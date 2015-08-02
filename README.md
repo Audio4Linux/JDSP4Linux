@@ -1,5 +1,5 @@
 # JamesDSPManager
-Merged with Omnirom DSP Manager features and able to run in all android rom include Samsung,AOSP,Cyanogenmod
+Merged with Omnirom DSP Manager features and able to run in all android rom include Samsung,AOSP,Cyanogenmod. 
 We don't work too much around with modifying Android framework instead of we integrate DSP Manager feature with framework, let it less depend on system framework.
 
 James DSPManager merge with Omnirom features: 
