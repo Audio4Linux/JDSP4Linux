@@ -9,7 +9,7 @@ Basic:
 3.Equalizer
 4.Virtualizer
 Omnirom extra:
-1.Low pass filter(Bass Boost)
+1.Adjustable Low pass filter(Bass Boost)
 2.Stereo Widener
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
