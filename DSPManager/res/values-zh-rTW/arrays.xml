@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="microphone_recording_presets">
+    <item>原音</item>
+    <item>平衡</item>
+    <item>高靈敏度</item>
+    <item>吵鬧環境</item>
+  </string-array>
+  <string-array name="headphone_modes">
+    <item>工作室</item>
+    <item>房間</item>
+    <item>大房間</item>
+    <item>巨大室內空間</item>
+    <item>大環境</item>
+    <item>強勁混響和回音</item>
+  </string-array>
+  <string-array name="equalizer_loudness_modes">
+      <item>已停用</item>
+      <item>最弱</item>
+      <item>更弱</item>
+      <item>弱</item>
+      <item>強</item>
+      <item>更強</item>
+      <item>變態</item>
+  </string-array>
+  <string-array name="compression_modes">
+    <item>輕微</item>
+    <item>中等</item>
+    <item>極端</item>
+  </string-array>
+  <string-array name="bassboost_modes">
+    <item>開啟</item>
+    <item>一點點</item>
+    <item>輕微</item>
+    <item>中等</item>
+    <item>超強</item>
+    <item>極端</item>
+  </string-array>
+  <string-array name="wm8994_bassboost_modes">
+    <item>標準</item>
+    <item>小型喇叭</item>
+  </string-array>
+    <string-array name="stereowide_modes">
+      <item>最弱</item>
+      <item>更弱</item>
+      <item>弱</item>
+      <item>強</item>
+      <item>更強</item>
+    </string-array>
+</resources>

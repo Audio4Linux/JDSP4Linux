@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="20dip">
+
+        <TextView android:id="@+id/bass_boost_gain_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pref_wm8994_bass_boost_gain_dlg_desc"
+                android:paddingTop="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip" />
+        <TextView android:id="@+id/bass_boost_gain_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingTop="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip" />
+        <SeekBar android:id="@+id/bass_boost_gain_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bass_boost_gain_text"
+                android:paddingTop="2dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip" />
+
+        <TextView android:id="@+id/bass_boost_range_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bass_boost_gain_seekbar"
+                android:text="@string/pref_wm8994_bass_boost_range_dlg_desc"
+                android:paddingTop="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip" />
+        <TextView android:id="@+id/bass_boost_range_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bass_boost_gain_seekbar"
+                android:layout_alignParentRight="true"
+                android:paddingTop="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip" />
+        <SeekBar android:id="@+id/bass_boost_range_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bass_boost_range_text"
+                android:paddingTop="2dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip" />
+
+    </RelativeLayout>
+</ScrollView>
