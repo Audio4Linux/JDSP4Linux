@@ -1,6 +1,6 @@
 #pragma once
 
-#include <audio_effects/effect_virtualizer.h>
+#include "effect_cvirtualizer.h"
 
 #include "Biquad.h"
 #include "Delay.h"
@@ -10,7 +10,7 @@
 class EffectVirtualizer : public Effect {
     private:
     int16_t mStrength;
-
+    float mEchoDecay;
     bool mDeep, mWide;
     int64_t mLevel;
 

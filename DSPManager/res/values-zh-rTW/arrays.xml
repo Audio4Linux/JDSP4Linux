@@ -14,6 +14,14 @@
     <item>大環境</item>
     <item>強勁混響和回音</item>
   </string-array>
+  <string-array name="headphone_echodecay">
+    <item>極端(非常危險)</item>
+    <item>超強(危險)</item>
+    <item>更大</item>
+    <item>一般(建議)</item>
+    <item>減少到最低回音</item>
+    <item>沒有回音</item>
+  </string-array>
   <string-array name="equalizer_loudness_modes">
       <item>已停用</item>
       <item>最弱</item>
@@ -36,6 +44,10 @@
     <item>超強</item>
     <item>極端</item>
   </string-array>
+  <string-array name="bassboost_filter">
+        <item>一般低通濾波器</item>
+        <item>有明確峰值的低通濾波器</item>
+    </string-array>
   <string-array name="wm8994_bassboost_modes">
     <item>標準</item>
     <item>小型喇叭</item>

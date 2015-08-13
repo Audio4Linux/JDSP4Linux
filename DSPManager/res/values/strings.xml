@@ -12,6 +12,7 @@
     <string name="pref_dsp_summary_off">Compression is disabled</string>
     <string name="pref_dsp_enable">Enable</string>
     <string name="pref_effect_title">Select effect strength</string>
+    <string name="dialog_filter">Filter type</string>
     <string name="pref_effect_freq_title">Select low pass filter frequency</string>
     <string name="dialog_freq">Filter frequency</string>
     <string name="dialog_effect">Effect strength</string>
@@ -31,6 +32,8 @@
     <string name="pref_headset_virtual_enable">Enable</string>
     <string name="pref_room_title">Select room type</string>
     <string name="dialog_room">Room type</string>
+    <string name="pref_echodecay_title">Select echo decay</string>
+    <string name="dialog_echodecay">Echo decay</string>
     <string name="pref_headset_stereowide_title">Stereo widener</string>
     <string name="pref_headset_stereowide_summary_on">Stereo widener is enabled</string>
     <string name="pref_headset_stereowide_summary_off">Stereo widener is disabled</string>

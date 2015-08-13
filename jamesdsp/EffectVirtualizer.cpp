@@ -19,7 +19,7 @@ typedef struct {
 } reply1x4_1x2_t;
 
 EffectVirtualizer::EffectVirtualizer()
-    : mStrength(0)
+    : mStrength(0), mEchoDecay(1000.0f)
 {
     refreshStrength();
 }
@@ -36,8 +36,8 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
 
         /* Haas effect delay -- slight difference between L & R
          * to reduce artificialness of the ping-pong. */
-        mReverbDelayL.setParameters(mSamplingRate, 0.029f);
-        mReverbDelayR.setParameters(mSamplingRate, 0.023f);
+        mReverbDelayL.setParameters(mSamplingRate, 0.030f);
+        mReverbDelayR.setParameters(mSamplingRate, 0.024f);
         /* the -3 dB point is around 650 Hz, giving about 300 us to work with */
         mLocalization.setHighShelf(0, 800.0f, mSamplingRate, -11.0f, 0.72f, 0);
 
@@ -69,6 +69,14 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
                 *replySize = sizeof(reply1x4_1x2_t);
                 return 0;
             }
+	    if (cmd == VIRTUALIZER_PARAM_ECHO_DECAY) {
+                reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 2;
+                replyData->data = (int16_t) mEchoDecay;
+                *replySize = sizeof(reply1x4_1x2_t);
+                return 0;
+            }
         }
 
         effect_param_t *replyData = (effect_param_t *) pReplyData;
@@ -84,6 +92,13 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
             int32_t cmd = ((int32_t *) cep)[3];
             if (cmd == VIRTUALIZER_PARAM_STRENGTH) {
                 mStrength = ((int16_t *) cep)[8];
+                refreshStrength();
+                int32_t *replyData = (int32_t *) pReplyData;
+                *replyData = 0;
+                return 0;
+            }
+            if (cmd == VIRTUALIZER_PARAM_ECHO_DECAY) {
+                mEchoDecay = ((int16_t *) cep)[8];
                 refreshStrength();
                 int32_t *replyData = (int32_t *) pReplyData;
                 *replyData = 0;
@@ -107,7 +122,7 @@ void EffectVirtualizer::refreshStrength()
     if (mStrength != 0) {
         float start = -15.0f;
         float end = -5.0f;
-        float attenuation = start + (end - start) * (mStrength / 1000.0f);
+        float attenuation = start + (end - start) * (mStrength / mEchoDecay);
         float roomEcho = powf(10.0f, attenuation / 20.0f);
         mLevel = int64_t(roomEcho * (int64_t(1) << 32));
     } else {

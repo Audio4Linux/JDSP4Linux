@@ -18,6 +18,7 @@
     <string name="pref_dsp_summary_off">已停用壓縮</string>
     <string name="pref_dsp_enable">使用壓縮</string>
     <string name="pref_effect_title">選擇效果程度</string>
+    <string name="dialog_filter">濾波器屬性或類型</string>
     <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>
     <string name="dialog_freq">濾波頻率</string>
     <string name="dialog_effect">效果程度</string>
@@ -37,6 +38,8 @@
     <string name="pref_headset_virtual_enable">使用耳機虛擬室內</string>
     <string name="pref_room_title">選擇房間種類</string>
     <string name="dialog_room">房間種類</string>
+    <string name="pref_echodecay_title">選擇回音衰減值</string>
+    <string name="dialog_echodecay">回音衰減</string>
     <string name="menu_reset">重設</string>
     <string name="pref_headset_stereowide_title">立體聲加寬</string>
     <string name="pref_headset_stereowide_summary_on">已啟用立體聲加寬</string>

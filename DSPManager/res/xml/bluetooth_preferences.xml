@@ -13,12 +13,12 @@
             android:title="@string/pref_dsp_enable" />
 
         <james.dsp.preference.SummariedListPreference
-            android:key="0"
-            android:dialogTitle="@string/dialog_effect"
+            android:key="dsp.compression.mode"
             android:entries="@array/compression_modes"
+            android:dialogTitle="@string/dialog_effect"
             android:defaultValue="50"
             android:title="@string/pref_effect_title"
-            android:entryValues="@array/compression_modes_values" />
+            android:entryValues="@array/compression_modes_values"/>
 
     </PreferenceCategory>
 
@@ -38,7 +38,14 @@
             android:dialogTitle="@string/dialog_effect"
             android:defaultValue="0"
             android:title="@string/pref_effect_title"
-            android:entryValues="@array/bassboost_modes_values"/>
+            android:entryValues="@array/bassboost_modes_values" />
+	<james.dsp.preference.SummariedListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_filter"
+            android:entries="@array/bassboost_filter"
+            android:entryValues="@array/bassboost_type"
+            android:title="@string/dialog_filter"
+            android:key="dsp.bass.filter" />
 	<james.dsp.preference.SummariedListPreference
 	    android:key="dsp.bass.freq"
             android:entries="@array/bassboost_freqs"
@@ -64,7 +71,7 @@
             android:dialogTitle="@string/pref_equalizer_preset_title"
             android:defaultValue="0.0;0.0;0.0;0.0;0.0;"
             android:title="@string/pref_equalizer_preset_title"
-            android:entryValues="@array/equalizer_preset_values"/>
+            android:entryValues="@array/equalizer_preset_values" />
 
         <james.dsp.preference.EqualizerPreference
             android:key="dsp.tone.eq.custom" />
@@ -91,11 +98,19 @@
 
         <james.dsp.preference.SummariedListPreference
             android:key="dsp.headphone.mode"
-            android:dialogTitle="@string/dialog_room"
-            android:entryValues="@array/headphone_modes_values"
-            android:title="@string/pref_room_title"
             android:defaultValue="0"
-            android:entries="@array/headphone_modes" />
+            android:dialogTitle="@string/dialog_room"
+            android:entries="@array/headphone_modes"
+            android:entryValues="@array/headphone_modes_values"
+            android:title="@string/pref_room_title" />
+
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.echodecay"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_echodecay"
+            android:entries="@array/headphone_echodecay"
+            android:entryValues="@array/headphone_decay_values"
+            android:title="@string/pref_echodecay_title" />
 
     </PreferenceCategory>
 

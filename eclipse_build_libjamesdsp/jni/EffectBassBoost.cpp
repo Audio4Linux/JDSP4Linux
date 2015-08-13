@@ -17,7 +17,7 @@ typedef struct {
 } reply1x4_1x2_t;
 
 EffectBassBoost::EffectBassBoost()
-    : mStrength(0), mCenterFrequency(55.0f)
+    : mStrength(0), mFilterType(0), mCenterFrequency(55.0f)
 {
     refreshStrength();
 }
@@ -57,6 +57,14 @@ int32_t EffectBassBoost::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 *replySize = sizeof(reply1x4_1x2_t);
                 return 0;
             }
+            if (cmd == BASSBOOST_PARAM_FILTER_TYPE) {
+                reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 2;
+                replyData->data = (int16_t) mFilterType;
+                *replySize = sizeof(reply1x4_1x2_t);
+                return 0;
+            }
             if (cmd == BASSBOOST_PARAM_CENTER_FREQUENCY) {
                 reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
                 replyData->status = 0;
@@ -85,6 +93,13 @@ int32_t EffectBassBoost::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 *replyData = 0;
                 return 0;
             }
+            if (cmd == BASSBOOST_PARAM_FILTER_TYPE) {
+                mFilterType = ((int16_t* )cep)[8];
+                refreshStrength();
+                int32_t *replyData = (int32_t *) pReplyData;
+                *replyData = 0;
+                return 0;
+            }
             if (cmd == BASSBOOST_PARAM_CENTER_FREQUENCY) {
                 mCenterFrequency = ((int16_t* )cep)[8];
                 refreshStrength();
@@ -103,8 +118,19 @@ int32_t EffectBassBoost::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 
 void EffectBassBoost::refreshStrength()
 {
+if(mFilterType == 0)
+{
     /* Q = 0.5 .. 2.0 */
     mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+}
+else if( mFilterType == 1)
+{
+    mBoost.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 600.0f);
+}
+else 
+{
+   mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+}
 }
 
 int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)

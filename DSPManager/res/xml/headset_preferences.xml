@@ -40,6 +40,13 @@
             android:title="@string/pref_effect_title"
             android:entryValues="@array/bassboost_modes_values" />
 	<james.dsp.preference.SummariedListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_filter"
+            android:entries="@array/bassboost_filter"
+            android:entryValues="@array/bassboost_type"
+            android:title="@string/dialog_filter"
+            android:key="dsp.bass.filter" />
+	<james.dsp.preference.SummariedListPreference
 	    android:key="dsp.bass.freq"
             android:entries="@array/bassboost_freqs"
             android:dialogTitle="@string/dialog_freq"
@@ -96,6 +103,14 @@
             android:entries="@array/headphone_modes"
             android:entryValues="@array/headphone_modes_values"
             android:title="@string/pref_room_title" />
+
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.echodecay"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_echodecay"
+            android:entries="@array/headphone_echodecay"
+            android:entryValues="@array/headphone_decay_values"
+            android:title="@string/pref_echodecay_title" />
 
     </PreferenceCategory>
 

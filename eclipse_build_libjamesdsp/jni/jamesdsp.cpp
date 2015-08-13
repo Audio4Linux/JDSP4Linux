@@ -3,7 +3,7 @@
 #include "hardware/audio_effect.h"
 #include "effect_cbassboost.h"
 #include "audio_effects/effect_equalizer.h"
-#include "audio_effects/effect_virtualizer.h"
+#include "effect_cvirtualizer.h"
 #include "effect_cstereowide.h"
 
 #include "Effect.h"

@@ -11,7 +11,7 @@ import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import james.dsp.framework.BassBoost;
 import android.media.audiofx.Equalizer;
-import android.media.audiofx.Virtualizer;
+import james.dsp.framework.Virtualizer;
 import james.dsp.framework.StereoWide;
 import android.os.Binder;
 import android.os.IBinder;
@@ -268,6 +268,7 @@ public class HeadsetService extends Service {
         try {
             session.mBassBoost.setEnabled(prefs.getBoolean("dsp.bass.enable", false));
             session.mBassBoost.setStrength(Short.valueOf(prefs.getString("dsp.bass.mode", "0")));
+	    session.mBassBoost.setFilterType(Short.valueOf(prefs.getString("dsp.bass.filter", "0")));
 	    session.mBassBoost.setCenterFrequency(Short.valueOf(prefs.getString("dsp.bass.freq", "55")));
         } catch (Exception e) {    }
 
@@ -295,8 +296,8 @@ public class HeadsetService extends Service {
 
         try {
             session.mVirtualizer.setEnabled(prefs.getBoolean("dsp.headphone.enable", false));
-            session.mVirtualizer.setStrength(
-                    Short.valueOf(prefs.getString("dsp.headphone.mode", "0")));
+            session.mVirtualizer.setStrength(Short.valueOf(prefs.getString("dsp.headphone.mode", "0")));
+	    session.mVirtualizer.setEchoDecay(Short.valueOf(prefs.getString("dsp.headphone.echodecay", "1000")));
         } catch (Exception e) { }
 	try {session.mStereoWide.setEnabled(prefs.getBoolean("dsp.stereowide.enable", false));
             session.mStereoWide.setStrength(

@@ -1,33 +1,3 @@
-/*
- * Copyright (C) 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Per article 5 of the Apache 2.0 License, some modifications to this code
- * were made by the OmniROM Project.
- *
- * Modifications Copyright (C) 2013 The OmniROM Project
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
-
 #include "Biquad.h"
 #include <math.h>
 
@@ -146,6 +116,21 @@ void Biquad::setLowPass(int32_t steps, double center_frequency, double sampling_
     double a0 =   1 + alpha;
     double a1 =  -2*cos(w0);
     double a2 =   1 - alpha;
+
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
+}
+
+void Biquad::setLowPassPeak(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
+{
+    double w0 = 2 * M_PI * center_frequency / sampling_frequency;
+    double alpha = sin(w0) / (2*resonance);
+
+    double b0 =  (1 - cos(w0))/12;
+    double b1 =   1 - cos(w0);
+    double b2 =  (1 - cos(w0))/12;
+    double a0 =   1 + alpha;
+    double a1 =  -2*cos(w0);
+    double a2 =   1 - alpha/a0;
 
     setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
