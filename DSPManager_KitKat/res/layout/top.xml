@@ -13,7 +13,6 @@
             android:layout_height="30dp"
             android:layout_gravity="top"
             android:textColor="@android:color/holo_blue_light"
-            android:background="@drawable/pager_background"
             android:textSize="14sp"
             android:textStyle="bold" />
 

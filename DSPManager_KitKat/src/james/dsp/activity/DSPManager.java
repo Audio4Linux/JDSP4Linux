@@ -26,7 +26,8 @@ import james.dsp.service.HeadsetService;
 import java.util.ArrayList;
 
 /**
- * Setting utility for CyanogenMod's DSP capabilities.
+ * Setting utility for CyanogenMod's DSP capabilities. This page is displays the
+ * top-level configurations menu.
  *
  * @author alankila@gmail.com
  */
@@ -58,7 +59,7 @@ public final class DSPManager extends FragmentActivity {
 
         pagerTabStrip.setDrawFullUnderline(true);
         pagerTabStrip.setTabIndicatorColor(
-        getResources().getColor(android.R.color.holo_blue_light));
+                getResources().getColor(android.R.color.holo_blue_light));
     }
 
     @Override
