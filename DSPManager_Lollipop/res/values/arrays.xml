@@ -33,7 +33,6 @@
   </string-array>
 
   <string-array name="headphone_echodecay">
-    <item>May get super echo(Danger!)</item>
     <item>Extreme(Danger!)</item>
     <item>Moderate echo</item>
     <item>Normal(Suggest)</item>
@@ -42,7 +41,6 @@
   </string-array>
 
   <string-array name="headphone_decay_values" translatable="false">
-    <item>850</item>
     <item>900</item>
     <item>950</item>
     <item>1000</item>
@@ -172,9 +170,36 @@
         <item>200</item>
     </string-array>
 
-    <string-array name="bassboost_filter_type" translatable="false">
-        <item>0</item>
-        <item>1</item>
+  <string-array name="reduction_modes">
+    <item>Enable</item>
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+    <item>Super</item>
+    <item>Extreme</item>
+  </string-array>
+
+  <string-array name="reduction_modes_values" translatable="false">
+    <item>200</item>
+    <item>255</item>
+    <item>355</item>
+    <item>650</item>
+    <item>1000</item>
+    <item>1400</item>
+  </string-array>
+
+<string-array name="reduction_freqs" translatable="false">
+        <item>16000Hz(Debug)</item>
+        <item>For 192k</item>
+        <item>For 256k</item>
+        <item>For 320k</item>
+    </string-array>
+
+    <string-array name="reduction_freqs_values" translatable="false">
+        <item>16000</item>
+        <item>17000</item>
+        <item>18000</item>
+        <item>20000</item>
     </string-array>
 
   <string-array name="wm8994_bassboost_modes">

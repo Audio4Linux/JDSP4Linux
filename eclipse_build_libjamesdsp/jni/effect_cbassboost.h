@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 #ifndef OPENSL_ES_H_
-static const effect_uuid_t SL_IID_BASSBOOST_ = { 0x0634f220, 0xddd4, 0x11db, 0xa0fc,
-        { 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b } };
+static const effect_uuid_t SL_IID_BASSBOOST_ = { 0x42b5cbf5, 0x4dd8, 0x4e79, 0xa5fb,
+		{ 0xcc, 0xeb, 0x2c, 0xb5, 0x4e, 0x13 } };
 const effect_uuid_t * const SL_IID_BASSBOOST = &SL_IID_BASSBOOST_;
 #endif //OPENSL_ES_H_
 

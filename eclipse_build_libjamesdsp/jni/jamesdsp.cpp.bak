@@ -163,6 +163,7 @@ int32_t EffectCreate(const effect_uuid_t *uuid, int32_t sessionId, int32_t ioId,
 		*pEffect = (effect_handle_t) e;
 		return 0;
 	}
+
 	return -EINVAL;
 }
 

@@ -4,51 +4,45 @@ import android.media.audiofx.AudioEffect;
 import java.util.StringTokenizer;
 import java.util.UUID;
 /**
- * Bass boost is an audio effect to boost or amplify low frequencies of the sound. It is comparable
+ * Reduction is an audio effect to boost or amplify low frequencies of the sound. It is comparable
  * to a simple equalizer but limited to one band amplification in the low frequency range.
- * <p>An application creates a BassBoost object to instantiate and control a bass boost engine in
+ * <p>An application creates a Reduction object to instantiate and control a Reduction engine in
  * the audio framework.
- * <p>The methods, parameter types and units exposed by the BassBoost implementation are directly
+ * <p>The methods, parameter types and units exposed by the Reduction implementation are directly
  * mapping those defined by the OpenSL ES 1.0.1 Specification (http://www.khronos.org/opensles/)
- * for the SLBassBoostItf interface. Please refer to this specification for more details.
- * <p>To attach the BassBoost to a particular AudioTrack or MediaPlayer, specify the audio session
- * ID of this AudioTrack or MediaPlayer when constructing the BassBoost.
- * <p>NOTE: attaching a BassBoost to the global audio output mix by use of session 0 is deprecated.
+ * for the SLReductionItf interface. Please refer to this specification for more details.
+ * <p>To attach the Reduction to a particular AudioTrack or MediaPlayer, specify the audio session
+ * ID of this AudioTrack or MediaPlayer when constructing the Reduction.
+ * <p>NOTE: attaching a Reduction to the global audio output mix by use of session 0 is deprecated.
  * <p>See {@link android.media.MediaPlayer#getAudioSessionId()} for details on audio sessions.
  * <p>See {@link android.media.audiofx.AudioEffect} class for more details on
  * controlling audio effects.
  */
 
-public class BassBoost extends AudioEffect {
+public class Reduction extends AudioEffect {
 
-    private final static String TAG = "BassBoost";
+    private final static String TAG = "Reduction";
 
     // These constants must be synchronized with those in
-    // frameworks/base/include/media/EffectBassBoostApi.h
+    // frameworks/base/include/media/EffectReductionApi.h
     /**
-     * Is strength parameter supported by bass boost engine. Parameter ID for getParameter().
+     * Is strength parameter supported by Reduction engine. Parameter ID for getParameter().
      */
     public static final int PARAM_STRENGTH_SUPPORTED = 0;
     /**
-     * Bass boost effect strength. Parameter ID for
-     * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
+     * Reduction effect strength. Parameter ID for
+     * {@link android.media.audiofx.Reduction.OnParameterChangeListener}
      */
     public static final int PARAM_STRENGTH = 1;
-    public static final UUID EFFECT_TYPE_BASS_BOOST = UUID.fromString("42b5cbf5-4dd8-4e79-a5fb-cceb2cb54e13");
+    public static final UUID EFFECT_TYPE_REDUCTION = UUID.fromString("d1c2bc8a-56cd-11e5-885d-feff819cdc9f");
     /**
-     * Bass boost filter type. Paremeter ID for
-     * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
+     * Reduction center frequency. Paremeter ID for
+     * {@link android.media.audiofx.Reduction.OnParameterChangeListener}
      * @hide
      */
-    public static final int PARAM_FILTER_TYPE = 2;
+    public static final int PARAM_HIGH_CENTER_FREQUENCY = 2;
     /**
-     * Bass boost center frequency. Paremeter ID for
-     * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
-     * @hide
-     */
-    public static final int PARAM_CENTER_FREQUENCY = 3;
-    /**
-     * Indicates if strength parameter is supported by the bass boost engine
+     * Indicates if strength parameter is supported by the Reduction engine
      */
     private boolean mStrengthSupported = false;
 
@@ -69,11 +63,11 @@ public class BassBoost extends AudioEffect {
 
     /**
      * Class constructor.
-     * @param priority the priority level requested by the application for controlling the BassBoost
+     * @param priority the priority level requested by the application for controlling the Reduction
      * engine. As the same engine can be shared by several applications, this parameter indicates
      * how much the requesting application needs control of effect parameters. The normal priority
      * is 0, above normal is a positive number, below normal a negative number.
-     * @param audioSession system wide unique audio session identifier. The BassBoost will be
+     * @param audioSession system wide unique audio session identifier. The Reduction will be
      * attached to the MediaPlayer or AudioTrack in the same audio session.
      *
      * @throws java.lang.IllegalStateException
@@ -81,10 +75,10 @@ public class BassBoost extends AudioEffect {
      * @throws java.lang.UnsupportedOperationException
      * @throws java.lang.RuntimeException
      */
-    public BassBoost(int priority, int audioSession)
+    public Reduction(int priority, int audioSession)
     throws IllegalStateException, IllegalArgumentException,
            UnsupportedOperationException, RuntimeException {
-        super(EFFECT_TYPE_BASS_BOOST, EFFECT_TYPE_NULL, priority, audioSession);
+        super(EFFECT_TYPE_REDUCTION, EFFECT_TYPE_NULL, priority, audioSession);
 
         if (audioSession == 0) {
         }
@@ -104,7 +98,7 @@ public class BassBoost extends AudioEffect {
     }
 
     /**
-     * Sets the strength of the bass boost effect. If the implementation does not support per mille
+     * Sets the strength of the Reduction effect. If the implementation does not support per mille
      * accuracy for setting the strength, it is allowed to round the given strength to the nearest
      * supported value. You can use the {@link #getRoundedStrength()} method to query the
      * (possibly rounded) value that was actually set.
@@ -135,52 +129,17 @@ public class BassBoost extends AudioEffect {
     }
 
     /**
-     * Sets the filter type of the bass boost effect.
-     * @param filter name. The valid range for the filter is [0,1]
-     * @throws IllegalStateException
-     * @throws IllegalArgumentException
-     * @throws UnsupportedOperationException
-     * @hide
-     */
-    public void setFilterType(short filter)
-    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
-        try {
-            checkStatus(setParameter(PARAM_FILTER_TYPE, filter));
-        } catch(IllegalArgumentException e) {
-            // ignore
-        }
-    }
-
-    /**
-     * Gets the current filter type of the effect
-     * @return the filter type of the effect. The valid range is [0,1], in Hertz
-     * @throws IllegalStateException
-     * @throws IllegalArgumentException
-     * @throws UnsupportedOperationException
-     * @hide
-     */
-    public short getFilterType() {
-        try {
-            short[] value = new short[1];
-            checkStatus(getParameter(PARAM_FILTER_TYPE, value));
-            return value[0];
-        } catch(IllegalArgumentException e) {
-            return 0;
-        }
-    }
-
-    /**
-     * Sets the center frequency of the bass boost effect.
+     * Sets the center frequency of the Reduction effect.
      * @param freq The frequency, in Hz. The valid range for the freq is [20,500]
      * @throws IllegalStateException
      * @throws IllegalArgumentException
      * @throws UnsupportedOperationException
      * @hide
      */
-    public void setCenterFrequency(short freq)
+    public void setHighCenterFrequency(short freq)
     throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         try {
-            checkStatus(setParameter(PARAM_CENTER_FREQUENCY, freq));
+            checkStatus(setParameter(PARAM_HIGH_CENTER_FREQUENCY, freq));
         } catch(IllegalArgumentException e) {
             // ignore
         }
@@ -194,10 +153,10 @@ public class BassBoost extends AudioEffect {
      * @throws UnsupportedOperationException
      * @hide
      */
-    public short getCenterFrequency() {
+    public short getHighCenterFrequency() {
         try {
             short[] value = new short[1];
-            checkStatus(getParameter(PARAM_CENTER_FREQUENCY, value));
+            checkStatus(getParameter(PARAM_HIGH_CENTER_FREQUENCY, value));
             return value[0];
         } catch(IllegalArgumentException e) {
             return 55;
@@ -205,20 +164,20 @@ public class BassBoost extends AudioEffect {
     }
 
     /**
-     * The OnParameterChangeListener interface defines a method called by the BassBoost when a
+     * The OnParameterChangeListener interface defines a method called by the Reduction when a
      * parameter value has changed.
      */
     public interface OnParameterChangeListener  {
         /**
          * Method called when a parameter value has changed. The method is called only if the
          * parameter was changed by another application having the control of the same
-         * BassBoost engine.
-         * @param effect the BassBoost on which the interface is registered.
+         * Reduction engine.
+         * @param effect the Reduction on which the interface is registered.
          * @param status status of the set parameter operation.
          * @param param ID of the modified parameter. See {@link #PARAM_STRENGTH} ...
          * @param value the new parameter value.
          */
-        void onParameterChange(BassBoost effect, int status, int param, short value);
+        void onParameterChange(Reduction effect, int status, int param, short value);
     }
 
     /**
@@ -248,7 +207,7 @@ public class BassBoost extends AudioEffect {
                     v = byteArrayToShort(value, 0);
                 }
                 if (p != -1 && v != -1) {
-                    l.onParameterChange(BassBoost.this, status, p, v);
+                    l.onParameterChange(Reduction.this, status, p, v);
                 }
             }
         }
@@ -269,7 +228,7 @@ public class BassBoost extends AudioEffect {
     }
 
     /**
-     * The Settings class regroups all bass boost parameters. It is used in
+     * The Settings class regroups all Reduction parameters. It is used in
      * conjuntion with getProperties() and setProperties() methods to backup and restore
      * all parameters in a single call.
      */
@@ -291,9 +250,9 @@ public class BassBoost extends AudioEffect {
                 throw new IllegalArgumentException("settings: " + settings);
             }
             String key = st.nextToken();
-            if (!key.equals("BassBoost")) {
+            if (!key.equals("Reduction")) {
                 throw new IllegalArgumentException(
-                        "invalid settings for BassBoost: " + key);
+                        "invalid settings for Reduction: " + key);
             }
             try {
                 key = st.nextToken();
@@ -309,7 +268,7 @@ public class BassBoost extends AudioEffect {
         @Override
         public String toString() {
             String str = new String (
-                    "BassBoost"+
+                    "Reduction"+
                     ";strength="+Short.toString(strength)
                     );
             return str;
@@ -318,14 +277,14 @@ public class BassBoost extends AudioEffect {
 
 
     /**
-     * Gets the bass boost properties. This method is useful when a snapshot of current
-     * bass boost settings must be saved by the application.
-     * @return a BassBoost.Settings object containing all current parameters values
+     * Gets the Reduction properties. This method is useful when a snapshot of current
+     * Reduction settings must be saved by the application.
+     * @return a Reduction.Settings object containing all current parameters values
      * @throws IllegalStateException
      * @throws IllegalArgumentException
      * @throws UnsupportedOperationException
      */
-    public BassBoost.Settings getProperties()
+    public Reduction.Settings getProperties()
     throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         Settings settings = new Settings();
         short[] value = new short[1];
@@ -335,14 +294,14 @@ public class BassBoost extends AudioEffect {
     }
 
     /**
-     * Sets the bass boost properties. This method is useful when bass boost settings have to
+     * Sets the Reduction properties. This method is useful when Reduction settings have to
      * be applied from a previous backup.
-     * @param settings a BassBoost.Settings object containing the properties to apply
+     * @param settings a Reduction.Settings object containing the properties to apply
      * @throws IllegalStateException
      * @throws IllegalArgumentException
      * @throws UnsupportedOperationException
      */
-    public void setProperties(BassBoost.Settings settings)
+    public void setProperties(Reduction.Settings settings)
     throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(PARAM_STRENGTH, settings.strength));
     }

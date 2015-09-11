@@ -125,7 +125,7 @@ if(mFilterType == 0)
 }
 else if( mFilterType == 1)
 {
-    mBoost.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 600.0f);
+    mBoost.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
 }
 else 
 {

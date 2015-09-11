@@ -17,6 +17,7 @@ class Biquad {
     virtual ~Biquad();
     void setHighShelf(int32_t steps, double cf, double sf, double gaindB, double slope, double overallGain);
     void setBandPass(int32_t steps, double cf, double sf, double resonance);
+	void setCustomBandPass(int32_t steps, double cf, double sf, double resonance);
     void setHighPass(int32_t steps, double cf, double sf, double resonance);
     void setLowPass(int32_t steps, double cf, double sf, double resonance);
     void setLowPassPeak(int32_t steps, double cf, double sf, double resonance);

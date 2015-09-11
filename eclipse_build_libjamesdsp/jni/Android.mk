@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := \
 	EffectEqualizer.cpp \
 	EffectVirtualizer.cpp \
 	EffectStereoWide.cpp \
+	EffectReduction.cpp \
 	FIR16.cpp \
 # terminator
 
@@ -32,7 +33,10 @@ LOCAL_C_INCLUDES += \
 	system/media/audio_effects/include \
 # terminator
 
-LOCAL_CPPFLAGS += -mhard-float -D_NDK_MATH_NO_SOFT=1
+ifeq ($(TARGET_ARCH),armeabi-v7a-hard)
+    LOCAL_CPPFLAGS += -mhard-float -D_NDK_MATH_NO_SOFT=1
+else
+endif
 
 LOCAL_LDFLAGS += -Wl,--gc-sections
 

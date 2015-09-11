@@ -20,6 +20,7 @@
     <string name="pref_effect_title">選擇效果程度</string>
     <string name="dialog_filter">濾波器屬性或類型</string>
     <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>
+    <string name="pref_effect_hfreq_title">選擇MP3類型</string>
     <string name="dialog_freq">濾波頻率</string>
     <string name="dialog_effect">效果程度</string>
     <string name="pref_equalizer_title">等化器</string>
@@ -32,6 +33,10 @@
     <string name="pref_bassboost_summary_on">已啟用低音強化</string>
     <string name="pref_bassboost_summary_off">已停用低音強化</string>
     <string name="pref_bassboost_enable">使用低音強化</string>
+    <string name="pref_reduction_title">高頻還原</string>
+    <string name="pref_reduction_summary_on">已啟用還原</string>
+    <string name="pref_reduction_summary_off">已停用還原</string>
+    <string name="pref_reduction_enable">使用還原</string>
     <string name="pref_headset_virtual_title">耳機虛擬室內效果</string>
     <string name="pref_headset_virtual_summary_on">已啟用耳機虛擬室內</string>
     <string name="pref_headset_virtual_summary_off">已停用耳機虛擬室內</string>

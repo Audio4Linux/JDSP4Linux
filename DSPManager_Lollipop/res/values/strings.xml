@@ -14,6 +14,7 @@
     <string name="pref_effect_title">Select effect strength</string>
     <string name="dialog_filter">Filter type</string>
     <string name="pref_effect_freq_title">Select low pass filter frequency</string>
+    <string name="pref_effect_hfreq_title">Select MP3 Type</string>
     <string name="dialog_freq">Filter frequency</string>
     <string name="dialog_effect">Effect strength</string>
     <string name="pref_equalizer_title">Equalizer</string>
@@ -26,6 +27,10 @@
     <string name="pref_bassboost_summary_on">Bass boost is enabled</string>
     <string name="pref_bassboost_summary_off">Bass boost is disabled</string>
     <string name="pref_bassboost_enable">Enable</string>
+    <string name="pref_reduction_title">Reduction</string>
+    <string name="pref_reduction_summary_on">Reduction is enabled</string>
+    <string name="pref_reduction_summary_off">Reduction is disabled</string>
+    <string name="pref_reduction_enable">Enable</string>
     <string name="pref_headset_virtual_title">Virtual room effect</string>
     <string name="pref_headset_virtual_summary_on">Virtual room effect is enabled</string>
     <string name="pref_headset_virtual_summary_off">Virtual room effect is disabled</string>
