@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="microphone_recording_presets">
+        <item>Оригинал</item>
+        <item>Баланс</item>
+        <item>Высокая чувствительность</item>
+        <item>Окружающей среда</item>
+    </string-array>
+    <string-array name="headphone_modes">
+        <item>Студия</item>
+        <item>Комната</item>
+        <item>Зал</item>
+        <item>Большая комната</item>
+        <item>Огромный среда</item>
+        <item>Сильная реверберация и эхо</item>
+    </string-array>
+    <string-array name="headphone_echodecay">
+        <item>Экстремально (Опасно!)</item>
+        <item>Умеренное эхо</item>
+        <item>Нормально (рекомендуется)</item>
+        <item>Подход не Эхо</item>
+        <item>Нет эха</item>
+    </string-array>
+    <string-array name="equalizer_loudness_modes">
+        <item>Отключено</item>
+        <item>Слабейший</item>
+        <item>Слабее</item>
+        <item>Слабый</item>
+        <item>Сильный</item>
+        <item>Сильнее</item>
+        <item>Сильнейший</item>
+    </string-array>
+    <string-array name="equalizer_preset_values">
+        <item>4.5;4.5;3.5;1.75;3.5;2.5;</item>
+        <item>6.5;6.5;4.0;0.0;0.0;0.0;</item>
+        <item>-6.5;-6.5;-4.0;0.0;0.0;0.0;</item>
+        <item>4.0;4.0;3.25;-0.5;2.0;3.5;</item>
+        <item>4.0;4.0;0.5;1.5;-4.0;-4.5;</item>
+        <item>0.0;0.0;0.0;0.0;0.0;0.0;</item>
+        <item>5.5;5.5;3.5;-1.75;1.5;2.5;</item>
+        <item>4.5;4.5;2.75;-0.5;2.75;4.0;</item>
+        <item>6.5;6.5;4.0;0.0;-6.5;-4.0;</item>
+        <item>0.0;0.0;0.0;0.0;4.0;6.5;</item>
+        <item>0.0;0.0;0.0;0.0;-6.5;-4.0;</item>
+        <item>-2.5;-2.5;0.0;3.5;1.5;-2.0;</item>
+        <item>настраиваемый</item>
+    </string-array>
+    <string-array name="compression_modes">
+        <item>Слабо</item>
+        <item>Сильно</item>
+        <item>Экстрим</item>
+    </string-array>
+    <string-array name="bassboost_modes">
+        <item>Включено</item>
+        <item>Немного</item>
+        <item>Слабо</item>
+        <item>Сильно</item>
+        <item>Супер</item>
+        <item>Экстрим</item>
+    </string-array>
+    <string-array name="bassboost_filter">
+        <item>Нормально</item>
+        <item>Нормальный с пика</item>
+    </string-array>
+    <string-array name="wm8994_bassboost_modes">
+        <item>Стандартный</item>
+        <item>Маленькие динамики</item>
+    </string-array>
+    <string-array name="stereowide_modes">
+        <item>Немного</item>
+        <item>Незначительно</item>
+        <item>Умеренно</item>
+        <item>Сильно</item>
+        <item>Супер</item>
+    </string-array>
+</resources>
