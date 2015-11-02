@@ -22,6 +22,8 @@ LOCAL_SRC_FILES := \
 	EffectEqualizer.cpp \
 	EffectVirtualizer.cpp \
 	EffectStereoWide.cpp \
+	EffectReduction.cpp \
+	EffectAmplifier.cpp\
 	FIR16.cpp \
 # terminator
 
@@ -31,8 +33,6 @@ LOCAL_C_INCLUDES += \
 	system/core/include \
 	system/media/audio_effects/include \
 # terminator
-
-#LOCAL_CPPFLAGS += -mfpu=vfpv3-d16 -mhard-float -D_NDK_MATH_NO_SOFT=1
 
 LOCAL_LDFLAGS += -Wl,--gc-sections
 

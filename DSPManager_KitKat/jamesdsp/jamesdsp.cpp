@@ -3,8 +3,10 @@
 #include <hardware/audio_effect.h>
 #include "effect_cbassboost.h"
 #include <audio_effects/effect_equalizer.h>
-#include "effect_cvirtualizer.h"
-#include "effect_cstereowide.h"
+#include "effect_cvirtualizer.h" // own description
+#include "effect_cstereowide.h" // own description
+#include "effect_creduction.h" // own description
+#include "effect_camplifier.h" // own description
 
 #include "Effect.h"
 #include "EffectBassBoost.h"
@@ -12,6 +14,19 @@
 #include "EffectEqualizer.h"
 #include "EffectVirtualizer.h"
 #include "EffectStereoWide.h"
+#include "EffectReduction.h"
+#include "EffectAmplifier.h"
+
+static effect_descriptor_t amplifier_descriptor = {
+	*SL_IID_AMPLIFIER,
+	{ 0x98c8baf0, 0x23a4, 0x4ce8, 0x8699, { 0x6b, 0x18, 0x53, 0x96, 0x9e, 0x9f } }, // own UUID
+	EFFECT_CONTROL_API_VERSION,
+	0,
+	10, /* 1 MIPS. FIXME: should be measured. */
+	1,
+	"James34602 Audio Amplifier",
+	"James34602"
+};
 
 static effect_descriptor_t compression_descriptor = {
 	{ 0x09e8ede0, 0xddde, 0x11db, 0xb4f6, { 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b } }, // SL_IID_VOLUME
@@ -69,6 +84,17 @@ static effect_descriptor_t bassboost_descriptor = {
 	"James34602"
 };
 
+static effect_descriptor_t reduction_descriptor = {
+	*SL_IID_REDUCTION,
+	{ 0xd1c2bc8a, 0x56cd, 0x11e5, 0x885d, { 0xfe, 0xff, 0x81, 0x9c, 0xdc, 0x9f } }, // own UUID
+	EFFECT_CONTROL_API_VERSION,
+	0,
+	10, /* 1 MIPS. FIXME: should be measured. */
+	1,
+	"James34602 Audio Reduction",
+	"James34602"
+};
+
 /* Library mandatory methods. */
 extern "C" {
 
@@ -102,6 +128,14 @@ static const struct effect_interface_s generic_interface = {
 };
 
 int32_t EffectCreate(const effect_uuid_t *uuid, int32_t sessionId, int32_t ioId, effect_handle_t *pEffect) {
+	if (memcmp(uuid, &amplifier_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+		struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
+		e->itfe = &generic_interface;
+		e->effect = new EffectAmplifier();
+		e->descriptor = &amplifier_descriptor;
+		*pEffect = (effect_handle_t) e;
+		return 0;
+	}
 	if (memcmp(uuid, &compression_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
 		struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
 		e->itfe = &generic_interface;
@@ -142,7 +176,14 @@ int32_t EffectCreate(const effect_uuid_t *uuid, int32_t sessionId, int32_t ioId,
 		*pEffect = (effect_handle_t) e;
 		return 0;
 	}
-
+	if (memcmp(uuid, &reduction_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+		struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
+		e->itfe = &generic_interface;
+		e->effect = new EffectReduction();
+		e->descriptor = &reduction_descriptor;
+		*pEffect = (effect_handle_t) e;
+		return 0;
+	}
 	return -EINVAL;
 }
 
@@ -154,6 +195,10 @@ int32_t EffectRelease(effect_handle_t ei) {
 }
 
 int32_t EffectGetDescriptor(const effect_uuid_t *uuid, effect_descriptor_t *pDescriptor) {
+	if (memcmp(uuid, &amplifier_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+	    memcpy(pDescriptor, &amplifier_descriptor, sizeof(effect_descriptor_t));
+	    return 0;
+	}
 	if (memcmp(uuid, &compression_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
 	    memcpy(pDescriptor, &compression_descriptor, sizeof(effect_descriptor_t));
 	    return 0;
@@ -174,7 +219,10 @@ int32_t EffectGetDescriptor(const effect_uuid_t *uuid, effect_descriptor_t *pDes
 	    memcpy(pDescriptor, &bassboost_descriptor, sizeof(effect_descriptor_t));
 	    return 0;
 	}
-
+	if (memcmp(uuid, &reduction_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+	    memcpy(pDescriptor, &reduction_descriptor, sizeof(effect_descriptor_t));
+	    return 0;
+	}
 	return -EINVAL;
 }
 

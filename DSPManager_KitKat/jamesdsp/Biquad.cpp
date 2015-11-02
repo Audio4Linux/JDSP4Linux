@@ -90,6 +90,21 @@ void Biquad::setBandPass(int32_t steps, double center_frequency, double sampling
     setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
 
+void Biquad::setCustomBandPass(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
+{
+    double w0 = 2 * M_PI * center_frequency / sampling_frequency;
+    double alpha = sin(w0) / (2*resonance);
+
+    double b0 =   sin(w0)/50;
+    double b1 =   0;
+    double b2 =  -sin(w0)/2;
+    double a0 =   1 + alpha;
+    double a1 =  -2*cos(w0);
+    double a2 =   1 - alpha;
+
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
+}
+
 void Biquad::setHighPass(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
 {
     double w0 = 2 * M_PI * center_frequency / sampling_frequency;
@@ -125,12 +140,27 @@ void Biquad::setLowPassPeak(int32_t steps, double center_frequency, double sampl
     double w0 = 2 * M_PI * center_frequency / sampling_frequency;
     double alpha = sin(w0) / (2*resonance);
 
-    double b0 =  (1 - cos(w0))/12;
+    double b0 =  (1 - cos(w0))/10;
     double b1 =   1 - cos(w0);
-    double b2 =  (1 - cos(w0))/12;
+    double b2 =  (1 - cos(w0))/10;
     double a0 =   1 + alpha;
     double a1 =  -2*cos(w0);
     double a2 =   1 - alpha/a0;
+
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
+}
+
+void Biquad::setAllPass(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
+{
+    double w0 = 2 * M_PI * center_frequency / sampling_frequency;
+    double alpha = sin(w0) / (2*resonance);
+
+    double a0 =   1 + alpha;
+    double a1 =  -(-2*cos(w0))/a0;
+    double a2 =   -(1 - alpha/a0);
+    double b0 =  (1 - cos(w0))/a0;
+    double b1 =   1 - cos(w0)/a0;
+    double b2 =  (1 + alpha)/a0;
 
     setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }

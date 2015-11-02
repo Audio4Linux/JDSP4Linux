@@ -23,6 +23,7 @@ LOCAL_SRC_FILES := \
 	EffectVirtualizer.cpp \
 	EffectStereoWide.cpp \
 	EffectReduction.cpp \
+	EffectAmplifier.cpp\
 	FIR16.cpp \
 # terminator
 
