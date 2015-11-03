@@ -14,6 +14,7 @@ import android.media.audiofx.Equalizer;
 import james.dsp.framework.Virtualizer;
 import james.dsp.framework.StereoWide;
 import james.dsp.framework.Reduction;
+import james.dsp.framework.Amplifier;
 import android.os.Binder;
 import android.os.IBinder;
 import james.dsp.activity.DSPManager;
@@ -49,8 +50,10 @@ public class HeadsetService extends Service {
         private final Virtualizer mVirtualizer;
         /** Session-specific stereo widener */
         private StereoWide mStereoWide;
-        /** Session-specific stereo widener */
+        /** Session-specific reduction */
         private Reduction mReduction;
+        /** Session-specific amplifier */
+        private Amplifier mAmplifier;
 
         protected EffectSet(int sessionId) {
             try {
@@ -67,6 +70,7 @@ public class HeadsetService extends Service {
             mVirtualizer = new Virtualizer(0, sessionId);
 	    mStereoWide = new StereoWide(0, sessionId);
 	    mReduction = new Reduction(0, sessionId);
+	    mAmplifier = new Amplifier(0, sessionId);
         }
 
         protected void release() {
@@ -76,6 +80,7 @@ public class HeadsetService extends Service {
             mVirtualizer.release();
 	    mStereoWide.release();
 	    mReduction.release();
+	    mAmplifier.release();
         }
     }
 
@@ -263,6 +268,11 @@ public class HeadsetService extends Service {
     }
 
     private void updateDsp(SharedPreferences prefs, EffectSet session) {
+        try {
+            session.mAmplifier.setEnabled(prefs.getBoolean("dsp.amplifier.enable", false));
+            session.mAmplifier.setStrength(Short.valueOf(prefs.getString("dsp.amplifier.mode", "1")));
+        } catch (Exception e) {    }
+
         try {
             session.mCompression.setEnabled(prefs.getBoolean("dsp.compression.enable", false));
             session.mCompression.setParameter(session.mCompression.intToByteArray(0),

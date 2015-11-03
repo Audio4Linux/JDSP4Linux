@@ -31,6 +31,10 @@
     <string name="pref_reduction_summary_on">Reduction is enabled</string>
     <string name="pref_reduction_summary_off">Reduction is disabled</string>
     <string name="pref_reduction_enable">Enable</string>
+    <string name="pref_amplifier_title">Amplifier</string>
+    <string name="pref_amplifier_summary_on">Amplifier is enabled</string>
+    <string name="pref_amplifier_summary_off">Amplifier is disabled</string>
+    <string name="pref_amplifier_enable">Enable</string>
     <string name="pref_headset_virtual_title">Virtual room effect</string>
     <string name="pref_headset_virtual_summary_on">Virtual room effect is enabled</string>
     <string name="pref_headset_virtual_summary_off">Virtual room effect is disabled</string>

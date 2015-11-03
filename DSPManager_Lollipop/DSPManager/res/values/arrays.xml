@@ -103,6 +103,7 @@
   <string-array name="compression_modes">
     <item>Slight</item>
     <item>Moderate</item>
+    <item>Super</item>
     <item>Extreme</item>
   </string-array>
 
@@ -110,6 +111,7 @@
     <item>50</item>
     <item>100</item>
     <item>300</item>
+    <item>450</item>
   </string-array>
 
   <string-array name="bassboost_modes">
@@ -186,6 +188,24 @@
     <item>650</item>
     <item>1000</item>
     <item>1400</item>
+  </string-array>
+
+  <string-array name="amplifier_modes">
+    <item>Disable</item>
+    <item>1x</item>
+    <item>2x</item>
+    <item>3x</item>
+    <item>4x</item>
+    <item>5x</item>
+  </string-array>
+
+  <string-array name="amplifier_modes_values" translatable="false">
+    <item>1</item>
+    <item>2</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
   </string-array>
 
 <string-array name="reduction_freqs" translatable="false">

@@ -33,6 +33,7 @@
   <string-array name="compression_modes">
     <item>輕微</item>
     <item>中等</item>
+    <item>超強</item>
     <item>極端</item>
   </string-array>
   <string-array name="bassboost_modes">
@@ -47,6 +48,14 @@
         <item>一般低通濾波器</item>
         <item>有明確峰值的低通濾波器</item>
     </string-array>
+  <string-array name="amplifier_modes">
+    <item>已停用</item>
+    <item>1x</item>
+    <item>2x</item>
+    <item>3x</item>
+    <item>4x</item>
+    <item>5x</item>
+  </string-array>
   <string-array name="reduction_modes">
     <item>開啟</item>
     <item>一點點</item>

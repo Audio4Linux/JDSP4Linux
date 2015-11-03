@@ -48,6 +48,7 @@
     <string-array name="compression_modes">
         <item>Слабо</item>
         <item>Сильно</item>
+        <item>Super</item>
         <item>Экстрим</item>
     </string-array>
     <string-array name="bassboost_modes">
