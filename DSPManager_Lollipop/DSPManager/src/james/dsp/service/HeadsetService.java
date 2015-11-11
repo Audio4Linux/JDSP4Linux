@@ -10,11 +10,9 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import james.dsp.framework.BassBoost;
-import android.media.audiofx.Equalizer;
+import james.dsp.framework.Equalizer;
 import james.dsp.framework.Virtualizer;
 import james.dsp.framework.StereoWide;
-import james.dsp.framework.Reduction;
-import james.dsp.framework.Amplifier;
 import android.os.Binder;
 import android.os.IBinder;
 import james.dsp.activity.DSPManager;
@@ -50,10 +48,6 @@ public class HeadsetService extends Service {
         private final Virtualizer mVirtualizer;
         /** Session-specific stereo widener */
         private StereoWide mStereoWide;
-        /** Session-specific reduction */
-        private Reduction mReduction;
-        /** Session-specific amplifier */
-        private Amplifier mAmplifier;
 
         protected EffectSet(int sessionId) {
             try {
@@ -69,8 +63,6 @@ public class HeadsetService extends Service {
             mBassBoost = new BassBoost(0, sessionId);
             mVirtualizer = new Virtualizer(0, sessionId);
 	    mStereoWide = new StereoWide(0, sessionId);
-	    mReduction = new Reduction(0, sessionId);
-	    mAmplifier = new Amplifier(0, sessionId);
         }
 
         protected void release() {
@@ -79,8 +71,6 @@ public class HeadsetService extends Service {
             mBassBoost.release();
             mVirtualizer.release();
 	    mStereoWide.release();
-	    mReduction.release();
-	    mAmplifier.release();
         }
     }
 
@@ -269,11 +259,6 @@ public class HeadsetService extends Service {
 
     private void updateDsp(SharedPreferences prefs, EffectSet session) {
         try {
-            session.mAmplifier.setEnabled(prefs.getBoolean("dsp.amplifier.enable", false));
-            session.mAmplifier.setStrength(Short.valueOf(prefs.getString("dsp.amplifier.mode", "1")));
-        } catch (Exception e) {    }
-
-        try {
             session.mCompression.setEnabled(prefs.getBoolean("dsp.compression.enable", false));
             session.mCompression.setParameter(session.mCompression.intToByteArray(0),
                     session.mCompression.shortToByteArray(
@@ -285,12 +270,6 @@ public class HeadsetService extends Service {
             session.mBassBoost.setStrength(Short.valueOf(prefs.getString("dsp.bass.mode", "0")));
 	    session.mBassBoost.setFilterType(Short.valueOf(prefs.getString("dsp.bass.filter", "0")));
 	    session.mBassBoost.setCenterFrequency(Short.valueOf(prefs.getString("dsp.bass.freq", "55")));
-        } catch (Exception e) {    }
-
-        try {
-            session.mReduction.setEnabled(prefs.getBoolean("dsp.reduction.enable", false));
-            session.mReduction.setStrength(Short.valueOf(prefs.getString("dsp.reduction.mode", "0")));
-	    session.mReduction.setHighCenterFrequency(Short.valueOf(prefs.getString("dsp.reduction.freq", "18000")));
         } catch (Exception e) {    }
 
         try {
@@ -313,6 +292,7 @@ public class HeadsetService extends Service {
             session.mEqualizer.setParameter(session.mEqualizer.intToByteArray(1000),
                     session.mEqualizer.shortToByteArray(
                             Short.valueOf(prefs.getString("dsp.tone.loudness", "10000"))));
+	    session.mEqualizer.setPreAmp(Short.valueOf(prefs.getString("dsp.tone.preamp", "1")));
         } catch (Exception e) { }
 
         try {

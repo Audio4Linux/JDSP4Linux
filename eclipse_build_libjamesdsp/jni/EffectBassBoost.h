@@ -10,7 +10,7 @@ class EffectBassBoost : public Effect {
     int16_t mStrength;
     int16_t mFilterType;
     float mCenterFrequency;
-    Biquad mBoost;
+    Biquad mBoostL, mBoostR;
 
     void refreshStrength();
 

@@ -168,6 +168,14 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 *replySize = sizeof(reply1x4_props_t);
                 return 0;
             }
+            if (cmd == EQ_PARAM_PREAMP_STRENGTH) {
+                reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 2;
+                replyData->data = mPreAmp;
+                *replySize = sizeof(reply1x4_1x2_t);
+                return 0;
+            }
             if (cmd == EQ_PARAM_CUR_PRESET) {
                 reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
                 replyData->status = 0;
@@ -304,6 +312,15 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 return 0;
             }
         }
+        if (cep->psize == 4 && cep->vsize == 2) {
+            int32_t cmd = ((int32_t *) cep)[3];
+            if (cmd == EQ_PARAM_PREAMP_STRENGTH) {
+                mPreAmp = ((int16_t *) cep)[8];
+                int32_t *replyData = (int32_t *) pReplyData;
+                *replyData = 0;
+                return 0;
+            }
+        }
         *replyData = -EINVAL;
         return 0;
     }
@@ -405,8 +422,11 @@ int32_t EffectEqualizer::process(audio_buffer_t *in, audio_buffer_t *out)
         }
         mNextUpdate --;
 
-        int32_t tmpL = read(in, i * 2);
-        int32_t tmpR = read(in, i * 2 + 1);
+        int32_t tmporgL = read(in, i * 2);
+        int32_t tmporgR = read(in, i * 2 + 1);
+
+        int32_t tmpL = tmporgL * mPreAmp;
+        int32_t tmpR = tmporgR * mPreAmp;
 
         /* Update signal loudness estimate in SPL */
         mPowerSquaredL += int64_t(tmpL) * tmpL;

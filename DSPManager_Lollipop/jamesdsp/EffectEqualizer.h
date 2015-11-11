@@ -1,6 +1,6 @@
 #pragma once
 
-#include <audio_effects/effect_equalizer.h>
+#include "effect_cequalizer.h"
 
 #include "Biquad.h"
 #include "Effect.h"
@@ -17,6 +17,7 @@ class EffectEqualizer : public Effect {
 
     float mLoudnessL;
     float mLoudnessR;
+    int16_t mPreAmp;
     int32_t mNextUpdate;
     int32_t mNextUpdateInterval;
     int64_t mPowerSquaredL;

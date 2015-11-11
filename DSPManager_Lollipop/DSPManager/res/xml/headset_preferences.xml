@@ -3,25 +3,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/pref_amplifier_title">
-
-        <CheckBoxPreference
-            android:key="dsp.amplifier.enable"
-            android:summaryOn="@string/pref_amplifier_summary_on"
-            android:summaryOff="@string/pref_amplifier_summary_off"
-            android:disableDependentsState="false"
-            android:title="@string/pref_amplifier_enable" />
-
-        <james.dsp.preference.SummariedListPreference
-            android:key="dsp.amplifier.mode"
-            android:entries="@array/amplifier_modes"
-            android:dialogTitle="@string/dialog_effect"
-            android:defaultValue="1"
-            android:title="@string/pref_effect_title"
-            android:entryValues="@array/amplifier_modes_values" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/pref_dsp_title">
 
         <CheckBoxPreference
@@ -75,32 +56,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/pref_reduction_title">
-
-        <CheckBoxPreference
-            android:key="dsp.reduction.enable"
-            android:summaryOn="@string/pref_reduction_summary_on"
-            android:summaryOff="@string/pref_reduction_summary_off"
-            android:disableDependentsState="false"
-            android:title="@string/pref_reduction_enable" />
-
-        <james.dsp.preference.SummariedListPreference
-            android:key="dsp.reduction.mode"
-            android:entries="@array/reduction_modes"
-            android:dialogTitle="@string/dialog_effect"
-            android:defaultValue="0"
-            android:title="@string/pref_effect_title"
-            android:entryValues="@array/reduction_modes_values" />
-	<james.dsp.preference.SummariedListPreference
-	    android:key="dsp.reduction.freq"
-            android:entries="@array/reduction_freqs"
-            android:dialogTitle="@string/dialog_freq"
-            android:defaultValue="18000"
-            android:title="@string/pref_effect_hfreq_title"
-            android:entryValues="@array/reduction_freqs_values" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/pref_equalizer_title">
 
         <CheckBoxPreference
@@ -109,7 +64,13 @@
             android:summaryOff="@string/pref_equalizer_summary_off"
             android:disableDependentsState="false"
             android:title="@string/pref_equalizer_enable" />
-
+        <james.dsp.preference.SummariedListPreference
+            android:key="dsp.tone.preamp"
+            android:entries="@array/preamp_modes"
+            android:dialogTitle="@string/dialog_effect"
+            android:defaultValue="1"
+            android:title="@string/pref_preamp_title"
+            android:entryValues="@array/preamp_values" />
         <james.dsp.preference.SummariedListPreference
             android:key="dsp.tone.eq"
             android:entries="@array/equalizer_preset_modes"

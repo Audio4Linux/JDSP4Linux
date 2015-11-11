@@ -33,14 +33,7 @@
     <string name="pref_bassboost_summary_on">已啟用低音強化</string>
     <string name="pref_bassboost_summary_off">已停用低音強化</string>
     <string name="pref_bassboost_enable">使用低音強化</string>
-    <string name="pref_reduction_title">高頻還原</string>
-    <string name="pref_reduction_summary_on">已啟用還原</string>
-    <string name="pref_reduction_summary_off">已停用還原</string>
-    <string name="pref_reduction_enable">使用還原</string>
-    <string name="pref_amplifier_title">放大器</string>
-    <string name="pref_amplifier_summary_on">已啟用放大器</string>
-    <string name="pref_amplifier_summary_off">已停用放大器</string>
-    <string name="pref_amplifier_enable">使用放大器</string>
+    <string name="pref_preamp_title">前置放大器</string>
     <string name="pref_headset_virtual_title">耳機虛擬室內效果</string>
     <string name="pref_headset_virtual_summary_on">已啟用耳機虛擬室內</string>
     <string name="pref_headset_virtual_summary_off">已停用耳機虛擬室內</string>

@@ -121,15 +121,18 @@ void EffectBassBoost::refreshStrength()
 if(mFilterType == 0)
 {
     /* Q = 0.5 .. 2.0 */
-    mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+    mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+	mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
 }
 else if( mFilterType == 1)
 {
-    mBoost.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
+    mBoostL.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
+	mBoostR.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
 }
 else 
 {
-   mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+   mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+   mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
 }
 }
 
@@ -153,10 +156,11 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
          * Additionally, a compressor element was used to limit the
          * mixing of the boost (only!) to avoid clipping.
          */
-        int32_t boost = mBoost.process(dryL + dryR);
+        int32_t boostl = mBoostL.process(dryL);
+		int32_t boostr = mBoostR.process(dryR);
 
-        write(out, i * 2, dryL + boost);
-        write(out, i * 2 + 1, dryR + boost);
+        write(out, i * 2, dryL + boostl);
+        write(out, i * 2 + 1, dryR + boostr);
     }
 
     return mEnable ? 0 : -ENODATA;
