@@ -228,7 +228,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
             if (cmd == EQ_PARAM_GET_PRESET_NAME && arg >= 0 && arg < int32_t(gNumPresets)) {
                 effect_param_t *replyData = (effect_param_t *)pReplyData;
                 memcpy(pReplyData, pCmdData, sizeof(effect_param_t) + cep->psize);
-                size_t *pValueSize = &replyData->vsize;
+                uint32_t *pValueSize = &replyData->vsize;
                 int voffset = ((replyData->psize - 1) / sizeof(int32_t) + 1) * sizeof(int32_t);
                 void *pValue = replyData->data + voffset;
 
