@@ -7,7 +7,7 @@ LOLLIPOP(Android 5.0 or late): https://drive.google.com/open?id=0B5xvL_71lUP_MzN
 
 KITKAT(Android 4.0 - Android 4.4.4) (Have not updated yet): https://drive.google.com/open?id=0B5xvL_71lUP_M3RlQ2hleGYzejg
 
-James DSPManager merge with Omnirom features: 
+JamesDSPManager merge with Omnirom features: 
 Basic: 
 1.Compression 
 2.Bass Boost
@@ -15,8 +15,6 @@ Basic:
 4.Virtualizer
 Omnirom extra:
 1.Adjustable Low pass filter(Bass Boost)
-2.Stereo Widener
-Custom extra:
-MP3 Quality Reduction
+2.Stereo Widen
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
