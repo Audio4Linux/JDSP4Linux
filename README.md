@@ -2,11 +2,6 @@
 Merged with Omnirom DSP Manager features and able to run in all android rom include Samsung,AOSP,Cyanogenmod. 
 We don't work too much around with modifying Android framework instead of we integrate DSP Manager feature with framework, let it less depend on system framework.
 
-Download:
-LOLLIPOP(Android 5.0 or late): https://drive.google.com/open?id=0B5xvL_71lUP_MzNWRW1HckpoU0U
-
-KITKAT(Android 4.0 - Android 4.4.4) (Have not updated yet): https://drive.google.com/open?id=0B5xvL_71lUP_M3RlQ2hleGYzejg
-
 JamesDSPManager merge with Omnirom features: 
 Basic: 
 1.Compression 
