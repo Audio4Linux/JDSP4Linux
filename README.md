@@ -13,3 +13,6 @@ Omnirom extra:
 2.Stereo Widen
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
+
+#Download
+https://drive.google.com/open?id=0B5xvL_71lUP_enhSVEtsRXg5RkE
