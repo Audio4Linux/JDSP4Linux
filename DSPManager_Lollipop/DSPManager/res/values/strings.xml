@@ -5,7 +5,6 @@
     <string name="speaker_title">Speaker</string>
     <string name="bluetooth_title">Bluetooth</string>
     <string name="usb_title">USB/Dock</string>
-    <string name="wm8994_title" translatable="false">WM8994</string>
     <string name="pref_unavailable">Functionality is not available on your device</string>
     <string name="pref_dsp_title">Dynamic range compression</string>
     <string name="pref_dsp_summary_on">Compression is enabled</string>
@@ -58,43 +57,6 @@
     <string name="eq_preset_treble_reducer">Treble reducer</string>
     <string name="eq_preset_vocal_booster">Vocal booster</string>
     <string name="eq_preset_custom">Custom</string>
-
-    <!-- WM8994 -->
-    <!-- Categories -->
-    <string name="category_wm8994_internal_speaker">Speaker</string>
-    <string name="category_wm8994_signal_processing">Signal processing</string>
-    <string name="category_wm8994_headphone_amp">Headset</string>
-    <string name="category_wm8994_codec_optimization">Codec optimization</string>
-    <string name="category_wm8994_dac_config">Digital/Analog converter settings</string>
-    <string name="category_wm8994_microphone_recording">Microphone</string>
-
-    <!-- Titles/Summaries -->
-    <string name="pref_wm8994_microphone_recording_title">Recording preset</string>
-    <string name="pref_wm8994_headphone_amp_title">Amplifier level</string>
-    <string name="pref_wm8994_headphone_amp_summary">Customize the analog gain</string>
-    <string name="pref_wm8994_headphone_amp_dlg_title">Headset amplifier level</string>
-    <string name="pref_wm8994_headphone_amp_dlg_desc">Analog gain</string>
-    <string name="pref_wm8994_bass_boost_enable_title">Bass boost</string>
-    <string name="pref_wm8994_bass_boost_enable_summary">Advanced controls for bass boost</string>
-    <string name="pref_wm8994_bass_boost_title">Bass boost range</string>
-    <string name="pref_wm8994_bass_boost_summary">Advanced dynamic range management</string>
-    <string name="pref_wm8994_bass_boost_preset_title">Bass boost preset</string>
-    <string name="pref_wm8994_bass_boost_gain_dlg_desc">Gain</string>
-    <string name="pref_wm8994_bass_boost_range_dlg_desc">Bass boost range</string>
-    <string name="pref_wm8994_speaker_tuning_title">Tune for music</string>
-    <string name="pref_wm8994_speaker_tuning_summary">Reconfigures the hardware EQ for more bass and balanced sound</string>
-    <string name="pref_wm8994_mono_downmix_title">Mono downmix</string>
-    <string name="pref_wm8994_mono_downmix_summary">Downmix stereo sound to mono (for stereo outputs, such as headphones)</string>
-    <string name="pref_wm8994_stereo_expansion_title">Stereo expansion</string>
-    <string name="pref_wm8994_stereo_expansion_summary">\'Expand\' stereo sound via digital signal processing</string>
-    <string name="pref_wm8994_dac_direct_title">D/AC direct</string>
-    <string name="pref_wm8994_dac_direct_summary">Access digital/analog converter directly, bypassing the channel mixer. Produces cleaner audio (higher signal-to-noise ratio)</string>
-    <string name="pref_wm8994_dac_osr128_title">Hi-fi playback</string>
-    <string name="pref_wm8994_dac_osr128_summary">Digital-to-analog converter 128x oversampling &#8212; cleaner sound when playing music</string>
-    <string name="pref_wm8994_adc_osr128_title">Hi-fi recording</string>
-    <string name="pref_wm8994_adc_osr128_summary">Analog-to-digital converter 128x oversampling &#8212; increases quality of recordings</string>
-    <string name="pref_wm8994_fll_tuning_title">Tuned audio clock</string>
-    <string name="pref_wm8994_fll_tuning_summary">Use tuned WM8994 audio clock source &#8212; improves quality of sound</string>
     <string name="help_title">Help</string>
     <string name="help_text"><b>Credit:</b>\n\n
 Author: Antti S. Lankila \n
@@ -103,13 +65,14 @@ Other feature: \n
 2.Custom Biquad Filter, Echo attenuation selector by James Fung \n
 Feature integration from Android framework: James Fung \n
 All component from Android framework develop by Google. \n
-For translations: Russian translation is provided by one of the xda-developer\n\n<b>What is DSP Manager?</b>
+\n<b>What is DSP Manager?</b>
 \n\n
 DSP Manager is a per-output audio adjustment app. <i>DSP</i> stands for
 Digital signal processing, and the <i>Manager</i> part refers to the fact that the
 DSP is actually not run inside the app itself; the manager can only
 enable it for apps which are compliant with Android\'s audio effect
 specification, i.e. most music players.
+\n\nSee: https://github.com/james34602/JamesDSPManager
 \n\n
 <b>Philosophy</b>
 \n\n
