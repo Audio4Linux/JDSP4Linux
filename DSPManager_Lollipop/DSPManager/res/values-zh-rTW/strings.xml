@@ -66,15 +66,14 @@
 其他功能: \n
 1.低通濾波器頻率選擇，立體聲加寬由Omnirom製作 \n
 2.自訂Biquad濾波器,回音衰減值選擇由James Fung製作 \n
-效果器功能及Android framework整合由James Fung製作 \n
+效果器及Android framework功能由James Fung整合 \n
 All component from Android framework develop by Google. \n
 For translations: Russian translation is provided by one of the xda-developer\n\n<b>什麼是 DSP 管理器？</b>
 \n\n
 DSP 管理器是一個進行音訊調整的應用程式。 
 <i>DSP</i> 代表 Digital Signal Processing，中文稱為「數字訊號處理」，
-及 <i>管理器</i> 同時表達著另一個事實就是 DSP 並非在一個程式內執行； 
-只要 Android 應用程式的音響效果符合規格，
-都可啟用管理器。
+及 <i>管理器</i> 同時表達著 DSP 並非在一個程式內執行； 
+只要應用程式符合規格，都可啟用管理器。
 \n\nhttps://github.com/james34602/JamesDSPManager
 \n\n
 <b>理念</b>
@@ -85,7 +84,7 @@ DSP 管理器是一個進行音訊調整的應用程式。
 DSP 管理器的理念是修正每個音響輸出的特定缺陷，
 以達到最優化的聽覺體驗。
 \n\n
-不像 AOSP 的音響效果，沒有獨立應用程式設定。
+不像 AOSP 的效果，沒有獨立應用程式設定。
 這是一個精心的設計：我們關心輸出的細節，
 並非應用程式產生的音響對 DSP 管理器協調。
 \n\n\n
@@ -99,12 +98,11 @@ DSP 管理器的理念是修正每個音響輸出的特定缺陷，
 在那裏恬靜的音樂的部分是在被淹沒在背景的噪音。
 \n\n
 唯一可調諧決定於 DSP Manager 將如何努力維持音頻響度的目標水平。
-沒有 AOSP 相當於此 DSP 音效。
 \n\n\n
-2. <b>低音強化 (Bass boost)</b>
+2. <b>低音強化</b>
 \n\n
 低音強化是一個簡單的低通濾波器，用作在 預設為55Hz或可調頻率範圍下增加一個低通濾波器。
-大約 6 dB 強化，由「強度」參數，在 55Hz或可調頻率範圍增加了濾光器的共振，
+大約 6 dB 強化，由「強度」參數，在 55Hz或可調頻率範圍增加了濾波器的共振，
 使該頻率特別強調的修改。效果是為消除損耗低音頻率的，
 針對哪些沒有與用戶的耳道緊密耦合，常見小揚聲器和貼耳式耳機。
 \n\n\n
