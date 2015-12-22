@@ -18,6 +18,7 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
 #Download
 KitKat: https://drive.google.com/open?id=0B5xvL_71lUP_WHotaTlSS2JEYnM
 Lollipop: https://drive.google.com/open?id=0B5xvL_71lUP_My1EWTRHVjB2dEE
+Lollipop(百度連結): http://pan.baidu.com/s/1bnWlLHP
 
 #Important
 We won't modify SELinux, let your device become more safe.
