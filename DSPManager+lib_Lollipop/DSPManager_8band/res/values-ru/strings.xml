@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">James DSP</string>
+    <string name="headset_title">Наушники</string>
+    <string name="speaker_title">Динамик</string>
+    <string name="bluetooth_title">Устройства Bluetooth</string>
+    <string name="usb_title">USB/Док-станция</string>
+    <string name="pref_unavailable">Данная функция не поддерживается на вашем устройстве</string>
+    <string name="pref_dsp_title">Сжатие динамического диапазона</string>
+    <string name="pref_dsp_summary_on">Сжатие включено</string>
+    <string name="pref_dsp_summary_off">Сжатие выключено</string>
+    <string name="pref_dsp_enable">Включить</string>
+    <string name="pref_effect_title">Сила эффекта</string>
+    <string name="pref_preamp_title">Сила Pre-amp эффекта</string>
+    <string name="dialog_slope">Тип фильтра</string>
+    <string name="pref_effect_freq_title">Выбрать центральную частоту эффекта</string>
+    <string name="dialog_freq">Частота фильтра</string>
+    <string name="dialog_effect">Сила эффекта</string>
+    <string name="pref_equalizer_title">Эквалайзер</string>
+    <string name="pref_equalizer_summary_on">Эквалайзер включен</string>
+    <string name="pref_equalizer_summary_off">Эквалайзер выключен</string>
+    <string name="pref_equalizer_enable">Включить</string>
+    <string name="pref_equalizer_preset_title">Выбор предустановок</string>
+    <string name="pref_equalizer_loudness_title">Тонкомпенсация</string>
+    <string name="pref_bassboost_title">Низкие частоты</string>
+    <string name="pref_bassboost_summary_on">Низкие частоты включены</string>
+    <string name="pref_bassboost_summary_off">Низкие частоты выключены</string>
+    <string name="pref_bassboost_enable">Включить</string>
+    <string name="pref_amplifier_title">Усилитель звука</string>
+    <string name="pref_amplifier_summary_on">Усилитель звука включен</string>
+    <string name="pref_amplifier_summary_off">Усилитель звука выключен</string>
+    <string name="pref_amplifier_enable">Включить</string>
+    <string name="pref_headset_virtual_title">Эффект виртуальной комнаты</string>
+    <string name="pref_headset_virtual_summary_on">Эффект включен</string>
+    <string name="pref_headset_virtual_summary_off">Эффект выключен</string>
+    <string name="pref_headset_virtual_enable">Включить</string>
+    <string name="pref_room_title">Тип эффекта</string>
+    <string name="dialog_room">Тип эффекта</string>
+    <string name="pref_echodecay_title">Выберете Эхо-эффект</string>
+    <string name="dialog_echodecay">Эхо-эффект</string>
+    <string name="pref_headset_stereowide_title">Расширенное стерео</string>
+    <string name="pref_headset_stereowide_summary_on">Расширенное стерео включено</string>
+    <string name="pref_headset_stereowide_summary_off">Расширенное стерео отключено</string>
+    <string name="pref_headset_stereowide_enable">Включить</string>
+    <string name="dialog_stereo">Расширенное стерео</string>
+    <string name="eq_preset_acoustic">Акустика</string>
+    <string name="eq_preset_bass_booster">Усиленные НЧ</string>
+    <string name="eq_preset_bass_reducer">Пониженные НЧ</string>
+    <string name="eq_preset_classical">Классика</string>
+    <string name="eq_preset_deep">Глубина</string>
+    <string name="eq_preset_flat">Плоско</string>
+    <string name="eq_preset_r_and_b">R&amp;B</string>
+    <string name="eq_preset_rock">Рок</string>
+    <string name="eq_preset_small_speakers">Маленькие динамики</string>
+    <string name="eq_preset_treble_booster">Усиленные ВЧ</string>
+    <string name="eq_preset_treble_reducer">Пониженные ВЧ</string>
+    <string name="eq_preset_vocal_booster">Усиленный вокал</string>
+    <string name="eq_preset_custom">Пользовательские настройки</string>
+    <string name="save_preset">Сохранить предустановку</string>
+    <string name="load_preset">Загрузить предустановку</string>
+    <string name="new_preset">Новая предустановка...</string>
+    <string name="navigation_drawer_toggle">Переключить панель</string>
+    <string name="navigation_drawer_open">Открыть панель навигации</string>
+    <string name="navigation_drawer_close">Закрыть панель навигации</string>
+    <string name="navigation_toggle_drawer">Режим общего меню</string>
+    <string name="navigation_toggle_tabbed">Режим вкладок</string>
+    <string name="save_error_bluetooth">"Не удается сохранить bluetooth.xml"</string>
+    <string name="save_error_headset">"Не удается сохранить headset.xml"</string>
+    <string name="save_error_speaker">"Не удается сохранить speaker.xml"</string>
+    <string name="load_error_bluetooth">Загрузка bluetooth.xml провалилась. Файл не найден или доступ запрещен</string>
+    <string name="load_error_headset">Загрузка headset.xml провалилась. Файл не найден или доступ запрещен</string>
+    <string name="load_error_speaker">Загрузка speaker.xml провалилась. Файл не найден или доступ запрещен</string>
+    <string name="warn_null">Имя файла не должно быть пустым.</string>
+    <string name="help_title">Руководство пользователя</string>
+    <string name="help_text"><b>Что такое JamesDSPManager?</b>" 
+
+ Author: Antti S. Lankila 
+ Other feature: 
+ 1.Bass frequency selector, Stereo Widener by Omnirom 
+ 2.Custom Biquad Filter, Echo attenuation selector by James Fung 
+ Feature integration from Android framework: James Fung 
+ All component from Android framework develop by Google. 
+ 
+"<b>What is DSP Manager?</b>" 
+
+ DSP Manager is a per-output audio adjustment app. "<i>DSP</i> stands for Digital signal processing, and the <i>Manager</i>" part refers to the fact that the DSP is actually not run inside the app itself; the manager can only enable it for apps which are compliant with Android's audio effect specification, i.e. most music players. 
+
+See: https://github.com/james34602/JamesDSPManager 
+
+ "<b>Philosophy</b>" 
+
+ Audio processing supports four different output categories: wired headset, USB audio, phone speaker and bluetooth headset. There is a separate configuration panel for each output category. DSP Manager's philosophy is to correct each audio output's particular deficiencies in order to reach the most optimal listening experience with each. 
+
+ Unlike with AOSP audio effects, there are no per-app settings. This is a deliberate design choice: it is the output we care about, not which app generates the audio for DSP Manager to work with. 
+
+
+ "<b>Features</b>" 
+
+ 1. "<b>Dynamic range compression (DRC)</b>" 
+
+ This effect estimates the loudness of the audio as perceived by an average listener and drives a gain control based on this estimate. The primary use case is with noisy environments such as in cars or on street, where quiet parts of music are in risk of being drowned out by background noise. 
+
+ The sole tunable determines how hard DSP Manager will try to maintain audio loudness at the target level. There is no AOSP equivalent for this DSP effect. 
+
+
+ 2. "<b>Bass boost</b>" 
+
+ The bass boost is has two simple lowpass filters which can be used to add an emphasis at 55 Hz or selectable frequency and lower frequencies. The boost is around 6 dB, and modified by the 'strength' parameter, which adds filters resonance at the 55 Hz or selectable frequency band, giving that frequency extra emphasis. The effect is designed to combat loss of bass frequency common with small speakers and supra-aural headsets which do not couple tightly with user's ear canal. Also enhance users bass experience. 
+
+
+ 3. "<b>Equalizer</b>" 
+
+ This is a 6-band equalizer with bands at 16, 64, 250, 1000, 4000 and 16000 Hz. Some common presets are provided, and the frequency response can also be customized by tapping on the equalizer graph. The effect should be used to tune the frequency response to user's personal taste, or to the particular capabilities of the available headset or speakers. 
+
+ Equalizer also contains a loudness compensation filter, which equalizes the changes in ear frequency response based on the sound pressure level which reaches the user's ear. Use of a wired headset is required, and the strength parameter value must be tuned correctly before the effect will work as designed. 
+
+ To select the right value for the compensation strength, use the quietest music volume, and choose some wide-spectrum noisy music such as rock or metal. Try to find a setting where the bass is boosted back into audibility and seems balanced with the rest of the material. After the compensation has been correctly configured, bass should remain at the same level relative to the other instruments regardless of the listening level. On the other hand, if music starts to sound bass heavy at higher listening levels, the compensation is probably set too strong, and should be reduced. 
+
+ The compensation is added to the user's chosen adjustments. If only compensation is desired, the equalizer should be left in the 'Flat' setting. 
+
+
+ 4. "<b>Virtualizer</b>" 
+
+ The headset filter is a crossfeed design inspired by the famous bs2b analog circuit. The effect passes mono sound unchanged, and adjusts the difference signal through a lowpass filter which approximates both head shadow and interaural delay at once, giving right kind of psychoacoustic clues for user's ears. The intention is to prevent listener fatigue arising from the implausible stereo separation inherent with all headsets. The effect should be enabled whenever using stereo headsets. 
+
+ Because the mixing reduces the stereo separation somewhat, there is a Haas effect reverb, which can be used to increase the perceived stereo image width. This is controlled by the 'Room type' control. 
+
+ 5. "<b>Stereo Widener</b>" 
+
+ Stereo Widener is a left-right channel direction splitter, it can enhance audio experience that when left-right speaker are put by a distance that is less than optimal 
+
+"<b>Audio enhancement can be done by using variety combination of different effectors!</b></string>
+</resources>
