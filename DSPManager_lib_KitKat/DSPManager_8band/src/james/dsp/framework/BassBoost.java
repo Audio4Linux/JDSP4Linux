@@ -46,7 +46,7 @@ public class BassBoost extends AudioEffect {
      * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
      * @hide
      */
-    public static final int PARAM_FILTER_TYPE = 2;
+    public static final int PARAM_FILTER_SLOPE = 2;
     /**
      * Bass boost center frequency. Paremeter ID for
      * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
@@ -147,10 +147,10 @@ public class BassBoost extends AudioEffect {
      * @throws UnsupportedOperationException
      * @hide
      */
-    public void setFilterType(short filter)
+    public void setFilterSlope(short filter)
     throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         try {
-            checkStatus(setParameter(PARAM_FILTER_TYPE, filter));
+            checkStatus(setParameter(PARAM_FILTER_SLOPE, filter));
         } catch(IllegalArgumentException e) {
             // ignore
         }
@@ -164,10 +164,10 @@ public class BassBoost extends AudioEffect {
      * @throws UnsupportedOperationException
      * @hide
      */
-    public short getFilterType() {
+    public short getFilterSlope() {
         try {
             short[] value = new short[1];
-            checkStatus(getParameter(PARAM_FILTER_TYPE, value));
+            checkStatus(getParameter(PARAM_FILTER_SLOPE, value));
             return value[0];
         } catch(IllegalArgumentException e) {
             return 0;

@@ -4,7 +4,6 @@
     <string name="headset_title">Наушники</string>
     <string name="speaker_title">Динамик</string>
     <string name="bluetooth_title">Устройства Bluetooth</string>
-    <string name="usb_title">USB/Док-станция</string>
     <string name="pref_unavailable">Данная функция не поддерживается на вашем устройстве</string>
     <string name="pref_dsp_title">Сжатие динамического диапазона</string>
     <string name="pref_dsp_summary_on">Сжатие включено</string>

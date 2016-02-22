@@ -12,7 +12,7 @@
     <string name="pref_dsp_enable">Enable</string>
     <string name="pref_effect_title">Select effect strength</string>
     <string name="pref_preamp_title">Select Pre-amp strength</string>
-    <string name="dialog_filter">Filter type</string>
+    <string name="dialog_slope">Filter type</string>
     <string name="pref_effect_freq_title">Select low pass filter frequency</string>
     <string name="dialog_freq">Filter frequency</string>
     <string name="dialog_effect">Effect strength</string>

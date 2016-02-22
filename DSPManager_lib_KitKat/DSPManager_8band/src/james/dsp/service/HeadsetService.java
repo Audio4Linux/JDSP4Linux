@@ -354,7 +354,7 @@ public class HeadsetService extends Service {
 
         session.mBassBoost.setEnabled(preferences.getBoolean("dsp.bass.enable", false));
             session.mBassBoost.setStrength(Short.valueOf(preferences.getString("dsp.bass.mode", "0")));
-	    session.mBassBoost.setFilterType(Short.valueOf(preferences.getString("dsp.bass.filter", "0")));
+	    session.mBassBoost.setFilterSlope(Short.valueOf(preferences.getString("dsp.bass.slope", "0")));
 	    session.mBassBoost.setCenterFrequency(Short.valueOf(preferences.getString("dsp.bass.freq", "55")));
 
         /* Equalizer state is in a single string preference with all values separated by ; */

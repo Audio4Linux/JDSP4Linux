@@ -9,6 +9,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := android-support-v13
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_PACKAGE_NAME := DSPManager
+LOCAL_PACKAGE_NAME := DSPManager8band
 
 include $(BUILD_PACKAGE)

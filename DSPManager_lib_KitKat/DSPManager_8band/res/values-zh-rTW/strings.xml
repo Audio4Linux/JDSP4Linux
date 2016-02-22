@@ -5,13 +5,11 @@
     <string name="headset_title">有線耳機</string>
     <string name="speaker_title">手機喇叭</string>
     <string name="bluetooth_title">藍牙裝置</string>
-    <string name="usb_title">USB/座架</string>
     <string name="audio_effects">音訊效果</string>
     <string name="pref_unavailable">此功能不可用於您的裝置上</string>
     <string name="dsp_settings_headset">有線耳機</string>
     <string name="dsp_settings_speaker">手機喇叭</string>
     <string name="dsp_settings_bluetooth">藍牙裝置</string>
-    <string name="dsp_settings_usb">USB裝置</string>
     <string name="pref_dsp_title">動態範圍壓縮（DRC）</string>
     <string name="pref_dsp_summary_on">已啟用壓縮</string>
     <string name="pref_dsp_summary_off">已停用壓縮</string>
@@ -21,7 +19,6 @@
     <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>
     <string name="dialog_freq">濾波頻率</string>
     <string name="dialog_effect">效果程度</string>
-    <string name="dialog_algorithm">演算法</string>
     <string name="pref_equalizer_title">等化器</string>
     <string name="pref_equalizer_summary_on">已啟用等化器</string>
     <string name="pref_equalizer_summary_off">已停用等化器</string>
