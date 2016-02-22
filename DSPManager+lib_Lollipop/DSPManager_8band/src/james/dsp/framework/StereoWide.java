@@ -30,6 +30,8 @@ public class StereoWide extends AudioEffect {
      */
     public static final int PARAM_STRENGTH = 1;
 
+    public static final int PARAM_FINE_TUNE_FREQ = 2;
+
     public static final UUID EFFECT_TYPE_STEREOWIDE = UUID.fromString("37cc2c00-dddd-11db-8577-0002a5d5c51c");
     /**
      * Indicates if strength parameter is supported by the stereowide engine
@@ -117,6 +119,33 @@ public class StereoWide extends AudioEffect {
         short[] value = new short[1];
         checkStatus(getParameter(PARAM_STRENGTH, value));
         return value[0];
+    }
+
+    public void setFineTuneFreq(short tfreq)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_FINE_TUNE_FREQ, tfreq));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+
+    /**
+     * Gets the current center frequency of the effect
+     * @return the center frequency of the effect. The valid range is [20,500], in Hertz
+     * @throws IllegalStateException
+     * @throws IllegalArgumentException
+     * @throws UnsupportedOperationException
+     * @hide
+     */
+    public short getFineTuneFreq() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_FINE_TUNE_FREQ, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 2000;
+        }
     }
 
     /**

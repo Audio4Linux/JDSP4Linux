@@ -31,7 +31,7 @@ LOCAL_C_INCLUDES += \
 	system/core/include \
 	system/media/audio_effects/include \
 # terminator
-
+	
 ifeq ($(TARGET_ARCH),armeabi-v7a-hard)
     LOCAL_CPPFLAGS += -mhard-float -D_NDK_MATH_NO_SOFT=1
 else

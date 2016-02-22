@@ -39,7 +39,7 @@ typedef struct {
  */
 
 EffectStereoWide::EffectStereoWide()
-    : mStrength(0)
+    : mStrength(0), mFineTuneFreq(2000.0f)
 {
     refreshStrength();
 }
@@ -57,8 +57,8 @@ int32_t EffectStereoWide::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmd
         /* We set a high pass at 2kHz to cut off bass. Because bass stays in the
          * center channel. The Q is set to 1.0 to keep a smooth transition.
          */
-        mHighPass.setHighPass(0, 2000.0f, mSamplingRate, 1.0f);
-
+        mSlightDelay.setParameters(mSamplingRate, 0.006f);
+        mHighPass.setHighPass(0, mFineTuneFreq, mSamplingRate, 1.0f);
         /* Bass trim, see usage in process
          */
         mBassTrim.setLowPass(0, 70.0f, mSamplingRate, 1.0f);
@@ -87,6 +87,14 @@ int32_t EffectStereoWide::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmd
                 replyData->status = 0;
                 replyData->vsize = 2;
                 replyData->data = mStrength;
+                *replySize = sizeof(reply1x4_1x2_t);
+                return 0;
+            }
+            if (cmd == STEREOWIDE_PARAM_FINE_TUNE_FREQ) {
+                reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 2;
+                replyData->data = (int16_t) mFineTuneFreq;
                 *replySize = sizeof(reply1x4_1x2_t);
                 return 0;
             }
@@ -144,7 +152,7 @@ void EffectStereoWide::refreshStrength()
         mMatrixSCoeff = 1.6;
         mSplitEQCoeff = 0.3;
         mSplitEQCompCoeff = 0.15;
-        mBassTrimCoeff = 0.13;
+        mBassTrimCoeff = 0.15;
         break;
 
     case 3: // High
@@ -160,7 +168,7 @@ void EffectStereoWide::refreshStrength()
         mMatrixSCoeff = 2.0;
         mSplitEQCoeff = 0.6;
         mSplitEQCompCoeff = 0.32;
-        mBassTrimCoeff = 0.21;
+        mBassTrimCoeff = 0.2;
         break;
     }
 }
@@ -193,7 +201,6 @@ int32_t EffectStereoWide::process(audio_buffer_t* in, audio_buffer_t* out)
          * our existing signals, so that acts similarly to an EQ.
          * We could add another BandPass EQ to act just on one
          * specific range of frequencies, but that's not needed here.
-         * We're on Android, not in a recording studio.
          */
         int32_t highPass = mHighPass.process(S);
 
@@ -215,8 +222,7 @@ int32_t EffectStereoWide::process(audio_buffer_t* in, audio_buffer_t* out)
 
         /* Last, to enhance noticeably the stereo image, we delay
          * both channels */
-        // XXX: It sounds good this way already. Maybe it can be implemented later,
-        // but as of now, there's no need IMHO.
+        S = mSlightDelay.process(S);
 
         /* Final mix */
         write(out, i * 2, M+S);

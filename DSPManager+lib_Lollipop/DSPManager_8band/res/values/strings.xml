@@ -43,6 +43,7 @@
     <string name="pref_headset_stereowide_summary_off">Stereo widener is disabled</string>
     <string name="pref_headset_stereowide_enable">Enable</string>
     <string name="dialog_stereo">Widen Level</string>
+    <string name="dialog_fine_tune">Fine Tune</string>
 
     <string name="eq_preset_acoustic">Acoustic</string>
     <string name="eq_preset_bass_booster">Bass booster</string>
@@ -126,7 +127,7 @@ couple tightly with user\'s ear canal. Also enhance users bass experience.
 \n\n\n
 3. <b>Equalizer</b>
 \n\n
-This is a 6-band equalizer with bands at 16, 64, 250, 1000, 4000 and 16000 Hz.
+This is a 6-band equalizer with bands at 15.625, 62,5, 250, 500, 1000, 4000, 8000 and 16000 Hz.
 Some common presets are provided, and the frequency response can also be
 customized by tapping on the equalizer graph. The effect should be used to tune
 the frequency response to user\'s personal taste, or to the particular
@@ -167,5 +168,7 @@ width. This is controlled by the \'Room type\' control.
 5. <b>Stereo Widener</b>
 \n\n
 Stereo Widener is a left-right channel direction splitter, it can enhance audio experience that when left-right speaker are put by a distance that is less than optimal
-\n\n<b>Audio enhancement can be done by using variety combination of different effectors!</b></string>
+\n\n<b>Audio enhancement can be done by using variety combination of different effectors!</b>
+We first calculate center and side channel data, and high pass side channel at 2000Hz, also add little bit delay effect on side channel, then add and subtract them respectively in order to synthesis left-right side position,
+</string>
 </resources>

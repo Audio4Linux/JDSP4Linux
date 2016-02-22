@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/save_preset"
+        android:title="@string/save_preset" />
+    <item
+        android:id="@+id/load_preset"
+        android:title="@string/load_preset" />
+    <item
+        android:id="@+id/dsp_action_tabbed"
+        android:title="@string/navigation_toggle_drawer"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/help"
+        android:title="@string/help_title"
+        android:icon="@android:drawable/ic_menu_help" />
+</menu>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="headphone_modes">
+    <item>工作室</item>
+    <item>房間</item>
+    <item>大房間</item>
+    <item>巨大室內空間</item>
+    <item>大環境</item>
+    <item>強勁混響和回音</item>
+  </string-array>
+  <string-array name="headphone_echodecay">
+    <item>超強(非常危險)</item>
+    <item>更大</item>
+    <item>一般(建議)</item>
+    <item>減少到最低回音</item>
+    <item>沒有回音</item>
+  </string-array>
+  <string-array name="equalizer_loudness_modes">
+      <item>已停用</item>
+      <item>最弱</item>
+      <item>更弱</item>
+      <item>弱</item>
+      <item>強</item>
+      <item>更強</item>
+      <item>變態</item>
+  </string-array>
+  <string-array name="compression_modes">
+    <item>輕微</item>
+    <item>中等</item>
+  </string-array>
+  <string-array name="bassboost_modes">
+    <item>開啟</item>
+    <item>一點點</item>
+    <item>輕微</item>
+    <item>中等</item>
+    <item>超強</item>
+    <item>極端</item>
+  </string-array>
+  <string-array name="bassboost_filter">
+        <item>一般低通濾波器</item>
+        <item>有明確峰值的低通濾波器</item>
+    </string-array>
+  <string-array name="bassboost_algorithm">
+        <item>左/右獨立低音(默認)</item>
+        <item>左/右合併低音</item>
+    </string-array>
+  <string-array name="preamp_modes">
+    <item>已停用</item>
+    <item>2x</item>
+    <item>3x</item>
+  </string-array>
+    <string-array name="stereowide_modes">
+      <item>最弱</item>
+      <item>更弱</item>
+      <item>弱</item>
+      <item>強</item>
+      <item>更強</item>
+    </string-array>
+</resources>

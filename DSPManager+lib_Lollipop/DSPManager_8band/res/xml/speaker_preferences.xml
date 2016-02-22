@@ -32,6 +32,13 @@
             android:defaultValue="0"
             android:title="@string/pref_effect_title"
             android:entryValues="@array/bassboost_modes_values" />
+	<james.dsp.preference.SummariedListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_slope"
+            android:entries="@array/bassboost_slope"
+            android:entryValues="@array/bassboost_slope_values"
+            android:title="@string/dialog_slope"
+            android:key="dsp.bass.slope" />
         <james.dsp.preference.SummariedListPreference
             android:entries="@array/bassboost_freqs"
             android:dialogTitle="@string/dialog_effect"
@@ -110,6 +117,13 @@
             android:entryValues="@array/stereowide_values"
             android:title="@string/dialog_stereo"
             android:key="dsp.stereowide.mode" />
+        <james.dsp.preference.SummariedListPreference
+            android:defaultValue="2000"
+            android:dialogTitle="@string/dialog_fine_tune"
+            android:entries="@array/stereowide_finetunefreq"
+            android:entryValues="@array/stereowide_finetunefreq_values"
+            android:title="@string/dialog_fine_tune"
+            android:key="dsp.stereowide.finetunefreq" />
     </PreferenceCategory>
 
 </PreferenceScreen>

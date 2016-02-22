@@ -167,9 +167,6 @@ int32_t EffectVirtualizer::process(audio_buffer_t* in, audio_buffer_t* out)
         /* Direct radiation components. */
         int32_t side = (dataL - dataR) >> 1;
 
-        /* Adjust derived center channel coloration to emphasize forward
-         * direction impression. (XXX: disabled until configurable). */
-        //center = mColorization.process(center);
         /* Sound reaching ear from the opposite speaker */
         side -= mLocalization.process(side);
 

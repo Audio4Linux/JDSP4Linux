@@ -18,7 +18,7 @@
     <color name="white">#ffffffff</color>
     <color name="off_white">#ffdedede</color>
     <color name="black">#ff000000</color>
-    <color name="grid_lines">#3fffffff</color>
+    <color name="grid_lines">#4fffffff</color>
     <color name="cb">#88bbffff</color>
     <color name="freq_hl">#2000ddff</color>
     <color name="freq_hl2">#4033b5e5</color>

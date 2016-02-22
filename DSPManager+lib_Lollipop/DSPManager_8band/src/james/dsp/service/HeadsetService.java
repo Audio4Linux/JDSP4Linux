@@ -373,8 +373,8 @@ public class HeadsetService extends Service {
 
         if (session.mStereoWide != null) {
             session.mStereoWide.setEnabled(preferences.getBoolean("dsp.stereowide.enable", false));
-            session.mStereoWide.setStrength(
-                    Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
+            session.mStereoWide.setStrength(Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
+            session.mStereoWide.setFineTuneFreq(Short.valueOf(preferences.getString("dsp.stereowide.finetunefreq", "2000")));
         }
     }
 }

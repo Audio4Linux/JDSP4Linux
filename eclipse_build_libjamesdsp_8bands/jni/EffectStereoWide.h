@@ -3,6 +3,7 @@
 #include "effect_cstereowide.h"
 
 #include "Biquad.h"
+#include "Delay.h"
 #include "Effect.h"
 #include "FIR16.h"
 
@@ -16,8 +17,10 @@ class EffectStereoWide : public Effect {
     private:
     int16_t mStrength;
 
+    Delay mSlightDelay;
     int64_t mDelayData;
     Biquad mHighPass;
+    Biquad mBandPass;
     Biquad mBassTrim;
 
     // Matrix M (center channel) coefficient
@@ -30,6 +33,7 @@ class EffectStereoWide : public Effect {
     double mSplitEQCompCoeff;
     // Bass trim coefficient
     double mBassTrimCoeff;
+    float mFineTuneFreq;
 
     void refreshStrength();
 
