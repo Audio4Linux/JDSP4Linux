@@ -21,8 +21,7 @@ Lollipop and Marshmallow: https://drive.google.com/open?id=0B5xvL_71lUP_U0l0c09U
 Lollipop(百度連結): http://pan.baidu.com/s/1bnWlLHP
 
 #Development
-For user want to try eclipse_build_test_libjamesdsp
-This is a testing library that doesn't work properly at all, I might use this in future when I solve problems.
+For user want to try eclipse_build_test_libjamesdsp. This is a testing library that doesn't work properly at all, I might use this in future when I solve problems.
 
 #Important
 We won't modify SELinux, let your device become more safe.
