@@ -10,6 +10,7 @@ import java.nio.ByteOrder;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.StringTokenizer;
+import java.util.UUID;
 /**
  * Bass boost is an audio effect to boost or amplify low frequencies of the sound. It is comparable
  * to a simple equalizer but limited to one band amplification in the low frequency range.
@@ -41,6 +42,7 @@ public class BassBoost extends AudioEffect {
      * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
      */
     public static final int PARAM_STRENGTH = 1;
+    public static final UUID EFFECT_TYPE_BASS_BOOST = UUID.fromString("42b5cbf5-4dd8-4e79-a5fb-cceb2cb54e13");
     /**
      * Bass boost filter type. Paremeter ID for
      * {@link android.media.audiofx.BassBoost.OnParameterChangeListener}
@@ -147,10 +149,10 @@ public class BassBoost extends AudioEffect {
      * @throws UnsupportedOperationException
      * @hide
      */
-    public void setFilterSlope(short filter)
+    public void setFilterSlope(short slope)
     throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         try {
-            checkStatus(setParameter(PARAM_FILTER_SLOPE, filter));
+            checkStatus(setParameter(PARAM_FILTER_SLOPE, slope));
         } catch(IllegalArgumentException e) {
             // ignore
         }
