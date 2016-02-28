@@ -189,7 +189,7 @@ public class EqualizerSurface extends SurfaceView {
         double gain = Math.pow(10, mLevels[0] / 20);
         for (int i = 0; i < biquads.length; i++) {
             if (i == 0) {
-            double freq = 15.625;
+            double freq = 23.0;
             int SAMPLING_RATE = 48000;
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
@@ -224,7 +224,7 @@ public class EqualizerSurface extends SurfaceView {
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
             else if (i == 7) {
-            double freq = 16000.0;
+            double freq = 15000.0;
             int SAMPLING_RATE = 48000;
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
@@ -302,7 +302,7 @@ public class EqualizerSurface extends SurfaceView {
 
         for (int i = 0; i < mLevels.length; i++) {
             if (i == 0) {
-            double freq = 15.625;
+            double freq = 23.0;
             float x = projectX(freq) * mWidth;
             float y = projectY(mLevels[i]) * mHeight;
             canvas.drawLine(x, mHeight, x, y, mControlBar);
@@ -365,7 +365,7 @@ public class EqualizerSurface extends SurfaceView {
             canvas.drawText(String.format(freq < 1000 ? "%.0f" : "%.0fk", freq < 1000 ? freq : freq / 1000), x, mWhite.getTextSize(), mControlBarText);
             }
             else if (i == 7) {
-            double freq = 16000.0;
+            double freq = 15000.0;
             float x = projectX(freq) * mWidth;
             float y = projectY(mLevels[i]) * mHeight;
             canvas.drawLine(x, mHeight, x, y, mControlBar);
