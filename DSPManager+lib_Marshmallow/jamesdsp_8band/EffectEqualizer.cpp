@@ -396,7 +396,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
  *    250 Hz  0.0 .. 10.0 dB
  *   1000 Hz  0.0 ..  0,0 dB
  *   4000 Hz -1.0 .. -3.0 dB
- *  15000 Hz -1.5 ..  8.0 dB
+ *  16000 Hz -1.5 ..  8.0 dB
  *
  * The boost will be applied maximally for signals of 20 dB and less,
  * and linearly decreased for signals 20 dB ... 100 dB, and no adjustment is
