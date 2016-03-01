@@ -15,8 +15,7 @@ Omnirom extra:
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
 
-#Download
-KitKat: https://drive.google.com/open?id=0B5xvL_71lUP_ZElEb3diQW04RGs
+#Download Link(Not Updated)
 Lollipop and Marshmallow: https://drive.google.com/open?id=0B5xvL_71lUP_U0l0c09UUjZGWjQ
 Lollipop(百度連結): http://pan.baidu.com/s/1bnWlLHP
 
