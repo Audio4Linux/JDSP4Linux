@@ -16,8 +16,9 @@ Omnirom extra:
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
 
 #Download Link(Not Updated)
-Lollipop and Marshmallow: https://drive.google.com/open?id=0B5xvL_71lUP_U0l0c09UUjZGWjQ
-Lollipop(百度連結): http://pan.baidu.com/s/1bnWlLHP
+Lollipop: https://drive.google.com/open?id=0B5xvL_71lUP_c1pIT2pZOEdERVE
+Marshmallow: https://drive.google.com/open?id=0B5xvL_71lUP_VXJBdHc2MXFKUk0
+Lollipop(百度連結): http://pan.baidu.com/s/1kTZgbGV
 
 #Development
 For user want to try eclipse_build_test_libjamesdsp. This is a testing library that doesn't work properly at all, I might use this in future when I solve problems.
