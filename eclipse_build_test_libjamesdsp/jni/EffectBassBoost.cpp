@@ -117,40 +117,37 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
     for (uint32_t i = 0; i < in->frameCount; i ++) {
     	if(mFilterType == 0)
     	{
-/*    	    mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-    	    mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-    	    mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f); */
         	int32_t dryL = read(in, i * 2);
             int32_t dryR = read(in, i * 2 + 1);
             const int order = 2;
-        	Iir::Butterworth::LowShelf<order> f;
-        	f.setup(order, 44100.0, mCenterFrequency, mStrength/60.);
+        	Iir::Butterworth::LowPass<order> f;
+        	f.setup(order, 44100.0, mCenterFrequency);
         	f.reset();
         	int32_t boostl = f.filter(dryL);
         	int32_t boostr = f.filter(dryR);
-            write(out, i * 2, boostl);
-            write(out, i * 2 + 1, boostr);
+    write(out, i * 2, boostl);
+    write(out, i * 2 + 1, boostr);
     	}
     	else if(mFilterType == 1)
     	{
         	int32_t dryL = read(in, i * 2);
             int32_t dryR = read(in, i * 2 + 1);
             const int order = 4;
-        	Iir::Butterworth::LowShelf<order> f;
-        	f.setup(order, 44100.0, mCenterFrequency, mStrength/60.);
+        	Iir::Butterworth::LowPass<order> f;
+        	f.setup(order, 44100.0, mCenterFrequency);
         	f.reset();
         	int32_t boostl = f.filter(dryL);
         	int32_t boostr = f.filter(dryR);
-        write(out, i * 2, boostl);
-        write(out, i * 2 + 1, boostr);
+    write(out, i * 2, boostl);
+    write(out, i * 2 + 1, boostr);
     	}
     	else
     	{
         	int32_t dryL = read(in, i * 2);
             int32_t dryR = read(in, i * 2 + 1);
             const int order = 2;
-        	Iir::Butterworth::LowShelf<order> f;
-        	f.setup(order, 44100.0, mCenterFrequency, mStrength/60.);
+        	Iir::Butterworth::LowPass<order> f;
+        	f.setup(order, 44100.0, mCenterFrequency);
         	f.reset();
         	int32_t boostl = f.filter(dryL);
         	int32_t boostr = f.filter(dryR);

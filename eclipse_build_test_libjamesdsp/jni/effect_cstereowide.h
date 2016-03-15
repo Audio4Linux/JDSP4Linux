@@ -35,7 +35,8 @@ const effect_uuid_t * const SL_IID_STEREOWIDE = &SL_IID_STEREOWIDE_;
 typedef enum
 {
     STEREOWIDE_PARAM_STRENGTH_SUPPORTED,
-    STEREOWIDE_PARAM_STRENGTH
+    STEREOWIDE_PARAM_STRENGTH,
+    STEREOWIDE_PARAM_FINE_TUNE_FREQ
 } t_stereowide_params;
 
 #if __cplusplus

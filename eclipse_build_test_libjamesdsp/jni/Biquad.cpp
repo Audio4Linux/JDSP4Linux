@@ -126,12 +126,12 @@ void BiquadBase::setCoefficients (double a0, double a1, double a2,
   assert (!Iir::is_nan (a0) && !Iir::is_nan (a1) && !Iir::is_nan (a2) &&
           !Iir::is_nan (b0) && !Iir::is_nan (b1) && !Iir::is_nan (b2));
 
-  m_a0 = toFixedPoint(a0);
-  m_a1 = -toFixedPoint(a1/a0);
-  m_a2 = -toFixedPoint(a2/a0);
-  m_b0 = toFixedPoint(b0/a0);
-  m_b1 = toFixedPoint(b1/a0);
-  m_b2 = toFixedPoint(b2/a0);
+  m_a0 = a0;
+  m_a1 = a1/a0;
+  m_a2 = a2/a0;
+  m_b0 = b0/a0;
+  m_b1 = b1/a0;
+  m_b2 = b2/a0;
 }
 
 void BiquadBase::setOnePole (complex_t pole, complex_t zero)

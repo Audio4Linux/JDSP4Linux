@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#define NUM_BANDS 6
+#define NUM_BANDS 8
 
 /*      EQ presets      */
 static int16_t gPresetAcoustic[NUM_BANDS] = { 450, 450, 350, 175, 350, 250 };
@@ -93,18 +93,14 @@ typedef struct {
     uint32_t psize;
     uint32_t vsize;
     int32_t cmd;
-    int16_t data[8]; // numbands (6) + 2
+    int16_t data[10]; // numbands (8) + 2
 } reply1x4_props_t;
-
-static int64_t toFixedPoint(float in) {
-    return (int64_t) (0.5 + in * ((int64_t) 1 << 32));
-}
 
 EffectEqualizer::EffectEqualizer()
     : mLoudnessAdjustment(10000.f), mLoudnessL(50.f), mLoudnessR(50.f),
       mNextUpdate(0), mNextUpdateInterval(1000), mPowerSquaredL(0), mPowerSquaredR(0), mFade(0)
 {
-    for (int32_t i = 0; i < 6; i ++) {
+    for (int32_t i = 0; i < 8; i ++) {
         mBand[i] = 0;
     }
 }
@@ -143,8 +139,8 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 reply1x4_2x2_t *replyData = (reply1x4_2x2_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 4;
-                replyData->data1 = -1000;
-                replyData->data2 = 1000;
+                replyData->data1 = -1200;
+                replyData->data2 = 1200;
                 *replySize = sizeof(reply1x4_2x2_t);
                 return 0;
             }
@@ -161,9 +157,9 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 replyData->status = 0;
                 replyData->vsize = 2*8;
                 replyData->data[0] = (int16_t)-1; // PRESET_CUSTOM
-                replyData->data[1] = (int16_t)6;  // number of bands
+                replyData->data[1] = (int16_t)8;  // number of bands
                 for (int i = 0; i < NUM_BANDS; i++) {
-                    replyData->data[2 + i] = (int16_t)(mBand[i] * 100 + 0.5f); // band levels
+                    replyData->data[2 + i] = (int16_t)(mBand[i] * 120 + 0.5f); // band levels
                 }
                 *replySize = sizeof(reply1x4_props_t);
                 return 0;
@@ -191,38 +187,96 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 reply2x4_1x2_t *replyData = (reply2x4_1x2_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 2;
-                replyData->data = int16_t(mBand[arg] * 100 + 0.5f);
+                replyData->data = int16_t(mBand[arg] * 120 + 0.5f);
                 *replySize = sizeof(reply2x4_1x2_t);
                 return 0;
             }
             if (cmd == EQ_PARAM_CENTER_FREQ && arg >= 0 && arg < NUM_BANDS) {
-                float centerFrequency = 15.625f * powf(4, arg);
+                if(arg == 0)
+                {
+                float centerFrequency = 23.0f;
                 reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 4;
                 replyData->data = int32_t(centerFrequency * 1000);
                 *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 1)
+                {
+                float centerFrequency = 62.5f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 2)
+                {
+                float centerFrequency = 250.0f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 3)
+                {
+                float centerFrequency = 500.0f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 4)
+                {
+                float centerFrequency = 1000.0f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 5)
+                {
+                float centerFrequency = 4000.0f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 6)
+                {
+                float centerFrequency = 8000.0f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else if(arg == 7)
+                {
+                float centerFrequency = 15000.0f;
+                reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
+                replyData->status = 0;
+                replyData->vsize = 4;
+                replyData->data = int32_t(centerFrequency * 1000);
+                *replySize = sizeof(reply2x4_1x4_t);
+                }
+                else
+                {
+                // Should not happen
+                }
                 return 0;
             }
             if (cmd == EQ_PARAM_GET_BAND) {
-                float band = log(float(arg / 1000) / 15.625f) / log(4);
+		int16_t band = 8;
                 reply2x4_1x2_t *replyData = (reply2x4_1x2_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 2;
                 replyData->data = int16_t(band);
                 *replySize = sizeof(reply2x4_1x2_t);
-                return 0;
-            }
-            if (cmd == EQ_PARAM_BAND_FREQ_RANGE && arg >= 0 && arg < NUM_BANDS) {
-                float centerFrequency = 15.625f * powf(4, arg);
-                float topFrequency = ((1.5f * 15.625f) * powf(4, arg));
-                float bottomFrequency = (centerFrequency - (topFrequency - centerFrequency));
-                reply2x4_2x4_t *replyData = (reply2x4_2x4_t *) pReplyData;
-                replyData->status = 0;
-                replyData->vsize = 8;
-                replyData->data1 = int32_t(bottomFrequency * 1000);
-                replyData->data2 = int32_t(topFrequency * 1000);
-                *replySize = sizeof(reply2x4_2x4_t);
                 return 0;
             }
             if (cmd == EQ_PARAM_GET_PRESET_NAME && arg >= 0 && arg < int32_t(gNumPresets)) {
@@ -342,7 +396,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
  *    250 Hz  0.0 .. 10.0 dB
  *   1000 Hz  0.0 ..  0,0 dB
  *   4000 Hz -1.0 .. -3.0 dB
- *  16000 Hz -1.5 ..  8.0 dB
+ *  15000 Hz -1.5 ..  8.0 dB
  *
  * The boost will be applied maximally for signals of 20 dB and less,
  * and linearly decreased for signals 20 dB ... 100 dB, and no adjustment is
@@ -351,8 +405,8 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
  */
 float EffectEqualizer::getAdjustedBand(int32_t band, float loudness) {
     /* 1st derived by linear extrapolation from (62.5, 28) to (20, 41) */
-    const float adj_beg[NUM_BANDS] = {  0.0,  0.0,  0.0,  0.0, -1.0, -1.5 };
-    const float adj_end[NUM_BANDS] = { 42.3, 28.0, 10.0,  0.0, -3.0,  8.0 };
+    const float adj_beg[NUM_BANDS] = {  0.0,  0.0,  0.0, 0.0, 0.0, -0.9 , -1.2 , -1.6};
+    const float adj_end[NUM_BANDS] = { 46.0, 31.0, 13.0, 6.0, 0.1, -3.1 ,  10.0 , 9.0};
 
     /* Add loudness adjustment */
     float loudnessLevel = loudness + mLoudnessAdjustment;
@@ -376,9 +430,9 @@ float EffectEqualizer::getAdjustedBand(int32_t band, float loudness) {
 void EffectEqualizer::refreshBands()
 {
     for (int32_t band = 0; band < (NUM_BANDS - 1); band ++) {
-        /* 15.625, 62.5, 250, 1000, 4000, 16000 */
-        float centerFrequency = 15.625f * powf(4, band);
-
+        if(band == 0)
+        {
+        float centerFrequency = 23.0f;
         float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
         float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
         mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
@@ -386,6 +440,88 @@ void EffectEqualizer::refreshBands()
         float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
         float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
         mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 1)
+        {
+        float centerFrequency = 62.5f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 2)
+        {
+        float centerFrequency = 250.0f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 3)
+        {
+        float centerFrequency = 500.0f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 4)
+        {
+        float centerFrequency = 1000.0f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 5)
+        {
+        float centerFrequency = 4000.0f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 6)
+        {
+        float centerFrequency = 8000.0f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else if(band == 7)
+        {
+        float centerFrequency = 15000.0f;
+        float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
+        float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
+        mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
+
+        float dBR = getAdjustedBand(band + 1, mLoudnessR) - getAdjustedBand(band, mLoudnessR);
+        float overallGainR = band == 0 ? getAdjustedBand(0, mLoudnessR) : 0.0f;
+        mFilterR[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBR, 1.0f, overallGainR);
+        }
+        else
+        {
+        // Should not happen
+        }
     }
 }
 

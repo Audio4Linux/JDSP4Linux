@@ -9,8 +9,8 @@
 
 class EffectEqualizer : public Effect {
     private:
-    float mBand[6];
-    Biquad mFilterL[5], mFilterR[5];
+    float mBand[8];
+    Biquad mFilterL[7], mFilterR[7];
 
     /* Automatic equalizer */
     float mLoudnessAdjustment;
