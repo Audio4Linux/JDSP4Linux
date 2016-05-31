@@ -117,9 +117,8 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
     for (uint32_t i = 0; i < in->frameCount; i ++) {
     	if(mFilterType == 0)
     	{
-    	    mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-    	    mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-    	    mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
+    	    mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+    	    mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
         	int32_t dryL = read(in, i * 2);
             int32_t dryR = read(in, i * 2 + 1);
     	if (mStrength >= 600)
@@ -137,10 +136,19 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
     	}
     	else if(mFilterType == 1)
     	{
-    	    mBoost.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
-    	    mBoostL.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
-    	    mBoostR.setLowPassPeak(0, mCenterFrequency, mSamplingRate, 1.5f + mStrength / 580.0f);
-        	int32_t dryL = read(in, i * 2);
+                if (mStrength < 560)
+		{
+                mStrengthK = 530;
+                }
+		else
+		{
+		mStrengthK = mStrength;
+		}
+    	    mStage1L.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    	    mStage1R.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    	    mBoostL.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    	    mBoostR.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+       	    int32_t dryL = read(in, i * 2);
             int32_t dryR = read(in, i * 2 + 1);
     	if (mStrength >= 600)
     {
@@ -150,17 +158,18 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
     {
         noiseon = 0;
     }
-    	int32_t boostl = mBoostL.process(dryL);
-    	int32_t boostr = mBoostR.process(dryR);
+    	int32_t stage1L = mStage1L.process(dryL);
+    	int32_t stage1R = mStage1R.process(dryR);
+    	int32_t boostl = mBoostL.process(stage1L);
+    	int32_t boostr = mBoostR.process(stage1R);
             write(out, i * 2, dryL + boostl + noiseon);
             write(out, i * 2 + 1, dryR + boostr + noiseon);
     	}
     	else
     	{
-    	   mBoost.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-    	   mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-    	   mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.5f + mStrength / 666.0f);
-       	int32_t dryL = read(in, i * 2);
+    	   mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+    	   mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+       	   int32_t dryL = read(in, i * 2);
            int32_t dryR = read(in, i * 2 + 1);
    	if (mStrength >= 600)
    {

@@ -107,7 +107,7 @@
 
   <string-array name="bassboost_slope">
         <item>Normal</item>
-        <item>Normal with peak</item>
+        <item>Warm filter</item>
     </string-array>
 
   <string-array name="bassboost_slope_values" translatable="false">
@@ -119,7 +119,7 @@
     <item>60</item>
     <item>100</item>
     <item>255</item>
-    <item>550</item>
+    <item>560</item>
     <item>900</item>
     <item>1200</item>
   </string-array>

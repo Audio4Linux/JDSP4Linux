@@ -29,9 +29,9 @@ FIR16::~FIR16()
 {
 }
 
-void FIR16::setParameters(float coeff[16])
+void FIR16::setParameters(float coeff[32])
 {
-    for (int32_t i = 0; i < 16; i ++) {
+    for (int32_t i = 0; i < 32; i ++) {
         mCoeff[i] = int64_t(coeff[i] * (int64_t(1) << 32));
     }
 }
@@ -42,7 +42,7 @@ int32_t FIR16::process(int32_t x0)
     mState[mIndex & 0xf] = x0;
 
     int64_t y = 0;
-    for (int32_t i = 0; i < 16; i ++) {
+    for (int32_t i = 0; i < 32; i ++) {
         y += mCoeff[i] * mState[(i + mIndex) & 0xf];
     }
 

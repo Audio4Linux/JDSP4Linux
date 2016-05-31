@@ -38,7 +38,7 @@
   </string-array>
   <string-array name="bassboost_slope">
         <item>一般低通濾波器</item>
-        <item>有明確峰值的低通濾波器</item>
+        <item>暖味低通濾波器</item>
     </string-array>
   <string-array name="preamp_modes">
     <item>已停用</item>

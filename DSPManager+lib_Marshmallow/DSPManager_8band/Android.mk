@@ -20,8 +20,6 @@ LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
 
 LOCAL_PACKAGE_NAME := DSPManager8band
 
-LOCAL_OVERRIDES_PACKAGES := MusicFX
-
 include $(BUILD_PACKAGE)
 
 # Use the folloing include to make our test apk.

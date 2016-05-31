@@ -411,7 +411,7 @@ public class EqualizerSurface extends SurfaceView {
         int idx = 0;
         float best = 1e9f;
         for (int i = 0; i < mLevels.length; i++) {
-            double freq = 23.0 * Math.pow(2.609, i);
+            double freq = 23.0 * Math.pow(2.55, i);
             float cx = projectX(freq) * mWidth;
             float distance = Math.abs(cx - px);
 
