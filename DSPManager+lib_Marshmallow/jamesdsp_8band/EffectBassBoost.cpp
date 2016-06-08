@@ -136,13 +136,25 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
     	}
     	else if(mFilterType == 1)
     	{
-                if (mStrength < 560)
+                if (mStrength < 80)
 		{
-                mStrengthK = 530;
+                mStrengthK = 515;
                 }
+                else if(mStrength > 80 && mStrength < 100)
+		{
+		mStrengthK = 540;
+		}
+		else if(mStrength > 120 && mStrength < 300)
+		{
+		mStrengthK = 550;
+		}
+		else if(mStrength > 500 && mStrength < 600)
+		{
+		mStrengthK  = 650;
+		}
 		else
 		{
-		mStrengthK = mStrength;
+		mStrengthK = mStrength - 50;
 		}
     	    mStage1L.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
     	    mStage1R.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
