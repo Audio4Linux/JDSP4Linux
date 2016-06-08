@@ -4,7 +4,7 @@ This app in order to improve your music experience especially you want realistic
 We don't work too much around with modifying Android framework instead of we integrate framework with DSP Manager, let it less depend on system framework.
 
 JamesDSPManager merge with Omnirom features: 
-Basic: 
+Basic:
 1. Compression
 2. Bass Boost
 3. Equalizer (8 Bands HS Filter)
