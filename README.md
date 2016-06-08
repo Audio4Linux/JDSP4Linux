@@ -5,7 +5,7 @@ We don't work too much around with modifying Android framework instead of we int
 
 JamesDSPManager merge with Omnirom features: 
 Basic: 
-1. Compression 
+1. Compression
 2. Bass Boost
 3. Equalizer (8 Bands HS Filter)
 4. Virtualizer
