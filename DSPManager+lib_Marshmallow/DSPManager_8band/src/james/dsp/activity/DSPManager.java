@@ -1,5 +1,7 @@
 package james.dsp.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -99,6 +101,7 @@ public final class DSPManager extends Activity {
     private SharedPreferences mPreferences;
     private boolean mIsTabbed = true;
     private CharSequence mTitle;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
     //==================================
     // Overridden Methods
@@ -298,6 +301,8 @@ public final class DSPManager extends Activity {
     }
 
     public void savePresetDialog() {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);}
         // We first list existing presets
         File presetsDir = new File(Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/" + PRESETS_FOLDER);

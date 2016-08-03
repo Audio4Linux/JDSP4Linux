@@ -204,17 +204,17 @@ public class EqualizerSurface extends SurfaceView {
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
             else if (i == 3) {
-            double freq = 500.0;
+            double freq = 600.0;
             int SAMPLING_RATE = 48000;
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
             else if (i == 4) {
-            double freq = 1000.0;
+            double freq = 1200.0;
             int SAMPLING_RATE = 48000;
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
             else if (i == 5) {
-            double freq = 4000.0;
+            double freq = 3800.0;
             int SAMPLING_RATE = 48000;
             biquads[i].setHighShelf(freq * 2, SAMPLING_RATE, mLevels[i + 1] - mLevels[i], 1);
             }
@@ -329,7 +329,7 @@ public class EqualizerSurface extends SurfaceView {
             canvas.drawText(String.format(freq < 1000 ? "%.0f" : "%.0fk", freq < 1000 ? freq : freq / 1000), x, mWhite.getTextSize(), mControlBarText);
             }
             else if (i == 3) {
-            double freq = 500.0;
+            double freq = 600.0;
             float x = projectX(freq) * mWidth;
             float y = projectY(mLevels[i]) * mHeight;
             canvas.drawLine(x, mHeight, x, y, mControlBar);
@@ -338,7 +338,7 @@ public class EqualizerSurface extends SurfaceView {
             canvas.drawText(String.format(freq < 1000 ? "%.0f" : "%.0fk", freq < 1000 ? freq : freq / 1000), x, mWhite.getTextSize(), mControlBarText);
             }
             else if (i == 4) {
-            double freq = 1000.0;
+            double freq = 1200.0;
             float x = projectX(freq) * mWidth;
             float y = projectY(mLevels[i]) * mHeight;
             canvas.drawLine(x, mHeight, x, y, mControlBar);
@@ -347,7 +347,7 @@ public class EqualizerSurface extends SurfaceView {
             canvas.drawText(String.format(freq < 1000 ? "%.0f" : "%.0fk", freq < 1000 ? freq : freq / 1000), x, mWhite.getTextSize(), mControlBarText);
             }
             else if (i == 5) {
-            double freq = 4000.0;
+            double freq = 3800.0;
             float x = projectX(freq) * mWidth;
             float y = projectY(mLevels[i]) * mHeight;
             canvas.drawLine(x, mHeight, x, y, mControlBar);

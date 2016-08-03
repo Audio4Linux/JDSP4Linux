@@ -8,15 +8,16 @@ Basic:
 
 1. Compression
 2. Bass Boost
-3. Equalizer (8 Bands HS Filter)
-4. Virtualizer
+3. Virtualizer
+4. Equalizer (8 Bands HS Filter)
+## Will provide more bands, and higher quality filters(Not finish)
 Omnirom extra:
 1. Adjustable Low pass filter(Bass Boost)
 2. Stereo Widen
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
 
-#Download Link
+#Download Link(Not the latest, latest version still in develop)
 1. Lollipop: https://drive.google.com/open?id=0B5xvL_71lUP_UmplNUNYVjVlZmc
 2. Lollipop(百度雲網盤連結): http://pan.baidu.com/s/1qYd6czU
 3. Marshmallow: https://drive.google.com/open?id=0B5xvL_71lUP_TnlGeTBReWYyQ1k
@@ -25,7 +26,9 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 (TESTED)
 
 
 #Development
-For user want to try eclipse_build_test_libjamesdsp. This is a testing library that doesn't work properly at all, I might use this in future when I solve problems.
+For user want to try eclipse_build_libjamesdsp_many_bands. This is a testing library that is working! But not finish yet.
+
+It provide many good IIR filters to making equalizer.
 
 #Important
 We won't modify SELinux, let your device become more safe.
