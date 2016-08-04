@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="headphone_modes">
+    <item>Studio</item>
+    <item>Room</item>
+    <item>Large room</item>
+    <item>Huge indoor space</item>
+    <item>Huge environment</item>
+    <item>Strong reverb and echo</item>
+  </string-array>
+
+  <string-array name="headphone_modes_values" translatable="false">
+    <item>20</item>
+    <item>333</item>
+    <item>900</item>
+    <item>1100</item>
+    <item>1220</item>
+    <item>1350</item>
+  </string-array>
+
+  <string-array name="headphone_echodecay">
+    <item>Extreme(Danger!)</item>
+    <item>Moderate echo</item>
+    <item>Normal(Suggest)</item>
+    <item>Approach no echo</item>
+    <item>No echo</item>
+  </string-array>
+
+  <string-array name="headphone_decay_values" translatable="false">
+    <item>900</item>
+    <item>950</item>
+    <item>1000</item>
+    <item>1100</item>
+    <item>1200</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_modes" translatable="false">
+    <item>@string/eq_preset_acoustic</item>
+    <item>@string/eq_preset_bass_booster</item>
+    <item>@string/eq_preset_bass_reducer</item>
+    <item>@string/eq_preset_classical</item>
+    <item>@string/eq_preset_deep</item>
+    <item>@string/eq_preset_flat</item>
+    <item>@string/eq_preset_r_and_b</item>
+    <item>@string/eq_preset_rock</item>
+    <item>@string/eq_preset_small_speakers</item>
+    <item>@string/eq_preset_treble_booster</item>
+    <item>@string/eq_preset_treble_reducer</item>
+    <item>@string/eq_preset_vocal_booster</item>
+    <item>@string/eq_preset_custom</item>
+  </string-array>
+
+  <string-array name="equalizer_loudness_modes">
+    <item>Disabled</item>
+    <item>Weakest</item>
+    <item>Weaker</item>
+    <item>Weak</item>
+    <item>Strong</item>
+    <item>Stronger</item>
+    <item>Strongest</item>
+  </string-array>
+
+  <string-array name="equalizer_loudness_values" translatable="false">
+    <item>10000</item>
+    <item>5000</item>
+    <item>4500</item>
+    <item>4000</item>
+    <item>3500</item>
+    <item>3000</item>
+    <item>2500</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_values" translatable="false">
+    <item>4.5;4.5;3.5;1.75;3.5;2.5;0;0</item>    <!-- Acoustic -->
+    <item>6.5;6.5;4.0;0.0;0.0;0.0;0;0</item>     <!-- Bass Booster -->
+    <item>-6.5;-6.5;-4.0;0.0;0.0;0.0;0;0</item>  <!-- Bass Reducer -->
+    <item>4.0;4.0;3.25;-0.5;2.0;3.5;0;0</item>   <!-- Classical -->
+    <item>4.0;4.0;0.5;1.5;-4.0;-4.5;0;0</item>   <!-- Deep -->
+    <item>0.0;0.0;0.0;0.0;0.0;0.0;0;0</item>     <!-- Flat -->
+    <item>5.5;5.5;3.5;-1.75;1.5;2.5;0;0</item>   <!-- R&B -->
+    <item>4.5;4.5;2.75;-0.5;2.75;4.0;0;0</item>  <!-- Rock -->
+    <item>6.5;6.5;4.0;0.0;-6.5;-4.0;0;0</item>   <!-- Small Speakers -->
+    <item>0.0;0.0;0.0;0.0;4.0;6.5;0;0</item>     <!-- Treble Booster -->
+    <item>0.0;0.0;0.0;0.0;-6.5;-4.0;0;0</item>   <!-- Treble Reducer -->
+    <item>-2.5;-2.5;0.0;3.5;1.5;-2.0;0;0</item>  <!-- Vocal Booster -->
+    <item>custom</item>                       <!-- Custom -->
+  </string-array>
+
+  <string-array name="compression_modes">
+    <item>Slight(Recommend)</item>
+    <item>Normal</item>
+  </string-array>
+
+  <string-array name="compression_modes_values" translatable="false">
+    <item>40</item>
+    <item>80</item>
+  </string-array>
+
+  <string-array name="bassboost_modes">
+    <item>Enable</item>
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+    <item>Super</item>
+    <item>Extreme</item>
+  </string-array>
+
+  <string-array name="bassboost_slope">
+        <item>Normal</item>
+        <item>Warm filter</item>
+    </string-array>
+
+  <string-array name="bassboost_slope_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+  <string-array name="bassboost_modes_values" translatable="false">
+    <item>60</item>
+    <item>100</item>
+    <item>255</item>
+    <item>560</item>
+    <item>900</item>
+    <item>1200</item>
+  </string-array>
+
+<string-array name="bassboost_freqs" translatable="false">
+        <item>20Hz</item>
+        <item>30Hz</item>
+        <item>45Hz</item>
+        <item>55Hz</item>
+        <item>60Hz</item>
+        <item>70Hz</item>
+        <item>80Hz</item>
+        <item>100Hz</item>
+        <item>120Hz</item>
+        <item>150Hz</item>
+        <item>180Hz</item>
+        <item>200Hz</item>
+    </string-array>
+
+    <string-array name="bassboost_freqs_values" translatable="false">
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+        <item>55</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+        <item>180</item>
+        <item>200</item>
+    </string-array>
+
+  <string-array name="preamp_modes">
+    <item>Disable</item>
+    <item>2x</item>
+    <item>3x</item>
+  </string-array>
+
+  <string-array name="preamp_values" translatable="false">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+  </string-array>
+
+    <string-array name="stereowide_modes">
+        <item>A Bit</item>
+        <item>Slight</item>
+        <item>Moderate</item>
+        <item>High</item>
+        <item>Super</item>
+    </string-array>
+
+    <string-array name="stereowide_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+	<item>3</item>
+	<item>4</item>
+    </string-array>
+
+    <string-array name="stereowide_finetunefreq" translatable="false">
+        <item>1800Hz</item>
+        <item>2000Hz</item>
+        <item>2500Hz</item>
+        <item>3000Hz</item>
+        <item>4000Hz</item>
+    </string-array>
+
+    <string-array name="stereowide_finetunefreq_values" translatable="false">
+        <item>1800</item>
+        <item>2000</item>
+        <item>2500</item>
+	<item>3000</item>
+	<item>4000</item>
+    </string-array>
+
+</resources>

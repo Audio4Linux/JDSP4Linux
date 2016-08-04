@@ -9,6 +9,7 @@ class EffectBassBoost : public Effect {
     private:
     int16_t mStrength, mStrengthK;
     int16_t mFilterType;
+    int16_t mAlgorithm;
     int32_t noiseon;
     float mCenterFrequency;
     Biquad mStage1L, mStage1R, mBoostL, mBoostR;

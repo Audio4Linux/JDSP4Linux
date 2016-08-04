@@ -221,7 +221,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 }
                 else if(arg == 3)
                 {
-                float centerFrequency = 600.0f;
+                float centerFrequency = 500.0f;
                 reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 4;
@@ -230,7 +230,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 }
                 else if(arg == 4)
                 {
-                float centerFrequency = 1200.0f;
+                float centerFrequency = 1000.0f;
                 reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 4;
@@ -239,7 +239,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
                 }
                 else if(arg == 5)
                 {
-                float centerFrequency = 3800.0f;
+                float centerFrequency = 4000.0f;
                 reply2x4_1x4_t *replyData = (reply2x4_1x4_t *) pReplyData;
                 replyData->status = 0;
                 replyData->vsize = 4;
@@ -465,7 +465,7 @@ void EffectEqualizer::refreshBands()
         }
         else if(band == 3)
         {
-        float centerFrequency = 600.0f;
+        float centerFrequency = 500.0f;
         float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
         float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
         mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
@@ -476,7 +476,7 @@ void EffectEqualizer::refreshBands()
         }
         else if(band == 4)
         {
-        float centerFrequency = 1200.0f;
+        float centerFrequency = 1000.0f;
         float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
         float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
         mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);
@@ -487,7 +487,7 @@ void EffectEqualizer::refreshBands()
         }
         else if(band == 5)
         {
-        float centerFrequency = 3800.0f;
+        float centerFrequency = 4000.0f;
         float dBL = getAdjustedBand(band + 1, mLoudnessL) - getAdjustedBand(band, mLoudnessL);
         float overallGainL = band == 0 ? getAdjustedBand(0, mLoudnessL) : 0.0f;
         mFilterL[band].setHighShelf(mNextUpdateInterval, centerFrequency * 2.0f, mSamplingRate, dBL, 1.0f, overallGainL);

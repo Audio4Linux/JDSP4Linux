@@ -15,7 +15,7 @@
 
 static effect_descriptor_t compression_descriptor = {
 	{ 0x09e8ede0, 0xddde, 0x11db, 0xb4f6, { 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b } }, // SL_IID_VOLUME
-	{ 0xf27317f4, 0xc984, 0x4de6, 0x9b90, { 0x93, 0x57, 0x59, 0x49, 0x5b, 0xf2 } }, // own UUID
+	{ 0xf27317f4, 0xc984, 0x4de6, 0x9a90, { 0x54, 0x57, 0x59, 0x49, 0x5b, 0xf2 } }, // own UUID
 	EFFECT_CONTROL_API_VERSION,
 	EFFECT_FLAG_INSERT_FIRST | EFFECT_FLAG_VOLUME_CTRL,
 	10, /* 1 MIPS. FIXME: should be measured. */
@@ -26,7 +26,7 @@ static effect_descriptor_t compression_descriptor = {
 
 static effect_descriptor_t virtualizer_descriptor = {
 	*SL_IID_VIRTUALIZER,
-	{ 0x7c6cc5f8, 0x6f34, 0x4449, 0xa289, { 0xba, 0xd8, 0x4f, 0x1a, 0x5b, 0x5a } }, // own UUID
+	{ 0x7c6cc5f8, 0x6f34, 0x4449, 0xa282, { 0xbe, 0xd8, 0x4f, 0x1a, 0x5b, 0x5a } }, // own UUID
 	EFFECT_CONTROL_API_VERSION,
 	EFFECT_FLAG_INSERT_LAST,
 	10, /* 1 MIPS. FIXME: should be measured. */
@@ -38,7 +38,7 @@ static effect_descriptor_t virtualizer_descriptor = {
 static effect_descriptor_t stereowide_descriptor = {
 	*SL_IID_STEREOWIDE,
         /* 37cc2c00-dddd-11db-8577-0002a5d5c51c */
-	{ 0x37cc2c11, 0xdddd, 0x11db, 0x8577, { 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1c } }, // own UUID
+	{ 0x37cc2c00, 0xdddd, 0x11db, 0x8577, { 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1c } }, // own UUID
 	EFFECT_CONTROL_API_VERSION,
 	EFFECT_FLAG_INSERT_LAST,
 	10, /* 1 MIPS. FIXME: should be measured. */
@@ -49,7 +49,7 @@ static effect_descriptor_t stereowide_descriptor = {
 
 static effect_descriptor_t equalizer_descriptor = {
 	*SL_IID_EQUALIZER,
-        { 0x58bc9011, 0x0d7f, 0x462e, 0x90d2, { 0x03, 0x5e, 0xdd, 0xd8, 0xb4, 0x34 } }, // own UUID
+        { 0x58bc9000, 0x0d7f, 0x462e, 0x90d2, { 0x03, 0x5e, 0xdd, 0xd8, 0xb4, 0x34 } }, // own UUID
 	EFFECT_CONTROL_API_VERSION,
 	0,
 	10, /* 1 MIPS. FIXME: should be measured. */
@@ -60,7 +60,7 @@ static effect_descriptor_t equalizer_descriptor = {
 
 static effect_descriptor_t bassboost_descriptor = {
 	*SL_IID_BASSBOOST,
-	{ 0x42b5cbf5, 0x4dd8, 0x4e79, 0xa5fc, { 0x64, 0xeb, 0x2c, 0xb5, 0x4e, 0x13 } }, // own UUID
+	{ 0x42b5cbf5, 0x4dd8, 0x4e79, 0xa5fb, { 0xcc, 0xeb, 0x2c, 0xb5, 0x4e, 0x13 } }, // own UUID
 	EFFECT_CONTROL_API_VERSION,
 	0,
 	10, /* 1 MIPS. FIXME: should be measured. */
