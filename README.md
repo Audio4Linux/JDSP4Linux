@@ -16,7 +16,7 @@ Omnirom extra/My own creation:
 
 1. Adjustable Low pass filter(Bass Boost)
 2. Stereo Widen
-3. 2 more custom bass boost mode
+3. 3 custom bass boost mode
 4. Special equalizer
 
 On development:
