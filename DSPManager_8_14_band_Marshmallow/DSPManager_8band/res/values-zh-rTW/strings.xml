@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">James DSP 總管</string>
+    <string name="select_configuration_title">選擇要編輯的設置</string>
+    <string name="headset_title">有線耳機</string>
+    <string name="speaker_title">手機喇叭</string>
+    <string name="bluetooth_title">藍牙裝置</string>
+    <string name="audio_effects">音訊效果</string>
+    <string name="pref_unavailable">此功能不可用於您的裝置上</string>
+    <string name="dsp_settings_headset">有線耳機</string>
+    <string name="dsp_settings_speaker">手機喇叭</string>
+    <string name="dsp_settings_bluetooth">藍牙裝置</string>
+    <string name="pref_dsp_title">動態範圍壓縮（DRC）</string>
+    <string name="pref_dsp_summary_on">已啟用壓縮</string>
+    <string name="pref_dsp_summary_off">已停用壓縮</string>
+    <string name="pref_dsp_enable">使用壓縮</string>
+    <string name="pref_effect_title">選擇效果程度</string>
+    <string name="dialog_slope">濾波器斜率</string>
+    <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>
+    <string name="dialog_freq">濾波頻率</string>
+    <string name="dialog_effect">效果程度</string>
+    <string name="pref_equalizer_title">等化器</string>
+    <string name="pref_equalizer_summary_on">已啟用等化器</string>
+    <string name="pref_equalizer_summary_off">已停用等化器</string>
+    <string name="pref_equalizer_enable">使用等化器</string>
+    <string name="pref_equalizer_preset_title">選擇設置</string>
+    <string name="pref_equalizer_loudness_title">響度補償</string>
+    <string name="pref_bassboost_title">低音強化</string>
+    <string name="pref_bassboost_summary_on">已啟用低音強化</string>
+    <string name="pref_bassboost_summary_off">已停用低音強化</string>
+    <string name="pref_bassboost_enable">使用低音強化</string>
+    <string name="pref_preamp_title">前置放大器</string>
+    <string name="pref_headset_virtual_title">耳機虛擬室內效果</string>
+    <string name="pref_headset_virtual_summary_on">已啟用耳機虛擬室內</string>
+    <string name="pref_headset_virtual_summary_off">已停用耳機虛擬室內</string>
+    <string name="pref_headset_virtual_enable">使用耳機虛擬室</string>
+    <string name="pref_room_title">選擇房間種類</string>
+    <string name="dialog_room">房間種類</string>
+    <string name="pref_echodecay_title">選擇回音衰減值</string>
+    <string name="dialog_echodecay">回音衰減</string>
+    <string name="menu_reset">重設</string>
+    <string name="pref_headset_stereowide_title">立體聲加寬</string>
+    <string name="pref_headset_stereowide_summary_on">已啟用立體聲加寬</string>
+    <string name="pref_headset_stereowide_summary_off">已停用立體聲加寬</string>
+    <string name="pref_headset_stereowide_enable">使用立體聲加寬</string>
+    <string name="dialog_stereo">加寬程度</string>
+    <string name="dialog_fine_tune">微調</string>
+
+    <string name="eq_preset_acoustic">原音音樂</string>
+    <string name="eq_preset_bass_booster">低音強化</string>
+    <string name="eq_preset_bass_reducer">低音弱化</string>
+    <string name="eq_preset_classical">古典音樂</string>
+    <string name="eq_preset_deep">深沉</string>
+    <string name="eq_preset_flat">平淡</string>
+    <string name="eq_preset_r_and_b">R&amp;B</string>
+    <string name="eq_preset_rock">搖滾音樂</string>
+    <string name="eq_preset_small_speakers">小型喇叭</string>
+    <string name="eq_preset_treble_booster">高音強化</string>
+    <string name="eq_preset_treble_reducer">高音弱化</string>
+    <string name="eq_preset_vocal_booster">人聲強化</string>
+    <string name="eq_preset_custom">自訂</string>
+    <string name="save_preset">保存設置</string>
+    <string name="load_preset">載入設置</string>
+    <string name="new_preset">新設置...</string>
+    <!-- IO ERROR -->
+    <string name="save_error_bluetooth">"無法保存bluetooth.xml。你有沒有打開過藍牙裝置面板?"</string>
+    <string name="save_error_headset">"無法保存headset.xml。你有沒有打開過有線耳機面板?"</string>
+    <string name="save_error_speaker">"無法保存speaker.xml。你有沒有打開過手機喇叭面板?"</string>
+    <string name="load_error_bluetooth">"加載bluetooth.xml失敗。未找到文件或權限不足"</string>
+    <string name="load_error_headset">"加載headset.xml失敗。未找到文件或權限不足"</string>
+    <string name="load_error_speaker">"加載speaker.xml失敗。未找到文件或權限不足"</string>
+    <string name="warn_null">請勿輸入空白設置名，下次加載時，會造成失敗。</string>
+    <string name="help_title">說明</string>
+    <string name="help_text"><b>嗚謝:</b>\n\n
+作者: Antti S. Lankila \n
+其他功能: \n
+1.低通濾波器頻率選擇，立體聲加寬由Omnirom製作 \n
+2.自訂Biquad濾波器,回音衰減值選擇由James Fung製作 \n
+效果器及Android framework功能由James Fung整合 \n
+All component from Android framework develop by Google. \n
+For translations: Russian translation is provided by one of the xda-developer\n\n<b>什麼是 DSP 管理器？</b>
+\n\n
+DSP 管理器是一個進行音訊調整的應用程式。 
+<i>DSP</i> 代表 Digital Signal Processing，中文稱為「數字訊號處理」，
+及 <i>管理器</i> 同時表達著 DSP 並非在一個程式內執行； 
+只要應用程式符合規格，都可啟用管理器。
+\n\nhttps://github.com/james34602/JamesDSPManager
+\n\n
+<b>理念</b>
+\n\n
+音響處理支援四種不同的輸出類型：
+有綫耳機，USB 音響，手機揚聲器和藍牙耳機。
+對每個輸出類型都有一個獨立設定畫面。
+DSP 管理器的理念是修正每個音響輸出的特定缺陷，
+以達到最優化的聽覺體驗。
+\n\n
+不像 AOSP 的效果，沒有獨立應用程式設定。
+這是一個精心的設計：我們關心輸出的細節，
+並非應用程式產生的音響對 DSP 管理器協調。
+\n\n\n
+<b>Features</b>
+\n\n
+1. <b>動態範圍壓縮 (DRC)</b>
+\n\n
+這種效應在平均監聽器和驅動器基礎上估計察覺到估算增益控制聲音的音量。
+主要用於嘈雜的環境，
+如在汽車或在街上，
+在那裏恬靜的音樂的部分是在被淹沒在背景的噪音。
+\n\n
+唯一可調諧決定於 DSP Manager 將如何努力維持音頻響度的目標水平。
+\n\n\n
+2. <b>低音強化</b>
+\n\n
+低音強化是一個簡單的低通濾波器，用作在 預設為55Hz或可調頻率範圍下增加一個低通濾波器。
+大約 6 dB 強化，由「強度」參數，在 55Hz或可調頻率範圍增加了濾波器的共振，
+使該頻率特別強調的修改。效果是為消除損耗低音頻率的，
+針對哪些沒有與用戶的耳道緊密耦合，常見小揚聲器和貼耳式耳機。
+\n\n\n
+3. <b>等化器</b>
+\n\n
+這是一個 6 頻段等化器，包括 15.625、62.5、250、500、1000、4000、8000 和 16000 Hz (赫茲)。
+提供一些普遍的預置，並且頻率響應也可通過輕擊均衡器曲線圖自訂。
+根據使用者的個人偏好，或者可用耳機或揚聲器的特定功能，用來調諧頻率響應。
+\n\n
+等化器還包含一個響度補償濾波器，以進入用戶耳朵中的聲壓水平為基礎上，
+均衡進變化耳朵的頻率響應。若想達設計效果，使用有線耳機是必需的，
+並且強度參數的值必須被正確地調整。
+\n\n
+要選擇補償強度合適的值，使用最安靜的音樂音量，並選擇一些廣譜嘈雜的音樂，如搖滾或金屬。
+嘗試尋找到低音升壓回到可聽度，並與材料的其餘部分好像均衡設定。
+當補償正確配置後，低音相對於其他樂器應保持在同一水平，無論聽力水平。
+另一方面，如果音樂開始聽起來重低音較高的聽力水平，補償可能是設定太強大，應該減少。
+\n\n
+補償將被新增到用戶選擇的調整。如果只有補償需要，均衡器應保留在「平淡」的設定。
+\n\n\n
+4. <b>耳機虛擬室</b>
+\n\n
+耳機虛擬室是一種互饋的設計，靈感來自著名的 BS2B 模擬電路。
+效果通過不變的單聲道聲音，並通過一個低通濾波器，它在一次近似兩個頭陰影和耳間延遲，對使用者給予合適耳朵音質線索的調整差訊號。
+我們的目的是為了防止所有固有的耳機，令人難以置信的立體聲分離而產生聽覺疲勞。
+效果應該使用立體聲耳機時啟用。
+\n\n
+因為混合有所降低立體聲分離，有一個哈斯效應混響，它可以被用來增加感知立體圖像的寬度。 
+這是由「房間種類」控制的控制。
+\n\n
+5. <b>立體聲加寬</b>
+\n\n
+是一個能改變聲源距離的效果，為左右揚聲器過近的用戶提供修正。效果首先計算中間聲道及側聲道，接著在側聲道進行2000Hz左右的高通濾波，再加一點延遲效果。最後因應左右加寬的量進行不同效果程度的加減量來合成聲音的位置。
+</string>
+</resources>

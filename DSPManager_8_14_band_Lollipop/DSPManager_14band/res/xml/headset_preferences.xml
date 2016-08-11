@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_dsp_title">
+        <CheckBoxPreference
+            android:key="dsp.compression.enable"
+            android:summaryOn="@string/pref_dsp_summary_on"
+            android:summaryOff="@string/pref_dsp_summary_off"
+            android:disableDependentsState="false"
+            android:title="@string/pref_dsp_enable"></CheckBoxPreference>
+        <james.dsp.preference.SummariedListPreference
+            android:entries="@array/compression_modes"
+            android:dialogTitle="@string/dialog_effect"
+            android:key="dsp.compression.mode"
+            android:defaultValue="50"
+            android:title="@string/pref_effect_title"
+            android:entryValues="@array/compression_modes_values" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_bassboost_title"
+        android:key="dsp.bass">
+        <CheckBoxPreference
+            android:disableDependentsState="false"
+            android:key="dsp.bass.enable"
+            android:summaryOn="@string/pref_bassboost_summary_on"
+            android:summaryOff="@string/pref_bassboost_summary_off"
+            android:title="@string/pref_bassboost_enable"></CheckBoxPreference>
+        <james.dsp.preference.SummariedListPreference
+            android:entries="@array/bassboost_modes"
+            android:dialogTitle="@string/dialog_effect"
+            android:key="dsp.bass.mode"
+            android:defaultValue="0"
+            android:title="@string/pref_effect_title"
+            android:entryValues="@array/bassboost_modes_values" />
+	<james.dsp.preference.SummariedListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_slope"
+            android:entries="@array/bassboost_slope"
+            android:entryValues="@array/bassboost_slope_values"
+            android:title="@string/dialog_slope"
+            android:key="dsp.bass.slope" />
+        <james.dsp.preference.SummariedListPreference
+            android:entries="@array/bassboost_freqs"
+            android:dialogTitle="@string/dialog_effect"
+            android:key="dsp.bass.freq"
+            android:defaultValue="55"
+            android:title="@string/pref_effect_freq_title"
+            android:entryValues="@array/bassboost_freqs_values" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_equalizer_title">
+        <CheckBoxPreference
+            android:disableDependentsState="false"
+            android:key="dsp.tone.enable"
+            android:summaryOn="@string/pref_equalizer_summary_on"
+            android:summaryOff="@string/pref_equalizer_summary_off"
+            android:title="@string/pref_equalizer_enable"></CheckBoxPreference>
+        <james.dsp.preference.SummariedListPreference
+            android:key="dsp.tone.preamp"
+            android:entries="@array/preamp_modes"
+            android:dialogTitle="@string/dialog_effect"
+            android:defaultValue="1"
+            android:title="@string/pref_preamp_title"
+            android:entryValues="@array/preamp_values" />
+        <james.dsp.preference.SummariedListPreference
+            android:entries="@array/equalizer_preset_modes"
+            android:dialogTitle="@string/pref_equalizer_preset_title"
+            android:key="dsp.tone.eq"
+            android:defaultValue="0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0"
+            android:title="@string/pref_equalizer_preset_title"
+            android:entryValues="@array/equalizer_preset_values" />
+        <james.dsp.preference.EqualizerPreference android:key="dsp.tone.eq.custom" />
+        <james.dsp.preference.SummariedListPreference
+            android:entries="@array/equalizer_loudness_modes"
+            android:dialogTitle="@string/pref_equalizer_loudness_title"
+            android:key="dsp.tone.loudness"
+            android:defaultValue="10000"
+            android:title="@string/pref_equalizer_loudness_title"
+            android:entryValues="@array/equalizer_loudness_values" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_headset_virtual_title">
+        <CheckBoxPreference
+            android:key="dsp.headphone.enable"
+            android:disableDependentsState="false"
+            android:summaryOn="@string/pref_headset_virtual_summary_on"
+            android:summaryOff="@string/pref_headset_virtual_summary_off"
+            android:title="@string/pref_headset_virtual_enable"></CheckBoxPreference>
+        <james.dsp.preference.SummariedListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_room"
+            android:entries="@array/headphone_modes"
+            android:entryValues="@array/headphone_modes_values"
+            android:title="@string/pref_room_title"
+            android:key="dsp.headphone.mode" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.echodecay"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_echodecay"
+            android:entries="@array/headphone_echodecay"
+            android:entryValues="@array/headphone_decay_values"
+            android:title="@string/pref_echodecay_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_headset_stereowide_title"
+        android:key="dsp.stereowide">
+        <CheckBoxPreference
+            android:key="dsp.stereowide.enable"
+            android:disableDependentsState="false"
+            android:summaryOn="@string/pref_headset_stereowide_summary_on"
+            android:summaryOff="@string/pref_headset_stereowide_summary_off"
+            android:title="@string/pref_headset_stereowide_enable"></CheckBoxPreference>
+        <james.dsp.preference.SummariedListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_stereo"
+            android:entries="@array/stereowide_modes"
+            android:entryValues="@array/stereowide_values"
+            android:title="@string/dialog_stereo"
+            android:key="dsp.stereowide.mode" />
+        <james.dsp.preference.SummariedListPreference
+            android:defaultValue="2000"
+            android:dialogTitle="@string/dialog_fine_tune"
+            android:entries="@array/stereowide_finetunefreq"
+            android:entryValues="@array/stereowide_finetunefreq_values"
+            android:title="@string/dialog_fine_tune"
+            android:key="dsp.stereowide.finetunefreq" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
