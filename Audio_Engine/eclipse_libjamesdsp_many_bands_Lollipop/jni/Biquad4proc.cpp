@@ -8,14 +8,14 @@ static int64_t toFixedPoint(double in) {
 Biquad4proc::Biquad4proc()
 {
     reset();
-    setBqSOSCoefficients(0, 1, 0, 0, 1, 0, 0);
+    setCoefficients(0, 1, 0, 0, 1, 0, 0);
 }
 
 Biquad4proc::~Biquad4proc()
 {
 }
 
-void Biquad4proc::setBqSOSCoefficients(int32_t steps, double a0, double a1, double a2, double b0, double b1, double b2)
+void Biquad4proc::setCoefficients(int32_t steps, double a0, double a1, double a2, double b0, double b1, double b2)
 {
     int64_t A1 = -toFixedPoint(a1/a0);
     int64_t A2 = -toFixedPoint(a2/a0);
@@ -72,7 +72,7 @@ void Biquad4proc::setHighShelf(int32_t steps, double center_frequency, double sa
     b1 *= overallGain;
     b2 *= overallGain;
 
-    setBqSOSCoefficients(steps, a0, a1, a2, b0, b1, b2);
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
 
 void Biquad4proc::setBandPass(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
@@ -87,7 +87,7 @@ void Biquad4proc::setBandPass(int32_t steps, double center_frequency, double sam
     double a1 =  -2*cos(w0);
     double a2 =   1 - alpha;
 
-    setBqSOSCoefficients(steps, a0, a1, a2, b0, b1, b2);
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
 
 void Biquad4proc::setHighPass(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
@@ -102,7 +102,7 @@ void Biquad4proc::setHighPass(int32_t steps, double center_frequency, double sam
     double a1 =  -2*cos(w0);
     double a2 =   1 - alpha;
 
-    setBqSOSCoefficients(steps, a0, a1, a2, b0, b1, b2);
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
 
 void Biquad4proc::setLowPass(int32_t steps, double center_frequency, double sampling_frequency, double resonance)
@@ -117,12 +117,12 @@ void Biquad4proc::setLowPass(int32_t steps, double center_frequency, double samp
     double a1 =  -2*cos(w0);
     double a2 =   1 - alpha;
 
-    setBqSOSCoefficients(steps, a0, a1, a2, b0, b1, b2);
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
 
 void Biquad4proc::setSOS(int32_t steps, double a0, double a1, double a2, double b0, double b1, double b2)
 {
-	setBqSOSCoefficients(steps, a0, a1, a2, b0, b1, b2);
+	setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }
 
 int32_t Biquad4proc::process(int32_t x0)

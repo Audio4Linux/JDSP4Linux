@@ -21,19 +21,12 @@ LOCAL_SRC_FILES := \
 	EffectVirtualizer.cpp \
 	EffectStereoWide.cpp \
 	FIR16.cpp \
-	Bessel.cpp \
 	Biquad.cpp \
 	Butterworth.cpp \
 	Cascade.cpp \
-	ChebyshevI.cpp \
-	ChebyshevII.cpp \
-	Custom.cpp \
-	Elliptic.cpp \
-	Legendre.cpp \
 	PoleFilter.cpp \
-	RBJ.cpp \
 	RootFinder.cpp \
-	State.cpp\
+	State.cpp \
 # terminator
 
 LOCAL_C_INCLUDES += \
@@ -43,10 +36,21 @@ LOCAL_C_INCLUDES += \
 	system/media/audio_effects/include \
 # terminator
 
-LOCAL_LDLIBS := -llog
+#LOCAL_LDLIBS := -llog
 #TARGET_PLATFORM := android-21
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -march=armv7-a -mfpu=neon -ftree-vectorize
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -march=armv7-a -mfpu=neon -ftree-vectorize
+else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -mfpu=neon -ftree-vectorize
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -mfpu=neon -ftree-vectorize
+else ifeq ($(TARGET_ARCH_ABI), x86)
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -march=atom -msse4 -mavx -maes
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -march=atom -msse4 -mavx -maes
+else
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections
+endif
 LOCAL_LDFLAGS += -Wl,--gc-sections -DNDEBUG
 
 include $(BUILD_SHARED_LIBRARY)

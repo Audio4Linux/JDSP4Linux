@@ -550,13 +550,13 @@ void EffectEqualizer::refreshBands()
             mSOS6Band11R.setSOS(0, bs10[5].getA0(), bs10[5].getA1(), bs10[5].getA2(), bs10[5].getB0(), bs10[5].getB1(), bs10[5].getB2());
             mSOS7Band11L.setSOS(0, bs10[6].getA0(), bs10[6].getA1(), bs10[6].getA2(), bs10[6].getB0(), bs10[6].getB1(), bs10[6].getB2());
             mSOS7Band11R.setSOS(0, bs10[6].getA0(), bs10[6].getA1(), bs10[6].getA2(), bs10[6].getB0(), bs10[6].getB1(), bs10[6].getB2());
-            mHSFilter12L.setHighShelf(0, 7960.0f, mSamplingRate, mBand[11]*0.6, 1.0f, 0);
-            mHSFilter12R.setHighShelf(0, 7960.0f, mSamplingRate, mBand[11]*0.6, 1.0f, 0);
-            mHSFilter13L.setHighShelf(0, 13500.0f, mSamplingRate, mBand[12]*0.75, 1.0f, 0);
-            mHSFilter13R.setHighShelf(0, 13500.0f, mSamplingRate, mBand[12]*0.75, 1.0f, 0);
-            float hsfreqGain = (mBand[12] > 0) ? mBand[12]*0.035 : 1.03;
-            mHSFilter14L.setHighShelf(0, 17500.0f, mSamplingRate, mBand[13]*hsfreqGain*0.9, 1.0f, 0);
-            mHSFilter14R.setHighShelf(0, 18500.0f, mSamplingRate, mBand[13]*hsfreqGain*0.9, 1.0f, 0);
+            mHSFilter12L.setHighShelf(0, 7960.0f, mSamplingRate, mBand[11]*0.8, 1.0f, 0);
+            mHSFilter12R.setHighShelf(0, 7960.0f, mSamplingRate, mBand[11]*0.8, 1.0f, 0);
+            float compensate = (mBand[11] > 0) ? mBand[11] * -1: mBand[11];
+            mHSFilter13L.setHighShelf(0, 13500.0f, mSamplingRate, (mBand[12]+compensate)*0.8, 1.0f, 0);
+            mHSFilter13R.setHighShelf(0, 13500.0f, mSamplingRate, (mBand[12]+compensate)*0.8, 1.0f, 0);
+            mHSFilter14L.setHighShelf(0, 17500.0f, mSamplingRate, mBand[13]*0.9, 1.0f, 0);
+            mHSFilter14R.setHighShelf(0, 18500.0f, mSamplingRate, mBand[13]*0.9, 1.0f, 0);
 }
 int32_t EffectEqualizer::process(audio_buffer_t *in, audio_buffer_t *out)
 {

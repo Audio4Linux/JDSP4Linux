@@ -10,7 +10,7 @@ class Biquad4proc {
     int64_t mB0dif, mB1dif, mB2dif, mA1dif, mA2dif;
     int32_t mInterpolationSteps;
 
-    void setBqSOSCoefficients(int32_t steps, double a0, double a1, double a2, double b0, double b1, double b2);
+    void setCoefficients(int32_t steps, double a0, double a1, double a2, double b0, double b1, double b2);
 
     public:
     Biquad4proc();
