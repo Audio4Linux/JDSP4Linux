@@ -16,9 +16,9 @@
     <string name="pref_effect_freq_title">Select low pass filter frequency</string>
     <string name="dialog_freq">Filter frequency</string>
     <string name="dialog_effect">Effect strength</string>
-    <string name="pref_equalizer_title">Equalizer</string>
-    <string name="pref_equalizer_summary_on">Equalizer is enabled</string>
-    <string name="pref_equalizer_summary_off">Equalizer is disabled</string>
+    <string name="pref_equalizer_title">Hybrid Equalizer</string>
+    <string name="pref_equalizer_summary_on">Hybrid Equalizer is enabled</string>
+    <string name="pref_equalizer_summary_off">Hybrid Equalizer is disabled</string>
     <string name="pref_equalizer_enable">Enable</string>
     <string name="pref_equalizer_preset_title">Select preset</string>
     <string name="pref_equalizer_loudness_title">Loudness compensation</string>

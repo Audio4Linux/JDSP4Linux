@@ -8,7 +8,6 @@
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
     <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
     <string name="abc_searchview_description_search">Поиск</string>
-    <string name="abc_search_hint">Поиск…</string>
     <string name="abc_searchview_description_query">Поисковый запрос</string>
     <string name="abc_searchview_description_clear">Удалить запрос</string>
     <string name="abc_searchview_description_submit">Отправить запрос</string>
@@ -17,7 +16,6 @@
     <string name="abc_activity_chooser_view_see_all">Показать все</string>
     <string name="abc_shareactionprovider_share_with_application">Открыть доступ пользователю %s</string>
     <string name="abc_shareactionprovider_share_with">Открыть доступ</string>
-    <string name="status_bar_notification_info_overflow">999+</string>
     <string name="app_name">James DSP</string>
     <string name="headset_title">Наушники</string>
     <string name="speaker_title">Динамик</string>
@@ -129,7 +127,7 @@
 
 3. "<b>Эквалайзер</b>" 
 
-Это 8-ти полосной эквалайзер с полосами на 23, 62, 250, 500, 1000, 4000 8000 и 15000 Гц и несколькими наиболее популярными предустановками. Частотная характеристика может быть изменена с помощью нажатия на график эквалайзера. Эквалайзер предназначен для настройки звучания в соответствии с предпочтениями конкретного слушателя или возможностями используемых наушников (динамиков). 
+Это 14-ти полосной эквалайзер с полосами от 32 до 18000 Гц и несколькими наиболее популярными предустановками. Частотная характеристика может быть изменена с помощью нажатия на график эквалайзера. Эквалайзер предназначен для настройки звучания в соответствии с предпочтениями конкретного слушателя или возможностями используемых наушников (динамиков). 
 
 Эквалайзер также содержит фильтр тонкомпенсации, который компенсирует кажущийся недостаток низких и высоких частот, изменяя частотную характеристику звука на основывании уровня звукового давления на ухо слушателя. 
 
@@ -149,4 +147,6 @@
 Расширитель стереобазы или стереокартины позволяет как бы раздвинуть звук в стороны, фонограмма при этом начинает звучать объемней, а в некоторых случаях и прозрачней. Достигается это за счет увеличения разницы между правым и левым каналом. То есть все источники звука, которые находились не в центре панорамы, отодвигаются в стороны на расстояние, прямо пропорциональное значению расширения. 
 
 "<b>Audio enhancement can be done by using variety combination of different effectors!</b>" We first calculate center and side channel data, and high pass side channel at 2000Hz, also add little bit delay effect on side channel, then add and subtract them respectively in order to synthesis left-right side position, "</string>
+    <string name="abc_search_hint">Поиск…</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
 </resources>

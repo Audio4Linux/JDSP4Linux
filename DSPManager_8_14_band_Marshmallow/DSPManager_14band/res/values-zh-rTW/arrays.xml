@@ -38,7 +38,7 @@
   </string-array>
   <string-array name="bassboost_slope">
         <item>一般低通濾波器(RBJ)</item>
-        <item>暖味低通濾波器(RBJ)</item>
+        <item>暖味低通濾波器(RBJ串聯)</item>
         <item>24dB/Oct巴特沃斯擱架濾波器</item>
     </string-array>
   <string-array name="preamp_modes">
