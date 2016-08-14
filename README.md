@@ -29,14 +29,6 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 and 6.0 (TESTED)
 
 #Download Link
 1. See my project release page
-2. Lollipop(Github release): https://github.com/james34602/JamesDSPManager/releases/download/Milestone1/JamesDSPManager_Lollipop.zip
-3. Lollipop: https://drive.google.com/open?id=0B5xvL_71lUP_b1NOdDZoUGUyQ0U
-4. Lollipop(百度雲網盤連結): http://pan.baidu.com/s/1mhYsbAo
-5. Marshmallow(Github release): https://github.com/james34602/JamesDSPManager/releases/download/Milestone1/JamesDSPManager_Marshmallow.zip
-6. Marshmallow: https://drive.google.com/open?id=0B5xvL_71lUP_QVJ6YUh2RXI5NVE
-7. Marshmallow(百度雲網盤連結): http://pan.baidu.com/s/1o7JuSTO
-8. (OUTDATED)Marshmallow(CWM Flashable): https://drive.google.com/open?id=0B5xvL_71lUP_aF9IdzdaUjBQSDQ
-
 
 #Development
 No public test subject!
