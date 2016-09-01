@@ -5,7 +5,6 @@
 #include "Biquad4proc.h"
 #include "Delay.h"
 #include "Effect.h"
-#include "FIR16.h"
 
 /**
  * Effect that enhances stereo wideness

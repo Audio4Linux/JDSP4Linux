@@ -2,6 +2,10 @@
 #include <android/log.h>
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)*/
 #include "EffectBassBoost.h"
+extern "C"
+{
+#include "fir_gen.h"
+}
 typedef struct {
     int32_t status;
     uint32_t psize;

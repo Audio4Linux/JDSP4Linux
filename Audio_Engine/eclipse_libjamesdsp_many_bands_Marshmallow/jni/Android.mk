@@ -20,7 +20,6 @@ LOCAL_SRC_FILES := \
 	EffectEqualizer.cpp \
 	EffectVirtualizer.cpp \
 	EffectStereoWide.cpp \
-	FIR16.cpp \
 	Biquad.cpp \
 	Butterworth.cpp \
 	Cascade.cpp \
