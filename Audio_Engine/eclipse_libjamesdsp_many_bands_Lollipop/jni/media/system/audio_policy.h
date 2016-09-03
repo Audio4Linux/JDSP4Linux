@@ -22,7 +22,7 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
-#include "cutils/bitops.h"
+#include "../../hardware/system/cutils/bitops.h"
 
 __BEGIN_DECLS
 

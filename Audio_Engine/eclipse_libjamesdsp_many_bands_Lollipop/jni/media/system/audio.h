@@ -24,7 +24,7 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
-#include "cutils/bitops.h"
+#include "../../hardware/system/cutils/bitops.h"
 
 __BEGIN_DECLS
 
@@ -847,7 +847,7 @@ struct audio_gain_config  {
 
 /* Types defined here are used to describe an audio source or sink at internal
  * framework interfaces (audio policy, patch panel) or at the audio HAL.
- * Sink and sources are grouped in a concept of “audio port” representing an
+ * Sink and sources are grouped in a concept of �udio port�� representing an
  * audio end point at the edge of the system managed by the module exposing
  * the interface. */
 

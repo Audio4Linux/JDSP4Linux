@@ -20,12 +20,12 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#include "utils/RefBase.h"
-#include "utils/Errors.h"
+#include "binder/utils/RefBase.h"
+#include "binder/utils/Errors.h"
 #include "binder/IInterface.h"
 #include "binder/IMemory.h"
-#include "utils/LinearTransform.h"
-#include "utils/String8.h"
+#include "binder/utils/LinearTransform.h"
+#include "binder/utils/String8.h"
 #include "AudioTimestamp.h"
 
 namespace android {

@@ -17,7 +17,7 @@
 #ifndef ANDROID_IEFFECT_H
 #define ANDROID_IEFFECT_H
 
-#include "utils/RefBase.h"
+#include "binder/utils/RefBase.h"
 #include "binder/IInterface.h"
 #include "binder/Parcel.h"
 #include "binder/IMemory.h"

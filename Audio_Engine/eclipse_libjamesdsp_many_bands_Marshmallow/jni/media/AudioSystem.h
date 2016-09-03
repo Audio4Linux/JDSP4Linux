@@ -23,8 +23,8 @@
 #include <media/IAudioPolicyServiceClient.h>
 #include "system/audio.h"
 #include "system/audio_policy.h"
-#include "utils/Errors.h"
-#include "utils/Mutex.h"
+#include "binder/utils/Errors.h"
+#include "binder/utils/Mutex.h"
 
 namespace android {
 

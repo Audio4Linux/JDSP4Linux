@@ -21,8 +21,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "utils/RefBase.h"
-#include "utils/Errors.h"
+#include "binder/utils/RefBase.h"
+#include "binder/utils/Errors.h"
 #include "binder/IInterface.h"
 #include "IAudioTrack.h"
 #include "IAudioRecord.h"
@@ -33,7 +33,7 @@
 #include <hardware/audio_effect.h>
 #include <media/IEffect.h>
 #include <media/IEffectClient.h>
-#include "utils/String8.h"
+#include "binder/utils/String8.h"
 
 namespace android {
 

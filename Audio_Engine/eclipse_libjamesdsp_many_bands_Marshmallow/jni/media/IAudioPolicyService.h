@@ -21,8 +21,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "utils/RefBase.h"
-#include "utils/Errors.h"
+#include "binder/utils/RefBase.h"
+#include "binder/utils/Errors.h"
 #include "binder/IInterface.h"
 #include <media/AudioSystem.h>
 #include <media/AudioPolicy.h>

@@ -17,7 +17,7 @@
 #ifndef ANDROID_IEFFECTCLIENT_H
 #define ANDROID_IEFFECTCLIENT_H
 
-#include "utils/RefBase.h"
+#include "binder/utils/RefBase.h"
 #include "binder/IInterface.h"
 #include "binder/Parcel.h"
 #include "binder/IMemory.h"

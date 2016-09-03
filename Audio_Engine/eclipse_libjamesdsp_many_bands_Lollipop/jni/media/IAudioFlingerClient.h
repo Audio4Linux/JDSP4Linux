@@ -18,9 +18,9 @@
 #define ANDROID_IAUDIOFLINGERCLIENT_H
 
 
-#include "utils/RefBase.h"
+#include "binder/utils/RefBase.h"
 #include "binder/IInterface.h"
-#include "utils/KeyedVector.h"
+#include "binder/utils/KeyedVector.h"
 #include "system/audio.h"
 
 namespace android {

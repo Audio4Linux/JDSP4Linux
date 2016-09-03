@@ -27,8 +27,8 @@
 #include <hardware/audio_effect.h>
 #include <media/AudioSystem.h>
 
-#include "utils/RefBase.h"
-#include "utils/Errors.h"
+#include "binder/utils/RefBase.h"
+#include "binder/utils/Errors.h"
 #include "binder/IInterface.h"
 
 namespace android {

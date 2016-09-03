@@ -17,7 +17,7 @@
 #ifndef ANDROID_STRONG_POINTER_H
 #define ANDROID_STRONG_POINTER_H
 
-#include "cutils/atomic.h"
+#include "../../../hardware/system/cutils/atomic.h"
 
 #include <stdint.h>
 #include <sys/types.h>

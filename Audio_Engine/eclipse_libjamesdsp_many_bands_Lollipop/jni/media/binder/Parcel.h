@@ -17,7 +17,7 @@
 #ifndef ANDROID_PARCEL_H
 #define ANDROID_PARCEL_H
 
-#include "utils/cutils/native_handle.h"
+#include "../../hardware/system/cutils/native_handle.h"
 #include "utils/Errors.h"
 #include "utils/RefBase.h"
 #include "utils/String16.h"

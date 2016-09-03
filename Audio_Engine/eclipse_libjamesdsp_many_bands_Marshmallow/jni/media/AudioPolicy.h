@@ -21,8 +21,8 @@
 #include "system/audio.h"
 #include "system/audio_policy.h"
 #include "binder/Parcel.h"
-#include "utils/String8.h"
-#include "utils/Vector.h"
+#include "binder/utils/String8.h"
+#include "binder/utils/Vector.h"
 
 namespace android {
 
