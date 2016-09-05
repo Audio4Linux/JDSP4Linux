@@ -10,7 +10,7 @@ Basic:
 1. Compression
 2. Bass Boost
 3. Virtualizer
-4. 14 Band Hybrid Equalizer (1 low shelf, 10 band shelves, 3 modified high shelves)
+4. 14 Band Hybrid Equalizer (1 low shelf, 11 band shelves, 2 modified high shelves)
 
 Omnirom extra/My own creation:
 
