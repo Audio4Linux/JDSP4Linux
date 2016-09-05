@@ -1,7 +1,7 @@
 #define TAG "Equalizer16Band"
-#include <android/log.h>
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
+//#include <android/log.h>
+//#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
+//#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
 #include "EffectEqualizer.h"
 
 //#include <math.h>
@@ -483,7 +483,7 @@ void EffectEqualizer::refreshBands()
             mSOS3Band5L.setSOS(0, bs4[2].getA0(), bs4[2].getA1(), bs4[2].getA2(), bs4[2].getB0(), bs4[2].getB1(), bs4[2].getB2());
             mSOS3Band5R.setSOS(0, bs4[2].getA0(), bs4[2].getA1(), bs4[2].getA2(), bs4[2].getB0(), bs4[2].getB1(), bs4[2].getB2());
             Iir::Butterworth::BandShelf<6> bs5;
-            bs5.setup (6, mSamplingRate, 502.0f, 200.0, mBand[5]);
+            bs5.setup (6, mSamplingRate, 502.0f, 220.0, mBand[5]);
             mSOS1Band6L.setSOS(0, bs5[0].getA0(), bs5[0].getA1(), bs5[0].getA2(), bs5[0].getB0(), bs5[0].getB1(), bs5[0].getB2());
             mSOS1Band6R.setSOS(0, bs5[0].getA0(), bs5[0].getA1(), bs5[0].getA2(), bs5[0].getB0(), bs5[0].getB1(), bs5[0].getB2());
             mSOS2Band6L.setSOS(0, bs5[1].getA0(), bs5[1].getA1(), bs5[1].getA2(), bs5[1].getB0(), bs5[1].getB1(), bs5[1].getB2());
@@ -491,7 +491,7 @@ void EffectEqualizer::refreshBands()
             mSOS3Band6L.setSOS(0, bs5[2].getA0(), bs5[2].getA1(), bs5[2].getA2(), bs5[2].getB0(), bs5[2].getB1(), bs5[2].getB2());
             mSOS3Band6R.setSOS(0, bs5[2].getA0(), bs5[2].getA1(), bs5[2].getA2(), bs5[2].getB0(), bs5[2].getB1(), bs5[2].getB2());
             Iir::Butterworth::BandShelf<6> bs6;
-            bs6.setup (6, mSamplingRate, 796.0f, 260.0, mBand[6]);
+            bs6.setup (6, mSamplingRate, 796.0f, 280.0, mBand[6]);
             mSOS1Band7L.setSOS(0, bs6[0].getA0(), bs6[0].getA1(), bs6[0].getA2(), bs6[0].getB0(), bs6[0].getB1(), bs6[0].getB2());
             mSOS1Band7R.setSOS(0, bs6[0].getA0(), bs6[0].getA1(), bs6[0].getA2(), bs6[0].getB0(), bs6[0].getB1(), bs6[0].getB2());
             mSOS2Band7L.setSOS(0, bs6[1].getA0(), bs6[1].getA1(), bs6[1].getA2(), bs6[1].getB0(), bs6[1].getB1(), bs6[1].getB2());
@@ -499,7 +499,7 @@ void EffectEqualizer::refreshBands()
             mSOS3Band7L.setSOS(0, bs6[2].getA0(), bs6[2].getA1(), bs6[2].getA2(), bs6[2].getB0(), bs6[2].getB1(), bs6[2].getB2());
             mSOS3Band7R.setSOS(0, bs6[2].getA0(), bs6[2].getA1(), bs6[2].getA2(), bs6[2].getB0(), bs6[2].getB1(), bs6[2].getB2());
             Iir::Butterworth::BandShelf<6> bs7;
-            bs7.setup (6, mSamplingRate, 1200.0f, 500.0, mBand[7]);
+            bs7.setup (6, mSamplingRate, 1250.0f, 600.0, mBand[7]);
             mSOS1Band8L.setSOS(0, bs7[0].getA0(), bs7[0].getA1(), bs7[0].getA2(), bs7[0].getB0(), bs7[0].getB1(), bs7[0].getB2());
             mSOS1Band8R.setSOS(0, bs7[0].getA0(), bs7[0].getA1(), bs7[0].getA2(), bs7[0].getB0(), bs7[0].getB1(), bs7[0].getB2());
             mSOS2Band8L.setSOS(0, bs7[1].getA0(), bs7[1].getA1(), bs7[1].getA2(), bs7[1].getB0(), bs7[1].getB1(), bs7[1].getB2());
@@ -507,7 +507,7 @@ void EffectEqualizer::refreshBands()
             mSOS3Band8L.setSOS(0, bs7[2].getA0(), bs7[2].getA1(), bs7[2].getA2(), bs7[2].getB0(), bs7[2].getB1(), bs7[2].getB2());
             mSOS3Band8R.setSOS(0, bs7[2].getA0(), bs7[2].getA1(), bs7[2].getA2(), bs7[2].getB0(), bs7[2].getB1(), bs7[2].getB2());
             Iir::Butterworth::BandShelf<12> bs8;
-            bs8.setup (12, mSamplingRate, 1900.0f, 900.0, mBand[8]);
+            bs8.setup (12, mSamplingRate, 2000.0f, 900.0, mBand[8]);
             mSOS1Band9L.setSOS(0, bs8[0].getA0(), bs8[0].getA1(), bs8[0].getA2(), bs8[0].getB0(), bs8[0].getB1(), bs8[0].getB2());
             mSOS1Band9R.setSOS(0, bs8[0].getA0(), bs8[0].getA1(), bs8[0].getA2(), bs8[0].getB0(), bs8[0].getB1(), bs8[0].getB2());
             mSOS2Band9L.setSOS(0, bs8[1].getA0(), bs8[1].getA1(), bs8[1].getA2(), bs8[1].getB0(), bs8[1].getB1(), bs8[1].getB2());
@@ -521,7 +521,7 @@ void EffectEqualizer::refreshBands()
             mSOS6Band9L.setSOS(0, bs8[5].getA0(), bs8[5].getA1(), bs8[5].getA2(), bs8[5].getB0(), bs8[5].getB1(), bs8[5].getB2());
             mSOS6Band9R.setSOS(0, bs8[5].getA0(), bs8[5].getA1(), bs8[5].getA2(), bs8[5].getB0(), bs8[5].getB1(), bs8[5].getB2());
             Iir::Butterworth::BandShelf<12> bs9;
-            bs9.setup (12, mSamplingRate, 3200.0f, 1450.0, mBand[9]);
+            bs9.setup (12, mSamplingRate, 3250.0f, 1500.0, mBand[9]);
             mSOS1Band10L.setSOS(0, bs9[0].getA0(), bs9[0].getA1(), bs9[0].getA2(), bs9[0].getB0(), bs9[0].getB1(), bs9[0].getB2());
             mSOS1Band10R.setSOS(0, bs9[0].getA0(), bs9[0].getA1(), bs9[0].getA2(), bs9[0].getB0(), bs9[0].getB1(), bs9[0].getB2());
             mSOS2Band10L.setSOS(0, bs9[1].getA0(), bs9[1].getA1(), bs9[1].getA2(), bs9[1].getB0(), bs9[1].getB1(), bs9[1].getB2());
@@ -535,7 +535,7 @@ void EffectEqualizer::refreshBands()
             mSOS6Band10L.setSOS(0, bs9[5].getA0(), bs9[5].getA1(), bs9[5].getA2(), bs9[5].getB0(), bs9[5].getB1(), bs9[5].getB2());
             mSOS6Band10R.setSOS(0, bs9[5].getA0(), bs9[5].getA1(), bs9[5].getA2(), bs9[5].getB0(), bs9[5].getB1(), bs9[5].getB2());
             Iir::Butterworth::BandShelf<14> bs10;
-            bs10.setup (14, mSamplingRate, 5300.0f, 2200.0, mBand[10]);
+            bs10.setup (14, mSamplingRate, 5200.0f, 2300.0, mBand[10]);
             mSOS1Band11L.setSOS(0, bs10[0].getA0(), bs10[0].getA1(), bs10[0].getA2(), bs10[0].getB0(), bs10[0].getB1(), bs10[0].getB2());
             mSOS1Band11R.setSOS(0, bs10[0].getA0(), bs10[0].getA1(), bs10[0].getA2(), bs10[0].getB0(), bs10[0].getB1(), bs10[0].getB2());
             mSOS2Band11L.setSOS(0, bs10[1].getA0(), bs10[1].getA1(), bs10[1].getA2(), bs10[1].getB0(), bs10[1].getB1(), bs10[1].getB2());
@@ -550,13 +550,32 @@ void EffectEqualizer::refreshBands()
             mSOS6Band11R.setSOS(0, bs10[5].getA0(), bs10[5].getA1(), bs10[5].getA2(), bs10[5].getB0(), bs10[5].getB1(), bs10[5].getB2());
             mSOS7Band11L.setSOS(0, bs10[6].getA0(), bs10[6].getA1(), bs10[6].getA2(), bs10[6].getB0(), bs10[6].getB1(), bs10[6].getB2());
             mSOS7Band11R.setSOS(0, bs10[6].getA0(), bs10[6].getA1(), bs10[6].getA2(), bs10[6].getB0(), bs10[6].getB1(), bs10[6].getB2());
-            mHSFilter12L.setHighShelf(0, 7950.0f, mSamplingRate, mBand[11], 1.0f, 0);
-            mHSFilter12R.setHighShelf(0, 7950.0f, mSamplingRate, mBand[11], 1.0f, 0);
-            float compensate = (mBand[11] > 0) ? mBand[11] * -1: mBand[11];
-            mHSFilter13L.setHighShelf(0, 13500.0f, mSamplingRate, (mBand[12]+compensate)*0.8, 1.0f, 0);
-            mHSFilter13R.setHighShelf(0, 13500.0f, mSamplingRate, (mBand[12]+compensate)*0.8, 1.0f, 0);
-            mHSFilter14L.setHighShelf(0, 17500.0f, mSamplingRate, mBand[13]*0.8, 1.0f, 0);
-            mHSFilter14R.setHighShelf(0, 18500.0f, mSamplingRate, mBand[13]*0.8, 1.0f, 0);
+            Iir::Butterworth::BandShelf<20> bs11;
+            bs11.setup (20, mSamplingRate, 8500.0f, 4500.0, mBand[11]);
+            mSOS1Band12L.setSOS(0, bs11[0].getA0(), bs11[0].getA1(), bs11[0].getA2(), bs11[0].getB0(), bs11[0].getB1(), bs11[0].getB2());
+            mSOS1Band12R.setSOS(0, bs11[0].getA0(), bs11[0].getA1(), bs11[0].getA2(), bs11[0].getB0(), bs11[0].getB1(), bs11[0].getB2());
+            mSOS2Band12L.setSOS(0, bs11[1].getA0(), bs11[1].getA1(), bs11[1].getA2(), bs11[1].getB0(), bs11[1].getB1(), bs11[1].getB2());
+            mSOS2Band12R.setSOS(0, bs11[1].getA0(), bs11[1].getA1(), bs11[1].getA2(), bs11[1].getB0(), bs11[1].getB1(), bs11[1].getB2());
+            mSOS3Band12L.setSOS(0, bs11[2].getA0(), bs11[2].getA1(), bs11[2].getA2(), bs11[2].getB0(), bs11[2].getB1(), bs11[2].getB2());
+            mSOS3Band12R.setSOS(0, bs11[2].getA0(), bs11[2].getA1(), bs11[2].getA2(), bs11[2].getB0(), bs11[2].getB1(), bs11[2].getB2());
+            mSOS4Band12L.setSOS(0, bs11[3].getA0(), bs11[3].getA1(), bs11[3].getA2(), bs11[3].getB0(), bs11[3].getB1(), bs11[3].getB2());
+            mSOS4Band12R.setSOS(0, bs11[3].getA0(), bs11[3].getA1(), bs11[3].getA2(), bs11[3].getB0(), bs11[3].getB1(), bs11[3].getB2());
+            mSOS5Band12L.setSOS(0, bs11[4].getA0(), bs11[4].getA1(), bs11[4].getA2(), bs11[4].getB0(), bs11[4].getB1(), bs11[4].getB2());
+            mSOS5Band12R.setSOS(0, bs11[4].getA0(), bs11[4].getA1(), bs11[4].getA2(), bs11[4].getB0(), bs11[4].getB1(), bs11[4].getB2());
+            mSOS6Band12L.setSOS(0, bs11[5].getA0(), bs11[5].getA1(), bs11[5].getA2(), bs11[5].getB0(), bs11[5].getB1(), bs11[5].getB2());
+            mSOS6Band12R.setSOS(0, bs11[5].getA0(), bs11[5].getA1(), bs11[5].getA2(), bs11[5].getB0(), bs11[5].getB1(), bs11[5].getB2());
+            mSOS7Band12L.setSOS(0, bs11[6].getA0(), bs11[6].getA1(), bs11[6].getA2(), bs11[6].getB0(), bs11[6].getB1(), bs11[6].getB2());
+            mSOS7Band12R.setSOS(0, bs11[6].getA0(), bs11[6].getA1(), bs11[6].getA2(), bs11[6].getB0(), bs11[6].getB1(), bs11[6].getB2());
+            mSOS8Band12L.setSOS(0, bs11[7].getA0(), bs11[7].getA1(), bs11[7].getA2(), bs11[7].getB0(), bs11[7].getB1(), bs11[7].getB2());
+            mSOS8Band12R.setSOS(0, bs11[7].getA0(), bs11[7].getA1(), bs11[7].getA2(), bs11[7].getB0(), bs11[7].getB1(), bs11[7].getB2());
+            mSOS9Band12L.setSOS(0, bs11[8].getA0(), bs11[8].getA1(), bs11[8].getA2(), bs11[8].getB0(), bs11[8].getB1(), bs11[8].getB2());
+            mSOS9Band12R.setSOS(0, bs11[8].getA0(), bs11[8].getA1(), bs11[8].getA2(), bs11[8].getB0(), bs11[8].getB1(), bs11[8].getB2());
+            mSOS10Band12L.setSOS(0, bs11[9].getA0(), bs11[9].getA1(), bs11[9].getA2(), bs11[9].getB0(), bs11[9].getB1(), bs11[9].getB2());
+            mSOS10Band12R.setSOS(0, bs11[9].getA0(), bs11[9].getA1(), bs11[9].getA2(), bs11[9].getB0(), bs11[9].getB1(), bs11[9].getB2());
+            mHSFilter13L.setHighShelf(0, 13500.0f, mSamplingRate, mBand[12]*0.8, 1.0f, 0);
+            mHSFilter13R.setHighShelf(0, 13500.0f, mSamplingRate, mBand[12]*0.8, 1.0f, 0);
+            mHSFilter14L.setHighShelf(0, 19000.0f, mSamplingRate, mBand[13]*0.8, 1.0f, 0);
+            mHSFilter14R.setHighShelf(0, 19000.0f, mSamplingRate, mBand[13]*0.8, 1.0f, 0);
 }
 int32_t EffectEqualizer::process(audio_buffer_t *in, audio_buffer_t *out)
 {
@@ -655,12 +674,30 @@ int32_t EffectEqualizer::process(audio_buffer_t *in, audio_buffer_t *out)
         tmpR = mSOS5Band11R.process(tmpR);
         tmpR = mSOS6Band11R.process(tmpR);
         tmpR = mSOS7Band11R.process(tmpR);
-        tmpL = mHSFilter12L.process(tmpL);
-        tmpR = mHSFilter12R.process(tmpR);
+        tmpL = mSOS1Band12L.process(tmpL);
+        tmpL = mSOS2Band12L.process(tmpL);
+        tmpL = mSOS3Band12L.process(tmpL);
+        tmpL = mSOS4Band12L.process(tmpL);
+        tmpL = mSOS5Band12L.process(tmpL);
+        tmpL = mSOS6Band12L.process(tmpL);
+        tmpL = mSOS7Band12L.process(tmpL);
+        tmpL = mSOS8Band12L.process(tmpL);
+        tmpL = mSOS9Band12L.process(tmpL);
+        tmpL = mSOS10Band12L.process(tmpL);
+        tmpR = mSOS1Band12R.process(tmpR);
+        tmpR = mSOS2Band12R.process(tmpR);
+        tmpR = mSOS3Band12R.process(tmpR);
+        tmpR = mSOS4Band12R.process(tmpR);
+        tmpR = mSOS5Band12R.process(tmpR);
+        tmpR = mSOS6Band12R.process(tmpR);
+        tmpR = mSOS7Band12R.process(tmpR);
+        tmpR = mSOS8Band12R.process(tmpR);
+        tmpR = mSOS9Band12R.process(tmpR);
+        tmpR = mSOS10Band12R.process(tmpR);
         tmpL = mHSFilter13L.process(tmpL);
         tmpR = mHSFilter13R.process(tmpR);
         tmpL = mHSFilter14L.process(tmpL);
-        tmpL = mHSFilter14R.process(tmpL);
+        tmpR = mHSFilter14R.process(tmpR);
         write(out, i * 2, tmpL);
         write(out, i * 2 + 1, tmpR);
     }
