@@ -54,7 +54,7 @@ Windowed Sinc FIR filters by Bobm.dsp, more window functions implementation and 
 
 Source code is provided under the [MIT License](http://www.opensource.org/licenses/mit-license.php)<br>
 
-#Credit
+###More Credit
 DSPFilter.xlsx is a tool for you to desgin IIR Biquad Filter, it is a component from miniDSP.
 
 RBJ_Eq.xls is a RBJ Biquad Equalizer designer. For me, not very useful and I will not implement it, but could be a reference to designing equalizer.
