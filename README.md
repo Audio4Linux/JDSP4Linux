@@ -3,8 +3,6 @@ Merged with Omnirom DSP Manager features and able to run in all android rom incl
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 We don't work too much around with modifying Android framework instead of we integrate framework with DSP Manager, let it less depend on system framework.
 
-JamesDSPManager merge with Omnirom features: 
-
 Basic:
 
 1. Compression
