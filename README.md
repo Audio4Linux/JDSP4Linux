@@ -41,7 +41,7 @@ See readme in download link.
 #Contact
 Better contact me by email. Send to james34602@gmail.com
 
-#Terms and Conditions / License
+###Terms and Conditions / License
 The engine frame is based on Antti S. Lankila's DSPManager
 
 All compatibility supporting by James Fung
