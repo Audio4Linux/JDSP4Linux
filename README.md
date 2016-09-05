@@ -41,6 +41,19 @@ See readme in download link.
 #Contact
 Better contact me by email. Send to james34602@gmail.com
 
+#Terms and Conditions / License
+The engine frame is based on Antti S. Lankila's DSPManager
+
+All compatibility supporting by James Fung
+
+Android framework components by Google
+
+Advanced IIR filters library by Vinnie Falco, modify by Bernd Porr, functionality shrink by James Fung
+
+Windowed Sinc FIR filters by Bobm.dsp, more window functions implementation and filter length fixes by James Fung
+
+Source code is provided under the [MIT License](http://www.opensource.org/licenses/mit-license.php)<br>
+
 #Credit
 DSPFilter.xlsx is a tool for you to desgin IIR Biquad Filter, it is a component from miniDSP.
 
