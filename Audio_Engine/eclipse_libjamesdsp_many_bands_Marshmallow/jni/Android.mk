@@ -26,6 +26,7 @@ LOCAL_SRC_FILES := \
 	PoleFilter.cpp \
 	RootFinder.cpp \
 	State.cpp \
+	FIR512.cpp \
 # terminator
 
 LOCAL_C_INCLUDES += \

@@ -111,6 +111,7 @@ void JfirHP(double h[],		// h[] will be written with the filter coefficients
 	}
 	else
 	{
+		printf("Odd numbers taps. OK!\n");
 	}
 	// 1. Generate lowpass filter
 	JfirLP(h, N, WINDOW, fc, Beta);
@@ -142,6 +143,7 @@ void JfirBS(double h[],		// h[] will be written with the filter taps
 	}
 	else
 	{
+		printf("Odd numbers taps. OK!\n");
 	}
 	double *h1 = new double[N];
 	double *h2 = new double[N];

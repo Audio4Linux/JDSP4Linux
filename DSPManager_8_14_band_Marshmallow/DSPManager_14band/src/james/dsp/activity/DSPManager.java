@@ -1,5 +1,6 @@
 package james.dsp.activity;
-
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -62,6 +63,7 @@ public final class DSPManager extends Activity {
     //==================================
     // Static Fields
     //==================================
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
     private static final String TAG = "DSPManager";
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
@@ -232,7 +234,7 @@ public final class DSPManager extends Activity {
                 return true;
 
             case R.id.save_preset:
-                savePresetDialog();
+		permissionAsave();
                 return true;
 
             case R.id.load_preset:
@@ -296,7 +298,14 @@ public final class DSPManager extends Activity {
 
         }
     }
-
+public void permissionAsave() {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+}
+        else {
+                savePresetDialog();
+        }
+}
     public void savePresetDialog() {
         // We first list existing presets
         File presetsDir = new File(Environment.getExternalStorageDirectory()
@@ -332,7 +341,7 @@ public final class DSPManager extends Activity {
                                     "Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     String value = input.getText().toString();
-                                    savePreset(value);
+                     savePreset(value);
                                 }
                             });
                             inputBuilder.setNegativeButton(
@@ -373,6 +382,21 @@ public final class DSPManager extends Activity {
                     }
                 });
         builder.create().show();
+    }
+    /*Grant permission response code*/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        doNext(requestCode,grantResults);
+    }
+    private void doNext(int requestCode, int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+	savePresetDialog();
+        } else {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            }
+        }
     }
 
     public void savePreset(String name) {
