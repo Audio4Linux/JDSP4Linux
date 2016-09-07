@@ -1,11 +1,7 @@
-//#define TAG "Equalizer16Band"
-//#include <android/log.h>
-//#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
-//#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
+/*#define TAG "Equalizer14Band"
+#include <android/log.h>
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)*/
 #include "EffectEqualizer.h"
-
-//#include <math.h>
-
 #define NUM_BANDS 14
 
 /*      EQ presets      */
@@ -46,6 +42,14 @@ static const int16_t gNumPresets = sizeof(gEqualizerPresets)/sizeof(sPresetConfi
 static int16_t mCurPreset = 0;
 
 /*      End of EQ presets      */
+
+// Time in millisecond count
+static double now_ms(void)
+{
+    struct timespec res;
+    clock_gettime(CLOCK_REALTIME, &res);
+    return 1000.0*res.tv_sec + (double)res.tv_nsec/1e6;
+}
 
 typedef struct {
     int32_t status;
@@ -582,7 +586,7 @@ int32_t EffectEqualizer::process(audio_buffer_t *in, audio_buffer_t *out)
     for (uint32_t i = 0; i < in->frameCount; i ++) {
         int32_t dryL = read(in, i * 2);
         int32_t dryR = read(in, i * 2 + 1);
-
+//        timerStart = now_ms();
         tmpL = dryL * mPreAmp;
         tmpR = dryR * mPreAmp;
 
@@ -698,6 +702,8 @@ int32_t EffectEqualizer::process(audio_buffer_t *in, audio_buffer_t *out)
         tmpR = mHSFilter13R.process(tmpR);
         tmpL = mHSFilter14L.process(tmpL);
         tmpR = mHSFilter14R.process(tmpR);
+//        timerEnd = now_ms();
+//    	LOGI("Total process time : %gms", timerEnd-timerStart);
         write(out, i * 2, tmpL);
         write(out, i * 2 + 1, tmpR);
     }

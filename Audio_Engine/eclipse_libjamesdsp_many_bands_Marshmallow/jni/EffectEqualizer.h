@@ -24,6 +24,7 @@ class EffectEqualizer : public Effect {
     int16_t mPreAmp;
     /* Smooth enable/disable */
     int32_t mFade;
+//    double timerStart, timerEnd;
     void refreshBands();
 
     public:

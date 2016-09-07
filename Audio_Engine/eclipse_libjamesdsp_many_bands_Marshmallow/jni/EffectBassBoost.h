@@ -12,6 +12,7 @@ class EffectBassBoost : public Effect {
     int16_t mFilterType;
     int32_t noise;
     float mCenterFrequency;
+    double timerStart, timerEnd;
     Biquad4proc mStage1L, mStage1R, mBoostL, mBoostR;
     void refreshStrength();
     protected:
