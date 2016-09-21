@@ -39,11 +39,13 @@ LOCAL_C_INCLUDES += \
 #LOCAL_LDLIBS := -llog
 #TARGET_PLATFORM := android-23
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -march=armv7-a -mfpu=neon -ftree-vectorize
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -march=armv7-a -mfpu=neon -ftree-vectorize
-else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+LOCAL_ARM_MODE := arm
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -mfpu=neon -ftree-vectorize
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -mfpu=neon -ftree-vectorize
+else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+LOCAL_ARM_MODE := arm
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -ftree-vectorize
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -ftree-vectorize
 else ifeq ($(TARGET_ARCH_ABI), x86)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -march=atom -msse4 -mavx -maes
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -march=atom -msse4 -mavx -maes
