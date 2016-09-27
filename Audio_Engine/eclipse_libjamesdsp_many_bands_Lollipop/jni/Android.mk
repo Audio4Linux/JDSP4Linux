@@ -39,16 +39,14 @@ LOCAL_C_INCLUDES += \
 #LOCAL_LDLIBS := -llog
 #TARGET_PLATFORM := android-21
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-LOCAL_ARM_MODE := arm
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -mfpu=neon -ftree-vectorize
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -mfpu=neon -ftree-vectorize
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -mfloat-abi=softfp -march=armv7-a -mfpu=neon -ftree-vectorize
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -mfloat-abi=softfp -march=armv7-a -mfpu=neon -ftree-vectorize
 else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
-LOCAL_ARM_MODE := arm
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -ftree-vectorize
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -ftree-vectorize
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=armv8-a -ftree-vectorize
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=armv8-a -ftree-vectorize
 else ifeq ($(TARGET_ARCH_ABI), x86)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -march=atom -msse4 -mavx -maes
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -march=atom -msse4 -mavx -maes
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=atom -msse2 -ftree-vectorize -mavx -maes
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=atom -msse2 -ftree-vectorize -mavx -maes
 else
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections

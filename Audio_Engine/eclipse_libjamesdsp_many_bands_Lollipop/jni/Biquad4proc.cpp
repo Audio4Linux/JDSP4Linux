@@ -54,7 +54,23 @@ void Biquad4proc::reset()
     mY2 = 0;
 }
 
-void Biquad4proc::setHighShelf(int32_t steps, double center_frequency, double sampling_frequency, double gainDb, double slope, double overallGainDb)
+void Biquad4proc::setPeaking(int32_t steps, double center_frequency, double sampling_frequency, double gainDb, double slope)
+{
+    double w0 = 2 * M_PI * center_frequency / sampling_frequency;
+    double A = pow(10, gainDb/40);
+    double alpha = sin(w0)/2 * sqrt( (A + 1/A)*(1/slope - 1) + 2 );
+
+    double b0 =   1 + alpha*A;
+    double b1 =  -2*cos(w0);
+    double b2 =   1 - alpha*A;
+    double a0 =   1 + alpha/A;
+    double a1 =  -2*cos(w0);
+    double a2 =   1 - alpha/A;
+
+    setCoefficients(steps, a0, a1, a2, b0, b1, b2);
+}
+
+void Biquad4proc::setHighShelf(int32_t steps, double center_frequency, double sampling_frequency, double gainDb, double slope)
 {
     double w0 = 2 * M_PI * center_frequency / sampling_frequency;
     double A = pow(10, gainDb/40);
@@ -66,11 +82,6 @@ void Biquad4proc::setHighShelf(int32_t steps, double center_frequency, double sa
     double a0 =        (A+1) - (A-1)*cos(w0) + 2*sqrt(A)*alpha  ;
     double a1 =    2*( (A-1) - (A+1)*cos(w0)                   );
     double a2 =        (A+1) - (A-1)*cos(w0) - 2*sqrt(A)*alpha  ;
-
-    double overallGain = pow(10, overallGainDb / 20);
-    b0 *= overallGain;
-    b1 *= overallGain;
-    b2 *= overallGain;
 
     setCoefficients(steps, a0, a1, a2, b0, b1, b2);
 }

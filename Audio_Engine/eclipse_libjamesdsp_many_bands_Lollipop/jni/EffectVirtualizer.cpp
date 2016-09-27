@@ -39,7 +39,7 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
         mReverbDelayL.setParameters(mSamplingRate, 0.030f);
         mReverbDelayR.setParameters(mSamplingRate, 0.024f);
         /* the -3 dB point is around 650 Hz, giving about 300 us to work with */
-        mLocalization.setHighShelf(0, 800.0f, mSamplingRate, -11.5f, 0.72f, 0);
+        mLocalization.setHighShelf(0, 800.0f, mSamplingRate, -11.5f, 0.72f);
 
         mDelayDataL = 0;
         mDelayDataR = 0;

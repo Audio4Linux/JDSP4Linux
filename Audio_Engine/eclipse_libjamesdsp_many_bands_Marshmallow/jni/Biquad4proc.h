@@ -15,7 +15,8 @@ class Biquad4proc {
     public:
     Biquad4proc();
     virtual ~Biquad4proc();
-    void setHighShelf(int32_t steps, double cf, double sf, double gaindB, double slope, double overallGain);
+    void setPeaking(int32_t steps, double cf, double sf, double gaindB, double slope);
+    void setHighShelf(int32_t steps, double cf, double sf, double gaindB, double slope);
     void setBandPass(int32_t steps, double cf, double sf, double resonance);
     void setHighPass(int32_t steps, double cf, double sf, double resonance);
     void setLowPass(int32_t steps, double cf, double sf, double resonance);
