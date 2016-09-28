@@ -24,22 +24,14 @@ typedef struct {
  * In order to achieve a stereo widening effect, we use three methods
  * combined in one effect that can be toggled on the user interface.
  *
- * First, we assume we have an MS matrix, and we basically shift towards
+ * We assume we have an MS matrix, and we basically shift towards
  * S rather than M, cutting down the center channel, and enhancing the
  * separate L/R channels (slightly).
- *
- * Second, for songs that might not have a good stereo image, we
- * apply a short delay on the L or R channel (after high-pass)
- * to simlate a stereo effect. This is the most noticeable effect.
- *
- * Finally, the third method is based on a split EQ effect. We basically
- * apply an EQ only to the S part of the MS matrix, making the S signal
- * sound crisper, thus giving a subtle boost to the stereo image.
  *
  */
 
 EffectStereoWide::EffectStereoWide()
-    : mStrength(0), mFineTuneFreq(2000.0f)
+    : mStrength(0)
 {
     refreshStrength();
 }
@@ -53,18 +45,6 @@ int32_t EffectStereoWide::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmd
             *replyData = ret;
             return 0;
         }
-
-        /* We set a high pass at 2kHz to cut off bass. Because bass stays in the
-         * center channel. The Q is set to 1.0 to keep a smooth transition.
-         */
-        mSlightDelay.setParameters(mSamplingRate, 0.006f);
-        mHighPass.setHighPass(0, mFineTuneFreq, mSamplingRate, 0.95f);
-        /* Bass trim, see usage in process
-         */
-        mBassTrim.setLowPass(0, 70.0f, mSamplingRate, 1.0f);
-
-        mDelayData = 0;
-
         int32_t *replyData = (int32_t *) pReplyData;
         *replyData = 0;
         return 0;
@@ -87,14 +67,6 @@ int32_t EffectStereoWide::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmd
                 replyData->status = 0;
                 replyData->vsize = 2;
                 replyData->data = mStrength;
-                *replySize = sizeof(reply1x4_1x2_t);
-                return 0;
-            }
-            if (cmd == STEREOWIDE_PARAM_FINE_TUNE_FREQ) {
-                reply1x4_1x2_t *replyData = (reply1x4_1x2_t *) pReplyData;
-                replyData->status = 0;
-                replyData->vsize = 2;
-                replyData->data = (int16_t) mFineTuneFreq;
                 *replySize = sizeof(reply1x4_1x2_t);
                 return 0;
             }
@@ -134,41 +106,26 @@ void EffectStereoWide::refreshStrength()
     case 0: // A Bit
         mMatrixMCoeff = 1.0;
         mMatrixSCoeff = 1.2;
-        mSplitEQCoeff = 0.1;
-        mSplitEQCompCoeff = 0.02;
-        mBassTrimCoeff = 0.1;
         break;
 
     case 1: // Slight
         mMatrixMCoeff = 0.95;
         mMatrixSCoeff = 1.4;
-        mSplitEQCoeff = 0.2;
-        mSplitEQCompCoeff = 0.05;
-        mBassTrimCoeff = 0.12;
         break;
 
     case 2: // Moderate
         mMatrixMCoeff = 0.90;
-        mMatrixSCoeff = 1.6;
-        mSplitEQCoeff = 0.3;
-        mSplitEQCompCoeff = 0.15;
-        mBassTrimCoeff = 0.15;
+        mMatrixSCoeff = 1.7;
         break;
 
     case 3: // High
         mMatrixMCoeff = 0.80;
-        mMatrixSCoeff = 1.8;
-        mSplitEQCoeff = 0.4;
-        mSplitEQCompCoeff = 0.21;
-        mBassTrimCoeff = 0.18;
+        mMatrixSCoeff = 2.0;
         break;
 
     case 4: // Super
         mMatrixMCoeff = 0.70;
-        mMatrixSCoeff = 2.0;
-        mSplitEQCoeff = 0.6;
-        mSplitEQCompCoeff = 0.32;
-        mBassTrimCoeff = 0.2;
+        mMatrixSCoeff = 2.5;
         break;
     }
 }
@@ -188,41 +145,8 @@ int32_t EffectStereoWide::process(audio_buffer_t* in, audio_buffer_t* out)
         int32_t M  = (dataL + dataR) >> 1;
         /* Direct radiation components. */
         int32_t S = (dataL - dataR) >> 1;
-
-        /* First pass: We turn down M and boost S. Note that we
-         * don't go through the High Pass here, as we use the
-         * original stereo image
-         */
         M = M * mMatrixMCoeff;
         S = S * mMatrixSCoeff;
-
-        /* Calculate the high pass now. Note that we have the
-         * high pass in a separate variable that we can add to
-         * our existing signals, so that acts similarly to an EQ.
-         * We could add another BandPass EQ to act just on one
-         * specific range of frequencies, but that's not needed here.
-         */
-        int32_t highPass = mHighPass.process(S);
-
-        /* And here's our split EQ */
-        S += highPass * mSplitEQCoeff;
-
-        /* We compensate this pass in the center channel to avoid clipping
-         * and to avoid acting like an EQ.
-         */
-        M -= highPass * mSplitEQCompCoeff;
-
-        /* Is it worth noting that enhancing the S channel of the MS
-         * matrix slightly reduces the bass impact. We trim bass a
-         * little bit with a small low pass on the M channel (don't ever
-         * enhance bass on S!)
-         */
-        int32_t lowPass = mBassTrim.process(M);
-        M += lowPass * mBassTrimCoeff;
-
-        /* Last, to enhance noticeably the stereo image, we delay
-         * both channels */
-        S = mSlightDelay.process(S);
 
         /* Final mix */
         write(out, i * 2, M+S);

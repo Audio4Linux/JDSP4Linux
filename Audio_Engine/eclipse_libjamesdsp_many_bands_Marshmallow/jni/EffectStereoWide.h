@@ -3,36 +3,15 @@
 #include "effect_cstereowide.h"
 
 #include "Biquad4proc.h"
-#include "Delay.h"
 #include "Effect.h"
-
-/**
- * Effect that enhances stereo wideness
- * Based off OpenSLES Stereo Widener and ideas from Waves S1 Stereo Imager DSP plugin
- * See the CPP file for a detailed explanation of the implementation
- */
 
 class EffectStereoWide : public Effect {
     private:
     int16_t mStrength;
-
-    Delay mSlightDelay;
-    int64_t mDelayData;
-    Biquad4proc mHighPass;
-    Biquad4proc mBandPass;
-    Biquad4proc mBassTrim;
-
     // Matrix M (center channel) coefficient
     double mMatrixMCoeff;
     // Matrix S (side channel) coefficient
     double mMatrixSCoeff;
-    // Split EQ HighPass on S coefficient
-    double mSplitEQCoeff;
-    // Split EQ HighPass compensation on M coefficient
-    double mSplitEQCompCoeff;
-    // Bass trim coefficient
-    double mBassTrimCoeff;
-    float mFineTuneFreq;
 
     void refreshStrength();
 
