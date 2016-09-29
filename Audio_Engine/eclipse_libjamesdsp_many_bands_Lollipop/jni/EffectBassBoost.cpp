@@ -171,23 +171,15 @@ void EffectBassBoost::refreshStrength()
 
 int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
 {
-    for (uint32_t i = 0; i < in->frameCount; i ++) {
+  for (uint32_t i = 0; i < in->frameCount; i ++) {
        	int32_t dryL = read(in, i * 2);
         int32_t dryR = read(in, i * 2 + 1);
-    	if (mStrength >= 600)
-        {
-        noise = triangularDither8() / 2;
-        }
-        else
-        {
-        noise = 0;
-        }
     	if(mFilterType == 0)
     	{
     	int32_t boostl = mBoostL.process(dryL);
     	int32_t boostr = mBoostR.process(dryR);
-        write(out, i * 2, dryL + boostl + noise);
-        write(out, i * 2 + 1, dryR + boostr + noise);
+        write(out, i * 2, dryL + boostl);
+        write(out, i * 2 + 1, dryR + boostr);
     	}
     	else if(mFilterType == 1)
     	{
@@ -195,8 +187,8 @@ int32_t EffectBassBoost::process(audio_buffer_t* in, audio_buffer_t* out)
     	int32_t stage1R = mStage1R.process(dryR);
     	int32_t boostl = mBoostL.process(stage1L);
     	int32_t boostr = mBoostR.process(stage1R);
-        write(out, i * 2, dryL + boostl + noise);
-        write(out, i * 2 + 1, dryR + boostr + noise);
+        write(out, i * 2, dryL + boostl);
+        write(out, i * 2 + 1, dryR + boostr);
     	}
     	else if(mFilterType == 2)
     	{
