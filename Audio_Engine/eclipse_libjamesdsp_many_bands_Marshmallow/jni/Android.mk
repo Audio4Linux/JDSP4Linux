@@ -45,8 +45,8 @@ else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=armv8-a -ftree-vectorize
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=armv8-a -ftree-vectorize
 else ifeq ($(TARGET_ARCH_ABI), x86)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=atom -msse2 -ftree-vectorize -mavx -maes
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=atom -msse2 -ftree-vectorize -mavx -maes
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -ftree-vectorize
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -ftree-vectorize
 else
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections
