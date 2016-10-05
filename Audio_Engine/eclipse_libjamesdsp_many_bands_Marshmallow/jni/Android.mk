@@ -39,18 +39,15 @@ LOCAL_C_INCLUDES += \
 #LOCAL_LDLIBS := -llog
 #TARGET_PLATFORM := android-23
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -mfloat-abi=softfp -march=armv7-a -mfpu=neon -ftree-vectorize
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -mfloat-abi=softfp -march=armv7-a -mfpu=neon -ftree-vectorize
-else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=armv8-a -ftree-vectorize
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -march=armv8-a -ftree-vectorize
+LOCAL_CPPFLAGS += -DNDEBUG -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize
+LOCAL_CFLAGS += -DNDEBUG -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize
 else ifeq ($(TARGET_ARCH_ABI), x86)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -ftree-vectorize
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -O2 -ffast-math -ftree-vectorize
+LOCAL_CPPFLAGS += -DNDEBUG -ffunction-sections -fdata-sections -Ofast -ftree-vectorize
+LOCAL_CFLAGS += -DNDEBUG -ffunction-sections -fdata-sections -Ofast -ftree-vectorize
 else
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections
+LOCAL_CPPFLAGS += -DNDEBUG -ffunction-sections -Ofast -fdata-sections
+LOCAL_CFLAGS += -DNDEBUG -ffunction-sections -Ofast -fdata-sections
 endif
-LOCAL_LDFLAGS += -Wl,--gc-sections -DNDEBUG
+LOCAL_LDFLAGS += -Wl,--gc-sections
 
 include $(BUILD_SHARED_LIBRARY)
