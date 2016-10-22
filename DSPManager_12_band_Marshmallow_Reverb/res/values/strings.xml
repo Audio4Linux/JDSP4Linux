@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">James DSP</string>
+    <string name="headset_title">Headset</string>
+    <string name="speaker_title">Speaker</string>
+    <string name="bluetooth_title">Bluetooth</string>
+    <string name="usb_title">USB/Dock</string>
+    <string name="pref_unavailable">Functionality is not available on your device</string>
+    <string name="pref_dsp_title">Dynamic range compression</string>
+    <string name="pref_dsp_summary_on">Compression is enabled</string>
+    <string name="pref_dsp_summary_off">Compression is disabled</string>
+    <string name="pref_dsp_enable">Enable</string>
+    <string name="pref_effect_title">Select effect strength</string>
+    <string name="pref_preamp_title">Reserved for future use</string>
+    <string name="dialog_slope">Slope</string>
+    <string name="pref_effect_freq_title">Select low pass filter frequency</string>
+    <string name="dialog_freq">Filter frequency</string>
+    <string name="dialog_effect">Effect strength</string>
+    <string name="pref_equalizer_title">Hybrid Equalizer</string>
+    <string name="pref_equalizer_summary_on">Hybrid Equalizer is enabled</string>
+    <string name="pref_equalizer_summary_off">Hybrid Equalizer is disabled</string>
+    <string name="pref_equalizer_enable">Enable</string>
+    <string name="pref_equalizer_preset_title">Select preset</string>
+    <string name="pref_equalizer_loudness_title">Reserved for future use</string>
+    <string name="pref_bassboost_title">Bass boost</string>
+    <string name="pref_bassboost_summary_on">Bass boost is enabled</string>
+    <string name="pref_bassboost_summary_off">Bass boost is disabled</string>
+    <string name="pref_bassboost_enable">Enable</string>
+    <string name="pref_amplifier_title">Amplifier</string>
+    <string name="pref_amplifier_summary_on">Amplifier is enabled</string>
+    <string name="pref_amplifier_summary_off">Amplifier is disabled</string>
+    <string name="pref_amplifier_enable">Enable</string>
+    <string name="pref_headset_virtual_title">Virtual room effect</string>
+    <string name="pref_headset_virtual_summary_on">Virtual room effect is enabled</string>
+    <string name="pref_headset_virtual_summary_off">Virtual room effect is disabled</string>
+    <string name="pref_headset_virtual_enable">Enable</string>
+    <string name="pref_room_title">Select room type</string>
+    <string name="dialog_room">Room type</string>
+    <string name="pref_echodecay_title">Select echo decay</string>
+    <string name="dialog_echodecay">Echo decay</string>
+    <string name="pref_headset_stereowide_title">Stereo widener</string>
+    <string name="pref_headset_stereowide_summary_on">Stereo widener is enabled</string>
+    <string name="pref_headset_stereowide_summary_off">Stereo widener is disabled</string>
+    <string name="pref_headset_stereowide_enable">Enable</string>
+    <string name="dialog_stereo">Widen Level</string>
+
+    <string name="eq_preset_acoustic">Acoustic</string>
+    <string name="eq_preset_bass_booster">Bass booster</string>
+    <string name="eq_preset_bass_reducer">Bass reducer</string>
+    <string name="eq_preset_classical">Classical</string>
+    <string name="eq_preset_deep">Deep</string>
+    <string name="eq_preset_flat">Flat</string>
+    <string name="eq_preset_r_and_b">R&amp;B</string>
+    <string name="eq_preset_rock">Rock</string>
+    <string name="eq_preset_small_speakers">Small speakers</string>
+    <string name="eq_preset_treble_booster">Treble booster</string>
+    <string name="eq_preset_treble_reducer">Treble reducer</string>
+    <string name="eq_preset_vocal_booster">Vocal booster</string>
+    <string name="eq_preset_custom">Custom</string>
+    <string name="save_preset">Save preset</string>
+    <string name="load_preset">Load preset</string>
+    <string name="new_preset">New preset...</string>
+    <!-- Drawer -->
+    <string name="navigation_drawer_toggle">Toggle Drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_toggle_drawer">Switch to Drawer</string>
+    <string name="navigation_toggle_tabbed">Switch to Tabbed</string>
+    <!-- IO ERROR -->
+    <string name="save_error_bluetooth">"Can't save bluetooth.xml. Have you ever open Bluetooth tab?"</string>
+    <string name="save_error_headset">"Can't save headset.xml. Have you ever open Headset tab?"</string>
+    <string name="save_error_speaker">"Can't save speaker.xml. Have you ever open Speaker tab?"</string>
+    <string name="load_error_bluetooth">"Load bluetooth.xml fail. File not found or permission denied"</string>
+    <string name="load_error_headset">"Load headset.xml fail. File not found or permission denied"</string>
+    <string name="load_error_speaker">"Load speaker.xml fail. File not found or permission denied"</string>
+    <string name="warn_null">"File name must NOT be EMPTY, or load fail upon next preset load."</string>
+    <string name="help_title">Help</string>
+    <string name="help_text"><b>Credit:</b>\n\n
+Author: Antti S. Lankila \n
+Other feature: \n
+1.Bass frequency selector, Stereo Widener by Omnirom \n
+2.Custom Biquad Filter, Echo attenuation selector by James Fung \n
+Feature integration from Android framework: James Fung \n
+All component from Android framework develop by Google. \n
+\n<b>What is DSP Manager?</b>
+\n\n
+DSP Manager is a per-output audio adjustment app. <i>DSP</i> stands for
+Digital signal processing, and the <i>Manager</i> part refers to the fact that the
+DSP is actually not run inside the app itself; the manager can only
+enable it for apps which are compliant with Android\'s audio effect
+specification, i.e. most music players.
+\n\nSee: https://github.com/james34602/JamesDSPManager
+\n\n
+<b>Philosophy</b>
+\n\n
+Audio processing supports four different output categories:
+wired headset, USB audio, phone speaker and bluetooth headset. There is a separate
+configuration panel for each output category. DSP Manager\'s philosophy is to
+correct each audio output\'s particular deficiencies in order to reach the most
+optimal listening experience with each.
+\n\n
+Unlike with AOSP audio effects, there are no per-app settings. This is
+a deliberate design choice: it is the output we care about, not which
+app generates the audio for DSP Manager to work with.
+\n\n\n
+<b>Features</b>
+\n\n
+1. <b>Dynamic range compression (DRC)</b>
+\n\n
+This effect estimates the loudness of the audio as perceived by an average
+listener and drives a gain control based on this estimate. The primary use case
+is with noisy environments such as in cars or on street, where quiet parts of
+music are in risk of being drowned out by background noise.
+\n\n
+The sole tunable determines how hard DSP Manager will try to maintain audio
+loudness at the target level. There is no AOSP equivalent for this DSP effect.
+\n\n\n
+2. <b>Bass boost</b>
+\n\n
+The bass boost is has two simple lowpass filters which can be used to add an emphasis
+at 55 Hz or selectable frequency and lower frequencies. The boost is around 6 dB, and modified by the
+\'strength\' parameter, which adds filters resonance at the 55 Hz or selectable frequency band, giving
+that frequency extra emphasis. The effect is designed to combat loss of bass
+frequency common with small speakers and supra-aural headsets which do not
+couple tightly with user\'s ear canal. Also enhance users bass experience.
+\n\n\n
+3. <b>Equalizer</b>
+\n\n
+This is a 6-band equalizer with bands at 15.625, 62,5, 250, 500, 1000, 4000, 8000 and 16000 Hz.
+Some common presets are provided, and the frequency response can also be
+customized by tapping on the equalizer graph. The effect should be used to tune
+the frequency response to user\'s personal taste, or to the particular
+capabilities of the available headset or speakers.
+\n\n
+Equalizer also contains a loudness compensation filter, which equalizes the
+changes in ear frequency response based on the sound pressure level which
+reaches the user\'s ear. Use of a wired headset is required, and the strength
+parameter value must be tuned correctly before the effect will work as
+designed.
+\n\n
+To select the right value for the compensation strength, use the quietest music
+volume, and choose some wide-spectrum noisy music such as rock or metal. Try
+to find a setting where the bass is boosted back into audibility and seems
+balanced with the rest of the material. After the compensation has been
+correctly configured, bass should remain at the same level relative to the
+other instruments regardless of the listening level. On the other hand, if
+music starts to sound bass heavy at higher listening levels, the compensation
+is probably set too strong, and should be reduced.
+\n\n
+The compensation is added to the user\'s chosen adjustments. If only compensation
+is desired, the equalizer should be left in the \'Flat\' setting.
+\n\n\n
+4. <b>Virtualizer</b>
+\n\n
+The headset filter is a crossfeed design inspired by the famous bs2b analog
+circuit. The effect passes mono sound unchanged, and adjusts the difference
+signal through a lowpass filter which approximates both head shadow and
+interaural delay at once, giving right kind of psychoacoustic clues for user\'s
+ears. The intention is to prevent listener fatigue arising from the
+implausible stereo separation inherent with all headsets. The effect should be
+enabled whenever using stereo headsets.
+\n\n
+Because the mixing reduces the stereo separation somewhat, there is a
+Haas effect reverb, which can be used to increase the perceived stereo image
+width. This is controlled by the \'Room type\' control.
+\n\n
+5. <b>Stereo Widener</b>
+\n\n
+Stereo Widener is a left-right channel direction splitter, it can enhance audio experience that when left-right speaker are put by a distance that is less than optimal
+\n\n<b>Audio enhancement can be done by using variety combination of different effectors!</b>
+We first calculate center and side channel data, and high pass side channel at 2000Hz, also add little bit delay effect on side channel, then add and subtract them respectively in order to synthesis left-right side position,
+</string>
+</resources>
