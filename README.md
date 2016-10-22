@@ -1,5 +1,5 @@
 # JamesDSPManager (Audio Effect Digital Signal Proccessing library for Android)
-Merged with Omnirom DSP Manager features and able to run in all android rom include Samsung,AOSP,Cyanogenmod. 
+Merged with Omnirom DSP Manager features and able to run in all android rom include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 We don't work too much around with modifying Android framework instead of we integrate framework with DSP Manager, let it less depend on system framework.
 
@@ -8,14 +8,10 @@ Basic:
 1. Compression
 2. Bass Boost
 3. Virtualizer
-4. 14 Band Hybrid Equalizer (1 low shelf, 11 band shelves, 2 modified high shelves)
-
-Omnirom extra/My own creation:
-
-1. Adjustable Low pass filter(Bass Boost)
-2. Stereo Widen
-3. 3 custom bass boost mode
-4. Special equalizer
+4. 12 Band Hybrid Equalizer (1 low shelf, 9 band shelves, 1 adjustable-Q band shelf, 1 high shelves)
+5. Stereo Widen
+6. Adjustable Low pass filter(Bass Boost)
+7. 3 custom bass boost mode
 
 On development:
 
@@ -49,8 +45,6 @@ All compatibility supporting by James Fung
 Android framework components by Google
 
 Advanced IIR filters library by Vinnie Falco, modify by Bernd Porr, functionality shrink by James Fung
-
-Windowed Sinc FIR filters by Bobm.dsp, more window functions implementation and filter length fixes by James Fung
 
 Source code is provided under the [MIT License](http://www.opensource.org/licenses/mit-license.php)<br>
 
