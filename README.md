@@ -25,7 +25,7 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 and 6.0 (TESTED)
 1. See my project release page
 
 #Development
-No public test subject!
+The folder end with reverb is my new developing project, but they have no functionality, it can response user via Logcat
 
 #Important
 We won't modify SELinux, let your device become more safe.
