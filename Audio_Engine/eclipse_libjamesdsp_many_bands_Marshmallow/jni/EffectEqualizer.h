@@ -16,7 +16,6 @@ class EffectEqualizer : public Effect {
     Biquad4proc mSOS3Band1L, mSOS3Band1R, mSOS3Band2L, mSOS3Band2R, mSOS3Band3L, mSOS3Band3R, mSOS3Band4L, mSOS3Band4R, mSOS3Band5L, mSOS3Band5R, mSOS3Band6L, mSOS3Band6R, mSOS3Band7L, mSOS3Band7R, mSOS3Band8L, mSOS3Band8R, mSOS3Band9L, mSOS3Band9R, mSOS3Band10L, mSOS3Band10R;
     Biquad4proc mSOS4Band9L, mSOS4Band9R, mSOS4Band10L, mSOS4Band10R;
     Biquad4proc mSOS5Band9L, mSOS5Band9R, mSOS5Band10L, mSOS5Band10R;
-    Biquad4proc mSOS6Band9L, mSOS6Band9R, mSOS6Band10L, mSOS6Band10R;
     int16_t mPreAmp;
     /* Smooth enable/disable */
     int32_t mFade;
