@@ -121,8 +121,8 @@ void EffectBassBoost::refreshStrength()
 {
     if(mFilterType == 0)
     {
-	    mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
-	    mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+	    mBoostL.setLowPass(mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+	    mBoostR.setLowPass(mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
     }
     else if(mFilterType == 1)
     {
@@ -134,10 +134,10 @@ void EffectBassBoost::refreshStrength()
         {
         mStrengthK = mStrength;
         }
-    mStage1L.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
-    mStage1R.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
-    mBoostL.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
-    mBoostR.setLowPass(0, mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    mStage1L.setLowPass(mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    mStage1R.setLowPass(mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    mBoostL.setLowPass(mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
+    mBoostR.setLowPass(mCenterFrequency * 0.95, mSamplingRate, 0.5f + mStrengthK / 666.0f);
    	}
     else if(mFilterType == 2)
     {
@@ -157,15 +157,15 @@ void EffectBassBoost::refreshStrength()
     		 LOGI("SOS %d: B1 = %9.50f", i, f[i].getB1());
     		 LOGI("SOS %d: B2 = %9.50f", i, f[i].getB2());
     	}*/
-        mStage1L.setSOS(0, f[0].getA0(), f[0].getA1(), f[0].getA2(), f[0].getB0(), f[0].getB1(), f[0].getB2());
-        mStage1R.setSOS(0, f[0].getA0(), f[0].getA1(), f[0].getA2(), f[0].getB0(), f[0].getB1(), f[0].getB2());
-	    mBoostL.setSOS(0, f[1].getA0(), f[1].getA1(), f[1].getA2(), f[1].getB0(), f[1].getB1(), f[1].getB2());
-	    mBoostR.setSOS(0, f[1].getA0(), f[1].getA1(), f[1].getA2(), f[1].getB0(), f[1].getB1(), f[1].getB2());
+        mStage1L.setSOS(f[0].getA0(), f[0].getA1(), f[0].getA2(), f[0].getB0(), f[0].getB1(), f[0].getB2());
+        mStage1R.setSOS(f[0].getA0(), f[0].getA1(), f[0].getA2(), f[0].getB0(), f[0].getB1(), f[0].getB2());
+	    mBoostL.setSOS(f[1].getA0(), f[1].getA1(), f[1].getA2(), f[1].getB0(), f[1].getB1(), f[1].getB2());
+	    mBoostR.setSOS(f[1].getA0(), f[1].getA1(), f[1].getA2(), f[1].getB0(), f[1].getB1(), f[1].getB2());
     }
     	else
     	{
-    	    mBoostL.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
-    	    mBoostR.setLowPass(0, mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+    	    mBoostL.setLowPass(mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
+    	    mBoostR.setLowPass(mCenterFrequency, mSamplingRate, 0.55f + mStrength / 666.0f);
     	}
 }
 

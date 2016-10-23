@@ -34,8 +34,8 @@ int32_t EffectCompression::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
 
         /* This filter gives a reasonable approximation of A- and C-weighting
          * which is close to correct for 100 - 10 kHz. 10 dB gain must be added to result. */
-        mWeigherBP[0].setBandPass(0, 2200, mSamplingRate, 0.33);
-        mWeigherBP[1].setBandPass(0, 2200, mSamplingRate, 0.33);
+        mWeigherBP[0].setBandPass(2200, mSamplingRate, 0.33);
+        mWeigherBP[1].setBandPass(2200, mSamplingRate, 0.33);
 
         *replyData = 0;
         return 0;

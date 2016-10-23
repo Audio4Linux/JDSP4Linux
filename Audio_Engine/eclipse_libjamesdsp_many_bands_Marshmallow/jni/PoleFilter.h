@@ -39,7 +39,6 @@ THE SOFTWARE.
 #include "Common.h"
 #include "MathSupplement.h"
 #include "Cascade.h"
-#include "State.h"
 
 namespace Iir {
 

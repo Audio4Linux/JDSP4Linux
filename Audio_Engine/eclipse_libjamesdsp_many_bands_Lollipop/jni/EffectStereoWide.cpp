@@ -1,5 +1,3 @@
-#include <math.h>
-
 #include "EffectStereoWide.h"
 
 typedef struct {
