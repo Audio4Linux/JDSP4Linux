@@ -51,10 +51,10 @@ namespace Iir {
 // Factored implementation to reduce template instantiations
 class Cascade
 {
+public:
   struct Stage : Biquad
   {
   };
-
   struct Storage
   {
     Storage (int maxStages_, Stage* stageArray_)

@@ -358,7 +358,6 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
             int16_t arg = *((int16_t *) (cep->data + sizeof(int32_t)));
 
             if (cmd == EQ_PARAM_CUR_PRESET && arg >= 0 && arg < gNumPresets) {
-                    sizeof(const int16_t *);
                 int16_t i = 0;
                 for (i = 0; i < NUM_BANDS; i++) {
                     mBand[i] = gEqualizerPresets[arg].bandConfigs[i] / 100.0f;

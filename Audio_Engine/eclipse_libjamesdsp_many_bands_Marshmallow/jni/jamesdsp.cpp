@@ -177,13 +177,13 @@ int32_t EffectGetDescriptor(const effect_uuid_t *uuid, effect_descriptor_t *pDes
 }
 
 audio_effect_library_t AUDIO_EFFECT_LIBRARY_INFO_SYM = {
-    tag : AUDIO_EFFECT_LIBRARY_TAG,
-    version : EFFECT_LIBRARY_API_VERSION,
-    name : "James34602 Effect Library",
-    implementor : "James34602",
-    create_effect : EffectCreate,
-    release_effect : EffectRelease,
-    get_descriptor : EffectGetDescriptor,
+    .tag = AUDIO_EFFECT_LIBRARY_TAG,
+    .version = EFFECT_LIBRARY_API_VERSION,
+    .name = "James34602 Effect Library",
+    .implementor = "James34602",
+    .create_effect = EffectCreate,
+    .release_effect = EffectRelease,
+    .get_descriptor = EffectGetDescriptor,
 };
 
 }
