@@ -66,8 +66,6 @@ public:
     int maxStages;
     Stage* stageArray;
   };
-
-public:
   int getNumStages () const
   {
     return m_numStages;
@@ -78,20 +76,10 @@ public:
     assert (index >= 0 && index <= m_numStages);
     return m_stageArray[index];
   }
-
-public:
   // Calculate filter response at the given normalized frequency.
   complex_t response (double normalizedFrequency) const;
 
   std::vector<PoleZeroPair> getPoleZeros () const;
-
-  // Process a block of samples in the given form
-  template <class StateType, typename Sample>
-  void process (int numSamples, Sample* dest, StateType& state) const
-  {
-    while (--numSamples >= 0)
-      *dest++ = state.process (*dest, *this);
-  }
 
 protected:
   Cascade ();
@@ -111,35 +99,15 @@ private:
 //------------------------------------------------------------------------------
 
 // Storage for Cascade
-template <int MaxStages,class StateType>
+template <int MaxStages>
 class CascadeStages
 {
 public:
-    void reset ()
-    {
-      StateType* state = m_states;
-      for (int i = MaxStages; --i >= 0; ++state)
-        state->reset();
-    }
-
-public:
-    template <typename Sample>
-    inline Sample filter(const Sample in)
-    {
-      double out = in;
-      StateType* state = m_states;
-      Biquad const* stage = m_stages;
-      for (int i = MaxStages; --i >= 0; ++state, ++stage)
-      out = state->process1 (out, *stage);
-      return static_cast<Sample> (out);
-    }
-
   Cascade::Storage getCascadeStorage()
   {
     return Cascade::Storage (MaxStages, m_stages);
   }
   Cascade::Stage m_stages[MaxStages];
-  StateType m_states[MaxStages];
 private:
 
 };

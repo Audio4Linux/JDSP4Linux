@@ -145,7 +145,6 @@ void EffectBassBoost::refreshStrength()
     	float gain = mStrength / 90.0;
     	Iir::Butterworth::LowShelf<order> f;
     	f.setup (order, mSamplingRate, mCenterFrequency, gain);
-    	f.reset();
 /*    	int n = f.getNumStages();
     	LOGI("NumStages = %d", n);
     	for(int i=0; i<n; i++)
