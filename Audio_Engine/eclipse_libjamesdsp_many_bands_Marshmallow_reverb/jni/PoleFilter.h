@@ -39,7 +39,6 @@ THE SOFTWARE.
 #include "Common.h"
 #include "MathSupplement.h"
 #include "Cascade.h"
-#include "State.h"
 
 namespace Iir {
 
@@ -104,11 +103,10 @@ protected:
 
 // Storage for pole filters
 template <class BaseClass,
-	  class StateType,
           int MaxAnalogPoles,
 	  int MaxDigitalPoles = MaxAnalogPoles>
 struct PoleFilter : BaseClass
-	, CascadeStages <(MaxDigitalPoles + 1) / 2 , StateType>
+	, CascadeStages <(MaxDigitalPoles + 1) / 2>
 {
   PoleFilter ()
   {

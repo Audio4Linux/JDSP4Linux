@@ -39,7 +39,6 @@ THE SOFTWARE.
 #include "Common.h"
 #include "Cascade.h"
 #include "PoleFilter.h"
-#include "State.h"
 
 namespace Iir {
 
@@ -142,38 +141,38 @@ struct BandShelfBase : PoleFilterBase <AnalogLowShelf>
 // Raw filters
 //
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct LowPass : PoleFilter <LowPassBase, StateType, MaxOrder>
+template <int MaxOrder>
+struct LowPass : PoleFilter <LowPassBase, MaxOrder>
 {
 };
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct HighPass : PoleFilter <HighPassBase, StateType, MaxOrder>
+template <int MaxOrder>
+struct HighPass : PoleFilter <HighPassBase, MaxOrder>
 {
 };
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct BandPass : PoleFilter <BandPassBase, StateType, MaxOrder, MaxOrder*2>
+template <int MaxOrder>
+struct BandPass : PoleFilter <BandPassBase, MaxOrder, MaxOrder*2>
 {
 };
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct BandStop : PoleFilter <BandStopBase, StateType, MaxOrder, MaxOrder*2>
+template <int MaxOrder>
+struct BandStop : PoleFilter <BandStopBase, MaxOrder, MaxOrder*2>
 {
 };
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct LowShelf : PoleFilter <LowShelfBase, StateType, MaxOrder>
+template <int MaxOrder>
+struct LowShelf : PoleFilter <LowShelfBase, MaxOrder>
 {
 };
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct HighShelf : PoleFilter <HighShelfBase, StateType, MaxOrder>
+template <int MaxOrder>
+struct HighShelf : PoleFilter <HighShelfBase, MaxOrder>
 {
 };
 
-template <int MaxOrder, class StateType = DEFAULT_STATE>
-struct BandShelf : PoleFilter <BandShelfBase, StateType, MaxOrder, MaxOrder*2>
+template <int MaxOrder>
+struct BandShelf : PoleFilter <BandShelfBase, MaxOrder, MaxOrder*2>
 {
 };
 
