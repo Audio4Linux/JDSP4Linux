@@ -11,20 +11,19 @@ class EffectBassBoost : public Effect {
     int16_t mStrength, mStrengthK, mStrengthL;
     int16_t mFilterType;
     float mCenterFrequency;
-//    double timerStart, timerEnd;
     Biquad4proc mStage1L, mStage1R, mBoostL, mBoostR;
     void refreshStrength();
     protected:
     uint8_t mPreviousRandom;
 
     /* High-passed triangular probability density function.
-     * Output varies from -0xff to 0xff. */
+     * Output varies from -0xff to 0xff.
     inline int32_t triangularDither8() {
         uint8_t newRandom = prng();
         int32_t rnd = int32_t(mPreviousRandom) - int32_t(newRandom);
         mPreviousRandom = newRandom;
         return rnd;
-    }
+    }*/
     public:
     EffectBassBoost();
 
