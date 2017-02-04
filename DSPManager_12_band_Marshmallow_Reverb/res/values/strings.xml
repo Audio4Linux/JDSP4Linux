@@ -11,7 +11,7 @@
     <string name="pref_dsp_summary_off">Compression is disabled</string>
     <string name="pref_dsp_enable">Enable</string>
     <string name="pref_effect_title">Select effect strength</string>
-    <string name="pref_preamp_title">Reserved for future use</string>
+<!--    <string name="pref_preamp_title">Reserved for future use</string>-->
     <string name="dialog_slope">Slope</string>
     <string name="pref_effect_freq_title">Select low pass filter frequency</string>
     <string name="dialog_freq">Filter frequency</string>
@@ -21,7 +21,7 @@
     <string name="pref_equalizer_summary_off">Hybrid Equalizer is disabled</string>
     <string name="pref_equalizer_enable">Enable</string>
     <string name="pref_equalizer_preset_title">Select preset</string>
-    <string name="pref_equalizer_loudness_title">Reserved for future use</string>
+<!--    <string name="pref_equalizer_loudness_title">Reserved for future use</string>-->
     <string name="pref_bassboost_title">Bass boost</string>
     <string name="pref_bassboost_summary_on">Bass boost is enabled</string>
     <string name="pref_bassboost_summary_off">Bass boost is disabled</string>

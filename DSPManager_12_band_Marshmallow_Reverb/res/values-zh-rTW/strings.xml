@@ -24,12 +24,12 @@
     <string name="pref_equalizer_summary_off">已停用混合等化器</string>
     <string name="pref_equalizer_enable">使用混合等化器</string>
     <string name="pref_equalizer_preset_title">選擇設置</string>
-    <string name="pref_equalizer_loudness_title">留待今後使用</string>
+<!--    <string name="pref_equalizer_loudness_title">留待今後使用</string>-->
     <string name="pref_bassboost_title">低音強化</string>
     <string name="pref_bassboost_summary_on">已啟用低音強化</string>
     <string name="pref_bassboost_summary_off">已停用低音強化</string>
     <string name="pref_bassboost_enable">使用低音強化</string>
-    <string name="pref_preamp_title">留待今後使用</string>
+<!--    <string name="pref_preamp_title">留待今後使用</string>-->
     <string name="pref_headset_virtual_title">耳機虛擬室內效果</string>
     <string name="pref_headset_virtual_summary_on">已啟用耳機虛擬室內</string>
     <string name="pref_headset_virtual_summary_off">已停用耳機虛擬室內</string>

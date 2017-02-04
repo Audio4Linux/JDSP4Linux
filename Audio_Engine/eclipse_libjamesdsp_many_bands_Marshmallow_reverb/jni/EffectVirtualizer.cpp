@@ -22,7 +22,7 @@ typedef struct {
 } reply1x4_1x2_t;
 
 EffectVirtualizer::EffectVirtualizer()
-    : mStrength(0), mEchoDecay(1000.0f), mReverbMode(0),mReverbPreset(0)
+    : mStrength(0), mEchoDecay(1000.0f), mReverbMode(0), mReverbPreset(0)
 {
     refreshStrength();
 }
@@ -36,16 +36,6 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
             *replyData = ret;
             return 0;
         }
-
-        /* Haas effect delay -- slight difference between L & R
-         * to reduce artificialness of the ping-pong. */
-        mReverbDelayL.setParameters(mSamplingRate, 0.030f);
-        mReverbDelayR.setParameters(mSamplingRate, 0.024f);
-        /* the -3 dB point is around 650 Hz, giving about 300 us to work with */
-        mLocalization.setHighShelf(0, 800.0f, mSamplingRate, -11.5f, 0.72f);
-
-        mDelayDataL = 0;
-        mDelayDataR = 0;
 
         int32_t *replyData = (int32_t *) pReplyData;
         *replyData = 0;
@@ -149,18 +139,9 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
 
 void EffectVirtualizer::refreshStrength()
 {
-    mDeep = mStrength != 0;
-    mWide = mStrength >= 500;
-
-    if (mStrength != 0) {
-        float start = -15.0f;
-        float end = -5.0f;
-        float attenuation = start + (end - start) * (mStrength / mEchoDecay);
-        float roomEcho = powf(10.0f, attenuation / 20.0f);
-        mLevel = int64_t(roomEcho * (int64_t(1) << 32));
-    } else {
-        mLevel = 0;
-    }
+  audio_buffer_t* info;
+  audioBufferSize = info->frameCount;
+  LOGI("Get initial audio frame size = %d",audioBufferSize);
 }
 
 void EffectVirtualizer::printTest()
@@ -171,49 +152,13 @@ void EffectVirtualizer::printTest()
 
 int32_t EffectVirtualizer::process(audio_buffer_t* in, audio_buffer_t* out)
 {
+//  LOGI("process() audio frame size = %u",in->frameCount);
     for (uint32_t i = 0; i < in->frameCount; i ++) {
-        /* calculate reverb wet into dataL, dataR */
         int32_t dryL = read(in, i * 2);
         int32_t dryR = read(in, i * 2 + 1);
-        int32_t dataL = dryL;
-        int32_t dataR = dryR;
 
-        if (mDeep) {
-            /* Note: a pinking filter here would be good. */
-            dataL += mDelayDataR;
-            dataR += mDelayDataL;
-        }
-
-        dataL = mReverbDelayL.process(dataL);
-        dataR = mReverbDelayR.process(dataR);
-
-        if (mWide) {
-            dataR = -dataR;
-        }
-
-        dataL = dataL * mLevel >> 32;
-        dataR = dataR * mLevel >> 32;
-
-        mDelayDataL = dataL;
-        mDelayDataR = dataR;
-
-        /* Reverb wet done; mix with dry and do headphone virtualization */
-        dataL += dryL;
-        dataR += dryR;
-
-        /* Center channel. */
-        int32_t center  = (dataL + dataR) >> 1;
-        /* Direct radiation components. */
-        int32_t side = (dataL - dataR) >> 1;
-
-        /* Adjust derived center channel coloration to emphasize forward
-         * direction impression. (XXX: disabled until configurable). */
-        //center = mColorization.process(center);
-        /* Sound reaching ear from the opposite speaker */
-        side -= mLocalization.process(side);
-
-        write(out, i * 2, center + side);
-        write(out, i * 2 + 1, center - side);
+        write(out, i * 2, dryL);
+        write(out, i * 2 + 1, dryR);
     }
 
     return mEnable ? 0 : -ENODATA;

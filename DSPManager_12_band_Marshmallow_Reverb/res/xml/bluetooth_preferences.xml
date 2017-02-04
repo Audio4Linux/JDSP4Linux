@@ -54,13 +54,13 @@
             android:summaryOn="@string/pref_equalizer_summary_on"
             android:summaryOff="@string/pref_equalizer_summary_off"
             android:title="@string/pref_equalizer_enable"></CheckBoxPreference>
-        <james.dsp.preference.SummariedListPreference
+<!--        <james.dsp.preference.SummariedListPreference
             android:key="dsp.tone.preamp"
             android:entries="@array/preamp_modes"
             android:dialogTitle="@string/dialog_effect"
             android:defaultValue="1"
             android:title="@string/pref_preamp_title"
-            android:entryValues="@array/preamp_values" />
+            android:entryValues="@array/preamp_values" />-->
         <james.dsp.preference.SummariedListPreference
             android:entries="@array/equalizer_preset_modes"
             android:dialogTitle="@string/pref_equalizer_preset_title"
@@ -69,13 +69,13 @@
             android:title="@string/pref_equalizer_preset_title"
             android:entryValues="@array/equalizer_preset_values" />
         <james.dsp.preference.EqualizerPreference android:key="dsp.tone.eq.custom" />
-        <james.dsp.preference.SummariedListPreference
+<!--        <james.dsp.preference.SummariedListPreference
             android:entries="@array/equalizer_loudness_modes"
             android:dialogTitle="@string/pref_equalizer_loudness_title"
             android:key="dsp.tone.loudness"
             android:defaultValue="10000"
             android:title="@string/pref_equalizer_loudness_title"
-            android:entryValues="@array/equalizer_loudness_values" />
+            android:entryValues="@array/equalizer_loudness_values" />-->
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_headset_virtual_title">
