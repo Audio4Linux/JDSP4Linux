@@ -8,7 +8,7 @@ Basic:
 1. Compression
 2. Bass Boost
 3. Virtualizer
-4. 12 Band Hybrid Equalizer (1 low shelf, 9 band shelves, 1 adjustable-Q band shelf, 1 high shelves)
+4. 12 Band Hybrid Equalizer (1 low shelf, 10 bands shelves, ,1 high shelves)(Different bands designed with different filter order)
 5. Stereo Widen
 6. Adjustable Low pass filter(Bass Boost)
 7. 3 custom bass boost mode
