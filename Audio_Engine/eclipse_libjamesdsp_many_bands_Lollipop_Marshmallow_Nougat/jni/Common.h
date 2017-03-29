@@ -37,13 +37,9 @@ THE SOFTWARE.
 #ifndef DSPFILTERS_COMMON_H
 #define DSPFILTERS_COMMON_H
 #include <stdlib.h>
-
-#include <cassert>
 #include <cfloat>
 #include <cmath>
 #include <complex>
-#include <cstring>
-#include <string>
 #include <limits>
 #include <vector>
 

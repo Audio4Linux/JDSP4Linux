@@ -73,7 +73,6 @@ public:
 
   const Stage& operator[] (int index)
   {
-    assert (index >= 0 && index <= m_numStages);
     return m_stageArray[index];
   }
   // Calculate filter response at the given normalized frequency.

@@ -85,7 +85,6 @@ std::vector<PoleZeroPair> Cascade::getPoleZeros () const
   for (int i = m_numStages; --i >=0;)
   {
     BiquadPoleState bps (*stage++);
-    assert (!bps.isSinglePole() || i == 0);
     vpz.push_back (bps);
   }
 
@@ -96,7 +95,6 @@ void Cascade::applyScale (double scale)
 {
   // For higher order filters it might be helpful
   // to spread this factor between all the stages.
-  assert (m_numStages > 0);
   m_stageArray->applyScale (scale);
 }
 
@@ -105,8 +103,6 @@ void Cascade::setLayout (const LayoutBase& proto)
 {
   const int numPoles = proto.getNumPoles();
   m_numStages = (numPoles + 1)/ 2;
-  assert (m_numStages <= m_maxStages);
-
   Biquad* stage = m_stageArray;
   for (int i = 0; i < m_numStages; ++i, ++stage)
     stage->setPoleZeroPair (proto[i]);
@@ -114,10 +110,4 @@ void Cascade::setLayout (const LayoutBase& proto)
   applyScale (proto.getNormalGain() /
               std::abs (response (proto.getNormalW() / (2 * doublePi))));
 }
-
-
-
-
-
 }
-

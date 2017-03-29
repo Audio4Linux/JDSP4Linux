@@ -51,7 +51,6 @@ struct ComplexPair : complex_pair_t
   explicit ComplexPair (const complex_t& c1)
     : complex_pair_t (c1, 0.)
   {
-    assert (isReal());
   }
 
   ComplexPair (const complex_t& c1,

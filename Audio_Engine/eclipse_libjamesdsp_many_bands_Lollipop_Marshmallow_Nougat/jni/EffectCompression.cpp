@@ -3,7 +3,6 @@
 #include <math.h>
 
 typedef struct {
-        effect_param_t ep;
         uint32_t code;
         uint16_t value;
 } cmd1x4_1x2_t;
