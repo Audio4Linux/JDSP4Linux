@@ -1,5 +1,5 @@
 # JamesDSPManager (Audio Effect Digital Signal Proccessing library for Android)
-Merged with Omnirom DSP Manager features and able to run in all android rom include Samsung, AOSP, Cyanogenmod. 
+Merged with Omnirom DSP Manager features and able to run in all recent Android rom include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 We don't work too much around with modifying Android framework instead of we integrate framework with DSP Manager, let it less depend on system framework.
 
@@ -19,7 +19,7 @@ On development:
 2. Equalizer presets
 3. Parameterized Room Convolution
 
-Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 and 6.0 (TESTED)
+Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 ,6.0 and 7.0(TESTED)
 
 # Download Link
 1. See my project release page
