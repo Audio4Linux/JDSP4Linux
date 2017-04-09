@@ -1,8 +1,8 @@
+//This is a working FFT filter
 #define TAG "Virtualizer"
 #include <android/log.h>
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
 #include <math.h>
-
 #include "EffectVirtualizer.h"
 
 typedef struct {

@@ -3,7 +3,7 @@ Merged with Omnirom DSP Manager features and able to run in all recent Android r
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 We don't work too much around with modifying Android framework instead of we integrate framework with DSP Manager, let it less depend on system framework.
 
-Basic:
+##### Basic:
 
 1. Compression
 2. Bass Boost
@@ -13,11 +13,12 @@ Basic:
 6. Adjustable Low pass filter(Bass Boost)
 7. 3 custom bass boost mode
 
-On development:
+##### On development:
 
-1. Linear phase FIR Equalizer------Status: Windowed Sinc FIR Coefficient generator works!
-2. Equalizer presets
-3. Parameterized Room Convolution
+1. Linear phase FIR Equalizer
+	Status: [EffectVirtualizerBK.cpp](https://github.com/james34602/JamesDSPManager/blob/master/Audio_Engine/eclipse_libjamesdsp_many_bands_Marshmallow_reverb/jni/EffectVirtualizerBK.cpp) is a working integer FFT filter based on Ne10 FFT library
+2. Parameterized Room Convolution
+	May be I  will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 ,6.0 and 7.0(TESTED)
 
@@ -46,7 +47,7 @@ Android framework components by Google
 
 Advanced IIR filters library by Vinnie Falco, modify by Bernd Porr, functionality shrink by James Fung
 
-Source code is provided under the [MIT License](http://www.opensource.org/licenses/mit-license.php)<br>
+Source code is provided under the [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 ### More Credit
 DSPFilter.xlsx is a tool for you to desgin IIR Biquad Filter, it is a component from miniDSP.
