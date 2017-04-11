@@ -25,7 +25,7 @@ LOCAL_SRC_FILES := \
 	EffectBassBoost.cpp \
 	EffectCompression.cpp \
 	EffectEqualizer.cpp \
-	EffectVirtualizer.cpp \
+	EffectVirtualizerBK.cpp \
 	EffectStereoWide.cpp \
 	Biquad.cpp \
 	Butterworth.cpp \
@@ -42,7 +42,7 @@ LOCAL_SRC_FILES := \
 	EffectBassBoost.cpp \
 	EffectCompression.cpp \
 	EffectEqualizer.cpp \
-	EffectVirtualizer.cpp \
+	EffectVirtualizerBK.cpp \
 	EffectStereoWide.cpp \
 	Biquad.cpp \
 	Butterworth.cpp \

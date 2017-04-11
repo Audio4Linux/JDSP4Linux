@@ -186,7 +186,7 @@ if(left==NULL)
     }
     ne10_fft_r2c_1d_int32_neon(cpxleft, left, cfgFor, 1);
     ne10_fft_r2c_1d_int32_neon(cpxright, right, cfgFor, 1);
-/*	for (int i=0;i<powTwoFrame/2;i++) //Direct frequency filtering test
+	for (int i=0;i<powTwoFrame/2;i++) //Direct frequency filtering test
 	{
 	    if(i>(mStrength/2.5)) {
 		cpxleft[i].r = 0;
@@ -194,7 +194,7 @@ if(left==NULL)
 		cpxright[i].r = 0;
 		cpxright[i].i = 0;
 	    }
-	}*/
+	}
     ne10_fft_c2r_1d_int32_neon(left, cpxleft, cfgInv, 0);
     ne10_fft_c2r_1d_int32_neon(right, cpxright, cfgInv, 0);
     for (uint32_t i = 0; i < powTwoFrame; i ++) {

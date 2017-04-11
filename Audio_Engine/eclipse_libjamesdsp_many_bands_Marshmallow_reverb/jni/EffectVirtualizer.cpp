@@ -53,8 +53,15 @@ int32_t EffectVirtualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCm
         imp = (ne10_int32_t*)NE10_MALLOC(powTwoFrame * sizeof(ne10_int32_t));
         cpximp = (ne10_fft_cpx_int32_t*)NE10_MALLOC(powTwoFrame * sizeof (ne10_fft_cpx_int32_t));
         cfgimp = ne10_fft_alloc_r2c_int32(powTwoFrame);
-        for(int i = 0; i < impSize ; i++)
-          imp[i] = bandpass[i];
+/*        for(int i = 0; i < impSize ; i++)
+          imp[i] = bandpass[i];*/
+		  //kronecker delta test
+		  for(int i = 0; i < impSize ; i++)
+		  {
+			  if(i == 0)
+				imp[i] = 1;
+			  else
+				imp[i] = 0;
         for(int i = impSize; i < powTwoFrame; i++)
           imp[i] = 0;
         ne10_fft_r2c_1d_int32_neon(cpximp, imp, cfgimp, 1);
@@ -195,12 +202,12 @@ if(left==NULL)
     cfgInv = ne10_fft_alloc_r2c_int32(convoledSize);
 }
     for (uint32_t i = 0; i < in->frameCount; i ++) {
-	left[i] = read(in, i * 2);
-        right[i] = read(in, i * 2 + 1);
+		left[i] = read(in, i * 2);
+		right[i] = read(in, i * 2 + 1);
     }
     for (uint32_t i = in->frameCount; i < convoledSize; i ++) {
-	left[i] = 0;
-        right[i] = 0;
+		left[i] = 0;
+		right[i] = 0;
     }
     ne10_fft_r2c_1d_int32_neon(cpxleft, left, cfgFor, 1);
     ne10_fft_r2c_1d_int32_neon(cpxright, right, cfgFor, 1);
