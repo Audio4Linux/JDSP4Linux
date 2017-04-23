@@ -38,6 +38,16 @@
     <string name="dialog_room">房間種類</string>
     <string name="pref_echodecay_title">選擇回音衰減值</string>
     <string name="dialog_echodecay">回音衰減</string>
+    <string name="dialog_mode">模式</string>
+    <string name="dialog_roomsize">房間大小</string>
+    <string name="dialog_reverbtime">延續</string>
+    <string name="dialog_damping">阻尼</string>
+    <string name="dialog_spread">發散</string>
+    <string name="dialog_inbandwidth">頻寬(通帶)</string>
+    <string name="dialog_earlyverb">混響起始時段幅度</string>
+    <string name="dialog_tailverb">混響完結時段幅度</string>
+    <string name="dialog_wetmix">濕信號混音</string>
+
     <string name="menu_reset">重設</string>
     <string name="pref_headset_stereowide_title">立體聲加寬</string>
     <string name="pref_headset_stereowide_summary_on">已啟用立體聲加寬</string>
@@ -65,9 +75,9 @@
     <string name="save_error_bluetooth">"無法保存bluetooth.xml。你有沒有打開過藍牙裝置面板?"</string>
     <string name="save_error_headset">"無法保存headset.xml。你有沒有打開過有線耳機面板?"</string>
     <string name="save_error_speaker">"無法保存speaker.xml。你有沒有打開過手機喇叭面板?"</string>
-    <string name="load_error_bluetooth">"加載bluetooth.xml失敗。未找到文件或權限不足"</string>
-    <string name="load_error_headset">"加載headset.xml失敗。未找到文件或權限不足"</string>
-    <string name="load_error_speaker">"加載speaker.xml失敗。未找到文件或權限不足"</string>
+    <string name="load_error_bluetooth">加載bluetooth.xml失敗。未找到文件或權限不足</string>
+    <string name="load_error_headset">加載headset.xml失敗。未找到文件或權限不足</string>
+    <string name="load_error_speaker">加載speaker.xml失敗。未找到文件或權限不足</string>
     <string name="warn_null">請勿輸入空白設置名，下次加載時，會造成失敗。</string>
     <string name="help_title">說明</string>
     <string name="help_text"><b>嗚謝:</b>\n\n

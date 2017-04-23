@@ -85,6 +85,13 @@
             android:summaryOn="@string/pref_headset_virtual_summary_on"
             android:summaryOff="@string/pref_headset_virtual_summary_off"
             android:title="@string/pref_headset_virtual_enable"></CheckBoxPreference>
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.modeverb"
+            android:defaultValue="1"
+            android:dialogTitle="@string/dialog_mode"
+            android:entries="@array/headphone_mode"
+            android:entryValues="@array/headphone_mode_values"
+            android:title="@string/dialog_mode" />
         <james.dsp.preference.SummariedListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/dialog_room"
@@ -94,11 +101,67 @@
             android:key="dsp.headphone.mode" />
 	<james.dsp.preference.SummariedListPreference
             android:key="dsp.headphone.echodecay"
-            android:defaultValue="0"
+            android:defaultValue="800"
             android:dialogTitle="@string/dialog_echodecay"
             android:entries="@array/headphone_echodecay"
             android:entryValues="@array/headphone_decay_values"
             android:title="@string/pref_echodecay_title" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.roomsize"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_roomsize"
+            android:entries="@array/headphone_roomsize"
+            android:entryValues="@array/headphone_roomsize_values"
+            android:title="@string/dialog_roomsize" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.reverbtime"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_reverbtime"
+            android:entries="@array/headphone_reverbtime"
+            android:entryValues="@array/headphone_reverbtime_values"
+            android:title="@string/dialog_reverbtime" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.damping"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_damping"
+            android:entries="@array/headphone_damping"
+            android:entryValues="@array/headphone_damping_values"
+            android:title="@string/dialog_damping" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.spread"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_spread"
+            android:entries="@array/headphone_spread"
+            android:entryValues="@array/headphone_spread_values"
+            android:title="@string/dialog_spread" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.inbandwidth"
+            android:defaultValue="80"
+            android:dialogTitle="@string/dialog_inbandwidth"
+            android:entries="@array/headphone_inbandwidth"
+            android:entryValues="@array/headphone_inbandwidth_values"
+            android:title="@string/dialog_inbandwidth" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.earlyverb"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_earlyverb"
+            android:entries="@array/headphone_earlyverb"
+            android:entryValues="@array/headphone_earlyverb_values"
+            android:title="@string/dialog_earlyverb" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.tailverb"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_tailverb"
+            android:entries="@array/headphone_tailverb"
+            android:entryValues="@array/headphone_tailverb_values"
+            android:title="@string/dialog_tailverb" />
+	<james.dsp.preference.SummariedListPreference
+            android:key="dsp.headphone.wetmix"
+            android:defaultValue="50"
+            android:dialogTitle="@string/dialog_wetmix"
+            android:entries="@array/headphone_wetmix"
+            android:entryValues="@array/headphone_wetmix_values"
+            android:title="@string/dialog_wetmix" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_headset_stereowide_title"

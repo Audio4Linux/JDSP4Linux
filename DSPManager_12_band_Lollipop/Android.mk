@@ -17,7 +17,6 @@ LOCAL_RESOURCE_DIR += $(appcompat_dir)
 
 LOCAL_AAPT_FLAGS := --auto-add-overlay
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
-LOCAL_PROGUARD_ENABLED := optimization
 LOCAL_PACKAGE_NAME := DSPManager12band
 include $(BUILD_PACKAGE)
 

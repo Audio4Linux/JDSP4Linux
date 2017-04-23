@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := \
 	Cascade.cpp \
 	PoleFilter.cpp \
 	RootFinder.cpp \
+	gverb.cpp \
 # terminator
 
 LOCAL_C_INCLUDES += \

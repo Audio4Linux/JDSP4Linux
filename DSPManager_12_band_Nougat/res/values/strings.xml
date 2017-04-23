@@ -38,6 +38,16 @@
     <string name="dialog_room">Room type</string>
     <string name="pref_echodecay_title">Select echo decay</string>
     <string name="dialog_echodecay">Echo decay</string>
+    <string name="dialog_mode">Mode</string>
+    <string name="dialog_roomsize">Room size</string>
+    <string name="dialog_reverbtime">Sustain</string>
+    <string name="dialog_damping">Damping</string>
+    <string name="dialog_spread">Spread</string>
+    <string name="dialog_inbandwidth">Bandwidth</string>
+    <string name="dialog_earlyverb">Early level</string>
+    <string name="dialog_tailverb">Tail level</string>
+    <string name="dialog_wetmix">Wet mix</string>
+
     <string name="pref_headset_stereowide_title">Stereo widener</string>
     <string name="pref_headset_stereowide_summary_on">Stereo widener is enabled</string>
     <string name="pref_headset_stereowide_summary_off">Stereo widener is disabled</string>
@@ -70,10 +80,10 @@
     <string name="save_error_bluetooth">"Can't save bluetooth.xml. Have you ever open Bluetooth tab?"</string>
     <string name="save_error_headset">"Can't save headset.xml. Have you ever open Headset tab?"</string>
     <string name="save_error_speaker">"Can't save speaker.xml. Have you ever open Speaker tab?"</string>
-    <string name="load_error_bluetooth">"Load bluetooth.xml fail. File not found or permission denied"</string>
-    <string name="load_error_headset">"Load headset.xml fail. File not found or permission denied"</string>
-    <string name="load_error_speaker">"Load speaker.xml fail. File not found or permission denied"</string>
-    <string name="warn_null">"File name must NOT be EMPTY, or load fail upon next preset load."</string>
+    <string name="load_error_bluetooth">Load bluetooth.xml fail. File not found or permission denied</string>
+    <string name="load_error_headset">Load headset.xml fail. File not found or permission denied</string>
+    <string name="load_error_speaker">Load speaker.xml fail. File not found or permission denied</string>
+    <string name="warn_null">File name must NOT be EMPTY, or load fail upon next preset load</string>
     <string name="help_title">Help</string>
     <string name="help_text"><b>Credit:</b>\n\n
 Author: Antti S. Lankila \n

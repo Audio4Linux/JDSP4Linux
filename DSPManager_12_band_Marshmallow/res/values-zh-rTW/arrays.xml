@@ -15,6 +15,28 @@
     <item>減少到最低回音</item>
     <item>沒有回音</item>
   </string-array>
+  <string-array name="headphone_mode">
+    <item>傳統</item>
+    <item>GVerb</item>
+  </string-array>
+  <string-array name="headphone_inbandwidth">
+    <item>採樣率的10&#65130;(Hz)</item>
+    <item>採樣率的15&#65130;(Hz)</item>
+    <item>採樣率的20&#65130;(Hz)</item>
+    <item>採樣率的30&#65130;(Hz)</item>
+    <item>採樣率的40&#65130;(Hz)</item>
+    <item>採樣率的50&#65130;(Hz)</item>
+    <item>採樣率的60&#65130;(Hz)</item>
+    <item>採樣率的70&#65130;(Hz)</item>
+    <item>採樣率的80&#65130;(Hz)</item>
+    <item>採樣率的90&#65130;(Hz)</item>
+    <item>採樣率的91&#65130;(Hz)</item>
+    <item>採樣率的93&#65130;(Hz)</item>
+    <item>採樣率的94&#65130;(Hz)</item>
+    <item>採樣率的95&#65130;(Hz)</item>
+    <item>採樣率的99&#65130;(Hz)</item>
+    <item>採樣率的99.9&#65130;(Hz)</item>
+  </string-array>
   <string-array name="equalizer_loudness_modes">
       <item>已停用</item>
       <item>最弱</item>

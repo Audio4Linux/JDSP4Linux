@@ -196,7 +196,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 1)
@@ -205,7 +205,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 2)
@@ -214,7 +214,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 3)
@@ -223,7 +223,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 4)
@@ -232,7 +232,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 5)
@@ -241,7 +241,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 6)
@@ -250,7 +250,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 7)
@@ -259,7 +259,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 8)
@@ -268,7 +268,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 9)
@@ -277,7 +277,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 10)
@@ -286,7 +286,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else if (arg == 11)
@@ -295,7 +295,7 @@ int32_t EffectEqualizer::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdD
 					reply2x4_1x4_t *replyData = (reply2x4_1x4_t *)pReplyData;
 					replyData->status = 0;
 					replyData->vsize = 4;
-					replyData->data = int32_t(centerFrequency * 1000);
+					replyData->data = int32_t(centerFrequency * 1000.0f);
 					*replySize = sizeof(reply2x4_1x4_t);
 				}
 				else

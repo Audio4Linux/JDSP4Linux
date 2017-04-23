@@ -7,7 +7,7 @@
 static inline uint8_t prng() {
     static uint32_t seed;
     seed = seed * 1664525 + 1013904223;
-    return seed >> 24;
+    return seed >> 22;
 }
 
 class Effect {
@@ -17,15 +17,7 @@ class Effect {
     protected:
     bool mEnable;
     float mSamplingRate;
-    uint8_t mPreviousRandom;
-    /* High-passed triangular probability density function.
-     * Output varies from -0xff to 0xff. */
-    inline int32_t triangularDither8() {
-        uint8_t newRandom = prng();
-        int32_t rnd = int32_t(mPreviousRandom) - int32_t(newRandom);
-        mPreviousRandom = newRandom;
-        return rnd;
-    }
+
     /* AudioFlinger only gives us 16-bit PCM for now. */
     inline int32_t read(audio_buffer_t *in, int32_t idx) {
         return in->s16[idx] << 8;
@@ -36,7 +28,19 @@ class Effect {
         if (mAccessMode == EFFECT_BUFFER_ACCESS_ACCUMULATE) {
             sample += out->s16[idx] << 8;
         }
-        sample = sample >> 8;
+        sample = (sample) >> 8;
+        if (sample > 32767) {
+            sample = 32767;
+        }
+        if (sample < -32768) {
+            sample = -32768;
+        }
+        out->s16[idx] = sample;
+    }
+    inline void writeNoBitshift(audio_buffer_t *out, int32_t idx, int32_t sample) {
+        if (mAccessMode == EFFECT_BUFFER_ACCESS_ACCUMULATE) {
+            sample += out->s16[idx];
+        }
         if (sample > 32767) {
             sample = 32767;
         }

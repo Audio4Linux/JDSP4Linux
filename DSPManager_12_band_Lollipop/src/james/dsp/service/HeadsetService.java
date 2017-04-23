@@ -370,6 +370,15 @@ public class HeadsetService extends Service {
         session.mVirtualizer.setEnabled(preferences.getBoolean("dsp.headphone.enable", false));
         session.mVirtualizer.setStrength(Short.valueOf(preferences.getString("dsp.headphone.mode", "0")));
 	session.mVirtualizer.setEchoDecay(Short.valueOf(preferences.getString("dsp.headphone.echodecay", "1000")));
+	session.mVirtualizer.setReverbMode(Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1")));
+	session.mVirtualizer.setRoomSize(Short.valueOf(preferences.getString("dsp.headphone.roomsize", "50")));
+	session.mVirtualizer.setReverbTime(Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "50")));
+	session.mVirtualizer.setDamping(Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
+	session.mVirtualizer.setSpread(Short.valueOf(preferences.getString("dsp.headphone.spread", "50")));
+	session.mVirtualizer.setInBandwidth(Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
+	session.mVirtualizer.setEarlyVerb(Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
+	session.mVirtualizer.setTailVerb(Short.valueOf(preferences.getString("dsp.headphone.tailverb", "50")));
+	session.mVirtualizer.setWetMix(Short.valueOf(preferences.getString("dsp.headphone.wetmix", "80")));
 
         if (session.mStereoWide != null) {
             session.mStereoWide.setEnabled(preferences.getBoolean("dsp.stereowide.enable", false));

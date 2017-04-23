@@ -52,21 +52,30 @@ public class Virtualizer extends AudioEffect {
      * {@link android.media.audiofx.Virtualizer.OnParameterChangeListener}
      */
     public static final int PARAM_ECHO_DECAY = 2;
+    public static final int PARAM_REVERB_MODE = 3;
+    public static final int PARAM_ROOM_SIZE = 4;
+    public static final int PARAM_RE_TIME = 5;
+    public static final int PARAM_DAMPING = 6;
+    public static final int PARAM_SPREAD = 7;
+    public static final int PARAM_INBANDIWIDTH = 8;
+    public static final int PARAM_EARLYVERB = 9;
+    public static final int PARAM_TAILVERB = 10;
+    public static final int PARAM_WETMIX = 11;
     /**
      * @hide
      * Parameter ID to query the virtual speaker angles for a channel mask / device configuration.
      */
-    public static final int PARAM_VIRTUAL_SPEAKER_ANGLES = 3;
+    public static final int PARAM_VIRTUAL_SPEAKER_ANGLES = 12;
     /**
      * @hide
      * Parameter ID to force the virtualization mode to be that of a specific device
      */
-    public static final int PARAM_FORCE_VIRTUALIZATION_MODE = 4;
+    public static final int PARAM_FORCE_VIRTUALIZATION_MODE = 13;
     /**
      * @hide
      * Parameter ID to query the current virtualization mode.
      */
-    public static final int PARAM_VIRTUALIZATION_MODE = 5;
+    public static final int PARAM_VIRTUALIZATION_MODE = 14;
 
     /**
      * Indicates if strength parameter is supported by the virtualizer engine
@@ -189,7 +198,159 @@ public class Virtualizer extends AudioEffect {
             return 1000;
         }
     }
-
+    public void setReverbMode(short mode)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_REVERB_MODE, mode));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getReverbMode() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_REVERB_MODE, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 1;
+        }
+    }
+    public void setRoomSize(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_ROOM_SIZE, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getRoomSize() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_ROOM_SIZE, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 50;
+        }
+    }
+    public void setReverbTime(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_RE_TIME, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getReverbTime() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_RE_TIME, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 50;
+        }
+    }
+    public void setDamping(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_DAMPING, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getDamping() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_DAMPING, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 50;
+        }
+    }
+    public void setSpread(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_SPREAD, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getSpread() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_SPREAD, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 50;
+        }
+    }
+    public void setInBandwidth(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_INBANDIWIDTH, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getInBandwidth() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_INBANDIWIDTH, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 80;
+        }
+    }
+    public void setEarlyVerb(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_EARLYVERB, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getEarlyVerb() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_EARLYVERB, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 50;
+        }
+    }
+    public void setTailVerb(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_TAILVERB, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getTailVerb() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_TAILVERB, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 50;
+        }
+    }
+    public void setWetMix(short preset)
+    throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        try {
+            checkStatus(setParameter(PARAM_WETMIX, preset));
+        } catch(IllegalArgumentException e) {
+            // ignore
+        }
+    }
+    public short getWetMix() {
+        try {
+            short[] value = new short[1];
+            checkStatus(getParameter(PARAM_WETMIX, value));
+            return value[0];
+        } catch(IllegalArgumentException e) {
+            return 80;
+        }
+    }
     /**
      * Checks if a configuration is supported, and query the virtual speaker angles.
      * @param inputChannelMask
