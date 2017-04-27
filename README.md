@@ -8,16 +8,13 @@ We don't work too much around with modifying Android framework instead of we int
 1. Compression
 2. Bass Boost
 3. Virtualizer
-4. 12 Band Hybrid Equalizer (1 low shelf, 10 bands shelves, ,1 high shelves)(Different bands designed with different filter order)
+4. 12 Band Hybrid Equalizer (1 low shelf, 10 bands shelves, 1 high shelves)(Different bands designed with different filter order)
 5. Stereo Widen
 6. Adjustable Low pass filter(Bass Boost)
 7. 3 custom bass boost mode
 
 ##### On development:
-
-1. Linear phase FIR Equalizer
-
-2. Parameterized Room Convolution
+1. Parameterized Room Convolution
 
 	-->May be I  will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
 
