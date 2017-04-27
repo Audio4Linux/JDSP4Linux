@@ -17,9 +17,6 @@ We don't work too much around with modifying Android framework instead of we int
 
 1. Linear phase FIR Equalizer
 
-	-->Status 1: Implementing ring buffer...Test project will disappear for a while...
-
-	-->Status 2: [EffectVirtualizerBK.cpp](https://github.com/james34602/JamesDSPManager/blob/master/Audio_Engine/eclipse_libjamesdsp_many_bands_Marshmallow_reverb/jni/EffectVirtualizerBK.cpp) is a working integer FFT filter based on Ne10 FFT library
 2. Parameterized Room Convolution
 
 	-->May be I  will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
