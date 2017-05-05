@@ -16,15 +16,19 @@ We don't work too much around with modifying Android framework instead of we int
 ##### On development:
 1. Parameterized Room Convolution
 
-	-->May be I  will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
+	-->May be I will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
+
+2.Linear phase bass boost
+
+##### Development completed but haven't published yet:
+1. Overlap-based convolution
+
+	-->Will be use libHybridConv as library, just like EqualizerAPO. Since my implementation on overlap-add convolution does not do any faster then others library, so I will use best performance library:)
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0 ,6.0 and 7.0(TESTED)
 
 # Download Link
 1. See my project release page
-
-# Development
-The folder end with reverb is my new developing project, but they have no functionality, it can response user via Logcat
 
 # Important
 We won't modify SELinux, let your device become more safe.
