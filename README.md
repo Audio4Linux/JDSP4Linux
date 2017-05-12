@@ -1,7 +1,7 @@
 # JamesDSPManager (Audio Effect Digital Signal Proccessing library for Android)
 GUI is based on Omnirom DSP Manager and able to run in all recent Android rom include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
-We don't work too much around with modifying Android framework instead of we integrate framework with DSP Manager, let it less depend on system framework.
+We don't work too much around with modifying Android framework.
 
 ##### Basic:
 
@@ -17,11 +17,11 @@ We don't work too much around with modifying Android framework instead of we int
 
 ## Important
 ### FAQ
-1. Computation datatype?
+#### 1. Computation datatype?
 
 A: Float32
 
-2. What is Clip control?
+#### 2. What is Clip control?
 
 A: When effect strength going extreme, value will go beyond -1.0 / +1.0 range, this will cause clipping.
 
@@ -29,12 +29,12 @@ A: When effect strength going extreme, value will go beyond -1.0 / +1.0 range, t
    
    But using tanh() will change the waveform even signal is haven't clip.
 
-3. What is the Normalisation?
+#### 3. What is the Normalisation?
 
 A: Prevent clipping with scaling down samples value a little bit.
    This will only apply to the signal when samples in buffer larger than -1.0 / +1.0.
 
-4. Bass boost filter type?
+#### 4. Bass boost filter type?
 
 A: Effect have 3 algorithms to boost low frequency, the first one is the traditional one from previous release, based on IIR Filter.
 
@@ -42,17 +42,44 @@ A: Effect have 3 algorithms to boost low frequency, the first one is the traditi
    
    4095 order FIR filter should work on all frequency listed on options, 1023 order should work well above 80Hz.
 
-5. What is the Misc folder
+#### 5. What is the Misc folder
 
 File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap not stack, it will be useful when you play around with Visual Studio, because VS have 1Mb stack allocation limit...
 
-5. Why you change the Effect structure?
+#### 5. Why you change the Effect structure?
 
 A: This is the only way to full control all DSP effects...
 
-6. Why libjamesdsp.so so big?
+#### 6. Why libjamesdsp.so so big?
 
 A: Because of fftw3 library linked.
+
+#### 6. Why no effect after installed?
+
+A: Check step in release build ReadMe.txt.
+   audio_effects.conf is file for system to load effect using known UUID, you can just add
+   ```
+  jdsp {
+    path /system/lib/soundfx/libjamesdsp.so
+  }
+   ```
+   ### under
+   ```
+   bundle {
+    path /system/lib/soundfx/libbundlewrapper.so
+  }
+   ```
+   ### AND
+   ```
+   jamesdsp {
+    library jdsp
+    uuid f27317f4-c984-4de6-9a90-545759495bf2
+  }
+   ```
+   ### under
+   ```
+   effects {
+   ```
 
 ##### On development:
 1. Loadable file convolver
