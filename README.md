@@ -11,6 +11,8 @@ We don't work too much around with modifying Android framework instead of we int
 3. Reverberation
    --> GVerb and Progenitor 2
 4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves)(Different bands designed with different filter order)
+3. Virtualizer
+4. 12 Band Hybrid Equalizer (1 low shelf, 10 bands shelves, 1 high shelves)(Different bands designed with different filter order)
 5. Stereo Widen
 
 ## Important
@@ -48,6 +50,10 @@ File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap
 
 A: This is the only way to full control all DSP effects...
 
+6. Why libjamesdsp.so so big?
+
+A: Because of fftw3 library linked.
+
 ##### On development:
 1. Loadable file convolver
 
@@ -58,10 +64,24 @@ A: This is the only way to full control all DSP effects...
 	-->May be I will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator]
 	(https://github.com/james34602/RIR-Generator)
 
+##### On development:
+1. Parameterized Room Convolution
+
+	-->May be I will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
+
+2.Linear phase bass boost
+
+##### Development completed but haven't published yet:
+1. Overlap-based convolution
+
+	-->Will be use libHybridConv as library, just like EqualizerAPO. Since my implementation on overlap-add convolution does not do any faster then others library, so I will use best performance library:)
+
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 
 ## Download Link
 1. See my project release page
+
+# Important
 
 We won't modify SELinux, let your device become more safe.
 Also, it is good for you to customize your own rom or even port rom.
