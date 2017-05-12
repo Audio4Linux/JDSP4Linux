@@ -84,7 +84,7 @@ A: Check step in release build ReadMe.txt.
 ##### On development:
 1. Loadable file convolver
 
-        -->Basically work same as FIR bass boost, load impulse response and do convolution...
+    -->Basically work same as FIR bass boost, load impulse response and do convolution...
 
 2. Parameterized Room Convolution
 
