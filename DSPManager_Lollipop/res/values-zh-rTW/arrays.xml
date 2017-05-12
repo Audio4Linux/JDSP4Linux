@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="clip_mode">
+    <item>硬性波形切斷</item>
+    <item>雙曲正切函數</item>
+  </string-array>
+  <string-array name="headphone_preset">
+<item>默認</item>
+<item>小禮堂1</item>
+<item>小禮堂2</item>
+<item>中禮堂1</item>
+<item>中禮堂2</item>
+<item>大禮堂1</item>
+<item>大禮堂2</item>
+<item>小房間1</item>
+<item>小房間2</item>
+<item>中房間1</item>
+<item>中房間2</item>
+<item>大房間1</item>
+<item>大房間2</item>
+<item>未知房間1</item>
+<item>未知房間2</item>
+<item>金屬板1</item>
+<item>金屬板2</item>
+<item>超長混響1</item>
+<item>超長混響2</item>
+  </string-array>
+  <string-array name="headphone_mode">
+    <item>Freeverb3 Progenitor2(房間參數己預設好)</item>
+    <item>GVerb</item>
+  </string-array>
+  <string-array name="headphone_inbandwidth">
+    <item>Nyquist的10&#65130;(Hz)</item>
+    <item>Nyquist的15&#65130;(Hz)</item>
+    <item>Nyquist的20&#65130;(Hz)</item>
+    <item>Nyquist的30&#65130;(Hz)</item>
+    <item>Nyquist的40&#65130;(Hz)</item>
+    <item>Nyquist的50&#65130;(Hz)</item>
+    <item>Nyquist的60&#65130;(Hz)</item>
+    <item>Nyquist的70&#65130;(Hz)</item>
+    <item>Nyquist的80&#65130;(Hz)</item>
+    <item>Nyquist的90&#65130;(Hz)</item>
+    <item>Nyquist的91&#65130;(Hz)</item>
+    <item>Nyquist的93&#65130;(Hz)</item>
+    <item>Nyquist的94&#65130;(Hz)</item>
+    <item>Nyquist的95&#65130;(Hz)</item>
+    <item>Nyquist的99&#65130;(Hz)</item>
+    <item>Nyquist的99.9&#65130;(Hz)</item>
+  </string-array>
+  <string-array name="equalizer_loudness_modes">
+      <item>已停用</item>
+      <item>最弱</item>
+      <item>更弱</item>
+      <item>弱</item>
+      <item>強</item>
+      <item>更強</item>
+      <item>變態</item>
+  </string-array>
+  <string-array name="compression_modes">
+    <item>輕微</item>
+    <item>中等</item>
+  </string-array>
+  <string-array name="bassboost_modes">
+    <item>開啟</item>
+    <item>一點點</item>
+    <item>輕微</item>
+    <item>中等</item>
+    <item>超強</item>
+    <item>極端</item>
+  </string-array>
+  <string-array name="bassboost_slope">
+        <item>24dB/Oct巴特沃斯擱架濾波器</item>
+        <item>線性相位1023階低通濾波器</item>
+        <item>線性相位4095階低通濾波器</item>
+    </string-array>
+    <string-array name="stereowide_modes">
+      <item>最弱</item>
+      <item>更弱</item>
+      <item>弱</item>
+      <item>強</item>
+      <item>更強</item>
+    </string-array>
+</resources>

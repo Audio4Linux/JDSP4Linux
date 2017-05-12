@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="headphone_modes">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+    <item>12</item>
+    <item>13</item>
+    <item>14</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+    </string-array>
+    <string-array name="equalizer_loudness_modes">
+        <item>Disabled</item>
+        <item>Weakest</item>
+        <item>Weaker</item>
+        <item>Weak</item>
+        <item>Strong</item>
+        <item>Stronger</item>
+        <item>Strongest</item>
+    </string-array>
+    <string-array name="equalizer_loudness_values">
+        <item>10000</item>
+        <item>5000</item>
+        <item>4500</item>
+        <item>4000</item>
+        <item>3500</item>
+        <item>3000</item>
+        <item>2500</item>
+    </string-array>
+    <string-array name="equalizer_preset_values">
+        <item>4.5;4.5;3.5;1.75;3.5;2.5;0;0;0;0;0;0;0;0</item>
+        <item>6.5;6.5;4.0;0.0;0.0;0.0;0;0;0;0;0;0;0;0</item>
+        <item>-6.5;-6.5;-4.0;0.0;0.0;0.0;0;0;0;0;0;0;0;0</item>
+        <item>4.0;4.0;3.25;-0.5;2.0;3.5;0;0;0;0;0;0;0;0</item>
+        <item>4.0;4.0;0.5;1.5;-4.0;-4.5;0;0;0;0;0;0;0;0</item>
+        <item>0.0;0.0;0.0;0.0;0.0;0.0;0;0;0;0;0;0;0;0</item>
+        <item>5.5;5.5;3.5;-1.75;1.5;2.5;0;0;0;0;0;0;0;0</item>
+        <item>4.5;4.5;2.75;-0.5;2.75;4.0;0;0;0;0;0;0;0;0</item>
+        <item>6.5;6.5;4.0;0.0;-6.5;-4.0;0;0;0;0;0;0;0;0</item>
+        <item>0.0;0.0;0.0;0.0;4.0;6.5;0;0;0;0;0;0;0;0</item>
+        <item>0.0;0.0;0.0;0.0;-6.5;-4.0;0;0;0;0;0;0;0;0</item>
+        <item>-2.5;-2.5;0.0;3.5;1.5;-2.0;0;0;0;0;0;0;0;0</item>
+        <item>custom</item>
+    </string-array>
+    <string-array name="compression_modes">
+        <item>Slight(Recommend)</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="compression_modes_values">
+        <item>40</item>
+        <item>80</item>
+    </string-array>
+    <string-array name="bassboost_modes">
+        <item>Enable</item>
+        <item>A Bit</item>
+        <item>Slight</item>
+        <item>Moderate</item>
+        <item>Super</item>
+        <item>Extreme</item>
+    </string-array>
+    <string-array name="bassboost_slope">
+        <item>RBJ Нормальный</item>
+        <item>RBJ каскадный эффект, теплый фильтр</item>
+        <item>24дБ/Октава(Баттерворт фильтр 4-го порядка)</item>
+    </string-array>
+    <string-array name="bassboost_slope_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="bassboost_modes_values">
+        <item>60</item>
+        <item>100</item>
+        <item>255</item>
+        <item>560</item>
+        <item>900</item>
+        <item>1200</item>
+    </string-array>
+    <string-array name="bassboost_freqs">
+        <item>20Hz</item>
+        <item>30Hz</item>
+        <item>45Hz</item>
+        <item>55Hz</item>
+        <item>60Hz</item>
+        <item>70Hz</item>
+        <item>80Hz</item>
+        <item>100Hz</item>
+        <item>120Hz</item>
+        <item>150Hz</item>
+        <item>180Hz</item>
+        <item>200Hz</item>
+    </string-array>
+    <string-array name="bassboost_freqs_values">
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+        <item>55</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+        <item>180</item>
+        <item>200</item>
+    </string-array>
+    <string-array name="preamp_modes">
+        <item>Disable</item>
+        <item>2x</item>
+        <item>3x</item>
+    </string-array>
+    <string-array name="preamp_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="stereowide_modes">
+        <item>A Bit</item>
+        <item>Slight</item>
+        <item>Moderate</item>
+        <item>High</item>
+        <item>Super</item>
+    </string-array>
+    <string-array name="stereowide_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>

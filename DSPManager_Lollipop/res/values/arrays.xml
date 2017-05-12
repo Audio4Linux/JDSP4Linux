@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="compression_pregain">
+    <item>0 dB</item>
+    <item>4 dB</item>
+    <item>6 dB</item>
+    <item>8 dB</item>
+  </string-array>
+  <string-array name="compression_pregain_values" translatable="false">
+    <item>0</item>
+    <item>4</item>
+    <item>6</item>
+    <item>8</item>
+  </string-array>
+  <string-array name="compression_threshold">
+    <item>-80 dB</item>
+    <item>-70 dB</item>
+    <item>-60 dB</item>
+    <item>-50 dB</item>
+    <item>-40 dB</item>
+    <item>-35 dB</item>
+    <item>-30 dB</item>
+    <item>-25 dB</item>
+    <item>-20 dB</item>
+    <item>-10 dB</item>
+    <item>-5 dB</item>
+  </string-array>
+  <string-array name="compression_threshold_values" translatable="false">
+    <item>80</item>
+    <item>70</item>
+    <item>60</item>
+    <item>50</item>
+    <item>40</item>
+    <item>35</item>
+    <item>30</item>
+    <item>25</item>
+    <item>20</item>
+    <item>10</item>
+    <item>5</item>
+  </string-array>
+  <string-array name="compression_knee">
+    <item>0 dB</item>
+    <item>5 dB</item>
+    <item>10 dB</item>
+    <item>15 dB</item>
+    <item>20 dB</item>
+    <item>25 dB</item>
+    <item>30 dB</item>
+    <item>35 dB</item>
+    <item>40 dB</item>
+  </string-array>
+  <string-array name="compression_knee_values" translatable="false">
+    <item>0</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>25</item>
+    <item>30</item>
+    <item>35</item>
+    <item>40</item>
+  </string-array>
+  <string-array name="compression_ratio">
+    <item>0</item>
+    <item>2</item>
+    <item>4</item>
+    <item>6</item>
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+    <item>14</item>
+    <item>16</item>
+  </string-array>
+  <string-array name="compression_ratio_values" translatable="false">
+    <item>0</item>
+    <item>2</item>
+    <item>4</item>
+    <item>6</item>
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+    <item>14</item>
+    <item>16</item>
+  </string-array>
+  <string-array name="compression_attack">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_attack_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_release">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_release_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_predelay">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_predelay_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_releasezone1">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_releasezone1_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_releasezone2">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_releasezone2_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_releasezone3">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_releasezone3_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_releasezone4">
+    <item>0.002</item>
+    <item>0.008</item>
+    <item>0.01</item>
+    <item>0.025</item>
+    <item>0.05</item>
+    <item>0.1</item>
+    <item>0.12</item>
+    <item>0.15</item>
+    <item>0.17</item>
+    <item>0.185</item>
+    <item>0.2</item>
+    <item>0.24</item>
+    <item>0.28</item>
+    <item>0.3</item>
+    <item>0.34</item>
+    <item>0.38</item>
+    <item>0.4</item>
+    <item>0.44</item>
+    <item>0.48</item>
+    <item>0.5</item>
+    <item>0.55</item>
+    <item>0.6</item>
+    <item>0.65</item>
+    <item>0.7</item>
+    <item>0.75</item>
+    <item>0.8</item>
+    <item>0.85</item>
+    <item>0.9</item>
+    <item>0.95</item>
+  </string-array>
+  <string-array name="compression_releasezone4_values" translatable="false">
+    <item>2</item>
+    <item>8</item>
+    <item>10</item>
+    <item>25</item>
+    <item>50</item>
+    <item>100</item>
+    <item>120</item>
+    <item>150</item>
+    <item>170</item>
+    <item>185</item>
+    <item>200</item>
+    <item>240</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>400</item>
+    <item>440</item>
+    <item>480</item>
+    <item>500</item>
+    <item>550</item>
+    <item>600</item>
+    <item>650</item>
+    <item>700</item>
+    <item>750</item>
+    <item>800</item>
+    <item>850</item>
+    <item>900</item>
+    <item>950</item>
+  </string-array>
+  <string-array name="compression_postgain">
+    <item>0 dB</item>
+    <item>4 dB</item>
+    <item>6 dB</item>
+    <item>8 dB</item>
+  </string-array>
+  <string-array name="compression_postgain_values" translatable="false">
+    <item>0</item>
+    <item>4</item>
+    <item>6</item>
+    <item>8</item>
+  </string-array>
+
+  <string-array name="headphone_preset">
+    <item>Default</item>
+    <item>Small hall 1</item>
+    <item>Small hall 2</item>
+    <item>Medium hall 1</item>
+    <item>Medium hall 2</item>
+    <item>Large hall 1</item>
+    <item>Large hall 2</item>
+    <item>Small room 1</item>
+    <item>Small room 2</item>
+    <item>Medium room 1</item>
+    <item>Medium room 2</item>
+    <item>Large room 1</item>
+    <item>Large room 2</item>
+    <item>Unknown room 1</item>
+    <item>Unknown room 2</item>
+    <item>Plate high</item>
+    <item>Plate low</item>
+    <item>Long reverb 1</item>
+    <item>Long reverb 2</item>
+  </string-array>
+
+  <string-array name="headphone_preset_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+    <item>12</item>
+    <item>13</item>
+    <item>14</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+  </string-array>
+
+  <string-array name="headphone_mode">
+    <item>Freeverb3 Progenitor2(Preset-based)</item>
+    <item>GVerb</item>
+  </string-array>
+  <string-array name="headphone_modeverb_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+  <string-array name="headphone_roomsize">
+    <item>10m</item>
+    <item>20m</item>
+    <item>30m</item>
+    <item>40m</item>
+    <item>50m</item>
+    <item>60m</item>
+    <item>70m</item>
+    <item>80m</item>
+    <item>90m</item>
+    <item>100m</item>
+    <item>120m</item>
+    <item>130m</item>
+    <item>140m</item>
+    <item>160m</item>
+    <item>180m</item>
+    <item>200m</item>
+    <item>210m</item>
+    <item>220m</item>
+    <item>230m</item>
+    <item>240m</item>
+    <item>250m</item>
+    <item>260m</item>
+    <item>280m</item>
+    <item>300m</item>
+    <item>340m</item>
+    <item>380m</item>
+    <item>410m</item>
+  </string-array>
+  <string-array name="headphone_roomsize_values" translatable="false">
+    <item>10</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>160</item>
+    <item>180</item>
+    <item>200</item>
+    <item>210</item>
+    <item>220</item>
+    <item>230</item>
+    <item>240</item>
+    <item>250</item>
+    <item>260</item>
+    <item>280</item>
+    <item>300</item>
+    <item>340</item>
+    <item>380</item>
+    <item>410</item>
+  </string-array>
+  <string-array name="headphone_reverbtime">
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>200</item>
+    <item>280</item>
+    <item>350</item>
+  </string-array>
+  <string-array name="headphone_reverbtime_values" translatable="false">
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>200</item>
+    <item>280</item>
+    <item>350</item>
+  </string-array>
+  <string-array name="headphone_damping">
+    <item>1&#65130;</item>
+    <item>5&#65130;</item>
+    <item>10&#65130;</item>
+    <item>15&#65130;</item>
+    <item>20&#65130;</item>
+    <item>25&#65130;</item>
+    <item>30&#65130;</item>
+    <item>35&#65130;</item>
+    <item>40&#65130;</item>
+    <item>45&#65130;</item>
+    <item>50&#65130;</item>
+    <item>55&#65130;</item>
+    <item>60&#65130;</item>
+    <item>65&#65130;</item>
+    <item>70&#65130;</item>
+    <item>75&#65130;</item>
+    <item>80&#65130;</item>
+    <item>85&#65130;</item>
+    <item>90&#65130;</item>
+    <item>95&#65130;</item>
+    <item>99&#65130;</item>
+  </string-array>
+  <string-array name="headphone_damping_values" translatable="false">
+    <item>1</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>25</item>
+    <item>30</item>
+    <item>35</item>
+    <item>40</item>
+    <item>45</item>
+    <item>50</item>
+    <item>55</item>
+    <item>60</item>
+    <item>65</item>
+    <item>70</item>
+    <item>75</item>
+    <item>80</item>
+    <item>85</item>
+    <item>90</item>
+    <item>95</item>
+    <item>99</item>
+  </string-array>
+  <string-array name="headphone_spread">
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>110</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>150</item>
+  </string-array>
+  <string-array name="headphone_spread_values" translatable="false">
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>110</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>150</item>
+  </string-array>
+  <string-array name="headphone_inbandwidth">
+    <item>5&#65130;of Nyquist frequency(Hz)</item>
+    <item>10&#65130;of Nyquist frequency(Hz)</item>
+    <item>15&#65130;of Nyquist frequency(Hz)</item>
+    <item>20&#65130;of Nyquist frequency(Hz)</item>
+    <item>30&#65130;of Nyquist frequency(Hz)</item>
+    <item>40&#65130;of Nyquist frequency(Hz)</item>
+    <item>50&#65130;of Nyquist frequency(Hz)</item>
+    <item>60&#65130;of Nyquist frequency(Hz)</item>
+    <item>70&#65130;of Nyquist frequency(Hz)</item>
+    <item>80&#65130;of Nyquist frequency(Hz)</item>
+    <item>90&#65130;of Nyquist frequency(Hz)</item>
+    <item>91&#65130;of Nyquist frequency(Hz)</item>
+    <item>93&#65130;of Nyquist frequency(Hz)</item>
+    <item>94&#65130;of Nyquist frequency(Hz)</item>
+    <item>95&#65130;of Nyquist frequency(Hz)</item>
+    <item>99&#65130;of Nyquist frequency(Hz)</item>
+    <item>99.9&#65130;of Nyquist frequency(Hz)</item>
+  </string-array>
+  <string-array name="headphone_inbandwidth_values" translatable="false">
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>110</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>148</item>
+  </string-array>
+  <string-array name="headphone_earlyverb">
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>110</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>150</item>
+    <item>160</item>
+    <item>170</item>
+    <item>180</item>
+    <item>190</item>
+  </string-array>
+  <string-array name="headphone_earlyverb_values" translatable="false">
+    <item>10</item>
+    <item>15</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>110</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>150</item>
+    <item>160</item>
+    <item>170</item>
+    <item>180</item>
+    <item>190</item>
+  </string-array>
+  <string-array name="headphone_tailverb">
+    <item>10</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>160</item>
+    <item>180</item>
+    <item>200</item>
+    <item>210</item>
+    <item>220</item>
+    <item>230</item>
+    <item>240</item>
+    <item>250</item>
+    <item>260</item>
+    <item>280</item>
+    <item>295</item>
+    <item>320</item>
+    <item>360</item>
+    <item>400</item>
+    <item>450</item>
+  </string-array>
+  <string-array name="headphone_tailverb_values" translatable="false">
+    <item>10</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>120</item>
+    <item>130</item>
+    <item>140</item>
+    <item>160</item>
+    <item>180</item>
+    <item>200</item>
+    <item>210</item>
+    <item>220</item>
+    <item>230</item>
+    <item>240</item>
+    <item>250</item>
+    <item>260</item>
+    <item>280</item>
+    <item>295</item>
+    <item>320</item>
+    <item>360</item>
+    <item>400</item>
+    <item>450</item>
+  </string-array>
+  <string-array name="clip_gain">
+    <item>40&#65130;</item>
+    <item>50&#65130;</item>
+    <item>60&#65130;</item>
+    <item>70&#65130;</item>
+    <item>80&#65130;</item>
+    <item>90&#65130;</item>
+    <item>100&#65130;</item>
+    <item>120&#65130;</item>
+  </string-array>
+  <string-array name="clip_gain_values" translatable="false">
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>70</item>
+    <item>80</item>
+    <item>90</item>
+    <item>100</item>
+    <item>120</item>
+  </string-array>
+  <string-array name="clip_mode">
+    <item>Hard clip</item>
+    <item>Hyperbolic Tangent Function</item>
+  </string-array>
+  <string-array name="clip_mode_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_modes" translatable="false">
+    <item>@string/eq_preset_acoustic</item>
+    <item>@string/eq_preset_bass_booster</item>
+    <item>@string/eq_preset_bass_reducer</item>
+    <item>@string/eq_preset_classical</item>
+    <item>@string/eq_preset_deep</item>
+    <item>@string/eq_preset_flat</item>
+    <item>@string/eq_preset_r_and_b</item>
+    <item>@string/eq_preset_rock</item>
+    <item>@string/eq_preset_small_speakers</item>
+    <item>@string/eq_preset_treble_booster</item>
+    <item>@string/eq_preset_treble_reducer</item>
+    <item>@string/eq_preset_vocal_booster</item>
+    <item>@string/eq_preset_custom</item>
+  </string-array>
+
+  <string-array name="equalizer_loudness_modes">
+    <item>Disabled</item>
+    <item>Weakest</item>
+    <item>Weaker</item>
+    <item>Weak</item>
+    <item>Strong</item>
+    <item>Stronger</item>
+    <item>Strongest</item>
+  </string-array>
+
+  <string-array name="equalizer_loudness_values" translatable="false">
+    <item>10000</item>
+    <item>5000</item>
+    <item>4500</item>
+    <item>4000</item>
+    <item>3500</item>
+    <item>3000</item>
+    <item>2500</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_values" translatable="false">
+    <item>4.5;4.5;3.5;1.75;3.5;2.5;0;0;0;0</item>    <!-- Acoustic -->
+    <item>6.5;6.5;4.0;0.0;0.0;0.0;0;0;0;0</item>     <!-- Bass Booster -->
+    <item>-6.5;-6.5;-4.0;0.0;0.0;0.0;0;0;0;0</item>  <!-- Bass Reducer -->
+    <item>4.0;4.0;3.25;-0.5;2.0;3.5;0;0;0;0</item>   <!-- Classical -->
+    <item>4.0;4.0;0.5;1.5;-4.0;-4.5;0;0;0;0</item>   <!-- Deep -->
+    <item>0.0;0.0;0.0;0.0;0.0;0.0;0;0;0;0</item>     <!-- Flat -->
+    <item>5.5;5.5;3.5;-1.75;1.5;2.5;0;0;0;0</item>   <!-- R&B -->
+    <item>4.5;4.5;2.75;-0.5;2.75;4.0;0;0;0;0</item>  <!-- Rock -->
+    <item>6.5;6.5;4.0;0.0;-6.5;-4.0;0;0;0;0</item>   <!-- Small Speakers -->
+    <item>0.0;0.0;0.0;0.0;4.0;6.5;0;0;0;0</item>     <!-- Treble Booster -->
+    <item>0.0;0.0;0.0;0.0;-6.5;-4.0;0;0;0;0</item>   <!-- Treble Reducer -->
+    <item>-2.5;-2.5;0.0;3.5;1.5;-2.0;0;0;0;0</item>  <!-- Vocal Booster -->
+    <item>custom</item>                       <!-- Custom -->
+  </string-array>
+
+  <string-array name="bassboost_modes">
+    <item>Enable</item>
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+    <item>Super</item>
+    <item>Extreme</item>
+  </string-array>
+
+  <string-array name="bassboost_slope">
+        <item>24dB/Octave(4th order Butterworth shelve)</item>
+        <item>Linear phase 1024 taps low pass filter</item>
+        <item>Linear phase 4096 taps low pass filter</item>
+    </string-array>
+
+  <string-array name="bassboost_slope_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+  <string-array name="bassboost_modes_values" translatable="false">
+    <item>80</item>
+    <item>200</item>
+    <item>360</item>
+    <item>600</item>
+    <item>900</item>
+    <item>1200</item>
+  </string-array>
+
+<string-array name="bassboost_freqs" translatable="false">
+        <item>55Hz</item>
+        <item>60Hz</item>
+        <item>70Hz</item>
+        <item>80Hz</item>
+        <item>100Hz</item>
+        <item>120Hz</item>
+        <item>150Hz</item>
+        <item>180Hz</item>
+        <item>200Hz</item>
+    </string-array>
+
+    <string-array name="bassboost_freqs_values" translatable="false">
+        <item>55</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+        <item>180</item>
+        <item>200</item>
+    </string-array>
+
+    <string-array name="stereowide_modes">
+        <item>A Bit</item>
+        <item>Slight</item>
+        <item>Moderate</item>
+        <item>High</item>
+        <item>Super</item>
+    </string-array>
+
+    <string-array name="stereowide_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+	<item>3</item>
+	<item>4</item>
+    </string-array>
+</resources>

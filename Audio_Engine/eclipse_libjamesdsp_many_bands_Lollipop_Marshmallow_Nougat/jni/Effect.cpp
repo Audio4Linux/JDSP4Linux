@@ -30,6 +30,7 @@ int32_t Effect::configure(void* pCmdData) {
 	if (out.channels != AUDIO_CHANNEL_OUT_STEREO) {
 	    return -EINVAL;
 	}
+    frameCountInit = in.buffer.frameCount * 2;
     }
 
     if (in.mask & EFFECT_CONFIG_FORMAT) {
@@ -81,15 +82,6 @@ int32_t Effect::command(uint32_t cmdCode, uint32_t cmdSize, void *pCmdData, uint
 	*replySize = 12;
 	break;
     }
-
-    case EFFECT_CMD_SET_VOLUME:
-	if (pReplyData != NULL) {
-	    int32_t *replyData = (int32_t *) pReplyData;
-	    for (uint32_t i = 0; i < *replySize / 4; i ++) {
-		replyData[i] = 1 << 24;
-	    }
-	}
-	break;
     }
 
     return 0;
