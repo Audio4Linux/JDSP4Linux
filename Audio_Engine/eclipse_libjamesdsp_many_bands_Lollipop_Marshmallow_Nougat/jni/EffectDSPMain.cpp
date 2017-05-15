@@ -7,8 +7,8 @@
 #include "firgen.h"
 
 EffectDSPMain::EffectDSPMain()
-	: pregain(0), threshold(-20.0f), knee(30.0f), ratio(12.0f), attack(0.003f), release(0.25f), predelay(0.05f), releasezone1(0.1f), releasezone2(0.15f), releasezone3(0.4f), releasezone4(0.95f), inputBuffer(0), mPreset(0), mReverbMode(1), roomSize(50.0f)
-	, fxreTime(0.5f), damping(0.5f), spread(50.0f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBosstLp(0), clipMode(0)
+	: pregainCom(0), threshold(-20.0f), knee(30.0f), ratio(12.0f), attack(0.003f), release(0.25f), predelay(0.05f), releasezone1(0.1f), releasezone2(0.15f), releasezone3(0.4f), releasezone4(0.95f), inputBuffer(0), mPreset(0), mReverbMode(1), roomSize(50.0f)
+	, fxreTime(0.5f), damping(0.5f), spread(50.0f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBosstLp(0), tapsLPFIR(1024), clipMode(0), tempImpulse(0), finalImpulse(0), convolverReady(0)
 {
 }
 EffectDSPMain::~EffectDSPMain()
@@ -21,26 +21,41 @@ EffectDSPMain::~EffectDSPMain()
 		for (uint32_t i = 0; i < NUMCHANNEL; i++)
 			free(outputBuffer[i]);
 		free(outputBuffer);
-#ifdef DEBUG
-		LOGI("Free buffer");
-#endif
 	}
 	if (verbL) {
 		gverb_free(verbL);
 		gverb_free(verbR);
 	}
-	if (bassBosstLp != NULL)
+	if (bassBosstLp)
 	{
 		for (unsigned i = 0; i < NUMCHANNEL; i++)
 			hcCloseSingle(&bassBosstLp[i]);
 		free(bassBosstLp);
 	}
+	if (convolver)
+	{
+		for (unsigned i = 0; i < NUMCHANNEL; i++)
+			hcCloseSingle(&convolver[i]);
+		free(convolver);
+	}
+	if (tempImpulse)
+		free(tempImpulse);
+	if (finalImpulse)
+	{
+		for (uint32_t i = 0; i < NUMCHANNEL; i++)
+			free(finalImpulse[i]);
+		free(finalImpulse);
+	}
+#ifdef DEBUG
+		LOGI("Free buffer");
+#endif
 }
 int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdData, uint32_t* replySize, void* pReplyData)
 {
 	if (cmdCode == EFFECT_CMD_SET_CONFIG) {
 		int32_t *replyData = (int32_t *)pReplyData;
-		int32_t ret = Effect::configure(pCmdData);
+		uint16_t frameCountInit;
+		int32_t ret = Effect::configure(pCmdData, &frameCountInit);
 		if (ret != 0) {
 			*replyData = ret;
 			return 0;
@@ -81,9 +96,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 100) {
 				int16_t value = ((int16_t *)cep)[8];
-				float oldBandVal = pregain;
-				pregain = (float)value;
-				if (oldBandVal != pregain && compressionEnabled)
+				float oldBandVal = pregainCom;
+				pregainCom = (float)value;
+				if (oldBandVal != pregainCom && compressionEnabled)
 					refreshCompressor();
 				*replyData = 0;
 				return 0;
@@ -372,7 +387,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				int16_t value = ((int16_t *)cep)[8];
 				int16_t oldVal = widenStrength;
 				widenStrength = value;
-				if (oldVal != widenStrength && reverbEnabled)
+				if (oldVal != widenStrength && stereoWidenEnabled)
 					refreshStereoWiden();
 				*replyData = 0;
 				return 0;
@@ -388,6 +403,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1201) {
 				bassBoostEnabled = ((int16_t *)cep)[8];
+				bassParameterChanged = 1;
 				*replyData = 0;
 				return 0;
 			}
@@ -416,6 +432,74 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1205) {
 				convolverEnabled = ((int16_t *)cep)[8];
+				if(!convolverEnabled) {
+					if (tempImpulse != NULL) {
+						free(tempImpulse);
+						tempImpulse = 0;
+#ifdef DEBUG
+						LOGI("Free impulse response!");
+#endif
+					}
+				}
+				*replyData = 0;
+				return 0;
+			}
+			else if (cmd == 10001) {
+				numTime2Send = ((int16_t *)cep)[8];
+				if (convolverEnabled) {
+					if (tempImpulse) {
+						free(tempImpulse);
+						tempImpulse = 0;
+					}
+					if (!tempImpulse) {
+						tempImpulse = (int32_t*)calloc(8192 * numTime2Send, sizeof(int32_t));
+#ifdef DEBUG
+						LOGI("tempImpulse Allocated::Total:%d", 8192 * numTime2Send);
+#endif
+					}
+				}
+				*replyData = 0;
+				return 0;
+			}
+			else if (cmd == 10002) {
+				impChannels = ((int16_t *)cep)[8];
+				*replyData = 0;
+				return 0;
+			}
+			else if (cmd == 10003) {
+				samplesInc = ((int16_t *)cep)[8];
+				*replyData = 0;
+				return 0;
+			}
+			else if (cmd == 10004) {
+				int16_t completed = ((int16_t *)cep)[8];
+				if (completed && convolverEnabled) {
+					if (finalImpulse) {
+						for (uint32_t i = 0; i < impChannels; i++)
+							free(finalImpulse[i]);
+						free(finalImpulse);
+						finalImpulse = 0;
+					}
+#ifdef DEBUG
+						LOGI("Checkpoint");
+#endif
+					if (!finalImpulse) {
+						finalImpulse = (float**)malloc(sizeof(float*) * impChannels);
+						for (uint32_t i = 0; i < impChannels; i++)
+							finalImpulse[i] = (float*)malloc(impulseLengthActual * sizeof(float));
+#ifdef DEBUG
+						LOGI("Float imp buffer allocated Actual size:%d", impulseLengthActual);
+#endif
+						channel_split_Int32Imp(tempImpulse, impulseLengthActual, finalImpulse, impChannels, 0.085f);
+#ifdef DEBUG
+						LOGI("Channel split:Channel count:%d", impChannels);
+#endif
+					LOGI("deleting tempImpulse");
+					free(tempImpulse);
+					tempImpulse = 0;
+					convolverReady = 0;
+				}
+			}
 				*replyData = 0;
 				return 0;
 			}
@@ -426,15 +510,25 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				return 0;
 			}
 			else if (cmd == 1501) {
-				normaliseEnabled = ((int16_t *)cep)[8];
+				int16_t value = ((int16_t *)cep)[8];
+				finalGain = value / 100.0f * 32768.0f;
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 1502) {
-				int16_t value = ((int16_t *)cep)[8];
-				finalGain = value / 100.0f * 32767.0f;
+		}
+		if (cep->psize == 4 && cep->vsize == 4) { // Receive int32_t
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 10000) {
+				impulseLengthActual = ((int32_t *)cep)[4];
 				*replyData = 0;
 				return 0;
+			}
+		}
+		if (cep->psize == 4 && cep->vsize == 16384) { // Receive int32_t array
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 12000) {
+			memcpy(tempImpulse+(samplesInc*4096), ((int32_t *)cep)+4, 4096 * sizeof(int32_t));
+			return 0;
 			}
 		}
 		return -1;
@@ -522,19 +616,22 @@ void EffectDSPMain::refreshBass()
 void EffectDSPMain::refreshBassLinearPhase(uint32_t actualframeCount)
 {
 	float imp[4096];
-	float winBeta = bassBoostCentreFreq / 10.0f;
+	float winBeta = bassBoostCentreFreq / 30.0f;
 	float strength = bassBoostStrength / 350.0f;
 	if (strength < 1.0f)
 		strength = 1.0f;
-	JfirLP(imp, tapsLPFIR, 1, bassBoostCentreFreq / mSamplingRate, winBeta, strength);
-	if (bassBosstLp != NULL)
+	if (tapsLPFIR < 1024)
+		JfirLP(imp, tapsLPFIR, 0, bassBoostCentreFreq / mSamplingRate, winBeta, strength);
+	else
+		JfirLP(imp, tapsLPFIR, 1, bassBoostCentreFreq / mSamplingRate, winBeta, strength);
+	if (bassBosstLp)
 	{
 		for (unsigned i = 0; i < NUMCHANNEL; i++)
 			hcCloseSingle(&bassBosstLp[i]);
 		free(bassBosstLp);
-		bassBosstLp = NULL;
+		bassBosstLp = 0;
 	}
-	if (bassBosstLp == NULL) {
+	if (!bassBosstLp) {
 		bassBosstLp = (HConvSingle*)malloc(sizeof(HConvSingle) * NUMCHANNEL);
 		for (unsigned i = 0; i < NUMCHANNEL; i++)
 		{
@@ -545,6 +642,39 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t actualframeCount)
 	LOGI("Linear phase FIR allocate all done: total taps %d", tapsLPFIR);
 #endif
 	bassParameterChanged = 0;
+}
+void EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
+{
+	if(!finalImpulse)
+		return;
+#ifdef DEBUG
+	LOGI("refreshConvolver::IR channel count:%d, IR frame count:%d, Audio buffer size:%d", impChannels, impulseLengthActual, actualframeCount);
+#endif
+	if (convolver)
+	{
+		for (unsigned i = 0; i < NUMCHANNEL; i++)
+			hcCloseSingle(&convolver[i]);
+		free(convolver);
+		convolver = NULL;
+	}
+	if (!convolver) {
+		convolver = (HConvSingle*)malloc(sizeof(HConvSingle) * NUMCHANNEL);
+		for (unsigned i = 0; i < NUMCHANNEL; i++)
+		{
+			hcInitSingle(&convolver[i], finalImpulse[i % impChannels], impulseLengthActual, actualframeCount, 1, 0);
+		}
+		if (finalImpulse)
+		{
+			for (uint32_t i = 0; i < NUMCHANNEL; i++)
+				free(finalImpulse[i]);
+			free(finalImpulse);
+			finalImpulse = 0;
+		}
+		convolverReady = 1;
+#ifdef DEBUG
+	LOGI("Convolver allocate complete");
+#endif
+	}
 }
 void EffectDSPMain::refreshEqBands()
 {
@@ -571,7 +701,7 @@ void EffectDSPMain::refreshEqBands()
 }
 void EffectDSPMain::refreshCompressor()
 {
-	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release,
+	sf_advancecomp(&compressor, mSamplingRate, pregainCom, threshold, knee, ratio, attack, release,
 		predelay,     // seconds, length of the predelay buffer [0 to 1]
 		releasezone1, // release zones should be increasing between 0 and 1, and are a fraction
 		releasezone2, //  of the release time depending on the input dB -- these parameters define
@@ -583,19 +713,20 @@ void EffectDSPMain::refreshCompressor()
 
 int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 {
+	uint16_t i;
 	channel_split(in->s16, in->frameCount, inputBuffer);
 	if (bassBoostEnabled) {
-		if (bassBoostFilterType == 0) {
-			for (uint32_t i = 0; i < in->frameCount; i++) {
+		if (!bassBoostFilterType) {
+			for (i = 0; i < in->frameCount; i++) {
 				inputBuffer[0][i] = bbL.filter(inputBuffer[0][i]);
 				inputBuffer[1][i] = bbR.filter(inputBuffer[1][i]);
 			}
 		}
 		else if (bassBoostFilterType > 0)
 		{
-			if ((bassBosstLp == NULL) || bassParameterChanged)
+			if (bassParameterChanged)
 				refreshBassLinearPhase(in->frameCount);
-			for (unsigned i = 0; i < NUMCHANNEL; i++)
+			for (i = 0; i < NUMCHANNEL; i++)
 			{
 				float* inputChannel = inputBuffer[i];
 				float* outputChannel = outputBuffer[i];
@@ -603,16 +734,13 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				hcPutSingle(bassBosstLpPtr, inputChannel);
 				hcProcessSingle(bassBosstLpPtr);
 				hcGetSingle(bassBosstLpPtr, outputChannel);
-			}
-			for (unsigned i = 0; i < NUMCHANNEL; i++)
-			{
 				for (unsigned j = 0; j < in->frameCount; j++)
 					inputBuffer[i][j] += outputBuffer[i][j];
 			}
 		}
 	}
 	if (equalizerEnabled) {
-		for (uint32_t i = 0; i < in->frameCount; i++) {
+		for (i = 0; i < in->frameCount; i++) {
 			float outL = lsl.filter(inputBuffer[0][i]);
 			float outR = lsr.filter(inputBuffer[1][i]);
 			outL = bs1l.filter(outL);
@@ -638,7 +766,7 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 	if (reverbEnabled) {
 		float outLL, outLR, outRL, outRR;
 		if (mReverbMode == 1) {
-			for (uint32_t i = 0; i < in->frameCount; i++) {
+			for (i = 0; i < in->frameCount; i++) {
 				gverb_do(verbL, inputBuffer[0][i], &outLL, &outLR);
 				gverb_do(verbR, inputBuffer[1][i], &outRL, &outRR);
 				inputBuffer[0][i] = (inputBuffer[0][i] * 0.2) + outLL + outRL;
@@ -646,15 +774,31 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 			}
 		}
 		else {
-			for (uint32_t i = 0; i < in->frameCount; i++) {
+			for (i = 0; i < in->frameCount; i++) {
 				sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &outLL, &outRR);
 				inputBuffer[0][i] = (inputBuffer[0][i] * 0.2) + outLL;
 				inputBuffer[1][i] = (inputBuffer[1][i] * 0.2) + outRR;
 			}
 		}
 	}
+	if (convolverEnabled) {
+		if (convolverReady) {
+				hcPutSingle(&convolver[0], inputBuffer[0]);
+				hcPutSingle(&convolver[1], inputBuffer[1]);
+				hcProcessSingle(&convolver[0]);
+				hcProcessSingle(&convolver[1]);
+				hcGetSingle(&convolver[0], outputBuffer[0]);
+				hcGetSingle(&convolver[1], outputBuffer[1]);
+				for (unsigned j = 0; j < in->frameCount; j++) {
+					inputBuffer[0][j] = outputBuffer[0][j];
+					inputBuffer[1][j] = outputBuffer[1][j];
+				}
+		}
+		else
+			refreshConvolver(in->frameCount);
+	}
 	if (stereoWidenEnabled) {
-		for (uint32_t i = 0; i < in->frameCount; i++) {
+		for (i = 0; i < in->frameCount; i++) {
 			float M = (inputBuffer[0][i] + inputBuffer[1][i]) * 0.5f * mMatrixMCoeff;
 			float S = (inputBuffer[0][i] - inputBuffer[1][i]) * 0.5f * mMatrixSCoeff;
 			inputBuffer[0][i] = M + S;
@@ -669,51 +813,23 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 		channel_join(inputBuffer, out->s16, in->frameCount);
 	return mEnable ? 0 : -ENODATA;
 }
-
-inline void EffectDSPMain::channel_split(int16_t* buffer, int num_frames, float** chan_buffers)
+void EffectDSPMain::channel_split_Int32Imp(int32_t* buffer, int num_frames, float** chan_buffers, int channels, float normalise)
 {
 	int i;
-	int samples = num_frames * 2;
+	float loudest_sample = 0.0;
+	float multiplier = 0.0;
+	int samples = num_frames * channels;
 	for (i = 0; i < samples; i++)
 	{
-		chan_buffers[(i % 2)][i / 2] = (float)((double)((int16_t)(buffer[i])) * 0.000030517578125);
+		chan_buffers[(i % 2)][i / 2] = ((float) ((double) ((int32_t) (buffer[i])) * 0.0000000004656612873077392578125));
 	}
-}
-inline void EffectDSPMain::channel_join(float** chan_buffers, int16_t* buffer, int num_frames)
-{
-	int i;
-	int samples = num_frames * 2;
-	if (!clipMode) {
-		if (normaliseEnabled)
-			normalise(chan_buffers, samples);
-		for (i = 0; i < samples; i++)
-		{
-			buffer[i] = chan_buffers[i % 2][i / 2] * finalGain;
-			if (buffer[i] > 32767)
-				buffer[i] = 32767;
-			if (buffer[i] < -32768)
-				buffer[i] = -32768;
-		}
+	for (i = 0; i < samples; i++)
+	{
+		if (fabsf(chan_buffers[(i % 2)][i / 2]) > loudest_sample) loudest_sample = chan_buffers[(i % 2)][i / 2];
 	}
-	if (clipMode) {
-		if (normaliseEnabled)
-			normalise(chan_buffers, samples);
-		for (i = 0; i < samples; i++)
-		{
-			buffer[i] = tanh(chan_buffers[i % 2][i / 2]) * finalGain;
-		}
-	}
-}
-void EffectDSPMain::normalise(float** buffer, int num_frames)
-{
-	float maxSamples = 0;
-	float multiplier = 0;
-	int i;
-	for (i = 0; i < num_frames; i++)
-		if (fabsf(buffer[i % 2][i / 2]) > maxSamples) maxSamples = buffer[i % 2][i / 2];
-	if (maxSamples > 1.0f) {
-		multiplier = 0.8f / maxSamples;
-		for (i = 0; i < num_frames; i++)
-			buffer[i % 2][i / 2] *= multiplier;
+	multiplier = normalise / loudest_sample;
+	for (i = 0; i < samples; i++)
+	{
+		chan_buffers[(i % 2)][i / 2] *= multiplier;
 	}
 }

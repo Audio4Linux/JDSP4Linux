@@ -9,7 +9,7 @@ Effect::~Effect() {
 }
 
 /* Configure a bunch of general parameters. */
-int32_t Effect::configure(void* pCmdData) {
+int32_t Effect::configure(void* pCmdData, uint16_t* frameCountInit) {
     effect_config_t *cfg = (effect_config_t *) pCmdData;
     buffer_config_t in = cfg->inputCfg;
     buffer_config_t out = cfg->outputCfg;
@@ -30,7 +30,7 @@ int32_t Effect::configure(void* pCmdData) {
 	if (out.channels != AUDIO_CHANNEL_OUT_STEREO) {
 	    return -EINVAL;
 	}
-    frameCountInit = in.buffer.frameCount * 2;
+	*frameCountInit = in.buffer.frameCount * 2;
     }
 
     if (in.mask & EFFECT_CONFIG_FORMAT) {

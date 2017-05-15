@@ -17,9 +17,8 @@ class Effect {
     protected:
     bool mEnable;
     float mSamplingRate;
-    uint32_t frameCountInit;
 	
-    int32_t configure(void *pCmdData);
+    int32_t configure(void *pCmdData, uint16_t* frameCountInit);
 
     public:
     Effect();

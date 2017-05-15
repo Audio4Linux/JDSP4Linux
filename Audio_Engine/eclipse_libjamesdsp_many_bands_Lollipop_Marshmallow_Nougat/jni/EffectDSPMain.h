@@ -11,16 +11,19 @@
 class EffectDSPMain : public Effect {
 private:
 	// Float buffer **
-	float **inputBuffer, **outputBuffer;
+	float **inputBuffer, **outputBuffer, **finalImpulse;
+	int32_t *tempImpulse;
 	sf_compressor_state_st compressor;
 	ty_gverb *verbL, *verbR;
 	sf_reverb_state_st myreverb;
-	HConvSingle* bassBosstLp;
-	float pregain, threshold, knee, ratio, attack, release, predelay, releasezone1, releasezone2, releasezone3, releasezone4, postgain;
+	HConvSingle *bassBosstLp, *convolver;
+	float pregainCom, threshold, knee, ratio, attack, release, predelay, releasezone1, releasezone2, releasezone3, releasezone4, postgain;
 	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, spread, deltaSpread, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
 	float mBand[NUM_BANDS];
 	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassParameterChanged;
+	int16_t numTime2Send, samplesInc, impChannels;
+	int32_t impulseLengthActual;
 	// Bass boost
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbL;
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbR;
@@ -47,17 +50,44 @@ private:
 	Iir::Butterworth::HighShelf<4, Iir::DirectFormII> bs9r;
 	int16_t mPreset, mReverbMode, widenStrength;
 	int tapsLPFIR;
-	float softClip(float x, float k);
 	void refreshCompressor();
 	void refreshBass();
-	void refreshBassLinearPhase(uint32_t frameCount);
+	void refreshBassLinearPhase(uint32_t actualframeCount);
 	void refreshEqBands();
 	void refreshReverb();
 	void refreshStereoWiden();
-	//    void refreshConvolver(uint32_t audioFrame);
-	void normalise(float** buffer, int num_frames);
-	inline void channel_split(int16_t* buffer, int num_frames, float** chan_buffers);
-	inline void channel_join(float** chan_buffers, int16_t* buffer, int num_frames);
+	void refreshConvolver(uint32_t actualframeCount);
+	void channel_split_Int32Imp(int32_t* buffer, int num_frames, float** chan_buffers, int channels, float normalise);
+	inline void channel_split(int16_t* buffer, int num_frames, float** chan_buffers)
+	{
+		int i;
+		int samples = num_frames * 2;
+		for (i = 0; i < samples; i++)
+		{
+			chan_buffers[(i % 2)][i / 2] = (float)((double)(buffer[i]) * 0.000030517578125);
+		}
+	}
+	inline void channel_join(float** chan_buffers, int16_t* buffer, int num_frames)
+	{
+		uint16_t i;
+		int samples = num_frames * 2;
+		if (!clipMode) {
+			for (i = 0; i < samples; i++)
+			{
+				buffer[i] = chan_buffers[i % 2][i / 2] * finalGain;
+				if (buffer[i] > 32767)
+					buffer[i] = 32767;
+				if (buffer[i] < -32768)
+					buffer[i] = -32768;
+			}
+		}
+		if (clipMode) {
+			for (i = 0; i < samples; i++)
+			{
+				buffer[i] = tanh(chan_buffers[i % 2][i / 2]) * finalGain;
+			}
+		}
+	}
 public:
 	EffectDSPMain();
 	~EffectDSPMain();

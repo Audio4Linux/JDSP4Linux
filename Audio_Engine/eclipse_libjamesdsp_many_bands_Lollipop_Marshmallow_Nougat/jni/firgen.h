@@ -31,57 +31,11 @@ void wKaiser(float w[], const int &N, float &Beta)
 	}
 	return;
 }
-float sincCal(float x)
-{
-	if (x > -1.0E-5 && x < 1.0E-5)return(1.0);
-	return(sinf(x) / x);
-}
-void wSinc(float w[], int &N, float &Beta)
-{
-	if (Beta < 0.0)Beta = 0.0;
-	if (Beta > 10.0)Beta = 10.0;
-	int i, M, dM, TopWidth;
-	TopWidth = (int)(0 * (float)N);
-	if (TopWidth % 2 != 0)TopWidth++;
-	if (TopWidth > N)TopWidth = N;
-	M = N - TopWidth;
-	dM = M + 1;
-	for (i = 0; i < M; i++) w[i] = sincCal((float)(2 * i + 1 - M) / dM * PI);
-	for (i = 0; i < M; i++) w[i] = pow(w[i], Beta);
-	return;
-}
 void wNone(float w[], const int &N)
 {
 	int i;
 	for (i = 0; i < N; i++) {
 		w[i] = 1.0f;
-	}
-	return;
-}
-void wBlackman(float w[], const int &N)
-{
-	int i;
-	const float M = N - 1;
-	for (i = 0; i < N; i++) {
-		w[i] = 0.42f - (0.5f * cos(2.0f*PI*(float)i / M)) + (0.08f*cos(4.0f*PI*(float)i / M));
-	}
-	return;
-}
-void wHanning(float w[], const int &N)
-{
-	int i;
-	const float M = N - 1;
-	for (i = 0; i < N; i++) {
-		w[i] = 0.5f * (1.0f - cos(2.0f*PI*(float)i / M));
-	}
-	return;
-}
-void wHamming(float w[], const int &N)
-{
-	int i;
-	const float M = N - 1;
-	for (i = 0; i < N; i++) {
-		w[i] = 0.54f - (0.46f*cos(2.0f*PI*(float)i / M));
 	}
 	return;
 }
@@ -108,23 +62,11 @@ void JfirLP(float h[], int &N, const int &WINDOW, const float &fc, float &Beta, 
 	float *sincfx = new float[N];
 	genSincFx(sincfx, N, fc);
 	switch (WINDOW) {
-	case 1:
+	case 0:
 		wNone(w, N);
 		break;
-	case 2:
-		wBlackman(w, N);
-		break;
-	case 3:
-		wHanning(w, N);
-		break;
-	case 4:
-		wHamming(w, N);
-		break;
-	case 5:
+	case 1:
 		wKaiser(w, N, Beta);
-		break;
-	case 6:
-		wSinc(w, N, Beta);
 		break;
 	default:
 		break;
@@ -140,9 +82,7 @@ void JfirHP(float h[], int &N, const int &WINDOW, const float &fc, float &Beta, 
 {
 	int i;
 	if (N % 2 == 0)
-	{
 		N += 1;
-	}
 	JfirLP(h, N, WINDOW, fc, Beta, gain);
 	for (i = 0; i < N; i++) {
 		h[i] *= -1.0;
@@ -154,9 +94,7 @@ void JfirBS(float h[], int &N, const int &WINDOW, const float &fc1, const float 
 {
 	int i;
 	if (N % 2 == 0)
-	{
 		N += 1;
-	}
 	float *h1 = new float[N];
 	float *h2 = new float[N];
 	JfirLP(h1, N, WINDOW, fc1, Beta, gain);

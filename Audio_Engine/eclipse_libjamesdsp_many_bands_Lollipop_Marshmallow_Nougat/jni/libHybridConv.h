@@ -45,33 +45,6 @@ typedef struct str_HConvSingle
 	fftwf_plan ifft;		// IFFT transformation plan
 } HConvSingle;
 
-
-typedef struct str_HConvDual
-{
-	int step;		// processing step counter
-	int maxstep;		// number of processing steps per long audio frame
-	int flen_long;		// number of samples per long audio frame
-	int flen_short;		// number of samples per short audio frame
-	float *in_long;		// input buffer (long frame)
-	float *out_long;	// output buffer (long frame)
-	HConvSingle *f_long;	// convolution filter (long segments)
-	HConvSingle *f_short;	// convolution filter (short segments)
-} HConvDual;
-
-
-typedef struct str_HConvTripple
-{
-	int step;		// processing step counter
-	int maxstep;		// number of processing steps per long audio frame
-	int flen_medium;	// number of samples per long audio frame
-	int flen_short;		// number of samples per short audio frame
-	float *in_medium;	// input buffer (long frame)
-	float *out_medium;	// output buffer (long frame)
-	HConvDual *f_medium;	// convolution filter (long segments)
-	HConvSingle *f_short;	// convolution filter (short segments)
-} HConvTripple;
-
-
 /* single filter functions */
 void hcPutSingle(HConvSingle *filter, float *x);
 void hcProcessSingle(HConvSingle *filter);
@@ -79,18 +52,5 @@ void hcGetSingle(HConvSingle *filter, float *y);
 void hcGetAddSingle(HConvSingle *filter, float *y);
 void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize);
 void hcCloseSingle(HConvSingle *filter);
-
-/* dual filter functions */
-void hcProcessDual(HConvDual *filter, float *in, float *out);
-void hcProcessAddDual(HConvDual *filter, float *in, float *out);
-void hcInitDual(HConvDual *filter, float *h, int hlen, int sflen, int lflen, int fftOptimize);
-void hcCloseDual(HConvDual *filter);
-
-/* tripple filter functions */
-void hcProcessTripple(HConvTripple *filter, float *in, float *out);
-void hcProcessAddTripple(HConvTripple *filter, float *in, float *out);
-void hcInitTripple(HConvTripple *filter, float *h, int hlen, int sflen, int mflen, int lflen, int fftOptimize);
-void hcCloseTripple(HConvTripple *filter);
-
 
 #endif // __LIBHYBRIDCONV_H__

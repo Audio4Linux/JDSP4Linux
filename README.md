@@ -7,13 +7,20 @@ We don't work too much around with modifying Android framework.
 
 1. Compression
 2. Bass Boost
+
    --> 4 order IIR and 1023/4095 order FIR linear phase low pass bass boost
 3. Reverberation
+
    --> GVerb and Progenitor 2
 4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves)(Different bands designed with different filter order)
 3. Virtualizer
 4. 12 Band Hybrid Equalizer (1 low shelf, 10 bands shelves, 1 high shelves)(Different bands designed with different filter order)
 5. Stereo Widen
+6. Convolver
+
+   --> Only support stereo
+   
+   --> Samples per channels should less than 500000
 
 ## Important
 ### FAQ
@@ -29,12 +36,7 @@ A: When effect strength going extreme, value will go beyond -1.0 / +1.0 range, t
    
    But using tanh() will change the waveform even signal is haven't clip.
 
-#### 3. What is the Normalisation?
-
-A: Prevent clipping with scaling down samples value a little bit.
-   This will only apply to the signal when samples in buffer larger than -1.0 / +1.0.
-
-#### 4. Bass boost filter type?
+#### 3. Bass boost filter type?
 
 A: Effect have 3 algorithms to boost low frequency, the first one is the traditional one from previous release, based on IIR Filter.
 
@@ -42,7 +44,7 @@ A: Effect have 3 algorithms to boost low frequency, the first one is the traditi
    
    4095 order FIR filter should work on all frequency listed on options, 1023 order should work well above 80Hz.
 
-#### 5. What is the Misc folder
+#### 4. What is the Misc folder
 
 File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap not stack, it will be useful when you play around with Visual Studio, because VS have 1Mb stack allocation limit...
 
@@ -54,7 +56,12 @@ A: This is the only way to full control all DSP effects...
 
 A: Because of fftw3 library linked.
 
-#### 6. Why no effect after installed?
+#### 7. Why open source? Any license?
+
+A: Audio effects actually is not hard to implement, I'm don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
+   This is published under GPLv2.
+
+#### 8. Why no effect after installed?
 
 A: Check step in release build ReadMe.txt.
    audio_effects.conf is file for system to load effect using known UUID, you can just add
@@ -82,26 +89,13 @@ A: Check step in release build ReadMe.txt.
    ```
 
 ##### On development:
-1. Loadable file convolver
-
-    -->Basically work same as FIR bass boost, load impulse response and do convolution...
-
-2. Parameterized Room Convolution
+1. Parameterized Room Convolution
 
 	-->May be I will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator]
 	(https://github.com/james34602/RIR-Generator)
 
-##### On development:
-1. Parameterized Room Convolution
-
-	-->May be I will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator](https://github.com/james34602/RIR-Generator)
-
-2.Linear phase bass boost
-
-##### Development completed but haven't published yet:
-1. Overlap-based convolution
-
-	-->Will be use libHybridConv as library, just like EqualizerAPO. Since my implementation on overlap-add convolution does not do any faster then others library, so I will use best performance library:)
+##### TODO:
+1. More optimization on all component (JAVA, Native)
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 
