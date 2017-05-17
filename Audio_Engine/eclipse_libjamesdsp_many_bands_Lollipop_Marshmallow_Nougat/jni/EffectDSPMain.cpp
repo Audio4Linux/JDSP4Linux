@@ -6,9 +6,17 @@
 #include "EffectDSPMain.h"
 #include "firgen.h"
 
+typedef struct {
+	int32_t status;
+	uint32_t psize;
+	uint32_t vsize;
+	int32_t cmd;
+	int32_t data;
+} reply1x4_1x4_t;
+
 EffectDSPMain::EffectDSPMain()
 	: pregainCom(0), threshold(-20.0f), knee(30.0f), ratio(12.0f), attack(0.003f), release(0.25f), predelay(0.05f), releasezone1(0.1f), releasezone2(0.15f), releasezone3(0.4f), releasezone4(0.95f), inputBuffer(0), mPreset(0), mReverbMode(1), roomSize(50.0f)
-	, fxreTime(0.5f), damping(0.5f), spread(50.0f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBosstLp(0), tapsLPFIR(1024), clipMode(0), tempImpulse(0), finalImpulse(0), convolverReady(0)
+	, fxreTime(0.5f), damping(0.5f), spread(50.0f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBosstLp(0), convolver(0), tapsLPFIR(1024), clipMode(0), tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(0)
 {
 }
 EffectDSPMain::~EffectDSPMain()
@@ -38,16 +46,18 @@ EffectDSPMain::~EffectDSPMain()
 			hcCloseSingle(&convolver[i]);
 		free(convolver);
 	}
-	if (tempImpulse)
-		free(tempImpulse);
 	if (finalImpulse)
 	{
-		for (uint32_t i = 0; i < NUMCHANNEL; i++)
+		for (uint32_t i = 0; i < impChannels; i++)
 			free(finalImpulse[i]);
 		free(finalImpulse);
 	}
+	if (tempImpulseInt32)
+		free(tempImpulseInt32);
+	if (tempImpulseFloat)
+		free(tempImpulseFloat);
 #ifdef DEBUG
-		LOGI("Free buffer");
+	LOGI("Free buffer");
 #endif
 }
 int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdData, uint32_t* replySize, void* pReplyData)
@@ -60,7 +70,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			*replyData = ret;
 			return 0;
 		}
-		if (inputBuffer == NULL)
+		if (!inputBuffer)
 		{
 			inputBuffer = (float**)malloc(sizeof(float*) * NUMCHANNEL);
 			for (uint32_t i = 0; i < NUMCHANNEL; i++)
@@ -75,23 +85,42 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 		*replyData = 0;
 		return 0;
 	}
-
+	if (cmdCode == EFFECT_CMD_GET_PARAM) {
+		effect_param_t *cep = (effect_param_t *)pCmdData;
+		int32_t *replyData = (int32_t *)pReplyData;
+		if (cep->psize == 4 && cep->vsize == 4) {
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 20000) {
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 20000;
+				replyData->data = (int32_t)mSamplingRate;
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+		}
+		if (cep->psize == 4 && cep->vsize == 4) {
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 20001) {
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 20001;
+				if (!convolver)
+					replyData->data = (int32_t)1;
+				else
+					replyData->data = (int32_t)0;
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+		}
+	}
 	if (cmdCode == EFFECT_CMD_SET_PARAM) {
 		effect_param_t *cep = (effect_param_t *)pCmdData;
 		int32_t *replyData = (int32_t *)pReplyData;
-		/*		if (cep->psize == 4 && cep->vsize == 16384) {
-		int32_t cmd = ((int32_t *)cep)[3];
-		if (cmd == 13000) {
-		short impReceived[8192];
-		LOGI("cep->vsize:%d",cep->vsize);
-		//for(unsigned int i = 0; i < cep->vsize; i++)
-		//	LOGI("Element %d: %d",i, ((int16_t *)cep)[i]);
-		memcpy(impReceived, ((int16_t *)cep)+8, 8192 * sizeof(int16_t));
-		for(unsigned int i = 0; i < 8192; i++)
-		LOGI("Element %d: %d",i, impReceived[i]);
-		LOGI("Array CMD received");
-		}
-		}*/
 		if (cep->psize == 4 && cep->vsize == 2) {
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 100) {
@@ -243,67 +272,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 115) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[0] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 116) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[1] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 117) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[2] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 118) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[3] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 119) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[4] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 120) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[5] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 121) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[6] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 122) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[7] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 123) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[8] = value / 100.0f;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 124) {
-				int16_t value = ((int16_t *)cep)[8];
-				mBand[9] = value / 100.0f;
-				refreshEqBands();
-				*replyData = 0;
-				return 0;
-			}
 			else if (cmd == 127) {
 				int16_t oldVal = mReverbMode;
 				mReverbMode = ((int16_t *)cep)[8];
@@ -432,37 +400,24 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1205) {
 				convolverEnabled = ((int16_t *)cep)[8];
-				if(!convolverEnabled) {
-					if (tempImpulse != NULL) {
-						free(tempImpulse);
-						tempImpulse = 0;
-#ifdef DEBUG
-						LOGI("Free impulse response!");
-#endif
-					}
-				}
 				*replyData = 0;
 				return 0;
 			}
 			else if (cmd == 10001) {
-				numTime2Send = ((int16_t *)cep)[8];
-				if (convolverEnabled) {
-					if (tempImpulse) {
-						free(tempImpulse);
-						tempImpulse = 0;
-					}
-					if (!tempImpulse) {
-						tempImpulse = (int32_t*)calloc(8192 * numTime2Send, sizeof(int32_t));
-#ifdef DEBUG
-						LOGI("tempImpulse Allocated::Total:%d", 8192 * numTime2Send);
-#endif
-					}
-				}
+				impChannels = ((int16_t *)cep)[8];
 				*replyData = 0;
 				return 0;
 			}
 			else if (cmd == 10002) {
-				impChannels = ((int16_t *)cep)[8];
+				numTime2Send = ((int16_t *)cep)[8];
+				if (convolverEnabled) {
+					if (tempImpulseInt32) {
+						free(tempImpulseInt32);
+						tempImpulseInt32 = 0;
+					}
+					if (!tempImpulseInt32)
+						tempImpulseInt32 = (int32_t*)calloc(4096 * impChannels * numTime2Send, sizeof(int32_t));
+				}
 				*replyData = 0;
 				return 0;
 			}
@@ -480,26 +435,29 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						free(finalImpulse);
 						finalImpulse = 0;
 					}
-#ifdef DEBUG
-						LOGI("Checkpoint");
-#endif
 					if (!finalImpulse) {
-						finalImpulse = (float**)malloc(sizeof(float*) * impChannels);
-						for (uint32_t i = 0; i < impChannels; i++)
-							finalImpulse[i] = (float*)malloc(impulseLengthActual * sizeof(float));
-#ifdef DEBUG
-						LOGI("Float imp buffer allocated Actual size:%d", impulseLengthActual);
-#endif
-						channel_split_Int32Imp(tempImpulse, impulseLengthActual, finalImpulse, impChannels, 0.085f);
-#ifdef DEBUG
-						LOGI("Channel split:Channel count:%d", impChannels);
-#endif
-					LOGI("deleting tempImpulse");
-					free(tempImpulse);
-					tempImpulse = 0;
-					convolverReady = 0;
+						unsigned i, j;
+						int tempbufValue = 4096 * impChannels * numTime2Send;
+						tempImpulseFloat = (float*)malloc(tempbufValue * sizeof(float));
+						for (i = 0; i < tempbufValue; i++)
+							tempImpulseFloat[i] = ((float)((double)((int32_t)(tempImpulseInt32[i])) * 0.0000000004656612873077392578125));
+						normalize(tempImpulseFloat, tempbufValue, 0.065f);
+						free(tempImpulseInt32);
+						tempImpulseInt32 = 0;
+						finalImpulse = (float**)malloc(impChannels * sizeof(float*));
+						for (i = 0; i < impChannels; i++)
+						{
+							float* channelbuf = (float*)malloc(impulseLengthActual * sizeof(float));
+							float* p = tempImpulseFloat + i;
+							for (j = 0; j < impulseLengthActual; j++)
+							{
+								channelbuf[j] = p[j * impChannels];
+							}
+							finalImpulse[i] = channelbuf;
+						}
+						convolverReady = 0;
+					}
 				}
-			}
 				*replyData = 0;
 				return 0;
 			}
@@ -516,7 +474,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				return 0;
 			}
 		}
-		if (cep->psize == 4 && cep->vsize == 4) { // Receive int32_t
+		if (cep->psize == 4 && cep->vsize == 4) {
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 10000) {
 				impulseLengthActual = ((int32_t *)cep)[4];
@@ -524,11 +482,22 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				return 0;
 			}
 		}
-		if (cep->psize == 4 && cep->vsize == 16384) { // Receive int32_t array
+		if (cep->psize == 4 && cep->vsize == 40) {
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 115) {
+				int mBandTemp[NUM_BANDS];
+				memcpy(mBandTemp, ((int32_t *)cep) + 4, NUM_BANDS * sizeof(int32_t));
+				for (int i = 0; i < 10; i++)
+					mBand[i] = mBandTemp[i] * 0.0001f;
+				refreshEqBands();
+				return 0;
+			}
+		}
+		if (cep->psize == 4 && cep->vsize == 16384) {
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 12000) {
-			memcpy(tempImpulse+(samplesInc*4096), ((int32_t *)cep)+4, 4096 * sizeof(int32_t));
-			return 0;
+				memcpy(tempImpulseInt32 + (samplesInc * 4096), ((int32_t *)cep) + 4, 4096 * sizeof(int32_t));
+				return 0;
 			}
 		}
 		return -1;
@@ -645,7 +614,7 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t actualframeCount)
 }
 void EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 {
-	if(!finalImpulse)
+	if (!finalImpulse)
 		return;
 #ifdef DEBUG
 	LOGI("refreshConvolver::IR channel count:%d, IR frame count:%d, Audio buffer size:%d", impChannels, impulseLengthActual, actualframeCount);
@@ -665,14 +634,16 @@ void EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 		}
 		if (finalImpulse)
 		{
-			for (uint32_t i = 0; i < NUMCHANNEL; i++)
+			for (uint32_t i = 0; i < impChannels; i++)
 				free(finalImpulse[i]);
 			free(finalImpulse);
 			finalImpulse = 0;
+			free(tempImpulseFloat);
+			tempImpulseFloat = 0;
 		}
 		convolverReady = 1;
 #ifdef DEBUG
-	LOGI("Convolver allocate complete");
+		LOGI("Convolver allocate complete");
 #endif
 	}
 }
@@ -783,16 +754,18 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 	}
 	if (convolverEnabled) {
 		if (convolverReady) {
-				hcPutSingle(&convolver[0], inputBuffer[0]);
-				hcPutSingle(&convolver[1], inputBuffer[1]);
-				hcProcessSingle(&convolver[0]);
-				hcProcessSingle(&convolver[1]);
-				hcGetSingle(&convolver[0], outputBuffer[0]);
-				hcGetSingle(&convolver[1], outputBuffer[1]);
-				for (unsigned j = 0; j < in->frameCount; j++) {
-					inputBuffer[0][j] = outputBuffer[0][j];
-					inputBuffer[1][j] = outputBuffer[1][j];
-				}
+			hcPutSingle(&convolver[0], inputBuffer[0]);
+			hcPutSingle(&convolver[1], inputBuffer[1]);
+			hcProcessSingle(&convolver[0]);
+			hcProcessSingle(&convolver[1]);
+			hcGetSingle(&convolver[0], outputBuffer[0]);
+			hcGetSingle(&convolver[1], outputBuffer[1]);
+			memcpy(inputBuffer[0], outputBuffer[0], in->frameCount * sizeof(float));
+			memcpy(inputBuffer[1], outputBuffer[1], in->frameCount * sizeof(float));
+			/*			for (unsigned j = 0; j < in->frameCount; j++) {
+			inputBuffer[0][j] = outputBuffer[0][j];
+			inputBuffer[1][j] = outputBuffer[1][j];
+			}*/
 		}
 		else
 			refreshConvolver(in->frameCount);
@@ -813,23 +786,18 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 		channel_join(inputBuffer, out->s16, in->frameCount);
 	return mEnable ? 0 : -ENODATA;
 }
-void EffectDSPMain::channel_split_Int32Imp(int32_t* buffer, int num_frames, float** chan_buffers, int channels, float normalise)
+void EffectDSPMain::normalize(float* buffer, int num_samps, float maxval)
 {
 	int i;
 	float loudest_sample = 0.0;
 	float multiplier = 0.0;
-	int samples = num_frames * channels;
-	for (i = 0; i < samples; i++)
+	for (i = 0; i < num_samps; i++)
 	{
-		chan_buffers[(i % 2)][i / 2] = ((float) ((double) ((int32_t) (buffer[i])) * 0.0000000004656612873077392578125));
+		if (fabsf(buffer[i]) > loudest_sample) loudest_sample = buffer[i];
 	}
-	for (i = 0; i < samples; i++)
+	multiplier = maxval / loudest_sample;
+	for (i = 0; i < num_samps; i++)
 	{
-		if (fabsf(chan_buffers[(i % 2)][i / 2]) > loudest_sample) loudest_sample = chan_buffers[(i % 2)][i / 2];
-	}
-	multiplier = normalise / loudest_sample;
-	for (i = 0; i < samples; i++)
-	{
-		chan_buffers[(i % 2)][i / 2] *= multiplier;
+		buffer[i] *= multiplier;
 	}
 }

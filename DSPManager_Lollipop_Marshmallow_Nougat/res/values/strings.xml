@@ -10,6 +10,7 @@
     <string name="pref_dsp_summary_on">Master audio is enabled</string>
     <string name="pref_dsp_summary_off">Master audio is disabled</string>
     <string name="pref_dsp_enable">Master switch</string>
+    <string name="dspcrashed">DSP module crashed</string>
     <string name="pref_compression_title">Dynamic range compression</string>
     <string name="pref_compression_summary_on">Compression is enabled</string>
     <string name="pref_compression_summary_off">Compression is disabled</string>
@@ -60,7 +61,12 @@
     <string name="pref_convolver_summary_off">Convolver is disabled</string>
     <string name="pref_convolver_enable">Convolver enable</string>
     <string name="dialog_impulseresponse">Impulse response</string>
+    <string name="dialog_quality">Impulse quality</string>
     <string name="text_ir_dir_isempty">IR sample directory %1$s is empty.</string>
+    <string name="impfilefault">Load impulse failed\nPlease choose right impulse response file!</string>
+    <string name="unmatchedsamplerate">Impulse response %1$s sample rate (%2$d) is not matching with native driver sample rate(%3$d)</string>
+    <string name="convolversuccess">Impulse response %1$s loaded\nSample rate:%2$d\nTotal channels:%3$d\nSamples per channel:%4$d\nSamples per channel(Truncated):%5$d</string>
+    <string name="memoryallocatefail">Cannot allocate memory for convolver</string>
     <string name="pref_clip_title">Clip control</string>
     <string name="dialog_gain">Final gain</string>
     <string name="pref_headset_stereowide_title">Stereo widener</string>

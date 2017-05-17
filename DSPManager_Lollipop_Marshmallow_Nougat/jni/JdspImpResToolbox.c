@@ -48,15 +48,8 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
         sf_close(sfIRFile);
         return NULL;
     }
-    sf_count_t mReadFrames = sf_readf_int(sfIRFile, pFrameBuffer, sfiIRInfo.frames);
+    sf_readf_int(sfIRFile, pFrameBuffer, sfiIRInfo.frames);
     sf_close(sfIRFile);
-
-    // Sanity check
-    if (mReadFrames != sfiIRInfo.frames) {
-        free(pFrameBuffer);
-        return NULL;
-    }
-
     // Prepare return array
     jsize jsFrameBufferSize = sfiIRInfo.frames * sfiIRInfo.channels;
     jintArray outbuf = (*env)->NewIntArray(env, jsFrameBufferSize);

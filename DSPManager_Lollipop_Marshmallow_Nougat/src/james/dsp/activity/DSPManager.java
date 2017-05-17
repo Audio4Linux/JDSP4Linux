@@ -1,6 +1,4 @@
 package james.dsp.activity;
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;

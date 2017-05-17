@@ -1,5 +1,7 @@
 package james.dsp.service;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothA2dp;
@@ -9,11 +11,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
+import james.dsp.R;
 import james.dsp.activity.DSPManager;
 
 import java.lang.reflect.Method;
@@ -39,13 +45,12 @@ public class HeadsetService extends Service {
 	*
 	* @author alankila
 	*/
-	private static int sendArray[];
-	private static int arraySize2Send = 4096;
-	protected static class EffectSet {
-		private static final UUID EFFECT_TYPE_VOLUME = UUID.fromString("09e8ede0-ddde-11db-b4f6-0002a5d5c51b");
-		private static final UUID EFFECT_TYPE_NULL = UUID.fromString("ec7178ec-e5e1-4432-a3f4-4657e6795210");
+	Bitmap iconLarge;
+	private class JDSPModule {
+		private final UUID EFFECT_TYPE_NULL = UUID.fromString("ec7178ec-e5e1-4432-a3f4-4657e6795210");
+		private final UUID EFFECT_JAMESDSP = UUID.fromString("f27317f4-c984-4de6-9a90-545759495bf2");
 		public AudioEffect JamesDSP;
-		protected EffectSet(int sessionId) {
+		public JDSPModule(int sessionId) {
 			try {
 				/*
 				* AudioEffect constructor is not part of SDK. We use reflection
@@ -53,18 +58,27 @@ public class HeadsetService extends Service {
 				*/
 				JamesDSP = AudioEffect.class.getConstructor(UUID.class,
 					UUID.class, Integer.TYPE, Integer.TYPE).newInstance(
-						EFFECT_TYPE_VOLUME, EFFECT_TYPE_NULL, 0, sessionId);
+						EFFECT_TYPE_NULL, EFFECT_JAMESDSP, 0, sessionId);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e);
 			}
-			sendArray = new int[arraySize2Send];
+			if (JamesDSP != null) {
+				AudioEffect.Descriptor dspDescriptor = JamesDSP.getDescriptor();
+				if (dspDescriptor.uuid.equals(EFFECT_JAMESDSP))
+					Toast.makeText(HeadsetService.this, "Effect name: " + dspDescriptor.name + "\nType id: " + dspDescriptor.type
+						+ "\nUnique id: " + dspDescriptor.uuid + "\nImplementor: " + dspDescriptor.implementor
+						+ "\nConnect mode: " + dspDescriptor.connectMode, Toast.LENGTH_SHORT).show();
+				else
+					Toast.makeText(HeadsetService.this, "Effect load failed!\nTry re-enable audio effect in current player!", Toast.LENGTH_SHORT).show();
+			}
 		}
 
-		protected void release() {
+		public void release() {
 			JamesDSP.release();
 		}
-		private static byte[] ShortToByte(short[] input)
+
+		private byte[] ShortToByte(short[] input)
 		{
 			int short_index, byte_index;
 			int iterations = input.length;
@@ -83,7 +97,7 @@ public class HeadsetService extends Service {
 
 			return buffer;
 		}
-		private static byte[] IntToByte(int[] input)
+		private byte[] IntToByte(int[] input)
 		{
 			int int_index, byte_index;
 			int iterations = input.length;
@@ -104,6 +118,13 @@ public class HeadsetService extends Service {
 
 			return buffer;
 		}
+		private int byteArrayToInt(byte[] encodedValue) {
+			int value = (encodedValue[3] << 24);
+			value |= (encodedValue[2] & 0xFF) << 16;
+			value |= (encodedValue[1] & 0xFF) << 8;
+			value |= (encodedValue[0] & 0xFF);
+			return value;
+		}
 		/**
 		* Proxies call to AudioEffect.setParameterShort(byte[], byte[]) which is
 		* available via reflection.
@@ -112,22 +133,7 @@ public class HeadsetService extends Service {
 		* @param parameter
 		* @param value
 		*/
-		private static void setParameterShortArray(AudioEffect audioEffect, int parameter, short value[]) {
-			try {
-				byte[] arguments = new byte[]{
-					(byte)(parameter), (byte)(parameter >> 8),
-					(byte)(parameter >> 16), (byte)(parameter >> 24)
-				};
-				byte[] result = ShortToByte(value);
-
-				Method setParameter = AudioEffect.class.getMethod("setParameter", byte[].class, byte[].class);
-				setParameter.invoke(audioEffect, arguments, result);
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-		private static void setParameterIntArray(AudioEffect audioEffect, int parameter, int value[]) {
+		private void setParameterIntArray(AudioEffect audioEffect, int parameter, int value[]) {
 			try {
 				byte[] arguments = new byte[]{
 					(byte)(parameter), (byte)(parameter >> 8),
@@ -142,7 +148,22 @@ public class HeadsetService extends Service {
 				throw new RuntimeException(e);
 			}
 		}
-		private static void setParameterInt(AudioEffect audioEffect, int parameter, int value) {
+		private int getParameter(AudioEffect audioEffect, int parameter) {
+			try {
+				byte[] arguments = new byte[]{
+					(byte)(parameter), (byte)(parameter >> 8),
+					(byte)(parameter >> 16), (byte)(parameter >> 24)
+				};
+				byte[] result = new byte[4];
+				Method getParameter = AudioEffect.class.getMethod("getParameter", byte[].class, byte[].class);
+				getParameter.invoke(audioEffect, arguments, result);
+				return byteArrayToInt(result);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		private void setParameterInt(AudioEffect audioEffect, int parameter, int value) {
 			try {
 				byte[] arguments = new byte[]{
 					(byte)(parameter), (byte)(parameter >> 8),
@@ -160,7 +181,7 @@ public class HeadsetService extends Service {
 				throw new RuntimeException(e);
 			}
 		}
-		private static void setParameterShort(AudioEffect audioEffect, int parameter, short value) {
+		private void setParameterShort(AudioEffect audioEffect, int parameter, short value) {
 			try {
 				byte[] arguments = new byte[]{
 					(byte)(parameter), (byte)(parameter >> 8),
@@ -179,8 +200,6 @@ public class HeadsetService extends Service {
 		}
 	}
 
-	private static final String TAG = DSPManager.TAG;
-
 	public class LocalBinder extends Binder {
 		public HeadsetService getService() {
 			return HeadsetService.this;
@@ -192,23 +211,30 @@ public class HeadsetService extends Service {
 	/**
 	* Known audio sessions and their associated audioeffect suites.
 	*/
-	protected final Map<Integer, EffectSet> mAudioSessions = new HashMap<Integer, EffectSet>();
+	protected final Map<Integer, JDSPModule> mAudioSessions = new HashMap<Integer, JDSPModule>();
 
 	/**
 	* Is a wired headset plugged in?
 	*/
-	protected static boolean mUseHeadset;
+	private static boolean mUseHeadset;
 
 	/**
 	* Is bluetooth headset plugged in?
 	*/
-	protected static boolean mUseBluetooth;
+	private static boolean mUseBluetooth;
 
 	/**
 	* Has DSPManager assumed control of equalizer levels?
 	*/
 	private float[] mOverriddenEqualizerLevels;
 
+	private String mConvIRFileName;
+	private String oldmConvIRFileName;
+	long[] impinfo;
+	long[] oldimpinfo;
+	float quality;
+	float oldquality;
+	int[] eqLevels = new int[10];
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
@@ -219,11 +245,11 @@ public class HeadsetService extends Service {
 		int sessionId = intent.getIntExtra(AudioEffect.EXTRA_AUDIO_SESSION, 0);
 		if (action.equals(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)) {
 			if (!mAudioSessions.containsKey(sessionId)) {
-				mAudioSessions.put(sessionId, new EffectSet(sessionId));
+				mAudioSessions.put(sessionId, new JDSPModule(sessionId));
 			}
 		}
 		if (action.equals(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION)) {
-			EffectSet gone = mAudioSessions.remove(sessionId);
+			JDSPModule gone = mAudioSessions.remove(sessionId);
 			if (gone != null) {
 				gone.release();
 			}
@@ -231,7 +257,6 @@ public class HeadsetService extends Service {
 		updateDsp();
 	}
 	};
-
 	/**
 	* Update audio parameters when preferences have been updated.
 	*/
@@ -289,7 +314,25 @@ public class HeadsetService extends Service {
 		}
 	}
 	};
-
+	private void foregroundPersistent(String mFXType) {
+		int mIconIDSmall = getResources().getIdentifier("ic_stat_icon", "drawable", getApplicationInfo().packageName);
+		Intent notificationIntent = new Intent(this, DSPManager.class);
+		PendingIntent contentItent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+		Notification statusNotify = new Notification.Builder(this)
+			.setPriority(Notification.PRIORITY_MIN)
+			.setAutoCancel(false)
+			.setOngoing(true)
+			.setDefaults(0)
+			.setWhen(System.currentTimeMillis())
+			.setSmallIcon(mIconIDSmall)
+			.setLargeIcon(iconLarge)
+			.setTicker("JamesDSP " + mFXType)
+			.setContentTitle("JamesDSP")
+			.setContentText(mFXType)
+			.setContentIntent(contentItent)
+			.getNotification();
+		startForeground(1, statusNotify);
+	}
 	@Override
 		public void onCreate() {
 		super.onCreate();
@@ -302,13 +345,14 @@ public class HeadsetService extends Service {
 		final IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_HEADSET_PLUG);
 		registerReceiver(mRoutingReceiver, intentFilter);
 
-		registerReceiver(mPreferenceUpdateReceiver,
-			new IntentFilter(DSPManager.ACTION_UPDATE_PREFERENCES));
+		registerReceiver(mPreferenceUpdateReceiver, new IntentFilter(DSPManager.ACTION_UPDATE_PREFERENCES));
 
 		final IntentFilter btFilter = new IntentFilter();
 		btFilter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
 		btFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
 		registerReceiver(mBtReceiver, btFilter);
+		iconLarge = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+		updateDsp();
 	}
 
 	@Override
@@ -318,6 +362,7 @@ public class HeadsetService extends Service {
 		unregisterReceiver(mAudioSessionReceiver);
 		unregisterReceiver(mRoutingReceiver);
 		unregisterReceiver(mPreferenceUpdateReceiver);
+		stopForeground(true);
 	}
 
 	@Override
@@ -376,8 +421,13 @@ public class HeadsetService extends Service {
 	*/
 	protected void updateDsp() {
 		final String mode = getAudioOutputRouting();
-		SharedPreferences preferences =
-			getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + mode, 0);
+		SharedPreferences preferences = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + mode, 0);
+		if (mode == "bluetooth")
+			foregroundPersistent(getString(R.string.bluetooth_title));
+		else if (mode == "headset")
+			foregroundPersistent(getString(R.string.headset_title));
+		else
+			foregroundPersistent(getString(R.string.speaker_title));
 
 		for (Integer sessionId : new ArrayList<Integer>(mAudioSessions.keySet())) {
 			try {
@@ -389,108 +439,123 @@ public class HeadsetService extends Service {
 		}
 	}
 
-	private void updateDsp(SharedPreferences preferences, EffectSet session) {
+	private void updateDsp(SharedPreferences preferences, JDSPModule session) {
 		session.JamesDSP.setEnabled(preferences.getBoolean("dsp.masterswitch.enable", false)); // Master switch
-		int compressorEnabled = (preferences.getBoolean("dsp.compression.enable", false) ? 1 : 0);
-		int bassBoostEnabled = (preferences.getBoolean("dsp.bass.enable", false) ? 1 : 0);
-		int equalizerEnabled = (preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0);
-		int reverbEnabled = (preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0);
-		int stereoEnabled = (preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0);
-		EffectSet.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.clipmode", "1")));
-		EffectSet.setParameterShort(session.JamesDSP, 1501, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
+		int compressorEnabled = preferences.getBoolean("dsp.compression.enable", false) ? 1 : 0;
+		int bassBoostEnabled = preferences.getBoolean("dsp.bass.enable", false) ? 1 : 0;
+		int equalizerEnabled = preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0;
+		int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
+		int stereoEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
+		int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
+		int dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
+		if (dspModuleSamplingRate == 0)
+			Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
+		session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.clipmode", "1")));
+		session.setParameterShort(session.JamesDSP, 1501, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
 		if (compressorEnabled == 1)
 		{
-			EffectSet.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "0")));
-			EffectSet.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "20")));
-			EffectSet.setParameterShort(session.JamesDSP, 102, Short.valueOf(preferences.getString("dsp.compression.knee", "30")));
-			EffectSet.setParameterShort(session.JamesDSP, 103, Short.valueOf(preferences.getString("dsp.compression.ratio", "12")));
-			EffectSet.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "30")));
-			EffectSet.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "250")));
-			EffectSet.setParameterShort(session.JamesDSP, 106, Short.valueOf(preferences.getString("dsp.compression.predelay", "60")));
-			EffectSet.setParameterShort(session.JamesDSP, 107, Short.valueOf(preferences.getString("dsp.compression.releasezone1", "100")));
-			EffectSet.setParameterShort(session.JamesDSP, 108, Short.valueOf(preferences.getString("dsp.compression.releasezone2", "150")));
-			EffectSet.setParameterShort(session.JamesDSP, 109, Short.valueOf(preferences.getString("dsp.compression.releasezone3", "400")));
-			EffectSet.setParameterShort(session.JamesDSP, 110, Short.valueOf(preferences.getString("dsp.compression.releasezone4", "950")));
-			EffectSet.setParameterShort(session.JamesDSP, 111, Short.valueOf(preferences.getString("dsp.compression.postgain", "0")));
+			session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "0")));
+			session.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "20")));
+			session.setParameterShort(session.JamesDSP, 102, Short.valueOf(preferences.getString("dsp.compression.knee", "30")));
+			session.setParameterShort(session.JamesDSP, 103, Short.valueOf(preferences.getString("dsp.compression.ratio", "12")));
+			session.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "30")));
+			session.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "250")));
+			session.setParameterShort(session.JamesDSP, 106, Short.valueOf(preferences.getString("dsp.compression.predelay", "60")));
+			session.setParameterShort(session.JamesDSP, 107, Short.valueOf(preferences.getString("dsp.compression.releasezone1", "100")));
+			session.setParameterShort(session.JamesDSP, 108, Short.valueOf(preferences.getString("dsp.compression.releasezone2", "150")));
+			session.setParameterShort(session.JamesDSP, 109, Short.valueOf(preferences.getString("dsp.compression.releasezone3", "400")));
+			session.setParameterShort(session.JamesDSP, 110, Short.valueOf(preferences.getString("dsp.compression.releasezone4", "950")));
+			session.setParameterShort(session.JamesDSP, 111, Short.valueOf(preferences.getString("dsp.compression.postgain", "0")));
 		}
-		EffectSet.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
+		session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
 		if (bassBoostEnabled == 1)
 		{
-			EffectSet.setParameterShort(session.JamesDSP, 112, Short.valueOf(preferences.getString("dsp.bass.mode", "80")));
-			EffectSet.setParameterShort(session.JamesDSP, 113, Short.valueOf(preferences.getString("dsp.bass.slope", "0")));
-			EffectSet.setParameterShort(session.JamesDSP, 114, Short.valueOf(preferences.getString("dsp.bass.freq", "55")));
+			session.setParameterShort(session.JamesDSP, 112, Short.valueOf(preferences.getString("dsp.bass.mode", "80")));
+			session.setParameterShort(session.JamesDSP, 113, Short.valueOf(preferences.getString("dsp.bass.slope", "0")));
+			session.setParameterShort(session.JamesDSP, 114, Short.valueOf(preferences.getString("dsp.bass.freq", "55")));
 		}
-		EffectSet.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
+		session.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
 		if (equalizerEnabled == 1)
 		{
 			/* Equalizer state is in a single string preference with all values separated by ; */
 			if (mOverriddenEqualizerLevels != null) {
-				for (short i = 0; i < mOverriddenEqualizerLevels.length; i++) {
-					EffectSet.setParameterShort(session.JamesDSP, 115 + i, (short)Math.round(mOverriddenEqualizerLevels[i] * 100));
-				}
+				for (short i = 0; i < mOverriddenEqualizerLevels.length; i++)
+					eqLevels[i] = Math.round(mOverriddenEqualizerLevels[i] * 10000);
 			}
 			else {
 				String[] levels = preferences.getString("dsp.tone.eq.custom", "0;0;0;0;0;0;0;0;0;0").split(";");
-				for (short i = 0; i < levels.length; i++) {
-					EffectSet.setParameterShort(session.JamesDSP, 115 + i, (short)Math.round(Float.valueOf(levels[i]) * 100));
+				for (short i = 0; i < levels.length; i++)
+					eqLevels[i] = Math.round(Float.valueOf(levels[i]) * 10000);
+			}
+			session.setParameterIntArray(session.JamesDSP, 115, eqLevels);
+		}
+		session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
+		if (reverbEnabled == 1)
+		{
+			session.setParameterShort(session.JamesDSP, 127, Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1")));
+			session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
+			session.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "50")));
+			session.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "50")));
+			session.setParameterShort(session.JamesDSP, 131, Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
+			session.setParameterShort(session.JamesDSP, 132, Short.valueOf(preferences.getString("dsp.headphone.spread", "50")));
+			session.setParameterShort(session.JamesDSP, 133, Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
+			session.setParameterShort(session.JamesDSP, 134, Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
+			session.setParameterShort(session.JamesDSP, 135, Short.valueOf(preferences.getString("dsp.headphone.tailverb", "50")));
+		}
+		session.setParameterShort(session.JamesDSP, 1203, (short)reverbEnabled); // Reverb switch
+		if (stereoEnabled == 1)
+			session.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
+		session.setParameterShort(session.JamesDSP, 1204, (short)stereoEnabled); // Stereo widener switch
+																				 // Convolver section
+		session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
+		if (convolverEnabled == 1)
+		{
+			int convolverNativeNullBuff = session.getParameter(session.JamesDSP, 20001);
+			oldmConvIRFileName = mConvIRFileName;
+			mConvIRFileName = preferences.getString("dsp.convolver.files", "");
+			oldimpinfo = impinfo;
+			impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFileName);
+			if (impinfo == null)
+				Toast.makeText(HeadsetService.this, R.string.impfilefault, Toast.LENGTH_SHORT).show();
+			else {
+				if (impinfo[2] != dspModuleSamplingRate)
+					Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFileName, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_LONG).show();
+				else {
+					oldquality = quality;
+					quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
+					if (!(oldmConvIRFileName == mConvIRFileName && oldimpinfo[1] == impinfo[1]) || convolverNativeNullBuff == 1 || oldquality != quality) {
+						int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt();
+						if (impulseResponse == null)
+							Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_LONG).show();
+						else {
+							int arraySize2Send = 4096;
+							int impulseCutted = (int)(impulseResponse.length * quality);
+							int[] sendArray = new int[arraySize2Send];
+							int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
+							session.setParameterInt(session.JamesDSP, 10000, impulseCutted); // Send length of actually impulse response
+							session.setParameterShort(session.JamesDSP, 10001, (short)impinfo[0]);
+							session.setParameterShort(session.JamesDSP, 10002, (short)numTime2Send);
+							int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
+							System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
+							for (int i = 0; i < numTime2Send; i++) {
+								System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
+								session.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
+								session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
+							}
+							session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
+							if (impinfo[0] == 2)
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted / 2), Toast.LENGTH_LONG).show();
+							else
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted), Toast.LENGTH_LONG).show();
+						}
+					}
 				}
 			}
 		}
-		EffectSet.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
-		if (reverbEnabled == 1)
+		else
 		{
-			EffectSet.setParameterShort(session.JamesDSP, 127, Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1")));
-			EffectSet.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
-			EffectSet.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "50")));
-			EffectSet.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "50")));
-			EffectSet.setParameterShort(session.JamesDSP, 131, Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
-			EffectSet.setParameterShort(session.JamesDSP, 132, Short.valueOf(preferences.getString("dsp.headphone.spread", "50")));
-			EffectSet.setParameterShort(session.JamesDSP, 133, Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
-			EffectSet.setParameterShort(session.JamesDSP, 134, Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
-			EffectSet.setParameterShort(session.JamesDSP, 135, Short.valueOf(preferences.getString("dsp.headphone.tailverb", "50")));
-		}
-		EffectSet.setParameterShort(session.JamesDSP, 1203, (short)reverbEnabled); // Reverb switch
-		if (stereoEnabled == 1)
-			EffectSet.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
-		EffectSet.setParameterShort(session.JamesDSP, 1204, (short)stereoEnabled); // Stereo widener switch
-		// Convolver section
-		EffectSet.setParameterShort(session.JamesDSP, 1205, (short)(preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0)); // Convolver switch
-		if((preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0) == 1) {
-            String mConvIRFileName = preferences.getString("dsp.convolver.files", "");
-            Log.i(DSPManager.TAG, "Impulse response name:" + mConvIRFileName);
-			long[] info = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFileName);
-			if(info == null)
-				Log.w(DSPManager.TAG, "Could not load impulse response file!");
-			else {
-				int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt();
-			if(info[0]*info[1] != impulseResponse.length)
-				Log.w(DSPManager.TAG, "Error occur with size check! info[0]*info[1]:"+info[0]*info[1]+" impulseResponse.length:"+impulseResponse.length);
-			else {
-				Log.w(DSPManager.TAG, "Impulse loaded to Java side! Impulse response length:"+impulseResponse.length);
-			EffectSet.setParameterInt(session.JamesDSP, 10000, impulseResponse.length); // Send length of actually impulse response
-				int numTime2Send = (int) Math.ceil((double)impulseResponse.length / arraySize2Send); // Send number of times that have to send
-				EffectSet.setParameterShort(session.JamesDSP, 10001, (short)numTime2Send);
-				EffectSet.setParameterShort(session.JamesDSP, 10002, (short)info[0]);
-				int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
-				for(int i = 0; i < impulseResponse.length; i++)
-					finalArray[i] = impulseResponse[i];
-				int consumedElements = 0;
-				for(int i = 0; i < numTime2Send; i++) {
-					for(int j = 0; j < arraySize2Send; j++) {
-						sendArray[j] = finalArray[consumedElements];
-						consumedElements++;
-					}
-					EffectSet.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
-					EffectSet.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
-				}
-				EffectSet.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
-		}
-		}
-		}
-		else {
-			Log.i(DSPManager.TAG, "Convolver disabled!");
-			EffectSet.setParameterShort(session.JamesDSP, 10002, (short) 0); // Reset counter
-			EffectSet.setParameterShort(session.JamesDSP, 10003, (short) 0); // Notify status
+			session.setParameterShort(session.JamesDSP, 10002, (short)0); // Reset counter
+			session.setParameterShort(session.JamesDSP, 10003, (short)0); // Notify status
 		}
 	}
 }
