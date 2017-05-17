@@ -1,4 +1,4 @@
-# JamesDSPManager (Audio Effect Digital Signal Proccessing library for Android)
+# JamesDSPManager (Audio Effect Digital Signal Processing library for Android)
 GUI is based on Omnirom DSP Manager and able to run in all recent Android rom include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 We don't work too much around with modifying Android framework.
@@ -18,7 +18,7 @@ We don't work too much around with modifying Android framework.
 5. Stereo Widen
 6. Convolver
 
-   --> Only support stereo
+   --> Only support mono / stereo
    
    --> Samples per channels should less than 500000
 
