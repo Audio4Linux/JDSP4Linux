@@ -13,9 +13,8 @@ We don't work too much around with modifying Android framework.
 
    --> GVerb and Progenitor 2
 4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves)(Different bands designed with different filter order)
-5. Virtualizer
-6. Stereo Widen
-7. Convolver
+5. Stereo Widen
+6. Convolver
 
    --> Only support mono / stereo
    
