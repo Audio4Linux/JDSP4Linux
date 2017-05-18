@@ -42,24 +42,32 @@ A: Effect have 3 algorithms to boost low frequency, the first one is the traditi
    
    4095 order FIR filter should work on all frequency listed on options, 1023 order should work well above 80Hz.
 
-#### 4. What is the Misc folder
+#### 4. What is convolver?
+
+A: Convolver is a effect apply convolution mathematical operation on audio signal, that perfectly apply user desired impulse response on music, it could simulate physical space.
+
+   Effect itself require audio file(.wav) to become impulse response source.
+
+   For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
+
+#### 5. What is Misc folder does?
 
 File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap not stack, it will be useful when you play around with Visual Studio, because VS have 1Mb stack allocation limit...
 
-#### 5. Why you change the Effect structure?
+#### 6. Why you change the Effect structure?
 
 A: This is the only way to full control all DSP effects...
 
-#### 6. Why libjamesdsp.so so big?
+#### 7. Why libjamesdsp.so so big?
 
 A: Because of fftw3 library linked.
 
-#### 7. Why open source? Any license?
+#### 8. Why open source? Any license?
 
-A: Audio effects actually is not hard to implement, I'm don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
+A: Audio effects actually is not hard to implement, I don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
    This is published under GPLv2.
 
-#### 8. Why no effect after installed?
+#### 9. Why no effect after installed?
 
 A: Check step in release build ReadMe.txt.
    audio_effects.conf is file for system to load effect using known UUID, you can just add
