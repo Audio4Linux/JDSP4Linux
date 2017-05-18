@@ -18,7 +18,7 @@ private:
 	sf_compressor_state_st compressor;
 	ty_gverb *verbL, *verbR;
 	sf_reverb_state_st myreverb;
-	HConvSingle *bassBosstLp, *convolver;
+	HConvSingle *bassBoostLp, *convolver;
 	// Bass boost
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbL;
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbR;
@@ -45,20 +45,20 @@ private:
 	Iir::Butterworth::HighShelf<4, Iir::DirectFormII> bs9r;
 	// Variables
 	float mBand[NUM_BANDS];
-	float pregainCom, threshold, knee, ratio, attack, release, predelay, releasezone1, releasezone2, releasezone3, releasezone4, postgain;
+	float pregainCom, threshold, knee, ratio, attack, release, predelay;
 	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, spread, deltaSpread, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassParameterChanged;
+	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassLpReady;
 	int16_t numTime2Send, samplesInc, impChannels;
 	int32_t impulseLengthActual, convolverNeedRefresh;
-	int16_t mPreset, mReverbMode, widenStrength;
+	int16_t mPreset, mReverbMode;
 	int tapsLPFIR;
 	void refreshCompressor();
 	void refreshBass();
 	void refreshBassLinearPhase(uint32_t actualframeCount);
 	void refreshEqBands();
 	void refreshReverb();
-	void refreshStereoWiden();
+	void refreshStereoWiden(uint32_t parameter);
 	void refreshConvolver(uint32_t actualframeCount);
 	void normalize(float* buffer, int num_samps, float maxval);
 	inline void channel_split(int16_t* buffer, int num_frames, float** chan_buffers)

@@ -22,11 +22,6 @@
     <string name="dialog_attack">Attack</string>
     <string name="dialog_release">Release</string>
     <string name="dialog_predelay">Pre-delay</string>
-    <string name="dialog_releasezone1">Release zone 1</string>
-    <string name="dialog_releasezone2">Release zone 2</string>
-    <string name="dialog_releasezone3">Release zone 3</string>
-    <string name="dialog_releasezone4">Release zone 4</string>
-    <string name="dialog_postgain">Post-gain</string>
     <string name="pref_effect_title">Select effect strength</string>
     <string name="dialog_slope">Slope</string>
     <string name="pref_effect_freq_title">Select low pass filter frequency</string>
@@ -61,7 +56,8 @@
     <string name="pref_convolver_summary_off">Convolver is disabled</string>
     <string name="pref_convolver_enable">Convolver enable</string>
     <string name="dialog_impulseresponse">Impulse response</string>
-    <string name="dialog_quality">Impulse quality</string>
+    <string name="dialog_quality">Quality</string>
+    <string name="dialog_length">Impulse response length</string>
     <string name="text_ir_dir_isempty">IR sample directory %1$s is empty.</string>
     <string name="impfilefault">Load impulse failed\nPlease choose right impulse response file!</string>
     <string name="unmatchedsamplerate">Impulse response %1$s sample rate (%2$d) is not matching with native driver sample rate(%3$d)</string>

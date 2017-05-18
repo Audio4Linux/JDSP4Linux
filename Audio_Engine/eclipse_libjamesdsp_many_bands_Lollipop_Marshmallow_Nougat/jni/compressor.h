@@ -74,20 +74,6 @@ typedef struct {
 	float delaybufR[SF_COMPRESSOR_MAXDELAY]; // predelay buffer
 } sf_compressor_state_st;
 
-// populate a compressor state with all default values
-void sf_defaultcomp(sf_compressor_state_st *state, int rate);
-
-// populate a compressor state with simple parameters
-void sf_simplecomp(sf_compressor_state_st *state,
-	int rate,        // input sample rate (samples per second)
-	float pregain,   // dB, amount to boost the signal before applying compression [0 to 100]
-	float threshold, // dB, level where compression kicks in [-100 to 0]
-	float knee,      // dB, width of the knee [0 to 40]
-	float ratio,     // unitless, amount to inversely scale the output when applying comp [1 to 20]
-	float attack,    // seconds, length of the attack phase [0 to 1]
-	float release    // seconds, length of the release phase [0 to 1]
-);
-
 // populate a compressor state with advanced parameters
 void sf_advancecomp(sf_compressor_state_st *state,
 	// these parameters are the same as the simple version above:

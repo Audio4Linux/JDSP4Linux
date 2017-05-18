@@ -33,10 +33,10 @@ LOCAL_C_INCLUDES += \
 # terminator
 
 LOCAL_STATIC_LIBRARIES := fftw3
-LOCAL_LDLIBS := -llog
+#LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG -DDEBUG
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG -DDEBUG
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
 else ifeq ($(TARGET_ARCH_ABI), x86)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG -DHYBRIDCONV_USE_SSE# -DDEBUG
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG -DHYBRIDCONV_USE_SSE# -DDEBUG

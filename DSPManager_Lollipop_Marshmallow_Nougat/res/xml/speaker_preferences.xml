@@ -78,41 +78,6 @@
             android:entries="@array/compression_predelay"
             android:entryValues="@array/compression_predelay_values"
             android:title="@string/dialog_predelay" />
-	<james.dsp.preference.SummariedListPreference
-            android:key="dsp.compression.releasezone1"
-            android:defaultValue="100"
-            android:dialogTitle="@string/dialog_releasezone1"
-            android:entries="@array/compression_releasezone1"
-            android:entryValues="@array/compression_releasezone1_values"
-            android:title="@string/dialog_releasezone1" />
-	<james.dsp.preference.SummariedListPreference
-            android:key="dsp.compression.releasezone2"
-            android:defaultValue="150"
-            android:dialogTitle="@string/dialog_releasezone2"
-            android:entries="@array/compression_releasezone2"
-            android:entryValues="@array/compression_releasezone2_values"
-            android:title="@string/dialog_releasezone2" />
-	<james.dsp.preference.SummariedListPreference
-            android:key="dsp.compression.releasezone3"
-            android:defaultValue="400"
-            android:dialogTitle="@string/dialog_releasezone3"
-            android:entries="@array/compression_releasezone3"
-            android:entryValues="@array/compression_releasezone3_values"
-            android:title="@string/dialog_releasezone3" />
-	<james.dsp.preference.SummariedListPreference
-            android:key="dsp.compression.releasezone4"
-            android:defaultValue="950"
-            android:dialogTitle="@string/dialog_releasezone4"
-            android:entries="@array/compression_releasezone4"
-            android:entryValues="@array/compression_releasezone4_values"
-            android:title="@string/dialog_releasezone4" />
-	<james.dsp.preference.SummariedListPreference
-            android:key="dsp.compression.postgain"
-            android:defaultValue="0"
-            android:dialogTitle="@string/dialog_postgain"
-            android:entries="@array/compression_postgain"
-            android:entryValues="@array/compression_postgain_values"
-            android:title="@string/dialog_postgain" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_bassboost_title">
@@ -262,7 +227,7 @@
     android:dialogTitle="@string/dialog_impulseresponse" />
         <james.dsp.preference.SummariedListPreference
             android:defaultValue="1"
-            android:dialogTitle="@string/dialog_quality"
+            android:dialogTitle="@string/dialog_length"
             android:entries="@array/quality_level"
             android:entryValues="@array/quality_values"
             android:title="@string/dialog_quality"

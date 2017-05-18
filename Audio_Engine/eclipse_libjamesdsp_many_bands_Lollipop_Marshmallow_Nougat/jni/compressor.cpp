@@ -12,39 +12,6 @@
 // changed a few things though in an attempt to simplify the curves and algorithm, and also included
 // a pregain so that samples can be scaled up then compressed
 
-void sf_defaultcomp(sf_compressor_state_st *state, int rate){
-	// sane defaults
-	sf_advancecomp(state, rate,
-		  0.000f, // pregain
-		-24.000f, // threshold
-		 30.000f, // knee
-		 12.000f, // ratio
-		  0.003f, // attack
-		  0.250f, // release
-		  0.006f, // predelay
-		  0.090f, // releasezone1
-		  0.160f, // releasezone2
-		  0.420f, // releasezone3
-		  0.980f, // releasezone4
-		  0.000f, // postgain
-		  1.000f  // wet
-	);
-}
-
-void sf_simplecomp(sf_compressor_state_st *state, int rate, float pregain, float threshold,
-	float knee, float ratio, float attack, float release){
-	// sane defaults
-	sf_advancecomp(state, rate, pregain, threshold, knee, ratio, attack, release,
-		0.006f, // predelay
-		0.090f, // releasezone1
-		0.160f, // releasezone2
-		0.420f, // releasezone3
-		0.980f, // releasezone4
-		0.000f, // postgain
-		1.000f  // wet
-	);
-}
-
 static inline float db2lin(float db){ // dB to linear
 	return powf(10.0f, 0.05f * db);
 }

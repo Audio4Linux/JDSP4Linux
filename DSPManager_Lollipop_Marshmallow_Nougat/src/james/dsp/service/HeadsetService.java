@@ -17,7 +17,6 @@ import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 import james.dsp.R;
 import james.dsp.activity.DSPManager;
@@ -67,8 +66,7 @@ public class HeadsetService extends Service {
 				AudioEffect.Descriptor dspDescriptor = JamesDSP.getDescriptor();
 				if (dspDescriptor.uuid.equals(EFFECT_JAMESDSP))
 					Toast.makeText(HeadsetService.this, "Effect name: " + dspDescriptor.name + "\nType id: " + dspDescriptor.type
-						+ "\nUnique id: " + dspDescriptor.uuid + "\nImplementor: " + dspDescriptor.implementor
-						+ "\nConnect mode: " + dspDescriptor.connectMode, Toast.LENGTH_SHORT).show();
+						+ "\nUnique id: " + dspDescriptor.uuid + "\nImplementor: " + dspDescriptor.implementor, Toast.LENGTH_SHORT).show();
 				else
 					Toast.makeText(HeadsetService.this, "Effect load failed!\nTry re-enable audio effect in current player!", Toast.LENGTH_SHORT).show();
 			}
@@ -441,121 +439,118 @@ public class HeadsetService extends Service {
 
 	private void updateDsp(SharedPreferences preferences, JDSPModule session) {
 		session.JamesDSP.setEnabled(preferences.getBoolean("dsp.masterswitch.enable", false)); // Master switch
-		int compressorEnabled = preferences.getBoolean("dsp.compression.enable", false) ? 1 : 0;
-		int bassBoostEnabled = preferences.getBoolean("dsp.bass.enable", false) ? 1 : 0;
-		int equalizerEnabled = preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0;
-		int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
-		int stereoEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
-		int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
-		int dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
-		if (dspModuleSamplingRate == 0)
-			Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
-		session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.clipmode", "1")));
-		session.setParameterShort(session.JamesDSP, 1501, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
-		if (compressorEnabled == 1)
-		{
-			session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "0")));
-			session.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "20")));
-			session.setParameterShort(session.JamesDSP, 102, Short.valueOf(preferences.getString("dsp.compression.knee", "30")));
-			session.setParameterShort(session.JamesDSP, 103, Short.valueOf(preferences.getString("dsp.compression.ratio", "12")));
-			session.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "30")));
-			session.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "250")));
-			session.setParameterShort(session.JamesDSP, 106, Short.valueOf(preferences.getString("dsp.compression.predelay", "60")));
-			session.setParameterShort(session.JamesDSP, 107, Short.valueOf(preferences.getString("dsp.compression.releasezone1", "100")));
-			session.setParameterShort(session.JamesDSP, 108, Short.valueOf(preferences.getString("dsp.compression.releasezone2", "150")));
-			session.setParameterShort(session.JamesDSP, 109, Short.valueOf(preferences.getString("dsp.compression.releasezone3", "400")));
-			session.setParameterShort(session.JamesDSP, 110, Short.valueOf(preferences.getString("dsp.compression.releasezone4", "950")));
-			session.setParameterShort(session.JamesDSP, 111, Short.valueOf(preferences.getString("dsp.compression.postgain", "0")));
-		}
-		session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
-		if (bassBoostEnabled == 1)
-		{
-			session.setParameterShort(session.JamesDSP, 112, Short.valueOf(preferences.getString("dsp.bass.mode", "80")));
-			session.setParameterShort(session.JamesDSP, 113, Short.valueOf(preferences.getString("dsp.bass.slope", "0")));
-			session.setParameterShort(session.JamesDSP, 114, Short.valueOf(preferences.getString("dsp.bass.freq", "55")));
-		}
-		session.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
-		if (equalizerEnabled == 1)
-		{
-			/* Equalizer state is in a single string preference with all values separated by ; */
-			if (mOverriddenEqualizerLevels != null) {
-				for (short i = 0; i < mOverriddenEqualizerLevels.length; i++)
-					eqLevels[i] = Math.round(mOverriddenEqualizerLevels[i] * 10000);
+		boolean masterSwitch = preferences.getBoolean("dsp.masterswitch.enable", false);
+		if (masterSwitch) {
+			int compressorEnabled = preferences.getBoolean("dsp.compression.enable", false) ? 1 : 0;
+			int bassBoostEnabled = preferences.getBoolean("dsp.bass.enable", false) ? 1 : 0;
+			int equalizerEnabled = preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0;
+			int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
+			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
+			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
+			int dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
+			if (dspModuleSamplingRate == 0)
+				Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
+			session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.clipmode", "1")));
+			session.setParameterShort(session.JamesDSP, 1501, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
+			if (compressorEnabled == 1)
+			{
+				session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "0")));
+				session.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "20")));
+				session.setParameterShort(session.JamesDSP, 102, Short.valueOf(preferences.getString("dsp.compression.knee", "30")));
+				session.setParameterShort(session.JamesDSP, 103, Short.valueOf(preferences.getString("dsp.compression.ratio", "12")));
+				session.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "30")));
+				session.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "250")));
+				session.setParameterShort(session.JamesDSP, 106, Short.valueOf(preferences.getString("dsp.compression.predelay", "60")));
 			}
-			else {
-				String[] levels = preferences.getString("dsp.tone.eq.custom", "0;0;0;0;0;0;0;0;0;0").split(";");
-				for (short i = 0; i < levels.length; i++)
-					eqLevels[i] = Math.round(Float.valueOf(levels[i]) * 10000);
+			session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
+			if (bassBoostEnabled == 1)
+			{
+				session.setParameterShort(session.JamesDSP, 112, Short.valueOf(preferences.getString("dsp.bass.mode", "80")));
+				session.setParameterShort(session.JamesDSP, 113, Short.valueOf(preferences.getString("dsp.bass.slope", "0")));
+				session.setParameterShort(session.JamesDSP, 114, Short.valueOf(preferences.getString("dsp.bass.freq", "55")));
 			}
-			session.setParameterIntArray(session.JamesDSP, 115, eqLevels);
-		}
-		session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
-		if (reverbEnabled == 1)
-		{
-			session.setParameterShort(session.JamesDSP, 127, Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1")));
-			session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
-			session.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "50")));
-			session.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "50")));
-			session.setParameterShort(session.JamesDSP, 131, Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
-			session.setParameterShort(session.JamesDSP, 132, Short.valueOf(preferences.getString("dsp.headphone.spread", "50")));
-			session.setParameterShort(session.JamesDSP, 133, Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
-			session.setParameterShort(session.JamesDSP, 134, Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
-			session.setParameterShort(session.JamesDSP, 135, Short.valueOf(preferences.getString("dsp.headphone.tailverb", "50")));
-		}
-		session.setParameterShort(session.JamesDSP, 1203, (short)reverbEnabled); // Reverb switch
-		if (stereoEnabled == 1)
-			session.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
-		session.setParameterShort(session.JamesDSP, 1204, (short)stereoEnabled); // Stereo widener switch
-																				 // Convolver section
-		session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
-		if (convolverEnabled == 1)
-		{
-			int convolverNativeNullBuff = session.getParameter(session.JamesDSP, 20001);
-			oldmConvIRFileName = mConvIRFileName;
-			mConvIRFileName = preferences.getString("dsp.convolver.files", "");
-			oldimpinfo = impinfo;
-			impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFileName);
-			if (impinfo == null)
-				Toast.makeText(HeadsetService.this, R.string.impfilefault, Toast.LENGTH_SHORT).show();
-			else {
-				if (impinfo[2] != dspModuleSamplingRate)
-					Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFileName, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_LONG).show();
+			session.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
+			if (equalizerEnabled == 1)
+			{
+				/* Equalizer state is in a single string preference with all values separated by ; */
+				if (mOverriddenEqualizerLevels != null) {
+					for (short i = 0; i < mOverriddenEqualizerLevels.length; i++)
+						eqLevels[i] = Math.round(mOverriddenEqualizerLevels[i] * 10000);
+				}
 				else {
-					oldquality = quality;
-					quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
-					if (!(oldmConvIRFileName == mConvIRFileName && oldimpinfo[1] == impinfo[1]) || convolverNativeNullBuff == 1 || oldquality != quality) {
-						int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt();
-						if (impulseResponse == null)
-							Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_LONG).show();
-						else {
-							int arraySize2Send = 4096;
-							int impulseCutted = (int)(impulseResponse.length * quality);
-							int[] sendArray = new int[arraySize2Send];
-							int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
-							session.setParameterInt(session.JamesDSP, 10000, impulseCutted); // Send length of actually impulse response
-							session.setParameterShort(session.JamesDSP, 10001, (short)impinfo[0]);
-							session.setParameterShort(session.JamesDSP, 10002, (short)numTime2Send);
-							int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
-							System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
-							for (int i = 0; i < numTime2Send; i++) {
-								System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
-								session.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
-								session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
+					String[] levels = preferences.getString("dsp.tone.eq.custom", "0;0;0;0;0;0;0;0;0;0").split(";");
+					for (short i = 0; i < levels.length; i++)
+						eqLevels[i] = Math.round(Float.valueOf(levels[i]) * 10000);
+				}
+				session.setParameterIntArray(session.JamesDSP, 115, eqLevels);
+			}
+			session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
+			if (reverbEnabled == 1)
+			{
+				session.setParameterShort(session.JamesDSP, 127, Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1")));
+				session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
+				session.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "50")));
+				session.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "50")));
+				session.setParameterShort(session.JamesDSP, 131, Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
+				session.setParameterShort(session.JamesDSP, 132, Short.valueOf(preferences.getString("dsp.headphone.spread", "50")));
+				session.setParameterShort(session.JamesDSP, 133, Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
+				session.setParameterShort(session.JamesDSP, 134, Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
+				session.setParameterShort(session.JamesDSP, 135, Short.valueOf(preferences.getString("dsp.headphone.tailverb", "50")));
+			}
+			session.setParameterShort(session.JamesDSP, 1203, (short)reverbEnabled); // Reverb switch
+			if (convolverEnabled == 1)
+			{
+				int convolverNativeNullBuff = session.getParameter(session.JamesDSP, 20001);
+				oldmConvIRFileName = mConvIRFileName;
+				mConvIRFileName = preferences.getString("dsp.convolver.files", "");
+				oldimpinfo = impinfo;
+				impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFileName);
+				if (impinfo == null)
+					Toast.makeText(HeadsetService.this, R.string.impfilefault, Toast.LENGTH_SHORT).show();
+				else {
+					if (impinfo[2] != dspModuleSamplingRate)
+						Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFileName, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_LONG).show();
+					else {
+						oldquality = quality;
+						quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
+						if (!(oldmConvIRFileName == mConvIRFileName && oldimpinfo[1] == impinfo[1]) || convolverNativeNullBuff == 1 || oldquality != quality) {
+							int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt();
+							if (impulseResponse == null)
+								Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_LONG).show();
+							else {
+								int arraySize2Send = 4096;
+								int impulseCutted = (int)(impulseResponse.length * quality);
+								int[] sendArray = new int[arraySize2Send];
+								int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
+								int[] sendBufInfo = new int[] {impulseCutted, (int) impinfo[0], numTime2Send};
+								session.setParameterIntArray(session.JamesDSP, 9999, sendBufInfo); // Send buffer info for module to allocate memeory
+								int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
+								System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
+								for (int i = 0; i < numTime2Send; i++) {
+									System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
+									session.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
+									session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
+								}
+								session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
+								if (impinfo[0] == 2)
+									Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted / 2), Toast.LENGTH_SHORT).show();
+								else
+									Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted), Toast.LENGTH_SHORT).show();
 							}
-							session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
-							if (impinfo[0] == 2)
-								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted / 2), Toast.LENGTH_LONG).show();
-							else
-								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted), Toast.LENGTH_LONG).show();
 						}
 					}
 				}
 			}
-		}
-		else
-		{
-			session.setParameterShort(session.JamesDSP, 10002, (short)0); // Reset counter
-			session.setParameterShort(session.JamesDSP, 10003, (short)0); // Notify status
+			else
+			{
+				session.setParameterShort(session.JamesDSP, 10002, (short)0);
+				session.setParameterShort(session.JamesDSP, 10003, (short)0);
+				session.setParameterShort(session.JamesDSP, 10004, (short)0);
+			}
+			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
+			if (stereoWideEnabled == 1)
+				session.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
+			session.setParameterShort(session.JamesDSP, 1204, (short)stereoWideEnabled); // Stereo widener switch
 		}
 	}
 }
