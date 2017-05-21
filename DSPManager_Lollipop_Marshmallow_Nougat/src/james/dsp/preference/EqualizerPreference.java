@@ -16,123 +16,125 @@ import james.dsp.service.HeadsetService;
 
 import java.util.Locale;
 
-public class EqualizerPreference extends DialogPreference {
+public class EqualizerPreference extends DialogPreference
+{
     protected static final String TAG = EqualizerPreference.class.getSimpleName();
 
     protected EqualizerSurface mListEqualizer, mDialogEqualizer;
 
     private HeadsetService mHeadsetService;
 
-    private final ServiceConnection connectionForDialog = new ServiceConnection() {
+    private final ServiceConnection connectionForDialog = new ServiceConnection()
+    {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder binder) {
+        public void onServiceConnected(ComponentName name, IBinder binder)
+        {
             mHeadsetService = ((HeadsetService.LocalBinder) binder).getService();
             updateDspFromDialogEqualizer();
         }
-
         @Override
-        public void onServiceDisconnected(ComponentName name) {
+        public void onServiceDisconnected(ComponentName name)
+        {
             mHeadsetService = null;
         }
     };
 
-    public EqualizerPreference(Context context, AttributeSet attributeSet) {
+    public EqualizerPreference(Context context, AttributeSet attributeSet)
+    {
         super(context, attributeSet);
         setLayoutResource(R.layout.equalizer);
         setDialogLayoutResource(R.layout.equalizer_popup);
     }
 
-    protected void updateDspFromDialogEqualizer() {
-        if (mHeadsetService != null) {
+    protected void updateDspFromDialogEqualizer()
+    {
+        if (mHeadsetService != null)
+        {
             float[] levels = new float[10];
-            for (int i = 0; i < levels.length; i++) {
+            for (int i = 0; i < levels.length; i++)
                 levels[i] = mDialogEqualizer.getBand(i);
-            }
             mHeadsetService.setEqualizerLevels(levels);
         }
     }
 
-    private void updateListEqualizerFromValue() {
+    private void updateListEqualizerFromValue()
+    {
         String value = getPersistedString(null);
-        if (value != null && mListEqualizer != null) {
+        if (value != null && mListEqualizer != null)
+        {
             String[] levelsStr = value.split(";");
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++)
                 mListEqualizer.setBand(i, Float.valueOf(levelsStr[i]));
-            }
         }
     }
 
     @Override
-    protected void onBindDialogView(View view) {
+    protected void onBindDialogView(View view)
+    {
         super.onBindDialogView(view);
-
         mDialogEqualizer = (EqualizerSurface) view.findViewById(R.id.FrequencyResponse);
-        mDialogEqualizer.setOnTouchListener(new OnTouchListener() {
+        mDialogEqualizer.setOnTouchListener(new OnTouchListener()
+        {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(View v, MotionEvent event)
+            {
                 float x = event.getX();
                 float y = event.getY();
-
                 /* Which band is closest to the position user pressed? */
                 int band = mDialogEqualizer.findClosest(x);
-
                 int wy = v.getHeight();
                 float level = (y / wy) * (EqualizerSurface.MIN_DB - EqualizerSurface.MAX_DB) - EqualizerSurface.MIN_DB;
-                if (level < EqualizerSurface.MIN_DB) {
+                if (level < EqualizerSurface.MIN_DB)
                     level = EqualizerSurface.MIN_DB;
-                }
-                if (level > EqualizerSurface.MAX_DB) {
+                if (level > EqualizerSurface.MAX_DB)
                     level = EqualizerSurface.MAX_DB;
-                }
-
                 mDialogEqualizer.setBand(band, level);
                 updateDspFromDialogEqualizer();
                 return true;
             }
         });
-
-        if (mListEqualizer != null) {
-            for (int i = 0; i < 10; i++) {
+        if (mListEqualizer != null)
+        {
+            for (int i = 0; i < 10; i++)
                 mDialogEqualizer.setBand(i, mListEqualizer.getBand(i));
-            }
         }
-
         getContext().bindService(new Intent(getContext(), HeadsetService.class), connectionForDialog, 0);
     }
 
     @Override
-    protected void onDialogClosed(boolean positiveResult) {
-        if (positiveResult) {
+    protected void onDialogClosed(boolean positiveResult)
+    {
+        if (positiveResult)
+        {
             String value = "";
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++)
                 value += String.format(Locale.ROOT, "%.1f", Math.round(mDialogEqualizer.getBand(i) * 10.f) / 10.f) + ";";
-            }
             persistString(value);
             updateListEqualizerFromValue();
         }
-
-        if (mHeadsetService != null) {
+        if (mHeadsetService != null)
             mHeadsetService.setEqualizerLevels(null);
-        }
         getContext().unbindService(connectionForDialog);
     }
 
     @Override
-    protected void onBindView(View view) {
+    protected void onBindView(View view)
+    {
         super.onBindView(view);
         mListEqualizer = (EqualizerSurface) view.findViewById(R.id.FrequencyResponse);
         updateListEqualizerFromValue();
     }
 
     @Override
-    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue)
+    {
         String value = restorePersistedValue ? getPersistedString(null) : (String) defaultValue;
-        if (shouldPersist()) {
+        if (shouldPersist())
             persistString(value);
-        }
     }
 
-    public void refreshFromPreference() {
+    public void refreshFromPreference()
+    {
         onSetInitialValue(true, null);
     }
 }

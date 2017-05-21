@@ -20,17 +20,18 @@
 
 #include "Binder.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------
 
 class IInterface : public virtual RefBase
 {
 public:
-            IInterface();
-            sp<IBinder>         asBinder();
-            sp<const IBinder>   asBinder() const;
-            
+    IInterface();
+    sp<IBinder>         asBinder();
+    sp<const IBinder>   asBinder() const;
+
 protected:
     virtual                     ~IInterface();
     virtual IBinder*            onAsBinder() = 0;
@@ -63,7 +64,7 @@ template<typename INTERFACE>
 class BpInterface : public INTERFACE, public BpRefBase
 {
 public:
-                                BpInterface(const sp<IBinder>& remote);
+    BpInterface(const sp<IBinder>& remote);
 
 protected:
     virtual IBinder*            onAsBinder();
@@ -113,7 +114,7 @@ protected:
 
 template<typename INTERFACE>
 inline sp<IInterface> BnInterface<INTERFACE>::queryLocalInterface(
-        const String16& _descriptor)
+    const String16& _descriptor)
 {
     if (_descriptor == INTERFACE::descriptor) return this;
     return NULL;
@@ -142,7 +143,7 @@ inline IBinder* BpInterface<INTERFACE>::onAsBinder()
 {
     return remote();
 }
-    
+
 // ----------------------------------------------------------------------
 
 }; // namespace android

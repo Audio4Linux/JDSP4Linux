@@ -38,55 +38,56 @@
 // not sure what this does exactly, but it is part of the release curve
 #define SF_COMPRESSOR_SPACINGDB  5.0f
 
-typedef struct {
-	// user can read the metergain state variable after processing a chunk to see how much dB the
-	// compressor would have liked to compress the sample; the meter values aren't used to shape the
-	// sound in any way, only used for output if desired
-	float metergain;
+typedef struct
+{
+    // user can read the metergain state variable after processing a chunk to see how much dB the
+    // compressor would have liked to compress the sample; the meter values aren't used to shape the
+    // sound in any way, only used for output if desired
+    float metergain;
 
-	// everything else shouldn't really be mucked with unless you read the algorithm and feel
-	// comfortable
-	float meterrelease;
-	float threshold;
-	float knee;
-	float linearpregain;
-	float linearthreshold;
-	float slope;
-	float attacksamplesinv;
-	float satreleasesamplesinv;
-	float wet;
-	float dry;
-	float k;
-	float kneedboffset;
-	float linearthresholdknee;
-	float mastergain;
-	float a; // adaptive release polynomial coefficients
-	float b;
-	float c;
-	float d;
-	float detectoravg;
-	float compgain;
-	float maxcompdiffdb;
-	int delaybufsize;
-	int delaywritepos;
-	int delayreadpos;
-	float delaybufL[SF_COMPRESSOR_MAXDELAY]; // predelay buffer
-	float delaybufR[SF_COMPRESSOR_MAXDELAY]; // predelay buffer
+    // everything else shouldn't really be mucked with unless you read the algorithm and feel
+    // comfortable
+    float meterrelease;
+    float threshold;
+    float knee;
+    float linearpregain;
+    float linearthreshold;
+    float slope;
+    float attacksamplesinv;
+    float satreleasesamplesinv;
+    float wet;
+    float dry;
+    float k;
+    float kneedboffset;
+    float linearthresholdknee;
+    float mastergain;
+    float a; // adaptive release polynomial coefficients
+    float b;
+    float c;
+    float d;
+    float detectoravg;
+    float compgain;
+    float maxcompdiffdb;
+    int delaybufsize;
+    int delaywritepos;
+    int delayreadpos;
+    float delaybufL[SF_COMPRESSOR_MAXDELAY]; // predelay buffer
+    float delaybufR[SF_COMPRESSOR_MAXDELAY]; // predelay buffer
 } sf_compressor_state_st;
 
 // populate a compressor state with advanced parameters
 void sf_advancecomp(sf_compressor_state_st *state,
-	// these parameters are the same as the simple version above:
-	int rate, float pregain, float threshold, float knee, float ratio, float attack, float release,
-	// these are the advanced parameters:
-	float predelay,     // seconds, length of the predelay buffer [0 to 1]
-	float releasezone1, // release zones should be increasing between 0 and 1, and are a fraction
-	float releasezone2, //  of the release time depending on the input dB -- these parameters define
-	float releasezone3, //  the adaptive release curve, which is discussed in further detail in the
-	float releasezone4, //  demo: adaptive-release-curve.html
-	float postgain,     // dB, amount of gain to apply after compression [0 to 100]
-	float wet           // amount to apply the effect [0 completely dry to 1 completely wet]
-);
+                    // these parameters are the same as the simple version above:
+                    int rate, float pregain, float threshold, float knee, float ratio, float attack, float release,
+                    // these are the advanced parameters:
+                    float predelay,     // seconds, length of the predelay buffer [0 to 1]
+                    float releasezone1, // release zones should be increasing between 0 and 1, and are a fraction
+                    float releasezone2, //  of the release time depending on the input dB -- these parameters define
+                    float releasezone3, //  the adaptive release curve, which is discussed in further detail in the
+                    float releasezone4, //  demo: adaptive-release-curve.html
+                    float postgain,     // dB, amount of gain to apply after compression [0 to 100]
+                    float wet           // amount to apply the effect [0 completely dry to 1 completely wet]
+                   );
 
 // this function will process the input sound based on the state passed
 // the input and output buffers should be the same size

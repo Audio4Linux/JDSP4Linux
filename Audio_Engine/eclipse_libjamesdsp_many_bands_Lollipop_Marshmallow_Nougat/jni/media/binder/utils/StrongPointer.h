@@ -24,7 +24,8 @@
 #include <stdlib.h>
 
 // ---------------------------------------------------------------------------
-namespace android {
+namespace android
+{
 
 template<typename T> class wp;
 
@@ -56,7 +57,8 @@ inline bool operator _op_ (const wp<U>& o) const {              \
 // ---------------------------------------------------------------------------
 
 template<typename T>
-class sp {
+class sp
+{
 public:
     inline sp() : m_ptr(0) { }
 
@@ -84,9 +86,18 @@ public:
 
     // Accessors
 
-    inline  T&      operator* () const  { return *m_ptr; }
-    inline  T*      operator-> () const { return m_ptr;  }
-    inline  T*      get() const         { return m_ptr; }
+    inline  T&      operator* () const
+    {
+        return *m_ptr;
+    }
+    inline  T*      operator-> () const
+    {
+        return m_ptr;
+    }
+    inline  T*      get() const
+    {
+        return m_ptr;
+    }
 
     // Operators
 
@@ -97,7 +108,7 @@ public:
     COMPARE(<=)
     COMPARE(>=)
 
-private:    
+private:
     template<typename Y> friend class sp;
     template<typename Y> friend class wp;
     void set_pointer(T* ptr);
@@ -111,40 +122,46 @@ private:
 
 template<typename T>
 sp<T>::sp(T* other)
-        : m_ptr(other) {
+    : m_ptr(other)
+{
     if (other)
         other->incStrong(this);
 }
 
 template<typename T>
 sp<T>::sp(const sp<T>& other)
-        : m_ptr(other.m_ptr) {
+    : m_ptr(other.m_ptr)
+{
     if (m_ptr)
         m_ptr->incStrong(this);
 }
 
 template<typename T> template<typename U>
 sp<T>::sp(U* other)
-        : m_ptr(other) {
+    : m_ptr(other)
+{
     if (other)
         ((T*) other)->incStrong(this);
 }
 
 template<typename T> template<typename U>
 sp<T>::sp(const sp<U>& other)
-        : m_ptr(other.m_ptr) {
+    : m_ptr(other.m_ptr)
+{
     if (m_ptr)
         m_ptr->incStrong(this);
 }
 
 template<typename T>
-sp<T>::~sp() {
+sp<T>::~sp()
+{
     if (m_ptr)
         m_ptr->decStrong(this);
 }
 
 template<typename T>
-sp<T>& sp<T>::operator =(const sp<T>& other) {
+sp<T>& sp<T>::operator =(const sp<T>& other)
+{
     T* otherPtr(other.m_ptr);
     if (otherPtr)
         otherPtr->incStrong(this);
@@ -155,7 +172,8 @@ sp<T>& sp<T>::operator =(const sp<T>& other) {
 }
 
 template<typename T>
-sp<T>& sp<T>::operator =(T* other) {
+sp<T>& sp<T>::operator =(T* other)
+{
     if (other)
         other->incStrong(this);
     if (m_ptr)
@@ -165,7 +183,8 @@ sp<T>& sp<T>::operator =(T* other) {
 }
 
 template<typename T> template<typename U>
-sp<T>& sp<T>::operator =(const sp<U>& other) {
+sp<T>& sp<T>::operator =(const sp<U>& other)
+{
     T* otherPtr(other.m_ptr);
     if (otherPtr)
         otherPtr->incStrong(this);
@@ -176,7 +195,8 @@ sp<T>& sp<T>::operator =(const sp<U>& other) {
 }
 
 template<typename T> template<typename U>
-sp<T>& sp<T>::operator =(U* other) {
+sp<T>& sp<T>::operator =(U* other)
+{
     if (other)
         ((T*) other)->incStrong(this);
     if (m_ptr)
@@ -186,21 +206,25 @@ sp<T>& sp<T>::operator =(U* other) {
 }
 
 template<typename T>
-void sp<T>::force_set(T* other) {
+void sp<T>::force_set(T* other)
+{
     other->forceIncStrong(this);
     m_ptr = other;
 }
 
 template<typename T>
-void sp<T>::clear() {
-    if (m_ptr) {
+void sp<T>::clear()
+{
+    if (m_ptr)
+    {
         m_ptr->decStrong(this);
         m_ptr = 0;
     }
 }
 
 template<typename T>
-void sp<T>::set_pointer(T* ptr) {
+void sp<T>::set_pointer(T* ptr)
+{
     m_ptr = ptr;
 }
 

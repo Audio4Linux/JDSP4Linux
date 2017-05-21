@@ -24,7 +24,8 @@
 #include "binder/utils/String8.h"
 #include "binder/utils/Vector.h"
 
-namespace android {
+namespace android
+{
 
 // Keep in sync with AudioMix.java, AudioMixingRule.java, AudioPolicyConfig.java
 #define RULE_EXCLUSION_MASK 0x8000
@@ -44,7 +45,8 @@ namespace android {
 #define MAX_MIXES_PER_POLICY 10
 #define MAX_CRITERIA_PER_MIX 20
 
-class AttributeMatchCriterion {
+class AttributeMatchCriterion
+{
 public:
     AttributeMatchCriterion() {}
     AttributeMatchCriterion(audio_usage_t usage, audio_source_t source, uint32_t rule);
@@ -52,14 +54,16 @@ public:
     status_t readFromParcel(Parcel *parcel);
     status_t writeToParcel(Parcel *parcel) const;
 
-    union {
+    union
+    {
         audio_usage_t   mUsage;
         audio_source_t  mSource;
     } mAttr;
     uint32_t        mRule;
 };
 
-class AudioMix {
+class AudioMix
+{
 public:
     AudioMix() {}
     AudioMix(Vector<AttributeMatchCriterion> criteria, uint32_t mixType, audio_config_t format,

@@ -12,9 +12,11 @@ import james.dsp.service.HeadsetService;
  *
  * @author alankila
  */
-public class BootCompletedReceiver extends BroadcastReceiver {
+public class BootCompletedReceiver extends BroadcastReceiver
+{
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent)
+    {
         context.startService(new Intent(context, HeadsetService.class));
     }
 }

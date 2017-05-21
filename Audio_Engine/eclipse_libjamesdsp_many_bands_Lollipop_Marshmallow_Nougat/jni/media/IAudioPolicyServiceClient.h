@@ -22,7 +22,8 @@
 #include "binder/IInterface.h"
 #include "../hardware/system/audio.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------------
 

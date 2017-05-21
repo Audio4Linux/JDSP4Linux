@@ -24,22 +24,43 @@
 
 // ---------------------------------------------------------------------------
 
-namespace android {
+namespace android
+{
 
 /*
  * Types traits
  */
 
-template <typename T> struct trait_trivial_ctor { enum { value = false }; };
-template <typename T> struct trait_trivial_dtor { enum { value = false }; };
-template <typename T> struct trait_trivial_copy { enum { value = false }; };
-template <typename T> struct trait_trivial_move { enum { value = false }; };
-template <typename T> struct trait_pointer      { enum { value = false }; };    
-template <typename T> struct trait_pointer<T*>  { enum { value = true }; };
+template <typename T> struct trait_trivial_ctor
+{
+    enum { value = false };
+};
+template <typename T> struct trait_trivial_dtor
+{
+    enum { value = false };
+};
+template <typename T> struct trait_trivial_copy
+{
+    enum { value = false };
+};
+template <typename T> struct trait_trivial_move
+{
+    enum { value = false };
+};
+template <typename T> struct trait_pointer
+{
+    enum { value = false };
+};
+template <typename T> struct trait_pointer<T*>
+{
+    enum { value = true };
+};
 
 template <typename TYPE>
-struct traits {
-    enum {
+struct traits
+{
+    enum
+    {
         // whether this type is a pointer
         is_pointer          = trait_pointer<TYPE>::value,
         // whether this type's constructor is a no-op
@@ -54,16 +75,18 @@ struct traits {
 };
 
 template <typename T, typename U>
-struct aggregate_traits {
-    enum {
+struct aggregate_traits
+{
+    enum
+    {
         is_pointer          = false,
-        has_trivial_ctor    = 
+        has_trivial_ctor    =
             traits<T>::has_trivial_ctor && traits<U>::has_trivial_ctor,
-        has_trivial_dtor    = 
+        has_trivial_dtor    =
             traits<T>::has_trivial_dtor && traits<U>::has_trivial_dtor,
-        has_trivial_copy    = 
+        has_trivial_copy    =
             traits<T>::has_trivial_copy && traits<U>::has_trivial_copy,
-        has_trivial_move    = 
+        has_trivial_move    =
             traits<T>::has_trivial_move && traits<U>::has_trivial_move
     };
 };
@@ -115,12 +138,14 @@ ANDROID_BASIC_TYPES_TRAITS( double )
  */
 
 template<typename TYPE> inline
-int strictly_order_type(const TYPE& lhs, const TYPE& rhs) {
+int strictly_order_type(const TYPE& lhs, const TYPE& rhs)
+{
     return (lhs < rhs) ? 1 : 0;
 }
 
 template<typename TYPE> inline
-int compare_type(const TYPE& lhs, const TYPE& rhs) {
+int compare_type(const TYPE& lhs, const TYPE& rhs)
+{
     return strictly_order_type(rhs, lhs) - strictly_order_type(lhs, rhs);
 }
 
@@ -129,18 +154,22 @@ int compare_type(const TYPE& lhs, const TYPE& rhs) {
  */
 
 template<typename TYPE> inline
-void construct_type(TYPE* p, size_t n) {
-    if (!traits<TYPE>::has_trivial_ctor) {
-        while (n--) {
+void construct_type(TYPE* p, size_t n)
+{
+    if (!traits<TYPE>::has_trivial_ctor)
+    {
+        while (n--)
             new(p++) TYPE;
-        }
     }
 }
 
 template<typename TYPE> inline
-void destroy_type(TYPE* p, size_t n) {
-    if (!traits<TYPE>::has_trivial_dtor) {
-        while (n--) {
+void destroy_type(TYPE* p, size_t n)
+{
+    if (!traits<TYPE>::has_trivial_dtor)
+    {
+        while (n--)
+        {
             p->~TYPE();
             p++;
         }
@@ -148,70 +177,77 @@ void destroy_type(TYPE* p, size_t n) {
 }
 
 template<typename TYPE> inline
-void copy_type(TYPE* d, const TYPE* s, size_t n) {
-    if (!traits<TYPE>::has_trivial_copy) {
-        while (n--) {
+void copy_type(TYPE* d, const TYPE* s, size_t n)
+{
+    if (!traits<TYPE>::has_trivial_copy)
+    {
+        while (n--)
+        {
             new(d) TYPE(*s);
             d++, s++;
         }
-    } else {
-        memcpy(d,s,n*sizeof(TYPE));
     }
+    else
+        memcpy(d,s,n*sizeof(TYPE));
 }
 
 template<typename TYPE> inline
-void splat_type(TYPE* where, const TYPE* what, size_t n) {
-    if (!traits<TYPE>::has_trivial_copy) {
-        while (n--) {
+void splat_type(TYPE* where, const TYPE* what, size_t n)
+{
+    if (!traits<TYPE>::has_trivial_copy)
+    {
+        while (n--)
+        {
             new(where) TYPE(*what);
             where++;
         }
-    } else {
-        while (n--) {
+    }
+    else
+    {
+        while (n--)
             *where++ = *what;
-        }
     }
 }
 
 template<typename TYPE> inline
-void move_forward_type(TYPE* d, const TYPE* s, size_t n = 1) {
-    if ((traits<TYPE>::has_trivial_dtor && traits<TYPE>::has_trivial_copy) 
-            || traits<TYPE>::has_trivial_move) 
-    {
+void move_forward_type(TYPE* d, const TYPE* s, size_t n = 1)
+{
+    if ((traits<TYPE>::has_trivial_dtor && traits<TYPE>::has_trivial_copy)
+            || traits<TYPE>::has_trivial_move)
         memmove(d,s,n*sizeof(TYPE));
-    } else {
+    else
+    {
         d += n;
         s += n;
-        while (n--) {
+        while (n--)
+        {
             --d, --s;
-            if (!traits<TYPE>::has_trivial_copy) {
+            if (!traits<TYPE>::has_trivial_copy)
                 new(d) TYPE(*s);
-            } else {
-                *d = *s;   
-            }
-            if (!traits<TYPE>::has_trivial_dtor) {
+            else
+                *d = *s;
+            if (!traits<TYPE>::has_trivial_dtor)
                 s->~TYPE();
-            }
         }
     }
 }
 
 template<typename TYPE> inline
-void move_backward_type(TYPE* d, const TYPE* s, size_t n = 1) {
-    if ((traits<TYPE>::has_trivial_dtor && traits<TYPE>::has_trivial_copy) 
-            || traits<TYPE>::has_trivial_move) 
-    {
+void move_backward_type(TYPE* d, const TYPE* s, size_t n = 1)
+{
+    if ((traits<TYPE>::has_trivial_dtor && traits<TYPE>::has_trivial_copy)
+            || traits<TYPE>::has_trivial_move)
         memmove(d,s,n*sizeof(TYPE));
-    } else {
-        while (n--) {
-            if (!traits<TYPE>::has_trivial_copy) {
+    else
+    {
+        while (n--)
+        {
+            if (!traits<TYPE>::has_trivial_copy)
                 new(d) TYPE(*s);
-            } else {
-                *d = *s;   
-            }
-            if (!traits<TYPE>::has_trivial_dtor) {
+            else
+                *d = *s;
+            if (!traits<TYPE>::has_trivial_dtor)
                 s->~TYPE();
-            }
             d++, s++;
         }
     }
@@ -224,7 +260,8 @@ void move_backward_type(TYPE* d, const TYPE* s, size_t n = 1) {
  */
 
 template <typename KEY, typename VALUE>
-struct key_value_pair_t {
+struct key_value_pair_t
+{
     typedef KEY key_t;
     typedef VALUE value_t;
 
@@ -234,29 +271,40 @@ struct key_value_pair_t {
     key_value_pair_t(const key_value_pair_t& o) : key(o.key), value(o.value) { }
     key_value_pair_t(const KEY& k, const VALUE& v) : key(k), value(v)  { }
     key_value_pair_t(const KEY& k) : key(k) { }
-    inline bool operator < (const key_value_pair_t& o) const {
+    inline bool operator < (const key_value_pair_t& o) const
+    {
         return strictly_order_type(key, o.key);
     }
-    inline const KEY& getKey() const {
+    inline const KEY& getKey() const
+    {
         return key;
     }
-    inline const VALUE& getValue() const {
+    inline const VALUE& getValue() const
+    {
         return value;
     }
 };
 
 template <typename K, typename V>
 struct trait_trivial_ctor< key_value_pair_t<K, V> >
-{ enum { value = aggregate_traits<K,V>::has_trivial_ctor }; };
+{
+    enum { value = aggregate_traits<K,V>::has_trivial_ctor };
+};
 template <typename K, typename V>
 struct trait_trivial_dtor< key_value_pair_t<K, V> >
-{ enum { value = aggregate_traits<K,V>::has_trivial_dtor }; };
+{
+    enum { value = aggregate_traits<K,V>::has_trivial_dtor };
+};
 template <typename K, typename V>
 struct trait_trivial_copy< key_value_pair_t<K, V> >
-{ enum { value = aggregate_traits<K,V>::has_trivial_copy }; };
+{
+    enum { value = aggregate_traits<K,V>::has_trivial_copy };
+};
 template <typename K, typename V>
 struct trait_trivial_move< key_value_pair_t<K, V> >
-{ enum { value = aggregate_traits<K,V>::has_trivial_move }; };
+{
+    enum { value = aggregate_traits<K,V>::has_trivial_move };
+};
 
 // ---------------------------------------------------------------------------
 
@@ -291,7 +339,8 @@ ANDROID_INT64_HASH(uint64_t)
 ANDROID_REINTERPRET_HASH(float, uint32_t)
 ANDROID_REINTERPRET_HASH(double, uint64_t)
 
-template <typename T> inline hash_t hash_type(T* const & value) {
+template <typename T> inline hash_t hash_type(T* const & value)
+{
     return hash_type(uintptr_t(value));
 }
 

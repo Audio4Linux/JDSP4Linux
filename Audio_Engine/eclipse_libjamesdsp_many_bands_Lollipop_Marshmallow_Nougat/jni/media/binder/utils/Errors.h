@@ -20,7 +20,8 @@
 #include <sys/types.h>
 #include <errno.h>
 
-namespace android {
+namespace android
+{
 
 // use this type to return error codes
 #ifdef HAVE_MS_C_RUNTIME
@@ -32,7 +33,7 @@ typedef int32_t     status_t;
 /* the MS C runtime lacks a few error codes */
 
 /*
- * Error codes. 
+ * Error codes.
  * All error codes are negative values.
  */
 
@@ -42,7 +43,8 @@ typedef int32_t     status_t;
 # undef NO_ERROR
 #endif
 
-enum {
+enum
+{
     OK                = 0,    // Everything's swell.
     NO_ERROR          = 0,    // No errors.
 
@@ -62,16 +64,16 @@ enum {
 #if !defined(HAVE_MS_C_RUNTIME)
     BAD_INDEX           = -EOVERFLOW,
     NOT_ENOUGH_DATA     = -ENODATA,
-    WOULD_BLOCK         = -EWOULDBLOCK, 
+    WOULD_BLOCK         = -EWOULDBLOCK,
     TIMED_OUT           = -ETIMEDOUT,
     UNKNOWN_TRANSACTION = -EBADMSG,
-#else    
+#else
     BAD_INDEX           = -E2BIG,
     NOT_ENOUGH_DATA     = (UNKNOWN_ERROR + 3),
     WOULD_BLOCK         = (UNKNOWN_ERROR + 4),
     TIMED_OUT           = (UNKNOWN_ERROR + 5),
     UNKNOWN_TRANSACTION = (UNKNOWN_ERROR + 6),
-#endif    
+#endif
     FDS_NOT_ALLOWED     = (UNKNOWN_ERROR + 7),
 };
 
@@ -82,7 +84,7 @@ enum {
 #endif
 
 }; // namespace android
-    
+
 // ---------------------------------------------------------------------------
-    
+
 #endif // ANDROID_ERRORS_H

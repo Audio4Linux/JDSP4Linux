@@ -22,21 +22,20 @@
     android:animateLayoutChanges="true"
     tools:context=".DSPManager">
 
-    <FrameLayout
-        android:id="@+id/dsp_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+  <FrameLayout
+      android:id="@+id/dsp_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/dsp_navigation_drawer"
-        android:background="@color/navigation_drawer"
-        android:layout_width="260dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" />
+  <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:id="@+id/dsp_navigation_drawer"
+      android:background="@color/navigation_drawerdark"
+      android:layout_width="260dp"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      android:choiceMode="singleChoice"
+      android:divider="@android:color/transparent"
+      android:dividerHeight="0dp" />
 
 </james.dsp.widgets.CustomDrawerLayout>
-

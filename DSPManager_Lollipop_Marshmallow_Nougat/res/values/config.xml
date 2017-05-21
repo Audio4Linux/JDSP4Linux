@@ -16,10 +16,10 @@
  -->
 <resources>
 
-    <!-- If true, menu_tabbed view is used, else it uses the menu_drawer mode -->
-    <bool name="config_use_tabbed">true</bool>
+  <!-- If true, menu_tabbed view is used, else it uses the menu_drawer mode -->
+  <bool name="config_use_tabbed">true</bool>
 
-    <!-- If false, user can't switch between menu_tabbed and menu_drawer mode -->
-    <bool name="config_allow_toggle_tabbed">true</bool>
+  <!-- If false, user can't switch between menu_tabbed and menu_drawer mode -->
+  <bool name="config_allow_toggle_tabbed">true</bool>
 
 </resources>

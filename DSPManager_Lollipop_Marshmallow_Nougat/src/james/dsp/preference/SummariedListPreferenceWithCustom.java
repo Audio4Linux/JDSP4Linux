@@ -16,19 +16,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-public class SummariedListPreferenceWithCustom extends ListPreference {
-    private static String impulseResponsePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/" + DSPManager.IMPULSERESPONSE_FOLDER + "/";
-    public SummariedListPreferenceWithCustom(Context context, AttributeSet set) {
+public class SummariedListPreferenceWithCustom extends ListPreference
+{
+    public SummariedListPreferenceWithCustom(Context context, AttributeSet set)
+    {
         super(context, set);
     }
 
     // Read file list from path
-    public static void getFileNameList(File path, String fileExt, ArrayList<String> fileList) {
-        if (path.isDirectory()) {
+    public static void getFileNameList(File path, String fileExt, ArrayList<String> fileList)
+    {
+        if (path.isDirectory())
+        {
             File[] files = path.listFiles();
             if (null == files) return;
             for (File file : files) getFileNameList(file, fileExt, fileList);
-        } else {
+        }
+        else
+        {
             String filePath = path.getAbsolutePath();
             String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
             if (fileName.toLowerCase(Locale.US).endsWith(fileExt))
@@ -36,74 +41,83 @@ public class SummariedListPreferenceWithCustom extends ListPreference {
         }
     }
     @Override
-    protected void onPrepareDialogBuilder(Builder builder) {
-        try {
-            if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    protected void onPrepareDialogBuilder(Builder builder)
+    {
+        try
+        {
+            if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+            {
                 Log.i(DSPManager.TAG, "External storage not mounted");
                 setEntries(new String[0]);
                 setEntryValues(new String[0]);
                 String tip = getContext().getResources().getString(R.string.text_ir_dir_isempty);
-                tip = String.format(tip, impulseResponsePath);
+                tip = String.format(tip, DSPManager.impulseResponsePath);
                 Toast.makeText(getContext(), tip, Toast.LENGTH_LONG).show();
                 super.onPrepareDialogBuilder(builder);
                 return;
             }
-
-            final String kernelPath = impulseResponsePath;
+            final String kernelPath = DSPManager.impulseResponsePath;
             File kernelFile = new File(kernelPath);
-
-            if (!kernelFile.exists()) {
+            if (!kernelFile.exists())
+            {
                 Log.i(DSPManager.TAG, "Impulse response directory does not exists");
                 kernelFile.mkdirs();
                 kernelFile.mkdir();
-            } else Log.i(DSPManager.TAG, "Impulse response directory exists");
-
+            }
+            else Log.i(DSPManager.TAG, "Impulse response directory exists");
             ArrayList<String> kernelList = new ArrayList<String>();
             getFileNameList(kernelFile, ".wav", kernelList);
-
-            if (kernelList.isEmpty()) {
+            if (kernelList.isEmpty())
+            {
                 String tip = getContext().getResources().getString(R.string.text_ir_dir_isempty);
-                tip = String.format(tip, impulseResponsePath);
+                tip = String.format(tip, DSPManager.impulseResponsePath);
                 Toast.makeText(getContext(), tip, Toast.LENGTH_LONG).show();
-            } else Collections.sort(kernelList);
-
+            }
+            else Collections.sort(kernelList);
             final String[] kernelArray = new String[kernelList.size()];
             final String[] arrayValue = new String[kernelList.size()];
-            for (int i = 0; i < kernelList.size(); i++) {
+            for (int i = 0; i < kernelList.size(); i++)
+            {
                 kernelArray[i] = kernelList.get(i);
                 arrayValue[i] = kernelPath + kernelList.get(i);
             }
-
             setEntries(kernelArray);
             setEntryValues(arrayValue);
             super.onPrepareDialogBuilder(builder);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             setEntries(new String[0]);
             setEntryValues(new String[0]);
             String tip = getContext().getResources().getString(R.string.text_ir_dir_isempty);
-            tip = String.format(tip, impulseResponsePath);
+            tip = String.format(tip, DSPManager.impulseResponsePath);
             Toast.makeText(getContext(), tip, Toast.LENGTH_LONG).show();
             super.onPrepareDialogBuilder(builder);
         }
     }
 
     @Override
-    public void setValue(String value) {
+    public void setValue(String value)
+    {
         super.setValue(value);
-
-        try {
+        try
+        {
             CharSequence[] entries = getEntries();
             CharSequence[] entryValues = getEntryValues();
-            if (entries == null || entryValues == null) {
-                if (value == null) {
+            if (entries == null || entryValues == null)
+            {
+                if (value == null)
+                {
                     setSummary("");
                     return;
                 }
-                if (value.isEmpty()) {
+                if (value.isEmpty())
+                {
                     setSummary("");
                     return;
                 }
-                if (value.contains("/")) {
+                if (value.contains("/"))
+                {
                     String fileName = value.substring(value.lastIndexOf("/") + 1);
                     setSummary(fileName);
                     return;
@@ -111,18 +125,23 @@ public class SummariedListPreferenceWithCustom extends ListPreference {
                 setSummary(value);
                 return;
             }
-            for (int i = 0; i < entryValues.length; i++) {
-                if (entryValues[i].equals(value)) {
+            for (int i = 0; i < entryValues.length; i++)
+            {
+                if (entryValues[i].equals(value))
+                {
                     setSummary(entries[i]);
                     break;
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             setSummary("");
         }
     }
 
-    public void refreshFromPreference() {
+    public void refreshFromPreference()
+    {
         onSetInitialValue(true, null);
     }
 }

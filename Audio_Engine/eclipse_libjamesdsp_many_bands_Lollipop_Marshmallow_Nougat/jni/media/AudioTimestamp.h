@@ -19,11 +19,14 @@
 
 #include <time.h>
 
-namespace android {
+namespace android
+{
 
-class AudioTimestamp {
+class AudioTimestamp
+{
 public:
-    AudioTimestamp() : mPosition(0) {
+    AudioTimestamp() : mPosition(0)
+    {
         mTime.tv_sec = 0;
         mTime.tv_nsec = 0;
     }

@@ -25,7 +25,8 @@
 #include "utils/Errors.h"
 #include "IInterface.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------------
 
@@ -35,7 +36,8 @@ public:
     DECLARE_META_INTERFACE(MemoryHeap);
 
     // flags returned by getFlags()
-    enum {
+    enum
+    {
         READ_ONLY   = 0x00000001
     };
 
@@ -46,20 +48,29 @@ public:
     virtual uint32_t    getOffset() const = 0;
 
     // these are there just for backward source compatibility
-    int32_t heapID() const { return getHeapID(); }
-    void*   base() const  { return getBase(); }
-    size_t  virtualSize() const { return getSize(); }
+    int32_t heapID() const
+    {
+        return getHeapID();
+    }
+    void*   base() const
+    {
+        return getBase();
+    }
+    size_t  virtualSize() const
+    {
+        return getSize();
+    }
 };
 
 class BnMemoryHeap : public BnInterface<IMemoryHeap>
 {
 public:
-    virtual status_t onTransact( 
-            uint32_t code,
-            const Parcel& data,
-            Parcel* reply,
-            uint32_t flags = 0);
-    
+    virtual status_t onTransact(
+        uint32_t code,
+        const Parcel& data,
+        Parcel* reply,
+        uint32_t flags = 0);
+
     BnMemoryHeap();
 protected:
     virtual ~BnMemoryHeap();
@@ -85,10 +96,10 @@ class BnMemory : public BnInterface<IMemory>
 {
 public:
     virtual status_t onTransact(
-            uint32_t code,
-            const Parcel& data,
-            Parcel* reply,
-            uint32_t flags = 0);
+        uint32_t code,
+        const Parcel& data,
+        Parcel* reply,
+        uint32_t flags = 0);
 
     BnMemory();
 protected:

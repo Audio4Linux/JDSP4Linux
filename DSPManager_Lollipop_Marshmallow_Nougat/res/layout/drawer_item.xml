@@ -21,28 +21,28 @@
     android:layout_width="match_parent"
     android:layout_height="60dp">
 
-    <ImageView
-        android:id="@+id/drawer_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true" />
+  <ImageView
+      android:id="@+id/drawer_icon"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:paddingLeft="10dp"
+      android:paddingTop="10dp"
+      android:paddingRight="10dp"
+      android:paddingBottom="10dp"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true" />
 
-    <TextView
-        android:id="@+id/drawer_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#111"
-        android:textSize="15sp"
-        android:background="?android:attr/activatedBackgroundIndicator"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+  <TextView
+      android:id="@+id/drawer_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textColor="#111"
+      android:textSize="15sp"
+      android:background="?android:attr/activatedBackgroundIndicator"
+      android:textAppearance="?android:attr/textAppearanceListItemSmall"
+      android:minHeight="?android:attr/listPreferredItemHeightSmall"
+      android:gravity="center_vertical"
+      android:paddingLeft="16dp"
+      android:paddingRight="16dp" />
 
 </RelativeLayout>

@@ -41,26 +41,28 @@ THE SOFTWARE.
 #include "PoleFilter.h"
 #include "State.h"
 
-namespace Iir {
+namespace Iir
+{
 
 /*
  * Filters with Butterworth response characteristics
  *
  */
 
-namespace Butterworth {
+namespace Butterworth
+{
 
 // Half-band analog prototypes (s-plane)
 
 class AnalogLowPass : public LayoutBase
 {
 public:
-  AnalogLowPass ();
+    AnalogLowPass ();
 
-  void design (const int numPoles);
+    void design (const int numPoles);
 
 private:
-  int m_numPoles;
+    int m_numPoles;
 };
 
 //------------------------------------------------------------------------------
@@ -68,13 +70,13 @@ private:
 class AnalogLowShelf : public LayoutBase
 {
 public:
-  AnalogLowShelf ();
+    AnalogLowShelf ();
 
-  void design (int numPoles, double gainDb);
+    void design (int numPoles, double gainDb);
 
 private:
-  int m_numPoles;
-  double m_gainDb;
+    int m_numPoles;
+    double m_gainDb;
 };
 
 //------------------------------------------------------------------------------
@@ -83,57 +85,57 @@ private:
 
 struct LowPassBase : PoleFilterBase <AnalogLowPass>
 {
-  void setup (int order,
-              double sampleRate,
-              double cutoffFrequency);
+    void setup (int order,
+                double sampleRate,
+                double cutoffFrequency);
 };
 
 struct HighPassBase : PoleFilterBase <AnalogLowPass>
 {
-  void setup (int order,
-              double sampleRate,
-              double cutoffFrequency);
+    void setup (int order,
+                double sampleRate,
+                double cutoffFrequency);
 };
 
 struct BandPassBase : PoleFilterBase <AnalogLowPass>
 {
-  void setup (int order,
-              double sampleRate,
-              double centerFrequency,
-              double widthFrequency);
+    void setup (int order,
+                double sampleRate,
+                double centerFrequency,
+                double widthFrequency);
 };
 
 struct BandStopBase : PoleFilterBase <AnalogLowPass>
 {
-  void setup (int order,
-              double sampleRate,
-              double centerFrequency,
-              double widthFrequency);
+    void setup (int order,
+                double sampleRate,
+                double centerFrequency,
+                double widthFrequency);
 };
 
 struct LowShelfBase : PoleFilterBase <AnalogLowShelf>
 {
-  void setup (int order,
-              double sampleRate,
-              double cutoffFrequency,
-              double gainDb);
+    void setup (int order,
+                double sampleRate,
+                double cutoffFrequency,
+                double gainDb);
 };
 
 struct HighShelfBase : PoleFilterBase <AnalogLowShelf>
 {
-  void setup (int order,
-              double sampleRate,
-              double cutoffFrequency,
-              double gainDb);
+    void setup (int order,
+                double sampleRate,
+                double cutoffFrequency,
+                double gainDb);
 };
 
 struct BandShelfBase : PoleFilterBase <AnalogLowShelf>
 {
-  void setup (int order,
-              double sampleRate,
-              double centerFrequency,
-              double widthFrequency,
-              double gainDb);
+    void setup (int order,
+                double sampleRate,
+                double centerFrequency,
+                double widthFrequency,
+                double gainDb);
 };
 
 //------------------------------------------------------------------------------

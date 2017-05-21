@@ -25,7 +25,8 @@
 #include "binder/IInterface.h"
 #include "binder/IMemory.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------------
 

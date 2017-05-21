@@ -46,7 +46,8 @@ __BEGIN_DECLS
 // - When used for effect type and the engine is implementing and effect corresponding to a standard
 // OpenSL ES interface, this ID must be the one defined in OpenSLES_IID.h for that interface.
 // - When used as uuid, it should be a unique UUID for this particular implementation.
-typedef struct effect_uuid_s {
+typedef struct effect_uuid_s
+{
     uint32_t timeLow;
     uint16_t timeMid;
     uint16_t timeHiAndVersion;
@@ -67,7 +68,8 @@ static const char * const EFFECT_UUID_NULL_STR = "ec7178ec-e5e1-4432-a3f4-4657e6
 
 // The effect descriptor contains necessary information to facilitate the enumeration of the effect
 // engines present in a library.
-typedef struct effect_descriptor_s {
+typedef struct effect_descriptor_s
+{
     effect_uuid_t type;     // UUID of to the OpenSL ES interface implemented by this effect
     effect_uuid_t uuid;     // UUID for this particular implementation
     uint32_t apiVersion;    // Version of the effect control API implemented
@@ -283,7 +285,8 @@ typedef struct audio_buffer_s audio_buffer_t;
 
 
 // Effect control interface definition
-struct effect_interface_s {
+struct effect_interface_s
+{
     ////////////////////////////////////////////////////////////////////////////////
     //
     //    Function:       process
@@ -416,30 +419,31 @@ struct effect_interface_s {
 //
 //--- Standardized command codes for command() function
 //
-enum effect_command_e {
-   EFFECT_CMD_INIT,                 // initialize effect engine
-   EFFECT_CMD_SET_CONFIG,           // configure effect engine (see effect_config_t)
-   EFFECT_CMD_RESET,                // reset effect engine
-   EFFECT_CMD_ENABLE,               // enable effect process
-   EFFECT_CMD_DISABLE,              // disable effect process
-   EFFECT_CMD_SET_PARAM,            // set parameter immediately (see effect_param_t)
-   EFFECT_CMD_SET_PARAM_DEFERRED,   // set parameter deferred
-   EFFECT_CMD_SET_PARAM_COMMIT,     // commit previous set parameter deferred
-   EFFECT_CMD_GET_PARAM,            // get parameter
-   EFFECT_CMD_SET_DEVICE,           // set audio device (see audio.h, audio_devices_t)
-   EFFECT_CMD_SET_VOLUME,           // set volume
-   EFFECT_CMD_SET_AUDIO_MODE,       // set the audio mode (normal, ring, ...)
-   EFFECT_CMD_SET_CONFIG_REVERSE,   // configure effect engine reverse stream(see effect_config_t)
-   EFFECT_CMD_SET_INPUT_DEVICE,     // set capture device (see audio.h, audio_devices_t)
-   EFFECT_CMD_GET_CONFIG,           // read effect engine configuration
-   EFFECT_CMD_GET_CONFIG_REVERSE,   // read configure effect engine reverse stream configuration
-   EFFECT_CMD_GET_FEATURE_SUPPORTED_CONFIGS,// get all supported configurations for a feature.
-   EFFECT_CMD_GET_FEATURE_CONFIG,   // get current feature configuration
-   EFFECT_CMD_SET_FEATURE_CONFIG,   // set current feature configuration
-   EFFECT_CMD_SET_AUDIO_SOURCE,     // set the audio source (see audio.h, audio_source_t)
-   EFFECT_CMD_OFFLOAD,              // set if effect thread is an offload one,
-                                    // send the ioHandle of the effect thread
-   EFFECT_CMD_FIRST_PROPRIETARY = 0x10000 // first proprietary command code
+enum effect_command_e
+{
+    EFFECT_CMD_INIT,                 // initialize effect engine
+    EFFECT_CMD_SET_CONFIG,           // configure effect engine (see effect_config_t)
+    EFFECT_CMD_RESET,                // reset effect engine
+    EFFECT_CMD_ENABLE,               // enable effect process
+    EFFECT_CMD_DISABLE,              // disable effect process
+    EFFECT_CMD_SET_PARAM,            // set parameter immediately (see effect_param_t)
+    EFFECT_CMD_SET_PARAM_DEFERRED,   // set parameter deferred
+    EFFECT_CMD_SET_PARAM_COMMIT,     // commit previous set parameter deferred
+    EFFECT_CMD_GET_PARAM,            // get parameter
+    EFFECT_CMD_SET_DEVICE,           // set audio device (see audio.h, audio_devices_t)
+    EFFECT_CMD_SET_VOLUME,           // set volume
+    EFFECT_CMD_SET_AUDIO_MODE,       // set the audio mode (normal, ring, ...)
+    EFFECT_CMD_SET_CONFIG_REVERSE,   // configure effect engine reverse stream(see effect_config_t)
+    EFFECT_CMD_SET_INPUT_DEVICE,     // set capture device (see audio.h, audio_devices_t)
+    EFFECT_CMD_GET_CONFIG,           // read effect engine configuration
+    EFFECT_CMD_GET_CONFIG_REVERSE,   // read configure effect engine reverse stream configuration
+    EFFECT_CMD_GET_FEATURE_SUPPORTED_CONFIGS,// get all supported configurations for a feature.
+    EFFECT_CMD_GET_FEATURE_CONFIG,   // get current feature configuration
+    EFFECT_CMD_SET_FEATURE_CONFIG,   // set current feature configuration
+    EFFECT_CMD_SET_AUDIO_SOURCE,     // set the audio source (see audio.h, audio_source_t)
+    EFFECT_CMD_OFFLOAD,              // set if effect thread is an offload one,
+    // send the ioHandle of the effect thread
+    EFFECT_CMD_FIRST_PROPRIETARY = 0x10000 // first proprietary command code
 };
 
 //==================================================================================================
@@ -775,9 +779,11 @@ enum effect_command_e {
 // The buffer size is expressed in frame count, a frame being composed of samples for all
 // channels at a given time. Frame size for unspecified format (AUDIO_FORMAT_OTHER) is 8 bit by
 // definition
-struct audio_buffer_s {
+struct audio_buffer_s
+{
     size_t   frameCount;        // number of frames in buffer
-    union {
+    union
+    {
         void*       raw;        // raw pointer to start of buffer
         int32_t*    s32;        // pointer to signed 32 bit data at start of buffer
         int16_t*    s16;        // pointer to signed 16 bit data at start of buffer
@@ -799,7 +805,8 @@ struct audio_buffer_s {
 
 typedef int32_t (* buffer_function_t)(void *cookie, audio_buffer_t *buffer);
 
-typedef struct buffer_provider_s {
+typedef struct buffer_provider_s
+{
     buffer_function_t getBuffer;       // retrieve next buffer
     buffer_function_t releaseBuffer;   // release used buffer
     void       *cookie;                // for use by client of buffer provider functions
@@ -810,7 +817,8 @@ typedef struct buffer_provider_s {
 // to be used by the effect engine. It is part of the effect_config_t
 // structure that defines both input and output buffer configurations and is
 // passed by the EFFECT_CMD_SET_CONFIG or EFFECT_CMD_SET_CONFIG_REVERSE command.
-typedef struct buffer_config_s {
+typedef struct buffer_config_s
+{
     audio_buffer_t  buffer;     // buffer for use by process() function if not passed explicitly
     uint32_t   samplingRate;    // sampling rate
     uint32_t   channels;        // channel mask (see audio_channel_mask_t in audio.h)
@@ -822,7 +830,8 @@ typedef struct buffer_config_s {
 
 // Values for "accessMode" field of buffer_config_t:
 //   overwrite, read only, accumulate (read/modify/write)
-enum effect_buffer_access_e {
+enum effect_buffer_access_e
+{
     EFFECT_BUFFER_ACCESS_WRITE,
     EFFECT_BUFFER_ACCESS_READ,
     EFFECT_BUFFER_ACCESS_ACCUMULATE
@@ -830,14 +839,16 @@ enum effect_buffer_access_e {
 };
 
 // feature identifiers for EFFECT_CMD_GET_FEATURE_SUPPORTED_CONFIGS command
-enum effect_feature_e {
+enum effect_feature_e
+{
     EFFECT_FEATURE_AUX_CHANNELS, // supports auxiliary channels (e.g. dual mic noise suppressor)
     EFFECT_FEATURE_CNT
 };
 
 // EFFECT_FEATURE_AUX_CHANNELS feature configuration descriptor. Describe a combination
 // of main and auxiliary channels supported
-typedef struct channel_config_s {
+typedef struct channel_config_s
+{
     audio_channel_mask_t main_channels; // channel mask for main channels
     audio_channel_mask_t aux_channels;  // channel mask for auxiliary channels
 } channel_config_t;
@@ -858,7 +869,8 @@ typedef struct channel_config_s {
 
 // effect_config_s structure describes the format of the pCmdData argument of EFFECT_CMD_SET_CONFIG
 // command to configure audio parameters and buffers for effect engine input and output.
-typedef struct effect_config_s {
+typedef struct effect_config_s
+{
     buffer_config_t   inputCfg;
     buffer_config_t   outputCfg;
 } effect_config_t;
@@ -888,7 +900,8 @@ typedef struct effect_config_s {
 //  |           |   |
 //  +-----------+
 
-typedef struct effect_param_s {
+typedef struct effect_param_s
+{
     int32_t     status;     // Transaction status (unused for command, used for reply)
     uint32_t    psize;      // Parameter size
     uint32_t    vsize;      // Value size
@@ -896,7 +909,8 @@ typedef struct effect_param_s {
 } effect_param_t;
 
 // structure used by EFFECT_CMD_OFFLOAD command
-typedef struct effect_offload_param_s {
+typedef struct effect_offload_param_s
+{
     bool isOffload;         // true if the playback thread the effect is attached to is offloaded
     int ioHandle;           // io handle of the playback thread the effect is attached to
 } effect_offload_param_t;
@@ -916,7 +930,8 @@ typedef struct effect_offload_param_s {
 // Every effect library must have a data structure named AUDIO_EFFECT_LIBRARY_INFO_SYM
 // and the fields of this data structure must begin with audio_effect_library_t
 
-typedef struct audio_effect_library_s {
+typedef struct audio_effect_library_s
+{
     // tag must be initialized to AUDIO_EFFECT_LIBRARY_TAG
     uint32_t tag;
     // Version of the effect library API : 0xMMMMmmmm MMMM: Major, mmmm: minor

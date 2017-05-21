@@ -80,7 +80,8 @@ __BEGIN_DECLS
 /* XXX: this should be defined OUTSIDE of frameworks/base */
 struct effect_descriptor_s;
 
-struct audio_policy {
+struct audio_policy
+{
     /*
      * configuration functions
      */
@@ -93,9 +94,9 @@ struct audio_policy {
 
     /* retrieve a device connection status */
     audio_policy_dev_state_t (*get_device_connection_state)(
-                                            const struct audio_policy *pol,
-                                            audio_devices_t device,
-                                            const char *device_address);
+        const struct audio_policy *pol,
+        audio_devices_t device,
+        const char *device_address);
 
     /* indicate a change in phone state. Valid phones states are defined
      * by audio_mode_t */
@@ -112,7 +113,7 @@ struct audio_policy {
 
     /* retrieve current device category forced for a given usage */
     audio_policy_forced_cfg_t (*get_force_use)(const struct audio_policy *pol,
-                                               audio_policy_force_use_t usage);
+            audio_policy_force_use_t usage);
 
     /* if can_mute is true, then audio streams that are marked ENFORCED_AUDIBLE
      * can still be muted. */
@@ -196,15 +197,15 @@ struct audio_policy {
      * index for the specified device.
      * The index is within the range specified by init_stream_volume() */
     int (*set_stream_volume_index_for_device)(struct audio_policy *pol,
-                                   audio_stream_type_t stream,
-                                   int index,
-                                   audio_devices_t device);
+            audio_stream_type_t stream,
+            int index,
+            audio_devices_t device);
 
     /* retrieve current volume index for the specified stream for the specified device */
     int (*get_stream_volume_index_for_device)(const struct audio_policy *pol,
-                                   audio_stream_type_t stream,
-                                   int *index,
-                                   audio_devices_t device);
+            audio_stream_type_t stream,
+            int *index,
+            audio_devices_t device);
 
     /* return the strategy corresponding to a given stream type */
     uint32_t (*get_strategy_for_stream)(const struct audio_policy *pol,
@@ -212,11 +213,11 @@ struct audio_policy {
 
     /* return the enabled output devices for the given stream type */
     audio_devices_t (*get_devices_for_stream)(const struct audio_policy *pol,
-                                       audio_stream_type_t stream);
+            audio_stream_type_t stream);
 
     /* Audio effect management */
     audio_io_handle_t (*get_output_for_effect)(struct audio_policy *pol,
-                                            const struct effect_descriptor_s *desc);
+            const struct effect_descriptor_s *desc);
 
     int (*register_effect)(struct audio_policy *pol,
                            const struct effect_descriptor_s *desc,
@@ -230,26 +231,27 @@ struct audio_policy {
     int (*set_effect_enabled)(struct audio_policy *pol, int id, bool enabled);
 
     bool (*is_stream_active)(const struct audio_policy *pol,
-            audio_stream_type_t stream,
-            uint32_t in_past_ms);
+                             audio_stream_type_t stream,
+                             uint32_t in_past_ms);
 
     bool (*is_stream_active_remotely)(const struct audio_policy *pol,
-            audio_stream_type_t stream,
-            uint32_t in_past_ms);
+                                      audio_stream_type_t stream,
+                                      uint32_t in_past_ms);
 
     bool (*is_source_active)(const struct audio_policy *pol,
-            audio_source_t source);
+                             audio_source_t source);
 
     /* dump state */
     int (*dump)(const struct audio_policy *pol, int fd);
 
     /* check if offload is possible for given sample rate, bitrate, duration, ... */
     bool (*is_offload_supported)(const struct audio_policy *pol,
-                                const audio_offload_info_t *info);
+                                 const audio_offload_info_t *info);
 };
 
 
-struct audio_policy_service_ops {
+struct audio_policy_service_ops
+{
     /*
      * Audio output Control functions
      */
@@ -279,8 +281,8 @@ struct audio_policy_service_ops {
      * a special mixer thread in the AudioFlinger.
      */
     audio_io_handle_t (*open_duplicate_output)(void *service,
-                                               audio_io_handle_t output1,
-                                               audio_io_handle_t output2);
+            audio_io_handle_t output1,
+            audio_io_handle_t output2);
 
     /* closes the output stream */
     int (*close_output)(void *service, audio_io_handle_t output);
@@ -378,21 +380,21 @@ struct audio_policy_service_ops {
      * module when calling open_output_on_module() or open_input_on_module()
      */
     audio_module_handle_t (*load_hw_module)(void *service,
-                                              const char *name);
+                                            const char *name);
 
     /* Opens an audio output on a particular HW module.
      *
      * Same as open_output() but specifying a specific HW module on which the output must be opened.
      */
     audio_io_handle_t (*open_output_on_module)(void *service,
-                                     audio_module_handle_t module,
-                                     audio_devices_t *pDevices,
-                                     uint32_t *pSamplingRate,
-                                     audio_format_t *pFormat,
-                                     audio_channel_mask_t *pChannelMask,
-                                     uint32_t *pLatencyMs,
-                                     audio_output_flags_t flags,
-                                     const audio_offload_info_t *offloadInfo);
+            audio_module_handle_t module,
+            audio_devices_t *pDevices,
+            uint32_t *pSamplingRate,
+            audio_format_t *pFormat,
+            audio_channel_mask_t *pChannelMask,
+            uint32_t *pLatencyMs,
+            audio_output_flags_t flags,
+            const audio_offload_info_t *offloadInfo);
 
     /* Opens an audio input on a particular HW module.
      *
@@ -400,11 +402,11 @@ struct audio_policy_service_ops {
      * Also removed deprecated acoustics parameter
      */
     audio_io_handle_t (*open_input_on_module)(void *service,
-                                    audio_module_handle_t module,
-                                    audio_devices_t *pDevices,
-                                    uint32_t *pSamplingRate,
-                                    audio_format_t *pFormat,
-                                    audio_channel_mask_t *pChannelMask);
+            audio_module_handle_t module,
+            audio_devices_t *pDevices,
+            uint32_t *pSamplingRate,
+            audio_format_t *pFormat,
+            audio_channel_mask_t *pChannelMask);
 
 };
 
@@ -415,11 +417,13 @@ struct audio_policy_service_ops {
  * and the fields of this data structure must begin with hw_module_t
  * followed by module specific information.
  */
-typedef struct audio_policy_module {
+typedef struct audio_policy_module
+{
     struct hw_module_t common;
 } audio_policy_module_t;
 
-struct audio_policy_device {
+struct audio_policy_device
+{
     /**
      * Common methods of the audio policy device.  This *must* be the first member of
      * audio_policy_device as users of this structure will cast a hw_device_t to
@@ -440,7 +444,7 @@ struct audio_policy_device {
 /** convenience API for opening and closing a supported device */
 
 static inline int audio_policy_dev_open(const hw_module_t* module,
-                                    struct audio_policy_device** device)
+                                        struct audio_policy_device** device)
 {
     return module->methods->open(module, AUDIO_POLICY_INTERFACE,
                                  (hw_device_t**)device);

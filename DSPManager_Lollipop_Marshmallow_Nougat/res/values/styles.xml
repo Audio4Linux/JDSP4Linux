@@ -16,17 +16,37 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="@android:style/Theme.Material">
-        <item name="android:colorPrimary">@color/primary</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:colorAccent">@color/accent</item>
-        <item name="android:navigationBarColor">@color/primary_dark</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-    </style>
+  <style name="AppTheme" parent="@android:style/Theme.Material">
+    <item name="android:colorPrimary">@color/primary</item>
+    <item name="android:colorPrimaryDark">@color/primary_dark</item>
+    <item name="android:colorAccent">@color/accent</item>
+    <item name="android:navigationBarColor">@color/primary_dark</item>
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+  </style>
+  <style name="AppThemeRed" parent="@android:style/Theme.Material">
+    <item name="android:windowBackground">@color/backgroundred</item>
+    <item name="android:itemBackground">@color/backgroundred</item>
+    <item name="android:textColorAlertDialogListItem">@color/primaryred</item>
+    <item name="android:colorPrimary">@color/primaryred</item>
+    <item name="android:colorPrimaryDark">@color/primaryred_dark</item>
+    <item name="android:colorAccent">@color/accentred</item>
+    <item name="android:navigationBarColor">@color/primaryred_dark</item>
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+  </style>
+  <style name="AppThemeIdea" parent="@android:style/Theme.Material">
+    <item name="android:windowBackground">@color/backgroundidea</item>
+    <item name="android:itemBackground">@color/backgroundidea</item>
+    <item name="android:textColorAlertDialogListItem">@color/primaryidea</item>
+    <item name="android:colorPrimary">@color/primaryidea</item>
+    <item name="android:colorPrimaryDark">@color/primaryidea_dark</item>
+    <item name="android:colorAccent">@color/accentidea</item>
+    <item name="android:navigationBarColor">@color/primaryidea_dark</item>
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+  </style>
 
-    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">true</item>
-        <item name="color">@android:color/white</item>
-    </style>
+  <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+    <item name="spinBars">true</item>
+    <item name="color">@android:color/white</item>
+  </style>
 
 </resources>

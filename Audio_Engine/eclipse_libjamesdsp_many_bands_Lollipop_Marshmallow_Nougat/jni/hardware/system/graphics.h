@@ -41,7 +41,8 @@ extern "C" {
  * pixel format definitions
  */
 
-enum {
+enum
+{
     /*
      * "linear" color pixel formats:
      *
@@ -342,7 +343,8 @@ enum {
  * and each chroma value is one byte) and 1 for planar.
  */
 
-struct android_ycbcr {
+struct android_ycbcr
+{
     void *y;
     void *cb;
     void *cr;
@@ -362,7 +364,8 @@ struct android_ycbcr {
  *
  */
 
-enum {
+enum
+{
     /* flip source image horizontally (around the vertical axis) */
     HAL_TRANSFORM_FLIP_H    = 0x01,
     /* flip source image vertically (around the horizontal axis)*/
@@ -387,7 +390,8 @@ enum {
  * range (within the bit depth).
  */
 
-enum {
+enum
+{
     /*
      * Arbitrary colorspace with manually defined characteristics.
      * Colorspace definition must be communicated separately.

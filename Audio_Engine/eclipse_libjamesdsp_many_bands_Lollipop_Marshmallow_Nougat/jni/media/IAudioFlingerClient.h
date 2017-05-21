@@ -23,7 +23,8 @@
 #include "binder/utils/KeyedVector.h"
 #include "../hardware/system/audio.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------------
 

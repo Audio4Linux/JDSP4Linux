@@ -27,7 +27,8 @@
     ((((c1)<<24)) | (((c2)<<16)) | (((c3)<<8)) | (c4))
 
 // ---------------------------------------------------------------------------
-namespace android {
+namespace android
+{
 
 class BBinder;
 class BpBinder;
@@ -44,7 +45,8 @@ class Parcel;
 class IBinder : public virtual RefBase
 {
 public:
-    enum {
+    enum
+    {
         FIRST_CALL_TRANSACTION  = 0x00000001,
         LAST_CALL_TRANSACTION   = 0x00ffffff,
 
@@ -57,7 +59,7 @@ public:
         FLAG_ONEWAY             = 0x00000001
     };
 
-                          IBinder();
+    IBinder();
 
     /**
      * Check if this IBinder implements the interface named by

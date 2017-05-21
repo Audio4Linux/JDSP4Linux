@@ -60,10 +60,11 @@ static inline int bitmask_ffz(unsigned int *bitmask, int num_bits)
 {
     int bit, result;
     size_t i;
-
-    for (i = 0; i < BITS_TO_WORDS(num_bits); i++) {
+    for (i = 0; i < BITS_TO_WORDS(num_bits); i++)
+    {
         bit = ffs(~bitmask[i]);
-        if (bit) {
+        if (bit)
+        {
             // ffs is 1-indexed, return 0-indexed result
             bit--;
             result = BITS_PER_WORD * i + bit;
@@ -79,7 +80,6 @@ static inline int bitmask_weight(unsigned int *bitmask, int num_bits)
 {
     size_t i;
     int weight = 0;
-
     for (i = 0; i < BITS_TO_WORDS(num_bits); i++)
         weight += __builtin_popcount(bitmask[i]);
     return weight;

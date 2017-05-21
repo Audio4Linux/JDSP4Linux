@@ -4,7 +4,7 @@
  *
  * The following statement of license applies *only* to this header file,
  * and *not* to the other files distributed with FFTW or derived therefrom:
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -76,33 +76,36 @@ extern "C"
    command-line flag.  This is not necessary under MinGW/Cygwin, where
    libtool does the imports/exports automatically. */
 #if defined(FFTW_DLL) && (defined(_WIN32) || defined(__WIN32__))
-   /* annoying Windows syntax for shared-library declarations */
+/* annoying Windows syntax for shared-library declarations */
 #  if defined(COMPILING_FFTW) /* defined in api.h when compiling FFTW */
-#    define FFTW_EXTERN extern __declspec(dllexport) 
+#    define FFTW_EXTERN extern __declspec(dllexport)
 #  else /* user is calling FFTW; import symbol */
-#    define FFTW_EXTERN extern __declspec(dllimport) 
+#    define FFTW_EXTERN extern __declspec(dllimport)
 #  endif
 #else
 #  define FFTW_EXTERN extern
 #endif
 
-enum fftw_r2r_kind_do_not_use_me {
-     FFTW_R2HC=0, FFTW_HC2R=1, FFTW_DHT=2,
-     FFTW_REDFT00=3, FFTW_REDFT01=4, FFTW_REDFT10=5, FFTW_REDFT11=6,
-     FFTW_RODFT00=7, FFTW_RODFT01=8, FFTW_RODFT10=9, FFTW_RODFT11=10
+enum fftw_r2r_kind_do_not_use_me
+{
+    FFTW_R2HC=0, FFTW_HC2R=1, FFTW_DHT=2,
+    FFTW_REDFT00=3, FFTW_REDFT01=4, FFTW_REDFT10=5, FFTW_REDFT11=6,
+    FFTW_RODFT00=7, FFTW_RODFT01=8, FFTW_RODFT10=9, FFTW_RODFT11=10
 };
 
-struct fftw_iodim_do_not_use_me {
-     int n;                     /* dimension size */
-     int is;			/* input stride */
-     int os;			/* output stride */
+struct fftw_iodim_do_not_use_me
+{
+    int n;                     /* dimension size */
+    int is;			/* input stride */
+    int os;			/* output stride */
 };
 
 #include <stddef.h> /* for ptrdiff_t */
-struct fftw_iodim64_do_not_use_me {
-     ptrdiff_t n;                     /* dimension size */
-     ptrdiff_t is;			/* input stride */
-     ptrdiff_t os;			/* output stride */
+struct fftw_iodim64_do_not_use_me
+{
+    ptrdiff_t n;                     /* dimension size */
+    ptrdiff_t is;			/* input stride */
+    ptrdiff_t os;			/* output stride */
 };
 
 typedef void (*fftw_write_char_func_do_not_use_me)(char c, void *);
@@ -111,7 +114,7 @@ typedef int (*fftw_read_char_func_do_not_use_me)(void *);
 /*
   huge second-order macro that defines prototypes for all API
   functions.  We expand this macro for each supported precision
- 
+
   X: name-mangling macro
   R: real data type
   C: complex data type

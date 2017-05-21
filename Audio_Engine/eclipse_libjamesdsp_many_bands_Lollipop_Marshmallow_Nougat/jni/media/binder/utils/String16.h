@@ -30,7 +30,8 @@ extern "C" {
 
 // ---------------------------------------------------------------------------
 
-namespace android {
+namespace android
+{
 
 // ---------------------------------------------------------------------------
 
@@ -49,56 +50,56 @@ public:
      */
     enum StaticLinkage { kEmptyString };
 
-                                String16();
+    String16();
     explicit                    String16(StaticLinkage);
-                                String16(const String16& o);
-                                String16(const String16& o,
-                                         size_t len,
-                                         size_t begin=0);
+    String16(const String16& o);
+    String16(const String16& o,
+             size_t len,
+             size_t begin=0);
     explicit                    String16(const char16_t* o);
     explicit                    String16(const char16_t* o, size_t len);
     explicit                    String16(const String8& o);
     explicit                    String16(const char* o);
     explicit                    String16(const char* o, size_t len);
 
-                                ~String16();
-    
+    ~String16();
+
     inline  const char16_t*     string() const;
     inline  size_t              size() const;
-    
+
     inline  const SharedBuffer* sharedBuffer() const;
-    
-            void                setTo(const String16& other);
-            status_t            setTo(const char16_t* other);
-            status_t            setTo(const char16_t* other, size_t len);
-            status_t            setTo(const String16& other,
-                                      size_t len,
-                                      size_t begin=0);
-    
-            status_t            append(const String16& other);
-            status_t            append(const char16_t* other, size_t len);
-            
+
+    void                setTo(const String16& other);
+    status_t            setTo(const char16_t* other);
+    status_t            setTo(const char16_t* other, size_t len);
+    status_t            setTo(const String16& other,
+                              size_t len,
+                              size_t begin=0);
+
+    status_t            append(const String16& other);
+    status_t            append(const char16_t* other, size_t len);
+
     inline  String16&           operator=(const String16& other);
-    
+
     inline  String16&           operator+=(const String16& other);
     inline  String16            operator+(const String16& other) const;
 
-            status_t            insert(size_t pos, const char16_t* chrs);
-            status_t            insert(size_t pos,
-                                       const char16_t* chrs, size_t len);
+    status_t            insert(size_t pos, const char16_t* chrs);
+    status_t            insert(size_t pos,
+                               const char16_t* chrs, size_t len);
 
-            ssize_t             findFirst(char16_t c) const;
-            ssize_t             findLast(char16_t c) const;
+    ssize_t             findFirst(char16_t c) const;
+    ssize_t             findLast(char16_t c) const;
 
-            bool                startsWith(const String16& prefix) const;
-            bool                startsWith(const char16_t* prefix) const;
-            
-            status_t            makeLower();
+    bool                startsWith(const String16& prefix) const;
+    bool                startsWith(const char16_t* prefix) const;
 
-            status_t            replaceAll(char16_t replaceThis,
-                                           char16_t withThis);
+    status_t            makeLower();
 
-            status_t            remove(size_t len, size_t begin=0);
+    status_t            replaceAll(char16_t replaceThis,
+                                   char16_t withThis);
+
+    status_t            remove(size_t len, size_t begin=0);
 
     inline  int                 compare(const String16& other) const;
 
@@ -108,18 +109,18 @@ public:
     inline  bool                operator!=(const String16& other) const;
     inline  bool                operator>=(const String16& other) const;
     inline  bool                operator>(const String16& other) const;
-    
+
     inline  bool                operator<(const char16_t* other) const;
     inline  bool                operator<=(const char16_t* other) const;
     inline  bool                operator==(const char16_t* other) const;
     inline  bool                operator!=(const char16_t* other) const;
     inline  bool                operator>=(const char16_t* other) const;
     inline  bool                operator>(const char16_t* other) const;
-    
+
     inline                      operator const char16_t*() const;
-    
+
 private:
-            const char16_t*     mString;
+    const char16_t*     mString;
 };
 
 // String16 can be trivially moved using memcpy() because moving does not

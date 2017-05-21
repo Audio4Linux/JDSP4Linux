@@ -35,7 +35,8 @@
 #include <media/IEffectClient.h>
 #include "binder/utils/String8.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------------
 
@@ -45,7 +46,8 @@ public:
     DECLARE_META_INTERFACE(AudioFlinger);
 
     // or-able bits shared by createTrack and openRecord, but not all combinations make sense
-    enum {
+    enum
+    {
         TRACK_DEFAULT = 0,  // client requests a default AudioTrack
         TRACK_TIMED   = 1,  // client requests a TimedAudioTrack
         TRACK_FAST    = 2,  // client requests a fast AudioTrack or AudioRecord
@@ -61,38 +63,38 @@ public:
      * return null if the track cannot be created.
      */
     virtual sp<IAudioTrack> createTrack(
-                                audio_stream_type_t streamType,
-                                uint32_t sampleRate,
-                                audio_format_t format,
-                                audio_channel_mask_t channelMask,
-                                size_t *pFrameCount,
-                                track_flags_t *flags,
-                                const sp<IMemory>& sharedBuffer,
-                                // On successful return, AudioFlinger takes over the handle
-                                // reference and will release it when the track is destroyed.
-                                // However on failure, the client is responsible for release.
-                                audio_io_handle_t output,
-                                pid_t tid,  // -1 means unused, otherwise must be valid non-0
-                                int *sessionId,
-                                int clientUid,
-                                status_t *status) = 0;
+        audio_stream_type_t streamType,
+        uint32_t sampleRate,
+        audio_format_t format,
+        audio_channel_mask_t channelMask,
+        size_t *pFrameCount,
+        track_flags_t *flags,
+        const sp<IMemory>& sharedBuffer,
+        // On successful return, AudioFlinger takes over the handle
+        // reference and will release it when the track is destroyed.
+        // However on failure, the client is responsible for release.
+        audio_io_handle_t output,
+        pid_t tid,  // -1 means unused, otherwise must be valid non-0
+        int *sessionId,
+        int clientUid,
+        status_t *status) = 0;
 
     virtual sp<IAudioRecord> openRecord(
-                                // On successful return, AudioFlinger takes over the handle
-                                // reference and will release it when the track is destroyed.
-                                // However on failure, the client is responsible for release.
-                                audio_io_handle_t input,
-                                uint32_t sampleRate,
-                                audio_format_t format,
-                                audio_channel_mask_t channelMask,
-                                size_t *pFrameCount,
-                                track_flags_t *flags,
-                                pid_t tid,  // -1 means unused, otherwise must be valid non-0
-                                int *sessionId,
-                                size_t *notificationFrames,
-                                sp<IMemory>& cblk,
-                                sp<IMemory>& buffers,   // return value 0 means it follows cblk
-                                status_t *status) = 0;
+        // On successful return, AudioFlinger takes over the handle
+        // reference and will release it when the track is destroyed.
+        // However on failure, the client is responsible for release.
+        audio_io_handle_t input,
+        uint32_t sampleRate,
+        audio_format_t format,
+        audio_channel_mask_t channelMask,
+        size_t *pFrameCount,
+        track_flags_t *flags,
+        pid_t tid,  // -1 means unused, otherwise must be valid non-0
+        int *sessionId,
+        size_t *notificationFrames,
+        sp<IMemory>& cblk,
+        sp<IMemory>& buffers,   // return value 0 means it follows cblk
+        status_t *status) = 0;
 
     /* query the audio hardware state. This state never changes,
      * and therefore can be cached.
@@ -117,11 +119,11 @@ public:
      * the preference panel, mostly.
      */
     virtual     status_t    setStreamVolume(audio_stream_type_t stream, float value,
-                                    audio_io_handle_t output) = 0;
+                                            audio_io_handle_t output) = 0;
     virtual     status_t    setStreamMute(audio_stream_type_t stream, bool muted) = 0;
 
     virtual     float       streamVolume(audio_stream_type_t stream,
-                                    audio_io_handle_t output) const = 0;
+                                         audio_io_handle_t output) const = 0;
     virtual     bool        streamMute(audio_stream_type_t stream) const = 0;
 
     // set audio mode
@@ -132,9 +134,9 @@ public:
     virtual     bool        getMicMute() const = 0;
 
     virtual     status_t    setParameters(audio_io_handle_t ioHandle,
-                                    const String8& keyValuePairs) = 0;
+                                          const String8& keyValuePairs) = 0;
     virtual     String8     getParameters(audio_io_handle_t ioHandle, const String8& keys)
-                                    const = 0;
+    const = 0;
 
     // Register an object to receive audio input/output change and track notifications.
     // For a given calling pid, AudioFlinger disregards any registrations after the first.
@@ -143,7 +145,7 @@ public:
 
     // retrieve the audio recording buffer size
     virtual size_t getInputBufferSize(uint32_t sampleRate, audio_format_t format,
-            audio_channel_mask_t channelMask) const = 0;
+                                      audio_channel_mask_t channelMask) const = 0;
 
     virtual status_t openOutput(audio_module_handle_t module,
                                 audio_io_handle_t *output,
@@ -153,7 +155,7 @@ public:
                                 uint32_t *latencyMs,
                                 audio_output_flags_t flags) = 0;
     virtual audio_io_handle_t openDuplicateOutput(audio_io_handle_t output1,
-                                    audio_io_handle_t output2) = 0;
+            audio_io_handle_t output2) = 0;
     virtual status_t closeOutput(audio_io_handle_t output) = 0;
     virtual status_t suspendOutput(audio_io_handle_t output) = 0;
     virtual status_t restoreOutput(audio_io_handle_t output) = 0;
@@ -172,7 +174,7 @@ public:
     virtual status_t setVoiceVolume(float volume) = 0;
 
     virtual status_t getRenderPosition(uint32_t *halFrames, uint32_t *dspFrames,
-                                    audio_io_handle_t output) const = 0;
+                                       audio_io_handle_t output) const = 0;
 
     virtual uint32_t getInputFramesLost(audio_io_handle_t ioHandle) const = 0;
 
@@ -186,21 +188,21 @@ public:
     virtual status_t queryEffect(uint32_t index, effect_descriptor_t *pDescriptor) const = 0;
 
     virtual status_t getEffectDescriptor(const effect_uuid_t *pEffectUUID,
-                                        effect_descriptor_t *pDescriptor) const = 0;
+                                         effect_descriptor_t *pDescriptor) const = 0;
 
     virtual sp<IEffect> createEffect(
-                                    effect_descriptor_t *pDesc,
-                                    const sp<IEffectClient>& client,
-                                    int32_t priority,
-                                    // AudioFlinger doesn't take over handle reference from client
-                                    audio_io_handle_t output,
-                                    int sessionId,
-                                    status_t *status,
-                                    int *id,
-                                    int *enabled) = 0;
+        effect_descriptor_t *pDesc,
+        const sp<IEffectClient>& client,
+        int32_t priority,
+        // AudioFlinger doesn't take over handle reference from client
+        audio_io_handle_t output,
+        int sessionId,
+        status_t *status,
+        int *id,
+        int *enabled) = 0;
 
     virtual status_t moveEffects(int session, audio_io_handle_t srcOutput,
-                                    audio_io_handle_t dstOutput) = 0;
+                                 audio_io_handle_t dstOutput) = 0;
 
     virtual audio_module_handle_t loadHwModule(const char *name) = 0;
 
@@ -224,7 +226,7 @@ public:
 
     /* Create an audio patch between several source and sink ports */
     virtual status_t createAudioPatch(const struct audio_patch *patch,
-                                       audio_patch_handle_t *handle) = 0;
+                                      audio_patch_handle_t *handle) = 0;
 
     /* Release an audio patch */
     virtual status_t releaseAudioPatch(audio_patch_handle_t handle) = 0;

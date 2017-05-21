@@ -28,7 +28,8 @@
 #include "binder/utils/String8.h"
 #include "AudioTimestamp.h"
 
-namespace android {
+namespace android
+{
 
 // ----------------------------------------------------------------------------
 
@@ -83,7 +84,7 @@ public:
        Target specifies whether this transform converts media time to local time
        or Tungsten time. The values for target are defined in AudioTrack.h */
     virtual status_t    setMediaTimeTransform(const LinearTransform& xform,
-                                              int target) = 0;
+            int target) = 0;
 
     /* Send parameters to the audio hardware */
     virtual status_t    setParameters(const String8& keyValuePairs) = 0;

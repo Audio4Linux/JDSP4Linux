@@ -36,7 +36,8 @@ THE SOFTWARE.
 #include "Common.h"
 #include "State.h"
 
-namespace Iir {
+namespace Iir
+{
 
 // nothing to do here
 

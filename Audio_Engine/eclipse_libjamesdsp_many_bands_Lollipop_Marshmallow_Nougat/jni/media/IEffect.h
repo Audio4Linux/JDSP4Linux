@@ -22,7 +22,8 @@
 #include "binder/Parcel.h"
 #include "binder/IMemory.h"
 
-namespace android {
+namespace android
+{
 
 class IEffect: public IInterface
 {

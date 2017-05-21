@@ -22,12 +22,14 @@
 #include "utils/Errors.h"
 #include "utils/String16.h"
 
-namespace android {
+namespace android
+{
 
 class Parcel;
 
 // Abstract interface of all parcelables.
-class Parcelable {
+class Parcelable
+{
 public:
     virtual ~Parcelable() = default;
 

@@ -21,15 +21,13 @@
 static audio_stream_type_t audio_attributes_to_stream_type(const audio_attributes_t *attr)
 {
     // flags to stream type mapping
-    if ((attr->flags & AUDIO_FLAG_AUDIBILITY_ENFORCED) == AUDIO_FLAG_AUDIBILITY_ENFORCED) {
+    if ((attr->flags & AUDIO_FLAG_AUDIBILITY_ENFORCED) == AUDIO_FLAG_AUDIBILITY_ENFORCED)
         return AUDIO_STREAM_ENFORCED_AUDIBLE;
-    }
-    if ((attr->flags & AUDIO_FLAG_SCO) == AUDIO_FLAG_SCO) {
+    if ((attr->flags & AUDIO_FLAG_SCO) == AUDIO_FLAG_SCO)
         return AUDIO_STREAM_BLUETOOTH_SCO;
-    }
-
     // usage to stream type mapping
-    switch (attr->usage) {
+    switch (attr->usage)
+    {
     case AUDIO_USAGE_MEDIA:
     case AUDIO_USAGE_GAME:
     case AUDIO_USAGE_ASSISTANCE_ACCESSIBILITY:
@@ -39,22 +37,18 @@ static audio_stream_type_t audio_attributes_to_stream_type(const audio_attribute
         return AUDIO_STREAM_SYSTEM;
     case AUDIO_USAGE_VOICE_COMMUNICATION:
         return AUDIO_STREAM_VOICE_CALL;
-
     case AUDIO_USAGE_VOICE_COMMUNICATION_SIGNALLING:
         return AUDIO_STREAM_DTMF;
-
     case AUDIO_USAGE_ALARM:
         return AUDIO_STREAM_ALARM;
     case AUDIO_USAGE_NOTIFICATION_TELEPHONY_RINGTONE:
         return AUDIO_STREAM_RING;
-
     case AUDIO_USAGE_NOTIFICATION:
     case AUDIO_USAGE_NOTIFICATION_COMMUNICATION_REQUEST:
     case AUDIO_USAGE_NOTIFICATION_COMMUNICATION_INSTANT:
     case AUDIO_USAGE_NOTIFICATION_COMMUNICATION_DELAYED:
     case AUDIO_USAGE_NOTIFICATION_EVENT:
         return AUDIO_STREAM_NOTIFICATION;
-
     case AUDIO_USAGE_UNKNOWN:
     default:
         return AUDIO_STREAM_MUSIC;
@@ -62,10 +56,11 @@ static audio_stream_type_t audio_attributes_to_stream_type(const audio_attribute
 }
 
 static void stream_type_to_audio_attributes(audio_stream_type_t streamType,
-                                     audio_attributes_t *attr) {
+        audio_attributes_t *attr)
+{
     memset(attr, 0, sizeof(audio_attributes_t));
-
-    switch (streamType) {
+    switch (streamType)
+    {
     case AUDIO_STREAM_DEFAULT:
     case AUDIO_STREAM_MUSIC:
         attr->content_type = AUDIO_CONTENT_TYPE_MUSIC;
@@ -77,7 +72,7 @@ static void stream_type_to_audio_attributes(audio_stream_type_t streamType,
         break;
     case AUDIO_STREAM_ENFORCED_AUDIBLE:
         attr->flags  |= AUDIO_FLAG_AUDIBILITY_ENFORCED;
-        // intended fall through, attributes in common with STREAM_SYSTEM
+    // intended fall through, attributes in common with STREAM_SYSTEM
     case AUDIO_STREAM_SYSTEM:
         attr->content_type = AUDIO_CONTENT_TYPE_SONIFICATION;
         attr->usage = AUDIO_USAGE_ASSISTANCE_SONIFICATION;

@@ -14,5 +14,5 @@
     limitations under the License.
 -->
 <resources>
-    <dimen name="bar_width">7dp</dimen>
+  <dimen name="bar_width">7dp</dimen>
 </resources>

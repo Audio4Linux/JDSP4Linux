@@ -133,9 +133,9 @@ void android_atomic_release_store(int32_t value, volatile int32_t* addr);
  * than possible, because we re-issue the memory barrier on each iteration.
  */
 int android_atomic_acquire_cas(int32_t oldvalue, int32_t newvalue,
-        volatile int32_t* addr);
+                               volatile int32_t* addr);
 int android_atomic_release_cas(int32_t oldvalue, int32_t newvalue,
-        volatile int32_t* addr);
+                               volatile int32_t* addr);
 
 /*
  * Aliases for code using an older version of this header.  These are now

@@ -26,7 +26,8 @@
 #include <linux/binder.h>
 
 // ---------------------------------------------------------------------------
-namespace android {
+namespace android
+{
 
 template <typename T> class Flattenable;
 template <typename T> class LightFlattenable;
@@ -36,15 +37,16 @@ class ProcessState;
 class String8;
 class TextOutput;
 
-class Parcel {
+class Parcel
+{
     friend class IPCThreadState;
 public:
     class ReadableBlob;
     class WritableBlob;
 
-                        Parcel();
-                        ~Parcel();
-    
+    Parcel();
+    ~Parcel();
+
     const uint8_t*      data() const;
     size_t              dataSize() const;
     size_t              dataAvail() const;
@@ -54,7 +56,7 @@ public:
     status_t            setDataSize(size_t size);
     void                setDataPosition(size_t pos) const;
     status_t            setDataCapacity(size_t size);
-    
+
     status_t            setData(const uint8_t* buffer, size_t len);
 
     status_t            appendFrom(const Parcel *parcel,
@@ -86,10 +88,10 @@ private:
 
 public:
     size_t              objectsCount() const;
-    
+
     status_t            errorCheck() const;
     void                setError(status_t err);
-    
+
     status_t            write(const void* data, size_t len);
     void*               writeInplace(size_t len);
     status_t            writeUnpadded(const void* data, size_t len);
@@ -115,15 +117,15 @@ public:
 
     // Place a native_handle into the parcel (the native_handle's file-
     // descriptors are dup'ed, so it is safe to delete the native_handle
-    // when this function returns). 
+    // when this function returns).
     // Doesn't take ownership of the native_handle.
     status_t            writeNativeHandle(const native_handle* handle);
-    
+
     // Place a file descriptor into the parcel.  The given fd must remain
     // valid for the lifetime of the parcel.
     // The Parcel does not take ownership of the given fd unless you ask it to.
     status_t            writeFileDescriptor(int fd, bool takeOwnership = false);
-    
+
     // Place a file descriptor into the parcel.  A dup of the fd is made, which
     // will be closed once the parcel is destroyed.
     status_t            writeDupFileDescriptor(int fd);
@@ -147,7 +149,7 @@ public:
     status_t            writeNoException();
 
     void                remove(size_t start, size_t amt);
-    
+
     status_t            read(void* outData, size_t len) const;
     const void*         readInplace(size_t len) const;
     int32_t             readInt32() const;
@@ -183,11 +185,11 @@ public:
 
     // Retrieve native_handle from the parcel. This returns a copy of the
     // parcel's native_handle (the caller takes ownership). The caller
-    // must free the native_handle with native_handle_close() and 
+    // must free the native_handle with native_handle_close() and
     // native_handle_delete().
     native_handle*     readNativeHandle() const;
 
-    
+
     // Retrieve a file descriptor from the parcel.  This returns the raw fd
     // in the parcel, which you do not own -- use dup() to get your own copy.
     int                 readFileDescriptor() const;
@@ -215,7 +217,7 @@ private:
                                         const uint8_t* data, size_t dataSize,
                                         const binder_size_t* objects, size_t objectsSize,
                                         void* cookie);
-                        
+
     uintptr_t           ipcData() const;
     size_t              ipcDataSize() const;
     uintptr_t           ipcObjects() const;
@@ -223,14 +225,14 @@ private:
     void                ipcSetDataReference(const uint8_t* data, size_t dataSize,
                                             const binder_size_t* objects, size_t objectsCount,
                                             release_func relFunc, void* relCookie);
-    
+
 public:
     void                print(TextOutput& to, uint32_t flags = 0) const;
 
 private:
-                        Parcel(const Parcel& o);
+    Parcel(const Parcel& o);
     Parcel&             operator=(const Parcel& o);
-    
+
     status_t            finishWrite(size_t len);
     void                releaseObjects();
     void                acquireObjects();
@@ -243,7 +245,7 @@ private:
     void                freeDataNoInit();
     void                initState();
     void                scanForFds() const;
-                        
+
     template<class T>
     status_t            readAligned(T *pArg) const;
 
@@ -265,17 +267,21 @@ private:
     mutable bool        mFdsKnown;
     mutable bool        mHasFds;
     bool                mAllowFds;
-    
+
     release_func        mOwner;
     void*               mOwnerCookie;
 
-    class Blob {
+    class Blob
+    {
     public:
         Blob();
         ~Blob();
 
         void release();
-        inline size_t size() const { return mSize; }
+        inline size_t size() const
+        {
+            return mSize;
+        }
 
     protected:
         void init(bool mapped, void* data, size_t size);
@@ -286,7 +292,8 @@ private:
         size_t mSize;
     };
 
-    class FlattenableHelperInterface {
+    class FlattenableHelperInterface
+    {
     protected:
         ~FlattenableHelperInterface() { }
     public:
@@ -297,22 +304,27 @@ private:
     };
 
     template<typename T>
-    class FlattenableHelper : public FlattenableHelperInterface {
+    class FlattenableHelper : public FlattenableHelperInterface
+    {
         friend class Parcel;
         const Flattenable<T>& val;
         explicit FlattenableHelper(const Flattenable<T>& val) : val(val) { }
 
     public:
-        virtual size_t getFlattenedSize() const {
+        virtual size_t getFlattenedSize() const
+        {
             return val.getFlattenedSize();
         }
-        virtual size_t getFdCount() const {
+        virtual size_t getFdCount() const
+        {
             return val.getFdCount();
         }
-        virtual status_t flatten(void* buffer, size_t size, int* fds, size_t count) const {
+        virtual status_t flatten(void* buffer, size_t size, int* fds, size_t count) const
+        {
             return val.flatten(buffer, size, fds, count);
         }
-        virtual status_t unflatten(void const* buffer, size_t size, int const* fds, size_t count) {
+        virtual status_t unflatten(void const* buffer, size_t size, int const* fds, size_t count)
+        {
             return const_cast<Flattenable<T>&>(val).unflatten(buffer, size, fds, count);
         }
     };
@@ -320,37 +332,48 @@ private:
     status_t read(FlattenableHelperInterface& val) const;
 
 public:
-    class ReadableBlob : public Blob {
+    class ReadableBlob : public Blob
+    {
         friend class Parcel;
     public:
-        inline const void* data() const { return mData; }
+        inline const void* data() const
+        {
+            return mData;
+        }
     };
 
-    class WritableBlob : public Blob {
+    class WritableBlob : public Blob
+    {
         friend class Parcel;
     public:
-        inline void* data() { return mData; }
+        inline void* data()
+        {
+            return mData;
+        }
     };
 };
 
 // ---------------------------------------------------------------------------
 
 template<typename T>
-status_t Parcel::write(const Flattenable<T>& val) {
+status_t Parcel::write(const Flattenable<T>& val)
+{
     const FlattenableHelper<T> helper(val);
     return write(helper);
 }
 
 template<typename T>
-status_t Parcel::write(const LightFlattenable<T>& val) {
+status_t Parcel::write(const LightFlattenable<T>& val)
+{
     size_t size(val.getFlattenedSize());
-    if (!val.isFixedSize()) {
+    if (!val.isFixedSize())
+    {
         status_t err = writeInt32(size);
-        if (err != NO_ERROR) {
+        if (err != NO_ERROR)
             return err;
-        }
     }
-    if (size) {
+    if (size)
+    {
         void* buffer = writeInplace(size);
         if (buffer == NULL)
             return NO_MEMORY;
@@ -360,28 +383,31 @@ status_t Parcel::write(const LightFlattenable<T>& val) {
 }
 
 template<typename T>
-status_t Parcel::read(Flattenable<T>& val) const {
+status_t Parcel::read(Flattenable<T>& val) const
+{
     FlattenableHelper<T> helper(val);
     return read(helper);
 }
 
 template<typename T>
-status_t Parcel::read(LightFlattenable<T>& val) const {
+status_t Parcel::read(LightFlattenable<T>& val) const
+{
     size_t size;
-    if (val.isFixedSize()) {
+    if (val.isFixedSize())
         size = val.getFlattenedSize();
-    } else {
+    else
+    {
         int32_t s;
         status_t err = readInt32(&s);
-        if (err != NO_ERROR) {
+        if (err != NO_ERROR)
             return err;
-        }
         size = s;
     }
-    if (size) {
+    if (size)
+    {
         void const* buffer = readInplace(size);
         return buffer == NULL ? NO_MEMORY :
-                val.unflatten(buffer, size);
+               val.unflatten(buffer, size);
     }
     return NO_ERROR;
 }

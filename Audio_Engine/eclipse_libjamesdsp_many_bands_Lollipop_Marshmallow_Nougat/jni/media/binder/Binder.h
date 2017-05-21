@@ -22,12 +22,13 @@
 #include "IBinder.h"
 
 // ---------------------------------------------------------------------------
-namespace android {
+namespace android
+{
 
 class BBinder : public IBinder
 {
 public:
-                        BBinder();
+    BBinder();
 
     virtual const String16& getInterfaceDescriptor() const;
     virtual bool        isBinderAlive() const;
@@ -66,13 +67,13 @@ protected:
                                     uint32_t flags = 0);
 
 private:
-                        BBinder(const BBinder& o);
-            BBinder&    operator=(const BBinder& o);
+    BBinder(const BBinder& o);
+    BBinder&    operator=(const BBinder& o);
 
     class Extras;
 
     atomic_uintptr_t    mExtras;  // should be atomic<Extras *>
-            void*       mReserved0;
+    void*       mReserved0;
 };
 
 // ---------------------------------------------------------------------------
@@ -80,17 +81,23 @@ private:
 class BpRefBase : public virtual RefBase
 {
 protected:
-                            BpRefBase(const sp<IBinder>& o);
+    BpRefBase(const sp<IBinder>& o);
     virtual                 ~BpRefBase();
     virtual void            onFirstRef();
     virtual void            onLastStrongRef(const void* id);
     virtual bool            onIncStrongAttempted(uint32_t flags, const void* id);
 
-    inline  IBinder*        remote()                { return mRemote; }
-    inline  IBinder*        remote() const          { return mRemote; }
+    inline  IBinder*        remote()
+    {
+        return mRemote;
+    }
+    inline  IBinder*        remote() const
+    {
+        return mRemote;
+    }
 
 private:
-                            BpRefBase(const BpRefBase& o);
+    BpRefBase(const BpRefBase& o);
     BpRefBase&              operator=(const BpRefBase& o);
 
     IBinder* const          mRemote;

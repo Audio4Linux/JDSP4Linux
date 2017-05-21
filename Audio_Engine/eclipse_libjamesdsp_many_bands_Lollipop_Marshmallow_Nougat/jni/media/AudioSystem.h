@@ -26,7 +26,8 @@
 #include "binder/utils/Errors.h"
 #include "binder/utils/Mutex.h"
 
-namespace android {
+namespace android
+{
 
 typedef void (*audio_error_callback)(status_t err);
 
@@ -74,7 +75,7 @@ public:
     // on the specified stream or have been active in the past inPastMs milliseconds. Remote
     // playback isn't mutually exclusive with local playback.
     static status_t isStreamActiveRemotely(audio_stream_type_t stream, bool *state,
-            uint32_t inPastMs);
+                                           uint32_t inPastMs);
     // returns true in *state if a recorder is currently recording with the specified source
     static status_t isSourceActive(audio_source_t source, bool *state);
 
@@ -99,13 +100,13 @@ public:
     // Returned samplingRate and frameCount output values are guaranteed
     // to be non-zero if status == NO_ERROR
     static status_t getOutputSamplingRate(uint32_t* samplingRate,
-            audio_stream_type_t stream);
+                                          audio_stream_type_t stream);
     static status_t getOutputFrameCount(size_t* frameCount,
-            audio_stream_type_t stream);
+                                        audio_stream_type_t stream);
     static status_t getOutputLatency(uint32_t* latency,
-            audio_stream_type_t stream);
+                                     audio_stream_type_t stream);
     static status_t getSamplingRate(audio_io_handle_t output,
-                                          uint32_t* samplingRate);
+                                    uint32_t* samplingRate);
     // returns the number of frames per audio HAL write buffer. Corresponds to
     // audio_stream->get_buffer_size()/audio_stream_out_frame_size()
     static status_t getFrameCount(audio_io_handle_t output,
@@ -117,7 +118,7 @@ public:
 
     // return status NO_ERROR implies *buffSize > 0
     static status_t getInputBufferSize(uint32_t sampleRate, audio_format_t format,
-        audio_channel_mask_t channelMask, size_t* buffSize);
+                                       audio_channel_mask_t channelMask, size_t* buffSize);
 
     static status_t setVoiceVolume(float volume);
 
@@ -152,7 +153,8 @@ public:
     static audio_hw_sync_t getAudioHwSyncForSession(audio_session_t sessionId);
 
     // types of io configuration change events received with ioConfigChanged()
-    enum io_config_event {
+    enum io_config_event
+    {
         OUTPUT_OPENED,
         OUTPUT_CLOSED,
         OUTPUT_CONFIG_CHANGED,
@@ -165,11 +167,12 @@ public:
 
     // audio output descriptor used to cache output configurations in client process to avoid
     // frequent calls through IAudioFlinger
-    class OutputDescriptor {
+    class OutputDescriptor
+    {
     public:
         OutputDescriptor()
-        : samplingRate(0), format(AUDIO_FORMAT_DEFAULT), channelMask(0), frameCount(0), latency(0)
-            {}
+            : samplingRate(0), format(AUDIO_FORMAT_DEFAULT), channelMask(0), frameCount(0), latency(0)
+        {}
 
         uint32_t samplingRate;
         audio_format_t format;
@@ -182,7 +185,8 @@ public:
     // For instance SYNC_EVENT_PRESENTATION_COMPLETE can be used to delay recording start until
     // playback is complete on another audio session.
     // See definitions in MediaSyncEvent.java
-    enum sync_event_t {
+    enum sync_event_t
+    {
         SYNC_EVENT_SAME = -1,             // used internally to indicate restart with same event
         SYNC_EVENT_NONE = 0,
         SYNC_EVENT_PRESENTATION_COMPLETE,
@@ -201,9 +205,9 @@ public:
     // IAudioPolicyService interface (see AudioPolicyInterface for method descriptions)
     //
     static status_t setDeviceConnectionState(audio_devices_t device, audio_policy_dev_state_t state,
-                                                const char *device_address);
+            const char *device_address);
     static audio_policy_dev_state_t getDeviceConnectionState(audio_devices_t device,
-                                                                const char *device_address);
+            const char *device_address);
     static status_t setPhoneState(audio_mode_t state);
     static status_t setForceUse(audio_policy_force_use_t usage, audio_policy_forced_cfg_t config);
     static audio_policy_forced_cfg_t getForceUse(audio_policy_force_use_t usage);
@@ -211,20 +215,20 @@ public:
     // Client must successfully hand off the handle reference to AudioFlinger via createTrack(),
     // or release it with releaseOutput().
     static audio_io_handle_t getOutput(audio_stream_type_t stream,
-                                        uint32_t samplingRate = 0,
-                                        audio_format_t format = AUDIO_FORMAT_DEFAULT,
-                                        audio_channel_mask_t channelMask = AUDIO_CHANNEL_OUT_STEREO,
-                                        audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
-                                        const audio_offload_info_t *offloadInfo = NULL);
+                                       uint32_t samplingRate = 0,
+                                       audio_format_t format = AUDIO_FORMAT_DEFAULT,
+                                       audio_channel_mask_t channelMask = AUDIO_CHANNEL_OUT_STEREO,
+                                       audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
+                                       const audio_offload_info_t *offloadInfo = NULL);
     static status_t getOutputForAttr(const audio_attributes_t *attr,
-                                        audio_io_handle_t *output,
-                                        audio_session_t session,
-                                        audio_stream_type_t *stream,
-                                        uint32_t samplingRate = 0,
-                                        audio_format_t format = AUDIO_FORMAT_DEFAULT,
-                                        audio_channel_mask_t channelMask = AUDIO_CHANNEL_OUT_STEREO,
-                                        audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
-                                        const audio_offload_info_t *offloadInfo = NULL);
+                                     audio_io_handle_t *output,
+                                     audio_session_t session,
+                                     audio_stream_type_t *stream,
+                                     uint32_t samplingRate = 0,
+                                     audio_format_t format = AUDIO_FORMAT_DEFAULT,
+                                     audio_channel_mask_t channelMask = AUDIO_CHANNEL_OUT_STEREO,
+                                     audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
+                                     const audio_offload_info_t *offloadInfo = NULL);
     static status_t startOutput(audio_io_handle_t output,
                                 audio_stream_type_t stream,
                                 audio_session_t session);
@@ -252,8 +256,8 @@ public:
     static void releaseInput(audio_io_handle_t input,
                              audio_session_t session);
     static status_t initStreamVolume(audio_stream_type_t stream,
-                                      int indexMin,
-                                      int indexMax);
+                                     int indexMin,
+                                     int indexMax);
     static status_t setStreamVolumeIndex(audio_stream_type_t stream,
                                          int index,
                                          audio_devices_t device);
@@ -266,10 +270,10 @@ public:
 
     static audio_io_handle_t getOutputForEffect(const effect_descriptor_t *desc);
     static status_t registerEffect(const effect_descriptor_t *desc,
-                                    audio_io_handle_t io,
-                                    uint32_t strategy,
-                                    int session,
-                                    int id);
+                                   audio_io_handle_t io,
+                                   uint32_t strategy,
+                                   int session,
+                                   int id);
     static status_t unregisterEffect(int id);
     static status_t setEffectEnabled(int id, bool enabled);
 
@@ -305,22 +309,22 @@ public:
 
     /* Create an audio patch between several source and sink ports */
     static status_t createAudioPatch(const struct audio_patch *patch,
-                                       audio_patch_handle_t *handle);
+                                     audio_patch_handle_t *handle);
 
     /* Release an audio patch */
     static status_t releaseAudioPatch(audio_patch_handle_t handle);
 
     /* List existing audio patches */
     static status_t listAudioPatches(unsigned int *num_patches,
-                                      struct audio_patch *patches,
-                                      unsigned int *generation);
+                                     struct audio_patch *patches,
+                                     unsigned int *generation);
     /* Set audio port configuration */
     static status_t setAudioPortConfig(const struct audio_port_config *config);
 
 
     static status_t acquireSoundTriggerSession(audio_session_t *session,
-                                           audio_io_handle_t *ioHandle,
-                                           audio_devices_t *device);
+            audio_io_handle_t *ioHandle,
+            audio_devices_t *device);
     static status_t releaseSoundTriggerSession(audio_session_t session);
 
     static audio_mode_t getPhoneState();
@@ -333,7 +337,7 @@ public:
     {
     public:
 
-                AudioPortCallback() {}
+        AudioPortCallback() {}
         virtual ~AudioPortCallback() {}
 
         virtual void onAudioPortListUpdate() = 0;
@@ -349,7 +353,8 @@ private:
     class AudioFlingerClient: public IBinder::DeathRecipient, public BnAudioFlingerClient
     {
     public:
-        AudioFlingerClient() {
+        AudioFlingerClient()
+        {
         }
 
         // DeathRecipient
@@ -363,10 +368,11 @@ private:
     };
 
     class AudioPolicyServiceClient: public IBinder::DeathRecipient,
-                                    public BnAudioPolicyServiceClient
+        public BnAudioPolicyServiceClient
     {
     public:
-        AudioPolicyServiceClient() {
+        AudioPolicyServiceClient()
+        {
         }
 
         // DeathRecipient
@@ -384,7 +390,7 @@ private:
 
     static Mutex gLock;      // protects gAudioFlinger and gAudioErrorCallback,
     static Mutex gLockCache; // protects gOutputs, gPrevInSamplingRate, gPrevInFormat,
-                             // gPrevInChannelMask and gInBuffSize
+    // gPrevInChannelMask and gInBuffSize
     static Mutex gLockAPS;   // protects gAudioPolicyService and gAudioPolicyServiceClient
     static Mutex gLockAPC;   // protects gAudioPortCallback
     static sp<IAudioFlinger> gAudioFlinger;

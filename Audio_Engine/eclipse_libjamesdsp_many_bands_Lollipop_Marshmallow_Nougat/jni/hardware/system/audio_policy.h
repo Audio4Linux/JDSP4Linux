@@ -31,7 +31,8 @@ __BEGIN_DECLS
  */
 
 /* device categories used for audio_policy->set_force_use() */
-typedef enum {
+typedef enum
+{
     AUDIO_POLICY_FORCE_NONE,
     AUDIO_POLICY_FORCE_SPEAKER,
     AUDIO_POLICY_FORCE_HEADPHONES,
@@ -53,7 +54,8 @@ typedef enum {
 } audio_policy_forced_cfg_t;
 
 /* usages used for audio_policy->set_force_use() */
-typedef enum {
+typedef enum
+{
     AUDIO_POLICY_FORCE_FOR_COMMUNICATION,
     AUDIO_POLICY_FORCE_FOR_MEDIA,
     AUDIO_POLICY_FORCE_FOR_RECORD,
@@ -67,7 +69,8 @@ typedef enum {
 
 /* device connection states used for audio_policy->set_device_connection_state()
  */
-typedef enum {
+typedef enum
+{
     AUDIO_POLICY_DEVICE_STATE_UNAVAILABLE,
     AUDIO_POLICY_DEVICE_STATE_AVAILABLE,
 
@@ -75,7 +78,8 @@ typedef enum {
     AUDIO_POLICY_DEVICE_STATE_MAX = AUDIO_POLICY_DEVICE_STATE_CNT - 1,
 } audio_policy_dev_state_t;
 
-typedef enum {
+typedef enum
+{
     /* Used to generate a tone to notify the user of a
      * notification/alarm/ringtone while they are in a call. */
     AUDIO_POLICY_TONE_IN_CALL_NOTIFICATION = 0,
@@ -87,7 +91,8 @@ typedef enum {
 
 static inline bool audio_is_low_visibility(audio_stream_type_t stream)
 {
-    switch (stream) {
+    switch (stream)
+    {
     case AUDIO_STREAM_SYSTEM:
     case AUDIO_STREAM_NOTIFICATION:
     case AUDIO_STREAM_RING:

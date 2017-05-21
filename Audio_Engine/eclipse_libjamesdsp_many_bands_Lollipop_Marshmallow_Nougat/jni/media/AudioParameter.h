@@ -21,9 +21,11 @@
 #include <utils/KeyedVector.h>
 #include <utils/String8.h>
 
-namespace android {
+namespace android
+{
 
-class AudioParameter {
+class AudioParameter
+{
 
 public:
     AudioParameter() {}
@@ -62,7 +64,10 @@ public:
     status_t getFloat(const String8& key, float& value);
     status_t getAt(size_t index, String8& key, String8& value);
 
-    size_t size() { return mParameters.size(); }
+    size_t size()
+    {
+        return mParameters.size();
+    }
 
 private:
     String8 mKeyValuePairs;
