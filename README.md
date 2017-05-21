@@ -32,7 +32,7 @@ A: When effect strength going extreme, value will go beyond -1.0 / +1.0 range, t
 
    Effect provide you more option, that is Hyperbolic tangent function/tanh() that will clip the value more natural.
    
-   But using tanh() will change the waveform even signal is haven't clip.
+   But using tanh() will change the waveform even signal haven't clipped.
 
 #### 3. Bass boost filter type?
 
@@ -107,6 +107,10 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 
 ## Download Link
 1. See my project release page
+
+# Screenshot
+1. [Equalizer screenshot(Dark theme)](https://rawgit.com/james34602/JamesDSPManager/master/ScreenshotMainApp1.png)
+2. [Convolver screenshot(Idea theme)](https://rawgit.com/james34602/JamesDSPManager/master/ScreenshotMainApp2.png)
 
 # Important
 
