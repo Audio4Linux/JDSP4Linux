@@ -1004,6 +1004,8 @@
   </string-array>
 
   <string-array name="quality_level">
+    <item>Truncate to 40&#65130;</item>
+    <item>Truncate to 50&#65130;</item>
     <item>Truncate to 60&#65130;</item>
     <item>Truncate to 70&#65130;</item>
     <item>Truncate to 80&#65130;</item>
@@ -1012,6 +1014,8 @@
   </string-array>
 
   <string-array name="quality_values" translatable="false">
+    <item>0.4</item>
+    <item>0.5</item>
     <item>0.6</item>
     <item>0.7</item>
     <item>0.8</item>

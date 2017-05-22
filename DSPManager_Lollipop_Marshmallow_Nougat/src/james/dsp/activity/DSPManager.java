@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -48,10 +49,7 @@ import java.util.List;
 import android.widget.Toast;
 
 /**
-* Setting utility for CyanogenMod's DSP capabilities. This page is displays the
-* activity_main-level configurations menu.
-*
-* @author alankila@gmail.com
+* This page is displays the activity_main-level configurations menu.
 */
 public final class DSPManager extends Activity
 {
@@ -152,6 +150,12 @@ public final class DSPManager extends Activity
         devMsgDisplay = mPreferences.getBoolean("dsp.app.showdevmsg", false);
         themeApp = mPreferences.getInt("dsp.app.theme", 2);
         mUserLearnedDrawer = mPreferences.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+        File kernelFile = new File(DSPManager.impulseResponsePath);
+        if (!kernelFile.exists())
+        {
+            kernelFile.mkdirs();
+            kernelFile.mkdir();
+        }
         mTitle = getTitle();
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
@@ -167,9 +171,15 @@ public final class DSPManager extends Activity
         sendBroadcast(new Intent(DSPManager.ACTION_UPDATE_PREFERENCES));
         setUpUi();
         handler = new Handler();
-        handler.post(routingDisplay);
         selectItem(routing);
     }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        handler.post(routingDisplay);
+    }
+    @Override
     protected void onPause()
     {
         super.onPause();
@@ -298,15 +308,15 @@ public final class DSPManager extends Activity
             findViewById(R.id.dsp_navigation_drawer),
             findViewById(R.id.dsp_drawer_layout));
         if (themeApp == 0)
-            mDrawerListView.setBackgroundColor(getColor(R.color.navigation_drawerdark));
+            mDrawerListView.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.navigation_drawerdark, null));
         else if (themeApp == 1)
-            mDrawerListView.setBackgroundColor(getColor(R.color.navigation_drawerlight));
+            mDrawerListView.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.navigation_drawerlight, null));
         else if (themeApp == 2)
-            mDrawerListView.setBackgroundColor(getColor(R.color.navigation_drawerdefault));
+            mDrawerListView.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.navigation_drawerdefault, null));
         else if (themeApp == 3)
-            mDrawerListView.setBackgroundColor(getColor(R.color.navigation_drawerred));
+            mDrawerListView.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.navigation_drawerred, null));
         else if (themeApp == 4)
-            mDrawerListView.setBackgroundColor(getColor(R.color.navigation_draweridea));
+            mDrawerListView.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.navigation_draweridea, null));
     }
     public void savePresetDialog()
     {
@@ -556,7 +566,6 @@ public final class DSPManager extends Activity
     */
     private List<HashMap<String, String>> getTitles()
     {
-        // TODO: use real drawables
         ArrayList<HashMap<String, String>> tmpList = new ArrayList<HashMap<String, String>>();
         // Headset
         HashMap<String, String> mTitleMap = new HashMap<String, String>();

@@ -1,13 +1,21 @@
 package james.dsp.activity;
 
+import android.util.Log;
+
 public class JdspImpResToolbox
 {
-
     static
     {
-        System.loadLibrary("jamesDSPImpulseToolbox");
+    	try {
+    		System.loadLibrary("jamesDSPImpulseToolbox");
+    	} catch(UnsatisfiedLinkError e) {
+    		try {
+    			System.load("/system/lib/libjamesDSPImpulseToolbox.so");
+    		} catch(UnsatisfiedLinkError error) {
+    			Log.i(DSPManager.TAG, "JNI LOAD FAILED!");
+    		}
+    	}
     }
-
     /* Impulse Response Utils */
     public static native int[] GetLoadImpulseResponseInfo(String path);
     public static native int[] ReadImpulseResponseToInt();
