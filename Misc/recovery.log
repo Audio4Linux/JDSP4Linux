@@ -1,0 +1,2691 @@
+Starting TWRP 3.0.4-1-cc844ae6 on Thu Mar 26 04:57:27 1970
+ (pid 415)
+BOARD_HAS_NO_REAL_SDCARD := true
+RECOVERY_SDCARD_ON_DATA := true
+I:Lun file '/sys/devices/soc/6a00000.ssusb/6a00000.dwc3/gadget/lun0/file'
+TW_INCLUDE_CRYPTO := true
+I:TW_BRIGHTNESS_PATH := /sys/devices/soc/900000.qcom,mdss_mdp/900000.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight/brightness
+I:Found brightness file at '/sys/devices/soc/900000.qcom,mdss_mdp/900000.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight/brightness'
+I:TWFunc::Set_Brightness: Setting brightness control to 149
+I:LANG: en
+Starting the UI...
+setting DRM_FORMAT_RGBX8888 and GGL_PIXEL_FORMAT_RGBX_8888
+cannot find/open a drm device: No such file or directory
+fb0 reports (possibly inaccurate):
+  vi.bits_per_pixel = 32
+  vi.red.offset   =   0   .length =   8
+  vi.green.offset =   8   .length =   8
+  vi.blue.offset  =  16   .length =   8
+setting GGL_PIXEL_FORMAT_RGBA_8888
+double buffered
+framebuffer: 0 (1080 x 1920)
+Using fbdev graphics.
+I:TWFunc::Set_Brightness: Setting brightness control to 149
+I:Loading package: splash (/twres/splash.xml)
+I:Load XML directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/splash.xml' directly
+I:Checking resolution...
+I:Loading resources...
+I:Loading variables...
+I:Loading mouse cursor...
+I:Loading pages...
+I:Loading page splash
+I:Switching packages (splash)
+=> Linking mtab
+=> Processing recovery.fstab
+I:Processing '/boot'
+I:Processing '/recovery'
+I:Processing '/system'
+I:Processing '/system_image'
+I:Processing '/data'
+I:Processing '/cache'
+I:Processing '/usb-otg'
+I:Created '/usb-otg' folder.
+I:Processing '/misc'
+I:Processing '/aboot'
+I:Processing '/cmnlib64'
+I:Processing '/cmnlib'
+I:Processing '/hyp'
+I:Processing '/pmic'
+I:Processing '/tz'
+I:Processing '/rpm'
+I:Processing '/keymaster'
+I:Processing '/devcfg'
+I:Processing '/xbl'
+I:Processing '/modem'
+I:Processing '/bluetooth'
+I:Processing '/dsp'
+I:Processing '/efs1'
+I:Processing '/efs2'
+I:Processing '/efsg'
+I:Processing '/efsc'
+I:Setting up '/data' as data/media emulated storage.
+I:Created '/sdcard' folder.
+I:Can't probe device /dev/block/sda15
+I:Unable to mount '/data'
+I:Actual block device: '/dev/block/sda15', current file system: 'f2fs'
+I:Can't probe device /dev/block/sda15
+I:Unable to mount '/data'
+I:Actual block device: '/dev/block/sda15', current file system: 'f2fs'
+get_crypt_ftr_info crypto key location: 'footer'
+I:Backup folder set to '/data/media/TWRP/BACKUPS/434899a7'
+I:Settings storage is '/data/media'
+I:Device is encrypted with the default password, attempting to decrypt.
+crypt_ftr->fs_size = 112477112
+Using scrypt with keymaster for cryptfs KDF
+Invalid hex string
+Failed to convert passwd from hex, using passwd instead
+keymaster module name is Keymaster QTI HAL
+keymaster version is 256
+Found keymaster1 module, using keymaster1 API.
+Signing safely-padded object
+Using scrypt with keymaster for cryptfs KDF
+Invalid hex string
+Failed to convert passwd from hex, using passwd instead
+keymaster module name is Keymaster QTI HAL
+keymaster version is 256
+Found keymaster1 module, using keymaster1 API.
+Signing safely-padded object
+crypt_ftr->fs_size = 112477112
+Using scrypt with keymaster for cryptfs KDF
+keymaster module name is Keymaster QTI HAL
+keymaster version is 256
+Found keymaster1 module, using keymaster1 API.
+Signing safely-padded object
+Using scrypt with keymaster for cryptfs KDF
+keymaster module name is Keymaster QTI HAL
+keymaster version is 256
+Found keymaster1 module, using keymaster1 API.
+Signing safely-padded object
+load_crypto_mapping_table: target_type = req-crypt
+load_crypto_mapping_table: real_blk_name = /dev/block/sda15, extra_params = fde_enabled ice
+Password matches
+Data successfully decrypted, new block device: '/dev/block/dm-0'
+I:mount -o bind '/data/media' '/sdcard' process ended with RC=0
+I:Backup folder set to '/data/media/0/TWRP/BACKUPS/434899a7'
+/data | /dev/block/dm-0 | Size: 0MB Used: 0MB Free: 0MB Backup Size: 0MB
+   Flags: Can_Be_Mounted Can_Be_Wiped Can_Be_Backed_Up Wipe_During_Factory_Reset Wipe_Available_in_GUI IsPresent Can_Be_Encrypted Is_Encrypted Is_Decrypted Has_Data_Media Can_Encrypt_Backup Use_Userdata_Encryption Is_Storage Is_Settings_Storage 
+   Symlink_Path: /data/media/0
+   Symlink_Mount_Point: /sdcard
+   Primary_Block_Device: /dev/block/sda15
+   Decrypted_Block_Device: /dev/block/dm-0
+   Length: -16384
+   Display_Name: data
+   Storage_Name: Internal Storage
+   Backup_Path: /data
+   Backup_Name: data
+   Backup_Display_Name: Data
+   Storage_Path: /data/media/0
+   Current_File_System: f2fs
+   Fstab_File_System: f2fs
+   Backup_Method: files
+   Mount_Options: noatime,nodiratime
+   MTP_Storage_ID: 65537
+
+Updating partition details...
+I:mount -o bind '/data/media/0' '/sdcard' process ended with RC=0
+I:Data backup size is 2526MB, free: 40666MB.
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+...done
+I:mount -o bind '/data/media/0' '/sdcard' process ended with RC=0
+I:Unmounting main partitions...
+Successfully decrypted with default password.
+I:Decrypt adopted storage starting
+I:PageManager::LoadFileToBuffer loading filename: '/data/system/storage.xml' directly
+Updating partition details...
+I:Data backup size is 2526MB, free: 40666MB.
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+...done
+I:Unmounting main partitions...
+
+
+Partition Logs:
+/boot | /dev/block/sde18 | Size: 64MB
+   Flags: Can_Be_Backed_Up IsPresent Can_Flash_Img 
+   Primary_Block_Device: /dev/block/sde18
+   Display_Name: Boot
+   Storage_Name: boot
+   Backup_Path: /boot
+   Backup_Name: boot
+   Backup_Display_Name: Boot
+   Storage_Path: /boot
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/recovery | /dev/block/sde21 | Size: 64MB
+   Flags: Can_Be_Backed_Up IsPresent Can_Flash_Img 
+   Primary_Block_Device: /dev/block/sde21
+   Display_Name: Recovery
+   Storage_Name: recovery
+   Backup_Path: /recovery
+   Backup_Name: recovery
+   Backup_Display_Name: Recovery
+   Storage_Path: /recovery
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/system | /dev/block/sde20 | Size: 2913MB Used: 1037MB Free: 1876MB Backup Size: 1037MB
+   Flags: Can_Be_Mounted Can_Be_Wiped Can_Be_Backed_Up Wipe_Available_in_GUI IsPresent 
+   Primary_Block_Device: /dev/block/sde20
+   Display_Name: System
+   Storage_Name: System
+   Backup_Path: /system
+   Backup_Name: system
+   Backup_Display_Name: System
+   Storage_Path: /system
+   Current_File_System: ext4
+   Fstab_File_System: ext4
+   Backup_Method: files
+
+/system_image | /dev/block/sde20 | Size: 3008MB
+   Flags: Can_Be_Backed_Up IsPresent Can_Flash_Img 
+   Primary_Block_Device: /dev/block/sde20
+   Display_Name: System Image
+   Storage_Name: system_image
+   Backup_Path: /system_image
+   Backup_Name: system_image
+   Backup_Display_Name: System Image
+   Storage_Path: /system_image
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/data | /dev/block/dm-0 | Size: 54918MB Used: 2526MB Free: 40666MB Backup Size: 2526MB
+   Flags: Can_Be_Mounted Can_Be_Wiped Can_Be_Backed_Up Wipe_During_Factory_Reset Wipe_Available_in_GUI IsPresent Can_Be_Encrypted Is_Encrypted Is_Decrypted Has_Data_Media Can_Encrypt_Backup Use_Userdata_Encryption Is_Storage Is_Settings_Storage 
+   Symlink_Path: /data/media/0
+   Symlink_Mount_Point: /sdcard
+   Primary_Block_Device: /dev/block/sda15
+   Decrypted_Block_Device: /dev/block/dm-0
+   Length: -16384
+   Display_Name: data
+   Storage_Name: Internal Storage
+   Backup_Path: /data
+   Backup_Name: data
+   Backup_Display_Name: Data
+   Storage_Path: /data/media/0
+   Current_File_System: f2fs
+   Fstab_File_System: f2fs
+   Backup_Method: files
+   Mount_Options: noatime,nodiratime
+   MTP_Storage_ID: 65537
+
+/cache | /dev/block/sda3 | Size: 247MB Used: 1MB Free: 246MB Backup Size: 1MB
+   Flags: Can_Be_Mounted Can_Be_Wiped Can_Be_Backed_Up Wipe_During_Factory_Reset Wipe_Available_in_GUI IsPresent 
+   Primary_Block_Device: /dev/block/sda3
+   Display_Name: Cache
+   Storage_Name: Cache
+   Backup_Path: /cache
+   Backup_Name: cache
+   Backup_Display_Name: Cache
+   Storage_Path: /cache
+   Current_File_System: ext4
+   Fstab_File_System: ext4
+   Backup_Method: files
+
+/usb-otg |  | Size: 0MB Used: 0MB Free: 0MB Backup Size: 0MB
+   Flags: Can_Be_Mounted Can_Be_Wiped Wipe_Available_in_GUI Removable Is_Storage 
+   Primary_Block_Device: /dev/block/sdg1
+   Alternate_Block_Device: /dev/block/sdg
+   Display_Name: USB OTG
+   Storage_Name: USB OTG
+   Backup_Path: /usb-otg
+   Backup_Name: usb-otg
+   Backup_Display_Name: USB OTG
+   Storage_Path: /usb-otg
+   Current_File_System: vfat
+   Fstab_File_System: vfat
+   Backup_Method: files
+   MTP_Storage_ID: 65538
+
+/misc | /dev/block/sda4 | Size: 1MB
+   Flags: IsPresent 
+   Primary_Block_Device: /dev/block/sda4
+   Display_Name: misc
+   Storage_Name: misc
+   Backup_Path: /misc
+   Backup_Name: misc
+   Backup_Display_Name: misc
+   Storage_Path: /misc
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/aboot | /dev/block/sde15 | Size: 8MB
+   Flags: Can_Be_Backed_Up Has_SubPartition IsPresent 
+   Primary_Block_Device: /dev/block/sde15
+   Display_Name: Bootloader
+   Storage_Name: Bootloader
+   Backup_Path: /aboot
+   Backup_Name: aboot
+   Backup_Display_Name: Bootloader
+   Storage_Path: /aboot
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/cmnlib64 | /dev/block/sde28 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde28
+   Display_Name: cmnlib64
+   Storage_Name: cmnlib64
+   Backup_Path: /cmnlib64
+   Backup_Name: cmnlib64
+   Backup_Display_Name: cmnlib64
+   Storage_Path: /cmnlib64
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/cmnlib | /dev/block/sde26 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde26
+   Display_Name: cmnlib
+   Storage_Name: cmnlib
+   Backup_Path: /cmnlib
+   Backup_Name: cmnlib
+   Backup_Display_Name: cmnlib
+   Storage_Path: /cmnlib
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/hyp | /dev/block/sde5 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde5
+   Display_Name: hyp
+   Storage_Name: hyp
+   Backup_Path: /hyp
+   Backup_Name: hyp
+   Backup_Display_Name: hyp
+   Storage_Path: /hyp
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/pmic | /dev/block/sde9 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde9
+   Display_Name: pmic
+   Storage_Name: pmic
+   Backup_Path: /pmic
+   Backup_Name: pmic
+   Backup_Display_Name: pmic
+   Storage_Path: /pmic
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/tz | /dev/block/sde3 | Size: 2MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde3
+   Display_Name: tz
+   Storage_Name: tz
+   Backup_Path: /tz
+   Backup_Name: tz
+   Backup_Display_Name: tz
+   Storage_Path: /tz
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/rpm | /dev/block/sde1 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde1
+   Display_Name: rpm
+   Storage_Name: rpm
+   Backup_Path: /rpm
+   Backup_Name: rpm
+   Backup_Display_Name: rpm
+   Storage_Path: /rpm
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/keymaster | /dev/block/sde24 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sde24
+   Display_Name: keymaster
+   Storage_Name: keymaster
+   Backup_Path: /keymaster
+   Backup_Name: keymaster
+   Backup_Display_Name: keymaster
+   Storage_Path: /keymaster
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/devcfg | /dev/block/sda6 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sda6
+   Display_Name: devcfg
+   Storage_Name: devcfg
+   Backup_Path: /devcfg
+   Backup_Name: devcfg
+   Backup_Display_Name: devcfg
+   Storage_Path: /devcfg
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/xbl | /dev/block/sdb1 | Size: 3MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /aboot
+   Primary_Block_Device: /dev/block/sdb1
+   Display_Name: xbl
+   Storage_Name: xbl
+   Backup_Path: /xbl
+   Backup_Name: xbl
+   Backup_Display_Name: xbl
+   Storage_Path: /xbl
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/modem | /dev/block/sde11 | Size: 95MB
+   Flags: Can_Be_Backed_Up Has_SubPartition IsPresent 
+   Primary_Block_Device: /dev/block/sde11
+   Display_Name: Modem
+   Storage_Name: Modem
+   Backup_Path: /modem
+   Backup_Name: modem
+   Backup_Display_Name: Modem
+   Storage_Path: /modem
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/bluetooth | /dev/block/sde23 | Size: 1MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /modem
+   Primary_Block_Device: /dev/block/sde23
+   Display_Name: bluetooth
+   Storage_Name: bluetooth
+   Backup_Path: /bluetooth
+   Backup_Name: bluetooth
+   Backup_Display_Name: bluetooth
+   Storage_Path: /bluetooth
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/dsp | /dev/block/sde12 | Size: 16MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /modem
+   Primary_Block_Device: /dev/block/sde12
+   Display_Name: dsp
+   Storage_Name: dsp
+   Backup_Path: /dsp
+   Backup_Name: dsp
+   Backup_Display_Name: dsp
+   Storage_Path: /dsp
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/efs1 | /dev/block/sdf1 | Size: 2MB
+   Flags: Can_Be_Backed_Up Has_SubPartition IsPresent 
+   Primary_Block_Device: /dev/block/sdf1
+   Display_Name: EFS
+   Storage_Name: EFS
+   Backup_Path: /efs1
+   Backup_Name: efs1
+   Backup_Display_Name: EFS
+   Storage_Path: /efs1
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/efs2 | /dev/block/sdf2 | Size: 2MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /efs1
+   Primary_Block_Device: /dev/block/sdf2
+   Display_Name: efs2
+   Storage_Name: efs2
+   Backup_Path: /efs2
+   Backup_Name: efs2
+   Backup_Display_Name: efs2
+   Storage_Path: /efs2
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/efsg | /dev/block/sde7 | Size: 2MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /efs1
+   Primary_Block_Device: /dev/block/sde7
+   Display_Name: efsg
+   Storage_Name: efsg
+   Backup_Path: /efsg
+   Backup_Name: efsg
+   Backup_Display_Name: efsg
+   Storage_Path: /efsg
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+/efsc | /dev/block/sdf3 | Size: 0MB
+   Flags: Can_Be_Backed_Up Is_SubPartition IsPresent 
+   SubPartition_Of: /efs1
+   Primary_Block_Device: /dev/block/sdf3
+   Display_Name: efsc
+   Storage_Name: efsc
+   Backup_Path: /efsc
+   Backup_Name: efsc
+   Backup_Display_Name: efsc
+   Storage_Path: /efsc
+   Current_File_System: emmc
+   Fstab_File_System: emmc
+   Backup_Method: dd
+
+I:Loading package: TWRP (/data/media/0/TWRP/theme/ui.zip)
+I:Loading zip theme
+I:Loading package: TWRP (/twres/ui.xml)
+I:Load XML directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/zh_TW.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/zh_CN.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/uk.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/tr.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/sv.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/sl.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/sk.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/ru.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/pt_BR.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/pl.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/nl.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/ja.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/it.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/hu.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/fr.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/es.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/en.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/el.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/de.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/cz.xml' directly
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/en.xml' directly
+parsing languageFile
+parsing languageFile done
+I:PageManager::LoadFileToBuffer loading filename: '/twres/ui.xml' directly
+I:Checking resolution...
+I:Loading resources...
+I:Failed to load image from indeterminate013, error -1
+I:Loading variables...
+I:Loading mouse cursor...
+I:Loading pages...
+I:Including file: /twres/portrait.xml...
+I:PageManager::LoadFileToBuffer loading filename: '/twres/portrait.xml' directly
+I:Loading resources...
+I:Loading variables...
+I:Loading mouse cursor...
+I:Loading pages...
+I:Loading page main
+I:Loading page main2
+I:Loading page install
+I:Loading page flash_confirm
+I:Loading page flash_zip
+I:Loading page flash_done
+I:Loading page flash_sleep_and_reboot
+I:Loading page flashimage_confirm
+I:Loading page clear_vars
+I:Loading page reboot_system_routine
+I:Loading page confirm_action
+I:Loading page action_page
+I:Loading page singleaction_page
+I:Loading page action_complete
+I:Loading page filecheck
+I:Loading page rebootcheck
+I:Loading page appcheck
+I:Loading page wipe
+I:Loading page advancedwipe
+I:Loading page formatdata
+I:Loading page formatdata_confirm
+I:Loading page checkpartitionlist
+I:Loading page partitionoptions
+I:Loading page refreshfilesystem
+I:Loading page selectfilesystem
+I:Loading page backup
+I:Loading page backup_options
+I:Loading page backupname1
+I:Loading page backupname2
+I:Loading page backupencryption
+I:Loading page backupencryption2
+I:Loading page checkbackuppassword
+I:Loading page backup_run
+I:Loading page restore
+I:Unable to open '/data/media/0/TWRP/BACKUPS/434899a7'
+I:Loading page restore_read
+I:Loading page restore_decrypt
+I:Loading page try_restore_decrypt
+I:Loading page restore_select
+I:Loading page renamebackup
+I:Loading page restore_run
+I:Loading page mount
+I:Loading page usb_mount
+I:Loading page usb_umount
+I:Loading page system_readonly_check
+I:Loading page reboot
+I:Loading page rebootapp
+I:Loading page system_readonly
+I:Loading page settings
+I:Loading page settings_timezone
+I:Loading page settings_screen
+I:Loading page settings_vibration
+I:Loading page settings_language
+I:Loading page copylog
+I:Loading page advanced
+I:Loading page partsdcardsel
+I:Loading page partsdcardcheck
+I:Loading page partsdcard
+I:Loading page htcdumlock
+I:Loading page lock
+I:Loading page filemanagerlist
+I:Loading page filemanageroptions
+I:Loading page choosedestinationfolder
+I:Loading page filemanagerrenamefile
+I:Loading page filemanagerrenamefolder
+I:Loading page filemanagerchmod
+I:Loading page filemanagerconfirm
+I:Loading page filemanageraction
+I:Loading page decrypt
+I:Loading page decrypt_pattern
+I:Loading page trydecrypt
+I:Loading page terminalcommand
+I:Loading page sideload
+I:Loading page fixcontexts
+I:Loading page installsu
+I:Loading page slideout
+I:Loading page select_storage
+I:Loading page select_language
+I:Set page: 'clear_vars'
+I:Set page: 'main2'
+I:Switching packages (TWRP)
+Renaming regular /file_contexts -> /file_contexts.bak
+Moving /prebuilt_file_contexts -> /file_contexts
+SELinux contexts loaded from /file_contexts
+Full SELinux support is present.
+Startup Commands: 
+ro.sf.lcd_density=440
+ro.com.google.clientidbase=android-google
+ro.com.android.dataroaming=true
+ro.com.android.wifi-watchlist=GoogleGuest
+ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html
+ro.boot.mode=recovery
+ro.boot.angela=disabled
+ro.boot.nobatt=0
+ro.boot.console=ttyHSL0
+ro.boot.secboot=enabled
+ro.boot.selinux=permissive
+ro.boot.baseband=msm
+ro.boot.ftm_mode=ftm_recovery
+ro.boot.hardware=qcom
+ro.boot.serialno=434899a7
+ro.boot.keymaster=1
+ro.boot.bootdevice=624000.ufshc
+ro.boot.hw_version=28
+ro.boot.rf_version=12
+ro.boot.veritymode=logging
+ro.boot.pcba_number=001581107216032000007464
+ro.boot.rpmb_enable=true
+ro.boot.project_name=15811
+ro.boot.enable_dm_verity=1
+ro.boot.verifiedbootstate=orange
+ro.omni.device=oneplus3
+ro.omni.version=6.0.1-20170208-oneplus3-HOMEMADE
+ro.twrp.boot=1
+ro.twrp.version=3.0.4-1
+ro.wifi.channels=
+ro.allow.mock.location=1
+ro.board.platform=msm8996
+ro.build.id=MOB31K
+ro.build.date=Wed Feb  8 01:25:32 EST 2017
+ro.build.date.utc=0
+ro.build.host=westerley
+ro.build.tags=test-keys
+ro.build.type=eng
+ro.build.user=jc
+ro.build.flavor=omni_oneplus3-eng
+ro.build.display.id=omni_oneplus3-eng 6.0.1 MOB31K eng.jc.20170208.012427 test-keys
+ro.build.product=oneplus3
+ro.build.version.sdk=23
+ro.build.version.base_os=
+ro.build.version.release=6.0.1
+ro.build.version.codename=REL
+ro.build.version.incremental=eng.jc.20170208.012427
+ro.build.version.preview_sdk=
+ro.build.version.all_codenames=REL
+ro.build.version.security_patch=2016-11-05
+ro.build.description=omni_oneplus3-eng 6.0.1 MOB31K eng.jc.20170208.012427 test-keys
+ro.build.fingerprint=OnePlus/omni_oneplus3/oneplus3:6.0.1/MOB31K/jc02080124:eng/test-keys
+ro.build.characteristics=default
+ro.config.ringtone=Ring_Synth_04.ogg
+ro.config.alarm_alert=Argon.ogg
+ro.config.notification_sound=pixiedust.ogg
+ro.crypto.state=encrypted
+ro.crypto.fs_crypto_blkdev=/dev/block/dm-0
+ro.crypto.using_system_libs=1
+ro.dalvik.vm.native.bridge=0
+ro.kernel.android.checkjni=1
+ro.secure=0
+ro.zygote=zygote32
+ro.carrier=unknown
+ro.display.series=OnePlus 3T
+ro.product.cpu.abi=arm64-v8a
+ro.product.cpu.abilist=armeabi-v7a,armeabi
+ro.product.cpu.abilist32=armeabi-v7a,armeabi
+ro.product.cpu.abilist64=
+ro.product.name=omni_oneplus3
+ro.product.board=msm8996
+ro.product.brand=OnePlus
+ro.product.model=ONEPLUS A3000
+ro.product.device=OnePlus3T
+ro.product.locale=en-US
+ro.product.manufacturer=OnePlus
+ro.baseband=msm
+ro.bootmode=recovery
+ro.hardware=qcom
+ro.hardware.keystore=msm8996
+ro.revision=0
+ro.serialno=434899a7
+ro.bootimage.build.date=Wed Feb 8 01:26:41 EST 2017
+ro.bootimage.build.date.utc=1486535201
+ro.bootimage.build.fingerprint=OnePlus/omni_oneplus3/oneplus3:6.0.1/MOB31K/jc02080124:eng/test-keys
+ro.bootloader=unknown
+ro.debuggable=1
+ro.modversion=OmniROM-6.0.1-20170208-oneplus3-HOMEMADE
+ro.recovery_id=0xcbb58fb39538c255e3f6e27aa26a3c855ab2c833000000000000000000000000
+ro.setupwizard.enterprise_mode=1
+net.bt.name=Android
+net.change=net.bt.name
+sys.usb.ffs.ready=1
+sys.usb.state=mtp,adb
+sys.usb.config=mtp,adb
+sys.keymaster.loaded=true
+sys.listeners.registered=true
+init.svc.adbd=running
+init.svc.healthd=running
+init.svc.ueventd=running
+init.svc.qseecomd=running
+init.svc.recovery=running
+init.svc.setup-decrypt=stopped
+init.svc.set_permissive=stopped
+twrp.crash_counter=0
+twrp.action_complete=0
+debug.atrace.tags.enableflags=0
+dalvik.vm.isa.arm.variant=cortex-a53
+dalvik.vm.isa.arm.features=default
+dalvik.vm.isa.arm64.variant=kryo
+dalvik.vm.isa.arm64.features=default
+dalvik.vm.usejit=true
+dalvik.vm.lockprof.threshold=500
+dalvik.vm.dex2oat-Xms=64m
+dalvik.vm.dex2oat-Xmx=512m
+dalvik.vm.dex2oat-filter=verify-at-runtime
+dalvik.vm.stack-trace-file=/data/anr/traces.txt
+dalvik.vm.image-dex2oat-Xms=64m
+dalvik.vm.image-dex2oat-Xmx=64m
+dalvik.vm.image-dex2oat-filter=verify-at-runtime
+persist.sys.usb.config=mtp,adb
+persist.sys.dalvik.vm.lib.2=libart
+persist.sys.root_access=1
+service.adb.root=1
+keyguard.no_require_sim=true
+
+I:Copying file /cache/recovery/log to /cache/recovery/last_log
+tw_get_context got selinux context: u:object_r:media_rw_data_file:s0
+I:Got default contexts and file mode for storage files.
+I:Attempt to load settings from settings file...
+I:InfoManager loading from '/data/media/0/TWRP/.twrps'.
+I:Backup folder set to '/data/media/0/TWRP/BACKUPS/434899a7'
+I:Copying file /etc/recovery.fstab to /cache/recovery/recovery.fstab
+I:Version number saved to '/cache/recovery/.version'
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+__bionic_open_tzdata: couldn't find any tzdata when looking for TAIST-8!
+__bionic_open_tzdata: couldn't find any tzdata when looking for posixrules!
+I:TWFunc::Set_Brightness: Setting brightness control to 25
+I:PageManager::LoadFileToBuffer loading filename: '/twres/languages/zh_TW.xml' directly
+parsing languageFile
+parsing languageFile done
+I:Translating partition display names
+I:Backup folder set to '/data/media/0/TWRP/BACKUPS/434899a7'
+I:TWFunc::Fixup_Time: Pre-fix date and time: 1970-03-26--12-58-01
+I:TWFunc::Fixup_Time: Setting time offset from file /sys/class/rtc/rtc0/since_epoch
+I:TWFunc::Fixup_Time: will attempt to use the ats files now.
+I:TWFunc::Fixup_Time: Setting time offset from file /data/time/ats_2, offset 1488877891939
+I:TWFunc::Fixup_Time: Date and time corrected: 2017-05-30--22-09-32
+I:Enabling MTP during startup
+I:Starting MTP
+Starting MTP
+I:sending message to add 65537 '/data/media/0' '內置存儲'
+I:Message sent, add storage ID: 65537
+MTP 已啟用
+I:Check_Lifetime_Writes result: '514976'
+I:Switching packages (TWRP)
+I:Set page: 'main'
+I:Set page: 'clear_vars'
+I:Set page: 'main2'
+created new mtpserver object
+MtpServer::run fd: 22
+mtppipe add storage 65537 '/data/media/0'
+MtpStorage id: 65537 path: /data/media/0
+I:Set page: 'install'
+I:Set page: 'main'
+I:Set page: 'clear_vars'
+I:Set page: 'main2'
+I:Set page: 'install'
+I:Set page: 'flash_confirm'
+I:Set page: 'flash_zip'
+I:operation_start: 'Flashing'
+正在安裝 Zip 刷機包 '/sdcard/TWRP/lineage-14.1-20170525-nightly-oneplus3-signed.zip'
+正在檢測 MD5…
+跳過 MD5 校驗：未找到 MD5 檔案
+I:Update binary zip
+I:Zip does not contain SELinux file_contexts file in its root.
+I:Legacy property environment initialized.
+Comparing TZ version TZ.BF.4.0.1-85373 to TZ.BF.4.0.1-85373Target: 1495709426
+Comparing TZ version TZ.BF.4.0.1-85373 to TZ.BF.4.0.1-85373
+Target: 1495709426
+detected filesystem ext4 for /dev/block/bootdevice/by-name/system
+detected filesystem ext4 for /dev/block/bootdevice/by-name/system
+about to run program [/tmp/install/bin/backuptool.sh] with 2 args
+grep: /tmp/gapps.prop: No such file or directory
+du: app/GoogleTTS/GoogleTTS.apk: No such file or directory
+about to run program [/tmp/install/bin/otasigcheck.sh] with 1 args
+Patching system image unconditionally...
+performing update
+Patching system image unconditionally...
+blockimg version is 4
+maximum stash entries 0
+creating stash /cache/recovery/2bdde8504898ccfcd2c59f20bb8c9c25f73bb524/
+253485056 bytes free on /cache (0 needed)
+ erasing 486178 blocks
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 1024 blocks of new data
+ writing 947 blocks of new data
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 1024 blocks
+  zeroing 299 blocks
+wrote 283870 blocks; expected 283870
+stashed 0 blocks
+max alloc needed was 4096
+bytes_written_system: 1162731520deleting stash 2bdde8504898ccfcd2c59f20bb8c9c25f73bb524
+
+bytes_stashed_system: 0
+detected filesystem ext4 for /dev/block/bootdevice/by-name/system
+detected filesystem ext4 for /dev/block/bootdevice/by-name/system
+about to run program [/tmp/install/bin/backuptool.sh] with 2 args
+find: /system/vendor/pittpatt: No such file or directory
+chown: /system/app/GoogleTTS/GoogleTTS.apk: No such file or directory
+chmod: /system/app/GoogleTTS/GoogleTTS.apk: No such file or directory
+chmod: /system/app/GoogleTTS: No such file or directory
+script succeeded: result was [1.000000]I:Updater process ended with RC=0
+I:Legacy property environment disabled.
+I:Install took 33 second(s).
+正在更新分區詳情…
+I:Data backup size is 2526MB, free: 40666MB.
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+…完成
+I:Set page: 'flash_done'
+I:operation_end - status=0
+I:Set page: 'clear_vars'
+I:Set page: 'install'
+I:Set page: 'flash_confirm'
+I:Set page: 'flash_zip'
+I:operation_start: 'Flashing'
+正在安裝 Zip 刷機包 '/sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip'
+正在檢測 MD5…
+跳過 MD5 校驗：未找到 MD5 檔案
+I:Update binary zip
+I:Zip does not contain SELinux file_contexts file in its root.
+I:Legacy property environment initialized.
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: app_densities.txt
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: app_sizes.txt
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: bkup_tail.sh
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: gapps-remove.txt
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: g.prop
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: installer.sh
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: busybox-arm
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: tar-arm
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: unzip-arm
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+  inflating: zip-arm
+ 
+##############################
+  _____   _____   ___   ____  
+ /  _  \ |  __ \ / _ \ |  _ \ 
+|  / \  || |__) | |_| || | \ \
+| |   | ||  ___/|  __/ | | | |
+|  \ /  || |    \ |__  | | | |
+ \_/ \_/ |_|     \___| |_| |_|
+       ___   _   ___ ___  ___ 
+      / __| /_\ | _ \ _ \/ __|
+     | (_ |/ _ \|  _/  _/\__ \
+      \___/_/ \_\_| |_|  |___/
+##############################
+ 
+Open GApps pico 7.1 - 20170418
+ 
+- Mounting  /system
+ 
+- Gathering device & ROM information
+ 
+grep: /system/etc/firmware/wlan/qca_cld/wlan_mac.bin: No such file or directory
+- Performing system space calculations
+ 
+du: /system/app/Books: No such file or directory
+du: /system/app/CalculatorGooglePrebuilt: No such file or directory
+du: /system/app/CalendarGooglePrebuilt: No such file or directory
+du: /system/app/Chrome: No such file or directory
+du: /system/app/CloudPrint2: No such file or directory
+du: /system/app/DMAgent: No such file or directory
+du: /system/app/Drive: No such file or directory
+du: /system/app/EditorsDocs: No such file or directory
+du: /system/app/EditorsSheets: No such file or directory
+du: /system/app/EditorsSlides: No such file or directory
+du: /system/app/FaceLock: No such file or directory
+du: /system/app/FitnessPrebuilt: No such file or directory
+du: /system/app/GoogleCamera: No such file or directory
+du: /system/app/GoogleCameraLegacy: No such file or directory
+du: /system/app/GoogleEarth: No such file or directory
+du: /system/app/GoogleHindiIME: No such file or directory
+du: /system/app/GoogleHome: No such file or directory
+du: /system/app/GoogleJapaneseInput: No such file or directory
+du: /system/app/GooglePinyinIME: No such file or directory
+du: /system/app/GooglePrintRecommendationService: No such file or directory
+du: /system/app/GoogleTTS: No such file or directory
+du: /system/app/GoogleVrCore: No such file or directory
+du: /system/app/GoogleZhuyinIME: No such file or directory
+du: /system/app/Hangouts: No such file or directory
+du: /system/app/KoreanIME: No such file or directory
+du: /system/app/LatinIMEGooglePrebuilt: No such file or directory
+du: /system/app/Maps: No such file or directory
+du: /system/app/Music2: No such file or directory
+du: /system/app/Newsstand: No such file or directory
+du: /system/app/NexusLauncherIcons: No such file or directory
+du: /system/app/Photos: No such file or directory
+du: /system/app/PlayGames: No such file or directory
+du: /system/app/PlusOne: No such file or directory
+du: /system/app/PrebuiltBugle: No such file or directory
+du: /system/app/PrebuiltDeskClockGoogle: No such file or directory
+du: /system/app/PrebuiltExchange3Google: No such file or directory
+du: /system/app/PrebuiltGmail: No such file or directory
+du: /system/app/PrebuiltKeep: No such file or directory
+du: /system/app/PrebuiltNewsWeather: No such file or directory
+du: /system/app/Street: No such file or directory
+du: /system/app/TranslatePrebuilt: No such file or directory
+du: /system/app/Tycho: No such file or directory
+du: /system/app/Videos: No such file or directory
+du: /system/app/Wallet: No such file or directory
+du: /system/app/WallpaperPickerGooglePrebuilt: No such file or directory
+du: /system/app/WebViewGoogle: No such file or directory
+du: /system/app/WebViewStub: No such file or directory
+du: /system/app/YouTube: No such file or directory
+du: /system/app/talkback: No such file or directory
+du: /system/etc/permissions/com.google.android.camera.experimental2016.xml: No such file or directory
+du: /system/etc/permissions/com.google.android.camera2.xml: No such file or directory
+du: /system/etc/sysconfig/google_vr_build.xml: No such file or directory
+du: /system/lib/libfilterpack_facedetect.so: No such file or directory
+du: /system/lib64/libfacenet.so: No such file or directory
+du: /system/lib64/libfilterpack_facedetect.so: No such file or directory
+du: /system/priv-app/GCS: No such file or directory
+du: /system/priv-app/GoogleContacts: No such file or directory
+du: /system/priv-app/GoogleDialer: No such file or directory
+du: /system/priv-app/HotwordEnrollment: No such file or directory
+du: /system/priv-app/NexusLauncherPrebuilt: No such file or directory
+du: /system/priv-app/StorageManagerGoogle: No such file or directory
+du: /system/priv-app/TagGoogle: No such file or directory
+du: /system/priv-app/Velvet: No such file or directory
+du: /system/usr/srec/en-US/: No such file or directory
+du: /system/vendor/lib/libfrsdk.so: No such file or directory
+du: /system/vendor/lib64/libfrsdk.so: No such file or directory
+du: /system/app/BooksStub: No such file or directory
+du: /system/app/CalendarGoogle: No such file or directory
+du: /system/app/CloudPrint: No such file or directory
+du: /system/app/DeskClockGoogle: No such file or directory
+du: /system/app/EditorsDocsStub: No such file or directory
+du: /system/app/EditorsSheetsStub: No such file or directory
+du: /system/app/EditorsSlidesStub: No such file or directory
+du: /system/app/Gmail: No such file or directory
+du: /system/app/Gmail2: No such file or directory
+du: /system/app/GoogleCalendar: No such file or directory
+du: /system/app/GoogleCloudPrint: No such file or directory
+du: /system/app/GoogleHangouts: No such file or directory
+du: /system/app/GoogleKeep: No such file or directory
+du: /system/app/GoogleLatinIme: No such file or directory
+du: /system/app/GooglePlus: No such file or directory
+du: /system/app/Keep: No such file or directory
+du: /system/app/NewsstandStub: No such file or directory
+du: /system/app/NewsWeather: No such file or directory
+du: /system/app/PartnerBookmarksProvider: No such file or directory
+du: /system/app/PrebuiltBugleStub: No such file or directory
+du: /system/app/PrebuiltKeepStub: No such file or directory
+du: /system/app/QuickSearchBox: No such file or directory
+du: /system/app/Vending: No such file or directory
+du: /system/priv-app/GmsCore: No such file or directory
+du: /system/priv-app/GoogleNow: No such file or directory
+du: /system/priv-app/GoogleSearch: No such file or directory
+du: /system/priv-app/GoogleHangouts: No such file or directory
+du: /system/priv-app/OneTimeInitializer: No such file or directory
+du: /system/priv-app/QuickSearchBox: No such file or directory
+du: /system/priv-app/Vending: No such file or directory
+du: /system/priv-app/Velvet_update: No such file or directory
+du: /system/priv-app/GmsCore_update: No such file or directory
+du: /system/app/CanvasPackageInstaller: No such file or directory
+du: /system/app/ConfigUpdater: No such file or directory
+du: /system/app/GoogleBackupTransport: No such file or directory
+du: /system/app/GoogleFeedback: No such file or directory
+du: /system/app/GoogleLoginService: No such file or directory
+du: /system/app/GoogleOneTimeInitializer: No such file or directory
+du: /system/app/GooglePartnerSetup: No such file or directory
+du: /system/app/GoogleServicesFramework: No such file or directory
+du: /system/app/OneTimeInitializer: No such file or directory
+du: /system/app/Phonesky: No such file or directory
+du: /system/app/PrebuiltGmsCore: No such file or directory
+du: /system/app/SetupWizard: No such file or directory
+du: /system/app/Velvet: No such file or directory
+du: /system/lib/libjni_latinimegoogle.so: No such file or directory
+du: /system/app/LatinIME/lib//libjni_latinimegoogle.so: No such file or directory
+du: /system/lib/libjni_keyboarddecoder.so: No such file or directory
+du: /system/lib64/libjni_keyboarddecoder.so: No such file or directory
+du: /system/app/LatinIME/lib//libjni_keyboarddecoder.so: No such file or directory
+du: /system/app/CalculatorGoogle: No such file or directory
+du: /system/priv-app/GoogleHome: No such file or directory
+du: /system/priv-app/Hangouts: No such file or directory
+du: /system/priv-app/PrebuiltExchange3Google: No such file or directory
+du: /system/priv-app/talkback: No such file or directory
+du: /system/priv-app/Wallet: No such file or directory
+- Removing existing/obsolete Apps
+ 
+find: /system/vendor/pittpatt: No such file or directory
+find: /system/usr/srec: No such file or directory
+- Installing core GApps
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/defaultetc-common.tar.lz  
+Found Core/defaultetc-common DPI path: unknown
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/defaultframework-common.tar.lz  
+Found Core/defaultframework-common DPI path: unknown
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/googlebackuptransport-all.tar.lz  
+Found Core/googlebackuptransport-all DPI path: googlebackuptransport-all/nodpi
+/tmp/tar-arm: googlebackuptransport-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/googlecontactssync-all.tar.lz  
+Found Core/googlecontactssync-all DPI path: googlecontactssync-all/nodpi
+/tmp/tar-arm: googlecontactssync-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/googlefeedback-all.tar.lz  
+Found Core/googlefeedback-all DPI path: googlefeedback-all/nodpi
+/tmp/tar-arm: googlefeedback-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/googleonetimeinitializer-all.tar.lz  
+Found Core/googleonetimeinitializer-all DPI path: googleonetimeinitializer-all/nodpi
+/tmp/tar-arm: googleonetimeinitializer-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/googlepartnersetup-all.tar.lz  
+Found Core/googlepartnersetup-all DPI path: googlepartnersetup-all/nodpi
+/tmp/tar-arm: googlepartnersetup-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/gmscore-arm64.tar.lz  
+Found Core/gmscore-arm64 DPI path: gmscore-arm64/480
+/tmp/tar-arm: gmscore-arm64/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/gsfcore-all.tar.lz  
+Found Core/gsfcore-all DPI path: gsfcore-all/nodpi
+/tmp/tar-arm: gsfcore-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/gsflogin-all.tar.lz  
+Found Core/gsflogin-all DPI path: gsflogin-all/nodpi
+/tmp/tar-arm: gsflogin-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/vending-all.tar.lz  
+Found Core/vending-all DPI path: vending-all/240-320-480
+/tmp/tar-arm: vending-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/setupwizarddefault-all.tar.lz  
+Found Core/setupwizarddefault-all DPI path: setupwizarddefault-all/nodpi
+/tmp/tar-arm: setupwizarddefault-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/configupdater-all.tar.lz  
+Found Core/configupdater-all DPI path: configupdater-all/nodpi
+/tmp/tar-arm: configupdater-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/extservicesgoogle-all.tar.lz  
+Found Core/extservicesgoogle-all DPI path: extservicesgoogle-all/nodpi
+/tmp/tar-arm: extservicesgoogle-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/extsharedgoogle-all.tar.lz  
+Found Core/extsharedgoogle-all DPI path: extsharedgoogle-all/nodpi
+/tmp/tar-arm: extsharedgoogle-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Core/gmssetup-all.tar.lz  
+Found Core/gmssetup-all DPI path: gmssetup-all/nodpi
+/tmp/tar-arm: gmssetup-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+ 
+- Installing swypelibs
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/Optional/swypelibs-lib-arm64.tar.lz  
+Found Optional/swypelibs-lib-arm64 DPI path: unknown
+- Installing calsync
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/GApps/calsync-all.tar.lz  
+Found GApps/calsync-all DPI path: calsync-all/nodpi
+/tmp/tar-arm: calsync-all/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+- Installing dialerframework
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/GApps/dialerframework-common.tar.lz  
+Found GApps/dialerframework-common DPI path: unknown
+- Installing googletts
+Archive:  /sdcard/TWRP/open_gapps-arm64-7.1-pico-20170418.zip
+signed by SignApk
+ extracting: /tmp/GApps/googletts-arm.tar.lz  
+Found GApps/googletts-arm DPI path: googletts-arm/nodpi
+/tmp/tar-arm: googletts-arm/common: Not found in archive
+/tmp/tar-arm: Exiting with failure status due to previous errors
+ 
+- Miscellaneous tasks
+ 
+find: /system/vendor/pittpatt: No such file or directory
+- Copying Log to /sdcard/TWRP
+ 
+- Installation complete!
+ 
+cp: can't stat '': No such file or directory
+cp: can't stat '/system/default.prop': No such file or directory
+cp: can't stat '/data/local.prop': No such file or directory
+cp: can't stat '/build.prop': No such file or directory
+logcat read failure- Unmounting  /system
+ 
+I:Updater process ended with RC=0
+I:Legacy property environment disabled.
+I:Install took 49 second(s).
+正在更新分區詳情…
+I:Data backup size is 2526MB, free: 40666MB.
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+…完成
+I:Set page: 'flash_done'
+I:operation_end - status=0
+I:Set page: 'clear_vars'
+I:Set page: 'install'
+I:Set page: 'flash_confirm'
+I:Set page: 'flash_zip'
+I:operation_start: 'Flashing'
+正在安裝 Zip 刷機包 '/sdcard/TWRP/SuperSU-v2.79-201612051815.zip'
+正在檢測 MD5…
+跳過 MD5 校驗：未找到 MD5 檔案
+I:Update binary zip
+I:Zip does not contain SELinux file_contexts file in its root.
+I:Legacy property environment initialized.
+ 
+*****************
+SuperSU installer
+*****************
+- Mounting /system, /data and rootfs
+mount: mounting /dev/block/dm-0 on /data failed: Device or resource busy
+2+0 records in
+2+0 records out
+2 bytes (2B) copied, 0.008553 seconds, 233B/s
+3+0 records in
+3+0 records out
+3 bytes (3B) copied, 0.004581 seconds, 654B/s
+10+0 records in
+10+0 records out
+10 bytes (10B) copied, 0.005343 seconds, 1.8KB/s
+0+0 records in
+0+0 records out
+0 bytes (0B) copied, 0.007858 seconds, 0B/s
+/tmp/updater: line 935: /system/toolbox: not found
+- Extracting files
+Archive:  /sdcard/TWRP/SuperSU-v2.79-201612051815.zip
+  inflating: META-INF/MANIFEST.MF
+  inflating: META-INF/CERT.SF
+  inflating: META-INF/CERT.RSA
+  inflating: META-INF/com/google/android/update-binary
+  inflating: META-INF/com/google/android/updater-script
+  inflating: arm/chattr
+  inflating: arm/chattr.pie
+  inflating: arm/libsupol.so
+  inflating: arm/su
+  inflating: arm/suinit
+  inflating: arm/sukernel
+  inflating: arm/supolicy
+  inflating: arm64/chromeos/futility
+  inflating: arm64/libsupol.so
+  inflating: arm64/su
+  inflating: arm64/suinit
+  inflating: arm64/sukernel
+  inflating: arm64/supolicy
+  inflating: armv7/chattr.pie
+  inflating: armv7/libsupol.so
+  inflating: armv7/su
+  inflating: armv7/suinit
+  inflating: armv7/sukernel
+  inflating: armv7/supolicy
+  inflating: common/000000deepsleep
+  inflating: common/99SuperSUDaemon
+  inflating: common/Superuser.apk
+  inflating: common/chromeos/kernel.bootloader
+  inflating: common/chromeos/kernel.config
+  inflating: common/chromeos/kernel.keyblock
+  inflating: common/chromeos/kernel_data_key.vbprivk
+  inflating: common/file_contexts_image
+  inflating: common/frp_install
+  inflating: common/hexpatch
+  inflating: common/init.supersu.rc
+  inflating: common/install-recovery.sh
+  inflating: common/launch_daemonsu.sh
+  inflating: mips/chattr.pie
+  inflating: mips/libsupol.so
+  inflating: mips/su
+  inflating: mips/suinit
+  inflating: mips/sukernel
+  inflating: mips/supolicy
+  inflating: mips64/libsupol.so
+  inflating: mips64/su
+  inflating: mips64/suinit
+  inflating: mips64/sukernel
+  inflating: mips64/supolicy
+  inflating: x64/libsupol.so
+  inflating: x64/su
+  inflating: x64/suinit
+  inflating: x64/sukernel
+  inflating: x64/supolicy
+  inflating: x86/chattr
+  inflating: x86/chattr.pie
+  inflating: x86/libsupol.so
+  inflating: x86/su
+  inflating: x86/su.pie
+  inflating: x86/suinit
+  inflating: x86/sukernel
+  inflating: x86/supolicy
+(Android M policy compatibility mode)
+supolicy v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Patching policy ...
+-permissive:adbd_socket=ok
+-permissive:functionfs=ok
+-permissive:wifip2p_service=ok
+-permissive:hci_attach_exec=ok
+-permissive:system_server=ok
+-permissive:proc_uid_cputime_showstat=ok
+-permissive:nfc=ok
+-permissive:rild_debug_socket=ok
+-permissive:file_type=ok
+-permissive:fsck_tmpfs=ok
+-permissive:exec_type=ok
+-permissive:property_type=ok
+-permissive:rtc_device=ok
+-permissive:surfaceflinger_service=ok
+-permissive:binderservicedomain=ok
+-permissive:mdns_socket=ok
+-permissive:network_score_service=ok
+-permissive:node_type=ok
+-permissive:registry_service=ok
+-permissive:gatekeeperd_tmpfs=ok
+-permissive:appwidget_service=ok
+-permissive:platform_app=ok
+-permissive:ram_device=ok
+-permissive:perfprofd_data_file=ok
+-permissive:port_type=ok
+-permissive:rootfs=ok
+-permissive:tmpfs=ok
+-permissive:usbfs=ok
+-permissive:bootanim_exec=ok
+-permissive:gatekeeper_data_file=ok
+-permissive:gpsd_tmpfs=ok
+-permissive:installd_exec=ok
+-permissive:su_tmpfs=ok
+-permissive:processinfo_service=ok
+-permissive:untrusted_app_tmpfs=ok
+-permissive:cpuctl_device=ok
+-permissive:launcherapps_service=ok
+-permissive:country_detector_service=ok
+-permissive:cgroup=ok
+-permissive:drmserver_socket=ok
+-permissive:ppp_device=ok
+-permissive:wpa_socket=ok
+-permissive:proc_net=ok
+-permissive:vdc=ok
+-permissive:clatd=ok
+-permissive:netd=ok
+-permissive:sdcardd=ok
+-permissive:zygote=ok
+-permissive:debuggerd=ok
+-permissive:input_device=ok
+-permissive:jobscheduler_service=ok
+-permissive:mnt_user_file=ok
+-permissive:mediaserver_tmpfs=ok
+-permissive:sysfs_ksm=ok
+-permissive:ueventd_tmpfs=ok
+-permissive:serial_service=ok
+-permissive:DockObserver_service=ok
+-permissive:download_file=ok
+-permissive:mtp=ok
+-permissive:backup_data_file=ok
+-permissive:servicemanager_tmpfs=ok
+-permissive:su_exec=ok
+-permissive:ppp_exec=ok
+-permissive:tee_exec=ok
+-permissive:vdc_exec=ok
+-permissive:wpa_exec=ok
+-permissive:dumpstate_tmpfs=ok
+-permissive:mqueue=ok
+-permissive:mtp_exec=ok
+-permissive:system_ndebug_socket=ok
+-permissive:tee=ok
+-permissive:adb_data_file=ok
+-permissive:anr_data_file=ok
+-permissive:app_data_file=ok
+-permissive:dhcp_data_file=ok
+-permissive:logdr_socket=ok
+-permissive:logdw_socket=ok
+-permissive:net_data_file=ok
+-permissive:shell_data_file=ok
+-permissive:vold_data_file=ok
+-permissive:vpn_data_file=ok
+-permissive:adb_keys_file=ok
+-permissive:dalvikcache_data_file=ok
+-permissive:media_session_service=ok
+-permissive:bluetooth_manager_service=ok
+-permissive:keystore_tmpfs=ok
+-permissive:fingerprint_service=ok
+-permissive:kernel=ok
+-permissive:servicediscovery_service=ok
+-permissive:dhcp_tmpfs=ok
+-permissive:platform_app_data_file=ok
+-permissive:dhcp=ok
+-permissive:mediaserver_service=ok
+-permissive:recovery_block_device=ok
+-permissive:dnsmasq=ok
+-permissive:drmserver=ok
+-permissive:drmserver_tmpfs=ok
+-permissive:keystore=ok
+-permissive:property_data_file=ok
+-permissive:vold_exec=ok
+-permissive:adbd=ok
+-permissive:package_service=ok
+-permissive:dumpstate=ok
+-permissive:racoon_exec=ok
+-permissive:usagestats_service=ok
+-permissive:rild_exec=ok
+-permissive:unlabeled=ok
+-permissive:bluetooth=ok
+-permissive:accessibility_service=ok
+-permissive:uncrypt_tmpfs=ok
+-permissive:inputflinger=ok
+-permissive:dhcp_exec=ok
+-permissive:vcs_device=ok
+-permissive:fsck_exec=ok
+-permissive:gpsd_exec=ok
+-permissive:port=ok
+-permissive:fuse=ok
+-permissive:install_data_file=ok
+-permissive:mkfs_exec=ok
+-permissive:lmkd_exec=ok
+-permissive:logd_exec=ok
+-permissive:wifi_service=ok
+-permissive:netd_exec=ok
+-permissive:sgdisk=ok
+-permissive:init_exec=ok
+-permissive:media_router_service=ok
+-permissive:asec_image_file=ok
+-permissive:recovery=ok
+-permissive:radio_tmpfs=ok
+-permissive:tee_tmpfs=ok
+-permissive:wpa=ok
+-permissive:dev_type=ok
+-permissive:runas=ok
+-permissive:vdc_tmpfs=ok
+-permissive:wpa_tmpfs=ok
+-permissive:hostapd=ok
+-permissive:system_prop=ok
+-permissive:vfat=ok
+-permissive:fs_type=ok
+-permissive:sdcard_external=ok
+-permissive:sdcard_internal=ok
+-permissive:sdcardd_exec=ok
+-permissive:owntty_device=ok
+-permissive:selinuxfs=ok
+-permissive:tty_device=ok
+-permissive:tun_device=ok
+-permissive:clatd_exec=ok
+-permissive:installd_tmpfs=ok
+-permissive:uio_device=ok
+-permissive:bootanim_tmpfs=ok
+-permissive:install_recovery_tmpfs=ok
+-permissive:sysinit_exec=ok
+-permissive:system_app_service=ok
+-permissive:full_device=ok
+-permissive:null_device=ok
+-permissive:fuse_device=ok
+-permissive:usb_device=ok
+-permissive:wfd_app=ok
+-permissive:camera_device=ok
+-permissive:hostapd_exec=ok
+-permissive:keystore_exec=ok
+-permissive:netpolicy_service=ok
+-permissive:power_service=ok
+-permissive:user_service=ok
+-permissive:persistent_data_block_service=ok
+-permissive:tv_input_service=ok
+-permissive:input_service=ok
+-permissive:uncrypt=ok
+-permissive:system_app_data_file=ok
+-permissive:uimode_service=ok
+-permissive:tee_device=ok
+-permissive:uncrypt_exec=ok
+-permissive:video_device=ok
+-permissive:system_api_service=ok
+-permissive:blkid_exec=ok
+-permissive:labeledfs=ok
+-permissive:midi_service=ok
+-permissive:mtp_tmpfs=ok
+-permissive:audio_device=ok
+-permissive:radio_device=ok
+-permissive:webviewupdate_service=ok
+-permissive:nfc_tmpfs=ok
+-permissive:userinit_exec=ok
+-permissive:ptmx_device=ok
+-permissive:restrictions_service=ok
+-permissive:textservices_service=ok
+-permissive:mdnsd_exec=ok
+-permissive:system_app_tmpfs=ok
+-permissive:wifiscanner_service=ok
+-permissive:bluetooth_data_file=ok
+-permissive:usbaccessory_device=ok
+-permissive:userinit_data_exec=ok
+-permissive:lvm_placeholder=ok
+-permissive:rmt_placeholder=ok
+-permissive:ffs_prop=ok
+-permissive:nfc_prop=ok
+-permissive:dex2oat_exec=ok
+-permissive:socket_device=ok
+-permissive:toolbox=ok
+-permissive:IProxyService_service=ok
+-permissive:bluetooth_tmpfs=ok
+-permissive:sysfs_lowmemorykiller=ok
+-permissive:installd_socket=ok
+-permissive:netd_tmpfs=ok
+-permissive:servicemanager_exec=ok
+-permissive:mnt_media_rw_stub_file=ok
+-permissive:proc=ok
+-permissive:scheduling_policy_service=ok
+-permissive:asec_public_file=ok
+-permissive:proc_cpuinfo=ok
+-permissive:tzdatacheck=ok
+-permissive:usermodehelper=ok
+-permissive:bluetooth_socket=ok
+-permissive:installd=ok
+-permissive:logcat_exec=ok
+-permissive:debug_prop=ok
+-permissive:inputflinger_exec=ok
+-permissive:pan_result_prop=ok
+-permissive:security_prop=ok
+-permissive:fingerprintd=ok
+-permissive:zygote_socket=ok
+-permissive:system_server_tmpfs=ok
+-permissive:bluetooth_prop=ok
+-permissive:mkfs_tmpfs=ok
+-permissive:bootchart_data_file=ok
+-permissive:ctl_rildaemon_prop=ok
+-permissive:system_radio_prop=ok
+-permissive:input_method_service=ok
+-permissive:fsck_untrusted=ok
+-permissive:contextmount_type=ok
+-permissive:lmkd_tmpfs=ok
+-permissive:logd_tmpfs=ok
+-permissive:uhid_device=ok
+-permissive:lock_settings_service=ok
+-permissive:ctl_dhcp_pan_prop=ok
+-permissive:media_projection_service=ok
+-permissive:racoon_socket=ok
+-permissive:ctl_bootanim_prop=ok
+-permissive:restorecon_prop=ok
+-permissive:wallpaper_file=ok
+-permissive:account_service=ok
+-permissive:content_service=ok
+-permissive:mount_service=ok
+-permissive:print_service=ok
+-permissive:install_recovery=ok
+-permissive:net_radio_prop=ok
+-permissive:location_service=ok
+-permissive:commontime_management_service=ok
+-permissive:asec_apk_file=ok
+-permissive:telecom_service=ok
+-permissive:console_device=ok
+-permissive:userinit_prop=ok
+-permissive:sensors_device=ok
+-permissive:cameraproxy_service=ok
+-permissive:heapdump_data_file=ok
+-permissive:connectivity_service=ok
+-permissive:notification_service=ok
+-permissive:dhcp_prop=ok
+-permissive:audio_prop=ok
+-permissive:qtaguid_proc=ok
+-permissive:ctl_bugreport_prop=ok
+-permissive:healthd=ok
+-permissive:init=ok
+-permissive:sysinit=ok
+-permissive:fingerprintd_tmpfs=ok
+-permissive:keychain_data_file=ok
+-permissive:kmem_device=ok
+-permissive:netif_type=ok
+-permissive:gps_control=ok
+-permissive:logd_prop=ok
+-permissive:init_tmpfs=ok
+-permissive:device_policy_service=ok
+-permissive:surfaceflinger_exec=ok
+-permissive:kmsg_device=ok
+-permissive:vold_prop=ok
+-permissive:slideshow=ok
+-permissive:dreams_service=ok
+-permissive:imms_service=ok
+-permissive:data_file_type=ok
+-permissive:samplingprofiler_service=ok
+-permissive:netif=ok
+-permissive:bootanim=ok
+-permissive:dalvik_prop=ok
+-permissive:klog_device=ok
+-permissive:zoneinfo_data_file=ok
+-permissive:radio=ok
+-permissive:inputflinger_service=ok
+-permissive:mlstrustedobject=fail
+-permissive:debuggerd_tmpfs=ok
+-permissive:diskstats_service=ok
+-permissive:usb_service=ok
+-permissive:wallpaper_service=ok
+-permissive:fscklogs=ok
+-permissive:netd_socket=ok
+-permissive:search_service=ok
+-permissive:battery_service=ok
+-permissive:task_service=ok
+-permissive:zygote_tmpfs=ok
+-permissive:mlstrustedsubject=fail
+-permissive:graphicsstats_service=ok
+-permissive:mediaserver=ok
+-permissive:mediaserver_exec=ok
+-permissive:ctl_fuse_prop=ok
+-permissive:drmserver_service=ok
+-permissive:fingerprintd_data_file=ok
+-permissive:mtpd_socket=ok
+-permissive:ctl_console_prop=ok
+-permissive:debugfs=ok
+-permissive:gatekeeperd_exec=ok
+-permissive:hardware_service=ok
+-permissive:keystore_service=ok
+-permissive:mkfs=ok
+-permissive:oemfs=ok
+-permissive:pipefs=ok
+-permissive:sockfs=ok
+-permissive:sysfs=ok
+-permissive:logd=ok
+-permissive:procstats_service=ok
+-permissive:pstorefs=ok
+-permissive:trust_service=ok
+-permissive:default_android_service=ok
+-permissive:drmserver_exec=ok
+-permissive:config_prop=ok
+-permissive:binfmt_miscfs=ok
+-permissive:inotify=ok
+-permissive:vold_tmpfs=ok
+-permissive:sap_uim_socket=ok
+-permissive:bluetooth_service=ok
+-permissive:fingerprintd_exec=ok
+-permissive:alarm_service=ok
+-permissive:sysfs_devices_system_cpu=ok
+-permissive:rttmanager_service=ok
+-permissive:sgdisk_exec=ok
+-permissive:storage_file=ok
+-permissive:debuggerd_exec=ok
+-permissive:untrusted_app=ok
+-permissive:appops_service=ok
+-permissive:gps_socket=ok
+-permissive:system_block_device=ok
+-permissive:ueventd=ok
+-permissive:node=ok
+-permissive:proc_sysrq=ok
+-permissive:gatekeeperd=ok
+-permissive:adb_device=ok
+-permissive:consumer_ir_service=ok
+-permissive:shared_relro=ok
+-permissive:sysfs_type=ok
+-permissive:updatelock_service=ok
+-permissive:system_data_file=ok
+-permissive:alarm_device=ok
+-permissive:camera_data_file=ok
+-permissive:sysfs_bluetooth_writable=ok
+-permissive:ctl_mdnsd_prop=ok
+-permissive:hci_attach_tmpfs=ok
+-permissive:devpts=ok
+-permissive:sysfs_zram=ok
+-permissive:audio_firmware_file=ok
+-permissive:proc_bluetooth_writable=ok
+-permissive:apk_data_file=ok
+-permissive:audio_data_file=ok
+-permissive:bluetooth_efs_file=ok
+-permissive:dm_device=ok
+-permissive:drm_data_file=ok
+-permissive:gps_data_file=ok
+-permissive:media_data_file=ok
+-permissive:nfc_data_file=ok
+-permissive:radio_data_file=ok
+-permissive:tee_data_file=ok
+-permissive:wifi_data_file=ok
+-permissive:app_api_service=ok
+-permissive:display_service=ok
+-permissive:mdnsd_tmpfs=ok
+-permissive:mnt_media_rw_file=ok
+-permissive:system_app=ok
+-permissive:misc_logd_file=ok
+-permissive:dumpstate_socket=ok
+-permissive:sdcard_type=ok
+-permissive:system_file=ok
+-permissive:apk_private_tmp_file=ok
+-permissive:hci_attach_dev=ok
+-permissive:su=ok
+-permissive:statusbar_service=ok
+-permissive:perfprofd_exec=ok
+-permissive:racoon_tmpfs=ok
+-permissive:apk_tmp_file=ok
+-permissive:batterystats_service=ok
+-permissive:proc_security=ok
+-permissive:system_server_service=ok
+-permissive:gps_device=ok
+-permissive:gpu_device=ok
+-permissive:mnt_expand_file=ok
+-permissive:nfc_service=ok
+-permissive:gpsd=ok
+-permissive:mdnsd=ok
+-permissive:device=ok
+-permissive:storage_stub_file=ok
+-permissive:system_wpa_socket=ok
+-permissive:assetatlas_service=ok
+-permissive:surfaceflinger=ok
+-permissive:perfprofd_tmpfs=ok
+-permissive:sysfs_nfc_power_writable=ok
+-permissive:fsck=ok
+-permissive:voiceinteraction_service=ok
+-permissive:rild_tmpfs=ok
+-permissive:sensorservice_service=ok
+-permissive:cpuinfo_service=ok
+-permissive:dbinfo_service=ok
+-permissive:gfxinfo_service=ok
+-permissive:meminfo_service=ok
+-permissive:isolated_app_tmpfs=ok
+-permissive:runas_exec=ok
+-permissive:untrusted_app_devpts=ok
+-permissive:dex2oat=ok
+-permissive:gatekeeper_service=ok
+-permissive:netstats_service=ok
+-permissive:watchdogd=ok
+-permissive:bluetoothdomain=ok
+-permissive:dnsmasq_exec=ok
+-permissive:fwmarkd_socket=ok
+-permissive:qtaguid_device=ok
+-permissive:tzdatacheck_exec=ok
+-permissive:inputflinger_tmpfs=ok
+-permissive:proc_drop_caches=ok
+-permissive:shell_exec=ok
+-permissive:activity_service=ok
+-permissive:backup_service=ok
+-permissive:hdmi_control_service=ok
+-permissive:ppp=ok
+-permissive:clipboard_service=ok
+-permissive:dumpstate_exec=ok
+-permissive:zero_device=ok
+-permissive:ethernet_service=ok
+-permissive:perfprofd=ok
+-permissive:resourcecache_data_file=ok
+-permissive:systemkeys_data_file=ok
+-permissive:shared_relro_tmpfs=ok
+-permissive:binder_device=ok
+-permissive:procrank_exec=ok
+-permissive:property_socket=ok
+-permissive:hw_random_device=ok
+-permissive:random_device=ok
+-permissive:urandom_device=ok
+-permissive:watchdog_device=ok
+-permissive:ctl_default_prop=ok
+-permissive:ctl_dumpstate_prop=ok
+-permissive:security_file=ok
+-permissive:userdata_block_device=ok
+-permissive:tzdatacheck_tmpfs=ok
+-permissive:media_rw_data_file=ok
+-permissive:wfd_app_tmpfs=ok
+-permissive:default_prop=ok
+-permissive:procrank=ok
+-permissive:proc_uid_cputime_removeuid=ok
+-permissive:debuggerd_prop=ok
+-permissive:shared_relro_file=ok
+-permissive:install_recovery_exec=ok
+-permissive:coredump_file=ok
+-permissive:netdomain=ok
+-permissive:cache_block_device=ok
+-permissive:appdomain=ok
+-permissive:lmkd_socket=ok
+-permissive:racoon=ok
+-permissive:graphics_device=ok
+-permissive:serial_device=ok
+-permissive:efs_file=ok
+-permissive:boot_block_device=ok
+-permissive:powerctl_prop=ok
+-permissive:rild=ok
+-permissive:vold=ok
+-permissive:adbtcp_prop=ok
+-permissive:toolbox_exec=ok
+-permissive:iio_device=ok
+-permissive:devicestoragemonitor_service=ok
+-permissive:ion_device=ok
+-permissive:permission_service=ok
+-permissive:shell=ok
+-permissive:tombstone_data_file=ok
+-permissive:audio_service=ok
+-permissive:radio_service=ok
+-permissive:apk_private_data_file=ok
+-permissive:mdnsd_socket=ok
+-permissive:metadata_block_device=ok
+-permissive:service_manager_type=ok
+-permissive:unencrypted_data_file=ok
+-permissive:healthd_service=ok
+-permissive:root_block_device=ok
+-permissive:swap_block_device=ok
+-permissive:cache_backup_file=ok
+-permissive:logd_socket=ok
+-permissive:blkid_untrusted=ok
+-permissive:toolbox_tmpfs=ok
+-permissive:hci_attach=ok
+-permissive:dalvikcache_profiles_data_file=ok
+-permissive:sdcard_posix=ok
+-permissive:vold_socket=ok
+-permissive:block_device=ok
+-permissive:zygote_exec=ok
+-permissive:frp_block_device=ok
+-permissive:radio_prop=ok
+-permissive:loop_device=ok
+-permissive:sysfs_writable=ok
+-permissive:vold_device=ok
+-permissive:properties_device=ok
+-permissive:misc_user_data_file=ok
+-permissive:surfaceflinger_tmpfs=ok
+-permissive:sysfs_ioscheduler=ok
+-permissive:lmkd=ok
+-permissive:nfc_device=ok
+-permissive:vibrator_service=ok
+-permissive:deviceidle_service=ok
+-permissive:servicemanager=ok
+-permissive:window_service=ok
+-permissive:dropbox_service=ok
+-permissive:sysfs_wake_lock=ok
+-permissive:dnsproxyd_socket=ok
+-permissive:rild_socket=ok
+-permissive:shell_prop=ok
+-permissive:keystore_data_file=ok
+-permissive:ashmem_device=ok
+-permissive:isolated_app=ok
+-permissive:sysinit_tmpfs=ok
+-permissive:shm=ok
+-permissive:platform_app_tmpfs=ok
+-permissive:pmsg_device=ok
+-permissive:rpmsg_device=ok
+-permissive:shell_tmpfs=ok
+-permissive:network_management_service=ok
+-permissive:cache_file=ok
+-permissive:fingerprint_prop=ok
+-permissive:blkid=ok
+-permissive:fingerprintd_service=ok
+-permissive:mtp_device=ok
+-permissive:mtd_device=ok
+-permissive:log_device=ok
+-permissive:domain=ok
+- Success
+- Detecting system compatibility
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/dev/block/sde18] ...
+
+magic: [ANDROID!]
+kernel: [11350955] (11354112) @ 0x80008000
+ramdisk: [1829590] (1830912) @ 0x81000000
+second: [0] (0) @ 0x80f00000
+tags: @ 0x80000100
+page size: 4096
+unused: [0x00000000] [0x0e041115]
+dtb(?): [0] (0)
+name: []
+command line: [androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff buildvariant=userdebug]
+extra command line: []
+id: [0x939ad66b33ccbe426908f32cef2d19947db8ee12000000000000000000000000]
+
+Saving to [/sutmp/ramdisk.packed] ...
+
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk.packed] ...
+
+Decompressing [1829590] --> [4582144]
+
+Saving to [/sutmp/ramdisk] ...
+
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+----- patch check -----
+
+Loading from cpio:[init.rc] ...
+
+Finding [daemonsu]
+-!Found
+
+Finding [SuperSU:PATCH]
+-!Found
+
+Result: not patched
+
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Saving to [/sutmp/fstab] ...
+
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Saving to [/sutmp/init] ...
+
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Saving to [/sutmp/sepolicy] ...
+
+- System-less mode, boot image support required
+- Creating image
+/data/su.img: 24/6144 files (0.0% non-contiguous), 1662/24576 blocks
+- Mounting image
+- Creating paths
+mkdir: can't create directory '/su/bin': File exists
+mkdir: can't create directory '/su/xbin': File exists
+mkdir: can't create directory '/su/lib': File exists
+mkdir: can't create directory '/su/etc': File exists
+mkdir: can't create directory '/su/su.d': File exists
+- Removing old files
+- Placing files
+rm: can't remove '/su/bin/su': No such file or directory
+rm: can't remove '/su/bin/daemonsu': No such file or directory
+rm: can't remove '/su/bin/supolicy_wrapped': No such file or directory
+rm: can't remove '/su/lib/libsupol.so': No such file or directory
+rm: can't remove '/su/bin/sukernel': No such file or directory
+rm: can't remove '/data/SuperSU.apk': No such file or directory
+ 
+******************
+Boot image patcher
+******************
+- Finding boot image
+--- Boot image: /dev/block/sde18
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/dev/block/sde18] ...
+
+magic: [ANDROID!]
+kernel: [11350955] (11354112) @ 0x80008000
+ramdisk: [1829590] (1830912) @ 0x81000000
+second: [0] (0) @ 0x80f00000
+tags: @ 0x80000100
+page size: 4096
+unused: [0x00000000] [0x0e041115]
+dtb(?): [0] (0)
+name: []
+command line: [androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff buildvariant=userdebug]
+extra command line: []
+id: [0x939ad66b33ccbe426908f32cef2d19947db8ee12000000000000000000000000]
+
+- Extracting ramdisk
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/dev/block/sde18] ...
+
+magic: [ANDROID!]
+kernel: [11350955] (11354112) @ 0x80008000
+ramdisk: [1829590] (1830912) @ 0x81000000
+second: [0] (0) @ 0x80f00000
+tags: @ 0x80000100
+page size: 4096
+unused: [0x00000000] [0x0e041115]
+dtb(?): [0] (0)
+name: []
+command line: [androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff buildvariant=userdebug]
+extra command line: []
+id: [0x939ad66b33ccbe426908f32cef2d19947db8ee12000000000000000000000000]
+
+Saving to [/sutmp/ramdisk.packed] ...
+
+- Decompressing ramdisk
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk.packed] ...
+
+Decompressing [1829590] --> [4582144]
+
+Saving to [/sutmp/ramdisk] ...
+
+- Checking patch status
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+----- patch check -----
+
+Loading from cpio:[init.rc] ...
+
+Finding [daemonsu]
+-!Found
+
+Finding [SuperSU:PATCH]
+-!Found
+
+Result: not patched
+
+- Creating backup
+rm: can't remove '/data/stock_boot_*.img': No such file or directory
+rm: can't remove '/cache/stock_boot_*.img': No such file or directory
+rm: can't remove '/cache/stock_boot_*.img.gz': No such file or directory
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+[/dev/block/sde18](67108864) --> [/data/stock_boot_78f6881c202a05ddcb4a4264cac9716218b759fe.img.gz](12801798)
+
+rm: can't remove '/sutmp/ramdisk.original': No such file or directory
+- Patching sepolicy
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Saving to [/sutmp/sepolicy] ...
+
+supolicy v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Patching policy [/sutmp/sepolicy] --> [/sutmp/sepolicy.patched] ...
+- Success
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Creating [sepolicy] ...
+
+Loading from [/sutmp/sepolicy.patched] ...
+
+Saving to [/sutmp/ramdisk] ...
+
+- Adding daemon launcher
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Creating [sbin/launch_daemonsu.sh] ...
+
+Loading from [/tmp/supersu/common/launch_daemonsu.sh] ...
+
+Saving to [/sutmp/ramdisk] ...
+
+- Adding init script
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Creating [init.supersu.rc] ...
+
+Loading from [/tmp/supersu/common/init.supersu.rc] ...
+
+Saving to [/sutmp/ramdisk] ...
+
+- Creating mount point
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Creating [su] ...
+
+Saving to [/sutmp/ramdisk] ...
+
+- Patching init.*.rc, fstabs, file_contexts, dm-verity
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+----- patch check -----
+
+Loading from cpio:[init.rc] ...
+
+Finding [daemonsu]
+-!Found
+
+Finding [SuperSU:PATCH]
+-!Found
+
+Result: not patched
+
+----- verity_key -----
+
+Removing [verity_key] ...
+Could not locate entry
+
+----- fstab: [fstab.qcom] -----
+
+Loading from cpio:[fstab.qcom] ...
+
+Finding [,support_scfs]
+-!Found
+
+Finding [,verify]
+-!Found
+
+Finding [,forceencrypt]
+-!Found
+
+Finding [,forcefdeorfbe]
+-!Found
+
+Finding [,fileencryption]
+-!Found
+
+Finding [ro,!rw,!atime|relatime]
+-Found@0010 [/dev/block/bootdevice/by-name/system                         /system           ext4    ro,barrier=1,discard                                                                                            wait]
+
+Remove@0010 [/dev/block/bootdevice/by-name/system                         /system           ext4    ro,barrier=1,discard                                                                                            wait]
+Insert@0010 [/dev/block/bootdevice/by-name/system                         /system           ext4    ro,noatime,barrier=1,discard                                                                                            wait]
+
+Finding [ro,!rw,!atime|relatime]
+-Found@0016 [/dev/block/bootdevice/by-name/dsp                            /dsp              ext4    ro,nosuid,nodev,barrier=1                                                                                       wait]
+
+Remove@0016 [/dev/block/bootdevice/by-name/dsp                            /dsp              ext4    ro,nosuid,nodev,barrier=1                                                                                       wait]
+Insert@0016 [/dev/block/bootdevice/by-name/dsp                            /dsp              ext4    ro,noatime,nosuid,nodev,barrier=1                                                                                       wait]
+
+Finding [ro,!rw,!atime|relatime]
+-Found@0017 [/dev/block/bootdevice/by-name/modem                          /firmware         vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0                    wait]
+
+Remove@0017 [/dev/block/bootdevice/by-name/modem                          /firmware         vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0                    wait]
+Insert@0017 [/dev/block/bootdevice/by-name/modem                          /firmware         vfat    ro,noatime,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0                    wait]
+
+Finding [ro,!rw,!atime|relatime]
+-Found@0018 [/dev/block/bootdevice/by-name/bluetooth                      /bt_firmware      vfat    ro,shortname=lower,uid=1002,gid=3002,dmask=222,fmask=333,context=u:object_r:bt_firmware_file:s0                 wait]
+
+Remove@0018 [/dev/block/bootdevice/by-name/bluetooth                      /bt_firmware      vfat    ro,shortname=lower,uid=1002,gid=3002,dmask=222,fmask=333,context=u:object_r:bt_firmware_file:s0                 wait]
+Insert@0018 [/dev/block/bootdevice/by-name/bluetooth                      /bt_firmware      vfat    ro,noatime,shortname=lower,uid=1002,gid=3002,dmask=222,fmask=333,context=u:object_r:bt_firmware_file:s0                 wait]
+
+Finding [ro,!rw,!atime|relatime]
+-!Found
+
+Saving to cpio:[fstab.qcom] ...
+
+----- init.rc -----
+
+Loading from cpio:[init.rc] ...
+
+Finding [setprop selinux.reload_policy]
+-Found@0488 [    setprop selinux.reload_policy 1]
+
+Remove@0488 [    setprop selinux.reload_policy 1]
+
+Finding [setprop selinux.reload_policy]
+-!Found
+
+Finding [import ]
+-Found@0006 [import /init.environ.rc]
+
+Insert@0011 [import init.supersu.rc]
+
+Append@0690 [# SuperSU:PATCH:279]
+Append@0691 [# SuperSU:STOCK:78f6881c202a05ddcb4a4264cac9716218b759fe]
+
+Saving to cpio:[init.rc] ...
+
+----- init.environ.rc -----
+
+Loading from cpio:[init.environ.rc] ...
+
+Finding [export PATH ]
+-!Found
+
+Finding [on init]
+-Found@0001 [on init]
+
+Insert@0002 [    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin]
+
+Finding [export PATH ]
+-Found@0002 [    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin]
+
+Remove@0002 [    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin]
+Insert@0002 [    export PATH /su/bin:/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin]
+
+Finding [export PATH ]
+-Found@0002 [    export PATH /su/bin:/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin]
+
+Remove@0002 [    export PATH /su/bin:/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin]
+Insert@0002 [    export PATH /su/bin:/sbin:/vendor/bin:/system/sbin:/system/bin:/su/xbin:/system/xbin]
+
+Saving to cpio:[init.environ.rc] ...
+
+----- file_contexts -----
+
+Loading from cpio:[file_contexts.bin] ...
+
+Decompiling binary file_contexts format ...
+
+Saving to cpio:[file_contexts.bin] ...
+
+Loading from cpio:[file_contexts.bin] ...
+
+Append@0832 []
+Append@0833 [# SuperSU]
+Append@0834 [/su(/.*)? u:object_r:system_file:s0]
+
+Saving to cpio:[file_contexts.bin] ...
+
+----- rc: [init.cm.rc] -----
+
+Loading from cpio:[init.cm.rc] ...
+
+----- rc: [init.environ.rc] -----
+
+Loading from cpio:[init.environ.rc] ...
+
+----- rc: [init.qcom.power.rc] -----
+
+Loading from cpio:[init.qcom.power.rc] ...
+
+----- rc: [init.qcom.rc] -----
+
+Loading from cpio:[init.qcom.rc] ...
+
+Found @0457 [service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh]
+Insert@0458 [    seclabel u:r:init:s0]
+
+Found @0463 [service qcom-c_main-sh /system/bin/sh /init.class_main.sh]
+Insert@0464 [    seclabel u:r:init:s0]
+
+Found @0562 [service hciattach_ath3k /system/bin/sh /system/etc/init.ath3k.bt.sh]
+Insert@0563 [    seclabel u:r:init:s0]
+
+Found @0799 [service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh]
+Insert@0800 [    seclabel u:r:init:s0]
+
+Found @0823 [service qcom-sh /system/bin/sh /init.qcom.sh]
+Insert@0824 [    seclabel u:r:init:s0]
+
+Found @0829 [service sensor-sh /system/bin/sh /init.qcom.sensors.sh]
+Insert@0830 [    seclabel u:r:init:s0]
+
+Found @0835 [service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh]
+Insert@0836 [    seclabel u:r:init:s0]
+
+Found @0849 [service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh]
+Insert@0850 [    seclabel u:r:init:s0]
+
+Found @0856 [service wifi-crda /system/bin/sh /system/etc/init.crda.sh]
+Insert@0857 [    seclabel u:r:init:s0]
+
+Found @0920 [service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh]
+Insert@0921 [    seclabel u:r:init:s0]
+
+Found @0945 [service hcidump /system/bin/sh /system/etc/hcidump.sh]
+Insert@0946 [    seclabel u:r:init:s0]
+
+Saving to cpio:[init.qcom.rc] ...
+
+----- rc: [init.qcom.usb.rc] -----
+
+Loading from cpio:[init.qcom.usb.rc] ...
+
+Found @0037 [service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh]
+Insert@0038 [    seclabel u:r:init:s0]
+
+Saving to cpio:[init.qcom.usb.rc] ...
+
+----- rc: [init.rc] -----
+
+Loading from cpio:[init.rc] ...
+
+----- rc: [init.supersu.rc] -----
+
+Loading from cpio:[init.supersu.rc] ...
+
+----- rc: [init.target.rc] -----
+
+Loading from cpio:[init.target.rc] ...
+
+Found @0262 [service mdm_launcher /system/bin/sh init.mdm.sh]
+Insert@0263 [    seclabel u:r:init:s0]
+
+Found @0417 [service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh]
+Insert@0418 [    seclabel u:r:init:s0]
+
+Saving to cpio:[init.target.rc] ...
+
+----- rc: [init.usb.configfs.rc] -----
+
+Loading from cpio:[init.usb.configfs.rc] ...
+
+----- rc: [init.usb.rc] -----
+
+Loading from cpio:[init.usb.rc] ...
+
+----- rc: [init.zygote32.rc] -----
+
+Loading from cpio:[init.zygote32.rc] ...
+
+----- rc: [init.zygote64_32.rc] -----
+
+Loading from cpio:[init.zygote64_32.rc] ...
+
+----- rc: [ueventd.qcom.rc] -----
+
+Loading from cpio:[ueventd.qcom.rc] ...
+
+----- rc: [ueventd.rc] -----
+
+Loading from cpio:[ueventd.rc] ...
+
+----- done -----
+
+Saving to [/sutmp/ramdisk] ...
+
+- Creating ramdisk backup
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk.original] ...
+
+Loading from [/sutmp/ramdisk] ...
+
+Append@0000 [+ init.supersu.rc]
+Append@0001 [+ sbin/launch_daemonsu.sh]
+Append@0002 [+ su]
+Creating [.subackup] ...
+
+Append@0003 [* file_contexts.bin 0000_file_contexts.bin]
+Creating [.subackup/0000_file_contexts.bin] ...
+
+Append@0004 [* fstab.qcom 0001_fstab.qcom]
+Creating [.subackup/0001_fstab.qcom] ...
+
+Append@0005 [* init.environ.rc 0002_init.environ.rc]
+Creating [.subackup/0002_init.environ.rc] ...
+
+Append@0006 [* init.qcom.rc 0003_init.qcom.rc]
+Creating [.subackup/0003_init.qcom.rc] ...
+
+Append@0007 [* init.qcom.usb.rc 0004_init.qcom.usb.rc]
+Creating [.subackup/0004_init.qcom.usb.rc] ...
+
+Append@0008 [* init.rc 0005_init.rc]
+Creating [.subackup/0005_init.rc] ...
+
+Append@0009 [* init.target.rc 0006_init.target.rc]
+Creating [.subackup/0006_init.target.rc] ...
+
+Append@0010 [* sepolicy 0007_sepolicy]
+Creating [.subackup/0007_sepolicy] ...
+
+Creating [.subackup/index] ...
+
+Saving to [/sutmp/ramdisk] ...
+
+- Compressing ramdisk
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/sutmp/ramdisk] ...
+
+Compressing [5191780] --> [1976493]
+
+Saving to [/sutmp/ramdisk.packed] ...
+
+- Creating boot image
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/dev/block/sde18] ...
+
+magic: [ANDROID!]
+kernel: [11350955] (11354112) @ 0x80008000
+ramdisk: [1829590] (1830912) @ 0x81000000
+second: [0] (0) @ 0x80f00000
+tags: @ 0x80000100
+page size: 4096
+unused: [0x00000000] [0x0e041115]
+dtb(?): [0] (0)
+name: []
+command line: [androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff buildvariant=userdebug]
+extra command line: []
+id: [0x939ad66b33ccbe426908f32cef2d19947db8ee12000000000000000000000000]
+
+Loading from [/sutmp/ramdisk.packed] ...
+
+Saving to [/sutmp/boot.img] ...
+
+magic: [ANDROID!]
+kernel: [11350955] (11354112) @ 0x80008000
+ramdisk: [1976493] (1978368) @ 0x81000000
+second: [0] (0) @ 0x80f00000
+tags: @ 0x80000100
+page size: 4096
+unused: [0x00000000] [0x0e041115]
+dtb(?): [0] (0)
+name: []
+command line: [androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff buildvariant=userdebug]
+extra command line: []
+id: [0x1ea8d365d7b937deaa97be5e447f8d8570f046a6000000000000000000000000]
+
+- Applying hex patches
+sukernel v2.79 (ndk:arm64-v8a) - Copyright (C) 2014-2016 - Chainfire
+
+Loading from [/tmp/supersu/common/hexpatch] ...
+
+Loading from [/sutmp/boot.img] ...
+
+[replace] [49010054011440B93FA00F71E9000054010840B93FA00F7189000054001840B91FA00F7188010054] [A1020054011440B93FA00F7140020054010840B93FA00F71E0010054001840B91FA00F7181010054]
+
+- Flashing boot image
+dd: writing '/dev/block/sde18': No space left on device
+16385+0 records in
+16384+0 records out
+67108864 bytes (64.0MB) copied, 0.074791 seconds, 855.7MB/s
+3256+0 records in
+3256+0 records out
+13336576 bytes (12.7MB) copied, 0.357913 seconds, 35.5MB/s
+ 
+*************************
+    IMPORTANT NOTICES    
+*************************
+First reboot may take a  
+few minutes. It can also 
+loop a few times. Do not 
+interrupt the process!   
+*************************
+ 
+- Unmounting /system
+- Done !
+I:Updater process ended with RC=0
+I:Legacy property environment disabled.
+I:Install took 21 second(s).
+正在更新分區詳情…
+I:Data backup size is 2533MB, free: 40659MB.
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+…完成
+I:Set page: 'flash_done'
+I:operation_end - status=0
+I:Set page: 'clear_vars'
+I:Set page: 'install'
+I:Set page: 'flash_confirm'
+I:Set page: 'flash_zip'
+I:operation_start: 'Flashing'
+正在安裝 Zip 刷機包 '/sdcard/TWRP/JamesDSPManager_ARM.zip'
+正在檢測 MD5…
+跳過 MD5 校驗：未找到 MD5 檔案
+I:Update binary zip
+I:Zip does not contain SELinux file_contexts file in its root.
+I:Legacy property environment initialized.
+about to run program [/sbin/busybox] with 3 args
+**********************************************
+*Installing JamesDSP for Android 5.X.X or above (ARM)*
+**********************************************
+minzip: Extracted file "/system/app/DSPManager_All.apk"
+minzip: Extracted file "/system/lib/libjamesDSPImpulseToolbox.so"
+minzip: Extracted file "/system/lib/soundfx/libjamesdsp.so"
+minzip: Extracted file "/system/vendor/etc/audio_effects.conf"
+Fixing permissions...
+about to run program [/sbin/busybox] with 3 args
+script result was [0.100000]
+**********************************************
+* Installation complete...                   *
+* Please reboot and launch JamesDSP          *
+**********************************************
+I:Updater process ended with RC=0
+I:Legacy property environment disabled.
+I:Install took 1 second(s).
+正在更新分區詳情…
+I:Data backup size is 2533MB, free: 40659MB.
+I:Unable to mount '/usb-otg'
+I:Actual block device: '', current file system: 'vfat'
+…完成
+I:Set page: 'flash_done'
+I:operation_end - status=0
+I:Set overlay: 'slideout'
+I:Set overlay: ''
+I:Set page: 'clear_vars'
+I:Set page: 'install'
+I:Set page: 'main'
+I:Set page: 'clear_vars'
+I:Set page: 'main2'
+I:Set page: 'advanced'
+I:Set page: 'copylog'
+I:Set page: 'action_page'
+I:operation_start: 'Copy Log'
+I:Copying file /tmp/recovery.log to /data/media/0/recovery.log
