@@ -28,7 +28,7 @@
   <string name="pref_dsp_enable">Включить</string>
   <string name="pref_effect_title">Сила эффекта</string>
   <string name="pref_preamp_title">Сила Pre-amp эффекта</string>
-  <string name="dialog_slope">Тип фильтра</string>
+  <string name="dialog_filtertype">Тип фильтра</string>
   <string name="pref_effect_freq_title">Выбрать центральную частоту эффекта</string>
   <string name="dialog_freq">Частота фильтра</string>
   <string name="dialog_effect">Сила эффекта</string>

@@ -26,15 +26,29 @@
 #include "binder/IMemory.h"
 #include "binder/utils/LinearTransform.h"
 #include "binder/utils/String8.h"
-#include "AudioTimestamp.h"
+//#include "AudioTimestamp.h"
 
 namespace android
 {
 
 // ----------------------------------------------------------------------------
 
+class AudioTimestamp
+{
+public:
+    AudioTimestamp() : mPosition(0)
+    {
+        mTime.tv_sec = 0;
+        mTime.tv_nsec = 0;
+    }
+    // FIXME change type to match android.media.AudioTrack
+    uint32_t        mPosition; // a frame position in AudioTrack::getPosition() units
+    struct timespec mTime;     // corresponding CLOCK_MONOTONIC when frame is expected to present
+};
+
 class IAudioTrack : public IInterface
 {
+
 public:
     DECLARE_META_INTERFACE(AudioTrack);
 
@@ -94,9 +108,7 @@ public:
 
     /* Signal the playback thread for a change in control block */
     virtual void        signal() = 0;
-};
-
-// ----------------------------------------------------------------------------
+};// ----------------------------------------------------------------------------
 
 class BnAudioTrack : public BnInterface<IAudioTrack>
 {

@@ -73,10 +73,12 @@ void sf_advancecomp(sf_compressor_state_st *state, int rate, float pregain, floa
     float satrelease = 0.0025f; // seconds
     float satreleasesamplesinv = 1.0f / ((float)rate * satrelease);
     float dry = 1.0f - wet;
+#ifdef METER
     // metering values (not used in core algorithm, but used to output a meter if desired)
     float metergain = 1.0f; // gets overwritten immediately because gain will always be negative
     float meterfalloff = 0.325f; // seconds
     float meterrelease = 1.0f - expf(-1.0f / ((float)rate * meterfalloff));
+#endif
     // calculate knee curve parameters
     float k = 5.0f; // initial guess
     float kneedboffset;
@@ -114,8 +116,10 @@ void sf_advancecomp(sf_compressor_state_st *state, int rate, float pregain, floa
     float c = (-11.0f * y1 + 18.0f * y2 - 9.0f * y3 + 2.0f * y4) / 6.0f;
     float d = y1;
     // save everything
+#ifdef METER
     state->metergain            = 1.0f; // large value overwritten immediately since it's always < 0
     state->meterrelease         = meterrelease;
+#endif
     state->threshold            = threshold;
     state->knee                 = knee;
     state->linearpregain        = linearpregain;
@@ -171,8 +175,10 @@ static inline float fixf(float v, float def)
 void sf_compressor_process(sf_compressor_state_st *state, int size, float *inputL, float *inputR, float *outputL, float *outputR)
 {
     // pull out the state into local variables
+#ifdef METER
     float metergain            = state->metergain;
     float meterrelease         = state->meterrelease;
+#endif
     float threshold            = state->threshold;
     float knee                 = state->knee;
     float linearpregain        = state->linearpregain;
@@ -279,18 +285,22 @@ void sf_compressor_process(sf_compressor_state_st *state, int size, float *input
             // the final gain value!
             float premixgain = sinf(ang90 * compgain);
             float gain = dry + wet * mastergain * premixgain;
+#ifdef METER
             // calculate metering (not used in core algo, but used to output a meter if desired)
             float premixgaindb = lin2db(premixgain);
             if (premixgaindb < metergain)
                 metergain = premixgaindb; // spike immediately
             else
                 metergain += (premixgaindb - metergain) * meterrelease; // fall slowly
+#endif
             // apply the gain
             outputL[samplepos] = delaybufL[delayreadpos] * gain;
             outputR[samplepos] = delaybufR[delayreadpos] * gain;
         }
     }
+#ifdef METER
     state->metergain     = metergain;
+#endif
     state->detectoravg   = detectoravg;
     state->compgain      = compgain;
     state->maxcompdiffdb = maxcompdiffdb;

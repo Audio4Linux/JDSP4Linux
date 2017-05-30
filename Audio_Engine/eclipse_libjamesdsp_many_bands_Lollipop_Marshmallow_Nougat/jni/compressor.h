@@ -29,25 +29,26 @@
 // value below (defaults to 32):
 
 // maximum number of samples in the delay buffer
-#define SF_COMPRESSOR_MAXDELAY   1024
+#define SF_COMPRESSOR_MAXDELAY   512
 
 // samples per update; the compressor works by dividing the input chunks into even smaller sizes,
 // and performs heavier calculations after each mini-chunk to adjust the final envelope
-#define SF_COMPRESSOR_SPU        4
+#define SF_COMPRESSOR_SPU        8
 
 // not sure what this does exactly, but it is part of the release curve
 #define SF_COMPRESSOR_SPACINGDB  5.0f
 
 typedef struct
 {
+#ifdef METER
     // user can read the metergain state variable after processing a chunk to see how much dB the
     // compressor would have liked to compress the sample; the meter values aren't used to shape the
     // sound in any way, only used for output if desired
     float metergain;
-
+    float meterrelease;
+#endif
     // everything else shouldn't really be mucked with unless you read the algorithm and feel
     // comfortable
-    float meterrelease;
     float threshold;
     float knee;
     float linearpregain;

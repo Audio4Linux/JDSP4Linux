@@ -197,6 +197,9 @@ public class EqualizerSurface extends SurfaceView
         {
             x = projectX(mFreq[i]) * mWidth;
             y = projectY(mLevels[i]) * mHeight;
+            canvas.drawLine(x, mHeight, x, y, mControlBar);
+            canvas.drawCircle(x, y, mControlBar.getStrokeWidth() * 0.66f, mControlBarKnob);
+            canvas.drawText(mFreqText[i], x, mWhite.getTextSize(), mControlBarText);
             freqResponse.lineTo(x, y);
         }
         x = projectX(MAX_FREQ) * mWidth;
@@ -233,14 +236,6 @@ public class EqualizerSurface extends SurfaceView
             y = projectY(dB) * mHeight;
             canvas.drawLine(0, y, mWidth - 1, y, mGridLines);
             canvas.drawText(String.format("%+d", dB), 1, (y - 1), mWhite);
-        }
-        for (int i = 0; i < mLevels.length; i++)
-        {
-            x = projectX(mFreq[i]) * mWidth;
-            y = projectY(mLevels[i]) * mHeight;
-            canvas.drawLine(x, mHeight, x, y, mControlBar);
-            canvas.drawCircle(x, y, mControlBar.getStrokeWidth() * 0.66f, mControlBarKnob);
-            canvas.drawText(mFreqText[i], x, mWhite.getTextSize(), mControlBarText);
         }
     }
 

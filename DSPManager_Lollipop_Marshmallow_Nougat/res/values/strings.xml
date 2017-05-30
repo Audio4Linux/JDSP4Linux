@@ -23,7 +23,7 @@
   <string name="dialog_release">Release</string>
   <string name="dialog_predelay">Pre-delay</string>
   <string name="pref_effect_title">Select effect strength</string>
-  <string name="dialog_slope">Slope</string>
+  <string name="dialog_filtertype">Filter type</string>
   <string name="pref_effect_freq_title">Select low pass filter frequency</string>
   <string name="dialog_freq">Filter frequency</string>
   <string name="dialog_effect">Effect strength</string>
@@ -46,7 +46,6 @@
   <string name="dialog_roomsize">Room size</string>
   <string name="dialog_reverbtime">Sustain</string>
   <string name="dialog_damping">Damping</string>
-  <string name="dialog_spread">Spread</string>
   <string name="dialog_inbandwidth">Bandwidth</string>
   <string name="dialog_earlyverb">Early level</string>
   <string name="dialog_tailverb">Tail level</string>

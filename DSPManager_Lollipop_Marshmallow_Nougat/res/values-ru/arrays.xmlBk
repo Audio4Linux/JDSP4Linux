@@ -70,12 +70,12 @@
     <item>Super</item>
     <item>Extreme</item>
   </string-array>
-  <string-array name="bassboost_slope">
+  <string-array name="bassboost_filtertype">
     <item>RBJ Нормальный</item>
     <item>RBJ каскадный эффект, теплый фильтр</item>
     <item>24дБ/Октава(Баттерворт фильтр 4-го порядка)</item>
   </string-array>
-  <string-array name="bassboost_slope_values">
+  <string-array name="bassboost_filtertype_values">
     <item>0</item>
     <item>1</item>
     <item>2</item>

@@ -21,7 +21,7 @@
 #include <sys/cdefs.h>
 
 #include "system/cutils/native_handle.h"
-#include "system/graphics.h"
+//#include "system/graphics.h"
 
 __BEGIN_DECLS
 

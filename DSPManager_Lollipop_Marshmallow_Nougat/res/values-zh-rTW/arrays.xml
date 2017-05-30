@@ -68,7 +68,7 @@
     <item>超強</item>
     <item>極端</item>
   </string-array>
-  <string-array name="bassboost_slope">
+  <string-array name="bassboost_filtertype">
     <item>24dB/Oct巴特沃斯擱架濾波器</item>
     <item>線性相位1023階低通濾波器</item>
     <item>線性相位4095階低通濾波器</item>

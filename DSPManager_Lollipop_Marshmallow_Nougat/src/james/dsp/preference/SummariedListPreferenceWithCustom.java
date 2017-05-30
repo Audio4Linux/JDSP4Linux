@@ -64,7 +64,6 @@ public class SummariedListPreferenceWithCustom extends ListPreference
                 kernelFile.mkdirs();
                 kernelFile.mkdir();
             }
-            else Log.i(DSPManager.TAG, "Impulse response directory exists");
             ArrayList<String> kernelList = new ArrayList<String>();
             getFileNameList(kernelFile, ".wav", kernelList);
             if (kernelList.isEmpty())

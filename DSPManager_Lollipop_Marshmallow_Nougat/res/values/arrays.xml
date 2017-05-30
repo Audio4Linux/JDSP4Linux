@@ -3,14 +3,18 @@
   <string-array name="compression_pregain">
     <item>0 dB</item>
     <item>4 dB</item>
-    <item>6 dB</item>
     <item>8 dB</item>
+    <item>12 dB</item>
+    <item>18 dB</item>
+    <item>24 dB</item>
   </string-array>
   <string-array name="compression_pregain_values" translatable="false">
     <item>0</item>
     <item>4</item>
-    <item>6</item>
     <item>8</item>
+    <item>12</item>
+    <item>18</item>
+    <item>24</item>
   </string-array>
   <string-array name="compression_threshold">
     <item>-80 dB</item>
@@ -61,7 +65,17 @@
     <item>40</item>
   </string-array>
   <string-array name="compression_ratio">
-    <item>0</item>
+    <item>-14</item>
+    <item>-12</item>
+    <item>-10</item>
+    <item>-8</item>
+    <item>-6</item>
+    <item>-5</item>
+    <item>-4</item>
+    <item>-3</item>
+    <item>-2</item>
+    <item>-1</item>
+    <item>1</item>
     <item>2</item>
     <item>4</item>
     <item>6</item>
@@ -70,9 +84,23 @@
     <item>12</item>
     <item>14</item>
     <item>16</item>
+    <item>18</item>
+    <item>20</item>
+    <item>22</item>
+    <item>24</item>
   </string-array>
   <string-array name="compression_ratio_values" translatable="false">
-    <item>0</item>
+    <item>-14</item>
+    <item>-12</item>
+    <item>-10</item>
+    <item>-8</item>
+    <item>-6</item>
+    <item>-5</item>
+    <item>-4</item>
+    <item>-3</item>
+    <item>-2</item>
+    <item>-1</item>
+    <item>1</item>
     <item>2</item>
     <item>4</item>
     <item>6</item>
@@ -81,8 +109,13 @@
     <item>12</item>
     <item>14</item>
     <item>16</item>
+    <item>18</item>
+    <item>20</item>
+    <item>22</item>
+    <item>24</item>
   </string-array>
   <string-array name="compression_attack">
+    <item>0.001</item>
     <item>0.002</item>
     <item>0.008</item>
     <item>0.01</item>
@@ -109,11 +142,9 @@
     <item>0.7</item>
     <item>0.75</item>
     <item>0.8</item>
-    <item>0.85</item>
-    <item>0.9</item>
-    <item>0.95</item>
   </string-array>
   <string-array name="compression_attack_values" translatable="false">
+    <item>1</item>
     <item>2</item>
     <item>8</item>
     <item>10</item>
@@ -140,9 +171,6 @@
     <item>700</item>
     <item>750</item>
     <item>800</item>
-    <item>850</item>
-    <item>900</item>
-    <item>950</item>
   </string-array>
   <string-array name="compression_release">
     <item>0.002</item>
@@ -205,328 +233,6 @@
     <item>850</item>
     <item>900</item>
     <item>950</item>
-  </string-array>
-  <string-array name="compression_predelay">
-    <item>0.002</item>
-    <item>0.008</item>
-    <item>0.01</item>
-    <item>0.025</item>
-    <item>0.05</item>
-    <item>0.1</item>
-    <item>0.12</item>
-    <item>0.15</item>
-    <item>0.17</item>
-    <item>0.185</item>
-    <item>0.2</item>
-    <item>0.24</item>
-    <item>0.28</item>
-    <item>0.3</item>
-    <item>0.34</item>
-    <item>0.38</item>
-    <item>0.4</item>
-    <item>0.44</item>
-    <item>0.48</item>
-    <item>0.5</item>
-    <item>0.55</item>
-    <item>0.6</item>
-    <item>0.65</item>
-    <item>0.7</item>
-    <item>0.75</item>
-    <item>0.8</item>
-    <item>0.85</item>
-    <item>0.9</item>
-    <item>0.95</item>
-  </string-array>
-  <string-array name="compression_predelay_values" translatable="false">
-    <item>2</item>
-    <item>8</item>
-    <item>10</item>
-    <item>25</item>
-    <item>50</item>
-    <item>100</item>
-    <item>120</item>
-    <item>150</item>
-    <item>170</item>
-    <item>185</item>
-    <item>200</item>
-    <item>240</item>
-    <item>280</item>
-    <item>300</item>
-    <item>340</item>
-    <item>380</item>
-    <item>400</item>
-    <item>440</item>
-    <item>480</item>
-    <item>500</item>
-    <item>550</item>
-    <item>600</item>
-    <item>650</item>
-    <item>700</item>
-    <item>750</item>
-    <item>800</item>
-    <item>850</item>
-    <item>900</item>
-    <item>950</item>
-  </string-array>
-  <string-array name="compression_releasezone1">
-    <item>0.002</item>
-    <item>0.008</item>
-    <item>0.01</item>
-    <item>0.025</item>
-    <item>0.05</item>
-    <item>0.1</item>
-    <item>0.12</item>
-    <item>0.15</item>
-    <item>0.17</item>
-    <item>0.185</item>
-    <item>0.2</item>
-    <item>0.24</item>
-    <item>0.28</item>
-    <item>0.3</item>
-    <item>0.34</item>
-    <item>0.38</item>
-    <item>0.4</item>
-    <item>0.44</item>
-    <item>0.48</item>
-    <item>0.5</item>
-    <item>0.55</item>
-    <item>0.6</item>
-    <item>0.65</item>
-    <item>0.7</item>
-    <item>0.75</item>
-    <item>0.8</item>
-    <item>0.85</item>
-    <item>0.9</item>
-    <item>0.95</item>
-  </string-array>
-  <string-array name="compression_releasezone1_values" translatable="false">
-    <item>2</item>
-    <item>8</item>
-    <item>10</item>
-    <item>25</item>
-    <item>50</item>
-    <item>100</item>
-    <item>120</item>
-    <item>150</item>
-    <item>170</item>
-    <item>185</item>
-    <item>200</item>
-    <item>240</item>
-    <item>280</item>
-    <item>300</item>
-    <item>340</item>
-    <item>380</item>
-    <item>400</item>
-    <item>440</item>
-    <item>480</item>
-    <item>500</item>
-    <item>550</item>
-    <item>600</item>
-    <item>650</item>
-    <item>700</item>
-    <item>750</item>
-    <item>800</item>
-    <item>850</item>
-    <item>900</item>
-    <item>950</item>
-  </string-array>
-  <string-array name="compression_releasezone2">
-    <item>0.002</item>
-    <item>0.008</item>
-    <item>0.01</item>
-    <item>0.025</item>
-    <item>0.05</item>
-    <item>0.1</item>
-    <item>0.12</item>
-    <item>0.15</item>
-    <item>0.17</item>
-    <item>0.185</item>
-    <item>0.2</item>
-    <item>0.24</item>
-    <item>0.28</item>
-    <item>0.3</item>
-    <item>0.34</item>
-    <item>0.38</item>
-    <item>0.4</item>
-    <item>0.44</item>
-    <item>0.48</item>
-    <item>0.5</item>
-    <item>0.55</item>
-    <item>0.6</item>
-    <item>0.65</item>
-    <item>0.7</item>
-    <item>0.75</item>
-    <item>0.8</item>
-    <item>0.85</item>
-    <item>0.9</item>
-    <item>0.95</item>
-  </string-array>
-  <string-array name="compression_releasezone2_values" translatable="false">
-    <item>2</item>
-    <item>8</item>
-    <item>10</item>
-    <item>25</item>
-    <item>50</item>
-    <item>100</item>
-    <item>120</item>
-    <item>150</item>
-    <item>170</item>
-    <item>185</item>
-    <item>200</item>
-    <item>240</item>
-    <item>280</item>
-    <item>300</item>
-    <item>340</item>
-    <item>380</item>
-    <item>400</item>
-    <item>440</item>
-    <item>480</item>
-    <item>500</item>
-    <item>550</item>
-    <item>600</item>
-    <item>650</item>
-    <item>700</item>
-    <item>750</item>
-    <item>800</item>
-    <item>850</item>
-    <item>900</item>
-    <item>950</item>
-  </string-array>
-  <string-array name="compression_releasezone3">
-    <item>0.002</item>
-    <item>0.008</item>
-    <item>0.01</item>
-    <item>0.025</item>
-    <item>0.05</item>
-    <item>0.1</item>
-    <item>0.12</item>
-    <item>0.15</item>
-    <item>0.17</item>
-    <item>0.185</item>
-    <item>0.2</item>
-    <item>0.24</item>
-    <item>0.28</item>
-    <item>0.3</item>
-    <item>0.34</item>
-    <item>0.38</item>
-    <item>0.4</item>
-    <item>0.44</item>
-    <item>0.48</item>
-    <item>0.5</item>
-    <item>0.55</item>
-    <item>0.6</item>
-    <item>0.65</item>
-    <item>0.7</item>
-    <item>0.75</item>
-    <item>0.8</item>
-    <item>0.85</item>
-    <item>0.9</item>
-    <item>0.95</item>
-  </string-array>
-  <string-array name="compression_releasezone3_values" translatable="false">
-    <item>2</item>
-    <item>8</item>
-    <item>10</item>
-    <item>25</item>
-    <item>50</item>
-    <item>100</item>
-    <item>120</item>
-    <item>150</item>
-    <item>170</item>
-    <item>185</item>
-    <item>200</item>
-    <item>240</item>
-    <item>280</item>
-    <item>300</item>
-    <item>340</item>
-    <item>380</item>
-    <item>400</item>
-    <item>440</item>
-    <item>480</item>
-    <item>500</item>
-    <item>550</item>
-    <item>600</item>
-    <item>650</item>
-    <item>700</item>
-    <item>750</item>
-    <item>800</item>
-    <item>850</item>
-    <item>900</item>
-    <item>950</item>
-  </string-array>
-  <string-array name="compression_releasezone4">
-    <item>0.002</item>
-    <item>0.008</item>
-    <item>0.01</item>
-    <item>0.025</item>
-    <item>0.05</item>
-    <item>0.1</item>
-    <item>0.12</item>
-    <item>0.15</item>
-    <item>0.17</item>
-    <item>0.185</item>
-    <item>0.2</item>
-    <item>0.24</item>
-    <item>0.28</item>
-    <item>0.3</item>
-    <item>0.34</item>
-    <item>0.38</item>
-    <item>0.4</item>
-    <item>0.44</item>
-    <item>0.48</item>
-    <item>0.5</item>
-    <item>0.55</item>
-    <item>0.6</item>
-    <item>0.65</item>
-    <item>0.7</item>
-    <item>0.75</item>
-    <item>0.8</item>
-    <item>0.85</item>
-    <item>0.9</item>
-    <item>0.95</item>
-  </string-array>
-  <string-array name="compression_releasezone4_values" translatable="false">
-    <item>2</item>
-    <item>8</item>
-    <item>10</item>
-    <item>25</item>
-    <item>50</item>
-    <item>100</item>
-    <item>120</item>
-    <item>150</item>
-    <item>170</item>
-    <item>185</item>
-    <item>200</item>
-    <item>240</item>
-    <item>280</item>
-    <item>300</item>
-    <item>340</item>
-    <item>380</item>
-    <item>400</item>
-    <item>440</item>
-    <item>480</item>
-    <item>500</item>
-    <item>550</item>
-    <item>600</item>
-    <item>650</item>
-    <item>700</item>
-    <item>750</item>
-    <item>800</item>
-    <item>850</item>
-    <item>900</item>
-    <item>950</item>
-  </string-array>
-  <string-array name="compression_postgain">
-    <item>0 dB</item>
-    <item>4 dB</item>
-    <item>6 dB</item>
-    <item>8 dB</item>
-  </string-array>
-  <string-array name="compression_postgain_values" translatable="false">
-    <item>0</item>
-    <item>4</item>
-    <item>6</item>
-    <item>8</item>
   </string-array>
 
   <string-array name="headphone_preset">
@@ -714,42 +420,6 @@
     <item>90</item>
     <item>95</item>
     <item>99</item>
-  </string-array>
-  <string-array name="headphone_spread">
-    <item>10</item>
-    <item>15</item>
-    <item>20</item>
-    <item>30</item>
-    <item>40</item>
-    <item>50</item>
-    <item>60</item>
-    <item>70</item>
-    <item>80</item>
-    <item>90</item>
-    <item>100</item>
-    <item>110</item>
-    <item>120</item>
-    <item>130</item>
-    <item>140</item>
-    <item>150</item>
-  </string-array>
-  <string-array name="headphone_spread_values" translatable="false">
-    <item>10</item>
-    <item>15</item>
-    <item>20</item>
-    <item>30</item>
-    <item>40</item>
-    <item>50</item>
-    <item>60</item>
-    <item>70</item>
-    <item>80</item>
-    <item>90</item>
-    <item>100</item>
-    <item>110</item>
-    <item>120</item>
-    <item>130</item>
-    <item>140</item>
-    <item>150</item>
   </string-array>
   <string-array name="headphone_inbandwidth">
     <item>5&#65130;of Nyquist frequency(Hz)</item>
@@ -958,13 +628,13 @@
     <item>Extreme</item>
   </string-array>
 
-  <string-array name="bassboost_slope">
+  <string-array name="bassboost_filtertype">
     <item>24dB/Octave(4th order Butterworth shelve)</item>
     <item>Linear phase 1024 taps low pass filter</item>
     <item>Linear phase 4096 taps low pass filter</item>
   </string-array>
 
-  <string-array name="bassboost_slope_values" translatable="false">
+  <string-array name="bassboost_filtertype_values" translatable="false">
     <item>0</item>
     <item>1</item>
     <item>2</item>

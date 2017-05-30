@@ -10,7 +10,7 @@
 #define NUM_BANDS 10
 class EffectDSPMain : public Effect
 {
-private:
+protected:
     // Float buffer
     float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat;
     // Incoming buffer from Java
@@ -46,8 +46,8 @@ private:
     Iir::Butterworth::HighShelf<4, Iir::DirectFormII> bs9r;
     // Variables
     float mBand[NUM_BANDS];
-    float pregainCom, threshold, knee, ratio, attack, release, predelay;
-    float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, spread, deltaSpread, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
+    float pregain, threshold, knee, ratio, attack, release;
+    float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
     int16_t bassBoostStrength, bassBoostFilterType;
     int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassLpReady;
     int16_t numTime2Send, samplesInc, impChannels;

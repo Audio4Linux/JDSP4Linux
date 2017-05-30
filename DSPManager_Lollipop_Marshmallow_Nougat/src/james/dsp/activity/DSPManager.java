@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;

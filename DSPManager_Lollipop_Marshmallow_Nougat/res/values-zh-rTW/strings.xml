@@ -29,7 +29,7 @@
   <string name="dialog_release">釋放幅度(包絡)</string>
   <string name="dialog_predelay">預延遲</string>
   <string name="pref_effect_title">選擇效果程度</string>
-  <string name="dialog_slope">濾波器斜率</string>
+  <string name="dialog_filtertype">濾波器類型</string>
   <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>
   <string name="dialog_freq">濾波頻率</string>
   <string name="dialog_effect">效果程度</string>
@@ -52,7 +52,6 @@
   <string name="dialog_roomsize">房間大小</string>
   <string name="dialog_reverbtime">延續</string>
   <string name="dialog_damping">阻尼</string>
-  <string name="dialog_spread">發散</string>
   <string name="dialog_inbandwidth">頻寬(通帶)</string>
   <string name="dialog_earlyverb">混響起始時段幅度</string>
   <string name="dialog_tailverb">混響完結時段幅度</string>
