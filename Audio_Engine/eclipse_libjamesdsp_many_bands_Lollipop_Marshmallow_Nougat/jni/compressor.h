@@ -29,7 +29,7 @@
 // value below (defaults to 32):
 
 // maximum number of samples in the delay buffer
-#define SF_COMPRESSOR_MAXDELAY   512
+#define SF_COMPRESSOR_MAXDELAY   256
 
 // samples per update; the compressor works by dividing the input chunks into even smaller sizes,
 // and performs heavier calculations after each mini-chunk to adjust the final envelope

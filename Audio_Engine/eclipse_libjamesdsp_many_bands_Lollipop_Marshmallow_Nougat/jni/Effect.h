@@ -4,23 +4,14 @@
 #include "hardware/system/audio.h"
 #include "hardware/audio_effect.h"
 
-static inline uint8_t prng()
-{
-    static uint32_t seed;
-    seed = seed * 1664525 + 1013904223;
-    return seed >> 22;
-}
 #define NUMCHANNEL 2
 class Effect
 {
-private:
-    effect_buffer_access_e mAccessMode;
-
 protected:
     bool mEnable;
     float mSamplingRate;
 
-    int32_t configure(void *pCmdData, uint16_t* frameCountInit);
+    int32_t configure(void *pCmdData, size_t* frameCountInit, effect_buffer_access_e* mAccessMode);
 
 public:
     Effect();

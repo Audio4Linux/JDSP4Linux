@@ -98,7 +98,7 @@ typedef struct
 
 // oversampling
 // maximum oversampling factor
-#define SF_REVERB_OF        4
+#define SF_REVERB_OF        2
 typedef struct
 {
     int factor;           // oversampling factor [1 to SF_REVERB_OF]
@@ -116,7 +116,7 @@ typedef struct
 
 // fractal noise cache
 // noise buffer size; must be a power of 2 because it's generated via fractal generator
-#define SF_REVERB_NS        (1<<12)
+#define SF_REVERB_NS        (1<<11)
 typedef struct
 {
     int pos;                 // current read position in the buffer
@@ -135,7 +135,7 @@ typedef struct
 
 // all-pass filter
 // maximum size
-#define SF_REVERB_APS       3500
+#define SF_REVERB_APS       3400
 typedef struct
 {
     int pos;
@@ -147,7 +147,7 @@ typedef struct
 
 // 2nd order all-pass filter
 // maximum sizes of the two buffers
-#define SF_REVERB_AP2S1     4600
+#define SF_REVERB_AP2S1     4200
 #define SF_REVERB_AP2S2     3000
 typedef struct
 {
@@ -177,7 +177,7 @@ typedef struct
 
 // modulated all-pass filter
 // maximum size and maximum mod size
-#define SF_REVERB_APMS      3800
+#define SF_REVERB_APMS      3600
 #define SF_REVERB_APMM      137
 typedef struct
 {

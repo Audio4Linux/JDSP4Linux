@@ -45,11 +45,8 @@ typedef struct str_HConvSingle
     fftwf_plan ifft;		// IFFT transformation plan
 } HConvSingle;
 
-/* single filter functions */
-void hcPutSingle(HConvSingle *filter, float *x);
-void hcProcessSingle(HConvSingle *filter);
-void hcGetSingle(HConvSingle *filter, float *y);
-void hcGetAddSingle(HConvSingle *filter, float *y);
+void hcProcess(HConvSingle *filter, float *x, float *y);
+void hcProcessAdd(HConvSingle *filter, float *x, float *y);
 void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize);
 void hcCloseSingle(HConvSingle *filter);
 

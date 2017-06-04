@@ -25,11 +25,13 @@
 #include <string.h>
 #include <math.h>
 #include "libHybridConv.h"
-
-
-void hcPutSingle(HConvSingle *filter, float *x)
+void hcProcess(HConvSingle *filter, float *x, float *y)
 {
-    int j, flen, size;
+    int j, flen, size, mpos, s, n, start, stop;
+#if defined(HYBRIDCONV_USE_SSE)
+	int flen4;
+#endif
+	float *out, *hist;
     flen = filter->framelength;
     size = sizeof(float) * flen;
     memcpy(filter->dft_time, x, size);
@@ -40,144 +42,215 @@ void hcPutSingle(HConvSingle *filter, float *x)
         filter->in_freq_real[j] = filter->dft_freq[j][0];
         filter->in_freq_imag[j] = filter->dft_freq[j][1];
     }
-}
-
-void hcProcessSingle(HConvSingle *filter)
-{
 #if defined(HYBRIDCONV_USE_SSE)
-    int s, n, start, stop, flen, flen4;
-    __m128 *x4_real;
-    __m128 *x4_imag;
-    __m128 *h4_real;
-    __m128 *h4_imag;
-    __m128 *y4_real;
-    __m128 *y4_imag;
-    float *x_real;
-    float *x_imag;
-    float *h_real;
-    float *h_imag;
-    float *y_real;
-    float *y_imag;
-    flen = filter->framelength;
-    x_real = filter->in_freq_real;
-    x_imag = filter->in_freq_imag;
-    x4_real = (__m128*)x_real;
-    x4_imag = (__m128*)x_imag;
-    start = filter->steptask[filter->step];
-    stop = filter->steptask[filter->step + 1];
-    for (s = start; s < stop; s++)
-    {
-        n = (s + filter->mixpos) % filter->num_mixbuf;
-        y_real = filter->mixbuf_freq_real[n];
-        y_imag = filter->mixbuf_freq_imag[n];
-        y4_real = (__m128*)y_real;
-        y4_imag = (__m128*)y_imag;
-        h_real = filter->filterbuf_freq_real[s];
-        h_imag = filter->filterbuf_freq_imag[s];
-        h4_real = (__m128*)h_real;
-        h4_imag = (__m128*)h_imag;
-        flen4 = flen / 4;
-        for (n = 0; n < flen4; n++)
-        {
-            __m128 a = _mm_mul_ps(x4_real[n], h4_real[n]);
-            __m128 b = _mm_mul_ps(x4_imag[n], h4_imag[n]);
-            __m128 c = _mm_sub_ps(a, b);
-            y4_real[n] = _mm_add_ps(y4_real[n], c);
-            a = _mm_mul_ps(x4_real[n], h4_imag[n]);
-            b = _mm_mul_ps(x4_imag[n], h4_real[n]);
-            c = _mm_add_ps(a, b);
-            y4_imag[n] = _mm_add_ps(y4_imag[n], c);
-        }
-        y_real[flen] += x_real[flen] * h_real[flen] -
-                        x_imag[flen] * h_imag[flen];
-        y_imag[flen] += x_real[flen] * h_imag[flen] +
-                        x_imag[flen] * h_real[flen];
-    }
-    filter->step = (filter->step + 1) % filter->maxstep;
+	__m128 *x4_real;
+	__m128 *x4_imag;
+	__m128 *h4_real;
+	__m128 *h4_imag;
+	__m128 *y4_real;
+	__m128 *y4_imag;
+	float *x_real;
+	float *x_imag;
+	float *h_real;
+	float *h_imag;
+	float *y_real;
+	float *y_imag;
+	flen = filter->framelength;
+	x_real = filter->in_freq_real;
+	x_imag = filter->in_freq_imag;
+	x4_real = (__m128*)x_real;
+	x4_imag = (__m128*)x_imag;
+	start = filter->steptask[filter->step];
+	stop = filter->steptask[filter->step + 1];
+	for (s = start; s < stop; s++)
+	{
+		n = (s + filter->mixpos) % filter->num_mixbuf;
+		y_real = filter->mixbuf_freq_real[n];
+		y_imag = filter->mixbuf_freq_imag[n];
+		y4_real = (__m128*)y_real;
+		y4_imag = (__m128*)y_imag;
+		h_real = filter->filterbuf_freq_real[s];
+		h_imag = filter->filterbuf_freq_imag[s];
+		h4_real = (__m128*)h_real;
+		h4_imag = (__m128*)h_imag;
+		flen4 = flen / 4;
+		for (n = 0; n < flen4; n++)
+		{
+			__m128 a = _mm_mul_ps(x4_real[n], h4_real[n]);
+			__m128 b = _mm_mul_ps(x4_imag[n], h4_imag[n]);
+			__m128 c = _mm_sub_ps(a, b);
+			y4_real[n] = _mm_add_ps(y4_real[n], c);
+			a = _mm_mul_ps(x4_real[n], h4_imag[n]);
+			b = _mm_mul_ps(x4_imag[n], h4_real[n]);
+			c = _mm_add_ps(a, b);
+			y4_imag[n] = _mm_add_ps(y4_imag[n], c);
+		}
+		y_real[flen] += x_real[flen] * h_real[flen] -
+			x_imag[flen] * h_imag[flen];
+		y_imag[flen] += x_real[flen] * h_imag[flen] +
+			x_imag[flen] * h_real[flen];
+	}
+	filter->step = (filter->step + 1) % filter->maxstep;
 #else
-    int s, n, start, stop, flen;
-    float *x_real;
-    float *x_imag;
-    float *h_real;
-    float *h_imag;
-    float *y_real;
-    float *y_imag;
-    flen = filter->framelength;
-    x_real = filter->in_freq_real;
-    x_imag = filter->in_freq_imag;
-    start = filter->steptask[filter->step];
-    stop  = filter->steptask[filter->step + 1];
-    for (s = start; s < stop; s++)
-    {
-        n = (s + filter->mixpos) % filter->num_mixbuf;
-        y_real = filter->mixbuf_freq_real[n];
-        y_imag = filter->mixbuf_freq_imag[n];
-        h_real = filter->filterbuf_freq_real[s];
-        h_imag = filter->filterbuf_freq_imag[s];
-        for (n = 0; n < flen + 1; n++)
-        {
-            y_real[n] += x_real[n] * h_real[n] -
-                         x_imag[n] * h_imag[n];
-            y_imag[n] += x_real[n] * h_imag[n] +
-                         x_imag[n] * h_real[n];
-        }
-    }
-    filter->step = (filter->step + 1) % filter->maxstep;
+	float *x_real;
+	float *x_imag;
+	float *h_real;
+	float *h_imag;
+	float *y_real;
+	float *y_imag;
+	flen = filter->framelength;
+	x_real = filter->in_freq_real;
+	x_imag = filter->in_freq_imag;
+	start = filter->steptask[filter->step];
+	stop = filter->steptask[filter->step + 1];
+	for (s = start; s < stop; s++)
+	{
+		n = (s + filter->mixpos) % filter->num_mixbuf;
+		y_real = filter->mixbuf_freq_real[n];
+		y_imag = filter->mixbuf_freq_imag[n];
+		h_real = filter->filterbuf_freq_real[s];
+		h_imag = filter->filterbuf_freq_imag[s];
+		for (n = 0; n < flen + 1; n++)
+		{
+			y_real[n] += x_real[n] * h_real[n] -
+				x_imag[n] * h_imag[n];
+			y_imag[n] += x_real[n] * h_imag[n] +
+				x_imag[n] * h_real[n];
+		}
+	}
+	filter->step = (filter->step + 1) % filter->maxstep;
 #endif
+	flen = filter->framelength;
+	mpos = filter->mixpos;
+	out = filter->dft_time;
+	hist = filter->history_time;
+	for (j = 0; j < flen + 1; j++)
+	{
+		filter->dft_freq[j][0] = filter->mixbuf_freq_real[mpos][j];
+		filter->dft_freq[j][1] = filter->mixbuf_freq_imag[mpos][j];
+		filter->mixbuf_freq_real[mpos][j] = 0.0;
+		filter->mixbuf_freq_imag[mpos][j] = 0.0;
+	}
+	fftwf_execute(filter->ifft);
+	for (n = 0; n < flen; n++)
+		y[n] = out[n] + hist[n];
+	size = sizeof(float) * flen;
+	memcpy(hist, &(out[flen]), size);
+	filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
 }
-
-
-void hcGetSingle(HConvSingle *filter, float *y)
+void hcProcessAdd(HConvSingle *filter, float *x, float *y)
 {
-    int flen, mpos;
-    float *out;
-    float *hist;
-    int size, n, j;
-    flen = filter->framelength;
-    mpos = filter->mixpos;
-    out  = filter->dft_time;
-    hist = filter->history_time;
-    for (j = 0; j < flen + 1; j++)
-    {
-        filter->dft_freq[j][0] = filter->mixbuf_freq_real[mpos][j];
-        filter->dft_freq[j][1] = filter->mixbuf_freq_imag[mpos][j];
-        filter->mixbuf_freq_real[mpos][j] = 0.0;
-        filter->mixbuf_freq_imag[mpos][j] = 0.0;
-    }
-    fftwf_execute(filter->ifft);
-    for (n = 0; n < flen; n++)
-        y[n] = out[n] + hist[n];
-    size = sizeof(float) * flen;
-    memcpy(hist, &(out[flen]), size);
-    filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
+	int j, flen, size, mpos, s, n, start, stop;
+#if defined(HYBRIDCONV_USE_SSE)
+	int flen4;
+#endif
+	float *out, *hist;
+	flen = filter->framelength;
+	size = sizeof(float) * flen;
+	memcpy(filter->dft_time, x, size);
+	memset(&(filter->dft_time[flen]), 0, size);
+	fftwf_execute(filter->fft);
+	for (j = 0; j < flen + 1; j++)
+	{
+		filter->in_freq_real[j] = filter->dft_freq[j][0];
+		filter->in_freq_imag[j] = filter->dft_freq[j][1];
+	}
+#if defined(HYBRIDCONV_USE_SSE)
+	__m128 *x4_real;
+	__m128 *x4_imag;
+	__m128 *h4_real;
+	__m128 *h4_imag;
+	__m128 *y4_real;
+	__m128 *y4_imag;
+	float *x_real;
+	float *x_imag;
+	float *h_real;
+	float *h_imag;
+	float *y_real;
+	float *y_imag;
+	flen = filter->framelength;
+	x_real = filter->in_freq_real;
+	x_imag = filter->in_freq_imag;
+	x4_real = (__m128*)x_real;
+	x4_imag = (__m128*)x_imag;
+	start = filter->steptask[filter->step];
+	stop = filter->steptask[filter->step + 1];
+	for (s = start; s < stop; s++)
+	{
+		n = (s + filter->mixpos) % filter->num_mixbuf;
+		y_real = filter->mixbuf_freq_real[n];
+		y_imag = filter->mixbuf_freq_imag[n];
+		y4_real = (__m128*)y_real;
+		y4_imag = (__m128*)y_imag;
+		h_real = filter->filterbuf_freq_real[s];
+		h_imag = filter->filterbuf_freq_imag[s];
+		h4_real = (__m128*)h_real;
+		h4_imag = (__m128*)h_imag;
+		flen4 = flen / 4;
+		for (n = 0; n < flen4; n++)
+		{
+			__m128 a = _mm_mul_ps(x4_real[n], h4_real[n]);
+			__m128 b = _mm_mul_ps(x4_imag[n], h4_imag[n]);
+			__m128 c = _mm_sub_ps(a, b);
+			y4_real[n] = _mm_add_ps(y4_real[n], c);
+			a = _mm_mul_ps(x4_real[n], h4_imag[n]);
+			b = _mm_mul_ps(x4_imag[n], h4_real[n]);
+			c = _mm_add_ps(a, b);
+			y4_imag[n] = _mm_add_ps(y4_imag[n], c);
+		}
+		y_real[flen] += x_real[flen] * h_real[flen] -
+			x_imag[flen] * h_imag[flen];
+		y_imag[flen] += x_real[flen] * h_imag[flen] +
+			x_imag[flen] * h_real[flen];
+	}
+	filter->step = (filter->step + 1) % filter->maxstep;
+#else
+	float *x_real;
+	float *x_imag;
+	float *h_real;
+	float *h_imag;
+	float *y_real;
+	float *y_imag;
+	flen = filter->framelength;
+	x_real = filter->in_freq_real;
+	x_imag = filter->in_freq_imag;
+	start = filter->steptask[filter->step];
+	stop = filter->steptask[filter->step + 1];
+	for (s = start; s < stop; s++)
+	{
+		n = (s + filter->mixpos) % filter->num_mixbuf;
+		y_real = filter->mixbuf_freq_real[n];
+		y_imag = filter->mixbuf_freq_imag[n];
+		h_real = filter->filterbuf_freq_real[s];
+		h_imag = filter->filterbuf_freq_imag[s];
+		for (n = 0; n < flen + 1; n++)
+		{
+			y_real[n] += x_real[n] * h_real[n] -
+				x_imag[n] * h_imag[n];
+			y_imag[n] += x_real[n] * h_imag[n] +
+				x_imag[n] * h_real[n];
+		}
+	}
+	filter->step = (filter->step + 1) % filter->maxstep;
+#endif
+	flen = filter->framelength;
+	mpos = filter->mixpos;
+	out = filter->dft_time;
+	hist = filter->history_time;
+	for (j = 0; j < flen + 1; j++)
+	{
+		filter->dft_freq[j][0] = filter->mixbuf_freq_real[mpos][j];
+		filter->dft_freq[j][1] = filter->mixbuf_freq_imag[mpos][j];
+		filter->mixbuf_freq_real[mpos][j] = 0.0;
+		filter->mixbuf_freq_imag[mpos][j] = 0.0;
+	}
+	fftwf_execute(filter->ifft);
+	for (n = 0; n < flen; n++)
+		y[n] += out[n] + hist[n];
+	size = sizeof(float) * flen;
+	memcpy(hist, &(out[flen]), size);
+	filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
 }
-
-
-void hcGetAddSingle(HConvSingle *filter, float *y)
-{
-    int flen, mpos;
-    float *out;
-    float *hist;
-    int size, n, j;
-    flen = filter->framelength;
-    mpos = filter->mixpos;
-    out  = filter->dft_time;
-    hist = filter->history_time;
-    for (j = 0; j < flen + 1; j++)
-    {
-        filter->dft_freq[j][0] = filter->mixbuf_freq_real[mpos][j];
-        filter->dft_freq[j][1] = filter->mixbuf_freq_imag[mpos][j];
-        filter->mixbuf_freq_real[mpos][j] = 0.0;
-        filter->mixbuf_freq_imag[mpos][j] = 0.0;
-    }
-    fftwf_execute(filter->ifft);
-    for (n = 0; n < flen; n++)
-        y[n] += out[n] + hist[n];
-    size = sizeof(float) * flen;
-    memcpy(hist, &(out[flen]), size);
-    filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
-}
-
 
 void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize)
 {
@@ -283,7 +356,6 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         filter->filterbuf_freq_imag[i][j] = filter->dft_freq[j][1];
     }
 }
-
 
 void hcCloseSingle(HConvSingle *filter)
 {

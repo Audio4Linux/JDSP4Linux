@@ -25,13 +25,6 @@ LOCAL_SRC_FILES := \
 	libHybridConv.cpp \
 # terminator
 
-LOCAL_C_INCLUDES += \
-	frameworks/base/include \
-	hardware/libhardware/include \
-	system/core/include \
-	system/media/audio_effects/include \
-# terminator
-
 LOCAL_STATIC_LIBRARIES := fftw3
 #LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
@@ -41,5 +34,5 @@ else ifeq ($(TARGET_ARCH_ABI), x86)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG -DHYBRIDCONV_USE_SSE# -DDEBUG
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG -DHYBRIDCONV_USE_SSE# -DDEBUG
 endif
-LOCAL_LDFLAGS += -Wl,--gc-sections -DNDEBUG
+LOCAL_LDFLAGS += -Wl,--gc-sections,--exclude-libs,ALL
 include $(BUILD_SHARED_LIBRARY)

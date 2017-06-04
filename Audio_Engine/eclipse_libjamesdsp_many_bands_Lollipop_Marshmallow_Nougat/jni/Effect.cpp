@@ -10,7 +10,7 @@ Effect::~Effect()
 }
 
 /* Configure a bunch of general parameters. */
-int32_t Effect::configure(void* pCmdData, uint16_t* frameCountInit)
+int32_t Effect::configure(void* pCmdData, size_t* frameCountInit, effect_buffer_access_e* mAccessMode)
 {
     effect_config_t *cfg = (effect_config_t *) pCmdData;
     buffer_config_t in = cfg->inputCfg;
@@ -29,7 +29,7 @@ int32_t Effect::configure(void* pCmdData, uint16_t* frameCountInit)
             return -EINVAL;
         if (out.channels != AUDIO_CHANNEL_OUT_STEREO)
             return -EINVAL;
-        *frameCountInit = in.buffer.frameCount * 2;
+        *frameCountInit = in.buffer.frameCount;
     }
     if (in.mask & EFFECT_CONFIG_FORMAT)
     {
@@ -44,7 +44,7 @@ int32_t Effect::configure(void* pCmdData, uint16_t* frameCountInit)
         }
     }
     if (out.mask & EFFECT_CONFIG_ACC_MODE)
-        mAccessMode = (effect_buffer_access_e) out.accessMode;
+        *mAccessMode = (effect_buffer_access_e) out.accessMode;
     return 0;
 }
 

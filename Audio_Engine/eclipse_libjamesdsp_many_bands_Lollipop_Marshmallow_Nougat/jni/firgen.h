@@ -1,5 +1,7 @@
-#pragma once
+#ifndef FIRGEN_H
+#define FIRGEN_H
 #include <math.h>
+#include <stdlib.h>
 #define PI 3.14159265358979323846f
 float BesselCal(float x)
 {
@@ -59,24 +61,22 @@ void genSincFx(float sincfx[], const int &N, const float &fc)
 void JfirLP(float h[], int &N, const int &WINDOW, const float &fc, float &Beta, float &gain)
 {
     int i;
-    float *w = new float[N];
-    float *sincfx = new float[N];
+    float *w = (float*)malloc(N * sizeof(float));
+    float *sincfx = (float*)malloc(N * sizeof(float));
     genSincFx(sincfx, N, fc);
-    switch (WINDOW)
+    if (WINDOW)
     {
-    case 0:
-        wNone(w, N);
-        break;
-    case 1:
-        wKaiser(w, N, Beta);
-        break;
-    default:
-        break;
-    }
+    	wKaiser(w, N, Beta);
     for (i = 0; i < N; i++)
         h[i] = sincfx[i] * w[i] * gain;
-    delete[]w;
-    delete[]sincfx;
+    }
+    else
+    {
+        for (i = 0; i < N; i++)
+            h[i] = sincfx[i] * gain;
+    }
+    free(w);
+    free(sincfx);
     return;
 }
 void JfirHP(float h[], int &N, const int &WINDOW, const float &fc, float &Beta, float &gain)
@@ -95,14 +95,14 @@ void JfirBS(float h[], int &N, const int &WINDOW, const float &fc1, const float 
     int i;
     if (N % 2 == 0)
         N += 1;
-    float *h1 = new float[N];
-    float *h2 = new float[N];
+    float *h1 = (float*)malloc(N * sizeof(float));
+    float *h2 = (float*)malloc(N * sizeof(float));
     JfirLP(h1, N, WINDOW, fc1, Beta, gain);
     JfirHP(h2, N, WINDOW, fc2, Beta, gain);
     for (i = 0; i < N; i++)
         h[i] = h1[i] + h2[i];
-    delete[]h1;
-    delete[]h2;
+    free(h1);
+    free(h2);
     return;
 }
 void JfirBP(float h[], int &N, const int &WINDOW, const float &fc1, const float &fc2, float &Beta, float &gain)
@@ -114,3 +114,4 @@ void JfirBP(float h[], int &N, const int &WINDOW, const float &fc1, const float 
     h[(N - 1) / 2] += 1.0f;
     return;
 }
+#endif

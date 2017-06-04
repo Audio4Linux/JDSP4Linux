@@ -49,7 +49,7 @@ public class HeadsetService extends Service
 	Bitmap iconLarge;
 	private class JDSPModule
 	{
-		private final UUID EFFECT_TYPE_NULL = UUID.fromString("ec7178ec-e5e1-4432-a3f4-4657e6795210");
+		private final UUID EFFECT_TYPE_CUSTOM = UUID.fromString("f98765f4-c321-5de6-9a45-123459495ab2");
 		private final UUID EFFECT_JAMESDSP = UUID.fromString("f27317f4-c984-4de6-9a90-545759495bf2");
 		public AudioEffect JamesDSP;
 		private JDSPModule(int sessionId)
@@ -62,7 +62,7 @@ public class HeadsetService extends Service
 				*/
 				JamesDSP = AudioEffect.class.getConstructor(UUID.class,
 					UUID.class, Integer.TYPE, Integer.TYPE).newInstance(
-						EFFECT_TYPE_NULL, EFFECT_JAMESDSP, 0, sessionId);
+							EFFECT_TYPE_CUSTOM, EFFECT_JAMESDSP, 0, sessionId);
 			}
 			catch (Exception e)
 			{
@@ -93,7 +93,7 @@ public class HeadsetService extends Service
 			try
 			{
 				JamesDSP = AudioEffect.class.getConstructor(UUID.class, UUID.class, Integer.TYPE, Integer.TYPE).newInstance(
-					EFFECT_TYPE_NULL, EFFECT_JAMESDSP, 0, sessionId);
+						EFFECT_TYPE_CUSTOM, EFFECT_JAMESDSP, 0, sessionId);
 			}
 			catch (Exception e)
 			{
@@ -475,13 +475,12 @@ public class HeadsetService extends Service
 			session.setParameterShort(session.JamesDSP, 1501, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
 			if (compressorEnabled == 1 && updateMajor)
 			{
-				session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "0")));
-				session.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "20")));
+				session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "12")));
+				session.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "60")));
 				session.setParameterShort(session.JamesDSP, 102, Short.valueOf(preferences.getString("dsp.compression.knee", "30")));
 				session.setParameterShort(session.JamesDSP, 103, Short.valueOf(preferences.getString("dsp.compression.ratio", "12")));
-				session.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "30")));
-				session.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "250")));
-				session.setParameterShort(session.JamesDSP, 106, Short.valueOf(preferences.getString("dsp.compression.predelay", "60")));
+				session.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "10")));
+				session.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "240")));
 			}
 			session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
 			if (bassBoostEnabled == 1 && updateMajor)
