@@ -52,7 +52,6 @@ struct ComplexPair : complex_pair_t
     explicit ComplexPair (const complex_t& c1)
         : complex_pair_t (c1, 0.)
     {
-        assert (isReal());
     }
 
     ComplexPair (const complex_t& c1,
@@ -82,11 +81,6 @@ struct ComplexPair : complex_pair_t
                    second.real () != 0 &&
                    first.real () != 0;
     }
-
-    bool is_nan () const
-    {
-        return Iir::is_nan (first) || Iir::is_nan (second);
-    }
 };
 
 // A pair of pole/zeros. This fits in a biquad (but is missing the gain)
@@ -114,11 +108,6 @@ struct PoleZeroPair
     bool isSinglePole () const
     {
         return poles.second == 0. && zeros.second == 0.;
-    }
-
-    bool is_nan () const
-    {
-        return poles.is_nan() || zeros.is_nan();
     }
 };
 

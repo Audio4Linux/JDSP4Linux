@@ -89,8 +89,6 @@ public:
 
     void add (const complex_t& pole, const complex_t& zero)
     {
-        assert (!(m_numPoles&1)); // single comes last
-        assert (!Iir::is_nan (pole));
         m_pair[m_numPoles/2] = PoleZeroPair (pole, zero);
         ++m_numPoles;
     }
@@ -98,8 +96,6 @@ public:
     void addPoleZeroConjugatePairs (const complex_t pole,
                                     const complex_t zero)
     {
-        assert (!(m_numPoles&1)); // single comes last
-        assert (!Iir::is_nan (pole));
         m_pair[m_numPoles/2] = PoleZeroPair (
                                    pole, zero, std::conj (pole), std::conj (zero));
         m_numPoles += 2;
@@ -107,9 +103,6 @@ public:
 
     void add (const ComplexPair& poles, const ComplexPair& zeros)
     {
-        assert (!(m_numPoles&1)); // single comes last
-        assert (poles.isMatchedPair ());
-        assert (zeros.isMatchedPair ());
         m_pair[m_numPoles/2] = PoleZeroPair (poles.first, zeros.first,
                                              poles.second, zeros.second);
         m_numPoles += 2;
@@ -117,7 +110,6 @@ public:
 
     const PoleZeroPair& getPair (int pairIndex) const
     {
-        assert (pairIndex >= 0 && pairIndex < (m_numPoles+1)/2);
         return m_pair[pairIndex];
     }
 

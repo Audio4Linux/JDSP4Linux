@@ -122,16 +122,7 @@ BandPassTransform::BandPassTransform (double fc,
                                       LayoutBase const& analog)
 {
     // handle degenerate cases efficiently
-    // THIS DOESNT WORK because the cascade states won't match
-#if 0
-    const double fw_2 = fw / 2;
-    if (fc - fw_2 < 0)
-        LowPassTransform::transform (fc + fw_2, digital, analog);
-    else if (fc + fw_2 >= 0.5)
-        HighPassTransform::transform (fc - fw_2, digital, analog);
-    else
-#endif
-        digital.reset ();
+    digital.reset ();
     const double ww = 2 * doublePi * fw;
     // pre-calcs
     wc2 = 2 * doublePi * fc - (ww / 2);
@@ -155,15 +146,6 @@ BandPassTransform::BandPassTransform (double fc,
         const PoleZeroPair& pair = analog[i];
         ComplexPair p1 = transform (pair.poles.first);
         ComplexPair z1 = transform (pair.zeros.first);
-        //
-        // Optimize out the calculations for conjugates for Release builds
-        //
-#ifndef NDEBUG
-        ComplexPair p2 = transform (pair.poles.second);
-        ComplexPair z2 = transform (pair.zeros.second);
-        assert (p2.first == std::conj (p1.first));
-        assert (p2.second == std::conj (p1.second));
-#endif
         digital.addPoleZeroConjugatePairs (p1.first, z1.first);
         digital.addPoleZeroConjugatePairs (p1.second, z1.second);
     }
@@ -227,25 +209,8 @@ BandStopTransform::BandStopTransform (double fc,
         const PoleZeroPair& pair = analog[i];
         ComplexPair p  = transform (pair.poles.first);
         ComplexPair z  = transform (pair.zeros.first);
-        //
-        // Optimize out the calculations for conjugates for Release builds
-        //
-#ifdef NDEBUG
-        // trick to get the conjugate
         if (z.second == z.first)
             z.second = std::conj (z.first);
-#else
-        // Do the full calculation to verify correctness
-        ComplexPair pc = transform (analog[i].poles.second);
-        ComplexPair zc = transform (analog[i].zeros.second);
-        // get the conjugates into pc and zc
-        if (zc.first == z.first)
-            std::swap (zc.first, zc.second);
-        assert (pc.first  == std::conj (p.first));
-        assert (pc.second == std::conj (p.second));
-        assert (zc.first  == std::conj (z.first));
-        assert (zc.second == std::conj (z.second));
-#endif
         digital.addPoleZeroConjugatePairs (p.first, z.first);
         digital.addPoleZeroConjugatePairs (p.second, z.second);
     }

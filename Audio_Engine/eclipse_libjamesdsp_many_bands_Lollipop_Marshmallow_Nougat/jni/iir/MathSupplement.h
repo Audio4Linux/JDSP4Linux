@@ -63,7 +63,7 @@ inline std::complex<Real> solve_quadratic_2 (Real a, Real b, Real c)
 
 inline const complex_t infinity()
 {
-    return complex_t (std::numeric_limits<double>::infinity());
+    return complex_t(std::numeric_limits<double>::infinity());
 }
 
 inline const complex_t adjust_imag (const complex_t& c)
@@ -82,38 +82,6 @@ inline std::complex<Ty> addmul (const std::complex<Ty>& c,
     return std::complex <Ty> (
                c.real() + v * c1.real(), c.imag() + v * c1.imag());
 }
-
-template <typename Ty>
-inline std::complex<Ty> recip (const std::complex<Ty>& c)
-{
-    Ty n = 1.0 / std::norm (c);
-    return std::complex<Ty> (n * c.real(), n * c.imag());
-}
-
-template <typename Ty>
-inline Ty asinh (Ty x)
-{
-    return log (x + std::sqrt (x * x + 1 ));
-}
-
-template <typename Ty>
-inline Ty acosh (Ty x)
-{
-    return log (x + std::sqrt (x * x - 1));
-}
-
-template <typename Ty>
-inline bool is_nan (Ty v)
-{
-    return !(v == v);
-}
-
-template <>
-inline bool is_nan<complex_t> (complex_t v)
-{
-    return Iir::is_nan (v.real()) || Iir::is_nan (v.imag());
-}
-
 }
 
 #endif

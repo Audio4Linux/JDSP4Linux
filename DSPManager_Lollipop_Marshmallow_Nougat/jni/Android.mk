@@ -19,5 +19,5 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG
-
+LOCAL_LDFLAGS += -Wl,--gc-sections,--exclude-libs,ALL
 include $(BUILD_SHARED_LIBRARY)

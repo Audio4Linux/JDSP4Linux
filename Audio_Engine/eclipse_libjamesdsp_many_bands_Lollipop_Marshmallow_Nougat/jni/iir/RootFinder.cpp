@@ -47,7 +47,6 @@ void RootFinderBase::solve (int degree,
                             bool polish,
                             bool doSort)
 {
-    assert (degree <= m_maxdegree);
     const double EPS = 1.0e-30;
     int its;
     complex_t x, b, c;
