@@ -27,7 +27,6 @@
   <string name="dialog_ratio">比例</string>
   <string name="dialog_attack">開始幅度(包絡)</string>
   <string name="dialog_release">釋放幅度(包絡)</string>
-  <string name="dialog_predelay">預延遲</string>
   <string name="pref_effect_title">選擇效果程度</string>
   <string name="dialog_filtertype">濾波器類型</string>
   <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>

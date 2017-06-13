@@ -7,11 +7,15 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -67,7 +71,6 @@ public final class DSPManager extends Activity
     public static final String JAMESDSP_FOLDER = "JamesDSP";
     public static final String IMPULSERESPONSE_FOLDER = "Convolver";
     private static final String PRESETS_FOLDER = "Presets";
-    private static int oldrouting;
     private static int routing;
     public static final String impulseResponsePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/" + DSPManager.IMPULSERESPONSE_FOLDER + "/";
     public static boolean devMsgDisplay;
@@ -101,7 +104,6 @@ public final class DSPManager extends Activity
     //==================================
     // Overridden Methods
     //==================================
-    private Handler handler;
     @Override
     public Resources.Theme getTheme()
     {
@@ -118,23 +120,23 @@ public final class DSPManager extends Activity
             theme.applyStyle(R.style.AppThemeIdea, true);
         return theme;
     }
-    private Runnable routingDisplay = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            oldrouting = routing;
-            if (HeadsetService.mUseBluetooth)
-                routing = 2;
-            else if (HeadsetService.mUseHeadset)
-                routing = 0;
-            else
-                routing = 1;
-            if (routing != oldrouting)
-                selectItem(routing);
-            handler.postDelayed(routingDisplay, 1500);
-        }
-    };
+	private final BroadcastReceiver updateReceiver = new BroadcastReceiver()
+	{
+		@Override
+		public void onReceive(final Context context, final Intent intent)
+	{
+  		  String action = intent.getAction();
+  		  if(action.equals("dsp.activity.updatePage")){
+              if (HeadsetService.mUseBluetooth)
+                  routing = 2;
+              else if (HeadsetService.mUseHeadset)
+                  routing = 0;
+              else
+                  routing = 1;
+			selectItem(routing);
+  		  }
+	}
+	};
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -151,12 +153,6 @@ public final class DSPManager extends Activity
         devMsgDisplay = mPreferences.getBoolean("dsp.app.showdevmsg", false);
         themeApp = mPreferences.getInt("dsp.app.theme", 2);
         mUserLearnedDrawer = mPreferences.getBoolean(PREF_USER_LEARNED_DRAWER, false);
-        File kernelFile = new File(DSPManager.impulseResponsePath);
-        if (!kernelFile.exists())
-        {
-            kernelFile.mkdirs();
-            kernelFile.mkdir();
-        }
         mTitle = getTitle();
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
@@ -171,20 +167,26 @@ public final class DSPManager extends Activity
         startService(serviceIntent);
         sendBroadcast(new Intent(DSPManager.ACTION_UPDATE_PREFERENCES));
         setUpUi();
-        handler = new Handler();
-        selectItem(routing);
+		registerReceiver(updateReceiver, new IntentFilter("dsp.activity.updatePage"));
+        if (HeadsetService.mUseBluetooth)
+            routing = 2;
+        else if (HeadsetService.mUseHeadset)
+            routing = 0;
+        else
+            routing = 1;
+		selectItem(routing);
     }
     @Override
     protected void onResume()
     {
         super.onResume();
-        handler.post(routingDisplay);
+		registerReceiver(updateReceiver, new IntentFilter("dsp.activity.updatePage"));
     }
     @Override
     protected void onPause()
     {
         super.onPause();
-        handler.removeCallbacks(routingDisplay);
+		unregisterReceiver(updateReceiver);
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState)

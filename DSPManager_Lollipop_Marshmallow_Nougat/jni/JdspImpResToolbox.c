@@ -46,11 +46,11 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
 {
     // Allocate memory block for reading
     int *pFrameBuffer = (int*)malloc(sfiIRInfo.channels * sfiIRInfo.frames * sizeof(int));
-    if (pFrameBuffer == NULL)
+    if (!pFrameBuffer)
     {
         // Memory not enough
         sf_close(sfIRFile);
-        return NULL;
+        return 0;
     }
     sf_readf_int(sfIRFile, pFrameBuffer, sfiIRInfo.frames);
     sf_close(sfIRFile);

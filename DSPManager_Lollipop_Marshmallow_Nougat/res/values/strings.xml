@@ -21,7 +21,6 @@
   <string name="dialog_ratio">Ratio</string>
   <string name="dialog_attack">Attack</string>
   <string name="dialog_release">Release</string>
-  <string name="dialog_predelay">Pre-delay</string>
   <string name="pref_effect_title">Select effect strength</string>
   <string name="dialog_filtertype">Filter type</string>
   <string name="pref_effect_freq_title">Select low pass filter frequency</string>

@@ -440,6 +440,8 @@ public class HeadsetService extends Service
 				foregroundPersistent(getString(R.string.headset_title));
 			else
 				foregroundPersistent(getString(R.string.speaker_title));
+			Intent intent = new Intent("dsp.activity.updatePage");
+			sendBroadcast(intent);
 		}
 		for (Integer sessionId : new ArrayList<Integer>(mAudioSessions.keySet()))
 		{
