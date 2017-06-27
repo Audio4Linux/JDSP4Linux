@@ -22,7 +22,7 @@ static effect_descriptor_t jamesdsp_descriptor =
     { 0xf27317f4, 0xc984, 0x4de6, 0x9a90, { 0x54, 0x57, 0x59, 0x49, 0x5b, 0xf2 } }, // own UUID
     EFFECT_CONTROL_API_VERSION,
     EFFECT_FLAG_INSERT_FIRST,
-    10,
+    20,
     1,
     "JamesDSP main unit",
     "James34602"

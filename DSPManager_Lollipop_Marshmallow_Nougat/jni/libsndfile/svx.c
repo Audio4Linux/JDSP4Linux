@@ -356,7 +356,7 @@ svx_close (SF_PRIVATE *psf)
 
 static int
 svx_write_header (SF_PRIVATE *psf, int calc_length)
-{	static	char 	annotation	[] = "ViPER4Android by vipercn\0\0\0" ;
+{	static	char 	annotation	[] = "JamesDSP\0\0\0" ;
 	sf_count_t	current ;
 
 	current = psf_ftell (psf) ;

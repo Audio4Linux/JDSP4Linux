@@ -92,7 +92,7 @@ xi_open	(SF_PRIVATE *psf)
 
 		/* Set up default instrument and software name. */
 		memcpy (pxi->filename, "Default Name            ", sizeof (pxi->filename)) ;
-		memcpy (pxi->software, "ViPER4Android           ", sizeof (pxi->software)) ;
+		memcpy (pxi->software, "JamesDSP           ", sizeof (pxi->software)) ;
 
 		memset (pxi->sample_name, 0, sizeof (pxi->sample_name)) ;
 		snprintf (pxi->sample_name, sizeof (pxi->sample_name), "%s", "Sample #1") ;

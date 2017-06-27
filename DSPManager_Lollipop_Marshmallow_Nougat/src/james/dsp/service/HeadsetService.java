@@ -47,12 +47,13 @@ public class HeadsetService extends Service
 	* @author alankila
 	*/
 	Bitmap iconLarge;
-	private class JDSPModule
+	private int modeEffect;
+	public final static UUID EFFECT_TYPE_CUSTOM = UUID.fromString("f98765f4-c321-5de6-9a45-123459495ab2");
+	public final static UUID EFFECT_JAMESDSP = UUID.fromString("f27317f4-c984-4de6-9a90-545759495bf2");
+	public class JDSPModule
 	{
-		private final UUID EFFECT_TYPE_CUSTOM = UUID.fromString("f98765f4-c321-5de6-9a45-123459495ab2");
-		private final UUID EFFECT_JAMESDSP = UUID.fromString("f27317f4-c984-4de6-9a90-545759495bf2");
 		public AudioEffect JamesDSP;
-		private JDSPModule(int sessionId)
+		public JDSPModule(int sessionId)
 		{
 			try
 			{
@@ -62,7 +63,7 @@ public class HeadsetService extends Service
 				*/
 				JamesDSP = AudioEffect.class.getConstructor(UUID.class,
 					UUID.class, Integer.TYPE, Integer.TYPE).newInstance(
-							EFFECT_TYPE_CUSTOM, EFFECT_JAMESDSP, 0, sessionId);
+						EFFECT_TYPE_CUSTOM, EFFECT_JAMESDSP, 0, sessionId);
 			}
 			catch (Exception e)
 			{
@@ -86,21 +87,6 @@ public class HeadsetService extends Service
 		{
 			JamesDSP.release();
 		}
-
-		public void recreateEffect(int sessionId)
-		{
-			JamesDSP.release();
-			try
-			{
-				JamesDSP = AudioEffect.class.getConstructor(UUID.class, UUID.class, Integer.TYPE, Integer.TYPE).newInstance(
-						EFFECT_TYPE_CUSTOM, EFFECT_JAMESDSP, 0, sessionId);
-			}
-			catch (Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
-
 
 		/**
 		* Proxies call to AudioEffect.setParameter(byte[], byte[]) which is
@@ -248,6 +234,9 @@ public class HeadsetService extends Service
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
+	private JDSPModule JamesDSPGbEf;
+	private SharedPreferences preferencesMode;
+
 	private final BroadcastReceiver mAudioSessionReceiver = new BroadcastReceiver()
 	{
 		@Override
@@ -255,8 +244,12 @@ public class HeadsetService extends Service
 	{
 		String action = intent.getAction();
 		int sessionId = intent.getIntExtra(AudioEffect.EXTRA_AUDIO_SESSION, 0);
+		if (sessionId == 0)
+			return;
 		if (action.equals(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION))
 		{
+			if (modeEffect == 0)
+				return;
 			if (!mAudioSessions.containsKey(sessionId)) {
 				JDSPModule fxId = new JDSPModule(sessionId);
 				if (fxId.JamesDSP == null)
@@ -379,6 +372,26 @@ public class HeadsetService extends Service
 		btFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
 		registerReceiver(mBtReceiver, btFilter);
 		iconLarge = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+		preferencesMode = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + "settings", 0);
+		if (!preferencesMode.contains("dsp.app.modeEffect"))
+			preferencesMode.edit().putInt("dsp.app.modeEffect", 0).commit();
+		modeEffect = preferencesMode.getInt("dsp.app.modeEffect", 0);
+		if (JamesDSPGbEf != null)
+		{
+			JamesDSPGbEf.release();
+			JamesDSPGbEf = null;
+		}
+		if (modeEffect == 0)
+		{
+			if (JamesDSPGbEf == null)
+				JamesDSPGbEf = new JDSPModule(0);
+			if (JamesDSPGbEf.JamesDSP == null)
+			{
+				Toast.makeText(HeadsetService.this, "Library load failed(Global effect)", Toast.LENGTH_SHORT).show();
+				JamesDSPGbEf.release();
+				JamesDSPGbEf = null;
+			}
+		}
 		updateDsp(true, false);
 	}
 
@@ -396,8 +409,52 @@ public class HeadsetService extends Service
 			iconLarge = null;
 		}
 		mAudioSessions.clear();
+		if (JamesDSPGbEf != null)
+			JamesDSPGbEf.release();
+		JamesDSPGbEf = null;
 	}
-
+	@Override
+		public int onStartCommand(Intent intent, int flags, int startId)
+	{
+		modeEffect = preferencesMode.getInt("dsp.app.modeEffect", 0);
+		if (modeEffect == 1)
+		{
+			if (JamesDSPGbEf != null)
+			{
+				JamesDSPGbEf.release();
+				JamesDSPGbEf = null;
+			}
+		}
+		if (modeEffect == 0)
+		{
+			if (JamesDSPGbEf == null) {
+				JamesDSPGbEf = new JDSPModule(0);
+				if (JamesDSPGbEf.JamesDSP == null) {
+					Log.e(DSPManager.TAG, "Global audio session load fail, reload it now!");
+					JamesDSPGbEf.release();
+					JamesDSPGbEf = null;
+					return super.onStartCommand(intent, flags, startId);
+				}
+				updateDsp(false, true);
+				return super.onStartCommand(intent, flags, startId);
+			}
+			if (JamesDSPGbEf.JamesDSP == null) {
+				Log.e(DSPManager.TAG, "Global audio session load fail, reload it now!");
+				JamesDSPGbEf.release();
+				JamesDSPGbEf = new JDSPModule(0);
+				if (JamesDSPGbEf.JamesDSP == null) {
+					Log.e(DSPManager.TAG, "Global audio session load fail, reload it now!");
+					JamesDSPGbEf.release();
+					JamesDSPGbEf = null;
+					return super.onStartCommand(intent, flags, startId);
+				}
+				return super.onStartCommand(intent, flags, startId);
+			}
+			Log.i(DSPManager.TAG, "Global audio session created!");
+			updateDsp(false, true);
+		}
+		return super.onStartCommand(intent, flags, startId);
+	}
 	@Override
 		public IBinder onBind(Intent intent)
 	{
@@ -430,6 +487,7 @@ public class HeadsetService extends Service
 	*/
 	protected void updateDsp(boolean notify, boolean updateConvolver)
 	{
+		modeEffect = preferencesMode.getInt("dsp.app.modeEffect", 0);
 		final String mode = getAudioOutputRouting();
 		SharedPreferences preferences = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + mode, 0);
 		if (notify)
@@ -443,15 +501,28 @@ public class HeadsetService extends Service
 			Intent intent = new Intent("dsp.activity.updatePage");
 			sendBroadcast(intent);
 		}
-		for (Integer sessionId : new ArrayList<Integer>(mAudioSessions.keySet()))
+		if (modeEffect == 0)
 		{
 			try
 			{
-				updateDsp(preferences, mAudioSessions.get(sessionId), updateConvolver, sessionId);
+				updateDsp(preferences, JamesDSPGbEf, updateConvolver, 0);
 			}
 			catch (Exception e)
 			{
-				mAudioSessions.remove(sessionId);
+			}
+		}
+		else
+		{
+			for (Integer sessionId : new ArrayList<Integer>(mAudioSessions.keySet()))
+			{
+				try
+				{
+					updateDsp(preferences, mAudioSessions.get(sessionId), updateConvolver, sessionId);
+				}
+				catch (Exception e)
+				{
+					mAudioSessions.remove(sessionId);
+				}
 			}
 		}
 	}
@@ -469,9 +540,10 @@ public class HeadsetService extends Service
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
 			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
 			int dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
-			if (dspModuleSamplingRate == 0) {
+			if (dspModuleSamplingRate == 0)
+			{
 				Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
-				session.recreateEffect(sessionId);
+				return;
 			}
 			session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.clipmode", "1")));
 			session.setParameterShort(session.JamesDSP, 1501, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
@@ -527,44 +599,48 @@ public class HeadsetService extends Service
 			if (convolverEnabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 1205, (short)0);
-				String mConvIRFileName = preferences.getString("dsp.convolver.files", "");
+				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
+				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
-				int[] impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFileName);
+				int normalise = Integer.parseInt((preferences.getString("dsp.convolver.normalise", "300")));
+				int[] impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFilePath);
 				if (impinfo == null)
 					Toast.makeText(HeadsetService.this, R.string.impfilefault, Toast.LENGTH_SHORT).show();
 				else
 				{
 					if (impinfo[2] != dspModuleSamplingRate)
-						Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFileName, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_SHORT).show();
+						Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFilePath, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_LONG).show();
+					int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt(dspModuleSamplingRate);
+					if (impulseResponse == null)
+						Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_LONG).show();
 					else
 					{
-						int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt();
-						if (impulseResponse == null)
-							Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_LONG).show();
-						else
+						int arraySize2Send = 4096;
+						impinfo[1] = impulseResponse.length / impinfo[0];
+						int impulseCutted = (int)(impulseResponse.length * quality);
+						if (impinfo[0] == 4 && impulseCutted > 131072)
+							impulseCutted = 131072;
+						int[] sendArray = new int[arraySize2Send];
+						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
+						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], normalise, numTime2Send};
+						session.setParameterIntArray(session.JamesDSP, 9999, sendBufInfo); // Send buffer info for module to allocate memory
+						int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
+						System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
+						for (int i = 0; i < numTime2Send; i++)
 						{
-							int arraySize2Send = 4096;
-							int impulseCutted = (int)(impulseResponse.length * quality);
-							int[] sendArray = new int[arraySize2Send];
-							int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
-							int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], numTime2Send};
-							session.setParameterIntArray(session.JamesDSP, 9999, sendBufInfo); // Send buffer info for module to allocate memory
-							int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
-							System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
-							for (int i = 0; i < numTime2Send; i++)
-							{
-								System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
-								session.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
-								session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
-							}
-							session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
-							if (DSPManager.devMsgDisplay)
-							{
-								if (impinfo[0] == 2)
-									Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName.replace(DSPManager.impulseResponsePath, ""), impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted / 2), Toast.LENGTH_SHORT).show();
-								else
-									Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName.replace(DSPManager.impulseResponsePath, ""), impinfo[2], impinfo[0], impinfo[1], (int)impulseCutted), Toast.LENGTH_SHORT).show();
-							}
+							System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
+							session.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
+							session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
+						}
+						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
+						if (DSPManager.devMsgDisplay)
+						{
+							if (impinfo[0] == 1)
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.mono_conv), impinfo[1], (int)impulseCutted), Toast.LENGTH_SHORT).show();
+							else if (impinfo[0] == 2)
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.stereo_conv), impinfo[1], (int)impulseCutted / 2), Toast.LENGTH_SHORT).show();
+							else if (impinfo[0] == 4)
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.fullstereo_conv), impinfo[1], (int)impulseCutted / 4), Toast.LENGTH_SHORT).show();
 						}
 					}
 				}

@@ -23,7 +23,7 @@
 #include "utils/String16.h"
 #include "utils/Vector.h"
 #include "utils/Flattenable.h"
-#include <linux/binder.h>
+#include "linux_binder.h"
 
 // ---------------------------------------------------------------------------
 namespace android

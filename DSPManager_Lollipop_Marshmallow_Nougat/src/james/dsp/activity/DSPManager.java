@@ -15,14 +15,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -98,9 +94,10 @@ public final class DSPManager extends Activity
     //==================================
     // Fields
     //==================================
-    private SharedPreferences mPreferences;
+    private SharedPreferences preferencesMode;
     private CharSequence mTitle;
     public static int themeApp;
+    public static int effectMode;
     //==================================
     // Overridden Methods
     //==================================
@@ -141,18 +138,21 @@ public final class DSPManager extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferencesMode = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + "settings", 0);
         SharedPreferences preferences = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + HeadsetService.getAudioOutputRouting(), 0);
         File impFile = new File(preferences.getString("dsp.convolver.files", ""));
         if (!impFile.exists())
             preferences.edit().putString("dsp.convolver.files", getString(R.string.doesntexist)).commit();
-        if (!mPreferences.contains("dsp.app.showdevmsg"))
-            mPreferences.edit().putBoolean("dsp.app.showdevmsg", false).commit();
-        if (!mPreferences.contains("dsp.app.theme"))
-            mPreferences.edit().putInt("dsp.app.theme", 2).commit();
-        devMsgDisplay = mPreferences.getBoolean("dsp.app.showdevmsg", false);
-        themeApp = mPreferences.getInt("dsp.app.theme", 2);
-        mUserLearnedDrawer = mPreferences.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+        if (!preferencesMode.contains("dsp.app.showdevmsg"))
+            preferencesMode.edit().putBoolean("dsp.app.showdevmsg", false).commit();
+        if (!preferencesMode.contains("dsp.app.theme"))
+            preferencesMode.edit().putInt("dsp.app.theme", 2).commit();
+        if (!preferencesMode.contains("dsp.app.modeEffect"))
+        	preferencesMode.edit().putInt("dsp.app.modeEffect", 0).commit();
+        devMsgDisplay = preferencesMode.getBoolean("dsp.app.showdevmsg", false);
+        themeApp = preferencesMode.getInt("dsp.app.theme", 2);
+        effectMode = preferencesMode.getInt("dsp.app.modeEffect", 0);
+        mUserLearnedDrawer = preferencesMode.getBoolean(PREF_USER_LEARNED_DRAWER, false);
         mTitle = getTitle();
         ActionBar mActionBar = getActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
@@ -241,6 +241,10 @@ public final class DSPManager extends Activity
                 menu.findItem(R.id.themeswitch).setTitle(getString(R.string.theme, getString(R.string.redtheme)));
             else if (themeApp == 4)
                 menu.findItem(R.id.themeswitch).setTitle(getString(R.string.theme, getString(R.string.ideatheme)));
+            if (effectMode == 0)
+                menu.findItem(R.id.globaleffectitm).setTitle(getString(R.string.globaleffect_title, getString(R.string.globalreg)));
+            else
+                menu.findItem(R.id.globaleffectitm).setTitle(getString(R.string.globaleffect_title, getString(R.string.traditionalreg)));
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -266,16 +270,24 @@ public final class DSPManager extends Activity
             return true;
         case R.id.mdisplaydevmsg:
             devMsgDisplay = !devMsgDisplay;
-            mPreferences.edit().putBoolean("dsp.app.showdevmsg", devMsgDisplay).commit();
+            preferencesMode.edit().putBoolean("dsp.app.showdevmsg", devMsgDisplay).commit();
             return true;
         case R.id.themeswitch:
             themeApp++;
             if(themeApp > 4)
                 themeApp = 0;
-            mPreferences.edit().putInt("dsp.app.theme", themeApp).commit();
+            preferencesMode.edit().putInt("dsp.app.theme", themeApp).commit();
             startActivity(new Intent(this, DSPManager.class));
             finish();
             return true;
+        case R.id.globaleffectitm:
+        	effectMode++;
+        	if(effectMode > 1)
+        		effectMode = 0;
+        	preferencesMode.edit().putInt("dsp.app.modeEffect", effectMode).commit();
+            Intent serviceIntent = new Intent(this, HeadsetService.class);
+            startService(serviceIntent);
+        	return true;
         default:
             return false;
         }
@@ -437,6 +449,14 @@ public final class DSPManager extends Activity
         {
             Toast.makeText(getApplicationContext(), R.string.save_error_speaker, Toast.LENGTH_LONG).show();
         }
+        try
+        {
+            copy(new File(spDir + packageName + "settings.xml"),
+                 new File(presetDir, packageName + "settings.xml"));
+        }
+        catch (IOException e)
+        {
+        }
     }
 
     public void loadPreset(String name)
@@ -473,6 +493,14 @@ public final class DSPManager extends Activity
         catch (IOException e)
         {
             Toast.makeText(getApplicationContext(), R.string.load_error_speaker, Toast.LENGTH_LONG).show();
+        }
+        try
+        {
+            copy(new File(presetDir, packageName + "settings.xml"),
+                 new File(spDir + packageName + "settings.xml"));
+        }
+        catch (IOException e)
+        {
         }
         // Reload preferences
         startActivity(new Intent(this, DSPManager.class));
@@ -524,7 +552,7 @@ public final class DSPManager extends Activity
                 if (!mUserLearnedDrawer)
                 {
                     mUserLearnedDrawer = true;
-                    mPreferences.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).commit();
+                    preferencesMode.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).commit();
                 }
                 invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }

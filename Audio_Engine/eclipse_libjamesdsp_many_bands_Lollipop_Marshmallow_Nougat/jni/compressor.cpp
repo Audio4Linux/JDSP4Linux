@@ -50,7 +50,7 @@ static inline float compcurve(float x, float k, float slope, float linearthresho
 // it does a bunch of pre-calculation so that the inner loop of signal processing is fast
 void sf_advancecomp(sf_compressor_state_st *state, int rate, float pregain, float threshold,
                     float knee, float ratio, float attack, float release, float predelay, float releasezone1,
-                    float releasezone2, float releasezone3, float releasezone4, float postgain, float wet)
+                    float releasezone2, float releasezone3, float releasezone4, float postgain)
 {
     // setup the predelay buffer
     int delaybufsize = rate * predelay;
@@ -72,7 +72,6 @@ void sf_advancecomp(sf_compressor_state_st *state, int rate, float pregain, floa
     float releasesamples = rate * release;
     float satrelease = 0.0025f; // seconds
     float satreleasesamplesinv = 1.0f / ((float)rate * satrelease);
-    float dry = 1.0f - wet;
 #ifdef METER
     // metering values (not used in core algorithm, but used to output a meter if desired)
     float metergain = 1.0f; // gets overwritten immediately because gain will always be negative
@@ -127,8 +126,6 @@ void sf_advancecomp(sf_compressor_state_st *state, int rate, float pregain, floa
     state->slope                = slope;
     state->attacksamplesinv     = attacksamplesinv;
     state->satreleasesamplesinv = satreleasesamplesinv;
-    state->wet                  = wet;
-    state->dry                  = dry;
     state->k                    = k;
     state->kneedboffset         = kneedboffset;
     state->linearthresholdknee  = linearthresholdknee;
@@ -186,8 +183,6 @@ void sf_compressor_process(sf_compressor_state_st *state, int size, float *input
     float slope                = state->slope;
     float attacksamplesinv     = state->attacksamplesinv;
     float satreleasesamplesinv = state->satreleasesamplesinv;
-    float wet                  = state->wet;
-    float dry                  = state->dry;
     float k                    = state->k;
     float kneedboffset         = state->kneedboffset;
     float linearthresholdknee  = state->linearthresholdknee;
@@ -204,12 +199,10 @@ void sf_compressor_process(sf_compressor_state_st *state, int size, float *input
     int delayreadpos           = state->delayreadpos;
     float *delaybufL           = state->delaybufL;
     float *delaybufR           = state->delaybufR;
-    int samplesperchunk = SF_COMPRESSOR_SPU;
-    int chunks = size / samplesperchunk;
+    int chunks = size / SF_COMPRESSOR_SPU;
     float ang90 = 1.57079625f; //3.14159265358979323846264338327950288 * 0.5f;
     float ang90inv = 0.63661978f; //2.0f / (float)3.14159265358979323846264338327950288;
     int samplepos = 0;
-    float spacingdb = SF_COMPRESSOR_SPACINGDB;
     for (int ch = 0; ch < chunks; ch++)
     {
         detectoravg = fixf(detectoravg, 1.0f);
@@ -226,7 +219,7 @@ void sf_compressor_process(sf_compressor_state_st *state, int size, float *input
             // scale compdiffdb between 0-3
             float x = (clampf(compdiffdb, -12.0f, 0.0f) + 12.0f) * 0.25f;
             float releasesamples = adaptivereleasecurve(x, a, b, c, d);
-            enveloperate = db2lin(spacingdb / releasesamples);
+            enveloperate = db2lin(SF_COMPRESSOR_SPACINGDB / releasesamples);
         }
         else  // compresorgain > scaleddesiredgain, so we're attacking
         {
@@ -239,7 +232,7 @@ void sf_compressor_process(sf_compressor_state_st *state, int size, float *input
             enveloperate = 1.0f - powf(0.25f / attenuate, attacksamplesinv);
         }
         // process the chunk
-        for (int chi = 0; chi < samplesperchunk; chi++, samplepos++,
+        for (int chi = 0; chi < SF_COMPRESSOR_SPU; chi++, samplepos++,
                 delayreadpos = (delayreadpos + 1) % delaybufsize,
                 delaywritepos = (delaywritepos + 1) % delaybufsize)
         {
@@ -284,7 +277,7 @@ void sf_compressor_process(sf_compressor_state_st *state, int size, float *input
             }
             // the final gain value!
             float premixgain = sinf(ang90 * compgain);
-            float gain = dry + wet * mastergain * premixgain;
+            float gain = mastergain * premixgain;
 #ifdef METER
             // calculate metering (not used in core algo, but used to output a meter if desired)
             float premixgaindb = lin2db(premixgain);

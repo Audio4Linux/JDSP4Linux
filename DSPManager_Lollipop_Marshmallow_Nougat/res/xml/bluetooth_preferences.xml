@@ -192,11 +192,23 @@
         android:summaryOn="@string/pref_convolver_summary_on"
         android:summaryOff="@string/pref_convolver_summary_off"
         android:title="@string/pref_convolver_enable"></CheckBoxPreference>
+    <james.dsp.preference.SummariedListPreferenceWithCusResampler
+        android:title="@string/dialog_offlineimpulseresponseresampler"
+        android:key="dsp.convolver.resampler"
+        android:defaultValue=""
+        android:dialogTitle="@string/dialog_offlineimpulseresponseresampler_title" />
     <james.dsp.preference.SummariedListPreferenceWithCustom
         android:title="@string/dialog_impulseresponse"
         android:key="dsp.convolver.files"
         android:defaultValue=""
         android:dialogTitle="@string/dialog_impulseresponse" />
+    <james.dsp.preference.SummariedListPreference
+        android:defaultValue="200"
+        android:dialogTitle="@string/dialog_normalise"
+        android:entries="@array/normalise_values_display"
+        android:entryValues="@array/normalise_values"
+        android:title="@string/dialog_normalise"
+        android:key="dsp.convolver.normalise" />
     <james.dsp.preference.SummariedListPreference
         android:defaultValue="1"
         android:dialogTitle="@string/dialog_length"

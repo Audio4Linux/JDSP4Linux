@@ -15,6 +15,7 @@ LOCAL_SRC_FILES := \
     libsndfile/ircam.c libsndfile/macbinary3.c libsndfile/macos.c libsndfile/mat4.c libsndfile/mat5.c libsndfile/nist.c \
     libsndfile/raw.c libsndfile/rx2.c libsndfile/sd2.c libsndfile/sds.c libsndfile/svx.c libsndfile/txw.c libsndfile/voc.c \
     libsndfile/wve.c libsndfile/w64.c libsndfile/wav_w64.c libsndfile/wav.c libsndfile/xi.c libsndfile/mpc2k.c libsndfile/rf64.c \
+    libsamplerate/samplerate.c libsamplerate/src_linear.c libsamplerate/src_sinc.c libsamplerate/src_zoh.c \
     JdspImpResToolbox.c \
 
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DNDEBUG

@@ -29,6 +29,7 @@ typedef struct str_HConvSingle
     int maxstep;			// number of processing steps per audio frame
     int mixpos;			// current frame index
     int framelength;		// number of samples per audio frame
+    int frameLenMulFloatSize; // framelength * sizeof(float)
     int *steptask;			// processing tasks per step
     float *dft_time;		// DFT buffer (time domain)
     fftwf_complex *dft_freq;	// DFT buffer (frequency domain)
@@ -44,10 +45,11 @@ typedef struct str_HConvSingle
     fftwf_plan fft;			// FFT transformation plan
     fftwf_plan ifft;		// IFFT transformation plan
 } HConvSingle;
-
+int hcFFTWThreadInit();
+void hcFFTWThreadClean();
 void hcProcess(HConvSingle *filter, float *x, float *y);
 void hcProcessAdd(HConvSingle *filter, float *x, float *y);
-void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize);
+void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize, int fftwThreads);
 void hcCloseSingle(HConvSingle *filter);
 
 #endif // __LIBHYBRIDCONV_H__

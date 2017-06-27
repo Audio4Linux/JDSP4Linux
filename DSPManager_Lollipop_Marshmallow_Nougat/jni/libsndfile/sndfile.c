@@ -487,7 +487,7 @@ sf_command	(SNDFILE *sndfile, int command, void *data, int datasize)
 					psf->error = SFE_BAD_COMMAND_PARAM ;
 				return SFE_BAD_COMMAND_PARAM ;
 				} ;
-			snprintf (data, datasize, "ViPER4Android") ;
+			snprintf (data, datasize, "JamesDSP") ;
 			return strlen (data) ;
 
 		case SFC_GET_SIMPLE_FORMAT_COUNT :

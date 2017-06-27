@@ -22,6 +22,7 @@ protected:
 	ty_gverb *verbL, *verbR;
 	sf_reverb_state_st myreverb;
 	HConvSingle *bassBoostLp, *convolver;
+	int threadResult;
 	// Bass boost
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbL;
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbR;
@@ -52,11 +53,12 @@ protected:
 	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
 	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassLpReady;
-	int16_t numTime2Send, samplesInc, impChannels;
+	int16_t numTime2Send, samplesInc, impChannels, previousimpChannels;
+	float normalise;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
 	int tapsLPFIR;
-	void normalize(float* buffer, size_t num_samps, float maxval);
+	void normaliseToLevel(float* buffer, size_t num_samps, float level);
 	void refreshBassLinearPhase(uint32_t actualframeCount);
 	void refreshConvolver(uint32_t actualframeCount);
 	void refreshStereoWiden(uint32_t parameter);
@@ -91,6 +93,10 @@ protected:
 			for (i = 0; i < samples; i++)
 				buffer[i] = tanh(chan_buffers[i % 2][i >> 1]) * finalGain;
 		}
+	}
+	float fmax(float a,double b)
+	{
+		return (b<a)?a:b;
 	}
 public:
 	EffectDSPMain();

@@ -56,8 +56,6 @@ typedef struct
     float slope;
     float attacksamplesinv;
     float satreleasesamplesinv;
-    float wet;
-    float dry;
     float k;
     float kneedboffset;
     float linearthresholdknee;
@@ -86,8 +84,7 @@ void sf_advancecomp(sf_compressor_state_st *state,
                     float releasezone2, //  of the release time depending on the input dB -- these parameters define
                     float releasezone3, //  the adaptive release curve, which is discussed in further detail in the
                     float releasezone4, //  demo: adaptive-release-curve.html
-                    float postgain,     // dB, amount of gain to apply after compression [0 to 100]
-                    float wet           // amount to apply the effect [0 completely dry to 1 completely wet]
+                    float postgain     // dB, amount of gain to apply after compression [0 to 100]
                    );
 
 // this function will process the input sound based on the state passed

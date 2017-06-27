@@ -13,6 +13,9 @@
       android:id="@+id/themeswitch"
       android:title="@string/theme"/>
   <item
+      android:id="@+id/globaleffectitm"
+      android:title="@string/globaleffect_title"/>
+  <item
       android:id="@+id/help"
       android:title="@string/help_title"
       android:icon="@android:drawable/ic_menu_help" />

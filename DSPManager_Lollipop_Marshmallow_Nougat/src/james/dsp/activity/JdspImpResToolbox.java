@@ -18,5 +18,6 @@ public class JdspImpResToolbox
     }
     /* Impulse Response Utils */
     public static native int[] GetLoadImpulseResponseInfo(String path);
-    public static native int[] ReadImpulseResponseToInt();
+    public static native int[] ReadImpulseResponseToInt(int targetSampleRate);
+    public static native int OfflineAudioResample(String path, String filename, int targetSampleRate);
 }

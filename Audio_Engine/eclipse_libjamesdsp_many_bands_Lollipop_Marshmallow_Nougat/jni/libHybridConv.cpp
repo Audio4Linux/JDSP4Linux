@@ -25,6 +25,14 @@
 #include <string.h>
 #include <math.h>
 #include "libHybridConv.h"
+int hcFFTWThreadInit()
+{
+	return fftwf_init_threads();
+}
+void hcFFTWThreadClean()
+{
+	fftwf_cleanup_threads();
+}
 void hcProcess(HConvSingle *filter, float *x, float *y)
 {
     int j, flen, size, mpos, s, n, start, stop;
@@ -33,7 +41,7 @@ void hcProcess(HConvSingle *filter, float *x, float *y)
 #endif
 	float *out, *hist;
     flen = filter->framelength;
-    size = sizeof(float) * flen;
+    size = filter->frameLenMulFloatSize;
     memcpy(filter->dft_time, x, size);
     memset(&(filter->dft_time[flen]), 0, size);
     fftwf_execute(filter->fft);
@@ -98,7 +106,6 @@ void hcProcess(HConvSingle *filter, float *x, float *y)
 	float *h_imag;
 	float *y_real;
 	float *y_imag;
-	flen = filter->framelength;
 	x_real = filter->in_freq_real;
 	x_imag = filter->in_freq_imag;
 	start = filter->steptask[filter->step];
@@ -120,7 +127,6 @@ void hcProcess(HConvSingle *filter, float *x, float *y)
 	}
 	filter->step = (filter->step + 1) % filter->maxstep;
 #endif
-	flen = filter->framelength;
 	mpos = filter->mixpos;
 	out = filter->dft_time;
 	hist = filter->history_time;
@@ -134,7 +140,6 @@ void hcProcess(HConvSingle *filter, float *x, float *y)
 	fftwf_execute(filter->ifft);
 	for (n = 0; n < flen; n++)
 		y[n] = out[n] + hist[n];
-	size = sizeof(float) * flen;
 	memcpy(hist, &(out[flen]), size);
 	filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
 }
@@ -146,7 +151,7 @@ void hcProcessAdd(HConvSingle *filter, float *x, float *y)
 #endif
 	float *out, *hist;
 	flen = filter->framelength;
-	size = sizeof(float) * flen;
+	size = filter->frameLenMulFloatSize;
 	memcpy(filter->dft_time, x, size);
 	memset(&(filter->dft_time[flen]), 0, size);
 	fftwf_execute(filter->fft);
@@ -211,7 +216,6 @@ void hcProcessAdd(HConvSingle *filter, float *x, float *y)
 	float *h_imag;
 	float *y_real;
 	float *y_imag;
-	flen = filter->framelength;
 	x_real = filter->in_freq_real;
 	x_imag = filter->in_freq_imag;
 	start = filter->steptask[filter->step];
@@ -233,7 +237,6 @@ void hcProcessAdd(HConvSingle *filter, float *x, float *y)
 	}
 	filter->step = (filter->step + 1) % filter->maxstep;
 #endif
-	flen = filter->framelength;
 	mpos = filter->mixpos;
 	out = filter->dft_time;
 	hist = filter->history_time;
@@ -247,14 +250,13 @@ void hcProcessAdd(HConvSingle *filter, float *x, float *y)
 	fftwf_execute(filter->ifft);
 	for (n = 0; n < flen; n++)
 		y[n] += out[n] + hist[n];
-	size = sizeof(float) * flen;
 	memcpy(hist, &(out[flen]), size);
 	filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
 }
 
-void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize)
+void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize, int fftwThreads)
 {
-    int i, j, size, num, pos;
+    int i, j, size, num, pos, size2;
     float gain;
     // processing step counter
     filter->step = 0;
@@ -264,8 +266,11 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
     filter->mixpos = 0;
     // number of samples per audio frame
     filter->framelength = flen;
+    size2 = 2 * flen;
+    // framelength * sizeof(float)
+    filter->frameLenMulFloatSize = flen * sizeof(float);
     // DFT buffer (time domain)
-    size = sizeof(float) * 2 * flen;
+    size = sizeof(float) * size2;
     filter->dft_time = (float *)fftwf_malloc(size);
     // DFT buffer (frequency domain)
     size = sizeof(fftwf_complex) * (flen + 1);
@@ -324,15 +329,15 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         fftOptimize = FFTW_ESTIMATE;
     else if (fftOptimize == 1)
         fftOptimize = FFTW_MEASURE;
-    else if (fftOptimize == 2)
-        fftOptimize = FFTW_PATIENT;
+    if(fftwThreads)
+    	fftwf_plan_with_nthreads(fftwThreads);
     // FFT transformation plan
-    filter->fft = fftwf_plan_dft_r2c_1d(2 * flen, filter->dft_time, filter->dft_freq, fftOptimize | FFTW_PRESERVE_INPUT);
+    filter->fft = fftwf_plan_dft_r2c_1d(size2, filter->dft_time, filter->dft_freq, fftOptimize | FFTW_PRESERVE_INPUT);
     // IFFT transformation plan
-    filter->ifft = fftwf_plan_dft_c2r_1d(2 * flen, filter->dft_freq, filter->dft_time, fftOptimize | FFTW_PRESERVE_INPUT);
+    filter->ifft = fftwf_plan_dft_c2r_1d(size2, filter->dft_freq, filter->dft_time, fftOptimize | FFTW_PRESERVE_INPUT);
     // generate filter segments
     gain = 0.5f / flen;
-    size = sizeof(float) * 2 * flen;
+    size = sizeof(float) * size2;
     memset(filter->dft_time, 0, size);
     for (i = 0; i < filter->num_filterbuf - 1; i++)
     {
