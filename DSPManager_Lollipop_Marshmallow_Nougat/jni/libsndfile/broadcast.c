@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2006-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2006-2016 Erik de Castro Lopo <erikd@mega-nerd.com>
 ** Copyright (C) 2006 Paul Davis <paul@linuxaudiosystems.com>
 **
 ** This program is free software; you can redistribute it and/or modify
@@ -17,13 +17,12 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include "sfconfig.h"
-
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
 
 #include "common.h"
+#include "sfconfig.h"
 
 
 static int gen_coding_history (char * added_history, int added_history_max, const SF_INFO * psfinfo) ;
@@ -60,11 +59,12 @@ broadcast_var_set (SF_PRIVATE *psf, const SF_BROADCAST_INFO * info, size_t datas
 
 	if (psf->broadcast_16k == NULL)
 	{	if ((psf->broadcast_16k = broadcast_var_alloc ()) == NULL)
-		{	psf->error = SFE_MALLOC_FAILED	 ;
+		{	psf->error = SFE_MALLOC_FAILED ;
 			return SF_FALSE ;
 			} ;
 		} ;
 
+	/* Only copy the first part of the struct. */
 	memcpy (psf->broadcast_16k, info, offsetof (SF_BROADCAST_INFO, coding_history)) ;
 
 	psf_strlcpy_crlf (psf->broadcast_16k->coding_history, info->coding_history, sizeof (psf->broadcast_16k->coding_history), datasize - offsetof (SF_BROADCAST_INFO, coding_history)) ;
@@ -82,7 +82,7 @@ broadcast_var_set (SF_PRIVATE *psf, const SF_BROADCAST_INFO * info, size_t datas
 
 	/* Force coding_history_size to be even. */
 	len = strlen (psf->broadcast_16k->coding_history) ;
-	len += (len & 1) ? 1 : 2 ;
+	len += (len & 1) ? 1 : 0 ;
 	psf->broadcast_16k->coding_history_size = len ;
 
 	/* Currently writing this version. */
@@ -120,16 +120,16 @@ gen_coding_history (char * added_history, int added_history_max, const SF_INFO *
 	**	Parameter            Variable string <allowed option>                 Unit
 	**	==========================================================================================
 	**	Coding Algorithm     A=<ANALOGUE, PCM, MPEG1L1, MPEG1L2, MPEG1L3,
-	**	                     MPEG2L1, MPEG2L2, MPEG2L3>
+	**	                    MPEG2L1, MPEG2L2, MPEG2L3>
 	**	Sampling frequency   F=<11000,22050,24000,32000,44100,48000>          [Hz]
 	**	Bit-rate             B=<any bit-rate allowed in MPEG 2 (ISO/IEC       [kbit/s per channel]
-	**	                     13818-3)>
+	**	                    13818-3)>
 	**	Word Length          W=<8, 12, 14, 16, 18, 20, 22, 24>                [bits]
 	**	Mode                 M=<mono, stereo, dual-mono, joint-stereo>
 	**	Text, free string    T=<a free ASCII-text string for in house use.
-	**	                     This string should contain no commas (ASCII
-	**	                     2Chex). Examples of the contents: ID-No; codec
-	**	                     type; A/D type>
+	**	                    This string should contain no commas (ASCII
+	**	                    2Chex). Examples of the contents: ID-No; codec
+	**	                    type; A/D type>
 	*/
 
 	switch (psfinfo->channels)
@@ -179,7 +179,7 @@ gen_coding_history (char * added_history, int added_history_max, const SF_INFO *
 		} ;
 
 	count = snprintf (added_history, added_history_max,
-							"A=PCM,F=%u,W=%hu,M=%s,T=v4a-dsp\r\n",
+							"A=PCM,F=%u,W=%d,M=%s,T=JamesDSP\r\n",
 							psfinfo->samplerate, width, chnstr) ;
 
 	if (count >= added_history_max)

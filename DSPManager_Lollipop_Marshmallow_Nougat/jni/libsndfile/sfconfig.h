@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2005-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2005-2014 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -53,6 +53,10 @@
 #define HAVE_ENDIAN_H 0
 #endif
 
+#ifndef HAVE_FSTAT64
+#define HAVE_FSTAT64 0
+#endif
+
 #ifndef HAVE_FSYNC
 #define HAVE_FSYNC 0
 #endif
@@ -73,14 +77,6 @@
 #define HAVE_MMAP 0
 #endif
 
-#ifndef HAVE_PREAD
-#define HAVE_PREAD 0
-#endif
-
-#ifndef HAVE_PWRITE
-#define HAVE_PWRITE 0
-#endif
-
 #ifndef HAVE_SETLOCALE
 #define HAVE_SETLOCALE 0
 #endif
@@ -97,6 +93,10 @@
 #define HAVE_SYS_WAIT_H 0
 #endif
 
+#ifndef HAVE_SYS_TIME_H
+#define HAVE_SYS_TIME_H 0
+#endif
+
 #ifndef HAVE_UNISTD_H
 #define HAVE_UNISTD_H 0
 #endif
@@ -109,5 +109,8 @@
 #define	HAVE_WAITPID 0
 #endif
 
+#ifndef HAVE_X86INTRIN_H
+#define HAVE_X86INTRIN_H 0
 #endif
 
+#endif

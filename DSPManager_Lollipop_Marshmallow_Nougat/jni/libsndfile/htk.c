@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2002-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2002-2016 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -16,16 +16,15 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include	"sfconfig.h"
-
 #include	<stdio.h>
 #include	<fcntl.h>
 #include	<string.h>
 #include	<ctype.h>
 
-#include	"sndfile.h"
-#include	"sfendian.h"
-#include	"common.h"
+#include "common.h"
+#include "sfconfig.h"
+#include "sfendian.h"
+#include "sndfile.h"
 
 /*------------------------------------------------------------------------------
 ** Macros to handle big/little endian issues.
@@ -112,8 +111,8 @@ htk_write_header (SF_PRIVATE *psf, int calc_length)
 		psf->filelength = psf_get_filelen (psf) ;
 
 	/* Reset the current header length to zero. */
-	psf->header [0] = 0 ;
-	psf->headindex = 0 ;
+	psf->header.ptr [0] = 0 ;
+	psf->header.indx = 0 ;
 	psf_fseek (psf, 0, SEEK_SET) ;
 
 	if (psf->filelength > 12)
@@ -126,12 +125,12 @@ htk_write_header (SF_PRIVATE *psf, int calc_length)
 	psf_binheader_writef (psf, "E444", sample_count, sample_period, 0x20000) ;
 
 	/* Header construction complete so write it out. */
-	psf_fwrite (psf->header, psf->headindex, 1, psf) ;
+	psf_fwrite (psf->header.ptr, psf->header.indx, 1, psf) ;
 
 	if (psf->error)
 		return psf->error ;
 
-	psf->dataoffset = psf->headindex ;
+	psf->dataoffset = psf->header.indx ;
 
 	if (current > 0)
 		psf_fseek (psf, current, SEEK_SET) ;

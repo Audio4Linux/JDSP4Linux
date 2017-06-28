@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2004-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2004-2016 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -16,14 +16,13 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include "sfconfig.h"
-
 #include <stdio.h>
 #include <string.h>
 
-#include "sndfile.h"
-#include "sfendian.h"
 #include "common.h"
+#include "sfconfig.h"
+#include "sfendian.h"
+#include "sndfile.h"
 
 #define TWOBIT_MARKER	(MAKE_MARKER ('2', 'B', 'I', 'T'))
 #define	AVR_HDR_SIZE	128
@@ -89,8 +88,7 @@ avr_open	(SF_PRIVATE *psf)
 		return	SFE_BAD_OPEN_FORMAT ;
 
 	if (psf->file.mode == SFM_WRITE || psf->file.mode == SFM_RDWR)
-	{	psf->endian = SF_ENDIAN (psf->sf.format) ;
-		psf->endian = SF_ENDIAN_BIG ;
+	{	psf->endian = SF_ENDIAN_BIG ;
 
 		if (avr_write_header (psf, SF_FALSE))
 			return psf->error ;
@@ -202,8 +200,8 @@ avr_write_header (SF_PRIVATE *psf, int calc_length)
 		} ;
 
 	/* Reset the current header length to zero. */
-	psf->header [0] = 0 ;
-	psf->headindex = 0 ;
+	psf->header.ptr [0] = 0 ;
+	psf->header.indx = 0 ;
 
 	/*
 	** Only attempt to seek if we are not writng to a pipe. If we are
@@ -223,12 +221,12 @@ avr_write_header (SF_PRIVATE *psf, int calc_length)
 	psf_binheader_writef (psf, "E222zz", 0, 0, 0, make_size_t (20), make_size_t (64)) ;
 
 	/* Header construction complete so write it out. */
-	psf_fwrite (psf->header, psf->headindex, 1, psf) ;
+	psf_fwrite (psf->header.ptr, psf->header.indx, 1, psf) ;
 
 	if (psf->error)
 		return psf->error ;
 
-	psf->dataoffset = psf->headindex ;
+	psf->dataoffset = psf->header.indx ;
 
 	if (current > 0)
 		psf_fseek (psf, current, SEEK_SET) ;

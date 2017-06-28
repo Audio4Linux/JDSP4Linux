@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 1999-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 1999-2016 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -16,8 +16,6 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include "sfconfig.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -25,9 +23,10 @@
 #include <ctype.h>
 #include <math.h>
 
-#include "sndfile.h"
-#include "sfendian.h"
 #include "common.h"
+#include "sfconfig.h"
+#include "sfendian.h"
+#include "sndfile.h"
 
 /*------------------------------------------------------------------------------
 ** Macros to handle big/little endian issues.
@@ -52,23 +51,19 @@
 typedef	struct
 {	int	version ;
 	int	endianness ;
-    int	samplerate ;
-    int	format ;
+	int	samplerate ;
+	int	format ;
 	int	channels ;
 	int	source ;
 } PAF_FMT ;
 
 typedef struct
-{	int				max_blocks, channels, samplesperblock, blocksize ;
+{	int				max_blocks, channels, blocksize ;
 	int				read_block, write_block, read_count, write_count ;
 	sf_count_t		sample_count ;
 	int				*samples ;
-	unsigned char	*block ;
-#if HAVE_FLEXIBLE_ARRAY
+	int				*block ;
 	int				data [] ; /* ISO C99 struct flexible array. */
-#else
-	int				data [1] ; /* This is a hack and may not work. */
-#endif
 } PAF24_PRIVATE ;
 
 /*------------------------------------------------------------------------------
@@ -202,7 +197,7 @@ paf_read_header	(SF_PRIVATE *psf)
 		psf->endian = SF_ENDIAN_BIG ;
 		} ;
 
-	if (paf_fmt.channels > SF_MAX_CHANNELS)
+	if (paf_fmt.channels < 1 || paf_fmt.channels > SF_MAX_CHANNELS)
 		return SFE_PAF_BAD_CHANNELS ;
 
 	psf->datalength = psf->filelength - psf->dataoffset ;
@@ -302,8 +297,8 @@ paf_write_header (SF_PRIVATE *psf, int UNUSED (calc_length))
 		} ;
 
 	/* Reset the current header length to zero. */
-	psf->header [0] = 0 ;
-	psf->headindex = 0 ;
+	psf->header.ptr [0] = 0 ;
+	psf->header.indx = 0 ;
 
 	if (psf->endian == SF_ENDIAN_BIG)
 	{	/* Marker, version, endianness, samplerate */
@@ -319,9 +314,9 @@ paf_write_header (SF_PRIVATE *psf, int UNUSED (calc_length))
 		} ;
 
 	/* Zero fill to dataoffset. */
-	psf_binheader_writef (psf, "z", (size_t) (psf->dataoffset - psf->headindex)) ;
+	psf_binheader_writef (psf, "z", (size_t) (psf->dataoffset - psf->header.indx)) ;
 
-	psf_fwrite (psf->header, psf->headindex, 1, psf) ;
+	psf_fwrite (psf->header.ptr, psf->header.indx, 1, psf) ;
 
 	return psf->error ;
 } /* paf_write_header */
@@ -366,10 +361,9 @@ paf24_init (SF_PRIVATE *psf)
 
 	ppaf24->channels	= psf->sf.channels ;
 	ppaf24->samples		= ppaf24->data ;
-	ppaf24->block		= (unsigned char*) (ppaf24->data + PAF24_SAMPLES_PER_BLOCK * ppaf24->channels) ;
+	ppaf24->block		= ppaf24->data + PAF24_SAMPLES_PER_BLOCK * ppaf24->channels ;
 
 	ppaf24->blocksize = PAF24_BLOCK_SIZE * ppaf24->channels ;
-	ppaf24->samplesperblock = PAF24_SAMPLES_PER_BLOCK ;
 
 	if (psf->file.mode == SFM_READ || psf->file.mode == SFM_RDWR)
 	{	paf24_read_block (psf, ppaf24) ;	/* Read first block. */
@@ -407,7 +401,7 @@ paf24_init (SF_PRIVATE *psf)
 	else
 		ppaf24->write_block = 0 ;
 
-	psf->sf.frames = ppaf24->samplesperblock * ppaf24->max_blocks ;
+	psf->sf.frames = PAF24_SAMPLES_PER_BLOCK * ppaf24->max_blocks ;
 	ppaf24->sample_count = psf->sf.frames ;
 
 	return 0 ;
@@ -428,8 +422,8 @@ paf24_seek (SF_PRIVATE *psf, int mode, sf_count_t offset)
 	if (mode == SFM_READ && ppaf24->write_count > 0)
 		paf24_write_block (psf, ppaf24) ;
 
-	newblock	= offset / ppaf24->samplesperblock ;
-	newsample	= offset % ppaf24->samplesperblock ;
+	newblock	= offset / PAF24_SAMPLES_PER_BLOCK ;
+	newsample	= offset % PAF24_SAMPLES_PER_BLOCK ;
 
 	switch (mode)
 	{	case SFM_READ :
@@ -462,7 +456,7 @@ paf24_seek (SF_PRIVATE *psf, int mode, sf_count_t offset)
 				return PSF_SEEK_ERROR ;
 		} ;
 
-	return newblock * ppaf24->samplesperblock + newsample ;
+	return newblock * PAF24_SAMPLES_PER_BLOCK + newsample ;
 } /* paf24_seek */
 
 static int
@@ -492,8 +486,8 @@ paf24_read_block (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24)
 	ppaf24->read_block ++ ;
 	ppaf24->read_count = 0 ;
 
-	if (ppaf24->read_block * ppaf24->samplesperblock > ppaf24->sample_count)
-	{	memset (ppaf24->samples, 0, ppaf24->samplesperblock * ppaf24->channels) ;
+	if (ppaf24->read_block * PAF24_SAMPLES_PER_BLOCK > ppaf24->sample_count)
+	{	memset (ppaf24->samples, 0, PAF24_SAMPLES_PER_BLOCK * ppaf24->channels) ;
 		return 1 ;
 		} ;
 
@@ -501,30 +495,15 @@ paf24_read_block (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24)
 	if ((k = psf_fread (ppaf24->block, 1, ppaf24->blocksize, psf)) != ppaf24->blocksize)
 		psf_log_printf (psf, "*** Warning : short read (%d != %d).\n", k, ppaf24->blocksize) ;
 
+	/* Do endian swapping if necessary. */
+	if ((CPU_IS_BIG_ENDIAN && psf->endian == SF_ENDIAN_LITTLE) || (CPU_IS_LITTLE_ENDIAN && psf->endian == SF_ENDIAN_BIG))
+		endswap_int_array (ppaf24->block, 8 * ppaf24->channels) ;
 
-	if (CPU_IS_LITTLE_ENDIAN)
-	{	/* Do endian swapping if necessary. */
-		if (psf->endian == SF_ENDIAN_BIG)
-			endswap_int_array 	(ppaf24->data, 8 * ppaf24->channels) ;
-
-		/* Unpack block. */
-		for (k = 0 ; k < PAF24_SAMPLES_PER_BLOCK * ppaf24->channels ; k++)
-		{	channel = k % ppaf24->channels ;
-			cptr = ppaf24->block + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
-			ppaf24->samples [k] = (cptr [0] << 8) | (cptr [1] << 16) | (cptr [2] << 24) ;
-			} ;
-		}
-	else
-	{	/* Do endian swapping if necessary. */
-		if (psf->endian == SF_ENDIAN_BIG)
-			endswap_int_array 	(ppaf24->data, 8 * ppaf24->channels) ;
-
-		/* Unpack block. */
-		for (k = 0 ; k < PAF24_SAMPLES_PER_BLOCK * ppaf24->channels ; k++)
-		{	channel = k % ppaf24->channels ;
-			cptr = ppaf24->block + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
-			ppaf24->samples [k] = (cptr [0] << 8) | (cptr [1] << 16) | (cptr [2] << 24) ;
-			} ;
+	/* Unpack block. */
+	for (k = 0 ; k < PAF24_SAMPLES_PER_BLOCK * ppaf24->channels ; k++)
+	{	channel = k % ppaf24->channels ;
+		cptr = ((unsigned char *) ppaf24->block) + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
+		ppaf24->samples [k] = (cptr [0] << 8) | (cptr [1] << 16) | (((unsigned) cptr [2]) << 24) ;
 		} ;
 
 	return 1 ;
@@ -535,15 +514,15 @@ paf24_read (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24, int *ptr, int len)
 {	int	count, total = 0 ;
 
 	while (total < len)
-	{	if (ppaf24->read_block * ppaf24->samplesperblock >= ppaf24->sample_count)
+	{	if (ppaf24->read_block * PAF24_SAMPLES_PER_BLOCK >= ppaf24->sample_count)
 		{	memset (&(ptr [total]), 0, (len - total) * sizeof (int)) ;
 			return total ;
 			} ;
 
-		if (ppaf24->read_count >= ppaf24->samplesperblock)
+		if (ppaf24->read_count >= PAF24_SAMPLES_PER_BLOCK)
 			paf24_read_block (psf, ppaf24) ;
 
-		count = (ppaf24->samplesperblock - ppaf24->read_count) * ppaf24->channels ;
+		count = (PAF24_SAMPLES_PER_BLOCK - ppaf24->read_count) * ppaf24->channels ;
 		count = (len - total > count) ? count : len - total ;
 
 		memcpy (&(ptr [total]), &(ppaf24->samples [ppaf24->read_count * ppaf24->channels]), count * sizeof (int)) ;
@@ -556,7 +535,8 @@ paf24_read (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24, int *ptr, int len)
 
 static sf_count_t
 paf24_read_s (SF_PRIVATE *psf, short *ptr, sf_count_t len)
-{	PAF24_PRIVATE 	*ppaf24 ;
+{	BUF_UNION		ubuf ;
+	PAF24_PRIVATE 	*ppaf24 ;
 	int				*iptr ;
 	int				k, bufferlen, readcount, count ;
 	sf_count_t		total = 0 ;
@@ -565,8 +545,8 @@ paf24_read_s (SF_PRIVATE *psf, short *ptr, sf_count_t len)
 		return 0 ;
 	ppaf24 = (PAF24_PRIVATE*) psf->codec_data ;
 
-	iptr = psf->u.ibuf ;
-	bufferlen = ARRAY_LEN (psf->u.ibuf) ;
+	iptr = ubuf.ibuf ;
+	bufferlen = ARRAY_LEN (ubuf.ibuf) ;
 	while (len > 0)
 	{	readcount = (len >= bufferlen) ? bufferlen : len ;
 		count = paf24_read (psf, ppaf24, iptr, readcount) ;
@@ -594,7 +574,8 @@ paf24_read_i (SF_PRIVATE *psf, int *ptr, sf_count_t len)
 
 static sf_count_t
 paf24_read_f (SF_PRIVATE *psf, float *ptr, sf_count_t len)
-{	PAF24_PRIVATE 	*ppaf24 ;
+{	BUF_UNION		ubuf ;
+	PAF24_PRIVATE 	*ppaf24 ;
 	int				*iptr ;
 	int				k, bufferlen, readcount, count ;
 	sf_count_t		total = 0 ;
@@ -606,8 +587,8 @@ paf24_read_f (SF_PRIVATE *psf, float *ptr, sf_count_t len)
 
 	normfact = (psf->norm_float == SF_TRUE) ? (1.0 / 0x80000000) : (1.0 / 0x100) ;
 
-	iptr = psf->u.ibuf ;
-	bufferlen = ARRAY_LEN (psf->u.ibuf) ;
+	iptr = ubuf.ibuf ;
+	bufferlen = ARRAY_LEN (ubuf.ibuf) ;
 	while (len > 0)
 	{	readcount = (len >= bufferlen) ? bufferlen : len ;
 		count = paf24_read (psf, ppaf24, iptr, readcount) ;
@@ -621,7 +602,8 @@ paf24_read_f (SF_PRIVATE *psf, float *ptr, sf_count_t len)
 
 static sf_count_t
 paf24_read_d (SF_PRIVATE *psf, double *ptr, sf_count_t len)
-{	PAF24_PRIVATE 	*ppaf24 ;
+{	BUF_UNION		ubuf ;
+	PAF24_PRIVATE 	*ppaf24 ;
 	int				*iptr ;
 	int				k, bufferlen, readcount, count ;
 	sf_count_t		total = 0 ;
@@ -633,8 +615,8 @@ paf24_read_d (SF_PRIVATE *psf, double *ptr, sf_count_t len)
 
 	normfact = (psf->norm_double == SF_TRUE) ? (1.0 / 0x80000000) : (1.0 / 0x100) ;
 
-	iptr = psf->u.ibuf ;
-	bufferlen = ARRAY_LEN (psf->u.ibuf) ;
+	iptr = ubuf.ibuf ;
+	bufferlen = ARRAY_LEN (ubuf.ibuf) ;
 	while (len > 0)
 	{	readcount = (len >= bufferlen) ? bufferlen : len ;
 		count = paf24_read (psf, ppaf24, iptr, readcount) ;
@@ -659,7 +641,7 @@ paf24_write_block (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24)
 	if (CPU_IS_LITTLE_ENDIAN)
 	{	for (k = 0 ; k < PAF24_SAMPLES_PER_BLOCK * ppaf24->channels ; k++)
 		{	channel = k % ppaf24->channels ;
-			cptr = ppaf24->block + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
+			cptr = ((unsigned char *) ppaf24->block) + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
 			nextsample = ppaf24->samples [k] >> 8 ;
 			cptr [0] = nextsample ;
 			cptr [1] = nextsample >> 8 ;
@@ -668,30 +650,30 @@ paf24_write_block (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24)
 
 		/* Do endian swapping if necessary. */
 		if (psf->endian == SF_ENDIAN_BIG)
-			endswap_int_array (ppaf24->data, 8 * ppaf24->channels) ;
+			endswap_int_array (ppaf24->block, 8 * ppaf24->channels) ;
 		}
 	else if (CPU_IS_BIG_ENDIAN)
 	{	/* This is correct. */
 		for (k = 0 ; k < PAF24_SAMPLES_PER_BLOCK * ppaf24->channels ; k++)
 		{	channel = k % ppaf24->channels ;
-			cptr = ppaf24->block + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
+			cptr = ((unsigned char *) ppaf24->block) + PAF24_BLOCK_SIZE * channel + 3 * (k / ppaf24->channels) ;
 			nextsample = ppaf24->samples [k] >> 8 ;
 			cptr [0] = nextsample ;
 			cptr [1] = nextsample >> 8 ;
 			cptr [2] = nextsample >> 16 ;
 			} ;
-		if (psf->endian == SF_ENDIAN_BIG)
-			endswap_int_array (ppaf24->data, 8 * ppaf24->channels) ;
+		if (psf->endian == SF_ENDIAN_LITTLE)
+			endswap_int_array (ppaf24->block, 8 * ppaf24->channels) ;
 		} ;
 
 	/* Write block to disk. */
 	if ((k = psf_fwrite (ppaf24->block, 1, ppaf24->blocksize, psf)) != ppaf24->blocksize)
 		psf_log_printf (psf, "*** Warning : short write (%d != %d).\n", k, ppaf24->blocksize) ;
 
-	if (ppaf24->sample_count < ppaf24->write_block * ppaf24->samplesperblock + ppaf24->write_count)
-		ppaf24->sample_count = ppaf24->write_block * ppaf24->samplesperblock + ppaf24->write_count ;
+	if (ppaf24->sample_count < ppaf24->write_block * PAF24_SAMPLES_PER_BLOCK + ppaf24->write_count)
+		ppaf24->sample_count = ppaf24->write_block * PAF24_SAMPLES_PER_BLOCK + ppaf24->write_count ;
 
-	if (ppaf24->write_count == ppaf24->samplesperblock)
+	if (ppaf24->write_count == PAF24_SAMPLES_PER_BLOCK)
 	{	ppaf24->write_block ++ ;
 		ppaf24->write_count = 0 ;
 		} ;
@@ -704,7 +686,7 @@ paf24_write (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24, const int *ptr, int len)
 {	int		count, total = 0 ;
 
 	while (total < len)
-	{	count = (ppaf24->samplesperblock - ppaf24->write_count) * ppaf24->channels ;
+	{	count = (PAF24_SAMPLES_PER_BLOCK - ppaf24->write_count) * ppaf24->channels ;
 
 		if (count > len - total)
 			count = len - total ;
@@ -713,7 +695,7 @@ paf24_write (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24, const int *ptr, int len)
 		total += count ;
 		ppaf24->write_count += count / ppaf24->channels ;
 
-		if (ppaf24->write_count >= ppaf24->samplesperblock)
+		if (ppaf24->write_count >= PAF24_SAMPLES_PER_BLOCK)
 			paf24_write_block (psf, ppaf24) ;
 		} ;
 
@@ -722,7 +704,8 @@ paf24_write (SF_PRIVATE *psf, PAF24_PRIVATE *ppaf24, const int *ptr, int len)
 
 static sf_count_t
 paf24_write_s (SF_PRIVATE *psf, const short *ptr, sf_count_t len)
-{	PAF24_PRIVATE 	*ppaf24 ;
+{	BUF_UNION		ubuf ;
+	PAF24_PRIVATE 	*ppaf24 ;
 	int				*iptr ;
 	int				k, bufferlen, writecount = 0, count ;
 	sf_count_t		total = 0 ;
@@ -731,8 +714,8 @@ paf24_write_s (SF_PRIVATE *psf, const short *ptr, sf_count_t len)
 		return 0 ;
 	ppaf24 = (PAF24_PRIVATE*) psf->codec_data ;
 
-	iptr = psf->u.ibuf ;
-	bufferlen = ARRAY_LEN (psf->u.ibuf) ;
+	iptr = ubuf.ibuf ;
+	bufferlen = ARRAY_LEN (ubuf.ibuf) ;
 	while (len > 0)
 	{	writecount = (len >= bufferlen) ? bufferlen : len ;
 		for (k = 0 ; k < writecount ; k++)
@@ -772,7 +755,8 @@ paf24_write_i (SF_PRIVATE *psf, const int *ptr, sf_count_t len)
 
 static sf_count_t
 paf24_write_f (SF_PRIVATE *psf, const float *ptr, sf_count_t len)
-{	PAF24_PRIVATE 	*ppaf24 ;
+{	BUF_UNION		ubuf ;
+	PAF24_PRIVATE 	*ppaf24 ;
 	int				*iptr ;
 	int				k, bufferlen, writecount = 0, count ;
 	sf_count_t		total = 0 ;
@@ -784,8 +768,8 @@ paf24_write_f (SF_PRIVATE *psf, const float *ptr, sf_count_t len)
 
 	normfact = (psf->norm_float == SF_TRUE) ? (1.0 * 0x7FFFFFFF) : (1.0 / 0x100) ;
 
-	iptr = psf->u.ibuf ;
-	bufferlen = ARRAY_LEN (psf->u.ibuf) ;
+	iptr = ubuf.ibuf ;
+	bufferlen = ARRAY_LEN (ubuf.ibuf) ;
 	while (len > 0)
 	{	writecount = (len >= bufferlen) ? bufferlen : len ;
 		for (k = 0 ; k < writecount ; k++)
@@ -802,7 +786,8 @@ paf24_write_f (SF_PRIVATE *psf, const float *ptr, sf_count_t len)
 
 static sf_count_t
 paf24_write_d (SF_PRIVATE *psf, const double *ptr, sf_count_t len)
-{	PAF24_PRIVATE 	*ppaf24 ;
+{	BUF_UNION		ubuf ;
+	PAF24_PRIVATE 	*ppaf24 ;
 	int				*iptr ;
 	int				k, bufferlen, writecount = 0, count ;
 	sf_count_t		total = 0 ;
@@ -814,8 +799,8 @@ paf24_write_d (SF_PRIVATE *psf, const double *ptr, sf_count_t len)
 
 	normfact = (psf->norm_double == SF_TRUE) ? (1.0 * 0x7FFFFFFF) : (1.0 / 0x100) ;
 
-	iptr = psf->u.ibuf ;
-	bufferlen = ARRAY_LEN (psf->u.ibuf) ;
+	iptr = ubuf.ibuf ;
+	bufferlen = ARRAY_LEN (ubuf.ibuf) ;
 	while (len > 0)
 	{	writecount = (len >= bufferlen) ? bufferlen : len ;
 		for (k = 0 ; k < writecount ; k++)

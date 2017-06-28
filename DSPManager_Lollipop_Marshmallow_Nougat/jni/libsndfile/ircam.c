@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2001-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2001-2016 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -16,16 +16,15 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include	"sfconfig.h"
-
 #include	<stdio.h>
 #include	<fcntl.h>
 #include	<string.h>
 #include	<ctype.h>
 
-#include	"sndfile.h"
-#include	"sfendian.h"
-#include	"common.h"
+#include "common.h"
+#include "sfconfig.h"
+#include "sfendian.h"
+#include "sndfile.h"
 
 /*------------------------------------------------------------------------------
 ** Macros to handle big/little endian issues.
@@ -95,7 +94,7 @@ ircam_open	(SF_PRIVATE *psf)
 		if (psf->endian == 0 || psf->endian == SF_ENDIAN_CPU)
 			psf->endian = (CPU_IS_BIG_ENDIAN) ? SF_ENDIAN_BIG : SF_ENDIAN_LITTLE ;
 
-	 	psf->dataoffset = IRCAM_DATA_OFFSET ;
+		psf->dataoffset = IRCAM_DATA_OFFSET ;
 
 		if ((error = ircam_write_header (psf, SF_FALSE)))
 			return error ;
@@ -147,11 +146,11 @@ ircam_read_header	(SF_PRIVATE *psf)
 
 	psf->endian = SF_ENDIAN_LITTLE ;
 
-	if (psf->sf.channels > 256)
+	if (psf->sf.channels > SF_MAX_CHANNELS)
 	{	psf_binheader_readf (psf, "Epmf44", 0, &marker, &samplerate, &(psf->sf.channels), &encoding) ;
 
 		/* Sanity checking for endian-ness detection. */
-		if (psf->sf.channels > 256)
+		if (psf->sf.channels > SF_MAX_CHANNELS)
 		{	psf_log_printf (psf, "marker: 0x%X\n", marker) ;
 			return SFE_IRCAM_BAD_CHANNELS ;
 			} ;
@@ -163,9 +162,10 @@ ircam_read_header	(SF_PRIVATE *psf)
 
 	psf->sf.samplerate = (int) samplerate ;
 
-	psf_log_printf (psf, "  Sample Rate : %d\n"
-						 "  Channels    : %d\n"
-						 "  Encoding    : %X => %s\n", psf->sf.samplerate, psf->sf.channels, encoding, get_encoding_str (encoding)) ;
+	psf_log_printf (psf,	"  Sample Rate : %d\n"
+							"  Channels    : %d\n"
+							"  Encoding    : %X => %s\n",
+						psf->sf.samplerate, psf->sf.channels, encoding, get_encoding_str (encoding)) ;
 
 	switch (encoding)
 	{	case IRCAM_PCM_16 :
@@ -255,8 +255,8 @@ ircam_write_header (SF_PRIVATE *psf, int UNUSED (calc_length))
 		return SFE_BAD_OPEN_FORMAT ;
 
 	/* Reset the current header length to zero. */
-	psf->header [0] = 0 ;
-	psf->headindex = 0 ;
+	psf->header.ptr [0] = 0 ;
+	psf->header.indx = 0 ;
 
 	if (psf->is_pipe == SF_FALSE)
 		psf_fseek (psf, 0, SEEK_SET) ;
@@ -277,10 +277,10 @@ ircam_write_header (SF_PRIVATE *psf, int UNUSED (calc_length))
 		default : return SFE_BAD_OPEN_FORMAT ;
 		} ;
 
-	psf_binheader_writef (psf, "z", (size_t) (IRCAM_DATA_OFFSET - psf->headindex)) ;
+	psf_binheader_writef (psf, "z", (size_t) (IRCAM_DATA_OFFSET - psf->header.indx)) ;
 
 	/* Header construction complete so write it out. */
-	psf_fwrite (psf->header, psf->headindex, 1, psf) ;
+	psf_fwrite (psf->header.ptr, psf->header.indx, 1, psf) ;
 
 	if (psf->error)
 		return psf->error ;

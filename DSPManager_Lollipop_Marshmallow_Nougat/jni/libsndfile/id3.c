@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2010-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2010-2017 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -16,16 +16,15 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include	"sfconfig.h"
-
 #include	<stdio.h>
 #include	<fcntl.h>
 #include	<string.h>
 #include	<ctype.h>
 
-#include	"sndfile.h"
-#include	"sfendian.h"
-#include	"common.h"
+#include "common.h"
+#include "sfconfig.h"
+#include "sfendian.h"
+#include "sndfile.h"
 
 int
 id3_skip (SF_PRIVATE * psf)
@@ -40,12 +39,19 @@ id3_skip (SF_PRIVATE * psf)
 		offset = (offset << 7) | (buf [8] & 0x7f) ;
 		offset = (offset << 7) | (buf [9] & 0x7f) ;
 
-		psf_binheader_readf (psf, "j", make_size_t (offset)) ;
-
 		psf_log_printf (psf, "ID3 length : %d\n--------------------\n", offset) ;
 
-		psf->fileoffset = 10 + offset ;
-		return 1 ;
+		/* Never want to jump backwards in a file. */
+		if (offset < 0)
+			return 0 ;
+
+		/* Calculate new file offset and position ourselves there. */
+		psf->fileoffset += offset + 10 ;
+
+		if (psf->fileoffset < psf->filelength)
+		{	psf_binheader_readf (psf, "p", psf->fileoffset) ;
+			return 1 ;
+			} ;
 		} ;
 
 	return 0 ;

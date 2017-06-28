@@ -54,7 +54,7 @@ import android.widget.Toast;
 */
 public final class DSPManager extends Activity
 {
-
+	public static Context actUi = null;
     //==================================
     // Static Fields
     //==================================
@@ -138,6 +138,7 @@ public final class DSPManager extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        actUi = getApplicationContext();
         preferencesMode = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + "settings", 0);
         SharedPreferences preferences = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + HeadsetService.getAudioOutputRouting(), 0);
         File impFile = new File(preferences.getString("dsp.convolver.files", ""));

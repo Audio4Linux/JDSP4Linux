@@ -1,24 +1,4 @@
-/*
-        Copyright (C) 1999 Juhana Sadeharju
-                       kouhia at nic.funet.fi
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-    */
-
 #include "gverb.h"
-
 ty_diffuser *diffuser_make(int size, float coeff)
 {
     ty_diffuser *p;
@@ -31,7 +11,6 @@ ty_diffuser *diffuser_make(int size, float coeff)
     for (i = 0; i < size; i++) p->buf[i] = 0.0;
     return(p);
 }
-
 ty_damper *damper_make(float damping)
 {
     ty_damper *p;
@@ -40,7 +19,6 @@ ty_damper *damper_make(float damping)
     p->delay = 0.0f;
     return(p);
 }
-
 ty_fixeddelay *fixeddelay_make(int size)
 {
     ty_fixeddelay *p;
@@ -52,7 +30,6 @@ ty_fixeddelay *fixeddelay_make(int size)
     for (i = 0; i < size; i++) p->buf[i] = 0.0;
     return(p);
 }
-
 ty_gverb *gverb_new(int srate, float maxroomsize, float roomsize,
                     float revtime, float damping, float spread,
                     float inputbandwidth, float earlylevel, float taillevel)
@@ -74,10 +51,8 @@ ty_gverb *gverb_new(int srate, float maxroomsize, float roomsize,
     p->taillevel = taillevel;
     p->maxdelay = p->rate*p->maxroomsize/340.0;
     p->largestdelay = p->rate*p->roomsize/340.0;
-    /* Input damper */
     p->inputbandwidth = inputbandwidth;
     p->inputdamper = damper_make(1.0 - p->inputbandwidth);
-    /* FDN section */
     p->fdndels = (ty_fixeddelay **)calloc(FDNORDER, sizeof(ty_fixeddelay *));
     for(i = 0; i < FDNORDER; i++)
         p->fdndels[i] = fixeddelay_make((int)p->maxdelay+1000);
@@ -104,7 +79,6 @@ ty_gverb *gverb_new(int srate, float maxroomsize, float roomsize,
     p->d = (float *)calloc(FDNORDER, sizeof(float));
     p->u = (float *)calloc(FDNORDER, sizeof(float));
     p->f = (float *)calloc(FDNORDER, sizeof(float));
-    /* Diffuser section */
     diffscale = (float)p->fdnlens[3]/(210+159+562+410);
     spread1 = spread;
     spread2 = 3.0*spread;
@@ -138,7 +112,6 @@ ty_gverb *gverb_new(int srate, float maxroomsize, float roomsize,
     p->rdifs[1] = diffuser_make((int)(diffscale*cc),0.75);
     p->rdifs[2] = diffuser_make((int)(diffscale*dd),0.625);
     p->rdifs[3] = diffuser_make((int)(diffscale*e),0.625);
-    /* Tapped delay section */
     p->tapdelay = fixeddelay_make(44000);
     p->taps = (int *)calloc(FDNORDER, sizeof(int));
     p->tapgains = (float *)calloc(FDNORDER, sizeof(float));
@@ -150,34 +123,28 @@ ty_gverb *gverb_new(int srate, float maxroomsize, float roomsize,
         p->tapgains[i] = pow(p->alpha,(double)p->taps[i]);
     return(p);
 }
-
 void damper_free(ty_damper *p)
 {
     free(p);
 }
-
 void damper_flush(ty_damper *p)
 {
     p->delay = 0.0f;
 }
-
 void diffuser_free(ty_diffuser *p)
 {
     free(p->buf);
     free(p);
 }
-
 void fixeddelay_free(ty_fixeddelay *p)
 {
     free(p->buf);
     free(p);
 }
-
 void fixeddelay_flush(ty_fixeddelay *p)
 {
     memset(p->buf, 0, p->size * sizeof(float));
 }
-
 void diffuser_flush(ty_diffuser *p)
 {
     memset(p->buf, 0, p->size * sizeof(float));
@@ -207,7 +174,6 @@ void gverb_free(ty_gverb *p)
     fixeddelay_free(p->tapdelay);
     free(p);
 }
-
 void gverb_flush(ty_gverb *p)
 {
     int i;
@@ -224,5 +190,3 @@ void gverb_flush(ty_gverb *p)
     memset(p->f, 0, FDNORDER * sizeof(float));
     fixeddelay_flush(p->tapdelay);
 }
-
-/* swh: other functions are now in the .h file for inlining */

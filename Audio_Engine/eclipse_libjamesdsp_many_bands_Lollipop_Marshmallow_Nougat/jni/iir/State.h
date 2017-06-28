@@ -1,67 +1,11 @@
-/*******************************************************************************
-
-"A Collection of Useful C++ Classes for Digital Signal Processing"
- By Vinnie Falco adapted for Linux by Bernd Porr
-
-Official project location:
-https://github.com/vinniefalco/DSPFilters
-
-See Documentation.cpp for contact information, notes, and bibliography.
-
---------------------------------------------------------------------------------
-
-License: MIT License (http://www.opensource.org/licenses/mit-license.php)
-Copyright (c) 2009 by Vinnie Falco
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*******************************************************************************/
-
 #ifndef DSPFILTERS_STATE_H
 #define DSPFILTERS_STATE_H
-
 #include "Common.h"
 #include "Biquad.h"
-
 #include <stdexcept>
-
 #define DEFAULT_STATE DirectFormII
-
 namespace Iir
 {
-
-/*
- * Various forms of state information required to
- * process channels of actual sample data.
- *
- */
-
-//------------------------------------------------------------------------------
-
-/*
- * State for applying a second order section to a sample using Direct Form I
- *
- * Difference equation:
- *
- *  y[n] = (b0/a0)*x[n] + (b1/a0)*x[n-1] + (b2/a0)*x[n-2]
- *                      - (a1/a0)*y[n-1] - (a2/a0)*y[n-2]
- */
 class DirectFormI
 {
 public:
@@ -69,7 +13,6 @@ public:
     {
         reset();
     }
-
     void reset ()
     {
         m_x1 = 0;
@@ -77,7 +20,6 @@ public:
         m_y1 = 0;
         m_y2 = 0;
     }
-
     template <typename Sample>
     inline Sample process1 (const Sample in,
                             const BiquadBase& s)
@@ -90,25 +32,12 @@ public:
         m_y1 = out;
         return static_cast<Sample> (out);
     }
-
 protected:
-    double m_x2; // x[n-2]
-    double m_y2; // y[n-2]
-    double m_x1; // x[n-1]
-    double m_y1; // y[n-1]
+    double m_x2;
+    double m_y2;
+    double m_x1;
+    double m_y1;
 };
-
-//------------------------------------------------------------------------------
-
-/*
- * State for applying a second order section to a sample using Direct Form II
- *
- * Difference equation:
- *
- *  v[n] =         x[n] - (a1/a0)*v[n-1] - (a2/a0)*v[n-2]
- *  y(n) = (b0/a0)*v[n] + (b1/a0)*v[n-1] + (b2/a0)*v[n-2]
- *
- */
 class DirectFormII
 {
 public:
@@ -116,42 +45,25 @@ public:
     {
         reset ();
     }
-
     void reset ()
     {
         m_v1 = 0;
         m_v2 = 0;
     }
-
     template <typename Sample>
     Sample process1 (const Sample in,
                      const BiquadBase& s)
     {
-        double w   = in - s.m_a1*m_v1 - s.m_a2*m_v2;
-        double out =      s.m_b0*w    + s.m_b1*m_v1 + s.m_b2*m_v2;
+        double w = in - s.m_a1*m_v1 - s.m_a2*m_v2;
+        double out = s.m_b0*w + s.m_b1*m_v1 + s.m_b2*m_v2;
         m_v2 = m_v1;
         m_v1 = w;
         return static_cast<Sample> (out);
     }
-
 private:
-    double m_v1; // v[-1]
-    double m_v2; // v[-2]
+    double m_v1;
+    double m_v2;
 };
-
-//------------------------------------------------------------------------------
-
-/*
- * Transposed Direct Form II
- * by lubomir i. ivanov (neolit123 [at] gmail)
- *
- * Reference:
- * http://www.kvraudio.com/forum/viewtopic.php?p=4430351
- *
- */
-
-//------------------------------------------------------------------------------
-
 class TransposedDirectFormII
 {
 public:
@@ -159,7 +71,6 @@ public:
     {
         reset ();
     }
-
     void reset ()
     {
         m_s1 = 0;
@@ -167,7 +78,6 @@ public:
         m_s2 = 0;
         m_s2_1 = 0;
     }
-
     template <typename Sample>
     inline Sample process1 (const Sample in,
                             const BiquadBase& s)
@@ -180,14 +90,11 @@ public:
         m_s2_1 = m_s2;
         return static_cast<Sample> (out);
     }
-
 private:
     double m_s1;
     double m_s1_1;
     double m_s2;
     double m_s2_1;
 };
-
 }
-
 #endif

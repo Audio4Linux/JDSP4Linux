@@ -1,48 +1,11 @@
-/*******************************************************************************
-
-"A Collection of Useful C++ Classes for Digital Signal Processing"
- By Vinnie Falco
-
-Official project location:
-https://github.com/vinniefalco/DSPFilters
-
-See Documentation.cpp for contact information, notes, and bibliography.
-
---------------------------------------------------------------------------------
-
-License: MIT License (http://www.opensource.org/licenses/mit-license.php)
-Copyright (c) 2009 by Vinnie Falco
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*******************************************************************************/
-
 #include "Common.h"
 #include "RootFinder.h"
 #include <stdexcept>
 #ifdef _MSC_VER
 #include <algorithm>
 #endif
-
 namespace Iir
 {
-
 void RootFinderBase::solve (int degree,
                             bool polish,
                             bool doSort)
@@ -51,19 +14,15 @@ void RootFinderBase::solve (int degree,
     int its;
     complex_t x, b, c;
     int m = degree;
-    // copy coefficients
     for (int j = 0; j <= m; ++j)
         m_ad[j] = m_a[j];
-    // for each root
     for (int j = m - 1; j >= 0; --j)
     {
-        // initial guess at 0
         x = 0.0;
         laguerre (j + 1, m_ad, x, its);
         if (fabs (std::imag(x)) <= 2.0 * EPS * fabs (std::real(x)))
             x = complex_t (std::real(x), 0.0);
         m_root[j] = x;
-        // deflate
         b = m_ad[j+1];
         for (int jj = j; jj >= 0; --jj)
         {
@@ -78,7 +37,6 @@ void RootFinderBase::solve (int degree,
     if (doSort)
         sort (degree);
 }
-
 void RootFinderBase::sort (int degree)
 {
     for (int j = 1; j < degree; ++j)
@@ -94,9 +52,6 @@ void RootFinderBase::sort (int degree)
         m_root[i+1] = x;
     }
 }
-
-//------------------------------------------------------------------------------
-
 void RootFinderBase::laguerre (int degree,
                                complex_t a[],
                                complex_t& x,
@@ -125,9 +80,9 @@ void RootFinderBase::laguerre (int degree,
         err *= EPS;
         if (std::abs(b) <= err)
             return;
-        g  = d / b;
+        g = d / b;
         g2 = g * g;
-        h  = g2 - 2.0 * f / b;
+        h = g2 - 2.0 * f / b;
         sq = sqrt (double(m - 1) * (double(m) * h - g2));
         gp = g + sq;
         gm = g - sq;
@@ -145,9 +100,6 @@ void RootFinderBase::laguerre (int degree,
             x -= frac[iter / MT] * dx;
     }
 }
-
-//------------------------------------------------------------------------------
-
 complex_t RootFinderBase::eval (int degree,
                                 const complex_t& x )
 {
@@ -161,6 +113,4 @@ complex_t RootFinderBase::eval (int degree,
         y = m_a[0];
     return y;
 }
-
-
 }

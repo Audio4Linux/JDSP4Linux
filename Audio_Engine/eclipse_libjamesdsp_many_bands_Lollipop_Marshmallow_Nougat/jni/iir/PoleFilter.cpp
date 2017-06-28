@@ -1,63 +1,19 @@
-/*******************************************************************************
-
-"A Collection of Useful C++ Classes for Digital Signal Processing"
- By Vinnie Falco
-
-Official project location:
-https://github.com/vinniefalco/DSPFilters
-
-See Documentation.cpp for contact information, notes, and bibliography.
-
---------------------------------------------------------------------------------
-
-License: MIT License (http://www.opensource.org/licenses/mit-license.php)
-Copyright (c) 2009 by Vinnie Falco
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*******************************************************************************/
-
 #include "Common.h"
 #include "PoleFilter.h"
-
 namespace Iir
 {
-
-//------------------------------------------------------------------------------
-
-
 complex_t LowPassTransform::transform (complex_t c)
 {
     if (c == infinity())
         return complex_t (-1, 0);
-    // frequency transform
     c = f * c;
-    // bilinear low pass transform
     return (1. + c) / (1. - c);
 }
-
 LowPassTransform::LowPassTransform (double fc,
                                     LayoutBase& digital,
                                     LayoutBase const& analog)
 {
     digital.reset ();
-    // prewarp
     f = tan (doublePi * fc);
     const int numPoles = analog.getNumPoles ();
     const int pairs = numPoles / 2;
@@ -76,25 +32,18 @@ LowPassTransform::LowPassTransform (double fc,
     digital.setNormal (analog.getNormalW(),
                        analog.getNormalGain());
 }
-
-//------------------------------------------------------------------------------
-
 complex_t HighPassTransform::transform (complex_t c)
 {
     if (c == infinity())
         return complex_t (1, 0);
-    // frequency transform
     c = f * c;
-    // bilinear high pass transform
     return - (1. + c) / (1. - c);
 }
-
 HighPassTransform::HighPassTransform (double fc,
                                       LayoutBase& digital,
                                       LayoutBase const& analog)
 {
     digital.reset ();
-    // prewarp
     f = 1. / tan (doublePi * fc);
     const int numPoles = analog.getNumPoles ();
     const int pairs = numPoles / 2;
@@ -113,26 +62,20 @@ HighPassTransform::HighPassTransform (double fc,
     digital.setNormal (doublePi - analog.getNormalW(),
                        analog.getNormalGain());
 }
-
-//------------------------------------------------------------------------------
-
 BandPassTransform::BandPassTransform (double fc,
                                       double fw,
                                       LayoutBase& digital,
                                       LayoutBase const& analog)
 {
-    // handle degenerate cases efficiently
     digital.reset ();
     const double ww = 2 * doublePi * fw;
-    // pre-calcs
     wc2 = 2 * doublePi * fc - (ww / 2);
-    wc  = wc2 + ww;
-    // what is this crap?
+    wc = wc2 + ww;
     if (wc2 < 1e-8)
         wc2 = 1e-8;
-    if (wc  > doublePi-1e-8)
-        wc  = doublePi-1e-8;
-    a =     cos ((wc + wc2) * 0.5) /
+    if (wc > doublePi-1e-8)
+        wc = doublePi-1e-8;
+    a = cos ((wc + wc2) * 0.5) /
             cos ((wc - wc2) * 0.5);
     b = 1 / tan ((wc - wc2) * 0.5);
     a2 = a * a;
@@ -159,12 +102,11 @@ BandPassTransform::BandPassTransform (double fc,
     digital.setNormal (2 * atan (sqrt (tan ((wc + wn)* 0.5) * tan((wc2 + wn)* 0.5))),
                        analog.getNormalGain());
 }
-
 ComplexPair BandPassTransform::transform (complex_t c)
 {
     if (c == infinity())
         return ComplexPair (-1, 1);
-    c = (1. + c) / (1. - c); // bilinear
+    c = (1. + c) / (1. - c);
     complex_t v = 0;
     v = addmul (v, 4 * (b2 * (a2 - 1) + 1), c);
     v += 8 * (b2 * (a2 - 1) - 1);
@@ -180,9 +122,6 @@ ComplexPair BandPassTransform::transform (complex_t c)
     d = addmul (d, 2 * (b - 1), c) + 2 * (1 + b);
     return ComplexPair (u/d, v/d);
 }
-
-//------------------------------------------------------------------------------
-
 BandStopTransform::BandStopTransform (double fc,
                                       double fw,
                                       LayoutBase& digital,
@@ -191,12 +130,11 @@ BandStopTransform::BandStopTransform (double fc,
     digital.reset ();
     const double ww = 2 * doublePi * fw;
     wc2 = 2 * doublePi * fc - (ww / 2);
-    wc  = wc2 + ww;
-    // this is crap
+    wc = wc2 + ww;
     if (wc2 < 1e-8)
         wc2 = 1e-8;
-    if (wc  > doublePi-1e-8)
-        wc  = doublePi-1e-8;
+    if (wc > doublePi-1e-8)
+        wc = doublePi-1e-8;
     a = cos ((wc + wc2) * .5) /
         cos ((wc - wc2) * .5);
     b = tan ((wc - wc2) * .5);
@@ -207,8 +145,8 @@ BandStopTransform::BandStopTransform (double fc,
     for (int i = 0; i < pairs; ++i)
     {
         const PoleZeroPair& pair = analog[i];
-        ComplexPair p  = transform (pair.poles.first);
-        ComplexPair z  = transform (pair.zeros.first);
+        ComplexPair p = transform (pair.poles.first);
+        ComplexPair z = transform (pair.zeros.first);
         if (z.second == z.first)
             z.second = std::conj (z.first);
         digital.addPoleZeroConjugatePairs (p.first, z.first);
@@ -225,13 +163,12 @@ BandStopTransform::BandStopTransform (double fc,
     else
         digital.setNormal (0, analog.getNormalGain());
 }
-
 ComplexPair BandStopTransform::transform (complex_t c)
 {
     if (c == infinity())
         c = -1;
     else
-        c = (1. + c) / (1. - c); // bilinear
+        c = (1. + c) / (1. - c);
     complex_t u (0);
     u = addmul (u, 4 * (b2 + a2 - 1), c);
     u += 8 * (b2 - a2 + 1);
@@ -248,5 +185,4 @@ ComplexPair BandStopTransform::transform (complex_t c)
     d = addmul (d, b-1, c);
     return ComplexPair (u/d, v/d);
 }
-
 }

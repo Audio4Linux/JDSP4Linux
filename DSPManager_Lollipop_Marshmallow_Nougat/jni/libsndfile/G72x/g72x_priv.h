@@ -1,3 +1,29 @@
+/*
+ * This source code is a product of Sun Microsystems, Inc. and is provided
+ * for unrestricted use.  Users may copy or modify this source code without
+ * charge.
+ *
+ * SUN SOURCE CODE IS PROVIDED AS IS WITH NO WARRANTIES OF ANY KIND INCLUDING
+ * THE WARRANTIES OF DESIGN, MERCHANTIBILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE, OR ARISING FROM A COURSE OF DEALING, USAGE OR TRADE PRACTICE.
+ *
+ * Sun source code is provided with no support and without any obligation on
+ * the part of Sun Microsystems, Inc. to assist in its use, correction,
+ * modification or enhancement.
+ *
+ * SUN MICROSYSTEMS, INC. SHALL HAVE NO LIABILITY WITH RESPECT TO THE
+ * INFRINGEMENT OF COPYRIGHTS, TRADE SECRETS OR ANY PATENTS BY THIS SOFTWARE
+ * OR ANY PART THEREOF.
+ *
+ * In no event will Sun Microsystems, Inc. be liable for any lost revenue
+ * or profits or other special, indirect and consequential damages, even if
+ * Sun has been advised of the possibility of such damages.
+ *
+ * Sun Microsystems, Inc.
+ * 2550 Garcia Avenue
+ * Mountain View, California  94043
+ */
+
 #ifndef G72X_PRIVATE_H
 #define G72X_PRIVATE_H
 
@@ -16,29 +42,29 @@
 */
 
 struct g72x_state
-{	long  yl;	/* Locked or steady state step size multiplier. */
-	short yu;	/* Unlocked or non-steady state step size multiplier. */
-	short dms;	/* Short term energy estimate. */
-	short dml;	/* Long term energy estimate. */
-	short ap;	/* Linear weighting coefficient of 'yl' and 'yu'. */
+{	long yl ;	/* Locked or steady state step size multiplier. */
+	short yu ;	/* Unlocked or non-steady state step size multiplier. */
+	short dms ;	/* Short term energy estimate. */
+	short dml ;	/* Long term energy estimate. */
+	short ap ;	/* Linear weighting coefficient of 'yl' and 'yu'. */
 
-	short a[2];	/* Coefficients of pole portion of prediction filter. */
-	short b[6];	/* Coefficients of zero portion of prediction filter. */
-	short pk[2];	/*
+	short a [2] ;	/* Coefficients of pole portion of prediction filter. */
+	short b [6] ;	/* Coefficients of zero portion of prediction filter. */
+	short pk [2] ;	/*
 					** Signs of previous two samples of a partially
 					** reconstructed signal.
 					**/
-	short dq[6];	/*
+	short dq [6] ;	/*
 					** Previous 6 samples of the quantized difference
 					** signal represented in an internal floating point
 					** format.
 					**/
-	short sr[2];	/*
+	short sr [2] ;	/*
 			 		** Previous 2 samples of the quantized difference
 					** signal represented in an internal floating point
 					** format.
 					*/
-	char td;	/* delayed tone detect, new in 1988 version */
+	char td ;	/* delayed tone detect, new in 1988 version */
 
 	/*	The following struct members were added for libsndfile. The original
 	**	code worked by calling a set of functions on a sample by sample basis
@@ -54,30 +80,48 @@ struct g72x_state
 
 typedef struct g72x_state G72x_STATE ;
 
-int	predictor_zero (G72x_STATE *state_ptr);
+int	predictor_zero (G72x_STATE *state_ptr) ;
 
-int	predictor_pole (G72x_STATE *state_ptr);
+int	predictor_pole (G72x_STATE *state_ptr) ;
 
-int	step_size (G72x_STATE *state_ptr);
+int	step_size (G72x_STATE *state_ptr) ;
 
-int	quantize (int d, int	y, short *table, int size);
+int	quantize (int d, int	y, short *table, int size) ;
 
-int	reconstruct (int sign, int dqln,	int y);
+int	reconstruct (int sign, int dqln,	int y) ;
 
-void update (int code_size, int y, int wi, int fi, int dq, int sr, int dqsez, G72x_STATE *state_ptr);
+void update (int code_size, int y, int wi, int fi, int dq, int sr, int dqsez, G72x_STATE *state_ptr) ;
 
-int g721_encoder	(int sample, G72x_STATE *state_ptr);
-int g721_decoder	(int code, G72x_STATE *state_ptr);
+int g721_encoder	(int sample, G72x_STATE *state_ptr) ;
+int g721_decoder	(int code, G72x_STATE *state_ptr) ;
 
-int g723_16_encoder	(int sample, G72x_STATE *state_ptr);
-int g723_16_decoder	(int code, G72x_STATE *state_ptr);
+int g723_16_encoder	(int sample, G72x_STATE *state_ptr) ;
+int g723_16_decoder	(int code, G72x_STATE *state_ptr) ;
 
-int g723_24_encoder	(int sample, G72x_STATE *state_ptr);
-int g723_24_decoder	(int code, G72x_STATE *state_ptr);
+int g723_24_encoder	(int sample, G72x_STATE *state_ptr) ;
+int g723_24_decoder	(int code, G72x_STATE *state_ptr) ;
 
-int g723_40_encoder	(int sample, G72x_STATE *state_ptr);
-int g723_40_decoder	(int code, G72x_STATE *state_ptr);
+int g723_40_encoder	(int sample, G72x_STATE *state_ptr) ;
+int g723_40_decoder	(int code, G72x_STATE *state_ptr) ;
 
 void private_init_state (G72x_STATE *state_ptr) ;
+
+#if __GNUC__
+#define ALWAYS_INLINE		__attribute__ ((always_inline))
+#else
+#define ALWAYS_INLINE
+#endif
+
+static inline int ALWAYS_INLINE
+arith_shift_left (int x, int shift)
+{	return (int) (((unsigned int) x) << shift) ;
+} /* arith_shift_left */
+
+static inline int ALWAYS_INLINE
+arith_shift_right (int x, int shift)
+{	if (x >= 0)
+		return x << shift ;
+	return ~ ((~x) << shift) ;
+} /* arith_shift_right */
 
 #endif /* G72X_PRIVATE_H */

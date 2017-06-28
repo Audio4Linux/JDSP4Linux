@@ -1,23 +1,3 @@
-/***************************************************************************
- *   Copyright (C) 2009 by Christian Borss                                 *
- *   christian.borss@rub.de                                                *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU Library General Public License as       *
- *   published by the Free Software Foundation; either version 2 of the    *
- *   License, or (at your option) any later version.                       *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU Library General Public     *
- *   License along with this program; if not, write to the                 *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
-
 #if defined(HYBRIDCONV_USE_SSE)
 #include <xmmintrin.h>
 #endif
@@ -253,35 +233,24 @@ void hcProcessAdd(HConvSingle *filter, float *x, float *y)
 	memcpy(hist, &(out[flen]), size);
 	filter->mixpos = (filter->mixpos + 1) % filter->num_mixbuf;
 }
-
 void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize, int fftwThreads)
 {
     int i, j, size, num, pos, size2;
     float gain;
-    // processing step counter
     filter->step = 0;
-    // number of processing steps per audio frame
     filter->maxstep = steps;
-    // current frame index
     filter->mixpos = 0;
-    // number of samples per audio frame
     filter->framelength = flen;
     size2 = 2 * flen;
-    // framelength * sizeof(float)
     filter->frameLenMulFloatSize = flen * sizeof(float);
-    // DFT buffer (time domain)
     size = sizeof(float) * size2;
     filter->dft_time = (float *)fftwf_malloc(size);
-    // DFT buffer (frequency domain)
     size = sizeof(fftwf_complex) * (flen + 1);
     filter->dft_freq = (fftwf_complex*)fftwf_malloc(size);
-    // input buffer (frequency domain)
     size = sizeof(float) * (flen + 1);
     filter->in_freq_real = (float*)fftwf_malloc(size);
     filter->in_freq_imag = (float*)fftwf_malloc(size);
-    // number of filter segments
     filter->num_filterbuf = (hlen + flen - 1) / flen;
-    // processing tasks per step
     size = sizeof(int) * (steps + 1);
     filter->steptask = (int *)malloc(size);
     num = filter->num_filterbuf / steps;
@@ -297,7 +266,6 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         for (i = j; i <= steps; i++)
             filter->steptask[i]++;
     }
-    // filter segments (frequency domain)
     size = sizeof(float*) * filter->num_filterbuf;
     filter->filterbuf_freq_real = (float**)fftwf_malloc(size);
     filter->filterbuf_freq_imag = (float**)fftwf_malloc(size);
@@ -307,9 +275,7 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         filter->filterbuf_freq_real[i] = (float*)fftwf_malloc(size);
         filter->filterbuf_freq_imag[i] = (float*)fftwf_malloc(size);
     }
-    // number of mixing segments
     filter->num_mixbuf = filter->num_filterbuf + 1;
-    // mixing segments (frequency domain)
     size = sizeof(float*) * filter->num_mixbuf;
     filter->mixbuf_freq_real = (float**)fftwf_malloc(size);
     filter->mixbuf_freq_imag = (float**)fftwf_malloc(size);
@@ -321,7 +287,6 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         memset(filter->mixbuf_freq_real[i], 0, size);
         memset(filter->mixbuf_freq_imag[i], 0, size);
     }
-    // history buffer (time domain)
     size = sizeof(float) * flen;
     filter->history_time = (float *)fftwf_malloc(size);
     memset(filter->history_time, 0, size);
@@ -331,11 +296,8 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         fftOptimize = FFTW_MEASURE;
     if(fftwThreads)
     	fftwf_plan_with_nthreads(fftwThreads);
-    // FFT transformation plan
     filter->fft = fftwf_plan_dft_r2c_1d(size2, filter->dft_time, filter->dft_freq, fftOptimize | FFTW_PRESERVE_INPUT);
-    // IFFT transformation plan
     filter->ifft = fftwf_plan_dft_c2r_1d(size2, filter->dft_freq, filter->dft_time, fftOptimize | FFTW_PRESERVE_INPUT);
-    // generate filter segments
     gain = 0.5f / flen;
     size = sizeof(float) * size2;
     memset(filter->dft_time, 0, size);
@@ -361,7 +323,6 @@ void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, 
         filter->filterbuf_freq_imag[i][j] = filter->dft_freq[j][1];
     }
 }
-
 void hcCloseSingle(HConvSingle *filter)
 {
     int i;

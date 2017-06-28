@@ -1,53 +1,14 @@
-/*******************************************************************************
-
-"A Collection of Useful C++ Classes for Digital Signal Processing"
- By Vinnie Falco and adjusted for Unix by Bernd Porr
-
-Official project location:
-https://github.com/vinniefalco/DSPFilters
-
-See Documentation.cpp for contact information, notes, and bibliography.
-
---------------------------------------------------------------------------------
-
-License: MIT License (http://www.opensource.org/licenses/mit-license.php)
-Copyright (c) 2009 by Vinnie Falco
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*******************************************************************************/
-
 #include "Common.h"
 #include "Butterworth.h"
-
 namespace Iir
 {
-
 namespace Butterworth
 {
-
 AnalogLowPass::AnalogLowPass ()
     : m_numPoles (-1)
 {
     setNormal (0, 1);
 }
-
 void AnalogLowPass::design (int numPoles)
 {
     if (m_numPoles != numPoles)
@@ -65,15 +26,11 @@ void AnalogLowPass::design (int numPoles)
             add (-1, infinity());
     }
 }
-
-//------------------------------------------------------------------------------
-
 AnalogLowShelf::AnalogLowShelf ()
     : m_numPoles (-1)
 {
     setNormal (doublePi, 1);
 }
-
 void AnalogLowShelf::design (int numPoles, double gainDb)
 {
     if (m_numPoles != numPoles ||
@@ -96,9 +53,6 @@ void AnalogLowShelf::design (int numPoles, double gainDb)
             add (gp, gz);
     }
 }
-
-//------------------------------------------------------------------------------
-
 void LowPassBase::setup (int order,
                          double sampleRate,
                          double cutoffFrequency)
@@ -109,7 +63,6 @@ void LowPassBase::setup (int order,
                       m_analogProto);
     Cascade::setLayout (m_digitalProto);
 }
-
 void HighPassBase::setup (int order,
                           double sampleRate,
                           double cutoffFrequency)
@@ -120,7 +73,6 @@ void HighPassBase::setup (int order,
                        m_analogProto);
     Cascade::setLayout (m_digitalProto);
 }
-
 void BandPassBase::setup (int order,
                           double sampleRate,
                           double centerFrequency,
@@ -133,7 +85,6 @@ void BandPassBase::setup (int order,
                        m_analogProto);
     Cascade::setLayout (m_digitalProto);
 }
-
 void BandStopBase::setup (int order,
                           double sampleRate,
                           double centerFrequency,
@@ -146,7 +97,6 @@ void BandStopBase::setup (int order,
                        m_analogProto);
     Cascade::setLayout (m_digitalProto);
 }
-
 void LowShelfBase::setup (int order,
                           double sampleRate,
                           double cutoffFrequency,
@@ -158,7 +108,6 @@ void LowShelfBase::setup (int order,
                       m_analogProto);
     Cascade::setLayout (m_digitalProto);
 }
-
 void HighShelfBase::setup (int order,
                            double sampleRate,
                            double cutoffFrequency,
@@ -170,7 +119,6 @@ void HighShelfBase::setup (int order,
                        m_analogProto);
     Cascade::setLayout (m_digitalProto);
 }
-
 void BandShelfBase::setup (int order,
                            double sampleRate,
                            double centerFrequency,
@@ -182,11 +130,8 @@ void BandShelfBase::setup (int order,
                        widthFrequency / sampleRate,
                        m_digitalProto,
                        m_analogProto);
-    // HACK!
     m_digitalProto.setNormal (((centerFrequency/sampleRate) < 0.25) ? doublePi : 0, 1);
     Cascade::setLayout (m_digitalProto);
 }
-
 }
-
 }

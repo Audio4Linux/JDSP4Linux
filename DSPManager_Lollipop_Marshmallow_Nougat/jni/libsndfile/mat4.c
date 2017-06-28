@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2002-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2002-2016 Erik de Castro Lopo <erikd@mega-nerd.com>
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
@@ -16,17 +16,16 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include	"sfconfig.h"
-
 #include	<stdio.h>
 #include	<fcntl.h>
 #include	<string.h>
 #include	<ctype.h>
 #include	<math.h>
 
-#include	"sndfile.h"
-#include	"sfendian.h"
-#include	"common.h"
+#include "common.h"
+#include "sfconfig.h"
+#include "sfendian.h"
+#include "sndfile.h"
 
 /*------------------------------------------------------------------------------
 ** Information on how to decode and encode this file was obtained in a PDF
@@ -123,9 +122,6 @@ mat4_open	(SF_PRIVATE *psf)
 		default : break ;
 		} ;
 
-	if (error)
-		return error ;
-
 	return error ;
 } /* mat4_open */
 
@@ -168,8 +164,8 @@ mat4_write_header (SF_PRIVATE *psf, int calc_length)
 		return SFE_BAD_OPEN_FORMAT ;
 
 	/* Reset the current header length to zero. */
-	psf->header [0] = 0 ;
-	psf->headindex = 0 ;
+	psf->header.ptr [0] = 0 ;
+	psf->header.indx = 0 ;
 	psf_fseek (psf, 0, SEEK_SET) ;
 
 	/* Need sample rate as a double for writing to the header. */
@@ -191,12 +187,12 @@ mat4_write_header (SF_PRIVATE *psf, int calc_length)
 		return SFE_BAD_OPEN_FORMAT ;
 
 	/* Header construction complete so write it out. */
-	psf_fwrite (psf->header, psf->headindex, 1, psf) ;
+	psf_fwrite (psf->header.ptr, psf->header.indx, 1, psf) ;
 
 	if (psf->error)
 		return psf->error ;
 
-	psf->dataoffset = psf->headindex ;
+	psf->dataoffset = psf->header.indx ;
 
 	if (current > 0)
 		psf_fseek (psf, current, SEEK_SET) ;
@@ -206,8 +202,9 @@ mat4_write_header (SF_PRIVATE *psf, int calc_length)
 
 static int
 mat4_read_header (SF_PRIVATE *psf)
-{	int		marker, rows, cols, imag ;
-	unsigned namesize ;
+{	char	buffer [256] ;
+	uint32_t marker, namesize ;
+	int		rows, cols, imag ;
 	double	value ;
 	const char *marker_str ;
 	char	name [64] ;
@@ -244,8 +241,8 @@ mat4_read_header (SF_PRIVATE *psf)
 
 	psf_binheader_readf (psf, "d", &value) ;
 
-	snprintf (psf->u.cbuf, sizeof (psf->u.cbuf), " Value : %f\n", value) ;
-	psf_log_printf (psf, psf->u.cbuf) ;
+	snprintf (buffer, sizeof (buffer), " Value : %f\n", value) ;
+	psf_log_printf (psf, buffer) ;
 
 	if ((rows != 1) || (cols != 1))
 		return SFE_MAT4_NO_SAMPLERATE ;
@@ -274,9 +271,13 @@ mat4_read_header (SF_PRIVATE *psf)
 
 	psf->dataoffset = psf_ftell (psf) ;
 
-	if (rows == 0 && cols == 0)
+	if (rows == 0)
 	{	psf_log_printf (psf, "*** Error : zero channel count.\n") ;
 		return SFE_CHANNEL_COUNT_ZERO ;
+		}
+	else if (rows > SF_MAX_CHANNELS)
+	{	psf_log_printf (psf, "*** Error : channel count %d > SF_MAX_CHANNELS.\n", rows) ;
+		return SFE_CHANNEL_COUNT ;
 		} ;
 
 	psf->sf.channels	= rows ;

@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2002-2011 Erik de Castro Lopo <erikd@mega-nerd.com>
+** Copyright (C) 2002-2014 Erik de Castro Lopo <erikd@mega-nerd.com>
 ** Copyright (C) 2003 Ross Bencina <rbencina@iprimus.com.au>
 **
 ** This program is free software; you can redistribute it and/or modify
@@ -32,10 +32,9 @@
 **	that large file support is enabled correctly on Unix systems.
 */
 
-#include "sfconfig.h"
-
 #include <stdio.h>
 #include <stdlib.h>
+#include "sfconfig.h"
 
 #if HAVE_UNISTD_H
 #include <unistd.h>
@@ -121,7 +120,7 @@ psf_open_rsrc (SF_PRIVATE *psf)
 		return 0 ;
 
 	/* Test for MacOSX style resource fork on HPFS or HPFS+ filesystems. */
-	snprintf (psf->rsrc.path.c, sizeof (psf->rsrc.path.c), "%s/rsrc", psf->file.path.c) ;
+	snprintf (psf->rsrc.path.c, sizeof (psf->rsrc.path.c), "%s/..namedfork/rsrc", psf->file.path.c) ;
 	psf->error = SFE_NO_ERROR ;
 	if ((psf->rsrc.filedes = psf_open_fd (&psf->rsrc)) >= 0)
 	{	psf->rsrclength = psf_get_filelen_fd (psf->rsrc.filedes) ;
@@ -358,6 +357,9 @@ psf_fwrite (const void *ptr, sf_count_t bytes, sf_count_t items, SF_PRIVATE *psf
 {	sf_count_t total = 0 ;
 	ssize_t	count ;
 
+	if (bytes == 0 || items == 0)
+		return 0 ;
+
 	if (psf->virtual_io)
 		return psf->vio.write (ptr, bytes*items, psf->vio_user_data) / bytes ;
 
@@ -473,19 +475,22 @@ psf_is_pipe (SF_PRIVATE *psf)
 
 static sf_count_t
 psf_get_filelen_fd (int fd)
-{	struct stat statbuf ;
+{
+#if (SIZEOF_OFF_T == 4 && SIZEOF_SF_COUNT_T == 8 && HAVE_FSTAT64)
+	struct stat64 statbuf ;
 
-	/*
-	** Sanity check.
-	** If everything is OK, this will be optimised out.
-	*/
-	if (sizeof (statbuf.st_size) == 4 && sizeof (sf_count_t) == 8)
-		return (sf_count_t) -SFE_BAD_STAT_SIZE ;
+	if (fstat64 (fd, &statbuf) == -1)
+		return (sf_count_t) -1 ;
+
+	return statbuf.st_size ;
+#else
+	struct stat statbuf ;
 
 	if (fstat (fd, &statbuf) == -1)
 		return (sf_count_t) -1 ;
 
 	return statbuf.st_size ;
+#endif
 } /* psf_get_filelen_fd */
 
 int
@@ -533,6 +538,17 @@ static int
 psf_open_fd (PSF_FILE * pfile)
 {	int fd, oflag, mode ;
 
+	/*
+	** Sanity check. If everything is OK, this test and the printfs will
+	** be optimised out. This is meant to catch the problems caused by
+	** "sfconfig.h" being included after <stdio.h>.
+	*/
+	if (sizeof (sf_count_t) != 8)
+	{	puts ("\n\n*** Fatal error : sizeof (sf_count_t) != 8") ;
+		puts ("*** This means that libsndfile was not configured correctly.\n") ;
+		exit (1) ;
+		} ;
+
 	switch (pfile->mode)
 	{	case SFM_READ :
 				oflag = O_RDONLY | O_BINARY ;
@@ -541,12 +557,12 @@ psf_open_fd (PSF_FILE * pfile)
 
 		case SFM_WRITE :
 				oflag = O_WRONLY | O_CREAT | O_TRUNC | O_BINARY ;
-				mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH ;
+				mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH ;
 				break ;
 
 		case SFM_RDWR :
 				oflag = O_RDWR | O_CREAT | O_BINARY ;
-				mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH ;
+				mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH ;
 				break ;
 
 		default :
@@ -578,10 +594,10 @@ void
 psf_fsync (SF_PRIVATE *psf)
 {
 #if HAVE_FSYNC
-    if (psf->file.mode == SFM_WRITE || psf->file.mode == SFM_RDWR)
-        fsync (psf->file.filedes) ;
+	if (psf->file.mode == SFM_WRITE || psf->file.mode == SFM_RDWR)
+		fsync (psf->file.filedes) ;
 #else
-    psf = NULL ;
+	psf = NULL ;
 #endif
 } /* psf_fsync */
 
@@ -661,7 +677,7 @@ psf_open_rsrc (SF_PRIVATE *psf)
 	psf->error = SFE_NO_ERROR ;
 	if ((psf->rsrc.handle = psf_open_handle (&psf->rsrc)) != NULL)
 	{	psf->rsrclength = psf_get_filelen_handle (psf->rsrc.handle) ;
-      		return SFE_NO_ERROR ;
+		return SFE_NO_ERROR ;
 		} ;
 
 	/* No resource file found. */
@@ -969,7 +985,7 @@ psf_fread (void *ptr, sf_count_t bytes, sf_count_t items, SF_PRIVATE *psf)
 /* USE_WINDOWS_API */ sf_count_t
 psf_fwrite (const void *ptr, sf_count_t bytes, sf_count_t items, SF_PRIVATE *psf)
 {	sf_count_t total = 0 ;
-	ssize_t	 count ;
+	ssize_t	count ;
 	DWORD dwNumberOfBytesWritten ;
 
 	if (psf->virtual_io)
@@ -1265,7 +1281,7 @@ psf_fseek (SF_PRIVATE *psf, sf_count_t offset, int whence)
 /* Win32 */ sf_count_t
 psf_fread (void *ptr, sf_count_t bytes, sf_count_t items, SF_PRIVATE *psf)
 {	sf_count_t total = 0 ;
-	ssize_t	 count ;
+	ssize_t	count ;
 
 	if (psf->virtual_io)
 		return psf->vio.read (ptr, bytes*items, psf->vio_user_data) / bytes ;
@@ -1303,7 +1319,7 @@ psf_fread (void *ptr, sf_count_t bytes, sf_count_t items, SF_PRIVATE *psf)
 /* Win32 */ sf_count_t
 psf_fwrite (const void *ptr, sf_count_t bytes, sf_count_t items, SF_PRIVATE *psf)
 {	sf_count_t total = 0 ;
-	ssize_t	 count ;
+	ssize_t	count ;
 
 	if (psf->virtual_io)
 		return psf->vio.write (ptr, bytes*items, psf->vio_user_data) / bytes ;
@@ -1443,6 +1459,19 @@ psf_get_filelen (SF_PRIVATE *psf)
 	{	psf_log_syserr (psf, errno) ;
 		return (sf_count_t) -1 ;
 		} ;
+
+	/*
+	** Lets face it, windoze if FUBAR!!!
+	**
+	** For some reason, I have to call _lseeki64() TWICE to get to the
+	** end of the file.
+	**
+	** This might have been avoided if windows had implemented the POSIX
+	** standard function fsync() but NO, that would have been too easy.
+	**
+	** I am VERY close to saying that windoze will no longer be supported
+	** by libsndfile and changing the license to GPL at the same time.
+	*/
 
 	_lseeki64 (psf->file.filedes, 0, SEEK_END) ;
 

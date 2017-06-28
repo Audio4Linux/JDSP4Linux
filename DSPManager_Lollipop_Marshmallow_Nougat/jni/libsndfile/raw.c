@@ -16,12 +16,11 @@
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include	"sfconfig.h"
-
 #include	<stdio.h>
 
-#include	"sndfile.h"
-#include	"common.h"
+#include "common.h"
+#include "sfconfig.h"
+#include "sndfile.h"
 
 /*------------------------------------------------------------------------------
 ** Public function.

@@ -67,6 +67,7 @@ public class SummariedListPreferenceWithCustom extends ListPreference
             ArrayList<String> kernelList = new ArrayList<String>();
             getFileNameList(kernelFile, ".irs", kernelList);
             getFileNameList(kernelFile, ".wav", kernelList);
+            getFileNameList(kernelFile, ".flac", kernelList);
             if (kernelList.isEmpty())
             {
                 String tip = getContext().getResources().getString(R.string.text_ir_dir_isempty);

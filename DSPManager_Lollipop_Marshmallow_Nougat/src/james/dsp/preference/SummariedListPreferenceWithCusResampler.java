@@ -1,9 +1,12 @@
 package james.dsp.preference;
 
+import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.media.audiofx.AudioEffect;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -72,6 +75,7 @@ public class SummariedListPreferenceWithCusResampler extends ListPreference
             ArrayList<String> kernelList = new ArrayList<String>();
             getFileNameList(kernelFile, ".irs", kernelList);
             getFileNameList(kernelFile, ".wav", kernelList);
+            getFileNameList(kernelFile, ".flac", kernelList);
             if (kernelList.isEmpty())
             {
                 String tip = getContext().getResources().getString(R.string.text_ir_dir_isempty);
@@ -163,12 +167,8 @@ public class SummariedListPreferenceWithCusResampler extends ListPreference
             {
                 if (entryValues[i].equals(value))
                 {
-                    JdspImpResToolbox.OfflineAudioResample(DSPManager.impulseResponsePath, entries[i].toString(), samplerateNative);
-                    String finalString = DSPManager.impulseResponsePath + samplerateNative + "_" + entries[i].toString();
-                    File f = new File(finalString);
-                    if(f.exists() && !f.isDirectory()) {
-                    	Toast.makeText(getContext(), getContext().getString(R.string.resamplerstr, samplerateNative, finalString), Toast.LENGTH_LONG).show();
-                    }
+                    Runnable runner = new ResamplerThread(DSPManager.impulseResponsePath, entries[i].toString(), samplerateNative);
+                    new Thread(runner).start();
                     break;
                 }
             }
@@ -183,3 +183,27 @@ public class SummariedListPreferenceWithCusResampler extends ListPreference
         onSetInitialValue(true, null);
     }
 }
+class ResamplerThread implements Runnable {
+	String path;
+	String filename;
+	int tarSmpRate;
+	   ResamplerThread(String p, String f, int s) {
+	       path = p;
+	       filename = f;
+	       tarSmpRate = s;
+	   }
+	   public void run() {
+           JdspImpResToolbox.OfflineAudioResample(path, filename, tarSmpRate);
+           final String finalString = path + tarSmpRate + "_" + filename;
+           new Handler(Looper.getMainLooper()).post(new Runnable() {
+        	    @Override
+        	    public void run() {
+        	           File f = new File(finalString);
+        	           if(f.exists() && !f.isDirectory()) {
+        	           	Toast.makeText(DSPManager.actUi, DSPManager.actUi.getString(R.string.resamplerstr, tarSmpRate, finalString), Toast.LENGTH_LONG).show();
+        	           }
+        	    }
+        	});
+
+	   }
+	}
