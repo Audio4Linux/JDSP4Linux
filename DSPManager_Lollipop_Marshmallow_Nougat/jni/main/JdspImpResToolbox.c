@@ -95,7 +95,7 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
 	free(pFrameBuffer);
 	return outbuf;
 }
-JNIEXPORT jstring JNICALL Java_james_dsp_activity_JdspImpResToolbox_OfflineAudioResample
+JNIEXPORT jint JNICALL Java_james_dsp_activity_JdspImpResToolbox_OfflineAudioResample
 (JNIEnv *env, jobject obj, jstring path, jstring filename, jint targetSampleRate)
 {
 	SF_INFO sfinfo;
@@ -114,18 +114,18 @@ JNIEXPORT jstring JNICALL Java_james_dsp_activity_JdspImpResToolbox_OfflineAudio
 	if (infile == NULL)
 	{
 		// Open failed or invalid wave file
-		return NULL;
+		return 0;
 	}
 	if ((sfinfo.channels != 1) && (sfinfo.channels != 2) && (sfinfo.channels != 4))
 	{
 		sf_close(infile);
-		return NULL;
+		return 0;
 	}
 	if ((sfinfo.samplerate <= 0) || (sfinfo.frames <= 0))
 	{
 		// Negative sampling rate or empty data ?
 		sf_close(infile);
-		return NULL;
+		return 0;
 	}
 	double src_ratio = (double)targetSampleRate / (double)sfinfo.samplerate;
 	needed = snprintf(NULL, 0, "%s%d_%s", jnipath, targetSampleRate, mIRFileName) + 1;
@@ -140,7 +140,7 @@ JNIEXPORT jstring JNICALL Java_james_dsp_activity_JdspImpResToolbox_OfflineAudio
 	{
 		// Memory not enough
 		sf_close(infile);
-		return NULL;
+		return 0;
 	}
 	sf_readf_float(infile, pFrameBuffer, sfinfo.frames);
 	sf_close(infile);
@@ -160,9 +160,8 @@ JNIEXPORT jstring JNICALL Java_james_dsp_activity_JdspImpResToolbox_OfflineAudio
 	sf_writef_float(outfile, out, outFramesPerChannel);
 	sf_close(outfile);
 	free(out);
+	free(filenameIR);
 	(*env)->ReleaseStringUTFChars(env, path, jnipath);
 	(*env)->ReleaseStringUTFChars(env, filename, mIRFileName);
-	jstring finalName = (*env)->NewStringUTF(env, filenameIR);
-	free(filenameIR);
-	return finalName;
+	return count;
 }

@@ -22,14 +22,14 @@
   <string name="pref_compression_summary_off">已停用壓縮</string>
   <string name="pref_compression_enable">啟用壓縮動態範圍</string>
   <string name="dialog_pregain">預增益</string>
-  <string name="dialog_threshold">閾值 [整數:-80 &#8211; 0 dB]</string>
-  <string name="dialog_knee">過渡 [整數:0 &#8211; 40 dB]</string>
-  <string name="dialog_ratio">比例 [整數:-20 &#8211; 20]</string>
-  <string name="dialog_attack">開始幅度 [實數:0 &#8211; 1]</string>
-  <string name="dialog_release">釋放幅度 [實數:0 &#8211; 1]</string>
+  <string name="dialog_threshold">閾值</string>
+  <string name="dialog_knee">過渡</string>
+  <string name="dialog_ratio">比例</string>
+  <string name="dialog_attack">開始幅度(包絡)</string>
+  <string name="dialog_release">釋放幅度(包絡)</string>
   <string name="pref_effect_title">選擇效果程度</string>
   <string name="dialog_filtertype">濾波器類型</string>
-  <string name="pref_effect_freq_title">截止頻率 [整數:40 &#8211; 250]Hz</string>
+  <string name="pref_effect_freq_title">選擇低通濾波器頻率</string>
   <string name="dialog_freq">濾波頻率</string>
   <string name="dialog_effect">效果程度</string>
   <string name="pref_equalizer_title">混合等化器</string>
@@ -41,7 +41,6 @@
   <string name="pref_bassboost_summary_on">已啟用低音強化</string>
   <string name="pref_bassboost_summary_off">已停用低音強化</string>
   <string name="pref_bassboost_enable">使用低音強化</string>
-  <string name="preferredlpf">階數不足，應選擇4095階低通濾波器</string>
   <string name="pref_headset_virtual_title">耳機虛擬室內效果</string>
   <string name="pref_headset_virtual_summary_on">已啟用耳機虛擬室內</string>
   <string name="pref_headset_virtual_summary_off">已停用耳機虛擬室內</string>
@@ -49,13 +48,12 @@
   <string name="pref_room_title">選擇房間種類(Progenitor2)</string>
   <string name="dialog_room">房間種類</string>
   <string name="dialog_mode">模式</string>
-  <string name="dialog_roomsize">房間大小 [整數:5 &#8211; 300]</string>
-  <string name="dialog_reverbtime">延續  [整數:5 &#8211; 300]</string>
-  <string name="dialog_damping">阻尼 [整數:1 &#8211; 100]%</string>
-  <string name="dialog_inbandwidth">頻寬(通帶) [整數:1 &#8211; 150]</string>
-  <string name="hfcomponents">(高頻分量)</string>
-  <string name="dialog_earlyverb">混響起始幅度 [整數:1 &#8211; 100]</string>
-  <string name="dialog_tailverb">混響完結幅度 [整數:1 &#8211; 200]</string>
+  <string name="dialog_roomsize">房間大小</string>
+  <string name="dialog_reverbtime">延續</string>
+  <string name="dialog_damping">阻尼</string>
+  <string name="dialog_inbandwidth">頻寬(通帶)</string>
+  <string name="dialog_earlyverb">混響起始時段幅度</string>
+  <string name="dialog_tailverb">混響完結時段幅度</string>
   <string name="pref_convolver_title">卷積器</string>
   <string name="pref_convolver_summary_on">已啟用卷積器</string>
   <string name="pref_convolver_summary_off">已停用卷積器</string>
@@ -63,7 +61,7 @@
   <string name="dialog_offlineimpulseresponseresampler">離線重採樣器(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">選擇需要重採樣的脈衝響應</string>
   <string name="dialog_impulseresponse">脈衝響應</string>
-  <string name="dialog_normalise">脈衝響應常規化[實數:&#x2192;0 &#8211; 1]</string>
+  <string name="dialog_normalise">音量常規化</string>
   <string name="dialog_quality">質素</string>
   <string name="dialog_length">脈衝響應長度</string>
   <string name="text_ir_dir_isempty">空白脈衝響應目錄 %1$s</string>
@@ -72,12 +70,11 @@
   <string name="stereo_conv">立體聲</string>
   <string name="fullstereo_conv">全立體聲</string>
   <string name="resamplerstr">已重採樣至DSP模組採樣率:%1$d\n重採樣後檔案路徑:%2$s</string>
-  <string name="resamplererror">請先啟用全域模式或者慣用模式來註冊DSP，以便從音訊DSP中獲取採樣率</string>
   <string name="impfilefault">載入脈衝響應失敗\n請選擇正確脈衝響應檔案</string>
   <string name="unmatchedsamplerate">脈衝響應檔案%1$s的採樣率%2$d與DSP模組採樣率%3$d不吻合\n目前正使用快速重採樣器\n追求高質素的，請使用離線重採樣器。</string>
   <string name="convolversuccess">成功載入脈衝響應:%1$s\n採樣率:%2$d\n聲道:%3$s\n每聲道樣本總數:%4$d\n截短後的每聲道樣本總數:%5$d</string>
   <string name="memoryallocatefail">卷積器無法分配記憶體</string>
-  <string name="dialog_gain">輸出增益 [整數:1 &#8211; 200]</string>
+  <string name="dialog_gain">輸出增益</string>
 
   <string name="menu_reset">重設</string>
   <string name="pref_headset_stereowide_title">立體聲加寬</string>
@@ -125,7 +122,8 @@
   <string name="help_text">
     <b>嗚謝:</b>\n\n
     圖形介面作者: Antti S. Lankila \n
-    其他功能: \n\
+    其他功能: \n
+    1.低通濾波器頻率選擇，立體聲加寬由Omnirom製作 \n
     2.線性相位低音強化 \n
     效果器及Android framework功能由James Fung整合 \n
     All component from Android framework develop by Google. \n
@@ -158,12 +156,13 @@
     如在汽車或在街上，
     在那裏恬靜的音樂的部分是在被淹沒在背景的噪音。
     \n\n
-    唯一可調諧決定於 DSP Manager 將如何努力維持音訊響度的目標水平。
+    唯一可調諧決定於 DSP Manager 將如何努力維持音頻響度的目標水平。
     \n\n\n
     2. <b>低音強化</b>
     \n\n
     低音強化是一個簡單的低通濾波器，用作在 預設為55Hz或可調頻率範圍下增加一個低通濾波器。
     大約 6 dB 強化，由「強度」參數，在 55Hz或可調頻率範圍增加了濾波器的共振，
+    使該頻率特別強調的修改。效果是為消除損耗低音頻率的，
     針對哪些沒有與用戶的耳道緊密耦合，常見小揚聲器和貼耳式耳機。
     \n\n\n
     3. <b>等化器</b>

@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
 import james.dsp.R;
 import james.dsp.preference.EqualizerPreference;
 import james.dsp.preference.SummariedListPreference;
@@ -68,8 +69,7 @@ public final class DSPScreen extends PreferenceFragment
                     preset.refreshFromPreference();
                 }
             }
-            if (!"dsp.convolver.resampler".equals(key))
-            	getActivity().sendBroadcast(new Intent(DSPManager.ACTION_UPDATE_PREFERENCES));
+            getActivity().sendBroadcast(new Intent(DSPManager.ACTION_UPDATE_PREFERENCES));
         }
     };
 

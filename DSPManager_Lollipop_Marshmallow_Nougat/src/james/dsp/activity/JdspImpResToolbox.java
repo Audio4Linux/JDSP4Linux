@@ -12,12 +12,12 @@ public class JdspImpResToolbox
     		try {
     			System.load("/system/lib/libjamesDSPImpulseToolbox.so");
     		} catch(UnsatisfiedLinkError error) {
-    			Log.e(DSPManager.TAG, "JNI LOAD FAILED!");
+    			Log.i(DSPManager.TAG, "JNI LOAD FAILED!");
     		}
     	}
     }
     /* Impulse Response Utils */
     public static native int[] GetLoadImpulseResponseInfo(String path);
     public static native int[] ReadImpulseResponseToInt(int targetSampleRate);
-    public static native String OfflineAudioResample(String path, String filename, int targetSampleRate);
+    public static native int OfflineAudioResample(String path, String filename, int targetSampleRate);
 }
