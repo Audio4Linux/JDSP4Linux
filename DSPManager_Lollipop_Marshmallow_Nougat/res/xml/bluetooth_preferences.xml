@@ -14,13 +14,12 @@
         android:entries="@array/clip_mode"
         android:entryValues="@array/clip_mode_values"
         android:title="@string/pref_clip_title" />
-    <james.dsp.preference.SummariedListPreference
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.masterswitch.finalgain"
         android:defaultValue="100"
         android:dialogTitle="@string/dialog_gain"
-        android:entries="@array/clip_gain"
-        android:entryValues="@array/clip_gain_values"
-        android:title="@string/dialog_gain" />
+        android:title="@string/dialog_gain"
+        android:inputType="number" />
   </PreferenceCategory>
   <PreferenceCategory android:title="@string/pref_compression_title">
     <CheckBoxPreference
@@ -36,41 +35,36 @@
         android:entries="@array/compression_pregain"
         android:entryValues="@array/compression_pregain_values"
         android:title="@string/dialog_pregain" />
-    <james.dsp.preference.SummariedListPreference
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.compression.threshold"
-        android:defaultValue="60"
+        android:defaultValue="-60"
         android:dialogTitle="@string/dialog_threshold"
-        android:entries="@array/compression_threshold"
-        android:entryValues="@array/compression_threshold_values"
-        android:title="@string/dialog_threshold" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_threshold"
+        android:inputType="number|numberSigned" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.compression.knee"
         android:defaultValue="30"
         android:dialogTitle="@string/dialog_knee"
-        android:entries="@array/compression_knee"
-        android:entryValues="@array/compression_knee_values"
-        android:title="@string/dialog_knee" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_knee"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.compression.ratio"
         android:defaultValue="12"
         android:dialogTitle="@string/dialog_ratio"
-        android:entries="@array/compression_ratio"
-        android:entryValues="@array/compression_ratio_values"
-        android:title="@string/dialog_ratio" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_ratio"
+        android:inputType="number|numberSigned" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.compression.attack"
-        android:defaultValue="10"
+        android:defaultValue="0.01"
         android:dialogTitle="@string/dialog_attack"
-        android:entries="@array/compression_attack"
-        android:entryValues="@array/compression_attack_values"
-        android:title="@string/dialog_attack" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_attack"
+        android:inputType="numberDecimal" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.compression.release"
-        android:defaultValue="240"
+        android:defaultValue="0.24"
         android:dialogTitle="@string/dialog_release"
-        android:entries="@array/compression_release"
-        android:entryValues="@array/compression_release_values"
-        android:title="@string/dialog_release" />
+        android:title="@string/dialog_release"
+        android:inputType="numberDecimal" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/pref_bassboost_title">
@@ -94,13 +88,12 @@
         android:entryValues="@array/bassboost_filtertype_values"
         android:title="@string/dialog_filtertype"
         android:key="dsp.bass.filtertype" />
-    <james.dsp.preference.SummariedListPreference
-        android:entries="@array/bassboost_freqs"
-        android:dialogTitle="@string/dialog_effect"
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:dialogTitle="@string/pref_effect_freq_title"
         android:key="dsp.bass.freq"
         android:defaultValue="55"
         android:title="@string/pref_effect_freq_title"
-        android:entryValues="@array/bassboost_freqs_values" />
+        android:inputType="number" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/pref_equalizer_title">
@@ -141,48 +134,42 @@
         android:entryValues="@array/headphone_preset_values"
         android:title="@string/pref_room_title"
         android:key="dsp.headphone.preset" />
-    <james.dsp.preference.SummariedListPreference
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.roomsize"
         android:defaultValue="50"
         android:dialogTitle="@string/dialog_roomsize"
-        android:entries="@array/headphone_roomsize"
-        android:entryValues="@array/headphone_roomsize_values"
-        android:title="@string/dialog_roomsize" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_roomsize"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.reverbtime"
         android:defaultValue="50"
         android:dialogTitle="@string/dialog_reverbtime"
-        android:entries="@array/headphone_reverbtime"
-        android:entryValues="@array/headphone_reverbtime_values"
-        android:title="@string/dialog_reverbtime" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_reverbtime"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.damping"
         android:defaultValue="50"
         android:dialogTitle="@string/dialog_damping"
-        android:entries="@array/headphone_damping"
-        android:entryValues="@array/headphone_damping_values"
-        android:title="@string/dialog_damping" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_damping"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.inbandwidth"
         android:defaultValue="80"
         android:dialogTitle="@string/dialog_inbandwidth"
-        android:entries="@array/headphone_inbandwidth"
-        android:entryValues="@array/headphone_inbandwidth_values"
-        android:title="@string/dialog_inbandwidth" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_inbandwidth"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.earlyverb"
         android:defaultValue="50"
         android:dialogTitle="@string/dialog_earlyverb"
-        android:entries="@array/headphone_earlyverb"
-        android:entryValues="@array/headphone_earlyverb_values"
-        android:title="@string/dialog_earlyverb" />
-    <james.dsp.preference.SummariedListPreference
+        android:title="@string/dialog_earlyverb"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.tailverb"
         android:defaultValue="50"
         android:dialogTitle="@string/dialog_tailverb"
-        android:entries="@array/headphone_tailverb"
-        android:entryValues="@array/headphone_tailverb_values"
-        android:title="@string/dialog_tailverb" />
+        android:title="@string/dialog_tailverb"
+        android:inputType="number" />
   </PreferenceCategory>
   <PreferenceCategory android:title="@string/pref_convolver_title"
       android:key="dsp.convolver">
@@ -192,7 +179,7 @@
         android:summaryOn="@string/pref_convolver_summary_on"
         android:summaryOff="@string/pref_convolver_summary_off"
         android:title="@string/pref_convolver_enable"></CheckBoxPreference>
-    <james.dsp.preference.SummariedListPreferenceWithCusResampler
+    <james.dsp.preference.SummariedListPreferenceWithCustom
         android:title="@string/dialog_offlineimpulseresponseresampler"
         android:key="dsp.convolver.resampler"
         android:defaultValue=""
@@ -202,13 +189,13 @@
         android:key="dsp.convolver.files"
         android:defaultValue=""
         android:dialogTitle="@string/dialog_impulseresponse" />
-    <james.dsp.preference.SummariedListPreference
-        android:defaultValue="200"
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.convolver.normalise"
+        android:defaultValue="0.2"
         android:dialogTitle="@string/dialog_normalise"
-        android:entries="@array/normalise_values_display"
-        android:entryValues="@array/normalise_values"
         android:title="@string/dialog_normalise"
-        android:key="dsp.convolver.normalise" />
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
     <james.dsp.preference.SummariedListPreference
         android:defaultValue="1"
         android:dialogTitle="@string/dialog_length"

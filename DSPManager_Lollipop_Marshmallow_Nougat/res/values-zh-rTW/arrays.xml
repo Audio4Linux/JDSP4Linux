@@ -29,28 +29,6 @@
     <item>Freeverb3 Progenitor2(房間參數己預設好)</item>
     <item>GVerb</item>
   </string-array>
-  <string-array name="headphone_inbandwidth">
-    <item>高頻分量:3&#65130;</item>
-    <item>高頻分量:5&#65130;</item>
-    <item>高頻分量:10&#65130;</item>
-    <item>高頻分量:15&#65130;</item>
-    <item>高頻分量:35&#65130;</item>
-    <item>高頻分量:50&#65130;</item>
-    <item>高頻分量:60&#65130;</item>
-    <item>高頻分量:70&#65130;</item>
-    <item>高頻分量:80&#65130;</item>
-    <item>高頻分量:90&#65130;</item>
-    <item>高頻分量:149&#65130;</item>
-  </string-array>
-  <string-array name="equalizer_loudness_modes">
-    <item>已停用</item>
-    <item>最弱</item>
-    <item>更弱</item>
-    <item>弱</item>
-    <item>強</item>
-    <item>更強</item>
-    <item>變態</item>
-  </string-array>
   <string-array name="compression_modes">
     <item>輕微</item>
     <item>中等</item>

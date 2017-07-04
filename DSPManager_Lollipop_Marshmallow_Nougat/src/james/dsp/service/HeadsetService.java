@@ -47,7 +47,7 @@ public class HeadsetService extends Service
 	* @author alankila
 	*/
 	Bitmap iconLarge;
-	private int modeEffect;
+	public static int modeEffect;
 	public final static UUID EFFECT_TYPE_CUSTOM = UUID.fromString("f98765f4-c321-5de6-9a45-123459495ab2");
 	public final static UUID EFFECT_JAMESDSP = UUID.fromString("f27317f4-c984-4de6-9a90-545759495bf2");
 	public class JDSPModule
@@ -216,7 +216,7 @@ public class HeadsetService extends Service
 	/**
 	* Known audio sessions and their associated audioeffect suites.
 	*/
-	protected final Map<Integer, JDSPModule> mAudioSessions = new HashMap<Integer, JDSPModule>();
+	private final Map<Integer, JDSPModule> mAudioSessions = new HashMap<Integer, JDSPModule>();
 
 	/**
 	* Is a wired headset plugged in?
@@ -234,9 +234,9 @@ public class HeadsetService extends Service
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
-	private JDSPModule JamesDSPGbEf;
+	public static JDSPModule JamesDSPGbEf;
 	private SharedPreferences preferencesMode;
-
+	public static int dspModuleSamplingRate = 0;
 	private final BroadcastReceiver mAudioSessionReceiver = new BroadcastReceiver()
 	{
 		@Override
@@ -417,14 +417,6 @@ public class HeadsetService extends Service
 		public int onStartCommand(Intent intent, int flags, int startId)
 	{
 		modeEffect = preferencesMode.getInt("dsp.app.modeEffect", 0);
-		if (modeEffect == 1)
-		{
-			if (JamesDSPGbEf != null)
-			{
-				JamesDSPGbEf.release();
-				JamesDSPGbEf = null;
-			}
-		}
 		if (modeEffect == 0)
 		{
 			if (JamesDSPGbEf == null) {
@@ -539,7 +531,7 @@ public class HeadsetService extends Service
 			int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
 			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
-			int dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
+			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
 			if (dspModuleSamplingRate == 0)
 			{
 				Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
@@ -550,18 +542,23 @@ public class HeadsetService extends Service
 			if (compressorEnabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "12")));
-				session.setParameterShort(session.JamesDSP, 101, Short.valueOf(preferences.getString("dsp.compression.threshold", "60")));
+				session.setParameterShort(session.JamesDSP, 101, (short)Math.abs(Short.valueOf(preferences.getString("dsp.compression.threshold", "-60"))));
 				session.setParameterShort(session.JamesDSP, 102, Short.valueOf(preferences.getString("dsp.compression.knee", "30")));
 				session.setParameterShort(session.JamesDSP, 103, Short.valueOf(preferences.getString("dsp.compression.ratio", "12")));
-				session.setParameterShort(session.JamesDSP, 104, Short.valueOf(preferences.getString("dsp.compression.attack", "10")));
-				session.setParameterShort(session.JamesDSP, 105, Short.valueOf(preferences.getString("dsp.compression.release", "240")));
+				session.setParameterShort(session.JamesDSP, 104, (short)(Float.valueOf((preferences.getString("dsp.compression.attack", "0.01")))*1000));
+				session.setParameterShort(session.JamesDSP, 105, (short)(Float.valueOf((preferences.getString("dsp.compression.release", "0.01")))*1000));
 			}
 			session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
 			if (bassBoostEnabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 112, Short.valueOf(preferences.getString("dsp.bass.mode", "80")));
-				session.setParameterShort(session.JamesDSP, 113, Short.valueOf(preferences.getString("dsp.bass.filtertype", "0")));
-				session.setParameterShort(session.JamesDSP, 114, Short.valueOf(preferences.getString("dsp.bass.freq", "55")));
+				short filtertype = Short.valueOf(preferences.getString("dsp.bass.filtertype", "0"));
+				session.setParameterShort(session.JamesDSP, 113, filtertype);
+				short freq = Short.valueOf(preferences.getString("dsp.bass.freq", "55"));
+				session.setParameterShort(session.JamesDSP, 114, freq);
+				if(filtertype == 1 && freq < 80)
+					if(DSPManager.devMsgDisplay)
+						Toast.makeText(HeadsetService.this, R.string.preferredlpf, Toast.LENGTH_SHORT).show();
 			}
 			session.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
 			if (equalizerEnabled == 1)
@@ -602,7 +599,7 @@ public class HeadsetService extends Service
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
 				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
-				int normalise = Integer.parseInt((preferences.getString("dsp.convolver.normalise", "300")));
+				int normalise = (int) (Float.valueOf((preferences.getString("dsp.convolver.normalise", "0.2")))*1000);
 				int[] impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFilePath);
 				if (impinfo == null)
 					Toast.makeText(HeadsetService.this, R.string.impfilefault, Toast.LENGTH_SHORT).show();
