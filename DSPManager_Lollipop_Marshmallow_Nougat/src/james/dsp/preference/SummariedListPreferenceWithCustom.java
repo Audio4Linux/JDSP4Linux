@@ -3,6 +3,8 @@ package james.dsp.preference;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import james.dsp.R;
 import james.dsp.activity.DSPManager;
+import james.dsp.activity.JdspImpResToolbox;
+import james.dsp.service.HeadsetService;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -126,12 +130,32 @@ public class SummariedListPreferenceWithCustom extends ListPreference
                 setSummary(value);
                 return;
             }
-            for (int i = 0; i < entryValues.length; i++)
+            if(getKey().equals("dsp.convolver.resampler"))
             {
-                if (entryValues[i].equals(value))
+                if(HeadsetService.dspModuleSamplingRate > 0)
                 {
-                    setSummary(entries[i]);
-                    break;
+                    for (int i = 0; i < entryValues.length; i++)
+                    {
+                        if (entryValues[i].equals(value))
+                        {
+                            Runnable runner = new ResamplerThread(DSPManager.impulseResponsePath, entries[i].toString(), HeadsetService.dspModuleSamplingRate);
+                            new Thread(runner).start();
+                            break;
+                        }
+                    }
+                }
+                else
+                	Toast.makeText(DSPManager.actUi, DSPManager.actUi.getString(R.string.resamplererror), Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                for (int i = 0; i < entryValues.length; i++)
+                {
+                    if (entryValues[i].equals(value))
+                    {
+                        setSummary(entries[i]);
+                        break;
+                    }
                 }
             }
         }
@@ -146,3 +170,24 @@ public class SummariedListPreferenceWithCustom extends ListPreference
         onSetInitialValue(true, null);
     }
 }
+class ResamplerThread implements Runnable {
+	String path;
+	String filename;
+	int tarSmpRate;
+	   ResamplerThread(String p, String f, int s) {
+	       path = p;
+	       filename = f;
+	       tarSmpRate = s;
+	   }
+	   public void run() {
+           final String finalName = JdspImpResToolbox.OfflineAudioResample(path, filename, tarSmpRate);
+           new Handler(Looper.getMainLooper()).post(new Runnable() {
+        	    @Override
+        	    public void run() {
+        	           File f = new File(finalName);
+        	           if(f.exists() && !f.isDirectory())
+        	           	Toast.makeText(DSPManager.actUi, DSPManager.actUi.getString(R.string.resamplerstr, tarSmpRate, finalName), Toast.LENGTH_LONG).show();
+        	    }
+        	});
+	   }
+	}

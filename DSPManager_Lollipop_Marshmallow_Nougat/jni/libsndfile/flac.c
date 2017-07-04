@@ -37,7 +37,7 @@
 ** Private static functions.
 */
 
-#define	FLAC_DEFAULT_COMPRESSION_LEVEL	5
+#define	FLAC_DEFAULT_COMPRESSION_LEVEL	8
 
 #define ENC_BUFFER_SIZE 8192
 
