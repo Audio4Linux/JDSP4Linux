@@ -60,6 +60,15 @@
   <string name="pref_convolver_summary_on">已啟用卷積器</string>
   <string name="pref_convolver_summary_off">已停用卷積器</string>
   <string name="pref_convolver_enable">使用卷積器</string>
+  <string name="pref_analogmodelling_title">真空管放大器</string>
+  <string name="pref_analogmodelling_summary_on">已啟用真空管放大器</string>
+  <string name="pref_analogmodelling_summary_off">已停用真空管放大器</string>
+  <string name="pref_analogmodelling_enable">使用模擬放大器</string>
+  <string name="dialog_tubedrive">預增益(諧波) [實數:0 &#8211; 30]</string>
+  <string name="dialog_tubebass">低音 [實數:0 &#8211; 10]</string>
+  <string name="dialog_tubemid">中音 [實數:0 &#8211; 10]</string>
+  <string name="dialog_tubetreble">高音 [實數:0 &#8211; 10]</string>
+  <string name="dialog_tubetonestack">音色層[實數:0 &#8211; 24]</string>
   <string name="dialog_offlineimpulseresponseresampler">離線重採樣器(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">選擇需要重採樣的脈衝響應</string>
   <string name="dialog_impulseresponse">脈衝響應</string>
@@ -168,7 +177,7 @@
     \n\n\n
     3. <b>等化器</b>
     \n\n
-    這是一個 6 頻段等化器，包括 15.625、62.5、250、500、1000、4000、8000 和 16000 Hz (赫茲)。
+    這是一個 6 頻段等化器，包括 15.625、62.5、250、500、1000、4000、8000 和 16000 (赫茲)。
     提供一些普遍的預置，並且頻率響應也可通過輕擊均衡器曲線圖自訂。
     根據使用者的個人偏好，或者可用耳機或揚聲器的特定功能，用來調諧頻率響應。
     \n\n

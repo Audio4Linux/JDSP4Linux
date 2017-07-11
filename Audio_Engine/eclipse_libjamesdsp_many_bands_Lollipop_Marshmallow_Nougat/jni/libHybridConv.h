@@ -24,7 +24,7 @@ typedef struct str_HConvSingle
     fftwf_plan ifft;
 } HConvSingle;
 int hcFFTWThreadInit();
-void hcFFTWThreadClean();
+void hcFFTWClean(int threads);
 void hcProcess(HConvSingle *filter, float *x, float *y);
 void hcProcessAdd(HConvSingle *filter, float *x, float *y);
 void hcInitSingle(HConvSingle *filter, float *h, int hlen, int flen, int steps, int fftOptimize, int fftwThreads);

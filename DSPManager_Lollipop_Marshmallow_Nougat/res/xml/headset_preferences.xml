@@ -204,6 +204,50 @@
         android:title="@string/dialog_quality"
         android:key="dsp.convolver.quality" />
   </PreferenceCategory>
+  <PreferenceCategory android:title="@string/pref_analogmodelling_title"
+      android:key="dsp.analogmodelling">
+    <CheckBoxPreference
+        android:key="dsp.analogmodelling.enable"
+        android:disableDependentsState="false"
+        android:summaryOn="@string/pref_analogmodelling_summary_on"
+        android:summaryOff="@string/pref_analogmodelling_summary_off"
+        android:title="@string/pref_analogmodelling_enable"></CheckBoxPreference>
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.analogmodelling.tubedrive"
+        android:defaultValue="1"
+        android:dialogTitle="@string/dialog_tubedrive"
+        android:title="@string/dialog_tubedrive"
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.analogmodelling.tubebass"
+        android:defaultValue="1"
+        android:dialogTitle="@string/dialog_tubebass"
+        android:title="@string/dialog_tubebass"
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.analogmodelling.tubemid"
+        android:defaultValue="1"
+        android:dialogTitle="@string/dialog_tubemid"
+        android:title="@string/dialog_tubemid"
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.analogmodelling.tubetreble"
+        android:defaultValue="1"
+        android:dialogTitle="@string/dialog_tubetreble"
+        android:title="@string/dialog_tubetreble"
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.analogmodelling.tubetonestack"
+        android:defaultValue="1"
+        android:dialogTitle="@string/dialog_tubetonestack"
+        android:title="@string/dialog_tubetonestack"
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
+  </PreferenceCategory>
   <PreferenceCategory android:title="@string/pref_headset_stereowide_title">
     <CheckBoxPreference
         android:key="dsp.stereowide.enable"

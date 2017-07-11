@@ -29,7 +29,7 @@ static inline float kneecurve(float x, float k, float linearthreshold)
     return linearthreshold + (1.0f - expf(-k * (x - linearthreshold))) / k;
 }
 
-static inline float kneeslope(float x, float k, float linearthreshold)
+float kneeslope(float x, float k, float linearthreshold)
 {
     return k * x / ((k * linearthreshold + 1.0f) * expf(k * (x - linearthreshold)) - 1);
 }

@@ -2,16 +2,21 @@
 
 #include "Effect.h"
 #include "iir/Iir.h"
+extern "C"
+{
+#include "firgen.h"
 #include "compressor.h"
 #include "gverb.h"
 #include "reverb.h"
 #include "libHybridConv.h"
+#include "Tube.h"
+}
 
 #define NUM_BANDS 10
 class EffectDSPMain : public Effect
 {
 protected:
-	uint16_t oldframeCountInit;
+	uint16_t currentframeCountInit;
 	size_t memSize;
 	// Float buffer
 	float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat;
@@ -22,6 +27,7 @@ protected:
 	ty_gverb *verbL, *verbR;
 	sf_reverb_state_st myreverb;
 	HConvSingle *bassBoostLp, *convolver;
+	tubeFilter tubeP[2];
 	int threadResult;
 	// Bass boost
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbL;
@@ -52,8 +58,9 @@ protected:
 	float pregain, threshold, knee, ratio, attack, release;
 	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassLpReady;
+	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassLpReady, analogModelEnable;
 	int16_t numTime2Send, samplesInc, impChannels, previousimpChannels;
+	float tubedrive, tubebass, tubemid, tubetreble, tubetonestack;
 	float normalise;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
@@ -94,9 +101,9 @@ protected:
 				buffer[i] = tanh(chan_buffers[i % 2][i >> 1]) * finalGain;
 		}
 	}
-	float fmax(float a,double b)
+	float fmax(float a, float b)
 	{
-		return (b<a)?a:b;
+		return b <a ? a : b;
 	}
 public:
 	EffectDSPMain();

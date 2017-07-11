@@ -10,42 +10,40 @@
 #include "reverb.h"
 #include <math.h>
 #include <string.h>
-#include <stdint.h>
-#include <stdlib.h>
 
 // utility functions
-static inline float db2lin(float db)   // dB to linear
+float db2lin(float db)   // dB to linear
 {
     return powf(10.0f, 0.05f * db);
 }
 
-static inline int clampi(int v, int min, int max)
+int clampi(int v, int min, int max)
 {
     return v < min ? min : (v > max ? max : v);
 }
 
-static inline float clampf(float v, float min, float max)
+float clampf(float v, float min, float max)
 {
     return v < min ? min : (v > max ? max : v);
 }
 
-static bool isprime(int v)
+static int isprime(int v)
 {
     if (v < 0)
         return isprime(-v);
     if (v < 2)
-        return false;
+        return 0;
     if (v <= 3)
-        return true;
+        return 1;
     if ((v % 2) == 0 || (v % 3) == 0)
-        return false;
+        return 0;
     int max = (int)sqrt((double)v);
     for (int i = 5; i <= max; i += 6)
     {
         if ((v % i) == 0 || (v % (i + 2)) == 0)
-            return false;
+            return 0;
     }
-    return true;
+    return 1;
 }
 
 static inline int nextprime(int v)

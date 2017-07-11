@@ -115,6 +115,30 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "100";
             setSummary(value);
     	}
+    	if(key.equals("dsp.analogmodelling.tubedrive"))
+    	{
+            if(valueFloat < 0)
+            	value = "0";
+            if(valueFloat > 30)
+            	value = "30";
+            setSummary(value);
+    	}
+    	if(key.equals("dsp.analogmodelling.tubebass") || key.equals("dsp.analogmodelling.tubemid") || key.equals("dsp.analogmodelling.tubetreble"))
+    	{
+            if(valueFloat < 0)
+            	value = "0";
+            if(valueFloat > 10)
+            	value = "10";
+            setSummary(value);
+    	}
+    	if(key.equals("dsp.analogmodelling.tubetonestack"))
+    	{
+            if(valueFloat < 0)
+            	value = "0";
+            if(valueFloat > 24)
+            	value = "24";
+            setSummary(value);
+    	}	 
         super.setText(value);
     }
 

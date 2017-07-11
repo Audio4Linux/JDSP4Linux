@@ -54,6 +54,15 @@
   <string name="pref_convolver_summary_on">Convolver is enabled</string>
   <string name="pref_convolver_summary_off">Convolver is disabled</string>
   <string name="pref_convolver_enable">Convolver enable</string>
+  <string name="pref_analogmodelling_title">Analog Modelling</string>
+  <string name="pref_analogmodelling_summary_on">Analog Modelling is enabled</string>
+  <string name="pref_analogmodelling_summary_off">Analog Modelling is disabled</string>
+  <string name="pref_analogmodelling_enable">Analog Modelling enable</string>
+  <string name="dialog_tubedrive">Preamp(Harmonics) [Real:&#x2192;0 &#8211; 30]</string>
+  <string name="dialog_tubebass">Bass [Real:&#x2192;0 &#8211; 10]</string>
+  <string name="dialog_tubemid">Middle [Real:&#x2192;0 &#8211; 10]</string>
+  <string name="dialog_tubetreble">Treble [Real:&#x2192;0 &#8211; 10]</string>
+  <string name="dialog_tubetonestack">Tonestack Amount[Real:&#x2192;0 &#8211; 24]</string>
   <string name="dialog_offlineimpulseresponseresampler">Offline Resampler(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">Select IR to resample</string>
   <string name="dialog_impulseresponse">Impulse response</string>

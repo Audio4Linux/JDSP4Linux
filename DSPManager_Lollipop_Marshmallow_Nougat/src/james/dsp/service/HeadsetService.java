@@ -234,6 +234,10 @@ public class HeadsetService extends Service
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
+	private String oldImpulseName = "";
+	private float oldQuality = 0;
+	private int oldnormalise = 0;
+	private int forcedShrink = 0;
 	public static JDSPModule JamesDSPGbEf;
 	private SharedPreferences preferencesMode;
 	public static int dspModuleSamplingRate = 0;
@@ -357,7 +361,7 @@ public class HeadsetService extends Service
 		startForeground(1, statusNotify);
 	}
 	@Override
-		public void onCreate()
+	public void onCreate()
 	{
 		super.onCreate();
 		IntentFilter audioFilter = new IntentFilter();
@@ -393,10 +397,13 @@ public class HeadsetService extends Service
 			}
 		}
 		updateDsp(true, false);
+		String arch = System.getProperty("os.arch");
+		if(arch.contains("arm"))
+			forcedShrink = 1;
 	}
 
 	@Override
-		public void onDestroy()
+	public void onDestroy()
 	{
 		super.onDestroy();
 		unregisterReceiver(mAudioSessionReceiver);
@@ -414,7 +421,7 @@ public class HeadsetService extends Service
 		JamesDSPGbEf = null;
 	}
 	@Override
-		public int onStartCommand(Intent intent, int flags, int startId)
+	public int onStartCommand(Intent intent, int flags, int startId)
 	{
 		modeEffect = preferencesMode.getInt("dsp.app.modeEffect", 0);
 		if (modeEffect == 0)
@@ -448,7 +455,7 @@ public class HeadsetService extends Service
 		return super.onStartCommand(intent, flags, startId);
 	}
 	@Override
-		public IBinder onBind(Intent intent)
+	public IBinder onBind(Intent intent)
 	{
 		return mBinder;
 	}
@@ -531,6 +538,7 @@ public class HeadsetService extends Service
 			int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
 			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
+			int analogModelEnabled = preferences.getBoolean("dsp.analogmodelling.enable", false) ? 1 : 0;
 			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
 			if (dspModuleSamplingRate == 0)
 			{
@@ -595,11 +603,16 @@ public class HeadsetService extends Service
 			session.setParameterShort(session.JamesDSP, 1204, (short)stereoWideEnabled); // Stereo widener switch
 			if (convolverEnabled == 1 && updateMajor)
 			{
-				session.setParameterShort(session.JamesDSP, 1205, (short)0);
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
-				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
 				int normalise = (int) (Float.valueOf((preferences.getString("dsp.convolver.normalise", "0.2")))*1000);
+				if(oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality && oldnormalise == normalise)
+					return;
+				oldImpulseName = mConvIRFilePath;
+				oldQuality = quality;
+				oldnormalise = normalise;
+				session.setParameterShort(session.JamesDSP, 1205, (short)0);
+				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
 				int[] impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFilePath);
 				if (impinfo == null)
 					Toast.makeText(HeadsetService.this, R.string.impfilefault, Toast.LENGTH_SHORT).show();
@@ -615,7 +628,9 @@ public class HeadsetService extends Service
 						int arraySize2Send = 4096;
 						impinfo[1] = impulseResponse.length / impinfo[0];
 						int impulseCutted = (int)(impulseResponse.length * quality);
-						if (impinfo[0] == 4 && impulseCutted > 131072)
+						if (impinfo[0] == 2 && impulseCutted > 800000 && forcedShrink == 1)
+							impulseCutted = 800000;
+						if (impinfo[0] == 4 && impulseCutted > 131072 && forcedShrink == 1)
 							impulseCutted = 131072;
 						int[] sendArray = new int[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
@@ -642,7 +657,22 @@ public class HeadsetService extends Service
 					}
 				}
 			}
+			else
+			{
+				oldImpulseName = "";
+				oldQuality = 0;
+				oldnormalise = 0;
+			}
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
+			if (analogModelEnabled == 1 && updateMajor)
+			{
+				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "1"))*1000));
+				session.setParameterShort(session.JamesDSP, 151, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubebass", "1"))*1000));
+				session.setParameterShort(session.JamesDSP, 152, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubemid", "1"))*1000));
+				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "1"))*1000));
+				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetonestack", "1"))*1000));
+			}
+			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 		}
 	}
 }
