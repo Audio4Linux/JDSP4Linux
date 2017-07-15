@@ -36,7 +36,7 @@ import james.dsp.activity.JdspImpResToolbox;
 * <li>preference update events.</li>
 * </ol>
 *
-* @author alankila
+* @Co-founder alankila
 */
 public class HeadsetService extends Service
 {
@@ -44,7 +44,7 @@ public class HeadsetService extends Service
 	* Helper class representing the full complement of effects attached to one
 	* audio session.
 	*
-	* @author alankila
+	* @Co-founder alankila
 	*/
 	Bitmap iconLarge;
 	public static int modeEffect;
@@ -641,7 +641,7 @@ public class HeadsetService extends Service
 						for (int i = 0; i < numTime2Send; i++)
 						{
 							System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
-							session.setParameterShort(session.JamesDSP, 10003, (short)i); // Current increment
+							session.setParameterShort(session.JamesDSP, 10003, (short)i); // Increment sliced buffer
 							session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
 						}
 						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
@@ -666,11 +666,11 @@ public class HeadsetService extends Service
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
 			if (analogModelEnabled == 1 && updateMajor)
 			{
-				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "1"))*1000));
-				session.setParameterShort(session.JamesDSP, 151, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubebass", "1"))*1000));
-				session.setParameterShort(session.JamesDSP, 152, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubemid", "1"))*1000));
-				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "1"))*1000));
-				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetonestack", "1"))*1000));
+				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
+				session.setParameterShort(session.JamesDSP, 151, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubebass", "8"))*1000));
+				session.setParameterShort(session.JamesDSP, 152, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubemid", "5.6"))*1000));
+				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "4.5"))*1000));
+				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetonestack", "5"))*1000));
 			}
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 		}

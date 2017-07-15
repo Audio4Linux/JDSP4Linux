@@ -3,9 +3,6 @@
 #define EPSILON 1e-9
 #define TOLERANCE 1e-6
 
-#define MAX(x, y) (( (x) > (y) ) ? x : y )
-#define MIN(x, y) (( (x) < (y) ) ? x : y )
-
 typedef double Real;
 
 typedef struct str_triode

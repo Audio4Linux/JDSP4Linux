@@ -18,7 +18,7 @@ import james.dsp.service.HeadsetService;
  * and a listener that ensures that our {@link HeadsetService} is running if
  * required.
  *
- * @author alankila
+ * @Co-founder alankila
  */
 public final class DSPScreen extends PreferenceFragment
 {

@@ -214,35 +214,35 @@
         android:title="@string/pref_analogmodelling_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubedrive"
-        android:defaultValue="1"
+        android:defaultValue="2"
         android:dialogTitle="@string/dialog_tubedrive"
         android:title="@string/dialog_tubedrive"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubebass"
-        android:defaultValue="1"
+        android:defaultValue="8"
         android:dialogTitle="@string/dialog_tubebass"
         android:title="@string/dialog_tubebass"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubemid"
-        android:defaultValue="1"
+        android:defaultValue="5.6"
         android:dialogTitle="@string/dialog_tubemid"
         android:title="@string/dialog_tubemid"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubetreble"
-        android:defaultValue="1"
+        android:defaultValue="4.5"
         android:dialogTitle="@string/dialog_tubetreble"
         android:title="@string/dialog_tubetreble"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubetonestack"
-        android:defaultValue="1"
+        android:defaultValue="5"
         android:dialogTitle="@string/dialog_tubetonestack"
         android:title="@string/dialog_tubetonestack"
         android:inputType="numberDecimal"

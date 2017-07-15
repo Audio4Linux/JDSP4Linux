@@ -119,8 +119,8 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	{
             if(valueFloat < 0)
             	value = "0";
-            if(valueFloat > 30)
-            	value = "30";
+            if(valueFloat > 12)
+            	value = "12";
             setSummary(value);
     	}
     	if(key.equals("dsp.analogmodelling.tubebass") || key.equals("dsp.analogmodelling.tubemid") || key.equals("dsp.analogmodelling.tubetreble"))

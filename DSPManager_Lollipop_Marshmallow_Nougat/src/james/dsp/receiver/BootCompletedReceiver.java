@@ -10,7 +10,7 @@ import james.dsp.service.HeadsetService;
  * Android 2.3, we will always need a persistent process, because we are forced
  * to keep track of all open audio sessions.
  *
- * @author alankila
+ * @Co-founder alankila
  */
 public class BootCompletedReceiver extends BroadcastReceiver
 {

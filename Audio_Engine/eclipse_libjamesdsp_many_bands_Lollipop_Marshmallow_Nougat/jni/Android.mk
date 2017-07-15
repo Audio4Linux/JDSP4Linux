@@ -41,7 +41,7 @@ LOCAL_SRC_FILES := \
 # terminator
 
 LOCAL_STATIC_LIBRARIES := fftw3thread fftw3
-LOCAL_LDLIBS := -llog
+#LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
