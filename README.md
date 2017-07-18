@@ -26,15 +26,7 @@ We don't work too much around with modifying Android framework.
 
 A: Float32
 
-#### 2. What is Clip control?
-
-A: When effect strength going extreme, value will go beyond -1.0 / +1.0 range, this will cause clipping.
-
-   Effect provide you more option, that is Hyperbolic tangent function/tanh() that will clip the value more natural.
-   
-   But using tanh() will change the waveform even signal haven't clipped.
-
-#### 3. Bass boost filter type?
+#### 2. Bass boost filter type?
 
 A: Effect have 3 algorithms to boost low frequency, the first one is the traditional one from previous release, based on IIR Filter.
 
@@ -42,13 +34,19 @@ A: Effect have 3 algorithms to boost low frequency, the first one is the traditi
    
    4095 order FIR filter should work on all frequency listed on options, 1023 order should work well above 80Hz.
 
-#### 4. What is convolver?
+#### 3. What is convolver?
 
 A: Convolver is a effect apply convolution mathematical operation on audio signal, that perfectly apply user desired impulse response on music, it could simulate physical space.
 
    Effect itself require audio file(.wav) to become impulse response source.
 
    For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
+
+#### 3. What is Analog Modelling?
+
+A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [ZamAudio](https://github.com/zamaudio).
+The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich, tonestack can be disabled by checkbox. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0, because of input audio amplitude is decided by user, louder volume will generate more harmonics and internal amplifier will clip the audio. All analog circuit was built from real mathematical model.
+Original is written in C++, for some reasons I ported it to C implementation.
 
 #### 5. What is Misc folder does?
 
@@ -67,7 +65,11 @@ A: Because of fftw3 library linked.
 A: Audio effects actually is not hard to implement, I don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
    This is published under GPLv2.
 
-#### 9. Why no effect after installed?
+#### 9. Can I use your effect code?
+
+A: Yes. It is relatively easy to use some effect in other applications. Convolver, reverb, 12AX7 tube amplifier source code is written in similar style, you can look at the how their function is called, initialised, processed, etc. Most of the effect is written in C, so it is easy to port to other platforms without huge modifications.
+
+#### 10. Why no effect after installed?
 
 A: Check step in release build ReadMe.txt.
    audio_effects.conf is file for system to load effect using known UUID, you can just add
@@ -115,7 +117,7 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 # Important
 
 We won't modify SELinux, let your device become more safe.
-Also, it is good for you to customize your own rom or even port rom.
+Also, it is good idea to customize your own rom or even port rom.
 
 ## How to install?
 See readme in download link.
