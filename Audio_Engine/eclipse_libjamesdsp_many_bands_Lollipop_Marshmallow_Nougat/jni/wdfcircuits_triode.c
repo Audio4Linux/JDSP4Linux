@@ -12,10 +12,6 @@ float from_dB(float gdb)
 	return (float)exp(gdb / 20.f*log(10.f));
 }
 
-float to_dB(float g)
-{
-	return 20.f*log10f(g);
-}
 Real getC(Triode *triode)
 {
 	return triode->Kb;
@@ -591,11 +587,13 @@ Real advanc(TubeStageCircuit *ckt, Real VE)
     Real Roa = S2_3b2;
     return -(Roa);
 }
-void warmup_tubes(TubeStageCircuit *ckt)
+void warmup_tubes(TubeStageCircuit *ckt, int warmupDuration)
 {
     int i;
     ckt->on = 0;
-    for (i = 0; i < 8000; i++)
+	if (warmupDuration < 4000)
+		warmupDuration = 4000;
+    for (i = 0; i < warmupDuration; i++)
     {
         advanc(ckt, 0.0);
     }

@@ -103,8 +103,8 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	{
             if(valueFloat < 1)
             	value = "1";
-            if(valueFloat > 150)
-            	value = "150";
+            if(valueFloat > 80)
+            	value = "80";
             setSummary(value+DSPManager.actUi.getString(R.string.hfcomponents));
     	}
     	if(key.equals("dsp.headphone.earlyverb"))

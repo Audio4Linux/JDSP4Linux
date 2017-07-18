@@ -44,7 +44,6 @@ Real ffk(Triode *triode);
 
 Real sanitize_denormald(Real v);
 float from_dB(float gdb);
-float to_dB(float g);
 void TriodeInit(Triode *triode);
 void compute(Triode *triode, Real Kbb, Real Gbb, Real Pbb);
 Real getC(Triode *triode);
@@ -57,5 +56,5 @@ Real zeroffp_insane(Triode *triode, Real a, Real b, Real t);
 Real zeroffg(Triode *triode, Real a, Real b, Real t);
 void updateRValues(TubeStageCircuit *ckt, Real C_Ci, Real C_Ck, Real C_Co, Real E_E250, Real E_Vi, Real R_E250, Real R_Rg, Real R_Ri, Real R_Rk, Real R_Ro, Real R_Vi, Real sampleRate, int insane, Triode tube);
 Real advanc(TubeStageCircuit *ckt, Real VE);
-void warmup_tubes(TubeStageCircuit *ckt);
+void warmup_tubes(TubeStageCircuit *ckt, int warmupDuration);
 #endif

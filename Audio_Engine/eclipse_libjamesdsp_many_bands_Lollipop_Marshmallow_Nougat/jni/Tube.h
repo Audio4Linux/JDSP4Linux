@@ -18,7 +18,7 @@ typedef struct str_tubeFilter
 	Real rk;
     float overdrived1Gain;
     float overdrived2Gain;
-	float mastergain;
+	int toneStackEnable;
     float   fConst0;
     float   fConst1;
     float   fConst2;
@@ -716,7 +716,9 @@ typedef struct str_tubeFilter
     float toneStack662;
     float toneStack663;
     float toneStack664;
+	double pa0, pa1, pa2, pb0, pb1, pb2;
+	double v1, v2;
 } tubeFilter;
-int InitTube(tubeFilter *tubefilter, double *circuitparameters, double samplerate, float tubedrive, float bass, float middle, float treble, float tonestack, float mastergain, int insane);
+int InitTube(tubeFilter *tubefilter, double *circuitparameters, double samplerate, float tubedrive, int toneStackEnable, float bass, float middle, float treble, float tonestack, int warmupDuration, int insane);
 void processTube(tubeFilter *tubefilter, float* inputs, float* outputs, unsigned frames);
 #endif

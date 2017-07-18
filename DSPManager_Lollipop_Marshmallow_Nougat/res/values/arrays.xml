@@ -69,10 +69,6 @@
     <item>0</item>
     <item>1</item>
   </string-array>
-  <string-array name="clip_mode">
-    <item>Hard clip</item>
-    <item>Hyperbolic Tangent Function</item>
-  </string-array>
   <string-array name="clip_mode_values" translatable="false">
     <item>0</item>
     <item>1</item>

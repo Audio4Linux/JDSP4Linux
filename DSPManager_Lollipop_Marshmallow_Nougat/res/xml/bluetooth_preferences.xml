@@ -7,13 +7,6 @@
         android:summaryOff="@string/pref_dsp_summary_off"
         android:disableDependentsState="false"
         android:title="@string/pref_dsp_enable"></CheckBoxPreference>
-    <james.dsp.preference.SummariedListPreference
-        android:key="dsp.masterswitch.clipmode"
-        android:defaultValue="0"
-        android:dialogTitle="@string/pref_clip_title"
-        android:entries="@array/clip_mode"
-        android:entryValues="@array/clip_mode_values"
-        android:title="@string/pref_clip_title" />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.masterswitch.finalgain"
         android:defaultValue="100"
@@ -154,7 +147,7 @@
         android:inputType="number" />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.inbandwidth"
-        android:defaultValue="80"
+        android:defaultValue="5"
         android:dialogTitle="@string/dialog_inbandwidth"
         android:title="@string/dialog_inbandwidth"
         android:inputType="number" />
@@ -219,6 +212,12 @@
         android:title="@string/dialog_tubedrive"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
+    <CheckBoxPreference
+        android:key="dsp.analogmodelling.tonestack"
+        android:disableDependentsState="false"
+        android:summaryOn="@string/pref_analogmodelling_tonestack_on"
+        android:summaryOff="@string/pref_analogmodelling_tonestack_off"
+        android:title="@string/pref_analogmodelling_tonestack_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubebass"
         android:defaultValue="8"
@@ -238,13 +237,6 @@
         android:defaultValue="4.5"
         android:dialogTitle="@string/dialog_tubetreble"
         android:title="@string/dialog_tubetreble"
-        android:inputType="numberDecimal"
-        android:digits="0123456789." />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.analogmodelling.tubetonestack"
-        android:defaultValue="5"
-        android:dialogTitle="@string/dialog_tubetonestack"
-        android:title="@string/dialog_tubetonestack"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
   </PreferenceCategory>

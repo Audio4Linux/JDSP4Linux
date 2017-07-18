@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string-array name="clip_mode">
-    <item>硬性波形切斷</item>
-    <item>雙曲正切函數</item>
-  </string-array>
   <string-array name="headphone_preset">
     <item>默認</item>
     <item>小禮堂1</item>

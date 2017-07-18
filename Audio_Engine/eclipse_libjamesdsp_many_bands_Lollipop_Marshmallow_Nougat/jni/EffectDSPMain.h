@@ -58,14 +58,13 @@ protected:
 	float pregain, threshold, knee, ratio, attack, release;
 	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, clipMode, convolverEnabled, convolverReady, bassLpReady, analogModelEnable;
+	int16_t toneStackEnable, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable;
 	int16_t numTime2Send, samplesInc, impChannels, previousimpChannels;
 	float tubedrive, tubebass, tubemid, tubetreble, tubetonestack;
 	float normalise;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
 	int tapsLPFIR;
-	void normaliseToLevel(float* buffer, size_t num_samps, float level);
 	void refreshBassLinearPhase(uint32_t actualframeCount);
 	void refreshConvolver(uint32_t actualframeCount);
 	void refreshStereoWiden(uint32_t parameter);
@@ -73,37 +72,28 @@ protected:
 	void refreshEqBands();
 	void refreshReverb();
 	void refreshBass();
+	inline float normaliseToLevel(float* buffer, size_t num_frames, float level)
+	{
+		int i;
+		float max = 0, amp;
+		for (i = 0; i < num_frames; i++)
+			max = fabsf(buffer[i]) < max ? max : fabsf(buffer[i]);
+		amp = level / max;
+		for (i = 0; i < num_frames; i++)
+			buffer[i] *= amp;
+		return max;
+	}
 	inline void channel_split(int16_t* buffer, size_t num_frames, float** chan_buffers)
 	{
-		size_t i;
-		size_t samples = num_frames << 1;
+		size_t i, samples = num_frames << 1;
 		for (i = 0; i < samples; i++)
-			chan_buffers[(i % 2)][i >> 1] = (float)((double)(buffer[i]) * 0.000030517578125);
+			chan_buffers[i % 2][i >> 1] = (float)((double)(buffer[i]) * 0.000030517578125);
 	}
 	inline void channel_join(float** chan_buffers, int16_t* buffer, size_t num_frames)
 	{
-		size_t i;
-		size_t samples = num_frames << 1;
-		if (!clipMode)
-		{
-			for (i = 0; i < samples; i++)
-			{
-				buffer[i] = chan_buffers[i % 2][i >> 1] * finalGain;
-				if (buffer[i] > 32767)
-					buffer[i] = 32767;
-				if (buffer[i] < -32768)
-					buffer[i] = -32768;
-			}
-		}
-		else
-		{
-			for (i = 0; i < samples; i++)
-				buffer[i] = tanh(chan_buffers[i % 2][i >> 1]) * finalGain;
-		}
-	}
-	float fmax(float a, float b)
-	{
-		return b <a ? a : b;
+		size_t i, samples = num_frames << 1;
+		for (i = 0; i < samples; i++)
+			buffer[i] = tanh(chan_buffers[i % 2][i >> 1] * finalGain) * 32768.0f;
 	}
 public:
 	EffectDSPMain();

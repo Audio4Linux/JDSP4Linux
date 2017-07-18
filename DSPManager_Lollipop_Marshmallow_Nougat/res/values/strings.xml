@@ -45,7 +45,7 @@
   <string name="dialog_roomsize">Room size [Int:5 &#8211; 300]</string>
   <string name="dialog_reverbtime">Sustain [Int:5 &#8211; 300]</string>
   <string name="dialog_damping">Damping [Int:1 &#8211; 100]%</string>
-  <string name="dialog_inbandwidth">Bandwidth [Int:1 &#8211; 150]</string>
+  <string name="dialog_inbandwidth">Bandwidth [Int:1 &#8211; 80]</string>
   <string name="hfcomponents">(High frequency components)</string>
   <string name="dialog_earlyverb">Early level [Int:1 &#8211; 100]</string>
   <string name="dialog_tailverb">Tail level [Int:1 &#8211; 200]</string>
@@ -58,11 +58,13 @@
   <string name="pref_analogmodelling_summary_on">Analog Modelling is enabled</string>
   <string name="pref_analogmodelling_summary_off">Analog Modelling is disabled</string>
   <string name="pref_analogmodelling_enable">Analog Modelling enable</string>
-  <string name="dialog_tubedrive">Preamp(Harmonics) [Real:&#x2192;0 &#8211; 30]</string>
+  <string name="pref_analogmodelling_tonestack_on">Analog tonestack is enabled</string>
+  <string name="pref_analogmodelling_tonestack_off">Analog tonestack is disabled</string>
+  <string name="pref_analogmodelling_tonestack_enable">Analog tonestack</string>
+  <string name="dialog_tubedrive">Preamp(Harmonics) [Real:→0 – 12]</string>
   <string name="dialog_tubebass">Bass [Real:&#x2192;0 &#8211; 10]</string>
   <string name="dialog_tubemid">Middle [Real:&#x2192;0 &#8211; 10]</string>
   <string name="dialog_tubetreble">Treble [Real:&#x2192;0 &#8211; 10]</string>
-  <string name="dialog_tubetonestack">Tonestack Amount[Real:&#x2192;0 &#8211; 24]</string>
   <string name="dialog_offlineimpulseresponseresampler">Offline Resampler(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">Select IR to resample</string>
   <string name="dialog_impulseresponse">Impulse response</string>
@@ -80,7 +82,6 @@
   <string name="unmatchedsamplerate">Impulse response %1$s sample rate (%2$d) is not matching with driver sample rate(%3$d)\nWill use low quality resampler to resample&#8230;\nUse Offline Resampler for higher qualtiy resampling!</string>
   <string name="convolversuccess">Impulse response %1$s loaded\nSample rate:%2$d\nChannel info:%3$s\nSamples per channel:%4$d\nSamples per channel(Truncated):%5$d</string>
   <string name="memoryallocatefail">Cannot allocate memory for convolver</string>
-  <string name="pref_clip_title">Clip control</string>
   <string name="dialog_gain">Final gain [Int:1 &#8211; 200]%</string>
   <string name="pref_headset_stereowide_title">Stereo widener</string>
   <string name="pref_headset_stereowide_summary_on">Stereo widener is enabled</string>

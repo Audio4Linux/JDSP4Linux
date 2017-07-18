@@ -16,7 +16,7 @@ typedef struct
 EffectDSPMain::EffectDSPMain()
 	: pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), inputBuffer(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
 	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), convolver(0), tapsLPFIR(1024), normalise(0.3f)
-	, clipMode(0), tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), tubetonestack(5.0f)
+	, tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), finalGain(1.0f)
 {
 	if(hcFFTWThreadInit())
 		threadResult = 2;
@@ -361,7 +361,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				tubedrive = ((int16_t *)cep)[8] / 1000.0f;
 				if(analogModelEnable && oldVal != tubedrive)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, tubetonestack, 5.0f, 0))
+					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, toneStackEnable, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 				}
@@ -370,11 +370,11 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 151)
 			{
-				float oldVal = tubebass;
-				tubebass = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubebass)
+				int16_t oldVal = toneStackEnable;
+				toneStackEnable = ((int16_t *)cep)[8];
+				if(analogModelEnable && oldVal != toneStackEnable)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, tubetonestack, 5.0f, 0))
+					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, toneStackEnable, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 				}
@@ -383,11 +383,11 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 152)
 			{
-				float oldVal = tubemid;
-				tubemid = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubemid)
+				float oldVal = tubebass;
+				tubebass = ((int16_t *)cep)[8] / 1000.0f;
+				if(analogModelEnable && oldVal != tubebass)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, tubetonestack, 5.0f, 0))
+					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, toneStackEnable, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 				}
@@ -396,11 +396,11 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 153)
 			{
-				float oldVal = tubetreble;
-				tubetreble = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubetreble)
+				float oldVal = tubemid;
+				tubemid = ((int16_t *)cep)[8] / 1000.0f;
+				if(analogModelEnable && oldVal != tubemid)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, tubetonestack, 5.0f, 0))
+					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, toneStackEnable, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 				}
@@ -409,11 +409,11 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 154)
 			{
-				float oldVal = tubetonestack;
-				tubetonestack = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubetonestack)
+				float oldVal = tubetreble;
+				tubetreble = ((int16_t *)cep)[8] / 1000.0f;
+				if(analogModelEnable && oldVal != tubetreble)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, tubetonestack, 5.0f, 0))
+					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, toneStackEnable, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 				}
@@ -497,7 +497,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				analogModelEnable = ((int16_t *)cep)[8];
 				if(analogModelEnable && oldVal != analogModelEnable)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, tubetonestack, 5.0f, 0))
+					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, toneStackEnable, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 				}
@@ -545,15 +545,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1500)
 			{
-				int16_t value = ((int16_t *)cep)[8];
-				clipMode = value;
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 1501)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				finalGain = value / 100.0f * 32768.0f;
+				finalGain = ((int16_t *)cep)[8] / 100.0f;
 				*replyData = 0;
 				return 0;
 			}
@@ -604,19 +596,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 		return -1;
 	}
 	return Effect::command(cmdCode, cmdSize, pCmdData, replySize, pReplyData);
-}
-void EffectDSPMain::normaliseToLevel(float* buffer, size_t num_samps, float level)
-{
-	int i;
-    float amp = 0;
-    for (i=0; i<num_samps; i++)
-        amp = fmax(amp, fabsf(buffer[i]));
-
-    for (i=0; i<num_samps; i++)
-    {
-    	buffer[i] /= amp;
-    	buffer[i] *= level;
-    }
 }
 void EffectDSPMain::refreshBassLinearPhase(uint32_t actualframeCount)
 {
