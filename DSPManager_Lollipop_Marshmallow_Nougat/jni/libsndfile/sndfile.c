@@ -830,13 +830,6 @@ sf_format_check	(const SF_INFO *info)
 					return 1 ;
 				break ;
 
-		case SF_FORMAT_OGG :
-				if (endian != SF_ENDIAN_FILE)
-					return 0 ;
-				if (subformat == SF_FORMAT_VORBIS)
-					return 1 ;
-				break ;
-
 		case SF_FORMAT_MPC2K :
 				if (info->channels > 2)
 					return 0 ;
@@ -3084,10 +3077,6 @@ psf_open_file (SF_PRIVATE *psf, SF_INFO *sfinfo)
 
 		case	SF_FORMAT_SDS :
 				error = sds_open (psf) ;
-				break ;
-
-		case	SF_FORMAT_OGG :
-				error = ogg_open (psf) ;
 				break ;
 
 		case	SF_FORMAT_TXW :

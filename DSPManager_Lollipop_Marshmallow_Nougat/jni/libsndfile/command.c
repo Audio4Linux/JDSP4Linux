@@ -104,17 +104,12 @@ static SF_FORMAT_INFO const major_formats [] =
 	{	SF_FORMAT_AU,		"AU (Sun/NeXT)", 						"au"	},
 	{	SF_FORMAT_AVR,		"AVR (Audio Visual Research)",			"avr"	},
 	{	SF_FORMAT_CAF,		"CAF (Apple Core Audio File)",			"caf"	},
-#if HAVE_EXTERNAL_XIPH_LIBS
 	{	SF_FORMAT_FLAC,		"FLAC (Free Lossless Audio Codec)",		"flac"	},
-#endif
 	{	SF_FORMAT_HTK,		"HTK (HMM Tool Kit)",					"htk"	},
 	{	SF_FORMAT_SVX,		"IFF (Amiga IFF/SVX8/SV16)",			"iff"	},
 	{	SF_FORMAT_MAT4,		"MAT4 (GNU Octave 2.0 / Matlab 4.2)",	"mat"	},
 	{	SF_FORMAT_MAT5,		"MAT5 (GNU Octave 2.1 / Matlab 5.0)",	"mat"	},
 	{	SF_FORMAT_MPC2K,	"MPC (Akai MPC 2k)",					"mpc"	},
-#if HAVE_EXTERNAL_XIPH_LIBS
-	{	SF_FORMAT_OGG,		"OGG (OGG Container format)",			"oga"	},
-#endif
 	{	SF_FORMAT_PAF,		"PAF (Ensoniq PARIS)", 					"paf"	},
 	{	SF_FORMAT_PVF,		"PVF (Portable Voice Format)",			"pvf"	},
 	{	SF_FORMAT_RAW,		"RAW (header-less)",					"raw"	},

@@ -3,6 +3,7 @@
 #include <android/log.h>
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
 #endif
+#include <unistd.h>
 #include "EffectDSPMain.h"
 typedef struct
 {
@@ -150,6 +151,17 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					replyData->data = (int32_t)1;
 				else
 					replyData->data = (int32_t)0;
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+			else if (cmd == 20002)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 20002;
+				replyData->data = (int32_t)getpid();
 				*replySize = sizeof(reply1x4_1x4_t);
 				return 0;
 			}

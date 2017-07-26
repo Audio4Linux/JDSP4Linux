@@ -16,9 +16,11 @@ We don't work too much around with modifying Android framework.
 5. Stereo Widen
 6. Convolver
 
-   --> Only support mono / stereo
+   --> Support mono / stereo / full stereo(LL, LR, RL, RR)
    
    --> Samples per channels should less than 500000
+
+7. Vacuum tube modelling
 
 ## Important
 ### FAQ

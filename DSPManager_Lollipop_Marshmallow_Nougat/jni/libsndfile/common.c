@@ -1507,7 +1507,6 @@ str_of_major_format (int format)
 		CASE_NAME (SF_FORMAT_FLAC) ;
 		CASE_NAME (SF_FORMAT_CAF) ;
 		CASE_NAME (SF_FORMAT_WVE) ;
-		CASE_NAME (SF_FORMAT_OGG) ;
 		default :
 			break ;
 		} ;

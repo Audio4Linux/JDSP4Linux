@@ -349,9 +349,6 @@ psrc_set_converter (SRC_PRIVATE	*psrc, int converter_type)
 	if (sinc_set_converter (psrc, converter_type) == SRC_ERR_NO_ERROR)
 		return SRC_ERR_NO_ERROR ;
 
-	if (zoh_set_converter (psrc, converter_type) == SRC_ERR_NO_ERROR)
-		return SRC_ERR_NO_ERROR ;
-
 	if (linear_set_converter (psrc, converter_type) == SRC_ERR_NO_ERROR)
 		return SRC_ERR_NO_ERROR ;
 

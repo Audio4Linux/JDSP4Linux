@@ -133,9 +133,7 @@ int src_is_valid_ratio (double ratio) ;
 enum
 {
 	SRC_SINC_MEDIUM_QUALITY		= 0,
-	SRC_SINC_FASTEST			= 1,
-	SRC_ZERO_ORDER_HOLD			= 2,
-	SRC_LINEAR					= 3,
+	SRC_LINEAR					= 1,
 } ;
 
 #ifdef __cplusplus

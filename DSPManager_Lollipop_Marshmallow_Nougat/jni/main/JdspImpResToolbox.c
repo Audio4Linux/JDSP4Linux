@@ -81,7 +81,7 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
 		data.input_frames = sfiIRInfo.frames;
 		data.output_frames = outFramesPerChannel;
 		data.src_ratio = convertionRatio;
-		error = src_simple(&data, 3, sfiIRInfo.channels);
+		error = src_simple(&data, 1, sfiIRInfo.channels);
 		unsigned int finalOut = resampledframeCountTotal;
 		final = (int*)malloc(finalOut * sizeof(int));
 		for (i = 0; i < finalOut; i++)

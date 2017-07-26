@@ -491,12 +491,15 @@ public class HeadsetService extends Service
 		SharedPreferences preferences = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + mode, 0);
 		if (notify)
 		{
+			String pid = "";
+			if (JamesDSPGbEf != null)
+				pid = " PID:" + JamesDSPGbEf.getParameter(JamesDSPGbEf.JamesDSP, 20002);
 			if (mode == "bluetooth")
-				foregroundPersistent(getString(R.string.bluetooth_title));
+				foregroundPersistent(getString(R.string.bluetooth_title) + pid);
 			else if (mode == "headset")
-				foregroundPersistent(getString(R.string.headset_title));
+				foregroundPersistent(getString(R.string.headset_title) + pid);
 			else
-				foregroundPersistent(getString(R.string.speaker_title));
+				foregroundPersistent(getString(R.string.speaker_title) + pid);
 			Intent intent = new Intent("dsp.activity.updatePage");
 			sendBroadcast(intent);
 		}

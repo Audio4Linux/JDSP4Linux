@@ -125,12 +125,6 @@ const char* linear_get_description (int src_enum) ;
 
 int linear_set_converter (SRC_PRIVATE *psrc, int src_enum) ;
 
-/* In src_zoh.c */
-const char* zoh_get_name (int src_enum) ;
-const char* zoh_get_description (int src_enum) ;
-
-int zoh_set_converter (SRC_PRIVATE *psrc, int src_enum) ;
-
 /*----------------------------------------------------------
 **	Common static inline functions.
 */

@@ -31,7 +31,6 @@
 typedef int32_t increment_t ;
 typedef float	coeff_t ;
 
-#include "fastest_coeffs.h"
 #include "mid_qual_coeffs.h"
 
 typedef struct
@@ -139,12 +138,7 @@ sinc_set_converter (SRC_PRIVATE *psrc, int src_enum)
 	psrc->reset = sinc_reset ;
 
 	switch (src_enum)
-	{	case SRC_SINC_FASTEST :
-				temp_filter.coeffs = fastest_coeffs.coeffs ;
-				temp_filter.coeff_half_len = ARRAY_LEN (fastest_coeffs.coeffs) - 2 ;
-				temp_filter.index_inc = fastest_coeffs.increment ;
-				break ;
-
+	{
 		case SRC_SINC_MEDIUM_QUALITY :
 				temp_filter.coeffs = slow_mid_qual_coeffs.coeffs ;
 				temp_filter.coeff_half_len = ARRAY_LEN (slow_mid_qual_coeffs.coeffs) - 2 ;

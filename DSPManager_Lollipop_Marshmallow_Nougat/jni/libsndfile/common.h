@@ -891,21 +891,6 @@ int		caf_open	(SF_PRIVATE *psf) ;
 int		mpc2k_open	(SF_PRIVATE *psf) ;
 int		rf64_open	(SF_PRIVATE *psf) ;
 
-int		ogg_vorbis_open	(SF_PRIVATE *psf) ;
-int		ogg_speex_open	(SF_PRIVATE *psf) ;
-int		ogg_pcm_open	(SF_PRIVATE *psf) ;
-int		ogg_opus_open	(SF_PRIVATE *psf) ;
-int		ogg_open	(SF_PRIVATE *psf) ;
-
-
-/* In progress. Do not currently work. */
-
-int		mpeg_open	(SF_PRIVATE *psf) ;
-int		rx2_open	(SF_PRIVATE *psf) ;
-int		txw_open	(SF_PRIVATE *psf) ;
-int		wve_open	(SF_PRIVATE *psf) ;
-int		dwd_open	(SF_PRIVATE *psf) ;
-
 /*------------------------------------------------------------------------------------
 **	Init functions for a number of common data encodings.
 */
