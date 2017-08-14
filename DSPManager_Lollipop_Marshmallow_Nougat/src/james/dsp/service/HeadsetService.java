@@ -613,8 +613,12 @@ public class HeadsetService extends Service
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
 				int normalise = (int) (Float.valueOf((preferences.getString("dsp.convolver.normalise", "0.2")))*1000);
-				if(oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality && oldnormalise == normalise)
-					return;
+				int requiredRefresh = session.getParameter(session.JamesDSP, 20001);
+				if (modeEffect == 0)
+				{
+					if((oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality && oldnormalise == normalise) && requiredRefresh == 0)
+						return;	
+				}
 				oldImpulseName = mConvIRFilePath;
 				oldQuality = quality;
 				oldnormalise = normalise;
@@ -637,8 +641,8 @@ public class HeadsetService extends Service
 						int impulseCutted = (int)(impulseResponse.length * quality);
 						if (impinfo[0] == 2 && impulseCutted > 800000 && forcedShrink == 1)
 							impulseCutted = 800000;
-						if (impinfo[0] == 4 && impulseCutted > 131072 && forcedShrink == 1)
-							impulseCutted = 131072;
+						if (impinfo[0] == 4 && impulseCutted > 320000 && forcedShrink == 1)
+							impulseCutted = 320000;
 						int[] sendArray = new int[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
 						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], normalise, numTime2Send};
