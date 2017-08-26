@@ -89,21 +89,5 @@ private:
     double ab;
     double ab_2;
 };
-class BandStopTransform
-{
-public:
-    BandStopTransform (double fc,
-                       double fw,
-                       LayoutBase& digital,
-                       LayoutBase const& analog);
-private:
-    ComplexPair transform (complex_t c);
-    double wc;
-    double wc2;
-    double a;
-    double b;
-    double a2;
-    double b2;
-};
 }
 #endif

@@ -1,7 +1,7 @@
 #ifndef WDFCIRCUITS_H
 #define WDFCIRCUITS_H
 #define EPSILON 1e-9
-#define TOLERANCE 1e-6
+#define TOLERANCE 1e-2
 
 typedef double Real;
 

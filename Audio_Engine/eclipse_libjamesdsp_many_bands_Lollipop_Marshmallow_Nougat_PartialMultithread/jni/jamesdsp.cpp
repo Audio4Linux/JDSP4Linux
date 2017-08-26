@@ -91,7 +91,8 @@ extern "C" {
     };
     int32_t EffectCreate(const effect_uuid_t *uuid, int32_t sessionId, int32_t ioId, effect_handle_t *pEffect)
     {
-        if (memcmp(uuid, &jamesdsp_descriptor.uuid, sizeof(effect_uuid_t)) == 0)
+    	size_t uuidSize = sizeof(effect_uuid_t);
+        if (!memcmp(uuid, &jamesdsp_descriptor.uuid, uuidSize))
         {
             struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
             e->itfe = &generic_interface;
@@ -100,7 +101,7 @@ extern "C" {
             *pEffect = (effect_handle_t) e;
             return 0;
         }
-    	if (memcmp(uuid, &equalizer_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+    	if (!memcmp(uuid, &equalizer_descriptor.uuid, uuidSize)) {
     		struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
     		e->itfe = &generic_interface;
             e->effect = new EffectDSPMain();
@@ -108,7 +109,7 @@ extern "C" {
     		*pEffect = (effect_handle_t) e;
     		return 0;
     	}
-    	if (memcmp(uuid, &virtualizer_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+    	if (!memcmp(uuid, &virtualizer_descriptor.uuid, uuidSize)) {
     		struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
     		e->itfe = &generic_interface;
             e->effect = new EffectDSPMain();
@@ -116,7 +117,7 @@ extern "C" {
     		*pEffect = (effect_handle_t) e;
     		return 0;
     	}
-    	if (memcmp(uuid, &bassboost_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
+    	if (!memcmp(uuid, &bassboost_descriptor.uuid, uuidSize)) {
     		struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
     		e->itfe = &generic_interface;
             e->effect = new EffectDSPMain();
@@ -135,21 +136,23 @@ extern "C" {
     }
     int32_t EffectGetDescriptor(const effect_uuid_t *uuid, effect_descriptor_t *pDescriptor)
     {
-        if (memcmp(uuid, &jamesdsp_descriptor.uuid, sizeof(effect_uuid_t)) == 0)
+    	size_t uuidSize = sizeof(effect_uuid_t);
+    	size_t descriptorSize = sizeof(effect_descriptor_t);
+        if (!memcmp(uuid, &jamesdsp_descriptor.uuid, uuidSize))
         {
-            memcpy(pDescriptor, &jamesdsp_descriptor, sizeof(effect_descriptor_t));
+            memcpy(pDescriptor, &jamesdsp_descriptor, descriptorSize);
             return 0;
         }
-    	if (memcmp(uuid, &equalizer_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
-    	    memcpy(pDescriptor, &equalizer_descriptor, sizeof(effect_descriptor_t));
+    	if (!memcmp(uuid, &equalizer_descriptor.uuid, uuidSize)) {
+    	    memcpy(pDescriptor, &equalizer_descriptor, descriptorSize);
     	    return 0;
     	}
-    	if (memcmp(uuid, &virtualizer_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
-    	    memcpy(pDescriptor, &virtualizer_descriptor, sizeof(effect_descriptor_t));
+    	if (!memcmp(uuid, &virtualizer_descriptor.uuid, uuidSize)) {
+    	    memcpy(pDescriptor, &virtualizer_descriptor, descriptorSize);
     	    return 0;
     	}
-    	if (memcmp(uuid, &bassboost_descriptor.uuid, sizeof(effect_uuid_t)) == 0) {
-    	    memcpy(pDescriptor, &bassboost_descriptor, sizeof(effect_descriptor_t));
+    	if (!memcmp(uuid, &bassboost_descriptor.uuid, uuidSize)) {
+    	    memcpy(pDescriptor, &bassboost_descriptor, descriptorSize);
     	    return 0;
     	}
         return -EINVAL;

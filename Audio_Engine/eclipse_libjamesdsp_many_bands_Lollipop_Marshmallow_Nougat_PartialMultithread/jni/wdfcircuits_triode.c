@@ -1,30 +1,9 @@
 #include <math.h>
 #include "wdfcircuits_triode.h"
 
-Real sanitize_denormald(Real v)
-{
-	if (!isnormal(v) || !isfinite(v))
-		return 0.0;
-	return v;
-}
 float from_dB(float gdb)
 {
 	return (float)exp(gdb / 20.f*log(10.f));
-}
-
-Real getC(Triode *triode)
-{
-	return triode->Kb;
-}
-
-Real getP(Triode *triode)
-{
-	return triode->Pb;
-}
-
-Real getG(Triode *triode)
-{
-	return triode->Gb;
 }
 
 void compute(Triode *triode, Real Pbb, Real Gbb, Real Kbb)
@@ -46,22 +25,22 @@ void compute(Triode *triode, Real Pbb, Real Gbb, Real Kbb)
 
 	vg0 = -10.0;
 	vg1 = 10.0;
-	triode->vg = sanitize_denormald(zeroffg(triode, vg0, vg1, TOLERANCE));
+	triode->vg = zeroffg(triode, vg0, vg1, TOLERANCE);
 	//v.vg = v.secantfg(&vg0,&vg1);
 
 	vp0 = triode->e;
 	vp1 = 0.0;
 	if (triode->insane)
 	{
-		triode->vp = sanitize_denormald(zeroffp_insane(triode, vp0, vp1, TOLERANCE));
+		triode->vp = zeroffp_insane(triode, vp0, vp1, TOLERANCE);
 	}
 	else
 	{
-		triode->vp = sanitize_denormald(zeroffp(triode, vp0, vp1, TOLERANCE));
+		triode->vp = zeroffp(triode, vp0, vp1, TOLERANCE);
 	}
 	//v.vp = v.secantfp(&vp0,&vp1);
 
-	triode->vk = sanitize_denormald(ffk(triode));
+	triode->vk = ffk(triode);
 
 	triode->Kb = (2.0*triode->vk - triode->Kb);
 	triode->Gb = (2.0*triode->vg - triode->Gb);
@@ -551,9 +530,9 @@ void updateRValues(TubeStageCircuit *ckt, Real C_Ci, Real C_Ck, Real C_Co, Real 
     Real P2_1R = S2_3R;
     Real P2_2R = E250R;
     ckt->P2_3Gamma1 = 1.0 / P2_1R / (1.0 / P2_1R + 1.0 / P2_2R);
-    ckt->t.Kr = sanitize_denormald(ckt->I3_3Gamma1);
-    ckt->t.Pr = sanitize_denormald(ckt->S2_3Gamma1);
-    ckt->t.Gr = sanitize_denormald(ckt->S1_3Gamma1);
+    ckt->t.Kr = ckt->I3_3Gamma1;
+    ckt->t.Pr = ckt->S2_3Gamma1;
+    ckt->t.Gr = ckt->S1_3Gamma1;
 }
 
 Real advanc(TubeStageCircuit *ckt, Real VE)
@@ -570,9 +549,9 @@ Real advanc(TubeStageCircuit *ckt, Real VE)
     Real P2_3b3 = ckt->E250E - ckt->P2_3Gamma1*(ckt->E250E - S2_3b3);
     //Tube:    K       G      P
     compute(&ckt->t, I3_3b3, S1_3b3, P2_3b3);
-    Real b1 = getC(&ckt->t);
-    Real b2 = getG(&ckt->t);
-    Real b3 = getP(&ckt->t);
+    Real b1 = ckt->t.Kb;
+	Real b2 = ckt->t.Gb;
+    Real b3 = ckt->t.Pb;
     //Set As
     Real I3_3b1 = b1 - Ckb - ckt->I3_3Gamma1*(-Ckb);
     ckt->Cka = I3_3b1;

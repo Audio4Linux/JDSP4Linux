@@ -1,6 +1,5 @@
 #include "Common.h"
 #include "RootFinder.h"
-#include <stdexcept>
 #ifdef _MSC_VER
 #include <algorithm>
 #endif
