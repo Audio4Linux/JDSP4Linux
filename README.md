@@ -1,7 +1,7 @@
 # JamesDSPManager (Audio Effect Digital Signal Processing library for Android)
 GUI is based on Omnirom DSP Manager and able to run in all recent Android rom include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
-This app don't work too much around with modifying Android framework.
+We don't work too much around with modifying Android framework.
 
 ##### Basic:
 
@@ -12,7 +12,7 @@ This app don't work too much around with modifying Android framework.
 3. Reverberation
 
    --> GVerb and Progenitor 2
-4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves) (Generate 3/4th order IIR filter on-the-fly, with relatively flat response)
+4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves)(Different bands designed with different filter order)
 5. Stereo Widen
 6. Convolver
 
@@ -30,9 +30,9 @@ A: Float32
 
 #### 2. Bass boost filter type?
 
-A: Effect have 2 option to boost low frequency, IIR based is obsoleted, eqaulizer already do the job.
+A: Effect have 3 algorithms to boost low frequency, the first one is the traditional one from previous release, based on IIR Filter.
 
-   Linear phase filter type is work on convolution basis. When user change the bass boost parameter, engine will compute new low pass filter impulse response.
+   Linear phase filter type is work on convolution basis. When user change the bass boost parameter, driver will compute new low pass filter impulse response.
    
    4095 order FIR filter should work on all frequency listed on options, 1023 order should work well above 80Hz.
 
@@ -40,14 +40,14 @@ A: Effect have 2 option to boost low frequency, IIR based is obsoleted, eqaulize
 
 A: Convolver is a effect apply convolution mathematical operation on audio signal, that perfectly apply user desired impulse response on music, it could simulate physical space.
 
-   Effect itself require audio file(.wav/.irs/.flac) to become impulse response source, long impulse(> 800000 samples) will be cutoff, however x86 device will have no restriction.
+   Effect itself require audio file(.wav) to become impulse response source.
 
    For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
 
 #### 3. What is Analog Modelling?
 
 A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [ZamAudio](https://github.com/zamaudio).
-The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will clip the audio. All analog circuit was built from real mathematical model.
+The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich, tonestack can be disabled by checkbox. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0, because of input audio amplitude is decided by user, louder volume will generate more harmonics and internal amplifier will clip the audio. All analog circuit was built from real mathematical model.
 Original is written in C++, for some reasons I ported it to C implementation.
 
 #### 5. What is Misc folder does?
@@ -134,7 +134,7 @@ All compatibility supporting by James Fung
 
 Android framework components by Google
 
-Advanced IIR filters library by Vinnie Falco, modify by Bernd Porr, with shrinked to minimum features needed.
+Advanced IIR filters library by Vinnie Falco, modify by Bernd Porr
 
 Source code is provided under the [GPL V2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 

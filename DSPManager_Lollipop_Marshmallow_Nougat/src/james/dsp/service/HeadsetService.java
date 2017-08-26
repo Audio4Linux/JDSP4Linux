@@ -559,7 +559,6 @@ public class HeadsetService extends Service
 				session.setParameterShort(session.JamesDSP, 105, (short)(Float.valueOf((preferences.getString("dsp.compression.release", "0.01")))*1000));
 			}
 			session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
-			session.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
 			if (bassBoostEnabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 112, Short.valueOf(preferences.getString("dsp.bass.mode", "80")));
@@ -567,10 +566,11 @@ public class HeadsetService extends Service
 				session.setParameterShort(session.JamesDSP, 113, filtertype);
 				short freq = Short.valueOf(preferences.getString("dsp.bass.freq", "55"));
 				session.setParameterShort(session.JamesDSP, 114, freq);
-				if(DSPManager.devMsgDisplay)
-				if(filtertype == 0 && freq < 90)
+				if(filtertype == 1 && freq < 80)
+					if(DSPManager.devMsgDisplay)
 						Toast.makeText(HeadsetService.this, R.string.preferredlpf, Toast.LENGTH_SHORT).show();
 			}
+			session.setParameterShort(session.JamesDSP, 1201, (short)bassBoostEnabled); // Bass boost switch
 			if (equalizerEnabled == 1)
 			{
 				/* Equalizer state is in a single string preference with all values separated by ; */
@@ -677,10 +677,15 @@ public class HeadsetService extends Service
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
 			if (analogModelEnabled == 1 && updateMajor)
 			{
+				short toneStackonOff = (short) (preferences.getBoolean("dsp.analogmodelling.tonestack", true) ? 1 : 0);
 				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
-				session.setParameterShort(session.JamesDSP, 151, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubebass", "8"))*1000));
-				session.setParameterShort(session.JamesDSP, 152, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubemid", "5.6"))*1000));
-				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "4.5"))*1000));
+				session.setParameterShort(session.JamesDSP, 151, toneStackonOff);
+				if(toneStackonOff == 1)
+				{
+					session.setParameterShort(session.JamesDSP, 152, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubebass", "8"))*1000));
+					session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubemid", "5.6"))*1000));
+					session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "4.5"))*1000));
+				}
 			}
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 		}

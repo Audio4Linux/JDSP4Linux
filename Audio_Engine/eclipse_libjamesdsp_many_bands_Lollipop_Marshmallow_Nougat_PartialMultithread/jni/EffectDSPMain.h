@@ -26,6 +26,8 @@ protected:
 		float **in;
 		size_t frameCount;
 	} ptrThreadParamsTube;
+	static void *threadingEqRefresh(void *args);
+	static void *threadingConvSingle(void *args); // 1 thread is used
 	static void *threadingConv(void *args);
 	static void *threadingTube(void *args);
 	ptrThreadParamsConv rightparams1;
@@ -44,6 +46,9 @@ protected:
 	HConvSingle *bassBoostLp, *convolver;
 	tubeFilter tubeP[2];
 	int threadResult;
+	// Bass boost
+	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbL;
+	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> bbR;
 	// Equalizer
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> lsl;
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> lsr;
@@ -69,18 +74,19 @@ protected:
 	float pregain, threshold, knee, ratio, attack, release;
 	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable;
+	int16_t toneStackEnable, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable;
 	int16_t numTime2Send, samplesInc, impChannels, previousimpChannels;
-	float tubedrive, tubebass, tubemid, tubetreble;
+	float tubedrive, tubebass, tubemid, tubetreble, tubetonestack;
 	float normalise;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
 	void refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR);
-	int refreshConvolver(uint32_t actualframeCount);
+	void refreshConvolver(uint32_t actualframeCount);
 	void refreshStereoWiden(uint32_t parameter);
 	void refreshCompressor();
 	void refreshEqBands(double *bands);
 	void refreshReverb();
+	void refreshBass();
 	inline float normaliseToLevel(float* buffer, size_t num_frames, float level)
 	{
 		int i;

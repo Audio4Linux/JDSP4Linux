@@ -58,6 +58,9 @@
   <string name="pref_analogmodelling_summary_on">Analog Modelling is enabled</string>
   <string name="pref_analogmodelling_summary_off">Analog Modelling is disabled</string>
   <string name="pref_analogmodelling_enable">Analog Modelling enable</string>
+  <string name="pref_analogmodelling_tonestack_on">Analog tonestack is enabled</string>
+  <string name="pref_analogmodelling_tonestack_off">Analog tonestack is disabled</string>
+  <string name="pref_analogmodelling_tonestack_enable">Analog tonestack</string>
   <string name="dialog_tubedrive">Preamp(Harmonics) [Real:→0 – 12]</string>
   <string name="dialog_tubebass">Bass [Real:&#x2192;0 &#8211; 10]</string>
   <string name="dialog_tubemid">Middle [Real:&#x2192;0 &#8211; 10]</string>

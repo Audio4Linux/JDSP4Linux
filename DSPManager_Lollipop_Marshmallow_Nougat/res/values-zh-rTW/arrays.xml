@@ -38,6 +38,7 @@
     <item>極端</item>
   </string-array>
   <string-array name="bassboost_filtertype">
+    <item>24dB/Oct Butterworth濾波器</item>
     <item>線性相位1023階低通濾波器</item>
     <item>線性相位4095階低通濾波器</item>
   </string-array>

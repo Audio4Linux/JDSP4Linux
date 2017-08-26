@@ -18,6 +18,23 @@ struct ComplexPair : complex_pair_t
         : complex_pair_t (c1, c2)
     {
     }
+    bool isConjugate () const
+    {
+        return second == std::conj (first);
+    }
+    bool isReal () const
+    {
+        return first.imag() == 0 && second.imag() == 0;
+    }
+    bool isMatchedPair () const
+    {
+        if (first.imag() != 0)
+            return second == std::conj (first);
+        else
+            return second.imag () == 0 &&
+                   second.real () != 0 &&
+                   first.real () != 0;
+    }
 };
 struct PoleZeroPair
 {
@@ -38,6 +55,17 @@ struct PoleZeroPair
     {
         return poles.second == 0. && zeros.second == 0.;
     }
+};
+enum Kind
+{
+    kindLowPass,
+    kindHighPass,
+    kindBandPass,
+    kindBandStop,
+    kindLowShelf,
+    kindHighShelf,
+    kindBandShelf,
+    kindOther
 };
 }
 #endif

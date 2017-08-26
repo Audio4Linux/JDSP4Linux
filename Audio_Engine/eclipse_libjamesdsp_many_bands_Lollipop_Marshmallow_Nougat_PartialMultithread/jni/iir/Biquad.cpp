@@ -35,6 +35,29 @@ BiquadPoleState::BiquadPoleState (const BiquadBase& s)
     }
     gain = b0 / a0;
 }
+complex_t BiquadBase::response (double normalizedFrequency) const
+{
+    const double a0 = getA0 ();
+    const double a1 = getA1 ();
+    const double a2 = getA2 ();
+    const double b0 = getB0 ();
+    const double b1 = getB1 ();
+    const double b2 = getB2 ();
+    const double w = 2 * doublePi * normalizedFrequency;
+    const complex_t czn1 = std::polar (1., -w);
+    const complex_t czn2 = std::polar (1., -2 * w);
+    complex_t ch (1);
+    complex_t cbot (1);
+    complex_t ct (b0/a0);
+    complex_t cb (1);
+    ct = addmul (ct, b1/a0, czn1);
+    ct = addmul (ct, b2/a0, czn2);
+    cb = addmul (cb, a1/a0, czn1);
+    cb = addmul (cb, a2/a0, czn2);
+    ch *= ct;
+    cbot *= cb;
+    return ch / cbot;
+}
 std::vector<PoleZeroPair> BiquadBase::getPoleZeros () const
 {
     std::vector<PoleZeroPair> vpz;
@@ -97,6 +120,10 @@ void BiquadBase::setPoleZeroForm (const BiquadPoleState& bps)
 {
     setPoleZeroPair (bps);
     applyScale (bps.gain);
+}
+void BiquadBase::setIdentity ()
+{
+    setCoefficients (1, 0, 0, 1, 0, 0);
 }
 void BiquadBase::applyScale (double scale)
 {

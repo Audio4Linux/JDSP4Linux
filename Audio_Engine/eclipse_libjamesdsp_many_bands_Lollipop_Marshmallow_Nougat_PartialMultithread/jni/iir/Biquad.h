@@ -19,6 +19,7 @@ public:
         }
     };
 public:
+    complex_t response (double normalizedFrequency) const;
     std::vector<PoleZeroPair> getPoleZeros () const;
     double getA0 () const
     {
@@ -64,6 +65,7 @@ protected:
                         pair.poles.second, pair.zeros.second);
     }
     void setPoleZeroForm (const BiquadPoleState& bps);
+    void setIdentity ();
     void applyScale (double scale);
 public:
     double m_a0;

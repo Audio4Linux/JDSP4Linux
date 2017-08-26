@@ -131,6 +131,14 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "10";
             setSummary(value);
     	}
+    	if(key.equals("dsp.analogmodelling.tubetonestack"))
+    	{
+            if(valueFloat < 0)
+            	value = "0";
+            if(valueFloat > 24)
+            	value = "24";
+            setSummary(value);
+    	}	 
         super.setText(value);
     }
 
