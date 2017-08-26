@@ -69,11 +69,6 @@
     <item>0</item>
     <item>1</item>
   </string-array>
-  <string-array name="clip_mode_values" translatable="false">
-    <item>0</item>
-    <item>1</item>
-  </string-array>
-
   <string-array name="equalizer_preset_modes" translatable="false">
     <item>@string/eq_preset_acoustic</item>
     <item>@string/eq_preset_bass_booster</item>
@@ -129,7 +124,6 @@
   </string-array>
 
   <string-array name="bassboost_filtertype">
-    <item>24dB/Octave(4th order Butterworth shelve)</item>
     <item>Linear phase 1024 taps low pass filter</item>
     <item>Linear phase 4096 taps low pass filter</item>
   </string-array>
@@ -137,7 +131,6 @@
   <string-array name="bassboost_filtertype_values" translatable="false">
     <item>0</item>
     <item>1</item>
-    <item>2</item>
   </string-array>
 
   <string-array name="bassboost_modes_values" translatable="false">

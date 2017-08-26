@@ -212,12 +212,6 @@
         android:title="@string/dialog_tubedrive"
         android:inputType="numberDecimal"
         android:digits="0123456789." />
-    <CheckBoxPreference
-        android:key="dsp.analogmodelling.tonestack"
-        android:disableDependentsState="false"
-        android:summaryOn="@string/pref_analogmodelling_tonestack_on"
-        android:summaryOff="@string/pref_analogmodelling_tonestack_off"
-        android:title="@string/pref_analogmodelling_tonestack_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.analogmodelling.tubebass"
         android:defaultValue="8"

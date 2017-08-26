@@ -63,9 +63,6 @@
   <string name="pref_analogmodelling_summary_on">已啟用真空管放大器</string>
   <string name="pref_analogmodelling_summary_off">已停用真空管放大器</string>
   <string name="pref_analogmodelling_enable">使用模擬放大器</string>
-  <string name="pref_analogmodelling_tonestack_on">已啟用模擬音色 </string>
-  <string name="pref_analogmodelling_tonestack_off">已停用模擬音色 </string>
-  <string name="pref_analogmodelling_tonestack_enable">模擬音色</string>
   <string name="dialog_tubedrive">預增益(諧波) [實數:0 &#8211; 12]</string>
   <string name="dialog_tubebass">低音 [實數:0 &#8211; 10]</string>
   <string name="dialog_tubemid">中音 [實數:0 &#8211; 10]</string>
