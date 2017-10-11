@@ -2,8 +2,7 @@
 // Modified by James34602 (James34602) for more efficient processing
 // Changes:
 // 1. Remove sample in/out structure
-// 2. Change almost all stack allocate to heap, because blow up stack if allocation a too big...
-// 3. Change file extension to cpp for easy integrate with c++ program
+// 2. Change almost all stack allocate to heap, because stack will blow up if allocation large amount of memory...
 // MIT License
 // Project Home: https://github.com/voidqk/sndfilter
 // Using in: JamesDSPManager

@@ -126,11 +126,13 @@
   <string-array name="bassboost_filtertype">
     <item>Linear phase 1024 taps low pass filter</item>
     <item>Linear phase 4096 taps low pass filter</item>
+    <item>Linear phase 8192 taps low pass filter</item>
   </string-array>
 
   <string-array name="bassboost_filtertype_values" translatable="false">
     <item>0</item>
     <item>1</item>
+    <item>2</item>
   </string-array>
 
   <string-array name="bassboost_modes_values" translatable="false">

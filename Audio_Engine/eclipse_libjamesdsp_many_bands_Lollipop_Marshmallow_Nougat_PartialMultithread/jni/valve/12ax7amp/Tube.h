@@ -1,7 +1,6 @@
 #ifndef __TUBE_H__
 #define __TUBE_H__
 #include "wdfcircuits_triode.h"
-#define DANGER 1000.f
 
 typedef struct str_tubeFilter
 {

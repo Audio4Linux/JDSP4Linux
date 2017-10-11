@@ -28,7 +28,7 @@
   <string name="dialog_release">釋放幅度 [實數:0 &#8211; 1]</string>
   <string name="pref_effect_title">選擇效果程度</string>
   <string name="dialog_filtertype">濾波器類型</string>
-  <string name="pref_effect_freq_title">截止頻率 [整數:40 &#8211; 250]Hz</string>
+  <string name="pref_effect_freq_title">截止頻率 [整數:30 &#8211; 300]Hz</string>
   <string name="dialog_freq">濾波頻率</string>
   <string name="dialog_effect">效果程度</string>
   <string name="pref_equalizer_title">混合等化器</string>

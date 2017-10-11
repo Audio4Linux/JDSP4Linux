@@ -1,9 +1,9 @@
 #include <math.h>
 #include "wdfcircuits_triode.h"
 
-float from_dB(float gdb)
+Real from_dB(Real gdb)
 {
-	return (float)exp(gdb / 20.f*log(10.f));
+	return exp(gdb / 20.0*log(10.0));
 }
 
 void compute(Triode *triode, Real Pbb, Real Gbb, Real Kbb)

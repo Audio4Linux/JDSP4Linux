@@ -24,6 +24,7 @@ import james.dsp.activity.DSPManager;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -231,13 +232,15 @@ public class HeadsetService extends Service
 	private float[] mOverriddenEqualizerLevels;
 
 	private int[] eqLevels = new int[10];
+	public static int[] bench_c0 = new int[10];
+	public static int[] bench_c1 = new int[10];
+	public static int benchNum = 0;
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
 	private String oldImpulseName = "";
 	private float oldQuality = 0;
 	private int oldnormalise = 0;
-	private int forcedShrink = 0;
 	public static JDSPModule JamesDSPGbEf;
 	private SharedPreferences preferencesMode;
 	public static int dspModuleSamplingRate = 0;
@@ -360,6 +363,38 @@ public class HeadsetService extends Service
 			.build();
 		startForeground(1, statusNotify);
 	}
+
+class StartUpOptimiserThread implements Runnable {
+	int times;
+	int tarSmpRate;
+	StartUpOptimiserThread(int entriesGen, int fs) {
+		if (entriesGen > 10)
+			entriesGen = 10;
+	       times = entriesGen;
+	       tarSmpRate = fs;
+	   }
+	   public void run() {
+		   double[] c0 = new double[10];
+		   double[] c1 = new double[10];
+		   benchNum = JdspImpResToolbox.FFTConvolutionBenchmark(times, tarSmpRate, c0, c1);
+			for (int i = 0 ; i < benchNum; i++)
+			{
+				double tmpCheck = c0[i] * 1.4317e+09;
+				if (tmpCheck > (double)Integer.MAX_VALUE - 1)
+					bench_c0[i] = Integer.MAX_VALUE - 1;
+				else
+					bench_c0[i] = (int)(c0[i] * 1.4317e+09);
+				tmpCheck = c1[i] * 1.4317e+09;
+				if (tmpCheck > (double)Integer.MAX_VALUE - 1)
+					bench_c1[i] = Integer.MAX_VALUE - 1;
+				else
+					bench_c1[i] = (int)(c1[i] * 1.4317e+09);
+			}
+/*			Log.i(DSPManager.TAG, "(Int)c0: " + Arrays.toString(bench_c0));
+			Log.i(DSPManager.TAG, "(Int)c1: " + Arrays.toString(bench_c1));*/
+			updateDsp(true, false);
+	   }
+	}
 	@Override
 	public void onCreate()
 	{
@@ -396,10 +431,12 @@ public class HeadsetService extends Service
 				JamesDSPGbEf = null;
 			}
 		}
+		if (bench_c0[0] == 0 || bench_c1[1] == 0)
+		{
+	        Runnable runner = new StartUpOptimiserThread(10, 48000);
+	        new Thread(runner).start();
+		}
 		updateDsp(true, false);
-		String arch = System.getProperty("os.arch");
-		if(arch.contains("arm"))
-			forcedShrink = 1;
 	}
 
 	@Override
@@ -542,11 +579,18 @@ public class HeadsetService extends Service
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
 			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
 			int analogModelEnabled = preferences.getBoolean("dsp.analogmodelling.enable", false) ? 1 : 0;
+			int wavechild670Enabled = preferences.getBoolean("dsp.wavechild670.enable", false) ? 1 : 0;
 			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
 			if (dspModuleSamplingRate == 0)
 			{
 				Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
 				return;
+			}
+			int convolutionBenchmarkDataReady = session.getParameter(session.JamesDSP, 20003);
+			if (convolutionBenchmarkDataReady == 0 && bench_c0[0] > 0 && bench_c1[0] > 0)
+			{
+				session.setParameterIntArray(session.JamesDSP, 1997, bench_c0);
+				session.setParameterIntArray(session.JamesDSP, 1998, bench_c1);
 			}
 			session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
 			if (compressorEnabled == 1 && updateMajor)
@@ -637,12 +681,11 @@ public class HeadsetService extends Service
 					else
 					{
 						int arraySize2Send = 4096;
+						Log.e(DSPManager.TAG, "Real frame count: " + impinfo[1]);
 						impinfo[1] = impulseResponse.length / impinfo[0];
-						int impulseCutted = (int)(impulseResponse.length * quality);
-						if (impinfo[0] == 2 && impulseCutted > 800000 && forcedShrink == 1)
-							impulseCutted = 800000;
-						if (impinfo[0] == 4 && impulseCutted > 320000 && forcedShrink == 1)
-							impulseCutted = 320000;
+						int impulseCutted = impulseResponse.length;
+						Log.e(DSPManager.TAG, "impulseResponse.length: " + impulseResponse.length + " impulseCutted: " + impulseCutted);
+						impulseCutted = (int)(impulseCutted * quality);
 						int[] sendArray = new int[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
 						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], normalise, numTime2Send};
@@ -683,6 +726,14 @@ public class HeadsetService extends Service
 				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "4.5"))*1000));
 			}
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
+			if (wavechild670Enabled == 1 && updateMajor)
+			{
+				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.compdrive", "2"))*1000));
+/*				session.setParameterShort(session.JamesDSP, 155, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubebass", "8"))*1000));
+				session.setParameterShort(session.JamesDSP, 156, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubemid", "5.6"))*1000));
+				session.setParameterShort(session.JamesDSP, 157, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubetreble", "4.5"))*1000));*/
+			}
+			session.setParameterShort(session.JamesDSP, 1207, (short)wavechild670Enabled); // Analog modelling switch
 		}
 	}
 }

@@ -77,10 +77,10 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	}
     	if(key.equals("dsp.bass.freq"))
     	{
-            if(valueFloat < 40)
-            	value = "40";
-            if(valueFloat > 250)
-            	value = "250";
+            if(valueFloat < 30)
+            	value = "30";
+            if(valueFloat > 300)
+            	value = "300";
             setSummary(value+"Hz");
     	}
     	if(key.equals("dsp.headphone.roomsize") || key.equals("dsp.headphone.reverbtime"))
@@ -115,7 +115,7 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "100";
             setSummary(value);
     	}
-    	if(key.equals("dsp.analogmodelling.tubedrive"))
+    	if(key.equals("dsp.analogmodelling.tubedrive") || key.equals("dsp.wavechild670.compdrive"))
     	{
             if(valueFloat < 0)
             	value = "0";

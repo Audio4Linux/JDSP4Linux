@@ -4,6 +4,7 @@
 #include <math.h>
 #include "../libsndfile\sndfile.h"
 #include "../libsamplerate\samplerate.h"
+#include "AutoConvolver.h"
 SF_INFO sfiIRInfo;
 SNDFILE *sfIRFile;
 JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_GetLoadImpulseResponseInfo
@@ -165,4 +166,33 @@ JNIEXPORT jstring JNICALL Java_james_dsp_activity_JdspImpResToolbox_OfflineAudio
 	jstring finalName = (*env)->NewStringUTF(env, filenameIR);
 	free(filenameIR);
 	return finalName;
+}
+JNIEXPORT jint JNICALL Java_james_dsp_activity_JdspImpResToolbox_FFTConvolutionBenchmark
+(JNIEnv *env, jobject obj, jint entriesGen, jint fs, jdoubleArray c0, jdoubleArray c1)
+{
+	double **result = PartitionHelperDirect(entriesGen, fs);
+	jdouble *bufc0 = (*env)->GetDoubleArrayElements(env, c0, 0);
+	jdouble *bufc1 = (*env)->GetDoubleArrayElements(env, c1, 0);
+	int length = (int)(*env)->GetArrayLength(env, c0);
+	if (length < entriesGen)
+		entriesGen = length;
+	for (int i = 0; i < entriesGen; i++)
+	{
+		bufc0[i] = result[0][i];
+		bufc1[i] = result[1][i];
+	}
+	free(result[0]);
+	free(result[1]);
+	free(result);
+	(*env)->ReleaseDoubleArrayElements(env, c0, bufc0, 0);
+	(*env)->ReleaseDoubleArrayElements(env, c1, bufc1, 0);
+	return entriesGen;
+}
+JNIEXPORT jstring JNICALL Java_james_dsp_activity_JdspImpResToolbox_FFTConvolutionBenchmarkToString
+(JNIEnv *env, jobject obj, jint entriesGen, jint fs)
+{
+	char *result = PartitionHelper(entriesGen, fs);
+	jstring finalResult = (*env)->NewStringUTF(env, result);
+	free(result);
+	return finalResult;
 }

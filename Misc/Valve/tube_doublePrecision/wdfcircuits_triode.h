@@ -1,7 +1,6 @@
 #ifndef WDFCIRCUITS_H
 #define WDFCIRCUITS_H
-#define EPSILON 1e-9
-#define TOLERANCE 1e-2
+#define TOLERANCE 1e-6
 
 typedef double Real;
 
@@ -12,8 +11,6 @@ typedef struct str_triode
 
 	Real vg, vk, vp;
 	Real g, mu, gamma, c, gg, e, cg, ig0;
-	Real g1, mu1, gamma1, c1, gg1, e1, cg1, ig01;
-	Real g2, mu2, gamma2, c2, gg2, e2, cg2, ig02;
     Real r8_epsilon;
 	int insane;
 } Triode;
@@ -42,13 +39,9 @@ Real ffp_insane(Triode *triode, Real VP);
 Real fpdash(Triode *triode, Real VP);
 Real ffk(Triode *triode);
 
-Real sanitize_denormald(Real v);
-float from_dB(float gdb);
+Real from_dB(Real gdb);
 void TriodeInit(Triode *triode);
 void compute(Triode *triode, Real Kbb, Real Gbb, Real Pbb);
-Real getC(Triode *triode);
-Real getG(Triode *triode);
-Real getP(Triode *triode);
 
 //Brent's method
 Real zeroffp(Triode *triode, Real a, Real b, Real t);

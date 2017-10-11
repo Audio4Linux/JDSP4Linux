@@ -234,6 +234,22 @@
         android:inputType="numberDecimal"
         android:digits="0123456789." />
   </PreferenceCategory>
+<!--    <PreferenceCategory android:title="@string/pref_wavechild670_title"
+      android:key="dsp.wavechild670">
+    <CheckBoxPreference
+        android:key="dsp.wavechild670.enable"
+        android:disableDependentsState="false"
+        android:summaryOn="@string/pref_wavechild670_summary_on"
+        android:summaryOff="@string/pref_wavechild670_summary_off"
+        android:title="@string/pref_wavechild670_enable"></CheckBoxPreference>
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.wavechild670.compdrive"
+        android:defaultValue="2"
+        android:dialogTitle="@string/dialog_tubedrive"
+        android:title="@string/dialog_tubedrive"
+        android:inputType="numberDecimal"
+        android:digits="0123456789." />
+  </PreferenceCategory> -->
   <PreferenceCategory android:title="@string/pref_headset_stereowide_title">
     <CheckBoxPreference
         android:key="dsp.stereowide.enable"

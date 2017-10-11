@@ -1,3 +1,8 @@
+#ifdef DEBUG
+#define TAG "EffectDSPMain"
+#include <android/log.h>
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
+#endif
 #include "Effect.h"
 
 Effect::Effect()
@@ -20,7 +25,12 @@ int32_t Effect::configure(void* pCmdData, size_t* frameCountInit, effect_buffer_
     if ((in.mask & EFFECT_CONFIG_SMP_RATE) && (out.mask & EFFECT_CONFIG_SMP_RATE))
     {
         if (out.samplingRate != in.samplingRate)
-            return -EINVAL;
+        {
+#ifdef DEBUG
+	LOGE("In/out sample rate doesn't match");
+#endif
+    return -EINVAL;
+        }
         mSamplingRate = in.samplingRate;
     }
     if (in.mask & EFFECT_CONFIG_CHANNELS && out.mask & EFFECT_CONFIG_CHANNELS)

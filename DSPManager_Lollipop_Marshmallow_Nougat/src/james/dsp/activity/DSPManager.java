@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -37,13 +38,17 @@ import james.dsp.R;
 import james.dsp.service.HeadsetService;
 import james.dsp.widgets.CustomDrawerLayout;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,6 +73,8 @@ public final class DSPManager extends Activity
     public static final String IMPULSERESPONSE_FOLDER = "Convolver";
     private static final String PRESETS_FOLDER = "Presets";
     private static int routing;
+    public static final String benchmarkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/";
+    public static final String wisdomTxt = "ConvolverWisdom.txt";
     public static final String impulseResponsePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/" + DSPManager.IMPULSERESPONSE_FOLDER + "/";
     public static boolean devMsgDisplay;
     //==================================
@@ -709,4 +716,55 @@ public final class DSPManager extends Activity
             return v;
         }
     }
+    private String readFromFile(Context context, String path) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput(path);
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+    public void writeToFile(String data)
+    {
+    	File path = new File(benchmarkPath);
+        if(!path.exists())
+            path.mkdirs();
+        final File file = new File(path, wisdomTxt);
+        try
+        {
+            file.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(file);
+            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+            myOutWriter.append(data);
+            myOutWriter.close();
+            fOut.flush();
+            fOut.close();
+        }
+        catch (IOException e)
+        {
+            Log.e("Exception", "File write failed: " + e.toString());
+        } 
+    }
+
 }

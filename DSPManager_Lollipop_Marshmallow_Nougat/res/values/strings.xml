@@ -23,7 +23,7 @@
   <string name="dialog_release">Release [Real:&gt;0 &#8211; 1]</string>
   <string name="pref_effect_title">Select effect strength</string>
   <string name="dialog_filtertype">Filter type</string>
-  <string name="pref_effect_freq_title">Cutoff frequency [Int:40 &#8211; 250]Hz</string>
+  <string name="pref_effect_freq_title">Cutoff frequency [Int:30 &#8211; 300]Hz</string>
   <string name="dialog_effect">Effect strength</string>
   <string name="pref_equalizer_title">Hybrid Equalizer</string>
   <string name="pref_equalizer_summary_on">Hybrid Equalizer is enabled</string>
@@ -58,6 +58,10 @@
   <string name="pref_analogmodelling_summary_on">Analog Modelling is enabled</string>
   <string name="pref_analogmodelling_summary_off">Analog Modelling is disabled</string>
   <string name="pref_analogmodelling_enable">Analog Modelling enable</string>
+  <string name="pref_wavechild670_title">Wavechild 670</string>
+  <string name="pref_wavechild670_summary_on">Wavechild 670 is enabled</string>
+  <string name="pref_wavechild670_summary_off">Wavechild 670 is disabled</string>
+  <string name="pref_wavechild670_enable">Wavechild 670 enable</string>
   <string name="dialog_tubedrive">Preamp(Harmonics) [Real:→0 – 12]</string>
   <string name="dialog_tubebass">Bass [Real:&#x2192;0 &#8211; 10]</string>
   <string name="dialog_tubemid">Middle [Real:&#x2192;0 &#8211; 10]</string>

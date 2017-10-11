@@ -5,12 +5,13 @@
 #include <pthread.h>
 extern "C"
 {
-#include "firgen.h"
+#include "arbeqfir/ArbFIRGen.h"
 #include "compressor.h"
 #include "gverb.h"
 #include "reverb.h"
-#include "libHybridConv.h"
-#include "Tube.h"
+#include "AutoConvolver.h"
+#include "valve/12ax7amp/Tube.h"
+#include "valve/wavechild670/wavechild670.h"
 }
 
 #define NUM_BANDS 10
@@ -18,31 +19,38 @@ class EffectDSPMain : public Effect
 {
 protected:
 	typedef struct threadParamsConv {
-		HConvSingle *conv;
+		AutoConvolverMono **conv;
 		float **in, **out;
-	} ptrThreadParamsConv;
+		size_t frameCount;
+	} ptrThreadParamsFullStConv;
 	typedef struct threadParamsTube {
 		tubeFilter *tube;
 		float **in;
 		size_t frameCount;
 	} ptrThreadParamsTube;
-	static void *threadingConv(void *args);
+	static void *threadingConvF(void *args);
+	static void *threadingConvF1(void *args);
+	static void *threadingConvF2(void *args);
 	static void *threadingTube(void *args);
-	ptrThreadParamsConv rightparams1;
+	ptrThreadParamsFullStConv fullStconvparams, fullStconvparams1;
 	ptrThreadParamsTube rightparams2;
-	pthread_t rightconv, righttube;
+	pthread_t rightconv, rightconv1, righttube;
 	uint16_t currentframeCountInit;
 	size_t memSize;
 	// Float buffer
-	float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat;
+	float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat, **fullStereoBuf;
 	// Incoming buffer from Java
 	int32_t *tempImpulseInt32;
+	// Fade ramp
+	float ramp;
 	// Effect units
 	sf_compressor_state_st compressor;
 	ty_gverb *verbL, *verbR;
 	sf_reverb_state_st myreverb;
-	HConvSingle *bassBoostLp, *convolver;
+	AutoConvolverMono **bassBoostLp;
+	AutoConvolverMono **convolver, **fullStereoConvolver;
 	tubeFilter tubeP[2];
+	Wavechild670 *compressor670;
 	int threadResult;
 	// Equalizer
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> lsl;
@@ -67,15 +75,17 @@ protected:
 	Iir::Butterworth::HighShelf<4, Iir::DirectFormII> bs9r;
 	// Variables
 	float pregain, threshold, knee, ratio, attack, release;
-	float bassBoostCentreFreq, finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
+	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable;
-	int16_t numTime2Send, samplesInc, impChannels, previousimpChannels;
+	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable, wavechild670Enabled;
+	int16_t samplesInc, impChannels, previousimpChannels;
 	float tubedrive, tubebass, tubemid, tubetreble;
 	float normalise;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
-	void refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR);
+	int isBenchData;
+	double *benchmarkValue[2];
+	void refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR, float bassBoostCentreFreq);
 	int refreshConvolver(uint32_t actualframeCount);
 	void refreshStereoWiden(uint32_t parameter);
 	void refreshCompressor();
@@ -98,11 +108,11 @@ protected:
 		for (i = 0; i < samples; i++)
 			chan_buffers[i % 2][i >> 1] = (float)((double)(buffer[i]) * 0.000030517578125);
 	}
-	inline void channel_join(float** chan_buffers, int16_t* buffer, size_t num_frames)
+	inline void channel_join(float** chan_buffers, int16_t* buffer, size_t num_frames, float scalar)
 	{
 		size_t i, samples = num_frames << 1;
 		for (i = 0; i < samples; i++)
-			buffer[i] = tanh(chan_buffers[i % 2][i >> 1] * finalGain) * 32768.0f;
+			buffer[i] = (int16_t)(tanh(chan_buffers[i % 2][i >> 1] * finalGain * scalar) * 32768.0f);
 	}
 public:
 	EffectDSPMain();

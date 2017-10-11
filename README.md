@@ -14,7 +14,7 @@ This app don't work too much around with modifying Android framework.
    --> GVerb and Progenitor 2
 4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves) (Generate 3/4th order IIR filter on-the-fly, with relatively flat response)
 5. Stereo Widen
-6. Convolver
+6. Auto partitioning Convolver
 
    --> Support mono / stereo / full stereo(LL, LR, RL, RR)
    

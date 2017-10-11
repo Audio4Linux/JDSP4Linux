@@ -31,17 +31,21 @@ LOCAL_SRC_FILES := \
 	iir/Cascade.cpp \
 	iir/PoleFilter.cpp \
 	iir/RootFinder.cpp \
-	firgen.c \
 	gverb.c \
 	reverb.c \
 	compressor.c \
-	libHybridConv.c \
-	Tube.c \
-	wdfcircuits_triode.c \
+	AutoConvolver.c \
+	arbeqfir/bessel.c \
+	arbeqfir/ArbFIRGen.c \
+	valve/12ax7amp/Tube.c \
+	valve/12ax7amp/wdfcircuits_triode.c \
+	valve/wavechild670/amplifiers.c \
+	valve/wavechild670/wdfcircuits.c \
+	valve/wavechild670/wavechild670.c \
 # terminator
 
 LOCAL_STATIC_LIBRARIES := fftw3thread fftw3
-LOCAL_LDLIBS := -llog
+#LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
