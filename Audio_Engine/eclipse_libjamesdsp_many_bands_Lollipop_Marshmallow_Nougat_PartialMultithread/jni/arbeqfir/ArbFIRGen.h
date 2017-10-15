@@ -23,6 +23,7 @@ typedef struct str_ArbitraryEq
 ArbitraryEq* InitArbitraryEq(int *filterLength, int isLinearPhase);
 void ArbitraryEqFree(ArbitraryEq *eqgain);
 int ArbitraryEqInsertNode(ArbitraryEq *eqgain, float freq, float gain);
+unsigned int ArbitraryEqFindNode(ArbitraryEq *eqgain, float freq);
 int ArbitraryEqRemoveNode(ArbitraryEq *eqgain, float freq);
 void ArbitraryEqString2SortedNodes(ArbitraryEq *eqgain, char *frArbitraryEqString);
 #endif

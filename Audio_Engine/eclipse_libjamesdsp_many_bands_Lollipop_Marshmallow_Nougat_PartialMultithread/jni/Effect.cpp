@@ -1,6 +1,7 @@
 #ifdef DEBUG
 #define TAG "EffectDSPMain"
 #include <android/log.h>
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
 #endif
 #include "Effect.h"
@@ -8,16 +9,22 @@
 Effect::Effect()
     : mSamplingRate(48000)
 {
+#ifdef DEBUG
+	LOGI("Effect class created");
+#endif
 }
 
 Effect::~Effect()
 {
+#ifdef DEBUG
+	LOGI("Effect class destroyed");
+#endif
 }
 
 /* Configure a bunch of general parameters. */
 int32_t Effect::configure(void* pCmdData, size_t* frameCountInit, effect_buffer_access_e* mAccessMode)
 {
-    effect_config_t *cfg = (effect_config_t *) pCmdData;
+    effect_config_t *cfg = (effect_config_t*)pCmdData;
     buffer_config_t in = cfg->inputCfg;
     buffer_config_t out = cfg->outputCfg;
     /* Check that we aren't asked to do resampling. Note that audioflinger

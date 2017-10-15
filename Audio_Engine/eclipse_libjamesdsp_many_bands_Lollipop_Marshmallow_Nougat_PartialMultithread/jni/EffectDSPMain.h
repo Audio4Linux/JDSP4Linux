@@ -71,8 +71,8 @@ protected:
 	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs7r;
 	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs8l;
 	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs8r;
-	Iir::Butterworth::HighShelf<4, Iir::DirectFormII> bs9l;
-	Iir::Butterworth::HighShelf<4, Iir::DirectFormII> bs9r;
+	Iir::Butterworth::HighShelf<3, Iir::DirectFormII> bs9l;
+	Iir::Butterworth::HighShelf<3, Iir::DirectFormII> bs9r;
 	// Variables
 	float pregain, threshold, knee, ratio, attack, release;
 	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;

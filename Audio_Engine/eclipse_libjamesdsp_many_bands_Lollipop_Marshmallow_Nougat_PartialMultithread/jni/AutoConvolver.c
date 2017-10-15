@@ -743,40 +743,34 @@ int PartitionerAnalyser(int hlen, int latency, int strategy, int fs, int entries
 }
 AutoConvolver* InitAutoConvolver(float **impulseResponse, int hlen, int impChannels, int audioBufferSize, int nChannels, double **recommendation, int items, int fftwThreads)
 {
-    int i, bestMethod = 2, sflen_best = 4096, msflen_best = 8192, mflen_best = 8192, lflen_best = 16384;
+    int i, bestMethod = 1, sflen_best = 4096, mflen_best = 8192, lflen_best = 16384, llflen_best = 32768;
     hlen = abs(hlen);
     if (!hlen)
         return 0;
     if (recommendation)
-        bestMethod = PartitionerAnalyser(hlen, 4096, 1, 48000, items, recommendation, &sflen_best, &msflen_best, &lflen_best);
-    if (hlen > 32768 && bestMethod < 2)
+        bestMethod = PartitionerAnalyser(hlen, 4096, 1, 48000, items, recommendation, &sflen_best, &mflen_best, &lflen_best);
+    if (hlen > 16384 && hlen < 81921 && bestMethod < 2)
+    {
+        bestMethod = 2;
+        sflen_best = 2048;
+        mflen_best = 8192;
+    }
+    else if (hlen > 81920 && hlen < 245764 && bestMethod < 2)
     {
         bestMethod = 2;
         sflen_best = 4096;
-        msflen_best = 8192;
+        mflen_best = 8192;
     }
-    else
+    else if (hlen > 245763 && hlen < 1000001 && bestMethod < 2)
     {
-        if (hlen < 55000)
-            bestMethod = 1;
-        else if (hlen > 54999 && hlen < 1090001)
-            bestMethod = 2;
-        else if (hlen > 1090000 && hlen < 1400001)
-        {
-            bestMethod = 2;
-            mflen_best = 16384;
-        }
-        else if (hlen > 1400000 && hlen < 1900001)
-        {
-            bestMethod = 2;
-            mflen_best = 8192;
-            mflen_best = 32768;
-        }
-        else
-            bestMethod = 1;
+        bestMethod = 2;
+        sflen_best = 4096;
+        mflen_best = 16384;
     }
-    if (!bestMethod)
-        return 0;
+    else if (hlen > 1000000 && hlen < 2000001 && bestMethod < 2)
+        bestMethod = 3;
+    else if (hlen > 2000000 && bestMethod < 2)
+        bestMethod = 4;
     AutoConvolver *autoConv = (AutoConvolver*)calloc(1, sizeof(AutoConvolver));
     autoConv->channels = nChannels;
     autoConv->methods = bestMethod;
@@ -806,7 +800,7 @@ AutoConvolver* InitAutoConvolver(float **impulseResponse, int hlen, int impChann
     {
         HConv4Stage* stage = (HConv4Stage*)malloc(nChannels * sizeof(HConv4Stage));
         for (i = 0; i < nChannels; i++)
-            hcInit4Stage(&(stage[i]), impulseResponse[i % impChannels], hlen, sflen_best, msflen_best, mflen_best, lflen_best, fftwThreads);
+            hcInit4Stage(&(stage[i]), impulseResponse[i % impChannels], hlen, sflen_best, mflen_best, lflen_best, llflen_best, fftwThreads);
         autoConv->filter = (void*)stage;
         autoConv->process = &Convolver4StageProcessArbitrarySignalLength;
     }
@@ -822,46 +816,34 @@ AutoConvolver* InitAutoConvolver(float **impulseResponse, int hlen, int impChann
 }
 AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int audioBufferSize, double **recommendation, int items, int fftwThreads)
 {
-    int bestMethod = 0, sflen_best = 4096, msflen_best = 16384, mflen_best = 8192, lflen_best = 16384;
+    int bestMethod = 1, sflen_best = 4096, mflen_best = 8192, lflen_best = 16384, llflen_best = 32768;
     hlen = abs(hlen);
     if (!hlen)
         return 0;
     if (recommendation)
-        bestMethod = PartitionerAnalyser(hlen, 4096, 1, 48000, items, recommendation, &sflen_best, &msflen_best, &lflen_best);
+        bestMethod = PartitionerAnalyser(hlen, 4096, 1, 48000, items, recommendation, &sflen_best, &mflen_best, &lflen_best);
     if (hlen > 16384 && hlen < 81921 && bestMethod < 2)
     {
         bestMethod = 2;
         sflen_best = 2048;
-        msflen_best = 8192;
+        mflen_best = 8192;
     }
-    else if (hlen > 81920 && bestMethod < 2)
+    else if (hlen > 81920 && hlen < 245764 && bestMethod < 2)
     {
         bestMethod = 2;
         sflen_best = 4096;
-        msflen_best = 8192;
+        mflen_best = 8192;
     }
-    else
+    else if (hlen > 245763 && hlen < 1000001 && bestMethod < 2)
     {
-        if (hlen < 55000)
-            bestMethod = 1;
-        else if (hlen > 54999 && hlen < 1090001)
-            bestMethod = 2;
-        else if (hlen > 1090000 && hlen < 1400001)
-        {
-            bestMethod = 2;
-            mflen_best = 16384;
-        }
-        else if (hlen > 1400000 && hlen < 1900001)
-        {
-            bestMethod = 2;
-            mflen_best = 8192;
-            mflen_best = 32768;
-        }
-        else
-            bestMethod = 1;
+        bestMethod = 2;
+        sflen_best = 4096;
+        mflen_best = 16384;
     }
-    if (!bestMethod)
-        return 0;
+    else if (hlen > 1000000 && hlen < 2000001 && bestMethod < 2)
+        bestMethod = 3;
+    else if (hlen > 2000000 && bestMethod < 2)
+        bestMethod = 4;
     AutoConvolverMono *autoConv = (AutoConvolverMono*)calloc(1, sizeof(AutoConvolverMono));
     autoConv->methods = bestMethod;
     if (bestMethod > 1)
@@ -887,7 +869,7 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
     else if (bestMethod == 4)
     {
         HConv4Stage* stage = (HConv4Stage*)malloc(sizeof(HConv4Stage));
-        hcInit4Stage(stage, impulseResponse, hlen, sflen_best, msflen_best, mflen_best, lflen_best, fftwThreads);
+        hcInit4Stage(stage, impulseResponse, hlen, sflen_best, mflen_best, lflen_best, llflen_best, fftwThreads);
         autoConv->filter = (void*)stage;
         autoConv->process = &Convolver4StageProcessArbitrarySignalLengthMono;
     }

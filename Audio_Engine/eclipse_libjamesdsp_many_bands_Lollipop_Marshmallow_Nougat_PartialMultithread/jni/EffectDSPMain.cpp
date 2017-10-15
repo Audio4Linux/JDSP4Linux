@@ -58,7 +58,7 @@ EffectDSPMain::~EffectDSPMain()
 	}
 	if (convolver)
 	{
-		for (unsigned int i = 0; i < 2; i++)
+		for (unsigned int i = 0; i < NUMCHANNEL; i++)
 		{
 			AutoConvolverMonoFree(convolver[i]);
 			free(convolver[i]);
@@ -525,7 +525,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						}
 						free(bassBoostLp);
 						bassBoostLp = 0;
-						ramp = 0.0f;
+						ramp = 0.3f;
 					}
 					bassLpReady = 0;
 				}
@@ -573,7 +573,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						}
 						free(convolver);
 						convolver = 0;
-						ramp = 0.0f;
+						ramp = 0.3f;
 					}
 					if (fullStereoConvolver)
 					{
@@ -584,7 +584,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						}
 						free(fullStereoConvolver);
 						fullStereoConvolver = 0;
-						ramp = 0.0f;
+						ramp = 0.3f;
 					}
 					if (fullStereoBuf)
 					{
@@ -849,7 +849,7 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t actualframeCount, uint32_t t
 			bassBoostLp[i] = InitAutoConvolverMonoZeroLatency(eqImpulseResponse, filterLength, actualframeCount, threadResult);
 	}
 	ArbitraryEqFree(bassFIR);
-	ramp = 0.0f;
+	ramp = 0.3f;
 #ifdef DEBUG
 	LOGI("Linear phase FIR allocate all done: total taps %d", filterLength);
 #endif
@@ -950,7 +950,7 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 			else
 				convolverReady = 4;
 		}
-		ramp = 0.0f;
+		ramp = 0.3f;
 #ifdef DEBUG
 		LOGI("Convolver IR allocate complete");
 #endif
@@ -985,8 +985,8 @@ void EffectDSPMain::refreshStereoWiden(uint32_t parameter)
 }
 void EffectDSPMain::refreshCompressor()
 {
-	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release, 0.003f, 0.09f, 0.16f, 0.42f, 0.98f, -(pregain / 1.4));
-	ramp = 0.0f;
+	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release, 0.003f, 0.09f, 0.16f, 0.42f, 0.98f, -(pregain / 1.4f));
+	ramp = 0.3f;
 }
 void EffectDSPMain::refreshEqBands(double *bands)
 {
@@ -1008,14 +1008,14 @@ void EffectDSPMain::refreshEqBands(double *bands)
 	bs7r.setup(2, mSamplingRate, 4650.0, 2600.0, bands[7]);
 	bs8l.setup(2, mSamplingRate, 9000.0, 5500.0, bands[8]);
 	bs8r.setup(2, mSamplingRate, 9000.0, 5500.0, bands[8]);
-	bs9l.setup(4, mSamplingRate, 13500.0, bands[9]);
-	bs9r.setup(4, mSamplingRate, 13500.0, bands[9]);
+	bs9l.setup(3, mSamplingRate, 13500.0, bands[9]);
+	bs9r.setup(3, mSamplingRate, 13500.0, bands[9]);
 }
 void EffectDSPMain::refreshReverb()
 {
 	if (mReverbMode == 1)
 	{
-		if (verbL == NULL)
+		if (!verbL)
 		{
 			verbL = gverb_new(mSamplingRate, 3000.0f, roomSize, fxreTime, damping, 50.0f, inBandwidth, earlyLv, tailLv);
 			verbR = gverb_new(mSamplingRate, 3000.0f, roomSize, fxreTime, damping, 50.0f, inBandwidth, earlyLv, tailLv);
@@ -1041,7 +1041,7 @@ void EffectDSPMain::refreshReverb()
 	else
 	{
 		//Refresh reverb memory when mode changed
-		if (verbL != NULL)
+		if (verbL)
 		{
 			gverb_flush(verbL);
 			gverb_flush(verbR);

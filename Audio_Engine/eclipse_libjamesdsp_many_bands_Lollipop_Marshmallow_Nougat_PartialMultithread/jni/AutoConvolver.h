@@ -1,5 +1,5 @@
-#ifndef __LIBHYBRIDCONV_H__
-#define __LIBHYBRIDCONV_H__
+#ifndef __AUTOCONVOLVER_H__
+#define __AUTOCONVOLVER_H__
 typedef struct str_AutoConvolver
 {
     int methods, channels, hnShortLen, bufpos;

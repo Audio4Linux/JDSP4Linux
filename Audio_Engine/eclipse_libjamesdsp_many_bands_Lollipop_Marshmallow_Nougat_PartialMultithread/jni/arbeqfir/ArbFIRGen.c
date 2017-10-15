@@ -62,7 +62,7 @@ float kaiser_alpha(float a)
     if (a > max_a) return max_alpha; // limit max attenuation
     return 0.1102f * (a - 8.7f);
 }
-float kaiser_window(int i, const int n, float alpha, float feedback)
+inline float kaiser_window(int i, const int n, float alpha, float feedback)
 {
     float index = (float)i;
     float n1 = (float)(n - 1);
@@ -105,31 +105,43 @@ void minimumPhaseSpectrum(fftwf_complex* timeData, fftwf_complex* freqData, fftw
         freqData[i][1] = eR * sinf(freqData[i][1]);
     }
 }
-float gainAtLogGrid(ArbitraryEq *gains, float freq)
+inline float gainAtLogGrid(ArbitraryEq *gains, float freq)
 {
     float dbGain = 0.0f, logLeft, logRightMinusLeft;
     if (!gains->nodesCount)
-        return dbGain;
-    if (gains->nodesCount == 1)
-        return gains->nodes[0]->gain;
-    else
-    {
-        if (freq > gains->nodes[gains->nodesCount - 1]->freq)
-            return gains->nodes[gains->nodesCount - 1]->gain;
-        else
-        {
-            int pos = lower_bound(gains->nodes, gains->nodesCount, freq);
-            if (pos < 2)
-                return gains->nodes[0]->gain;
-            logLeft = logf(gains->nodes[pos - 1]->freq);
-            logRightMinusLeft = logf(gains->nodes[pos]->freq) - logLeft;
-            float t = (logf(freq) - logLeft) / logRightMinusLeft;
-            if (gains->nodes[pos - 1]->gain == gains->nodes[pos]->gain)
-                dbGain = gains->nodes[pos]->gain;
-            else
-                dbGain = gains->nodes[pos - 1]->gain + t * (gains->nodes[pos]->gain - gains->nodes[pos - 1]->gain);
-        }
-    }
+         return dbGain;
+     if (gains->nodesCount == 1)
+         return gains->nodes[0]->gain;
+     else
+     {
+         if (freq > gains->nodes[gains->nodesCount - 1]->freq)
+             return gains->nodes[gains->nodesCount - 1]->gain;
+         else
+         {
+             int pos = lower_bound(gains->nodes, gains->nodesCount, freq);
+             if (pos < 1)
+                 return gains->nodes[0]->gain;
+ 			float tmpfreq = gains->nodes[pos - 1]->freq;
+ 			if (tmpfreq < 2.0f)
+ 				logLeft = tmpfreq;
+ 			else
+ 				logLeft = logf(tmpfreq);
+ 			tmpfreq = gains->nodes[pos]->freq;
+ 			if (tmpfreq < 2.0f)
+ 				logRightMinusLeft = tmpfreq - logLeft;
+ 			else
+ 				logRightMinusLeft = logf(tmpfreq) - logLeft;
+ 			float t;
+ 			if (freq < 2.0f)
+ 				t = (freq - logLeft) / logRightMinusLeft;
+ 			else
+ 				t = (logf(freq) - logLeft) / logRightMinusLeft;
+ 			if (gains->nodes[pos - 1]->gain == gains->nodes[pos]->gain)
+ 				dbGain = gains->nodes[pos]->gain;
+ 			else
+ 				dbGain = gains->nodes[pos - 1]->gain + t * (gains->nodes[pos]->gain - gains->nodes[pos - 1]->gain);
+         }
+     }
     return dbGain;
 }
 float *ArbitraryEqMinimumPhase(ArbitraryEq *gains, float fs, float attenuate)
@@ -280,7 +292,7 @@ void NodesSorter(ArbitraryEq *eqgain)
 int ArbitraryEqInsertNode(ArbitraryEq *eqgain, float freq, float gain)
 {
     if (!eqgain)
-        return 0;
+        return -1;
     if (!eqgain->nodes)
     {
         eqgain->nodes = (EqNode**)malloc((eqgain->nodesCount + 1) * sizeof(EqNode*));
@@ -288,12 +300,13 @@ int ArbitraryEqInsertNode(ArbitraryEq *eqgain, float freq, float gain)
         eqgain->nodes[0]->freq = freq;
         eqgain->nodes[0]->gain = gain;
         eqgain->nodesCount = 1;
+		return 1;
     }
     EqNode **tmpNode = (EqNode**)realloc(eqgain->nodes, (eqgain->nodesCount + 1) * sizeof(EqNode*));
     if (!tmpNode)
     {
         ArbitraryEqFree(eqgain);
-        return 0;
+        return -1;
     }
     else
     {
@@ -306,12 +319,23 @@ int ArbitraryEqInsertNode(ArbitraryEq *eqgain, float freq, float gain)
     }
     return 1;
 }
+unsigned int ArbitraryEqFindNode(ArbitraryEq *eqgain, float freq)
+{
+	if (!eqgain)
+		return -1;
+	for (unsigned int i = 0; i < eqgain->nodesCount; i++)
+	{
+		if (freq == eqgain->nodes[i]->freq)
+			return i;
+	}
+	return 0;
+}
 int ArbitraryEqRemoveNode(ArbitraryEq *eqgain, float freq)
 {
     if (!eqgain)
-        return 0;
+        return -1;
     if (!eqgain->nodes)
-        return 0;
+        return -2;
     unsigned int i, findResult = 0;
     for (i = 0; i < eqgain->nodesCount; i++)
     {
@@ -332,7 +356,7 @@ int ArbitraryEqRemoveNode(ArbitraryEq *eqgain, float freq)
         if (!tmpNode)
         {
             ArbitraryEqFree(eqgain);
-            return 0;
+            return -1;
         }
         else
         {

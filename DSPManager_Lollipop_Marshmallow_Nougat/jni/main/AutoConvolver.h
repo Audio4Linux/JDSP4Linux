@@ -1,20 +1,20 @@
-#ifndef __LIBHYBRIDCONV_H__
-#define __LIBHYBRIDCONV_H__
+#ifndef __AUTOCONVOLVER_H__
+#define __AUTOCONVOLVER_H__
 typedef struct str_AutoConvolver
 {
     int methods, channels, hnShortLen, bufpos;
-	int *routeIn, *routeOut;
+    int *routeIn, *routeOut;
     float *inbuf, *outbuf;
     void *filter;
     void(*process)(struct str_AutoConvolver*, float**, float**, int);
 } AutoConvolver;
 typedef struct str_AutoConvolverMono
 {
-	int methods, hnShortLen, bufpos;
-	int *routeIn, *routeOut;
-	float *inbuf, *outbuf;
-	void *filter;
-	void(*process)(struct str_AutoConvolverMono*, float*, float*, int);
+    int methods, hnShortLen, bufpos;
+    int *routeIn, *routeOut;
+    float *inbuf, *outbuf;
+    void *filter;
+    void(*process)(struct str_AutoConvolverMono*, float*, float*, int);
 } AutoConvolverMono;
 int ACFFTWThreadInit();
 void ACFFTWClean(int threads);
