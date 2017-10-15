@@ -18,7 +18,9 @@ This app don't work too much around with modifying Android framework.
 
    --> Support mono / stereo / full stereo(LL, LR, RL, RR)
    
-   --> Samples per channels should less than 500000
+   --> Samples per channels for stereo impulse response should less than 1000000
+   
+   --> Samples per channels for full stereo impulse response should less than 500000
 
 7. Vacuum tube modelling
 
@@ -65,7 +67,7 @@ A: Because of fftw3 library linked.
 #### 8. Why open source? Any license?
 
 A: Audio effects actually is not hard to implement, I don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
-   This is published under GPLv2.
+   All files in this repository is published under GPLv2.
 
 #### 9. Can I use your effect code?
 
@@ -99,10 +101,7 @@ A: Check step in release build ReadMe.txt.
    ```
 
 ##### On development:
-1. Parameterized Room Convolution
-
-	-->May be I will implement this in my other repository: [Complete C implementation of Room Impulse Response Generator]
-	(https://github.com/james34602/RIR-Generator)
+N/A
 
 ##### TODO:
 1. More optimization on all component (JAVA, Native)
