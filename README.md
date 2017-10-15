@@ -42,7 +42,7 @@ A: Effect have 2 option to boost low frequency, IIR based is obsoleted, eqaulize
 
 A: Convolver is a effect apply convolution mathematical operation on audio signal, that perfectly apply user desired impulse response on music, it could simulate physical space.
 
-   Effect itself require audio file(.wav/.irs/.flac) to become impulse response source, long impulse(> 800000 samples) will be cutoff, however x86 device will have no restriction.
+   Effect itself require audio file(.wav/.irs/.flac) to become impulse response source. x86 Android device may perform better.
 
    For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
 
