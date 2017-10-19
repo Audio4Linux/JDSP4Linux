@@ -430,12 +430,12 @@ class StartUpOptimiserThread implements Runnable {
 				JamesDSPGbEf = null;
 			}
 		}
+		updateDsp(true, false);
 		if (bench_c0[0] == 0 || bench_c1[1] == 0)
 		{
-	        Runnable runner = new StartUpOptimiserThread(10, 48000);
+	        Runnable runner = new StartUpOptimiserThread(9, 48000);
 	        new Thread(runner).start();
 		}
-		updateDsp(true, false);
 	}
 
 	@Override
@@ -576,9 +576,10 @@ class StartUpOptimiserThread implements Runnable {
 			int equalizerEnabled = preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0;
 			int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
+			int bs2bEnabled = preferences.getBoolean("dsp.bs2b.enable", false) ? 1 : 0;
 			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
 			int analogModelEnabled = preferences.getBoolean("dsp.analogmodelling.enable", false) ? 1 : 0;
-			int wavechild670Enabled = preferences.getBoolean("dsp.wavechild670.enable", false) ? 1 : 0;
+//			int wavechild670Enabled = preferences.getBoolean("dsp.wavechild670.enable", false) ? 1 : 0;
 			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
 			if (dspModuleSamplingRate == 0)
 			{
@@ -637,8 +638,8 @@ class StartUpOptimiserThread implements Runnable {
 				session.setParameterShort(session.JamesDSP, 127, mode);
 				if(mode == 1)
 				{
-					session.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "50")));
-					session.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "50")));
+					session.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "120")));
+					session.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "150")));
 					session.setParameterShort(session.JamesDSP, 131, Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
 					session.setParameterShort(session.JamesDSP, 133, Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
 					session.setParameterShort(session.JamesDSP, 134, Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
@@ -651,6 +652,9 @@ class StartUpOptimiserThread implements Runnable {
 			if (stereoWideEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
 			session.setParameterShort(session.JamesDSP, 1204, (short)stereoWideEnabled); // Stereo widener switch
+			session.setParameterShort(session.JamesDSP, 1208, (short)bs2bEnabled); // BS2B switch
+			if (bs2bEnabled == 1 && updateMajor)
+				session.setParameterShort(session.JamesDSP, 188, Short.valueOf(preferences.getString("dsp.bs2b.mode", "0")));
 			if (convolverEnabled == 1 && updateMajor)
 			{
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
@@ -680,10 +684,8 @@ class StartUpOptimiserThread implements Runnable {
 					else
 					{
 						int arraySize2Send = 4096;
-						Log.e(DSPManager.TAG, "Real frame count: " + impinfo[1]);
 						impinfo[1] = impulseResponse.length / impinfo[0];
 						int impulseCutted = impulseResponse.length;
-						Log.e(DSPManager.TAG, "impulseResponse.length: " + impulseResponse.length + " impulseCutted: " + impulseCutted);
 						impulseCutted = (int)(impulseCutted * quality);
 						int[] sendArray = new int[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
@@ -725,14 +727,14 @@ class StartUpOptimiserThread implements Runnable {
 				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "4.5"))*1000));
 			}
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
-			if (wavechild670Enabled == 1 && updateMajor)
+/*			if (wavechild670Enabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.compdrive", "2"))*1000));
-/*				session.setParameterShort(session.JamesDSP, 155, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubebass", "8"))*1000));
+				session.setParameterShort(session.JamesDSP, 155, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubebass", "8"))*1000));
 				session.setParameterShort(session.JamesDSP, 156, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubemid", "5.6"))*1000));
-				session.setParameterShort(session.JamesDSP, 157, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubetreble", "4.5"))*1000));*/
+				session.setParameterShort(session.JamesDSP, 157, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubetreble", "4.5"))*1000));
 			}
-			session.setParameterShort(session.JamesDSP, 1207, (short)wavechild670Enabled); // Analog modelling switch
+			session.setParameterShort(session.JamesDSP, 1207, (short)wavechild670Enabled); // Analog modelling switch*/
 		}
 	}
 }

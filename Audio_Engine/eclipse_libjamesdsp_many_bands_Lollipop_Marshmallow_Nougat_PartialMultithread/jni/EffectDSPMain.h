@@ -5,13 +5,14 @@
 #include <pthread.h>
 extern "C"
 {
-#include "arbeqfir/ArbFIRGen.h"
+#include "bs2b.h"
+#include "ArbFIRGen.h"
 #include "compressor.h"
 #include "gverb.h"
 #include "reverb.h"
 #include "AutoConvolver.h"
 #include "valve/12ax7amp/Tube.h"
-#include "valve/wavechild670/wavechild670.h"
+//#include "valve/wavechild670/wavechild670.h"
 }
 
 #define NUM_BANDS 10
@@ -50,7 +51,8 @@ protected:
 	AutoConvolverMono **bassBoostLp;
 	AutoConvolverMono **convolver, **fullStereoConvolver;
 	tubeFilter tubeP[2];
-	Wavechild670 *compressor670;
+	t_bs2bdp bs2b;
+//	Wavechild670 *compressor670;
 	int threadResult;
 	// Equalizer
 	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> lsl;
@@ -76,8 +78,8 @@ protected:
 	// Variables
 	float pregain, threshold, knee, ratio, attack, release;
 	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
-	int16_t bassBoostStrength, bassBoostFilterType;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, normaliseEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable, wavechild670Enabled;
+	int16_t bassBoostStrength, bassBoostFilterType, bs2bLv;
+	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
 	int16_t samplesInc, impChannels, previousimpChannels;
 	float tubedrive, tubebass, tubemid, tubetreble;
 	float normalise;

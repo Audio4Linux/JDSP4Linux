@@ -177,4 +177,16 @@
     <item>3</item>
     <item>4</item>
   </string-array>
+  
+  <string-array name="bs2b_modes">
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+  </string-array>
+
+  <string-array name="bs2b_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
 </resources>

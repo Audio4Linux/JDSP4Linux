@@ -35,13 +35,13 @@ LOCAL_SRC_FILES := \
 	reverb.c \
 	compressor.c \
 	AutoConvolver.c \
-	arbeqfir/bessel.c \
-	arbeqfir/ArbFIRGen.c \
+	ArbFIRGen.c \
+	bs2b.c \
 	valve/12ax7amp/Tube.c \
 	valve/12ax7amp/wdfcircuits_triode.c \
-	valve/wavechild670/amplifiers.c \
-	valve/wavechild670/wdfcircuits.c \
-	valve/wavechild670/wavechild670.c \
+#	valve/wavechild670/amplifiers.c \
+#	valve/wavechild670/wdfcircuits.c \
+#	valve/wavechild670/wavechild670.c \
 # terminator
 
 LOCAL_STATIC_LIBRARIES := fftw3thread fftw3

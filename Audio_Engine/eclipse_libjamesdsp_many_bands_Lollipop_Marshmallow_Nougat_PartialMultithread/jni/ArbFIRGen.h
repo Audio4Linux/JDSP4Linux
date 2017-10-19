@@ -1,6 +1,6 @@
 #ifndef ARBFIRGEN_H
 #define ARBFIRGEN_H
-#include "../fftw3.h"
+#include "fftw3.h"
 typedef struct str_EqNodes
 {
     float freq;

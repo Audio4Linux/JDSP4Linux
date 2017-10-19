@@ -87,11 +87,15 @@
   <string name="dialog_gain">輸出增益 [整數:1 &#8211; 200]</string>
 
   <string name="menu_reset">重設</string>
-  <string name="pref_headset_stereowide_title">立體聲加寬</string>
+  <string name="pref_headset_soundpos_title">空間位置效果</string>
   <string name="pref_headset_stereowide_summary_on">已啟用立體聲加寬</string>
   <string name="pref_headset_stereowide_summary_off">已停用立體聲加寬</string>
   <string name="pref_headset_stereowide_enable">使用立體聲加寬</string>
   <string name="dialog_stereo">加寬程度</string>
+  <string name="pref_headset_bs2b_summary_on">已啟用BS2B</string>
+  <string name="pref_headset_bs2b_summary_off">已停用BS2B</string>
+  <string name="dialog_bs2b">BS2B預置</string>
+  <string name="pref_headset_bs2b_enable">使用BS2B</string>
 
   <string name="eq_preset_acoustic">原音音樂</string>
   <string name="eq_preset_bass_booster">低音強化</string>

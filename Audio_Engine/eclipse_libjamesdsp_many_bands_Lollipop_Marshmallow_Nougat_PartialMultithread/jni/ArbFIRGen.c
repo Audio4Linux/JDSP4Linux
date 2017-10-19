@@ -2,14 +2,12 @@
 #include <string.h>
 #include <math.h>
 #include <errno.h>
-#include "bessel.h"
 #include "ArbFIRGen.h"
 int get_float(char *val, float *F)
 {
     char *eptr;
-    float f;
     errno = 0;
-    f = strtod(val, &eptr);
+    float f = strtof(val, &eptr);
     if (eptr != val && errno != ERANGE)
     {
         *F = f;
@@ -43,33 +41,60 @@ int lower_bound(EqNode **array, int size, float key)
     }
     return first;
 }
-/******************************************************************************
-Kaiser window functions
-* kaiser_alpha(a)
-a - attenuation in dB
-Returns parameter of a kaiser window for a given stopband attenuation
-* kaiser_window(i, n, alpha)
-i - bin number
-n - window length
-alpha - window parameter
-Returns i-th bin of the window
-******************************************************************************/
-static const float max_a = 1000;
-static const float max_alpha = 109.24126;
-float kaiser_alpha(float a)
+#define EPS	1E-16
+double bessi0(double x)
 {
-    if (a <= 50.0f) return 0.5842f * powf(a - 21.0f, 0.4f) + 0.07886f * (a - 21.0f);
-    if (a > max_a) return max_alpha; // limit max attenuation
-    return 0.1102f * (a - 8.7f);
+	double xh, sum, pow, ds;
+	int k;
+	xh = 0.5 * x;
+	sum = 1.0;
+	pow = 1.0;
+	k = 0;
+	ds = 1.0;
+	while (ds > sum * EPS)
+	{
+		++k;
+		pow = pow * (xh / k);
+		ds = pow * pow;
+		sum = sum + ds;
+	}
+	return sum;
 }
-inline float kaiser_window(int i, const int n, float alpha, float feedback)
+#undef EPS
+double getKaiser(double x, double alpha)
 {
-    float index = (float)i;
-    float n1 = (float)(n - 1);
-    if ((float)fabs(2.0 * index) > n1) return feedback * 0.9999f; // extend the window with zeros
-    return (float)(bessi0(alpha * sqrt(1.0 - 4.0 * index*index / (n1 * n1))) / bessi0(alpha));
+	static double alpha_prev = 0.0;
+	static double Ia = 1.0;
+	double beta, win;
+	if (alpha != alpha_prev)
+	{
+		Ia = bessi0(alpha);
+		alpha_prev = alpha;
+	}
+	if (x < -1.0 || x > 1.0)
+		win = 0.0;
+	else
+	{
+		beta = alpha * sqrt(1.0 - x * x);
+		win = bessi0(beta) / Ia;
+	}
+	return win;
 }
-/////////////////////////////////////////////////////////////////////////////
+void winKaiser(float *win, int N, double alpha)
+{
+	int i, k, minus1 = N - 1;
+	for (i = 0, k = minus1; i <= k; ++i, --k)
+	{
+		win[i] = (float)getKaiser((double)(2 * i - minus1) / minus1, alpha);
+		win[k] = win[i];
+	}
+}
+void winKaiserHalf(float *win, int N, double alpha)
+{
+	int i, k, mulN = (N << 1) - 1;
+	for (i = 0; i < N; i++)
+		win[N - 1 - i] = (float)getKaiser((double)(2 * i - mulN) / mulN, alpha);
+}
 void minimumPhaseSpectrum(fftwf_complex* timeData, fftwf_complex* freqData, fftwf_plan planForward, fftwf_plan planReverse, unsigned int filterLength)
 {
     unsigned int i, fLMul2 = filterLength << 1;
@@ -165,24 +190,18 @@ float *ArbitraryEqMinimumPhase(ArbitraryEq *gains, float fs, float attenuate)
     }
     minimumPhaseSpectrum(timeData, freqData, planForward, planReverse, gains->filterLength);
     fftwf_execute(planReverse);
+	float factor, *finalImpulse = gains->impulseResponse;
+	winKaiserHalf(finalImpulse, gains->filterLength, (double)attenuate);
     for (i = 0; i < gains->filterLength; i++)
     {
-        float factor = (float)(0.5 * (1.0 + cos(6.283185307179586 * (double)i / fLMul2)));
-        timeData[i][0] *= factor / (float)fLMul2;
-    }
-    float *finalImpulse = gains->impulseResponse;
-    float oldVal = 0.0;
-    for (i = 0; i < gains->filterLength; i++)
-    {
-        float value = kaiser_window(i, gains->filterLength, attenuate, oldVal);
-        oldVal = value;
-        finalImpulse[i] = timeData[i][0] * value;
+        factor = (float)(0.5 * (1.0 + cos(6.283185307179586 * (double)i / fLMul2)));
+		finalImpulse[i] *= factor / (float)fLMul2 * timeData[i][0];
     }
     return finalImpulse;
 }
 float *ArbitraryEqLinearPhase(ArbitraryEq *gains, float fs, float attenuate)
 {
-    unsigned int fLMul2 = gains->fLMul2;
+    unsigned int fLMul2 = gains->fLMul2, flMul2Minus1 = fLMul2 - 1;
     fftwf_complex* timeData = gains->timeData;
     fftwf_complex* freqData = gains->freqData;
     fftwf_plan planReverse = gains->planReverse;
@@ -199,19 +218,11 @@ float *ArbitraryEqLinearPhase(ArbitraryEq *gains, float fs, float attenuate)
         freqData[fLMul2 - i - 1][1] = 0;
     }
     fftwf_execute(planReverse);
-    float oldVal = 0.0;
-    for (i = 0; i < gains->filterLength; i++)
-    {
-        float value = kaiser_window(i, gains->filterLength, attenuate, oldVal);
-        oldVal = value;
-        timeData[i][0] *= value;
-    }
     float *finalImpulse = gains->impulseResponse;
+	winKaiser(finalImpulse, flMul2Minus1, (double)attenuate);
+	unsigned int minus1 = gains->filterLength - 1;
     for (i = 0; i < gains->filterLength; i++)
-    {
-        finalImpulse[i] = timeData[gains->filterLength - i][0];
-        finalImpulse[i + gains->filterLength] = timeData[i][0];
-    }
+		finalImpulse[minus1 - i] = finalImpulse[minus1 + i] *= timeData[i][0];
     return finalImpulse;
 }
 ArbitraryEq* InitArbitraryEq(int *filterLength, int isLinearPhase)
@@ -420,11 +431,5 @@ void ArbitraryEqString2SortedNodes(ArbitraryEq *eqgain, char *frArbitraryEqStrin
     }
     eqgain->nodesCount = numOfNodes;
     eqgain->nodes = nodes;
-    /*	printf("Unsorted\n");
-    	for (i = 0; i < numOfNodes; i++)
-    		printf("Node[%d]: Freq=%lf, Gain=%lf\n", i, nodes[i]->freq, nodes[i]->gain);*/
     NodesSorter(eqgain);
-    /*	printf("Sorted\n");
-    	for (i = 0; i < numOfNodes; i++)
-    		printf("Node[%d]: Freq=%lf, Gain=%lf\n", i, nodes[i]->freq, nodes[i]->gain);*/
 }

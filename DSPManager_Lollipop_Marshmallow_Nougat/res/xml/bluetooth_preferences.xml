@@ -129,13 +129,13 @@
         android:key="dsp.headphone.preset" />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.roomsize"
-        android:defaultValue="50"
+        android:defaultValue="120"
         android:dialogTitle="@string/dialog_roomsize"
         android:title="@string/dialog_roomsize"
         android:inputType="number" />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.reverbtime"
-        android:defaultValue="50"
+        android:defaultValue="150"
         android:dialogTitle="@string/dialog_reverbtime"
         android:title="@string/dialog_reverbtime"
         android:inputType="number" />
@@ -147,7 +147,7 @@
         android:inputType="number" />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.headphone.inbandwidth"
-        android:defaultValue="5"
+        android:defaultValue="8"
         android:dialogTitle="@string/dialog_inbandwidth"
         android:title="@string/dialog_inbandwidth"
         android:inputType="number" />
@@ -250,7 +250,8 @@
         android:inputType="numberDecimal"
         android:digits="0123456789." />
   </PreferenceCategory> -->
-  <PreferenceCategory android:title="@string/pref_headset_stereowide_title">
+  
+  <PreferenceCategory android:title="@string/pref_headset_soundpos_title">
     <CheckBoxPreference
         android:key="dsp.stereowide.enable"
         android:disableDependentsState="false"
@@ -264,5 +265,18 @@
         android:entryValues="@array/stereowide_values"
         android:title="@string/dialog_stereo"
         android:key="dsp.stereowide.mode" />
+    <CheckBoxPreference
+        android:key="dsp.bs2b.enable"
+        android:disableDependentsState="false"
+        android:summaryOn="@string/pref_headset_bs2b_summary_on"
+        android:summaryOff="@string/pref_headset_bs2b_summary_off"
+        android:title="@string/pref_headset_bs2b_enable"></CheckBoxPreference>
+    <james.dsp.preference.SummariedListPreference
+        android:defaultValue="0"
+        android:dialogTitle="@string/dialog_bs2b"
+        android:entries="@array/bs2b_modes"
+        android:entryValues="@array/bs2b_values"
+        android:title="@string/dialog_bs2b"
+        android:key="dsp.bs2b.mode" />
   </PreferenceCategory>
 </PreferenceScreen>

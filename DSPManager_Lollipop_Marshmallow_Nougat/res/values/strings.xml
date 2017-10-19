@@ -84,11 +84,15 @@
   <string name="convolversuccess">Impulse response %1$s loaded\nSample rate:%2$d\nChannel info:%3$s\nSamples per channel:%4$d\nSamples per channel(Truncated):%5$d</string>
   <string name="memoryallocatefail">Cannot allocate memory for convolver</string>
   <string name="dialog_gain">Final gain [Int:1 &#8211; 200]%</string>
-  <string name="pref_headset_stereowide_title">Stereo widener</string>
+  <string name="pref_headset_soundpos_title">Sound positioning</string>
   <string name="pref_headset_stereowide_summary_on">Stereo widener is enabled</string>
   <string name="pref_headset_stereowide_summary_off">Stereo widener is disabled</string>
-  <string name="pref_headset_stereowide_enable">Enable</string>
+  <string name="pref_headset_stereowide_enable">Enable stereo widen</string>
   <string name="dialog_stereo">Widen Level</string>
+  <string name="pref_headset_bs2b_summary_on">BS2B is enabled</string>
+  <string name="pref_headset_bs2b_summary_off">BS2B is disabled</string>
+  <string name="dialog_bs2b">BS2B Preset</string>
+  <string name="pref_headset_bs2b_enable">Enable BS2B</string>
 
   <string name="eq_preset_acoustic">Acoustic</string>
   <string name="eq_preset_bass_booster">Bass booster</string>

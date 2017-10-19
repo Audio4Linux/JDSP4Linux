@@ -17,7 +17,7 @@ typedef struct
 
 EffectDSPMain::EffectDSPMain()
 	: ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), inputBuffer(0), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
-	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), convolver(0), fullStereoConvolver(0), normalise(0.3f), compressor670(0)
+	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), convolver(0), fullStereoConvolver(0), normalise(0.3f)//, compressor670(0)
 	, tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), finalGain(1.0f)
 {
 	double c0[15] = {2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778, 1.0418565333333332, 2.1131378, 4.6};
@@ -412,6 +412,22 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
+			else if (cmd == 188)
+			{
+				int16_t value = ((int16_t *)cep)[8];
+				if (bs2bEnabled == 2)
+				{
+					if (value == 0)
+						BS2BInit(&bs2b, (unsigned int)mSamplingRate, BS2B_JMEIER_CLEVEL);
+					else if (value == 1)
+						BS2BInit(&bs2b, (unsigned int)mSamplingRate, BS2B_CMOY_CLEVEL);
+					else if (value == 2)
+						BS2BInit(&bs2b, (unsigned int)mSamplingRate, BS2B_DEFAULT_CLEVEL);
+					bs2bEnabled = 1;
+				}
+				*replyData = 0;
+				return 0;
+			}
 			else if (cmd == 150)
 			{
 				float oldVal = tubedrive;
@@ -468,7 +484,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 154)
+/*			else if (cmd == 154)
 			{
 				float oldVal = tubedrive;
 				tubedrive = ((int16_t *)cep)[8] / 1000.0f;
@@ -500,7 +516,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				}
 				*replyData = 0;
 				return 0;
-			}
+			}*/
 			else if (cmd == 1200)
 			{
 				int16_t value = ((int16_t *)cep)[8];
@@ -559,6 +575,16 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
+			else if (cmd == 1208)
+			{
+				int16_t val = ((int16_t *)cep)[8];
+				if (val)
+					bs2bEnabled = 2;
+				else
+					bs2bEnabled = 0;
+				*replyData = 0;
+				return 0;
+			}
 			else if (cmd == 1205)
 			{
 				convolverEnabled = ((int16_t *)cep)[8];
@@ -612,7 +638,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 1207)
+/*			else if (cmd == 1207)
 			{
 				int16_t oldVal = wavechild670Enabled;
 				int curStat = ((int16_t *)cep)[8];
@@ -630,7 +656,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				}
 				*replyData = 0;
 				return 0;
-			}
+			}*/
 			else if (cmd == 10003)
 			{
 				samplesInc = ((int16_t *)cep)[8];
@@ -1193,6 +1219,18 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 			outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
 			inputBuffer[0][i] = outLR + outRL;
 			inputBuffer[1][i] = outLR - outRL;
+		}
+	}
+	if (bs2bEnabled == 1)
+	{
+		double tmpL, tmpR;
+		for (i = 0; i < frameCount; i++)
+		{
+			tmpL = (double)inputBuffer[0][i];
+			tmpR = (double)inputBuffer[1][i];
+			BS2BProcess(&bs2b, &tmpL, &tmpR);
+			inputBuffer[0][i] = (float)tmpL;
+			inputBuffer[1][i] = (float)tmpR;
 		}
 	}
 	if (ramp < 1.0f)

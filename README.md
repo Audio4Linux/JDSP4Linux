@@ -3,18 +3,19 @@ GUI is based on Omnirom DSP Manager and able to run in all recent Android rom in
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 This app don't work too much around with modifying Android framework.
 
-##### Basic:
+##### Features:
 
 1. Compression
 2. Bass Boost
 
-   --> 4 order IIR and 1023/4095 order FIR linear phase low pass bass boost
+   --> 1022/4094/8190 order FIR linear phase low pass bass boost
 3. Reverberation
 
    --> GVerb and Progenitor 2
 4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves) (Generate 3/4th order IIR filter on-the-fly, with relatively flat response)
 5. Stereo Widen
-6. Auto partitioning Convolver
+6. BS2B
+7. Auto partitioning Convolver
 
    --> Support mono / stereo / full stereo(LL, LR, RL, RR)
    
@@ -22,7 +23,7 @@ This app don't work too much around with modifying Android framework.
    
    --> Samples per channels for full stereo impulse response should less than 500000
 
-7. Vacuum tube modelling
+8. Vacuum tube modelling
 
 ## Important
 ### FAQ
@@ -32,17 +33,17 @@ A: Float32
 
 #### 2. Bass boost filter type?
 
-A: Effect have 2 option to boost low frequency, IIR based is obsoleted, eqaulizer already do the job.
+A: Effect have 3 option to boost low frequency, IIR based is obsoleted, eqaulizer already do the job.
 
    Linear phase filter type is work on convolution basis. When user change the bass boost parameter, engine will compute new low pass filter impulse response.
    
-   4095 order FIR filter should work on all frequency listed on options, 1023 order should work well above 80Hz.
+   4094/8190 order FIR filter should work on all frequency listed on options, 1022 order should work well above 80Hz.
 
 #### 3. What is convolver?
 
 A: Convolver is a effect apply convolution mathematical operation on audio signal, that perfectly apply user desired impulse response on music, it could simulate physical space.
 
-   Effect itself require audio file(.wav/.irs/.flac) to become impulse response source. x86 Android device may perform better.
+   Effect itself require audio file(.wav/.irs/.flac) to become impulse response source.
 
    For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
 
@@ -56,24 +57,20 @@ Original is written in C++, for some reasons I ported it to C implementation.
 
 File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap not stack, it will be useful when you play around with Visual Studio, because VS have 1Mb stack allocation limit...
 
-#### 6. Why you change the Effect structure?
-
-A: This is the only way to full control all DSP effects...
-
-#### 7. Why libjamesdsp.so so big?
+#### 6. Why libjamesdsp.so so big?
 
 A: Because of fftw3 library linked.
 
-#### 8. Why open source? Any license?
+#### 7. Why open source? Any license?
 
 A: Audio effects actually is not hard to implement, I don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
    All files in this repository is published under GPLv2.
 
-#### 9. Can I use your effect code?
+#### 8. Can I use your effect code?
 
 A: Yes. It is relatively easy to use some effect in other applications. Convolver, reverb, 12AX7 tube amplifier source code is written in similar style, you can look at the how their function is called, initialised, processed, etc. Most of the effect is written in C, so it is easy to port to other platforms without huge modifications.
 
-#### 10. Why no effect after installed?
+#### 9. Why no effect after installed?
 
 A: Check step in release build ReadMe.txt.
    audio_effects.conf is file for system to load effect using known UUID, you can just add
@@ -104,7 +101,7 @@ A: Check step in release build ReadMe.txt.
 N/A
 
 ##### TODO:
-1. More optimization on all component (JAVA, Native)
+1. N/A
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 

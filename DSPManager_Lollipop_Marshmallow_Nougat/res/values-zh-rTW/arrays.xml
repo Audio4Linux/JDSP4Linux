@@ -57,4 +57,9 @@
     <item>強</item>
     <item>更強</item>
   </string-array>
+  <string-array name="bs2b_modes">
+    <item>最弱</item>
+    <item>更弱</item>
+    <item>弱</item>
+  </string-array>
 </resources>
