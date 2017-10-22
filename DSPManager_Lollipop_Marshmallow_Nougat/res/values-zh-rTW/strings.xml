@@ -82,7 +82,7 @@
   <string name="resamplererror">請先啟用全域模式或者慣用模式來註冊DSP，以便從音訊DSP中獲取採樣率</string>
   <string name="impfilefault">載入脈衝響應失敗\n請選擇正確脈衝響應檔案</string>
   <string name="unmatchedsamplerate">脈衝響應檔案%1$s的採樣率%2$d與DSP模組採樣率%3$d不吻合\n目前正使用快速重採樣器\n追求高質素的，請使用離線重採樣器。</string>
-  <string name="convolversuccess">成功載入脈衝響應:%1$s\n採樣率:%2$d\n聲道:%3$s\n每聲道樣本總數:%4$d\n截短後的每聲道樣本總數:%5$d</string>
+  <string name="convolversuccess">成功載入脈衝響應:%1$s\n採樣率:%2$d\n聲道:%3$s\n每聲道樣本總數:%4$d\n截短後的每聲道樣本總數:%5$d\n策略:%6$d段</string>
   <string name="memoryallocatefail">卷積器無法分配記憶體</string>
   <string name="dialog_gain">輸出增益 [整數:1 &#8211; 200]</string>
 

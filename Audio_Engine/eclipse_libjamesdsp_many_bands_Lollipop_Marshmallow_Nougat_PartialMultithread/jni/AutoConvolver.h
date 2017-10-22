@@ -24,7 +24,6 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 AutoConvolverMono* InitAutoConvolverMonoZeroLatency(float *impulseResponse, int hlen, int audioBufferSize, int fftwThreads);
 void AutoConvolverFree(AutoConvolver *autoConv);
 void AutoConvolverMonoFree(AutoConvolverMono *autoConv);
-int PartitionerAnalyzer(int hlen, int latency, int strategy, int fs, int entriesResult, double **result_c0_c1, int *sflen_best, int *mflen_best, int *lflen_best);
 double** PartitionHelperWisdomGetFromFile(const char *file, int *itemRet);
 char* PartitionHelper(int s_max, int fs);
 double** PartitionHelperDirect(int s_max, int fs);

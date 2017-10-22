@@ -217,6 +217,22 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replySize = sizeof(reply1x4_1x4_t);
 				return 0;
 			}
+			else if (cmd == 20004)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 20003;
+				if (convolver)
+					replyData->data = convolver[0]->methods;
+				else if (fullStereoConvolver)
+					replyData->data = fullStereoConvolver[0]->methods;
+				else
+					replyData->data = 0;
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
 		}
 	}
 	if (cmdCode == EFFECT_CMD_SET_PARAM)
@@ -944,6 +960,9 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 				convolverReady = 1;
 			else
 				convolverReady = 2;
+#ifdef DEBUG
+		LOGI("Convolver strategy used: %d", convolver[0]->methods);
+#endif
 		}
 		else if (impChannels == 4)
 		{
@@ -975,6 +994,9 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 				convolverReady = 3;
 			else
 				convolverReady = 4;
+#ifdef DEBUG
+		LOGI("Convolver strategy used: %d", fullStereoConvolver[0]->methods);
+#endif
 		}
 		ramp = 0.3f;
 #ifdef DEBUG

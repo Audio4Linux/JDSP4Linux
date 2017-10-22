@@ -433,7 +433,7 @@ class StartUpOptimiserThread implements Runnable {
 		updateDsp(true, false);
 		if (bench_c0[0] == 0 || bench_c1[1] == 0)
 		{
-	        Runnable runner = new StartUpOptimiserThread(9, 48000);
+	        Runnable runner = new StartUpOptimiserThread(10, 48000);
 	        new Thread(runner).start();
 		}
 	}
@@ -677,10 +677,10 @@ class StartUpOptimiserThread implements Runnable {
 				else
 				{
 					if (impinfo[2] != dspModuleSamplingRate)
-						Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFilePath, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_LONG).show();
+						Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFilePath, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_SHORT).show();
 					int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt(dspModuleSamplingRate);
 					if (impulseResponse == null)
-						Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_LONG).show();
+						Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_SHORT).show();
 					else
 					{
 						int arraySize2Send = 4096;
@@ -702,12 +702,13 @@ class StartUpOptimiserThread implements Runnable {
 						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
 						if (DSPManager.devMsgDisplay)
 						{
+							int convolutionStrategy = session.getParameter(session.JamesDSP, 20004);
 							if (impinfo[0] == 1)
-								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.mono_conv), impinfo[1], (int)impulseCutted), Toast.LENGTH_SHORT).show();
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.mono_conv), impinfo[1], (int)impulseCutted, convolutionStrategy), Toast.LENGTH_SHORT).show();
 							else if (impinfo[0] == 2)
-								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.stereo_conv), impinfo[1], (int)impulseCutted / 2), Toast.LENGTH_SHORT).show();
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.stereo_conv), impinfo[1], (int)impulseCutted / 2, convolutionStrategy), Toast.LENGTH_SHORT).show();
 							else if (impinfo[0] == 4)
-								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.fullstereo_conv), impinfo[1], (int)impulseCutted / 4), Toast.LENGTH_SHORT).show();
+								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, impinfo[2], getString(R.string.fullstereo_conv), impinfo[1], (int)impulseCutted / 4, convolutionStrategy), Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
