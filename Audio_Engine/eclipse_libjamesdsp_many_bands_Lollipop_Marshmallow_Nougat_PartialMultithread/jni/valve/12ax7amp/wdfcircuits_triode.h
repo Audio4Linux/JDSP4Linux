@@ -1,6 +1,6 @@
 #ifndef WDFCIRCUITS_H
 #define WDFCIRCUITS_H
-#define TOLERANCE 1e-6
+#define TOLERANCE 1e-3
 
 #include "../Misc.h"
 
@@ -37,7 +37,6 @@ Real ffp_insane(Triode *triode, Real VP);
 Real fpdash(Triode *triode, Real VP);
 Real ffk(Triode *triode);
 
-float from_dB(float gdb);
 void TriodeInit(Triode *triode);
 void compute(Triode *triode, Real Kbb, Real Gbb, Real Pbb);
 

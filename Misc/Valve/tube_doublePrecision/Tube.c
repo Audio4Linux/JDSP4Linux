@@ -1,6 +1,10 @@
 #include <math.h>
 #include "Tube.h"
 
+inline Real from_dB(Real gdb)
+{
+	return exp(gdb / 20.0*log(10.0));
+}
 int activate(tubeFilter *tubefilter, double samplerate, double *circuitdata, int warmupDuration, int insane)
 {
 	Real Fs = samplerate;

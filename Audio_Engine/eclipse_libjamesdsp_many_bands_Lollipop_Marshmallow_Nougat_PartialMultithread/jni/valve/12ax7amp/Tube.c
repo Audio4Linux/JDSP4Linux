@@ -1,6 +1,10 @@
 #include <math.h>
 #include "Tube.h"
 
+inline float from_dB(float gdb)
+{
+	return (float)exp(gdb / 20.f*log(10.f));
+}
 int activate(tubeFilter *tubefilter, double samplerate, double *circuitdata, int warmupDuration, int insane)
 {
 	Real Fs = samplerate;
@@ -865,7 +869,7 @@ void processTube(tubeFilter *tubefilter, float* inputs, float* outputs, unsigned
 																										+ ((tubefilter->toneStack56 * tubefilter->fRec1[3]) + (tubefilter->toneStack54 * tubefilter->fRec1[2])))))
 																										+ (tubefilter->toneStack32 * ((tubefilter->toneStack30 * tubefilter->fRec0[0]) + ((tubefilter->toneStack29 * tubefilter->fRec0[1])
 																											+ ((tubefilter->toneStack27 * tubefilter->fRec0[3]) + (tubefilter->toneStack25 * tubefilter->fRec0[2]))))))))))))))))))))))))))))) - tubefilter->pa1 * tubefilter->v1 - tubefilter->pa2*tubefilter->v2;
-		outputs[i] = tubefilter->pb0 * ViE + tubefilter->pb1 * tubefilter->v1 + tubefilter->pb2*tubefilter->v2;
+		outputs[i] = (float)(tubefilter->pb0 * ViE + tubefilter->pb1 * tubefilter->v1 + tubefilter->pb2*tubefilter->v2);
 		tubefilter->v2 = tubefilter->v1;
 		tubefilter->v1 = ViE;
 		// post processing

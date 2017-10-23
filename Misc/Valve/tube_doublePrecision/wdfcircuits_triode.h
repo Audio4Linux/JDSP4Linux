@@ -39,7 +39,6 @@ Real ffp_insane(Triode *triode, Real VP);
 Real fpdash(Triode *triode, Real VP);
 Real ffk(Triode *triode);
 
-Real from_dB(Real gdb);
 void TriodeInit(Triode *triode);
 void compute(Triode *triode, Real Kbb, Real Gbb, Real Pbb);
 

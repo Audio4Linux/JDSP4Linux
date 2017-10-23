@@ -20,9 +20,9 @@ EffectDSPMain::EffectDSPMain()
 	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), convolver(0), fullStereoConvolver(0), normalise(0.3f)//, compressor670(0)
 	, tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), finalGain(1.0f)
 {
-	double c0[15] = {2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778, 1.0418565333333332, 2.1131378, 4.6};
-	double c1[15] = {5.88199398839289e-6, 1.1786813951189911e-5, 2.5600214528512222e-5, 8.53041086120132e-5, 2.656291374239004e-4, 5.047717001008378e-4, 8.214255850540808e-4, 0.0016754651127819551, 0.0033478867132867136, 0.006705333333333334, 0.013496382222222221, 0.02673028888888889, 0.054979466666666664, 0.11634819999999998, 0.35878};
-	if(ACFFTWThreadInit())
+	double c0[15] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778, 1.0418565333333332, 2.1131378, 4.6 };
+	double c1[15] = { 5.88199398839289e-6, 1.1786813951189911e-5, 2.5600214528512222e-5, 8.53041086120132e-5, 2.656291374239004e-4, 5.047717001008378e-4, 8.214255850540808e-4, 0.0016754651127819551, 0.0033478867132867136, 0.006705333333333334, 0.013496382222222221, 0.02673028888888889, 0.054979466666666664, 0.11634819999999998, 0.35878 };
+	if (ACFFTWThreadInit())
 		threadResult = 2;
 	else
 		threadResult = 0;
@@ -448,9 +448,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				float oldVal = tubedrive;
 				tubedrive = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubedrive)
+				if (analogModelEnable && oldVal != tubedrive)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 					rightparams2.tube = tubeP;
@@ -462,9 +462,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				float oldVal = tubebass;
 				tubebass = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubebass)
+				if (analogModelEnable && oldVal != tubebass)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 					rightparams2.tube = tubeP;
@@ -476,9 +476,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				float oldVal = tubemid;
 				tubemid = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubemid)
+				if (analogModelEnable && oldVal != tubemid)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 					rightparams2.tube = tubeP;
@@ -490,9 +490,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				float oldVal = tubetreble;
 				tubetreble = ((int16_t *)cep)[8] / 1000.0f;
-				if(analogModelEnable && oldVal != tubetreble)
+				if (analogModelEnable && oldVal != tubetreble)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 					rightparams2.tube = tubeP;
@@ -500,38 +500,38 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-/*			else if (cmd == 154)
+			/*			else if (cmd == 154)
 			{
-				float oldVal = tubedrive;
-				tubedrive = ((int16_t *)cep)[8] / 1000.0f;
-				if(wavechild670Enabled == -1)
-				{
-					Real inputLevelA = tubedrive;
-					Real ACThresholdA = 0.35; // This require 0 < ACThresholdA < 1.0
-					uint timeConstantSelectA = 1; // Integer from 1-6
-					Real DCThresholdA = 0.35; // This require 0 < DCThresholdA < 1.0
-					Real outputGain = 1.0 / inputLevelA;
-					int sidechainLink = 0;
-				    int isMidSide = 0;
-				    int useFeedbackTopology = 1;
-					Real inputLevelB = inputLevelA;
-					Real ACThresholdB = ACThresholdA;
-					uint timeConstantSelectB = timeConstantSelectA;
-					Real DCThresholdB = DCThresholdA;
-				    Wavechild670Parameters params = Wavechild670ParametersInit(inputLevelA, ACThresholdA, timeConstantSelectA, DCThresholdA,
-				                                    inputLevelB, ACThresholdB, timeConstantSelectB, DCThresholdB,
-				                                    sidechainLink, isMidSide, useFeedbackTopology, outputGain);
-				    if (compressor670)
-				    	free(compressor670);
-				    compressor670 = Wavechild670Init((Real)mSamplingRate, &params);
-				    Wavechild670WarmUp(compressor670, 0.5);
-				    wavechild670Enabled = 1;
-#ifdef DEBUG
-				    LOGI("Compressor670 Initialised");
-#endif
-				}
-				*replyData = 0;
-				return 0;
+			float oldVal = tubedrive;
+			tubedrive = ((int16_t *)cep)[8] / 1000.0f;
+			if(wavechild670Enabled == -1)
+			{
+			Real inputLevelA = tubedrive;
+			Real ACThresholdA = 0.35; // This require 0 < ACThresholdA < 1.0
+			uint timeConstantSelectA = 1; // Integer from 1-6
+			Real DCThresholdA = 0.35; // This require 0 < DCThresholdA < 1.0
+			Real outputGain = 1.0 / inputLevelA;
+			int sidechainLink = 0;
+			int isMidSide = 0;
+			int useFeedbackTopology = 1;
+			Real inputLevelB = inputLevelA;
+			Real ACThresholdB = ACThresholdA;
+			uint timeConstantSelectB = timeConstantSelectA;
+			Real DCThresholdB = DCThresholdA;
+			Wavechild670Parameters params = Wavechild670ParametersInit(inputLevelA, ACThresholdA, timeConstantSelectA, DCThresholdA,
+			inputLevelB, ACThresholdB, timeConstantSelectB, DCThresholdB,
+			sidechainLink, isMidSide, useFeedbackTopology, outputGain);
+			if (compressor670)
+			free(compressor670);
+			compressor670 = Wavechild670Init((Real)mSamplingRate, &params);
+			Wavechild670WarmUp(compressor670, 0.5);
+			wavechild670Enabled = 1;
+			#ifdef DEBUG
+			LOGI("Compressor670 Initialised");
+			#endif
+			}
+			*replyData = 0;
+			return 0;
 			}*/
 			else if (cmd == 1200)
 			{
@@ -644,9 +644,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				int16_t oldVal = analogModelEnable;
 				analogModelEnable = ((int16_t *)cep)[8];
-				if(analogModelEnable && oldVal != analogModelEnable)
+				if (analogModelEnable && oldVal != analogModelEnable)
 				{
-					if(!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
 						analogModelEnable = 0;
 					tubeP[1] = tubeP[0];
 					rightparams2.tube = tubeP;
@@ -654,24 +654,24 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-/*			else if (cmd == 1207)
+			/*			else if (cmd == 1207)
 			{
-				int16_t oldVal = wavechild670Enabled;
-				int curStat = ((int16_t *)cep)[8];
-				if (curStat)
-					wavechild670Enabled = -1;
-				else
-					wavechild670Enabled = 0;
-				if (!wavechild670Enabled)
-				{
-				    if (compressor670)
-				    {
-				    	free(compressor670);
-				    	compressor670 = 0;
-				    }
-				}
-				*replyData = 0;
-				return 0;
+			int16_t oldVal = wavechild670Enabled;
+			int curStat = ((int16_t *)cep)[8];
+			if (curStat)
+			wavechild670Enabled = -1;
+			else
+			wavechild670Enabled = 0;
+			if (!wavechild670Enabled)
+			{
+			if (compressor670)
+			{
+			free(compressor670);
+			compressor670 = 0;
+			}
+			}
+			*replyData = 0;
+			return 0;
 			}*/
 			else if (cmd == 10003)
 			{
@@ -775,7 +775,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						LOGI("bench_c0: %lf", benchmarkValue[0][i]);
 #endif
 					}
-				isBenchData++;
+					isBenchData++;
 				}
 				*replyData = 0;
 				return 0;
@@ -799,24 +799,24 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						LOGI("bench_c1: %lf", benchmarkValue[1][i]);
 #endif
 					}
-				isBenchData++;
-				if (convolverReady > 0)
-				{
-					if (!refreshConvolver(currentframeCountInit))
+					isBenchData++;
+					if (convolverReady > 0)
 					{
-						if (finalImpulse)
+						if (!refreshConvolver(currentframeCountInit))
 						{
-							for (uint32_t i = 0; i < impChannels; i++)
-								free(finalImpulse[i]);
-							free(finalImpulse);
-							finalImpulse = 0;
-							free(tempImpulseFloat);
-							tempImpulseFloat = 0;
+							if (finalImpulse)
+							{
+								for (uint32_t i = 0; i < impChannels; i++)
+									free(finalImpulse[i]);
+								free(finalImpulse);
+								finalImpulse = 0;
+								free(tempImpulseFloat);
+								tempImpulseFloat = 0;
+							}
+							convolverReady = -1;
+							convolverEnabled = !convolverEnabled;
 						}
-						convolverReady = -1;
-						convolverEnabled = !convolverEnabled;
 					}
-				}
 				}
 				*replyData = 0;
 				return 0;
@@ -906,11 +906,12 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 #endif
 	unsigned int i;
 	if (convolver)
-	{for (i = 0; i < 2; i++)
 	{
-		AutoConvolverMonoFree(convolver[i]);
-		free(convolver[i]);
-	}
+		for (i = 0; i < 2; i++)
+		{
+			AutoConvolverMonoFree(convolver[i]);
+			free(convolver[i]);
+		}
 		free(convolver);
 		convolver = 0;
 	}
@@ -961,7 +962,7 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 			else
 				convolverReady = 2;
 #ifdef DEBUG
-		LOGI("Convolver strategy used: %d", convolver[0]->methods);
+			LOGI("Convolver strategy used: %d", convolver[0]->methods);
 #endif
 		}
 		else if (impChannels == 4)
@@ -995,7 +996,7 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 			else
 				convolverReady = 4;
 #ifdef DEBUG
-		LOGI("Convolver strategy used: %d", fullStereoConvolver[0]->methods);
+			LOGI("Convolver strategy used: %d", fullStereoConvolver[0]->methods);
 #endif
 		}
 		ramp = 0.3f;
@@ -1231,8 +1232,8 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 		processTube(&tubeP[0], inputBuffer[0], inputBuffer[0], frameCount);
 		pthread_join(righttube, 0);
 	}
-/*	if (wavechild670Enabled == 1)
-		Wavechild670ProcessFloat(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], frameCount);*/
+	/*	if (wavechild670Enabled == 1)
+	Wavechild670ProcessFloat(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], frameCount);*/
 	if (stereoWidenEnabled)
 	{
 		for (i = 0; i < frameCount; i++)
