@@ -1,6 +1,6 @@
 #ifndef WDFCIRCUITS_H
 #define WDFCIRCUITS_H
-#define TOLERANCE 1e-3
+#define TOLERANCE 1e-2
 
 #include "../Misc.h"
 
