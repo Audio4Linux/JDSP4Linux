@@ -102,7 +102,7 @@ A: Check step in release build ReadMe.txt.
 It would be downloadable on public domain.
 
 ##### TODO:
-1. Eliminate remain C++ part, which is used only in Equalizer. May replaced by minimum phase or linear phase equalizer, also the algorithm used in current FIR bass boost.
+1. Eliminate remain C++ part, which is used only in Equalizer. May replaced by minimum phase or linear phase equalizer, also used in current FIR bass boost.
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 
