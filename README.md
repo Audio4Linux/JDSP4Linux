@@ -50,7 +50,7 @@ A: Convolver is a effect apply convolution(a mathematical operation) on audio si
 #### 3. What is Analog Modelling?
 
 A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [ZamAudio](https://github.com/zamaudio).
-The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will tend to clip the audio. Analog amplifier was built from real mathematical model, most notably Nonlinearity of vacuum tube.
+The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will tend to clip the audio. Analog amplifier was built from real mathematical model, most notably is nonlinearity of vacuum tube.
 Original is written in C++, for some reasons I ported it to C implementation.
 
 #### 5. What is Misc folder does?
@@ -66,7 +66,7 @@ A: Because of fftw3 library linked.
 A: Audio effects actually is not hard to implement, I don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
    All files in this repository is published under GPLv2.
 
-#### 8. Can I use your effect code?
+#### 8. Can I use your audio effect code?
 
 A: Yes. It is relatively easy to use some effect in other applications. Convolver, reverb, 12AX7 tube amplifier source code is written in similar style, you can look at the how their function is called, initialised, processed, etc. Most of the effect is written in C, so it is easy to port to other platforms without huge modifications.
 
@@ -104,6 +104,7 @@ It would be downloadable on public domain.
 
 ##### TODO:
 1. Eliminate remain C++ part from major signal processing code, which is used only in Equalizer. May replace by minimum phase or linear phase equalizer, also used in current FIR bass boost.
+2. Doesn't detect Bluetooth headset when device boot up.
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 
