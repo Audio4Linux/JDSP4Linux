@@ -972,15 +972,50 @@ AutoConvolver* InitAutoConvolverZeroLatency(float **impulseResponse, int hlen, i
 	autoConv->process = &Convolver1StageLowLatencyProcess;
 	return autoConv;
 }
-AutoConvolverMono* InitAutoConvolverMonoZeroLatency(float *impulseResponse, int hlen, int audioBufferSize, int fftwThreads)
+AutoConvolverMono* AllocateAutoConvolverMonoZeroLatency(float *impulseResponse, int hlen, int audioBufferSize, int fftwThreads)
 {
 	AutoConvolverMono *autoConv = (AutoConvolverMono*)calloc(1, sizeof(AutoConvolverMono));
 	autoConv->methods = 1;
-	HConv1Stage* stage = (HConv1Stage*)malloc(sizeof(HConv1Stage));
+	HConv1Stage* stage = (HConv1Stage*)calloc(1, sizeof(HConv1Stage));
 	hcInit1Stage(stage, impulseResponse, hlen, audioBufferSize, 1, fftwThreads);
 	autoConv->filter = (void*)stage;
 	autoConv->process = &Convolver1StageLowLatencyProcessMono;
 	return autoConv;
+}
+void hcInit1StageDeterminedAllocation(HConv1Stage *filter, float *h, int hlen)
+{
+	int i, j, size, num, pos;
+	float gain;
+	int flen = filter->framelength;
+	// generate filter segments
+	gain = 0.5f / flen;
+	size = sizeof(float) * 2 * flen;
+	memset(filter->dft_time, 0, size);
+	for (i = 0; i < filter->num_filterbuf - 1; i++)
+	{
+		for (j = 0; j < flen; j++)
+			filter->dft_time[j] = gain * h[i * flen + j];
+		fftwf_execute(filter->fft);
+		for (j = 0; j < flen + 1; j++)
+		{
+			filter->filterbuf_freq_real[i][j] = filter->dft_freq[j][0];
+			filter->filterbuf_freq_imag[i][j] = filter->dft_freq[j][1];
+		}
+	}
+	for (j = 0; j < hlen - i * flen; j++)
+		filter->dft_time[j] = gain * h[i * flen + j];
+	size = sizeof(float) * ((i + 1) * flen - hlen);
+	memset(&(filter->dft_time[hlen - i * flen]), 0, size);
+	fftwf_execute(filter->fft);
+	for (j = 0; j < flen + 1; j++)
+	{
+		filter->filterbuf_freq_real[i][j] = filter->dft_freq[j][0];
+		filter->filterbuf_freq_imag[i][j] = filter->dft_freq[j][1];
+	}
+}
+void UpdateAutoConvolverMonoZeroLatency(AutoConvolverMono *autoConv, float *impulseResponse, int hlen)
+{
+	hcInit1StageDeterminedAllocation((HConv1Stage*)autoConv->filter, impulseResponse, hlen);
 }
 void hcClose1Stage(HConv1Stage *filter)
 {

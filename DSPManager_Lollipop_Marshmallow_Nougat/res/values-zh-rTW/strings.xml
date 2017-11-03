@@ -31,7 +31,7 @@
   <string name="pref_effect_freq_title">截止頻率 [整數:30 &#8211; 300]Hz</string>
   <string name="dialog_freq">濾波頻率</string>
   <string name="dialog_effect">效果程度</string>
-  <string name="pref_equalizer_title">混合等化器</string>
+  <string name="pref_equalizer_title">FIR等化器</string>
   <string name="pref_equalizer_summary_on">已啟用混合等化器</string>
   <string name="pref_equalizer_summary_off">已停用混合等化器</string>
   <string name="pref_equalizer_enable">使用混合等化器</string>
@@ -97,18 +97,7 @@
   <string name="dialog_bs2b">BS2B預置</string>
   <string name="pref_headset_bs2b_enable">使用BS2B</string>
 
-  <string name="eq_preset_acoustic">原音音樂</string>
-  <string name="eq_preset_bass_booster">低音強化</string>
-  <string name="eq_preset_bass_reducer">低音弱化</string>
-  <string name="eq_preset_classical">古典音樂</string>
-  <string name="eq_preset_deep">深沉</string>
   <string name="eq_preset_flat">平淡</string>
-  <string name="eq_preset_r_and_b">R&amp;B</string>
-  <string name="eq_preset_rock">搖滾音樂</string>
-  <string name="eq_preset_small_speakers">小型喇叭</string>
-  <string name="eq_preset_treble_booster">高音強化</string>
-  <string name="eq_preset_treble_reducer">高音弱化</string>
-  <string name="eq_preset_vocal_booster">人聲強化</string>
   <string name="eq_preset_custom">自訂</string>
   <string name="save_preset">保存設置</string>
   <string name="load_preset">載入設置</string>

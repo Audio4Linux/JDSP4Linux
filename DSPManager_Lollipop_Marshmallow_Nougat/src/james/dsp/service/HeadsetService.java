@@ -221,16 +221,16 @@ public class HeadsetService extends Service
 	/**
 	* Is a wired headset plugged in?
 	*/
-	public static boolean mUseHeadset;
+	public static boolean mUseHeadset = false;
 
 	/**
 	* Is bluetooth headset plugged in?
 	*/
-	public static boolean mUseBluetooth;
+	public static boolean mUseBluetooth = false;
 
 	private float[] mOverriddenEqualizerLevels;
 
-	private int[] eqLevels = new int[10];
+	private int[] eqLevels = new int[15];
 	public static int[] bench_c0 = new int[10];
 	public static int[] bench_c1 = new int[10];
 	public static int benchNum = 0;
@@ -317,8 +317,7 @@ public class HeadsetService extends Service
 		final String action = intent.getAction();
 		if (action.equals(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED))
 		{
-			int state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE,
-				BluetoothProfile.STATE_CONNECTED);
+			int state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, BluetoothProfile.STATE_CONNECTED);
 			if (state == BluetoothProfile.STATE_CONNECTED && !mUseBluetooth)
 			{
 				mUseBluetooth = true;
@@ -408,7 +407,24 @@ class StartUpOptimiserThread implements Runnable {
 		final IntentFilter btFilter = new IntentFilter();
 		btFilter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
 		btFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-		registerReceiver(mBtReceiver, btFilter);
+		registerReceiver(mBtReceiver, btFilter);AudioManager mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        if (mAudioManager != null)
+        {
+            mUseBluetooth = mAudioManager.isBluetoothA2dpOn();
+            if (mUseBluetooth)
+            {
+                Log.i(DSPManager.TAG, "Bluetooth mode");
+                mUseHeadset = false;
+            }
+            else
+            {
+                mUseHeadset = mAudioManager.isWiredHeadsetOn();
+                if (mUseHeadset)
+                    Log.i(DSPManager.TAG, "Headset mode");
+                else
+                    Log.i(DSPManager.TAG, "Speaker mode");
+            }
+        }
 		iconLarge = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
 		preferencesMode = getSharedPreferences(DSPManager.SHARED_PREFERENCES_BASENAME + "." + "settings", 0);
 		if (!preferencesMode.contains("dsp.app.modeEffect"))
@@ -615,6 +631,8 @@ class StartUpOptimiserThread implements Runnable {
 				if(filtertype == 0 && freq < 90)
 						Toast.makeText(HeadsetService.this, R.string.preferredlpf, Toast.LENGTH_SHORT).show();
 			}
+			session.setParameterShort(session.JamesDSP, 154, Short.valueOf(preferences.getString("dsp.tone.filtertype", "0")));
+			session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
 			if (equalizerEnabled == 1)
 			{
 				/* Equalizer state is in a single string preference with all values separated by ; */
@@ -625,13 +643,12 @@ class StartUpOptimiserThread implements Runnable {
 				}
 				else
 				{
-					String[] levels = preferences.getString("dsp.tone.eq.custom", "0;0;0;0;0;0;0;0;0;0").split(";");
+					String[] levels = preferences.getString("dsp.tone.eq.custom", "0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0").split(";");
 					for (short i = 0; i < levels.length; i++)
 						eqLevels[i] = Math.round(Float.valueOf(levels[i]) * 10000);
 				}
 				session.setParameterIntArray(session.JamesDSP, 115, eqLevels);
 			}
-			session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
 			if (reverbEnabled == 1 && updateMajor)
 			{
 				short mode = Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1"));

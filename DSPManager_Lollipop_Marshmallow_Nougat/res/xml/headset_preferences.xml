@@ -97,10 +97,17 @@
         android:summaryOff="@string/pref_equalizer_summary_off"
         android:title="@string/pref_equalizer_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedListPreference
+        android:defaultValue="0"
+        android:dialogTitle="@string/dialog_filtertype"
+        android:entries="@array/equalizer_filtertype"
+        android:entryValues="@array/equalizer_filtertype_values"
+        android:title="@string/dialog_filtertype"
+        android:key="dsp.tone.filtertype" />
+    <james.dsp.preference.SummariedListPreference
         android:entries="@array/equalizer_preset_modes"
         android:dialogTitle="@string/pref_equalizer_preset_title"
         android:key="dsp.tone.eq"
-        android:defaultValue="0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0"
+        android:defaultValue="0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0"
         android:title="@string/pref_equalizer_preset_title"
         android:entryValues="@array/equalizer_preset_values" />
     <james.dsp.preference.EqualizerPreference android:key="dsp.tone.eq.custom" />

@@ -25,7 +25,7 @@
   <string name="dialog_filtertype">Filter type</string>
   <string name="pref_effect_freq_title">Cutoff frequency [Int:30 &#8211; 300]Hz</string>
   <string name="dialog_effect">Effect strength</string>
-  <string name="pref_equalizer_title">Hybrid Equalizer</string>
+  <string name="pref_equalizer_title">FIR Equalizer</string>
   <string name="pref_equalizer_summary_on">Hybrid Equalizer is enabled</string>
   <string name="pref_equalizer_summary_off">Hybrid Equalizer is disabled</string>
   <string name="pref_equalizer_enable">Enable</string>
@@ -94,18 +94,7 @@
   <string name="dialog_bs2b">BS2B Preset</string>
   <string name="pref_headset_bs2b_enable">Enable BS2B</string>
 
-  <string name="eq_preset_acoustic">Acoustic</string>
-  <string name="eq_preset_bass_booster">Bass booster</string>
-  <string name="eq_preset_bass_reducer">Bass reducer</string>
-  <string name="eq_preset_classical">Classical</string>
-  <string name="eq_preset_deep">Deep</string>
   <string name="eq_preset_flat">Flat</string>
-  <string name="eq_preset_r_and_b">R&amp;B</string>
-  <string name="eq_preset_rock">Rock</string>
-  <string name="eq_preset_small_speakers">Small speakers</string>
-  <string name="eq_preset_treble_booster">Treble booster</string>
-  <string name="eq_preset_treble_reducer">Treble reducer</string>
-  <string name="eq_preset_vocal_booster">Vocal booster</string>
   <string name="eq_preset_custom">Custom</string>
   <string name="save_preset">Save preset</string>
   <string name="load_preset">Load preset</string>

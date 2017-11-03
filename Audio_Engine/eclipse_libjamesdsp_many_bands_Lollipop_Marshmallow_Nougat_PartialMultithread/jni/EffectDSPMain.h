@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Effect.h"
-#include "iir/Iir.h"
 #include <pthread.h>
 extern "C"
 {
 #include "bs2b.h"
+#include "mnspline.h"
 #include "ArbFIRGen.h"
 #include "compressor.h"
 #include "gverb.h"
@@ -15,7 +15,8 @@ extern "C"
 //#include "valve/wavechild670/wavechild670.h"
 }
 
-#define NUM_BANDS 10
+#define NUM_BANDS 15
+#define NUM_BANDSM1 NUM_BANDS-1
 class EffectDSPMain : public Effect
 {
 protected:
@@ -54,32 +55,15 @@ protected:
 	t_bs2bdp bs2b;
 //	Wavechild670 *compressor670;
 	int threadResult;
-	// Equalizer
-	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> lsl;
-	Iir::Butterworth::LowShelf<4, Iir::DirectFormII> lsr;
-	Iir::Butterworth::BandShelf<4, Iir::DirectFormII> bs1l;
-	Iir::Butterworth::BandShelf<4, Iir::DirectFormII> bs1r;
-	Iir::Butterworth::BandShelf<3, Iir::DirectFormII> bs2l;
-	Iir::Butterworth::BandShelf<3, Iir::DirectFormII> bs2r;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs3l;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs3r;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs4l;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs4r;
-	Iir::Butterworth::BandShelf<3, Iir::DirectFormII> bs5l;
-	Iir::Butterworth::BandShelf<3, Iir::DirectFormII> bs5r;
-	Iir::Butterworth::BandShelf<3, Iir::DirectFormII> bs6l;
-	Iir::Butterworth::BandShelf<3, Iir::DirectFormII> bs6r;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs7l;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs7r;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs8l;
-	Iir::Butterworth::BandShelf<2, Iir::DirectFormII> bs8r;
-	Iir::Butterworth::HighShelf<3, Iir::DirectFormII> bs9l;
-	Iir::Butterworth::HighShelf<3, Iir::DirectFormII> bs9r;
+	ArbitraryEq *arbEq;
+	float *xaxis, *yaxis;
+	int eqfilterLength;
+	AutoConvolverMono **FIREq;
 	// Variables
 	float pregain, threshold, knee, ratio, attack, release;
 	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
-	int16_t bassBoostStrength, bassBoostFilterType, bs2bLv;
-	int16_t compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled, stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
+	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
+	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
 	int16_t samplesInc, impChannels, previousimpChannels;
 	float tubedrive, tubebass, tubemid, tubetreble;
 	float normalise;
@@ -87,11 +71,15 @@ protected:
 	int16_t mPreset, mReverbMode;
 	int isBenchData;
 	double *benchmarkValue[2];
+	void FreeBassBoost();
+	void FreeEq();
+	void FreeConvolver();
+	void refreshTubeAmp();
 	void refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR, float bassBoostCentreFreq);
 	int refreshConvolver(uint32_t actualframeCount);
 	void refreshStereoWiden(uint32_t parameter);
 	void refreshCompressor();
-	void refreshEqBands(double *bands);
+	void refreshEqBands(uint32_t actualframeCount, float *bands);
 	void refreshReverb();
 	inline float normaliseToLevel(float* buffer, size_t num_frames, float level)
 	{

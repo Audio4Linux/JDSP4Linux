@@ -2,10 +2,11 @@
 #define TAG "EffectDSPMain"
 #include <android/log.h>
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
+#include "MemoryUsage.h"
 #endif
 #include <unistd.h>
 #include "EffectDSPMain.h"
-
 typedef struct
 {
 	int32_t status;
@@ -16,9 +17,9 @@ typedef struct
 } reply1x4_1x4_t;
 
 EffectDSPMain::EffectDSPMain()
-	: ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), inputBuffer(0), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
-	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), convolver(0), fullStereoConvolver(0), normalise(0.3f)//, compressor670(0)
-	, tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), finalGain(1.0f)
+	: equalizerEnabled(0), ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), inputBuffer(0), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
+	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0), normalise(0.3f)//, compressor670(0)
+	, tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), finalGain(1.0f), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[15] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778, 1.0418565333333332, 2.1131378, 4.6 };
 	double c1[15] = { 5.88199398839289e-6, 1.1786813951189911e-5, 2.5600214528512222e-5, 8.53041086120132e-5, 2.656291374239004e-4, 5.047717001008378e-4, 8.214255850540808e-4, 0.0016754651127819551, 0.0033478867132867136, 0.006705333333333334, 0.013496382222222221, 0.02673028888888889, 0.054979466666666664, 0.11634819999999998, 0.35878 };
@@ -33,6 +34,7 @@ EffectDSPMain::EffectDSPMain()
 }
 EffectDSPMain::~EffectDSPMain()
 {
+	unsigned int i;
 	if (inputBuffer)
 	{
 		free(inputBuffer[0]);
@@ -47,39 +49,9 @@ EffectDSPMain::~EffectDSPMain()
 		gverb_free(verbL);
 		gverb_free(verbR);
 	}
-	if (bassBoostLp)
-	{
-		for (unsigned int i = 0; i < NUMCHANNEL; i++)
-		{
-			AutoConvolverMonoFree(bassBoostLp[i]);
-			free(bassBoostLp[i]);
-		}
-		free(bassBoostLp);
-	}
-	if (convolver)
-	{
-		for (unsigned int i = 0; i < NUMCHANNEL; i++)
-		{
-			AutoConvolverMonoFree(convolver[i]);
-			free(convolver[i]);
-		}
-		free(convolver);
-	}
-	if (fullStereoConvolver)
-	{
-		for (unsigned int i = 0; i < 4; i++)
-		{
-			AutoConvolverMonoFree(fullStereoConvolver[i]);
-			free(fullStereoConvolver[i]);
-		}
-		free(fullStereoConvolver);
-	}
-	if (fullStereoBuf)
-	{
-		free(fullStereoBuf[0]);
-		free(fullStereoBuf[1]);
-		free(fullStereoBuf);
-	}
+	FreeBassBoost();
+	FreeEq();
+	FreeConvolver();
 	if (finalImpulse)
 	{
 		free(finalImpulse[0]);
@@ -99,11 +71,88 @@ EffectDSPMain::~EffectDSPMain()
 	if (benchmarkValue[1])
 		free(benchmarkValue[1]);
 #ifdef DEBUG
-	LOGI("Free buffer");
+	LOGI("Buffer freed");
 #endif
+}
+void EffectDSPMain::FreeBassBoost()
+{
+	if (bassBoostLp)
+	{
+		for (unsigned int i = 0; i < NUMCHANNEL; i++)
+		{
+			AutoConvolverMonoFree(bassBoostLp[i]);
+			free(bassBoostLp[i]);
+		}
+		free(bassBoostLp);
+		bassBoostLp = 0;
+		ramp = 0.4f;
+	}
+}
+void EffectDSPMain::FreeEq()
+{
+	if (xaxis)
+	{
+		free(xaxis);
+		xaxis = 0;
+	}
+	if (yaxis)
+	{
+		free(yaxis);
+		yaxis = 0;
+	}
+	if (arbEq)
+	{
+		ArbitraryEqFree(arbEq);
+		free(arbEq);
+		arbEq = 0;
+	}
+	if (FIREq)
+	{
+		for (unsigned int i = 0; i < NUMCHANNEL; i++)
+		{
+			AutoConvolverMonoFree(FIREq[i]);
+			free(FIREq[i]);
+		}
+		free(FIREq);
+		FIREq = 0;
+	}
+}
+void EffectDSPMain::FreeConvolver()
+{
+	int i;
+	if (convolver)
+	{
+		for (i = 0; i < 2; i++)
+		{
+			AutoConvolverMonoFree(convolver[i]);
+			free(convolver[i]);
+		}
+		free(convolver);
+		convolver = 0;
+	}
+	if (fullStereoConvolver)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			AutoConvolverMonoFree(fullStereoConvolver[i]);
+			free(fullStereoConvolver[i]);
+		}
+		free(fullStereoConvolver);
+		fullStereoConvolver = 0;
+	}
+	if (fullStereoBuf)
+	{
+		free(fullStereoBuf[0]);
+		free(fullStereoBuf[1]);
+		free(fullStereoBuf);
+		fullStereoBuf = 0;
+	}
 }
 int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdData, uint32_t* replySize, void* pReplyData)
 {
+#ifdef DEBUG
+		LOGI("Memory used: %lf Mb", (double)getCurrentRSS() / 1024.0 / 1024.0);
+#endif
 	if (cmdCode == EFFECT_CMD_SET_CONFIG)
 	{
 		size_t frameCountInit;
@@ -318,7 +367,10 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				int16_t oldVal = bassBoostFilterType;
 				bassBoostFilterType = value;
 				if (oldVal != bassBoostFilterType)
+				{
+					FreeBassBoost();
 					bassLpReady = 0;
+				}
 				*replyData = 0;
 				return 0;
 			}
@@ -334,8 +386,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				{
 					bassLpReady = 0;
 					if (!bassBoostFilterType)
-						refreshBassLinearPhase(currentframeCountInit, 512, bassBoostCentreFreq);
-					else if (bassBoostFilterType == 1)
 						refreshBassLinearPhase(currentframeCountInit, 2048, bassBoostCentreFreq);
 					else
 						refreshBassLinearPhase(currentframeCountInit, 4096, bassBoostCentreFreq);
@@ -449,12 +499,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				float oldVal = tubedrive;
 				tubedrive = ((int16_t *)cep)[8] / 1000.0f;
 				if (analogModelEnable && oldVal != tubedrive)
-				{
-					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
-						analogModelEnable = 0;
-					tubeP[1] = tubeP[0];
-					rightparams2.tube = tubeP;
-				}
+					refreshTubeAmp();
 				*replyData = 0;
 				return 0;
 			}
@@ -463,12 +508,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				float oldVal = tubebass;
 				tubebass = ((int16_t *)cep)[8] / 1000.0f;
 				if (analogModelEnable && oldVal != tubebass)
-				{
-					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
-						analogModelEnable = 0;
-					tubeP[1] = tubeP[0];
-					rightparams2.tube = tubeP;
-				}
+					refreshTubeAmp();
 				*replyData = 0;
 				return 0;
 			}
@@ -477,12 +517,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				float oldVal = tubemid;
 				tubemid = ((int16_t *)cep)[8] / 1000.0f;
 				if (analogModelEnable && oldVal != tubemid)
-				{
-					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
-						analogModelEnable = 0;
-					tubeP[1] = tubeP[0];
-					rightparams2.tube = tubeP;
-				}
+					refreshTubeAmp();
 				*replyData = 0;
 				return 0;
 			}
@@ -491,16 +526,30 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				float oldVal = tubetreble;
 				tubetreble = ((int16_t *)cep)[8] / 1000.0f;
 				if (analogModelEnable && oldVal != tubetreble)
+					refreshTubeAmp();
+				*replyData = 0;
+				return 0;
+			}
+			else if (cmd == 154)
+			{
+				int16_t oldVal = eqFilterType;
+				int16_t value = ((int16_t *)cep)[8];
+				if (oldVal != value)
 				{
-					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
-						analogModelEnable = 0;
-					tubeP[1] = tubeP[0];
-					rightparams2.tube = tubeP;
+					eqFilterType = value;
+					eqFIRReady = 2;
+#ifdef DEBUG
+					LOGI("EQ filter type: %d", eqFilterType);
+#endif
+					FreeEq();
+#ifdef DEBUG
+					LOGI("FIR EQ reseted caused by filter type change");
+#endif
 				}
 				*replyData = 0;
 				return 0;
 			}
-			/*			else if (cmd == 154)
+			/*			else if (cmd == 808)
 			{
 			float oldVal = tubedrive;
 			tubedrive = ((int16_t *)cep)[8] / 1000.0f;
@@ -545,20 +594,11 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1201)
 			{
+				int16_t oldVal = bassBoostEnabled;
 				bassBoostEnabled = ((int16_t *)cep)[8];
-				if (!bassBoostEnabled)
+				if (!bassBoostEnabled && (oldVal != bassBoostEnabled))
 				{
-					if (bassBoostLp)
-					{
-						for (unsigned int i = 0; i < NUMCHANNEL; i++)
-						{
-							AutoConvolverMonoFree(bassBoostLp[i]);
-							free(bassBoostLp[i]);
-						}
-						free(bassBoostLp);
-						bassBoostLp = 0;
-						ramp = 0.3f;
-					}
+					FreeBassBoost();
 					bassLpReady = 0;
 				}
 				*replyData = 0;
@@ -566,7 +606,31 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1202)
 			{
+				int16_t oldVal = equalizerEnabled;
 				equalizerEnabled = ((int16_t *)cep)[8];
+				if ((equalizerEnabled == 1 && (oldVal != equalizerEnabled)) || eqFIRReady == 2)
+				{
+					const float interpFreq[15] = { 25.0f, 40.0f, 63.0f, 100.0f, 160.0f, 250.0f, 400.0f, 630.0f, 1000.0f, 1600.0f, 2500.0f, 4000.0f, 6300.0f, 10000.0f, 16000.0f };
+					xaxis = (float*)malloc(1024 * sizeof(float));
+					yaxis = (float*)malloc(1024 * sizeof(float));
+					linspace(xaxis, 1024, interpFreq[0], interpFreq[NUM_BANDSM1]);
+					arbEq = (ArbitraryEq*)malloc(sizeof(ArbitraryEq));
+					eqfilterLength = 8192;
+					InitArbitraryEq(arbEq, &eqfilterLength, eqFilterType);
+					for (int i = 0; i < 1024; i++)
+						ArbitraryEqInsertNode(arbEq, xaxis[i], 0.0f, 0);
+#ifdef DEBUG
+					LOGI("FIR EQ Initialised");
+#endif
+				}
+				else if (!equalizerEnabled && (oldVal != equalizerEnabled))
+				{
+					FreeEq();
+					eqFIRReady = 0;
+#ifdef DEBUG
+					LOGI("FIR EQ destroyed");
+#endif
+				}
 				*replyData = 0;
 				return 0;
 			}
@@ -579,8 +643,10 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					refreshReverb();
 				if (verbL && !reverbEnabled)
 				{
-					gverb_flush(verbL);
-					gverb_flush(verbR);
+					gverb_free(verbL);
+					verbL = 0;
+					gverb_free(verbR);
+					verbR = 0;
 				}
 				*replyData = 0;
 				return 0;
@@ -606,35 +672,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				convolverEnabled = ((int16_t *)cep)[8];
 				if (!convolverEnabled)
 				{
-					if (convolver)
-					{
-						for (unsigned int i = 0; i < 2; i++)
-						{
-							AutoConvolverMonoFree(convolver[i]);
-							free(convolver[i]);
-						}
-						free(convolver);
-						convolver = 0;
-						ramp = 0.3f;
-					}
-					if (fullStereoConvolver)
-					{
-						for (unsigned int i = 0; i < 4; i++)
-						{
-							AutoConvolverMonoFree(fullStereoConvolver[i]);
-							free(fullStereoConvolver[i]);
-						}
-						free(fullStereoConvolver);
-						fullStereoConvolver = 0;
-						ramp = 0.3f;
-					}
-					if (fullStereoBuf)
-					{
-						free(fullStereoBuf[0]);
-						free(fullStereoBuf[1]);
-						free(fullStereoBuf);
-						fullStereoBuf = 0;
-					}
+					FreeConvolver();
 					convolverReady = -1;
 				}
 				*replyData = 0;
@@ -646,10 +684,11 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				analogModelEnable = ((int16_t *)cep)[8];
 				if (analogModelEnable && oldVal != analogModelEnable)
 				{
-					if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
-						analogModelEnable = 0;
-					tubeP[1] = tubeP[0];
-					rightparams2.tube = tubeP;
+					refreshTubeAmp();
+					ramp = 0.5f;
+#ifdef DEBUG
+					LOGI("Tube amp enabled");
+#endif
 				}
 				*replyData = 0;
 				return 0;
@@ -744,15 +783,15 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				return 0;
 			}
 		}
-		if (cep->psize == 4 && cep->vsize == 40)
+		if (cep->psize == 4 && cep->vsize == 60)
 		{
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 115)
 			{
-				double mBand[NUM_BANDS];
-				for (uint32_t i = 0; i < 10; i++)
-					mBand[i] = ((int32_t *)cep)[4 + i] * 0.0001;
-				refreshEqBands(mBand);
+				float mBand[NUM_BANDS];
+				for (uint32_t i = 0; i < NUM_BANDS; i++)
+					mBand[i] = ((int32_t *)cep)[4 + i] * 0.0001f;
+				refreshEqBands(currentframeCountInit, mBand);
 				*replyData = 0;
 				return 0;
 			}
@@ -772,7 +811,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						else
 							benchmarkValue[0][i] = 1.0;
 #ifdef DEBUG
-						LOGI("bench_c0: %lf", benchmarkValue[0][i]);
+//						LOGI("bench_c0: %lf", benchmarkValue[0][i]);
 #endif
 					}
 					isBenchData++;
@@ -796,7 +835,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						else
 							benchmarkValue[1][i] = 1.0;
 #ifdef DEBUG
-						LOGI("bench_c1: %lf", benchmarkValue[1][i]);
+//						LOGI("bench_c1: %lf", benchmarkValue[1][i]);
 #endif
 					}
 					isBenchData++;
@@ -857,43 +896,41 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 	}
 	return Effect::command(cmdCode, cmdSize, pCmdData, replySize, pReplyData);
 }
+void EffectDSPMain::refreshTubeAmp()
+{
+	if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+		analogModelEnable = 0;
+	tubeP[1] = tubeP[0];
+	rightparams2.tube = tubeP;
+}
 void EffectDSPMain::refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR, float bassBoostCentreFreq)
 {
 	float strength = bassBoostStrength / 100.0f;
 	if (strength < 1.0f)
 		strength = 1.0f;
-	int filterLength = tapsLPFIR;
-	ArbitraryEq *bassFIR = InitArbitraryEq(&filterLength, 1);
-	ArbitraryEqInsertNode(bassFIR, 0.0, strength);
-	ArbitraryEqInsertNode(bassFIR, bassBoostCentreFreq, strength);
-	if (filterLength < 2001)
-		ArbitraryEqInsertNode(bassFIR, bassBoostCentreFreq + 80.0f, 0);
-	else if (filterLength > 2000 && filterLength < 7000)
-		ArbitraryEqInsertNode(bassFIR, bassBoostCentreFreq + 40.0f, 0);
-	else
-		ArbitraryEqInsertNode(bassFIR, bassBoostCentreFreq + 15.0f, 0);
+	int filterLength = (int)tapsLPFIR;
+	float transition = 80.0f;
+	if (filterLength > 4096)
+		transition = 40.0f;
+	float freq[4] = { 0, (bassBoostCentreFreq * 2.0f) / mSamplingRate, (bassBoostCentreFreq * 2.0f + transition) / mSamplingRate , 1.0f };
+	float amplitude[4] = { strength, strength, 0, 0 };
+	float *freqSamplImp = fir2(&filterLength, freq, amplitude, 4);
 	unsigned int i;
-	float *eqImpulseResponse = bassFIR->GetFilter(bassFIR, mSamplingRate, bassBoostCentreFreq * 0.125f);
-	if (bassBoostLp)
-	{
-		for (i = 0; i < NUMCHANNEL; i++)
-		{
-			AutoConvolverMonoFree(bassBoostLp[i]);
-			free(bassBoostLp[i]);
-		}
-		free(bassBoostLp);
-		bassBoostLp = 0;
-	}
 	if (!bassBoostLp)
 	{
 		bassBoostLp = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
 		for (i = 0; i < NUMCHANNEL; i++)
-			bassBoostLp[i] = InitAutoConvolverMonoZeroLatency(eqImpulseResponse, filterLength, actualframeCount, threadResult);
+			bassBoostLp[i] = AllocateAutoConvolverMonoZeroLatency(freqSamplImp, filterLength, actualframeCount, threadResult);
+		ramp = 0.4f;
 	}
-	ArbitraryEqFree(bassFIR);
-	ramp = 0.3f;
+	else
+	{
+		for (i = 0; i < NUMCHANNEL; i++)
+			UpdateAutoConvolverMonoZeroLatency(bassBoostLp[i], freqSamplImp, filterLength);
+	}
+	free(freqSamplImp);
 #ifdef DEBUG
-	LOGI("Linear phase FIR allocate all done: total taps %d", filterLength);
+	LOGI("Linear phase bass boost allocate all done: total taps %d", filterLength);
 #endif
 	bassLpReady = 1;
 }
@@ -905,26 +942,7 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 	LOGI("refreshConvolver::IR channel count:%d, IR frame count:%d, Audio buffer size:%d", impChannels, impulseLengthActual, actualframeCount);
 #endif
 	unsigned int i;
-	if (convolver)
-	{
-		for (i = 0; i < 2; i++)
-		{
-			AutoConvolverMonoFree(convolver[i]);
-			free(convolver[i]);
-		}
-		free(convolver);
-		convolver = 0;
-	}
-	if (fullStereoConvolver)
-	{
-		for (i = 0; i < 4; i++)
-		{
-			AutoConvolverMonoFree(fullStereoConvolver[i]);
-			free(fullStereoConvolver[i]);
-		}
-		free(fullStereoConvolver);
-		fullStereoConvolver = 0;
-	}
+	FreeConvolver();
 	if (!convolver)
 	{
 		if (impChannels < 3)
@@ -932,13 +950,6 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 			convolver = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * 2);
 			if (!convolver)
 				return 0;
-			if (fullStereoBuf)
-			{
-				free(fullStereoBuf[0]);
-				free(fullStereoBuf[1]);
-				free(fullStereoBuf);
-				fullStereoBuf = 0;
-			}
 			for (i = 0; i < 2; i++)
 			{
 				if (impChannels == 1)
@@ -999,7 +1010,7 @@ int EffectDSPMain::refreshConvolver(uint32_t actualframeCount)
 			LOGI("Convolver strategy used: %d", fullStereoConvolver[0]->methods);
 #endif
 		}
-		ramp = 0.3f;
+		ramp = 0.4f;
 #ifdef DEBUG
 		LOGI("Convolver IR allocate complete");
 #endif
@@ -1037,28 +1048,37 @@ void EffectDSPMain::refreshCompressor()
 	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release, 0.003f, 0.09f, 0.16f, 0.42f, 0.98f, -(pregain / 1.4f));
 	ramp = 0.3f;
 }
-void EffectDSPMain::refreshEqBands(double *bands)
+void EffectDSPMain::refreshEqBands(uint32_t actualframeCount, float *bands)
 {
-	lsl.setup(4, mSamplingRate, 31.0, bands[0]);
-	lsr.setup(4, mSamplingRate, 31.0, bands[0]);
-	bs1l.setup(4, mSamplingRate, 65.0, 55.0, bands[1]);
-	bs1r.setup(4, mSamplingRate, 65.0, 55.0, bands[1]);
-	bs2l.setup(3, mSamplingRate, 154.0, 93.0, bands[2]);
-	bs2r.setup(3, mSamplingRate, 154.0, 93.0, bands[2]);
-	bs3l.setup(2, mSamplingRate, 315.0, 180.0, bands[3]);
-	bs3r.setup(2, mSamplingRate, 315.0, 180.0, bands[3]);
-	bs4l.setup(2, mSamplingRate, 620.0, 350.0, bands[4]);
-	bs4r.setup(2, mSamplingRate, 620.0, 350.0, bands[4]);
-	bs5l.setup(3, mSamplingRate, 1190.0, 600.0, bands[5]);
-	bs5r.setup(3, mSamplingRate, 1190.0, 600.0, bands[5]);
-	bs6l.setup(3, mSamplingRate, 2340.0, 1300.0, bands[6]);
-	bs6r.setup(3, mSamplingRate, 2340.0, 1300.0, bands[6]);
-	bs7l.setup(2, mSamplingRate, 4650.0, 2600.0, bands[7]);
-	bs7r.setup(2, mSamplingRate, 4650.0, 2600.0, bands[7]);
-	bs8l.setup(2, mSamplingRate, 9000.0, 5500.0, bands[8]);
-	bs8r.setup(2, mSamplingRate, 9000.0, 5500.0, bands[8]);
-	bs9l.setup(3, mSamplingRate, 13500.0, bands[9]);
-	bs9r.setup(3, mSamplingRate, 13500.0, bands[9]);
+	if (!arbEq || !xaxis || !yaxis)
+		return;
+#ifdef DEBUG
+	LOGI("Allocating FIR Equalizer");
+#endif
+	const float interpFreq[NUM_BANDS] = { 25.0f, 40.0f, 63.0f, 100.0f, 160.0f, 250.0f, 400.0f, 630.0f, 1000.0f, 1600.0f, 2500.0f, 4000.0f, 6300.0f, 10000.0f, 16000.0f };
+	float y2[NUM_BANDS];
+	float workingBuf[NUM_BANDSM1]; // interpFreq or bands data length minus 1
+	spline(&interpFreq[0], bands, NUM_BANDS, &y2[0], &workingBuf[0]);
+	splint(&interpFreq[0], bands, &y2[0], NUM_BANDS, xaxis, yaxis, 1024, 1);
+	int i;
+	for (i = 0; i < 1024; i++)
+		arbEq->nodes[i]->gain = yaxis[i];
+	float *eqImpulseResponse = arbEq->GetFilter(arbEq, mSamplingRate);
+	if (!FIREq)
+	{
+		FIREq = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
+		for (i = 0; i < NUMCHANNEL; i++)
+			FIREq[i] = AllocateAutoConvolverMonoZeroLatency(eqImpulseResponse, eqfilterLength, actualframeCount, threadResult);
+	}
+	else
+	{
+		for (i = 0; i < NUMCHANNEL; i++)
+			UpdateAutoConvolverMonoZeroLatency(FIREq[i], eqImpulseResponse, eqfilterLength);
+	}
+#ifdef DEBUG
+	LOGI("FIR Equalizer allocate all done: total taps %d", eqfilterLength);
+#endif
+	eqFIRReady = 1;
 }
 void EffectDSPMain::refreshReverb()
 {
@@ -1139,28 +1159,10 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 	}
 	if (equalizerEnabled)
 	{
-		for (i = 0; i < frameCount; i++)
+		if (eqFIRReady == 1)
 		{
-			outLL = lsl.filter(inputBuffer[0][i]);
-			outRR = lsr.filter(inputBuffer[1][i]);
-			outLL = bs1l.filter(outLL);
-			outRR = bs1r.filter(outRR);
-			outLL = bs2l.filter(outLL);
-			outRR = bs2r.filter(outRR);
-			outLL = bs3l.filter(outLL);
-			outRR = bs3r.filter(outRR);
-			outLL = bs4l.filter(outLL);
-			outRR = bs4r.filter(outRR);
-			outLL = bs5l.filter(outLL);
-			outRR = bs5r.filter(outRR);
-			outLL = bs6l.filter(outLL);
-			outRR = bs6r.filter(outRR);
-			outLL = bs7l.filter(outLL);
-			outRR = bs7r.filter(outRR);
-			outLL = bs8l.filter(outLL);
-			outRR = bs8r.filter(outRR);
-			inputBuffer[0][i] = bs9l.filter(outLL);
-			inputBuffer[1][i] = bs9r.filter(outRR);
+			FIREq[0]->process(FIREq[0], inputBuffer[0], inputBuffer[0], frameCount);
+			FIREq[1]->process(FIREq[1], inputBuffer[1], inputBuffer[1], frameCount);
 		}
 	}
 	if (reverbEnabled)

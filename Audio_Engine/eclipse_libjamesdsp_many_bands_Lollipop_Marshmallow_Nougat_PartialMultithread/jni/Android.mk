@@ -26,15 +26,11 @@ LOCAL_SRC_FILES := \
 	jamesdsp.cpp \
 	Effect.cpp \
 	EffectDSPMain.cpp \
-	iir/Biquad.cpp \
-	iir/Butterworth.cpp \
-	iir/Cascade.cpp \
-	iir/PoleFilter.cpp \
-	iir/RootFinder.cpp \
 	gverb.c \
 	reverb.c \
 	compressor.c \
 	AutoConvolver.c \
+	mnspline.c \
 	ArbFIRGen.c \
 	bs2b.c \
 	valve/12ax7amp/Tube.c \

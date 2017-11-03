@@ -70,46 +70,12 @@
     <item>1</item>
   </string-array>
   <string-array name="equalizer_preset_modes" translatable="false">
-    <item>@string/eq_preset_acoustic</item>
-    <item>@string/eq_preset_bass_booster</item>
-    <item>@string/eq_preset_bass_reducer</item>
-    <item>@string/eq_preset_classical</item>
-    <item>@string/eq_preset_deep</item>
     <item>@string/eq_preset_flat</item>
-    <item>@string/eq_preset_r_and_b</item>
-    <item>@string/eq_preset_rock</item>
-    <item>@string/eq_preset_small_speakers</item>
-    <item>@string/eq_preset_treble_booster</item>
-    <item>@string/eq_preset_treble_reducer</item>
-    <item>@string/eq_preset_vocal_booster</item>
     <item>@string/eq_preset_custom</item>
   </string-array>
 
   <string-array name="equalizer_preset_values" translatable="false">
-    <item>4.5;4.5;3.5;1.75;3.5;2.5;0;0;0;0</item>
-    <!-- Acoustic -->
-    <item>6.5;6.5;4.0;0.0;0.0;0.0;0;0;0;0</item>
-    <!-- Bass Booster -->
-    <item>-6.5;-6.5;-4.0;0.0;0.0;0.0;0;0;0;0</item>
-    <!-- Bass Reducer -->
-    <item>4.0;4.0;3.25;-0.5;2.0;3.5;0;0;0;0</item>
-    <!-- Classical -->
-    <item>4.0;4.0;0.5;1.5;-4.0;-4.5;0;0;0;0</item>
-    <!-- Deep -->
-    <item>0.0;0.0;0.0;0.0;0.0;0.0;0;0;0;0</item>
-    <!-- Flat -->
-    <item>5.5;5.5;3.5;-1.75;1.5;2.5;0;0;0;0</item>
-    <!-- R&B -->
-    <item>4.5;4.5;2.75;-0.5;2.75;4.0;0;0;0;0</item>
-    <!-- Rock -->
-    <item>6.5;6.5;4.0;0.0;-6.5;-4.0;0;0;0;0</item>
-    <!-- Small Speakers -->
-    <item>0.0;0.0;0.0;0.0;4.0;6.5;0;0;0;0</item>
-    <!-- Treble Booster -->
-    <item>0.0;0.0;0.0;0.0;-6.5;-4.0;0;0;0;0</item>
-    <!-- Treble Reducer -->
-    <item>-2.5;-2.5;0.0;3.5;1.5;-2.0;0;0;0;0</item>
-    <!-- Vocal Booster -->
+    <item>0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0</item>
     <item>custom</item>
     <!-- Custom -->
   </string-array>
@@ -124,15 +90,13 @@
   </string-array>
 
   <string-array name="bassboost_filtertype">
-    <item>Linear phase 1024 taps low pass filter</item>
-    <item>Linear phase 4096 taps low pass filter</item>
-    <item>Linear phase 8192 taps low pass filter</item>
+    <item>Linear phase 2049 taps low pass filter</item>
+    <item>Linear phase 4097 taps low pass filter</item>
   </string-array>
 
   <string-array name="bassboost_filtertype_values" translatable="false">
     <item>0</item>
     <item>1</item>
-    <item>2</item>
   </string-array>
 
   <string-array name="bassboost_modes_values" translatable="false">
@@ -144,6 +108,16 @@
     <item>1200</item>
   </string-array>
 
+  <string-array name="equalizer_filtertype">
+    <item>Minimum phase(Zero latency)</item>
+    <item>Linear phase</item>
+  </string-array>
+
+  <string-array name="equalizer_filtertype_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+  
   <string-array name="quality_level">
     <item>Truncate to 40&#65130;</item>
     <item>Truncate to 50&#65130;</item>

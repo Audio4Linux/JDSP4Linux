@@ -28,9 +28,9 @@ public class EqualizerSurface extends SurfaceView
     private int mWidth;
     private int mHeight;
 
-    private float[] mLevels = new float[10];
-    private float[] mFreq = {31.0f,62.0f,125.0f,250.0f,500.0f,1000.0f,2000.0f,4000.0f,8000.0f,16000.0f};
-    private String[] mFreqText = {"31","62","125","250","500","1k","2k","4k","8k","16k"};
+    private float[] mLevels = new float[15];
+    private float[] mFreq = {25.0f, 40.0f, 63.0f, 100.0f, 160.0f, 250.0f, 400.0f, 630.0f, 1000.0f, 1600.0f, 2500.0f, 4000.0f, 6300.0f, 10000.0f, 16000.0f};
+    private String[] mFreqText = {"25","40","63","100","160","250","400","630","1k","1.6k","2.5k","4k","6.3k","10k","16k"};
     private final Paint mWhite, mGridLines, mControlBarText, mControlBar, mControlBarKnob;
     private final Paint mFrequencyResponseBg, mFrequencyResponseHighlight, mFrequencyResponseHighlight2;
 
@@ -203,7 +203,7 @@ public class EqualizerSurface extends SurfaceView
             freqResponse.lineTo(x, y);
         }
         x = projectX(MAX_FREQ) * mWidth;
-        y = projectY(mLevels[9]) * mHeight;
+        y = projectY(mLevels[14]) * mHeight;
         freqResponse.lineTo(x, y);
         Path freqResponseBg = new Path();
         freqResponseBg.addPath(freqResponse);
@@ -262,10 +262,10 @@ public class EqualizerSurface extends SurfaceView
     public int findClosest(float px)
     {
         int idx = 0;
-        float best = 1e9f;
+        float best = 1e8f;
         for (int i = 0; i < mLevels.length; i++)
         {
-            float freq = (float) (15.625 * Math.pow(2, i+1));
+            float freq = (float) (15.625 * Math.pow(1.6, i+1));
             float cx = projectX(freq) * mWidth;
             float distance = Math.abs(cx - px);
             if (distance < best)
