@@ -8,7 +8,7 @@ This app don't work too much around with modifying Android framework.
 1. Compression
 2. Bass Boost
 
-   --> 1022/4094/8190 order FIR linear phase low pass bass boost
+   --> 2048/4096 order FIR linear phase bass boost
 3. Reverberation
 
    --> GVerb and Progenitor 2
@@ -33,11 +33,11 @@ A: Float32
 
 #### 2. Bass boost filter type?
 
-A: Effect has 3 options to boost low frequency band, IIR based is obsoleted, equalizer already do the job.
+A: Effect has 2 options to boost low frequency band, IIR based is obsoleted, equalizer already do the job.
 
-   Filtering is work on convolution basis. When user change the bass boost parameter, engine will compute new low pass filter(with gain) impulse response.
+   Filtering is work on convolution basis. When user change the bass boost parameter, engine will compute new low pass filter(with gain) impulse response using firls(Function ported from Matlab).
    
-   4094/8190 order FIR filter should work on all frequency listed on options, 1022 order should work well above 80Hz.
+   2048/4096 order FIR filter should work on all frequency listed on options.
 
 #### 3. What is convolver?
 
@@ -50,7 +50,7 @@ A: Convolver is a effect apply convolution(a mathematical operation) on audio si
 #### 3. What is Analog Modelling?
 
 A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [ZamAudio](https://github.com/zamaudio).
-The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will clip the audio. All analog circuit was built from real mathematical model.
+The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will tend to clip the audio. Analog amplifier was built from real mathematical model, most notably Nonlinearity of vacuum tube.
 Original is written in C++, for some reasons I ported it to C implementation.
 
 #### 5. What is Misc folder does?
