@@ -403,8 +403,6 @@ void ArbitraryEqFree(ArbitraryEq *eqgain)
 	fftw_free(eqgain->freqData);
 	fftw_destroy_plan(eqgain->planReverse);
 	free(eqgain->impulseResponse);
-	free(eqgain);
-	eqgain = 0;
 }
 void NodesSorter(ArbitraryEq *eqgain)
 {

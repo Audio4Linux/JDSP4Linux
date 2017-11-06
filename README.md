@@ -12,7 +12,7 @@ This app don't work too much around with modifying Android framework.
 3. Reverberation
 
    --> GVerb and Progenitor 2
-4. 10 Band Hybrid Equalizer (1 low shelf, 8 bands shelves, 1 high shelves) (Generate 3/4th order IIR filter on-the-fly, with relatively flat response)
+4. FIR Equalizer (Cubic spline interpolated 15 bands equalizer)[How smooth it is?](https://rawgit.com/james34602/JamesDSPManager/master/SmoothEq.svg)
 5. Stereo Widen
 6. BS2B
 7. Partitioned Convolver (Auto segmenting selection)
