@@ -12,7 +12,7 @@ This app don't work too much around with modifying Android framework.
 3. Reverberation
 
    --> GVerb and Progenitor 2
-4. FIR Equalizer (Cubic spline interpolated 15 bands equalizer)[How smooth it is?](https://rawgit.com/james34602/JamesDSPManager/master/SmoothEq.svg)
+4. FIR Equalizer (Cubic spline interpolated 15 bands equalizer)[How smooth it is?](https://github.com/james34602/JamesDSPManager/blob/master/SmoothEq.svg)
 5. Stereo Widen
 6. BS2B
 7. Partitioned Convolver (Auto segmenting selection)
@@ -112,8 +112,8 @@ Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 1. See my project release page
 
 # Screenshot
-1. [Equalizer screenshot(Dark theme)](https://rawgit.com/james34602/JamesDSPManager/master/ScreenshotMainApp1.png)
-2. [Convolver screenshot(Idea theme)](https://rawgit.com/james34602/JamesDSPManager/master/ScreenshotMainApp2.png)
+1. [Equalizer screenshot(Dark theme)](https://github.com/james34602/JamesDSPManager/blob/master/ScreenshotMainApp1.png)
+2. [Convolver screenshot(Idea theme)](https://github.com/james34602/JamesDSPManager/blob/master/ScreenshotMainApp2.png)
 
 # Important
 This won't require to modify SELinux(in most case), let your device become more safe.
