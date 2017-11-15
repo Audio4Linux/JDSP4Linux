@@ -18,8 +18,8 @@ typedef struct
 
 EffectDSPMain::EffectDSPMain()
 	: equalizerEnabled(0), ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), inputBuffer(0), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
-	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0), normalise(0.3f)//, compressor670(0)
-	, tempImpulseInt32(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), tubebass(8.0f), tubemid(5.6f), tubetreble(4.5f), finalGain(1.0f), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
+	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0)//, compressor670(0)
+	, tempImpulseIncoming(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), finalGain(1.0f), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[15] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778, 1.0418565333333332, 2.1131378, 4.6 };
 	double c1[15] = { 5.88199398839289e-6, 1.1786813951189911e-5, 2.5600214528512222e-5, 8.53041086120132e-5, 2.656291374239004e-4, 5.047717001008378e-4, 8.214255850540808e-4, 0.0016754651127819551, 0.0033478867132867136, 0.006705333333333334, 0.013496382222222221, 0.02673028888888889, 0.054979466666666664, 0.11634819999999998, 0.35878 };
@@ -58,8 +58,8 @@ EffectDSPMain::~EffectDSPMain()
 		free(finalImpulse[1]);
 		free(finalImpulse);
 	}
-	if (tempImpulseInt32)
-		free(tempImpulseInt32);
+	if (tempImpulseIncoming)
+		free(tempImpulseIncoming);
 	if (tempImpulseFloat)
 		free(tempImpulseFloat);
 	if (threadResult)
@@ -503,33 +503,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 151)
-			{
-				float oldVal = tubebass;
-				tubebass = ((int16_t *)cep)[8] / 1000.0f;
-				if (analogModelEnable && oldVal != tubebass)
-					refreshTubeAmp();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 152)
-			{
-				float oldVal = tubemid;
-				tubemid = ((int16_t *)cep)[8] / 1000.0f;
-				if (analogModelEnable && oldVal != tubemid)
-					refreshTubeAmp();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 153)
-			{
-				float oldVal = tubetreble;
-				tubetreble = ((int16_t *)cep)[8] / 1000.0f;
-				if (analogModelEnable && oldVal != tubetreble)
-					refreshTubeAmp();
-				*replyData = 0;
-				return 0;
-			}
 			else if (cmd == 154)
 			{
 				int16_t oldVal = eqFilterType;
@@ -685,7 +658,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				if (analogModelEnable && oldVal != analogModelEnable)
 				{
 					refreshTubeAmp();
-					ramp = 0.5f;
 #ifdef DEBUG
 					LOGI("Tube amp enabled");
 #endif
@@ -731,17 +703,18 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				if (!finalImpulse)
 				{
 					tempbufValue = impulseLengthActual * impChannels;
-					tempImpulseFloat = (float*)malloc(tempbufValue * sizeof(float));
+					size_t bufferSize = tempbufValue * sizeof(float);
+					tempImpulseFloat = (float*)malloc(bufferSize);
 					if (!tempImpulseFloat)
 					{
 						convolverReady = -1;
 						convolverEnabled = !convolverEnabled;
 					}
-					for (i = 0; i < tempbufValue; i++)
-						tempImpulseFloat[i] = (float)(((double)tempImpulseInt32[i]) * 0.0000000004656612873077392578125);
-					free(tempImpulseInt32);
-					tempImpulseInt32 = 0;
-					normaliseToLevel(tempImpulseFloat, tempbufValue, normalise);
+					memcpy(tempImpulseFloat, tempImpulseIncoming, bufferSize);
+					free(tempImpulseIncoming);
+					tempImpulseIncoming = 0;
+					if (normalise < 0.99998f)
+						normaliseToLevel(tempImpulseFloat, tempbufValue, normalise);
 					finalImpulse = (float**)malloc(impChannels * sizeof(float*));
 					for (i = 0; i < impChannels; i++)
 					{
@@ -766,6 +739,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 								free(finalImpulse[i]);
 							free(finalImpulse);
 							finalImpulse = 0;
+						}
+						if (tempImpulseFloat)
+						{
 							free(tempImpulseFloat);
 							tempImpulseFloat = 0;
 						}
@@ -789,8 +765,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			if (cmd == 115)
 			{
 				float mBand[NUM_BANDS];
-				for (uint32_t i = 0; i < NUM_BANDS; i++)
-					mBand[i] = ((int32_t *)cep)[4 + i] * 0.0001f;
+				for (int i = 0; i < NUM_BANDS; i++)
+					mBand[i] = ((float*)cep)[4 + i];
 				refreshEqBands(currentframeCountInit, mBand);
 				*replyData = 0;
 				return 0;
@@ -805,11 +781,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				{
 					for (uint32_t i = 0; i < 10; i++)
 					{
-						int tmp = ((int32_t *)cep)[4 + i];
-						if (tmp)
-							benchmarkValue[0][i] = (double)tmp / 1.4317e+09;
-						else
-							benchmarkValue[0][i] = 1.0;
+						benchmarkValue[0][i] = (float)((float*)cep)[4 + i];
 #ifdef DEBUG
 //						LOGI("bench_c0: %lf", benchmarkValue[0][i]);
 #endif
@@ -829,11 +801,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				{
 					for (uint32_t i = 0; i < 10; i++)
 					{
-						int tmp = ((int32_t *)cep)[4 + i];
-						if (tmp)
-							benchmarkValue[1][i] = (double)tmp / 1.4317e+09;
-						else
-							benchmarkValue[1][i] = 1.0;
+						benchmarkValue[1][i] = (float)((float*)cep)[4 + i];
 #ifdef DEBUG
 //						LOGI("bench_c1: %lf", benchmarkValue[1][i]);
 #endif
@@ -870,14 +838,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				impChannels = ((int32_t *)cep)[5];
 				impulseLengthActual = ((int32_t *)cep)[4] / impChannels;
 				normalise = ((int32_t *)cep)[6] / 1000.0f;
-				int16_t numTime2Send = ((int32_t *)cep)[7];
-				if (tempImpulseInt32)
-				{
-					free(tempImpulseInt32);
-					tempImpulseInt32 = 0;
-				}
-				if (!tempImpulseInt32)
-					tempImpulseInt32 = (int32_t*)calloc(4096 * impChannels * numTime2Send, sizeof(int32_t));
+				int numTime2Send = ((int32_t *)cep)[7];
+				tempImpulseIncoming = (float*)calloc(4096 * impChannels * numTime2Send, sizeof(float));
 				*replyData = 0;
 				return 0;
 			}
@@ -887,7 +849,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 12000)
 			{
-				memcpy(tempImpulseInt32 + (samplesInc * 4096), ((int32_t *)cep) + 4, 4096 * sizeof(int32_t));
+				memcpy(tempImpulseIncoming + (samplesInc * 4096), ((float*)cep) + 4, 4096 * sizeof(float));
 				*replyData = 0;
 				return 0;
 			}
@@ -898,7 +860,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 }
 void EffectDSPMain::refreshTubeAmp()
 {
-	if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, tubebass, tubemid, tubetreble, 4.8f, 6000, 0))
+	if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, 6.5f, 5.6f, 4.5f, 4.8f, 6000, 0))
 		analogModelEnable = 0;
 	tubeP[1] = tubeP[0];
 	rightparams2.tube = tubeP;

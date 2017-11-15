@@ -51,8 +51,8 @@
   <string name="dialog_roomsize">房間大小 [整數:5 &#8211; 300]</string>
   <string name="dialog_reverbtime">延續  [整數:5 &#8211; 300]</string>
   <string name="dialog_damping">阻尼 [整數:1 &#8211; 100]%</string>
-  <string name="dialog_inbandwidth">頻寬(通帶) [整數:1 &#8211; 80]</string>
-  <string name="hfcomponents">(高頻分量)</string>
+  <string name="dialog_inbandwidth">高頻成分 [整數:1 &#8211; 60]</string>
+  <string name="hfcomponents">高頻分量</string>
   <string name="dialog_earlyverb">混響起始幅度 [整數:1 &#8211; 100]</string>
   <string name="dialog_tailverb">混響完結幅度 [整數:1 &#8211; 200]</string>
   <string name="pref_convolver_title">卷積器</string>

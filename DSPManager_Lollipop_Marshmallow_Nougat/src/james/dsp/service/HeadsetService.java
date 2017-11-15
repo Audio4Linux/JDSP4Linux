@@ -23,7 +23,10 @@ import james.dsp.R;
 import james.dsp.activity.DSPManager;
 
 import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -139,6 +142,28 @@ public class HeadsetService extends Service
 				throw new RuntimeException(e);
 			}
 		}
+		private void setParameterFloatArray(AudioEffect audioEffect, int parameter, float value[])
+		{
+			try
+			{
+				byte[] arguments = new byte[]
+				{
+					(byte)(parameter), (byte)(parameter >> 8),
+					(byte)(parameter >> 16), (byte)(parameter >> 24)
+				};
+				byte[] result = new byte[value.length * 4];
+            	ByteBuffer byteDataBuffer = ByteBuffer.wrap(result);
+            	byteDataBuffer.order(ByteOrder.nativeOrder());
+            	for (int i = 0; i < value.length; i++)
+            		byteDataBuffer.putFloat(value[i]);
+				Method setParameter = AudioEffect.class.getMethod("setParameter", byte[].class, byte[].class);
+				setParameter.invoke(audioEffect, arguments, result);
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
 		private void setParameterInt(AudioEffect audioEffect, int parameter, int value)
 		{
 			try
@@ -230,9 +255,9 @@ public class HeadsetService extends Service
 
 	private float[] mOverriddenEqualizerLevels;
 
-	private int[] eqLevels = new int[15];
-	public static int[] bench_c0 = new int[10];
-	public static int[] bench_c1 = new int[10];
+	private float[] eqLevels = new float[15];
+	public static float[] bench_c0 = new float[10];
+	public static float[] bench_c1 = new float[10];
 	public static int benchNum = 0;
 	/**
 	* Receive new broadcast intents for adding DSP to session
@@ -377,16 +402,8 @@ class StartUpOptimiserThread implements Runnable {
 		   benchNum = JdspImpResToolbox.FFTConvolutionBenchmark(times, tarSmpRate, c0, c1);
 			for (int i = 0 ; i < benchNum; i++)
 			{
-				double tmpCheck = c0[i] * 1.4317e+09;
-				if (tmpCheck > (double)Integer.MAX_VALUE - 1)
-					bench_c0[i] = Integer.MAX_VALUE - 1;
-				else
-					bench_c0[i] = (int)(c0[i] * 1.4317e+09);
-				tmpCheck = c1[i] * 1.4317e+09;
-				if (tmpCheck > (double)Integer.MAX_VALUE - 1)
-					bench_c1[i] = Integer.MAX_VALUE - 1;
-				else
-					bench_c1[i] = (int)(c1[i] * 1.4317e+09);
+				bench_c0[i] = (float)c0[i];
+				bench_c1[i] = (float)c1[i];
 			}
 /*			Log.i(DSPManager.TAG, "(Int)c0: " + Arrays.toString(bench_c0));
 			Log.i(DSPManager.TAG, "(Int)c1: " + Arrays.toString(bench_c1));*/
@@ -603,10 +620,10 @@ class StartUpOptimiserThread implements Runnable {
 				return;
 			}
 			int convolutionBenchmarkDataReady = session.getParameter(session.JamesDSP, 20003);
-			if (convolutionBenchmarkDataReady == 0 && bench_c0[0] > 0 && bench_c1[0] > 0)
+			if (convolutionBenchmarkDataReady == 0 && bench_c0[0] > 0.0f && bench_c1[0] > 0.0f)
 			{
-				session.setParameterIntArray(session.JamesDSP, 1997, bench_c0);
-				session.setParameterIntArray(session.JamesDSP, 1998, bench_c1);
+				session.setParameterFloatArray(session.JamesDSP, 1997, bench_c0);
+				session.setParameterFloatArray(session.JamesDSP, 1998, bench_c1);
 			}
 			session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
 			if (compressorEnabled == 1 && updateMajor)
@@ -639,15 +656,15 @@ class StartUpOptimiserThread implements Runnable {
 				if (mOverriddenEqualizerLevels != null)
 				{
 					for (short i = 0; i < mOverriddenEqualizerLevels.length; i++)
-						eqLevels[i] = Math.round(mOverriddenEqualizerLevels[i] * 10000);
+						eqLevels[i] = mOverriddenEqualizerLevels[i];
 				}
 				else
 				{
 					String[] levels = preferences.getString("dsp.tone.eq.custom", "0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0").split(";");
 					for (short i = 0; i < levels.length; i++)
-						eqLevels[i] = Math.round(Float.valueOf(levels[i]) * 10000);
+						eqLevels[i] = Float.valueOf(levels[i]);
 				}
-				session.setParameterIntArray(session.JamesDSP, 115, eqLevels);
+				session.setParameterFloatArray(session.JamesDSP, 115, eqLevels);
 			}
 			if (reverbEnabled == 1 && updateMajor)
 			{
@@ -676,7 +693,7 @@ class StartUpOptimiserThread implements Runnable {
 			{
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
-				int normalise = (int) (Float.valueOf((preferences.getString("dsp.convolver.normalise", "0.2")))*1000);
+				int normalise = (int) (Float.valueOf((preferences.getString("dsp.convolver.normalise", "0.2")))*1000.0f);
 				int requiredRefresh = session.getParameter(session.JamesDSP, 20001);
 				if (modeEffect == 0)
 				{
@@ -695,7 +712,7 @@ class StartUpOptimiserThread implements Runnable {
 				{
 					if (impinfo[2] != dspModuleSamplingRate)
 						Toast.makeText(HeadsetService.this, getString(R.string.unmatchedsamplerate, mConvIRFilePath, impinfo[2], dspModuleSamplingRate), Toast.LENGTH_SHORT).show();
-					int[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToInt(dspModuleSamplingRate);
+					float[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToFloat(dspModuleSamplingRate);
 					if (impulseResponse == null)
 						Toast.makeText(HeadsetService.this, R.string.memoryallocatefail, Toast.LENGTH_SHORT).show();
 					else
@@ -704,17 +721,17 @@ class StartUpOptimiserThread implements Runnable {
 						impinfo[1] = impulseResponse.length / impinfo[0];
 						int impulseCutted = impulseResponse.length;
 						impulseCutted = (int)(impulseCutted * quality);
-						int[] sendArray = new int[arraySize2Send];
+						float[] sendArray = new float[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
 						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], normalise, numTime2Send};
 						session.setParameterIntArray(session.JamesDSP, 9999, sendBufInfo); // Send buffer info for module to allocate memory
-						int[] finalArray = new int[numTime2Send*arraySize2Send]; // Fill final array with zero padding
+						float[] finalArray = new float[numTime2Send*arraySize2Send]; // Fill final array with zero padding
 						System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
 						for (int i = 0; i < numTime2Send; i++)
 						{
 							System.arraycopy(finalArray, arraySize2Send * i, sendArray, 0, arraySize2Send);
 							session.setParameterShort(session.JamesDSP, 10003, (short)i); // Increment sliced buffer
-							session.setParameterIntArray(session.JamesDSP, 12000, sendArray); // Commit buffer
+							session.setParameterFloatArray(session.JamesDSP, 12000, sendArray); // Commit buffer
 						}
 						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
 						if (DSPManager.devMsgDisplay)
@@ -738,12 +755,7 @@ class StartUpOptimiserThread implements Runnable {
 			}
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
 			if (analogModelEnabled == 1 && updateMajor)
-			{
 				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
-				session.setParameterShort(session.JamesDSP, 151, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubebass", "8"))*1000));
-				session.setParameterShort(session.JamesDSP, 152, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubemid", "5.6"))*1000));
-				session.setParameterShort(session.JamesDSP, 153, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubetreble", "4.5"))*1000));
-			}
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 /*			if (wavechild670Enabled == 1 && updateMajor)
 			{

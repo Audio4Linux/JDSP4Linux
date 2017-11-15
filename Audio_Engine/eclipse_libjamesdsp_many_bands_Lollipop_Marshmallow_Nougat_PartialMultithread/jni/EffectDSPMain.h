@@ -40,9 +40,7 @@ protected:
 	uint16_t currentframeCountInit;
 	size_t memSize;
 	// Float buffer
-	float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat, **fullStereoBuf;
-	// Incoming buffer from Java
-	int32_t *tempImpulseInt32;
+	float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat, **fullStereoBuf, *tempImpulseIncoming;
 	// Fade ramp
 	float ramp;
 	// Effect units
@@ -60,13 +58,11 @@ protected:
 	int eqfilterLength;
 	AutoConvolverMono **FIREq;
 	// Variables
-	float pregain, threshold, knee, ratio, attack, release;
+	float pregain, threshold, knee, ratio, attack, release, tubedrive, normalise;
 	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
 	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
 	int16_t samplesInc, impChannels, previousimpChannels;
-	float tubedrive, tubebass, tubemid, tubetreble;
-	float normalise;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
 	int isBenchData;

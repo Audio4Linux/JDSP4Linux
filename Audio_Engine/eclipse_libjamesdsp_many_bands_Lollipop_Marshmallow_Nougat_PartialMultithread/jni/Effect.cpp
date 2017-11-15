@@ -31,6 +31,9 @@ int32_t Effect::configure(void* pCmdData, size_t* frameCountInit, effect_buffer_
      * always provides full setup info at initial configure time. */
     if ((in.mask & EFFECT_CONFIG_SMP_RATE) && (out.mask & EFFECT_CONFIG_SMP_RATE))
     {
+#ifdef DEBUG
+    	LOGE("SMPR of In: %u and out: %u", in.samplingRate, out.samplingRate);
+#endif
         if (out.samplingRate != in.samplingRate)
         {
 #ifdef DEBUG

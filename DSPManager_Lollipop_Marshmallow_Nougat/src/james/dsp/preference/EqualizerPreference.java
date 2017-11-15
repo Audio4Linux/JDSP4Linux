@@ -108,7 +108,7 @@ public class EqualizerPreference extends DialogPreference
         {
             String value = "";
             for (int i = 0; i < 15; i++)
-                value += String.format(Locale.ROOT, "%.1f", Math.round(mDialogEqualizer.getBand(i) * 10.f) / 10.f) + ";";
+                value += String.format(Locale.ROOT, "%.7f", mDialogEqualizer.getBand(i)) + ";";
             persistString(value);
             updateListEqualizerFromValue();
         }

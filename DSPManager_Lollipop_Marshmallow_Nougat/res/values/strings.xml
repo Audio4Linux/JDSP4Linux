@@ -45,7 +45,7 @@
   <string name="dialog_roomsize">Room size [Int:5 &#8211; 300]</string>
   <string name="dialog_reverbtime">Sustain [Int:5 &#8211; 300]</string>
   <string name="dialog_damping">Damping [Int:1 &#8211; 100]%</string>
-  <string name="dialog_inbandwidth">Bandwidth [Int:1 &#8211; 80]</string>
+  <string name="dialog_inbandwidth">HF [Int:1 &#8211; 60]</string>
   <string name="hfcomponents">(High frequency components)</string>
   <string name="dialog_earlyverb">Early level [Int:1 &#8211; 100]</string>
   <string name="dialog_tailverb">Tail level [Int:1 &#8211; 200]</string>

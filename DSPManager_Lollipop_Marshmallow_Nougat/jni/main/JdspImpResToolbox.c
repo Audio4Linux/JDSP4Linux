@@ -42,15 +42,16 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_GetLoadImp
 	(*env)->ReleaseStringUTFChars(env, path, mIRFileName);
 	return jrImpInfo;
 }
-JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpulseResponseToInt
+JNIEXPORT jfloatArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpulseResponseToFloat
 (JNIEnv *env, jobject obj, jint targetSampleRate)
 {
 	// Allocate memory block for reading
-	jintArray outbuf;
+	jfloatArray outbuf;
 	int i;
-	int *final;
+	float *final;
 	int frameCountTotal = sfiIRInfo.channels * sfiIRInfo.frames;
-	float *pFrameBuffer = (float*)malloc(frameCountTotal * sizeof(float));
+	size_t bufferSize = frameCountTotal * sizeof(float);
+	float *pFrameBuffer = (float*)malloc(bufferSize);
 	if (!pFrameBuffer)
 	{
 		// Memory not enough
@@ -61,12 +62,11 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
 	sf_close(sfIRFile);
 	if (sfiIRInfo.samplerate == targetSampleRate)
 	{
-		final = (int*)malloc(frameCountTotal * sizeof(int));
-		for (i = 0; i < frameCountTotal; i++)
-			final[i] = pFrameBuffer[i] * 32768.0f;
+		final = (float*)malloc(bufferSize);
+		memcpy(final, pFrameBuffer, bufferSize);
 		// Prepare return array
-		outbuf = (*env)->NewIntArray(env, (jsize)frameCountTotal);
-		(*env)->SetIntArrayRegion(env, outbuf, 0, (jsize)frameCountTotal, final);
+		outbuf = (*env)->NewFloatArray(env, (jsize)frameCountTotal);
+		(*env)->SetFloatArrayRegion(env, outbuf, 0, (jsize)frameCountTotal, final);
 		free(final);
 	}
 	else
@@ -74,7 +74,8 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
 		double convertionRatio = (double)targetSampleRate / (double)sfiIRInfo.samplerate;
 		int resampledframeCountTotal = (int)((double)frameCountTotal * convertionRatio);
 		int outFramesPerChannel = (int)((double)sfiIRInfo.frames * convertionRatio);
-		float *out = (float*)malloc(resampledframeCountTotal * sizeof(float));
+		bufferSize = resampledframeCountTotal * sizeof(float);
+		float *out = (float*)malloc(bufferSize);
 		int error;
 		SRC_DATA data;
 		data.data_in = pFrameBuffer;
@@ -83,13 +84,11 @@ JNIEXPORT jintArray JNICALL Java_james_dsp_activity_JdspImpResToolbox_ReadImpuls
 		data.output_frames = outFramesPerChannel;
 		data.src_ratio = convertionRatio;
 		error = src_simple(&data, 1, sfiIRInfo.channels);
-		unsigned int finalOut = resampledframeCountTotal;
-		final = (int*)malloc(finalOut * sizeof(int));
-		for (i = 0; i < finalOut; i++)
-			final[i] = out[i] * 32768.0f;
-		jsize jsFrameBufferSize = finalOut;
-		outbuf = (*env)->NewIntArray(env, jsFrameBufferSize);
-		(*env)->SetIntArrayRegion(env, outbuf, 0, jsFrameBufferSize, final);
+		final = (float*)malloc(bufferSize);
+		memcpy(final, out, bufferSize);
+		jsize jsFrameBufferSize = (unsigned int)resampledframeCountTotal;
+		outbuf = (*env)->NewFloatArray(env, jsFrameBufferSize);
+		(*env)->SetFloatArrayRegion(env, outbuf, 0, jsFrameBufferSize, final);
 		free(out);
 		free(final);
 	}

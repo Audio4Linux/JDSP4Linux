@@ -16,7 +16,7 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     public void setText(String value)
     {
     	String key = getKey();
-    	float valueFloat = 0;
+    	float valueFloat = 0.0f;
     	try
     	{
             valueFloat = Float.parseFloat(value);
@@ -26,68 +26,74 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	}
     	if(key.equals("dsp.masterswitch.finalgain") || key.equals("dsp.headphone.tailverb"))
     	{
-            if(valueFloat < 1)
+            if(valueFloat < 1.0f)
             	value = "1";
-            if(valueFloat > 200)
+            if(valueFloat > 200.0f)
             	value = "200";
             setSummary(value);
     	}
     	if(key.equals("dsp.compression.threshold"))
     	{
-            if(valueFloat < -80)
+            if(valueFloat < -80.0f)
             	valueFloat = -80;
-            if(valueFloat > 0)
-            	valueFloat = 0;
+            if(valueFloat > 0.0f)
+            	valueFloat = 0.0f;
             setSummary(value+" dB");
             value = Integer.toString((int)valueFloat);
     	}
     	if(key.equals("dsp.compression.knee"))
     	{
-            if(valueFloat < 0)
+            if(valueFloat < 0.0f)
             	value = "0";
-            if(valueFloat > 40)
+            if(valueFloat > 40.0f)
             	value = "40";
             setSummary(value+" dB");
     	}
     	if(key.equals("dsp.compression.ratio"))
     	{
-    		if(valueFloat == 0)
+    		if(valueFloat == 0.0f)
     			value = "1";
-            if(valueFloat < -20)
+            if(valueFloat < -20.0f)
             	value = "-20";
-            if(valueFloat > 20)
+            if(valueFloat > 20.0f)
             	value = "20";
             setSummary("1:"+value);
     	}
     	if(key.equals("dsp.compression.attack") || key.equals("dsp.compression.release"))
     	{
-            if(valueFloat < 0.00001)
+            if(valueFloat < 0.00001f)
             	value = "0.00001";
-            if(valueFloat > 0.99999)
+            if(valueFloat > 0.99999f)
             	value = "0.99999";
             setSummary(value);
     	}
     	if(key.equals("dsp.convolver.normalise"))
     	{
-            if(valueFloat < 0.00001)
-            	value = "0.00001";
-            if(valueFloat > 0.99999)
+            if(valueFloat < 0.000001f)
+            {
+            	value = "0.000001";
+            	valueFloat = 0.000001f;
+            }
+            if(valueFloat > 0.99999f)
+            {
             	value = "0.99999";
+            	valueFloat = 0.99999f;
+            }
             setSummary(Float.toString(valueFloat*100)+"%");
     	}
     	if(key.equals("dsp.bass.freq"))
     	{
-            if(valueFloat < 30)
+            if(valueFloat < 30.0f)
             	value = "30";
-            if(valueFloat > 300)
+            if(valueFloat > 300.0f)
             	value = "300";
             setSummary(value+"Hz");
     	}
     	if(key.equals("dsp.headphone.roomsize") || key.equals("dsp.headphone.reverbtime"))
     	{
-            if(valueFloat < 5)
+            if(valueFloat < 5.0f)
             	value = "5";
-            if(valueFloat > 300)
+            if(valueFloat > 300.0f)
             	value = "300";
             setSummary(value+"m");
     	}
@@ -103,8 +109,8 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	{
             if(valueFloat < 1)
             	value = "1";
-            if(valueFloat > 80)
-            	value = "80";
+            if(valueFloat > 60)
+            	value = "60";
             setSummary(value+DSPManager.actUi.getString(R.string.hfcomponents));
     	}
     	if(key.equals("dsp.headphone.earlyverb"))
@@ -121,14 +127,6 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "0";
             if(valueFloat > 12)
             	value = "12";
-            setSummary(value);
-    	}
-    	if(key.equals("dsp.analogmodelling.tubebass") || key.equals("dsp.analogmodelling.tubemid") || key.equals("dsp.analogmodelling.tubetreble"))
-    	{
-            if(valueFloat < 0)
-            	value = "0";
-            if(valueFloat > 10)
-            	value = "10";
             setSummary(value);
     	}
         super.setText(value);
