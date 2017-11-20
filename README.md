@@ -1,5 +1,5 @@
 # JamesDSPManager (Audio Effect Digital Signal Processing library for Android)
-GUI is based on Omnirom DSP Manager and able to run in all recent Android rom include Samsung, AOSP, Cyanogenmod. 
+GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5.0 - 7.x include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 This app don't work too much around with modifying Android framework.
 
