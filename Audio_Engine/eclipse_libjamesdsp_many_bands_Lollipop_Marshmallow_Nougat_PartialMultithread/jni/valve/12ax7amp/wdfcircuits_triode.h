@@ -2,12 +2,13 @@
 #define WDFCIRCUITS_H
 #define TOLERANCE 1e-2
 
-#include "../Misc.h"
+typedef double Real;
 
 typedef struct str_triode
 {
 	Real Kb, Gb, Pb;
 	Real Kr, Gr, Pr;
+
 	Real vg, vk, vp;
 	Real g, mu, gamma, c, gg, e, cg, ig0;
     Real r8_epsilon;
@@ -29,6 +30,7 @@ typedef struct str_TubeStageCircuit
     Real S2_3Gamma1;
     Real S1_3Gamma1;
     Real P2_3Gamma1;
+    int on;
 } TubeStageCircuit;
 Real ffg(Triode *triode, Real VG);
 Real fgdash(Triode *triode, Real VG);
@@ -37,6 +39,7 @@ Real ffp_insane(Triode *triode, Real VP);
 Real fpdash(Triode *triode, Real VP);
 Real ffk(Triode *triode);
 
+float from_dB(float gdb);
 void TriodeInit(Triode *triode);
 void compute(Triode *triode, Real Kbb, Real Gbb, Real Pbb);
 

@@ -1,5 +1,11 @@
 #include <math.h>
 #include "wdfcircuits_triode.h"
+
+float from_dB(float gdb)
+{
+	return expf(gdb / 20.0f*logf(10.0f));
+}
+
 void compute(Triode *triode, Real Pbb, Real Gbb, Real Kbb)
 {
 	//	Real Kb_o = Kb;
@@ -57,13 +63,13 @@ Real fgdash(Triode *triode, Real VG)
 Real ffp(Triode *triode, Real VP)
 {
 	static int prepared = 0;
-	static Real coeff[4];
+	static double coeff[4];
 	if (!prepared)
 	{
 		//go go series expansion
-		const Real L2 = log(2.0);
+		const double L2 = log(2.0);
 
-		const Real scale = pow(L2, triode->gamma - 2) / (8.0*pow(triode->c, triode->gamma));
+		const double scale = pow(L2, triode->gamma - 2) / (8.0*pow(triode->c, triode->gamma));
 		coeff[0] = 8.0*L2*L2*scale;
 		coeff[1] = triode->gamma*triode->c*L2 * 4 * scale;
 		coeff[2] = (triode->c*triode->c*triode->gamma*triode->gamma + L2*triode->c*triode->c*triode->gamma - triode->c*triode->c*triode->gamma)*scale;
@@ -71,7 +77,7 @@ Real ffp(Triode *triode, Real VP)
 		prepared = 1;
 	}
 
-	Real A = VP / triode->mu + triode->vg;
+	double A = VP / triode->mu + triode->vg;
 	return (triode->Pb + triode->Pr*((triode->g*(coeff[0] + coeff[1] * A + coeff[2] * A*A)) + (triode->Gb - triode->vg) / triode->Gr) - VP);
 }
 
@@ -494,6 +500,7 @@ void updateRValues(TubeStageCircuit *ckt, Real C_Ci, Real C_Ck, Real C_Co, Real 
     ckt->Cia = 0.0;
     ckt->Cka = 0.0;
     ckt->Coa = 0.0;
+    ckt->on = 0;
     TriodeInit(&ckt->t);
     ckt->t = tube;
 	ckt->t.insane = insane;
@@ -540,7 +547,7 @@ Real advanc(TubeStageCircuit *ckt, Real VE)
     Real Cob = ckt->Coa;
     Real S2_3b3 = -(Cob)+-(0.0);
     Real P2_3b3 = ckt->E250E - ckt->P2_3Gamma1*(ckt->E250E - S2_3b3);
-    //Tube:             K       G      P
+    //Tube:    K       G      P
     compute(&ckt->t, I3_3b3, S1_3b3, P2_3b3);
     Real b1 = ckt->t.Kb;
 	Real b2 = ckt->t.Gb;
@@ -562,8 +569,12 @@ Real advanc(TubeStageCircuit *ckt, Real VE)
 void warmup_tubes(TubeStageCircuit *ckt, int warmupDuration)
 {
     int i;
+    ckt->on = 0;
 	if (warmupDuration < 4000)
 		warmupDuration = 4000;
     for (i = 0; i < warmupDuration; i++)
+    {
         advanc(ckt, 0.0);
+    }
+    ckt->on = 1;
 }
