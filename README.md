@@ -121,8 +121,7 @@ A: Check step in release build ReadMe.txt.
 It would be downloadable on public domain.
 
 ##### TODO:
-1. Eliminate remain C++ part from major signal processing code, which is used only in Equalizer. May replace by minimum phase or linear phase equalizer, also used in current FIR bass boost.
-2. Doesn't detect Bluetooth headset when device boot up.
+1. Support Android 8.0, especially AOSP.
 
 Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
 
