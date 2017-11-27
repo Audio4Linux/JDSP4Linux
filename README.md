@@ -47,30 +47,48 @@ A: Convolver is a effect apply convolution(a mathematical operation) on audio si
 
    For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
 
-#### 3. What is Analog Modelling?
+#### 4. Low audio quality compared to other DSP like Viper#^$DROID?
+
+A: This probably impossible from all algorithms perspective. All algorithms has been precisely measured on time domain, frequency domain, input/output characteristic, correlations, etc with professional mathematics/numerical analysis software.
+
+I put much time on Auto Convolver engine and it's calibration in order to provide accurate result that same(#1) as MATLAB conv(), but not losing any performance.
+
+How about other reasons that bring down quality?
+1. Your Android audio framework is not supported, this not uncommon on HTC devices.
+2. Audio amplitude clipped(#2), this is a obvious reason which produce strange sound, try to turn your volume down!
+3. If you are using convolver, did you try to use smaller normalise(#3) value, which control overall impulse response amplitude level.
+4. Tube modelling require a high performance CPU to output best quality, so I turn down algorithm precision. **This may produce low amplitude noise.
+
+#1: Floating point rounding issue is not taken into account.
+
+#2: JamesDSP use tanh() on output to prevent hard clip, but not any limiter.
+
+#3: This option will be changed to simple amplitude control.
+
+#### 5. What is Analog Modelling?
 
 A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [ZamAudio](https://github.com/zamaudio).
 The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will tend to clip the audio. Analog amplifier was built from real mathematical model, most notably is nonlinearity of vacuum tube.
 Original is written in C++, for some reasons I ported it to C implementation.
 
-#### 5. What is Misc folder does?
+#### 6. What is Misc folder does?
 
 File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap not stack, it will be useful when you play around with Visual Studio, because VS have 1Mb stack allocation limit...
 
-#### 6. Why libjamesdsp.so so big?
+#### 7. Why libjamesdsp.so so big?
 
 A: Because of fftw3 library linked.
 
-#### 7. Why open source? Any license?
+#### 8. Why open source? Any license?
 
 A: Audio effects actually is not hard to implement, I don't think close source is a good idea. Many audio effects is exist in the form of libraries, or even in thesis, everyone can implement it...
    All files in this repository is published under GPLv2.
 
-#### 8. Can I use your audio effect code?
+#### 9. Can I use your audio effect code?
 
 A: Yes. It is relatively easy to use some effect in other applications. Convolver, reverb, 12AX7 tube amplifier source code is written in similar style, you can look at the how their function is called, initialised, processed, etc. Most of the effect is written in C, so it is easy to port to other platforms without huge modifications.
 
-#### 9. Why no effect after installed?
+#### 10. Why no effect after installed?
 
 A: Check step in release build ReadMe.txt.
    Effect may get unloaded by Android system if no audio stream for while.
