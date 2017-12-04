@@ -37,10 +37,10 @@ protected:
 	ptrThreadParamsFullStConv fullStconvparams, fullStconvparams1;
 	ptrThreadParamsTube rightparams2;
 	pthread_t rightconv, rightconv1, righttube;
-	uint16_t currentframeCountInit;
+	int fixedFrameCount, inOutRWPostion;
 	size_t memSize;
 	// Float buffer
-	float **inputBuffer, **outputBuffer, **finalImpulse, *tempImpulseFloat, **fullStereoBuf, *tempImpulseIncoming;
+	float *inputBuffer[2], *outputBuffer[2], **finalImpulse, *tempImpulseFloat, **fullStereoBuf, *tempImpulseIncoming;
 	// Fade ramp
 	float ramp;
 	// Effect units
@@ -87,18 +87,6 @@ protected:
 		for (i = 0; i < num_frames; i++)
 			buffer[i] *= amp;
 		return max;
-	}
-	inline void channel_split(int16_t* buffer, size_t num_frames, float** chan_buffers)
-	{
-		size_t i, samples = num_frames << 1;
-		for (i = 0; i < samples; i++)
-			chan_buffers[i % 2][i >> 1] = (float)((double)(buffer[i]) * 0.000030517578125);
-	}
-	inline void channel_join(float** chan_buffers, int16_t* buffer, size_t num_frames, float scalar)
-	{
-		size_t i, samples = num_frames << 1;
-		for (i = 0; i < samples; i++)
-			buffer[i] = (int16_t)(tanh(chan_buffers[i % 2][i >> 1] * finalGain * scalar) * 32768.0f);
 	}
 public:
 	EffectDSPMain();

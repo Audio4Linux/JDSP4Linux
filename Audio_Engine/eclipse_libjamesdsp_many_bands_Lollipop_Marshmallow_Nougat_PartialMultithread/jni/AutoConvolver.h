@@ -3,7 +3,6 @@
 typedef struct str_AutoConvolver
 {
     int methods, channels, hnShortLen, bufpos;
-    int *routeIn, *routeOut;
     float *inbuf, *outbuf;
     void *filter;
     void(*process)(struct str_AutoConvolver*, float**, float**, int);
@@ -11,7 +10,6 @@ typedef struct str_AutoConvolver
 typedef struct str_AutoConvolverMono
 {
     int methods, hnShortLen, bufpos;
-    int *routeIn, *routeOut;
     float *inbuf, *outbuf;
     void *filter;
     void(*process)(struct str_AutoConvolverMono*, float*, float*, int);

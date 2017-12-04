@@ -22,7 +22,7 @@ Effect::~Effect()
 }
 
 /* Configure a bunch of general parameters. */
-int32_t Effect::configure(void* pCmdData, size_t* frameCountInit, effect_buffer_access_e* mAccessMode)
+int32_t Effect::configure(void* pCmdData, effect_buffer_access_e* mAccessMode)
 {
     effect_config_t *cfg = (effect_config_t*)pCmdData;
     buffer_config_t in = cfg->inputCfg;
@@ -46,21 +46,42 @@ int32_t Effect::configure(void* pCmdData, size_t* frameCountInit, effect_buffer_
     if (in.mask & EFFECT_CONFIG_CHANNELS && out.mask & EFFECT_CONFIG_CHANNELS)
     {
         if (in.channels != AUDIO_CHANNEL_OUT_STEREO)
+        {
+#ifdef DEBUG
+	LOGE("Input is non stereo signal. It's channel count is %u", in.channels);
+#endif
             return -EINVAL;
+        }
         if (out.channels != AUDIO_CHANNEL_OUT_STEREO)
+        {
+#ifdef DEBUG
+	LOGE("Output is non stereo signal. It's channel count is %u", out.channels);
+#endif
             return -EINVAL;
-        *frameCountInit = in.buffer.frameCount;
+        }
+    }
+    else
+    {
+#ifdef DEBUG
+	LOGE("In/out channel mask doesn't match");
+#endif
     }
     if (in.mask & EFFECT_CONFIG_FORMAT)
     {
         if (in.format != AUDIO_FORMAT_PCM_16_BIT)
         {
+#ifdef DEBUG
+	LOGE("Input is not 16 bit PCM. It's is %u bit PCM", in.format);
+#endif
         }
     }
     if (out.mask & EFFECT_CONFIG_FORMAT)
     {
         if (out.format != AUDIO_FORMAT_PCM_16_BIT)
         {
+#ifdef DEBUG
+	LOGE("Output is not 16 bit PCM. It's is %u bit PCM", in.format);
+#endif
         }
     }
     if (out.mask & EFFECT_CONFIG_ACC_MODE)

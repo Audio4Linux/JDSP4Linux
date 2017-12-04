@@ -11,7 +11,7 @@ protected:
     bool mEnable;
     float mSamplingRate;
 
-    int32_t configure(void *pCmdData, size_t* frameCountInit, effect_buffer_access_e* mAccessMode);
+    int32_t configure(void *pCmdData, effect_buffer_access_e* mAccessMode);
 
 public:
     Effect();
