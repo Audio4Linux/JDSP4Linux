@@ -17,7 +17,7 @@ typedef struct
 } reply1x4_1x4_t;
 
 EffectDSPMain::EffectDSPMain()
-	: fixedFrameCount(2048), inOutRWPostion(0), equalizerEnabled(0), ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
+	: DSPbufferLength(2048), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
 	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0)//, compressor670(0)
 	, tempImpulseIncoming(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), finalGain(1.0f), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
@@ -31,6 +31,7 @@ EffectDSPMain::EffectDSPMain()
 	benchmarkValue[1] = (double*)malloc(12 * sizeof(double));
 	memcpy(benchmarkValue[0], c0, sizeof(c0));
 	memcpy(benchmarkValue[1], c1, sizeof(c1));
+	inputBuffer[0] = 0;
 }
 EffectDSPMain::~EffectDSPMain()
 {
@@ -38,6 +39,7 @@ EffectDSPMain::~EffectDSPMain()
 	if (inputBuffer[0])
 	{
 		free(inputBuffer[0]);
+		inputBuffer[0] = 0;
 		free(inputBuffer[1]);
 		free(outputBuffer[0]);
 		free(outputBuffer[1]);
@@ -161,7 +163,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			*replyData = ret;
 			return 0;
 		}
-		memSize = fixedFrameCount * sizeof(float);
+		memSize = DSPbufferLength * sizeof(float);
 		if (!inputBuffer[0])
 		{
 			inputBuffer[0] = (float*)malloc(memSize);
@@ -171,15 +173,15 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			memset(outputBuffer[0], 0, memSize);
 			memset(outputBuffer[1], 0, memSize);
 #ifdef DEBUG
-			LOGI("%d space allocated", fixedFrameCount);
+			LOGI("%d space allocated", DSPbufferLength);
 #endif
 		}
 		fullStconvparams.in = inputBuffer;
-		fullStconvparams.frameCount = fixedFrameCount;
+		fullStconvparams.frameCount = DSPbufferLength;
 		fullStconvparams1.in = inputBuffer;
-		fullStconvparams1.frameCount = fixedFrameCount;
+		fullStconvparams1.frameCount = DSPbufferLength;
 		rightparams2.in = inputBuffer;
-		rightparams2.frameCount = fixedFrameCount;
+		rightparams2.frameCount = DSPbufferLength;
 		*replyData = 0;
 		return 0;
 	}
@@ -190,7 +192,18 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 		if (cep->psize == 4 && cep->vsize == 4)
 		{
 			int32_t cmd = ((int32_t *)cep)[3];
-			if (cmd == 20000)
+			if (cmd == 19999)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 19999;
+				replyData->data = (int32_t)DSPbufferLength;
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+			else if (cmd == 20000)
 			{
 				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
 				replyData->status = 0;
@@ -360,9 +373,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				{
 					bassLpReady = 0;
 					if (!bassBoostFilterType)
-						refreshBassLinearPhase(fixedFrameCount, 2048, bassBoostCentreFreq);
+						refreshBassLinearPhase(DSPbufferLength, 2048, bassBoostCentreFreq);
 					else
-						refreshBassLinearPhase(fixedFrameCount, 4096, bassBoostCentreFreq);
+						refreshBassLinearPhase(DSPbufferLength, 4096, bassBoostCentreFreq);
 				}
 				*replyData = 0;
 				return 0;
@@ -630,12 +643,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				int16_t oldVal = analogModelEnable;
 				analogModelEnable = ((int16_t *)cep)[8];
 				if (analogModelEnable && oldVal != analogModelEnable)
-				{
 					refreshTubeAmp();
-#ifdef DEBUG
-					LOGI("Tube amp enabled");
-#endif
-				}
 				*replyData = 0;
 				return 0;
 			}
@@ -705,7 +713,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 							channelbuf[j] = p[j * impChannels];
 						finalImpulse[i] = channelbuf;
 					}
-					if (!refreshConvolver(fixedFrameCount))
+					if (!refreshConvolver(DSPbufferLength))
 					{
 						if (finalImpulse)
 						{
@@ -728,7 +736,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 1500)
 			{
-				finalGain = ((int16_t *)cep)[8] / 100.0f;
+				float gain = ((int16_t *)cep)[8] / 100.0f;
+				finalGain = map(gain, 0.0f, 1.0f, 0.0f, 32768.0f);
 				*replyData = 0;
 				return 0;
 			}
@@ -741,7 +750,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				float mBand[NUM_BANDS];
 				for (int i = 0; i < NUM_BANDS; i++)
 					mBand[i] = ((float*)cep)[4 + i];
-				refreshEqBands(fixedFrameCount, mBand);
+				refreshEqBands(DSPbufferLength, mBand);
 				*replyData = 0;
 				return 0;
 			}
@@ -783,7 +792,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					isBenchData++;
 					if (convolverReady > 0)
 					{
-						if (!refreshConvolver(fixedFrameCount))
+						if (!refreshConvolver(DSPbufferLength))
 						{
 							if (finalImpulse)
 							{
@@ -839,7 +848,7 @@ void EffectDSPMain::refreshTubeAmp()
 	tubeP[1] = tubeP[0];
 	rightparams2.tube = tubeP;
 }
-void EffectDSPMain::refreshBassLinearPhase(uint32_t fixedFrameCount, uint32_t tapsLPFIR, float bassBoostCentreFreq)
+void EffectDSPMain::refreshBassLinearPhase(uint32_t DSPbufferLength, uint32_t tapsLPFIR, float bassBoostCentreFreq)
 {
 	float strength = bassBoostStrength / 100.0f;
 	if (strength < 1.0f)
@@ -854,14 +863,14 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t fixedFrameCount, uint32_t ta
 #ifdef DEBUG
 	LOGI("filterLength: %d", filterLength);
 	if (!freqSamplImp)
-		LOGI("Pointer freqSamplImp is valid");
+		LOGI("Pointer freqSamplImp is invalid");
 #endif
 	unsigned int i;
 	if (!bassBoostLp)
 	{
 		bassBoostLp = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
 		for (i = 0; i < NUMCHANNEL; i++)
-			bassBoostLp[i] = AllocateAutoConvolverMonoZeroLatency(freqSamplImp, filterLength, fixedFrameCount, threadResult);
+			bassBoostLp[i] = AllocateAutoConvolverMonoZeroLatency(freqSamplImp, filterLength, DSPbufferLength, threadResult);
 		ramp = 0.4f;
 	}
 	else
@@ -875,12 +884,12 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t fixedFrameCount, uint32_t ta
 #endif
 	bassLpReady = 1;
 }
-int EffectDSPMain::refreshConvolver(uint32_t fixedFrameCount)
+int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 {
 	if (!finalImpulse)
 		return 0;
 #ifdef DEBUG
-	LOGI("refreshConvolver::IR channel count:%d, IR frame count:%d, Audio buffer size:%d", impChannels, impulseLengthActual, fixedFrameCount);
+	LOGI("refreshConvolver::IR channel count:%d, IR frame count:%d, Audio buffer size:%d", impChannels, impulseLengthActual, DSPbufferLength);
 #endif
 	unsigned int i;
 	FreeConvolver();
@@ -894,9 +903,9 @@ int EffectDSPMain::refreshConvolver(uint32_t fixedFrameCount)
 			for (i = 0; i < 2; i++)
 			{
 				if (impChannels == 1)
-					convolver[i] = InitAutoConvolverMono(finalImpulse[0], impulseLengthActual, fixedFrameCount, benchmarkValue, 12, threadResult);
+					convolver[i] = InitAutoConvolverMono(finalImpulse[0], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
 				else
-					convolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, fixedFrameCount, benchmarkValue, 12, threadResult);
+					convolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
 			}
 			fullStconvparams.conv = convolver;
 			fullStconvparams.out = outputBuffer;
@@ -925,13 +934,13 @@ int EffectDSPMain::refreshConvolver(uint32_t fixedFrameCount)
 			if (!fullStereoBuf)
 			{
 				fullStereoBuf = (float**)malloc(2 * sizeof(float*));
-				fullStereoBuf[0] = (float*)malloc(fixedFrameCount * sizeof(float));
-				fullStereoBuf[1] = (float*)malloc(fixedFrameCount * sizeof(float));
+				fullStereoBuf[0] = (float*)malloc(DSPbufferLength * sizeof(float));
+				fullStereoBuf[1] = (float*)malloc(DSPbufferLength * sizeof(float));
 				fullStconvparams.out = fullStereoBuf;
 				fullStconvparams1.out = fullStereoBuf;
 			}
 			for (i = 0; i < 4; i++)
-				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, fixedFrameCount, benchmarkValue, 12, threadResult);
+				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
 			fullStconvparams.conv = fullStereoConvolver;
 			fullStconvparams1.conv = fullStereoConvolver;
 			if (finalImpulse)
@@ -989,7 +998,7 @@ void EffectDSPMain::refreshCompressor()
 	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release, 0.003f, 0.09f, 0.16f, 0.42f, 0.98f, -(pregain / 1.4f));
 	ramp = 0.3f;
 }
-void EffectDSPMain::refreshEqBands(uint32_t fixedFrameCount, float *bands)
+void EffectDSPMain::refreshEqBands(uint32_t DSPbufferLength, float *bands)
 {
 	if (!arbEq || !xaxis || !yaxis)
 		return;
@@ -1009,7 +1018,7 @@ void EffectDSPMain::refreshEqBands(uint32_t fixedFrameCount, float *bands)
 	{
 		FIREq = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
 		for (i = 0; i < NUMCHANNEL; i++)
-			FIREq[i] = AllocateAutoConvolverMonoZeroLatency(eqImpulseResponse, eqfilterLength, fixedFrameCount, threadResult);
+			FIREq[i] = AllocateAutoConvolverMonoZeroLatency(eqImpulseResponse, eqfilterLength, DSPbufferLength, threadResult);
 	}
 	else
 	{
@@ -1087,137 +1096,149 @@ void *EffectDSPMain::threadingTube(void *args)
 }
 int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 {
-	size_t i, j, framePos, framePos2x, actualFrameCount = in->frameCount;
-	float outLL, outLR, outRL, outRR;
-	int pos = inOutRWPostion;
-	for (framePos = 0; framePos < actualFrameCount; framePos++)
+	if (inputBuffer[0])
 	{
-		framePos2x = framePos << 1;
-		inputBuffer[0][pos] = (float)((double)(in->s16[framePos2x] * 0.000030517578125));
-		inputBuffer[1][pos] = (float)((double)(in->s16[framePos2x + 1] * 0.000030517578125));
-		out->s16[framePos2x] = (int16_t)(tanh(outputBuffer[0][pos] * finalGain * ramp) * 32768.0f);
-		out->s16[framePos2x + 1] = (int16_t)(tanh(outputBuffer[1][pos] * finalGain * ramp) * 32768.0f);
-		pos++;
-		if (pos == fixedFrameCount)
+		size_t i, j, framePos, framePos2x, framePos2xPlus1, actualFrameCount = in->frameCount;
+		float outLL, outLR, outRL, outRR;
+		int pos = inOutRWPosition;
+		for (framePos = 0; framePos < actualFrameCount; framePos++)
 		{
-			if (bassBoostEnabled)
+			framePos2x = framePos << 1;
+			framePos2xPlus1 = framePos2x + 1;
+			inputBuffer[0][pos] = (float)((double)(in->s16[framePos2x] * 0.000030517578125));
+			inputBuffer[1][pos] = (float)((double)(in->s16[framePos2xPlus1] * 0.000030517578125));
+			if (outputBuffer[0][pos] > 1.0f)
+				outputBuffer[0][pos] = 1.0f;
+			if (outputBuffer[0][pos] < -1.0f)
+				outputBuffer[0][pos] = -1.0f;
+			if (outputBuffer[1][pos] > 1.0f)
+				outputBuffer[1][pos] = 1.0f;
+			if (outputBuffer[1][pos] < -1.0f)
+				outputBuffer[1][pos] = -1.0f;
+			out->s16[framePos2x] = (int16_t)(outputBuffer[0][pos] * ramp * finalGain);
+			out->s16[framePos2xPlus1] = (int16_t)(outputBuffer[1][pos] * ramp * finalGain);
+			pos++;
+			if (pos == DSPbufferLength)
 			{
-				if (bassLpReady > 0)
+				if (bassBoostEnabled)
 				{
-					bassBoostLp[0]->process(bassBoostLp[0], inputBuffer[0], inputBuffer[0], fixedFrameCount);
-					bassBoostLp[1]->process(bassBoostLp[1], inputBuffer[1], inputBuffer[1], fixedFrameCount);
-				}
-			}
-			if (equalizerEnabled)
-			{
-				if (eqFIRReady == 1)
-				{
-					FIREq[0]->process(FIREq[0], inputBuffer[0], inputBuffer[0], fixedFrameCount);
-					FIREq[1]->process(FIREq[1], inputBuffer[1], inputBuffer[1], fixedFrameCount);
-				}
-			}
-			if (reverbEnabled)
-			{
-				if (mReverbMode == 1)
-				{
-					for (i = 0; i < fixedFrameCount; i++)
+					if (bassLpReady > 0)
 					{
-						gverb_do(verbL, inputBuffer[0][i], &outLL, &outLR);
-						gverb_do(verbR, inputBuffer[1][i], &outRL, &outRR);
-						inputBuffer[0][i] = outLL + outRL;
-						inputBuffer[1][i] = outLR + outRR;
+						bassBoostLp[0]->process(bassBoostLp[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+						bassBoostLp[1]->process(bassBoostLp[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
 					}
 				}
-				else
+				if (equalizerEnabled)
 				{
-					for (i = 0; i < fixedFrameCount; i++)
-						sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &inputBuffer[0][i], &inputBuffer[1][i]);
-				}
-			}
-			if (convolverEnabled)
-			{
-				if (convolverReady == 1)
-				{
-					convolver[0]->process(convolver[0], inputBuffer[0], outputBuffer[0], fixedFrameCount);
-					convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], fixedFrameCount);
-					memcpy(inputBuffer[0], outputBuffer[0], memSize);
-					memcpy(inputBuffer[1], outputBuffer[1], memSize);
-				}
-				else if (convolverReady == 2)
-				{
-					pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
-					convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], fixedFrameCount);
-					pthread_join(rightconv, 0);
-					memcpy(inputBuffer[0], outputBuffer[0], memSize);
-					memcpy(inputBuffer[1], outputBuffer[1], memSize);
-				}
-				else if (convolverReady == 3)
-				{
-					pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
-					fullStereoConvolver[1]->process(fullStereoConvolver[1], inputBuffer[0], fullStereoBuf[1], fixedFrameCount);
-					fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], fixedFrameCount);
-					fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], fixedFrameCount);
-					pthread_join(rightconv, 0);
-					for (i = 0; i < fixedFrameCount; i++)
+					if (eqFIRReady == 1)
 					{
-						inputBuffer[0][i] = outputBuffer[0][i] + fullStereoBuf[0][i];
-						inputBuffer[1][i] = outputBuffer[1][i] + fullStereoBuf[1][i];
+						FIREq[0]->process(FIREq[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+						FIREq[1]->process(FIREq[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
 					}
 				}
-				else if (convolverReady == 4)
+				if (reverbEnabled)
 				{
-					pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
-					pthread_create(&rightconv1, 0, EffectDSPMain::threadingConvF1, (void*)&fullStconvparams1);
-					fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], fixedFrameCount);
-					fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], fixedFrameCount);
-					pthread_join(rightconv, 0);
-					pthread_join(rightconv1, 0);
-					for (i = 0; i < fixedFrameCount; i++)
+					if (mReverbMode == 1)
 					{
-						inputBuffer[0][i] = outputBuffer[0][i] + fullStereoBuf[0][i];
-						inputBuffer[1][i] = outputBuffer[1][i] + fullStereoBuf[1][i];
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							gverb_do(verbL, inputBuffer[0][i], &outLL, &outLR);
+							gverb_do(verbR, inputBuffer[1][i], &outRL, &outRR);
+							inputBuffer[0][i] = outLL + outRL;
+							inputBuffer[1][i] = outLR + outRR;
+						}
+					}
+					else
+					{
+						for (i = 0; i < DSPbufferLength; i++)
+							sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &inputBuffer[0][i], &inputBuffer[1][i]);
 					}
 				}
-			}
-			if (analogModelEnable)
-			{
-				pthread_create(&righttube, 0, EffectDSPMain::threadingTube, (void*)&rightparams2);
-				processTube(&tubeP[0], inputBuffer[0], inputBuffer[0], fixedFrameCount);
-				pthread_join(righttube, 0);
-			}
-			/*	if (wavechild670Enabled == 1)
-			Wavechild670ProcessFloat(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], fixedFrameCount);*/
-			if (stereoWidenEnabled)
-			{
-				for (i = 0; i < fixedFrameCount; i++)
+				if (convolverEnabled)
 				{
-					outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;
-					outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
-					inputBuffer[0][i] = outLR + outRL;
-					inputBuffer[1][i] = outLR - outRL;
+					if (convolverReady == 1)
+					{
+						convolver[0]->process(convolver[0], inputBuffer[0], outputBuffer[0], DSPbufferLength);
+						convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						memcpy(inputBuffer[0], outputBuffer[0], memSize);
+						memcpy(inputBuffer[1], outputBuffer[1], memSize);
+					}
+					else if (convolverReady == 2)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						memcpy(inputBuffer[0], outputBuffer[0], memSize);
+						memcpy(inputBuffer[1], outputBuffer[1], memSize);
+					}
+					else if (convolverReady == 3)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						fullStereoConvolver[1]->process(fullStereoConvolver[1], inputBuffer[0], fullStereoBuf[1], DSPbufferLength);
+						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
+						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							inputBuffer[0][i] = outputBuffer[0][i] + fullStereoBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + fullStereoBuf[1][i];
+						}
+					}
+					else if (convolverReady == 4)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						pthread_create(&rightconv1, 0, EffectDSPMain::threadingConvF1, (void*)&fullStconvparams1);
+						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
+						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						pthread_join(rightconv1, 0);
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							inputBuffer[0][i] = outputBuffer[0][i] + fullStereoBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + fullStereoBuf[1][i];
+						}
+					}
 				}
-			}
-			if (bs2bEnabled == 1)
-			{
-				double tmpL, tmpR;
-				for (i = 0; i < fixedFrameCount; i++)
+				if (analogModelEnable)
 				{
-					tmpL = (double)inputBuffer[0][i];
-					tmpR = (double)inputBuffer[1][i];
-					BS2BProcess(&bs2b, &tmpL, &tmpR);
-					inputBuffer[0][i] = (float)tmpL;
-					inputBuffer[1][i] = (float)tmpR;
+					pthread_create(&righttube, 0, EffectDSPMain::threadingTube, (void*)&rightparams2);
+					processTube(&tubeP[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+					pthread_join(righttube, 0);
 				}
+				/*	if (wavechild670Enabled == 1)
+				Wavechild670ProcessFloat(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], DSPbufferLength);*/
+				if (stereoWidenEnabled)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;
+						outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
+						inputBuffer[0][i] = outLR + outRL;
+						inputBuffer[1][i] = outLR - outRL;
+					}
+				}
+				if (bs2bEnabled == 1)
+				{
+					double tmpL, tmpR;
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						tmpL = (double)inputBuffer[0][i];
+						tmpR = (double)inputBuffer[1][i];
+						BS2BProcess(&bs2b, &tmpL, &tmpR);
+						inputBuffer[0][i] = (float)tmpL;
+						inputBuffer[1][i] = (float)tmpR;
+					}
+				}
+				if (ramp < 1.0f)
+					ramp += 0.05f;
+				if (compressionEnabled)
+					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1]);
+				memcpy(outputBuffer[0], inputBuffer[0], memSize);
+				memcpy(outputBuffer[1], inputBuffer[1], memSize);
+				pos = 0;
 			}
-			if (ramp < 1.0f)
-				ramp += 0.05f;
-			if (compressionEnabled)
-				sf_compressor_process(&compressor, fixedFrameCount, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1]);
-			memcpy(outputBuffer[0], inputBuffer[0], memSize);
-			memcpy(outputBuffer[1], inputBuffer[1], memSize);
-			pos = 0;
 		}
+		inOutRWPosition = pos;
 	}
-	inOutRWPostion = pos;
 	return mEnable ? 0 : -ENODATA;
 }

@@ -37,7 +37,7 @@ protected:
 	ptrThreadParamsFullStConv fullStconvparams, fullStconvparams1;
 	ptrThreadParamsTube rightparams2;
 	pthread_t rightconv, rightconv1, righttube;
-	int fixedFrameCount, inOutRWPostion;
+	int DSPbufferLength, inOutRWPosition;
 	size_t memSize;
 	// Float buffer
 	float *inputBuffer[2], *outputBuffer[2], **finalImpulse, *tempImpulseFloat, **fullStereoBuf, *tempImpulseIncoming;
@@ -87,6 +87,10 @@ protected:
 		for (i = 0; i < num_frames; i++)
 			buffer[i] *= amp;
 		return max;
+	}
+	inline float map(float x, float in_min, float in_max, float out_min, float out_max)
+	{
+		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
 public:
 	EffectDSPMain();
