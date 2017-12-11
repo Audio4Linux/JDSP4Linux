@@ -43,6 +43,8 @@ EffectDSPMain::~EffectDSPMain()
 		free(inputBuffer[1]);
 		free(outputBuffer[0]);
 		free(outputBuffer[1]);
+		free(tempBuf[0]);
+		free(tempBuf[1]);
 	}
 	if (verbL)
 	{
@@ -119,13 +121,18 @@ void EffectDSPMain::FreeEq()
 }
 void EffectDSPMain::FreeConvolver()
 {
+	convolverReady = -1;
 	int i;
 	if (convolver)
 	{
 		for (i = 0; i < 2; i++)
 		{
-			AutoConvolverMonoFree(convolver[i]);
-			free(convolver[i]);
+			if (convolver[i])
+			{
+				AutoConvolverMonoFree(convolver[i]);
+				free(convolver[i]);
+				convolver[i] = 0;
+			}
 		}
 		free(convolver);
 		convolver = 0;
@@ -134,19 +141,22 @@ void EffectDSPMain::FreeConvolver()
 	{
 		for (i = 0; i < 4; i++)
 		{
-			AutoConvolverMonoFree(fullStereoConvolver[i]);
-			free(fullStereoConvolver[i]);
+			if (fullStereoConvolver[i])
+			{
+				AutoConvolverMonoFree(fullStereoConvolver[i]);
+				free(fullStereoConvolver[i]);
+				fullStereoConvolver[i] = 0;
+			}
 		}
 		free(fullStereoConvolver);
 		fullStereoConvolver = 0;
 	}
-	if (fullStereoBuf)
-	{
-		free(fullStereoBuf[0]);
-		free(fullStereoBuf[1]);
-		free(fullStereoBuf);
-		fullStereoBuf = 0;
-	}
+}
+void EffectDSPMain::channel_splitFloat(const float *buffer, unsigned int num_frames, float **chan_buffers, unsigned int num_channels)
+{
+	unsigned int i, samples = num_frames * num_channels;
+	for (i = 0; i < samples; i++)
+		chan_buffers[i % num_channels][i / num_channels] = buffer[i];
 }
 int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdData, uint32_t* replySize, void* pReplyData)
 {
@@ -172,6 +182,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			outputBuffer[1] = (float*)malloc(memSize);
 			memset(outputBuffer[0], 0, memSize);
 			memset(outputBuffer[1], 0, memSize);
+			tempBuf[0] = (float*)malloc(memSize);
+			tempBuf[1] = (float*)malloc(memSize);
 #ifdef DEBUG
 			LOGI("%d space allocated", DSPbufferLength);
 #endif
@@ -180,6 +192,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 		fullStconvparams.frameCount = DSPbufferLength;
 		fullStconvparams1.in = inputBuffer;
 		fullStconvparams1.frameCount = DSPbufferLength;
+		fullStconvparams.out = tempBuf;
+		fullStconvparams1.out = tempBuf;
 		rightparams2.in = inputBuffer;
 		rightparams2.frameCount = DSPbufferLength;
 		*replyData = 0;
@@ -585,8 +599,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				}
 				else if (!equalizerEnabled && (oldVal != equalizerEnabled))
 				{
-					FreeEq();
 					eqFIRReady = 0;
+					FreeEq();
 #ifdef DEBUG
 					LOGI("FIR EQ destroyed");
 #endif
@@ -631,10 +645,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				convolverEnabled = ((int16_t *)cep)[8];
 				if (!convolverEnabled)
-				{
 					FreeConvolver();
-					convolverReady = -1;
-				}
 				*replyData = 0;
 				return 0;
 			}
@@ -715,6 +726,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					}
 					if (!refreshConvolver(DSPbufferLength))
 					{
+						convolverReady = -1;
+						convolverEnabled = !convolverEnabled;
 						if (finalImpulse)
 						{
 							for (i = 0; i < impChannels; i++)
@@ -727,8 +740,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 							free(tempImpulseFloat);
 							tempImpulseFloat = 0;
 						}
-						convolverReady = -1;
-						convolverEnabled = !convolverEnabled;
 					}
 				}
 				*replyData = 0;
@@ -931,14 +942,6 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 			fullStereoConvolver = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * impChannels);
 			if (!fullStereoConvolver)
 				return 0;
-			if (!fullStereoBuf)
-			{
-				fullStereoBuf = (float**)malloc(2 * sizeof(float*));
-				fullStereoBuf[0] = (float*)malloc(DSPbufferLength * sizeof(float));
-				fullStereoBuf[1] = (float*)malloc(DSPbufferLength * sizeof(float));
-				fullStconvparams.out = fullStereoBuf;
-				fullStconvparams1.out = fullStereoBuf;
-			}
 			for (i = 0; i < 4; i++)
 				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
 			fullStconvparams.conv = fullStereoConvolver;
@@ -1174,14 +1177,14 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 					else if (convolverReady == 3)
 					{
 						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
-						fullStereoConvolver[1]->process(fullStereoConvolver[1], inputBuffer[0], fullStereoBuf[1], DSPbufferLength);
+						fullStereoConvolver[1]->process(fullStereoConvolver[1], inputBuffer[0], tempBuf[1], DSPbufferLength);
 						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
 						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
 						pthread_join(rightconv, 0);
 						for (i = 0; i < DSPbufferLength; i++)
 						{
-							inputBuffer[0][i] = outputBuffer[0][i] + fullStereoBuf[0][i];
-							inputBuffer[1][i] = outputBuffer[1][i] + fullStereoBuf[1][i];
+							inputBuffer[0][i] = outputBuffer[0][i] + tempBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + tempBuf[1][i];
 						}
 					}
 					else if (convolverReady == 4)
@@ -1194,8 +1197,8 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 						pthread_join(rightconv1, 0);
 						for (i = 0; i < DSPbufferLength; i++)
 						{
-							inputBuffer[0][i] = outputBuffer[0][i] + fullStereoBuf[0][i];
-							inputBuffer[1][i] = outputBuffer[1][i] + fullStereoBuf[1][i];
+							inputBuffer[0][i] = outputBuffer[0][i] + tempBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + tempBuf[1][i];
 						}
 					}
 				}

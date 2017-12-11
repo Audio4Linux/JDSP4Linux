@@ -10,13 +10,7 @@ public class JdspImpResToolbox
     		System.loadLibrary("jamesDSPImpulseToolbox");
     		Log.i(DSPManager.TAG, "JNI loaded via normal installation");
     	} catch(UnsatisfiedLinkError e) {
-    		try {
-    			System.load("/system/lib/libjamesDSPImpulseToolbox.so");
-        		Log.i(DSPManager.TAG, "Loading 32 bit JNI via system directly");
-    		}
-    		catch(UnsatisfiedLinkError err2) {
     			Log.e(DSPManager.TAG, "JNI LOAD FAILED!");
-    		}
     	}
     }
     /* Impulse Response Utils */

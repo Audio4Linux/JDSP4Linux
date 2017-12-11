@@ -40,7 +40,7 @@ protected:
 	int DSPbufferLength, inOutRWPosition;
 	size_t memSize;
 	// Float buffer
-	float *inputBuffer[2], *outputBuffer[2], **finalImpulse, *tempImpulseFloat, **fullStereoBuf, *tempImpulseIncoming;
+	float *inputBuffer[2], *outputBuffer[2], *tempBuf[2], **finalImpulse, *tempImpulseFloat, *tempImpulseIncoming;
 	// Fade ramp
 	float ramp;
 	// Effect units
@@ -61,7 +61,7 @@ protected:
 	float pregain, threshold, knee, ratio, attack, release, tubedrive, normalise;
 	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
-	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
+	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled, pamssEnabled;
 	int16_t samplesInc, impChannels, previousimpChannels;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int16_t mPreset, mReverbMode;
@@ -70,6 +70,7 @@ protected:
 	void FreeBassBoost();
 	void FreeEq();
 	void FreeConvolver();
+	void channel_splitFloat(const float *buffer, unsigned int num_frames, float **chan_buffers, unsigned int num_channels);
 	void refreshTubeAmp();
 	void refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR, float bassBoostCentreFreq);
 	int refreshConvolver(uint32_t actualframeCount);

@@ -21,14 +21,14 @@
   <string name="pref_compression_summary_off">已停用壓縮</string>
   <string name="pref_compression_enable">啟用壓縮動態範圍</string>
   <string name="dialog_pregain">預增益</string>
-  <string name="dialog_threshold">閾值 [整數:-80 &#8211; 0 dB]</string>
-  <string name="dialog_knee">過渡 [整數:0 &#8211; 40 dB]</string>
-  <string name="dialog_ratio">比例 [整數:-20 &#8211; 20]</string>
-  <string name="dialog_attack">開始幅度 [實數:0 &#8211; 1]</string>
-  <string name="dialog_release">釋放幅度 [實數:0 &#8211; 1]</string>
+  <string name="dialog_threshold">閾值 [整數:-80到0 dB]</string>
+  <string name="dialog_knee">過渡 [整數:0到40 dB]</string>
+  <string name="dialog_ratio">比例 [整數:-20到20]</string>
+  <string name="dialog_attack">開始幅度 [實數:0到1]</string>
+  <string name="dialog_release">釋放幅度 [實數:0到1]</string>
   <string name="pref_effect_title">選擇效果程度</string>
   <string name="dialog_filtertype">濾波器類型</string>
-  <string name="pref_effect_freq_title">截止頻率 [整數:30 &#8211; 300]Hz</string>
+  <string name="pref_effect_freq_title">截止頻率 [整數:30到300]Hz</string>
   <string name="dialog_freq">濾波頻率</string>
   <string name="dialog_effect">效果程度</string>
   <string name="pref_equalizer_title">FIR等化器</string>
@@ -48,13 +48,13 @@
   <string name="pref_room_title">選擇房間種類(Progenitor2)</string>
   <string name="dialog_room">房間種類</string>
   <string name="dialog_mode">模式</string>
-  <string name="dialog_roomsize">房間大小 [整數:5 &#8211; 300]</string>
-  <string name="dialog_reverbtime">延續  [整數:5 &#8211; 300]</string>
-  <string name="dialog_damping">阻尼 [整數:1 &#8211; 100]%</string>
-  <string name="dialog_inbandwidth">高頻成分 [整數:1 &#8211; 60]</string>
+  <string name="dialog_roomsize">房間大小 [整數:5到300]</string>
+  <string name="dialog_reverbtime">延續  [整數:5到300]</string>
+  <string name="dialog_damping">衰減速度 [整數:1到100]%</string>
+  <string name="dialog_inbandwidth">高頻成分 [整數:1到60]</string>
   <string name="hfcomponents">高頻分量</string>
-  <string name="dialog_earlyverb">混響起始幅度 [整數:1 &#8211; 100]</string>
-  <string name="dialog_tailverb">混響完結幅度 [整數:1 &#8211; 200]</string>
+  <string name="dialog_earlyverb">混響起始幅度 [整數:1到100]</string>
+  <string name="dialog_tailverb">混響完結幅度 [整數:1到200]</string>
   <string name="pref_convolver_title">卷積器</string>
   <string name="pref_convolver_summary_on">已啟用卷積器</string>
   <string name="pref_convolver_summary_off">已停用卷積器</string>
@@ -63,14 +63,11 @@
   <string name="pref_analogmodelling_summary_on">已啟用真空管放大器</string>
   <string name="pref_analogmodelling_summary_off">已停用真空管放大器</string>
   <string name="pref_analogmodelling_enable">使用模擬放大器</string>
-  <string name="dialog_tubedrive">預增益(諧波) [實數:0 &#8211; 12]</string>
-  <string name="dialog_tubebass">低音 [實數:0 &#8211; 10]</string>
-  <string name="dialog_tubemid">中音 [實數:0 &#8211; 10]</string>
-  <string name="dialog_tubetreble">高音 [實數:0 &#8211; 10]</string>
+  <string name="dialog_tubedrive">預增益(諧波) [實數:0到12]</string>
   <string name="dialog_offlineimpulseresponseresampler">離線重採樣器(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">選擇需要重採樣的脈衝響應</string>
   <string name="dialog_impulseresponse">脈衝響應</string>
-  <string name="dialog_normalise">脈衝響應常規化[實數:&#x2192;0 &#8211; 1]</string>
+  <string name="dialog_normalise">脈衝響應常規化[實數:&#x2192;0到1]</string>
   <string name="dialog_quality">質素</string>
   <string name="dialog_length">脈衝響應長度</string>
   <string name="text_ir_dir_isempty">空白脈衝響應目錄 %1$s</string>
@@ -84,7 +81,7 @@
   <string name="unmatchedsamplerate">脈衝響應檔案%1$s的採樣率%2$d與DSP模組採樣率%3$d不吻合\n目前正使用快速重採樣器\n追求高質素的，請使用離線重採樣器。</string>
   <string name="convolversuccess">成功載入脈衝響應:%1$s\n採樣率:%2$d\n聲道:%3$s\n每聲道樣本總數:%4$d\n截短後的每聲道樣本總數:%5$d\n策略:%6$d段</string>
   <string name="memoryallocatefail">卷積器無法分配記憶體</string>
-  <string name="dialog_gain">輸出增益 [整數:1 &#8211; 200]</string>
+  <string name="dialog_gain">輸出增益 [整數:1到200]</string>
 
   <string name="menu_reset">重設</string>
   <string name="pref_headset_soundpos_title">空間位置效果</string>
@@ -125,76 +122,5 @@
   <string name="help_text">
     <b>嗚謝:</b>\n\n
     圖形介面作者: Antti S. Lankila \n
-    其他功能: \n\
-    2.線性相位低音強化 \n
-    效果器及Android framework功能由James Fung整合 \n
-    All component from Android framework develop by Google. \n
-    For translations: Russian translation is provided by one of the xda-developer\n\n<b>什麼是 DSP 管理器？</b>
-    \n\n
-    DSP 管理器是一個進行音訊調整的應用程式。
-    <i>DSP</i> 代表 Digital Signal Processing，中文稱為「數位訊號處理」，
-    及 <i>管理器</i> 同時表達著 DSP 並非在一個程式內執行；
-    只要應用程式符合規格，都可啟用DSP音效。
-    \n\nhttps://github.com/james34602/JamesDSPManager
-    \n\n
-    <b>理念</b>
-    \n\n
-    音響處理支援四種不同的輸出類型：
-    有綫耳機，USB 音響，手機揚聲器和藍牙耳機。
-    對每個輸出類型都有一個獨立設定畫面。
-    DSP 管理器的理念是修正每個音響輸出的特定缺陷，
-    以達到最優化的聽覺體驗。
-    \n\n
-    不像 AOSP 的效果，沒有獨立應用程式設定。
-    這是一個精心的設計：我們關心輸出的細節，
-    並非應用程式產生的音響對 DSP 管理器協調。
-    \n\n\n
-    <b>Features</b>
-    \n\n
-    1. <b>動態範圍壓縮 (DRC)</b>
-    \n\n
-    這種效應在平均監聽器和驅動器基礎上估計察覺到估算增益控制聲音的音量。
-    主要用於嘈雜的環境，
-    如在汽車或在街上，
-    在那裏恬靜的音樂的部分是在被淹沒在背景的噪音。
-    \n\n
-    唯一可調諧決定於 DSP Manager 將如何努力維持音訊響度的目標水平。
-    \n\n\n
-    2. <b>低音強化</b>
-    \n\n
-    低音強化是一個簡單的低通濾波器，用作在 預設為55Hz或可調頻率範圍下增加一個低通濾波器。
-    大約 6 dB 強化，由「強度」參數，在 55Hz或可調頻率範圍增加了濾波器的共振，
-    針對哪些沒有與用戶的耳道緊密耦合，常見小揚聲器和貼耳式耳機。
-    \n\n\n
-    3. <b>等化器</b>
-    \n\n
-    這是一個 6 頻段等化器，包括 15.625、62.5、250、500、1000、4000、8000 和 16000 (赫茲)。
-    提供一些普遍的預置，並且頻率響應也可通過輕擊均衡器曲線圖自訂。
-    根據使用者的個人偏好，或者可用耳機或揚聲器的特定功能，用來調諧頻率響應。
-    \n\n
-    等化器還包含一個響度補償濾波器，以進入用戶耳朵中的聲壓水平為基礎上，
-    均衡進變化耳朵的頻率響應。若想達設計效果，使用有線耳機是必需的，
-    並且強度參數的值必須被正確地調整。
-    \n\n
-    要選擇補償強度合適的值，使用最安靜的音樂音量，並選擇一些廣譜嘈雜的音樂，如搖滾或金屬。
-    嘗試尋找到低音升壓回到可聽度，並與材料的其餘部分好像均衡設定。
-    當補償正確配置後，低音相對於其他樂器應保持在同一水平，無論聽力水平。
-    另一方面，如果音樂開始聽起來重低音較高的聽力水平，補償可能是設定太強大，應該減少。
-    \n\n
-    補償將被新增到用戶選擇的調整。如果只有補償需要，均衡器應保留在「平淡」的設定。
-    \n\n\n
-    4. <b>耳機虛擬室</b>
-    \n\n
-    耳機虛擬室是一種互饋的設計，靈感來自著名的 BS2B 模擬電路。
-    效果通過不變的單聲道聲音，並通過一個低通濾波器，它在一次近似兩個頭陰影和耳間延遲，對使用者給予合適耳朵音質線索的調整差訊號。
-    我們的目的是為了防止所有固有的耳機，令人難以置信的立體聲分離而產生聽覺疲勞。
-    效果應該使用立體聲耳機時啟用。
-    \n\n
-    因為混合有所降低立體聲分離，有一個哈斯效應混響，它可以被用來增加感知立體圖像的寬度。
-    這是由「房間種類」控制的控制。
-    \n\n
-    5. <b>立體聲加寬</b>
-    \n\n
-    是一個能改變聲源距離的效果，為左右揚聲器過近的用戶提供修正。效果首先計算中間聲道及側聲道，接著在側聲道進行2000Hz左右的高通濾波，再加一點延遲效果。最後因應左右加寬的量進行不同效果程度的加減量來合成聲音的位置。
   </string>
 </resources>
