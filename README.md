@@ -49,7 +49,7 @@ A: Convolver is a effect apply convolution(a mathematical operation) on audio si
 
 #### 4. Low audio quality compared to other DSP like Viper#^$DROID?
 
-A: This probably impossible from all algorithms perspective. All algorithms has been precisely measured on time domain, frequency domain, input/output characteristic, correlations, etc with professional mathematics/numerical analysis software.
+A: This probably impossible from all algorithms perspective. All algorithms has been precisely measured on time domain, frequency domain, input/output characteristic, etc with mathematics/numerical analysis software.
 
 I put much time on Auto Convolver engine and it's calibration in order to provide accurate result that same(#1) as MATLAB conv(), but not losing any performance.
 
