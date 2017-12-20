@@ -210,7 +210,6 @@ int InitTube(tubeFilter *tubefilter, double *circuitparameters, float samplerate
 	float toneStack105 = (6.1875e-08f + (((2.75e-07f * toneStack17) + (toneStack0 * (3.403125000000001e-07f - toneStack89))) + (toneStack2 * (6.1875e-07f + (3.0593750000000007e-06f * toneStack0)))));
 	float toneStack106 = (0.00055625f + (toneStack22 + toneStack95));
 	float toneStack107 = (tubefilter->fConst1 * toneStack106);
-	float toneStack108 = (toneStack107 + (tubefilter->fConst2 * (toneStack105 - toneStack104)));
 	float toneStack109 = (tubefilter->fConst1 * toneStack103);
 	tubefilter->toneStack110 = (toneStack107 + (tubefilter->fConst2 * (toneStack109 - toneStack105)));
 	float toneStack111 = (tubefilter->fConst1 * -toneStack106);
@@ -348,7 +347,6 @@ int InitTube(tubeFilter *tubefilter, double *circuitparameters, float samplerate
 	float toneStack241 = (0.00011750000000000001f * toneStack17);
 	float toneStack242 = (0.0005617500000000001f + (toneStack149 + (toneStack8 + toneStack241)));
 	float toneStack243 = (tubefilter->fConst1 * toneStack242);
-	float toneStack244 = (toneStack243 + (tubefilter->fConst2 * (toneStack240 - toneStack239)));
 	float toneStack245 = (tubefilter->fConst1 * toneStack238);
 	tubefilter->toneStack246 = (toneStack243 + (tubefilter->fConst2 * (toneStack245 - toneStack240)));
 	float toneStack247 = (tubefilter->fConst1 * -toneStack242);

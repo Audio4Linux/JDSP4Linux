@@ -17,8 +17,8 @@ typedef struct
 } reply1x4_1x4_t;
 
 EffectDSPMain::EffectDSPMain()
-	: DSPbufferLength(2048), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), isBenchData(0), mPreset(0), mReverbMode(1), roomSize(50.0f), reverbEnabled(0), threadResult(0)
-	, fxreTime(0.5f), damping(0.5f), inBandwidth(0.8f), earlyLv(0.5f), tailLv(0.5f), verbL(0), mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0)//, compressor670(0)
+	: DSPbufferLength(2048), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0f), pregain(12.0f), threshold(-60.0f), knee(30.0f), ratio(12.0f), attack(0.001f), release(0.24f), isBenchData(0), mPreset(0), reverbEnabled(0), threadResult(0)
+	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0)//, compressor670(0)
 	, tempImpulseIncoming(0), tempImpulseFloat(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0f), finalGain(1.0f), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[12] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778 };
@@ -35,7 +35,6 @@ EffectDSPMain::EffectDSPMain()
 }
 EffectDSPMain::~EffectDSPMain()
 {
-	unsigned int i;
 	if (inputBuffer[0])
 	{
 		free(inputBuffer[0]);
@@ -45,11 +44,6 @@ EffectDSPMain::~EffectDSPMain()
 		free(outputBuffer[1]);
 		free(tempBuf[0]);
 		free(tempBuf[1]);
-	}
-	if (verbL)
-	{
-		gverb_free(verbL);
-		gverb_free(verbR);
 	}
 	FreeBassBoost();
 	FreeEq();
@@ -192,8 +186,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 		fullStconvparams.frameCount = DSPbufferLength;
 		fullStconvparams1.in = inputBuffer;
 		fullStconvparams1.frameCount = DSPbufferLength;
-		fullStconvparams.out = tempBuf;
-		fullStconvparams1.out = tempBuf;
 		rightparams2.in = inputBuffer;
 		rightparams2.frameCount = DSPbufferLength;
 		*replyData = 0;
@@ -202,7 +194,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 	if (cmdCode == EFFECT_CMD_GET_PARAM)
 	{
 		effect_param_t *cep = (effect_param_t *)pCmdData;
-		int32_t *replyData = (int32_t *)pReplyData;
 		if (cep->psize == 4 && cep->vsize == 4)
 		{
 			int32_t cmd = ((int32_t *)cep)[3];
@@ -378,7 +369,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			else if (cmd == 114)
 			{
 				int16_t value = ((int16_t *)cep)[8];
-				float bassBoostCentreFreq;
 				float oldVal = bassBoostCentreFreq;
 				if (bassBoostCentreFreq < 55.0f)
 					bassBoostCentreFreq = 55.0f;
@@ -391,84 +381,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					else
 						refreshBassLinearPhase(DSPbufferLength, 4096, bassBoostCentreFreq);
 				}
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 127)
-			{
-				int16_t oldVal = mReverbMode;
-				mReverbMode = ((int16_t *)cep)[8];
-				if (oldVal != mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 128)
-			{
-				int16_t oldVal = mPreset;
-				mPreset = ((int16_t *)cep)[8];
-				if (oldVal != mPreset && !mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 129)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				float oldVal = roomSize;
-				roomSize = (float)value;
-				if (oldVal != roomSize && mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 130)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				float oldVal = fxreTime;
-				fxreTime = value / 100.0f;
-				if (oldVal != fxreTime && mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 131)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				float oldVal = damping;
-				damping = value / 100.0f;
-				if (oldVal != damping && mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 133)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				float oldVal = inBandwidth;
-				inBandwidth = value / 100.0f;
-				if (oldVal != inBandwidth && mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 134)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				float oldVal = earlyLv;
-				earlyLv = value / 100.0f;
-				if (oldVal != earlyLv && mReverbMode)
-					refreshReverb();
-				*replyData = 0;
-				return 0;
-			}
-			else if (cmd == 135)
-			{
-				int16_t value = ((int16_t *)cep)[8];
-				float oldVal = tailLv;
-				tailLv = value / 100.0f;
-				if (oldVal != tailLv && mReverbMode)
-					refreshReverb();
 				*replyData = 0;
 				return 0;
 			}
@@ -615,13 +527,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				reverbEnabled = value;
 				if (oldVal != reverbEnabled)
 					refreshReverb();
-				if (verbL && !reverbEnabled)
-				{
-					gverb_free(verbL);
-					verbL = 0;
-					gverb_free(verbR);
-					verbR = 0;
-				}
 				*replyData = 0;
 				return 0;
 			}
@@ -685,7 +590,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			}
 			else if (cmd == 10004)
 			{
-				size_t i, j, tempbufValue;
+				int i, j, tempbufValue;
 				if (finalImpulse)
 				{
 					for (i = 0; i < previousimpChannels; i++)
@@ -807,7 +712,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						{
 							if (finalImpulse)
 							{
-								for (uint32_t i = 0; i < impChannels; i++)
+								for (int i = 0; i < impChannels; i++)
 									free(finalImpulse[i]);
 								free(finalImpulse);
 								finalImpulse = 0;
@@ -902,7 +807,7 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 #ifdef DEBUG
 	LOGI("refreshConvolver::IR channel count:%d, IR frame count:%d, Audio buffer size:%d", impChannels, impulseLengthActual, DSPbufferLength);
 #endif
-	unsigned int i;
+	int i;
 	FreeConvolver();
 	if (!convolver)
 	{
@@ -946,6 +851,8 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
 			fullStconvparams.conv = fullStereoConvolver;
 			fullStconvparams1.conv = fullStereoConvolver;
+			fullStconvparams.out = tempBuf;
+			fullStconvparams1.out = tempBuf;
 			if (finalImpulse)
 			{
 				for (i = 0; i < 4; i++)
@@ -1035,43 +942,9 @@ void EffectDSPMain::refreshEqBands(uint32_t DSPbufferLength, float *bands)
 }
 void EffectDSPMain::refreshReverb()
 {
-	if (mReverbMode == 1)
-	{
-		if (!verbL)
-		{
-			verbL = gverb_new(mSamplingRate, 3000.0f, roomSize, fxreTime, damping, 50.0f, inBandwidth, earlyLv, tailLv);
-			verbR = gverb_new(mSamplingRate, 3000.0f, roomSize, fxreTime, damping, 50.0f, inBandwidth, earlyLv, tailLv);
-			gverb_flush(verbL);
-			gverb_flush(verbR);
-		}
-		else
-		{
-			gverb_set_roomsize(verbL, roomSize);
-			gverb_set_roomsize(verbR, roomSize);
-			gverb_set_revtime(verbL, fxreTime);
-			gverb_set_revtime(verbR, fxreTime);
-			gverb_set_damping(verbL, damping);
-			gverb_set_damping(verbR, damping);
-			gverb_set_inputbandwidth(verbL, inBandwidth);
-			gverb_set_inputbandwidth(verbR, inBandwidth);
-			gverb_set_earlylevel(verbL, earlyLv);
-			gverb_set_earlylevel(verbR, earlyLv);
-			gverb_set_taillevel(verbL, tailLv);
-			gverb_set_taillevel(verbR, tailLv);
-		}
-	}
-	else
-	{
-		//Refresh reverb memory when mode changed
-		if (verbL)
-		{
-			gverb_flush(verbL);
-			gverb_flush(verbR);
-		}
-		if (mPreset < 0 || mPreset > 18)
-			mPreset = 0;
-		sf_presetreverb(&myreverb, mSamplingRate, (sf_reverb_preset)mPreset);
-	}
+	if (mPreset < 0 || mPreset > 18)
+		mPreset = 0;
+	sf_presetreverb(&myreverb, mSamplingRate, (sf_reverb_preset)mPreset);
 }
 void *EffectDSPMain::threadingConvF(void *args)
 {
@@ -1101,8 +974,7 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 {
 	if (inputBuffer[0])
 	{
-		size_t i, j, framePos, framePos2x, framePos2xPlus1, actualFrameCount = in->frameCount;
-		float outLL, outLR, outRL, outRR;
+		int i, framePos, framePos2x, framePos2xPlus1, actualFrameCount = in->frameCount;
 		int pos = inOutRWPosition;
 		for (framePos = 0; framePos < actualFrameCount; framePos++)
 		{
@@ -1110,16 +982,8 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 			framePos2xPlus1 = framePos2x + 1;
 			inputBuffer[0][pos] = (float)((double)(in->s16[framePos2x] * 0.000030517578125));
 			inputBuffer[1][pos] = (float)((double)(in->s16[framePos2xPlus1] * 0.000030517578125));
-			if (outputBuffer[0][pos] > 1.0f)
-				outputBuffer[0][pos] = 1.0f;
-			if (outputBuffer[0][pos] < -1.0f)
-				outputBuffer[0][pos] = -1.0f;
-			if (outputBuffer[1][pos] > 1.0f)
-				outputBuffer[1][pos] = 1.0f;
-			if (outputBuffer[1][pos] < -1.0f)
-				outputBuffer[1][pos] = -1.0f;
-			out->s16[framePos2x] = (int16_t)(outputBuffer[0][pos] * ramp * finalGain);
-			out->s16[framePos2xPlus1] = (int16_t)(outputBuffer[1][pos] * ramp * finalGain);
+			out->s16[framePos2x] = (int16_t)(tanhf(outputBuffer[0][pos] * ramp) * finalGain);
+			out->s16[framePos2xPlus1] = (int16_t)(tanhf(outputBuffer[1][pos] * ramp) * finalGain);
 			pos++;
 			if (pos == DSPbufferLength)
 			{
@@ -1141,21 +1005,8 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				}
 				if (reverbEnabled)
 				{
-					if (mReverbMode == 1)
-					{
-						for (i = 0; i < DSPbufferLength; i++)
-						{
-							gverb_do(verbL, inputBuffer[0][i], &outLL, &outLR);
-							gverb_do(verbR, inputBuffer[1][i], &outRL, &outRR);
-							inputBuffer[0][i] = outLL + outRL;
-							inputBuffer[1][i] = outLR + outRR;
-						}
-					}
-					else
-					{
-						for (i = 0; i < DSPbufferLength; i++)
-							sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &inputBuffer[0][i], &inputBuffer[1][i]);
-					}
+					for (i = 0; i < DSPbufferLength; i++)
+						sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &inputBuffer[0][i], &inputBuffer[1][i]);
 				}
 				if (convolverEnabled)
 				{
@@ -1212,6 +1063,7 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				Wavechild670ProcessFloat(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], DSPbufferLength);*/
 				if (stereoWidenEnabled)
 				{
+					float outLR, outRL;
 					for (i = 0; i < DSPbufferLength; i++)
 					{
 						outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;

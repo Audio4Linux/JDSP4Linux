@@ -26,7 +26,6 @@ LOCAL_SRC_FILES := \
 	jamesdsp.cpp \
 	Effect.cpp \
 	EffectDSPMain.cpp \
-	gverb.c \
 	reverb.c \
 	compressor.c \
 	AutoConvolver.c \
@@ -43,8 +42,8 @@ LOCAL_SRC_FILES := \
 LOCAL_STATIC_LIBRARIES := fftw3thread fftw3
 #LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
+LOCAL_CPPFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
+LOCAL_CFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG
 else ifeq ($(TARGET_ARCH_ABI), x86)
 LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DAUTOCONV_USE_SSE -DNDEBUG# -DDEBUG
 LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -DAUTOCONV_USE_SSE -DNDEBUG# -DDEBUG

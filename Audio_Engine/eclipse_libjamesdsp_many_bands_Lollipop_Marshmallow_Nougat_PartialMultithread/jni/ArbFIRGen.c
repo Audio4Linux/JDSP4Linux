@@ -93,7 +93,7 @@ void winKaiser(float *win, int N, double alpha)
 }
 void winKaiserHalf(float *win, int N, double alpha)
 {
-	int i, k, mulN = (N << 1) - 1;
+	int i, mulN = (N << 1) - 1;
 	for (i = 0; i < N; i++)
 		win[N - 1 - i] = (float)getKaiser((double)(2 * i - mulN) / mulN, alpha);
 }

@@ -2,13 +2,13 @@
 
 #include "Effect.h"
 #include <pthread.h>
+#include <math.h>
 extern "C"
 {
 #include "bs2b.h"
 #include "mnspline.h"
 #include "ArbFIRGen.h"
 #include "compressor.h"
-#include "gverb.h"
 #include "reverb.h"
 #include "AutoConvolver.h"
 #include "valve/12ax7amp/Tube.h"
@@ -45,7 +45,6 @@ protected:
 	float ramp;
 	// Effect units
 	sf_compressor_state_st compressor;
-	ty_gverb *verbL, *verbR;
 	sf_reverb_state_st myreverb;
 	AutoConvolverMono **bassBoostLp;
 	AutoConvolverMono **convolver, **fullStereoConvolver;
@@ -58,13 +57,13 @@ protected:
 	int eqfilterLength;
 	AutoConvolverMono **FIREq;
 	// Variables
-	float pregain, threshold, knee, ratio, attack, release, tubedrive, normalise;
-	float finalGain, roomSize, fxreTime, damping, inBandwidth, earlyLv, tailLv, mMatrixMCoeff, mMatrixSCoeff;
+	float pregain, threshold, knee, ratio, attack, release, tubedrive, normalise, bassBoostCentreFreq;
+	float finalGain, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
 	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled, pamssEnabled;
 	int16_t samplesInc, impChannels, previousimpChannels;
 	int32_t impulseLengthActual, convolverNeedRefresh;
-	int16_t mPreset, mReverbMode;
+	int16_t mPreset;
 	int isBenchData;
 	double *benchmarkValue[2];
 	void FreeBassBoost();
@@ -80,7 +79,7 @@ protected:
 	void refreshReverb();
 	inline float normaliseToLevel(float* buffer, size_t num_frames, float level)
 	{
-		int i;
+		size_t i;
 		float max = 0, amp;
 		for (i = 0; i < num_frames; i++)
 			max = fabsf(buffer[i]) < max ? max : fabsf(buffer[i]);

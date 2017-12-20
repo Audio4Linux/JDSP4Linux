@@ -984,7 +984,7 @@ AutoConvolverMono* AllocateAutoConvolverMonoZeroLatency(float *impulseResponse, 
 }
 void hcInit1StageDeterminedAllocation(HConv1Stage *filter, float *h, int hlen)
 {
-	int i, j, size, num, pos;
+	int i, j, size;
 	float gain;
 	int flen = filter->framelength;
 	// generate filter segments
