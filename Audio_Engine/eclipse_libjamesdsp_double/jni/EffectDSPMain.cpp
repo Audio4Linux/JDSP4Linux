@@ -15,11 +15,12 @@ typedef struct
 	int32_t cmd;
 	int32_t data;
 } reply1x4_1x4_t;
+const double interpFreq[NUM_BANDS] = { 25.0, 40.0, 63.0, 100.0, 160.0, 250.0, 400.0, 630.0, 1000.0, 1600.0, 2500.0, 4000.0, 6300.0, 10000.0, 16000.0 };
 
 EffectDSPMain::EffectDSPMain()
 	: DSPbufferLength(2048), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0), pregain(12.0), threshold(-60.0), knee(30.0), ratio(12.0), attack(0.001), release(0.24), isBenchData(0), mPreset(0), reverbEnabled(0), threadResult(0)
 	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0)//, compressor670(0)
-	, tempImpulseIncoming(0), tempImpulsedouble(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0), finalGain(1.0), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
+	, tempImpulseIncoming(0), tempImpulsedouble(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[12] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778 };
 	double c1[12] = { 5.88199398839289e-6, 1.1786813951189911e-5, 2.5600214528512222e-5, 8.53041086120132e-5, 2.656291374239004e-4, 5.047717001008378e-4, 8.214255850540808e-4, 0.0016754651127819551, 0.0033478867132867136, 0.006705333333333334, 0.013496382222222221, 0.02673028888888889 };
@@ -32,6 +33,8 @@ EffectDSPMain::EffectDSPMain()
 	memcpy(benchmarkValue[0], c0, sizeof(c0));
 	memcpy(benchmarkValue[1], c1, sizeof(c1));
 	inputBuffer[0] = 0;
+	JLimiterInit(&kLimiter);
+	JLimiterSetCoefficients(&kLimiter, -0.1, 60.0, mSamplingRate);
 }
 EffectDSPMain::~EffectDSPMain()
 {
@@ -81,7 +84,7 @@ void EffectDSPMain::FreeBassBoost()
 		}
 		free(bassBoostLp);
 		bassBoostLp = 0;
-		ramp = 0.4f;
+		ramp = 0.4;
 	}
 }
 void EffectDSPMain::FreeEq()
@@ -146,7 +149,7 @@ void EffectDSPMain::FreeConvolver()
 		fullStereoConvolver = 0;
 	}
 }
-void EffectDSPMain::channel_splitdouble(const double *buffer, unsigned int num_frames, double **chan_buffers, unsigned int num_channels)
+void EffectDSPMain::channel_splitFloat(const float *buffer, unsigned int num_frames, float **chan_buffers, unsigned int num_channels)
 {
 	unsigned int i, samples = num_frames * num_channels;
 	for (i = 0; i < samples; i++)
@@ -182,6 +185,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			LOGI("%d space allocated", DSPbufferLength);
 #endif
 		}
+		JLimiterSetCoefficients(&kLimiter, -0.1, 60.0, mSamplingRate);
 		fullStconvparams.in = inputBuffer;
 		fullStconvparams.frameCount = DSPbufferLength;
 		fullStconvparams1.in = inputBuffer;
@@ -425,7 +429,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 154)
+			else if (cmd == 151)
 			{
 				int16_t oldVal = eqFilterType;
 				int16_t value = ((int16_t *)cep)[8];
@@ -505,7 +509,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				equalizerEnabled = ((int16_t *)cep)[8];
 				if ((equalizerEnabled == 1 && (oldVal != equalizerEnabled)) || eqFIRReady == 2)
 				{
-					const double interpFreq[15] = { 25.0, 40.0, 63.0, 100.0, 160.0, 250.0, 400.0, 630.0, 1000.0, 1600.0, 2500.0, 4000.0, 6300.0, 10000.0, 16000.0 };
 					xaxis = (double*)malloc(1024 * sizeof(double));
 					yaxis = (double*)malloc(1024 * sizeof(double));
 					linspace(xaxis, 1024, interpFreq[0], interpFreq[NUM_BANDSM1]);
@@ -620,8 +623,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						tempImpulsedouble[i] = (double)tempImpulseIncoming[i];
 					free(tempImpulseIncoming);
 					tempImpulseIncoming = 0;
-					if (normalise < 0.99998)
-						normaliseToLevel(tempImpulsedouble, tempbufValue, normalise);
+					if (normalise > 1.5)
+						normalise = 1.5;
+					normaliseToLevel(tempImpulsedouble, tempbufValue, normalise);
 					finalImpulse = (double**)malloc(impChannels * sizeof(double*));
 					for (i = 0; i < impChannels; i++)
 					{
@@ -659,10 +663,22 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			else if (cmd == 1500)
+		}
+		if (cep->psize == 4 && cep->vsize == 8)
+		{
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 1500)
 			{
-				double gain = ((int16_t *)cep)[8] / 100.0;
-				finalGain = map(gain, 0.0, 1.0, 0.0, 32768.0);
+				double limThreshold = (double)((float*)cep)[4];
+				double limRelease = (double)((float*)cep)[5];
+				if (limThreshold > -0.1)
+					limThreshold = 0.1;
+				if (limRelease < 0.15)
+					limRelease = 0.15;
+				JLimiterSetCoefficients(&kLimiter, limThreshold, limRelease, (double)mSamplingRate);
+#ifdef DEBUG
+				LOGI("limThreshold: %lf, limRelease: %lf", limThreshold, limRelease);
+#endif
 				*replyData = 0;
 				return 0;
 			}
@@ -775,14 +791,14 @@ void EffectDSPMain::refreshTubeAmp()
 }
 void EffectDSPMain::refreshBassLinearPhase(uint32_t DSPbufferLength, uint32_t tapsLPFIR, double bassBoostCentreFreq)
 {
-	double strength = bassBoostStrength / 100.0f;
+	double strength = (double)bassBoostStrength / 100.0;
 	if (strength < 1.0)
 		strength = 1.0;
 	int filterLength = (int)tapsLPFIR;
 	double transition = 80.0;
 	if (filterLength > 4096)
 		transition = 40.0;
-	double freq[4] = { 0, (bassBoostCentreFreq * 2.0) / mSamplingRate, (bassBoostCentreFreq * 2.0 + transition) / mSamplingRate , 1.0 };
+	double freq[4] = { 0, (bassBoostCentreFreq * 2.0) / mSamplingRate, (bassBoostCentreFreq * 2.0 + transition) / mSamplingRate, 1.0 };
 	double amplitude[4] = { strength, strength, 0, 0 };
 	double *freqSamplImp = fir2(&filterLength, freq, amplitude, 4);
 #ifdef DEBUG
@@ -796,7 +812,7 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t DSPbufferLength, uint32_t ta
 		bassBoostLp = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
 		for (i = 0; i < NUMCHANNEL; i++)
 			bassBoostLp[i] = AllocateAutoConvolverMonoZeroLatency(freqSamplImp, filterLength, DSPbufferLength, threadResult);
-		ramp = 0.4f;
+		ramp = 0.4;
 	}
 	else
 	{
@@ -853,7 +869,7 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 		}
 		else if (impChannels == 4)
 		{
-			fullStereoConvolver = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * impChannels);
+			fullStereoConvolver = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * 4);
 			if (!fullStereoConvolver)
 				return 0;
 			for (i = 0; i < 4; i++)
@@ -879,7 +895,7 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 			LOGI("Convolver strategy used: %d", fullStereoConvolver[0]->methods);
 #endif
 		}
-		ramp = 0.4f;
+		ramp = 0.4;
 #ifdef DEBUG
 		LOGI("Convolver IR allocate complete");
 #endif
@@ -914,8 +930,8 @@ void EffectDSPMain::refreshStereoWiden(uint32_t parameter)
 }
 void EffectDSPMain::refreshCompressor()
 {
-	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release, 0.003f, 0.09f, 0.16f, 0.42f, 0.98f, -(pregain / 1.4f));
-	ramp = 0.3f;
+	sf_advancecomp(&compressor, mSamplingRate, pregain, threshold, knee, ratio, attack, release, 0.003, 0.09, 0.16, 0.42, 0.98, -(pregain / 1.4));
+	ramp = 0.3;
 }
 void EffectDSPMain::refreshEqBands(uint32_t DSPbufferLength, double *bands)
 {
@@ -924,7 +940,6 @@ void EffectDSPMain::refreshEqBands(uint32_t DSPbufferLength, double *bands)
 #ifdef DEBUG
 	LOGI("Allocating FIR Equalizer");
 #endif
-	const double interpFreq[NUM_BANDS] = { 25.0, 40.0, 63.0, 100.0, 160.0, 250.0, 400.0, 630.0, 1000.0, 1600.0, 2500.0, 4000.0, 6300.0, 10000.0, 16000.0 };
 	double y2[NUM_BANDS];
 	double workingBuf[NUM_BANDSM1]; // interpFreq or bands data length minus 1
 	spline(&interpFreq[0], bands, NUM_BANDS, &y2[0], &workingBuf[0]);
@@ -983,16 +998,26 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 {
 	if (inputBuffer[0])
 	{
-		int i, framePos, framePos2x, framePos2xPlus1, actualFrameCount = in->frameCount;
+		int i, framePos, framePos2x, actualFrameCount = in->frameCount;
 		int pos = inOutRWPosition;
 		for (framePos = 0; framePos < actualFrameCount; framePos++)
 		{
 			framePos2x = framePos << 1;
-			framePos2xPlus1 = framePos2x + 1;
+			outputBuffer[0][pos] *= ramp;
+			outputBuffer[1][pos] *= ramp;
+			JLimiterProcess(&kLimiter, &outputBuffer[0][pos], &outputBuffer[1][pos]);
+			if (outputBuffer[0][pos] > 1.0)
+				outputBuffer[0][pos] = 1.0;
+			if (outputBuffer[0][pos] < -1.0)
+				outputBuffer[0][pos] = -1.0;
+			if (outputBuffer[1][pos] > 1.0)
+				outputBuffer[1][pos] = 1.0;
+			if (outputBuffer[1][pos] < -1.0)
+				outputBuffer[1][pos] = -1.0;
 			inputBuffer[0][pos] = (double)in->s16[framePos2x] * 0.000030517578125;
-			inputBuffer[1][pos] = (double)in->s16[framePos2xPlus1] * 0.000030517578125;
-			out->s16[framePos2x] = (int16_t)(tanh(outputBuffer[0][pos] * ramp) * finalGain);
-			out->s16[framePos2xPlus1] = (int16_t)(tanh(outputBuffer[1][pos] * ramp) * finalGain);
+			out->s16[framePos2x] = (int16_t)(outputBuffer[0][pos] * 32768.0);
+			inputBuffer[1][pos] = (double)in->s16[++framePos2x] * 0.000030517578125;
+			out->s16[framePos2x] = (int16_t)(outputBuffer[1][pos] * 32768.0);
 			pos++;
 			if (pos == DSPbufferLength)
 			{
@@ -1010,6 +1035,17 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 					{
 						FIREq[0]->process(FIREq[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
 						FIREq[1]->process(FIREq[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
+					}
+				}
+				if (stereoWidenEnabled)
+				{
+					double outLR, outRL;
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;
+						outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
+						inputBuffer[0][i] = outLR + outRL;
+						inputBuffer[1][i] = outLR - outRL;
 					}
 				}
 				if (reverbEnabled)
@@ -1070,17 +1106,6 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				}
 				/*	if (wavechild670Enabled == 1)
 				Wavechild670Processdouble(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], DSPbufferLength);*/
-				if (stereoWidenEnabled)
-				{
-					double outLR, outRL;
-					for (i = 0; i < DSPbufferLength; i++)
-					{
-						outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;
-						outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
-						inputBuffer[0][i] = outLR + outRL;
-						inputBuffer[1][i] = outLR - outRL;
-					}
-				}
 				if (bs2bEnabled == 1)
 				{
 					for (i = 0; i < DSPbufferLength; i++)
@@ -1089,9 +1114,12 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				if (ramp < 1.0)
 					ramp += 0.05;
 				if (compressionEnabled)
-					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1]);
-				memcpy(outputBuffer[0], inputBuffer[0], memSize);
-				memcpy(outputBuffer[1], inputBuffer[1], memSize);
+					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], outputBuffer[0], outputBuffer[1]);
+				else
+				{
+					memcpy(outputBuffer[0], inputBuffer[0], memSize);
+					memcpy(outputBuffer[1], inputBuffer[1], memSize);
+				}
 				pos = 0;
 			}
 		}

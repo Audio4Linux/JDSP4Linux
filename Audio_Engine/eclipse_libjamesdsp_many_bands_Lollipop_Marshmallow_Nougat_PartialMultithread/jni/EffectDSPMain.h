@@ -12,6 +12,7 @@ extern "C"
 #include "reverb.h"
 #include "AutoConvolver.h"
 #include "valve/12ax7amp/Tube.h"
+#include "JLimiter.h"
 //#include "valve/wavechild670/wavechild670.h"
 }
 
@@ -44,6 +45,7 @@ protected:
 	// Fade ramp
 	float ramp;
 	// Effect units
+	JLimiter kLimiter;
 	sf_compressor_state_st compressor;
 	sf_reverb_state_st myreverb;
 	AutoConvolverMono **bassBoostLp;
@@ -58,7 +60,7 @@ protected:
 	AutoConvolverMono **FIREq;
 	// Variables
 	float pregain, threshold, knee, ratio, attack, release, tubedrive, normalise, bassBoostCentreFreq;
-	float finalGain, mMatrixMCoeff, mMatrixSCoeff;
+	float mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
 	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled, pamssEnabled;
 	int16_t samplesInc, impChannels, previousimpChannels;

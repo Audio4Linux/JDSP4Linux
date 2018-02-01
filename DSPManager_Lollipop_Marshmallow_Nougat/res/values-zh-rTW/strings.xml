@@ -16,6 +16,7 @@
   <string name="pref_dsp_enable">總音訊效果控制</string>
   <string name="pref_clip_enable">啟用波形切斷</string>
   <string name="dspcrashed">DSP模組崩潰!</string>
+  <string name="dspneedreboot">用戶需要重啟以使用DSP</string>
   <string name="pref_compression_title">動態範圍壓縮（DRC）</string>
   <string name="pref_compression_summary_on">已啟用壓縮</string>
   <string name="pref_compression_summary_off">已停用壓縮</string>
@@ -67,7 +68,7 @@
   <string name="dialog_offlineimpulseresponseresampler">離線重採樣器(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">選擇需要重採樣的脈衝響應</string>
   <string name="dialog_impulseresponse">脈衝響應</string>
-  <string name="dialog_normalise">脈衝響應常規化[實數:&#x2192;0到1]</string>
+  <string name="dialog_normalise">脈衝響應常規化[實數:&#x2192;0到1.5]</string>
   <string name="dialog_quality">質素</string>
   <string name="dialog_length">脈衝響應長度</string>
   <string name="text_ir_dir_isempty">空白脈衝響應目錄 %1$s</string>
@@ -81,7 +82,8 @@
   <string name="unmatchedsamplerate">脈衝響應檔案%1$s的採樣率%2$d與DSP模組採樣率%3$d不吻合\n目前正使用快速重採樣器\n追求高質素的，請使用離線重採樣器。</string>
   <string name="convolversuccess">成功載入脈衝響應:%1$s\n採樣率:%2$d\n聲道:%3$s\n每聲道樣本總數:%4$d\n截短後的每聲道樣本總數:%5$d\n策略:%6$d段</string>
   <string name="memoryallocatefail">卷積器無法分配記憶體</string>
-  <string name="dialog_gain">輸出增益 [整數:1到200]</string>
+  <string name="limiter_threshold">壓限器閾值[dB:-60 &#8211; -0.1]</string>
+  <string name="limiter_release">壓限器時間常數[ms:1.5 &#8211; 2000]</string>
 
   <string name="menu_reset">重設</string>
   <string name="pref_headset_soundpos_title">空間位置效果</string>

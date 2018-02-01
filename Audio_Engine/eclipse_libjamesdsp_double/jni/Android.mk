@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := \
 	jamesdsp.cpp \
 	Effect.cpp \
 	EffectDSPMain.cpp \
+	JLimiter.c \
 	reverb.c \
 	compressor.c \
 	AutoConvolver.c \

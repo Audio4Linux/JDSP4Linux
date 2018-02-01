@@ -3,8 +3,6 @@ package james.dsp.preference;
 import android.content.Context;
 import android.preference.EditTextPreference;
 import android.util.AttributeSet;
-import james.dsp.R;
-import james.dsp.activity.DSPManager;
 
 public class SummariedTextPreferenceRanged extends EditTextPreference
 {
@@ -24,13 +22,23 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	catch(NumberFormatException e)
     	{
     	}
-    	if(key.equals("dsp.masterswitch.finalgain") || key.equals("dsp.headphone.tailverb"))
+    	if(key.equals("dsp.masterswitch.limthreshold"))
     	{
-            if(valueFloat < 1.0f)
-            	value = "1";
-            if(valueFloat > 200.0f)
-            	value = "200";
-            setSummary(value);
+            if(valueFloat < -60.0f)
+            	valueFloat = -60.0f;
+            if(valueFloat > -0.1f)
+            	valueFloat = -0.1f;
+            setSummary(valueFloat+" dB");
+            value = Float.toString(valueFloat);
+    	}
+    	if(key.equals("dsp.masterswitch.limrelease"))
+    	{
+            if(valueFloat < 1.5f)
+            	valueFloat = 1.5f;
+            if(valueFloat > 2000.0f)
+            	valueFloat = 2000.0f;
+            setSummary(valueFloat+" ms");
+            value = Float.toString(valueFloat);
     	}
     	if(key.equals("dsp.compression.threshold"))
     	{
@@ -38,7 +46,7 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	valueFloat = -80;
             if(valueFloat > 0.0f)
             	valueFloat = 0.0f;
-            setSummary(value+" dB");
+            setSummary(valueFloat+" dB");
             value = Integer.toString((int)valueFloat);
     	}
     	if(key.equals("dsp.compression.knee"))
@@ -47,7 +55,7 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "0";
             if(valueFloat > 40.0f)
             	value = "40";
-            setSummary(value+" dB");
+            setSummary(valueFloat+" dB");
     	}
     	if(key.equals("dsp.compression.ratio"))
     	{
@@ -74,10 +82,10 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "0.000001";
             	valueFloat = 0.000001f;
             }
-            if(valueFloat > 0.99999f)
+            if(valueFloat > 1.5f)
             {
-            	value = "0.99999";
-            	valueFloat = 0.99999f;
+            	value = "1.5";
+            	valueFloat = 1.5f;
             }
             setSummary(Float.toString(valueFloat*100)+"%");
     	}
@@ -88,38 +96,6 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             if(valueFloat > 300.0f)
             	value = "300";
             setSummary(value+"Hz");
-    	}
-    	if(key.equals("dsp.headphone.roomsize") || key.equals("dsp.headphone.reverbtime"))
-    	{
-            if(valueFloat < 5.0f)
-            	value = "5";
-            if(valueFloat > 300.0f)
-            	value = "300";
-            setSummary(value+"m");
-    	}
-    	if(key.equals("dsp.headphone.damping"))
-    	{
-            if(valueFloat < 1)
-            	value = "1";
-            if(valueFloat > 100)
-            	value = "100";
-            setSummary(value+"%");
-    	}
-    	if(key.equals("dsp.headphone.inbandwidth"))
-    	{
-            if(valueFloat < 1)
-            	value = "1";
-            if(valueFloat > 60)
-            	value = "60";
-            setSummary(value+DSPManager.actUi.getString(R.string.hfcomponents));
-    	}
-    	if(key.equals("dsp.headphone.earlyverb"))
-    	{
-            if(valueFloat < 1)
-            	value = "1";
-            if(valueFloat > 100)
-            	value = "100";
-            setSummary(value);
     	}
     	if(key.equals("dsp.analogmodelling.tubedrive") || key.equals("dsp.wavechild670.compdrive"))
     	{

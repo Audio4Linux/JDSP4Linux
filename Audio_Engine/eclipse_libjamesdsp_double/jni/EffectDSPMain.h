@@ -12,6 +12,7 @@ extern "C"
 #include "reverb.h"
 #include "AutoConvolver.h"
 #include "valve/12ax7amp/Tube.h"
+#include "JLimiter.h"
 //#include "valve/wavechild670/wavechild670.h"
 }
 
@@ -45,6 +46,7 @@ protected:
 	// Fade ramp
 	double ramp;
 	// Effect units
+	JLimiter kLimiter;
 	sf_compressor_state_st compressor;
 	sf_reverb_state_st myreverb;
 	AutoConvolverMono **bassBoostLp;
@@ -59,18 +61,17 @@ protected:
 	AutoConvolverMono **FIREq;
 	// Variables
 	double pregain, threshold, knee, ratio, attack, release, tubedrive, normalise, bassBoostCentreFreq;
-	double finalGain, mMatrixMCoeff, mMatrixSCoeff;
+	double mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
-	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled, pamssEnabled;
-	int16_t samplesInc, impChannels, previousimpChannels;
+	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
+	int16_t mPreset, samplesInc, impChannels, previousimpChannels;
 	int32_t impulseLengthActual, convolverNeedRefresh;
-	int16_t mPreset;
 	int isBenchData;
 	double *benchmarkValue[2];
 	void FreeBassBoost();
 	void FreeEq();
 	void FreeConvolver();
-	void channel_splitdouble(const double *buffer, unsigned int num_frames, double **chan_buffers, unsigned int num_channels);
+	void channel_splitFloat(const float *buffer, unsigned int num_frames, float **chan_buffers, unsigned int num_channels);
 	void refreshTubeAmp();
 	void refreshBassLinearPhase(uint32_t actualframeCount, uint32_t tapsLPFIR, double bassBoostCentreFreq);
 	int refreshConvolver(uint32_t actualframeCount);

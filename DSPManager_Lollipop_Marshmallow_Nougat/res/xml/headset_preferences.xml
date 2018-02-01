@@ -8,10 +8,16 @@
         android:disableDependentsState="false"
         android:title="@string/pref_dsp_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.masterswitch.finalgain"
-        android:defaultValue="100"
-        android:dialogTitle="@string/dialog_gain"
-        android:title="@string/dialog_gain"
+        android:key="dsp.masterswitch.limthreshold"
+        android:defaultValue="-0.1"
+        android:dialogTitle="@string/limiter_threshold"
+        android:title="@string/limiter_threshold"
+        android:inputType="number" />
+    <james.dsp.preference.SummariedTextPreferenceRanged
+        android:key="dsp.masterswitch.limrelease"
+        android:defaultValue="60"
+        android:dialogTitle="@string/limiter_release"
+        android:title="@string/limiter_release"
         android:inputType="number" />
   </PreferenceCategory>
   <PreferenceCategory android:title="@string/pref_compression_title">
@@ -121,55 +127,12 @@
         android:summaryOff="@string/pref_headset_virtual_summary_off"
         android:title="@string/pref_headset_virtual_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedListPreference
-         android:key="dsp.headphone.modeverb"
-         android:defaultValue="1"
-         android:dialogTitle="@string/dialog_mode"
-         android:entries="@array/headphone_mode"
-         android:entryValues="@array/headphone_modeverb_values"
-         android:title="@string/dialog_mode" />
-    <james.dsp.preference.SummariedListPreference
         android:defaultValue="0"
         android:dialogTitle="@string/dialog_room"
         android:entries="@array/headphone_preset"
         android:entryValues="@array/headphone_preset_values"
         android:title="@string/pref_room_title"
         android:key="dsp.headphone.preset" />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.headphone.roomsize"
-        android:defaultValue="120"
-        android:dialogTitle="@string/dialog_roomsize"
-        android:title="@string/dialog_roomsize"
-        android:inputType="number" />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.headphone.reverbtime"
-        android:defaultValue="150"
-        android:dialogTitle="@string/dialog_reverbtime"
-        android:title="@string/dialog_reverbtime"
-        android:inputType="number" />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.headphone.damping"
-        android:defaultValue="50"
-        android:dialogTitle="@string/dialog_damping"
-        android:title="@string/dialog_damping"
-        android:inputType="number" />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.headphone.inbandwidth"
-        android:defaultValue="8"
-        android:dialogTitle="@string/dialog_inbandwidth"
-        android:title="@string/dialog_inbandwidth"
-        android:inputType="number" />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.headphone.earlyverb"
-        android:defaultValue="50"
-        android:dialogTitle="@string/dialog_earlyverb"
-        android:title="@string/dialog_earlyverb"
-        android:inputType="number" />
-    <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.headphone.tailverb"
-        android:defaultValue="50"
-        android:dialogTitle="@string/dialog_tailverb"
-        android:title="@string/dialog_tailverb"
-        android:inputType="number" />
   </PreferenceCategory>
   <PreferenceCategory android:title="@string/pref_convolver_title"
       android:key="dsp.convolver">

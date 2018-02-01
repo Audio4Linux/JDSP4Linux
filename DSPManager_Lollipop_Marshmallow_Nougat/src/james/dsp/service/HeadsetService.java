@@ -265,6 +265,8 @@ public class HeadsetService extends Service
 	private String oldImpulseName = "";
 	private float oldQuality = 0;
 	private int oldnormalise = 0;
+	private float prelimthreshold = 0;
+	private float prelimrelease = 0;
 	public static JDSPModule JamesDSPGbEf;
 	private SharedPreferences preferencesMode;
 	public static int dspModuleSamplingRate = 0;
@@ -616,6 +618,11 @@ class StartUpOptimiserThread implements Runnable {
 			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
 			if (dspModuleSamplingRate == 0)
 			{
+				if (JamesDSPGbEf.getParameter(JamesDSPGbEf.JamesDSP, 20002) == 0)
+				{
+					Toast.makeText(HeadsetService.this, R.string.dspneedreboot, Toast.LENGTH_LONG).show();
+					return;
+				}
 				Toast.makeText(HeadsetService.this, R.string.dspcrashed, Toast.LENGTH_LONG).show();
 				return;
 			}
@@ -625,7 +632,12 @@ class StartUpOptimiserThread implements Runnable {
 				session.setParameterFloatArray(session.JamesDSP, 1997, bench_c0);
 				session.setParameterFloatArray(session.JamesDSP, 1998, bench_c1);
 			}
-			session.setParameterShort(session.JamesDSP, 1500, Short.valueOf(preferences.getString("dsp.masterswitch.finalgain", "100")));
+			float limthreshold = Float.valueOf(preferences.getString("dsp.masterswitch.limthreshold", "-0.1"));
+			float limrelease = Float.valueOf(preferences.getString("dsp.masterswitch.limrelease", "60"));
+			if (prelimthreshold != limthreshold || prelimrelease != limrelease)
+				session.setParameterFloatArray(session.JamesDSP, 1500, new float[]{ limthreshold, limrelease });
+			prelimthreshold = limthreshold;
+			prelimrelease = limrelease;
 			if (compressorEnabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 100, Short.valueOf(preferences.getString("dsp.compression.pregain", "12")));
@@ -667,21 +679,7 @@ class StartUpOptimiserThread implements Runnable {
 				session.setParameterFloatArray(session.JamesDSP, 115, eqLevels);
 			}
 			if (reverbEnabled == 1 && updateMajor)
-			{
-				short mode = Short.valueOf(preferences.getString("dsp.headphone.modeverb", "1"));
-				session.setParameterShort(session.JamesDSP, 127, mode);
-				if(mode == 1)
-				{
-					session.setParameterShort(session.JamesDSP, 129, Short.valueOf(preferences.getString("dsp.headphone.roomsize", "120")));
-					session.setParameterShort(session.JamesDSP, 130, Short.valueOf(preferences.getString("dsp.headphone.reverbtime", "150")));
-					session.setParameterShort(session.JamesDSP, 131, Short.valueOf(preferences.getString("dsp.headphone.damping", "50")));
-					session.setParameterShort(session.JamesDSP, 133, Short.valueOf(preferences.getString("dsp.headphone.inbandwidth", "80")));
-					session.setParameterShort(session.JamesDSP, 134, Short.valueOf(preferences.getString("dsp.headphone.earlyverb", "50")));
-					session.setParameterShort(session.JamesDSP, 135, Short.valueOf(preferences.getString("dsp.headphone.tailverb", "50")));
-				}
-				else
 					session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
-			}
 			session.setParameterShort(session.JamesDSP, 1203, (short)reverbEnabled); // Reverb switch
 			if (stereoWideEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
@@ -689,6 +687,9 @@ class StartUpOptimiserThread implements Runnable {
 			session.setParameterShort(session.JamesDSP, 1208, (short)bs2bEnabled); // BS2B switch
 			if (bs2bEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 188, Short.valueOf(preferences.getString("dsp.bs2b.mode", "0")));
+			if (analogModelEnabled == 1 && updateMajor)
+				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
+			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 			if (convolverEnabled == 1 && updateMajor)
 			{
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
@@ -754,9 +755,6 @@ class StartUpOptimiserThread implements Runnable {
 				oldnormalise = 0;
 			}
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
-			if (analogModelEnabled == 1 && updateMajor)
-				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
-			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 /*			if (wavechild670Enabled == 1 && updateMajor)
 			{
 				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.compdrive", "2"))*1000));
