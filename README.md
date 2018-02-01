@@ -61,7 +61,7 @@ How about other reasons that bring down quality?
 
 #1: Floating point rounding issue is not taken into account.
 
-#2: JamesDSP use hard clip, but not any limiter.
+#2: JamesDSP use limiter to reduce clipping harshness.
 
 #3: This option will be changed to simple amplitude control.
 
