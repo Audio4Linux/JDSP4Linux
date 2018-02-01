@@ -12,8 +12,8 @@ void JLimiterProcessFloat(JLimiter *limiter, float *in1, float *in2)
 	else
 		limiter->envOverThreshold = maxLR + limiter->relCoef * (limiter->envOverThreshold - maxLR);
 	double gR = limiter->threshold / limiter->envOverThreshold;
-	*in1 = (double)*in1 * gR;
-	*in2 = (double)*in2 * gR;
+	*in1 = *in1 * (float)gR;
+	*in2 = *in2 * (float)gR;
 }
 void JLimiterProcess(JLimiter *limiter, double *in1, double *in2)
 {
