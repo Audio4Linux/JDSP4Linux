@@ -370,6 +370,7 @@ void InitArbitraryEq(ArbitraryEq* eqgain, int *filterLength, int isLinearPhase)
     eqgain->freqData = fftw_alloc_complex(eqgain->fLMul2);
     eqgain->filterLength = *filterLength;
     eqgain->isLinearPhase = isLinearPhase;
+	eqgain->nodes = 0;
 	eqgain->nodesCount = 0;
     if (!isLinearPhase)
     {
@@ -548,6 +549,8 @@ void ArbitraryEqString2SortedNodes(ArbitraryEq *eqgain, char *frArbitraryEqStrin
         {
             count++;
             double val = strtod(counter, &counter);
+			if (i == numOfNodes)
+				break;
             if (count % 2)
             {
                 nodes[i]->gain = val;
