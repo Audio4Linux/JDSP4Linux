@@ -70,7 +70,7 @@
   <string name="dialog_offlineimpulseresponseresampler">Offline Resampler(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">Select IR to resample</string>
   <string name="dialog_impulseresponse">Impulse response</string>
-  <string name="dialog_normalise">Normalise [Real:&#x2192;0 &#8211; 1.5]</string>
+  <string name="dialog_convgain">IR volume[Real:&#x2192;-80.0 &#8211; 30.0]dB</string>
   <string name="dialog_quality">Quality</string>
   <string name="dialog_length">Impulse response length</string>
   <string name="text_ir_dir_isempty">IR sample directory %1$s is empty</string>

@@ -60,8 +60,7 @@ protected:
 	int eqfilterLength;
 	AutoConvolverMono **FIREq;
 	// Variables
-	double pregain, threshold, knee, ratio, attack, release, tubedrive, normalise, bassBoostCentreFreq;
-	double mMatrixMCoeff, mMatrixSCoeff;
+	double pregain, threshold, knee, ratio, attack, release, tubedrive, bassBoostCentreFreq, convGaindB, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
 	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
 	int16_t mPreset, samplesInc, impChannels, previousimpChannels;
@@ -79,17 +78,6 @@ protected:
 	void refreshCompressor();
 	void refreshEqBands(uint32_t actualframeCount, double *bands);
 	void refreshReverb();
-	inline double normaliseToLevel(double* buffer, size_t num_frames, double level)
-	{
-		size_t i;
-		double max = 0, amp;
-		for (i = 0; i < num_frames; i++)
-			max = fabs(buffer[i]) < max ? max : fabs(buffer[i]);
-		amp = level / max;
-		for (i = 0; i < num_frames; i++)
-			buffer[i] *= amp;
-		return max;
-	}
 	inline double map(double x, double in_min, double in_max, double out_min, double out_max)
 	{
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

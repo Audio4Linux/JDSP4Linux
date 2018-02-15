@@ -264,7 +264,6 @@ public class HeadsetService extends Service
 	*/
 	private String oldImpulseName = "";
 	private float oldQuality = 0;
-	private int oldnormalise = 0;
 	private float prelimthreshold = 0;
 	private float prelimrelease = 0;
 	public static JDSPModule JamesDSPGbEf;
@@ -694,16 +693,14 @@ class StartUpOptimiserThread implements Runnable {
 			{
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
-				int normalise = (int) (Float.valueOf((preferences.getString("dsp.convolver.normalise", "0.2")))*1000.0f);
 				int requiredRefresh = session.getParameter(session.JamesDSP, 20001);
 				if (modeEffect == 0)
 				{
-					if((oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality && oldnormalise == normalise) && requiredRefresh == 0)
+					if((oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality) && requiredRefresh == 0)
 						return;	
 				}
 				oldImpulseName = mConvIRFilePath;
 				oldQuality = quality;
-				oldnormalise = normalise;
 				session.setParameterShort(session.JamesDSP, 1205, (short)0);
 				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
 				int[] impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFilePath);
@@ -724,7 +721,7 @@ class StartUpOptimiserThread implements Runnable {
 						impulseCutted = (int)(impulseCutted * quality);
 						float[] sendArray = new float[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
-						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], normalise, numTime2Send};
+						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], (int)(Float.valueOf(preferences.getString("dsp.convolver.gain", "0.0")) * 262144.0f), numTime2Send};
 						session.setParameterIntArray(session.JamesDSP, 9999, sendBufInfo); // Send buffer info for module to allocate memory
 						float[] finalArray = new float[numTime2Send*arraySize2Send]; // Fill final array with zero padding
 						System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
@@ -752,7 +749,6 @@ class StartUpOptimiserThread implements Runnable {
 			{
 				oldImpulseName = "";
 				oldQuality = 0;
-				oldnormalise = 0;
 			}
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
 /*			if (wavechild670Enabled == 1 && updateMajor)

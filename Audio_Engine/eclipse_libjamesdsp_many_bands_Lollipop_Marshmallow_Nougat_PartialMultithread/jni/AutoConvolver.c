@@ -1,6 +1,3 @@
-#ifdef AUTOCONV_USE_SSE
-#include <xmmintrin.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +7,7 @@
 typedef struct str_dffirfilter
 {
 	unsigned int pos, coeffslength;
-	float *coeffs, *delayLine;
+	float *coeffs, *delayLine, gain;
 } DFFIR;
 typedef struct str_HConv1Stage
 {
@@ -30,6 +27,8 @@ typedef struct str_HConv1Stage
 	float **mixbuf_freq_real;	// mixing segments (frequency domain)
 	float **mixbuf_freq_imag;	// mixing segments (frequency domain)
 	float *history_time;		// history buffer (time domain)
+	float normalizationGain;
+	float gain;
 	fftwf_plan fft;			// FFT transformation plan
 	fftwf_plan ifft;		// IFFT transformation plan
 } HConv1Stage;
@@ -103,10 +102,10 @@ float DFFIRProcess(DFFIR *fir, float x)
 	*buf_val = x;
 	float y = 0.0f;
 	while (buf_val >= fir->delayLine)
-		y += *buf_val-- * *coeff++;
+		y += *buf_val-- * *coeff++ * fir->gain;
 	buf_val = fir->delayLine + fir->coeffslength - 1;
 	while (coeff < coeff_end)
-		y += *buf_val-- * *coeff++;
+		y += *buf_val-- * *coeff++ * fir->gain;
 	if (++fir->pos >= fir->coeffslength)
 		fir->pos = 0;
 	return y;
@@ -127,55 +126,6 @@ inline void hcPut1Stage(HConv1Stage *filter, float *x)
 }
 void hcProcess1Stage(HConv1Stage *filter)
 {
-#ifdef AUTOCONV_USE_SSE
-	int s, n, start, stop, flen, flen4;
-	__m128 *x4_real;
-	__m128 *x4_imag;
-	__m128 *h4_real;
-	__m128 *h4_imag;
-	__m128 *y4_real;
-	__m128 *y4_imag;
-	float *x_real;
-	float *x_imag;
-	float *h_real;
-	float *h_imag;
-	float *y_real;
-	float *y_imag;
-	flen = filter->framelength;
-	x_real = filter->in_freq_real;
-	x_imag = filter->in_freq_imag;
-	x4_real = (__m128*)x_real;
-	x4_imag = (__m128*)x_imag;
-	start = filter->steptask[filter->step];
-	stop = filter->steptask[filter->step + 1];
-	for (s = start; s < stop; s++)
-	{
-		n = (s + filter->mixpos) % filter->num_mixbuf;
-		y_real = filter->mixbuf_freq_real[n];
-		y_imag = filter->mixbuf_freq_imag[n];
-		y4_real = (__m128*)y_real;
-		y4_imag = (__m128*)y_imag;
-		h_real = filter->filterbuf_freq_real[s];
-		h_imag = filter->filterbuf_freq_imag[s];
-		h4_real = (__m128*)h_real;
-		h4_imag = (__m128*)h_imag;
-		flen4 = flen / 4;
-		for (n = 0; n < flen4; n++)
-		{
-			__m128 a = _mm_mul_ps(x4_real[n], h4_real[n]);
-			__m128 b = _mm_mul_ps(x4_imag[n], h4_imag[n]);
-			__m128 c = _mm_sub_ps(a, b);
-			y4_real[n] = _mm_add_ps(y4_real[n], c);
-			a = _mm_mul_ps(x4_real[n], h4_imag[n]);
-			b = _mm_mul_ps(x4_imag[n], h4_real[n]);
-			c = _mm_add_ps(a, b);
-			y4_imag[n] = _mm_add_ps(y4_imag[n], c);
-		}
-		y_real[flen] += x_real[flen] * h_real[flen] - x_imag[flen] * h_imag[flen];
-		y_imag[flen] += x_real[flen] * h_imag[flen] + x_imag[flen] * h_real[flen];
-	}
-	filter->step = (filter->step + 1) % filter->maxstep;
-#else
 	int s, n, start, stop, flen;
 	float *x_real;
 	float *x_imag;
@@ -197,12 +147,11 @@ void hcProcess1Stage(HConv1Stage *filter)
 		h_imag = filter->filterbuf_freq_imag[s];
 		for (n = 0; n < flen + 1; n++)
 		{
-			y_real[n] += x_real[n] * h_real[n] - x_imag[n] * h_imag[n];
-			y_imag[n] += x_real[n] * h_imag[n] + x_imag[n] * h_real[n];
+			y_real[n] += (x_real[n] * h_real[n] - x_imag[n] * h_imag[n]) * filter->gain;
+			y_imag[n] += (x_real[n] * h_imag[n] + x_imag[n] * h_real[n]) * filter->gain;
 		}
 	}
 	filter->step = (filter->step + 1) % filter->maxstep;
-#endif
 }
 inline void hcGet1Stage(HConv1Stage *filter, float *y)
 {
@@ -233,7 +182,6 @@ inline void hcGet1Stage(HConv1Stage *filter, float *y)
 void hcInit1Stage(HConv1Stage *filter, float *h, int hlen, int flen, int steps, int fftwThreads)
 {
 	int i, j, size, num, pos;
-	float gain;
 	// processing step counter
 	filter->step = 0;
 	// number of processing steps per audio frame
@@ -305,13 +253,14 @@ void hcInit1Stage(HConv1Stage *filter, float *h, int hlen, int flen, int steps, 
 	// IFFT transformation plan
 	filter->ifft = fftwf_plan_dft_c2r_1d(2 * flen, filter->dft_freq, filter->dft_time, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
 	// generate filter segments
-	gain = 0.5f / flen;
+	filter->normalizationGain = 0.5f / (float)flen;
+	filter->gain = filter->normalizationGain;
 	size = sizeof(float) * 2 * flen;
 	memset(filter->dft_time, 0, size);
 	for (i = 0; i < filter->num_filterbuf - 1; i++)
 	{
 		for (j = 0; j < flen; j++)
-			filter->dft_time[j] = gain * h[i * flen + j];
+			filter->dft_time[j] = h[i * flen + j];
 		fftwf_execute(filter->fft);
 		for (j = 0; j < flen + 1; j++)
 		{
@@ -320,7 +269,7 @@ void hcInit1Stage(HConv1Stage *filter, float *h, int hlen, int flen, int steps, 
 		}
 	}
 	for (j = 0; j < hlen - i * flen; j++)
-		filter->dft_time[j] = gain * h[i * flen + j];
+		filter->dft_time[j] = h[i * flen + j];
 	size = sizeof(float) * ((i + 1) * flen - hlen);
 	memset(&(filter->dft_time[hlen - i * flen]), 0, size);
 	fftwf_execute(filter->fft);
@@ -528,121 +477,6 @@ void hcInit4Stage(HConv4Stage *filter, float *h, int hlen, int ssflen, int sflen
 	if (h2 != NULL)
 		fftwf_free(h2);
 }
-void Convolver4StageProcessArbitrarySignalLength(AutoConvolver *autoConv, float** inputs, float** outputs, int sigLen)
-{
-	int pos, new_pos;
-	int nChannels = autoConv->channels;
-	int m_lenShort = autoConv->hnShortLen;
-	float *m_inbuf = autoConv->inbuf;
-	float *m_outbuf = autoConv->outbuf;
-	HConv4Stage *m_filter = (HConv4Stage*)autoConv->filter;
-	for (int f = 0; f < nChannels; f++)
-	{
-		pos = autoConv->bufpos;
-		float *in = inputs[f];
-		float *out = outputs[f];
-		float *buf_in = &(m_inbuf[f * m_lenShort]);
-		float *buf_out = &(m_outbuf[f * m_lenShort]);
-		for (int s = 0; s < sigLen; s++)
-		{
-			buf_in[pos] = in[s];
-			out[s] = buf_out[pos];
-			pos++;
-			if (pos == m_lenShort)
-			{
-				hcProcess4Stage(&(m_filter[f]), buf_in, buf_out);
-				pos = 0;
-			}
-		}
-		new_pos = pos;
-	}
-	autoConv->bufpos = new_pos;
-}
-void Convolver3StageProcessArbitrarySignalLength(AutoConvolver *autoConv, float** inputs, float** outputs, int sigLen)
-{
-	int pos, new_pos;
-	int nChannels = autoConv->channels;
-	int m_lenShort = autoConv->hnShortLen;
-	float *m_inbuf = autoConv->inbuf;
-	float *m_outbuf = autoConv->outbuf;
-	HConv3Stage *m_filter = (HConv3Stage*)autoConv->filter;
-	for (int f = 0; f < nChannels; f++)
-	{
-		pos = autoConv->bufpos;
-		float *in = inputs[f];
-		float *out = outputs[f];
-		float *buf_in = &(m_inbuf[f * m_lenShort]);
-		float *buf_out = &(m_outbuf[f * m_lenShort]);
-		for (int s = 0; s < sigLen; s++)
-		{
-			buf_in[pos] = in[s];
-			out[s] = buf_out[pos];
-			pos++;
-			if (pos == m_lenShort)
-			{
-				hcProcess3Stage(&(m_filter[f]), buf_in, buf_out);
-				pos = 0;
-			}
-		}
-		new_pos = pos;
-	}
-	autoConv->bufpos = new_pos;
-}
-void Convolver2StageProcessArbitrarySignalLength(AutoConvolver *autoConv, float** inputs, float** outputs, int sigLen)
-{
-	int pos, new_pos;
-	int nChannels = autoConv->channels;
-	int m_lenShort = autoConv->hnShortLen;
-	float *m_inbuf = autoConv->inbuf;
-	float *m_outbuf = autoConv->outbuf;
-	HConv2Stage *m_filter = (HConv2Stage*)autoConv->filter;
-	for (int f = 0; f < nChannels; f++)
-	{
-		pos = autoConv->bufpos;
-		float *in = inputs[f];
-		float *out = outputs[f];
-		float *buf_in = &(m_inbuf[f * m_lenShort]);
-		float *buf_out = &(m_outbuf[f * m_lenShort]);
-		for (int s = 0; s < sigLen; s++)
-		{
-			buf_in[pos] = in[s];
-			out[s] = buf_out[pos];
-			pos++;
-			if (pos == m_lenShort)
-			{
-				hcProcess2Stage(&(m_filter[f]), buf_in, buf_out);
-				pos = 0;
-			}
-		}
-		new_pos = pos;
-	}
-	autoConv->bufpos = new_pos;
-}
-void Convolver1StageLowLatencyProcess(AutoConvolver *autoConv, float** inputs, float** outputs, int unused)
-{
-	int nChannels = autoConv->channels;
-	HConv1Stage *m_filter = (HConv1Stage*)autoConv->filter;
-	for (int f = 0; f < nChannels; f++)
-	{
-		float *in = inputs[f];
-		float *out = outputs[f];
-		hcPut1Stage(&(m_filter[f]), in);
-		hcProcess1Stage(&(m_filter[f]));
-		hcGet1Stage(&(m_filter[f]), out);
-	}
-}
-void Convolver1DirectFormProcess(AutoConvolver *autoConv, float** inputs, float** outputs, int sigLen)
-{
-	int i, nChannels = autoConv->channels;
-	DFFIR *m_filter = (DFFIR*)autoConv->filter;
-	for (int f = 0; f < nChannels; f++)
-	{
-		float *in = inputs[f];
-		float *out = outputs[f];
-		for (i = 0; i < sigLen; i++)
-			out[i] = DFFIRProcess(&(m_filter[f]), in[i]);
-	}
-}
 void Convolver4StageProcessArbitrarySignalLengthMono(AutoConvolverMono *autoConv, float* inputs, float* outputs, int sigLen)
 {
 	int m_lenShort = autoConv->hnShortLen;
@@ -800,90 +634,7 @@ int PartitionerAnalyser(int hlen, int latency, int strategy, int fs, int entries
 	}
 	return type_best;
 }
-AutoConvolver* InitAutoConvolver(float **impulseResponse, int hlen, int impChannels, int audioBufferSize, int nChannels, double **recommendation, int items, int fftwThreads)
-{
-	int i, bestMethod = 1, sflen_best = 4096, mflen_best = 8192, lflen_best = 16384, llflen_best = 32768;
-	hlen = abs(hlen);
-	if (!hlen)
-		return 0;
-	if (recommendation)
-		bestMethod = PartitionerAnalyser(hlen, 4096, 1, 48000, items, recommendation, &sflen_best, &mflen_best, &lflen_best);
-	if (hlen > 0 && hlen < 32)
-		bestMethod = 999;
-	else if (hlen > 20000 && hlen < 81921 && bestMethod < 2)
-	{
-		bestMethod = 2;
-		sflen_best = 2048;
-		mflen_best = 8192;
-	}
-	else if (hlen > 81920 && hlen < 245764 && bestMethod < 2)
-	{
-		bestMethod = 2;
-		sflen_best = 4096;
-		mflen_best = 8192;
-	}
-	else if (hlen > 245763 && hlen < 1000001 && bestMethod < 2)
-	{
-		bestMethod = 2;
-		sflen_best = 4096;
-		mflen_best = 16384;
-	}
-	else if (hlen > 1000000 && hlen < 2000001 && bestMethod < 2)
-		bestMethod = 3;
-	else if (hlen > 2000000 && bestMethod < 2)
-		bestMethod = 4;
-	AutoConvolver *autoConv = (AutoConvolver*)calloc(1, sizeof(AutoConvolver));
-	autoConv->channels = nChannels;
-	autoConv->methods = bestMethod;
-	if (bestMethod > 1)
-	{
-		autoConv->hnShortLen = sflen_best;
-		autoConv->inbuf = (float*)calloc(nChannels * sflen_best, sizeof(float));
-		autoConv->outbuf = (float*)calloc(nChannels * sflen_best, sizeof(float));
-	}
-	if (bestMethod == 3)
-	{
-		HConv3Stage* stage = (HConv3Stage*)malloc(nChannels * sizeof(HConv3Stage));
-		for (i = 0; i < nChannels; i++)
-			hcInit3Stage(&stage[i], impulseResponse[(i % impChannels)], hlen, sflen_best, mflen_best, lflen_best, fftwThreads);
-		autoConv->filter = (void*)stage;
-		autoConv->process = &Convolver3StageProcessArbitrarySignalLength;
-	}
-	else if (bestMethod == 2)
-	{
-		HConv2Stage* stage = (HConv2Stage*)malloc(nChannels * sizeof(HConv2Stage));
-		for (i = 0; i < nChannels; i++)
-			hcInit2Stage(&(stage[i]), impulseResponse[i % impChannels], hlen, sflen_best, mflen_best, fftwThreads);
-		autoConv->filter = (void*)stage;
-		autoConv->process = &Convolver2StageProcessArbitrarySignalLength;
-	}
-	else if (bestMethod == 4)
-	{
-		HConv4Stage* stage = (HConv4Stage*)malloc(nChannels * sizeof(HConv4Stage));
-		for (i = 0; i < nChannels; i++)
-			hcInit4Stage(&(stage[i]), impulseResponse[i % impChannels], hlen, sflen_best, mflen_best, lflen_best, llflen_best, fftwThreads);
-		autoConv->filter = (void*)stage;
-		autoConv->process = &Convolver4StageProcessArbitrarySignalLength;
-	}
-	else if (bestMethod == 999)
-	{
-		DFFIR* stage = (DFFIR*)malloc(nChannels * sizeof(DFFIR));
-		for (i = 0; i < nChannels; i++)
-			DFFIRInit(&stage[i], impulseResponse[i % impChannels], hlen);
-		autoConv->filter = (void*)stage;
-		autoConv->process = &Convolver1DirectFormProcess;
-	}
-	else
-	{
-		HConv1Stage* stage = (HConv1Stage*)malloc(nChannels * sizeof(HConv1Stage));
-		for (i = 0; i < nChannels; i++)
-			hcInit1Stage(&(stage[i]), impulseResponse[i % impChannels], hlen, audioBufferSize, 1, fftwThreads);
-		autoConv->filter = (void*)stage;
-		autoConv->process = &Convolver1StageLowLatencyProcess;
-	}
-	return autoConv;
-}
-AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int audioBufferSize, double **recommendation, int items, int fftwThreads)
+AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int audioBufferSize, float gaindB, double **recommendation, int items, int fftwThreads)
 {
 	int bestMethod = 1, sflen_best = 4096, mflen_best = 8192, lflen_best = 16384, llflen_best = 32768;
 	hlen = abs(hlen);
@@ -915,6 +666,7 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 		bestMethod = 3;
 	else if (hlen > 2000000 && bestMethod < 2)
 		bestMethod = 4;
+	float linGain = powf(10.0f, gaindB / 20.0f);
 	AutoConvolverMono *autoConv = (AutoConvolverMono*)calloc(1, sizeof(AutoConvolverMono));
 	autoConv->methods = bestMethod;
 	if (bestMethod > 1)
@@ -927,6 +679,9 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 	{
 		HConv3Stage* stage = (HConv3Stage*)malloc(sizeof(HConv3Stage));
 		hcInit3Stage(stage, impulseResponse, hlen, sflen_best, mflen_best, lflen_best, fftwThreads);
+		stage->f_medium->f_long->gain = stage->f_medium->f_long->normalizationGain * linGain;
+		stage->f_medium->f_short->gain = stage->f_medium->f_short->normalizationGain * linGain;
+		stage->f_short->gain = stage->f_short->normalizationGain * linGain;
 		autoConv->filter = (void*)stage;
 		autoConv->process = &Convolver3StageProcessArbitrarySignalLengthMono;
 	}
@@ -934,6 +689,8 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 	{
 		HConv2Stage* stage = (HConv2Stage*)malloc(sizeof(HConv2Stage));
 		hcInit2Stage(stage, impulseResponse, hlen, sflen_best, mflen_best, fftwThreads);
+		stage->f_long->gain = stage->f_long->normalizationGain * linGain;
+		stage->f_short->gain = stage->f_short->normalizationGain * linGain;
 		autoConv->filter = (void*)stage;
 		autoConv->process = &Convolver2StageProcessArbitrarySignalLengthMono;
 	}
@@ -941,6 +698,10 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 	{
 		HConv4Stage* stage = (HConv4Stage*)malloc(sizeof(HConv4Stage));
 		hcInit4Stage(stage, impulseResponse, hlen, sflen_best, mflen_best, lflen_best, llflen_best, fftwThreads);
+		stage->f_medium->f_medium->f_long->gain = stage->f_medium->f_medium->f_long->normalizationGain * linGain;
+		stage->f_medium->f_medium->f_short->gain = stage->f_medium->f_medium->f_short->normalizationGain * linGain;
+		stage->f_medium->f_short->gain = stage->f_medium->f_short->normalizationGain * linGain;
+		stage->f_short->gain = stage->f_short->normalizationGain * linGain;
 		autoConv->filter = (void*)stage;
 		autoConv->process = &Convolver4StageProcessArbitrarySignalLengthMono;
 	}
@@ -948,6 +709,7 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 	{
 		DFFIR* stage = (DFFIR*)malloc(sizeof(DFFIR));
 		DFFIRInit(stage, impulseResponse, hlen);
+		stage->gain = linGain;
 		autoConv->filter = (void*)stage;
 		autoConv->process = &Convolver1DirectFormProcessMono;
 	}
@@ -955,21 +717,10 @@ AutoConvolverMono* InitAutoConvolverMono(float *impulseResponse, int hlen, int a
 	{
 		HConv1Stage* stage = (HConv1Stage*)malloc(sizeof(HConv1Stage));
 		hcInit1Stage(stage, impulseResponse, hlen, audioBufferSize, 1, fftwThreads);
+		stage->gain = stage->normalizationGain * linGain;
 		autoConv->filter = (void*)stage;
 		autoConv->process = &Convolver1StageLowLatencyProcessMono;
 	}
-	return autoConv;
-}
-AutoConvolver* InitAutoConvolverZeroLatency(float **impulseResponse, int hlen, int impChannels, int audioBufferSize, int nChannels, int fftwThreads)
-{
-	AutoConvolver *autoConv = (AutoConvolver*)calloc(1, sizeof(AutoConvolver));
-	autoConv->channels = nChannels;
-	autoConv->methods = 1;
-	HConv1Stage* stage = (HConv1Stage*)malloc(nChannels * sizeof(HConv1Stage));
-	for (int i = 0; i < nChannels; i++)
-		hcInit1Stage(&(stage[i]), impulseResponse[i % impChannels], hlen, audioBufferSize, 1, fftwThreads);
-	autoConv->filter = (void*)stage;
-	autoConv->process = &Convolver1StageLowLatencyProcess;
 	return autoConv;
 }
 AutoConvolverMono* AllocateAutoConvolverMonoZeroLatency(float *impulseResponse, int hlen, int audioBufferSize, int fftwThreads)
@@ -985,16 +736,14 @@ AutoConvolverMono* AllocateAutoConvolverMonoZeroLatency(float *impulseResponse, 
 void hcInit1StageDeterminedAllocation(HConv1Stage *filter, float *h, int hlen)
 {
 	int i, j, size;
-	float gain;
 	int flen = filter->framelength;
 	// generate filter segments
-	gain = 0.5f / flen;
 	size = sizeof(float) * 2 * flen;
 	memset(filter->dft_time, 0, size);
 	for (i = 0; i < filter->num_filterbuf - 1; i++)
 	{
 		for (j = 0; j < flen; j++)
-			filter->dft_time[j] = gain * h[i * flen + j];
+			filter->dft_time[j] = h[i * flen + j];
 		fftwf_execute(filter->fft);
 		for (j = 0; j < flen + 1; j++)
 		{
@@ -1003,7 +752,7 @@ void hcInit1StageDeterminedAllocation(HConv1Stage *filter, float *h, int hlen)
 		}
 	}
 	for (j = 0; j < hlen - i * flen; j++)
-		filter->dft_time[j] = gain * h[i * flen + j];
+		filter->dft_time[j] = h[i * flen + j];
 	size = sizeof(float) * ((i + 1) * flen - hlen);
 	memset(&(filter->dft_time[hlen - i * flen]), 0, size);
 	fftwf_execute(filter->fft);
@@ -1073,50 +822,6 @@ void hcClose4Stage(HConv4Stage *filter)
 	fftwf_free(filter->out_medium);
 	fftwf_free(filter->in_medium);
 	memset(filter, 0, sizeof(HConv4Stage));
-}
-void AutoConvolverFree(AutoConvolver *autoConv)
-{
-	int i, nChannels = autoConv->channels;
-	if (autoConv->methods > 1)
-	{
-		free(autoConv->inbuf);
-		free(autoConv->outbuf);
-	}
-	if (autoConv->methods == 1)
-	{
-		HConv1Stage* stage = (HConv1Stage*)autoConv->filter;
-		for (i = 0; i < nChannels; i++)
-			hcClose1Stage(&stage[i]);
-		free(stage);
-	}
-	else if (autoConv->methods == 2)
-	{
-		HConv2Stage* stage = (HConv2Stage*)autoConv->filter;
-		for (i = 0; i < nChannels; i++)
-			hcClose2Stage(&stage[i]);
-		free(stage);
-	}
-	else if (autoConv->methods == 3)
-	{
-		HConv3Stage* stage = (HConv3Stage*)autoConv->filter;
-		for (i = 0; i < nChannels; i++)
-			hcClose3Stage(&stage[i]);
-		free(stage);
-	}
-	else if (autoConv->methods == 4)
-	{
-		HConv4Stage* stage = (HConv4Stage*)autoConv->filter;
-		for (i = 0; i < nChannels; i++)
-			hcClose4Stage(&stage[i]);
-		free(stage);
-	}
-	else if (autoConv->methods == 999)
-	{
-		DFFIR* stage = (DFFIR*)autoConv->filter;
-		for (i = 0; i < nChannels; i++)
-			DFFIRClean(&stage[i]);
-		free(stage);
-	}
 }
 void AutoConvolverMonoFree(AutoConvolverMono *autoConv)
 {

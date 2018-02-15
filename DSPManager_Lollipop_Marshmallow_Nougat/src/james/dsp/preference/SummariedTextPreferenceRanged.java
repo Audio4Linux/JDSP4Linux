@@ -26,8 +26,8 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
     	{
             if(valueFloat < -60.0f)
             	valueFloat = -60.0f;
-            if(valueFloat > -0.1f)
-            	valueFloat = -0.1f;
+            if(valueFloat > -0.09f)
+            	valueFloat = -0.09f;
             setSummary(valueFloat+" dB");
             value = Float.toString(valueFloat);
     	}
@@ -75,19 +75,19 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "0.99999";
             setSummary(value);
     	}
-    	if(key.equals("dsp.convolver.normalise"))
+    	if(key.equals("dsp.convolver.gain"))
     	{
-            if(valueFloat < 0.000001f)
+            if(valueFloat < -80.0f)
             {
-            	value = "0.000001";
-            	valueFloat = 0.000001f;
+            	value = "-80.0";
+            	valueFloat = -80.0f;
             }
-            if(valueFloat > 1.5f)
+            if(valueFloat > 30.0f)
             {
-            	value = "1.5";
-            	valueFloat = 1.5f;
+            	value = "30.0";
+            	valueFloat = 30.0f;
             }
-            setSummary(Float.toString(valueFloat*100)+"%");
+            setSummary(Float.toString(valueFloat));
     	}
     	if(key.equals("dsp.bass.freq"))
     	{

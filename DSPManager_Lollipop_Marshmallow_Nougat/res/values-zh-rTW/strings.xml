@@ -68,7 +68,7 @@
   <string name="dialog_offlineimpulseresponseresampler">離線重採樣器(121dB SNR 90% BW)</string>
   <string name="dialog_offlineimpulseresponseresampler_title">選擇需要重採樣的脈衝響應</string>
   <string name="dialog_impulseresponse">脈衝響應</string>
-  <string name="dialog_normalise">脈衝響應常規化[實數:&#x2192;0到1.5]</string>
+  <string name="dialog_convgain">脈衝響應音量[實數:&#x2192;-80.0 &#8211; 30.0]dB</string>
   <string name="dialog_quality">質素</string>
   <string name="dialog_length">脈衝響應長度</string>
   <string name="text_ir_dir_isempty">空白脈衝響應目錄 %1$s</string>

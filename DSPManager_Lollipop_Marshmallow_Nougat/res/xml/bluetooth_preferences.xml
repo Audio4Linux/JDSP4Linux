@@ -12,7 +12,7 @@
         android:defaultValue="-0.1"
         android:dialogTitle="@string/limiter_threshold"
         android:title="@string/limiter_threshold"
-        android:inputType="number" />
+        android:inputType="numberDecimal|numberSigned" />
     <james.dsp.preference.SummariedTextPreferenceRanged
         android:key="dsp.masterswitch.limrelease"
         android:defaultValue="60"
@@ -153,12 +153,11 @@
         android:defaultValue=""
         android:dialogTitle="@string/dialog_impulseresponse" />
     <james.dsp.preference.SummariedTextPreferenceRanged
-        android:key="dsp.convolver.normalise"
-        android:defaultValue="0.2"
-        android:dialogTitle="@string/dialog_normalise"
-        android:title="@string/dialog_normalise"
-        android:inputType="numberDecimal"
-        android:digits="0123456789." />
+        android:key="dsp.convolver.gain"
+        android:defaultValue="0.0"
+        android:dialogTitle="@string/dialog_convgain"
+        android:title="@string/dialog_convgain"
+        android:inputType="numberDecimal|numberSigned" />
     <james.dsp.preference.SummariedListPreference
         android:defaultValue="1"
         android:dialogTitle="@string/dialog_length"

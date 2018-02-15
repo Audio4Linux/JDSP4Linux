@@ -623,9 +623,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						tempImpulsedouble[i] = (double)tempImpulseIncoming[i];
 					free(tempImpulseIncoming);
 					tempImpulseIncoming = 0;
-					if (normalise > 1.5)
-						normalise = 1.5;
-					normaliseToLevel(tempImpulsedouble, tempbufValue, normalise);
 					finalImpulse = (double**)malloc(impChannels * sizeof(double*));
 					for (i = 0; i < impChannels; i++)
 					{
@@ -671,8 +668,8 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			{
 				double limThreshold = (double)((float*)cep)[4];
 				double limRelease = (double)((float*)cep)[5];
-				if (limThreshold > -0.1)
-					limThreshold = 0.1;
+				if (limThreshold > -0.09)
+					limThreshold = -0.09;
 				if (limRelease < 0.15)
 					limRelease = 0.15;
 				JLimiterSetCoefficients(&kLimiter, limThreshold, limRelease, (double)mSamplingRate);
@@ -761,7 +758,9 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				previousimpChannels = impChannels;
 				impChannels = ((int32_t *)cep)[5];
 				impulseLengthActual = ((int32_t *)cep)[4] / impChannels;
-				normalise = (double)((int32_t *)cep)[6] / 1000.0;
+				convGaindB = (double)((int32_t *)cep)[6] / 262144.0;
+				if (convGaindB > 50.0)
+					convGaindB = 50.0;
 				int numTime2Send = ((int32_t *)cep)[7];
 				tempImpulseIncoming = (float*)calloc(4096 * impChannels * numTime2Send, sizeof(float));
 				*replyData = 0;
@@ -844,9 +843,9 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 			for (i = 0; i < 2; i++)
 			{
 				if (impChannels == 1)
-					convolver[i] = InitAutoConvolverMono(finalImpulse[0], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
+					convolver[i] = InitAutoConvolverMono(finalImpulse[0], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12, threadResult);
 				else
-					convolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
+					convolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12, threadResult);
 			}
 			fullStconvparams.conv = convolver;
 			fullStconvparams.out = outputBuffer;
@@ -873,7 +872,7 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 			if (!fullStereoConvolver)
 				return 0;
 			for (i = 0; i < 4; i++)
-				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, benchmarkValue, 12, threadResult);
+				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12, threadResult);
 			fullStconvparams.conv = fullStereoConvolver;
 			fullStconvparams1.conv = fullStereoConvolver;
 			fullStconvparams.out = tempBuf;
