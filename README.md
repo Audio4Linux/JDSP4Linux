@@ -1,5 +1,5 @@
 # JamesDSPManager (Audio Effect Digital Signal Processing library for Android)
-GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5.0 - 8.0 include Samsung, AOSP, Cyanogenmod. 
+GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5.0 - 8.1 include Samsung, AOSP, Cyanogenmod. 
 This app in order to improve your music experience especially you want realistic bass and more natural clarity.
 This app don't work too much around with modifying Android framework.
 
@@ -56,14 +56,14 @@ I put much time on Auto Convolver engine and it's calibration in order to provid
 How about other reasons that bring down quality?
 1. Your Android audio framework is not supported, this not uncommon on HTC devices.
 2. Audio amplitude clipped(#2), this is a obvious reason which produce strange sound, try to turn your volume down!
-3. If you are using convolver, did you try to use smaller normalise(#3) value, which control overall impulse response amplitude level.
+3. ~~If you are using convolver, did you try to use smaller normalise~~(#3)~~value, which control overall impulse response amplitude level.~~
 4. Tube modelling require a high performance CPU to output best quality, so I turn down algorithm precision. **This may produce low amplitude noise.
 
 #1: Floating point rounding issue is not taken into account.
 
 #2: JamesDSP use limiter to reduce clipping harshness.
 
-#3: This option will be changed to simple amplitude control.
+#3: This option have been changed to simple gain control.
 
 #### 5. What is Analog Modelling?
 
