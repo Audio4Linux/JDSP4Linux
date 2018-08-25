@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="abc_action_mode_done">Готово</string>
+  <string name="abc_action_bar_home_description">Перейти на главный экран</string>
+  <string name="abc_action_bar_up_description">Перейти вверх</string>
+  <string name="abc_action_menu_overflow_description">Другие параметры</string>
+  <string name="abc_toolbar_collapse_description">Свернуть</string>
+  <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+  <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
+  <string name="abc_searchview_description_search">Поиск</string>
+  <string name="abc_searchview_description_query">Поисковый запрос</string>
+  <string name="abc_searchview_description_clear">Удалить запрос</string>
+  <string name="abc_searchview_description_submit">Отправить запрос</string>
+  <string name="abc_searchview_description_voice">Голосовой поиск</string>
+  <string name="abc_activitychooserview_choose_application">Выбрать приложение</string>
+  <string name="abc_activity_chooser_view_see_all">Показать все</string>
+  <string name="abc_shareactionprovider_share_with_application">Открыть доступ пользователю %s</string>
+  <string name="abc_shareactionprovider_share_with">Открыть доступ</string>
+  <string name="app_name">James DSP</string>
+  <string name="headset_title">Наушники</string>
+  <string name="speaker_title">Динамик</string>
+  <string name="bluetooth_title">Устройства Bluetooth</string>
+  <string name="usb_title">USB/Док-станция</string>
+  <string name="pref_unavailable">Данная функция не поддерживается на вашем устройстве</string>
+  <string name="pref_dsp_title">Сжатие динамического диапазона</string>
+  <string name="pref_dsp_summary_on">Сжатие включено</string>
+  <string name="pref_dsp_summary_off">Сжатие выключено</string>
+  <string name="pref_dsp_enable">Включить</string>
+  <string name="pref_effect_title">Сила эффекта</string>
+  <string name="pref_preamp_title">Сила Pre-amp эффекта</string>
+  <string name="dialog_filtertype">Тип фильтра</string>
+  <string name="pref_effect_freq_title">Выбрать центральную частоту эффекта</string>
+  <string name="dialog_freq">Частота фильтра</string>
+  <string name="dialog_effect">Сила эффекта</string>
+  <string name="pref_equalizer_title">Эквалайзер</string>
+  <string name="pref_equalizer_summary_on">Эквалайзер включен</string>
+  <string name="pref_equalizer_summary_off">Эквалайзер выключен</string>
+  <string name="pref_equalizer_enable">Включить</string>
+  <string name="pref_equalizer_preset_title">Выбор предустановок</string>
+  <string name="pref_equalizer_loudness_title">Тонкомпенсация</string>
+  <string name="pref_bassboost_title">Усиление басов</string>
+  <string name="pref_bassboost_summary_on">Усиление басов включено</string>
+  <string name="pref_bassboost_summary_off">Усиление басов выключено</string>
+  <string name="pref_bassboost_enable">Включить</string>
+  <string name="pref_amplifier_title">Усилитель звука</string>
+  <string name="pref_amplifier_summary_on">Усилитель звука включен</string>
+  <string name="pref_amplifier_summary_off">Усилитель звука выключен</string>
+  <string name="pref_amplifier_enable">Включить</string>
+  <string name="pref_headset_virtual_title">Эффект виртуальной комнаты</string>
+  <string name="pref_headset_virtual_summary_on">Эффект включен</string>
+  <string name="pref_headset_virtual_summary_off">Эффект выключен</string>
+  <string name="pref_headset_virtual_enable">Включить</string>
+  <string name="pref_room_title">Тип эффекта(Progenitor2)</string>
+  <string name="dialog_room">Тип эффекта</string>
+  <string name="pref_headset_stereowide_title">Расширенное стерео</string>
+  <string name="pref_headset_stereowide_summary_on">Расширенное стерео включено</string>
+  <string name="pref_headset_stereowide_summary_off">Расширенное стерео выключено</string>
+  <string name="pref_headset_stereowide_enable">Включить</string>
+  <string name="dialog_stereo">Уровень расширения стерео</string>
+  <string name="eq_preset_acoustic">Акустика</string>
+  <string name="eq_preset_bass_booster">Усиленные НЧ</string>
+  <string name="eq_preset_bass_reducer">Пониженные НЧ</string>
+  <string name="eq_preset_classical">Классика</string>
+  <string name="eq_preset_deep">Глубина</string>
+  <string name="eq_preset_flat">Плоско</string>
+  <string name="eq_preset_r_and_b">R&amp;B</string>
+  <string name="eq_preset_rock">Рок</string>
+  <string name="eq_preset_small_speakers">Маленькие динамики</string>
+  <string name="eq_preset_treble_booster">Усиленные ВЧ</string>
+  <string name="eq_preset_treble_reducer">Пониженные ВЧ</string>
+  <string name="eq_preset_vocal_booster">Усиленный вокал</string>
+  <string name="eq_preset_custom">Пользовательские настройки</string>
+  <string name="save_preset">Сохранить предустановку</string>
+  <string name="load_preset">Загрузить предустановку</string>
+  <string name="new_preset">Новая предустановка...</string>
+  <string name="navigation_drawer_toggle">Переключить панель</string>
+  <string name="navigation_drawer_open">Открыть панель навигации</string>
+  <string name="navigation_drawer_close">Закрыть панель навигации</string>
+  <string name="navigation_toggle_drawer">Режим общего меню</string>
+  <string name="navigation_toggle_tabbed">Режим вкладок</string>
+  <string name="save_error_bluetooth">Не удается сохранить bluetooth.xml</string>
+  <string name="save_error_headset">Не удается сохранить headset.xml</string>
+  <string name="save_error_speaker">Не удается сохранить speaker.xml</string>
+  <string name="load_error_bluetooth">Загрузка bluetooth.xml провалилась. Файл не найден или доступ запрещен</string>
+  <string name="load_error_headset">Загрузка headset.xml провалилась. Файл не найден или доступ запрещен</string>
+  <string name="load_error_speaker">Загрузка speaker.xml провалилась. Файл не найден или доступ запрещен</string>
+  <string name="warn_null">Имя файла не должно быть пустым, или будет сбой при следующей загрузке пресета</string>
+  <string name="help_title">Помощь</string>
+  <string name="help_text">
+    <b>Авторы:</b>"
+
+    Автор: Antti S. Lankila, Перевод на русский язык: Scrubber
+    Содержание:
+    1.Усиление басов, Расширенное стерео основано на исходниках Omnirom
+    2.Пользовательский Biquad Фильтр, пользовательский Эхо-эффект, James Fung
+    Интеграция в Android framework: James Fung
+    Все компоненты для Android framework разработаны компанией Google.
+
+    "<b>Что такое DSP Manager?</b>"
+
+    DSP Manager — это приложение, предназначенное для настройки каждого из звуковых выводов. Название приложения состоит из двух частей: \"DSP\" и \"Manager\". "<i>DSP</i> является аббревиатурой Digital Signal Processing, что в переводе означает Цифровая обработка сигнала. <i>Manager</i>" означает, что обработка производится не внутри данного приложения, оно лишь является интерфейсом для настройки. DSP Manager позволяет настроить и включить обработку звука для приложений, совместимых со спецификациями звуковых эффектов в системе Android, то есть для большинства музыкальных проигрывателей.
+
+    Подробнее: https://github.com/james34602/JamesDSPManager
+
+    "<b>Философия</b>"
+
+    Звуковая обработка поддерживается для четырёх звуковых выводов: проводных наушников (разъёма mini-jack), USB-устройств, динамика и беспроводной гарнитуры bluetooth. Для каждого из них предусмотрена своя панель настроек. Философия DSP Manager заключается в том, чтобы корректировать недостатки, присущие конкретным выводам, для достижения максимального качества звучания на каждом из них.
+
+    В отличие от \"звуковых эффектов\" в оригинальных исходниках Android (AOSP), в DSP Manager нет настроек для конкретных приложений, установленных в системе. Это принципиальный выбор: нам важны конкретные звуковые выводы, а не создающие звуковой поток приложения.
+
+
+    "<b>Возможности</b>"
+
+    1. "<b>Сжатие динамического диапазона (DRC)</b>"
+
+    Данный эффект оценивает громкость звука как среднестатистический слушатель и управляет усилением на основе данной оценки. Основной сценарий использования данного эффекта - шумные места, где тихие звуки могут заглушаться окружающим шумом.
+
+    Сила эффекта определяет, насколько упорно DSP Manager будет стараться поддерживать громкость на заданном уровне. В AOSP нет подобного звукового эффекта.
+
+
+    2. "<b>Усиление баса</b>"
+
+    Усилитель баса — это простой фильтр низких частот, использующийся для добавления акцента на 55 Гц и более низких частотах. Уровень усиления примерно равен 6 дБ и регулируется параметом \"Сила эффекта\", который добавляет резонанс в полосе 55 Гц, что дополнительно акцентирует данную частоту. Эффект \"Усиление баса\" призван бороться с потерей басов в следствие использования динамиков малых размеров или неплотно прилегающих наушников.
+
+
+    3. "<b>Эквалайзер</b>"
+
+    Это 14-ти полосной эквалайзер с полосами от 32 до 18000 Гц и несколькими наиболее популярными предустановками. Частотная характеристика может быть изменена с помощью нажатия на график эквалайзера. Эквалайзер предназначен для настройки звучания в соответствии с предпочтениями конкретного слушателя или возможностями используемых наушников (динамиков).
+
+    Эквалайзер также содержит фильтр тонкомпенсации, который компенсирует кажущийся недостаток низких и высоких частот, изменяя частотную характеристику звука на основывании уровня звукового давления на ухо слушателя.
+
+    Для правильной настройки силы эффекта тонкомпенсации, необходимо включить шумную музыку с широким спектром частот (например, рок или металл) на минимальной громкости. Далее необходимо найти такое значение силы эффекта фильтра, при котором басы будут отчетливо слышны и сбалансированы с остальными частотами музыкальной композиции. Если фильтр настроен правильно, басы будут оставаться на неизменной громкости по отношению к остальным инструментам в независимости от уровня громкости прослушивания. Если же при росте громкости прослушивания басы перекрывают остальные частоты композиции, фильтр настроен неправильно, сила его эффекта должна быть уменьшена.
+
+    Сила эффекта тонкомпенсации сохраняется вместе с пользовательской предустановкой эквалайзера. Если необходимо использовать только фильтр тонкомпенсации, выберите предустановку эквалайзера \"Плоско\".
+
+
+    4. "<b>Эффект виртуальной комнаты</b>"
+
+    The headset filter is a crossfeed design inspired by the famous bs2b analog circuit. The effect passes mono sound unchanged, and adjusts the difference signal through a lowpass filter which approximates both head shadow and interaural delay at once, giving right kind of psychoacoustic clues for user's ears. The intention is to prevent listener fatigue arising from the implausible stereo separation inherent with all headsets. The effect should be enabled whenever using stereo headsets.
+
+    Because the mixing reduces the stereo separation somewhat, there is a Haas effect reverb, which can be used to increase the perceived stereo image width. This is controlled by the 'Room type' control.
+
+    5. "<b>Расширенное стерео</b>"
+
+    Расширитель стереобазы или стереокартины позволяет как бы раздвинуть звук в стороны, фонограмма при этом начинает звучать объемней, а в некоторых случаях и прозрачней. Достигается это за счет увеличения разницы между правым и левым каналом. То есть все источники звука, которые находились не в центре панорамы, отодвигаются в стороны на расстояние, прямо пропорциональное значению расширения.
+
+    "<b>Audio enhancement can be done by using variety combination of different effectors!</b>" We first calculate center and side channel data, and high pass side channel at 2000Hz, also add little bit delay effect on side channel, then add and subtract them respectively in order to synthesis left-right side position, "
+  </string>
+  <string name="abc_search_hint">Поиск…</string>
+  <string name="status_bar_notification_info_overflow">999+</string>
+</resources>
