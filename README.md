@@ -29,7 +29,7 @@ This app don't work too much around with modifying Android framework.
 ### FAQ
 #### 1. Computation datatype?
 
-A: Float32
+A: Float32/Float64, depend on which version you install.
 
 #### 2. Bass boost filter type?
 
