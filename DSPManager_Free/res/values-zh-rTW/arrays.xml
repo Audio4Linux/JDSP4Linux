@@ -29,6 +29,10 @@
     <item>最小相位</item>
     <item>線性相位</item>
   </string-array>
+  <string-array name="equalizer_stringfiltertype">
+    <item>最小相位</item>
+    <item>線性相位</item>
+  </string-array>
   <string-array name="quality_level">
     <item>樣本截斷至40&#65130;</item>
     <item>樣本截斷至50&#65130;</item>

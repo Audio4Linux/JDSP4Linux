@@ -8,6 +8,7 @@ extern "C"
 #include "bs2b.h"
 #include "mnspline.h"
 #include "ArbFIRGen.h"
+#include "vdc.h"
 #include "compressor.h"
 #include "reverb.h"
 #include "AutoConvolver.h"
@@ -21,6 +22,10 @@ extern "C"
 class EffectDSPMain : public Effect
 {
 protected:
+	int stringLength;
+	char *stringEq;
+	DirectForm2 **df441, **df48, **sosPointer;
+	int sosCount;
 	typedef struct threadParamsConv {
 		AutoConvolverMono **conv;
 		double **in, **out;
@@ -62,8 +67,8 @@ protected:
 	// Variables
 	double pregain, threshold, knee, ratio, attack, release, tubedrive, bassBoostCentreFreq, convGaindB, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
-	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, wavechild670Enabled, bs2bEnabled;
-	int16_t mPreset, samplesInc, impChannels, previousimpChannels;
+	stereoWidenEnabled, convolverEnabled, convolverReady, bassLpReady, eqFIRReady, analogModelEnable, bs2bEnabled, viperddcEnabled;
+	int16_t mPreset, samplesInc, stringIndex, impChannels, previousimpChannels;
 	int32_t impulseLengthActual, convolverNeedRefresh;
 	int isBenchData;
 	double *benchmarkValue[2];

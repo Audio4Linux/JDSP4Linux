@@ -75,6 +75,11 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             	value = "0.99999";
             setSummary(value);
     	}
+    	if(key.equals("dsp.streq.stringp"))
+    	{
+            if(key.length() < 12)
+            	value = "GraphicEQ: 0.0 0.0; ";
+    	}
     	if(key.equals("dsp.convolver.gain"))
     	{
             if(valueFloat < -80.0f)

@@ -1,0 +1,13 @@
+﻿// Assembly ViPERToolBox, Version 1.0.0.0
+[assembly: System.Reflection.AssemblyConfiguration("")]
+[assembly: System.Runtime.CompilerServices.CompilationRelaxations(8)]
+[assembly: System.Reflection.AssemblyProduct("ViPERToolBox")]
+[assembly: System.Reflection.AssemblyTitle("ViPERToolBox")]
+[assembly: System.Reflection.AssemblyDescription("")]
+[assembly: System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)]
+[assembly: System.Reflection.AssemblyCompany("")]
+[assembly: System.Reflection.AssemblyCopyright("James34602")]
+[assembly: System.Reflection.AssemblyTrademark("")]
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
+[assembly: System.Runtime.InteropServices.Guid("71c87070-3fa2-41c0-b223-4dadf0ad6952")]
+[assembly: System.Reflection.AssemblyFileVersion("1.0.0.0")]

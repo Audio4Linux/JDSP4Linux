@@ -26,7 +26,18 @@
   <string name="dialog_filtertype">Filter type</string>
   <string name="pref_effect_freq_title">Cutoff frequency [Int:30 &#8211; 300]Hz</string>
   <string name="dialog_effect">Effect strength</string>
-  <string name="pref_equalizer_title">FIR Equalizer</string>
+  <string name="pref_equalizer_title">Mixed Equalizer</string>
+  <string name="pref_strequalizer_enable">Enable Arbitrary Magnitude Response Equalizer</string>
+  <string name="pref_strphase_enable">Enable Arbitrary Phase Response Equalizer</string>
+  <string name="pref_strequalizer_title">Arbitrary Response Equalizer</string>
+  <string name="pref_strequalizer_summary_on">Arbitrary magnitude is enabled</string>
+  <string name="pref_strequalizer_summary_off">Arbitrary magnitude is disabled</string>
+  <string name="dialog_magnitude_response">Magnitude response string</string>
+  <string name="pref_strphase_title">Arbitrary Phase Response</string>
+  <string name="pref_strphase_summary_on">Arbitrary Phase is enabled</string>
+  <string name="pref_strphase_summary_off">Arbitrary Phase is disabled</string>
+  <string name="dialog_phaseleft_response">Phase response(Left) string</string>
+  <string name="dialog_phaseright_response">Phase response(Right) string</string>
   <string name="pref_equalizer_summary_on">Hybrid Equalizer is enabled</string>
   <string name="pref_equalizer_summary_off">Hybrid Equalizer is disabled</string>
   <string name="pref_equalizer_enable">Enable</string>
@@ -55,14 +66,16 @@
   <string name="pref_convolver_summary_on">Convolver is enabled</string>
   <string name="pref_convolver_summary_off">Convolver is disabled</string>
   <string name="pref_convolver_enable">Convolver enable</string>
+  <string name="pref_ddc_title">ViPER-DDC</string>
+  <string name="pref_ddc_summary_on">ViPER-DDC is enabled</string>
+  <string name="pref_ddc_summary_off">ViPER-DDC is disabled</string>
+  <string name="pref_ddc_enable">Enable</string>
+  <string name="dialog_sosmatrix">DDC file</string>
+  <string name="text_ddc_dir_isempty">DDC directory %1$s is empty</string>
   <string name="pref_analogmodelling_title">Analog Modelling</string>
   <string name="pref_analogmodelling_summary_on">Analog Modelling is enabled</string>
   <string name="pref_analogmodelling_summary_off">Analog Modelling is disabled</string>
   <string name="pref_analogmodelling_enable">Analog Modelling enable</string>
-  <string name="pref_wavechild670_title">Wavechild 670</string>
-  <string name="pref_wavechild670_summary_on">Wavechild 670 is enabled</string>
-  <string name="pref_wavechild670_summary_off">Wavechild 670 is disabled</string>
-  <string name="pref_wavechild670_enable">Wavechild 670 enable</string>
   <string name="dialog_tubedrive">Preamp(Harmonics) [Real:→0 – 12]</string>
   <string name="dialog_tubebass">Bass [Real:&#x2192;0 &#8211; 10]</string>
   <string name="dialog_tubemid">Middle [Real:&#x2192;0 &#8211; 10]</string>
@@ -75,6 +88,7 @@
   <string name="dialog_length">Impulse response length</string>
   <string name="text_ir_dir_isempty">IR sample directory %1$s is empty</string>
   <string name="doesntexist">Error: No IR file selected</string>
+  <string name="ddcdoesntexist">Error: No DDC file selected</string>
   <string name="mono_conv">Mono</string>
   <string name="stereo_conv">Stereo</string>
   <string name="fullstereo_conv">Full Stereo</string>
@@ -95,6 +109,10 @@
   <string name="pref_headset_bs2b_summary_off">BS2B is disabled</string>
   <string name="dialog_bs2b">BS2B Preset</string>
   <string name="pref_headset_bs2b_enable">Enable BS2B</string>
+  <string name="pref_headset_pams_title">TruCentre with Joe0Bloggs filter</string>
+  <string name="pref_headset_pamss_summary_on">TruCentre is enabled</string>
+  <string name="pref_headset_pamss_summary_off">TruCentre is disabled</string>
+  <string name="pref_headset_pamss_enable">Enable TruCentre Surround</string>
 
   <string name="eq_preset_flat">Flat</string>
   <string name="eq_preset_custom">Custom</string>
@@ -131,97 +149,5 @@
   <string name="help_text">
     <b>Credit:</b>\n\n
     GUI Author: Antti S. Lankila \n
-    Other feature: \n
-    1.Bass frequency selector, Stereo Widener by Omnirom \n
-    2.Linear phase bass boost \n
-    Feature integration from Android framework: James Fung \n
-    All component from Android framework develop by Google. \n
-    \n<b>What is DSP Manager?</b>
-    \n\n
-    DSP Manager is a per-output audio adjustment app. <i>DSP</i> stands for
-    Digital signal processing, and the <i>Manager</i> part refers to the fact that the
-    DSP is actually not run inside the app itself; the manager can only
-    enable it for apps which are compliant with Android\'s audio effect
-    specification, i.e. most music players.
-    \n\nSee: https://github.com/james34602/JamesDSPManager
-    \n\n
-    <b>Philosophy</b>
-    \n\n
-    Audio processing supports four different output categories:
-    wired headset, USB audio, phone speaker and bluetooth headset. There is a separate
-    configuration panel for each output category. DSP Manager\'s philosophy is to
-    correct each audio output\'s particular deficiencies in order to reach the most
-    optimal listening experience with each.
-    \n\n
-    Unlike with AOSP audio effects, there are no per-app settings. This is
-    a deliberate design choice: it is the output we care about, not which
-    app generates the audio for DSP Manager to work with.
-    \n\n\n
-    <b>Features</b>
-    \n\n
-    1. <b>Dynamic range compression (DRC)</b>
-    \n\n
-    This effect estimates the loudness of the audio as perceived by an average
-    listener and drives a gain control based on this estimate. The primary use case
-    is with noisy environments such as in cars or on street, where quiet parts of
-    music are in risk of being drowned out by background noise.
-    \n\n
-    The sole tunable determines how hard DSP Manager will try to maintain audio
-    loudness at the target level. There is no AOSP equivalent for this DSP effect.
-    \n\n\n
-    2. <b>Bass boost</b>
-    \n\n
-    The bass boost is has two simple lowpass filters which can be used to add an emphasis
-    at 55 Hz or selectable frequency and lower frequencies. The boost is around 6 dB, and modified by the
-    \'strength\' parameter, which adds filters resonance at the 55 Hz or selectable frequency band, giving
-    that frequency extra emphasis. The effect is designed to combat loss of bass
-    frequency common with small speakers and supra-aural headsets which do not
-    couple tightly with user\'s ear canal. Also enhance users bass experience.
-    \n\n\n
-    3. <b>Equalizer</b>
-    \n\n
-    This is a 6-band equalizer with bands at 15.625, 62,5, 250, 500, 1000, 4000, 8000 and 16000 Hz.
-    Some common presets are provided, and the frequency response can also be
-    customized by tapping on the equalizer graph. The effect should be used to tune
-    the frequency response to user\'s personal taste, or to the particular
-    capabilities of the available headset or speakers.
-    \n\n
-    Equalizer also contains a loudness compensation filter, which equalizes the
-    changes in ear frequency response based on the sound pressure level which
-    reaches the user\'s ear. Use of a wired headset is required, and the strength
-    parameter value must be tuned correctly before the effect will work as
-    designed.
-    \n\n
-    To select the right value for the compensation strength, use the quietest music
-    volume, and choose some wide-spectrum noisy music such as rock or metal. Try
-    to find a setting where the bass is boosted back into audibility and seems
-    balanced with the rest of the material. After the compensation has been
-    correctly configured, bass should remain at the same level relative to the
-    other instruments regardless of the listening level. On the other hand, if
-    music starts to sound bass heavy at higher listening levels, the compensation
-    is probably set too strong, and should be reduced.
-    \n\n
-    The compensation is added to the user\'s chosen adjustments. If only compensation
-    is desired, the equalizer should be left in the \'Flat\' setting.
-    \n\n\n
-    4. <b>Virtualizer</b>
-    \n\n
-    The headset filter is a crossfeed design inspired by the famous bs2b analog
-    circuit. The effect passes mono sound unchanged, and adjusts the difference
-    signal through a lowpass filter which approximates both head shadow and
-    interaural delay at once, giving right kind of psychoacoustic clues for user\'s
-    ears. The intention is to prevent listener fatigue arising from the
-    implausible stereo separation inherent with all headsets. The effect should be
-    enabled whenever using stereo headsets.
-    \n\n
-    Because the mixing reduces the stereo separation somewhat, there is a
-    Haas effect reverb, which can be used to increase the perceived stereo image
-    width. This is controlled by the \'Room type\' control.
-    \n\n
-    5. <b>Stereo Widener</b>
-    \n\n
-    Stereo Widener is a left-right channel direction splitter, it can enhance audio experience that when left-right speaker are put by a distance that is less than optimal
-    \n\n<b>Audio enhancement can be done by using variety combination of different effectors!</b>
-    We first calculate center and side channel data, and high pass side channel at 2000Hz, also add little bit delay effect on side channel, then add and subtract them respectively in order to synthesis left-right side position,
   </string>
 </resources>

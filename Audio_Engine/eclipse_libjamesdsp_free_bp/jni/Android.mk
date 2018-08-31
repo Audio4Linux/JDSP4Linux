@@ -32,6 +32,7 @@ LOCAL_SRC_FILES := \
 	AutoConvolver.c \
 	mnspline.c \
 	ArbFIRGen.c \
+	vdc.c \
 	bs2b.c \
 	valve/12ax7amp/Tube.c \
 	valve/12ax7amp/wdfcircuits_triode.c \

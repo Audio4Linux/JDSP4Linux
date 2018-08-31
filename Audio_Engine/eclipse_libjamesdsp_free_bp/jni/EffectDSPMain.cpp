@@ -19,7 +19,7 @@ const double interpFreq[NUM_BANDS] = { 25.0, 40.0, 63.0, 100.0, 160.0, 250.0, 40
 
 EffectDSPMain::EffectDSPMain()
 	: DSPbufferLength(1024), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0), pregain(12.0), threshold(-60.0), knee(30.0), ratio(12.0), attack(0.001), release(0.24), isBenchData(0), mPreset(0), reverbEnabled(0), threadResult(0)
-	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0)//, compressor670(0)
+	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0), sosCount(0), df441(0), df48(0)
 	, tempImpulseIncoming(0), tempImpulsedouble(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[12] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778 };
@@ -32,7 +32,18 @@ EffectDSPMain::EffectDSPMain()
 	benchmarkValue[1] = (double*)malloc(12 * sizeof(double));
 	memcpy(benchmarkValue[0], c0, sizeof(c0));
 	memcpy(benchmarkValue[1], c1, sizeof(c1));
-	inputBuffer[0] = 0;
+	memSize = DSPbufferLength * sizeof(double);
+	inputBuffer[0] = (double*)malloc(memSize);
+	inputBuffer[1] = (double*)malloc(memSize);
+	outputBuffer[0] = (double*)malloc(memSize);
+	outputBuffer[1] = (double*)malloc(memSize);
+	memset(outputBuffer[0], 0, memSize);
+	memset(outputBuffer[1], 0, memSize);
+	tempBuf[0] = (double*)malloc(memSize);
+	tempBuf[1] = (double*)malloc(memSize);
+#ifdef DEBUG
+	LOGI("%d space allocated", DSPbufferLength);
+#endif
 	JLimiterInit(&kLimiter);
 	JLimiterSetCoefficients(&kLimiter, -0.1, 60.0, mSamplingRate);
 }
@@ -69,6 +80,17 @@ EffectDSPMain::~EffectDSPMain()
 		free(benchmarkValue[0]);
 	if (benchmarkValue[1])
 		free(benchmarkValue[1]);
+	if (sosCount)
+	{
+		for (int i = 0; i < sosCount; i++)
+		{
+			free(df441[i]);
+			free(df48[i]);
+		}
+		free(df441);
+		free(df48);
+		sosCount = 0;
+	}
 #ifdef DEBUG
 	LOGI("Buffer freed");
 #endif
@@ -158,7 +180,7 @@ void EffectDSPMain::channel_splitFloat(const float *buffer, unsigned int num_fra
 int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdData, uint32_t* replySize, void* pReplyData)
 {
 #ifdef DEBUG
-		LOGI("Memory used: %lf Mb", (double)getCurrentRSS() / 1024.0 / 1024.0);
+	LOGI("Memory used: %lf Mb", (double)getCurrentRSS() / 1024.0 / 1024.0);
 #endif
 	if (cmdCode == EFFECT_CMD_SET_CONFIG)
 	{
@@ -169,21 +191,6 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 		{
 			*replyData = ret;
 			return 0;
-		}
-		memSize = DSPbufferLength * sizeof(double);
-		if (!inputBuffer[0])
-		{
-			inputBuffer[0] = (double*)malloc(memSize);
-			inputBuffer[1] = (double*)malloc(memSize);
-			outputBuffer[0] = (double*)malloc(memSize);
-			outputBuffer[1] = (double*)malloc(memSize);
-			memset(outputBuffer[0], 0, memSize);
-			memset(outputBuffer[1], 0, memSize);
-			tempBuf[0] = (double*)malloc(memSize);
-			tempBuf[1] = (double*)malloc(memSize);
-#ifdef DEBUG
-			LOGI("%d space allocated", DSPbufferLength);
-#endif
 		}
 		JLimiterSetCoefficients(&kLimiter, -0.1, 60.0, mSamplingRate);
 		fullStconvparams.in = inputBuffer;
@@ -575,25 +582,52 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
-			/*			else if (cmd == 1207)
+			else if (cmd == 1212)
 			{
-			int16_t oldVal = wavechild670Enabled;
-			int curStat = ((int16_t *)cep)[8];
-			if (curStat)
-			wavechild670Enabled = -1;
-			else
-			wavechild670Enabled = 0;
-			if (!wavechild670Enabled)
-			{
-			if (compressor670)
-			{
-			free(compressor670);
-			compressor670 = 0;
+				int16_t oldVal = viperddcEnabled;
+				if (mSamplingRate == 44100.0 && df441)
+				{
+					viperddcEnabled = ((int16_t *)cep)[8];
+					sosPointer = df441;
+				}
+				else if (mSamplingRate == 48000.0 && df48)
+				{
+					viperddcEnabled = ((int16_t *)cep)[8];
+					sosPointer = df48;
+				}
+				else
+				{
+					viperddcEnabled = 0;
+					sosPointer = 0;
+				}
+#ifdef DEBUG
+				LOGI("viperddcEnabled: %d", viperddcEnabled);
+#endif
+				if (!viperddcEnabled && oldVal)
+				{
+					if (stringEq)
+					{
+						free(stringEq);
+						stringEq = 0;
+					}
+					if (sosCount)
+					{
+						for (int i = 0; i < sosCount; i++)
+						{
+							free(df441[i]);
+							free(df48[i]);
+						}
+						free(df441);
+						df441 = 0;
+						free(df48);
+						df48 = 0;
+						sosCount = 0;
+						sosPointer = 0;
+					}
+				}
+				*replyData = 0;
+				return 0;
 			}
-			}
-			*replyData = 0;
-			return 0;
-			}*/
 			else if (cmd == 10003)
 			{
 				samplesInc = ((int16_t *)cep)[8];
@@ -660,6 +694,44 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				*replyData = 0;
 				return 0;
 			}
+			else if (cmd == 10005)
+			{
+				stringIndex = ((int16_t *)cep)[8];
+				*replyData = 0;
+				return 0;
+			}
+			else if (cmd == 10009)
+			{
+				if (!viperddcEnabled)
+				{
+					if (sosCount)
+					{
+						for (int i = 0; i < sosCount; i++)
+						{
+							free(df441[i]);
+							free(df48[i]);
+						}
+						free(df441);
+						df441 = 0;
+						free(df48);
+						df48 = 0;
+						sosCount = 0;
+						sosPointer = 0;
+					}
+				}
+#ifdef DEBUG
+				LOGI("%s", stringEq);
+#endif
+				sosCount = DDCParser(stringEq, &df441, &df48);
+#ifdef DEBUG
+			LOGI("VDC num of SOS: %d", sosCount);
+			LOGI("VDC df48[0].b0: %1.14lf", df48[0]->b0);
+#endif
+				free(stringEq);
+				stringEq = 0;
+				*replyData = 0;
+				return 0;
+			}
 		}
 		if (cep->psize == 4 && cep->vsize == 8)
 		{
@@ -704,7 +776,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					{
 						benchmarkValue[0][i] = (double)((float*)cep)[4 + i];
 #ifdef DEBUG
-//						LOGI("bench_c0: %lf", benchmarkValue[0][i]);
+						//						LOGI("bench_c0: %lf", benchmarkValue[0][i]);
 #endif
 					}
 					isBenchData++;
@@ -724,7 +796,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 					{
 						benchmarkValue[1][i] = (double)((float*)cep)[4 + i];
 #ifdef DEBUG
-//						LOGI("bench_c1: %lf", benchmarkValue[1][i]);
+						//						LOGI("bench_c1: %lf", benchmarkValue[1][i]);
 #endif
 					}
 					isBenchData++;
@@ -746,6 +818,22 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						}
 					}
 				}
+				*replyData = 0;
+				return 0;
+			}
+		}
+		if (cep->psize == 4 && cep->vsize == 8)
+		{
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 8888)
+			{
+				int32_t times = ((int32_t *)cep)[4];
+				int32_t sizePerBuffer = ((int32_t *)cep)[5];
+				stringLength = times * sizePerBuffer;
+#ifdef DEBUG
+				LOGI("Allocate %d stringLength", stringLength);
+#endif
+				stringEq = (char*)calloc(stringLength, sizeof(char));
 				*replyData = 0;
 				return 0;
 			}
@@ -773,6 +861,19 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 			if (cmd == 12000)
 			{
 				memcpy(tempImpulseIncoming + (samplesInc * 4096), ((float*)cep) + 4, 4096 * sizeof(float));
+				*replyData = 0;
+				return 0;
+			}
+		}
+		if (cep->psize == 4 && cep->vsize == 256)
+		{
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 12001)
+			{
+#ifdef DEBUG
+				LOGI("Copying string");
+#endif
+				memcpy(stringEq + (stringIndex * 256), ((char*)cep) + 16, 256 * sizeof(char));
 				*replyData = 0;
 				return 0;
 			}
@@ -995,10 +1096,11 @@ void *EffectDSPMain::threadingTube(void *args)
 }
 int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 {
-	if (inputBuffer[0])
+	int i, framePos, framePos2x, actualFrameCount = in->frameCount;
+	int pos = inOutRWPosition;
+	switch (formatFloatModeInt32Mode)
 	{
-		int i, framePos, framePos2x, actualFrameCount = in->frameCount;
-		int pos = inOutRWPosition;
+	case 0:
 		for (framePos = 0; framePos < actualFrameCount; framePos++)
 		{
 			framePos2x = framePos << 1;
@@ -1013,27 +1115,10 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				outputBuffer[1][pos] = 1.0;
 			if (outputBuffer[1][pos] < -1.0)
 				outputBuffer[1][pos] = -1.0;
-			switch (formatFloatModeInt32Mode)
-			{
-			case 0:
-				inputBuffer[0][pos] = (double)in->s16[framePos2x] * 3.051757812500000e-05;
-				out->s16[framePos2x] = (int16_t)(outputBuffer[0][pos] * 32768.0);
-				inputBuffer[1][pos] = (double)in->s16[++framePos2x] * 3.051757812500000e-05;
-				out->s16[framePos2x] = (int16_t)(outputBuffer[1][pos] * 32768.0);
-			break;
-			case 1:
-				inputBuffer[0][pos] = (double)in->f32[framePos2x];
-				out->f32[framePos2x] = (float)outputBuffer[0][pos];
-				inputBuffer[1][pos] = (double)in->f32[++framePos2x];
-				out->f32[framePos2x] = (float)outputBuffer[1][pos];
-			break;
-			case 2:
-				inputBuffer[0][pos] = (double)in->s32[framePos2x] * 4.656612875245797e-10;
-				out->s32[framePos2x] = (int32_t)(outputBuffer[0][pos] * 2147483647.0);
-				inputBuffer[1][pos] = (double)in->s32[++framePos2x] * 4.656612875245797e-10;
-				out->s32[framePos2x] = (int32_t)(outputBuffer[1][pos] * 2147483647.0);
-			break;
-			}
+			inputBuffer[0][pos] = (double)in->s16[framePos2x] * 3.051757812500000e-05;
+			out->s16[framePos2x] = (int16_t)(outputBuffer[0][pos] * 32768.0);
+			inputBuffer[1][pos] = (double)in->s16[++framePos2x] * 3.051757812500000e-05;
+			out->s16[framePos2x] = (int16_t)(outputBuffer[1][pos] * 32768.0);
 			pos++;
 			if (pos == DSPbufferLength)
 			{
@@ -1120,8 +1205,6 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 					processTube(&tubeP[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
 					pthread_join(righttube, 0);
 				}
-				/*	if (wavechild670Enabled == 1)
-				Wavechild670Processdouble(compressor670, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1], DSPbufferLength);*/
 				if (bs2bEnabled == 1)
 				{
 					for (i = 0; i < DSPbufferLength; i++)
@@ -1130,7 +1213,18 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				if (ramp < 1.0)
 					ramp += 0.05;
 				if (compressionEnabled)
-					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], outputBuffer[0], outputBuffer[1]);
+					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1]);
+				if (viperddcEnabled)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						double sampleOutL = inputBuffer[0][i], sampleOutR = inputBuffer[1][i];
+						for (int j = 0; j < sosCount; j++)
+							SOS_DF2_StereoProcess(sosPointer[j], sampleOutL, sampleOutR, &sampleOutL, &sampleOutR);
+						outputBuffer[0][i] = sampleOutL;
+						outputBuffer[1][i] = sampleOutR;
+					}
+				}
 				else
 				{
 					memcpy(outputBuffer[0], inputBuffer[0], memSize);
@@ -1139,7 +1233,276 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 				pos = 0;
 			}
 		}
-		inOutRWPosition = pos;
+		break;
+	case 1:
+		for (framePos = 0; framePos < actualFrameCount; framePos++)
+		{
+			framePos2x = framePos << 1;
+			outputBuffer[0][pos] *= ramp;
+			outputBuffer[1][pos] *= ramp;
+			JLimiterProcess(&kLimiter, &outputBuffer[0][pos], &outputBuffer[1][pos]);
+			if (outputBuffer[0][pos] > 1.0)
+				outputBuffer[0][pos] = 1.0;
+			if (outputBuffer[0][pos] < -1.0)
+				outputBuffer[0][pos] = -1.0;
+			if (outputBuffer[1][pos] > 1.0)
+				outputBuffer[1][pos] = 1.0;
+			if (outputBuffer[1][pos] < -1.0)
+				outputBuffer[1][pos] = -1.0;
+			inputBuffer[0][pos] = (double)in->f32[framePos2x];
+			out->f32[framePos2x] = (float)outputBuffer[0][pos];
+			inputBuffer[1][pos] = (double)in->f32[++framePos2x];
+			out->f32[framePos2x] = (float)outputBuffer[1][pos];
+			pos++;
+			if (pos == DSPbufferLength)
+			{
+				if (bassBoostEnabled)
+				{
+					if (bassLpReady > 0)
+					{
+						bassBoostLp[0]->process(bassBoostLp[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+						bassBoostLp[1]->process(bassBoostLp[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
+					}
+				}
+				if (equalizerEnabled)
+				{
+					if (eqFIRReady == 1)
+					{
+						FIREq[0]->process(FIREq[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+						FIREq[1]->process(FIREq[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
+					}
+				}
+				if (stereoWidenEnabled)
+				{
+					double outLR, outRL;
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;
+						outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
+						inputBuffer[0][i] = outLR + outRL;
+						inputBuffer[1][i] = outLR - outRL;
+					}
+				}
+				if (reverbEnabled)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+						sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &inputBuffer[0][i], &inputBuffer[1][i]);
+				}
+				if (convolverEnabled)
+				{
+					if (convolverReady == 1)
+					{
+						convolver[0]->process(convolver[0], inputBuffer[0], outputBuffer[0], DSPbufferLength);
+						convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						memcpy(inputBuffer[0], outputBuffer[0], memSize);
+						memcpy(inputBuffer[1], outputBuffer[1], memSize);
+					}
+					else if (convolverReady == 2)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						memcpy(inputBuffer[0], outputBuffer[0], memSize);
+						memcpy(inputBuffer[1], outputBuffer[1], memSize);
+					}
+					else if (convolverReady == 3)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						fullStereoConvolver[1]->process(fullStereoConvolver[1], inputBuffer[0], tempBuf[1], DSPbufferLength);
+						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
+						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							inputBuffer[0][i] = outputBuffer[0][i] + tempBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + tempBuf[1][i];
+						}
+					}
+					else if (convolverReady == 4)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						pthread_create(&rightconv1, 0, EffectDSPMain::threadingConvF1, (void*)&fullStconvparams1);
+						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
+						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						pthread_join(rightconv1, 0);
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							inputBuffer[0][i] = outputBuffer[0][i] + tempBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + tempBuf[1][i];
+						}
+					}
+				}
+				if (analogModelEnable)
+				{
+					pthread_create(&righttube, 0, EffectDSPMain::threadingTube, (void*)&rightparams2);
+					processTube(&tubeP[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+					pthread_join(righttube, 0);
+				}
+				if (bs2bEnabled == 1)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+						BS2BProcess(&bs2b, &inputBuffer[0][i], &inputBuffer[1][i]);
+				}
+				if (ramp < 1.0)
+					ramp += 0.05;
+				if (compressionEnabled)
+					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1]);
+				if (viperddcEnabled)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						double sampleOutL = inputBuffer[0][i], sampleOutR = inputBuffer[1][i];
+						for (int j = 0; j < sosCount; j++)
+							SOS_DF2_StereoProcess(sosPointer[j], sampleOutL, sampleOutR, &sampleOutL, &sampleOutR);
+						outputBuffer[0][i] = sampleOutL;
+						outputBuffer[1][i] = sampleOutR;
+					}
+				}
+				else
+				{
+					memcpy(outputBuffer[0], inputBuffer[0], memSize);
+					memcpy(outputBuffer[1], inputBuffer[1], memSize);
+				}
+				pos = 0;
+			}
+		}
+		break;
+	case 2:
+		for (framePos = 0; framePos < actualFrameCount; framePos++)
+		{
+			framePos2x = framePos << 1;
+			outputBuffer[0][pos] *= ramp;
+			outputBuffer[1][pos] *= ramp;
+			JLimiterProcess(&kLimiter, &outputBuffer[0][pos], &outputBuffer[1][pos]);
+			if (outputBuffer[0][pos] > 1.0)
+				outputBuffer[0][pos] = 1.0;
+			if (outputBuffer[0][pos] < -1.0)
+				outputBuffer[0][pos] = -1.0;
+			if (outputBuffer[1][pos] > 1.0)
+				outputBuffer[1][pos] = 1.0;
+			if (outputBuffer[1][pos] < -1.0)
+				outputBuffer[1][pos] = -1.0;
+			inputBuffer[0][pos] = (double)in->s32[framePos2x] * 4.656612875245797e-10;
+			out->s32[framePos2x] = (int32_t)(outputBuffer[0][pos] * 2147483647.0);
+			inputBuffer[1][pos] = (double)in->s32[++framePos2x] * 4.656612875245797e-10;
+			out->s32[framePos2x] = (int32_t)(outputBuffer[1][pos] * 2147483647.0);
+			pos++;
+			if (pos == DSPbufferLength)
+			{
+				if (bassBoostEnabled)
+				{
+					if (bassLpReady > 0)
+					{
+						bassBoostLp[0]->process(bassBoostLp[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+						bassBoostLp[1]->process(bassBoostLp[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
+					}
+				}
+				if (equalizerEnabled)
+				{
+					if (eqFIRReady == 1)
+					{
+						FIREq[0]->process(FIREq[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+						FIREq[1]->process(FIREq[1], inputBuffer[1], inputBuffer[1], DSPbufferLength);
+					}
+				}
+				if (stereoWidenEnabled)
+				{
+					double outLR, outRL;
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						outLR = (inputBuffer[0][i] + inputBuffer[1][i]) * mMatrixMCoeff;
+						outRL = (inputBuffer[0][i] - inputBuffer[1][i]) * mMatrixSCoeff;
+						inputBuffer[0][i] = outLR + outRL;
+						inputBuffer[1][i] = outLR - outRL;
+					}
+				}
+				if (reverbEnabled)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+						sf_reverb_process(&myreverb, inputBuffer[0][i], inputBuffer[1][i], &inputBuffer[0][i], &inputBuffer[1][i]);
+				}
+				if (convolverEnabled)
+				{
+					if (convolverReady == 1)
+					{
+						convolver[0]->process(convolver[0], inputBuffer[0], outputBuffer[0], DSPbufferLength);
+						convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						memcpy(inputBuffer[0], outputBuffer[0], memSize);
+						memcpy(inputBuffer[1], outputBuffer[1], memSize);
+					}
+					else if (convolverReady == 2)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						convolver[1]->process(convolver[1], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						memcpy(inputBuffer[0], outputBuffer[0], memSize);
+						memcpy(inputBuffer[1], outputBuffer[1], memSize);
+					}
+					else if (convolverReady == 3)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						fullStereoConvolver[1]->process(fullStereoConvolver[1], inputBuffer[0], tempBuf[1], DSPbufferLength);
+						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
+						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							inputBuffer[0][i] = outputBuffer[0][i] + tempBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + tempBuf[1][i];
+						}
+					}
+					else if (convolverReady == 4)
+					{
+						pthread_create(&rightconv, 0, EffectDSPMain::threadingConvF, (void*)&fullStconvparams);
+						pthread_create(&rightconv1, 0, EffectDSPMain::threadingConvF1, (void*)&fullStconvparams1);
+						fullStereoConvolver[2]->process(fullStereoConvolver[2], inputBuffer[1], outputBuffer[0], DSPbufferLength);
+						fullStereoConvolver[3]->process(fullStereoConvolver[3], inputBuffer[1], outputBuffer[1], DSPbufferLength);
+						pthread_join(rightconv, 0);
+						pthread_join(rightconv1, 0);
+						for (i = 0; i < DSPbufferLength; i++)
+						{
+							inputBuffer[0][i] = outputBuffer[0][i] + tempBuf[0][i];
+							inputBuffer[1][i] = outputBuffer[1][i] + tempBuf[1][i];
+						}
+					}
+				}
+				if (analogModelEnable)
+				{
+					pthread_create(&righttube, 0, EffectDSPMain::threadingTube, (void*)&rightparams2);
+					processTube(&tubeP[0], inputBuffer[0], inputBuffer[0], DSPbufferLength);
+					pthread_join(righttube, 0);
+				}
+				if (bs2bEnabled == 1)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+						BS2BProcess(&bs2b, &inputBuffer[0][i], &inputBuffer[1][i]);
+				}
+				if (ramp < 1.0)
+					ramp += 0.05;
+				if (compressionEnabled)
+					sf_compressor_process(&compressor, DSPbufferLength, inputBuffer[0], inputBuffer[1], inputBuffer[0], inputBuffer[1]);
+				if (viperddcEnabled)
+				{
+					for (i = 0; i < DSPbufferLength; i++)
+					{
+						double sampleOutL = inputBuffer[0][i], sampleOutR = inputBuffer[1][i];
+						for (int j = 0; j < sosCount; j++)
+							SOS_DF2_StereoProcess(sosPointer[j], sampleOutL, sampleOutR, &sampleOutL, &sampleOutR);
+						outputBuffer[0][i] = sampleOutL;
+						outputBuffer[1][i] = sampleOutR;
+					}
+				}
+				else
+				{
+					memcpy(outputBuffer[0], inputBuffer[0], memSize);
+					memcpy(outputBuffer[1], inputBuffer[1], memSize);
+				}
+				pos = 0;
+			}
+		}
+		break;
 	}
+	inOutRWPosition = pos;
 	return mEnable ? 0 : -ENODATA;
 }

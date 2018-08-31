@@ -16,15 +16,20 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 import james.dsp.R;
 import james.dsp.activity.DSPManager;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -164,6 +169,46 @@ public class HeadsetService extends Service
 				throw new RuntimeException(e);
 			}
 		}
+		private byte[] concatArrays(byte[]... arrays)
+		{
+            int len = 0;
+            for (byte[] a : arrays)
+                len += a.length;
+            byte[] b = new byte[len];
+            int offs = 0;
+            for (byte[] a : arrays)
+            {
+                System.arraycopy(a, 0, b, offs, a.length);
+                offs += a.length;
+            }
+            return b;
+        }
+		private void setParameterCharArray(AudioEffect audioEffect, int parameter, String value)
+		{
+			try
+			{
+				byte[] arguments = new byte[]
+				{
+					(byte)(parameter), (byte)(parameter >> 8),
+					(byte)(parameter >> 16), (byte)(parameter >> 24)
+				};
+	            byte[] result = value.getBytes(Charset.forName("US-ASCII"));
+                if (result.length < 256)
+                {
+                    int zeroPad = 256 - result.length;
+                    byte[] zeroArray = new byte[zeroPad];
+                    result = concatArrays(result, zeroArray);
+                    zeroArray = null;
+                }
+				Method setParameter = AudioEffect.class.getMethod("setParameter", byte[].class, byte[].class);
+				setParameter.invoke(audioEffect, arguments, result);
+                result = null;
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
 		private void setParameterInt(AudioEffect audioEffect, int parameter, int value)
 		{
 			try
@@ -262,13 +307,16 @@ public class HeadsetService extends Service
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
+	private String oldVDCName = "";
 	private String oldImpulseName = "";
 	private float oldQuality = 0;
 	private float prelimthreshold = 0;
 	private float prelimrelease = 0;
+	private int olddBGainIR = 0;
 	public static JDSPModule JamesDSPGbEf;
 	private SharedPreferences preferencesMode;
 	public static int dspModuleSamplingRate = 0;
+	public static String ddcString = "";
 	private final BroadcastReceiver mAudioSessionReceiver = new BroadcastReceiver()
 	{
 		@Override
@@ -330,6 +378,9 @@ public class HeadsetService extends Service
 		final boolean prevUseHeadset = mUseHeadset;
 		if (action.equals(AudioManager.ACTION_HEADSET_PLUG))
 			mUseHeadset = intent.getIntExtra("state", 0) == 1;
+		 else
+             if (Build.VERSION.SDK_INT >= 16 && action.equals("android.intent.action.ANALOG_AUDIO_DOCK_PLUG"))
+            	 mUseHeadset = intent.getIntExtra("state", 0) == 1;
 		if (prevUseHeadset != mUseHeadset)
 			updateDsp(true, false);
 	}
@@ -420,6 +471,8 @@ class StartUpOptimiserThread implements Runnable {
 		audioFilter.addAction(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
 		registerReceiver(mAudioSessionReceiver, audioFilter);
 		final IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_HEADSET_PLUG);
+        if (Build.VERSION.SDK_INT >= 16)
+            audioFilter.addAction("android.intent.action.ANALOG_AUDIO_DOCK_PLUG");
 		registerReceiver(mRoutingReceiver, intentFilter);
 		registerReceiver(mPreferenceUpdateReceiver, new IntentFilter(DSPManager.ACTION_UPDATE_PREFERENCES));
 		final IntentFilter btFilter = new IntentFilter();
@@ -608,11 +661,15 @@ class StartUpOptimiserThread implements Runnable {
 			int compressorEnabled = preferences.getBoolean("dsp.compression.enable", false) ? 1 : 0;
 			int bassBoostEnabled = preferences.getBoolean("dsp.bass.enable", false) ? 1 : 0;
 			int equalizerEnabled = preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0;
+			int stringEqEnabled = preferences.getBoolean("dsp.streq.enable", false) ? 1 : 0;
+			int phaseEqEnabled = preferences.getBoolean("dsp.strph.enable", false) ? 1 : 0;
 			int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
 			int bs2bEnabled = preferences.getBoolean("dsp.bs2b.enable", false) ? 1 : 0;
 			int convolverEnabled = preferences.getBoolean("dsp.convolver.enable", false) ? 1 : 0;
 			int analogModelEnabled = preferences.getBoolean("dsp.analogmodelling.enable", false) ? 1 : 0;
+			int pamssEnabled = preferences.getBoolean("dsp.pamss.enable", false) ? 1 : 0;
+			int viperddcEnabled = preferences.getBoolean("dsp.ddc.enable", false) ? 1 : 0;
 //			int wavechild670Enabled = preferences.getBoolean("dsp.wavechild670.enable", false) ? 1 : 0;
 			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20000);
 			if (dspModuleSamplingRate == 0)
@@ -659,7 +716,7 @@ class StartUpOptimiserThread implements Runnable {
 				if(filtertype == 0 && freq < 90)
 						Toast.makeText(HeadsetService.this, R.string.preferredlpf, Toast.LENGTH_SHORT).show();
 			}
-			session.setParameterShort(session.JamesDSP, 154, Short.valueOf(preferences.getString("dsp.tone.filtertype", "0")));
+			session.setParameterShort(session.JamesDSP, 151, Short.valueOf(preferences.getString("dsp.tone.filtertype", "0")));
 			session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
 			if (equalizerEnabled == 1)
 			{
@@ -677,8 +734,49 @@ class StartUpOptimiserThread implements Runnable {
 				}
 				session.setParameterFloatArray(session.JamesDSP, 115, eqLevels);
 			}
+			session.setParameterShort(session.JamesDSP, 152, Short.valueOf(preferences.getString("dsp.streq.filtertype", "0")));
+			session.setParameterShort(session.JamesDSP, 1210, (short)stringEqEnabled); // String equalizer switch
+			if (stringEqEnabled == 1 && updateMajor)
+			{
+				String eqText = preferences.getString("dsp.streq.stringp", "GraphicEQ: 0.0 0.0; ");
+				int arraySize2Send = 256;
+				int stringLength = eqText.length();
+				int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
+				session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
+				for (int i = 0; i < numTime2Send; i++)
+				{
+					session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
+					session.setParameterCharArray(session.JamesDSP, 12001, eqText.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
+				}
+				session.setParameterShort(session.JamesDSP, 10006, (short)1); // Notify send array completed and generate filter in native side
+			}
+			session.setParameterShort(session.JamesDSP, 1211, (short)phaseEqEnabled); // String equalizer switch
+			if (phaseEqEnabled == 1 && updateMajor)
+			{
+				String phTextLeft = preferences.getString("dsp.strph.stringleft", "PhaseShifterLeft: 0.0 0.0; ");
+				int arraySize2Send = 256;
+				int stringLength = phTextLeft.length();
+				int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
+				session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
+				for (int i = 0; i < numTime2Send; i++)
+				{
+					session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
+					session.setParameterCharArray(session.JamesDSP, 12001, phTextLeft.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
+				}
+				session.setParameterShort(session.JamesDSP, 10007, (short)1); // Notify send array completed and generate filter in native side
+				String phTextRight = preferences.getString("dsp.strph.stringright", "PhaseShifterRight: 0.0 180.0; 22000.0 180.0");
+				stringLength = phTextRight.length();
+				numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
+				session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
+				for (int i = 0; i < numTime2Send; i++)
+				{
+					session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
+					session.setParameterCharArray(session.JamesDSP, 12001, phTextRight.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
+				}
+				session.setParameterShort(session.JamesDSP, 10008, (short)1); // Notify send array completed and generate filter in native side
+			}
 			if (reverbEnabled == 1 && updateMajor)
-					session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
+				session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));
 			session.setParameterShort(session.JamesDSP, 1203, (short)reverbEnabled); // Reverb switch
 			if (stereoWideEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 137, Short.valueOf(preferences.getString("dsp.stereowide.mode", "0")));
@@ -689,18 +787,57 @@ class StartUpOptimiserThread implements Runnable {
 			if (analogModelEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
+			session.setParameterShort(session.JamesDSP, 1207, (short)pamssEnabled); // Virtual surround switch
+			if (viperddcEnabled == 1 && updateMajor)
+			{
+				String ddcFilePath = preferences.getString("dsp.ddc.files", "");
+				if (!oldVDCName.equals(ddcFilePath))
+				{
+					oldVDCName = ddcFilePath;
+					StringBuilder contentBuilder = new StringBuilder();
+				    try (BufferedReader br = new BufferedReader(new FileReader(ddcFilePath)))
+				    {
+				        String sCurrentLine;
+				        while ((sCurrentLine = br.readLine()) != null)
+				            contentBuilder.append(sCurrentLine).append("\n");
+				    }
+				    catch (IOException e)
+				    {
+				        e.printStackTrace();
+				    }
+					int arraySize2Send = 256;
+				    ddcString = contentBuilder.toString();
+				    if(ddcString != null && !ddcString.isEmpty())
+				    {
+						int stringLength = ddcString.length();
+						int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
+						session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
+						for (int i = 0; i < numTime2Send; i++)
+						{
+							session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
+							session.setParameterCharArray(session.JamesDSP, 12001, ddcString.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
+						}
+						session.setParameterShort(session.JamesDSP, 10009, (short)1); // Notify send array completed and generate filter in native side
+				    }
+				}
+			}
+			else
+				oldVDCName = "";
+			session.setParameterShort(session.JamesDSP, 1212, (short)viperddcEnabled); // VDC switch
 			if (convolverEnabled == 1 && updateMajor)
 			{
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
 				float quality = Float.valueOf(preferences.getString("dsp.convolver.quality", "1"));
-				int requiredRefresh = session.getParameter(session.JamesDSP, 20001);
+				int dBGainIR = (int)(Math.ceil(Float.valueOf(preferences.getString("dsp.convolver.gain", "0.0")) * 262144.0f));
+//				int requiredRefresh = session.getParameter(session.JamesDSP, 20001);
 				if (modeEffect == 0)
 				{
-					if((oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality) && requiredRefresh == 0)
-						return;	
+					if(oldImpulseName.equals(mConvIRFilePath) && oldQuality == quality && olddBGainIR == dBGainIR)
+						return;
 				}
 				oldImpulseName = mConvIRFilePath;
 				oldQuality = quality;
+				olddBGainIR = dBGainIR;
 				session.setParameterShort(session.JamesDSP, 1205, (short)0);
 				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
 				int[] impinfo = JdspImpResToolbox.GetLoadImpulseResponseInfo(mConvIRFilePath);
@@ -721,7 +858,7 @@ class StartUpOptimiserThread implements Runnable {
 						impulseCutted = (int)(impulseCutted * quality);
 						float[] sendArray = new float[arraySize2Send];
 						int numTime2Send = (int)Math.ceil((double)impulseCutted / arraySize2Send); // Send number of times that have to send
-						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], (int)(Float.valueOf(preferences.getString("dsp.convolver.gain", "0.0")) * 262144.0f), numTime2Send};
+						int[] sendBufInfo = new int[] {impulseCutted, impinfo[0], (int)(Math.ceil(Float.valueOf(preferences.getString("dsp.convolver.gain", "0.0")) * 262144.0f)), numTime2Send};
 						session.setParameterIntArray(session.JamesDSP, 9999, sendBufInfo); // Send buffer info for module to allocate memory
 						float[] finalArray = new float[numTime2Send*arraySize2Send]; // Fill final array with zero padding
 						System.arraycopy(impulseResponse, 0, finalArray, 0, impulseCutted);
@@ -751,14 +888,6 @@ class StartUpOptimiserThread implements Runnable {
 				oldQuality = 0;
 			}
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
-/*			if (wavechild670Enabled == 1 && updateMajor)
-			{
-				session.setParameterShort(session.JamesDSP, 154, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.compdrive", "2"))*1000));
-				session.setParameterShort(session.JamesDSP, 155, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubebass", "8"))*1000));
-				session.setParameterShort(session.JamesDSP, 156, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubemid", "5.6"))*1000));
-				session.setParameterShort(session.JamesDSP, 157, (short) (Float.valueOf(preferences.getString("dsp.wavechild670.tubetreble", "4.5"))*1000));
-			}
-			session.setParameterShort(session.JamesDSP, 1207, (short)wavechild670Enabled); // Analog modelling switch*/
 		}
 	}
 }

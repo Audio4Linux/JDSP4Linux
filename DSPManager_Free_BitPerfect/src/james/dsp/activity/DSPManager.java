@@ -71,11 +71,13 @@ public final class DSPManager extends Activity
     public static final String ACTION_UPDATE_PREFERENCES = "james.dsp.UPDATE";
     public static final String JAMESDSP_FOLDER = "JamesDSP";
     public static final String IMPULSERESPONSE_FOLDER = "Convolver";
+    public static final String DDC_FOLDER = "DDC";
     private static final String PRESETS_FOLDER = "Presets";
     private static int routing;
     public static final String benchmarkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/";
     public static final String wisdomTxt = "ConvolverWisdom.txt";
     public static final String impulseResponsePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/" + DSPManager.IMPULSERESPONSE_FOLDER + "/";
+    public static final String ddcPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DSPManager.JAMESDSP_FOLDER + "/" + DSPManager.DDC_FOLDER + "/";
     public static boolean devMsgDisplay;
     //==================================
     private static String[] mEntries;
@@ -151,6 +153,9 @@ public final class DSPManager extends Activity
         File impFile = new File(preferences.getString("dsp.convolver.files", ""));
         if (!impFile.exists())
             preferences.edit().putString("dsp.convolver.files", getString(R.string.doesntexist)).commit();
+        File ddcFile = new File(preferences.getString("dsp.ddc.files", ""));
+        if (!ddcFile.exists())
+            preferences.edit().putString("dsp.ddc.files", getString(R.string.ddcdoesntexist)).commit();
         if (!preferencesMode.contains("dsp.app.showdevmsg"))
             preferencesMode.edit().putBoolean("dsp.app.showdevmsg", false).commit();
         if (!preferencesMode.contains("dsp.app.theme"))
