@@ -163,10 +163,7 @@ Now work on most Android device from Lollipop to Pie
 
 # Important
 Modify SELinux is not required(in most case), let your device become safer.
-Also, it's good to customizing your own rom or even port rom with JamesDSP.
-
-## How to install?
-See readme in download link.
+Also, it's good to customizing your own ROM or even port ROM with JamesDSP.
 
 # Contact
 Better contact me by email. Send to james34602@gmail.com
