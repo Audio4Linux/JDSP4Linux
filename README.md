@@ -46,7 +46,7 @@ A: Float32(Close source due to proprietary spatialization algorithm) / Float64, 
 
 A: Effect has 2 options to boost low frequency band, IIR based is obsoleted, equalizer already do the job.
 
-   Filtering is work on convolution basis. When user change the bass boost parameter, engine will compute new low pass filter(with gain) impulse response using firls(Function ported from Matlab).
+   Filtering is work on convolution basis. When user change the bass boost parameter, engine will compute new low pass filter(with gain) impulse response using firls, a function ported from Matlab.
    
    2048/4096 order FIR filter should work on all frequency listed on options.
 
@@ -133,8 +133,13 @@ A: Highest compatibility method(Manual installation)
    3. Reboot
    4. Install APK
 
-B: Automatic installation(Only support up to Android 7.1.1)
-   1. Copy zip package to your phone, reboot to TWRP, install package, reboot, done.
+B: Automatic installation(Only support up to Android Pie)
+   1. Join Telegram group [JDSP and V4A group](https://t.me/jDSP_V4A) to receive latest update.
+
+   Methods:
+   1. Copy zip package to your phone, reboot to custom recovery, install package, reboot, done.
+   2. Get Magisk manager to install JDSP.
+Now work on most Android device from Lollipop to Pie
 
 ##### Algorithms included in non open source version
 1. Arbitrary response IIR library
@@ -148,13 +153,6 @@ B: Automatic installation(Only support up to Android 7.1.1)
 
 ##### Coming up:
 1. Auto-detected bit rates MP3 high frequency harmonic excitor
-
-##### TODO:
-1. Support automatic Android 8.0 installation.
-
-Now work on AOSP, Cyanogenmod, Samsung on Android 5.0, 6.0 and 7.0/7.1(TESTED)
-
-Some tester report latest release is fully functioning on Android Oreo, but only by manual installation method(Q/A 10B)
 
 ## Download Link
 1. See my project release page
