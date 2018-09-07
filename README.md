@@ -162,7 +162,7 @@ Now work on most Android device from Lollipop to Pie
 2. [Convolver screenshot(Idea theme)](https://github.com/james34602/JamesDSPManager/blob/master/ScreenshotMainApp2.png)
 
 # Important
-This won't require to modify SELinux(in most case), let your device become more safe.
+Modify SELinux is not required(in most case), let your device become safer.
 Also, it's good to customizing your own rom or even port rom with JamesDSP.
 
 ## How to install?
