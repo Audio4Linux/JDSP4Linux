@@ -101,7 +101,7 @@ A: Yes. It is relatively easy to use some effect in other applications. Convolve
 
 #### 10. Installation method
 
-A: Highest compatibility method(Manual installation)
+A: Advanced method(Manual installation)
 
    Effect may get unloaded by Android system if no audio stream for while.
 
