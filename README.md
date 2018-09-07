@@ -133,9 +133,8 @@ A: Advanced method(Manual installation)
    3. Reboot
    4. Install APK
 
-B: Automatic installation(Only support up to Android Pie)
-   1. Join Telegram group [JDSP and V4A group](https://t.me/jDSP_V4A) to receive latest update.
-
+B: Automatic installation(Supported up to Android Pie)
+   Join Telegram group [JDSP and V4A group](https://t.me/jDSP_V4A) to receive latest update.
    Methods:
    1. Copy zip package to your phone, reboot to custom recovery, install package, reboot, done.
    2. Get Magisk manager to install JDSP.
