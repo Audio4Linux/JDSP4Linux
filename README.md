@@ -82,6 +82,9 @@ A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [Z
 The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will tend to clip the audio. Analog amplifier was built from real mathematical model, most notably is nonlinearity of vacuum tube.
 Original is written in C++, for some reasons I ported it to C implementation.
 
+####Example circuit for triode amplifier and tonestack:
+<a><img src="https://raw.githubusercontent.com/james34602/JamesDSPManager/master/Misc/Valve/TubeTonestack.svg"/></a>
+
 #### 6. What is Misc folder does?
 
 File reverbHeap is modified Progenitor 2 reverb, memory allocation is using heap not stack, it will be useful when you play around with Visual Studio, because VS have 1Mb stack allocation limit...
