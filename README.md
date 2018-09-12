@@ -181,6 +181,7 @@ Source code is provided under the [GPL V2](https://www.gnu.org/licenses/old-lice
 1. Joseph Young (Impulse response provider)
 2. Christopher Blomeyer (Very patient app tester and inspiring me bit depth issue)
 3. [ahrion](https://github.com/therealahrion) (Making installation tools)
+4. [Zackptg5](https://github.com/Zackptg5) (Making installation tools)
 
 ### More Credit
 1. Matlab, for verifying algorithm correctness
