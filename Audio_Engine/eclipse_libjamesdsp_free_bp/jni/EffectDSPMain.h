@@ -24,8 +24,8 @@ class EffectDSPMain : public Effect
 protected:
 	int stringLength;
 	char *stringEq;
-	DirectForm2 **df441, **df48, **sosPointer;
-	int sosCount;
+	DirectForm2 **df441, **df48, **dfResampled, **sosPointer;
+	int sosCount, resampledSOSCount, usedSOSCount;
 	typedef struct threadParamsConv {
 		AutoConvolverMono **conv;
 		double **in, **out;

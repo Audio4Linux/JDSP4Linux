@@ -6,3 +6,4 @@ typedef struct
 double SOS_DF2Process(DirectForm2 *df2, double x);
 void SOS_DF2_StereoProcess(DirectForm2 *df2, double x1, double x2, double *Out_y1, double *Out_y2);
 int DDCParser(char *DDCString, DirectForm2 ***ptrdf441, DirectForm2 ***ptrdf48);
+int PeakingFilterResampler(DirectForm2 **inputIIR, double inFs, DirectForm2 ***resampledIIR, double outFs, int sosCount);

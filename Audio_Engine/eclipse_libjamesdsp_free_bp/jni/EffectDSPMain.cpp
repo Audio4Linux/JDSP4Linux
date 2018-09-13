@@ -19,7 +19,7 @@ const double interpFreq[NUM_BANDS] = { 25.0, 40.0, 63.0, 100.0, 160.0, 250.0, 40
 
 EffectDSPMain::EffectDSPMain()
 	: DSPbufferLength(1024), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0), pregain(12.0), threshold(-60.0), knee(30.0), ratio(12.0), attack(0.001), release(0.24), isBenchData(0), mPreset(0), reverbEnabled(0), threadResult(0)
-	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0), sosCount(0), df441(0), df48(0)
+	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0), sosCount(0), resampledSOSCount(0), usedSOSCount(0), df441(0), df48(0), dfResampled(0)
 	, tempImpulseIncoming(0), tempImpulsedouble(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[12] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778 };
@@ -90,6 +90,14 @@ EffectDSPMain::~EffectDSPMain()
 		free(df441);
 		free(df48);
 		sosCount = 0;
+		if (resampledSOSCount)
+		{
+			for (int i = 0; i < resampledSOSCount; i++)
+				free(dfResampled[i]);
+			free(dfResampled);
+			dfResampled = 0;
+			resampledSOSCount = 0;
+		}
 	}
 #ifdef DEBUG
 	LOGI("Buffer freed");
@@ -587,18 +595,22 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 				int16_t oldVal = viperddcEnabled;
 				if (mSamplingRate == 44100.0 && df441)
 				{
-					viperddcEnabled = ((int16_t *)cep)[8];
 					sosPointer = df441;
+					usedSOSCount = sosCount;
+					viperddcEnabled = ((int16_t *)cep)[8];
 				}
 				else if (mSamplingRate == 48000.0 && df48)
 				{
-					viperddcEnabled = ((int16_t *)cep)[8];
 					sosPointer = df48;
+					usedSOSCount = sosCount;
+					viperddcEnabled = ((int16_t *)cep)[8];
 				}
 				else
 				{
-					viperddcEnabled = 0;
-					sosPointer = 0;
+					resampledSOSCount = PeakingFilterResampler(df48, 48000.0, &dfResampled, mSamplingRate, sosCount);
+					usedSOSCount = resampledSOSCount;
+					sosPointer = dfResampled;
+					viperddcEnabled = ((int16_t *)cep)[8];
 				}
 #ifdef DEBUG
 				LOGI("viperddcEnabled: %d", viperddcEnabled);
@@ -622,6 +634,14 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						free(df48);
 						df48 = 0;
 						sosCount = 0;
+						if (resampledSOSCount)
+						{
+							for (int i = 0; i < resampledSOSCount; i++)
+								free(dfResampled[i]);
+							free(dfResampled);
+							dfResampled = 0;
+							resampledSOSCount = 0;
+						}
 						sosPointer = 0;
 					}
 				}
@@ -716,6 +736,14 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 						free(df48);
 						df48 = 0;
 						sosCount = 0;
+						if (resampledSOSCount)
+						{
+							for (int i = 0; i < resampledSOSCount; i++)
+								free(dfResampled[i]);
+							free(dfResampled);
+							dfResampled = 0;
+							resampledSOSCount = 0;
+						}
 						sosPointer = 0;
 					}
 				}
@@ -884,7 +912,7 @@ int32_t EffectDSPMain::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDat
 }
 void EffectDSPMain::refreshTubeAmp()
 {
-	if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, 6.5, 5.6, 4.5, 5, 8192, 0))
+	if (!InitTube(&tubeP[0], 0, mSamplingRate, tubedrive, 8192, 0))
 		analogModelEnable = 0;
 	tubeP[1] = tubeP[0];
 	rightparams2.tube = tubeP;
@@ -1219,7 +1247,7 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 					for (i = 0; i < DSPbufferLength; i++)
 					{
 						double sampleOutL = inputBuffer[0][i], sampleOutR = inputBuffer[1][i];
-						for (int j = 0; j < sosCount; j++)
+						for (int j = 0; j < usedSOSCount; j++)
 							SOS_DF2_StereoProcess(sosPointer[j], sampleOutL, sampleOutR, &sampleOutL, &sampleOutR);
 						outputBuffer[0][i] = sampleOutL;
 						outputBuffer[1][i] = sampleOutR;
@@ -1353,7 +1381,7 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 					for (i = 0; i < DSPbufferLength; i++)
 					{
 						double sampleOutL = inputBuffer[0][i], sampleOutR = inputBuffer[1][i];
-						for (int j = 0; j < sosCount; j++)
+						for (int j = 0; j < usedSOSCount; j++)
 							SOS_DF2_StereoProcess(sosPointer[j], sampleOutL, sampleOutR, &sampleOutL, &sampleOutR);
 						outputBuffer[0][i] = sampleOutL;
 						outputBuffer[1][i] = sampleOutR;
@@ -1487,7 +1515,7 @@ int32_t EffectDSPMain::process(audio_buffer_t *in, audio_buffer_t *out)
 					for (i = 0; i < DSPbufferLength; i++)
 					{
 						double sampleOutL = inputBuffer[0][i], sampleOutR = inputBuffer[1][i];
-						for (int j = 0; j < sosCount; j++)
+						for (int j = 0; j < usedSOSCount; j++)
 							SOS_DF2_StereoProcess(sosPointer[j], sampleOutL, sampleOutR, &sampleOutL, &sampleOutR);
 						outputBuffer[0][i] = sampleOutL;
 						outputBuffer[1][i] = sampleOutR;

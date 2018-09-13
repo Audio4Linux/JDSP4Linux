@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <math.h>
+#include <float.h>
 #include "vdc.h"
 double SOS_DF2Process(DirectForm2 *df2, double x1)
 {
@@ -119,4 +121,121 @@ int DDCParser(char *DDCString, DirectForm2 ***ptrdf441, DirectForm2 ***ptrdf48)
 	*ptrdf441 = df441;
 	*ptrdf48 = df48;
 	return sosCount;
+}
+void complexMultiplicationRI(double *zReal, double *zImag, double xReal, double xImag, double yReal, double yImag)
+{
+	*zReal = xReal * yReal - xImag * yImag;
+	*zImag = xReal * yImag + xImag * yReal;
+}
+void complexDivisionRI(double *zReal, double *zImag, double xReal, double xImag, double yReal, double yImag)
+{
+	*zReal = (xReal * yReal + xImag * yImag) / (yReal * yReal + yImag * yImag);
+	*zImag = (xImag * yReal - xReal * yImag) / (yReal * yReal + yImag * yImag);
+}
+// Analytical magnitude response of digital filters
+void DigitalFilterMagnitudeResponsedB(DirectForm2 **IIR, int section, double *magnitude, int NumPts)
+{
+	double Arg;
+	double z1Real, z1Imag, z2Real, z2Imag, HofZReal, HofZImag, DenomReal, DenomImag, tmpReal, tmpImag;
+	for (int j = 0; j < NumPts; j++)
+	{
+		Arg = M_PI * (double)j / (double)NumPts;
+		z1Real = cos(Arg), z1Imag = -sin(Arg);
+		complexMultiplicationRI(&z2Real, &z2Imag, z1Real, z1Imag, z1Real, z1Imag);
+		HofZReal = 1.0, HofZImag = 0.0;
+		tmpReal = IIR[section]->b0 + IIR[section]->b1 * z1Real + IIR[section]->b2 * z2Real;
+		tmpImag = IIR[section]->b1 * z1Imag + IIR[section]->b2 * z2Imag;
+		complexMultiplicationRI(&HofZReal, &HofZImag, HofZReal, HofZImag, tmpReal, tmpImag);
+		DenomReal = 1.0 + IIR[section]->a1 * z1Real + IIR[section]->a2 * z2Real;
+		DenomImag = IIR[section]->a1 * z1Imag + IIR[section]->a2 * z2Imag;
+		if (sqrt(DenomReal * DenomReal + DenomImag * DenomImag) < DBL_EPSILON)
+			magnitude[j] = 0.0;
+		else
+		{
+			complexDivisionRI(&HofZReal, &HofZImag, HofZReal, HofZImag, DenomReal, DenomImag);
+			magnitude[j] = 20.0 * log10(sqrt(HofZReal * HofZReal + HofZImag * HofZImag));
+		}
+	}
+}
+// DDC resampler
+void designPeakingFilter(double dbGain, double centreFreq, double fs, double dBandwidthOrQOrS, double *b0, double *b1, double *b2, double *a1, double *a2)
+{
+	if (centreFreq <= DBL_EPSILON || fs <= DBL_EPSILON)
+		return;
+	const double at1d3 = atanh(1.0 / 3.0);
+	double lingain = pow(10.0, dbGain / 40.0);
+	double omega = (6.2831853071795862 * centreFreq) / fs;
+	double num3 = sin(omega);
+	double cs = cos(omega);
+	double alpha = num3 * sinh((at1d3 * dBandwidthOrQOrS * omega) / num3);
+	double B0 = 1.0 + (alpha * lingain);
+	double B1 = -2.0 * cs;
+	double B2 = 1.0 - (alpha * lingain);
+	double A0 = 1.0 + (alpha / lingain);
+	double A1 = -2.0 * cs;
+	double A2 = 1.0 - (alpha / lingain);
+	*b0 = B0 / A0;
+	*b1 = B1 / A0;
+	*b2 = B2 / A0;
+	*a1 = A1 / A0;
+	*a2 = A2 / A0;
+}
+int PeakingFilterResampler(DirectForm2 **inputIIR, double inFs, DirectForm2 ***resampledIIR, double outFs, int sosCount)
+{
+	const int filterTestLength = 32768;
+	double *magnitude = (double*)malloc(filterTestLength * sizeof(double));
+	int i;
+	int outSOSCount = 0;
+	double *cell[3];
+	for (i = 0; i < 3; i++)
+		cell[i] = (double*)malloc(sosCount * sizeof(double));
+	for (i = 0; i < sosCount; i++)
+	{
+		DigitalFilterMagnitudeResponsedB(inputIIR, i, magnitude, filterTestLength);
+		double absoluteMax = fabs(magnitude[0]);
+		double centreFreq = 0.0;
+		int index = 0;
+		for (int c = 1; c < filterTestLength; c++)
+		{
+			if (fabs(magnitude[c]) > absoluteMax)
+			{
+				absoluteMax = fabs(magnitude[c]);
+				index = c;
+				centreFreq = round(c * (inFs / filterTestLength / 2.0));
+			}
+		}
+		if (centreFreq < DBL_EPSILON)
+			centreFreq = DBL_EPSILON;
+		if (fabs(inputIIR[i]->b1) < DBL_EPSILON)
+		{
+			if (inputIIR[i]->b1 < 0.0)
+				inputIIR[i]->b1 = -DBL_EPSILON;
+			else
+				inputIIR[i]->b1 = DBL_EPSILON;
+		}
+		double omega = (6.2831853071795862 * centreFreq) / inFs;
+		double A0 = (-2.0 * cos(omega)) / inputIIR[i]->b1;
+		double lingain = pow(10.0, magnitude[index] / 40.0);
+		double num3 = sin(omega);
+		double bandwidth = ((asinh(((A0 - 1.0) * lingain) / num3) * num3) / omega) / 0.34657359027997264;
+		if (bandwidth > 98.8 - DBL_EPSILON)
+			bandwidth = 98.8;
+		if (centreFreq < outFs - DBL_EPSILON)
+			outSOSCount++;
+		cell[0][i] = magnitude[index];
+		cell[1][i] = centreFreq;
+		cell[2][i] = bandwidth;
+	}
+	free(magnitude);
+	DirectForm2 **temp = (DirectForm2**)malloc(outSOSCount * sizeof(DirectForm2*));
+	for (i = 0; i < outSOSCount; i++)
+	{
+		temp[i] = (DirectForm2*)malloc(sizeof(DirectForm2));
+		memset(temp[i], 0, sizeof(DirectForm2));
+		designPeakingFilter(cell[0][i], cell[1][i], outFs, cell[2][i], &temp[i]->b0, &temp[i]->b1, &temp[i]->b2, &temp[i]->a1, &temp[i]->a2);
+	}
+	for (i = 0; i < 3; i++)
+		free(cell[i]);
+	*resampledIIR = temp;
+	return outSOSCount;
 }
