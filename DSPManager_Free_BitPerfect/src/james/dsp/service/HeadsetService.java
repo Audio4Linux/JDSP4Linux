@@ -661,8 +661,6 @@ class StartUpOptimiserThread implements Runnable {
 			int compressorEnabled = preferences.getBoolean("dsp.compression.enable", false) ? 1 : 0;
 			int bassBoostEnabled = preferences.getBoolean("dsp.bass.enable", false) ? 1 : 0;
 			int equalizerEnabled = preferences.getBoolean("dsp.tone.enable", false) ? 1 : 0;
-			int stringEqEnabled = preferences.getBoolean("dsp.streq.enable", false) ? 1 : 0;
-			int phaseEqEnabled = preferences.getBoolean("dsp.strph.enable", false) ? 1 : 0;
 			int reverbEnabled = preferences.getBoolean("dsp.headphone.enable", false) ? 1 : 0;
 			int stereoWideEnabled = preferences.getBoolean("dsp.stereowide.enable", false) ? 1 : 0;
 			int bs2bEnabled = preferences.getBoolean("dsp.bs2b.enable", false) ? 1 : 0;
@@ -732,47 +730,6 @@ class StartUpOptimiserThread implements Runnable {
 						eqLevels[i] = Float.valueOf(levels[i]);
 				}
 				session.setParameterFloatArray(session.JamesDSP, 115, eqLevels);
-			}
-			session.setParameterShort(session.JamesDSP, 152, Short.valueOf(preferences.getString("dsp.streq.filtertype", "0")));
-			session.setParameterShort(session.JamesDSP, 1210, (short)stringEqEnabled); // String equalizer switch
-			if (stringEqEnabled == 1 && updateMajor)
-			{
-				String eqText = preferences.getString("dsp.streq.stringp", "GraphicEQ: 0.0 0.0; ");
-				int arraySize2Send = 256;
-				int stringLength = eqText.length();
-				int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
-				session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
-				for (int i = 0; i < numTime2Send; i++)
-				{
-					session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
-					session.setParameterCharArray(session.JamesDSP, 12001, eqText.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
-				}
-				session.setParameterShort(session.JamesDSP, 10006, (short)1); // Notify send array completed and generate filter in native side
-			}
-			session.setParameterShort(session.JamesDSP, 1211, (short)phaseEqEnabled); // String equalizer switch
-			if (phaseEqEnabled == 1 && updateMajor)
-			{
-				String phTextLeft = preferences.getString("dsp.strph.stringleft", "PhaseShifterLeft: 0.0 0.0; ");
-				int arraySize2Send = 256;
-				int stringLength = phTextLeft.length();
-				int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
-				session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
-				for (int i = 0; i < numTime2Send; i++)
-				{
-					session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
-					session.setParameterCharArray(session.JamesDSP, 12001, phTextLeft.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
-				}
-				session.setParameterShort(session.JamesDSP, 10007, (short)1); // Notify send array completed and generate filter in native side
-				String phTextRight = preferences.getString("dsp.strph.stringright", "PhaseShifterRight: 0.0 180.0; 22000.0 180.0");
-				stringLength = phTextRight.length();
-				numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
-				session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
-				for (int i = 0; i < numTime2Send; i++)
-				{
-					session.setParameterShort(session.JamesDSP, 10005, (short)i); // Increment sliced buffer
-					session.setParameterCharArray(session.JamesDSP, 12001, phTextRight.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
-				}
-				session.setParameterShort(session.JamesDSP, 10008, (short)1); // Notify send array completed and generate filter in native side
 			}
 			if (reverbEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 128, Short.valueOf(preferences.getString("dsp.headphone.preset", "0")));

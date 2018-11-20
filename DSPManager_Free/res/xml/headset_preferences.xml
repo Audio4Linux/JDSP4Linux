@@ -271,5 +271,12 @@
         android:summaryOn="@string/pref_headset_pamss_summary_on"
         android:summaryOff="@string/pref_headset_pamss_summary_off"
         android:title="@string/pref_headset_pamss_enable"></CheckBoxPreference>
+    <james.dsp.preference.SummariedListPreference
+        android:defaultValue="90"
+        android:dialogTitle="@string/dialog_pamss_wrap"
+        android:entries="@array/pamss_wrap"
+        android:entryValues="@array/pamss_wrap_values"
+        android:title="@string/dialog_pamss_wrap"
+        android:key="dsp.pamss.wrap" />
   </PreferenceCategory>
 </PreferenceScreen>

@@ -113,6 +113,7 @@
   <string name="pref_headset_pamss_summary_on">TruCentre is enabled</string>
   <string name="pref_headset_pamss_summary_off">TruCentre is disabled</string>
   <string name="pref_headset_pamss_enable">Enable TruCentre Surround</string>
+  <string name="dialog_pamss_wrap">Speaker wrap angle</string>
 
   <string name="eq_preset_flat">Flat</string>
   <string name="eq_preset_custom">Custom</string>

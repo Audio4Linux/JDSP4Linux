@@ -788,6 +788,11 @@ class StartUpOptimiserThread implements Runnable {
 				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
 			session.setParameterShort(session.JamesDSP, 1207, (short)pamssEnabled); // Virtual surround switch
+			if (pamssEnabled == 1 && updateMajor)
+			{
+				float circularWrap = Float.valueOf(preferences.getString("dsp.pamss.wrap", "90"));
+				session.setParameterFloatArray(session.JamesDSP, 1501, new float[]{ 0.0f, circularWrap, 0.0f, 0.0f, 0.0f });	
+			}
 			if (viperddcEnabled == 1 && updateMajor)
 			{
 				String ddcFilePath = preferences.getString("dsp.ddc.files", "");

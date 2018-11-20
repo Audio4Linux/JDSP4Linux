@@ -1,28 +1,10 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
-LOCAL_MODULE    := fftw3
-ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
-LOCAL_SRC_FILES := fftw/DoubleARM/libfftw3.a
-else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
-LOCAL_SRC_FILES := fftw/DoubleARM64/libfftw3.a
-else ifeq ($(TARGET_ARCH_ABI), x86)
-LOCAL_SRC_FILES := fftw/Doublex86/libfftw3.a
-endif
-include $(PREBUILT_STATIC_LIBRARY)
-include $(CLEAR_VARS)
-LOCAL_MODULE    := fftw3thread
-ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
-LOCAL_SRC_FILES := fftw/DoubleARM/libfftw3_threads.a
-else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
-LOCAL_SRC_FILES := fftw/DoubleARM64/libfftw3_threads.a
-else ifeq ($(TARGET_ARCH_ABI), x86)
-LOCAL_SRC_FILES := fftw/Doublex86/libfftw3_threads.a
-endif
-include $(PREBUILT_STATIC_LIBRARY)
-include $(CLEAR_VARS)
 LOCAL_MODULE := libjamesdsp
 LOCAL_PRELINK_MODULE := false
 LOCAL_SRC_FILES := \
+	kissfft/kiss_fft.c \
+	kissfft/kiss_fftr.c \
 	jamesdsp.cpp \
 	Effect.cpp \
 	EffectDSPMain.cpp \
@@ -40,8 +22,6 @@ LOCAL_SRC_FILES := \
 #	valve/wavechild670/wdfcircuits.c \
 #	valve/wavechild670/wavechild670.c \
 # terminator
-
-LOCAL_STATIC_LIBRARIES := fftw3thread fftw3
 #LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
 LOCAL_CPPFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -DNDEBUG# -DDEBUG

@@ -142,4 +142,38 @@
     <item>1</item>
     <item>2</item>
   </string-array>
+  
+  <string-array name="pamss_wrap">
+    <item>30 Degree</item>
+    <item>50 Degree</item>
+    <item>70 Degree</item>
+    <item>90 Degree</item>
+    <item>100 Degree</item>
+    <item>120 Degree</item>
+    <item>140 Degree</item>
+    <item>160 Degree</item>
+    <item>180 Degree</item>
+    <item>200 Degree</item>
+    <item>220 Degree</item>
+    <item>240 Degree</item>
+    <item>260 Degree</item>
+    <item>270 Degree</item>
+  </string-array>
+  
+  <string-array name="pamss_wrap_values" translatable="false">
+    <item>30</item>
+    <item>50</item>
+    <item>70</item>
+    <item>90</item>
+    <item>100</item>
+    <item>120</item>
+    <item>140</item>
+    <item>160</item>
+    <item>180</item>
+    <item>200</item>
+    <item>220</item>
+    <item>240</item>
+    <item>260</item>
+    <item>270</item>
+  </string-array>
 </resources>

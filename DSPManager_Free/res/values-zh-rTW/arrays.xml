@@ -53,4 +53,24 @@
     <item>更弱</item>
     <item>弱</item>
   </string-array>
+  <string-array name="pamss_wrap">
+    <item>30度</item>
+    <item>50度</item>
+    <item>70度</item>
+    <item>90度</item>
+    <item>100度</item>
+    <item>120度</item>
+    <item>140度</item>
+    <item>160度</item>
+    <item>180度</item>
+    <item>200度</item>
+    <item>220度</item>
+    <item>240度</item>
+    <item>260度</item>
+    <item>280度</item>
+    <item>300度</item>
+    <item>320度</item>
+    <item>340度</item>
+    <item>360度</item>
+  </string-array>
 </resources>

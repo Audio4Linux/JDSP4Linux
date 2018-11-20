@@ -87,16 +87,6 @@
     <item>2</item>
   </string-array>
   
-  <string-array name="equalizer_stringfiltertype">
-    <item>Minimum phase</item>
-    <item>Linear phase</item>
-  </string-array>
-
-  <string-array name="equalizer_stringfiltertype_values" translatable="false">
-    <item>0</item>
-    <item>1</item>
-  </string-array>
-  
   <string-array name="quality_level">
     <item>Truncate to 40&#65130;</item>
     <item>Truncate to 50&#65130;</item>

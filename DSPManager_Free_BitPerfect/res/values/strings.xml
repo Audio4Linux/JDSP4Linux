@@ -27,17 +27,6 @@
   <string name="pref_effect_freq_title">Cutoff frequency [Int:30 &#8211; 300]Hz</string>
   <string name="dialog_effect">Effect strength</string>
   <string name="pref_equalizer_title">Mixed Equalizer</string>
-  <string name="pref_strequalizer_enable">Enable Arbitrary Magnitude Response Equalizer</string>
-  <string name="pref_strphase_enable">Enable Arbitrary Phase Response Equalizer</string>
-  <string name="pref_strequalizer_title">Arbitrary Response Equalizer</string>
-  <string name="pref_strequalizer_summary_on">Arbitrary magnitude is enabled</string>
-  <string name="pref_strequalizer_summary_off">Arbitrary magnitude is disabled</string>
-  <string name="dialog_magnitude_response">Magnitude response string</string>
-  <string name="pref_strphase_title">Arbitrary Phase Response</string>
-  <string name="pref_strphase_summary_on">Arbitrary Phase is enabled</string>
-  <string name="pref_strphase_summary_off">Arbitrary Phase is disabled</string>
-  <string name="dialog_phaseleft_response">Phase response(Left) string</string>
-  <string name="dialog_phaseright_response">Phase response(Right) string</string>
   <string name="pref_equalizer_summary_on">Hybrid Equalizer is enabled</string>
   <string name="pref_equalizer_summary_off">Hybrid Equalizer is disabled</string>
   <string name="pref_equalizer_enable">Enable</string>
@@ -109,10 +98,6 @@
   <string name="pref_headset_bs2b_summary_off">BS2B is disabled</string>
   <string name="dialog_bs2b">BS2B Preset</string>
   <string name="pref_headset_bs2b_enable">Enable BS2B</string>
-  <string name="pref_headset_pams_title">TruCentre with Joe0Bloggs filter</string>
-  <string name="pref_headset_pamss_summary_on">TruCentre is enabled</string>
-  <string name="pref_headset_pamss_summary_off">TruCentre is disabled</string>
-  <string name="pref_headset_pamss_enable">Enable TruCentre Surround</string>
 
   <string name="eq_preset_flat">Flat</string>
   <string name="eq_preset_custom">Custom</string>

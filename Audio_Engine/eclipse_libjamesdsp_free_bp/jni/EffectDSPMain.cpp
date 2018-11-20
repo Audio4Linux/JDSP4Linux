@@ -18,16 +18,12 @@ typedef struct
 const double interpFreq[NUM_BANDS] = { 25.0, 40.0, 63.0, 100.0, 160.0, 250.0, 400.0, 630.0, 1000.0, 1600.0, 2500.0, 4000.0, 6300.0, 10000.0, 16000.0 };
 
 EffectDSPMain::EffectDSPMain()
-	: DSPbufferLength(1024), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0), pregain(12.0), threshold(-60.0), knee(30.0), ratio(12.0), attack(0.001), release(0.24), isBenchData(0), mPreset(0), reverbEnabled(0), threadResult(0)
+	: DSPbufferLength(1024), inOutRWPosition(0), equalizerEnabled(0), ramp(1.0), pregain(12.0), threshold(-60.0), knee(30.0), ratio(12.0), attack(0.001), release(0.24), isBenchData(0), mPreset(0), reverbEnabled(0)
 	, mMatrixMCoeff(1.0), mMatrixSCoeff(1.0), bassBoostLp(0), FIREq(0), convolver(0), fullStereoConvolver(0), sosCount(0), resampledSOSCount(0), usedSOSCount(0), df441(0), df48(0), dfResampled(0)
 	, tempImpulseIncoming(0), tempImpulsedouble(0), finalImpulse(0), convolverReady(-1), bassLpReady(-1), analogModelEnable(0), tubedrive(2.0), eqFilterType(0), arbEq(0), xaxis(0), yaxis(0), eqFIRReady(0)
 {
 	double c0[12] = { 2.138018534150542e-5, 4.0608501987194246e-5, 7.950414700590711e-5, 1.4049065318523225e-4, 2.988065284903209e-4, 0.0013061668170781858, 0.0036204239724680425, 0.008959629624060151, 0.027083658741258742, 0.08156916666666666, 0.1978822177777778, 0.4410733777777778 };
 	double c1[12] = { 5.88199398839289e-6, 1.1786813951189911e-5, 2.5600214528512222e-5, 8.53041086120132e-5, 2.656291374239004e-4, 5.047717001008378e-4, 8.214255850540808e-4, 0.0016754651127819551, 0.0033478867132867136, 0.006705333333333334, 0.013496382222222221, 0.02673028888888889 };
-	if (ACFFTWThreadInit())
-		threadResult = 2;
-	else
-		threadResult = 0;
 	benchmarkValue[0] = (double*)malloc(12 * sizeof(double));
 	benchmarkValue[1] = (double*)malloc(12 * sizeof(double));
 	memcpy(benchmarkValue[0], c0, sizeof(c0));
@@ -72,10 +68,6 @@ EffectDSPMain::~EffectDSPMain()
 		free(tempImpulseIncoming);
 	if (tempImpulsedouble)
 		free(tempImpulsedouble);
-	if (threadResult)
-		ACFFTWClean(1);
-	else
-		ACFFTWClean(0);
 	if (benchmarkValue[0])
 		free(benchmarkValue[0]);
 	if (benchmarkValue[1])
@@ -109,7 +101,7 @@ void EffectDSPMain::FreeBassBoost()
 	{
 		for (unsigned int i = 0; i < NUMCHANNEL; i++)
 		{
-			AutoConvolverMonoFree(bassBoostLp[i]);
+			AutoConvolver1x1Free(bassBoostLp[i]);
 			free(bassBoostLp[i]);
 		}
 		free(bassBoostLp);
@@ -139,7 +131,7 @@ void EffectDSPMain::FreeEq()
 	{
 		for (unsigned int i = 0; i < NUMCHANNEL; i++)
 		{
-			AutoConvolverMonoFree(FIREq[i]);
+			AutoConvolver1x1Free(FIREq[i]);
 			free(FIREq[i]);
 		}
 		free(FIREq);
@@ -156,7 +148,7 @@ void EffectDSPMain::FreeConvolver()
 		{
 			if (convolver[i])
 			{
-				AutoConvolverMonoFree(convolver[i]);
+				AutoConvolver1x1Free(convolver[i]);
 				free(convolver[i]);
 				convolver[i] = 0;
 			}
@@ -170,7 +162,7 @@ void EffectDSPMain::FreeConvolver()
 		{
 			if (fullStereoConvolver[i])
 			{
-				AutoConvolverMonoFree(fullStereoConvolver[i]);
+				AutoConvolver1x1Free(fullStereoConvolver[i]);
 				free(fullStereoConvolver[i]);
 				fullStereoConvolver[i] = 0;
 			}
@@ -937,15 +929,15 @@ void EffectDSPMain::refreshBassLinearPhase(uint32_t DSPbufferLength, uint32_t ta
 	unsigned int i;
 	if (!bassBoostLp)
 	{
-		bassBoostLp = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
+		bassBoostLp = (AutoConvolver1x1**)malloc(sizeof(AutoConvolver1x1*) * NUMCHANNEL);
 		for (i = 0; i < NUMCHANNEL; i++)
-			bassBoostLp[i] = AllocateAutoConvolverMonoZeroLatency(freqSamplImp, filterLength, DSPbufferLength, threadResult);
+			bassBoostLp[i] = AllocateAutoConvolver1x1ZeroLatency(freqSamplImp, filterLength, DSPbufferLength);
 		ramp = 0.4;
 	}
 	else
 	{
 		for (i = 0; i < NUMCHANNEL; i++)
-			UpdateAutoConvolverMonoZeroLatency(bassBoostLp[i], freqSamplImp, filterLength);
+			UpdateAutoConvolver1x1ZeroLatency(bassBoostLp[i], freqSamplImp, filterLength);
 	}
 	free(freqSamplImp);
 #ifdef DEBUG
@@ -966,15 +958,15 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 	{
 		if (impChannels < 3)
 		{
-			convolver = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * 2);
+			convolver = (AutoConvolver1x1**)malloc(sizeof(AutoConvolver1x1*) * 2);
 			if (!convolver)
 				return 0;
 			for (i = 0; i < 2; i++)
 			{
 				if (impChannels == 1)
-					convolver[i] = InitAutoConvolverMono(finalImpulse[0], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12, threadResult);
+					convolver[i] = InitAutoConvolver1x1(finalImpulse[0], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12);
 				else
-					convolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12, threadResult);
+					convolver[i] = InitAutoConvolver1x1(finalImpulse[i], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12);
 			}
 			fullStconvparams.conv = convolver;
 			fullStconvparams.out = outputBuffer;
@@ -997,11 +989,11 @@ int EffectDSPMain::refreshConvolver(uint32_t DSPbufferLength)
 		}
 		else if (impChannels == 4)
 		{
-			fullStereoConvolver = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * 4);
+			fullStereoConvolver = (AutoConvolver1x1**)malloc(sizeof(AutoConvolver1x1*) * 4);
 			if (!fullStereoConvolver)
 				return 0;
 			for (i = 0; i < 4; i++)
-				fullStereoConvolver[i] = InitAutoConvolverMono(finalImpulse[i], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12, threadResult);
+				fullStereoConvolver[i] = InitAutoConvolver1x1(finalImpulse[i], impulseLengthActual, DSPbufferLength, convGaindB, benchmarkValue, 12);
 			fullStconvparams.conv = fullStereoConvolver;
 			fullStconvparams1.conv = fullStereoConvolver;
 			fullStconvparams.out = tempBuf;
@@ -1078,14 +1070,14 @@ void EffectDSPMain::refreshEqBands(uint32_t DSPbufferLength, double *bands)
 	double *eqImpulseResponse = arbEq->GetFilter(arbEq, mSamplingRate);
 	if (!FIREq)
 	{
-		FIREq = (AutoConvolverMono**)malloc(sizeof(AutoConvolverMono*) * NUMCHANNEL);
+		FIREq = (AutoConvolver1x1**)malloc(sizeof(AutoConvolver1x1*) * NUMCHANNEL);
 		for (i = 0; i < NUMCHANNEL; i++)
-			FIREq[i] = AllocateAutoConvolverMonoZeroLatency(eqImpulseResponse, eqfilterLength, DSPbufferLength, threadResult);
+			FIREq[i] = AllocateAutoConvolver1x1ZeroLatency(eqImpulseResponse, eqfilterLength, DSPbufferLength);
 	}
 	else
 	{
 		for (i = 0; i < NUMCHANNEL; i++)
-			UpdateAutoConvolverMonoZeroLatency(FIREq[i], eqImpulseResponse, eqfilterLength);
+			UpdateAutoConvolver1x1ZeroLatency(FIREq[i], eqImpulseResponse, eqfilterLength);
 	}
 #ifdef DEBUG
 	LOGI("FIR Equalizer allocate all done: total taps %d", eqfilterLength);

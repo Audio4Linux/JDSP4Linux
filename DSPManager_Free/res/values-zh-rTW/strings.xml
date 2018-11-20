@@ -117,6 +117,7 @@
   <string name="pref_headset_pamss_summary_on">已啟用TruCentre環繞</string>
   <string name="pref_headset_pamss_summary_off">已停用TruCentre環繞</string>
   <string name="pref_headset_pamss_enable">使用TruCentre環繞</string>
+  <string name="dialog_pamss_wrap">揚聲器包圍角度</string>
 
   <string name="eq_preset_flat">平淡</string>
   <string name="eq_preset_custom">自訂</string>

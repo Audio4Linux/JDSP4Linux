@@ -27,7 +27,7 @@ protected:
 	DirectForm2 **df441, **df48, **dfResampled, **sosPointer;
 	int sosCount, resampledSOSCount, usedSOSCount;
 	typedef struct threadParamsConv {
-		AutoConvolverMono **conv;
+		AutoConvolver1x1 **conv;
 		double **in, **out;
 		size_t frameCount;
 	} ptrThreadParamsFullStConv;
@@ -54,16 +54,15 @@ protected:
 	JLimiter kLimiter;
 	sf_compressor_state_st compressor;
 	sf_reverb_state_st myreverb;
-	AutoConvolverMono **bassBoostLp;
-	AutoConvolverMono **convolver, **fullStereoConvolver;
+	AutoConvolver1x1 **bassBoostLp;
+	AutoConvolver1x1 **convolver, **fullStereoConvolver;
 	tubeFilter tubeP[2];
 	t_bs2bdp bs2b;
 //	Wavechild670 *compressor670;
-	int threadResult;
 	ArbitraryEq *arbEq;
 	double *xaxis, *yaxis;
 	int eqfilterLength;
-	AutoConvolverMono **FIREq;
+	AutoConvolver1x1 **FIREq;
 	// Variables
 	double pregain, threshold, knee, ratio, attack, release, tubedrive, bassBoostCentreFreq, convGaindB, mMatrixMCoeff, mMatrixSCoeff;
 	int16_t bassBoostStrength, bassBoostFilterType, eqFilterType, bs2bLv, compressionEnabled, bassBoostEnabled, equalizerEnabled, reverbEnabled,
