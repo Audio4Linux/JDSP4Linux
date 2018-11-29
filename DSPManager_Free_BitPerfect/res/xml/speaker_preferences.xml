@@ -180,7 +180,7 @@
         android:inputType="numberDecimal"
         android:digits="0123456789." />
   </PreferenceCategory>
-  <PreferenceCategory android:title="@string/pref_headset_soundpos_title">
+  <PreferenceCategory android:title="@string/pref_headset_stereowide_title">
     <CheckBoxPreference
         android:key="dsp.stereowide.enable"
         android:disableDependentsState="false"
@@ -194,6 +194,8 @@
         android:entryValues="@array/stereowide_values"
         android:title="@string/dialog_stereo"
         android:key="dsp.stereowide.mode" />
+  </PreferenceCategory>
+  <PreferenceCategory android:title="@string/pref_headset_bs2b_title">
     <CheckBoxPreference
         android:key="dsp.bs2b.enable"
         android:disableDependentsState="false"
