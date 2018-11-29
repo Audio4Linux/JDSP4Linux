@@ -89,11 +89,12 @@
   <string name="memoryallocatefail">Cannot allocate memory for convolver</string>
   <string name="limiter_threshold">Limiter threshold [dB:-60 &#8211; -0.1]</string>
   <string name="limiter_release">Limiter release [ms:1.5 &#8211; 2000]</string>
-  <string name="pref_headset_soundpos_title">Sound positioning</string>
+  <string name="pref_headset_stereowide_title">Stereo widener</string>
   <string name="pref_headset_stereowide_summary_on">Stereo widener is enabled</string>
   <string name="pref_headset_stereowide_summary_off">Stereo widener is disabled</string>
   <string name="pref_headset_stereowide_enable">Enable stereo widen</string>
   <string name="dialog_stereo">Widen Level</string>
+  <string name="pref_headset_bs2b_title">BS2B</string>
   <string name="pref_headset_bs2b_summary_on">BS2B is enabled</string>
   <string name="pref_headset_bs2b_summary_off">BS2B is disabled</string>
   <string name="dialog_bs2b">BS2B Preset</string>
