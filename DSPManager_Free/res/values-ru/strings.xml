@@ -66,7 +66,7 @@
   <string name="pref_effect_title">Уровень</string>
   <string name="dialog_effect">Уровень</string>
   <string name="dialog_filtertype">Фильтр</string>
-  <string name="pref_effect_freq_title">Срез [цел.: 30 &#8211; 300]</string>
+  <string name="pref_effect_freq_title">Частота среза [цел.: 30 &#8211; 300]</string>
   <!-- Related toasts -->
   <string name="preferredlpf">Неоптимальные настройки!\nПредпочтителен фильтр 4096-го порядка</string>
 
@@ -104,8 +104,8 @@
   <string name="dialog_impulseresponse">Импульс</string>
   <string name="doesntexist">Не выбран</string>
   <string name="dialog_convgain">Громкость [вещ.: -80.0 &#8211; 30.0]</string>
-  <string name="dialog_quality">Длина</string>
-  <string name="dialog_length">Длина</string>
+  <string name="dialog_quality">Длина импульса</string>
+  <string name="dialog_length">Длина импульса</string>
   <!-- Related toasts -->
   <string name="text_ir_dir_isempty">Каталог импульсов %1$s пуст</string>
   <string name="mono_conv">Моно</string>
@@ -133,14 +133,17 @@
   <string name="pref_analogmodelling_enable">Включить</string>
   <string name="pref_analogmodelling_summary_on">Ламповый звук включён</string>
   <string name="pref_analogmodelling_summary_off">Ламповый звук отключён</string>
-  <string name="dialog_tubedrive">Гармоники [цел.: 0 – 12]</string>
+  <string name="dialog_tubedrive">Гармоники [цел.: 0 &#8211; 12]</string>
 
-  <!-- Sound positioning -->
-  <string name="pref_headset_soundpos_title">Позиционирование звука</string>
+  <!-- Stereo widener -->
+  <string name="pref_headset_stereowide_title">Расширение стереобазы</string>
   <string name="pref_headset_stereowide_enable">Включить</string>
   <string name="pref_headset_stereowide_summary_on">Расширение стереобазы включено</string>
   <string name="pref_headset_stereowide_summary_off">Расширение стереобазы отключено</string>
   <string name="dialog_stereo">Уровень</string>
+
+  <!-- BS2B -->
+  <string name="pref_headset_bs2b_title">Бинауральный звук</string>
   <string name="pref_headset_bs2b_enable">Включить</string>
   <string name="pref_headset_bs2b_summary_on">Бинауральный звук включён</string>
   <string name="pref_headset_bs2b_summary_off">Бинауральный звук отключён</string>
@@ -155,8 +158,9 @@
   <string name="dialog_room">Тип</string>
 
   <!-- TruCentre with Joe0Bloggs filter -->
-  <string name="pref_headset_pams_title">TruCentre</string>
+  <string name="pref_headset_pams_title">Пространственный звук (TruCentre)</string>
   <string name="pref_headset_pamss_enable">Включить</string>
-  <string name="pref_headset_pamss_summary_on">TruCentre включён</string>
-  <string name="pref_headset_pamss_summary_off">TruCentre отключён</string>
+  <string name="pref_headset_pamss_summary_on">Пространственный звук включён</string>
+  <string name="pref_headset_pamss_summary_off">Пространственный звук отключён</string>
+  <string name="dialog_pamss_wrap">Угол обхвата</string>
 </resources>

@@ -10,11 +10,11 @@
     <item>Длинная 2</item>
   </string-array>
   <string-array name="bassboost_modes">
-    <item>Плацебо</item>
     <item>Минимум</item>
     <item>Низкий</item>
     <item>Средний</item>
     <item>Высокий</item>
+    <item>Экстрим</item>
     <item>Максимум</item>
   </string-array>
   <string-array name="bassboost_filtertype">
@@ -22,10 +22,6 @@
     <item>Линейно-фазовый 4096-го порядка</item>
   </string-array>
   <string-array name="equalizer_filtertype">
-    <item>Минимально-фазовый</item>
-    <item>Линейно-фазовый</item>
-  </string-array>
-  <string-array name="equalizer_stringfiltertype">
     <item>Минимально-фазовый</item>
     <item>Линейно-фазовый</item>
   </string-array>

@@ -10,11 +10,11 @@
     <item>Длинная 2</item>
   </string-array>
   <string-array name="bassboost_modes">
-    <item>Плацебо</item>
     <item>Минимум</item>
     <item>Низкий</item>
     <item>Средний</item>
     <item>Высокий</item>
+    <item>Экстрим</item>
     <item>Максимум</item>
   </string-array>
   <string-array name="bassboost_filtertype">
@@ -48,5 +48,21 @@
     <item>Минимум</item>
     <item>Низкий</item>
     <item>Средний</item>
+  </string-array>
+  <string-array name="pamss_wrap">
+    <item>30 градусов</item>
+    <item>50 градусов</item>
+    <item>70 градусов</item>
+    <item>90 градусов</item>
+    <item>100 градусов</item>
+    <item>120 градусов</item>
+    <item>140 градусов</item>
+    <item>160 градусов</item>
+    <item>180 градусов</item>
+    <item>200 градусов</item>
+    <item>220 градусов</item>
+    <item>240 градусов</item>
+    <item>260 градусов</item>
+    <item>270 градусов</item>
   </string-array>
 </resources>
