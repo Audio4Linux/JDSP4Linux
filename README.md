@@ -53,7 +53,7 @@ gst-inspect-1.0 jdspfx
 ```
 Copy the test-script (used to launch JDSP) to /usr/local/bin
 ```bash
-sudo cp ../JDSP4Linux/jdsp_test /usr/local/bin
+sudo cp ../JDSP4Linux/jdsp /usr/local/bin
 ```
 Create the config folder...
 ```bash
@@ -66,17 +66,17 @@ cp ../JDSP4Linux/audio.conf ~/.config/jamesdsp/audio.conf
 Now JDSP4Linux should be setup correctly.
 Edit the audio.conf to your liking and launch JDSP using the script (like Viper4Linux):
 ```bash
-jdsp_test start
+jdsp start
 ```
 And stop it like this:
 ```bash
-jdsp_test stop
+jdsp stop
 ```
 Like I said, work-in-progress != stable, so use it with caution. 
 
 By the way, if you try to use a corrupted VDC file your ears will be effectively destructed by blasting white noise at them, so don't do that :) 
 
-Maybe I should implement some kind of validation ._.
+(I will implement some kind of validation later)
 ## Workarounds
 ### Fix crackling/choppy sound
 _Set the default samplerate to 48000Hz in pulseaudio's config:_
