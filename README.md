@@ -45,7 +45,7 @@ sudo cp src/.libs/libgstjdspfx.so /usr/lib/x86_64-linux-gnu/gstreamer-1.0/
 ```
 #### Arch
 ```bash
-sudo cp libgstviperfx.so /usr/lib/gstreamer-1.0/  
+sudo cp libgstjdspfx.so /usr/lib/gstreamer-1.0/  
 ```
 If everything went alright gst-inspect-1.0 should display all element properties of the JDSP plugin:
 ```bash
