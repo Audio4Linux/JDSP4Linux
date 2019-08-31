@@ -31,6 +31,8 @@ sudo apt install qt5-qmake libqt5widgets5 libqt5gui5 libqt5core5a libqt5multimed
 ```
 
 #### Build from sources
+_(You can find precompiled binaries [here](https://github.com/ThePBone/JDSP4Linux-GUI/releases))_
+
 Clone this repository
 
     git clone https://github.com/ThePBone/JDSP4Linux-GUI
