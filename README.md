@@ -2,11 +2,26 @@
 
 User Interface for JDSP4Linux [https://github.com/ThePBone/JDSP4Linux](https://github.com/ThePBone/JDSP4Linux)
 * Telegram: @ThePBone
+* [Releases](https://github.com/ThePBone/JDSP4Linux-GUI/releases)
 
 This project is work-in-progress.
 
 ## Installation
+* [Ubuntu PPA](#ubuntu-ppa)
 * [Portable/Manually](#portablemanually)
+
+### Ubuntu (PPA)
+#### Add PPA Repo
+```bash
+curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" | sudo apt-key add -
+sudo curl -s --compressed -o /etc/apt/sources.list.d/thepbone_ppa.list "https://thepbone.github.io/PPA-Repository/thepbone_ppa.list"
+sudo apt update
+```
+#### Install from PPA
+```bash
+sudo apt install jdsp4linux-gui
+```
+[View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
 
 ### Portable/Manually
 #### Install Dependencies
