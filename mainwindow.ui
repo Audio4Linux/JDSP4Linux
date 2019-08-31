@@ -1,0 +1,1894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>539</width>
+    <height>301</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>539</width>
+    <height>301</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>750</width>
+    <height>301</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>JDSP4Linux GUI</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/icon.png</normaloff>:/icons/icon.png</iconset>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cpreset">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Custom Presets</string>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom Presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/queue.svg</normaloff>:/icons/queue.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="set">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Settings</string>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this UI&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/settings.svg</normaloff>:/icons/settings.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Load and save the currently active config, reload JDSP and enable context help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/menu.svg</normaloff>:/icons/menu.svg</iconset>
+        </property>
+        <property name="popupMode">
+         <enum>QToolButton::InstantPopup</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="disableFX">
+        <property name="minimumSize">
+         <size>
+          <width>88</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Master Power&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable JDSP sound effects, also known as main switch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Disable FX</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="info">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="reset">
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reset&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Resets all properties to default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Reset</string>
+        </property>
+        <property name="icon">
+         <iconset theme="ok">
+          <normaloff>.</normaloff>.</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="apply">
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Apply&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Applies current configuration and reloads JDSP.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Apply</string>
+        </property>
+        <property name="icon">
+         <iconset theme="ok">
+          <normaloff>.</normaloff>.</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabhost">
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="bass">
+       <property name="toolTipDuration">
+        <number>0</number>
+       </property>
+       <attribute name="title">
+        <string>Bass/Misc</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QHBoxLayout" name="bass_lay">
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="bass_left">
+            <item>
+             <widget class="QGroupBox" name="bassboost">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Bass Boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;2048/4096 order FIR linear phase bass boost&lt;/p&gt;&lt;p&gt;Filtering is done on a convolution basis. When the user changes the bass boost parameter, the engine will compute a new low pass filter (with gain) impulse response using firls, a function ported from Matlab.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bass Strength:&lt;/span&gt; Recommended value between 0 and 1200&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="title">
+               <string>Bass Boost</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <property name="sizeConstraint">
+                  <enum>QLayout::SetDefaultConstraint</enum>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="bassmode_label">
+                   <property name="text">
+                    <string>Filtertype</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="bassfiltertype">
+                   <property name="maximumSize">
+                    <size>
+                     <width>160</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Linear phase 2049 taps low pass filter</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Linear phase 4096 taps low pass filter</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="bassgain_label">
+                   <property name="text">
+                    <string>Strength</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSlider" name="bassstrength">
+                   <property name="toolTipDuration">
+                    <number>-1</number>
+                   </property>
+                   <property name="minimum">
+                    <number>0</number>
+                   </property>
+                   <property name="maximum">
+                    <number>2000</number>
+                   </property>
+                   <property name="value">
+                    <number>0</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="invertedControls">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="bassfreq_label">
+                   <property name="text">
+                    <string>Cutoff Frequency</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSlider" name="bassfreq">
+                   <property name="minimum">
+                    <number>30</number>
+                   </property>
+                   <property name="maximum">
+                    <number>300</number>
+                   </property>
+                   <property name="value">
+                    <number>30</number>
+                   </property>
+                   <property name="tracking">
+                    <bool>true</bool>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="invertedControls">
+                    <bool>false</bool>
+                   </property>
+                   <property name="tickPosition">
+                    <enum>QSlider::NoTicks</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>30</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="bass_right">
+            <item>
+             <widget class="QGroupBox" name="analog">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog Modelling (12AX7)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Vacuum tube modelling&lt;/p&gt;&lt;p&gt;Analog Modelling works as a vacuum tube amplifier, which was designed by ZamAudio. The tube they used to model is a 12AX7 double triode. They also provide a final stage of the tonestack control, it makes the sound more rich. However, the major parameter is the amplifier preamp (this is how even ordered harmonic is generated), but this parameter has been limited at a maximum of 12000 (=12 on android). Louder volume will generate more harmonics and the internal amplifier will tend to clip the audio. The analog amplifier was built from a real mathematical model, most notably is nonlinearity of vacuum tube. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="title">
+               <string>Analog Modelling</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Preamp</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="analog_tubedrive">
+                 <property name="maximum">
+                  <number>12000</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>24</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="limiter">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Mainly used to dynamically control the audio volume.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="title">
+               <string>Limiter</string>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <layout class="QFormLayout" name="formLayout_4">
+                 <property name="horizontalSpacing">
+                  <number>18</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="vclvl_label">
+                   <property name="text">
+                    <string>Threshold</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSlider" name="limthreshold">
+                   <property name="minimum">
+                    <number>-80</number>
+                   </property>
+                   <property name="maximum">
+                    <number>0</number>
+                   </property>
+                   <property name="value">
+                    <number>0</number>
+                   </property>
+                   <property name="tracking">
+                    <bool>true</bool>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="invertedControls">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>Release</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSlider" name="limrelease">
+                   <property name="minimum">
+                    <number>2</number>
+                   </property>
+                   <property name="maximum">
+                    <number>2000</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>30</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="surround">
+       <attribute name="title">
+        <string>Sound Positioning</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QGroupBox" name="stereowidener">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Stereo widener&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Level: &lt;/span&gt;Strength of the widening effect&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="title">
+             <string>Stereo widener</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="topMargin">
+              <number>7</number>
+             </property>
+             <property name="bottomMargin">
+              <number>11</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="roomsize_label">
+               <property name="text">
+                <string>Level</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="stereowidener_lvl">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>13</height>
+                </size>
+               </property>
+               <property name="minimum">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <number>4</number>
+               </property>
+               <property name="singleStep">
+                <number>1</number>
+               </property>
+               <property name="value">
+                <number>0</number>
+               </property>
+               <property name="tracking">
+                <bool>true</bool>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="invertedControls">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="bs2b">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Bauer stereophonic-to-binaural DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A typical stereo records are being made to listen by speakers. That is a sound engineer makes the stereo mix to the adaptation of sound for listening of one channel by both ears. Therefore, you will be tired during a long time headphone listening more by a superstereo effect than by a poor design of headphones. What's missing in headphones is the sound going from each channel to the opposite ear, arriving a short time later for the extra distance traveled, and with a bit of high frequency roll-off for the shadowing effect of the head. And the time delay to the far ear is somewhat longer at low frequencies than at high frequencies. The Bauer stereophonic-to-binaural DSP (bs2b) is designed to improve headphone listening of stereo audio records.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Source: &lt;/span&gt;&lt;a href=&quot;http://bs2b.sourceforge.net/&quot;&gt;&lt;span style=&quot; font-style:italic; text-decoration: underline; color:#007af4;&quot;&gt;http://bs2b.sourceforge.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="title">
+             <string>BS2B</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <property name="bottomMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Preset</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="bs2b_preset_cb">
+               <item>
+                <property name="text">
+                 <string>A Bit</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Slight</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Moderate</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>10</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QGroupBox" name="reverb">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverbation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Based on Progenitor2 (part of FreeVerb3)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="title">
+             <string>Reverbation</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_15">
+               <item>
+                <widget class="QLabel" name="vhplvl_label">
+                 <property name="text">
+                  <string>Strength</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="reverb_strength">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>13</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>18</number>
+                 </property>
+                 <property name="value">
+                  <number>0</number>
+                 </property>
+                 <property name="tracking">
+                  <bool>true</bool>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="invertedControls">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>Room Presets</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="roompresets">
+                 <property name="maximumSize">
+                  <size>
+                   <width>133</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frame">
+                  <bool>true</bool>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Small room</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Medium room</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Large room</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Plate high</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Plate low</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Long reverb 1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Long reverb 2</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>11</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="eq">
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Cubic spline interpolated 15 bands equalizer&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Preset:&lt;/span&gt; Here you can select default equalizer presets. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer Bands:&lt;/span&gt; You can manually adjust the levels of amplification and attenuation of the 15 bands. (Min/Max: -12/12dB)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <attribute name="title">
+        <string>Equalizer</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QFrame" name="eq_container">
+          <property name="minimumSize">
+           <size>
+            <width>360</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="eq_p12db">
+           <property name="geometry">
+            <rect>
+             <x>306</x>
+             <y>10</y>
+             <width>48</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>+12db</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq5">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq2">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_0db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>83</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_p12db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>11</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_0db_2">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>46</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq3">
+           <property name="geometry">
+            <rect>
+             <x>50</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_p3db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>63</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq1">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_p9db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>29</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="eq_p6db">
+           <property name="geometry">
+            <rect>
+             <x>313</x>
+             <y>48</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>+6db</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="Line" name="line_n6db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>120</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq10">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq7">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_n3db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>103</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_n12db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>155</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_n9db">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>137</y>
+             <width>301</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="eq_0db">
+           <property name="geometry">
+            <rect>
+             <x>315</x>
+             <y>83</y>
+             <width>39</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>0db</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="eq_n6db">
+           <property name="geometry">
+            <rect>
+             <x>315</x>
+             <y>121</y>
+             <width>39</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>-6db</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq8">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="eq_n12db">
+           <property name="geometry">
+            <rect>
+             <x>305</x>
+             <y>154</y>
+             <width>49</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>-12db</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq4">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq6">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq9">
+           <property name="geometry">
+            <rect>
+             <x>170</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq11">
+           <property name="geometry">
+            <rect>
+             <x>210</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq12">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq13">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq14">
+           <property name="geometry">
+            <rect>
+             <x>270</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <widget class="QSlider" name="eq15">
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>13</y>
+             <width>16</width>
+             <height>160</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-1200</number>
+           </property>
+           <property name="maximum">
+            <number>1200</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+          <zorder>line_p9db</zorder>
+          <zorder>line_n12db</zorder>
+          <zorder>line_p3db</zorder>
+          <zorder>line_n6db</zorder>
+          <zorder>line_n9db</zorder>
+          <zorder>line_0db</zorder>
+          <zorder>line_p12db</zorder>
+          <zorder>line_0db_2</zorder>
+          <zorder>line_n3db</zorder>
+          <zorder>eq_p12db</zorder>
+          <zorder>eq5</zorder>
+          <zorder>eq2</zorder>
+          <zorder>eq3</zorder>
+          <zorder>eq1</zorder>
+          <zorder>eq_p6db</zorder>
+          <zorder>eq10</zorder>
+          <zorder>eq7</zorder>
+          <zorder>eq_0db</zorder>
+          <zorder>eq_n6db</zorder>
+          <zorder>eq8</zorder>
+          <zorder>eq_n12db</zorder>
+          <zorder>eq4</zorder>
+          <zorder>eq6</zorder>
+          <zorder>eq9</zorder>
+          <zorder>eq11</zorder>
+          <zorder>eq12</zorder>
+          <zorder>eq13</zorder>
+          <zorder>eq14</zorder>
+          <zorder>eq15</zorder>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_18">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>11</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="enable_eq">
+            <property name="text">
+             <string>Enable EQ</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="eqfiltertype">
+            <item>
+             <property name="text">
+              <string>Minimum phase</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Linear phase</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="reseteq">
+            <property name="text">
+             <string>Reset EQ</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="comp">
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compression&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Threshold:&lt;/span&gt; The threshold control sets the level at which the compression effect is engaged. Only when a level passes above the threshold will it be compressed. If the threshold level is set at say -10 dB, only signal peaks that extend above that level will be compressed. The rest of the time, no compression will be taking place.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Knee:&lt;/span&gt; The “knee” refers to how the compressor transitions between the non-compressed and compressed states of an audio signal running through it.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Attack Time: &lt;/span&gt;This refers to the time it takes for the signal to become fully compressed after exceeding the threshold level. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Release Time: &lt;/span&gt;This is literally the opposite of attack time. More specifically, it is the time it takes for the signal to go from the compressed — or attenuated — state back to the original non-compressed signal. Release times will be considerably longer than attack times.&lt;br/&gt;Normal compressor operation will be to set the release time to be as short as possible without producing a &amp;quot;pumping&amp;quot; effect, which is caused by cyclic activation and deactivation of compression. For example, if the release time is set too short and the compressor is cycling between active and non-active, your dominant signal — usually the bass guitar and bass drum — will also modulate your noise floor, resulting in a distinct &amp;quot;breathing&amp;quot; effect.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Compression Ratio: &lt;/span&gt;Often misunderstood, compression ratio simply specifies the amount of attenuation to be applied to the signal.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Source: &lt;/span&gt;&lt;a href=&quot;http://uaudio.de&quot;&gt;&lt;span style=&quot; font-style:italic; text-decoration: underline; color:#007af4;&quot;&gt;http://uaudio.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <attribute name="title">
+        <string>Compressor</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_17">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_31">
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_16">
+            <item>
+             <widget class="QCheckBox" name="enable_comp">
+              <property name="text">
+               <string>Enable Compressor</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>6</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="comp_thres_label">
+              <property name="text">
+               <string>Pre-gain</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="comp_pregain">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>14</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <number>24</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::NoTicks</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="comp_ratio_label">
+              <property name="text">
+               <string>Threshold</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="comp_thres">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>14</height>
+               </size>
+              </property>
+              <property name="minimum">
+               <number>-60</number>
+              </property>
+              <property name="maximum">
+               <number>0</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::NoTicks</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Knee</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="comp_knee">
+              <property name="maximum">
+               <number>40</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_13">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_32">
+          <property name="rightMargin">
+           <number>7</number>
+          </property>
+          <item>
+           <spacer name="verticalSpacer_15">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>24</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>6</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Ratio</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="comp_ratio">
+              <property name="minimum">
+               <number>-20</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="value">
+               <number>12</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Attack</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="comp_attack">
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Release</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="comp_release">
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>30</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>DDC</string>
+       </attribute>
+       <widget class="QTabWidget" name="ddcTabs">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>391</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::South</enum>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="ddc_filesystem">
+         <attribute name="title">
+          <string>Filesystem</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="ddc_dirpath"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ddc_reload">
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Reload</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ddc_select">
+              <property name="maximumSize">
+               <size>
+                <width>35</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QListWidget" name="ddc_files"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="ddc_db">
+         <attribute name="title">
+          <string>Database</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTableView" name="ddcTable">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QCheckBox" name="ddc_enable">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>10</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enable DDC</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>tabhost</tabstop>
+  <tabstop>bassboost</tabstop>
+  <tabstop>bassstrength</tabstop>
+  <tabstop>bassfreq</tabstop>
+  <tabstop>limthreshold</tabstop>
+  <tabstop>reverb</tabstop>
+  <tabstop>reverb_strength</tabstop>
+  <tabstop>stereowidener</tabstop>
+  <tabstop>eq1</tabstop>
+  <tabstop>eq2</tabstop>
+  <tabstop>eq3</tabstop>
+  <tabstop>eq4</tabstop>
+  <tabstop>eq5</tabstop>
+  <tabstop>eq6</tabstop>
+  <tabstop>eq7</tabstop>
+  <tabstop>eq8</tabstop>
+  <tabstop>eq9</tabstop>
+  <tabstop>eq10</tabstop>
+  <tabstop>enable_eq</tabstop>
+  <tabstop>enable_comp</tabstop>
+  <tabstop>cpreset</tabstop>
+  <tabstop>set</tabstop>
+  <tabstop>toolButton</tabstop>
+  <tabstop>disableFX</tabstop>
+  <tabstop>reset</tabstop>
+  <tabstop>apply</tabstop>
+ </tabstops>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

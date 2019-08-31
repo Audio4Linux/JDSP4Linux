@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>palette</class>
+ <widget class="QDialog" name="palette">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>272</width>
+    <height>243</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Palette Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/icon.png</normaloff>:/icons/icon.png</iconset>
+  </property>
+  <widget class="QPushButton" name="base">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>20</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="base_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>23</y>
+     <width>121</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Base Color</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="back_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>53</y>
+     <width>151</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Background Color</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="fore_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>83</y>
+     <width>131</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Foreground Color</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="back">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>50</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select...</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="fore">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>80</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select...</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="close">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>201</y>
+     <width>61</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reset">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>201</y>
+     <width>61</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="whiteicons">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>251</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>White Icons</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sel">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>110</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sel_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>113</y>
+     <width>131</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Selection Color</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="disabled">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>140</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="disabled_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>143</y>
+     <width>131</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Disabled Color</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>base</tabstop>
+  <tabstop>back</tabstop>
+  <tabstop>fore</tabstop>
+  <tabstop>sel</tabstop>
+  <tabstop>whiteicons</tabstop>
+  <tabstop>reset</tabstop>
+  <tabstop>close</tabstop>
+ </tabstops>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
