@@ -44,7 +44,7 @@ settings::settings(QWidget *parent) :
     else ui->path->setText(QString::fromStdString(path));
 
     ui->autofx->setChecked(mainwin->getAutoFx());
-    ui->muteonrestart->setChecked(mainwin->getMuteOnRestart());
+    ui->reloadMethod->setCurrentIndex(mainwin->getReloadMethod());
     ui->glavafix->setChecked(mainwin->getGFix());
 
     connect(ui->close, SIGNAL(clicked()), this, SLOT(reject()));
@@ -58,7 +58,7 @@ settings::settings(QWidget *parent) :
 
     connect(ui->glavafix, SIGNAL(clicked()), this, SLOT(updateGLava()));
     connect(ui->autofx, SIGNAL(clicked()), this, SLOT(updateAutoFX()));
-    connect(ui->muteonrestart, SIGNAL(clicked()), this, SLOT(updateMuteRestart()));
+    connect(ui->reloadMethod, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateReloadMethod()));
     connect(ui->savepath, SIGNAL(clicked()), this, SLOT(updatePath()));
 
     ui->styleSelect->addItem("Default","default");
@@ -117,8 +117,8 @@ settings::~settings(){
 void settings::updateAutoFX(){
     mainwin->setAutoFx(ui->autofx->isChecked());
 }
-void settings::updateMuteRestart(){
-    mainwin->setMuteOnRestart(ui->muteonrestart->isChecked());
+void settings::updateReloadMethod(){
+    mainwin->setReloadMethod(ui->reloadMethod->currentIndex());
 };
 void settings::updatePath(){
     mainwin->setPath(ui->path->text().toUtf8().constData());

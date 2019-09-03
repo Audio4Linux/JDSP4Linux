@@ -48,7 +48,7 @@ static int theme_mode = 0;
 static int autofxmode = 0;
 static bool custom_whiteicons;
 static bool autofx;
-static bool muteOnRestart;
+static bool reload_method = 0;
 static bool glava_fix;
 static bool settingsdlg_enabled=true;
 static bool presetdlg_enabled=true;
@@ -550,13 +550,13 @@ void MainWindow::Reset(){
 }
 void MainWindow::Restart(){
     if(process->state()!=QProcess::ProcessState::NotRunning)return;
-    if(muteOnRestart)system("pactl set-sink-mute 0 1");
     //process->kill();
     if(glava_fix)system("killall -r glava");
-    process->start("jdsp", QStringList(initializer_list<QString>({"restart"})));
-    if(glava_fix)system("setsid glava -d >/dev/null 2>&1 &");
-    if(muteOnRestart)system("pactl set-sink-mute 0 0");
 
+    if(reload_method==0)process->start("jdsp", QStringList(initializer_list<QString>({"restart"})));
+    else system("jdsp restart");
+
+    if(glava_fix)system("setsid glava -d >/dev/null 2>&1 &");
 }
 void MainWindow::DisableFX(){
     //Apply instantly
@@ -654,8 +654,8 @@ void MainWindow::decodeAppConfig(const string& key,const string& value){
         custom_palette = value;
         break;
     }
-    case mutedRestart: {
-        muteOnRestart = value=="true";
+    case reloadMethod: {
+        reload_method = value=="true";
         break;
     }
     }
@@ -685,7 +685,7 @@ void MainWindow::loadAppConfig(bool once){
 }
 
 //---UI Config Generator
-void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool muteRestart = muteOnRestart,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode){
+void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool relmet = reload_method,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode){
     string appconfig;
     stringstream converter1;
     converter1 << boolalpha << afx;
@@ -695,8 +695,8 @@ void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bo
     appconfig += "configpath=\"" + cpath + "\"\n";
 
     stringstream converter2;
-    converter2 << boolalpha << muteRestart;
-    appconfig += "muteOnRestart=" + converter2.str() + "\n";
+    converter2 << boolalpha << relmet;
+    appconfig += "reloadMethod=" + converter2.str() + "\n";
 
     stringstream converter3;
     converter3 << boolalpha << g_fix;
@@ -1256,11 +1256,11 @@ void MainWindow::setAutoFx(bool afx){
     autofx = afx;
     SaveAppConfig();
 }
-bool MainWindow::getMuteOnRestart(){
-    return muteOnRestart;
+bool MainWindow::getReloadMethod(){
+    return reload_method;
 }
-void MainWindow::setMuteOnRestart(bool on){
-    muteOnRestart = on;
+void MainWindow::setReloadMethod(bool on){
+    reload_method = on;
     SaveAppConfig();
 }
 void MainWindow::setGFix(bool f){

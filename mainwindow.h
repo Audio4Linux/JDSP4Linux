@@ -41,10 +41,10 @@ public:
     void setAutoFx(bool autofx);
     int getThememode();
     void setThememode(int mode);
-    bool getMuteOnRestart();
+    bool getReloadMethod();
     bool getGFix();
     void setGFix(bool);
-    void setMuteOnRestart(bool on);
+    void setReloadMethod(bool on);
     void setPath(string npath);
     void setStylesheet(string);
     void loadAppConfig(bool once = false);
