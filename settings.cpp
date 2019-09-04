@@ -104,7 +104,7 @@ settings::settings(QWidget *parent) :
     QVariant qvS(QString::fromStdString(style_sheet));
     int indexT = ui->styleSelect->findData(qvS);
     if ( indexT != -1 ) {
-       ui->styleSelect->setCurrentIndex(index);
+       ui->styleSelect->setCurrentIndex(indexT);
     }
 
     QVariant qvS2(QString::fromStdString(palette));
@@ -149,6 +149,7 @@ void settings::updateAutoFxMode(){
     mainwin->setAutoFxMode(mode);
 }
 void settings::updateTheme(){
+    if(lockslot)return;
     mainwin->setTheme(ui->themeSelect->itemText(ui->themeSelect->currentIndex()).toUtf8().constData());
 }
 void settings::changeThemeMode(){
@@ -174,6 +175,7 @@ void settings::openPalConfig(){
     c->show();
 }
 void settings::changeStyle(const QString& style){
+    if(lockslot)return;
     mainwin->setStylesheet(ui->styleSelect->itemData(ui->styleSelect->currentIndex()).toString().toUtf8().constData());
 }
 void settings::github(){
