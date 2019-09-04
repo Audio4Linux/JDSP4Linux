@@ -39,6 +39,7 @@ settings::settings(QWidget *parent) :
     int thememode = mainwin->getThememode();
     string palette = mainwin->getColorpalette();
     int autofxmode = mainwin->getAutoFxMode();
+    string theme = mainwin->getTheme();
 
     if(path.empty()) ui->path->setText(QString::fromUtf8(result));
     else ui->path->setText(QString::fromStdString(path));
@@ -56,6 +57,7 @@ settings::settings(QWidget *parent) :
     connect(ui->aa_instant, SIGNAL(clicked()), this, SLOT(updateAutoFxMode()));
     connect(ui->aa_release, SIGNAL(clicked()), this, SLOT(updateAutoFxMode()));
 
+    connect(ui->themeSelect, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateTheme()));
     connect(ui->glavafix, SIGNAL(clicked()), this, SLOT(updateGLava()));
     connect(ui->autofx, SIGNAL(clicked()), this, SLOT(updateAutoFX()));
     connect(ui->reloadMethod, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateReloadMethod()));
@@ -86,9 +88,22 @@ settings::settings(QWidget *parent) :
     ui->paletteSelect->addItem("White","white");
     ui->paletteSelect->addItem("Custom","custom");
 
-    QVariant qvS(QString::fromStdString(style_sheet));
-    int index = ui->styleSelect->findData(qvS);
+    for ( const auto& i : QStyleFactory::keys() )
+        ui->themeSelect->addItem(i);
+
+    QString qvT(QString::fromStdString(theme));
+    int index = ui->themeSelect->findText(qvT);
     if ( index != -1 ) {
+       ui->themeSelect->setCurrentIndex(index);
+    }else{
+        int index_fallback = ui->themeSelect->findText("Fusion");
+        if ( index_fallback != -1 )
+           ui->themeSelect->setCurrentIndex(index_fallback);
+    }
+
+    QVariant qvS(QString::fromStdString(style_sheet));
+    int indexT = ui->styleSelect->findData(qvS);
+    if ( indexT != -1 ) {
        ui->styleSelect->setCurrentIndex(index);
     }
 
@@ -119,7 +134,7 @@ void settings::updateAutoFX(){
 }
 void settings::updateReloadMethod(){
     mainwin->setReloadMethod(ui->reloadMethod->currentIndex());
-};
+}
 void settings::updatePath(){
     mainwin->setPath(ui->path->text().toUtf8().constData());
 }
@@ -133,7 +148,9 @@ void settings::updateAutoFxMode(){
     else if(ui->aa_release->isChecked())mode=1;
     mainwin->setAutoFxMode(mode);
 }
-
+void settings::updateTheme(){
+    mainwin->setTheme(ui->themeSelect->itemText(ui->themeSelect->currentIndex()).toUtf8().constData());
+}
 void settings::changeThemeMode(){
     if(lockslot)return;
 

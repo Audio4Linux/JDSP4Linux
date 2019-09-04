@@ -44,6 +44,7 @@ static string appcpath;
 static string style_sheet;
 static string color_palette;
 static string custom_palette;
+static string theme_str;
 static int theme_mode = 0;
 static int autofxmode = 0;
 static bool custom_whiteicons;
@@ -244,6 +245,7 @@ void MainWindow::writeLogF(const QString& log,const QString& _path){
 
 //---Style
 void MainWindow::SetStyle(){
+    QApplication::setStyle(QString::fromStdString(mainwin->getTheme()));
     if(theme_mode==0){
         QApplication::setPalette(this->style()->standardPalette());
         QString stylepath = "";
@@ -650,6 +652,10 @@ void MainWindow::decodeAppConfig(const string& key,const string& value){
         color_palette = value;
         break;
     }
+    case theme: {
+        theme_str = value;
+        break;
+    }
     case custompalette: {
         custom_palette = value;
         break;
@@ -685,7 +691,7 @@ void MainWindow::loadAppConfig(bool once){
 }
 
 //---UI Config Generator
-void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool relmet = reload_method,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode){
+void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool relmet = reload_method,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode,string thm=theme_str){
     string appconfig;
     stringstream converter1;
     converter1 << boolalpha << afx;
@@ -702,6 +708,7 @@ void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bo
     converter3 << boolalpha << g_fix;
     appconfig += "glavafix=" + converter3.str() + "\n";
 
+    appconfig += "theme=" + thm + "\n";
     appconfig += "stylesheet=" + ssheet + "\n";
     appconfig += "thememode=" + to_string(tmode) + "\n";
 
@@ -1326,6 +1333,14 @@ int MainWindow::getAutoFxMode(){
 void MainWindow::setAutoFxMode(int mode){
     autofxmode = mode;
     SaveAppConfig();
+}
+void MainWindow::setTheme(string thm){
+    theme_str = std::move(thm);
+    SetStyle();
+    SaveAppConfig();
+}
+string MainWindow::getTheme(){
+    return theme_str;
 }
 
 

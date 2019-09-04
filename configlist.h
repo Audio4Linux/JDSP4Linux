@@ -45,6 +45,7 @@ enum AppConfig {
     colorpalette,
     custompalette,
     customwhiteicons,
+    theme,
     unknownApp
 };
 inline Config resolveConfig(const std::string& input) {
@@ -88,6 +89,7 @@ inline AppConfig resolveAppConfig(const std::string& input) {
     if( input == "colorpalette" ) return colorpalette;
     if( input == "customwhiteicons" ) return customwhiteicons;
     if( input == "custompalette" ) return custompalette;
+    if( input == "theme" ) return theme;
    return unknownApp;
 }
 

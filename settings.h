@@ -22,8 +22,9 @@ private slots:
         void updateAutoFX();
         void updateReloadMethod();
         void updatePath();
-         void updateGLava();
+        void updateGLava();
         void updateAutoFxMode();
+        void updateTheme();
 };
 
 #endif // SETTINGS_H

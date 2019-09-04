@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
+    <width>560</width>
     <height>301</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>539</width>
+    <width>560</width>
     <height>301</height>
    </size>
   </property>
@@ -122,7 +122,7 @@
         <property name="minimumSize">
          <size>
           <width>88</width>
-          <height>0</height>
+          <height>25</height>
          </size>
         </property>
         <property name="whatsThis">
@@ -161,6 +161,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="reset">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reset&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Resets all properties to default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
@@ -175,6 +181,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="apply">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Apply&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Applies current configuration and reloads JDSP.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
@@ -246,7 +258,7 @@
                   <widget class="QComboBox" name="bassfiltertype">
                    <property name="maximumSize">
                     <size>
-                     <width>160</width>
+                     <width>162</width>
                      <height>16777215</height>
                     </size>
                    </property>
