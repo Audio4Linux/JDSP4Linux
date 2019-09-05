@@ -24,7 +24,6 @@ private slots:
     void updateBase();
     void updateBack();
     void updateFore();
-    void updateIcons();
     void updateSelection();
     void updateDisabled();
     void saveColor(int index,const QColor& color);

@@ -47,6 +47,7 @@ settings::settings(QWidget *parent) :
     ui->autofx->setChecked(mainwin->getAutoFx());
     ui->reloadMethod->setCurrentIndex(mainwin->getReloadMethod());
     ui->glavafix->setChecked(mainwin->getGFix());
+    ui->addpadding->setChecked(mainwin->getWhiteIcons());
 
     connect(ui->close, SIGNAL(clicked()), this, SLOT(reject()));
     connect(ui->github, SIGNAL(clicked()), this, SLOT(github()));
@@ -59,6 +60,7 @@ settings::settings(QWidget *parent) :
 
     connect(ui->themeSelect, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateTheme()));
     connect(ui->glavafix, SIGNAL(clicked()), this, SLOT(updateGLava()));
+    connect(ui->addpadding, SIGNAL(clicked()), this, SLOT(updateWhiteIcons()));
     connect(ui->autofx, SIGNAL(clicked()), this, SLOT(updateAutoFX()));
     connect(ui->reloadMethod, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateReloadMethod()));
     connect(ui->savepath, SIGNAL(clicked()), this, SLOT(updatePath()));
@@ -113,12 +115,15 @@ settings::settings(QWidget *parent) :
        ui->paletteSelect->setCurrentIndex(index2);
     }
 
+
     ui->styleSelect->setEnabled(!thememode);
     ui->paletteConfig->setEnabled(thememode && palette=="custom");
     ui->paletteSelect->setEnabled(thememode);
 
     ui->uimode_css->setChecked(!thememode);//If 0 set true, else false
     ui->uimode_pal->setChecked(thememode);//If 0 set false, else true
+
+    ui->addpadding->setEnabled(!thememode || palette=="custom");
 
     ui->aa_instant->setChecked(!autofxmode);//same here..
     ui->aa_release->setChecked(autofxmode);
@@ -128,7 +133,9 @@ settings::settings(QWidget *parent) :
 settings::~settings(){
     delete ui;
 }
-
+void settings::updateWhiteIcons(){
+    mainwin->setWhiteIcons(ui->addpadding->isChecked());
+}
 void settings::updateAutoFX(){
     mainwin->setAutoFx(ui->autofx->isChecked());
 }
@@ -158,7 +165,7 @@ void settings::changeThemeMode(){
     int mode = 0;
     if(ui->uimode_css->isChecked())mode=0;
     else if(ui->uimode_pal->isChecked())mode=1;
-
+    ui->addpadding->setEnabled(!mode || mainwin->getColorpalette()=="custom");
     ui->styleSelect->setEnabled(!mode);
     ui->paletteSelect->setEnabled(mode);
     ui->paletteConfig->setEnabled(mode && mainwin->getColorpalette()=="custom");
@@ -168,6 +175,7 @@ void settings::changePalette(const QString&){
     if(lockslot)return;
     mainwin->setColorpalette(ui->paletteSelect->itemData(ui->paletteSelect->currentIndex()).toString().toUtf8().constData());
     ui->paletteConfig->setEnabled(mainwin->getColorpalette()=="custom");
+    ui->addpadding->setEnabled(mainwin->getColorpalette()=="custom");
 }
 void settings::openPalConfig(){
     auto c = new class palette(this);

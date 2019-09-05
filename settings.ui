@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>367</width>
-    <height>345</height>
+    <height>404</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>0</width>
-    <height>345</height>
+    <height>400</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>400</height>
+    <height>600</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -335,7 +335,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>38</width>
+             <width>40</width>
              <height>20</height>
             </size>
            </property>
@@ -437,6 +437,13 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="addpadding">
+         <property name="text">
+          <string>White icons</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -452,7 +459,7 @@
        <item>
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; Some distros override the theme of qt, this can lead to inconsistent/strange layout arrangements. Currently, this application is optimized for the default theme 'Fusion'.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; Some distros override the theme of qt, this can lead to inconsistent/strange layout arrangements. Currently, this application is optimized for the default theme 'Fusion' and has been tested with some KVantum themes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

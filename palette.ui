@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>272</width>
-    <height>243</height>
+    <height>239</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,19 +121,6 @@
     <string>Reset</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="whiteicons">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>170</y>
-     <width>251</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>White Icons</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="sel">
    <property name="geometry">
     <rect>
@@ -192,7 +179,6 @@
   <tabstop>back</tabstop>
   <tabstop>fore</tabstop>
   <tabstop>sel</tabstop>
-  <tabstop>whiteicons</tabstop>
   <tabstop>reset</tabstop>
   <tabstop>close</tabstop>
  </tabstops>

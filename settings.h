@@ -25,6 +25,7 @@ private slots:
         void updateGLava();
         void updateAutoFxMode();
         void updateTheme();
+        void updateWhiteIcons();
 };
 
 #endif // SETTINGS_H

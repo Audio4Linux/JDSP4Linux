@@ -9,8 +9,6 @@ palette::palette(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->whiteicons->setChecked(mainwin->getWhiteIcons());
-
     QObject::connect(ui->base, SIGNAL(clicked()),
                      this, SLOT(updateBase()));
     QObject::connect(ui->back, SIGNAL(clicked()),
@@ -23,7 +21,6 @@ palette::palette(QWidget *parent) :
                      this, SLOT(updateDisabled()));
 
     connect(ui->close,SIGNAL(clicked()),this,SLOT(closeWin()));
-    connect(ui->whiteicons,SIGNAL(clicked()),this,SLOT(updateIcons()));
     connect(ui->reset,SIGNAL(clicked()),this,SLOT(Reset()));
 }
 
@@ -61,9 +58,7 @@ void palette::saveColor(int index,const QColor& color){
     elements.replace(index,strcolor);
     mainwin->setCustompalette(elements.join(";").toUtf8().constData());
 }
-void palette::updateIcons(){
-    mainwin->setWhiteIcons(ui->whiteicons->isChecked());
-}
+
 void palette::updateBase(){
     QColorDialog *base = new QColorDialog();
     base->setOptions(QColorDialog::DontUseNativeDialog);

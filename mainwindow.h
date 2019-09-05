@@ -48,6 +48,8 @@ public:
     void setPath(string npath);
     string getTheme();
     void setTheme(string);
+    void setBorderPadding(bool b);
+    bool getBorderPadding();
     void setStylesheet(string);
     void loadAppConfig(bool once = false);
     void UpdatePeakSource(string source);
@@ -90,7 +92,7 @@ private:
 
     void loadConfig(const string& key, string value);
     void decodeAppConfig(const string& key, const string& value);
-    void SaveAppConfig(bool,const string&,bool,bool,const string&,int,const string&,const string&,bool,int,string);
+    void SaveAppConfig(bool,const string&,bool,bool,const string&,int,const string&,const string&,bool,int,string,bool);
     string getMain();
     string getBass();
     string getSurround();

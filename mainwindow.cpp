@@ -47,6 +47,7 @@ static string custom_palette;
 static string theme_str;
 static int theme_mode = 0;
 static int autofxmode = 0;
+static bool bd_padding = 0;
 static bool custom_whiteicons;
 static bool autofx;
 static bool reload_method = 0;
@@ -246,6 +247,7 @@ void MainWindow::writeLogF(const QString& log,const QString& _path){
 //---Style
 void MainWindow::SetStyle(){
     QApplication::setStyle(QString::fromStdString(mainwin->getTheme()));
+
     if(theme_mode==0){
         QApplication::setPalette(this->style()->standardPalette());
         QString stylepath = "";
@@ -276,7 +278,10 @@ void MainWindow::SetStyle(){
                 ui->set->setIcon(icon);
                 ui->cpreset->setIcon(icon2);
                 ui->toolButton->setIcon(icon3);
-            }else{
+            }else if (getWhiteIcons()) {
+                loadIcons(getWhiteIcons());
+            }
+            else{
                 QPixmap pix(":/icons/settings.svg");
                 QIcon icon(pix);
                 QPixmap pix2(":/icons/queue.svg");
@@ -288,6 +293,7 @@ void MainWindow::SetStyle(){
                 ui->toolButton->setIcon(icon3);
             }
         }
+
     }else{
         loadIcons(false);
         if(color_palette=="dark"){
@@ -640,6 +646,10 @@ void MainWindow::decodeAppConfig(const string& key,const string& value){
         custom_whiteicons = value=="true";
         break;
     }
+    case borderpadding: {
+        bd_padding = value=="true";
+        break;
+    }
     case stylesheet: {
         style_sheet = value;
         break;
@@ -691,7 +701,7 @@ void MainWindow::loadAppConfig(bool once){
 }
 
 //---UI Config Generator
-void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool relmet = reload_method,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode,string thm=theme_str){
+void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool relmet = reload_method,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode,string thm=theme_str,bool bd=bd_padding){
     string appconfig;
     stringstream converter1;
     converter1 << boolalpha << afx;
@@ -717,6 +727,10 @@ void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bo
     converter4 << boolalpha << w_ico;
     appconfig += "customwhiteicons=" + converter4.str() + "\n";
     appconfig += "custompalette=" + custompal + "\n";
+
+    stringstream converter5;
+    converter5 << boolalpha << bd;
+    appconfig += "borderpadding=" + converter5.str() + "\n";
 
     ofstream myfile(appcpath);
     if (myfile.is_open())
@@ -1341,6 +1355,14 @@ void MainWindow::setTheme(string thm){
 }
 string MainWindow::getTheme(){
     return theme_str;
+}
+void MainWindow::setBorderPadding(bool b){
+    bd_padding = b;
+    SetStyle();
+    SaveAppConfig();
+}
+bool MainWindow::getBorderPadding(){
+    return bd_padding;
 }
 
 

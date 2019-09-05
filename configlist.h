@@ -46,6 +46,7 @@ enum AppConfig {
     custompalette,
     customwhiteicons,
     theme,
+    borderpadding,
     unknownApp
 };
 inline Config resolveConfig(const std::string& input) {
@@ -85,6 +86,7 @@ inline AppConfig resolveAppConfig(const std::string& input) {
     if( input == "glavafix" ) return glavafix;
     if( input == "reloadMethod" ) return reloadMethod;
     if( input == "stylesheet" ) return stylesheet;
+    if( input == "borderpadding" ) return borderpadding;
     if( input == "thememode" ) return thememode;
     if( input == "colorpalette" ) return colorpalette;
     if( input == "customwhiteicons" ) return customwhiteicons;
