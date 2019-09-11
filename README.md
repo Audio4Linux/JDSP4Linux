@@ -17,6 +17,18 @@ For now, I will only include the basics in the readme. More details will be adde
 
 Install gstreamer-1.0 and some tools to build the gstreamer plugin. (If you have already installed Viper4Linux before, you can skip this step...)
 
+### Arch
+
+On Arch you can install the [AUR package](https://aur.archlinux.org/packages/jdsp4linux-git/) by yochananmarqos:
+```bash
+yay -S jdsp4linux-git
+```
+Please check the [workarounds section](#workarounds) if encounter any problems.
+
+![AUR version](https://img.shields.io/aur/version/jdsp4linux-git?label=aur)
+
+### Manually
+
 #### Debian
 ```bash
 sudo apt-get install build-essential autoconf libtool
@@ -96,6 +108,10 @@ pulseaudio --start
 ### Error: no element "device"
 As described [here](https://github.com/noahbliss/Viper4Linux#configuration), you can set a custom alsa path.
 For now, you can follow the instructions over there, but make sure you drop the devices.conf in `~/.config/jamesdsp`.
+
+## Credits
+* [yochananmarqos - AUR packages](https://github.com/yochananmarqos)
+* [james34602 - JamesDSP audio engine](https://github.com/james34602/)
 
 ______________
 Please open an issue or contact me on Telegram @ThePBone if you find any bugs or have questions.
