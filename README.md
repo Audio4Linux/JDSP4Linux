@@ -7,8 +7,17 @@ User Interface for JDSP4Linux [https://github.com/ThePBone/JDSP4Linux](https://g
 This project is work-in-progress.
 
 ## Installation
+* [Arch](#arch)
 * [Ubuntu PPA](#ubuntu-ppa)
 * [Portable/Manually](#portablemanually)
+
+### Arch
+On Arch you can install the [AUR package](https://aur.archlinux.org/packages/jdsp4linux-gui-git/) by yochananmarqos:
+```bash
+yay -S jdsp4linux-gui-git
+```
+
+![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur)
 
 ### Ubuntu (PPA)
 #### Add PPA Repo
@@ -73,6 +82,8 @@ EOT
 ```bash
 sudo wget -O /usr/share/pixmaps/jdsp-gui.png https://raw.githubusercontent.com/ThePBone/JDSP4Linux-GUI/master/icons/icon.png -q --show-progress
 ```
-## Credits
+## Contributors
+* [yochananmarqos - AUR packages](https://github.com/yochananmarqos)
+##### Other credits
+* [GTRONICK - QSS Stylesheets (modified by ThePBone)](https://github.com/GTRONICK/QSS)
 * [Material Icons](https://material.io/tools/icons/)
-* [QSS Stylesheets - GTRONICK (modified by ThePBone)](https://github.com/GTRONICK/QSS)
