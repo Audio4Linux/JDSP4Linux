@@ -23,7 +23,7 @@ On Arch you can install the [AUR package](https://aur.archlinux.org/packages/jds
 ```bash
 yay -S jdsp4linux-git
 ```
-Please check the [workarounds section](#workarounds) if encounter any problems.
+Please check the [workarounds section](#workarounds) if you encounter any problems.
 
 ![AUR version](https://img.shields.io/aur/version/jdsp4linux-git?label=aur)
 
