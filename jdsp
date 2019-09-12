@@ -14,7 +14,7 @@ idfile=$tmppath/sinkid.tmp
 if [ -f $idfile ]; then oldid=$(< $idfile); fi
 pidfile=$tmppath/pid.tmp
 if [ -f $pidfile ]; then pid=$(< $pidfile); fi
-logfile=$tmppath/viper.log
+logfile=$tmppath/jdsp.log
 vipersink=jdsp
 mkdir -p $configpath
 mkdir -p $tmppath
@@ -28,13 +28,13 @@ start () {
 		declare $(head -n1 $devicefile) #get location and desc from file	else
 		#Do our best.
 		location=$(pactl info | grep "Default Sink" | awk -F ": " '{print $2}')
-		if [ "$location" == "$vipersink" ]; then echo "Something is very wrong (Target is same as our vipersink name)."; return; fi
+		if [ "$location" == "$vipersink" ]; then echo "Something is very wrong (Target is same as our jdspsink name)."; return; fi
 	fi
 	idnum=$(pactl load-module module-null-sink sink_name=$vipersink sink_properties=device.description="JDSP4Linux")
 	echo $idnum > $idfile
 	echo "Setting original sink to full volume..."
 	pactl set-sink-volume $location 1.0
-	echo "Changing primary sink to Viper..."
+	echo "Changing primary sink to JDSP..."
 	pactl set-default-sink $vipersink
 	source $audiofile
 	gst-launch-1.0 -v pulsesrc device=$vipersink.monitor volume=1.0 \
@@ -57,7 +57,7 @@ stop () {
         if [ -f $idfile ]; then
                 pactl unload-module $oldid
 		rm $idfile
-		echo "Unloaded Viper sink."
+		echo "Unloaded JDSP sink."
         fi
 }
 
@@ -77,7 +77,7 @@ status () {
 		running="[STOPPED]"
 	fi
 	if [ -f $idfile ]; then
-		idfilestatus="There is an idfile. The viper sink seems to be loaded at id: $oldid."; else
+		idfilestatus="There is an idfile. The JDSPP sink seems to be loaded at id: $oldid."; else
 		idfilestatus="No idfile found."
 	fi
 	echo "$running"
