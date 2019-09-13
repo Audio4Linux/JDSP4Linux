@@ -45,7 +45,6 @@ settings::settings(QWidget *parent) :
     else ui->path->setText(QString::fromStdString(path));
 
     ui->autofx->setChecked(mainwin->getAutoFx());
-    ui->reloadMethod->setCurrentIndex(mainwin->getReloadMethod());
     ui->glavafix->setChecked(mainwin->getGFix());
     ui->addpadding->setChecked(mainwin->getWhiteIcons());
 
@@ -62,7 +61,6 @@ settings::settings(QWidget *parent) :
     connect(ui->glavafix, SIGNAL(clicked()), this, SLOT(updateGLava()));
     connect(ui->addpadding, SIGNAL(clicked()), this, SLOT(updateWhiteIcons()));
     connect(ui->autofx, SIGNAL(clicked()), this, SLOT(updateAutoFX()));
-    connect(ui->reloadMethod, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateReloadMethod()));
     connect(ui->savepath, SIGNAL(clicked()), this, SLOT(updatePath()));
 
     ui->styleSelect->addItem("Default","default");
@@ -138,9 +136,6 @@ void settings::updateWhiteIcons(){
 }
 void settings::updateAutoFX(){
     mainwin->setAutoFx(ui->autofx->isChecked());
-}
-void settings::updateReloadMethod(){
-    mainwin->setReloadMethod(ui->reloadMethod->currentIndex());
 }
 void settings::updatePath(){
     mainwin->setPath(ui->path->text().toUtf8().constData());

@@ -38,35 +38,29 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 using namespace std;
-
-static string path;
-static string appcpath;
-static string style_sheet;
-static string color_palette;
-static string custom_palette;
-static string theme_str;
+static string path = "";
+static string appcpath = "";
+static string style_sheet = "";
+static string color_palette = "";
+static string custom_palette = "";
+static string theme_str = "";
 static int theme_mode = 0;
 static int autofxmode = 0;
 static bool bd_padding = 0;
-static bool custom_whiteicons;
-static bool autofx;
-static bool reload_method = 0;
-static bool glava_fix;
+static bool custom_whiteicons = false;
+static bool autofx = false;
+static bool glava_fix = false;
 static bool settingsdlg_enabled=true;
 static bool presetdlg_enabled=true;
 static bool logdlg_enabled=true;
 static bool lockapply = false;
 static bool lockddcupdate = false;
 static QString ddcpath = "";
-static QProcess* process;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    process = new QProcess(this);
-    connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(processProcOutput()));
-    connect (process, SIGNAL(readyReadStandardError()), this, SLOT(processProcOutput()));
 
     //Clear log
     QFile file ("/tmp/jamesdsp/ui.log");
@@ -207,20 +201,7 @@ bool MainWindow::createconnection()
     return true;
 }
 
-//--Process/Logs
-void MainWindow::processProcOutput(){
-    QString out = process->readAllStandardOutput();
-    QString err = process->readAllStandardError();
-    QString logpath("/tmp/jamesdsp/ui_jdsp.log");
-    if(out!=""){
-        //qDebug()<<out;
-        writeLogF(out,logpath);
-    }
-    if(err!=""){
-        //qDebug()<<err;
-        writeLogF(err,logpath);
-    }
-}
+//--Logs
 void MainWindow::writeLog(const QString& log,int mode){
     //Mode: 0-Log+Stdout 1-Log 2-Stdout
     QFile f("/tmp/jamesdsp/ui.log");
@@ -229,7 +210,7 @@ void MainWindow::writeLog(const QString& log,int mode){
 
     if(mode==0||mode==1){
         if (f.open(QIODevice::WriteOnly | QIODevice::Append)) {
-          f.write(o.toUtf8().constData());
+            f.write(o.toUtf8().constData());
         }
         f.close();
     }
@@ -239,7 +220,7 @@ void MainWindow::writeLogF(const QString& log,const QString& _path){
     QFile f(_path);
     QString o = "[" + QTime::currentTime().toString() + "] " + log;
     if (f.open(QIODevice::WriteOnly | QIODevice::Append)) {
-      f.write(o.toUtf8().constData());
+        f.write(o.toUtf8().constData());
     }
     f.close();
 }
@@ -309,20 +290,20 @@ void MainWindow::SetStyle(){
             QColor base = QColor(23, 0, 19);
             QColor selection = QColor(42, 130, 218);
             setPalette(base,background,foreground,selection,Qt::black);
-         }else if(color_palette=="gray"){
+        }else if(color_palette=="gray"){
             loadIcons(true);
             QColor background = QColor(49,49,74);
             QColor foreground = Qt::white;
             QColor base = QColor(83,83,125);
             QColor selection = QColor(85,85,127);
             setPalette(base,background,foreground,selection,Qt::black,QColor(144,144,179));
-         }else if(color_palette=="white"){
+        }else if(color_palette=="white"){
             QColor background = Qt::white;
             QColor foreground = Qt::black;
             QColor base = Qt::white;
             QColor selection = QColor(56,161,227);
             setPalette(base,background,foreground,selection,Qt::black);
-         }
+        }
         else if(color_palette=="blue"){
             loadIcons(true);
             QColor background = QColor(0,0,50);
@@ -340,27 +321,27 @@ void MainWindow::SetStyle(){
             setPalette(base,background,foreground,selection,Qt::black);
         }
         else if(color_palette=="honeycomb"){
-                    QColor background = QColor(212,215,208);
-                    QColor foreground = Qt::black;
-                    QColor base = QColor(185,188,182);
-                    QColor selection = QColor(243,193,41);
-                    setPalette(base,background,foreground,selection,Qt::white);
+            QColor background = QColor(212,215,208);
+            QColor foreground = Qt::black;
+            QColor base = QColor(185,188,182);
+            QColor selection = QColor(243,193,41);
+            setPalette(base,background,foreground,selection,Qt::white);
         }
         else if(color_palette=="black"){
-                    loadIcons(true);
-                    QColor background = QColor(16,16,16);
-                    QColor foreground = QColor(222,222,222);
-                    QColor base = Qt::black;
-                    QColor selection = QColor(132,132,132);
-                    setPalette(base,background,foreground,selection,Qt::black);
+            loadIcons(true);
+            QColor background = QColor(16,16,16);
+            QColor foreground = QColor(222,222,222);
+            QColor base = Qt::black;
+            QColor selection = QColor(132,132,132);
+            setPalette(base,background,foreground,selection,Qt::black);
         }
         else if(color_palette=="solarized"){
-                    loadIcons(true);
-                    QColor background = QColor(15,30,49);
-                    QColor foreground = QColor(154,174,180);
-                    QColor base = Qt::black;
-                    QColor selection = QColor(3,50,63);
-                    setPalette(base,background,foreground,selection,Qt::black);
+            loadIcons(true);
+            QColor background = QColor(15,30,49);
+            QColor foreground = QColor(154,174,180);
+            QColor base = Qt::black;
+            QColor selection = QColor(3,50,63);
+            setPalette(base,background,foreground,selection,Qt::black);
         }
         else if(color_palette=="silver"){
             QColor background = QColor(176,180,196);
@@ -370,12 +351,12 @@ void MainWindow::SetStyle(){
             setPalette(base,background,foreground,selection,Qt::black);
         }
         else if(color_palette=="darkgreen"){
-                    loadIcons(true);
-                    QColor background = QColor(27,34,36);
-                    QColor foreground = QColor(197,209,217);
-                    QColor base = QColor(30,30,30);
-                    QColor selection = QColor(21,67,58);
-                    setPalette(base,background,foreground,selection,Qt::black);
+            loadIcons(true);
+            QColor background = QColor(27,34,36);
+            QColor foreground = QColor(197,209,217);
+            QColor base = QColor(30,30,30);
+            QColor selection = QColor(21,67,58);
+            setPalette(base,background,foreground,selection,Qt::black);
         }
         else if(color_palette=="custom"){
             QColor base = QColor(loadColor(0,0),loadColor(0,1),loadColor(0,2));
@@ -557,12 +538,9 @@ void MainWindow::Reset(){
     }
 }
 void MainWindow::Restart(){
-    if(process->state()!=QProcess::ProcessState::NotRunning)return;
-    //process->kill();
     if(glava_fix)system("killall -r glava");
 
-    if(reload_method==0)process->start("jdsp", QStringList(initializer_list<QString>({"restart"})));
-    else system("jdsp restart");
+    system("jdsp restart");
 
     if(glava_fix)system("setsid glava -d >/dev/null 2>&1 &");
 }
@@ -670,10 +648,6 @@ void MainWindow::decodeAppConfig(const string& key,const string& value){
         custom_palette = value;
         break;
     }
-    case reloadMethod: {
-        reload_method = value=="true";
-        break;
-    }
     }
 }
 void MainWindow::loadAppConfig(bool once){
@@ -701,7 +675,19 @@ void MainWindow::loadAppConfig(bool once){
 }
 
 //---UI Config Generator
-void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bool relmet = reload_method,bool g_fix = glava_fix, const string &ssheet = style_sheet,int tmode = theme_mode,const string &cpalette = color_palette,const string &custompal = custom_palette,bool w_ico = custom_whiteicons,int aamode=autofxmode,string thm=theme_str,bool bd=bd_padding){
+void MainWindow::SaveAppConfig(){
+    bool afx = autofx;
+    const string& cpath = path;
+    bool g_fix = glava_fix;
+    const string &ssheet = style_sheet;
+    int tmode = theme_mode;
+    const string &cpalette = color_palette;
+    const string &custompal = custom_palette;
+    bool w_ico = custom_whiteicons;
+    int aamode=autofxmode;
+    const string &thm=theme_str;
+    bool bd=bd_padding;
+
     string appconfig;
     stringstream converter1;
     converter1 << boolalpha << afx;
@@ -709,10 +695,6 @@ void MainWindow::SaveAppConfig(bool afx = autofx, const string& cpath = path, bo
     appconfig += "autoapplymode=" + to_string(aamode) + "\n";
 
     appconfig += "configpath=\"" + cpath + "\"\n";
-
-    stringstream converter2;
-    converter2 << boolalpha << relmet;
-    appconfig += "reloadMethod=" + converter2.str() + "\n";
 
     stringstream converter3;
     converter3 << boolalpha << g_fix;
@@ -1247,8 +1229,8 @@ void MainWindow::updateeq(int f,QObject *obj){
     
     QString s;
     if(to_string(abs(f)%100).length()==1)
-    {	
-	char buffer[5];
+    {
+        char buffer[5];
         snprintf(buffer, sizeof(buffer), "%02d", abs(f)%100);
         s = pre + QString::number(abs(f)/100) + "."  + QString::fromUtf8(buffer) + "dB";
     }
@@ -1275,13 +1257,6 @@ bool MainWindow::getAutoFx(){
 }
 void MainWindow::setAutoFx(bool afx){
     autofx = afx;
-    SaveAppConfig();
-}
-bool MainWindow::getReloadMethod(){
-    return reload_method;
-}
-void MainWindow::setReloadMethod(bool on){
-    reload_method = on;
     SaveAppConfig();
 }
 void MainWindow::setGFix(bool f){
@@ -1503,7 +1478,7 @@ void MainWindow::selectDDCFolder(){
 bool MainWindow::is_number(const string& s)
 {
     return !s.empty() && std::find_if(s.begin(),
-        s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
+                                      s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
 }
 bool MainWindow::is_only_ascii_whitespace( const std::string& str )
 {

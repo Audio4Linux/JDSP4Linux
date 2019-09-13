@@ -41,10 +41,8 @@ public:
     void setAutoFx(bool autofx);
     int getThememode();
     void setThememode(int mode);
-    bool getReloadMethod();
     bool getGFix();
     void setGFix(bool);
-    void setReloadMethod(bool on);
     void setPath(string npath);
     string getTheme();
     void setTheme(string);
@@ -77,7 +75,6 @@ private slots:
     void LoadExternalFile();
     void SaveExternalFile();
     void OpenLog();
-    void processProcOutput();
     void reloadDDC();
     void updateDDC_file();
     void selectDDCFolder();
@@ -89,10 +86,9 @@ private:
     int loadColor(int index,int rgb_index);
     void updateeq(int,QObject*);
     void setRoompreset(int data);
-
     void loadConfig(const string& key, string value);
     void decodeAppConfig(const string& key, const string& value);
-    void SaveAppConfig(bool,const string&,bool,bool,const string&,int,const string&,const string&,bool,int,string,bool);
+    void SaveAppConfig();
     string getMain();
     string getBass();
     string getSurround();
@@ -105,6 +101,8 @@ private:
     void SetStyle();
     bool is_only_ascii_whitespace(const string&);
     bool is_number(const string& s);
+
+
 };
 
 #endif // MAINWINDOW_H

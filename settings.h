@@ -20,7 +20,6 @@ private slots:
         void changeThemeMode();
         void changePalette(const QString&);
         void updateAutoFX();
-        void updateReloadMethod();
         void updatePath();
         void updateGLava();
         void updateAutoFxMode();

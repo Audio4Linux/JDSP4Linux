@@ -38,7 +38,6 @@ enum AppConfig {
     configpath,
     autoapply,
     autoapplymode,
-    reloadMethod,
     glavafix,
     stylesheet,
     thememode,
@@ -84,7 +83,6 @@ inline AppConfig resolveAppConfig(const std::string& input) {
     if( input == "autoapply" ) return autoapply;
     if( input == "autoapplymode" ) return autoapplymode;
     if( input == "glavafix" ) return glavafix;
-    if( input == "reloadMethod" ) return reloadMethod;
     if( input == "stylesheet" ) return stylesheet;
     if( input == "borderpadding" ) return borderpadding;
     if( input == "thememode" ) return thememode;
