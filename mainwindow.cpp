@@ -895,6 +895,8 @@ void MainWindow::loadConfig(const string& key,string value){
             else break;
 
             QString qEq(eq_str);
+            if(count == 0)qEq.remove(0,1);
+            else if(count == 14) qEq.chop(1);
             sld->setValue(qEq.toInt());
 
             eq_str = strtok (nullptr, ";");
