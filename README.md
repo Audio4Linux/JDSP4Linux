@@ -2,7 +2,7 @@
 Port of the opensource version of JamesDSP to Linux
 
 This is experimental and obviously work in progress.
-Currently everything (analog modelling, bass boost, bs2b, VDC/DDCs, limiter, compression, reverbation and the stereo widener), except the convolver is implemented, and the plugin might produce crackling output if the samplerate is set incorrectly.
+Currently everything (analog modelling, bass boost, bs2b, VDC/DDCs, limiter, compression, reverbation and the stereo widener), except the convolver is implemented.
 
 You can find the repo of my gst-wrapper for JDSP [here](https://github.com/ThePBone/gst-plugin-jamesdsp).
 
