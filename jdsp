@@ -38,11 +38,8 @@ start () {
 	pactl set-default-sink $vipersink
 	source $audiofile
 	gst-launch-1.0 -v pulsesrc device=$vipersink.monitor volume=1.0 \
-	! audio/x-raw,channels=2,rate=44100,format=F32LE,endianness=1234 \
-	! audioconvert \
 	! jdspfx enable="$enable" analogmodelling-enable="$analogmodelling_enable" analogmodelling-tubedrive="$analogmodelling_tubedrive" bass-enable="$bass_enable" bass-mode="$bass_mode" bass-filtertype="$bass_filtertype" bass-freq="$bass_freq" headset-enable="$headset_enable" headset-preset="$headset_preset" stereowide-enable="$stereowide_enable" stereowide-mode="$stereowide_mode" bs2b-enable="$bs2b_enable" bs2b-mode="$bs2b_mode" compression-enable="$compression_enable" compression-pregain="$compression_pregain" compression-threshold="$compression_threshold" compression-knee="$compression_knee" compression-ratio="$compression_ratio" compression-attack="$compression_attack" compression-release="$compression_release" tone-enable="$tone_enable" tone-filtertype="$tone_filtertype"  tone-eq="$tone_eq" masterswitch-limthreshold="$masterswitch_limthreshold" masterswitch-limrelease="$masterswitch_limrelease" ddc-enable="$ddc_enable" ddc-file="$ddc_file"  \
-	! audio/x-raw,channels=2,rate=44100,format=F32LE,endianness=1234 \
-	! audioconvert ! pulsesink device="$location"  &
+        ! pulsesink device="$location" > $logfile &
 	echo $! > $pidfile
 	echo "Moving existing audio streams to Viper..."
 	while read existing_sink; do pactl move-sink-input $existing_sink $vipersink; done < <(pactl list sink-inputs short | awk '{print $1}')
@@ -77,7 +74,7 @@ status () {
 		running="[STOPPED]"
 	fi
 	if [ -f $idfile ]; then
-		idfilestatus="There is an idfile. The JDSPP sink seems to be loaded at id: $oldid."; else
+		idfilestatus="There is an idfile. The JDSP sink seems to be loaded at id: $oldid."; else
 		idfilestatus="No idfile found."
 	fi
 	echo "$running"
@@ -85,4 +82,3 @@ status () {
 	echo "$idfilestatus"
 }
 $@
-
