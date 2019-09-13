@@ -13,9 +13,16 @@ At the moment JDSP and Viper4Linux are not compatible. Trying to start them both
 
 For now, I will only include the basics in the readme. More details will be added later.
 
-## Setup
+### Technical Data
+Supported sample formats:
+* 32-bit float (LE)
+* 32-bit int (LE)
 
-Install gstreamer-1.0 and some tools to build the gstreamer plugin. (If you have already installed Viper4Linux before, you can skip this step...)
+Supported samplerates:
+* 44100
+* 48000
+
+## Setup
 
 ### Arch
 
@@ -28,6 +35,7 @@ Please check the [workarounds section](#workarounds) if you encounter any proble
 ![AUR version](https://img.shields.io/aur/version/jdsp4linux-git?label=aur)
 
 ### Manually
+Install gstreamer-1.0 and some tools to build the gstreamer plugin. (If you have already installed Viper4Linux before, you can skip this step...)
 
 #### Debian
 ```bash
@@ -57,7 +65,7 @@ sudo cp src/.libs/libgstjdspfx.so /usr/lib/x86_64-linux-gnu/gstreamer-1.0/
 ```
 #### Arch
 ```bash
-sudo cp libgstjdspfx.so /usr/lib/gstreamer-1.0/  
+sudo cp src/.libs/libgstjdspfx.so /usr/lib/gstreamer-1.0/  
 ```
 If everything went alright gst-inspect-1.0 should display all element properties of the JDSP plugin:
 ```bash
@@ -86,10 +94,11 @@ jdsp stop
 ```
 Like I said, work-in-progress != stable, so use it with caution. 
 
-By the way, if you try to use a corrupted VDC file your ears will be effectively destructed by blasting white noise at them, so don't do that :) 
-
-(I will implement some kind of validation later)
 ## Workarounds
+### Error: no element "device"
+As described [here](https://github.com/noahbliss/Viper4Linux#configuration), you can set a custom alsa path.
+For now, you can follow the instructions over there, but make sure you drop the devices.conf in `~/.config/jamesdsp`.
+
 ### Fix crackling/choppy sound
 _Set the default samplerate to 48000Hz in pulseaudio's config:_
 
@@ -105,9 +114,6 @@ And restart pulseaudio:
 pulseaudio -k
 pulseaudio --start
 ```
-### Error: no element "device"
-As described [here](https://github.com/noahbliss/Viper4Linux#configuration), you can set a custom alsa path.
-For now, you can follow the instructions over there, but make sure you drop the devices.conf in `~/.config/jamesdsp`.
 
 ## Credits
 * [yochananmarqos - AUR packages](https://github.com/yochananmarqos)
