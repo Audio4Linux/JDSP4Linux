@@ -237,7 +237,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="bass">
        <property name="toolTipDuration">
@@ -1359,7 +1359,7 @@
            <property name="geometry">
             <rect>
              <x>306</x>
-             <y>10</y>
+             <y>8</y>
              <width>48</width>
              <height>20</height>
             </rect>
@@ -1375,9 +1375,9 @@
            <property name="geometry">
             <rect>
              <x>90</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1391,6 +1391,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1400,9 +1403,9 @@
            <property name="geometry">
             <rect>
              <x>30</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1417,6 +1420,9 @@
            <property name="pageStep">
             <number>50</number>
            </property>
+           <property name="value">
+            <number>0</number>
+           </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -1425,7 +1431,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>83</y>
+             <y>108</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1441,7 +1447,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>11</y>
+             <y>8</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1457,7 +1463,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>46</y>
+             <y>57</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1473,9 +1479,9 @@
            <property name="geometry">
             <rect>
              <x>50</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1490,6 +1496,9 @@
            <property name="pageStep">
             <number>50</number>
            </property>
+           <property name="value">
+            <number>0</number>
+           </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -1498,7 +1507,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>63</y>
+             <y>82</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1514,9 +1523,9 @@
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1542,7 +1551,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>29</y>
+             <y>32</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1558,7 +1567,7 @@
            <property name="geometry">
             <rect>
              <x>313</x>
-             <y>48</y>
+             <y>57</y>
              <width>41</width>
              <height>20</height>
             </rect>
@@ -1574,7 +1583,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>120</y>
+             <y>158</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1590,9 +1599,9 @@
            <property name="geometry">
             <rect>
              <x>190</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1606,6 +1615,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1615,9 +1627,9 @@
            <property name="geometry">
             <rect>
              <x>130</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1632,6 +1644,9 @@
            <property name="pageStep">
             <number>50</number>
            </property>
+           <property name="value">
+            <number>0</number>
+           </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -1640,7 +1655,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>103</y>
+             <y>133</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1656,7 +1671,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>155</y>
+             <y>207</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1672,7 +1687,7 @@
            <property name="geometry">
             <rect>
              <x>9</x>
-             <y>137</y>
+             <y>183</y>
              <width>301</width>
              <height>20</height>
             </rect>
@@ -1688,7 +1703,7 @@
            <property name="geometry">
             <rect>
              <x>315</x>
-             <y>83</y>
+             <y>110</y>
              <width>39</width>
              <height>17</height>
             </rect>
@@ -1704,7 +1719,7 @@
            <property name="geometry">
             <rect>
              <x>315</x>
-             <y>121</y>
+             <y>160</y>
              <width>39</width>
              <height>17</height>
             </rect>
@@ -1720,9 +1735,9 @@
            <property name="geometry">
             <rect>
              <x>150</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1737,6 +1752,9 @@
            <property name="pageStep">
             <number>50</number>
            </property>
+           <property name="value">
+            <number>0</number>
+           </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -1745,7 +1763,7 @@
            <property name="geometry">
             <rect>
              <x>305</x>
-             <y>154</y>
+             <y>206</y>
              <width>49</width>
              <height>20</height>
             </rect>
@@ -1761,9 +1779,9 @@
            <property name="geometry">
             <rect>
              <x>70</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1777,6 +1795,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1786,9 +1807,9 @@
            <property name="geometry">
             <rect>
              <x>110</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1802,6 +1823,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1811,9 +1835,9 @@
            <property name="geometry">
             <rect>
              <x>170</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1827,6 +1851,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1836,9 +1863,9 @@
            <property name="geometry">
             <rect>
              <x>210</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1852,6 +1879,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1861,9 +1891,9 @@
            <property name="geometry">
             <rect>
              <x>230</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1877,6 +1907,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1886,9 +1919,9 @@
            <property name="geometry">
             <rect>
              <x>250</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1902,6 +1935,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1911,9 +1947,9 @@
            <property name="geometry">
             <rect>
              <x>270</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>160</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1927,6 +1963,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1936,9 +1975,9 @@
            <property name="geometry">
             <rect>
              <x>290</x>
-             <y>13</y>
+             <y>10</y>
              <width>16</width>
-             <height>161</height>
+             <height>216</height>
             </rect>
            </property>
            <property name="minimum">
@@ -1952,6 +1991,9 @@
            </property>
            <property name="pageStep">
             <number>50</number>
+           </property>
+           <property name="value">
+            <number>0</number>
            </property>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -2297,8 +2339,8 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>391</width>
-          <height>251</height>
+          <width>441</width>
+          <height>246</height>
          </rect>
         </property>
         <property name="tabPosition">
@@ -2398,7 +2440,7 @@
        <widget class="QCheckBox" name="ddc_enable">
         <property name="geometry">
          <rect>
-          <x>410</x>
+          <x>460</x>
           <y>10</y>
           <width>101</width>
           <height>21</height>
