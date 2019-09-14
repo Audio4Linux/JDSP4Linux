@@ -544,7 +544,7 @@
           <item>
            <widget class="QGroupBox" name="stereowidener">
             <property name="whatsThis">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Stereo widener&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Level: &lt;/span&gt;Strength of the widening effect&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Stereo widener&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The Mid channel is the center of a stereo image. When the Mid channel is boosted, the listener perceives a more centered (mono) sound to the audio.&lt;/p&gt;&lt;p&gt;The Side channel is the edges of a stereo image. When the Side channel is boosted, the listener perceives a more spacious (wider) sound to the audio.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="title">
              <string>Stereo widener</string>
@@ -560,7 +560,7 @@
               <number>6</number>
              </property>
              <property name="topMargin">
-              <number>7</number>
+              <number>9</number>
              </property>
              <property name="bottomMargin">
               <number>11</number>
@@ -568,74 +568,17 @@
              <item>
               <widget class="QLabel" name="roomsize_label">
                <property name="text">
-                <string>Level</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSlider" name="stereowidener_lvl">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>13</height>
-                </size>
-               </property>
-               <property name="minimum">
-                <number>0</number>
-               </property>
-               <property name="maximum">
-                <number>4</number>
-               </property>
-               <property name="singleStep">
-                <number>1</number>
-               </property>
-               <property name="value">
-                <number>0</number>
-               </property>
-               <property name="tracking">
-                <bool>true</bool>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="invertedControls">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="bs2b">
-            <property name="whatsThis">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Bauer stereophonic-to-binaural DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A typical stereo records are being made to listen by speakers. That is a sound engineer makes the stereo mix to the adaptation of sound for listening of one channel by both ears. Therefore, you will be tired during a long time headphone listening more by a superstereo effect than by a poor design of headphones. What's missing in headphones is the sound going from each channel to the opposite ear, arriving a short time later for the extra distance traveled, and with a bit of high frequency roll-off for the shadowing effect of the head. And the time delay to the far ear is somewhat longer at low frequencies than at high frequencies. The Bauer stereophonic-to-binaural DSP (bs2b) is designed to improve headphone listening of stereo audio records.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Source: &lt;/span&gt;&lt;a href=&quot;http://bs2b.sourceforge.net/&quot;&gt;&lt;span style=&quot; font-style:italic; text-decoration: underline; color:#007af4;&quot;&gt;http://bs2b.sourceforge.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="title">
-             <string>BS2B</string>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout">
-             <property name="bottomMargin">
-              <number>12</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="label_2">
-               <property name="text">
                 <string>Preset</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="bs2b_preset_cb">
+              <widget class="QComboBox" name="stereowide_preset">
+               <item>
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </item>
                <item>
                 <property name="text">
                  <string>A Bit</string>
@@ -651,6 +594,50 @@
                  <string>Moderate</string>
                 </property>
                </item>
+               <item>
+                <property name="text">
+                 <string>High</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Super</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Side Gain</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="stereowide_s">
+               <property name="maximum">
+                <number>5000</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Mid Gain</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="stereowide_m">
+               <property name="maximum">
+                <number>5000</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
               </widget>
              </item>
             </layout>
@@ -683,12 +670,15 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QGroupBox" name="reverb">
+           <widget class="QGroupBox" name="bs2b">
             <property name="whatsThis">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverbation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Based on Progenitor2 (part of FreeVerb3)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Bauer stereophonic-to-binaural DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A typical stereo records are being made to listen by speakers. That is a sound engineer makes the stereo mix to the adaptation of sound for listening of one channel by both ears. Therefore, you will be tired during a long time headphone listening more by a superstereo effect than by a poor design of headphones. What's missing in headphones is the sound going from each channel to the opposite ear, arriving a short time later for the extra distance traveled, and with a bit of high frequency roll-off for the shadowing effect of the head. And the time delay to the far ear is somewhat longer at low frequencies than at high frequencies. The Bauer stereophonic-to-binaural DSP (bs2b) is designed to improve headphone listening of stereo audio records.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Source: &lt;/span&gt;&lt;a href=&quot;http://bs2b.sourceforge.net/&quot;&gt;&lt;span style=&quot; font-style:italic; text-decoration: underline; color:#007af4;&quot;&gt;http://bs2b.sourceforge.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="title">
-             <string>Reverbation</string>
+             <string>BS2B</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -696,105 +686,86 @@
             <property name="checked">
              <bool>false</bool>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_11">
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <property name="bottomMargin">
+              <number>12</number>
+             </property>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_15">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Preset</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="bs2b_preset_cb">
                <item>
-                <widget class="QLabel" name="vhplvl_label">
-                 <property name="text">
-                  <string>Strength</string>
-                 </property>
-                </widget>
+                <property name="text">
+                 <string>...</string>
+                </property>
                </item>
                <item>
-                <widget class="QSlider" name="reverb_strength">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>13</height>
-                  </size>
-                 </property>
-                 <property name="minimum">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <number>18</number>
-                 </property>
-                 <property name="value">
-                  <number>0</number>
-                 </property>
-                 <property name="tracking">
-                  <bool>true</bool>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="invertedControls">
-                  <bool>false</bool>
-                 </property>
-                </widget>
+                <property name="text">
+                 <string>Default</string>
+                </property>
                </item>
                <item>
-                <widget class="QLabel" name="label_4">
-                 <property name="text">
-                  <string>Room Presets</string>
-                 </property>
-                </widget>
+                <property name="text">
+                 <string>Chu Moy</string>
+                </property>
                </item>
                <item>
-                <widget class="QComboBox" name="roompresets">
-                 <property name="maximumSize">
-                  <size>
-                   <width>133</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="frame">
-                  <bool>true</bool>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>...</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Small room</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium room</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Large room</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Plate high</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Plate low</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Long reverb 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Long reverb 2</string>
-                  </property>
-                 </item>
-                </widget>
+                <property name="text">
+                 <string>Jan Meier</string>
+                </property>
                </item>
-              </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Crossfeed</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="bs2b_feed">
+               <property name="minimum">
+                <number>10</number>
+               </property>
+               <property name="maximum">
+                <number>150</number>
+               </property>
+               <property name="value">
+                <number>60</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Cut frequency</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="bs2b_fcut">
+               <property name="minimum">
+                <number>300</number>
+               </property>
+               <property name="maximum">
+                <number>2000</number>
+               </property>
+               <property name="value">
+                <number>700</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -816,6 +787,145 @@
            </spacer>
           </item>
          </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Reverb</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_15">
+        <item>
+         <widget class="QGroupBox" name="reverb">
+          <property name="whatsThis">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverbation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Based on Progenitor2 (part of FreeVerb3)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="title">
+           <string>Reverbation</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="horizontalSpacing">
+              <number>22</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>6</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QLabel" name="vhplvl_label">
+               <property name="text">
+                <string>Strength</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSlider" name="reverb_strength">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>13</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>132</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="minimum">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <number>18</number>
+               </property>
+               <property name="value">
+                <number>0</number>
+               </property>
+               <property name="tracking">
+                <bool>true</bool>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="invertedControls">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Room Presets</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="roompresets">
+               <property name="maximumSize">
+                <size>
+                 <width>133</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="frame">
+                <bool>true</bool>
+               </property>
+               <item>
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Small room</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Medium room</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Large room</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Plate high</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Plate low</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Long reverb 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Long reverb 2</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -1907,8 +2017,6 @@
   <tabstop>bassstrength</tabstop>
   <tabstop>bassfreq</tabstop>
   <tabstop>limthreshold</tabstop>
-  <tabstop>reverb</tabstop>
-  <tabstop>reverb_strength</tabstop>
   <tabstop>stereowidener</tabstop>
   <tabstop>eq1</tabstop>
   <tabstop>eq2</tabstop>

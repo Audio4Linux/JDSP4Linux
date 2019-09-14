@@ -6,6 +6,7 @@
 #include <iostream>
 #include <QSqlTableModel>
 #include <QItemSelection>
+#include <cmath>
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -71,6 +72,8 @@ private slots:
     void ResetEQ();
     void OpenSettings();
     void updateroompreset();
+    void updatestereopreset();
+    void updatebs2bpreset();
     void update(int,QObject*alt=nullptr);
     void LoadExternalFile();
     void SaveExternalFile();
@@ -85,6 +88,8 @@ private:
     void setPalette(const QColor& base,const QColor& background,const QColor& foreground,const QColor&,const QColor&,const QColor& = QColor(85,85,85));
     int loadColor(int index,int rgb_index);
     void updateeq(int,QObject*);
+    void setBS2B(int,int);
+    void setStereoWide(float m,float s);
     void setRoompreset(int data);
     void loadConfig(const string& key, string value);
     void decodeAppConfig(const string& key, const string& value);
@@ -101,8 +106,6 @@ private:
     void SetStyle();
     bool is_only_ascii_whitespace(const string&);
     bool is_number(const string& s);
-
-
 };
 
 #endif // MAINWINDOW_H

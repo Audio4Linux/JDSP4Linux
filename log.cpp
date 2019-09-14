@@ -25,8 +25,7 @@ void log::reject()
 void log::updateLog(){
     ui->viperlog->clear();
     QString path;
-    if(ui->select->currentText()=="JDSP") path = "/tmp/jamesdsp/ui_jdsp.log";
-    else if(ui->select->currentText()=="GST Plugin") path = "/tmp/jamesdsp/jdsp.log";
+    if(ui->select->currentText()=="GST Plugin") path = "/tmp/jamesdsp/jdsp.log";
     else path = "/tmp/jamesdsp/ui.log";
 
     QFile file(path);

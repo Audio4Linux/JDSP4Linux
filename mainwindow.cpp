@@ -814,18 +814,28 @@ void MainWindow::loadConfig(const string& key,string value){
         ui->stereowidener->setChecked(value=="true");
         break;
     }
-    case stereowide_mode: {
-        ui->stereowidener_lvl->setValue(std::stoi(value));
-        update(i,ui->stereowidener_lvl);
+    case stereowide_mcoeff: {
+        ui->stereowide_m->setValue(std::stoi(value));
+        update(i,ui->stereowide_m);
+        break;
+    }
+    case stereowide_scoeff: {
+        ui->stereowide_s->setValue(std::stoi(value));
+        update(i,ui->stereowide_s);
         break;
     }
     case bs2b_enable: {
         ui->bs2b->setChecked(value=="true");
         break;
     }
-    case bs2b_mode: {
-        ui->bs2b_preset_cb->setCurrentIndex(std::stoi(value));
-        update(i,ui->bs2b_preset_cb);
+    case bs2b_feed: {
+        ui->bs2b_feed->setValue(std::stoi(value));
+        update(i,ui->bs2b_feed);
+        break;
+    }
+    case bs2b_fcut: {
+        ui->bs2b_fcut->setValue(std::stoi(value));
+        update(i,ui->bs2b_fcut);
         break;
     }
     case compression_enable: {
@@ -1064,14 +1074,18 @@ string MainWindow::getSurround() {
     out += "stereowide_enable=";
     if(ui->stereowidener->isChecked())out += "true" + n;
     else out += "false" + n;
-    out += "stereowide_mode=";
-    out += to_string(ui->stereowidener_lvl->value()) + n;
+    out += "stereowide_scoeff=";
+    out += to_string(ui->stereowide_s->value()) + n;
+    out += "stereowide_mcoeff=";
+    out += to_string(ui->stereowide_m->value()) + n;
 
     out += "bs2b_enable=";
     if(ui->bs2b->isChecked())out += "true" + n;
     else out += "false" + n;
-    out += "bs2b_mode=";
-    out += to_string(ui->bs2b_preset_cb->currentIndex()) + n;
+    out += "bs2b_feed=";
+    out += to_string(ui->bs2b_feed->value()) + n;
+    out += "bs2b_fcut=";
+    out += to_string(ui->bs2b_fcut->value()) + n;
 
     out += "headset_enable=";
     if(ui->reverb->isChecked())out += "true" + n;
@@ -1109,6 +1123,24 @@ void MainWindow::setRoompreset(int data){
     lockapply=false;
     OnUpdate(true);
 }
+void MainWindow::setBS2B(int fcut,int feed){
+    lockapply=true;
+    ui->bs2b_feed->setValue(feed);
+    updateWidgetUnit(ui->bs2b_feed,QString::number((double)feed/10) + "dB",false);
+    ui->bs2b_fcut->setValue(fcut);
+    updateWidgetUnit(ui->bs2b_fcut,QString::number(fcut) + "Hz",false);
+    lockapply=false;
+    OnUpdate(true);
+}
+void MainWindow::setStereoWide(float m,float s){
+    lockapply=true;
+    ui->stereowide_m->setValue((int)(m*1000.0f));
+    updateWidgetUnit(ui->stereowide_m,QString::number(m)+"dB",false);
+    ui->stereowide_s->setValue((int)(s*1000.0f));
+    updateWidgetUnit(ui->stereowide_s,QString::number(s)+"dB",false);
+    lockapply=false;
+    OnUpdate(true);
+}
 void MainWindow::updateroompreset(){
     QString selection = ui->roompresets->currentText();
     if(selection == "Small room")setRoompreset(8);
@@ -1120,6 +1152,24 @@ void MainWindow::updateroompreset(){
     else if(selection == "Long reverb 2")setRoompreset(18);
     else setRoompreset(0);
 }
+void MainWindow::updatebs2bpreset(){
+    QString selection = ui->bs2b_preset_cb->currentText();
+    if(selection == "Default")setBS2B(700,45);
+    else if(selection == "Chu Moy")setBS2B(700,60);
+    else if(selection == "Jan Meier")setBS2B(650,95);
+    else setBS2B(300,10);
+}
+void MainWindow::updatestereopreset(){
+    QString selection = ui->stereowide_preset->currentText();
+    if(selection == "A Bit")setStereoWide(1.0 * 0.5,1.2 * 0.5);
+    else if(selection == "Slight")setStereoWide(0.95 * 0.5,1.4 * 0.5);
+    else if(selection == "Moderate")setStereoWide(0.9 * 0.5,1.6 * 0.5);
+    else if(selection == "High")setStereoWide(0.85 * 0.5,1.8 * 0.5);
+    else if(selection == "Super")setStereoWide(0.8 * 0.5,2.0 * 0.5);
+    else setStereoWide(0,0);
+}
+
+
 void MainWindow::ResetEQ(){
     ui->eq1->setValue(0);
     ui->eq2->setValue(0);
@@ -1180,13 +1230,11 @@ void MainWindow::update(int d,QObject *alt){
         else if(d <= 900) updateWidgetUnit(obj,"Moderate (" + QString::number( d )+")",alt==nullptr);
         else updateWidgetUnit(obj,"Extreme (" + QString::number( d )+")",alt==nullptr);
     }
-    else if(obj==ui->stereowidener_lvl){
-        if(d==0) updateWidgetUnit(obj,"A bit",alt==nullptr);
-        else if(d==1) updateWidgetUnit(obj,"Slight",alt==nullptr);
-        else if(d==2) updateWidgetUnit(obj,"Moderate",alt==nullptr);
-        else if(d==3) updateWidgetUnit(obj,"High",alt==nullptr);
-        else if(d==4) updateWidgetUnit(obj,"Super",alt==nullptr);
-        else updateWidgetUnit(obj,"Mode "+QString::number( d ),alt==nullptr);
+    else if(obj==ui->stereowide_m||obj==ui->stereowide_s){
+        updateWidgetUnit(obj,QString::number((double)d/1000 ) + "dB",alt==nullptr);
+    }
+    else if(obj==ui->bs2b_feed){
+        updateWidgetUnit(obj,QString::number( (double)d/10 )+"dB",alt==nullptr);
     }
     else if(obj==ui->comp_ratio){
         updateWidgetUnit(obj,"1:"+QString::number( d ),alt==nullptr);
@@ -1203,6 +1251,7 @@ void MainWindow::update(int d,QObject *alt){
         if(obj==ui->comp_thres||obj==ui->comp_pregain||obj==ui->comp_knee||obj==ui->limthreshold)post = "dB";
         else if(obj==ui->comp_attack||obj==ui->comp_release||obj==ui->limrelease)post = "ms";
         else if(obj==ui->bassfreq)post = "Hz";
+        else if(obj==ui->bs2b_fcut)post = "Hz";
         updateWidgetUnit(obj,pre + QString::number(d) + post,alt==nullptr);
     }
     if(!lockapply||obj!=nullptr)OnUpdate(false);
@@ -1358,7 +1407,11 @@ void MainWindow::ConnectActions(){
 
     connect( ui->reverb_strength , SIGNAL(valueChanged(int)),this,  SLOT(update(int)));
     connect( ui->analog_tubedrive , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
-    connect( ui->stereowidener_lvl , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect( ui->stereowide_m , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect( ui->stereowide_s , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect( ui->bs2b_fcut, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect( ui->bs2b_feed, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+
     connect(ui->bassfreq, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect(ui->bassstrength, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect(ui->limthreshold, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
@@ -1396,13 +1449,19 @@ void MainWindow::ConnectActions(){
     connect( ui->enable_comp , SIGNAL(clicked()),this, SLOT(OnUpdate()));
     connect( ui->ddc_enable , SIGNAL(clicked()),this, SLOT(OnUpdate()));
 
-    connect(ui->bs2b_preset_cb, SIGNAL(currentIndexChanged(int)),this,SLOT(OnUpdate()));
+    connect(ui->bs2b_preset_cb, SIGNAL(currentIndexChanged(int)),this,SLOT(updatebs2bpreset()));
+    connect(ui->stereowide_preset, SIGNAL(currentIndexChanged(int)),this,SLOT(updatestereopreset()));
+
     connect(ui->eqfiltertype, SIGNAL(currentIndexChanged(int)),this,SLOT(OnUpdate()));
     connect(ui->bassfiltertype, SIGNAL(currentIndexChanged(int)),this,SLOT(OnUpdate()));
     connect(ui->roompresets, SIGNAL(currentIndexChanged(int)),this,SLOT(updateroompreset()));
 
     connect( ui->reverb_strength, SIGNAL(sliderReleased()),this, SLOT(OnRelease()));
-    connect( ui->stereowidener_lvl , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect( ui->stereowide_m , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect( ui->stereowide_s , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect( ui->bs2b_fcut , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect( ui->bs2b_feed , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+
     connect( ui->bassfreq , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
     connect( ui->bassstrength , SIGNAL(sliderReleased()),this, SLOT(OnRelease()));
     connect( ui->analog_tubedrive , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
