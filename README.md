@@ -4,7 +4,7 @@ Port of the opensource version of JamesDSP to Linux
 This is experimental and obviously work in progress.
 Currently everything (analog modelling, bass boost, bs2b, VDC/DDCs, limiter, compression, reverbation and the stereo widener), except the convolver is implemented.
 
-__The GUI is available [here](https://https://github.com/ThePBone/JDSP4Linux-GUI)__
+__The GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)__
 
 You can find the repo of my gst-wrapper for JDSP [here](https://github.com/ThePBone/gst-plugin-jamesdsp).
 
@@ -99,7 +99,7 @@ And stop it like this:
 jdsp stop
 ```
 Like I said, work-in-progress != stable, so use it with caution. 
-The GUI is available [here](https://https://github.com/ThePBone/JDSP4Linux-GUI)
+The GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)
 
 ## Workarounds
 ### Error: no element "device"
