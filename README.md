@@ -82,6 +82,9 @@ EOT
 ```bash
 sudo wget -O /usr/share/pixmaps/jdsp-gui.png https://raw.githubusercontent.com/ThePBone/JDSP4Linux-GUI/master/icons/icon.png -q --show-progress
 ```
+## Screenshots
+![Screenshot](https://github.com/ThePBone/JDSP4Linux-GUI/blob/master/screenshots/screenshot_reverb.png?raw=true)
+
 ## Contributors
 * [yochananmarqos - AUR packages](https://github.com/yochananmarqos)
 ##### Other credits
