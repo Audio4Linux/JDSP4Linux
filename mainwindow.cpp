@@ -511,6 +511,7 @@ void MainWindow::ConfirmConf(bool restart){
     config += getEQ();
     config += getComp();
     config += getMisc();
+    config += getReverb();
 
     ofstream myfile(path);
     if (myfile.is_open())
@@ -759,14 +760,16 @@ void MainWindow::reloadConfig(){
     lockapply=false;
 }
 void MainWindow::loadConfig(const string& key,string value){
-    //cout << key << " -> " << value << endl;
+    //qDebug() << QString::fromStdString(key) << " -> " << QString::fromStdString(value);
 
     if(value.empty()||is_only_ascii_whitespace(value)){
         mainwin->writeLog("Key " + QString::fromStdString(key) + " is empty (main/parser)");
         return;
     }
     int i = -1;
-    if(is_number(value))i = stoi(value);
+    if(is_number(value)){
+        i = stoi(value);
+    }
     switch (resolveConfig(key)) {
     case enable: {
         if(value=="true") ui->disableFX->setChecked(false);
@@ -805,11 +808,92 @@ void MainWindow::loadConfig(const string& key,string value){
         ui->reverb->setChecked(value=="true");
         break;
     }
-    case headset_preset: {
-        ui->reverb_strength->setValue(std::stoi(value));
-        update(i,ui->reverb_strength);
+    case headset_osf: {
+        ui->rev_osf->setValue(std::stoi(value));
+        update(stoi(value),ui->rev_osf);
         break;
     }
+    case headset_reflection_amount: {
+        ui->rev_era->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_era);
+        break;
+    }
+    case headset_reflection_width: {
+        ui->rev_erw->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_erw);
+        break;
+    }
+    case headset_reflection_factor: {
+        ui->rev_erf->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_erf);
+        break;
+    }
+    case headset_finaldry: {
+        ui->rev_finaldry->setValue((int)(10*stof(value)));
+        update(10*stof(value),ui->rev_finaldry);
+        break;
+    }
+    case headset_finalwet: {
+        ui->rev_finalwet->setValue((int)(10*stof(value)));
+        update(10*stof(value),ui->rev_finalwet);
+        break;
+    }
+    case headset_width: {
+        ui->rev_width->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_width);
+        break;
+    }
+    case headset_wet: {
+        ui->rev_wet->setValue((int)(10*stof(value)));
+        update(10*stof(value),ui->rev_wet);
+        break;
+    }
+    case headset_bassboost: {
+        ui->rev_bass->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_bass);
+        break;
+    }
+    case headset_lfo_spin: {
+        ui->rev_spin->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_spin);
+        break;
+    }
+    case headset_lfo_wander: {
+        ui->rev_wander->setValue((int)(100*stof(value)));
+        update(100*stof(value),ui->rev_wander);
+        break;
+    }
+    case headset_decay: {
+        ui->rev_decay->setValue((int)(100.0f*stof(value)));
+        update(100*stof(value),ui->rev_decay);
+        break;
+    }
+    case headset_delay: {
+        ui->rev_delay->setValue((int)(10*stof(value)));
+        update(10*stof(value),ui->rev_delay);
+        break;
+    }
+    case headset_lpf_input: {
+        ui->rev_lci->setValue(std::stoi(value));
+        update(i,ui->rev_lci);
+        break;
+    }
+    case headset_lpf_bass: {
+        ui->rev_lcb->setValue(std::stoi(value));
+        update(i,ui->rev_lcb);
+        break;
+    }
+    case headset_lpf_damp: {
+        ui->rev_lcd->setValue(std::stoi(value));
+        update(i,ui->rev_lcd);
+        break;
+    }
+    case headset_lpf_output: {
+        ui->rev_lco->setValue(std::stoi(value));
+        update(i,ui->rev_lco);
+        break;
+    }
+
     case stereowide_enable: {
         ui->stereowidener->setChecked(value=="true");
         break;
@@ -1086,12 +1170,56 @@ string MainWindow::getSurround() {
     out += to_string(ui->bs2b_feed->value()) + n;
     out += "bs2b_fcut=";
     out += to_string(ui->bs2b_fcut->value()) + n;
+    return out;
+}
+string MainWindow::getReverb(){
+    string out;
+    string n = "\n";
+    string pre = "headset_";
 
-    out += "headset_enable=";
+    out += pre + "enable=";
     if(ui->reverb->isChecked())out += "true" + n;
     else out += "false" + n;
-    out += "headset_preset=";
-    out += to_string(ui->reverb_strength->value()) + n;
+
+    out += pre + "osf=";
+    out += to_string(ui->rev_osf->value()) + n;
+    out += pre + "lpf_input=";
+    out += to_string(ui->rev_lci->value()) + n;
+    out += pre + "lpf_bass=";
+    out += to_string(ui->rev_lcb->value()) + n;
+    out += pre + "lpf_damp=";
+    out += to_string(ui->rev_lcd->value()) + n;
+    out += pre + "lpf_output=";
+    out += to_string(ui->rev_lco->value()) + n;
+
+    out += pre + "reflection_amount=";
+    out += to_string((float)(ui->rev_era->value()/100.0f)) + n;
+    out += pre + "reflection_width=";
+    out += to_string((float)(ui->rev_erw->value()/100.0f)) + n;
+    out += pre + "reflection_factor=";
+    out += to_string((float)(ui->rev_erf->value()/100.0f)) + n;
+
+    out += pre + "finaldry=";
+    out += to_string((float)(ui->rev_finaldry->value()/10.0f)) + n;
+    out += pre + "finalwet=";
+    out += to_string((float)(ui->rev_finalwet->value()/10.0f)) + n;
+    out += pre + "width=";
+    out += to_string((float)(ui->rev_width->value()/100.0f)) + n;
+    out += pre + "wet=";
+    out += to_string((float)(ui->rev_wet->value()/10.0f)) + n;
+    out += pre + "bassboost=";
+    out += to_string((float)(ui->rev_bass->value()/100.0f)) + n;
+
+    out += pre + "lfo_spin=";
+    out += to_string((float)(ui->rev_spin->value()/100.0f)) + n;
+    out += pre + "lfo_wander=";
+    out += to_string((float)(ui->rev_wander->value()/100.0f)) + n;
+
+    out += pre + "decay=";
+    out += to_string((float)(ui->rev_decay->value()/100.0f)) + n;
+
+    out += pre + "delay=";
+    out += to_string((int)(ui->rev_delay->value()/10.0f)) + n;
 
     return out;
 }
@@ -1117,11 +1245,107 @@ void MainWindow::setEQ(const int* data){
     lockapply=false;
     OnUpdate(true);
 }
-void MainWindow::setRoompreset(int data){
+void MainWindow::setReverbData(int osf,double p1,double p2,double p3,double p4,
+                               double p5,double p6,double p7,double p8,double p9,
+                               double p10,double p11,double p12,double p13,double p14,
+                               double p15,double p16) {
     lockapply=true;
-    ui->reverb_strength->setValue(data);
+    ui->rev_osf->setValue(osf);
+    ui->rev_era->setValue((int)(p1*100));
+    ui->rev_finalwet->setValue((int)(p2*10));
+    ui->rev_finaldry->setValue((int)(p3*10));
+    ui->rev_erf->setValue((int)(p4*100));
+    ui->rev_erw->setValue((int)(p5*100));
+    ui->rev_width->setValue((int)(p6*100));
+    ui->rev_wet->setValue((int)(p7*10));
+    ui->rev_wander->setValue((int)(p8*100));
+    ui->rev_bass->setValue((int)(p9*100));
+    ui->rev_spin->setValue((int)(p10*100));
+    ui->rev_lci->setValue((int)p11);
+    ui->rev_lcb->setValue((int)p12);
+    ui->rev_lcd->setValue((int)p13);
+    ui->rev_lco->setValue((int)p14);
+    ui->rev_decay->setValue((int)(p15*100));
+    ui->rev_delay->setValue((int)(p16*10));
+
+    updateWidgetUnit(ui->rev_osf,QString::number(osf),false);
+    updateWidgetUnit(ui->rev_era,QString::number(p1),false);
+    updateWidgetUnit(ui->rev_finalwet,QString::number(p2),false);
+    updateWidgetUnit(ui->rev_finaldry,QString::number(p3),false);
+    updateWidgetUnit(ui->rev_erf,QString::number(p4),false);
+    updateWidgetUnit(ui->rev_erw,QString::number(p5),false);
+    updateWidgetUnit(ui->rev_width,QString::number(p6),false);
+    updateWidgetUnit(ui->rev_wet,QString::number(p7),false);
+    updateWidgetUnit(ui->rev_wander,QString::number(p8),false);
+    updateWidgetUnit(ui->rev_bass,QString::number(p9),false);
+    updateWidgetUnit(ui->rev_spin,QString::number(p10),false);
+    updateWidgetUnit(ui->rev_lci,QString::number(p11),false);
+    updateWidgetUnit(ui->rev_lcb,QString::number(p12),false);
+    updateWidgetUnit(ui->rev_lcd,QString::number(p13),false);
+    updateWidgetUnit(ui->rev_lco,QString::number(p14),false);
+    updateWidgetUnit(ui->rev_decay,QString::number(p15),false);
+    updateWidgetUnit(ui->rev_delay,QString::number(p16),false);
+
     lockapply=false;
     OnUpdate(true);
+}
+void MainWindow::setRoompreset(int preset){
+    struct
+    {
+        int osf;
+        double p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16;
+    } ps[] =
+    {
+
+        //OSF ERtoLt ERWet Dry ERFac ERWdth Wdth Wet Wander BassB Spin InpLP BasLP DmpLP OutLP RT60  Delay
+        { 1, 0.4, -9.0,-7, 1.6, 0.7, 1.0, -0, 0.25, 0.15, 0.7,17000, 500, 7000,10000, 3.2,0.02 },
+        { 1, 0.3, -9.0, -7, 1.0, 0.7, 1.0, -8, 0.3, 0.25, 0.7,18000, 600, 9000,17000, 2.1,0.01 },
+        { 1, 0.3, -9.0, -7, 1.0, 0.7, 1.0, -8, 0.25, 0.2, 0.5,18000, 600, 7000, 9000, 2.3,0.01 },
+        { 1, 0.3, -9.0, -7, 1.2, 0.7, 1.0, -8, 0.25, 0.2, 0.7,18000, 500, 8000,16000, 2.8,0.01 },
+        { 1, 0.3, -9.0, -7, 1.2, 0.7, 1.0, -8, 0.2, 0.15, 0.5,18000, 500, 6000, 8000, 2.9,0.01 },
+        { 1, 0.2, -9.0, -7, 1.4, 0.7, 1.0, -8, 0.15, 0.2, 1.0,18000, 400, 9000,14000, 3.8,0.018 },
+        { 1, 0.2, -9.0, -7, 1.5, 0.7, 1.0, -8, 0.2, 0.2, 0.5,18000, 400, 5000, 7000, 4.2,0.018 },
+        { 1, 0.7, -8.0, -7, 0.7,-0.4, 0.8, -8, 0.2, 0.3, 1.6,18000,1000,18000,18000, 0.5,0.005 },
+        { 1, 0.7, -8.0, -7, 0.8, 0.6, 0.9, -8, 0.3, 0.3, 0.4,18000, 300,10000,18000, 0.5,0.005 },
+        { 1, 0.5, -8.0, -7, 1.2,-0.4, 0.8, -8, 0.2, 0.1, 1.6,18000,1000,18000,18000, 0.8,0.008 },
+        { 1, 0.5, -8.0, -7, 1.2, 0.6, 0.9, -8, 0.3, 0.1, 0.4,18000, 300,10000,18000, 1.2,0.016 },
+        { 1, 0.2, -8.0, -7, 2.2,-0.4, 0.9, -8, 0.2, 0.1, 1.6,18000,1000,16000,18000, 1.8,0.01 },
+        { 1, 0.2, -8.0, -7, 2.2, 0.6, 0.9, -8, 0.3, 0.1, 0.4,18000, 500, 9000,18000, 1.9,0.02 },
+        { 1, 0.5, -7.0, -6, 1.2,-0.4, 0.8,-70, 0.2, 0.1, 1.6,18000,1000,18000,18000, 0.8,0.008 },
+        { 1, 0.5, -7.0, -6, 1.2, 0.6, 0.9,-70, 0.3, 0.1, 0.4,18000, 300,10000,18000, 1.2,0.016 },
+        { 2, 0.0,-30.0,-12, 1.0, 1.0, 1.0, -8, 0.2, 0.1, 1.6,18000,1000,16000,18000, 1.8,0.0 },
+        { 2, 0.0,-30.0,-12, 1.0, 1.0, 1.0, -8, 0.3, 0.2, 0.4,18000, 500, 9000,18000, 1.9,0.0 },
+        { 2, 0.1,-16.0,-14, 1.0, 0.1, 1.0, -5, 0.35, 0.05, 1.0,18000, 100,10000,18000,12.0,0.0 },
+        { 2, 0.1,-16.0,-14, 1.0, 0.1, 1.0, -5, 0.4, 0.05, 1.0,18000, 100, 9000,18000,30.0,0.0 }
+    };
+#define CASE(prs, i)                                                                        \
+        case prs: setReverbData(ps[i].osf, ps[i].p1, ps[i].p2, ps[i].p3, ps[i].p4, \
+            ps[i].p5, ps[i].p6, ps[i].p7, ps[i].p8, ps[i].p9, ps[i].p10, ps[i].p11, ps[i].p12,  \
+            ps[i].p13, ps[i].p14, ps[i].p15, ps[i].p16); return;
+    switch (preset)
+    {
+        CASE(SF_REVERB_PRESET_DEFAULT, 0)
+        CASE(SF_REVERB_PRESET_SMALLHALL1, 1)
+        CASE(SF_REVERB_PRESET_SMALLHALL2, 2)
+        CASE(SF_REVERB_PRESET_MEDIUMHALL1, 3)
+        CASE(SF_REVERB_PRESET_MEDIUMHALL2, 4)
+        CASE(SF_REVERB_PRESET_LARGEHALL1, 5)
+        CASE(SF_REVERB_PRESET_LARGEHALL2, 6)
+        CASE(SF_REVERB_PRESET_SMALLROOM1, 7)
+        CASE(SF_REVERB_PRESET_SMALLROOM2, 8)
+        CASE(SF_REVERB_PRESET_MEDIUMROOM1, 9)
+        CASE(SF_REVERB_PRESET_MEDIUMROOM2, 10)
+        CASE(SF_REVERB_PRESET_LARGEROOM1, 11)
+        CASE(SF_REVERB_PRESET_LARGEROOM2, 12)
+        CASE(SF_REVERB_PRESET_MEDIUMER1, 13)
+        CASE(SF_REVERB_PRESET_MEDIUMER2, 14)
+        CASE(SF_REVERB_PRESET_PLATEHIGH, 15)
+        CASE(SF_REVERB_PRESET_PLATELOW, 16)
+        CASE(SF_REVERB_PRESET_LONGREVERB1, 17)
+        CASE(SF_REVERB_PRESET_LONGREVERB2, 18)
+    }
+#undef CASE
+
 }
 void MainWindow::setBS2B(int fcut,int feed){
     lockapply=true;
@@ -1135,22 +1359,16 @@ void MainWindow::setBS2B(int fcut,int feed){
 void MainWindow::setStereoWide(float m,float s){
     lockapply=true;
     ui->stereowide_m->setValue((int)(m*1000.0f));
-    updateWidgetUnit(ui->stereowide_m,QString::number(m)+"dB",false);
+    updateWidgetUnit(ui->stereowide_m,QString::number(m)+"x",false);
     ui->stereowide_s->setValue((int)(s*1000.0f));
-    updateWidgetUnit(ui->stereowide_s,QString::number(s)+"dB",false);
+    updateWidgetUnit(ui->stereowide_s,QString::number(s)+"x",false);
     lockapply=false;
     OnUpdate(true);
 }
 void MainWindow::updateroompreset(){
-    QString selection = ui->roompresets->currentText();
-    if(selection == "Small room")setRoompreset(8);
-    else if(selection == "Medium room")setRoompreset(10);
-    else if(selection == "Large room")setRoompreset(12);
-    else if(selection == "Plate high")setRoompreset(15);
-    else if(selection == "Plate low")setRoompreset(16);
-    else if(selection == "Long reverb 1")setRoompreset(17);
-    else if(selection == "Long reverb 2")setRoompreset(18);
-    else setRoompreset(0);
+    int selection = ui->roompresets->currentIndex();
+    if(selection < 1)return;
+    setRoompreset(selection - 1);
 }
 void MainWindow::updatebs2bpreset(){
     QString selection = ui->bs2b_preset_cb->currentText();
@@ -1215,6 +1433,9 @@ void MainWindow::PasteEQ(){
 
 //---Updates Unit-Label
 void MainWindow::update(int d,QObject *alt){
+    update((float)d,alt);
+}
+void MainWindow::update(float d,QObject *alt){
     if(lockapply&&alt==nullptr)return;//Skip if lockapply-flag is set (when setting presets, ...)
     QObject* obj;
 
@@ -1231,10 +1452,24 @@ void MainWindow::update(int d,QObject *alt){
         else updateWidgetUnit(obj,"Extreme (" + QString::number( d )+")",alt==nullptr);
     }
     else if(obj==ui->stereowide_m||obj==ui->stereowide_s){
-        updateWidgetUnit(obj,QString::number((double)d/1000 ) + "dB",alt==nullptr);
+        updateWidgetUnit(obj,QString::number((double)d/1000 )+"x",alt==nullptr);
     }
     else if(obj==ui->bs2b_feed){
         updateWidgetUnit(obj,QString::number( (double)d/10 )+"dB",alt==nullptr);
+    }
+    else if(obj==ui->rev_decay){
+        updateWidgetUnit(obj,QString::number( (double)d/100 ),alt==nullptr);
+    }
+    else if(obj==ui->rev_delay){
+        updateWidgetUnit(obj,QString::number( (double)d/10 )+"ms",alt==nullptr);
+    }
+    else if(obj==ui->rev_wet||obj==ui->rev_finalwet||obj==ui->rev_finaldry){
+        updateWidgetUnit(obj,QString::number( (double)d/10 )+"dB",alt==nullptr);
+    }
+    else if(obj==ui->rev_era||obj==ui->rev_erf||obj==ui->rev_erw
+            ||obj==ui->rev_width||obj==ui->rev_bass||obj==ui->rev_spin
+            ||obj==ui->rev_wander){
+        updateWidgetUnit(obj,QString::number( (double)d/100 ),alt==nullptr);
     }
     else if(obj==ui->comp_ratio){
         updateWidgetUnit(obj,"1:"+QString::number( d ),alt==nullptr);
@@ -1252,6 +1487,9 @@ void MainWindow::update(int d,QObject *alt){
         else if(obj==ui->comp_attack||obj==ui->comp_release||obj==ui->limrelease)post = "ms";
         else if(obj==ui->bassfreq)post = "Hz";
         else if(obj==ui->bs2b_fcut)post = "Hz";
+        else if(obj==ui->rev_lcb||obj==ui->rev_lcd
+                ||obj==ui->rev_lci||obj==ui->rev_lco)post = "Hz";
+        else if(obj==ui->rev_osf)post = "x";
         updateWidgetUnit(obj,pre + QString::number(d) + post,alt==nullptr);
     }
     if(!lockapply||obj!=nullptr)OnUpdate(false);
@@ -1405,7 +1643,6 @@ void MainWindow::ConnectActions(){
     connect(ui->set, SIGNAL(clicked()), this, SLOT(OpenSettings()));
     connect(ui->ddcTable->selectionModel(),SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),this,SLOT(updateDDC(const QItemSelection &, const QItemSelection &)));
 
-    connect( ui->reverb_strength , SIGNAL(valueChanged(int)),this,  SLOT(update(int)));
     connect( ui->analog_tubedrive , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect( ui->stereowide_m , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect( ui->stereowide_s , SIGNAL(valueChanged(int)),this, SLOT(update(int)));
@@ -1423,6 +1660,24 @@ void MainWindow::ConnectActions(){
     connect(ui->comp_thres, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect(ui->comp_attack, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect(ui->comp_release, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+
+    connect(ui->rev_osf, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_erf, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_era, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_erw, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_lci, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_lcb, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_lcd, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_lco, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_finalwet, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_finaldry, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_wet, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_width, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_spin, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_wander, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_decay, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_delay, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+    connect(ui->rev_bass, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
 
     connect(ui->eq1, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect(ui->eq2, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
@@ -1456,11 +1711,28 @@ void MainWindow::ConnectActions(){
     connect(ui->bassfiltertype, SIGNAL(currentIndexChanged(int)),this,SLOT(OnUpdate()));
     connect(ui->roompresets, SIGNAL(currentIndexChanged(int)),this,SLOT(updateroompreset()));
 
-    connect( ui->reverb_strength, SIGNAL(sliderReleased()),this, SLOT(OnRelease()));
     connect( ui->stereowide_m , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
     connect( ui->stereowide_s , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
     connect( ui->bs2b_fcut , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
     connect( ui->bs2b_feed , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+
+    connect(ui->rev_osf, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_erf, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_era, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_erw, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_lci, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_lcb, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_lcd, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_lco, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_finalwet, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_finaldry, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_wet, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_width, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_spin, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_wander, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_decay, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_delay, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
+    connect(ui->rev_bass, SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
 
     connect( ui->bassfreq , SIGNAL(sliderReleased()),this,  SLOT(OnRelease()));
     connect( ui->bassstrength , SIGNAL(sliderReleased()),this, SLOT(OnRelease()));

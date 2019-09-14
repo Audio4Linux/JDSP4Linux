@@ -75,6 +75,7 @@ private slots:
     void updatestereopreset();
     void updatebs2bpreset();
     void update(int,QObject*alt=nullptr);
+    void update(float,QObject*alt=nullptr);
     void LoadExternalFile();
     void SaveExternalFile();
     void OpenLog();
@@ -94,18 +95,40 @@ private:
     void loadConfig(const string& key, string value);
     void decodeAppConfig(const string& key, const string& value);
     void SaveAppConfig();
-    string getMain();
-    string getBass();
     string getSurround();
-    string getMaster();
+    string getBass();
     string getEQ();
     string getComp();
     string getMisc();
-    string getDynsys();
+    string getReverb();
     void ConnectActions();
     void SetStyle();
     bool is_only_ascii_whitespace(const string&);
     bool is_number(const string& s);
+    void setReverbData(int, double, double, double, double, \
+                double, double, double, double, double, double, double, double,  \
+                double, double, double, double);
 };
-
+typedef enum
+{
+    SF_REVERB_PRESET_DEFAULT,
+    SF_REVERB_PRESET_SMALLHALL1,
+    SF_REVERB_PRESET_SMALLHALL2,
+    SF_REVERB_PRESET_MEDIUMHALL1,
+    SF_REVERB_PRESET_MEDIUMHALL2,
+    SF_REVERB_PRESET_LARGEHALL1,
+    SF_REVERB_PRESET_LARGEHALL2,
+    SF_REVERB_PRESET_SMALLROOM1,
+    SF_REVERB_PRESET_SMALLROOM2,
+    SF_REVERB_PRESET_MEDIUMROOM1,
+    SF_REVERB_PRESET_MEDIUMROOM2,
+    SF_REVERB_PRESET_LARGEROOM1,
+    SF_REVERB_PRESET_LARGEROOM2,
+    SF_REVERB_PRESET_MEDIUMER1,
+    SF_REVERB_PRESET_MEDIUMER2,
+    SF_REVERB_PRESET_PLATEHIGH,
+    SF_REVERB_PRESET_PLATELOW,
+    SF_REVERB_PRESET_LONGREVERB1,
+    SF_REVERB_PRESET_LONGREVERB2
+} sf_reverb_preset;
 #endif // MAINWINDOW_H
