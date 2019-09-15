@@ -1454,6 +1454,9 @@ void MainWindow::update(float d,QObject *alt){
     else if(obj==ui->stereowide_m||obj==ui->stereowide_s){
         updateWidgetUnit(obj,QString::number((double)d/1000 )+"x",alt==nullptr);
     }
+    else if(obj==ui->rev_width){
+        updateWidgetUnit(obj,QString::number( (double)d )+"%",alt==nullptr);
+    }
     else if(obj==ui->bs2b_feed){
         updateWidgetUnit(obj,QString::number( (double)d/10 )+"dB",alt==nullptr);
     }
