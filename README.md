@@ -1,8 +1,8 @@
 # JDSP4Linux
 Port of the opensource version of JamesDSP to Linux
 
-This is experimental and obviously work in progress.
-Currently everything (analog modelling, bass boost, bs2b, VDC/DDCs, limiter, compression, reverbation and the stereo widener), except the convolver is implemented.
+This is experimental and still work in progress.
+Every feature from the opensource version is implemented.
 
 __The GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)__
 
@@ -23,6 +23,19 @@ Supported sample formats:
 Supported samplerates:
 * 44100
 * 48000
+### Effects
+Pretty much everything from the opensource version is implemented:
+* Analog modelling (12AX7)
+* BS2B
+* ViPER DDCs
+* Limiter
+* Compression
+* Convolver
+* Reverbation (Progenitor2)
+* Bass boost
+* Stereo widener (Side/Mid) 
+
+Instead of being tied to presets; stereo widener, bs2b and the reverbation engine can be fully customized.
 
 ## Setup
 
@@ -99,7 +112,8 @@ And stop it like this:
 jdsp stop
 ```
 Like I said, work-in-progress != stable, so use it with caution. 
-The GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)
+
+> __[Installation instructions for the GUI here](https://github.com/ThePBone/JDSP4Linux-GUI)__
 
 ## Workarounds
 ### Error: no element "device"
