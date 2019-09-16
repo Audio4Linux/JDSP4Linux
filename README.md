@@ -88,6 +88,7 @@ sudo wget -O /usr/share/pixmaps/jdsp-gui.png https://raw.githubusercontent.com/T
 ```
 ## Screenshots
 ![Screenshot](https://github.com/ThePBone/JDSP4Linux-GUI/blob/master/screenshots/screenshot_reverb.png?raw=true)
+![Screenshot](https://github.com/ThePBone/JDSP4Linux-GUI/blob/master/screenshots/tabs.gif?raw=true)
 
 ## Contributors
 * [yochananmarqos - AUR packages](https://github.com/yochananmarqos)
