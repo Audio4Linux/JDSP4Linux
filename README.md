@@ -3,11 +3,11 @@ Port of the opensource version of JamesDSP to Linux
 
 This is experimental and still work in progress.
 Every feature from the opensource version is implemented.
-
-__The GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)__
+Feel free to join our [Telegram Group](https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw) (combined with Viper4Linux)
 
 You can find the repo of my gst-wrapper for JDSP [here](https://github.com/ThePBone/gst-plugin-jamesdsp).
 
+__And the GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)__
 ## Notes
 Since the gst interface of this port is very similar to viper4linux, I will temporarily use a slightly modified version of the [viper script](https://github.com/noahbliss/Viper4Linux/blob/master/viper) written by [@noahbliss](https://github.com/noahbliss).
 
@@ -58,12 +58,14 @@ Install gstreamer-1.0 and some tools to build the gstreamer plugin. (If you have
 
 #### Debian
 ```bash
+sudo apt-get install libsamplerate0 libsamplerate0-dev libsndfile1 libsndfile1-dev
 sudo apt-get install build-essential autoconf libtool
 sudo apt-get install gstreamer-1.0 libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev 
 ```
 #### Arch
 ```bash
 sudo pacman -S base-devel  
+sudo pacman -S libsndfile libsamplerate
 sudo pacman -S gst-plugins-good  
 ```
 Clone both JDSP4Linux repos
@@ -113,7 +115,9 @@ jdsp stop
 ```
 Like I said, work-in-progress != stable, so use it with caution. 
 
-> __[Installation instructions for the GUI here](https://github.com/ThePBone/JDSP4Linux-GUI)__
+> __You can find [installation instructions](https://github.com/ThePBone/JDSP4Linux-GUI) for the GUI [here](https://github.com/ThePBone/JDSP4Linux-GUI)__
+
+> __Join our [Telegram Group](https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw)__
 
 ## Workarounds
 ### Error: no element "device"
@@ -121,6 +125,12 @@ As described [here](https://github.com/noahbliss/Viper4Linux#configuration), you
 For now, you can follow the instructions over there, but make sure you drop the devices.conf in `~/.config/jamesdsp`.
 
 ### Fix crackling/choppy sound
+#### Solution 1
+Edit `/etc/pulse/default.pa` as root and uncomment or add the following line:
+
+    load-module module-udev-detect tsched=0
+
+#### Solution 2
 _Set the default samplerate to 48000Hz in pulseaudio's config:_
 
 `sudo nano /etc/pulse/daemon.conf`
