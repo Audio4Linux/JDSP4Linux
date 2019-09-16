@@ -50,6 +50,9 @@ enum Config {
     headset_lpf_bass,
     headset_lpf_damp,
     headset_lpf_output,
+    convolver_gain,
+    convolver_file,
+    convolver_enable,
     unknown
 };
 enum AppConfig {
@@ -112,6 +115,9 @@ inline Config resolveConfig(const std::string& input) {
     if( input == "headset_lpf_bass" ) return headset_lpf_bass;
     if( input == "headset_lpf_damp" ) return headset_lpf_damp;
     if( input == "headset_lpf_output" ) return headset_lpf_output;
+    if( input == "convolver_enable" ) return convolver_enable;
+    if( input == "convolver_file" ) return convolver_file;
+    if( input == "convolver_gain" ) return convolver_gain;
    return unknown;
 }
 inline AppConfig resolveAppConfig(const std::string& input) {
@@ -129,6 +135,6 @@ inline AppConfig resolveAppConfig(const std::string& input) {
    return unknownApp;
 }
 
-static std::string default_config = "enable=true\nanalogmodelling_enable=false\nanalogmodelling_tubedrive=10000\nbass_enable=false\nbass_mode=1000\nbass_filtertype=1\nbass_freq=65\nstereowide_enable=false\nstereowide_mode=4\nbs2b_enable=false\nbs2b_mode=2\ncompression_enable=false\ncompression_pregain=20\ncompression_threshold=-60\ncompression_knee=40\ncompression_ratio=-20\ncompression_attack=1\ncompression_release=88\ntone_enable=false\ntone_filtertype=0\ntone_eq=\"0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\"\nmasterswitch_limthreshold=0\nmasterswitch_limrelease=50\nddc_enable=false\nddc_file=\"none\"\nbs2b_fcut=300\nbs2b_feed=78\nstereowide_mcoeff=1000\nstereowide_scoeff=400\nheadset_enable=false\nheadset_osf=1\nheadset_lpf_input=18000\nheadset_lpf_bass=300\nheadset_lpf_damp=10000\nheadset_lpf_output=18000\nheadset_reflection_amount=0.5\nheadset_reflection_width=0.6\nheadset_reflection_factor=1.2\nheadset_finaldry=-7.0\nheadset_finalwet=-8.0\nheadset_width=0.9\nheadset_wet=-8.0\nheadset_bassboost=0.1\nheadset_lfo_spin=0.4\nheadset_lfo_wander=0.3\nheadset_decay=1.2\nheadset_delay=0\n";
+static std::string default_config = "enable=true\nanalogmodelling_enable=false\nanalogmodelling_tubedrive=10000\nbass_enable=false\nbass_mode=1000\nbass_filtertype=1\nbass_freq=65\nstereowide_enable=false\nstereowide_mode=4\nbs2b_enable=false\nbs2b_mode=2\ncompression_enable=false\ncompression_pregain=20\ncompression_threshold=-60\ncompression_knee=40\ncompression_ratio=-20\ncompression_attack=1\ncompression_release=88\ntone_enable=false\ntone_filtertype=0\ntone_eq=\"0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\"\nmasterswitch_limthreshold=0\nmasterswitch_limrelease=50\nddc_enable=false\nddc_file=\"none\"\nbs2b_fcut=300\nbs2b_feed=78\nstereowide_mcoeff=1000\nstereowide_scoeff=400\nheadset_enable=false\nheadset_osf=1\nheadset_lpf_input=18000\nheadset_lpf_bass=300\nheadset_lpf_damp=10000\nheadset_lpf_output=18000\nheadset_reflection_amount=0.5\nheadset_reflection_width=0.6\nheadset_reflection_factor=1.2\nheadset_finaldry=-7.0\nheadset_finalwet=-8.0\nheadset_width=0.9\nheadset_wet=-8.0\nheadset_bassboost=0.1\nheadset_lfo_spin=0.4\nheadset_lfo_wander=0.3\nheadset_decay=1.2\nheadset_delay=0\nconvolver_enable=false\nconvolver_gain=0\nconvolver_file=\"...\"\n";
 static std::string default_appconfig = "configspath=\"\"\nautoapply=false\nglavafix=false\nmuteOnRestart=true";
 #endif // CONFIGLIST_H

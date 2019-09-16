@@ -82,6 +82,14 @@ private slots:
     void reloadDDC();
     void updateDDC_file();
     void selectDDCFolder();
+    void reloadIRS();
+    void updateIRS_file();
+    void selectIRSFolder();
+    void updateIRS_fav();
+    void reloadIRSFav();
+    void addIRSFav();
+    void renameIRSFav();
+    void removeIRSFav();
 private:
     bool createconnection();
     void updateWidgetUnit(QObject* sender,QString text,bool);

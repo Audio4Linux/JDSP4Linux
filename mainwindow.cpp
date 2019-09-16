@@ -37,6 +37,7 @@
 #include <QSqlQuery>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QInputDialog>
 using namespace std;
 static string path = "";
 static string appcpath = "";
@@ -55,7 +56,10 @@ static bool presetdlg_enabled=true;
 static bool logdlg_enabled=true;
 static bool lockapply = false;
 static bool lockddcupdate = false;
+static bool lockirsupdate = false;
 static QString ddcpath = "";
+static QString irspath = "";
+static QString config_path = "";
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -81,11 +85,17 @@ MainWindow::MainWindow(QWidget *parent) :
     path = result;
     appcpath = result2;
 
+
+    QDir d = QFileInfo(QString::fromStdString(path)).absoluteDir();
+    QString absolute=d.absolutePath();
+    config_path=absolute;
+
+    QDir irs_fav(QDir::cleanPath(absolute + QDir::separator() + "irs_favorites"));
+    if (!irs_fav.exists())
+        irs_fav.mkpath(".");
+
     reloadConfig();
     loadAppConfig();
-
-    QDir d = QFileInfo(QString::fromStdString(getPath())).absoluteDir();
-    QString absolute=d.absolutePath();
 
     if(ddcpath==""||ddcpath==(absolute+"/dbcopy.vdc")){
         ui->ddc_dirpath->setText(QString::fromStdString(homedir));
@@ -111,6 +121,47 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
+    reloadIRSFav();
+    if(irspath==""){
+        ui->conv_dirpath->setText(QString::fromStdString(homedir));
+        reloadIRS();
+    }
+    else if(irspath.contains(absolute+"/irs_favorites")){
+        ui->conv_dirpath->setText(QString::fromStdString(homedir));
+        reloadIRS();
+        ui->convTabs->setCurrentIndex(1);
+        try {
+            if(ui->conv_files_fav->count() >= 1){
+                for(int i=0;i<ui->conv_files_fav->count();i++){
+                    if(ui->conv_files_fav->item(i)->text()==QFileInfo(irspath).fileName()){
+                        ui->conv_files_fav->setCurrentRow(i);
+                        break;
+                    }
+                }
+            }
+        } catch (exception e) {
+            writeLog("Failed to load previous fav-IRS path: " + QString::fromStdString(e.what()));
+        }
+    }
+    else{
+        try {
+            QDir d2 = QFileInfo(irspath).absoluteDir();
+            ui->conv_dirpath->setText(d2.absolutePath());
+            reloadIRS();
+            if(ui->conv_files->count() >= 1){
+                for(int i=0;i<ui->conv_files->count();i++){
+                    if(ui->conv_files->item(i)->text()==QFileInfo(irspath).fileName()){
+                        ui->conv_files->setCurrentRow(i);
+                        break;
+                    }
+                }
+            }
+        } catch (exception e) {
+            writeLog("Failed to load previous IRS path: " + QString::fromStdString(e.what()));
+            ui->conv_dirpath->setText(QString::fromStdString(homedir));
+            reloadIRS();
+        }
+    }
 
     QMenu *menu = new QMenu();
     menu->addAction("Reload JDSP", this,SLOT(Restart()));
@@ -1019,6 +1070,22 @@ void MainWindow::loadConfig(const string& key,string value){
         ddcpath = ddc_in;
         break;
     }
+    case convolver_enable: {
+        ui->conv_enable->setChecked(value=="true");
+        break;
+    }
+    case convolver_file: {
+        if(value.size() <= 2) break;
+        value = value.substr(1, value.size() - 2);
+        QString in= QString::fromStdString(value);
+        irspath = in;
+        break;
+    }
+    case convolver_gain: {
+        ui->conv_gain->setValue(std::stoi(value));
+        update(i,ui->conv_gain);
+        break;
+    }
     case unknown: {
         writeLog("Unable to resolve key: " + QString::fromStdString(key)+ " (main/uiparser)");
         break;
@@ -1056,6 +1123,18 @@ string MainWindow::getMisc(){
     }else{
         out += "ddc_file=\"none\"" + n;
     }
+
+    out += "convolver_enable=";
+    if(ui->conv_enable->isChecked())out += "true" + n;
+    else out += "false" + n;
+
+    if(irspath!=""){
+        out += "convolver_file=" + esc + irspath.toUtf8().constData() + esc + n;
+    }else{
+        out += "convolver_file=\"none\"" + n;
+    }
+    out += "convolver_gain=";
+    out += to_string(ui->conv_gain->value()) + n;
 
     return out;
 }
@@ -1298,51 +1377,51 @@ void MainWindow::setRoompreset(int preset){
     {
 
         //OSF ERtoLt ERWet Dry ERFac ERWdth Wdth Wet Wander BassB Spin InpLP BasLP DmpLP OutLP RT60  Delay
-        { 1, 0.4, -9.0,-7, 1.6, 0.7, 1.0, -0, 0.25, 0.15, 0.7,17000, 500, 7000,10000, 3.2,0.02 },
-        { 1, 0.3, -9.0, -7, 1.0, 0.7, 1.0, -8, 0.3, 0.25, 0.7,18000, 600, 9000,17000, 2.1,0.01 },
-        { 1, 0.3, -9.0, -7, 1.0, 0.7, 1.0, -8, 0.25, 0.2, 0.5,18000, 600, 7000, 9000, 2.3,0.01 },
-        { 1, 0.3, -9.0, -7, 1.2, 0.7, 1.0, -8, 0.25, 0.2, 0.7,18000, 500, 8000,16000, 2.8,0.01 },
-        { 1, 0.3, -9.0, -7, 1.2, 0.7, 1.0, -8, 0.2, 0.15, 0.5,18000, 500, 6000, 8000, 2.9,0.01 },
-        { 1, 0.2, -9.0, -7, 1.4, 0.7, 1.0, -8, 0.15, 0.2, 1.0,18000, 400, 9000,14000, 3.8,0.018 },
-        { 1, 0.2, -9.0, -7, 1.5, 0.7, 1.0, -8, 0.2, 0.2, 0.5,18000, 400, 5000, 7000, 4.2,0.018 },
-        { 1, 0.7, -8.0, -7, 0.7,-0.4, 0.8, -8, 0.2, 0.3, 1.6,18000,1000,18000,18000, 0.5,0.005 },
-        { 1, 0.7, -8.0, -7, 0.8, 0.6, 0.9, -8, 0.3, 0.3, 0.4,18000, 300,10000,18000, 0.5,0.005 },
-        { 1, 0.5, -8.0, -7, 1.2,-0.4, 0.8, -8, 0.2, 0.1, 1.6,18000,1000,18000,18000, 0.8,0.008 },
-        { 1, 0.5, -8.0, -7, 1.2, 0.6, 0.9, -8, 0.3, 0.1, 0.4,18000, 300,10000,18000, 1.2,0.016 },
-        { 1, 0.2, -8.0, -7, 2.2,-0.4, 0.9, -8, 0.2, 0.1, 1.6,18000,1000,16000,18000, 1.8,0.01 },
-        { 1, 0.2, -8.0, -7, 2.2, 0.6, 0.9, -8, 0.3, 0.1, 0.4,18000, 500, 9000,18000, 1.9,0.02 },
-        { 1, 0.5, -7.0, -6, 1.2,-0.4, 0.8,-70, 0.2, 0.1, 1.6,18000,1000,18000,18000, 0.8,0.008 },
-        { 1, 0.5, -7.0, -6, 1.2, 0.6, 0.9,-70, 0.3, 0.1, 0.4,18000, 300,10000,18000, 1.2,0.016 },
-        { 2, 0.0,-30.0,-12, 1.0, 1.0, 1.0, -8, 0.2, 0.1, 1.6,18000,1000,16000,18000, 1.8,0.0 },
-        { 2, 0.0,-30.0,-12, 1.0, 1.0, 1.0, -8, 0.3, 0.2, 0.4,18000, 500, 9000,18000, 1.9,0.0 },
-        { 2, 0.1,-16.0,-14, 1.0, 0.1, 1.0, -5, 0.35, 0.05, 1.0,18000, 100,10000,18000,12.0,0.0 },
-        { 2, 0.1,-16.0,-14, 1.0, 0.1, 1.0, -5, 0.4, 0.05, 1.0,18000, 100, 9000,18000,30.0,0.0 }
-    };
+    { 1, 0.4, -9.0,-7, 1.6, 0.7, 1.0, -0, 0.25, 0.15, 0.7,17000, 500, 7000,10000, 3.2,0.02 },
+    { 1, 0.3, -9.0, -7, 1.0, 0.7, 1.0, -8, 0.3, 0.25, 0.7,18000, 600, 9000,17000, 2.1,0.01 },
+    { 1, 0.3, -9.0, -7, 1.0, 0.7, 1.0, -8, 0.25, 0.2, 0.5,18000, 600, 7000, 9000, 2.3,0.01 },
+    { 1, 0.3, -9.0, -7, 1.2, 0.7, 1.0, -8, 0.25, 0.2, 0.7,18000, 500, 8000,16000, 2.8,0.01 },
+    { 1, 0.3, -9.0, -7, 1.2, 0.7, 1.0, -8, 0.2, 0.15, 0.5,18000, 500, 6000, 8000, 2.9,0.01 },
+    { 1, 0.2, -9.0, -7, 1.4, 0.7, 1.0, -8, 0.15, 0.2, 1.0,18000, 400, 9000,14000, 3.8,0.018 },
+    { 1, 0.2, -9.0, -7, 1.5, 0.7, 1.0, -8, 0.2, 0.2, 0.5,18000, 400, 5000, 7000, 4.2,0.018 },
+    { 1, 0.7, -8.0, -7, 0.7,-0.4, 0.8, -8, 0.2, 0.3, 1.6,18000,1000,18000,18000, 0.5,0.005 },
+    { 1, 0.7, -8.0, -7, 0.8, 0.6, 0.9, -8, 0.3, 0.3, 0.4,18000, 300,10000,18000, 0.5,0.005 },
+    { 1, 0.5, -8.0, -7, 1.2,-0.4, 0.8, -8, 0.2, 0.1, 1.6,18000,1000,18000,18000, 0.8,0.008 },
+    { 1, 0.5, -8.0, -7, 1.2, 0.6, 0.9, -8, 0.3, 0.1, 0.4,18000, 300,10000,18000, 1.2,0.016 },
+    { 1, 0.2, -8.0, -7, 2.2,-0.4, 0.9, -8, 0.2, 0.1, 1.6,18000,1000,16000,18000, 1.8,0.01 },
+    { 1, 0.2, -8.0, -7, 2.2, 0.6, 0.9, -8, 0.3, 0.1, 0.4,18000, 500, 9000,18000, 1.9,0.02 },
+    { 1, 0.5, -7.0, -6, 1.2,-0.4, 0.8,-70, 0.2, 0.1, 1.6,18000,1000,18000,18000, 0.8,0.008 },
+    { 1, 0.5, -7.0, -6, 1.2, 0.6, 0.9,-70, 0.3, 0.1, 0.4,18000, 300,10000,18000, 1.2,0.016 },
+    { 2, 0.0,-30.0,-12, 1.0, 1.0, 1.0, -8, 0.2, 0.1, 1.6,18000,1000,16000,18000, 1.8,0.0 },
+    { 2, 0.0,-30.0,-12, 1.0, 1.0, 1.0, -8, 0.3, 0.2, 0.4,18000, 500, 9000,18000, 1.9,0.0 },
+    { 2, 0.1,-16.0,-14, 1.0, 0.1, 1.0, -5, 0.35, 0.05, 1.0,18000, 100,10000,18000,12.0,0.0 },
+    { 2, 0.1,-16.0,-14, 1.0, 0.1, 1.0, -5, 0.4, 0.05, 1.0,18000, 100, 9000,18000,30.0,0.0 }
+};
 #define CASE(prs, i)                                                                        \
-        case prs: setReverbData(ps[i].osf, ps[i].p1, ps[i].p2, ps[i].p3, ps[i].p4, \
-            ps[i].p5, ps[i].p6, ps[i].p7, ps[i].p8, ps[i].p9, ps[i].p10, ps[i].p11, ps[i].p12,  \
-            ps[i].p13, ps[i].p14, ps[i].p15, ps[i].p16); return;
+    case prs: setReverbData(ps[i].osf, ps[i].p1, ps[i].p2, ps[i].p3, ps[i].p4, \
+    ps[i].p5, ps[i].p6, ps[i].p7, ps[i].p8, ps[i].p9, ps[i].p10, ps[i].p11, ps[i].p12,  \
+    ps[i].p13, ps[i].p14, ps[i].p15, ps[i].p16); return;
     switch (preset)
     {
-        CASE(SF_REVERB_PRESET_DEFAULT, 0)
-        CASE(SF_REVERB_PRESET_SMALLHALL1, 1)
-        CASE(SF_REVERB_PRESET_SMALLHALL2, 2)
-        CASE(SF_REVERB_PRESET_MEDIUMHALL1, 3)
-        CASE(SF_REVERB_PRESET_MEDIUMHALL2, 4)
-        CASE(SF_REVERB_PRESET_LARGEHALL1, 5)
-        CASE(SF_REVERB_PRESET_LARGEHALL2, 6)
-        CASE(SF_REVERB_PRESET_SMALLROOM1, 7)
-        CASE(SF_REVERB_PRESET_SMALLROOM2, 8)
-        CASE(SF_REVERB_PRESET_MEDIUMROOM1, 9)
-        CASE(SF_REVERB_PRESET_MEDIUMROOM2, 10)
-        CASE(SF_REVERB_PRESET_LARGEROOM1, 11)
-        CASE(SF_REVERB_PRESET_LARGEROOM2, 12)
-        CASE(SF_REVERB_PRESET_MEDIUMER1, 13)
-        CASE(SF_REVERB_PRESET_MEDIUMER2, 14)
-        CASE(SF_REVERB_PRESET_PLATEHIGH, 15)
-        CASE(SF_REVERB_PRESET_PLATELOW, 16)
-        CASE(SF_REVERB_PRESET_LONGREVERB1, 17)
-        CASE(SF_REVERB_PRESET_LONGREVERB2, 18)
+    CASE(SF_REVERB_PRESET_DEFAULT, 0)
+            CASE(SF_REVERB_PRESET_SMALLHALL1, 1)
+            CASE(SF_REVERB_PRESET_SMALLHALL2, 2)
+            CASE(SF_REVERB_PRESET_MEDIUMHALL1, 3)
+            CASE(SF_REVERB_PRESET_MEDIUMHALL2, 4)
+            CASE(SF_REVERB_PRESET_LARGEHALL1, 5)
+            CASE(SF_REVERB_PRESET_LARGEHALL2, 6)
+            CASE(SF_REVERB_PRESET_SMALLROOM1, 7)
+            CASE(SF_REVERB_PRESET_SMALLROOM2, 8)
+            CASE(SF_REVERB_PRESET_MEDIUMROOM1, 9)
+            CASE(SF_REVERB_PRESET_MEDIUMROOM2, 10)
+            CASE(SF_REVERB_PRESET_LARGEROOM1, 11)
+            CASE(SF_REVERB_PRESET_LARGEROOM2, 12)
+            CASE(SF_REVERB_PRESET_MEDIUMER1, 13)
+            CASE(SF_REVERB_PRESET_MEDIUMER2, 14)
+            CASE(SF_REVERB_PRESET_PLATEHIGH, 15)
+            CASE(SF_REVERB_PRESET_PLATELOW, 16)
+            CASE(SF_REVERB_PRESET_LONGREVERB1, 17)
+            CASE(SF_REVERB_PRESET_LONGREVERB2, 18)
     }
 #undef CASE
 
@@ -1698,6 +1777,8 @@ void MainWindow::ConnectActions(){
     connect(ui->eq14, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
     connect(ui->eq15, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
 
+    connect(ui->conv_gain, SIGNAL(valueChanged(int)),this, SLOT(update(int)));
+
     connect( ui->bassboost , SIGNAL(clicked()),this, SLOT(OnUpdate()));
     connect( ui->bs2b , SIGNAL(clicked()),this, SLOT(OnUpdate()));
     connect( ui->stereowidener, SIGNAL(clicked()),this, SLOT(OnUpdate()));
@@ -1706,6 +1787,7 @@ void MainWindow::ConnectActions(){
     connect( ui->enable_eq , SIGNAL(clicked()),this, SLOT(OnUpdate()));
     connect( ui->enable_comp , SIGNAL(clicked()),this, SLOT(OnUpdate()));
     connect( ui->ddc_enable , SIGNAL(clicked()),this, SLOT(OnUpdate()));
+    connect( ui->conv_enable , SIGNAL(clicked()),this, SLOT(OnUpdate()));
 
     connect(ui->bs2b_preset_cb, SIGNAL(currentIndexChanged(int)),this,SLOT(updatebs2bpreset()));
     connect(ui->stereowide_preset, SIGNAL(currentIndexChanged(int)),this,SLOT(updatestereopreset()));
@@ -1765,11 +1847,21 @@ void MainWindow::ConnectActions(){
     connect(ui->eq14, SIGNAL(sliderReleased()),this, SLOT(OnRelease()));
     connect(ui->eq15, SIGNAL(sliderReleased()),this, SLOT(OnRelease()));
 
+    connect(ui->conv_gain, SIGNAL(sliderReleased()),this, SLOT(OnRelease()));
+
     connect(ui->ddc_reload, SIGNAL(clicked()), this, SLOT(reloadDDC()));
     connect(ui->ddc_files, SIGNAL(itemSelectionChanged()), this, SLOT(updateDDC_file()));
     connect(ui->ddc_select, SIGNAL(clicked()), this, SLOT(selectDDCFolder()));
+    connect(ui->conv_reload, SIGNAL(clicked()), this, SLOT(reloadIRS()));
+    connect(ui->conv_files, SIGNAL(itemSelectionChanged()), this, SLOT(updateIRS_file()));
+    connect(ui->conv_select, SIGNAL(clicked()), this, SLOT(selectIRSFolder()));
 
+    connect(ui->conv_bookmark, SIGNAL(clicked()), this, SLOT(addIRSFav()));
+    connect(ui->conv_files_fav, SIGNAL(itemSelectionChanged()), this, SLOT(updateIRS_fav()));
+    connect(ui->conv_fav_remove, SIGNAL(clicked()), this, SLOT(removeIRSFav()));
+    connect(ui->conv_fav_rename, SIGNAL(clicked()), this, SLOT(renameIRSFav()));
 }
+
 void MainWindow::reloadDDC(){
     lockddcupdate=true;
     QDir path(ui->ddc_dirpath->text());
@@ -1810,6 +1902,117 @@ void MainWindow::selectDDCFolder(){
         reloadDDC();
     }
 }
+void MainWindow::reloadIRS(){
+    lockirsupdate=true;
+    QDir path(ui->conv_dirpath->text());
+    QStringList nameFilter("*.irs");
+    nameFilter.append("*.wav");
+    nameFilter.append("*.flac");
+    QStringList files = path.entryList(nameFilter);
+    ui->conv_files->clear();
+    if(files.empty()){
+        QFont font;
+        font.setItalic(true);
+        font.setPointSize(11);
+
+        QListWidgetItem* placeholder = new QListWidgetItem;
+        placeholder->setFont(font);
+        placeholder->setText("No IRS files found");
+        placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
+        ui->conv_files->addItem(placeholder);
+    }
+    else ui->conv_files->addItems(files);
+    lockirsupdate=false;
+}
+void MainWindow::updateIRS_file(){
+    if(lockirsupdate || ui->conv_files->selectedItems().count()<1)return; //Clearing Selection by code != User Interaction
+    QString path = QDir(ui->conv_dirpath->text()).filePath(ui->conv_files->selectedItems().first()->text());
+    if(QFileInfo::exists(path) && QFileInfo(path).isFile())irspath=path;
+    OnUpdate();
+}
+void MainWindow::selectIRSFolder(){
+
+    QFileDialog *fd = new QFileDialog;
+    fd->setFileMode(QFileDialog::Directory);
+    fd->setOption(QFileDialog::ShowDirsOnly);
+    fd->setViewMode(QFileDialog::Detail);
+    QString result = fd->getExistingDirectory();
+    if (result!="")
+    {
+        ui->conv_dirpath->setText(result);
+        reloadIRS();
+    }
+}
+void MainWindow::addIRSFav(){
+    if(ui->conv_files->selectedItems().count()<1)return; //Clearing Selection by code != User Interaction
+
+    const QString src = QDir(ui->conv_dirpath->text()).filePath(ui->conv_files->selectedItems().first()->text());
+    const QString& dest = QDir(QDir::cleanPath(config_path + QDir::separator() + "irs_favorites")).filePath(ui->conv_files->selectedItems().first()->text());
+
+    if (QFile::exists(dest))QFile::remove(dest);
+
+    QFile::copy(src,dest);
+    mainwin->writeLog("Adding " + src + " to bookmarks (convolver/add)");
+    reloadIRSFav();
+}
+void MainWindow::reloadIRSFav(){
+    lockirsupdate=true;
+    QDir path(QDir::cleanPath(config_path + QDir::separator() + "irs_favorites"));
+    QStringList nameFilter("*.wav");
+    nameFilter.append("*.irs");
+    nameFilter.append("*.flac");
+    QStringList files = path.entryList(nameFilter);
+    ui->conv_files_fav->clear();
+    if(files.empty()){
+        QFont font;
+        font.setItalic(true);
+        font.setPointSize(11);
+
+        QListWidgetItem* placeholder = new QListWidgetItem;
+        placeholder->setFont(font);
+        placeholder->setText("Nothing here yet...");
+        placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
+        ui->conv_files_fav->addItem(placeholder);
+        QListWidgetItem* placeholder2 = new QListWidgetItem;
+        //placeholder2->setFont(font);
+        placeholder2->setText("Bookmark some IRS files in the 'filesystem' tab");
+        placeholder2->setFlags(placeholder2->flags() & ~Qt::ItemIsEnabled);
+        ui->conv_files_fav->addItem(placeholder2);
+    }
+    else ui->conv_files_fav->addItems(files);
+    lockirsupdate=false;
+}
+void MainWindow::updateIRS_fav(){
+    if(lockirsupdate || ui->conv_files_fav->selectedItems().count()<1)return; //Clearing Selection by code != User Interaction
+    QString path = QDir(QDir::cleanPath(config_path + QDir::separator() + "irs_favorites")).filePath(ui->conv_files_fav->selectedItems().first()->text());
+    if(QFileInfo::exists(path) && QFileInfo(path).isFile())irspath = path;
+    OnUpdate();
+}
+void MainWindow::renameIRSFav(){
+    if(ui->conv_files_fav->selectedItems().count()<1)return;
+    bool ok;
+    QString text = QInputDialog::getText(this, "Rename",
+                                         "New Name", QLineEdit::Normal,
+                                         ui->conv_files_fav->selectedItems().first()->text(), &ok);
+    QString fullpath = QDir(QDir::cleanPath(config_path + QDir::separator() + "irs_favorites")).filePath(ui->conv_files_fav->selectedItems().first()->text());;
+    QString dest = QDir::cleanPath(config_path + QDir::separator() + "irs_favorites");
+    if (ok && !text.isEmpty())QFile::rename(fullpath,QDir(dest).filePath(text));
+    reloadIRSFav();
+}
+void MainWindow::removeIRSFav(){
+    if(ui->conv_files_fav->selectedItems().count()<1)return;
+    QString fullpath = QDir(QDir::cleanPath(config_path + QDir::separator() + "irs_favorites")).filePath(ui->conv_files_fav->selectedItems().first()->text());;
+    if(!QFile::exists(fullpath)){
+        QMessageBox::warning(this, "Error", "Selected File doesn't exist",QMessageBox::Ok);
+        reloadIRSFav();
+        return;
+    }
+    QFile file (fullpath);
+    file.remove();
+    mainwin->writeLog("Removed "+fullpath+" from favorites (convolver/remove)");
+    reloadIRSFav();
+}
+
 //---Helper
 bool MainWindow::is_number(const string& s)
 {
