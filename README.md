@@ -17,7 +17,11 @@ On Arch you can install the [AUR package](https://aur.archlinux.org/packages/jds
 yay -S jdsp4linux-gui-git
 ```
 
-![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur)
+Or [this one](https://aur.archlinux.org/packages/jdsp4linux-gui) to get the latest stable release:
+```bash
+yay -S jdsp4linux-gui
+```
+![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui?label=aur%20%28stable%29) ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur%20%28git%29)
 
 ### Ubuntu (PPA)
 #### Add PPA Repo
