@@ -122,8 +122,31 @@ Like I said, work-in-progress != stable, so use it with caution.
 ## Workarounds
 ### Error: no element "device"
 As described [here](https://github.com/noahbliss/Viper4Linux#configuration), you can set a custom alsa path.
-For now, you can follow the instructions over there, but make sure you drop the devices.conf in `~/.config/jamesdsp`.
+You can also follow the instructions over there, but make sure you drop the devices.conf in `~/.config/jamesdsp`.
 
+##### Short summary:
+Run this command:
+```bash
+pactl list sinks | grep "Name: " -A1
+```
+...and look for the Alsa Output Path of your headset.
+If we have this command output for example:
+```bash
+Name: alsa_output.pci-0000_00_1f.3.analog-stereo
+Description: Built-in Audio Analog Stereo
+Name: jdsp
+Description: JDSP4Linux
+```
+Then `alsa_output.pci-0000_00_1f.3.analog-stereo` would be the output path.
+
+Finally create the file `~/.config/jamesdsp/devices.conf` and paste the path in there, like this:
+```bash
+location=...insert custom alsa path here...
+```
+...and reload JDSP:
+```bash
+jdsp restart
+```
 ### Fix crackling/choppy sound
 #### Solution 1
 Edit `/etc/pulse/default.pa` as root and uncomment or add the following line:
