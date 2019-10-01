@@ -40,7 +40,7 @@ sudo apt install jdsp4linux-gui
 #### Install Dependencies
 You will need to change this line, depending on which package manager your distribution uses.
 ```bash
-sudo apt install qt5-qmake libqt5widgets5 libqt5gui5 libqt5core5a libqt5multimedia5 libqt5xml5 libgl1-mesa-dev git
+sudo apt install qt5-qmake qtbase5-dev qtmultimedia5-dev libqt5widgets5 libqt5gui5 libqt5core5a libqt5multimedia5 libqt5xml5 libgl1-mesa-dev git
 ```
 
 #### Build from sources
