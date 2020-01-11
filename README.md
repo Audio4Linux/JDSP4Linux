@@ -7,7 +7,7 @@ This is experimental and still work in progress.
 Every feature from the opensource version is implemented.
 Feel free to join our [Telegram Group](https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw) (combined with Viper4Linux)
 
-You can find the repo of my gst-wrapper for JDSP [here](https://github.com/ThePBone/gst-plugin-jamesdsp).
+You can find the repo of my gst-wrapper for JDSP [here](https://github.com/Audio4Linux/gst-plugin-jamesdsp).
 
 __And the GUI is available [here](https://github.com/ThePBone/JDSP4Linux-GUI)__
 ## Notes
