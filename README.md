@@ -1,6 +1,8 @@
 # JDSP4Linux
 Port of the opensource version of JamesDSP to Linux
 
+>**Currently maintained by [@ThePBone](https://t.me/ThePBone)**
+
 This is experimental and still work in progress.
 Every feature from the opensource version is implemented.
 Feel free to join our [Telegram Group](https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw) (combined with Viper4Linux)
