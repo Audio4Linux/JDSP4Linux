@@ -1,4 +1,4 @@
-#define TAG "jamesdsp::"
+#define TAG "jamesdsp:"
 #include <android/log.h>
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
@@ -9,7 +9,7 @@
 #include <errno.h>
 #include "essential.h"
 
-static effect_descriptor_t jamesdsp_descriptor =
+const effect_descriptor_t jamesdsp_descriptor =
 {
 	{ 0xf98765f4, 0xc321, 0x5de6, 0x9a45, { 0x12, 0x34, 0x59, 0x49, 0x5a, 0xb2 } },
 	{ 0xf27317f4, 0xc984, 0x4de6, 0x9a90, { 0x54, 0x57, 0x59, 0x49, 0x5b, 0xf2 } }, // own UUID
@@ -22,48 +22,36 @@ static effect_descriptor_t jamesdsp_descriptor =
 };
 __attribute__((constructor)) static void initialize(void)
 {
-	LOGI("jamesdspProcessor: DLL loaded");
+	LOGI("Initialization: DLL loaded");
 }
 __attribute__((destructor)) static void destruction(void)
 {
-	LOGI("jamesdspProcessor: Unload DLL");
+	LOGI("Initialization: Unload DLL");
 }
 typedef struct
 {
-	int dummy;
-	int32_t(*process)(audio_buffer_t *in, audio_buffer_t *out);
-	int32_t(*command)(uint32_t, uint32_t, void*, uint32_t*, void*);
+	int mEnable;
 } Effect;
 /* Library mandatory methods. */
 struct effect_module_s
 {
 	const struct effect_interface_s *itfe;
-	Effect *effect;
-	effect_descriptor_t *descriptor;
+	Effect jdsp;
 };
+int counter;
 static int32_t generic_process(effect_handle_t self, audio_buffer_t *in, audio_buffer_t *out)
 {
 	struct effect_module_s *e = (struct effect_module_s *) self;
-	return e->effect->process(in, out);
+	Effect *jdsp = &e->jdsp;
+	int i, actualFrameCount = in->frameCount;
+	counter++;
+	if (counter == 128)
+	{
+		LOGI("Processing loop: Processing %d samples", actualFrameCount);
+		counter = 0;
+	}
+	return jdsp->mEnable ? 0 : -ENODATA;
 }
-static int32_t generic_command(effect_handle_t self, uint32_t cmdCode, uint32_t cmdSize, void *pCmdData, uint32_t *replySize, void *pReplyData)
-{
-	struct effect_module_s *e = (struct effect_module_s *) self;
-	return e->effect->command(cmdCode, cmdSize, pCmdData, replySize, pReplyData);
-}
-static int32_t generic_getDescriptor(effect_handle_t self, effect_descriptor_t *pDescriptor)
-{
-	struct effect_module_s *e = (struct effect_module_s *) self;
-	memcpy(pDescriptor, e->descriptor, sizeof(effect_descriptor_t));
-	return 0;
-}
-static const struct effect_interface_s generic_interface =
-{
-	generic_process,
-	generic_command,
-	generic_getDescriptor,
-	NULL
-};
 int32_t formatConfigure(void* pCmdData, effect_buffer_access_e* mAccessMode)
 {
 	int mSamplingRate, formatFloatModeInt32Mode;
@@ -125,15 +113,33 @@ int32_t formatConfigure(void* pCmdData, effect_buffer_access_e* mAccessMode)
 		*mAccessMode = (effect_buffer_access_e)out.accessMode;
 	return 0;
 }
-int mEnable;
-int32_t transferCmd(uint32_t cmdCode, uint32_t cmdSize, void *pCmdData, uint32_t *replySize, void* pReplyData)
+static int32_t generic_command(effect_handle_t self, uint32_t cmdCode, uint32_t cmdSize, void *pCmdData, uint32_t *replySize, void *pReplyData)
 {
+	struct effect_module_s *e = (struct effect_module_s *) self;
+	Effect *jdsp = &e->jdsp;
+	if (cmdCode == EFFECT_CMD_SET_CONFIG)
+	{
+		effect_buffer_access_e mAccessMode;
+		int32_t *replyData = (int32_t *)pReplyData;
+		int32_t ret = formatConfigure(pCmdData, &mAccessMode);
+		if (ret != 0)
+		{
+			*replyData = ret;
+			return 0;
+		}
+		*replyData = 0;
+		return 0;
+	}
+	if (cmdCode == EFFECT_CMD_GET_PARAM)
+	{
+		effect_param_t *cep = (effect_param_t *)pCmdData;
+	}
 	switch (cmdCode)
 	{
 	case EFFECT_CMD_ENABLE:
 	case EFFECT_CMD_DISABLE:
 	{
-		mEnable = cmdCode == EFFECT_CMD_ENABLE;
+		jdsp->mEnable = cmdCode == EFFECT_CMD_ENABLE;
 		int32_t *replyData = (int32_t *)pReplyData;
 		*replyData = 0;
 		break;
@@ -164,58 +170,35 @@ int32_t transferCmd(uint32_t cmdCode, uint32_t cmdSize, void *pCmdData, uint32_t
 	}
 	return 0;
 }
-int32_t effectCommand(uint32_t cmdCode, uint32_t cmdSize, void* pCmdData, uint32_t* replySize, void* pReplyData)
+static int32_t generic_getDescriptor(effect_handle_t self, effect_descriptor_t *pDescriptor)
 {
-	if (cmdCode == EFFECT_CMD_SET_CONFIG)
+	LOGI("Effect control interface: Copying descriptor info");
+	if (pDescriptor == NULL)
 	{
-		effect_buffer_access_e mAccessMode;
-		int32_t *replyData = (int32_t *)pReplyData;
-		int32_t ret = formatConfigure(pCmdData, &mAccessMode);
-		if (ret != 0)
-		{
-			*replyData = ret;
-			return 0;
-		}
-		*replyData = 0;
-		return 0;
+		LOGI("Effect control interface: generic_getDescriptor() called with NULL pointer");
+		return -EINVAL;
 	}
-	if (cmdCode == EFFECT_CMD_GET_PARAM)
-	{
-		effect_param_t *cep = (effect_param_t *)pCmdData;
-	}
-	return transferCmd(cmdCode, cmdSize, pCmdData, replySize, pReplyData);
+	*pDescriptor = jamesdsp_descriptor;
+	return 0;
 }
-int counter;
-int32_t effectProcess(audio_buffer_t *in, audio_buffer_t *out)
+static const struct effect_interface_s generic_interface =
 {
-	int i, actualFrameCount = in->frameCount;
-	counter++;
-	if (counter == 128)
-	{
-		LOGI("jamesdspProcessor: Processing %d samples", actualFrameCount);
-		counter = 0;
-	}
-	return mEnable ? 0 : -ENODATA;
-}
-Effect jdsp;
+	generic_process,
+	generic_command,
+	generic_getDescriptor,
+	NULL
+};
 int32_t EffectCreate(const effect_uuid_t *uuid, int32_t sessionId, int32_t ioId, effect_handle_t *pEffect)
 {
-	LOGI("jamesdspProcessor: Creating effect with %d sessionId", sessionId);
+	LOGI("Initialization: Creating effect with %d sessionId", sessionId);
 	// Debug init start
-	mEnable = 0;
 	counter = 0;
-	memset(&jdsp, 0, sizeof(Effect));
-	jdsp.command = effectCommand;
-	jdsp.process = effectProcess;
 	// Debug init end
 	struct effect_module_s *e = (struct effect_module_s *) calloc(1, sizeof(struct effect_module_s));
 	e->itfe = &generic_interface;
-	e->effect = &jdsp;
 	// Initialize effect here
-
-	e->descriptor = &jamesdsp_descriptor;
 	*pEffect = (effect_handle_t)e;
-	LOGI("jamesdspProcessor: Effect created");
+	LOGI("Initialization: Effect created");
 	return 0;
 }
 int32_t EffectRelease(effect_handle_t ei)
@@ -226,10 +209,10 @@ int32_t EffectRelease(effect_handle_t ei)
 }
 int32_t EffectGetDescriptor(const effect_uuid_t *uuid, effect_descriptor_t *pDescriptor)
 {
-	LOGI("jamesdspProcessor: Copying descriptor info");
+	LOGI("Initialization: Copying descriptor info");
 	if (pDescriptor == NULL || uuid == NULL)
 	{
-		LOGI("jamesdspProcessor: EffectGetDescriptor() called with NULL pointer");
+		LOGI("Initialization: EffectGetDescriptor() called with NULL pointer");
 		return -EINVAL;
 	}
 	*pDescriptor = jamesdsp_descriptor;
