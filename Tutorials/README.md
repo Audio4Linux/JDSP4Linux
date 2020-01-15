@@ -9,6 +9,11 @@ Android audio framework learner that use current repository can play around it a
 
 **Description to be continued**
 
+## Is root required?
+For testing, yes, you must get your device rooted.
+
+For Android ROM distribution, no, you don't need any root, just build this engine code along other ROM source code.
+
 ## License
 All codes under this folder is distributed in Apache license.
 
