@@ -6,25 +6,34 @@ This app include many cool features.
 
 1. Auto dynamic range compression
    --> A highly automated multiband dynamic range adjusting effect
+
 2. Auto Bass Boost
-   --> Frequency detecting bass boost. Effect detect interesting frequnecy, and adjust gain, bandwidth and cut-off frequency arcordingly
+   --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arcordingly
+
 3. Reverb
    --> Progenitor 2 (Complicated IIR network)
+
 4. Interpolating FIR Equalizer
 5. Partitioned Convolver (Auto segmenting convolution)
    --> Support mono, stereo, full/true stereo(LL, LR, RL, RR) IR
 
 6. Live programmable DSP
-A effect that can compile EEL code into opcode, and do processing base on the compiled code.
+   --> A effect that can compile EEL code into opcode, and do processing base on the compiled code.
 The EEL virtual machine had pre-built tons of advanced math routines and DSP function.
 Including: Basic C String manipulation functions, Linear algebra solver(Least square, inv(), pinv()), Mathematical optimization(linprog(), quadprog(), lsqlin()), polynomial roots solver(roots()), spectral processing(Short-time Fourier Transform), Constant Q Transform, multi-purpose FIR filter designer(firls()), IIR Subbands transform, Direct form FIR filter, Fractional delay line.
+
 Although STFT, DF-FIR and Fractional delay line are the only components that have been opened.
+
 More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
+
 7. Stereo Widen
-Algorithm detect stereo phase relation in a few spectral region, and enhance the stereo soundstage without affect vocal integrity
+   --> Algorithm detect stereo phase relation in a few spectral region, and enhance the stereo soundstage without affect vocal integrity
+
 8. Crossfeed
-Include traditional BS2B mode and convolution-based HRTF
+   --> Include traditional BS2B mode and convolution-based HRTF
+
 9. Vacuum tube modelling
+
 10. Viper DDC (IIR Cascaded Second-Order Sections Form II)
 
 ##### Supported bit depth:
