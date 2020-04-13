@@ -1,0 +1,59 @@
+QPushButton{
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	border-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+    padding: 4 12 4 12;
+	background-color: #000000;
+}
+QPushButton::default{
+        border-style: solid;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-bottom-color: #e67e22;
+        border-width: 1px;
+        color: #a9b7c6;
+        padding: 2px;
+        background-color: #000000;
+}
+QPushButton:hover{
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #e67e22;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #FFFFFF;
+        padding-bottom: 2px;
+	background-color: #000000;
+}
+QPushButton:pressed{
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #e67e22;
+	border-bottom-width: 2px;
+	border-style: solid;
+	color: #e67e22;
+        padding-bottom: 1px;
+	background-color: #000000;
+}
+QPushButton:disabled{
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	border-bottom-width: 2px;
+	border-style: solid;
+	color: #808086;
+        padding-bottom: 1px;
+	background-color: #000000;
+}
