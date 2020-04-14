@@ -78,6 +78,17 @@ GraphicEQFilterGUI::~GraphicEQFilterGUI()
     delete ui;
 }
 
+void GraphicEQFilterGUI::setSidebarHidden(bool hidden){
+    ui->sidebar->setVisible(!hidden);
+}
+
+void GraphicEQFilterGUI::set15BandFreeMode(bool e){
+    freeMode15 = e;
+    scene->setBandCount(15);
+    setFreqEditable(true);
+    scene->set15BandFreeMode(true);
+}
+
 void GraphicEQFilterGUI::store(QString& parameters)
 {
     parameters = "GraphicEQ: ";
@@ -94,12 +105,31 @@ void GraphicEQFilterGUI::store(QString& parameters)
     }
 }
 
+void GraphicEQFilterGUI::storeCsv(QString& parameters)
+{
+    bool first = true;
+    for (FilterNode node : scene->getNodes())
+    {
+        if (first)
+            first = false;
+        else
+            parameters += ";";
+
+        parameters += QString::number(node.freq);
+    }
+    for (FilterNode node : scene->getNodes())
+    {
+        parameters += ";";
+        parameters += QString::number(node.dbGain);
+    }
+}
+
 void GraphicEQFilterGUI::load(const QString& parameters)
 {
     QStringList parameterList(parameters.split(":"));
     if(parameterList.count() < 2)
         return;
-    
+
     std::vector<FilterNode> nodes;
     QStringList nodeList = parameterList.at(1).split(";");
     for(QString nodeStr : nodeList){
@@ -109,11 +139,11 @@ void GraphicEQFilterGUI::load(const QString& parameters)
         FilterNode node(values.at(0).toDouble(),values.at(1).toDouble());
         nodes.push_back(node);
     }
-    
+
     sort(nodes.begin(), nodes.end());
-    
+
     scene->setNodes(nodes);
-    
+
     int bandCount = scene->verifyBands(nodes);
     if (bandCount != scene->getBandCount())
     {
@@ -134,13 +164,47 @@ void GraphicEQFilterGUI::load(const QString& parameters)
         emit updateModel();
     }
 }
+
+void GraphicEQFilterGUI::loadMap(const QMap<float,float>& parameters)
+{
+    std::vector<FilterNode> nodes;
+    for(auto p : parameters.toStdMap()){
+        FilterNode node(p.first,p.second);
+        nodes.push_back(node);
+    }
+
+    sort(nodes.begin(), nodes.end());
+
+    scene->setNodes(nodes);
+
+    int bandCount = scene->verifyBands(nodes);
+    if (bandCount != scene->getBandCount())
+    {
+        switch (bandCount)
+        {
+        case 15:
+            ui->radioButton15->click();
+            break;
+        case 31:
+            ui->radioButton31->click();
+            break;
+        default:
+            ui->radioButtonVar->click();
+        }
+    }
+    else
+    {
+        emit updateModel();
+    }
+}
+
 void GraphicEQFilterGUI::loadPreferences(const QVariantMap& prefs)
 {
     /*ui->tableWidget->setFixedWidth(DPIHelper::scale(prefs.value("tableWidth", DEFAULT_TABLE_WIDTH).toDouble()));
     ui->graphicsView->setFixedHeight(DPIHelper::scale(prefs.value("viewHeight", DEFAULT_VIEW_HEIGHT).toDouble()));*/
     double zoomX = DPIHelper::scaleZoom(prefs.value("zoomX", 1.0).toDouble());
     double zoomY = DPIHelper::scaleZoom(prefs.value("zoomY", 1.0).toDouble());
-    scene->setZoom(zoomX, 3);
+    scene->setZoom(zoomX, zoomY);
     bool ok;
     int scrollX = DPIHelper::scale(prefs.value("scrollX").toDouble(&ok));
     if (!ok)
@@ -281,7 +345,7 @@ void GraphicEQFilterGUI::on_tableWidget_itemSelectionChanged()
 
 void GraphicEQFilterGUI::on_radioButton15_toggled(bool checked)
 {
-    if (checked)
+    if (checked && !freeMode15)
     {
         scene->setBandCount(15);
         setFreqEditable(false);
@@ -290,7 +354,7 @@ void GraphicEQFilterGUI::on_radioButton15_toggled(bool checked)
 
 void GraphicEQFilterGUI::on_radioButton31_toggled(bool checked)
 {
-    if (checked)
+    if (checked && !freeMode15)
     {
         scene->setBandCount(31);
         setFreqEditable(false);
@@ -299,7 +363,7 @@ void GraphicEQFilterGUI::on_radioButton31_toggled(bool checked)
 
 void GraphicEQFilterGUI::on_radioButtonVar_toggled(bool checked)
 {
-    if (checked)
+    if (checked && !freeMode15)
     {
         scene->setBandCount(-1);
         setFreqEditable(true);

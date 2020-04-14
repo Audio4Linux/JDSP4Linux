@@ -43,6 +43,8 @@ public:
 	int verifyBands(const std::vector<FilterNode>& nodes);
 	void setBandCount(int value) override;
 
+    void set15BandFreeMode(bool e);
+    bool get15BandFreeMode();
 signals:
 	void nodeInserted(int index, double hz, double db);
 	void nodeRemoved(int index);
@@ -58,6 +60,6 @@ protected:
 private:
 	std::vector<FilterNode> nodes;
 	QList<GraphicEQFilterGUIItem*> items;
-
+    bool freeMode15 = false;
 	bool noUpdateModel = false;
 };

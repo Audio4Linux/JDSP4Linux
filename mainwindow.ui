@@ -130,7 +130,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>4</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1268,7 +1268,7 @@
             </layout>
            </widget>
            <widget class="QWidget" name="tabHostPage4">
-            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="12,0">
+            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0">
              <property name="spacing">
               <number>11</number>
              </property>
@@ -1285,7 +1285,52 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="LiquidEqualizerWidget" name="eq_widget" native="true"/>
+              <widget class="QStackedWidget" name="eq_holder">
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="page_fixed_eq">
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="LiquidEqualizerWidget" name="eq_widget" native="true"/>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_dyn_eq">
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="GraphicEQFilterGUI" name="eq_dyn_widget" native="true"/>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
              </item>
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1383,6 +1428,41 @@
                  <property name="text">
                   <string>Reset EQ</string>
                  </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="radiobtn_holder_eq" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_26">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QRadioButton" name="eq_r_fixed">
+                    <property name="text">
+                     <string>Fixed bands</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="eq_r_flex">
+                    <property name="text">
+                     <string>Flexible bands</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item>
@@ -2045,8 +2125,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>188</width>
-                    <height>68</height>
+                    <width>276</width>
+                    <height>219</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_24">

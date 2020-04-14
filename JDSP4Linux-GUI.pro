@@ -53,6 +53,7 @@ SOURCES += main.cpp \
     config/container.cpp \
     config/dbusproxy.cpp \
     config/io.cpp \
+    crashhandler/airbag.c \
     dbus/clientproxy.cpp \
     dbus/serveradaptor.cpp \
     dialog/androidimporterdlg.cpp \
@@ -121,6 +122,10 @@ HEADERS += \
     config/container.h \
     config/dbusproxy.h \
     config/io.h \
+    crashhandler/airbag.h \
+    crashhandler/killer.h \
+    crashhandler/safecall.h \
+    crashhandler/stacktrace.h \
     dbus/clientproxy.h \
     dbus/serveradaptor.h \
     dialog/androidimporterdlg.h \
@@ -179,5 +184,8 @@ else: unix:!android: target.path = /usr/bin/
 SUBDIRS += \
     3rdparty/WebLoader/WebLoader.pro
 
-
+unix {
+    QMAKE_LFLAGS += -ldl -lutil
+    QMAKE_CXXFLAGS += -g
+}
 

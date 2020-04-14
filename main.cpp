@@ -1,7 +1,3 @@
-#ifndef MAIN
-#define MAIN
-#endif
-
 #include "mainwindow.h"
 #include "misc/findbinary.h"
 
@@ -13,14 +9,35 @@
 #include <string>
 #include <iostream>
 
+#define FORCE_CRASH_HANDLER
+
+#if defined(Q_OS_UNIX) && defined(QT_NO_DEBUG) || defined(FORCE_CRASH_HANDLER)
+#define ENABLE_CRASH_HANDLER
+#endif
+
+#ifdef ENABLE_CRASH_HANDLER
+#include "crashhandler/airbag.h"
+#include "crashhandler/stacktrace.h"
+#include <sys/stat.h>
+#include <sys/time.h>
+void crash_handled(int fd){
+    safe_printf(STDERR_FILENO, "Done! Crash report saved to /tmp/jamesdsp/crash.dmp.\n");
+}
+#endif
+
 using namespace std;
 int main(int argc, char *argv[])
 {
-    qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-
     findyourself_init(argv[0]);
     char exepath[PATH_MAX];
     find_yourself(exepath, sizeof(exepath));
+
+#ifdef ENABLE_CRASH_HANDLER
+    EXECUTION_FILENAME = exepath;
+    mkdir("/tmp/jamesdsp/", S_IRWXU);
+    int fd = safe_open_wo_fd("/tmp/jamesdsp/crash.dmp");
+    airbag_init_fd(fd,crash_handled,EXECUTION_FILENAME);
+#endif
 
     QApplication a(argc, argv);
     QCommandLineParser parser;

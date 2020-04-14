@@ -26,6 +26,7 @@ private slots:
 private:
     Ui::AutoEQSelector *ui;
     QSize imgSizeCache;
+    HeadphoneMeasurement hpCache;
 };
 
 #endif // AUTOEQSELECTOR_H

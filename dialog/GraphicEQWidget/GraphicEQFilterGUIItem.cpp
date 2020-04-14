@@ -100,7 +100,7 @@ QVariant GraphicEQFilterGUIItem::itemChange(QGraphicsItem::GraphicsItemChange ch
 	else if (change == ItemPositionChange)
 	{
 		GraphicEQFilterGUIScene* s = qobject_cast<GraphicEQFilterGUIScene*>(scene());
-		if (s->getBandCount() != -1)
+        if (s->getBandCount() != -1 && !s->get15BandFreeMode())
 		{
 			QPointF newPos = value.toPointF();
 			newPos.setX(s->hzToX(getHz()));

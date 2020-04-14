@@ -24,6 +24,8 @@ AutoEQSelector::AutoEQSelector(QWidget *parent) :
     ui->listWidget->addItem(new QListWidgetItem());
     ui->listWidget->setItemWidget(ui->listWidget->item(ui->listWidget->count()-1),item);
 
+    ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(false);
+
     connect(ui->listWidget,&QListWidget::itemSelectionChanged,this,&AutoEQSelector::updateDetails);
     connect(ui->search,&QAbstractButton::clicked,this,&AutoEQSelector::doQuery);
 }
@@ -51,17 +53,23 @@ void AutoEQSelector::updateDetails(){
     if(!selection->data(Qt::UserRole).canConvert<QueryResult>())
         return;
 
+    ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(false);
+
+
     QueryResult result = selection->data(Qt::UserRole).value<QueryResult>();
     ui->title->setText(result.getModel());
     ui->group->setText(result.getGroup());
 
     HeadphoneMeasurement hp = AutoEQClient::fetchDetails(result);
+    hpCache = hp;
     if(hp.getGraphicEQ() == "" && hp.getGraphUrl() == "")
         QMessageBox::warning(this,"Error","API request failed.\n\nEither your network connection is experiencing issues, or you are being rate-limited by GitHub.\nKeep in mind that you can only send 60 web requests per hour to this API.\n\nYou can check your current rate limit status here: https://api.github.com/rate_limit");
     else
         ui->picture->setPixmap(hp.getGraphImage().scaled(imgSizeCache,
                                                          Qt::AspectRatioMode::KeepAspectRatio,
                                                          Qt::TransformationMode::SmoothTransformation));
+    ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(true);
+
 }
 
 void AutoEQSelector::doQuery(){
@@ -92,6 +100,5 @@ HeadphoneMeasurement AutoEQSelector::getSelection(){
     if(!selection->data(Qt::UserRole).canConvert<QueryResult>())
         return HeadphoneMeasurement();
 
-    QueryResult result = selection->data(Qt::UserRole).value<QueryResult>();
-    return AutoEQClient::fetchDetails(result);
+    return hpCache;
 }

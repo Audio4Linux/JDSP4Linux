@@ -37,12 +37,16 @@ public:
 	~GraphicEQFilterGUI();
 
     void store(QString& parameters);
+    void storeCsv(QString &parameters);
     void load(const QString &parameters);
 
     void loadPreferences(const QVariantMap& prefs);
     void storePreferences(QVariantMap& prefs);
 
     QCheckBox* chk_enable;
+    void setSidebarHidden(bool hidden);
+    void set15BandFreeMode(bool e);
+    void loadMap(const QMap<float, float> &parameters);
 private slots:
 	void insertRow(int index, double hz, double db);
 	void removeRow(int index);
@@ -75,5 +79,6 @@ private:
 	Ui::GraphicEQFilterGUI* ui;
 	GraphicEQFilterGUIScene* scene;
 	QString configPath;
+    bool freeMode15 = false;
 	static QRegularExpression numberRegEx;
 };

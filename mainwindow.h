@@ -73,6 +73,7 @@ public:
     void ForceReload();
 
     SettingsDlg *settings_dlg;
+    void setEQMode(int mode);
 protected:
     void closeEvent(QCloseEvent *event) override;
     void showEvent(QShowEvent *event) override;
@@ -109,6 +110,7 @@ private slots:
     void reloadLiveprog();
     void restoreGraphicEQView();
     void saveGraphicEQView();
+    void updateEQMode();
 private:
     ConfigContainer* conf;
     AppConfigWrapper* m_appwrapper;

@@ -26,6 +26,7 @@
 #include <fstream>
 #include <QClipboard>
 #include <QInputDialog>
+#include <QButtonGroup>
 
 #define DISABLE_DIAGNOSTICS
 
@@ -39,6 +40,19 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
     bool aboutToQuit = false;
 
     ui->tabhost_legacy->hide();
+    ui->eq_dyn_widget->setSidebarHidden(true);
+    ui->eq_dyn_widget->set15BandFreeMode(true);
+
+    ConfigContainer pref;
+    pref.setValue("scrollX",160.366);
+    pref.setValue("scrollY",34.862);
+    pref.setValue("zoomX",0.561);
+    pref.setValue("zoomY",0.561);
+    ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
+
+    QButtonGroup eq_mode;
+    eq_mode.addButton(ui->eq_r_fixed);
+    eq_mode.addButton(ui->eq_r_flex);
 
     QDir("/tmp").mkdir("jamesdsp");
 
@@ -1061,27 +1075,51 @@ void MainWindow::LoadConfig(Context ctx){
     ui->enable_eq->setChecked(conf->getBool("tone_enable"));
     ui->eqinterpolator->setCurrentIndex(conf->getInt("tone_interpolation"));
     ui->eqfiltertype->setCurrentIndex(conf->getInt("tone_filtertype"));
+
+    //*** Parse EQ String to QMap
     QString rawEqString = chopFirstLastChar(conf->getString("tone_eq"));
-    QVector<float> eq_data;
+    QVector<float> rawEqData;
     for(auto val : rawEqString.split(";"))
         if(!val.isEmpty())
-            eq_data.push_back(val.toFloat() / 100.f);
+            rawEqData.push_back(val.toFloat());
         else
-            eq_data.push_back(0.f);
+            rawEqData.push_back(0.f);
 
-    int it = 0;
-    bool eqReloadRequired = false;
-    for(auto cur_data : ui->eq_widget->getBands()){
-        if(it >= eq_data.count())
-            break;
-
-        bool equal = isApproximatelyEqual<float>(cur_data,eq_data.at(it));
-        if(eqReloadRequired == false)
-            eqReloadRequired = !equal;
-        it++;
+    QMap<float,float> eqData;
+    QVector<float> dbData;
+    for(int i = 0; i < rawEqData.size(); i++){
+        if(i <= 14)
+            if(i + 15 < rawEqString.size())
+                eqData[rawEqData.at(i)] = rawEqData.at(i + 15);
+            else
+                eqData[rawEqData.at(i)] = 0.0;
+        else
+            dbData.push_back(rawEqData.at(i));
     }
-    if(eqReloadRequired)
-        ui->eq_widget->setBands(eq_data,false);
+
+    // Decide if fixed or flexible EQ should be enabled
+    if(rawEqString.contains("25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0")){
+        //Use fixed 15-band EQ
+        setEQMode(0);
+
+        int it = 0;
+        bool eqReloadRequired = false;
+        for(auto cur_data : ui->eq_widget->getBands()){
+            if(it >= rawEqData.count())
+                break;
+
+            bool equal = isApproximatelyEqual<float>(cur_data,dbData.at(it));
+            if(eqReloadRequired == false)
+                eqReloadRequired = !equal;
+            it++;
+        }
+        if(eqReloadRequired)
+            ui->eq_widget->setBands(dbData,false);
+    } else {
+        //Use flexible 15-band EQ
+        setEQMode(1);
+        ui->eq_dyn_widget->loadMap(eqData);
+    }
 
     if(ctx != Context::DBus){
         UpdateEqStringFromWidget();
@@ -1119,16 +1157,23 @@ void MainWindow::ApplyConfig(bool restart){
     conf->setValue("tone_enable",QVariant(ui->enable_eq->isChecked()));
     conf->setValue("tone_filtertype",QVariant(ui->eqfiltertype->currentIndex()));
     conf->setValue("tone_interpolation",QVariant(ui->eqinterpolator->currentIndex()));
-    QVector<float> eqBands = ui->eq_widget->getBands();
-    QString rawEqString;
-    int counter = 0;
-    for(auto band : eqBands){
-        rawEqString.append(QString::number((int)(band * 100.f)));
-        if(counter < 14)
-            rawEqString.append(';');
-        counter++;
+
+    if(ui->eq_r_fixed->isChecked()){
+        QVector<float> eqBands = ui->eq_widget->getBands();
+        QString rawEqString = "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;";
+        int counter = 0;
+        for(auto band : eqBands){
+            rawEqString.append(QString::number(band));
+            if(counter < 14)
+                rawEqString.append(';');
+            counter++;
+        }
+        conf->setValue("tone_eq",QVariant("\"" + rawEqString + "\""));
+    } else {
+        QString rawEqString;
+        ui->eq_dyn_widget->storeCsv(rawEqString);
+        conf->setValue("tone_eq",QVariant("\"" + rawEqString + "\""));
     }
-    conf->setValue("tone_eq",QVariant("\"" + rawEqString + "\""));
 
     conf->setValue("bass_enable",QVariant(ui->bassboost->isChecked()));
 
@@ -1476,6 +1521,7 @@ void MainWindow::ResetEQ(){
         ui->reseteq->setEnabled(true);
     });
     ui->eqpreset->setCurrentIndex(0);
+    ui->eq_dyn_widget->load(DEFAULT_GRAPHICEQ);
     SetEQ(PresetProvider::EQ::defaultPreset());
 }
 void MainWindow::SetIRS(const QString& irs,bool apply){
@@ -1532,6 +1578,14 @@ void MainWindow::restoreGraphicEQView(){
     state = ConfigIO::readFile(m_appwrapper->getGraphicEQConfigFilePath());
     if(state.count() >= 1)
         ui->graphicEq->loadPreferences(state);
+    else{
+        ConfigContainer pref;
+        pref.setValue("scrollX",165.346);
+        pref.setValue("scrollY",75.7);
+        pref.setValue("zoomX",0.561);
+        pref.setValue("zoomY",0.713);
+        ui->graphicEq->loadPreferences(pref.getConfigMap());
+    }
 }
 void MainWindow::saveGraphicEQView(){
     QVariantMap state;
@@ -1781,5 +1835,19 @@ void MainWindow::ConnectActions(){
         }
         sel->deleteLater();
     });
+
+    connect(ui->eq_r_fixed,&QRadioButton::clicked,this,&MainWindow::updateEQMode);
+    connect(ui->eq_r_flex,&QRadioButton::clicked,this,&MainWindow::updateEQMode);
 }
 
+void MainWindow::updateEQMode(){
+    bool isFixed = ui->eq_r_fixed->isChecked();
+    setEQMode(isFixed ? 0 : 1);
+}
+
+void MainWindow::setEQMode(int mode){
+    ui->eq_holder->setCurrentIndex(mode);
+    ui->eqpreset->setEnabled(!mode);
+    ui->eq_r_flex->setChecked(mode);
+    ui->eq_r_fixed->setChecked(!mode);
+}

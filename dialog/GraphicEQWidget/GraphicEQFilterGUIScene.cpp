@@ -179,7 +179,7 @@ void GraphicEQFilterGUIScene::itemMoved(int index)
 	double db = yToDb(item->scenePos().y());
 	double oldHz = item->getHz();
 	double hz;
-	if (getBandCount() != -1)
+    if (getBandCount() != -1 && !freeMode15)
 	{
 		hz = oldHz;
 	}
@@ -369,4 +369,11 @@ void GraphicEQFilterGUIScene::setBandCount(int value)
 		if (!noUpdateModel)
 			emit updateModel();
 	}
+}
+
+void GraphicEQFilterGUIScene::set15BandFreeMode(bool e){
+    freeMode15 = e;
+}
+bool GraphicEQFilterGUIScene::get15BandFreeMode(){
+    return freeMode15;
 }
