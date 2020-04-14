@@ -20,7 +20,7 @@ void AppConfigWrapper::loadAppConfig(){
 }
 
 bool AppConfigWrapper::getAutoFx(){
-    return appconf->getBool("apply.auto.enable");
+    return appconf->getBool("apply.auto.enable",true,true);
 }
 void AppConfigWrapper::setAutoFx(bool afx){
     appconf->setValue("apply.auto.enable",QVariant(afx));
@@ -98,7 +98,7 @@ bool AppConfigWrapper::getWhiteIcons(){
     return appconf->getBool("theme.icons.white");
 }
 int AppConfigWrapper::getAutoFxMode(){
-    return appconf->getInt("apply.auto.mode");
+    return appconf->getInt("apply.auto.mode",true,1);
 }
 void AppConfigWrapper::setAutoFxMode(int mode){
     appconf->setValue("apply.auto.mode",QVariant(mode));
