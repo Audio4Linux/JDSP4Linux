@@ -23,7 +23,6 @@ class LogHelper : QObject
 {
     Q_OBJECT
 public:
-
     enum LoggingMode{
         LM_ALL,
         LM_FILE,

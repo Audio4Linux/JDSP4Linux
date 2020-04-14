@@ -377,6 +377,7 @@ void MainWindow::RunDiagnosticChecks(){
                           "Please make sure jdsp is installed and you\n"
                           "are using the lastest version of gst-plugin-jamesdsp"),
                        tr("Continue anyway"));
+        LogHelper::error("JDSP binary not found ('which jdsp' returned 1)");
     }
     else if(pidfile.exists() && !m_dbus->isValid() &&
             system("kill -0 $(cat /tmp/jamesdsp/pid.tmp) > /dev/null")==0){
@@ -388,6 +389,7 @@ void MainWindow::RunDiagnosticChecks(){
                           "DBus server was unable to launch and couldn't acquire a busname.\n"
                           "Please check the github repository and consider to update!"),
                        tr("Continue anyway"));
+        LogHelper::error("JDSP is running but there is no DBus interface available (the gst-plugin is very likely outdated or was unable to register the DBus service)");
     }
     else if(!m_dbus->isValid())
         ShowDBusError();
@@ -574,18 +576,20 @@ void MainWindow::ShowDBusError(){
                                  "Please make sure jdsp is running and you are\n"
                                  "using the lastest version of gst-plugin-jamesdsp"),
                               tr("Launch now"));
+    LogHelper::error("DBus interface unavailable");
     connect(msg_notrunning,&OverlayMsgProxy::buttonPressed,[this](){
         int returncode = system("jdsp start");
         if(returncode != 0){
             if(msg_launchfail != nullptr)
                 msg_launchfail->hide();
-            QTimer::singleShot(300,this,[this](){
+            QTimer::singleShot(300,this,[this,returncode](){
                 msg_launchfail = new OverlayMsgProxy(this);
                 msg_launchfail->openError(tr("Failed to launch JDSP"),
                                           tr("jdsp.sh has returned a non-null exit code.\n"
                                              "Please make sure jdsp is correctly installed\n"
                                              "and try to restart it manually"),
                                           tr("Continue anyway"));
+                LogHelper::error(QString("Could not start jdsp.sh (returned %1)").arg(returncode));
             });
         } else {
             //Reconnect DBus
@@ -611,6 +615,7 @@ void MainWindow::CheckDBusVersion(){
                                           "this GUI in order to ensure full functionality.\n"
                                           "Current version: %1, Required version: >=%2").arg(currentPluginVersion).arg(MINIMUM_PLUGIN_VERSION),
                                        tr("Close"));
+        LogHelper::error(QString("GStreamer plugin version mismatch (current: %1, required: >= %2)").arg(currentPluginVersion).arg(MINIMUM_PLUGIN_VERSION));
     }
 }
 //Systray
