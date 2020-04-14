@@ -28,7 +28,9 @@
 #include <QInputDialog>
 #include <QButtonGroup>
 
+///TODO: --- REMOVE BEFORE RELEASE ---
 #define DISABLE_DIAGNOSTICS
+///TODO: -----------------------------
 
 using namespace std;
 
@@ -71,6 +73,7 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
     m_stylehelper = new StyleHelper(this);
     m_appwrapper = new AppConfigWrapper(m_stylehelper);
     m_dbus = new DBusProxy();
+    m_eelEditor = new EELEditor(this);
 
     m_appwrapper->loadAppConfig();
 
@@ -1838,6 +1841,21 @@ void MainWindow::ConnectActions(){
 
     connect(ui->eq_r_fixed,&QRadioButton::clicked,this,&MainWindow::updateEQMode);
     connect(ui->eq_r_flex,&QRadioButton::clicked,this,&MainWindow::updateEQMode);
+
+    connect(ui->liveprog_editscript, &QAbstractButton::clicked,[this]{
+        if(activeliveprog.isEmpty()){
+            QMessageBox::warning(this,"Error","No EEL file loaded.\n"
+                                              "Please select one in the list on the left side.");
+            return;
+        } else if(!QFile(activeliveprog).exists()){
+            QMessageBox::warning(this,"Error","Selected EEL file does not exist anymore.\n"
+                                              "Please select another one");
+            return;
+        }
+        m_eelEditor->show();
+        m_eelEditor->openNewScript(activeliveprog);
+    });
+    connect(m_eelEditor,&EELEditor::scriptSaved,this,&MainWindow::reloadLiveprog);
 }
 
 void MainWindow::updateEQMode(){

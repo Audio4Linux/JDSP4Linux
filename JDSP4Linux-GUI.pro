@@ -24,6 +24,7 @@ include(visualization/SpectrumAudioViewer.pri)
 include(phantom/phantom.pri)
 include(dialog/FlatTabWidget/FlatTabWidget.pri)
 include(dialog/GraphicEQWidget/GraphicEQWidget.pri)
+include(dialog/EELEditor/EELEditor.pri)
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.

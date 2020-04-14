@@ -1,0 +1,12 @@
+#include "customkeywordprovider.h"
+
+CustomKeywordProvider::CustomKeywordProvider(EELCompleter* completer, EELHighlighter* highlighter)
+{
+    mCompleter = completer;
+    mHighlighter = highlighter;
+}
+
+template<typename T>
+void CustomKeywordProvider::addDefinition(T def){
+    typeid (def).name();
+}

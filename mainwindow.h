@@ -20,6 +20,7 @@
 #include <QCloseEvent>
 
 #include <misc/qjsontablemodel.h>
+#include <eeleditor.h>
 
 #include "visualization/audiostreamengine.h"
 #include "visualization/spectrograph.h"
@@ -134,6 +135,7 @@ private:
 
     PresetDlg *preset_dlg;
     LogDlg *log_dlg;
+    EELEditor* m_eelEditor;
 
     QScopedPointer<QFrame> analysisLayout;
     Spectrograph* m_spectrograph;
