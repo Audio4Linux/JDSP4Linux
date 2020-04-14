@@ -130,7 +130,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>7</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -333,8 +333,11 @@
                     </item>
                     <item>
                      <widget class="QAnimatedSlider" name="analog_tubedrive">
+                      <property name="minimum">
+                       <number>-300</number>
+                      </property>
                       <property name="maximum">
-                       <number>12000</number>
+                       <number>800</number>
                       </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -345,28 +348,12 @@
                   </widget>
                  </item>
                  <item>
-                  <spacer name="verticalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Fixed</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>2</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
                   <widget class="QGroupBox" name="limiter">
                    <property name="whatsThis">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Mainly used to dynamically control the audio volume.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="title">
-                    <string>Limiter</string>
+                    <string>Limiter/Master</string>
                    </property>
                    <property name="checkable">
                     <bool>false</bool>
@@ -423,6 +410,26 @@
                         </property>
                         <property name="maximum">
                          <number>2000</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="label_6">
+                        <property name="text">
+                         <string>Post gain</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="QAnimatedSlider" name="postgain">
+                        <property name="minimum">
+                         <number>-15</number>
+                        </property>
+                        <property name="maximum">
+                         <number>15</number>
                         </property>
                         <property name="orientation">
                          <enum>Qt::Horizontal</enum>
@@ -1596,6 +1603,20 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="label_8">
+                   <property name="text">
+                    <string>Pregain</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QAnimatedSlider" name="comp_pregain">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -1727,7 +1748,7 @@
                 <enum>QTabWidget::South</enum>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="conv_filesystem">
                 <attribute name="title">
@@ -1888,26 +1909,6 @@
                   </size>
                  </property>
                 </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_30">
-                 <property name="text">
-                  <string>IR volume</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QAnimatedSlider" name="conv_gain">
-                 <property name="minimum">
-                  <number>-80</number>
-                 </property>
-                 <property name="maximum">
-                  <number>30</number>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
                </item>
               </layout>
              </item>
@@ -2125,8 +2126,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>276</width>
-                    <height>219</height>
+                    <width>188</width>
+                    <height>71</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -2456,7 +2457,6 @@
   <tabstop>conv_fav_rename</tabstop>
   <tabstop>conv_fav_remove</tabstop>
   <tabstop>conv_enable</tabstop>
-  <tabstop>conv_gain</tabstop>
   <tabstop>ddcTabs</tabstop>
   <tabstop>ddc_dirpath</tabstop>
   <tabstop>ddc_reload</tabstop>

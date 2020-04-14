@@ -1043,9 +1043,11 @@ void MainWindow::LoadConfig(Context ctx){
     ui->comp_highthres->setValueA(conf->getInt("compression_thres2"));
     ui->comp_maxattack->setValueA(conf->getInt("compression_maxatk"));
     ui->comp_maxrelease->setValueA(conf->getInt("compression_maxrel"));
+    ui->comp_pregain->setValueA(conf->getInt("compression_pregain"));
 
     ui->limthreshold->setValueA(conf->getInt("masterswitch_limthreshold"));
     ui->limrelease->setValueA(conf->getInt("masterswitch_limrelease"));
+    ui->postgain->setValueA(conf->getInt("masterswitch_postgain"));
 
     ui->graphicEq->chk_enable->setChecked(conf->getBool("streq_enable"));
     QString streq = conf->getString("streq_stringp",false);
@@ -1078,7 +1080,6 @@ void MainWindow::LoadConfig(Context ctx){
         if(ir.at(ir.length()-1)=='"')ir.chop(1);
         activeirs = ir;
     }
-    ui->conv_gain->setValueA(conf->getInt("convolver_gain"));
 
     ui->enable_eq->setChecked(conf->getBool("tone_enable"));
     ui->eqinterpolator->setCurrentIndex(conf->getInt("tone_interpolation"));
@@ -1086,10 +1087,19 @@ void MainWindow::LoadConfig(Context ctx){
 
     //*** Parse EQ String to QMap
     QString rawEqString = chopFirstLastChar(conf->getString("tone_eq"));
+    bool isOldFormat = rawEqString.split(";").count() == 15;
+
+    if(isOldFormat)
+        rawEqString = "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;"
+                + rawEqString;
+
     QVector<float> rawEqData;
     for(auto val : rawEqString.split(";"))
         if(!val.isEmpty())
-            rawEqData.push_back(val.toFloat());
+            if(isOldFormat)
+                rawEqData.push_back(val.toFloat() / 100.f);
+            else
+                rawEqData.push_back(val.toFloat());
         else
             rawEqData.push_back(0.f);
 
@@ -1097,7 +1107,7 @@ void MainWindow::LoadConfig(Context ctx){
     QVector<float> dbData;
     for(int i = 0; i < rawEqData.size(); i++){
         if(i <= 14)
-            if(i + 15 < rawEqString.size())
+            if((i + 15) < rawEqData.size())
                 eqData[rawEqData.at(i)] = rawEqData.at(i + 15);
             else
                 eqData[rawEqData.at(i)] = 0.0;
@@ -1145,6 +1155,7 @@ void MainWindow::ApplyConfig(bool restart){
     conf->setValue("analogmodelling_tubedrive",QVariant(ui->analog_tubedrive->valueA()));
     conf->setValue("masterswitch_limthreshold",QVariant(ui->limthreshold->valueA()));
     conf->setValue("masterswitch_limrelease",QVariant(ui->limrelease->valueA()));
+    conf->setValue("masterswitch_postgain",QVariant(ui->postgain->valueA()));
 
     conf->setValue("ddc_enable",QVariant(ui->ddc_enable->isChecked()));
     conf->setValue("ddc_file",QVariant("\"" + activeddc + "\""));
@@ -1153,7 +1164,6 @@ void MainWindow::ApplyConfig(bool restart){
     conf->setValue("liveprog_file",QVariant("\"" + activeliveprog + "\""));
 
     conf->setValue("convolver_enable",QVariant(ui->conv_enable->isChecked()));
-    conf->setValue("convolver_gain",QVariant(ui->conv_gain->valueA()));
     conf->setValue("convolver_file",QVariant("\"" + activeirs + "\""));
 
     conf->setValue("compression_enable",QVariant(ui->enable_comp->isChecked()));
@@ -1161,6 +1171,7 @@ void MainWindow::ApplyConfig(bool restart){
     conf->setValue("compression_thres2",QVariant(ui->comp_highthres->valueA()));
     conf->setValue("compression_maxatk",QVariant(ui->comp_maxattack->valueA()));
     conf->setValue("compression_maxrel",QVariant(ui->comp_maxrelease->valueA()));
+    conf->setValue("compression_pregain",QVariant(ui->comp_pregain->valueA()));
 
     conf->setValue("tone_enable",QVariant(ui->enable_eq->isChecked()));
     conf->setValue("tone_filtertype",QVariant(ui->eqfiltertype->currentIndex()));
@@ -1310,6 +1321,9 @@ void MainWindow::UpdateUnitLabel(int d,QObject *alt){
     else if(obj==ui->bass_sensitivity){
         UpdateTooltipLabelUnit(obj,QString::number( (double)d/100 ),alt==nullptr);
     }
+    else if(obj==ui->analog_tubedrive){
+        UpdateTooltipLabelUnit(obj,QString::number( (double)d/100 )+"dB",alt==nullptr);
+    }
     else if(obj==ui->rev_decay){
         UpdateTooltipLabelUnit(obj,QString::number( (double)d/100 ),alt==nullptr);
     }
@@ -1329,7 +1343,8 @@ void MainWindow::UpdateUnitLabel(int d,QObject *alt){
         // Ignore these UI elements
     }
     else{
-        if(obj==ui->comp_lowthres||obj==ui->comp_highthres)
+        if(obj==ui->comp_lowthres||obj==ui->comp_highthres||
+                obj==ui->comp_pregain||obj==ui->postgain)
             post = "dB";
         else if(obj==ui->comp_maxattack||obj==ui->comp_maxrelease||obj==ui->limrelease)
             post = "ms";
@@ -1359,7 +1374,7 @@ void MainWindow::UpdateAllUnitLabels(){
      ui->limthreshold,ui->limrelease,ui->comp_maxrelease,ui->comp_maxattack,ui->comp_highthres,ui->comp_lowthres,
      ui->rev_osf,ui->rev_erf,ui->rev_era,ui->rev_erw,ui->rev_lci,ui->rev_lcb,ui->rev_lcd,
      ui->rev_lco,ui->rev_finalwet,ui->rev_finaldry,ui->rev_wet,ui->rev_width,ui->rev_spin,ui->rev_wander,ui->rev_decay,
-     ui->rev_delay,ui->rev_bass,ui->conv_gain,ui->bass_maxgain,ui->bass_gaintime,ui->bass_sensitivity,ui->bass_spectraltime});
+     ui->rev_delay,ui->rev_bass,ui->postgain,ui->comp_pregain,ui->bass_maxgain,ui->bass_gaintime,ui->bass_sensitivity,ui->bass_spectraltime});
 
     foreach (auto w, slidersToBeUpdated)
         UpdateUnitLabel(w->valueA(),w);
@@ -1629,17 +1644,17 @@ void MainWindow::ConnectActions(){
 
     QList<QAnimatedSlider*> registerValueAChange(
     {ui->analog_tubedrive,ui->stereowide_m,ui->stereowide_s,ui->bs2b_fcut,ui->bs2b_feed,ui->bass_maxgain,ui->bass_gaintime,
-     ui->bass_sensitivity,ui->bass_spectraltime,ui->limthreshold,ui->limrelease,ui->comp_maxrelease,ui->comp_maxattack,ui->comp_highthres,ui->comp_lowthres,
-     ui->rev_osf,ui->rev_erf,ui->rev_era,ui->rev_erw,ui->rev_lci,ui->rev_lcb,ui->rev_lcd,
+     ui->bass_sensitivity,ui->bass_spectraltime,ui->limthreshold,ui->limrelease,ui->comp_maxrelease,ui->comp_maxattack,
+     ui->rev_osf,ui->rev_erf,ui->rev_era,ui->rev_erw,ui->rev_lci,ui->rev_lcb,ui->rev_lcd,ui->comp_highthres,ui->comp_lowthres,
      ui->rev_lco,ui->rev_finalwet,ui->rev_finaldry,ui->rev_wet,ui->rev_width,ui->rev_spin,ui->rev_wander,ui->rev_decay,
-     ui->rev_delay,ui->rev_bass,ui->conv_gain});
+     ui->rev_delay,ui->rev_bass,ui->postgain,ui->comp_pregain});
 
     QList<QWidget*> registerSliderRelease(
     {ui->stereowide_m,ui->stereowide_s,ui->bs2b_fcut,ui->bs2b_feed,ui->rev_osf,ui->rev_erf,ui->rev_era,ui->rev_erw,
      ui->rev_lci,ui->rev_lcb,ui->rev_lcd,ui->rev_lco,ui->rev_finalwet,ui->rev_finaldry,ui->rev_wet,ui->rev_width,ui->rev_spin,
      ui->rev_wander,ui->rev_decay,ui->rev_delay,ui->rev_bass,ui->analog_tubedrive,ui->limthreshold,
-     ui->limrelease,ui->comp_maxrelease,ui->comp_maxattack,ui->comp_highthres,ui->comp_lowthres,ui->conv_gain,
-     ui->bass_maxgain,ui->bass_gaintime,ui->bass_sensitivity,ui->bass_spectraltime,});
+     ui->limrelease,ui->comp_maxrelease,ui->comp_maxattack,ui->comp_highthres,ui->comp_lowthres,
+     ui->bass_maxgain,ui->bass_gaintime,ui->bass_sensitivity,ui->bass_spectraltime,ui->postgain,ui->comp_pregain});
 
     QList<QWidget*> registerClick(
     {ui->bassboost,ui->bs2b,ui->stereowidener,ui->analog,ui->reverb,ui->enable_eq,ui->enable_comp,ui->ddc_enable,ui->conv_enable,
