@@ -1,6 +1,8 @@
 #ifndef AUTOEQCLIENT_H
 #define AUTOEQCLIENT_H
 
+#include "loghelper.h"
+
 #include <QDebug>
 #include <QObject>
 #include <QPixmap>
@@ -116,7 +118,7 @@ public:
 
         QByteArray image = net_request.loadSync(getGraphUrl());
         if(net_request.lastError() != ""){
-            qDebug().nospace().noquote() << "An error occurred (getGraphImage): " << net_request.lastError();
+            LogHelper::error("An error occurred (getGraphImage): " + net_request.lastError());
             return QPixmap();
         }
         QPixmap pixmap;

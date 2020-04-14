@@ -1,5 +1,4 @@
 #include "dbusproxy.h"
-#include <QDebug>
 #include <QDBusArgument>
 #include "misc/loghelper.h"
 
@@ -17,7 +16,7 @@ DBusProxy::DBusProxy()
                         "me.timschneeberger.JdspFx", "PropertiesCommitted",
                         this, SLOT(PropertiesSignalReceived(uint)))
             )
-        LogHelper::writeLog("DBus signal handler not connected");
+        LogHelper::warning("DBus signal handler not connected");
 }
 
 bool DBusProxy::isValid(){

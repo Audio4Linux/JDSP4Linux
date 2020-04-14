@@ -2,6 +2,8 @@
 
 #include <QDebug>
 #include <utility> 
+
+#include <misc/loghelper.h>
 ConfigContainer::ConfigContainer()
 = default;
 void ConfigContainer::setValue(const QString& key,QVariant value){
@@ -9,23 +11,24 @@ void ConfigContainer::setValue(const QString& key,QVariant value){
 }
 QVariant ConfigContainer::getVariant(const QString& key, bool silent){
     if(!map.contains(key)){
-        if(!silent)
-            qWarning().noquote().nospace() << "[W] Requested key '" << key << "' not found";
+        if(!silent) {
+            LogHelper::debug(QString("Requested key '%1' (variant) not found").arg(key));
+        }
         return QVariant();
     }
     return map.find(key).value();
 }
 QString ConfigContainer::getString(const QString& key,bool setToDefaultIfMissing){
     if(!map.contains(key)){
-        qWarning().noquote().nospace() << "[W] Requested key '" << key << "' not found";
-        if(setToDefaultIfMissing)map[key] = "";
+        LogHelper::debug(QString("Requested key '%1' (string) not found").arg(key));
+         if(setToDefaultIfMissing)map[key] = "";
         return "";
     }
     return getVariant(key).toString();
 }
 int ConfigContainer::getInt(const QString& key){
     if(!map.contains(key)){
-        qWarning().noquote().nospace() << "[W] Requested key '" << key << "' not found";
+        LogHelper::debug(QString("Requested key '%1' (int) not found").arg(key));
         map[key] = 0;
         return 0;
     }
@@ -33,7 +36,7 @@ int ConfigContainer::getInt(const QString& key){
 }
 float ConfigContainer::getFloat(const QString& key){
     if(!map.contains(key)){
-        qWarning().noquote().nospace() << "[W] Requested key '" << key << "' not found";
+        LogHelper::debug(QString("Requested key '%1' (float) not found").arg(key));
         map[key] = 0.0F;
         return 0.0F;
     }
@@ -41,7 +44,7 @@ float ConfigContainer::getFloat(const QString& key){
 }
 bool ConfigContainer::getBool(const QString& key, bool setToDefaultIfMissing){
     if(!map.contains(key)){
-        qWarning().noquote().nospace() << "[W] Requested key '" << key << "' not found";
+        LogHelper::debug(QString("Requested key '%1' (bool) not found").arg(key));
         if(setToDefaultIfMissing)map[key] = false;
         return false;
     }

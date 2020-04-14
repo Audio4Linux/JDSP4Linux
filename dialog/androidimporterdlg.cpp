@@ -37,7 +37,7 @@ void AndroidImporterDlg::import(){
     auto response = ConfigConverter::fromAndroid(filename);
     if( response.failed ) {
         QMessageBox::warning(this, tr("Syntax Error"), response.description,QMessageBox::Ok);
-        LogHelper::writeLog("Converter (from android): " + response.description + " (importandroid/syntaxcheck)");
+        LogHelper::error("Converter (from android): " + response.description + " (importandroid/syntaxcheck)");
         return;
     }
 
@@ -62,7 +62,7 @@ void AndroidImporterDlg::import(){
             cfile.close();
         }
         else
-            LogHelper::writeLog("Unable to create new file at '" + QDir::cleanPath(path + QDir::separator() + text + ".conf") + "'; cannot import converted android config (importandroid/importer)");
+            LogHelper::error("Unable to create new file at '" + QDir::cleanPath(path + QDir::separator() + text + ".conf") + "'; cannot import converted android config (importandroid/importer)");
     }
 
     emit importFinished();

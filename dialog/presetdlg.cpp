@@ -135,7 +135,7 @@ void PresetDlg::importLinux(){
     if (QFile::exists(dest))QFile::remove(dest);
 
     QFile::copy(src,dest);
-    LogHelper::writeLog("Importing from "+filename+ " (presets/linuximport)");
+    LogHelper::debug("Importing from "+filename+ " (presets/linuximport)");
 }
 void PresetDlg::exportLinux(){
     if(ui->files->selectedItems().length() == 0){
@@ -167,7 +167,7 @@ void PresetDlg::exportLinux(){
     if (QFile::exists(dest))QFile::remove(dest);
 
     QFile::copy(src,dest);
-    LogHelper::writeLog("Exporting to "+filename+ " (presets/linuxexport)");
+    LogHelper::debug("Exporting to "+filename+ " (presets/linuxexport)");
 }
 void PresetDlg::remove(){
     if(ui->files->selectedItems().length() == 0){
@@ -185,7 +185,7 @@ void PresetDlg::remove(){
         return;
     }
     file.remove();
-    LogHelper::writeLog("Removed "+fullpath+ " (presets/remove)");
+    LogHelper::debug("Removed "+fullpath+ " (presets/remove)");
     UpdateList();
     emit presetChanged();
 }
@@ -246,7 +246,7 @@ void PresetDlg::showContextMenu(const QPoint &pos)
                 }
                 QFile file (fullpath);
                 file.remove();
-                LogHelper::writeLog("Removed "+fullpath);
+                LogHelper::debug("Removed "+fullpath);
                 UpdateList();
                 emit presetChanged();
 

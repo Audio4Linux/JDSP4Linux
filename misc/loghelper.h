@@ -19,12 +19,23 @@
 #include <QString>
 #include <QDebug>
 
-class LogHelper
+class LogHelper : QObject
 {
+    Q_OBJECT
 public:
-    static void writeLog(const QString& log,int mode = 0);
-    static void writeLogF(const QString& log,const QString& _path);
-    static void clearLog();
+
+    enum LoggingMode{
+        LM_ALL,
+        LM_FILE,
+        LM_STDOUT
+    };
+
+    static void debug(const QString &log);
+    static void information(const QString& log);
+    static void warning(const QString &log);
+    static void error(const QString &log);
+    static void write(const QString& log,LoggingMode mode = LM_ALL);
+    static void clear();
 };
 
 #endif // LOGHELPER_H

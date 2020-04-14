@@ -1,28 +1,36 @@
 #include "loghelper.h"
 
-void LogHelper::writeLog(const QString& log,int mode){
-    //Mode: 0-Log+Stdout 1-Log 2-Stdout
-    QFile f("/tmp/jamesdsp/ui.log");
-    QString o = "[" + QTime::currentTime().toString() + "] " + log;
+void LogHelper::debug(const QString &log){
+    write(QString("[D] %1").arg(log));
+}
 
-    if(mode==0||mode==1){
-        if (f.open(QIODevice::WriteOnly | QIODevice::Append)) {
-            f.write(QString("%1\n").arg(o).toUtf8().constData());
-        }
-        f.close();
-    }
-    if(mode==0||mode==2)
-        qDebug().noquote().nospace() << o.toUtf8().constData();
+void LogHelper::information(const QString &log){
+    write(QString("[I] %1").arg(log));
 }
-void LogHelper::writeLogF(const QString& log,const QString& _path){
-    QFile f(_path);
-    QString o = "[" + QTime::currentTime().toString() + "] " + log + "\n";
-    if (f.open(QIODevice::WriteOnly | QIODevice::Append)) {
-        f.write(o.toUtf8().constData());
-    }
-    f.close();
+
+void LogHelper::warning(const QString &log){
+    write(QString("[W] %1").arg(log));
 }
-void LogHelper::clearLog(){
+
+void LogHelper::error(const QString &log){
+    write(QString("[E] %1").arg(log));
+}
+
+void LogHelper::write(const QString& log, LoggingMode mode){
+    QFile file("/tmp/jamesdsp/ui.log");
+    QString formattedLog(QString("[%1] %2").arg(QTime::currentTime().toString()).arg(log));
+
+    if(mode == LM_ALL || mode == LM_FILE){
+        if (file.open(QIODevice::WriteOnly | QIODevice::Append))
+            file.write(QString("%1\n").arg(formattedLog).toUtf8().constData());
+        file.close();
+    }
+    if(mode == LM_ALL || mode == LM_STDOUT)
+        qDebug().noquote().nospace() << formattedLog.toUtf8().constData();
+}
+
+void LogHelper::clear(){
     QFile file ("/tmp/jamesdsp/ui.log");
-    if(file.exists())file.remove();
+    if(file.exists())
+        file.remove();
 }

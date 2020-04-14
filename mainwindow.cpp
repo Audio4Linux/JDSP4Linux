@@ -61,8 +61,8 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
     m_exepath = exepath;
     m_startupInTraySwitch = statupInTray;
 
-    LogHelper::clearLog();
-    LogHelper::writeLog("UI launched...");
+    LogHelper::clear();
+    LogHelper::information("UI launched...");
 
     msg_notrunning = new OverlayMsgProxy(this);
     msg_launchfail = new OverlayMsgProxy(this);
@@ -106,23 +106,23 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
     bool serviceRegistrationSuccessful = connection.registerObject("/Gui", this);
     bool objectRegistrationSuccessful = connection.registerService("cf.thebone.jdsp4linux.Gui");
     if(serviceRegistrationSuccessful && objectRegistrationSuccessful)
-        LogHelper::writeLog("DBus service registration successful");
+        LogHelper::information("DBus service registration successful");
     else{
-        LogHelper::writeLog("DBus service registration failed. Name already aquired by other instance");
+        LogHelper::warning("DBus service registration failed. Name already aquired by other instance");
         if(!allowMultipleInst){
-            LogHelper::writeLog("Attempting to switch to this instance...");
+            LogHelper::information("Attempting to switch to this instance...");
             auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("cf.thebone.jdsp4linux.Gui", "/Gui",
                                                                   QDBusConnection::sessionBus(), this);
             if(!m_dbInterface->isValid())
-                LogHelper::writeLog("Critical: Unable to connect to other DBus instance. Continuing anyway...");
+                LogHelper::error("Critical: Unable to connect to other DBus instance. Continuing anyway...");
             else{
                 QDBusPendingReply<> msg = m_dbInterface->raiseWindow();
                 if(msg.isError() || msg.isValid()){
-                    LogHelper::writeLog("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
+                    LogHelper::error("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
                 }
                 else{
                     aboutToQuit = true;
-                    LogHelper::writeLog("Success! Waiting for event loop to exit...");
+                    LogHelper::information("Success! Waiting for event loop to exit...");
                     QTimer::singleShot(0, qApp, &QCoreApplication::quit);
                 }
             }
@@ -180,7 +180,7 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
             ui->ddc_dirpath->setText(d2.absolutePath());
             reloadDDC();
         } catch (const exception& e) {
-            LogHelper::writeLog("Failed to load previous DDC path: " + QString::fromStdString(e.what()));
+            LogHelper::error("Failed to load previous DDC path: " + QString::fromStdString(e.what()));
             ui->ddc_dirpath->setText(m_appwrapper->getDDCPath());
             reloadDDC();
         }
@@ -206,7 +206,7 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
                 }
             }
         } catch (const exception& e) {
-            LogHelper::writeLog("Failed to load previous fav-IRS path: " + QString::fromStdString(e.what()));
+            LogHelper::error("Failed to load previous fav-IRS path: " + QString::fromStdString(e.what()));
         }
     }
     else{
@@ -223,7 +223,7 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
                 }
             }
         } catch (const exception& e) {
-            LogHelper::writeLog("Failed to load previous IRS path: " + QString::fromStdString(e.what()));
+            LogHelper::error("Failed to load previous IRS path: " + QString::fromStdString(e.what()));
             ui->conv_dirpath->setText(m_appwrapper->getIrsPath());
             reloadIRS();
         }
@@ -239,7 +239,7 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
             ui->liveprog_dirpath->setText(d2.absolutePath());
             reloadLiveprog();
         } catch (const exception& e) {
-            LogHelper::writeLog("Failed to load previous Liveprog path: " + QString::fromStdString(e.what()));
+            LogHelper::error("Failed to load previous Liveprog path: " + QString::fromStdString(e.what()));
             ui->liveprog_dirpath->setText(m_appwrapper->getLiveprogPath());
             reloadLiveprog();
         }
@@ -502,9 +502,9 @@ void MainWindow::ToggleSpectrum(bool on,bool ctrl_visibility){
             if(item.deviceName()==m_appwrapper->getSpectrumInput())
                 in = item;
 
-        LogHelper::writeLog("Spectrum Expected Input Device: "+m_appwrapper->getSpectrumInput());
-        LogHelper::writeLog("Spectrum Found Input Device: "+in.deviceName());
-        LogHelper::writeLog("Spectrum Default Input Device: "+QAudioDeviceInfo::defaultInputDevice().deviceName());
+        LogHelper::debug("Spectrum Expected Input Device: "+m_appwrapper->getSpectrumInput());
+        LogHelper::debug("Spectrum Found Input Device: "+in.deviceName());
+        LogHelper::debug("Spectrum Default Input Device: "+QAudioDeviceInfo::defaultInputDevice().deviceName());
 
         m_audioengine->setAudioInputDevice(in);
         m_audioengine->initializeRecord();
@@ -946,7 +946,7 @@ void MainWindow::LoadPresetFile(const QString& filename){
     if (QFile::exists(dest))QFile::remove(dest);
 
     QFile::copy(src,dest);
-    LogHelper::writeLog("Loading from " + filename+ " (main/loadpreset)");
+    LogHelper::debug("Loading from " + filename+ " (main/loadpreset)");
     conf->setConfigMap(readConfig());
     LoadConfig();
     m_irsNeedUpdate = true;
@@ -959,7 +959,7 @@ void MainWindow::SavePresetFile(const QString& filename){
     if (QFile::exists(dest))QFile::remove(dest);
 
     QFile::copy(src,dest);
-    LogHelper::writeLog("Saving to " + filename+ " (main/savepreset)");
+    LogHelper::debug("Saving to " + filename+ " (main/savepreset)");
 }
 void MainWindow::LoadExternalFile(){
     QString filename = QFileDialog::getOpenFileName(this,tr("Load custom audio.conf"),"","*.conf");
@@ -969,7 +969,7 @@ void MainWindow::LoadExternalFile(){
     if (QFile::exists(dest))QFile::remove(dest);
 
     QFile::copy(src,dest);
-    LogHelper::writeLog("Loading from " + filename+ " (main/loadexternal)");
+    LogHelper::debug("Loading from " + filename+ " (main/loadexternal)");
     conf->setConfigMap(readConfig());
     LoadConfig();
     m_irsNeedUpdate = true;
@@ -988,7 +988,7 @@ void MainWindow::SaveExternalFile(){
     if (QFile::exists(dest))QFile::remove(dest);
 
     QFile::copy(src,dest);
-    LogHelper::writeLog("Saving to " + filename+ " (main/saveexternal)");
+    LogHelper::debug("Saving to " + filename+ " (main/saveexternal)");
 }
 
 //---Config IO
@@ -1785,7 +1785,7 @@ void MainWindow::ConnectActions(){
         if (QFile::exists(dest))QFile::remove(dest);
 
         QFile::copy(src,dest);
-        LogHelper::writeLog("Adding " + src + " to bookmarks (convolver/add)");
+        LogHelper::debug("Adding " + src + " to bookmarks (convolver/add)");
         reloadIRSFav();
     });
     connect(ui->conv_files_fav,      &QListWidget::itemSelectionChanged,[this,absolute]{
@@ -1820,7 +1820,7 @@ void MainWindow::ConnectActions(){
         }
         QFile file (fullpath);
         file.remove();
-        LogHelper::writeLog("Removed "+fullpath+" from favorites (convolver/remove)");
+        LogHelper::debug("Removed "+fullpath+" from favorites (convolver/remove)");
         reloadIRSFav();
     });
 

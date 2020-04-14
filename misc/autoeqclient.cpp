@@ -16,7 +16,7 @@ QVector<QueryResult> AutoEQClient::query(QueryRequest request){
     QString status =
             QString::fromUtf8(net_request.loadSync(INDEX_RAW_URL));
     if(net_request.lastError() != ""){
-        qDebug().nospace().noquote() << "An error occurred (query): " << net_request.lastError();
+        LogHelper::error("An error occurred (query): " + net_request.lastError());
         return results;
     }
 
@@ -61,7 +61,7 @@ HeadphoneMeasurement AutoEQClient::fetchDetails(QueryResult item){
     QString status =
             QString::fromUtf8(net_request.loadSync(item.mApiPath));
     if(net_request.lastError() != ""){
-        qDebug().nospace().noquote() << "An error occurred (fetchDetails): " << net_request.lastError();
+        LogHelper::error("An error occurred (fetchDetails): " + net_request.lastError());
         return hp;
     }
 
@@ -79,7 +79,7 @@ HeadphoneMeasurement AutoEQClient::fetchDetails(QueryResult item){
             QString status =
                     QString::fromUtf8(net_request_eq.loadSync(url));
             if(net_request_eq.lastError() != ""){
-                qDebug().nospace().noquote() << "An error occurred (fetchDetails/graphiceq): " << net_request_eq.lastError();
+                LogHelper::error("An error occurred (fetchDetails/graphiceq): " + net_request_eq.lastError());
             }
             hp.setGraphicEQ(status);
         }

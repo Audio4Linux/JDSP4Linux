@@ -23,7 +23,7 @@ ConversionResult ConfigConverter::fromAndroid(QString path)
                 .arg(errorLine)
                 .arg(errorColumn)
                 .arg(errorMsg);
-        LogHelper::writeLog("Converter (a-to-l): " + error + " (converter/syntaxcheck)");
+        LogHelper::error("Converter (from android): " + error + " (converter/syntaxcheck)");
         result.failed = true;
         result.description = error;
         return result;
