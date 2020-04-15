@@ -217,7 +217,7 @@ bool AppConfigWrapper::getSpetrumGrid(){
     return appconf->getBool("visualizer.spectrum.grid");
 }
 int AppConfigWrapper::getSpectrumTheme(){
-    return appconf->getInt("visualizer.spectrum.theme");
+    return appconf->getInt("visualizer.spectrum.theme",true,1);
 }
 void AppConfigWrapper::setSpectrumTheme(int number){
     appconf->setValue("visualizer.spectrum.theme",QVariant(number));

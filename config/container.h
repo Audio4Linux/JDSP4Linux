@@ -25,7 +25,7 @@ public:
     void setValue(const QString& key,QVariant value);
     QVariant getVariant(const QString& key, bool silent=false);
     QString getString(const QString& key,bool setToDefaultIfMissing=true);
-    int getInt(const QString& key, bool setToDefaultIfMissing=true, int defaultVal = false);
+    int getInt(const QString& key, bool setToDefaultIfMissing=true, int defaultVal = 0);
     float getFloat(const QString& key);
     bool getBool(const QString& key, bool setToDefaultIfMissing=true, bool defaultVal = false);
 

@@ -51,10 +51,10 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
         ui->eq_dyn_widget->set15BandFreeMode(true);
 
         ConfigContainer pref;
-        pref.setValue("scrollX",160.366);
-        pref.setValue("scrollY",34.862);
+        pref.setValue("scrollX",160);
+        pref.setValue("scrollY",311);
         pref.setValue("zoomX",0.561);
-        pref.setValue("zoomY",0.561);
+        pref.setValue("zoomY",1.651);
         ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
 
         QButtonGroup eq_mode;
@@ -350,6 +350,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::showEvent( QShowEvent* event ) {
     QWidget::showEvent( event );
+
     if(m_appwrapper->getLegacyTabs())
         InitializeLegacyTabs();
 }

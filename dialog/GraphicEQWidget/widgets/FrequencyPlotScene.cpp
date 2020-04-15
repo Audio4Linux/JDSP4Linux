@@ -29,8 +29,8 @@ static double maxX = 1000;
 static double maxY = 500;
 static double minHz = 1;
 static double maxHz = 30000;
-static double minDb = -30;
-static double maxDb = 30;
+static double minDb = -70;
+static double maxDb = 70;
 
 vector<double> FrequencyPlotScene::bands15 = {25, 40, 63, 100, 160, 250, 400, 630, 1000, 1600, 2500, 4000, 6300, 10000, 16000};
 vector<double> FrequencyPlotScene::bands31 = {20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800,

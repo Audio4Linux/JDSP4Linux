@@ -130,7 +130,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1612,6 +1612,9 @@
                  </item>
                  <item>
                   <widget class="QAnimatedSlider" name="comp_pregain">
+                   <property name="maximum">
+                    <number>30</number>
+                   </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -2126,8 +2129,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>188</width>
-                    <height>71</height>
+                    <width>276</width>
+                    <height>219</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_24">
