@@ -18,10 +18,12 @@ LogDlg::~LogDlg()
 {
     delete ui;
 }
-void LogDlg::reject()
+
+void LogDlg::showEvent(QShowEvent *)
 {
-    QDialog::reject();
+    updateLog();
 }
+
 void LogDlg::updateLog(){
     ui->containerlog->clear();
     QString path;

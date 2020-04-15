@@ -130,7 +130,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2221,7 +2221,7 @@
     <item>
      <layout class="QHBoxLayout" name="buttonbox">
       <item>
-       <widget class="QPushButton" name="cpreset">
+       <widget class="QToolButton" name="cpreset">
         <property name="minimumSize">
          <size>
           <width>30</width>
@@ -2250,7 +2250,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="set">
+       <widget class="QToolButton" name="set">
         <property name="minimumSize">
          <size>
           <width>30</width>
@@ -2302,11 +2302,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="disableFX">
+       <widget class="QToolButton" name="disableFX">
         <property name="minimumSize">
          <size>
           <width>88</width>
-          <height>0</height>
+          <height>25</height>
          </size>
         </property>
         <property name="whatsThis">
@@ -2345,6 +2345,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="reset">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reset&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Resets all properties to default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
@@ -2355,15 +2361,17 @@
       </item>
       <item>
        <widget class="QPushButton" name="apply">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Apply&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Applies current configuration and reloads jdsp.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>Apply</string>
-        </property>
-        <property name="icon">
-         <iconset theme="ok">
-          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>

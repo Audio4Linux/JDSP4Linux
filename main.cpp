@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
     parser.process(a);
     if(parser.isSet(sjdsp)) system("jdsp start");
 
+    QLocale::setDefault(QLocale::c());
+
     QApplication::setQuitOnLastWindowClosed( false );
     MainWindow w(QString::fromLocal8Bit(exepath),parser.isSet(tray),parser.isSet(minst));
     w.setFixedSize(w.geometry().width(),w.geometry().height());

@@ -21,7 +21,6 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 include(visualization/SpectrumAudioViewer.pri)
-include(phantom/phantom.pri)
 include(dialog/FlatTabWidget/FlatTabWidget.pri)
 include(dialog/GraphicEQWidget/GraphicEQWidget.pri)
 include(dialog/EELEditor/EELEditor.pri)

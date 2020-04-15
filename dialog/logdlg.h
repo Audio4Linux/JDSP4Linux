@@ -30,8 +30,8 @@ public:
     ~LogDlg();
 public slots:
     void updateLog();
-private slots:
-    void reject();
+protected:
+    void showEvent(QShowEvent *) override;
 private:
     Ui::log *ui;
 };

@@ -97,7 +97,6 @@ private slots:
     void UpdateAllUnitLabels();
     void LoadExternalFile();
     void SaveExternalFile();
-    void OpenLog();
     void DialogHandler();
     void updateTrayPresetList();
     void RefreshSpectrumParameters();

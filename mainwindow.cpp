@@ -9,7 +9,6 @@
 #include "misc/eventfilter.h"
 #include "dialog/firstlaunchwizard.h"
 
-#include <phantomstyle.h>
 #include <Animation/Animation.h>
 #include <misc/qjsontablemodel.h>
 #include <dialog/autoeqselector.h>
@@ -39,270 +38,310 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    bool aboutToQuit = false;
-
-    ui->tabhost_legacy->hide();
-    ui->eq_dyn_widget->setSidebarHidden(true);
-    ui->eq_dyn_widget->set15BandFreeMode(true);
-
-    ConfigContainer pref;
-    pref.setValue("scrollX",160.366);
-    pref.setValue("scrollY",34.862);
-    pref.setValue("zoomX",0.561);
-    pref.setValue("zoomY",0.561);
-    ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
-
-    QButtonGroup eq_mode;
-    eq_mode.addButton(ui->eq_r_fixed);
-    eq_mode.addButton(ui->eq_r_flex);
-
-    QDir("/tmp").mkdir("jamesdsp");
-
-    m_exepath = exepath;
-    m_startupInTraySwitch = statupInTray;
-
-    LogHelper::clear();
-    LogHelper::information("UI launched...");
-
-    msg_notrunning = new OverlayMsgProxy(this);
-    msg_launchfail = new OverlayMsgProxy(this);
-    msg_versionmismatch = new OverlayMsgProxy(this);
-
-    tray_disableAction = new QAction();
-    conf = new ConfigContainer();
-    m_stylehelper = new StyleHelper(this);
-    m_appwrapper = new AppConfigWrapper(m_stylehelper);
-    m_dbus = new DBusProxy();
-    m_eelEditor = new EELEditor(this);
-
-    m_appwrapper->loadAppConfig();
-
-    if(!QFile(m_appwrapper->getPath()).exists()){
-        QFile file(m_appwrapper->getPath());
-        if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream stream(&file);
-            stream << QString::fromStdString(default_config);
-            file.close();
-        }
+    //Prepare logger
+    {
+        LogHelper::clear();
+        LogHelper::information("UI launched...");
     }
 
-    InitializeSpectrum();
+    //Prepare base UI
+    {
+        ui->tabhost_legacy->hide();
+        ui->eq_dyn_widget->setSidebarHidden(true);
+        ui->eq_dyn_widget->set15BandFreeMode(true);
 
-    conf->setConfigMap(readConfig());
-    LoadConfig();
+        ConfigContainer pref;
+        pref.setValue("scrollX",160.366);
+        pref.setValue("scrollY",34.862);
+        pref.setValue("zoomX",0.561);
+        pref.setValue("zoomY",0.561);
+        ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
 
-    preset_dlg = new PresetDlg(this);
+        QButtonGroup eq_mode;
+        eq_mode.addButton(ui->eq_r_fixed);
+        eq_mode.addButton(ui->eq_r_flex);
+    }
 
-    createTrayIcon();
-    initGlobalTrayActions();
+    //Allocate pointers and init important variables
+    {
+        m_exepath = exepath;
+        m_startupInTraySwitch = statupInTray;
 
-    settings_dlg = new SettingsDlg(this,this);
-    log_dlg = new LogDlg(this);
+        msg_notrunning = new OverlayMsgProxy(this);
+        msg_launchfail = new OverlayMsgProxy(this);
+        msg_versionmismatch = new OverlayMsgProxy(this);
 
-    //This section checks if another instance is already running and switches to it.
-    new GuiAdaptor(this);
-    QDBusConnection connection = QDBusConnection::sessionBus();
-    bool serviceRegistrationSuccessful = connection.registerObject("/Gui", this);
-    bool objectRegistrationSuccessful = connection.registerService("cf.thebone.jdsp4linux.Gui");
-    if(serviceRegistrationSuccessful && objectRegistrationSuccessful)
-        LogHelper::information("DBus service registration successful");
-    else{
-        LogHelper::warning("DBus service registration failed. Name already aquired by other instance");
-        if(!allowMultipleInst){
-            LogHelper::information("Attempting to switch to this instance...");
-            auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("cf.thebone.jdsp4linux.Gui", "/Gui",
-                                                                  QDBusConnection::sessionBus(), this);
-            if(!m_dbInterface->isValid())
-                LogHelper::error("Critical: Unable to connect to other DBus instance. Continuing anyway...");
-            else{
-                QDBusPendingReply<> msg = m_dbInterface->raiseWindow();
-                if(msg.isError() || msg.isValid()){
-                    LogHelper::error("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
-                }
-                else{
-                    aboutToQuit = true;
-                    LogHelper::information("Success! Waiting for event loop to exit...");
-                    QTimer::singleShot(0, qApp, &QCoreApplication::quit);
-                }
+        tray_disableAction = new QAction();
+        conf = new ConfigContainer();
+        m_stylehelper = new StyleHelper(this);
+        m_appwrapper = new AppConfigWrapper(m_stylehelper);
+        m_dbus = new DBusProxy();
+        m_eelEditor = new EELEditor(this);
+    }
+
+    //Load internal app configuration
+    {
+        m_appwrapper->loadAppConfig();
+    }
+
+    //Create audio.conf if it doesn't exists
+    {
+        if(!QFile(m_appwrapper->getPath()).exists()){
+            QFile file(m_appwrapper->getPath());
+            if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+            {
+                QTextStream stream(&file);
+                stream << QString::fromStdString(default_config);
+                file.close();
             }
         }
     }
 
-    //Cancel constructor if quitting soon
-    if(aboutToQuit) return;
+    //Load config and initialize less important stuff
+    {
+        InitializeSpectrum();
+        conf->setConfigMap(readConfig());
+        LoadConfig();
+
+        preset_dlg = new PresetDlg(this);
+        createTrayIcon();
+        initGlobalTrayActions();
+        settings_dlg = new SettingsDlg(this,this);
+        log_dlg = new LogDlg(this);
+    }
+
+    //Check if another instance is already running and switch to it if that's the case
+    {
+        bool aboutToQuit = false;
+        new GuiAdaptor(this);
+        QDBusConnection connection = QDBusConnection::sessionBus();
+        bool serviceRegistrationSuccessful = connection.registerObject("/Gui", this);
+        bool objectRegistrationSuccessful = connection.registerService("cf.thebone.jdsp4linux.Gui");
+        if(serviceRegistrationSuccessful && objectRegistrationSuccessful)
+            LogHelper::information("DBus service registration successful");
+        else{
+            LogHelper::warning("DBus service registration failed. Name already aquired by other instance");
+            if(!allowMultipleInst){
+                LogHelper::information("Attempting to switch to this instance...");
+                auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("cf.thebone.jdsp4linux.Gui", "/Gui",
+                                                                      QDBusConnection::sessionBus(), this);
+                if(!m_dbInterface->isValid())
+                    LogHelper::error("Critical: Unable to connect to other DBus instance. Continuing anyway...");
+                else{
+                    QDBusPendingReply<> msg = m_dbInterface->raiseWindow();
+                    if(msg.isError() || msg.isValid()){
+                        LogHelper::error("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
+                    }
+                    else{
+                        aboutToQuit = true;
+                        LogHelper::information("Success! Waiting for event loop to exit...");
+                        QTimer::singleShot(0, qApp, &QCoreApplication::quit);
+                    }
+                }
+            }
+        }
+
+        //Cancel constructor if quitting soon
+        if(aboutToQuit) return;
+    }
 
     //Init 3-dot menu button
-    QMenu *menu = new QMenu();
-    spectrum = new QAction("Reload spectrum",this);
-    connect(spectrum,&QAction::triggered,this,&MainWindow::RestartSpectrum);
-    menu->addAction(tr("Reload JDSP"), this,SLOT(Restart()));
-    menu->addAction(spectrum);
-    menu->addAction(tr("Driver status"), this,[this](){
-        if(!m_dbus->isValid()){
-            ShowDBusError();
-            return;
-        }
+    {
+        QMenu *menu = new QMenu();
+        spectrum = new QAction("Reload spectrum",this);
+        connect(spectrum,&QAction::triggered,this,&MainWindow::RestartSpectrum);
+        menu->addAction(tr("Reload JDSP"), this,SLOT(Restart()));
+        menu->addAction(spectrum);
+        menu->addAction(tr("Driver status"), this,[this](){
+            if(!m_dbus->isValid()){
+                ShowDBusError();
+                return;
+            }
 
-        StatusDialog* sd = new StatusDialog(m_dbus);
-        QWidget* host = new QWidget(this);
-        host->setProperty("menu", false);
-        QVBoxLayout* hostLayout = new QVBoxLayout(host);
-        hostLayout->addWidget(sd);
-        host->hide();
-        host->setAutoFillBackground(true);
-        connect(sd,&StatusDialog::closePressed,this,[host](){
-            WAF::Animation::sideSlideOut(host, WAF::BottomSide);
+            StatusDialog* sd = new StatusDialog(m_dbus);
+            QWidget* host = new QWidget(this);
+            host->setProperty("menu", false);
+            QVBoxLayout* hostLayout = new QVBoxLayout(host);
+            hostLayout->addWidget(sd);
+            host->hide();
+            host->setAutoFillBackground(true);
+            connect(sd,&StatusDialog::closePressed,this,[host](){
+                WAF::Animation::sideSlideOut(host, WAF::BottomSide);
+            });
+            WAF::Animation::sideSlideIn(host, WAF::BottomSide);
         });
-        WAF::Animation::sideSlideIn(host, WAF::BottomSide);
-    });
-    menu->addAction(tr("Load from file"), this,SLOT(LoadExternalFile()));
-    menu->addAction(tr("Save to file"), this,SLOT(SaveExternalFile()));
-    menu->addAction(tr("View logs"), this,SLOT(OpenLog()));
-    menu->addAction(tr("What's this..."), this,[](){QWhatsThis::enterWhatsThisMode();});
-    ui->toolButton->setMenu(menu);
+        menu->addAction(tr("Load from file"), this,SLOT(LoadExternalFile()));
+        menu->addAction(tr("Save to file"), this,SLOT(SaveExternalFile()));
+        menu->addAction(tr("View logs"), this,[this]{log_dlg->show();});
+        menu->addAction(tr("What's this..."), this,[](){QWhatsThis::enterWhatsThisMode();});
+        ui->toolButton->setMenu(menu);
+    }
 
     //Prepare styles
-    m_stylehelper->SetStyle();
-    ui->eq_widget->setAccentColor(palette().highlight().color());
+    {
+        m_stylehelper->SetStyle();
+        ui->eq_widget->setAccentColor(palette().highlight().color());
+    }
 
-    //Reload DDC selection
-    reloadDDCDB();
-    QString absolute = QFileInfo(m_appwrapper->getPath()).absoluteDir().absolutePath();
-    if(!QFile(activeddc).exists()||activeddc==(absolute+"/dbcopy.vdc")){
-        ui->ddc_dirpath->setText(m_appwrapper->getDDCPath());
-        reloadDDC();
-        if(activeddc==(absolute+"/dbcopy.vdc"))
-            ui->ddcTabs->setCurrentIndex(1);
-    }else{
-        try {
-            QDir d2 = QFileInfo(activeddc).absoluteDir();
-            ui->ddc_dirpath->setText(d2.absolutePath());
-            reloadDDC();
-        } catch (const exception& e) {
-            LogHelper::error("Failed to load previous DDC path: " + QString::fromStdString(e.what()));
+    //Load DDC/IRS/Liveprog lists
+    {
+        //Reload DDC selection
+        reloadDDCDB();
+        QString absolute = QFileInfo(m_appwrapper->getPath()).absoluteDir().absolutePath();
+        if(!QFile(activeddc).exists()||activeddc==(absolute+"/dbcopy.vdc")){
             ui->ddc_dirpath->setText(m_appwrapper->getDDCPath());
             reloadDDC();
+            if(activeddc==(absolute+"/dbcopy.vdc"))
+                ui->ddcTabs->setCurrentIndex(1);
+        }else{
+            try {
+                QDir d2 = QFileInfo(activeddc).absoluteDir();
+                ui->ddc_dirpath->setText(d2.absolutePath());
+                reloadDDC();
+            } catch (const exception& e) {
+                LogHelper::error("Failed to load previous DDC path: " + QString::fromStdString(e.what()));
+                ui->ddc_dirpath->setText(m_appwrapper->getDDCPath());
+                reloadDDC();
+            }
         }
-    }
 
-    //Reload IRS lists
-    reloadIRSFav();
-    if(!QFile(activeirs).exists()){
-        ui->conv_dirpath->setText(m_appwrapper->getIrsPath());
-        reloadIRS();
-    }
-    else if(activeirs.contains(absolute+"/irs_favorites")){
-        ui->conv_dirpath->setText(m_appwrapper->getIrsPath());
-        reloadIRS();
-        ui->convTabs->setCurrentIndex(1);
-        try {
-            if(ui->conv_files_fav->count() >= 1){
-                for(int i=0;i<ui->conv_files_fav->count();i++){
-                    if(ui->conv_files_fav->item(i)->text()==QFileInfo(activeirs).fileName()){
-                        ui->conv_files_fav->setCurrentRow(i);
-                        break;
-                    }
-                }
-            }
-        } catch (const exception& e) {
-            LogHelper::error("Failed to load previous fav-IRS path: " + QString::fromStdString(e.what()));
-        }
-    }
-    else{
-        try {
-            QDir d2 = QFileInfo(activeirs).absoluteDir();
-            ui->conv_dirpath->setText(d2.absolutePath());
-            reloadIRS();
-            if(ui->conv_files->count() >= 1){
-                for(int i=0;i<ui->conv_files->count();i++){
-                    if(ui->conv_files->item(i)->text()==QFileInfo(activeirs).fileName()){
-                        ui->conv_files->setCurrentRow(i);
-                        break;
-                    }
-                }
-            }
-        } catch (const exception& e) {
-            LogHelper::error("Failed to load previous IRS path: " + QString::fromStdString(e.what()));
+        //Reload IRS lists
+        reloadIRSFav();
+        if(!QFile(activeirs).exists()){
             ui->conv_dirpath->setText(m_appwrapper->getIrsPath());
             reloadIRS();
         }
-    }
+        else if(activeirs.contains(absolute+"/irs_favorites")){
+            ui->conv_dirpath->setText(m_appwrapper->getIrsPath());
+            reloadIRS();
+            ui->convTabs->setCurrentIndex(1);
+            try {
+                if(ui->conv_files_fav->count() >= 1){
+                    for(int i=0;i<ui->conv_files_fav->count();i++){
+                        if(ui->conv_files_fav->item(i)->text()==QFileInfo(activeirs).fileName()){
+                            ui->conv_files_fav->setCurrentRow(i);
+                            break;
+                        }
+                    }
+                }
+            } catch (const exception& e) {
+                LogHelper::error("Failed to load previous fav-IRS path: " + QString::fromStdString(e.what()));
+            }
+        }
+        else{
+            try {
+                QDir d2 = QFileInfo(activeirs).absoluteDir();
+                ui->conv_dirpath->setText(d2.absolutePath());
+                reloadIRS();
+                if(ui->conv_files->count() >= 1){
+                    for(int i=0;i<ui->conv_files->count();i++){
+                        if(ui->conv_files->item(i)->text()==QFileInfo(activeirs).fileName()){
+                            ui->conv_files->setCurrentRow(i);
+                            break;
+                        }
+                    }
+                }
+            } catch (const exception& e) {
+                LogHelper::error("Failed to load previous IRS path: " + QString::fromStdString(e.what()));
+                ui->conv_dirpath->setText(m_appwrapper->getIrsPath());
+                reloadIRS();
+            }
+        }
 
-    //Reload Liveprog selection
-    if(!QFile(activeliveprog).exists()){
-        ui->liveprog_dirpath->setText(m_appwrapper->getLiveprogPath());
-        reloadLiveprog();
-    }else{
-        try {
-            QDir d2 = QFileInfo(activeliveprog).absoluteDir();
-            ui->liveprog_dirpath->setText(d2.absolutePath());
-            reloadLiveprog();
-        } catch (const exception& e) {
-            LogHelper::error("Failed to load previous Liveprog path: " + QString::fromStdString(e.what()));
+        //Reload Liveprog selection
+        if(!QFile(activeliveprog).exists()){
             ui->liveprog_dirpath->setText(m_appwrapper->getLiveprogPath());
             reloadLiveprog();
+        }else{
+            try {
+                QDir d2 = QFileInfo(activeliveprog).absoluteDir();
+                ui->liveprog_dirpath->setText(d2.absolutePath());
+                reloadLiveprog();
+            } catch (const exception& e) {
+                LogHelper::error("Failed to load previous Liveprog path: " + QString::fromStdString(e.what()));
+                ui->liveprog_dirpath->setText(m_appwrapper->getLiveprogPath());
+                reloadLiveprog();
+            }
         }
+
     }
 
     //Populate EQ preset list
-    for(auto preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
-        ui->eqpreset->addItem(preset);
+    {
+        for(auto preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
+            ui->eqpreset->addItem(preset);
+    }
 
-    ConnectActions();
+    //Connect UI signals
+    {
+        ConnectActions();
+    }
 
-    if(m_appwrapper->getTrayMode() || m_startupInTraySwitch) trayIcon->show();
-    else trayIcon->hide();
+    //Show Tray Icon if neccessary
+    {
+        if(m_appwrapper->getTrayMode() || m_startupInTraySwitch) trayIcon->show();
+        else trayIcon->hide();
+    }
 
-    connect(m_dbus, &DBusProxy::propertiesCommitted, this, [this](){
-        conf->setConfigMap(m_dbus->FetchPropertyMap());
-        LoadConfig(Context::DBus);
-    });
-
-    connect(m_appwrapper,&AppConfigWrapper::styleChanged,this,[this](){
-        ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-        ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-        ui->tabbar->redrawTabBar();
-        RestartSpectrum();
-        ui->eq_widget->setAccentColor(palette().highlight().color());
-    });
-
-    ui->eq_widget->setAlwaysDrawHandles(m_appwrapper->getEqualizerPermanentHandles());
-    connect(m_appwrapper,&AppConfigWrapper::eqChanged,this,[this](){
-        ui->eq_widget->setAlwaysDrawHandles(m_appwrapper->getEqualizerPermanentHandles());
-    });
-
-    ToggleSpectrum(m_appwrapper->getSpetrumEnable(),true);
-
-    if(!m_appwrapper->getIntroShown())
-        LaunchFirstRunSetup();
-    else
-        QTimer::singleShot(300,this,[this]{
-            RunDiagnosticChecks();
+    //Connect non-UI signals (DBus/ACW/...)
+    {
+        connect(m_dbus, &DBusProxy::propertiesCommitted, this, [this](){
+            conf->setConfigMap(m_dbus->FetchPropertyMap());
+            LoadConfig(Context::DBus);
         });
 
-    ui->tabbar->setAnimatePageChange(true);
-    ui->tabbar->setCustomStackWidget(ui->tabhost);
-    ui->tabbar->setDetachCustomStackedWidget(true);
-    ui->tabbar->addPage("Bass/Misc");
-    ui->tabbar->addPage("Sound Positioning");
-    ui->tabbar->addPage("Reverb");
-    ui->tabbar->addPage("Equalizer");
-    ui->tabbar->addPage("Compressor");
-    ui->tabbar->addPage("Convolver");
-    ui->tabbar->addPage("DDC");
-    ui->tabbar->addPage("Liveprog");
-    ui->tabbar->addPage("Graphic EQ");
-    ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-    ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-    ui->tabbar->redrawTabBar();
+        connect(m_appwrapper,&AppConfigWrapper::styleChanged,this,[this](){
+            ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+            ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+            ui->tabbar->redrawTabBar();
+            RestartSpectrum();
+            ui->eq_widget->setAccentColor(palette().highlight().color());
+        });
 
-    QTimer::singleShot(300,this,[this]{
-        if(m_appwrapper->getLegacyTabs())
-            InitializeLegacyTabs();
-    });
+        connect(m_appwrapper,&AppConfigWrapper::eqChanged,this,[this](){
+            ui->eq_widget->setAlwaysDrawHandles(m_appwrapper->getEqualizerPermanentHandles());
+        });
+    }
 
-    restoreGraphicEQView();
+    //Lateinit less important UI stuff and setup tabbar
+    {
+        ToggleSpectrum(m_appwrapper->getSpetrumEnable(),true);
+        restoreGraphicEQView();
+        ui->eq_widget->setAlwaysDrawHandles(m_appwrapper->getEqualizerPermanentHandles());
+
+        ui->tabbar->setAnimatePageChange(true);
+        ui->tabbar->setCustomStackWidget(ui->tabhost);
+        ui->tabbar->setDetachCustomStackedWidget(true);
+        ui->tabbar->addPage("Bass/Misc");
+        ui->tabbar->addPage("Sound Positioning");
+        ui->tabbar->addPage("Reverb");
+        ui->tabbar->addPage("Equalizer");
+        ui->tabbar->addPage("Compressor");
+        ui->tabbar->addPage("Convolver");
+        ui->tabbar->addPage("DDC");
+        ui->tabbar->addPage("Liveprog");
+        ui->tabbar->addPage("Graphic EQ");
+        ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+        ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+        ui->tabbar->redrawTabBar();
+
+        QTimer::singleShot(300,this,[this]{
+            if(m_appwrapper->getLegacyTabs())
+                InitializeLegacyTabs();
+        });
+    }
+
+    //Handle first launch and diagnostic checks
+    {
+        if(!m_appwrapper->getIntroShown())
+            LaunchFirstRunSetup();
+        else
+            QTimer::singleShot(300,this,[this]{
+                RunDiagnosticChecks();
+            });
+    }
+
+    LogHelper::information("UI initialized");
 }
 
 MainWindow::~MainWindow()
@@ -620,16 +659,17 @@ void MainWindow::CheckDBusVersion(){
 }
 //Systray
 void MainWindow::raiseWindow(){
-    Qt::WindowFlags eFlags = this->windowFlags();
-    eFlags |= Qt::WindowStaysOnTopHint;
-    this->setWindowFlags(eFlags);
-    this->show();
-    eFlags &= ~Qt::WindowStaysOnTopHint;
-    this->setWindowFlags(eFlags);
-    this->showNormal();
-    this->setWindowState( (windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-    this->raise();
-    this->activateWindow();
+    /*
+     * NOTE: Raising the window does not always work!
+     *
+     * KDE users can disable 'Focus Stealing Prevention'
+     * in the Window Behavior section (system settings)
+     * as a workaround.
+     */
+    show();
+    setWindowState( (windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+    raise();
+    activateWindow();
 }
 void MainWindow::setTrayVisible(bool visible){
     if(visible) trayIcon->show();
@@ -889,10 +929,6 @@ void MainWindow::DialogHandler(){
         preset_dlg->show();
     }
 }
-void MainWindow::OpenLog(){
-    log_dlg->show();
-    log_dlg->updateLog();
-}
 void MainWindow::Reset(){
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this,tr("Reset Configuration"),tr("Are you sure?"),
@@ -968,7 +1004,7 @@ void MainWindow::SavePresetFile(const QString& filename){
 }
 void MainWindow::LoadExternalFile(){
     QString filename = QFileDialog::getOpenFileName(this,tr("Load custom audio.conf"),"","*.conf");
-    if(filename=="")return;
+    if(filename=="")return;    system("jdsp restart");
     const QString& src = filename;
     const QString dest = m_appwrapper->getPath();
     if (QFile::exists(dest))QFile::remove(dest);

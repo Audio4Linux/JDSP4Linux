@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include "config/appconfigwrapper.h"
-#include "phantom/phantomstyle.h"
 
 #include <QTextStream>
 #include <QApplication>
@@ -13,10 +12,8 @@ StyleHelper::StyleHelper(QObject* host){
 void StyleHelper::SetStyle(){
     MainWindow* m_host = qobject_cast<MainWindow*>(m_objhost);
     AppConfigWrapper* m_appconf = m_host->getACWrapper();
-    if(m_appconf->getTheme() == "Phantom")
-        QApplication::setStyle(new PhantomStyle);
-    else
-        QApplication::setStyle(m_appconf->getTheme());
+
+    QApplication::setStyle(m_appconf->getTheme());
 
     QString style_sheet = m_appconf->getStylesheet();
     int theme_mode = m_appconf->getThememode();
