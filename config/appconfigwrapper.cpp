@@ -62,7 +62,7 @@ QString AppConfigWrapper::getStylesheet(){
     return appconf->getString("theme.stylesheet");
 }
 int AppConfigWrapper::getThememode(){
-    return appconf->getInt("theme.mode");
+    return appconf->getInt("theme.mode",true,1);
 }
 void AppConfigWrapper::setThememode(int mode){
     appconf->setValue("theme.mode",QVariant(mode));

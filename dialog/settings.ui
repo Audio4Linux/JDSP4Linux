@@ -119,7 +119,7 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="general">
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -286,7 +286,7 @@
              </item>
              <item>
               <property name="text">
-               <string>Use jdsp.sh</string>
+               <string>Use jdsp.sh (not recommended)</string>
               </property>
              </item>
             </widget>
