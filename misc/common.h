@@ -50,6 +50,11 @@ static QString chopFirstLastChar(QString i){
     return i;
 }
 
+static bool is_integer(float k)
+{
+  return std::floor(k) == k;
+}
+
 template<typename TReal>
 static bool isApproximatelyEqual(TReal a, TReal b, TReal tolerance = std::numeric_limits<TReal>::epsilon())
 {

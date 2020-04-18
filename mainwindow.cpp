@@ -11,6 +11,7 @@
 
 #include <Animation/Animation.h>
 #include <misc/qjsontablemodel.h>
+#include <misc/scrollfilter.h>
 #include <dialog/autoeqselector.h>
 
 #include <QMenu>
@@ -60,6 +61,10 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
         QButtonGroup eq_mode;
         eq_mode.addButton(ui->eq_r_fixed);
         eq_mode.addButton(ui->eq_r_flex);
+
+        refreshTick = new QTimer(this);
+        connect(refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
+        refreshTick->start(1000);
     }
 
     //Allocate pointers and init important variables
@@ -77,6 +82,8 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
         m_appwrapper = new AppConfigWrapper(m_stylehelper);
         m_dbus = new DBusProxy();
         m_eelEditor = new EELEditor(this);
+
+        eelparser = new EELParser();
     }
 
     //Load internal app configuration
@@ -294,8 +301,8 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
             ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
             ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
             ui->tabbar->redrawTabBar();
-            RestartSpectrum();
             ui->eq_widget->setAccentColor(palette().highlight().color());
+            spectrumReloadSignalQueued = true;
         });
 
         connect(m_appwrapper,&AppConfigWrapper::eqChanged,this,[this](){
@@ -325,6 +332,8 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
         ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabbar->redrawTabBar();
 
+        ui->liveprog_name->setMaximumWidth(ui->liveprog_name->width());
+
         QTimer::singleShot(300,this,[this]{
             if(m_appwrapper->getLegacyTabs())
                 InitializeLegacyTabs();
@@ -348,6 +357,14 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::fireTimerSignal(){
+    if(spectrumReloadSignalQueued)
+        RestartSpectrum();
+
+    spectrumReloadSignalQueued = false;
+}
+
 void MainWindow::showEvent( QShowEvent* event ) {
     QWidget::showEvent( event );
 
@@ -411,7 +428,7 @@ void MainWindow::RunDiagnosticChecks(){
     }
     pidfile.close();
     if(system("which jdsp > /dev/null 2>&1") == 1){
-        OverlayMsgProxy *msg = new OverlayMsgProxy(this);
+        OverlfireTimerSignalayMsgProxy *msg = new OverlayMsgProxy(this);
         msg->openError(tr("JDSP not installed"),
                        tr("Unable to find jdsp executable.\n"
                           "Please make sure jdsp is installed and you\n"
@@ -978,7 +995,7 @@ void MainWindow::Restart(){
     system("jdsp restart");
     if(m_appwrapper->getGFix())system("setsid glava -d >/dev/null 2>&1 &");
     if(m_appwrapper->getMuteOnRestart())system("pactl set-sink-mute 0 0");
-    RestartSpectrum();
+    spectrumReloadSignalQueued = true;
 }
 
 //---User preset management
@@ -1379,6 +1396,12 @@ void MainWindow::UpdateUnitLabel(int d,QObject *alt){
             ||obj==ui->bs2b_preset_cb){
         // Ignore these UI elements
     }
+    else if(obj->property("isCustomEELProperty").toBool()){
+        if(obj->property("handleAsInt").toBool())
+            UpdateTooltipLabelUnit(obj,QString::number((int)d/100),alt==nullptr);
+        else
+            UpdateTooltipLabelUnit(obj,QString::number((double)d/100),alt==nullptr);
+    }
     else{
         if(obj==ui->comp_lowthres||obj==ui->comp_highthres||
                 obj==ui->comp_pregain||obj==ui->postgain)
@@ -1565,7 +1588,67 @@ void MainWindow::reloadLiveprog(){
     lockliveprogupdate=false;
 }
 void MainWindow::setLiveprogSelection(QString path){
-    ui->liveprog_name->setText(QFileInfo(path).fileName());
+    eelparser->loadFile(path);
+    ui->liveprog_name->setText(eelparser->getDescription());
+
+    QLayoutItem* item;
+    while ( ( item = ui->liveprog_ui_container->layout()->takeAt( 0 ) ) != NULL )
+    {
+        delete item->widget();
+        delete item;
+    }
+
+    EELProperties props = eelparser->getProperties();
+    for(EELBaseProperty* propbase : props){
+        if(propbase->getType() == EELPropertyType::NumberRange){
+            EELNumberRangeProperty<float>* prop = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
+            bool handleAsInt = is_integer(prop->getStep());
+            QLabel *lbl = new QLabel(this);
+            QAnimatedSlider *sld = new QAnimatedSlider(this);
+            lbl->setText(prop->getDescription());
+
+            sld->setMinimum(prop->getMinimum() * 100);
+            sld->setMaximum(prop->getMaximum() * 100);
+            sld->setValue(prop->getMinimum() * 100);
+            sld->setValueA(prop->getValue() * 100);
+            sld->setOrientation(Qt::Horizontal);
+            sld->setToolTip(QString::number(prop->getValue()));
+            sld->setProperty("isCustomEELProperty",true);
+            sld->setProperty("handleAsInt",handleAsInt);
+
+            sld->setObjectName(prop->getKey());
+            sld->installEventFilter(new ScrollFilter);
+
+            ui->liveprog_ui_container->layout()->addWidget(lbl);
+            ui->liveprog_ui_container->layout()->addWidget(sld);
+
+            connect(sld, SIGNAL(valueChangedA(int)), this, SLOT(UpdateUnitLabel(int)));
+            connect(sld, &QAbstractSlider::sliderReleased, [this,sld,prop]{
+                float val = sld->valueA() / 100.f;
+                prop->setValue(val);
+                eelparser->manipulateProperty(prop);
+                ui->liveprog_reset->setEnabled(eelparser->canLoadBackup());
+            });
+
+        }
+    }
+
+    if(props.isEmpty()){
+        QLabel *lbl = new QLabel(this);
+        lbl->setText("No customizable parameters");
+        ui->liveprog_ui_container->layout()->addWidget(lbl);
+        ui->liveprog_reset->hide();
+    }
+    else{
+        ui->liveprog_reset->show();
+        ui->liveprog_reset->setEnabled(eelparser->canLoadBackup());
+    }
+}
+
+void MainWindow::resetLiveprogParams(){
+    if(!eelparser->loadBackup())
+        QMessageBox::warning(this,"Error","Cannot load backup\nThe backup file doesn't exist anymore.");
+    setLiveprogSelection(eelparser->getPath());
 }
 
 //---Helper
@@ -1913,6 +1996,7 @@ void MainWindow::ConnectActions(){
         m_eelEditor->openNewScript(activeliveprog);
     });
     connect(m_eelEditor,&EELEditor::scriptSaved,this,&MainWindow::reloadLiveprog);
+    connect(ui->liveprog_reset,&QAbstractButton::clicked,this,&MainWindow::resetLiveprogParams);
 }
 
 void MainWindow::updateEQMode(){

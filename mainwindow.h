@@ -19,6 +19,7 @@
 #include <QSystemTrayIcon>
 #include <QCloseEvent>
 
+#include <misc/eelparser.h>
 #include <misc/qjsontablemodel.h>
 #include <eeleditor.h>
 
@@ -111,12 +112,15 @@ private slots:
     void restoreGraphicEQView();
     void saveGraphicEQView();
     void updateEQMode();
+    void fireTimerSignal();
+    void resetLiveprogParams();
 private:
     ConfigContainer* conf;
     AppConfigWrapper* m_appwrapper;
     StyleHelper* m_stylehelper;
     DBusProxy* m_dbus;
     QString m_exepath;
+    QTimer* refreshTick;
 
     bool m_startupInTraySwitch;
     QSystemTrayIcon *trayIcon;
@@ -127,6 +131,7 @@ private:
     QMenu *tray_convMenu;
 
     QAction *spectrum;
+    EELParser *eelparser;
 
     OverlayMsgProxy *msg_notrunning;
     OverlayMsgProxy *msg_launchfail;
@@ -140,6 +145,7 @@ private:
     Spectrograph* m_spectrograph;
     AudioStreamEngine* m_audioengine;
 
+    bool spectrumReloadSignalQueued = false;
     bool m_irsNeedUpdate = false;
     bool settingsdlg_enabled=true;
     bool presetdlg_enabled=true;

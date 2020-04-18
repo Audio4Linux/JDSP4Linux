@@ -130,7 +130,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>0</number>
+            <number>7</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2120,11 +2120,11 @@
                 </layout>
                </item>
                <item>
-                <widget class="QScrollArea" name="scrollArea">
+                <widget class="QScrollArea" name="liveprog_scrollarea">
                  <property name="widgetResizable">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                 <widget class="QWidget" name="liveprog_scrollareacontent">
                   <property name="geometry">
                    <rect>
                     <x>0</x>
@@ -2134,11 +2134,38 @@
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_24">
+                   <property name="sizeConstraint">
+                    <enum>QLayout::SetDefaultConstraint</enum>
+                   </property>
+                   <property name="leftMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>6</number>
+                   </property>
                    <item>
-                    <widget class="QLabel" name="liveprog_name">
+                    <widget class="ScrollText" name="liveprog_name">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>22</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
-                       <pointsize>10</pointsize>
+                       <family>Noto Sans</family>
+                       <pointsize>11</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                       <underline>false</underline>
+                       <strikeout>false</strikeout>
                       </font>
                      </property>
                      <property name="text">
@@ -2147,38 +2174,65 @@
                     </widget>
                    </item>
                    <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_18">
+                    <layout class="QVBoxLayout" name="verticalLayout_27">
+                     <property name="leftMargin">
+                      <number>5</number>
+                     </property>
                      <property name="topMargin">
                       <number>0</number>
                      </property>
+                     <property name="rightMargin">
+                      <number>5</number>
+                     </property>
                      <item>
-                      <widget class="QCheckBox" name="liveprog_enable">
-                       <property name="text">
-                        <string>Enable</string>
+                      <layout class="QHBoxLayout" name="horizontalLayout_18">
+                       <property name="topMargin">
+                        <number>0</number>
                        </property>
-                      </widget>
+                       <item>
+                        <widget class="QCheckBox" name="liveprog_enable">
+                         <property name="text">
+                          <string>Enable</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QToolButton" name="liveprog_reset">
+                         <property name="text">
+                          <string>Reset</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QToolButton" name="liveprog_editscript">
+                         <property name="text">
+                          <string>Edit script</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </item>
                      <item>
-                      <widget class="QToolButton" name="liveprog_editscript">
-                       <property name="text">
-                        <string>Edit script</string>
+                      <layout class="QVBoxLayout" name="liveprog_ui_container">
+                       <property name="topMargin">
+                        <number>0</number>
                        </property>
-                      </widget>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_9">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
                      </item>
                     </layout>
-                   </item>
-                   <item>
-                    <spacer name="verticalSpacer_9">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                    </spacer>
                    </item>
                   </layout>
                  </widget>
@@ -2408,6 +2462,11 @@
    <header>GraphicEQFilterGUI.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>ScrollText</class>
+   <extends>QLabel</extends>
+   <header>dialog/WidgetMarqueeLabel.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>tabhost_legacy</tabstop>
@@ -2478,7 +2537,7 @@
   <tabstop>liveprog_reload</tabstop>
   <tabstop>liveprog_select</tabstop>
   <tabstop>liveprog_files</tabstop>
-  <tabstop>scrollArea</tabstop>
+  <tabstop>liveprog_scrollarea</tabstop>
   <tabstop>ddcTable</tabstop>
  </tabstops>
  <resources>

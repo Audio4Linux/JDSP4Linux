@@ -56,6 +56,7 @@ SOURCES += main.cpp \
     crashhandler/airbag.c \
     dbus/clientproxy.cpp \
     dbus/serveradaptor.cpp \
+    dialog/WidgetMarqueeLabel.cpp \
     dialog/androidimporterdlg.cpp \
     dialog/animatedjdspicon.cpp \
     dialog/autoeqselector.cpp \
@@ -76,6 +77,7 @@ SOURCES += main.cpp \
     misc/autoeqclient.cpp \
     misc/autostartmanager.cpp \
     misc/biquad.cpp \
+    misc/eelparser.cpp \
     misc/loghelper.cpp \
     misc/overlaymsgproxy.cpp \
     misc/presetprovider.cpp \
@@ -128,6 +130,7 @@ HEADERS += \
     crashhandler/stacktrace.h \
     dbus/clientproxy.h \
     dbus/serveradaptor.h \
+    dialog/WidgetMarqueeLabel.h \
     dialog/androidimporterdlg.h \
     dialog/animatedjdspicon.h \
     dialog/autoeqselector.h \
@@ -150,6 +153,7 @@ HEADERS += \
     misc/autostartmanager.h \
     misc/biquad.h \
     misc/common.h \
+    misc/eelparser.h \
     misc/eventfilter.h \
     misc/findbinary.h \
     misc/initializableqmap.h \
@@ -158,6 +162,7 @@ HEADERS += \
     misc/overlaymsgproxy.h \
     misc/presetprovider.h \
     misc/qjsontablemodel.h \
+    misc/scrollfilter.h \
     misc/stylehelper.h \
     misc/versioncontainer.h
 
