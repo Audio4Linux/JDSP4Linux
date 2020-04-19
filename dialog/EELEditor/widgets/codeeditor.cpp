@@ -11,7 +11,7 @@ CodeEditor::CodeEditor(QWidget* parent) :
 {
     refreshTick = new QTimer(this);
     connect(refreshTick, &QTimer::timeout, this, &CodeEditor::fireRefreshSignal);
-    refreshTick->start(1000);
+
     connect(this,&QCodeEditor::cursorPositionChanged,[=]{refreshCursorSignalQueued = true;});
     connect(document(),&QTextDocument::contentsChanged,this,[=]{refreshSignalQueued = true;});
 }
@@ -23,6 +23,13 @@ void CodeEditor::fireRefreshSignal(){
         emit cursorRefreshed();
     refreshSignalQueued = false;
     refreshCursorSignalQueued = false;
+
+    if(cont != nullptr)
+        cont->code = toPlainText();
+}
+
+void CodeEditor::showEvent(QShowEvent *){
+        refreshTick->start(400);
 }
 
 void CodeEditor::goToLine(int line){
@@ -114,16 +121,9 @@ QList<AnnotationDefinition> CodeEditor::findAnnotations(){
     return map;
 }
 
-void CodeEditor::loadCodeFromFile(QString path)
-{
-    QFile fl(path);
-    if (!fl.open(QIODevice::ReadOnly))
-        return;
-    setPlainText(fl.readAll());
-}
-
 void CodeEditor::loadCode(CodeContainer* code)
 {
+    cont = code;
     setPlainText(code->code);
 }
 

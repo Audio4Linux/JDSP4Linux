@@ -16,16 +16,18 @@ public:
     QList<FunctionDefinition> findFunctions();
     QList<AnnotationDefinition> findAnnotations();
     void loadStyle(QString path);
-    void loadCodeFromFile(QString path);
     void loadCode(CodeContainer *code);
     int getCurrentLine();
     QString textUnderCursor() const;
 signals:
     void backendRefreshRequired();
     void cursorRefreshed();
+protected:
+    void showEvent(QShowEvent *);
 private slots:
     void fireRefreshSignal();
 private:
+    CodeContainer* cont;
     QTimer* refreshTick;
     bool refreshSignalQueued = false;
     bool refreshCursorSignalQueued = false;

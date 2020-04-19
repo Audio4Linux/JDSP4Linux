@@ -30,7 +30,7 @@ int ConfigContainer::getInt(const QString& key,bool setToDefaultIfMissing, int d
     if(!map.contains(key)){
         LogHelper::debug(QString("Requested key '%1' (int) not found").arg(key));
         if(setToDefaultIfMissing)map[key] = defaults;
-        return 0;
+        return defaults;
     }
     return getVariant(key).toInt();
 }
@@ -46,7 +46,7 @@ bool ConfigContainer::getBool(const QString& key, bool setToDefaultIfMissing, bo
     if(!map.contains(key)){
         LogHelper::debug(QString("Requested key '%1' (bool) not found").arg(key));
         if(setToDefaultIfMissing)map[key] = defaults;
-        return false;
+        return defaults;
     }
     return getVariant(key).toBool();
 }

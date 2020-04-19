@@ -17,6 +17,7 @@
         <name>in</name>
         <name>do</name>
         <name>while</name>
+        <name>loop</name>
         <name>until</name>
         <name>break</name>
         <name>continue</name>
@@ -54,16 +55,52 @@
     </section>
     <section name="Function">
         <!--DSP-->
-        <name>sum</name>
-        <name>average</name>
-        <name>polynomial</name>
-        <name>polynomial_i</name>
+        <name>stftCheckMemoryRequirement</name>
+        <name>stftInit</name>
+        <name>stftForward</name>
+        <name>stftBackward</name>
+        <name>fft</name>
+        <name>ifft</name>
         <name>fft_real</name>
         <name>ifft_real</name>
-        <name>fft_cleanup</name>
-        <name>c_abs</name>
-        <name>c_arg</name>
+        <name>fft_permute</name>
+        <name>fft_ipermute</name>
+        <name>convolve_c</name>
+        <name>fractionalDelayLineInit</name>
+        <name>fractionalDelayLineSetDelay</name>
+        <name>fractionalDelayLineClear</name>
+        <name>fractionalDelayLineProcess</name>
+        <name>FIRInit</name>
+        <name>FIRProcess</name>
+        <name>IIRBandSplitterInit</name>
+        <name>IIRBandSplitterClearState</name>
+        <name>IIRBandSplitterProcess</name>
+        <!--LINEAR-ALGEBRA-->
+        <name>det</name>
+        <name>rank</name>
+        <name>transpose</name>
+        <name>inv</name>
+        <name>pinv</name>
+        <name>mldivide</name>
+        <name>mrdivide</name>
+        <name>linprog</name>
+        <name>lsqlin</name>
+        <name>quadprog</name>
+        <!--STRING-->
+        <name>resetStringContainers</name>
+        <name>importFLTFromStr</name>
+        <name>strlen</name>
+        <name>strcmp</name>
+        <name>stricmp</name>
+        <name>strncmp</name>
+        <name>strnicmp</name>
+        <name>printf</name>
+        <name>sprintf</name>
+        <name>match</name>
+        <name>matchi</name>
         <!--MATH-->
+        <name>min</name>
+        <name>max</name>
         <name>atan2</name>
         <name>tan</name>
         <name>cos</name>
@@ -75,45 +112,39 @@
         <name>log</name>
         <name>log10</name>
         <name>exp</name>
-        <name>ldexp</name>
+        <name>sqr</name>
         <name>asin</name>
         <name>acos</name>
         <name>atan</name>
-        <!--SYSTEM-->
-        <name>getms</name>
-        <name>getus</name>
-        <name>sleep</name>
-        <name>system</name>
-        <!--INDEXABLE-OBJECTS-->
-        <name>copy</name>
-        <name>index</name>
-        <name>key</name>
-        <name>tryindex</name>
+        <name>sqrt</name>
+        <name>sign</name>
+        <name>round</name>
+        <name>pow</name>
+        <name>rand</name>
+        <name>invsqrt</name>
+        <name>hypot</name>
+        <name>hypotFast</name>
+        <name>expint</name>
+        <name>expintFast</name>
+        <name>invsqrtFast</name>
+        <!--MEMORY-->
+        <name>__memtop</name>
+        <name>freembuf</name>
+        <name>memcpy</name>
+        <name>memset</name>
+        <name>stack_push</name>
+        <name>stack_pop</name>
+        <name>stack_peek</name>
+        <name>stack_exch</name>
     </section>
     <section name="Procedure">
-        <!--DSP-->
-        <name>add_polynomial</name>
-        <name>add_polynomial_i</name>
-        <name>c_set</name>
-        <name>c_add</name>
-        <name>c_set_polar</name>
-        <name>c_add_polar</name>
-        <name>c_add_i</name>
-        <name>c_add_polar_i</name>
-        <name>add_i</name>
-        <name>add_polar_i</name>
-        <!--INDEXABLE-OBJECTS-->
-        <name>insert</name>
-        <name>delete</name>
     </section>
     <section name="Constant">
         <name>$PI</name>
         <name>$E</name>
-
-        <name>$ARCH</name>
-        <name>$SOEXT</name>
-        <name>$EXENAME</name>
-        <name>$EXEPATH</name>
+        <name>$PHI</name>
+        <name>$EPS</name>
+        <name>srate</name>
     </section>
     <section name="PrimitiveType">
         <name>class</name>

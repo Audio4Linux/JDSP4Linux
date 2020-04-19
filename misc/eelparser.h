@@ -19,6 +19,7 @@ public:
     bool saveFile();
     bool loadBackup();
     bool saveBackup();
+    bool deleteBackup();
     bool backupExists();
     bool canLoadBackup();
     bool isFileLoaded();

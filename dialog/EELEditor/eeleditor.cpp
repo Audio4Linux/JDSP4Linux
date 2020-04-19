@@ -49,14 +49,18 @@ EELEditor::EELEditor(QWidget *parent)
         ui->projectView->closeCurrentFile();
     });
     connect(ui->actionSave,&QAction::triggered,[this]{
+        ui->projectView->getCurrentFile()->code = ui->codeEdit->toPlainText();
         ui->projectView->getCurrentFile()->save();
         emit scriptSaved(ui->projectView->getCurrentFile()->path);
     });
-    connect(ui->projectView,&ProjectView::currentFileUpdated,[this](CodeContainer* code){
+    connect(ui->projectView,&ProjectView::currentFileUpdated,[this](CodeContainer* prev, CodeContainer* code){
         if(code == nullptr)
             ui->codeEdit->setText("//No code is loaded. Please create or open a file first.");
-        else
+        else{
+            if(prev != nullptr)
+
             ui->codeEdit->loadCode(code);
+        }
         ui->codeEdit->setEnabled(code != nullptr);
     });
 

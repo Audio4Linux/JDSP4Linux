@@ -86,6 +86,7 @@ public slots:
     void raiseWindow();
     void ApplyConfig(bool restart=true);
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    int extractDefaultEELScripts(bool allowOverride);
 private slots:
     void DisableFX();
     void OnUpdate(bool = true);
@@ -114,6 +115,7 @@ private slots:
     void updateEQMode();
     void fireTimerSignal();
     void resetLiveprogParams();
+    void updateFromEELEditor(QString path);
 private:
     ConfigContainer* conf;
     AppConfigWrapper* m_appwrapper;

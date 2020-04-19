@@ -16,7 +16,9 @@ public:
 private slots:
     void updatedCurrentFile(QListWidgetItem* item);
 signals:
-    void currentFileUpdated(CodeContainer*);
+    void currentFileUpdated(CodeContainer* prev,CodeContainer* cur);
+private:
+    CodeContainer* previousCont;
 };
 
 #endif // PROJECTVIEW_H

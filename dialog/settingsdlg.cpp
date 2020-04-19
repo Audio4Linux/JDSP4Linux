@@ -216,6 +216,20 @@ SettingsDlg::SettingsDlg(MainWindow* mainwin,QWidget *parent) :
     connect(ui->saveliveprogpath, &QPushButton::clicked, this, [this]{
         appconf->setLiveprogPath(ui->saveliveprogpath->text());
     });
+    connect(ui->liveprog_autoextract,&QCheckBox::clicked,[this](){
+        appconf->setLiveprogAutoExtract(ui->liveprog_autoextract->isChecked());
+    });
+    connect(ui->liveprog_extractNow, &QPushButton::clicked, this, [this,mainwin]{
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this,tr("Question"),tr("Do you want to override existing EEL scripts (if any)?"),
+                                      QMessageBox::Yes|QMessageBox::No);
+
+        int count = mainwin->extractDefaultEELScripts(reply == QMessageBox::Yes);
+        if(count > 0)
+            QMessageBox::information(this,"Extract scripts",QString("%1 script(s) have been restored").arg(count));
+        else
+            QMessageBox::information(this,"Extract scripts",QString("No scripts have been extracted"));
+    });
 
     /*
      * Connect all signals for Devices
@@ -403,6 +417,8 @@ void SettingsDlg::refreshAll(){
     ui->muteonrestart->setChecked(appconf->getMuteOnRestart());
     ui->glavafix->setChecked(appconf->getGFix());
     ui->reloadmethod->setCurrentIndex((int)appconf->getReloadMethod());
+
+    ui->liveprog_autoextract->setChecked(appconf->getLiveprogAutoExtract());
 
     updateInputSinks();
 

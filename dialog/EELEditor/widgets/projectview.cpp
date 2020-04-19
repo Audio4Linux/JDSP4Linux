@@ -41,11 +41,12 @@ CodeContainer* ProjectView::getCurrentFile(){
 
 void ProjectView::updatedCurrentFile(QListWidgetItem* item){
     if(item == nullptr) {
-        emit currentFileUpdated(nullptr);
+        emit currentFileUpdated(previousCont,nullptr);
         return;
     }
-    auto container = item->data(Qt::UserRole).value<CodeContainer*>();
-    emit currentFileUpdated(container);
+    auto container = item->data(Qt::UserRole).value<CodeContainer*>(); 
+    emit currentFileUpdated(previousCont,container);
+    previousCont = container;
 }
 
 void ProjectView::closeCurrentFile(){

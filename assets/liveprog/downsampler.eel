@@ -1,0 +1,25 @@
+desc: Downsampler
+//Just playing around with eel scripts at this point, I don't know why you would want to downsample/decimate your phone's audio output
+
+@init
+bits=16;
+rate=0.5;
+
+out=0;
+cnt=0;
+m=1<<(bits-1);
+
+function decimate(i)(
+   cnt+=rate;
+   cnt>=1 ? (
+      cnt-=1;
+      out=floor(i*m)/m;
+   );
+   out;
+);
+
+@sample
+tmp0 = decimate(spl0);
+tmp1 = decimate(spl1);
+spl0=tmp0;
+spl1=tmp1;

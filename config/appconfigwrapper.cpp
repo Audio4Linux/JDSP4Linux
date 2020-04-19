@@ -40,6 +40,13 @@ void AppConfigWrapper::setGFix(bool f){
 bool AppConfigWrapper::getGFix(){
     return appconf->getBool("apply.fixglava");
 }
+void AppConfigWrapper::setLiveprogAutoExtract(bool f){
+    appconf->setValue("liveprog.default.autoextract",QVariant(f));
+    saveAppConfig();
+}
+bool AppConfigWrapper::getLiveprogAutoExtract(){
+    return appconf->getBool("liveprog.default.autoextract",true,true);
+}
 void AppConfigWrapper::setPath(const QString& npath){
     appconf->setValue("io.configpath",QVariant(QString("\"%1\"").arg(npath)));
     saveAppConfig();

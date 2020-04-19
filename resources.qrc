@@ -24,5 +24,19 @@
         <file>ddc/DDCData.json</file>
         <file>icons/refresh.svg</file>
         <file>icons/folder.svg</file>
+        <file>assets/liveprog/3bandSplitting.eel</file>
+        <file>assets/liveprog/autopeakfilter.eel</file>
+        <file>assets/liveprog/dc_remove.eel</file>
+        <file>assets/liveprog/downsampler.eel</file>
+        <file>assets/liveprog/firFilter.eel</file>
+        <file>assets/liveprog/firlsProc.eel</file>
+        <file>assets/liveprog/fractionalDelayline.eel</file>
+        <file>assets/liveprog/gainControl.eel</file>
+        <file>assets/liveprog/hadamVerb.eel</file>
+        <file>assets/liveprog/phaseshifter.eel</file>
+        <file>assets/liveprog/stereowide.eel</file>
+        <file>assets/liveprog/stft-filter.eel</file>
+        <file>assets/liveprog/stftCentreCut.eel</file>
+        <file>assets/liveprog/strange-reverb.eel</file>
     </qresource>
 </RCC>

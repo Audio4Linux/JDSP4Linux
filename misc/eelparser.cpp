@@ -70,6 +70,17 @@ bool EELParser::saveBackup()
     return false;
 }
 
+bool EELParser::deleteBackup()
+{
+    QString absolutePath = QFileInfo(container.path).absoluteDir().absolutePath();
+    QString fileName = QFileInfo(container.path).fileName();
+    QFile backup(absolutePath + "/." + fileName + ".bak");
+    if(!backup.exists())
+        return false;
+    backup.remove();
+    return true;
+}
+
 bool EELParser::backupExists()
 {
     if(!isFileLoaded())
@@ -122,7 +133,7 @@ QString EELParser::getDescription()
 
 EELProperties EELParser::getProperties(){
     EELProperties props;
-    QRegularExpression descRe(R"((?<var>\w+):(?<cur>-?\d+\.?\d*)<(?<min>-?\d+\.?\d*),(?<max>-?\d+\.?\d*),?(?<step>-?\d+\.?\d*)?>(?<desc>[\s\S][^\n]*))");
+    QRegularExpression descRe(R"((?<var>\w+):(?<cur>-?\d+\.?\d*)?<(?<min>-?\d+\.?\d*),(?<max>-?\d+\.?\d*),?(?<step>-?\d+\.?\d*)?>(?<desc>[\s\S][^\n]*))");
     for(auto line : container.code.split("\n")){
         auto matchIterator = descRe.globalMatch(line);
         if(matchIterator.hasNext()){

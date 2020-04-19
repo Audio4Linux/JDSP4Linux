@@ -1,7 +1,6 @@
 #ifndef SCROLLFILTER_H
 #define SCROLLFILTER_H
 
-#include <QCloseEvent>
 #include <QEvent>
 #include <QObject>
 

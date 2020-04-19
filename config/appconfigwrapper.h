@@ -98,6 +98,8 @@ public:
     QString getLiveprogPath();
     void setLiveprogPath(const QString &npath);
     QString getGraphicEQConfigFilePath();
+    bool getLiveprogAutoExtract();
+    void setLiveprogAutoExtract(bool f);
 signals:
     void spectrumChanged();
     void spectrumReloadRequired();

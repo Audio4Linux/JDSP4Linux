@@ -51,6 +51,8 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
         ui->eq_dyn_widget->setSidebarHidden(true);
         ui->eq_dyn_widget->set15BandFreeMode(true);
 
+        ui->liveprog_reset->hide();
+
         ConfigContainer pref;
         pref.setValue("scrollX",160);
         pref.setValue("scrollY",311);
@@ -340,10 +342,17 @@ MainWindow::MainWindow(QString exepath, bool statupInTray, bool allowMultipleIns
         });
     }
 
+    //Extract default EEL files if missing
+    {
+        if(m_appwrapper->getLiveprogAutoExtract())
+            extractDefaultEELScripts(false);
+    }
+
     //Handle first launch and diagnostic checks
     {
-        if(!m_appwrapper->getIntroShown())
+        if(!m_appwrapper->getIntroShown()){
             LaunchFirstRunSetup();
+        }
         else
             QTimer::singleShot(300,this,[this]{
                 RunDiagnosticChecks();
@@ -371,6 +380,26 @@ void MainWindow::showEvent( QShowEvent* event ) {
     if(m_appwrapper->getLegacyTabs())
         InitializeLegacyTabs();
 }
+
+int MainWindow::extractDefaultEELScripts(bool allowOverride){
+    QDirIterator it(":/assets/liveprog", QDirIterator::NoIteratorFlags);
+    int i = 0;
+    while (it.hasNext()) {
+        QFile eel(it.next());
+        QString name = QFileInfo(eel).fileName();
+        QString newpath = m_appwrapper->getLiveprogPath() + "/" + name;
+
+        if(QFile(newpath).exists() && !allowOverride)
+            continue;
+
+        eel.copy(newpath);
+        i++;
+    }
+    if(i > 0)
+        LogHelper::debug(QString("%1 default eel files extracted").arg(i));
+    return i;
+}
+
 void MainWindow::InitializeLegacyTabs(){
     if(!ui->frame->isVisible())
         return;
@@ -1624,6 +1653,7 @@ void MainWindow::setLiveprogSelection(QString path){
 
             connect(sld, SIGNAL(valueChangedA(int)), this, SLOT(UpdateUnitLabel(int)));
             connect(sld, &QAbstractSlider::sliderReleased, [this,sld,prop]{
+                //TODO: Add DBus hook to reload the EEL VM
                 float val = sld->valueA() / 100.f;
                 prop->setValue(val);
                 eelparser->manipulateProperty(prop);
@@ -1649,6 +1679,19 @@ void MainWindow::resetLiveprogParams(){
     if(!eelparser->loadBackup())
         QMessageBox::warning(this,"Error","Cannot load backup\nThe backup file doesn't exist anymore.");
     setLiveprogSelection(eelparser->getPath());
+}
+
+void MainWindow::updateFromEELEditor(QString path){
+    if(eelparser->getPath() == path){
+        eelparser->deleteBackup();
+        setLiveprogSelection(eelparser->getPath());
+    }
+    else{
+        EELParser parser;
+        parser.loadFile(path);
+        parser.deleteBackup();
+        parser.deleteLater();
+    }
 }
 
 //---Helper
@@ -1995,7 +2038,7 @@ void MainWindow::ConnectActions(){
         m_eelEditor->show();
         m_eelEditor->openNewScript(activeliveprog);
     });
-    connect(m_eelEditor,&EELEditor::scriptSaved,this,&MainWindow::reloadLiveprog);
+    connect(m_eelEditor,&EELEditor::scriptSaved,this,&MainWindow::updateFromEELEditor);
     connect(ui->liveprog_reset,&QAbstractButton::clicked,this,&MainWindow::resetLiveprogParams);
 }
 
