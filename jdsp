@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 #Noah Bliss
 
+# Workaround to fix JDSP4Linux on other than
+# English languages
+# ------------------------------------------
+# GST cannot find entry 'device' on other
+# than English languages
+
+export LC_ALL=C
+
 # quick mod of this script to test my jdsp plugin
 # if someone reads this: feel free to send a PR with an optimized script for jdsp4linux (+compatibility for V4L)
 # ~thepbone
