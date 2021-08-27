@@ -244,8 +244,9 @@ void LiquidEqualizerWidget::paintEvent(QPaintEvent *event)
 	mHeight = this->height() + 1;
 
 	QPainterPath frequencyResponse;
-    int          ComputeEqResponse(mFreq.toStdVector().data(), mLevels, 1, RESOLUTION, dispFreq, response);
 	float        x, y;
+
+    ComputeEqResponse(mFreq.toStdVector().data(), mLevels, 1, RESOLUTION, dispFreq, response);
 
 	for (int i = 0; i < RESOLUTION; i++)
 	{
