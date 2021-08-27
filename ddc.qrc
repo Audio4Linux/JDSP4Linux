@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>ddc/ViPERDDC.db</file>
-    </qresource>
-</RCC>

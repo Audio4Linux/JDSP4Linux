@@ -1,0 +1,1 @@
+uncrustify -c uncrustify.cfg --replace --no-backup src/*.cpp src/*.h src/interface/event/* src/interface/dialog/*.cpp src/interface/dialog/*.h src/interface/fragment/*.cpp src/interface/fragment/*.h src/interface/model/*.cpp src/interface/model/*.h src/config/*.* src/data/*.* src/utils/*.* src/utils/dbus/*.cpp src/utils/dbus/*.h src/interface/*.h src/interface/*.cpp

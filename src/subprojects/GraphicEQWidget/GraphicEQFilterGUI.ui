@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GraphicEQFilterGUI</class>
+ <widget class="QWidget" name="GraphicEQFilterGUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>495</width>
+    <height>238</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true"/>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,0">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="GraphicEQFilterGUIView" name="graphicsView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="renderHints">
+      <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+     </property>
+     <property name="dragMode">
+      <enum>QGraphicsView::RubberBandDrag</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="sidebar" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>145</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="chk_enable">
+        <property name="text">
+         <string>Enable Graphic EQ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Highlight">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>51</red>
+              <green>153</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Highlight">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>122</red>
+              <green>189</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Highlight">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>51</red>
+              <green>153</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="horizontalScrollMode">
+         <enum>QAbstractItemView::ScrollPerPixel</enum>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="columnCount">
+         <number>2</number>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>10</number>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>10</number>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderMinimumSectionSize">
+         <number>23</number>
+        </attribute>
+        <attribute name="verticalHeaderDefaultSectionSize">
+         <number>23</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Freq.</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Gain</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="topMargin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="autoeq">
+          <property name="text">
+           <string>AutoEQ database...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>4</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QRadioButton" name="radioButton15">
+          <property name="text">
+           <string>15-band</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton31">
+          <property name="text">
+           <string>31-band</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButtonVar">
+          <property name="text">
+           <string>variable</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QToolBar" name="toolBar"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+  <action name="actionImport">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/document-open.ico</normaloff>:/icons/document-open.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/document-save.ico</normaloff>:/icons/document-save.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionInvertResponse">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/invert_response.ico</normaloff>:/icons/invert_response.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Invert response</string>
+   </property>
+  </action>
+  <action name="actionNormalizeResponse">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/normalize_response.ico</normaloff>:/icons/normalize_response.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Normalize response</string>
+   </property>
+  </action>
+  <action name="actionResetResponse">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/reset_response.ico</normaloff>:/icons/reset_response.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Reset response</string>
+   </property>
+  </action>
+  <action name="actionImport_AutoEQ_result">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/document-open.ico</normaloff>:/icons/document-open.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import AutoEQ result</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicEQFilterGUIView</class>
+   <extends>QGraphicsView</extends>
+   <header>GraphicEQFilterGUIView.h</header>
+   <slots>
+    <signal>itemMoved()</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="GraphicEQWidget.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>updateItemList()</slot>
+  <slot>on_actionImport_AutoEQ_result()</slot>
+ </slots>
+</ui>
