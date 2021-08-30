@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="FieldGetter" severity="warning" />
+    <issue id="IconExpectedSize" severity="warning" />
+    <issue id="LintError" severity="ignore" />
+    <issue id="TypographyQuotes" severity="warning" />
+    <issue id="UsesMinSdkAttributes" severity="ignore" />
+</lint>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="equalizer_filtertype">
+    <item>Минимально-фазовый</item>
+    <item>Линейно-фазовый</item>
+  </string-array>
+  <string-array name="equalizer_dialog_spinterpolation">
+    <item>Кубический сплайн Эрмита</item>
+    <item>Модифицированный сплайн Акимы</item>
+  </string-array>
+  <string-array name="stereowide_modes">
+    <item>Минимум</item>
+    <item>Низкий</item>
+    <item>Средний</item>
+    <item>Высокий</item>
+    <item>Максимум</item>
+    <item>Сумасшедший</item>
+  </string-array>
+  <string-array name="bs2b_modes">
+    <item>Бинауральный (слабый)</item>
+    <item>Бинауральный (сильный)</item>
+    <item>Вне головы</item>
+    <item>Объёмный 1</item>
+    <item>Объёмный 2</item>
+    <item>Объёмный 3 (Joe0Bloggs)</item>
+  </string-array>
+  <string-array name="headphone_preset">
+    <item>Маленькая комната</item>
+    <item>Средняя комната</item>
+    <item>Большая комната</item>
+    <item>Пластинчатая (сильная)</item>
+    <item>Пластинчатая (слабая)</item>
+    <item>Длинная 1</item>
+    <item>Длинная 2</item>
+  </string-array>
+</resources>

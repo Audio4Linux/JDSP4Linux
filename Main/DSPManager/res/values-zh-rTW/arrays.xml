@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="headphone_preset">
+    <item>小房間</item>
+    <item>中房間</item>
+    <item>大房間</item>
+    <item>金屬板房1</item>
+    <item>金屬板房2</item>
+    <item>超長混響1</item>
+    <item>超長混響2</item>
+  </string-array>
+  <string-array name="compression_modes">
+    <item>輕微</item>
+    <item>中等</item>
+  </string-array>
+  <string-array name="bassboost_modes">
+    <item>開啟</item>
+    <item>一點點</item>
+    <item>輕微</item>
+    <item>中等</item>
+    <item>超強</item>
+    <item>極端</item>
+  </string-array>
+  <string-array name="equalizer_filtertype">
+    <item>最小相位</item>
+    <item>線性相位</item>
+  </string-array>
+  <string-array name="equalizer_dialog_spinterpolation">
+    <item>分段三次Hermite插值</item>
+    <item>改進Hiroshi Akima插值</item>
+  </string-array>
+<string-array name="stereowide_modes">
+    <item>超窄</item>
+    <item>窄</item>
+    <item>不變</item>
+    <item>寬</item>
+    <item>超寬</item>
+  </string-array>
+  <string-array name="bs2b_modes">
+    <item>BS2B 弱</item>
+    <item>BS2B 強</item>
+    <item>頭外聲源</item>
+    <item>環繞 1</item>
+    <item>環繞 2</item>
+    <item>Joe0Bloggs真實環繞</item>
+  </string-array>
+  <string-array name="convolution_mode">
+    <item>不修改</item>
+    <item>移除低能量信號</item>
+    <item>最小相位變換並去除低能量信號</item>
+  </string-array>
+</resources>

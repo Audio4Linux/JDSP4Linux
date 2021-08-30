@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="headphone_preset">
+    <item>Маленькая комната</item>
+    <item>Средняя комната</item>
+    <item>Большая комната</item>
+    <item>Пластинчатая 1</item>
+    <item>Пластинчатая 2</item>
+    <item>Длинная 1</item>
+    <item>Длинная 2</item>
+  </string-array>
+  <string-array name="bassboost_modes">
+    <item>Минимум</item>
+    <item>Низкий</item>
+    <item>Средний</item>
+    <item>Высокий</item>
+    <item>Экстрим</item>
+    <item>Максимум</item>
+  </string-array>
+  <string-array name="bassboost_filtertype">
+    <item>Линейно-фазовый 2048-го порядка</item>
+    <item>Линейно-фазовый 4096-го порядка</item>
+  </string-array>
+  <string-array name="equalizer_filtertype">
+    <item>Минимально-фазовый</item>
+    <item>Линейно-фазовый</item>
+  </string-array>
+  <string-array name="quality_level">
+    <item>Усечён до 40&#65130;</item>
+    <item>Усечён до 50&#65130;</item>
+    <item>Усечён до 60&#65130;</item>
+    <item>Усечён до 70&#65130;</item>
+    <item>Усечён до 80&#65130;</item>
+    <item>Полный</item>
+  </string-array>
+  <string-array name="stereowide_modes">
+    <item>Минимум</item>
+    <item>Низкий</item>
+    <item>Средний</item>
+    <item>Высокий</item>
+    <item>Максимум</item>
+  </string-array>
+  <string-array name="bs2b_modes">
+    <item>Минимум</item>
+    <item>Низкий</item>
+    <item>Средний</item>
+  </string-array>
+</resources>
