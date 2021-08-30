@@ -1,3 +1,5 @@
+#include <AudioManager.h>
+
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
@@ -60,6 +62,11 @@ MainWindow::MainWindow(QString  exepath,
 		Log::clear();
 		Log::information("UI launched...");
 	}
+
+    // Prepare audio subsystem
+    {
+        audioManager = new AudioManager();
+    }
 
 	// Prepare base UI
 	{
@@ -833,71 +840,71 @@ void MainWindow::loadConfig()
 {
 	lockapply = true;
 
-	trayIcon->changedDisableFx(!DspConfig::instance().get<bool>("enable"));
-	ui->disableFX->setChecked(!DspConfig::instance().get<bool>("enable"));
+    trayIcon->changedDisableFx(!DspConfig::instance().get<bool>(DspConfig::master_enable));
+    ui->disableFX->setChecked(!DspConfig::instance().get<bool>(DspConfig::master_enable));
 
-	ui->analog->setChecked(DspConfig::instance().get<bool>("analogmodelling_enable"));
-	ui->analog_tubedrive->setValueA(DspConfig::instance().get<int>("analogmodelling_tubedrive"));
+    ui->analog->setChecked(DspConfig::instance().get<bool>(DspConfig::tube_enable));
+    ui->analog_tubedrive->setValueA(DspConfig::instance().get<int>(DspConfig::tube_pregain));
 
-	ui->bassboost->setChecked(DspConfig::instance().get<bool>("bass_enable"));
-	ui->bass_maxgain->setValueA(DspConfig::instance().get<int>("bass_maxgain"));
+    ui->bassboost->setChecked(DspConfig::instance().get<bool>(DspConfig::bass_enable));
+    ui->bass_maxgain->setValueA(DspConfig::instance().get<int>(DspConfig::bass_maxgain));
 
-	ui->reverb->setChecked(DspConfig::instance().get<bool>("headset_enable"));
-	ui->rev_osf->setValueA(DspConfig::instance().get<int>("headset_osf"));
-	ui->rev_era->setValueA(100 * DspConfig::instance().get<int>("headset_reflection_amount"));
-	ui->rev_erw->setValueA(100 * DspConfig::instance().get<int>("headset_reflection_width"));
-	ui->rev_erf->setValueA(100 * DspConfig::instance().get<int>("headset_reflection_factor"));
-	ui->rev_finaldry->setValueA(10 * DspConfig::instance().get<int>("headset_finaldry"));
-	ui->rev_finalwet->setValueA(10 * DspConfig::instance().get<int>("headset_finalwet"));
-	ui->rev_width->setValueA(100 * DspConfig::instance().get<int>("headset_width"));
-	ui->rev_wet->setValueA(10 * DspConfig::instance().get<int>("headset_wet"));
-	ui->rev_bass->setValueA(100 * DspConfig::instance().get<int>("headset_bassboost"));
-	ui->rev_spin->setValueA(100 * DspConfig::instance().get<int>("headset_lfo_spin"));
-	ui->rev_wander->setValueA(100 * DspConfig::instance().get<int>("headset_lfo_wander"));
-	ui->rev_decay->setValueA(100 * DspConfig::instance().get<int>("headset_decay"));
-	ui->rev_delay->setValueA(10 * DspConfig::instance().get<int>("headset_delay"));
-	ui->rev_lci->setValueA(DspConfig::instance().get<int>("headset_lpf_input"));
-	ui->rev_lcb->setValueA(DspConfig::instance().get<int>("headset_lpf_bass"));
-	ui->rev_lcd->setValueA(DspConfig::instance().get<int>("headset_lpf_damp"));
-	ui->rev_lco->setValueA(DspConfig::instance().get<int>("headset_lpf_output"));
+    ui->reverb->setChecked(DspConfig::instance().get<bool>(DspConfig::reverb_enable));
+    ui->rev_osf->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_osf));
+    ui->rev_era->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_reflection_amount));
+    ui->rev_erw->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_reflection_width));
+    ui->rev_erf->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_reflection_factor));
+    ui->rev_finaldry->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_finaldry));
+    ui->rev_finalwet->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_finalwet));
+    ui->rev_width->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_width));
+    ui->rev_wet->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_wet));
+    ui->rev_bass->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_bassboost));
+    ui->rev_spin->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_lfo_spin));
+    ui->rev_wander->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_lfo_wander));
+    ui->rev_decay->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_decay));
+    ui->rev_delay->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_delay));
+    ui->rev_lci->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_input));
+    ui->rev_lcb->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_bass));
+    ui->rev_lcd->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_damp));
+    ui->rev_lco->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_output));
 
-	ui->stereowidener->setChecked(DspConfig::instance().get<bool>("stereowide_enable"));
-	ui->stereowide_level->setValueA(DspConfig::instance().get<int>("stereowide_level"));
+    ui->stereowidener->setChecked(DspConfig::instance().get<bool>(DspConfig::stereowide_enable));
+    ui->stereowide_level->setValueA(DspConfig::instance().get<int>(DspConfig::stereowide_level));
 
-	ui->bs2b->setChecked(DspConfig::instance().get<bool>("crossfeed_enable"));
-	ui->crossfeed_mode->setCurrentText(PresetProvider::BS2B::reverseLookup(DspConfig::instance().get<int>("crossfeed_mode")));
-	ui->bs2b_feed->setValueA(DspConfig::instance().get<int>("crossfeed_bs2b_feed"));
-	ui->bs2b_fcut->setValueA(DspConfig::instance().get<int>("crossfeed_bs2b_fcut"));
+    ui->bs2b->setChecked(DspConfig::instance().get<bool>(DspConfig::crossfeed_enable));
+    ui->crossfeed_mode->setCurrentText(PresetProvider::BS2B::reverseLookup(DspConfig::instance().get<int>(DspConfig::crossfeed_mode)));
+    ui->bs2b_feed->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_feed));
+    ui->bs2b_fcut->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_fcut));
 
-	ui->enable_comp->setChecked(DspConfig::instance().get<bool>("compression_enable"));
-	ui->comp_maxattack->setValueA(DspConfig::instance().get<int>("compression_maxatk"));
-	ui->comp_maxrelease->setValueA(DspConfig::instance().get<int>("compression_maxrel"));
-	ui->comp_aggressiveness->setValueA(DspConfig::instance().get<int>("compression_aggressiveness"));
+    ui->enable_comp->setChecked(DspConfig::instance().get<bool>(DspConfig::compression_enable));
+    ui->comp_maxattack->setValueA(DspConfig::instance().get<int>(DspConfig::compression_maxatk));
+    ui->comp_maxrelease->setValueA(DspConfig::instance().get<int>(DspConfig::compression_maxrel));
+    ui->comp_aggressiveness->setValueA(DspConfig::instance().get<int>(DspConfig::compression_aggressiveness));
 
-	ui->limthreshold->setValueA(DspConfig::instance().get<int>("masterswitch_limthreshold"));
-	ui->limrelease->setValueA(DspConfig::instance().get<int>("masterswitch_limrelease"));
-	ui->postgain->setValueA(DspConfig::instance().get<int>("masterswitch_postgain"));
+    ui->limthreshold->setValueA(DspConfig::instance().get<int>(DspConfig::master_limthreshold));
+    ui->limrelease->setValueA(DspConfig::instance().get<int>(DspConfig::master_limrelease));
+    ui->postgain->setValueA(DspConfig::instance().get<int>(DspConfig::master_postgain));
 
-	ui->graphicEq->chk_enable->setChecked(DspConfig::instance().get<bool>("streq_enable"));
-	ui->graphicEq->load(chopDoubleQuotes(DspConfig::instance().get<QString>("streq_stringp"))); // TODO stress-test
+    ui->graphicEq->chk_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::graphiceq_enable));
+    ui->graphicEq->load(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::graphiceq_param))); // TODO stress-test
 
-	ui->ddc_enable->setChecked(DspConfig::instance().get<bool>("ddc_enable"));
-	activeddc      = chopDoubleQuotes(DspConfig::instance().get<QString>("ddc_file"));
+    ui->ddc_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::ddc_enable));
+    activeddc      = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
 
-	ui->liveprog_enable->setChecked(DspConfig::instance().get<bool>("liveprog_enable"));
-	activeliveprog = chopDoubleQuotes(DspConfig::instance().get<QString>("liveprog_file"));
+    ui->liveprog_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::liveprog_enable));
+    activeliveprog = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::liveprog_file));
 
-	ui->conv_enable->setChecked(DspConfig::instance().get<bool>("convolver_enable"));
-	ui->conv_ir_opt->setCurrentIndex(DspConfig::instance().get<int>("convolver_optimization_mode"));
-	activeirs                 = chopDoubleQuotes(DspConfig::instance().get<QString>("convolver_file"));
-	irAdvancedWaveformEditing = chopDoubleQuotes(DspConfig::instance().get<QString>("convolver_waveform_edit"));
+    ui->conv_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::convolver_enable));
+    ui->conv_ir_opt->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::convolver_optimization_mode));
+    activeirs                 = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
+    irAdvancedWaveformEditing = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_waveform_edit));
 
-	ui->enable_eq->setChecked(DspConfig::instance().get<bool>("tone_enable"));
-	ui->eqinterpolator->setCurrentIndex(DspConfig::instance().get<int>("tone_interpolation"));
-	ui->eqfiltertype->setCurrentIndex(DspConfig::instance().get<int>("tone_filtertype"));
+    ui->enable_eq->setChecked(DspConfig::instance().get<bool>(DspConfig::tone_enable));
+    ui->eqinterpolator->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_interpolation));
+    ui->eqfiltertype->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_filtertype));
 
 	// Parse EQ String to QMap
-	QString rawEqString = chopFirstLastChar(DspConfig::instance().get<QString>("tone_eq"));
+    QString rawEqString = chopFirstLastChar(DspConfig::instance().get<QString>(DspConfig::tone_eq));
 	bool    isOldFormat = rawEqString.split(";").count() == 15;
 
 	if (isOldFormat)
@@ -997,33 +1004,33 @@ void MainWindow::loadConfig()
 
 void MainWindow::applyConfig()
 {
-	DspConfig::instance().set("enable",                     QVariant(!ui->disableFX->isChecked()));
+    DspConfig::instance().set(DspConfig::master_enable,              QVariant(!ui->disableFX->isChecked()));
 
-	DspConfig::instance().set("analogmodelling_enable",     QVariant(ui->analog->isChecked()));
-	DspConfig::instance().set("analogmodelling_tubedrive",  QVariant(ui->analog_tubedrive->valueA()));
-	DspConfig::instance().set("masterswitch_limthreshold",  QVariant(ui->limthreshold->valueA()));
-	DspConfig::instance().set("masterswitch_limrelease",    QVariant(ui->limrelease->valueA()));
-	DspConfig::instance().set("masterswitch_postgain",      QVariant(ui->postgain->valueA()));
+    DspConfig::instance().set(DspConfig::tube_enable,                QVariant(ui->analog->isChecked()));
+    DspConfig::instance().set(DspConfig::tube_pregain,               QVariant(ui->analog_tubedrive->valueA()));
+    DspConfig::instance().set(DspConfig::master_limthreshold,        QVariant(ui->limthreshold->valueA()));
+    DspConfig::instance().set(DspConfig::master_limrelease,          QVariant(ui->limrelease->valueA()));
+    DspConfig::instance().set(DspConfig::master_postgain,            QVariant(ui->postgain->valueA()));
 
-	DspConfig::instance().set("ddc_enable",                 QVariant(ui->ddc_enable->isChecked()));
-	DspConfig::instance().set("ddc_file",                   QVariant("\"" + activeddc + "\""));
+    DspConfig::instance().set(DspConfig::ddc_enable,                 QVariant(ui->ddc_enable->isChecked()));
+    DspConfig::instance().set(DspConfig::ddc_file,                   QVariant("\"" + activeddc + "\""));
 
-	DspConfig::instance().set("liveprog_enable",            QVariant(ui->liveprog_enable->isChecked()));
-	DspConfig::instance().set("liveprog_file",              QVariant("\"" + activeliveprog + "\""));
+    DspConfig::instance().set(DspConfig::liveprog_enable,            QVariant(ui->liveprog_enable->isChecked()));
+    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant("\"" + activeliveprog + "\""));
 
-	DspConfig::instance().set("convolver_enable",           QVariant(ui->conv_enable->isChecked()));
-	DspConfig::instance().set("convolver_optimization_mode", QVariant(ui->conv_ir_opt->currentIndex()));
-	DspConfig::instance().set("convolver_file",             QVariant("\"" + activeirs + "\""));
-	DspConfig::instance().set("convolver_waveform_edit",    QVariant("\"" + irAdvancedWaveformEditing + "\""));
+    DspConfig::instance().set(DspConfig::convolver_enable,           QVariant(ui->conv_enable->isChecked()));
+    DspConfig::instance().set(DspConfig::convolver_optimization_mode,QVariant(ui->conv_ir_opt->currentIndex()));
+    DspConfig::instance().set(DspConfig::convolver_file,             QVariant("\"" + activeirs + "\""));
+    DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant("\"" + irAdvancedWaveformEditing + "\""));
 
-	DspConfig::instance().set("compression_enable",         QVariant(ui->enable_comp->isChecked()));
-	DspConfig::instance().set("compression_maxatk",         QVariant(ui->comp_maxattack->valueA()));
-	DspConfig::instance().set("compression_maxrel",         QVariant(ui->comp_maxrelease->valueA()));
-	DspConfig::instance().set("compression_aggressiveness", QVariant(ui->comp_aggressiveness->valueA()));
+    DspConfig::instance().set(DspConfig::compression_enable,         QVariant(ui->enable_comp->isChecked()));
+    DspConfig::instance().set(DspConfig::compression_maxatk,         QVariant(ui->comp_maxattack->valueA()));
+    DspConfig::instance().set(DspConfig::compression_maxrel,         QVariant(ui->comp_maxrelease->valueA()));
+    DspConfig::instance().set(DspConfig::compression_aggressiveness, QVariant(ui->comp_aggressiveness->valueA()));
 
-	DspConfig::instance().set("tone_enable",                QVariant(ui->enable_eq->isChecked()));
-	DspConfig::instance().set("tone_filtertype",            QVariant(ui->eqfiltertype->currentIndex()));
-	DspConfig::instance().set("tone_interpolation",         QVariant(ui->eqinterpolator->currentIndex()));
+    DspConfig::instance().set(DspConfig::tone_enable,                QVariant(ui->enable_eq->isChecked()));
+    DspConfig::instance().set(DspConfig::tone_filtertype,            QVariant(ui->eqfiltertype->currentIndex()));
+    DspConfig::instance().set(DspConfig::tone_interpolation,         QVariant(ui->eqinterpolator->currentIndex()));
 
 	if (ui->eq_r_fixed->isChecked())
 	{
@@ -1043,49 +1050,49 @@ void MainWindow::applyConfig()
 			counter++;
 		}
 
-		DspConfig::instance().set("tone_eq", QVariant("\"" + rawEqString + "\""));
+        DspConfig::instance().set(DspConfig::tone_eq, QVariant("\"" + rawEqString + "\""));
 	}
 	else
 	{
 		QString rawEqString;
 		ui->eq_dyn_widget->storeCsv(rawEqString);
-		DspConfig::instance().set("tone_eq", QVariant("\"" + rawEqString + "\""));
+        DspConfig::instance().set(DspConfig::tone_eq, QVariant("\"" + rawEqString + "\""));
 	}
 
-	DspConfig::instance().set("bass_enable",               QVariant(ui->bassboost->isChecked()));
-	DspConfig::instance().set("bass_maxgain",              QVariant(ui->bass_maxgain->valueA()));
+    DspConfig::instance().set(DspConfig::bass_enable,               QVariant(ui->bassboost->isChecked()));
+    DspConfig::instance().set(DspConfig::bass_maxgain,              QVariant(ui->bass_maxgain->valueA()));
 
-	DspConfig::instance().set("stereowide_enable",         QVariant(ui->stereowidener->isChecked()));
-	DspConfig::instance().set("stereowide_level",          QVariant(ui->stereowide_level->valueA()));
+    DspConfig::instance().set(DspConfig::stereowide_enable,         QVariant(ui->stereowidener->isChecked()));
+    DspConfig::instance().set(DspConfig::stereowide_level,          QVariant(ui->stereowide_level->valueA()));
 
-	DspConfig::instance().set("crossfeed_enable",          QVariant(ui->bs2b->isChecked()));
-	DspConfig::instance().set("crossfeed_mode",            QVariant(PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText())));
-	DspConfig::instance().set("crossfeed_bs2b_feed",       QVariant(ui->bs2b_feed->valueA()));
-	DspConfig::instance().set("crossfeed_bs2b_fcut",       QVariant(ui->bs2b_fcut->valueA()));
+    DspConfig::instance().set(DspConfig::crossfeed_enable,          QVariant(ui->bs2b->isChecked()));
+    DspConfig::instance().set(DspConfig::crossfeed_mode,            QVariant(PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText())));
+    DspConfig::instance().set(DspConfig::crossfeed_bs2b_feed,       QVariant(ui->bs2b_feed->valueA()));
+    DspConfig::instance().set(DspConfig::crossfeed_bs2b_fcut,       QVariant(ui->bs2b_fcut->valueA()));
 
-	DspConfig::instance().set("headset_enable",            QVariant(ui->reverb->isChecked()));
-	DspConfig::instance().set("headset_osf",               QVariant(ui->rev_osf->valueA()));
-	DspConfig::instance().set("headset_lpf_input",         QVariant(ui->rev_lci->valueA()));
-	DspConfig::instance().set("headset_lpf_bass",          QVariant(ui->rev_lcb->valueA()));
-	DspConfig::instance().set("headset_lpf_damp",          QVariant(ui->rev_lcd->valueA()));
-	DspConfig::instance().set("headset_lpf_output",        QVariant(ui->rev_lco->valueA()));
-	DspConfig::instance().set("headset_reflection_amount", QVariant(ui->rev_era->valueA() / 100.0f));
-	DspConfig::instance().set("headset_reflection_width",  QVariant(ui->rev_erw->valueA() / 100.0f));
-	DspConfig::instance().set("headset_reflection_factor", QVariant(ui->rev_erf->valueA() / 100.0f));
-	DspConfig::instance().set("headset_finaldry",          QVariant(ui->rev_finaldry->valueA() / 10.0f));
-	DspConfig::instance().set("headset_finalwet",          QVariant(ui->rev_finalwet->valueA() / 10.0f));
-	DspConfig::instance().set("headset_width",             QVariant(ui->rev_width->valueA() / 100.0f));
-	DspConfig::instance().set("headset_wet",               QVariant(ui->rev_wet->valueA() / 10.0f));
-	DspConfig::instance().set("headset_bassboost",         QVariant(ui->rev_bass->valueA() / 100.0f));
-	DspConfig::instance().set("headset_lfo_spin",          QVariant(ui->rev_spin->valueA() / 100.0f));
-	DspConfig::instance().set("headset_lfo_wander",        QVariant(ui->rev_wander->valueA() / 100.0f));
-	DspConfig::instance().set("headset_decay",             QVariant(ui->rev_decay->valueA() / 100.0f));
-	DspConfig::instance().set("headset_delay",             QVariant(ui->rev_delay->valueA() / 10.0f));
+    DspConfig::instance().set(DspConfig::reverb_enable,             QVariant(ui->reverb->isChecked()));
+    DspConfig::instance().set(DspConfig::reverb_osf,                QVariant(ui->rev_osf->valueA()));
+    DspConfig::instance().set(DspConfig::reverb_lpf_input,          QVariant(ui->rev_lci->valueA()));
+    DspConfig::instance().set(DspConfig::reverb_lpf_bass,           QVariant(ui->rev_lcb->valueA()));
+    DspConfig::instance().set(DspConfig::reverb_lpf_damp,           QVariant(ui->rev_lcd->valueA()));
+    DspConfig::instance().set(DspConfig::reverb_lpf_output,         QVariant(ui->rev_lco->valueA()));
+    DspConfig::instance().set(DspConfig::reverb_reflection_amount,  QVariant(ui->rev_era->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_reflection_width,   QVariant(ui->rev_erw->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_reflection_factor,  QVariant(ui->rev_erf->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_finaldry,           QVariant(ui->rev_finaldry->valueA() / 10.0f));
+    DspConfig::instance().set(DspConfig::reverb_finalwet,           QVariant(ui->rev_finalwet->valueA() / 10.0f));
+    DspConfig::instance().set(DspConfig::reverb_width,              QVariant(ui->rev_width->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_wet,                QVariant(ui->rev_wet->valueA() / 10.0f));
+    DspConfig::instance().set(DspConfig::reverb_bassboost,          QVariant(ui->rev_bass->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_lfo_spin,           QVariant(ui->rev_spin->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_lfo_wander,         QVariant(ui->rev_wander->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_decay,              QVariant(ui->rev_decay->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::reverb_delay,              QVariant(ui->rev_delay->valueA() / 10.0f));
 
-	DspConfig::instance().set("streq_enable",              QVariant(ui->graphicEq->chk_enable->isChecked()));
+    DspConfig::instance().set(DspConfig::graphiceq_enable,          QVariant(ui->graphicEq->chk_enable->isChecked()));
 	QString streq;
 	ui->graphicEq->store(streq);
-	DspConfig::instance().set("streq_stringp", QVariant("\"" + streq + "\""));
+    DspConfig::instance().set(DspConfig::graphiceq_param,           QVariant("\"" + streq + "\""));
 
 	DspConfig::instance().save();
 	// TODO restart engine

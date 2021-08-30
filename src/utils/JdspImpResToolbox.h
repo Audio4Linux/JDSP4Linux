@@ -11,7 +11,7 @@
 #include <string.h>
 
 extern "C" {
-#include "interpolation.h"
+#include <generalDSP/interpolation.h>
 #define NUMPTS 15
 ierper pch1, pch2;
 __attribute__((constructor)) static void initialize(void)

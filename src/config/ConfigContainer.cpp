@@ -14,16 +14,21 @@ void ConfigContainer::setValue(const QString &key,
 }
 
 QVariant ConfigContainer::getVariant(const QString &key,
-                                     bool           silent)
+                                     bool           silent,
+                                     bool*          exists)
 {
-	if (!map.contains(key))
+    if(exists != NULL){
+        *exists = map.contains(key);
+    }
+
+    if (!map.contains(key))
 	{
 		if (!silent)
 		{
 			Log::debug(QString("Requested key '%1' (variant) not found").arg(key));
 		}
 
-		return QVariant();
+        return QVariant();
 	}
 
 	return map.find(key).value();

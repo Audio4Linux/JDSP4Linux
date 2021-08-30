@@ -25,7 +25,8 @@ public:
 	void        setValue(const QString &key,
 	                     QVariant       value);
 	QVariant    getVariant(const QString &key,
-	                       bool           silent               = false);
+                           bool           silent               = false,
+                           bool*          exists = nullptr);
 	QString     getString(const QString &key,
 	                      bool           setToDefaultIfMissing = true,
 	                      const QString &defaultVal            = "");

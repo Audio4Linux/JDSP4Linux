@@ -23,7 +23,7 @@ class MainWindow;
 
 namespace Ui
 {
-	class Preset;
+    class PresetDialog;
 }
 
 class PresetDialog :
@@ -49,7 +49,7 @@ private slots:
 	void presetIndexChanged();
 
 private:
-	Ui::Preset *ui;
+    Ui::PresetDialog *ui;
 	QStringList irs;
 
 signals:

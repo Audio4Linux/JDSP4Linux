@@ -9,8 +9,7 @@ SOURCES += \
     $$PWD/clickablelabel.cpp \
     $$PWD/colorprovider.cpp \
     $$PWD/customtabbar.cpp \
-    $$PWD/flattabwidget.cpp \
-    $$PWD/interpolation.c
+    $$PWD/flattabwidget.cpp
 
 HEADERS += \
     $$PWD/3rdparty/AbstractAnimator.h \
@@ -23,12 +22,10 @@ HEADERS += \
     $$PWD/3rdparty/StackedWidgetAnimation/StackedWidgetSlideOver/StackedWidgetSlideOverAnimator.h \
     $$PWD/3rdparty/StackedWidgetAnimation/StackedWidgetSlideOver/StackedWidgetSlideOverDecorator.h \
     $$PWD/3rdparty/WAF.h \
-    $$PWD/JdspImpResToolbox.h \
     $$PWD/clickablelabel.h \
     $$PWD/colorprovider.h \
     $$PWD/customtabbar.h \
-    $$PWD/flattabwidget.h \
-    $$PWD/interpolation.h
+    $$PWD/flattabwidget.h
 
 FORMS += \
     $$PWD/flattabwidget.ui

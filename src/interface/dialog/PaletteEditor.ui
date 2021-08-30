@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>palette</class>
+ <class>PaletteEditor</class>
  <widget class="QDialog" name="palette">
   <property name="geometry">
    <rect>

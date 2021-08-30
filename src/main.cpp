@@ -21,10 +21,21 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
+static bool SPIN_ON_CRASH = false;
+
 void crash_handled(int fd)
 {
     Q_UNUSED(fd)
 	safe_printf(STDERR_FILENO, "Done! Crash report saved to /tmp/jamesdsp/crash.dmp.\n");
+
+    if(SPIN_ON_CRASH)
+    {
+        safe_printf(STDERR_FILENO, "\nSpinning. Please run 'gdb jamesdsp %u' to continue debugging, Ctrl-C to quit, or Ctrl-\ to dump core\n", getpid());
+    }
+    else
+    {
+        safe_printf(STDERR_FILENO, "\nConsider to launch this application with the parameter '--spinlock-on-crash' to wait for a debugger in case of a crash.\n");
+    }
 }
 
 #endif
@@ -51,11 +62,15 @@ int main(int   argc,
 
 	QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (forced)");
 	parser.addOption(tray);
-	QCommandLineOption minst(QStringList() << "m" << "allow-multiple-instances", "Allow multiple instances of this app");
-	parser.addOption(minst);
+    QCommandLineOption minst(QStringList() << "m" << "allow-multiple-instances", "Allow multiple instances of this app");
+    parser.addOption(minst);
+    QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
+    parser.addOption(spinlck);
 	parser.process(a);
 
-	QLocale::setDefault(QLocale::c());
+    SPIN_ON_CRASH = parser.isSet(spinlck);
+
+	QLocale::setDefault(QLocale::c());  
 
 	QApplication::setQuitOnLastWindowClosed(false);
 	MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));

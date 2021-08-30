@@ -39,6 +39,7 @@ class Spectrograph;
 class QJsonTableModel;
 class TrayIcon;
 class QVBoxLayout;
+class AudioManager;
 
 using namespace std;
 namespace Ui
@@ -65,11 +66,10 @@ public:
 	void        setEq(const QVector<double> &data);
 	void        setReverbData(PresetProvider::Reverb::sf_reverb_preset_data data);
 	void        setEqMode(int mode);
-
-	Ui::MainWindow *ui;
-	SettingsFragment *settings_dlg;
-
 	void        updateDDCSelection();
+
+    Ui::MainWindow *ui;
+    SettingsFragment *settings_dlg;
 
 protected:
 	void        closeEvent(QCloseEvent *event) override;
@@ -133,6 +133,8 @@ private:
 
 	QFrame *settingsFragmentHost;
 	QVBoxLayout *settingsHostLayout;
+
+    AudioManager* audioManager;
 
 	bool spectrumReloadSignalQueued   = false;
 	bool lockapply                    = false;

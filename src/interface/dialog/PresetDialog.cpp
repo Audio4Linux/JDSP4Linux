@@ -1,5 +1,5 @@
 #include "PresetDialog.h"
-#include "ui_preset.h"
+#include "ui_PresetDialog.h"
 
 #include "config/AppConfig.h"
 #include "MainWindow.h"
@@ -23,7 +23,7 @@
 
 PresetDialog::PresetDialog(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::Preset)
+    ui(new Ui::PresetDialog)
 {
 	ui->setupUi(this);
 

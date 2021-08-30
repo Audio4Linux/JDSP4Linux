@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Preset</class>
+ <class>PresetDialog</class>
  <widget class="QDialog" name="Preset">
   <property name="geometry">
    <rect>

@@ -1,12 +1,12 @@
 #include "PaletteEditor.h"
-#include "ui_PaletteDlg.h"
+#include "ui_PaletteEditor.h"
 
 #include <QColorDialog>
 
 PaletteEditor::PaletteEditor(AppConfig *_appconf,
                              QWidget   *parent) :
 	QDialog(parent),
-	ui(new Ui::palette)
+    ui(new Ui::PaletteEditor)
 {
 	ui->setupUi(this);
 

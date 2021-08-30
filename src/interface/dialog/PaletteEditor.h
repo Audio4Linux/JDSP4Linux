@@ -20,7 +20,7 @@
 
 namespace Ui
 {
-	class palette;
+    class PaletteEditor;
 }
 
 class PaletteEditor :
@@ -34,7 +34,7 @@ public:
 	~PaletteEditor();
 
 private:
-	Ui::palette *ui;
+    Ui::PaletteEditor *ui;
 	AppConfig *appconf;
 
 private slots:
