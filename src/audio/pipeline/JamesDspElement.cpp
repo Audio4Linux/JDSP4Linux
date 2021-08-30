@@ -2,8 +2,6 @@
 
 #include "JamesDspElement.h"
 
-#include <jdsp_extensions.h>
-
 JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
 {
     gboolean gEnabled;

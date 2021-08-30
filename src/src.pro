@@ -142,6 +142,6 @@ unix {
 
 # Link libjamesdsp
 unix:!macx: LIBS += -L$$OUT_PWD/../libjamesdsp/ -llibjamesdsp
-INCLUDEPATH += $$PWD/../libjamesdsp/JamesDSPManager/Main/libjamesdsp/jni/jamesdsp/jdsp/
+INCLUDEPATH += $$PWD/../libjamesdsp/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/
 DEPENDPATH += $$PWD/../libjamesdsp
 unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../libjamesdsp/liblibjamesdsp.a
