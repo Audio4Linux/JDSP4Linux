@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="bassboost_maxgain">
+    <item>3 dB</item>
+    <item>4 dB</item>
+    <item>5 dB</item>
+    <item>6 dB</item>
+    <item>7 dB</item>
+    <item>8 dB</item>
+    <item>9 dB</item>
+    <item>10 dB</item>
+    <item>11 dB</item>
+    <item>12 dB</item>
+    <item>13 dB</item>
+    <item>14 dB</item>
+    <item>15 dB</item>
+  </string-array>
+  <string-array name="bassboost_maxgain_values" translatable="false">
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+    <item>12</item>
+    <item>13</item>
+    <item>14</item>
+    <item>15</item>
+  </string-array>
+  <string-array name="compression_atk">
+    <item>0 ms</item>
+    <item>20 ms</item>
+    <item>30 ms</item>
+    <item>40 ms</item>
+    <item>60 ms</item>
+    <item>80 ms</item>
+    <item>100 ms</item>
+    <item>125 ms</item>
+    <item>150 ms</item>
+    <item>175 ms</item>
+    <item>200 ms</item>
+    <item>250 ms</item>
+    <item>300 ms</item>
+    <item>350 ms</item>
+    <item>400 ms</item>
+  </string-array>
+  <string-array name="compression_atk_values" translatable="false">
+    <item>0</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>60</item>
+    <item>80</item>
+    <item>100</item>
+    <item>125</item>
+    <item>150</item>
+    <item>175</item>
+    <item>200</item>
+    <item>250</item>
+    <item>300</item>
+    <item>350</item>
+    <item>400</item>
+  </string-array>
+  <string-array name="compression_rel">
+    <item>0 ms</item>
+    <item>20 ms</item>
+    <item>30 ms</item>
+    <item>40 ms</item>
+    <item>60 ms</item>
+    <item>80 ms</item>
+    <item>100 ms</item>
+    <item>125 ms</item>
+    <item>150 ms</item>
+    <item>175 ms</item>
+    <item>200 ms</item>
+    <item>250 ms</item>
+    <item>300 ms</item>
+    <item>350 ms</item>
+    <item>400 ms</item>
+  </string-array>
+  <string-array name="compression_rel_values" translatable="false">
+    <item>0</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>60</item>
+    <item>80</item>
+    <item>100</item>
+    <item>125</item>
+    <item>150</item>
+    <item>175</item>
+    <item>200</item>
+    <item>250</item>
+    <item>300</item>
+    <item>350</item>
+    <item>400</item>
+  </string-array>
+  <string-array name="compression_adaptspeed">
+    <item>10</item>
+    <item>50</item>
+    <item>100</item>
+    <item>150</item>
+    <item>200</item>
+    <item>300</item>
+    <item>400</item>
+    <item>500</item>
+    <item>600</item>
+    <item>700</item>
+    <item>800</item>
+    <item>900</item>
+    <item>1000</item>
+  </string-array>
+  <string-array name="compression_adaptspeed_values" translatable="false">
+    <item>10</item>
+    <item>50</item>
+    <item>100</item>
+    <item>150</item>
+    <item>200</item>
+    <item>300</item>
+    <item>400</item>
+    <item>500</item>
+    <item>600</item>
+    <item>700</item>
+    <item>800</item>
+    <item>900</item>
+    <item>1000</item>
+  </string-array>
+
+  <string-array name="headphone_preset">
+    <item>Small room</item>
+    <item>Medium room</item>
+    <item>Large room</item>
+    <item>Plate high</item>
+    <item>Plate low</item>
+    <item>Long reverb 1</item>
+    <item>Long reverb 2</item>
+  </string-array>
+
+  <string-array name="headphone_preset_values" translatable="false">
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_modes" translatable="false">
+    <item>@string/eq_preset_flat</item>
+    <item>@string/eq_preset_custom</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_values" translatable="false">
+    <item>25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0</item>
+    <item>custom</item>
+    <!-- Custom -->
+  </string-array>
+
+  <string-array name="equalizer_filtertype">
+    <item>Minimum phase</item>
+    <item>Linear phase</item>
+  </string-array>
+
+  <string-array name="equalizer_filtertype_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+  
+  <string-array name="equalizer_dialog_spinterpolation">
+    <item>Piecewise Cubic Hermite Interpolating Polynomial</item>
+    <item>Modified Hiroshi Akima spline</item>
+  </string-array>
+
+  <string-array name="equalizer_dialog_spinterpolation_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+  
+  <string-array name="stereowide_modes">
+    <item>Very Narrow</item>
+    <item>Narrow</item>
+    <item>Unchange</item>
+    <item>Wide</item>
+    <item>Very wide</item>
+  </string-array>
+
+  <string-array name="stereowide_values" translatable="false">
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
+    <item>75</item>
+  </string-array>
+  
+  <string-array name="bs2b_modes">
+    <item>BS2B Weak</item>
+    <item>BS2B Strong</item>
+    <item>Out of head</item>
+    <item>Surround 1</item>
+    <item>Surround 2</item>
+    <item>Joe0Bloggs Realistic surround</item>
+  </string-array>
+
+  <string-array name="bs2b_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+  </string-array>
+
+  <string-array name="convolution_mode">
+    <item>Original</item>
+    <item>Shrink</item>
+    <item>Minimum phase transform and shrink</item>
+  </string-array>
+
+  <string-array name="convolution_mode_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Enable selected checks that are disabled by default. These should help devs fix minor mistakes.-->
+    <issue id="FieldGetter" severity="warning" />
+    <issue id="IconExpectedSize" severity="warning" />
+    <issue id="TypographyQuotes" severity="warning" />
+
+    <!-- Suppress UsesMinSdkAttributes since we know what version we are building for -->
+    <issue id="UsesMinSdkAttributes" severity="ignore" />
+
+    <issue id="LintError" severity="ignore" />
+
+</lint>

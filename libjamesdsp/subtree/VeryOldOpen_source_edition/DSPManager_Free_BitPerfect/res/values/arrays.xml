@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="compression_pregain">
+    <item>0 dB</item>
+    <item>4 dB</item>
+    <item>8 dB</item>
+    <item>12 dB</item>
+    <item>18 dB</item>
+    <item>24 dB</item>
+  </string-array>
+  <string-array name="compression_pregain_values" translatable="false">
+    <item>0</item>
+    <item>4</item>
+    <item>8</item>
+    <item>12</item>
+    <item>18</item>
+    <item>24</item>
+  </string-array>
+
+  <string-array name="headphone_preset">
+    <item>Small room</item>
+    <item>Medium room</item>
+    <item>Large room</item>
+    <item>Plate high</item>
+    <item>Plate low</item>
+    <item>Long reverb 1</item>
+    <item>Long reverb 2</item>
+  </string-array>
+
+  <string-array name="headphone_preset_values" translatable="false">
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_modes" translatable="false">
+    <item>@string/eq_preset_flat</item>
+    <item>@string/eq_preset_custom</item>
+  </string-array>
+
+  <string-array name="equalizer_preset_values" translatable="false">
+    <item>0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0</item>
+    <item>custom</item>
+    <!-- Custom -->
+  </string-array>
+
+  <string-array name="bassboost_modes">
+    <item>Enable</item>
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+    <item>Super</item>
+    <item>Extreme</item>
+  </string-array>
+
+  <string-array name="bassboost_filtertype">
+    <item>Linear phase 2049 taps low pass filter</item>
+    <item>Linear phase 4097 taps low pass filter</item>
+  </string-array>
+
+  <string-array name="bassboost_filtertype_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+
+  <string-array name="bassboost_modes_values" translatable="false">
+    <item>80</item>
+    <item>200</item>
+    <item>360</item>
+    <item>600</item>
+    <item>900</item>
+    <item>1200</item>
+  </string-array>
+
+  <string-array name="equalizer_filtertype">
+    <item>Minimum phase</item>
+    <item>Linear phase</item>
+  </string-array>
+
+  <string-array name="equalizer_filtertype_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  
+  <string-array name="quality_level">
+    <item>Truncate to 40&#65130;</item>
+    <item>Truncate to 50&#65130;</item>
+    <item>Truncate to 60&#65130;</item>
+    <item>Truncate to 70&#65130;</item>
+    <item>Truncate to 80&#65130;</item>
+    <item>Full</item>
+  </string-array>
+
+  <string-array name="quality_values" translatable="false">
+    <item>0.4</item>
+    <item>0.5</item>
+    <item>0.6</item>
+    <item>0.7</item>
+    <item>0.8</item>
+    <item>1</item>
+  </string-array>
+  
+  <string-array name="stereowide_modes">
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+    <item>High</item>
+    <item>Super</item>
+  </string-array>
+
+  <string-array name="stereowide_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+  </string-array>
+  
+  <string-array name="bs2b_modes">
+    <item>A Bit</item>
+    <item>Slight</item>
+    <item>Moderate</item>
+  </string-array>
+  
+  <string-array name="bs2b_values" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+</resources>
