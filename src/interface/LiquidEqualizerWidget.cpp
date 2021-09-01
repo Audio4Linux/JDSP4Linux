@@ -16,8 +16,11 @@
     https://github.com/vipersaudio/viper4android_fx
  */
 
-#include "utils/JdspImpResToolbox.h"
 #include "LiquidEqualizerWidget.h"
+
+extern "C" {
+#include <JdspImpResToolbox.h>
+}
 
 #include <QDebug>
 #include <QLinearGradient>

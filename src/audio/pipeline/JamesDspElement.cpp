@@ -2,6 +2,10 @@
 
 #include "JamesDspElement.h"
 
+extern "C" {
+#include <JdspImpResToolbox.h>
+}
+
 JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
 {
     gboolean gEnabled;
@@ -34,7 +38,10 @@ JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
     temp->set(DspConfig::crossfeed_enable, false);
     temp->set(DspConfig::crossfeed_mode, 3);
 
-    temp->set(DspConfig::Key::liveprog_enable, true);
+    temp->set(DspConfig::reverb_wet, 0.3);
+    temp->set(DspConfig::reverb_enable, true);
+
+    temp->set(DspConfig::Key::liveprog_enable, false);
     temp->set(DspConfig::Key::liveprog_file, "/home/tim/.config/jamesdsp/liveprog/phaseshifter.eel");
     update(temp);
     delete temp;
@@ -177,8 +184,115 @@ void JamesDspElement::updateCompressor(DspConfig *config)
 
 void JamesDspElement::updateReverb(DspConfig* config)
 {
-    sf_advancereverb(&this->_dsp->reverb, this->_dsp->fs, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1);
+#define GET_PARAM(key,type,defaults,msg) \
+    bool key##Exists; \
+    float key = config->get<type>(DspConfig::reverb_##key, &key##Exists); \
+    if(!key##Exists) { \
+        util::warning(msg); \
+        key = defaults; \
+    }
 
+    std::string msg = "JamesDspElement::updateReverb: At least one reverb parameter is unset. "
+                      "Attempting to fill out with defaults; this may cause unexpected audio changes.";
+
+    GET_PARAM(bassboost, float, 0.15, msg);
+    GET_PARAM(decay, float, 3.2, msg);
+    GET_PARAM(delay, float, 20, msg);
+    GET_PARAM(finaldry, float, -7.0, msg);
+    GET_PARAM(finalwet, float, -9.0, msg);
+    GET_PARAM(lfo_spin, float, 0.7, msg);
+    GET_PARAM(lfo_wander, float, 0.25, msg);
+    GET_PARAM(lpf_bass, int, 500, msg);
+    GET_PARAM(lpf_damp, int, 7000, msg);
+    GET_PARAM(lpf_input, int, 17000, msg);
+    GET_PARAM(lpf_output, int, 10000, msg);
+    GET_PARAM(osf, int, 1, msg);
+    GET_PARAM(reflection_amount, float, 0.40, msg);
+    GET_PARAM(reflection_factor, float, 1.6, msg);
+    GET_PARAM(reflection_width, float, 0.7, msg);
+    GET_PARAM(wet, float, 0, msg);
+    GET_PARAM(width, float, 1.0, msg);
+
+    sf_advancereverb(&this->_dsp->reverb, this->_dsp->fs, osf, reflection_amount, finalwet, finaldry,
+                     reflection_factor, reflection_width, width, wet, lfo_wander, bassboost, lfo_spin,
+                     lpf_input, lpf_bass, lpf_damp, lpf_output, decay, delay / 1000.0f);
+#undef GET_PARAM
+}
+
+void JamesDspElement::updateConvolver(DspConfig *config)
+{
+    bool fileExists;
+    bool waveEditExists;
+    bool optModeExists;
+
+    QString file = config->get<QString>(DspConfig::convolver_file, &fileExists);
+    QString waveEdit = config->get<QString>(DspConfig::convolver_waveform_edit, &waveEditExists);
+    int optMode = config->get<int>(DspConfig::convolver_optimization_mode, &optModeExists);
+
+    if(!fileExists)
+    {
+        util::error("JamesDspElement::updateConvolver: convolver_file property missing. Cannot update convolver state.");
+        return;
+    }
+
+    if(!optModeExists || !waveEditExists)
+    {
+        util::warning("JamesDspElement::updateConvolver: Opt mode or advanced wave editing unset. Using defaults.");
+
+        if(!optModeExists) optMode = 0;
+        if(!waveEditExists) waveEdit = "-80;-100;23;12;17;28";
+    }
+
+    std::string str = config->get<std::string>(DspConfig::tone_eq);
+    std::vector<string> v;
+    std::stringstream ss(str);
+
+    while (ss.good()) {
+        std::string substr;
+        getline(ss, substr, ';');
+        v.push_back(substr);
+    }
+
+    int param[6];
+    if(v.size() != 6)
+    {
+        util::warning("JamesDspElement::updateConvolver: Invalid advanced impulse editing data. 6 semicolon-separateds field expected, "
+                      "found " + std::to_string(v.size()) + " fields instead.");
+
+        param[0] = -80;
+        param[1] = -100;
+        param[2] = 23;
+        param[3] = 12;
+        param[4] = 17;
+        param[5] = 28;
+    }
+    else
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            param[i] = (int)std::stoi(v[i]);
+        }
+    }
+
+    int* impInfo = new int[2];
+    float* impulse = ReadImpulseResponseToFloat(file.toLocal8Bit().constData(), this->_dsp->fs, impInfo, optMode, param);
+
+    if(impInfo[1] <= 0)
+    {
+        util::warning("JamesDspElement::updateConvolver: IR is empty and has zero frames");
+    }
+
+    util::debug("JamesDspElement::updateConvolver: Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
+
+    int success = Convolver1DLoadImpulseResponse(this->_dsp, impulse, impInfo[0], impInfo[1]);
+
+    if(success <= 0)
+    {
+        util::debug("JamesDspElement::updateConvolver: Failed to update convolver. Convolver1DLoadImpulseResponse returned an error.");
+    }
+
+    delete[] impInfo;
+    free(impulse);
 }
 
 bool JamesDspElement::update(DspConfig *config)
@@ -186,6 +300,8 @@ bool JamesDspElement::update(DspConfig *config)
     QMetaEnum e = QMetaEnum::fromType<DspConfig::Key>();
 
     bool refreshReverb = false;
+    bool refreshCrossfeed = false;
+    bool refreshConvolver = false;
     for (int k = 0; k < e.keyCount(); k++)
     {
         DspConfig::Key key = (DspConfig::Key) e.value(k);
@@ -237,14 +353,9 @@ bool JamesDspElement::update(DspConfig *config)
                 Convolver1DDisable(this->_dsp);
             break;
         case DspConfig::convolver_file:
-            break;
         case DspConfig::convolver_optimization_mode:
-            break;
         case DspConfig::convolver_waveform_edit:
-            break;
-        case DspConfig::crossfeed_bs2b_fcut:
-            break;
-        case DspConfig::crossfeed_bs2b_feed:
+            refreshConvolver = true;
             break;
         case DspConfig::crossfeed_enable:
             if(current.toBool())
@@ -252,8 +363,10 @@ bool JamesDspElement::update(DspConfig *config)
             else
                 CrossfeedDisable(this->_dsp);
             break;
+        case DspConfig::crossfeed_bs2b_fcut:
+        case DspConfig::crossfeed_bs2b_feed:
         case DspConfig::crossfeed_mode:
-            CrossfeedChangeMode(this->_dsp, current.toInt());
+            refreshCrossfeed = true;
             break;
         case DspConfig::ddc_enable:
         case DspConfig::ddc_file:
@@ -362,6 +475,49 @@ bool JamesDspElement::update(DspConfig *config)
     if(refreshReverb)
     {
         updateReverb(config);
+    }
+
+    if(refreshConvolver)
+    {
+        updateConvolver(config);
+    }
+
+    if(refreshCrossfeed)
+    {
+        bool modeExists;
+        int mode = config->get<int>(DspConfig::crossfeed_mode, &modeExists);
+
+        if(!modeExists)
+        {
+            util::warning("JamesDspElement::update: Crossfeed mode unset, using defaults");
+        }
+
+        if(mode == 99)
+        {
+            bool fcutExists;
+            bool feedExists;
+            int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut, &fcutExists);
+            int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed, &feedExists);
+
+            if(!fcutExists)
+            {
+                util::warning("JamesDspElement::update: Crossfeed custom fcut unset, using defaults");
+                fcut = 650;
+            }
+            if(!feedExists)
+            {
+                util::warning("JamesDspElement::update: Crossfeed custom feed unset, using defaults");
+                feed = 95;
+            }
+
+            memset(&this->_dsp->advXF.bs2b, 0, sizeof(this->_dsp->advXF.bs2b));
+            BS2BInit(&this->_dsp->advXF.bs2b[1], (unsigned int)this->_dsp->fs, ((unsigned int)fcut | ((unsigned int)feed << 16)));
+            this->_dsp->advXF.mode = 1;
+        }
+        else
+        {
+           CrossfeedChangeMode(this->_dsp, mode);
+        }
     }
 
     return true;

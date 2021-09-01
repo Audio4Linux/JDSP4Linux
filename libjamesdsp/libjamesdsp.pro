@@ -43,7 +43,8 @@ HEADERS += \
     $$BASEPATH/generalDSP/digitalFilters.h \
     $$BASEPATH/generalDSP/interpolation.h \
     $$BASEPATH/generalDSP/spectralInterpolatorFloat.h \
-    $$BASEPATH/jdsp_header.h
+    $$BASEPATH/jdsp_header.h \
+    JdspImpResToolbox.h
 
 SOURCES += \
     $$BASEPATH/Effects/arbEqConv.c \
@@ -89,7 +90,8 @@ SOURCES += \
     $$BASEPATH/generalDSP/generalProg.c \
     $$BASEPATH/generalDSP/interpolation.c \
     $$BASEPATH/generalDSP/spectralInterpolatorFloat.c \
-    $$BASEPATH/jdspController.c
+    $$BASEPATH/jdspController.c \
+    JdspImpResToolbox.c
 
 unix {
     target.path = /usr/lib

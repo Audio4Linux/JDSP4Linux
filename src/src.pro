@@ -110,7 +110,6 @@ HEADERS += \
     utils/AutoEqClient.h \
     utils/AutoStartManager.h \
     utils/Common.h \
-    utils/JdspImpResToolbox.h \
     utils/Log.h \
     utils/dbus/ClientProxy.h \
     utils/dbus/ServerAdaptor.h \
@@ -141,7 +140,8 @@ unix {
 }
 
 # Link libjamesdsp
-unix:!macx: LIBS += -L$$OUT_PWD/../libjamesdsp/ -llibjamesdsp
-INCLUDEPATH += $$PWD/../libjamesdsp/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/
+unix:!macx: LIBS += -L$$OUT_PWD/../libjamesdsp -llibjamesdsp
+INCLUDEPATH += $$PWD/../libjamesdsp/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/ \
+               $$PWD/../libjamesdsp
 DEPENDPATH += $$PWD/../libjamesdsp
 unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../libjamesdsp/liblibjamesdsp.a

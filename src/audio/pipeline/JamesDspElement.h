@@ -23,6 +23,7 @@ private:
     void updateVdc(DspConfig *config);
     void updateCompressor(DspConfig *config);
     void updateReverb(DspConfig *config);
+    void updateConvolver(DspConfig *config);
 };
 
 #endif // JAMESDSPELEMENT_H

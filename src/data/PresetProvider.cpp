@@ -99,7 +99,7 @@ namespace PresetProvider
 	const QMap<BS2B_UNIT> BS2B::BS2B_LOOKUP_TABLE()
 	{
 		InitializableQMap<BS2B_UNIT> table;
-		table << QPair<BS2B_UNIT>("BS2B Custom", 6)
+        table << QPair<BS2B_UNIT>("BS2B Custom", 99)
 		      << QPair<BS2B_UNIT>("BS2B Weak", 0)
 		      << QPair<BS2B_UNIT>("BS2B Strong", 1)
 		      << QPair<BS2B_UNIT>("Out of head", 2)
@@ -138,65 +138,7 @@ namespace PresetProvider
 		return "BS2B Weak";
 	}
 
-	const QMap<SW_UNIT> StereoWidener::SW_LOOKUP_TABLE()
-	{
-		InitializableQMap<SW_UNIT> table;
-		table << QPair<SW_UNIT>("Unknown", FLOAT_LIST({ 0, 0 }))
-		      << QPair<SW_UNIT>("A Bit", FLOAT_LIST({ 1.0 * 0.5, 1.2 * 0.5 }))
-		      << QPair<SW_UNIT>("Slight", FLOAT_LIST({ 0.95 * 0.5, 1.4 * 0.5 }))
-		      << QPair<SW_UNIT>("Moderate", FLOAT_LIST({ 0.9 * 0.5, 1.6 * 0.5 }))
-		      << QPair<SW_UNIT>("High", FLOAT_LIST({ 0.85 * 0.5, 1.8 * 0.5 }))
-		      << QPair<SW_UNIT>("Super", FLOAT_LIST({ 0.8 * 0.5, 2.0 * 0.5 }));
-		return std::move(table);
-	}
-
-	const FLOAT_LIST StereoWidener::lookupPreset(const QString &preset)
-	{
-		auto table = SW_LOOKUP_TABLE();
-
-		if (table.contains(preset))
-		{
-			return table[preset];
-		}
-		else
-		{
-			return table["Unknown"];
-		}
-	}
-
-	const QString StereoWidener::reverseLookup(const QVector<float> &data)
-	{
-		auto table = SW_LOOKUP_TABLE();
-
-		for (auto key : table.keys())
-		{
-			QVector<float> row(table[key]);
-			int            it        = 0;
-			bool           different = false;
-
-			for (auto cur_data : row)
-			{
-				bool equal = isApproximatelyEqual<float>(cur_data, data.at(it), 0.01);
-
-				if (!equal)
-				{
-					different = true;
-					break;
-				}
-
-				it++;
-			}
-
-			if (!different)
-			{
-				return key;
-			}
-		}
-
-		return "...";
-	}
-
-	const Reverb::sf_reverb_preset_data Reverb::lookupPreset(int preset)
+    const Reverb::sf_reverb_preset_data Reverb::lookupPreset(int preset)
 	{
 		sf_reverb_preset_data ps[] =
 		{

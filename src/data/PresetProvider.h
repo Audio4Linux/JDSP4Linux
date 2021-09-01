@@ -50,15 +50,6 @@ public:
 
 	};
 
-	class StereoWidener
-	{
-public:
-		static const QMap<SW_UNIT> SW_LOOKUP_TABLE();
-		static const FLOAT_LIST    lookupPreset(const QString &preset);
-		static const QString       reverseLookup(const QVector<float> &data);
-
-	};
-
 	class Reverb
 	{
 public:

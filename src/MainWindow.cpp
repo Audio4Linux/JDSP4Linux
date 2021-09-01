@@ -839,7 +839,7 @@ void MainWindow::saveExternalFile()
 void MainWindow::loadConfig()
 {
 	lockapply = true;
-
+// TODO check where float is needed
     trayIcon->changedDisableFx(!DspConfig::instance().get<bool>(DspConfig::master_enable));
     ui->disableFX->setChecked(!DspConfig::instance().get<bool>(DspConfig::master_enable));
 
@@ -851,18 +851,18 @@ void MainWindow::loadConfig()
 
     ui->reverb->setChecked(DspConfig::instance().get<bool>(DspConfig::reverb_enable));
     ui->rev_osf->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_osf));
-    ui->rev_era->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_reflection_amount));
-    ui->rev_erw->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_reflection_width));
-    ui->rev_erf->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_reflection_factor));
-    ui->rev_finaldry->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_finaldry));
-    ui->rev_finalwet->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_finalwet));
-    ui->rev_width->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_width));
-    ui->rev_wet->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_wet));
-    ui->rev_bass->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_bassboost));
-    ui->rev_spin->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_lfo_spin));
-    ui->rev_wander->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_lfo_wander));
-    ui->rev_decay->setValueA(100 * DspConfig::instance().get<int>(DspConfig::reverb_decay));
-    ui->rev_delay->setValueA(10 * DspConfig::instance().get<int>(DspConfig::reverb_delay));
+    ui->rev_era->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_reflection_amount));
+    ui->rev_erw->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_reflection_width));
+    ui->rev_erf->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_reflection_factor));
+    ui->rev_finaldry->setValueA(10 * DspConfig::instance().get<float>(DspConfig::reverb_finaldry));
+    ui->rev_finalwet->setValueA(10 * DspConfig::instance().get<float>(DspConfig::reverb_finalwet));
+    ui->rev_width->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_width));
+    ui->rev_wet->setValueA(10 * DspConfig::instance().get<float>(DspConfig::reverb_wet));
+    ui->rev_bass->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_bassboost));
+    ui->rev_spin->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_lfo_spin));
+    ui->rev_wander->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_lfo_wander));
+    ui->rev_decay->setValueA(100 * DspConfig::instance().get<float>(DspConfig::reverb_decay));
+    ui->rev_delay->setValueA(10 * DspConfig::instance().get<float>(DspConfig::reverb_delay));
     ui->rev_lci->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_input));
     ui->rev_lcb->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_bass));
     ui->rev_lcd->setValueA(DspConfig::instance().get<int>(DspConfig::reverb_lpf_damp));
