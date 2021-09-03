@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\binaryBlobs.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\arbEqConv.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\bs2b.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\convolver1D.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\crossfeed.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\dbb.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\dynamic.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\cpthread.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\fft.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\nseel-compiler.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\nseel-ram.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\codelet.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\cpoly.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FFTConvolver.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\cos_fib_paraunitary.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\eqnerror.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\firls.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\generalFdesign.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseASRC.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_sinc.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\MersenneTwister.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\quadprog.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\inv.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\mldivide.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\mrdivide.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\pinv.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\solvopt.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\s_str.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\y.tab.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\firEqualizer.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\liveprogWrapper.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\reverb.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\stereoEnhancement.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\vacuumTube.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\vdc.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\ArbFIRGen.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\digitalFilters.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\generalProg.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\interpolation.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\spectralInterpolatorFloat.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\TwoStageFFTConvolver.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\jdspController.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\cpthread.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dirent.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dr_flac.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dr_mp3.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dr_wav.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\eelCommon.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\eel_matrix.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\fft.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\glue_port.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\ns-eel-int.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\ns-eel.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\codelet.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\cpoly.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FFTConvolver.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\fdesign.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseASRC.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseFilterbank.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\common.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_config.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\quadprog.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\solvopt.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\stb_sprintf.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\s_str.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\ArbFIRGen.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\digitalFilters.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\interpolation.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\spectralInterpolatorFloat.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\TwoStageFFTConvolver.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\jdsp_header.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{0B79F137-4D4B-448F-95FF-2E6D56BE770B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>JamesDSPLib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <ProjectName>JamesDSPLib</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>.;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>.;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>.;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>.;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <OpenMPSupport>
+      </OpenMPSupport>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <PrecompiledHeaderFile />
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <OpenMPSupport>
+      </OpenMPSupport>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <PrecompiledHeaderFile />
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+      <OmitFramePointers>false</OmitFramePointers>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <OpenMPSupport>
+      </OpenMPSupport>
+      <PrecompiledHeaderFile />
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <OpenMPSupport>
+      </OpenMPSupport>
+      <PrecompiledHeaderFile />
+      <ControlFlowGuard>
+      </ControlFlowGuard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>CompileAsC</CompileAs>
+      <OmitFramePointers>true</OmitFramePointers>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

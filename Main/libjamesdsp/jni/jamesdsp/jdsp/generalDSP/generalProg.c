@@ -1,6 +1,9 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <math.h>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 double mapVal(double x, double in_min, double in_max, double out_min, double out_max)
 {
 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -233,4 +236,27 @@ double randXorshift(uint64_t s[2])
 {
 	const union { uint64_t i; double d; } u = { .i = UINT64_C(0x3FF) << 52 | next(s) >> 12 };
 	return 2.0 * (u.d - 1.5);
+}
+unsigned int updateSplane(unsigned int order, double *QValsList)
+{
+	unsigned int pairs = order >> 1;
+	unsigned int oddPoles = order & 1;
+	double poleInc = M_PI / (double)order;
+
+	// show coefficients
+	double firstAngle = poleInc;
+	unsigned int offset;
+	if (!oddPoles)
+	{
+		firstAngle = firstAngle / 2.0;
+		offset = 0;
+	}
+	else
+	{
+		QValsList[0] = 0.5;
+		offset = 1;
+	}
+	for (unsigned int idx = 0; idx < pairs; idx++)
+		QValsList[offset + idx] = 1.0 / (2.0 * cos(firstAngle + idx * poleInc));
+	return pairs + offset;
 }

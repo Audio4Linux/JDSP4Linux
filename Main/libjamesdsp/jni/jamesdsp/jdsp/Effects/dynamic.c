@@ -17,7 +17,7 @@ void JLimiterInit(JamesDSPLib *jdsp)
 #include <string.h>
 #include <math.h>
 #include <float.h>
-#include "jdsp/Effects/eel2/numericSys/codelet.h"
+#include "eel2/numericSys/codelet.h"
 #ifndef min
 #define min(a,b) (((a)<(b))?(a):(b))
 #endif
