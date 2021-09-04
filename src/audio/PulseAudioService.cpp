@@ -1,4 +1,4 @@
-#include "AudioManager.h"
+#include "PulseAudioService.h"
 
 #include "Utils.h"
 #include "PipelineManager.h"
@@ -6,7 +6,7 @@
 
 #include <gstjamesdsp.h>
 
-AudioManager::AudioManager()
+PulseAudioService::PulseAudioService()
 {
     Glib::init();
     gst_init (nullptr, nullptr);
@@ -36,7 +36,7 @@ AudioManager::AudioManager()
      apt->start();
 }
 
-AudioManager::~AudioManager()
+PulseAudioService::~PulseAudioService()
 {
     mgr.get()->terminateLoop();
     if(!apt->wait(300)){
@@ -49,5 +49,29 @@ AudioManager::~AudioManager()
 
     /* Make sure the PipelineManager is not referenced anymore and was destroyed */
     assert(mgr.use_count() == 0);
+}
+
+void PulseAudioService::update(DspConfig *config)
+{
+    auto* ptr = mgr.get()->getDsp();
+
+    if(ptr == nullptr)
+    {
+        util::error("PulseAudioService::update: JamesDspElement is NULL. Cannot update configuration.");
+        return;
+    }
+
+    mgr.get()->getDsp()->update(config);
+}
+
+void PulseAudioService::reloadLiveprog()
+{
+    mgr.get()->getDsp()->reloadLiveprog();
+}
+
+void PulseAudioService::reloadService()
+{
+    mgr.get()->unlink();
+    mgr.get()->link();
 }
 

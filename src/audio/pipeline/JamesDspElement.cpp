@@ -30,21 +30,6 @@ JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
     }
 
     _cache = new DspConfig();
-
-    auto temp = new DspConfig();
-    temp->set(DspConfig::master_enable, true);
-    temp->set(DspConfig::bass_enable, false);
-    temp->set(DspConfig::bass_maxgain, 10);
-    temp->set(DspConfig::crossfeed_enable, false);
-    temp->set(DspConfig::crossfeed_mode, 3);
-
-    temp->set(DspConfig::reverb_wet, 0.3);
-    temp->set(DspConfig::reverb_enable, true);
-
-    temp->set(DspConfig::Key::liveprog_enable, false);
-    temp->set(DspConfig::Key::liveprog_file, "/home/tim/.config/jamesdsp/liveprog/phaseshifter.eel");
-    update(temp);
-    delete temp;
 }
 
 void JamesDspElement::updateLimiter(DspConfig* config)
@@ -91,7 +76,7 @@ void JamesDspElement::updateFirEqualizer(DspConfig *config)
         else if (!interpolationExists) interpolationMode = 0;
     }
 
-    std::string str = config->get<std::string>(DspConfig::tone_eq);
+    std::string str = chopDoubleQuotes(config->get<QString>(DspConfig::tone_eq)).toStdString();
     std::vector<string> v;
     std::stringstream ss(str);
 
@@ -123,7 +108,7 @@ void JamesDspElement::updateVdc(DspConfig *config)
     bool fileExists;
 
     bool ddcEnable = config->get<bool>(DspConfig::ddc_enable, &enableExists);
-    QString ddcFile = config->get<QString>(DspConfig::ddc_file, &fileExists);
+    QString ddcFile = chopDoubleQuotes(config->get<QString>(DspConfig::ddc_file, &fileExists));
 
     if(!enableExists || !fileExists)
     {
@@ -135,6 +120,12 @@ void JamesDspElement::updateVdc(DspConfig *config)
     if(ddcEnable)
     {
         QFile f(ddcFile);
+        if(!f.exists())
+        {
+            util::warning("JamesDspElement::updateVdc: Referenced file does not exist 'ddc_file'");
+            return;
+        }
+
         if (!f.open(QFile::ReadOnly | QFile::Text))
         {
             util::error("JamesDspElement::updateVdc: Cannot open file path in property 'ddc_file'");
@@ -225,13 +216,18 @@ void JamesDspElement::updateConvolver(DspConfig *config)
     bool waveEditExists;
     bool optModeExists;
 
-    QString file = config->get<QString>(DspConfig::convolver_file, &fileExists);
-    QString waveEdit = config->get<QString>(DspConfig::convolver_waveform_edit, &waveEditExists);
+    QString file = chopDoubleQuotes(config->get<QString>(DspConfig::convolver_file, &fileExists));
+    QString waveEdit = chopDoubleQuotes(config->get<QString>(DspConfig::convolver_waveform_edit, &waveEditExists));
     int optMode = config->get<int>(DspConfig::convolver_optimization_mode, &optModeExists);
 
     if(!fileExists)
     {
         util::error("JamesDspElement::updateConvolver: convolver_file property missing. Cannot update convolver state.");
+        return;
+    }
+
+    if(file.isEmpty())
+    {
         return;
     }
 
@@ -243,9 +239,8 @@ void JamesDspElement::updateConvolver(DspConfig *config)
         if(!waveEditExists) waveEdit = "-80;-100;23;12;17;28";
     }
 
-    std::string str = config->get<std::string>(DspConfig::tone_eq);
     std::vector<string> v;
-    std::stringstream ss(str);
+    std::stringstream ss(waveEdit.toStdString());
 
     while (ss.good()) {
         std::string substr;
@@ -297,6 +292,8 @@ void JamesDspElement::updateConvolver(DspConfig *config)
 
 bool JamesDspElement::update(DspConfig *config)
 {
+    util::debug("JamesDspElement::update called");
+
     QMetaEnum e = QMetaEnum::fromType<DspConfig::Key>();
 
     bool refreshReverb = false;
@@ -379,7 +376,7 @@ bool JamesDspElement::update(DspConfig *config)
                 ArbitraryResponseEqualizerDisable(this->_dsp);
             break;
         case DspConfig::graphiceq_param:
-            ArbitraryResponseEqualizerStringParser(this->_dsp, current.toString().toLocal8Bit().data());
+            ArbitraryResponseEqualizerStringParser(this->_dsp, chopDoubleQuotes(current.toString()).toLocal8Bit().data());
             break;
         case DspConfig::reverb_enable:
             if(current.toBool())
@@ -413,7 +410,13 @@ bool JamesDspElement::update(DspConfig *config)
                 LiveProgDisable(this->_dsp);
             break;
         case DspConfig::liveprog_file: {
-                QFile f(current.toString());
+                QFile f(chopDoubleQuotes(current.toString()));
+                if(!f.exists())
+                {
+                    util::warning("JamesDspElement::update: Referenced file does not exist 'liveprog_file'");
+                    break;
+                }
+
                 if (!f.open(QFile::ReadOnly | QFile::Text))
                 {
                     util::error("JamesDspElement::update: Cannot open file path in property 'liveprog_file'");
@@ -521,4 +524,37 @@ bool JamesDspElement::update(DspConfig *config)
     }
 
     return true;
+}
+
+void JamesDspElement::reloadLiveprog()
+{
+    bool propExists;
+    QString file = chopDoubleQuotes(_cache->get<QString>(DspConfig::liveprog_file, &propExists));
+
+    if(!propExists)
+    {
+        util::warning("JamesDspElement::refreshLiveprog: liveprog_file property not found in cache. Cannot reload.");
+        return;
+    }
+
+    QFile f(file);
+    if(!f.exists())
+    {
+        util::warning("JamesDspElement::refreshLiveprog: Referenced file does not exist anymore. Cannot reload.");
+        return;
+    }
+
+    if (!f.open(QFile::ReadOnly | QFile::Text))
+    {
+        util::error("JamesDspElement::refreshLiveprog: Cannot open file path");
+        return;
+    }
+    QTextStream in(&f);
+
+    int ret = LiveProgStringParser(this->_dsp, in.readAll().toLocal8Bit().data());
+    if(ret <= 0)
+    {
+        util::error("JamesDspElement::refreshLiveprog: Syntax error in script file, cannot load. Reason: " + std::string(checkErrorCode(ret)));
+    }
+    // TODO report liveprog result
 }

@@ -22,6 +22,8 @@
 
 #include "data/PresetProvider.h"
 
+#include "IAudioService.h"
+
 // Minimum required version of gst-plugin-jamesdsp
 #define MINIMUM_PLUGIN_VERSION "2.0.0"
 
@@ -88,8 +90,7 @@ public slots:
 
 private slots:
 	void        disableFx();
-	void        onUpdate(bool = true);
-	void        onRelease();
+    void        onUpdate();
 	void        resetEQ();
 	void        eqPresetSelectionUpdated();
 	void        updateUnitLabel(int,
@@ -134,7 +135,7 @@ private:
 	QFrame *settingsFragmentHost;
 	QVBoxLayout *settingsHostLayout;
 
-    AudioManager* audioManager;
+    IAudioService* audioService;
 
 	bool spectrumReloadSignalQueued   = false;
 	bool lockapply                    = false;

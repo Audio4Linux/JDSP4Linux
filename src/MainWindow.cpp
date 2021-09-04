@@ -1,4 +1,4 @@
-#include <AudioManager.h>
+#include <PulseAudioService.h>
 
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
@@ -65,7 +65,8 @@ MainWindow::MainWindow(QString  exepath,
 
     // Prepare audio subsystem
     {
-        audioManager = new AudioManager();
+        audioService = new PulseAudioService();
+        connect(&DspConfig::instance(), &DspConfig::updated, audioService, &IAudioService::update);
     }
 
 	// Prepare base UI
@@ -749,18 +750,9 @@ void MainWindow::disableFx()
 }
 
 // ---Reloader
-void MainWindow::onUpdate(bool ignoremode)
+void MainWindow::onUpdate()
 {
-	// Will be called when slider has been moved, dynsys/eq preset set or spinbox changed
-	if ((ignoremode || AppConfig::instance().getAutoFxMode() == 0) && !lockapply)
-	{
-		applyConfig();
-	}
-}
-
-void MainWindow::onRelease()
-{
-	if ((AppConfig::instance().getAutoFxMode() == 1) && !lockapply)
+    if (!lockapply)
 	{
 		applyConfig();
 	}
@@ -768,8 +760,9 @@ void MainWindow::onRelease()
 
 void MainWindow::restart()
 {
-	// TODO
+    audioService->reloadService();
 
+    // TODO
 	spectrumReloadSignalQueued = true;
 }
 
@@ -1094,8 +1087,8 @@ void MainWindow::applyConfig()
 	ui->graphicEq->store(streq);
     DspConfig::instance().set(DspConfig::graphiceq_param,           QVariant("\"" + streq + "\""));
 
-	DspConfig::instance().save();
-	// TODO restart engine
+    DspConfig::instance().commit();
+    DspConfig::instance().save();
 }
 
 // ---Predefined Presets
@@ -1143,11 +1136,11 @@ void MainWindow::bs2bPresetSelectionUpdated()
 	}
 
 	// TODO
-	ui->bs2b_custom_box->setEnabled(index == -1);
+    ui->bs2b_custom_box->setEnabled(index == 99);
 
 	lockapply = false;
 	updateAllUnitLabels();
-	onUpdate(true);
+    onUpdate();
 }
 
 void MainWindow::reverbPresetSelectionUpdated()
@@ -1178,7 +1171,7 @@ void MainWindow::reverbPresetSelectionUpdated()
 	ui->rev_delay->setValueA((int) (data.p16 * 10));
 	updateAllUnitLabels();
 	lockapply = false;
-	onUpdate(true);
+    onUpdate();
 }
 
 // ---Status
@@ -1279,12 +1272,6 @@ void MainWindow::updateUnitLabel(int      d,
 
 		updateTooltipLabelUnit(obj, pre + QString::number(d) + post, alt == nullptr);
 	}
-
-	if (!lockapply || obj != nullptr)
-	{
-		onUpdate(false);
-	}
-
 }
 
 void MainWindow::updateTooltipLabelUnit(QObject       *sender,
@@ -1694,11 +1681,12 @@ void MainWindow::setLiveprogSelection(QString path)
 
 			connect(sld, SIGNAL(valueChangedA(int)),       this, SLOT(updateUnitLabel(int)));
 			connect(sld, &QAbstractSlider::sliderReleased, [this, sld, prop] {
-				// TODO: Add DBus hook to reload the EEL VM
 				float val = sld->valueA() / 100.f;
 				prop->setValue(val);
 				_eelparser->manipulateProperty(prop);
 				ui->liveprog_reset->setEnabled(_eelparser->canLoadBackup());
+
+                audioService->reloadLiveprog();
 			});
 
 		}
@@ -1725,6 +1713,8 @@ void MainWindow::resetLiveprogParams()
 		QMessageBox::warning(this, "Error", "Cannot load backup\nThe backup file doesn't exist anymore.");
 	}
 
+    audioService->reloadLiveprog();
+
 	setLiveprogSelection(_eelparser->getPath());
 }
 
@@ -1740,7 +1730,9 @@ void MainWindow::updateFromEelEditor(QString path)
 		EELParser parser;
 		parser.loadFile(path);
 		parser.deleteBackup();
-		parser.deleteLater();
+
+        // TODO: Should we reload here or create a dedicated button in the editor?
+        audioService->reloadLiveprog();
 	}
 }
 
@@ -1801,7 +1793,7 @@ void MainWindow::setEq(const QVector<double> &data)
 	lockapply = true;
 	ui->eq_widget->setBands(QVector<double>(data));
 	lockapply = false;
-	onUpdate(true);
+    onUpdate();
 }
 
 void MainWindow::resetEQ()
@@ -1893,7 +1885,7 @@ void MainWindow::connectActions()
 	connect(w, SIGNAL(valueChangedA(int)), this, SLOT(updateUnitLabel(int)));
 
 	foreach(QWidget * w, registerSliderRelease)
-	connect(w, SIGNAL(sliderReleased()), this, SLOT(onRelease()));
+    connect(w, SIGNAL(sliderReleased()), this, SLOT(onUpdate()));
 
 	foreach(QWidget * w, registerClick)
 	connect(w,                      SIGNAL(clicked()),                this, SLOT(onUpdate()));
@@ -1906,9 +1898,9 @@ void MainWindow::connectActions()
 	connect(ui->eq_r_fixed,         SIGNAL(clicked()),                this, SLOT(applyConfig()));
 	connect(ui->eq_r_flex,          SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
-	connect(ui->eqfiltertype,       SIGNAL(currentIndexChanged(int)), this, SLOT(onRelease()));
-	connect(ui->eqinterpolator,     SIGNAL(currentIndexChanged(int)), this, SLOT(onRelease()));
-	connect(ui->conv_ir_opt,        SIGNAL(currentIndexChanged(int)), this, SLOT(onRelease()));
+    connect(ui->eqfiltertype,       SIGNAL(currentIndexChanged(int)), this, SLOT(onUpdate()));
+    connect(ui->eqinterpolator,     SIGNAL(currentIndexChanged(int)), this, SLOT(onUpdate()));
+    connect(ui->conv_ir_opt,        SIGNAL(currentIndexChanged(int)), this, SLOT(onUpdate()));
 
 	connect(ui->eq_widget,          SIGNAL(bandsUpdated()),           this, SLOT(applyConfig()));
 	connect(ui->eq_widget,          SIGNAL(mouseReleased()),          this, SLOT(updateEqStringFromWidget()));
@@ -1919,20 +1911,20 @@ void MainWindow::connectActions()
 
 	connect(ui->crossfeed_mode,     SIGNAL(currentIndexChanged(int)), this, SLOT(bs2bPresetSelectionUpdated()));
 
-	connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::onRelease);
-	connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::onRelease);
+    connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::onUpdate);
+    connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::onUpdate);
 	connect(ui->graphicEq,          &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving)
 	{
 		if (!isMoving)
 		{
-		    onRelease();
+            onUpdate();
 		}
 	});
 	connect(ui->eq_dyn_widget, &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving)
 	{
 		if (!isMoving)
 		{
-		    onRelease();
+            onUpdate();
 		}
 	});
 

@@ -75,6 +75,7 @@ FORMS += \
     MainWindow.ui
 
 HEADERS += \
+    IAudioService.h \
     config/AppConfig.h \
     config/ConfigContainer.h \
     config/ConfigIO.h \

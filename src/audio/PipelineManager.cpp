@@ -513,6 +513,11 @@ SinkElement *PipelineManager::getSink() const
     return sink;
 }
 
+JamesDspElement *PipelineManager::getDsp() const
+{
+    return dsp;
+}
+
 /**
  * @brief PipelineManager::unlink
  * @note Call this after performing changes to the filter container and before \c link(). Free all removed elements after this call

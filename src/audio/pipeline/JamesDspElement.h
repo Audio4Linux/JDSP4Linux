@@ -13,6 +13,7 @@ class JamesDspElement : public FilterElement
 public:
     JamesDspElement();
     bool update(DspConfig* config);
+    void reloadLiveprog();
 
 private:
     JamesDSPLib* _dsp;

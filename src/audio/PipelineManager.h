@@ -44,6 +44,7 @@ public:
     bool                appsWantToPlay();
     SourceElement*      getSource() const;
     SinkElement*        getSink() const;
+    JamesDspElement*    getDsp() const;
 
     void                getLatency();
 

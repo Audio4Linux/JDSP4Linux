@@ -114,6 +114,11 @@ public:
         _conf->setValue(QVariant::fromValue(key).toString(), value);
 	}
 
+    void commit()
+    {
+        emit updated(this);
+    }
+
 	template<class T>
     T get(const Key &key, bool* exists = nullptr)
 	{
@@ -163,6 +168,10 @@ public:
         {
             return Type::Float;
         }
+        if(type == (int)QMetaType::Float)
+        {
+            return Type::Float;
+        }
         if(type == QVariant::Type::String)
         {
             return Type::String;
@@ -196,6 +205,7 @@ public:
 
 		_conf->setConfigMap(map);
 		emit configBuffered();
+        emit updated(this);
 	}
 
 	void load(const QString &string)
@@ -211,6 +221,7 @@ public:
 
 		_conf->setConfigMap(map);
 		emit configBuffered();
+        emit updated(this);
 	}
 
 	void loadDefault()
@@ -225,12 +236,14 @@ public:
 			auto map = ConfigIO::readString(file.readAll());
 			_conf->setConfigMap(map);
 			emit configBuffered();
+            emit updated(this);
 		}
 
 	}
 
 signals:
 	void configBuffered();
+    void updated(DspConfig* self);
 
 private:
 	ConfigContainer *_conf;
