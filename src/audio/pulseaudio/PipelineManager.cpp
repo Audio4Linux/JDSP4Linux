@@ -403,6 +403,16 @@ void PipelineManager::getLatency() {
     gst_query_unref(q);
 }
 
+void PipelineManager::reallocDsp()
+{
+    unlink();
+
+    delete dsp;
+    dsp = new JamesDspElement();
+
+    link();
+}
+
 bool PipelineManager::appsWantToPlay() {
     bool wants_to_play = false;
 
@@ -524,6 +534,7 @@ JamesDspElement *PipelineManager::getDsp() const
  */
 void PipelineManager::unlink(){
     assert(source != NULL);
+    assert(dsp != NULL);
     assert(sink != NULL);
 
     std::vector<GstElement*> elements = source->getPartialPipeline();
@@ -564,6 +575,7 @@ void PipelineManager::unlink(){
 
 void PipelineManager::link(){
     assert(source != NULL);
+    assert(dsp != NULL);
     assert(sink != NULL);
 
     /* Add the elements to the pipeline and link them together */

@@ -78,7 +78,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>2</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -488,6 +488,41 @@
                     <property name="frame">
                      <bool>true</bool>
                     </property>
+                    <item>
+                     <property name="text">
+                      <string>BS2B Weak</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>BS2B Strong</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>BS2B Custom</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Out of head</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Surround 1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Surround 2</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Joe0Bloggs Realistic Surround</string>
+                     </property>
+                    </item>
                    </widget>
                   </item>
                   <item>

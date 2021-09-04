@@ -48,6 +48,8 @@ public:
 
     void                getLatency();
 
+    void                reallocDsp();
+
     sigc::signal
     <void, int>         new_latency;
     GMutex*             pipelineLock;

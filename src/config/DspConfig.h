@@ -238,7 +238,6 @@ public:
 			emit configBuffered();
             emit updated(this);
 		}
-
 	}
 
 signals:

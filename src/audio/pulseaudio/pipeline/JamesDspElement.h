@@ -13,7 +13,7 @@ class JamesDspElement : public FilterElement
 public:
     JamesDspElement();
     bool update(DspConfig* config);
-    void reloadLiveprog();
+    void reloadLiveprog(DspConfig* config = nullptr);
 
 private:
     JamesDSPLib* _dsp;
@@ -25,6 +25,8 @@ private:
     void updateCompressor(DspConfig *config);
     void updateReverb(DspConfig *config);
     void updateConvolver(DspConfig *config);
+    void updateGraphicEq(DspConfig *config);
+    void updateCrossfeed(DspConfig *config);
 };
 
 #endif // JAMESDSPELEMENT_H

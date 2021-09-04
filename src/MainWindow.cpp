@@ -241,7 +241,7 @@ MainWindow::MainWindow(QString  exepath,
 		QMenu *menu = new QMenu();
 		spectrum = new QAction("Reload spectrum", this);
 		connect(spectrum, &QAction::triggered, this, &MainWindow::restartSpectrum);
-		menu->addAction(tr("Reload JDSP"),       this, SLOT(restart()));
+        menu->addAction(tr("Reload JamesDSP"),   this, SLOT(restart()));
 		menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
 		menu->addAction(spectrum);
 		menu->addAction(tr("Driver status"),     this, [this]()
@@ -321,11 +321,6 @@ MainWindow::MainWindow(QString  exepath,
 		{
 			ui->eqpreset->addItem(preset);
 		}
-
-		for (const auto &preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().keys())
-		{
-			ui->crossfeed_mode->insertItem(ui->crossfeed_mode->count(), preset);
-		}
 	}
 
 	// Connect UI signals
@@ -386,6 +381,7 @@ MainWindow::MainWindow(QString  exepath,
 
 MainWindow::~MainWindow()
 {
+    delete audioService;
 	delete ui;
 }
 
@@ -832,7 +828,10 @@ void MainWindow::saveExternalFile()
 void MainWindow::loadConfig()
 {
 	lockapply = true;
-// TODO check where float is needed
+
+    auto dsp = &DspConfig::instance();
+    dsp->get<bool>(DspConfig::master_enable);
+
     trayIcon->changedDisableFx(!DspConfig::instance().get<bool>(DspConfig::master_enable));
     ui->disableFX->setChecked(!DspConfig::instance().get<bool>(DspConfig::master_enable));
 
@@ -865,9 +864,11 @@ void MainWindow::loadConfig()
     ui->stereowide_level->setValueA(DspConfig::instance().get<int>(DspConfig::stereowide_level));
 
     ui->bs2b->setChecked(DspConfig::instance().get<bool>(DspConfig::crossfeed_enable));
-    ui->crossfeed_mode->setCurrentText(PresetProvider::BS2B::reverseLookup(DspConfig::instance().get<int>(DspConfig::crossfeed_mode)));
+    int bs2bMode = DspConfig::instance().get<int>(DspConfig::crossfeed_mode);
+    ui->crossfeed_mode->setCurrentText(PresetProvider::BS2B::reverseLookup(bs2bMode));
     ui->bs2b_feed->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_feed));
     ui->bs2b_fcut->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_fcut));
+    ui->bs2b_custom_box->setEnabled(bs2bMode == 99);
 
     ui->enable_comp->setChecked(DspConfig::instance().get<bool>(DspConfig::compression_enable));
     ui->comp_maxattack->setValueA(DspConfig::instance().get<int>(DspConfig::compression_maxatk));
@@ -991,12 +992,18 @@ void MainWindow::loadConfig()
 	updateAllUnitLabels();
 	updateIrsSelection();
 	updateDDCSelection();
+    reloadLiveprog();
 
 	lockapply = false;
 }
 
 void MainWindow::applyConfig()
 {
+    if(lockapply)
+    {
+        return;
+    }
+
     DspConfig::instance().set(DspConfig::master_enable,              QVariant(!ui->disableFX->isChecked()));
 
     DspConfig::instance().set(DspConfig::tube_enable,                QVariant(ui->analog->isChecked()));
@@ -1094,7 +1101,7 @@ void MainWindow::applyConfig()
 // ---Predefined Presets
 void MainWindow::eqPresetSelectionUpdated()
 {
-	if (ui->eqpreset->currentText() == "Custom")
+    if (ui->eqpreset->currentText() == "Custom" || lockapply)
 	{
 		return;
 	}
@@ -1113,16 +1120,15 @@ void MainWindow::eqPresetSelectionUpdated()
 
 void MainWindow::bs2bPresetSelectionUpdated()
 {
-	if (ui->crossfeed_mode->currentText() == "...")
+    if (ui->crossfeed_mode->currentText() == "..." || lockapply)
 	{
 		return;
 	}
 
 	const auto index = PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText());
-	lockapply = true;
-
 
 	// TODO Verify values
+    lockapply = true;
 	switch (index)
 	{
 		case 0: // BS2B weak
@@ -1135,17 +1141,16 @@ void MainWindow::bs2bPresetSelectionUpdated()
 			break;
 	}
 
-	// TODO
     ui->bs2b_custom_box->setEnabled(index == 99);
+    lockapply = false;
 
-	lockapply = false;
 	updateAllUnitLabels();
     onUpdate();
 }
 
 void MainWindow::reverbPresetSelectionUpdated()
 {
-	if (ui->roompresets->currentText() == "...")
+    if (ui->roompresets->currentText() == "..." || lockapply)
 	{
 		return;
 	}
@@ -1540,6 +1545,23 @@ void MainWindow::reloadIRS()
 	else
 	{
 		ui->conv_files->addItems(files);
+
+        ui->conv_files->clearSelection();
+
+        if (QFile(activeirs).exists() && !activeirs.contains(AppConfig::instance().getPath("irs_favorites")))
+        {
+            if (ui->conv_files->count() >= 1)
+            {
+                for (int i = 0; i < ui->conv_files->count(); i++)
+                {
+                    if (ui->conv_files->item(i)->text() == QFileInfo(activeirs).fileName())
+                    {
+                        ui->conv_files->setCurrentRow(i);
+                        break;
+                    }
+                }
+            }
+        }
 	}
 
 	lockirsupdate = false;
@@ -1752,6 +1774,11 @@ int MainWindow::extractDefaultEelScripts(bool allowOverride,
 		{
 			continue;
 		}
+
+        if(!QDir(AppConfig::instance().getLiveprogPath()).exists())
+        {
+            QDir().mkpath(AppConfig::instance().getLiveprogPath());
+        }
 
 		QFile file(newpath);
 
@@ -1988,6 +2015,10 @@ void MainWindow::connectActions()
 		        AppConfig::instance().setLastVdcDatabaseId(newId);
 			}
 
+            /* Workaround: Load different file to make sure the config parser notices a change and reloads the DDC engine */
+            DspConfig::instance().set(DspConfig::ddc_file, "");
+            DspConfig::instance().commit();
+
 		    activeddc = absolute + "/temp.vdc";
 		}
 
@@ -2026,7 +2057,10 @@ void MainWindow::connectActions()
 		}
 	});
 
-	connect(ui->conv_files, &QListWidget::itemSelectionChanged, [this] {
+    connect(ui->conv_reload, &QAbstractButton::clicked, this, [this] {
+        reloadIRS();
+    });
+    connect(ui->conv_files, &QListWidget::itemSelectionChanged, [this] {
 		if (lockirsupdate || ui->conv_files->selectedItems().count() < 1)
 		{
 		    return; // Clearing Selection by code != User Interaction

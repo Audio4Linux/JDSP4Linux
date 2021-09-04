@@ -8,7 +8,7 @@ QT       += core gui xml network dbus svg multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = jdsp-gui
+TARGET = jamesdsp
 TEMPLATE = app
 !msvc {
     QMAKE_CXXFLAGS += "-Wno-old-style-cast -Wno-double-promotion -Wno-unused-function"
@@ -16,7 +16,7 @@ TEMPLATE = app
 
 include(../3rdparty/3rdparty.pri)
 
-include(audio/AudioCore.pri)
+include(audio/pulseaudio/PulseaudioCore.pri)
 
 include(subprojects/Visualization/SpectrumAudioViewer.pri)
 include(subprojects/FlatTabWidget/FlatTabWidget.pri)

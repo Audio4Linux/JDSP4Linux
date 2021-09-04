@@ -215,10 +215,18 @@ void JamesDspElement::updateConvolver(DspConfig *config)
     bool fileExists;
     bool waveEditExists;
     bool optModeExists;
+    bool enableExists;
 
     QString file = chopDoubleQuotes(config->get<QString>(DspConfig::convolver_file, &fileExists));
     QString waveEdit = chopDoubleQuotes(config->get<QString>(DspConfig::convolver_waveform_edit, &waveEditExists));
     int optMode = config->get<int>(DspConfig::convolver_optimization_mode, &optModeExists);
+    bool enabled = config->get<bool>(DspConfig::convolver_enable, &enableExists);
+
+    if(!enableExists)
+    {
+        util::warning("JamesDspElement::updateConvolver: Enable switch unset. Disabling convolver.");
+        enabled = false;
+    }
 
     if(!fileExists)
     {
@@ -279,7 +287,14 @@ void JamesDspElement::updateConvolver(DspConfig *config)
 
     util::debug("JamesDspElement::updateConvolver: Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
 
+    Convolver1DDisable(this->_dsp);
+
     int success = Convolver1DLoadImpulseResponse(this->_dsp, impulse, impInfo[0], impInfo[1]);
+
+    if(enabled)
+        Convolver1DEnable(this->_dsp);
+    else
+        Convolver1DDisable(this->_dsp);
 
     if(success <= 0)
     {
@@ -288,6 +303,86 @@ void JamesDspElement::updateConvolver(DspConfig *config)
 
     delete[] impInfo;
     free(impulse);
+}
+
+void JamesDspElement::updateGraphicEq(DspConfig *config)
+{
+    bool paramExists;
+    bool enableExists;
+
+    QString eq = chopDoubleQuotes(config->get<QString>(DspConfig::graphiceq_param, &paramExists));
+    bool enabled = config->get<bool>(DspConfig::graphiceq_enable, &enableExists);
+
+    if(!enableExists)
+    {
+        util::warning("JamesDspElement::updateGraphicEq: Enable switch unset. Disabling graphic eq.");
+        enabled = false;
+    }
+
+    if(!paramExists)
+    {
+        util::error("JamesDspElement::updateGraphicEq: graphiceq_param property missing. Cannot update GraphicEq state.");
+        return;
+    }
+
+    if(enabled)
+    {
+        ArbitraryResponseEqualizerStringParser(this->_dsp, eq.toLocal8Bit().data());
+        ArbitraryResponseEqualizerEnable(this->_dsp);
+    }
+    else
+        ArbitraryResponseEqualizerDisable(this->_dsp);
+}
+
+void JamesDspElement::updateCrossfeed(DspConfig* config)
+{
+    bool modeExists;
+    bool enableExists;
+    int mode = config->get<int>(DspConfig::crossfeed_mode, &modeExists);
+    int enabled = config->get<bool>(DspConfig::crossfeed_enable, &enableExists);
+
+    if(!modeExists)
+    {
+        util::warning("JamesDspElement::update: Crossfeed mode unset, using defaults");
+    }
+
+    if(!enableExists)
+    {
+        util::warning("JamesDspElement::update: Crossfeed enable switch unset, disabling crossfeed.");
+        enabled = false;
+    }
+
+    if(mode == 99)
+    {
+        bool fcutExists;
+        bool feedExists;
+        int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut, &fcutExists);
+        int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed, &feedExists);
+
+        if(!fcutExists)
+        {
+            util::warning("JamesDspElement::update: Crossfeed custom fcut unset, using defaults");
+            fcut = 650;
+        }
+        if(!feedExists)
+        {
+            util::warning("JamesDspElement::update: Crossfeed custom feed unset, using defaults");
+            feed = 95;
+        }
+
+        memset(&this->_dsp->advXF.bs2b, 0, sizeof(this->_dsp->advXF.bs2b));
+        BS2BInit(&this->_dsp->advXF.bs2b[1], (unsigned int)this->_dsp->fs, ((unsigned int)fcut | ((unsigned int)feed << 16)));
+        this->_dsp->advXF.mode = 1;
+    }
+    else
+    {
+       CrossfeedChangeMode(this->_dsp, mode);
+    }
+
+    if(enabled)
+        CrossfeedEnable(this->_dsp);
+    else
+        CrossfeedDisable(this->_dsp);
 }
 
 bool JamesDspElement::update(DspConfig *config)
@@ -299,6 +394,10 @@ bool JamesDspElement::update(DspConfig *config)
     bool refreshReverb = false;
     bool refreshCrossfeed = false;
     bool refreshConvolver = false;
+    bool refreshLiveprog = false;
+    bool refreshGraphicEq = false;
+    bool refreshVdc = false;
+
     for (int k = 0; k < e.keyCount(); k++)
     {
         DspConfig::Key key = (DspConfig::Key) e.value(k);
@@ -344,22 +443,12 @@ bool JamesDspElement::update(DspConfig *config)
             updateCompressor(config);
             break;
         case DspConfig::convolver_enable:
-            if(current.toBool())
-                Convolver1DEnable(this->_dsp);
-            else
-                Convolver1DDisable(this->_dsp);
-            break;
         case DspConfig::convolver_file:
         case DspConfig::convolver_optimization_mode:
         case DspConfig::convolver_waveform_edit:
             refreshConvolver = true;
             break;
         case DspConfig::crossfeed_enable:
-            if(current.toBool())
-                CrossfeedEnable(this->_dsp);
-            else
-                CrossfeedDisable(this->_dsp);
-            break;
         case DspConfig::crossfeed_bs2b_fcut:
         case DspConfig::crossfeed_bs2b_feed:
         case DspConfig::crossfeed_mode:
@@ -367,16 +456,11 @@ bool JamesDspElement::update(DspConfig *config)
             break;
         case DspConfig::ddc_enable:
         case DspConfig::ddc_file:
-            updateVdc(config);
+            refreshVdc = true;
             break;
         case DspConfig::graphiceq_enable:
-            if(current.toBool())
-                ArbitraryResponseEqualizerEnable(this->_dsp);
-            else
-                ArbitraryResponseEqualizerDisable(this->_dsp);
-            break;
         case DspConfig::graphiceq_param:
-            ArbitraryResponseEqualizerStringParser(this->_dsp, chopDoubleQuotes(current.toString()).toLocal8Bit().data());
+            refreshGraphicEq = true;
             break;
         case DspConfig::reverb_enable:
             if(current.toBool())
@@ -404,32 +488,8 @@ bool JamesDspElement::update(DspConfig *config)
             refreshReverb = true;
             break;
         case DspConfig::liveprog_enable:
-            if(current.toBool())
-                LiveProgEnable(this->_dsp);
-            else
-                LiveProgDisable(this->_dsp);
-            break;
-        case DspConfig::liveprog_file: {
-                QFile f(chopDoubleQuotes(current.toString()));
-                if(!f.exists())
-                {
-                    util::warning("JamesDspElement::update: Referenced file does not exist 'liveprog_file'");
-                    break;
-                }
-
-                if (!f.open(QFile::ReadOnly | QFile::Text))
-                {
-                    util::error("JamesDspElement::update: Cannot open file path in property 'liveprog_file'");
-                    break;
-                }
-                QTextStream in(&f);
-
-                int ret = LiveProgStringParser(this->_dsp, in.readAll().toLocal8Bit().data());
-                if(ret <= 0)
-                {
-                    util::error("LiveProgStringParser: Syntax error in script file, cannot load. Reason: " + std::string(checkErrorCode(ret)));
-                }
-            }
+        case DspConfig::liveprog_file:
+            refreshLiveprog = true;
             break;
         case DspConfig::master_enable:
             this->setValues("dsp_enable", current.toBool(), NULL);
@@ -468,7 +528,7 @@ bool JamesDspElement::update(DspConfig *config)
                 VacuumTubeDisable(this->_dsp);
             break;
         case DspConfig::tube_pregain:
-            VacuumTubeSetGain(this->_dsp, current.toFloat() / 1000.0f);
+            VacuumTubeSetGain(this->_dsp, current.toFloat() / 100.0f);
             break;
         }
 
@@ -485,51 +545,46 @@ bool JamesDspElement::update(DspConfig *config)
         updateConvolver(config);
     }
 
+    if(refreshLiveprog)
+    {
+        reloadLiveprog();
+    }
+
+    if(refreshGraphicEq)
+    {
+        updateGraphicEq(config);
+    }
+
+    if(refreshVdc)
+    {
+        updateVdc(config);
+    }
+
     if(refreshCrossfeed)
     {
-        bool modeExists;
-        int mode = config->get<int>(DspConfig::crossfeed_mode, &modeExists);
-
-        if(!modeExists)
-        {
-            util::warning("JamesDspElement::update: Crossfeed mode unset, using defaults");
-        }
-
-        if(mode == 99)
-        {
-            bool fcutExists;
-            bool feedExists;
-            int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut, &fcutExists);
-            int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed, &feedExists);
-
-            if(!fcutExists)
-            {
-                util::warning("JamesDspElement::update: Crossfeed custom fcut unset, using defaults");
-                fcut = 650;
-            }
-            if(!feedExists)
-            {
-                util::warning("JamesDspElement::update: Crossfeed custom feed unset, using defaults");
-                feed = 95;
-            }
-
-            memset(&this->_dsp->advXF.bs2b, 0, sizeof(this->_dsp->advXF.bs2b));
-            BS2BInit(&this->_dsp->advXF.bs2b[1], (unsigned int)this->_dsp->fs, ((unsigned int)fcut | ((unsigned int)feed << 16)));
-            this->_dsp->advXF.mode = 1;
-        }
-        else
-        {
-           CrossfeedChangeMode(this->_dsp, mode);
-        }
+        updateCrossfeed(config);
     }
 
     return true;
 }
 
-void JamesDspElement::reloadLiveprog()
+void JamesDspElement::reloadLiveprog(DspConfig* config)
 {
+    if(config == nullptr)
+    {
+        config = _cache;
+    }
+
     bool propExists;
-    QString file = chopDoubleQuotes(_cache->get<QString>(DspConfig::liveprog_file, &propExists));
+    bool enableExists;
+    QString file = chopDoubleQuotes(config->get<QString>(DspConfig::liveprog_file, &propExists));
+    bool enabled = config->get<bool>(DspConfig::liveprog_enable, &enableExists);
+
+    if(!enableExists)
+    {
+        util::warning("JamesDspElement::refreshLiveprog: Liveprog enable switch unset. Disabling liveprog.");
+        enabled = false;
+    }
 
     if(!propExists)
     {
@@ -557,4 +612,9 @@ void JamesDspElement::reloadLiveprog()
         util::error("JamesDspElement::refreshLiveprog: Syntax error in script file, cannot load. Reason: " + std::string(checkErrorCode(ret)));
     }
     // TODO report liveprog result
+
+    if(enabled)
+        LiveProgEnable(this->_dsp);
+    else
+        LiveProgDisable(this->_dsp);
 }

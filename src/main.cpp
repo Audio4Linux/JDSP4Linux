@@ -22,6 +22,7 @@
 #include <sys/time.h>
 
 static bool SPIN_ON_CRASH = false;
+static const char* EXEC_NAME = "jamesdsp";
 
 void crash_handled(int fd)
 {
@@ -30,7 +31,11 @@ void crash_handled(int fd)
 
     if(SPIN_ON_CRASH)
     {
-        safe_printf(STDERR_FILENO, "\nSpinning. Please run 'gdb jamesdsp %u' to continue debugging, Ctrl-C to quit, or Ctrl-\ to dump core\n", getpid());
+        safe_printf(STDERR_FILENO, "\nSpinning. Please run 'gdb jamesdsp %u' to continue debugging, Ctrl-C to quit, or Ctrl-\\ to dump core\n", getpid());
+        while(true)
+        {
+            sleep(1);
+        }
     }
     else
     {
@@ -71,6 +76,10 @@ int main(int   argc,
     SPIN_ON_CRASH = parser.isSet(spinlck);
 
 	QLocale::setDefault(QLocale::c());  
+    if(setlocale(LC_NUMERIC, "en_US.UTF-8") == nullptr)
+    {
+        setlocale(LC_NUMERIC, "C");
+    }
 
 	QApplication::setQuitOnLastWindowClosed(false);
 	MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));

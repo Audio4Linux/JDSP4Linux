@@ -72,6 +72,9 @@ void PulseAudioService::reloadLiveprog()
 void PulseAudioService::reloadService()
 {
     mgr.get()->unlink();
+
+
+
     mgr.get()->link();
 }
 

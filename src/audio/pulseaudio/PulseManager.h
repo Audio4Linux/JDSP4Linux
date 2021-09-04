@@ -11,8 +11,13 @@
 #include <iostream>
 #include <memory>
 
-#define SINK_NAME "GstEffectManager"
-#define SINK_DESC "GstEffectManager"
+#define SINK_NAME "JamesDSP"
+#define SINK_DESC "JamesDSP"
+
+/*
+ * Note: Code derived from PulseEffects
+ * https://github.com/wwmm/pulseeffects
+ */
 
 struct myServerInfo {
     std::string server_name;
@@ -128,7 +133,7 @@ private:
     pa_mainloop_api* main_loop_api = nullptr;
     pa_context* context = nullptr;
 
-    std::array<std::string, 10> blacklist_apps = { "-Google Chrome",
+    std::array<std::string, 12> blacklist_apps = { "-Google Chrome", "JamesDSP", "jamesdsp",
         "GstEffectManager", "jdsp-gui", "PulseEffectsWebrtcProbe", "gsd-media-keys",
         "GNOME Shell", "libcanberra", "Screenshot", "speech-dispatcher", "gst-launch-1.0"};
 

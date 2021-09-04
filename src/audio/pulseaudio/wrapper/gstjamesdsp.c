@@ -110,6 +110,7 @@ gst_jamesdsp_init(Gstjamesdsp *self) {
 
     /* initialize properties */
     self->dsp = malloc(sizeof(JamesDSPLib));
+    memset(self->dsp, 0, sizeof(JamesDSPLib));
 
     JamesDSPGlobalMemoryAllocation();
     JamesDSPInit(self->dsp, 128, 48000);
