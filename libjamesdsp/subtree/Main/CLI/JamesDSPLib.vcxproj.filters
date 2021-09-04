@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\binaryBlobs.c">
+      <Filter>jdsp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\jdspController.c">
+      <Filter>jdsp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\ArbFIRGen.c">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\digitalFilters.c">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\generalProg.c">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\interpolation.c">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\spectralInterpolatorFloat.c">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\TwoStageFFTConvolver.c">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\arbEqConv.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\bs2b.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\convolver1D.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\crossfeed.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\dbb.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\dynamic.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\firEqualizer.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\liveprogWrapper.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\reverb.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\stereoEnhancement.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\vacuumTube.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\vdc.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\cpthread.c">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\fft.c">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\nseel-compiler.c">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\nseel-ram.c">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\s_str.c">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\y.tab.c">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\codelet.c">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\cpoly.c">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FFTConvolver.c">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\MersenneTwister.c">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\quadprog.c">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\solvopt.c">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\cos_fib_paraunitary.c">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\eqnerror.c">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\firls.c">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\generalFdesign.c">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseASRC.c">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.c">
+      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_sinc.c">
+      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\inv.c">
+      <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\mldivide.c">
+      <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\mrdivide.c">
+      <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\pinv.c">
+      <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.c">
+      <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="jdsp">
+      <UniqueIdentifier>{32307e4f-5004-403e-87f1-38460fcfffdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects">
+      <UniqueIdentifier>{8b70b9a7-39a4-4c70-bd68-c148db8670bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\generalDSP">
+      <UniqueIdentifier>{ec61943b-81d9-4d2a-9ccc-784c74abe94c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects\eel2">
+      <UniqueIdentifier>{101c3ff2-d4ec-485f-a88a-537b89430d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects\eel2\numericSys">
+      <UniqueIdentifier>{a71ef9a5-5b9b-4037-89a0-45fe8366be7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects\eel2\numericSys\FilterDesign">
+      <UniqueIdentifier>{5adefad5-8491-4bcb-be90-9c0cbb9fdfa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects\eel2\numericSys\libsamplerate">
+      <UniqueIdentifier>{2bc4bd25-ff51-4154-9009-aa55bf1e6dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects\eel2\numericSys\SolveLinearSystem">
+      <UniqueIdentifier>{120faa8f-8a0e-42a8-86c4-bfe62ab09b72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\jdsp_header.h">
+      <Filter>jdsp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\ArbFIRGen.h">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\digitalFilters.h">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\interpolation.h">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\spectralInterpolatorFloat.h">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\TwoStageFFTConvolver.h">
+      <Filter>jdsp\generalDSP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\cpthread.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dirent.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dr_flac.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dr_mp3.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\dr_wav.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\eel_matrix.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\eelCommon.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\fft.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\glue_port.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\ns-eel.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\ns-eel-int.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\s_str.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\stb_sprintf.h">
+      <Filter>jdsp\Effects\eel2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\codelet.h">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\cpoly.h">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FFTConvolver.h">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\quadprog.h">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\solvopt.h">
+      <Filter>jdsp\Effects\eel2\numericSys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\fdesign.h">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseASRC.h">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseFilterbank.h">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\common.h">
+      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.h">
+      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_config.h">
+      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.h">
+      <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

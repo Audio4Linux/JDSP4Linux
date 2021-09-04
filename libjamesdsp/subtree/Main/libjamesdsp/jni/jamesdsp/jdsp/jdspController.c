@@ -105,8 +105,10 @@ void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 	// Output
 	for (i = 0; i < n; i++)
 	{
-		float rect1 = fabsf(jdsp->tmpBuffer[0][i]);
-		float rect2 = fabsf(jdsp->tmpBuffer[1][i]);
+		float xL = jdsp->tmpBuffer[0][i] * jdsp->postGain;
+		float xR = jdsp->tmpBuffer[1][i] * jdsp->postGain;
+		float rect1 = fabsf(xL);
+		float rect2 = fabsf(xR);
 		float maxLR = max(rect1, rect2);
 		if (maxLR < jdsp->limiter.threshold)
 			maxLR = jdsp->limiter.threshold;
@@ -114,9 +116,9 @@ void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 			jdsp->limiter.envOverThreshold = maxLR;
 		else
 			jdsp->limiter.envOverThreshold = maxLR + jdsp->limiter.relCoef * (jdsp->limiter.envOverThreshold - maxLR);
-		float gR = jdsp->limiter.threshold / jdsp->limiter.envOverThreshold * jdsp->postGain;
-		rect1 = jdsp->tmpBuffer[0][i] * gR;
-		rect2 = jdsp->tmpBuffer[1][i] * gR;
+		float gR = jdsp->limiter.threshold / jdsp->limiter.envOverThreshold;
+		rect1 = xL * gR;
+		rect2 = xR * gR;
 		if (rect1 > 1.0f)
 			rect1 = 1.0f;
 		if (rect1 < -1.0f)
