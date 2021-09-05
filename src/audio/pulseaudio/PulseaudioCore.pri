@@ -6,6 +6,7 @@ SOURCES +=  \
     $$PWD/PulseAudioService.cpp \
     $$PWD/PulseManager.cpp \
     $$PWD/RealtimeKit.cpp \
+    $$PWD/Utils.cpp \
     $$PWD/pipeline/FilterElement.cpp \
     $$PWD/pipeline/GstElementProperties.cpp \
     $$PWD/pipeline/JamesDspElement.cpp \

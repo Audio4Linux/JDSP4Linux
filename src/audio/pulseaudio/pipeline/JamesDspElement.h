@@ -2,31 +2,19 @@
 #define JAMESDSPELEMENT_H
 
 #include "FilterElement.h"
+#include "IDspElement.h"
 
 extern "C" {
 #include <jdsp_header.h>
 }
 
 class DspConfig;
-class JamesDspElement : public FilterElement
+class JamesDspElement : public FilterElement, public IDspElement
 {
 public:
     JamesDspElement();
-    bool update(DspConfig* config);
-    void reloadLiveprog(DspConfig* config = nullptr);
+    DspStatus status() override;
 
-private:
-    JamesDSPLib* _dsp;
-    DspConfig* _cache;
-
-    void updateLimiter(DspConfig *config);
-    void updateFirEqualizer(DspConfig *config);
-    void updateVdc(DspConfig *config);
-    void updateCompressor(DspConfig *config);
-    void updateReverb(DspConfig *config);
-    void updateConvolver(DspConfig *config);
-    void updateGraphicEq(DspConfig *config);
-    void updateCrossfeed(DspConfig *config);
 };
 
 #endif // JAMESDSPELEMENT_H

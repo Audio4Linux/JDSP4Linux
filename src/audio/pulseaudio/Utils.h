@@ -9,7 +9,6 @@
 #include <glib.h>
 #include <vector>
 #include <cmath>
-#include <random>
 #include <algorithm>
 #include <sstream>
 
@@ -48,14 +47,7 @@ inline int normalize_unsigned_to_int(T in) {
     return in;
 };
 
-inline int random_number(int max)
-{
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(0, max);
-
-    return dist(mt);
-}
+int random_number(int max);
 
 inline std::string tolower(std::string s) {
     std::transform(s.begin(), s.end(), s.begin(),

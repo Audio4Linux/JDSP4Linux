@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "PipelineManager.h"
 #include "AudioProcessingThread.h"
+#include "DspHost.h"
 
 #include <gstjamesdsp.h>
 
@@ -61,20 +62,16 @@ void PulseAudioService::update(DspConfig *config)
         return;
     }
 
-    mgr.get()->getDsp()->update(config);
+    mgr.get()->getDsp()->host()->update(config);
 }
 
 void PulseAudioService::reloadLiveprog()
 {
-    mgr.get()->getDsp()->reloadLiveprog();
+    mgr.get()->getDsp()->host()->reloadLiveprog();
 }
 
 void PulseAudioService::reloadService()
 {
-    mgr.get()->unlink();
-
-
-
-    mgr.get()->link();
+    mgr.get()->reallocDsp();
 }
 

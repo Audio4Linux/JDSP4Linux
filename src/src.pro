@@ -16,7 +16,7 @@ TEMPLATE = app
 
 include(../3rdparty/3rdparty.pri)
 
-include(audio/pulseaudio/PulseaudioCore.pri)
+include(audio/AudioDrivers.pri)
 
 include(subprojects/Visualization/SpectrumAudioViewer.pri)
 include(subprojects/FlatTabWidget/FlatTabWidget.pri)
@@ -75,7 +75,6 @@ FORMS += \
     MainWindow.ui
 
 HEADERS += \
-    IAudioService.h \
     config/AppConfig.h \
     config/ConfigContainer.h \
     config/ConfigIO.h \
