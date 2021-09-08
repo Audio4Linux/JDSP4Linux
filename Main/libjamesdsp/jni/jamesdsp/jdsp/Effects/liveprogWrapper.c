@@ -100,6 +100,7 @@ int LiveProgStringParser(JamesDSPLib *jdsp, char *eelCode)
 	const char *initSegment = strstr(eelCode, "@init");
 	if (!initSegment)
 	{
+		jdsp_unlock(jdsp);
 		return 0;
 	}
 	else
@@ -107,6 +108,7 @@ int LiveProgStringParser(JamesDSPLib *jdsp, char *eelCode)
 	const char *processSegment = strstr(eelCode, "@sample");
 	if (!processSegment)
 	{
+		jdsp_unlock(jdsp);
 		return -2;
 	}
 	else
