@@ -2,28 +2,38 @@
 #define DSPHOST_H
 
 #include <functional>
-
-#include "config/DspConfig.h"
+#include <any>
 
 extern "C" {
 #include <jdsp_header.h>
 }
 
+class DspConfig;
+class QVariant;
+
 class DspHost
 {
 public:
-    typedef std::function<void(DspConfig::Key,QVariant)> HandleExtraConfigFunc;
+    enum Message {
+        SwitchPassthrough,
+        EelCompilerStart,
+        EelCompilerResult,
+        EelWriteOutputBuffer
+    };
 
-    DspHost(void* dspPtr, HandleExtraConfigFunc&& extraHandler);
+    typedef std::function<void(Message,std::any)> MessageHandlerFunc;
+
+    DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler);
+    ~DspHost();
 
     bool update(DspConfig* config);
     void reloadLiveprog(DspConfig* config = nullptr);
+    void dispatch(Message msg, std::any value);
 
 private:
-    HandleExtraConfigFunc _extraFunc;
+    MessageHandlerFunc _extraFunc;
     JamesDSPLib* _dsp;
     DspConfig* _cache;
-    std::function<void(DspConfig::Key)> _extraHandler;
 
     void updateLimiter(DspConfig *config);
     void updateFirEqualizer(DspConfig *config);
@@ -34,5 +44,8 @@ private:
     void updateGraphicEq(DspConfig *config);
     void updateCrossfeed(DspConfig *config);
 };
+
+/* C interop function */
+static void receiveLiveprogStdOut(const char* buffer, void* userData);
 
 #endif // DSPHOST_H

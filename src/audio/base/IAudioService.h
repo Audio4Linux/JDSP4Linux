@@ -17,7 +17,9 @@ public slots:
     virtual void reloadService() = 0;
 
 signals:
-    void eelCompilationFinished(int ret);
+    void eelCompilationStarted(const QString& scriptName);
+    void eelCompilationFinished(int ret, const QString& retMsg, const QString& msg, const QString& scriptName, float initMs);
+    void eelOutputReceived(const QString& output);
 
 };
 

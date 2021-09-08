@@ -14,15 +14,12 @@
  */
 #ifndef LOG_H
 #define LOG_H
-#include <QDebug>
-#include <QFile>
-#include <QString>
-#include <QTime>
 
-class Log :
-	QObject
+#include <string>
+#include <QString>
+
+class Log
 {
-	Q_OBJECT
 
 public:
 	enum LoggingMode

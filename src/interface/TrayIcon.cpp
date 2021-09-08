@@ -146,7 +146,7 @@ void TrayIcon::updateConvolverList()
 				QAction *newEntry = new QAction(files[i]);
 				connect(newEntry, &QAction::triggered, this, [ = ]()
 				{
-					emit loadIrs(files[i]);
+                    emit loadIrs(path + "/" + files[i]);
 				});
 				tray_convMenu->addAction(newEntry);
 			}

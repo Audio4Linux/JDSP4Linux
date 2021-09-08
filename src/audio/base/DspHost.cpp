@@ -5,9 +5,14 @@
 
 extern "C" {
 #include <JdspImpResToolbox.h>
+#include <EELStdOutExtension.h>
+#include <QElapsedTimer>
 }
 
-DspHost::DspHost(void* dspPtr, HandleExtraConfigFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
+#include <QTextStream>
+#include <QDebug> // <-- remove this later TODO
+
+DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
 {
     _dsp = static_cast<JamesDSPLib*>(dspPtr);
     if(!_dsp)
@@ -24,6 +29,11 @@ DspHost::DspHost(void* dspPtr, HandleExtraConfigFunc&& extraHandler) : _extraFun
     }
 
     _cache = new DspConfig();
+}
+
+DspHost::~DspHost()
+{
+    setStdOutHandler(NULL, NULL);
 }
 
 void DspHost::updateLimiter(DspConfig* config)
@@ -486,8 +496,7 @@ bool DspHost::update(DspConfig *config)
             refreshLiveprog = true;
             break;
         case DspConfig::master_enable:
-            _extraFunc(key, current);
-            //TODO: this->setValues("dsp_enable", current.toBool(), NULL);
+            dispatch(SwitchPassthrough, current.toBool());
             break;
         case DspConfig::master_limrelease:
         case DspConfig::master_limthreshold:
@@ -587,6 +596,9 @@ void DspHost::reloadLiveprog(DspConfig* config)
         return;
     }
 
+    // Attach log listener
+    setStdOutHandler(receiveLiveprogStdOut, this);
+
     QFile f(file);
     if(!f.exists())
     {
@@ -601,15 +613,51 @@ void DspHost::reloadLiveprog(DspConfig* config)
     }
     QTextStream in(&f);
 
+
+    LiveProgDisable(this->_dsp);
+    dispatch(EelCompilerStart, f.fileName());
+
+    QElapsedTimer timer;
+    timer.start();
     int ret = LiveProgStringParser(this->_dsp, in.readAll().toLocal8Bit().data());
+
+    // Workaround due to library bug
+    jdsp_unlock(this->_dsp);
+
+    float msecs = timer.nsecsElapsed() / 1000000.0;
+
+    const char* errorString = NSEEL_code_getcodeerror(this->_dsp->eel.vm);
+    if(errorString != NULL)
+    {
+        util::warning("DspHost::refreshLiveprog: NSEEL_code_getcodeerror: Syntax error in script file, cannot load. Reason: " + std::string(errorString));
+    }
     if(ret <= 0)
     {
-        util::error("DspHost::refreshLiveprog: Syntax error in script file, cannot load. Reason: " + std::string(checkErrorCode(ret)));
+        util::warning("DspHost::refreshLiveprog: " + std::string(checkErrorCode(ret)));
     }
-    // TODO report liveprog result
+
+    QList<QString> resultArgs;
+    resultArgs.append(QString::number(ret));
+    resultArgs.append(errorString == NULL ? "" : errorString);
+    resultArgs.append(f.fileName());
+    resultArgs.append(QString::number(msecs));
+    dispatch(EelCompilerResult, resultArgs);
 
     if(enabled)
         LiveProgEnable(this->_dsp);
     else
         LiveProgDisable(this->_dsp);
+}
+
+void DspHost::dispatch(Message msg, std::any value)
+{
+    _extraFunc(msg, value);
+}
+
+void receiveLiveprogStdOut(const char *buffer, void* userData)
+{
+    DspHost* self = static_cast<DspHost*>(userData);
+    assert(self != nullptr);
+
+    self->dispatch(DspHost::EelWriteOutputBuffer, QString(buffer));
 }

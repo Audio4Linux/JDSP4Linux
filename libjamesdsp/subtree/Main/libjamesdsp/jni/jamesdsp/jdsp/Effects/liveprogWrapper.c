@@ -62,7 +62,7 @@ int LiveProgLoadCode(JamesDSPLib *jdsp, char *codeTextInit, char *codeTextProces
 		return -1;
 	}
 	NSEEL_code_execute(pg->codehandleInit);
-	pg->codehandleProcess = NSEEL_code_compile(pg->vm, codeTextProcess, 0);
+    pg->codehandleProcess = NSEEL_code_compile(pg->vm, codeTextProcess, 0);
 	if (pg->codehandleInit && pg->codehandleProcess)
 	{
 		if (pg->codehandleProcess)
@@ -95,19 +95,19 @@ const char* checkErrorCode(int errCode)
 }
 int LiveProgStringParser(JamesDSPLib *jdsp, char *eelCode)
 {
-	jdsp_lock(jdsp);
+    jdsp_lock(jdsp);
 	long long strLen = (long long)strlen(eelCode);
 	const char *initSegment = strstr(eelCode, "@init");
 	if (!initSegment)
 	{
-		return 0;
+        return 0;
 	}
 	else
 		initSegment += 6;
 	const char *processSegment = strstr(eelCode, "@sample");
 	if (!processSegment)
 	{
-		return -2;
+        return -2;
 	}
 	else
 		processSegment += 8;

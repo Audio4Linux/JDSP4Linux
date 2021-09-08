@@ -12,13 +12,15 @@ JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
 
     assert(!gEnabled); // check if underlying object is fresh
 
-    _host = new DspHost(gDspPtr, [this](DspConfig::Key key, QVariant value){
-        switch(key)
+    _host = new DspHost(gDspPtr, [this](DspHost::Message msg, std::any value){
+        switch(msg)
         {
-            case DspConfig::master_enable:
-                this->setValues("dsp_enable", value.toBool(), NULL);
+            case DspHost::SwitchPassthrough:
+                this->setValues("dsp_enable", std::any_cast<bool>(value), NULL);
                 break;
             default:
+                // Redirect to parent handler
+                _msgHandler(msg, value);
                 break;
         }
     });

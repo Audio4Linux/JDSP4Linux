@@ -1,9 +1,11 @@
 #include "PulseAudioService.h"
 
 #include "Utils.h"
-#include "PipelineManager.h"
-#include "AudioProcessingThread.h"
+#include "PulsePipelineManager.h"
+#include "PulseAudioProcessingThread.h"
 #include "DspHost.h"
+
+#include <QDebug>
 
 #include <gstjamesdsp.h>
 
@@ -29,12 +31,33 @@ PulseAudioService::PulseAudioService()
         abort();
     }
 
-     /* Create a shared thread-safe pointer */
-     mgr = std::make_shared<PipelineManager>();
+    /* Create a shared thread-safe pointer */
+    mgr = std::make_shared<PulsePipelineManager>();
 
-     /* Launch audio processing thread */
-     apt = new AudioProcessingThread(mgr);
-     apt->start();
+    mgr.get()->getDsp()->setMessageHandler([this](DspHost::Message msg, std::any value){
+        switch(msg)
+        {
+            case DspHost::EelCompilerResult: {
+                auto args = std::any_cast<QList<QString>>(value);
+                int ret = args[0].toInt();
+
+                emit eelCompilationFinished(ret, checkErrorCode(ret), args[1], args[2], args[3].toFloat());
+                break;
+            }
+            case DspHost::EelCompilerStart:
+                emit eelCompilationStarted(std::any_cast<QString>(value));
+                break;
+            case DspHost::EelWriteOutputBuffer:
+                emit eelOutputReceived(std::any_cast<QString>(value));
+                break;
+            default:
+                break;
+        }
+    });
+
+    /* Launch audio processing thread */
+    apt = new PulseAudioProcessingThread(mgr);
+    apt->start();
 }
 
 PulseAudioService::~PulseAudioService()

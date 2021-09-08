@@ -37,7 +37,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	/*
 	 * Prepare TreeView
 	 */
-	ui->selector->setCurrentItem(ui->selector->findItems("General", Qt::MatchFlag::MatchExactly).first());
+
+    ui->selector->setCurrentItem(ui->selector->topLevelItem(0));
 	ui->stackedWidget->setCurrentIndex(0);
 	connect(ui->selector, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, QTreeWidgetItem*)>(&QTreeWidget::currentItemChanged), this, [this](QTreeWidgetItem *cur, QTreeWidgetItem*)
 	{
@@ -49,18 +50,18 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 
 				if (cur->text(0) == "Context Menu")
 				{
-				    ui->stackedWidget->setCurrentIndex(5);
+                    ui->stackedWidget->setCurrentIndex(4);
 				}
 
 				if (cur->text(0) == "Advanced")
 				{
-				    ui->stackedWidget->setCurrentIndex(7);
+                    ui->stackedWidget->setCurrentIndex(6);
 				}
 
 				break;
-			case 5:
+            case 4:
 				// -- SA/ROOT
-				ui->stackedWidget->setCurrentIndex(6);
+                ui->stackedWidget->setCurrentIndex(5);
 				break;
 			default:
 				ui->stackedWidget->setCurrentIndex(toplevel_index);
@@ -94,49 +95,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	 */
 	refreshAll();
 
-	/*
-	 * Connect all signals for page General
-	 */
-	connect(ui->glavafix, &QPushButton::clicked, this, [this]
-	{
-		AppConfig::instance().setGFix(ui->glavafix->isChecked());
-	});
-	connect(ui->muteonrestart, &QCheckBox::clicked, this, [this]
-	{
-		AppConfig::instance().setMuteOnRestart(ui->muteonrestart->isChecked());
-	});
-	connect(ui->run_first_launch, &QPushButton::clicked, this, [this]
-	{
-		emit closeClicked();
-		QTimer::singleShot(300, this, &SettingsFragment::launchSetupWizard);
-	});
-	auto autofx_mode = [this]
-					   {
-						   if (lockslot)
-						   {
-							   return;
-						   }
 
-						   int mode = 0;
-
-						   if (ui->aa_instant->isChecked())
-						   {
-							   mode = 0;
-						   }
-						   else if (ui->aa_release->isChecked())
-						   {
-							   mode = 1;
-						   }
-
-						   AppConfig::instance().setAutoFxMode(mode);
-					   };
-	connect(ui->aa_instant,    &QRadioButton::clicked, this, autofx_mode);
-	connect(ui->aa_release,    &QRadioButton::clicked, this, autofx_mode);
-	connect(ui->glavafix_help, &QPushButton::clicked,  this, [this]
-	{
-		QMessageBox::information(this, tr("Help"),
-		                         tr("This fix kills GLava (desktop visualizer) and restarts it after a new config has been applied.\nThis prevents GLava to switch to another audio sink, while JamesDSP is restarting."));
-	});
 	/*
 	 * Connect all signals for Session
 	 */
@@ -463,10 +422,8 @@ void SettingsFragment::refreshAll()
 	ui->irspath->setText(AppConfig::instance().getIrsPath());
 	ui->ddcpath->setText(AppConfig::instance().getDDCPath());
 	ui->liveprog_path->setText(AppConfig::instance().getLiveprogPath());
-	ui->muteonrestart->setChecked(AppConfig::instance().getMuteOnRestart());
-	ui->glavafix->setChecked(AppConfig::instance().getGFix());
 
-	ui->liveprog_autoextract->setChecked(AppConfig::instance().getLiveprogAutoExtract());
+    ui->liveprog_autoextract->setChecked(AppConfig::instance().getLiveprogAutoExtract());
 
 	updateInputSinks();
 
@@ -496,9 +453,6 @@ void SettingsFragment::refreshAll()
 	}
 
 	ui->paletteConfig->setEnabled(AppConfig::instance().getColorpalette() == "custom");
-
-	ui->aa_instant->setChecked(!AppConfig::instance().getAutoFxMode()); // same here..
-	ui->aa_release->setChecked(AppConfig::instance().getAutoFxMode());
 
 	ui->systray_r_none->setChecked(!AppConfig::instance().getTrayMode());
 	ui->systray_r_showtray->setChecked(AppConfig::instance().getTrayMode());

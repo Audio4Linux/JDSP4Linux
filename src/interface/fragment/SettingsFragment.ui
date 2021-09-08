@@ -69,11 +69,6 @@
          </column>
          <item>
           <property name="text">
-           <string>General</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>Interface</string>
           </property>
          </item>
@@ -120,170 +115,8 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
-       <widget class="QWidget" name="general">
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QCheckBox" name="glavafix">
-             <property name="text">
-              <string>Fix GLava sink switching</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="glavafix_help">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>35</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <underline>true</underline>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>[?]</string>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="muteonrestart">
-           <property name="text">
-            <string>Mute while restarting JDSP</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="autofx">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>59</height>
-            </size>
-           </property>
-           <property name="title">
-            <string>Apply automatically</string>
-           </property>
-           <property name="flat">
-            <bool>false</bool>
-           </property>
-           <property name="checkable">
-            <bool>false</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <widget class="QRadioButton" name="aa_release">
-            <property name="geometry">
-             <rect>
-              <x>90</x>
-              <y>30</y>
-              <width>131</width>
-              <height>23</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Mouse release</string>
-            </property>
-           </widget>
-           <widget class="QRadioButton" name="aa_instant">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>30</y>
-              <width>71</width>
-              <height>23</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Instant</string>
-            </property>
-           </widget>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_10">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <spacer name="horizontalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="run_first_launch">
-             <property name="minimumSize">
-              <size>
-               <width>131</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Run setup wizard</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
          <size>
@@ -1136,6 +969,19 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="run_first_launch">
+       <property name="minimumSize">
+        <size>
+         <width>131</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Run setup wizard</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="close">
        <property name="text">
         <string>Close</string>
@@ -1155,12 +1001,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>glavafix_help</tabstop>
-  <tabstop>glavafix</tabstop>
-  <tabstop>muteonrestart</tabstop>
-  <tabstop>autofx</tabstop>
-  <tabstop>aa_instant</tabstop>
-  <tabstop>aa_release</tabstop>
   <tabstop>systray_r_none</tabstop>
   <tabstop>systray_r_showtray</tabstop>
   <tabstop>systray_minOnBoot</tabstop>

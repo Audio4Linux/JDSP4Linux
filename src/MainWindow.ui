@@ -78,7 +78,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>4</number>
+            <number>6</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -520,7 +520,7 @@
                     </item>
                     <item>
                      <property name="text">
-                      <string>Joe0Bloggs Realistic Surround</string>
+                      <string>Joe0Bloggs Realistic surround</string>
                      </property>
                     </item>
                    </widget>

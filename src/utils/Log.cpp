@@ -1,23 +1,27 @@
 #include "Log.h"
 
+#include <QDebug>
+#include <QFile>
+#include <QTime>
+
 void Log::debug(const QString &log)
 {
-	write(QString("[D] %1").arg(log));
+    write(QString("[D] %1").arg(log));
 }
 
 void Log::information(const QString &log)
 {
-	write(QString("[I] %1").arg(log));
+    write(QString("[I] %1").arg(log));
 }
 
 void Log::warning(const QString &log)
 {
-	write(QString("[W] %1").arg(log));
+    write(QString("[W] %1").arg(log));
 }
 
 void Log::error(const QString &log)
 {
-	write(QString("[E] %1").arg(log));
+    write(QString("[E] %1").arg(log));
 }
 
 void Log::write(const QString &log,

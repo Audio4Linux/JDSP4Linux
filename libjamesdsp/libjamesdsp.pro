@@ -7,6 +7,8 @@ CONFIG += c++17
 
 QMAKE_CFLAGS += -std=gnu17 -O2
 
+DEFINES += CUSTOM_CMD
+
 BASEPATH = $$PWD/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/
 
 INCLUDEPATH += $$BASEPATH \
@@ -44,6 +46,7 @@ HEADERS += \
     $$BASEPATH/generalDSP/interpolation.h \
     $$BASEPATH/generalDSP/spectralInterpolatorFloat.h \
     $$BASEPATH/jdsp_header.h \
+    EELStdOutExtension.h \
     JdspImpResToolbox.h
 
 SOURCES += \
@@ -91,6 +94,7 @@ SOURCES += \
     $$BASEPATH/generalDSP/interpolation.c \
     $$BASEPATH/generalDSP/spectralInterpolatorFloat.c \
     $$BASEPATH/jdspController.c \
+    EELStdOutExtension.c \
     JdspImpResToolbox.c
 
 unix {

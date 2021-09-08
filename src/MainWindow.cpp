@@ -103,7 +103,33 @@ MainWindow::MainWindow(QString  exepath,
 		m_eelEditor           = new EELEditor(this);
 
 		_eelparser            = new EELParser();
-	}
+
+        connect(audioService, &IAudioService::eelCompilationStarted, m_eelEditor, &EELEditor::onCompilerStarted);
+        connect(audioService, &IAudioService::eelCompilationFinished, m_eelEditor, &EELEditor::onCompilerFinished);
+        connect(audioService, &IAudioService::eelOutputReceived, m_eelEditor, &EELEditor::onConsoleOutputReceived);
+        connect(m_eelEditor, &EELEditor::runCode, [this](QString path){
+            bool isSameFile = path == activeliveprog;
+            if (QFileInfo::exists(path) && QFileInfo(path).isFile())
+            {
+                activeliveprog = path;
+            }
+            else
+            {
+                QMessageBox::critical(m_eelEditor, "Cannot execute",
+                                      QString("The current EEL file (at '%1') does not exist anymore on the filesystem. Please reopen the file manually.").arg(path));
+                return;
+            }
+
+            setLiveprogSelection(activeliveprog);
+
+            applyConfig();
+
+            if(isSameFile)
+            {
+                audioService->reloadLiveprog();
+            }
+        });
+    }
 
 	// Prepare tray icon
 	{
@@ -129,8 +155,10 @@ MainWindow::MainWindow(QString  exepath,
 		});
 		connect(trayIcon, &TrayIcon::loadCrossfeedPreset, [this](int preset)
 		{
-			ui->crossfeed_mode->setCurrentIndex(preset);
-			bs2bPresetSelectionUpdated();
+            auto name = PresetProvider::BS2B::reverseLookup(preset);
+            ui->crossfeed_mode->setCurrentText(name);
+
+            bs2bPresetSelectionUpdated();
 		});
 		connect(trayIcon, &TrayIcon::loadIrs, [this](const QString &irs)
 		{
@@ -694,8 +722,8 @@ void MainWindow::dialogHandler()
 {
 	if (sender() == ui->set)
 	{
-		settings_dlg->updateInputSinks();
 		WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
+        settings_dlg->updateInputSinks();
 	}
 	else if (sender() == ui->cpreset)
 	{
@@ -2205,6 +2233,7 @@ void MainWindow::connectActions()
 		}
 
 		m_eelEditor->show();
+        m_eelEditor->raise();
 		m_eelEditor->openNewScript(activeliveprog);
 	});
 }

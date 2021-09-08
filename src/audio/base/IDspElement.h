@@ -2,10 +2,11 @@
 #define IDSPELEMENT_H
 
 #include <DspStatus.h>
+#include <DspHost.h>
+
 #include <assert.h>
 
 class DspConfig;
-class DspHost;
 
 class IDspElement
 {
@@ -20,8 +21,14 @@ public:
        return _host;
     }
 
+    void setMessageHandler(DspHost::MessageHandlerFunc&& extraHandler)
+    {
+        _msgHandler = std::move(extraHandler);
+    }
+
 protected:
     DspHost* _host = nullptr;
+    DspHost::MessageHandlerFunc _msgHandler;
 
 };
 

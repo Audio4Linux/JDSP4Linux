@@ -1,10 +1,10 @@
 include(wrapper/GstPluginWrapper.pri)
 
 SOURCES +=  \
-    $$PWD/AudioProcessingThread.cpp \
-    $$PWD/PipelineManager.cpp \
+    $$PWD/PulseAudioProcessingThread.cpp \
     $$PWD/PulseAudioService.cpp \
     $$PWD/PulseManager.cpp \
+    $$PWD/PulsePipelineManager.cpp \
     $$PWD/RealtimeKit.cpp \
     $$PWD/Utils.cpp \
     $$PWD/pipeline/FilterElement.cpp \
@@ -16,10 +16,10 @@ SOURCES +=  \
     $$PWD/pipeline/source/PulseSrcElement.cpp
 
 HEADERS +=  \
-    $$PWD/AudioProcessingThread.h \
-    $$PWD/PipelineManager.h \
+    $$PWD/PulseAudioProcessingThread.h \
     $$PWD/PulseAudioService.h \
     $$PWD/PulseManager.h \
+    $$PWD/PulsePipelineManager.h \
     $$PWD/RealtimeKit.h \
     $$PWD/Utils.h \
     $$PWD/pipeline/BaseElement.h \

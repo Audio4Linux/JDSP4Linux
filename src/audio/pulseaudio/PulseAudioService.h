@@ -1,14 +1,14 @@
 #ifndef PULSEAUDIOSERVICE_H
 #define PULSEAUDIOSERVICE_H
 
-#include "PipelineManager.h"
+#include "PulsePipelineManager.h"
 
 #include <memory>
 #include <QObject>
 
 #include "IAudioService.h"
 
-class AudioProcessingThread;
+class PulseAudioProcessingThread;
 
 class PulseAudioService : public IAudioService
 {
@@ -25,8 +25,8 @@ public slots:
     void reloadService() override;
 
 private:
-    std::shared_ptr<PipelineManager> mgr;
-    AudioProcessingThread* apt;
+    std::shared_ptr<PulsePipelineManager> mgr;
+    PulseAudioProcessingThread* apt;
 
 };
 

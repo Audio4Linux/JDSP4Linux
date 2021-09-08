@@ -90,11 +90,7 @@ public:
 		save();                                  \
 	}
 
-	DEF_INT(AutoFxMode, "apply.auto.mode", 1, );
-	DEF_BOOL(MuteOnRestart,       "apply.mutedreload",            false, );
-	DEF_BOOL(GFix,                "apply.fixglava",               false, );
-
-	DEF_BOOL(LiveprogAutoExtract, "liveprog.default.autoextract", false, );
+    DEF_BOOL(LiveprogAutoExtract, "liveprog.default.autoextract", false, );
 
 	DEF_STRING(Theme,         "theme.name",           "", emit styleChanged(); );
 	DEF_STRING(Stylesheet,    "theme.stylesheet",     "", emit styleChanged(); );
