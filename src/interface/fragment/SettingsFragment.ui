@@ -74,27 +74,22 @@
          </item>
          <item>
           <property name="text">
-           <string>Default Paths</string>
+           <string>Default paths</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Devices</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Systray</string>
+           <string>Tray icon</string>
           </property>
           <item>
            <property name="text">
-            <string>Context Menu</string>
+            <string>Context menu</string>
            </property>
           </item>
          </item>
          <item>
           <property name="text">
-           <string>Spectrum Analyser</string>
+           <string>Spectrum analyser</string>
           </property>
           <item>
            <property name="text">
@@ -115,7 +110,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -484,39 +479,6 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_8">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <spacer name="horizontalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="dev_reload_jdsp">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Reload JDSP</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
           <spacer name="verticalSpacer_8">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -536,40 +498,33 @@
          <item>
           <widget class="QGroupBox" name="systray_box">
            <property name="title">
-            <string>Systray Behaviour</string>
+            <string>Run in background (tray icon)</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
              <widget class="QRadioButton" name="systray_r_none">
               <property name="text">
-               <string>None</string>
+               <string>No, shutdown audio effects when closing app</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QRadioButton" name="systray_r_showtray">
               <property name="text">
-               <string>Show tray icon</string>
+               <string>Yes, minimize to tray icon when closing app</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QGroupBox" name="systray_icon_box">
               <property name="title">
-               <string>Tray Icon</string>
+               <string>Auto-start</string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_8">
                <item>
                 <widget class="QCheckBox" name="systray_minOnBoot">
                  <property name="text">
                   <string>Start minimized on boot</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="systray_autostartJDSP">
-                 <property name="text">
-                  <string>Autostart jdsp service</string>
                  </property>
                 </widget>
                </item>
@@ -1004,7 +959,6 @@
   <tabstop>systray_r_none</tabstop>
   <tabstop>systray_r_showtray</tabstop>
   <tabstop>systray_minOnBoot</tabstop>
-  <tabstop>systray_autostartJDSP</tabstop>
   <tabstop>themeSelect</tabstop>
   <tabstop>irspath</tabstop>
   <tabstop>saveirspath</tabstop>

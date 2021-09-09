@@ -1,4 +1,8 @@
+#ifdef USE_PULSEAUDIO
 #include <PulseAudioService.h>
+#else
+#include <PipewireAudioService.h>
+#endif
 
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
@@ -57,20 +61,89 @@ MainWindow::MainWindow(QString  exepath,
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+
 	// Prepare logger
 	{
-		Log::clear();
-		Log::information("UI launched...");
+        Log::clear();
 	}
+
+    // Check if another instance is already running and switch to it if that's the case
+    {
+        new GuiAdaptor(this);
+
+        QDBusConnection connection                    = QDBusConnection::sessionBus();
+        bool            aboutToQuit                   = false;
+        bool            serviceRegistrationSuccessful = connection.registerObject("/Gui", this);
+        bool            objectRegistrationSuccessful  = connection.registerService("me.timschneeberger.jdsp4linux.Gui");
+
+        if (serviceRegistrationSuccessful && objectRegistrationSuccessful)
+        {
+            Log::information("DBus service registration successful");
+        }
+        else
+        {
+            Log::warning("DBus service registration failed. Name already aquired by other instance");
+
+            if (!allowMultipleInst)
+            {
+                Log::information("Attempting to switch to this instance...");
+                auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("me.timschneeberger.jdsp4linux.Gui", "/Gui",
+                                                                      QDBusConnection::sessionBus(), this);
+
+                if (!m_dbInterface->isValid())
+                {
+                    Log::error("Critical: Unable to connect to other DBus instance. Continuing anyway...");
+                }
+                else
+                {
+                    QDBusPendingReply<> msg = m_dbInterface->raiseWindow();
+
+                    if (msg.isError() || msg.isValid())
+                    {
+                        Log::error("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
+                    }
+                    else
+                    {
+                        aboutToQuit = true;
+                        Log::information("Success! Waiting for event loop to exit...");
+                        QTimer::singleShot(0, qApp, &QCoreApplication::quit);
+                    }
+                }
+            }
+        }
+
+        // Cancel constructor if quitting soon
+        if (aboutToQuit)
+        {
+            return;
+        }
+    }
 
     // Prepare audio subsystem
     {
+        Log::information("============ Initializing audio service ============");
+#ifdef USE_PULSEAUDIO
+        Log::information("Compiled with PulseAudio support.");
+        Log::information("This application flavor does not support PipeWire or its PulseAudio compatibility mode.");
+        Log::information("If you want to use this application with PipeWire, you need to recompile this app with proper support enabled.");
+        Log::information("Refer to the README for more detailed information.");
+        Log::information("");
         audioService = new PulseAudioService();
+#else
+        Log::information("Compiled with PipeWire support.");
+        Log::information("This application flavor does not support PulseAudio.");
+        Log::information("If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.");
+        Log::information("Refer to the README for more detailed information.");
+        Log::information("");
+        audioService = new PipewireAudioService();
+#endif
         connect(&DspConfig::instance(), &DspConfig::updated, audioService, &IAudioService::update);
     }
 
 	// Prepare base UI
 	{
+        Log::information("============ Initializing user interface ============");
+
 		ui->eq_widget->setBands(PresetProvider::EQ::defaultPreset(), false);
 		ui->eq_dyn_widget->setSidebarHidden(true);
 		ui->eq_dyn_widget->set15BandFreeMode(true);
@@ -208,61 +281,8 @@ MainWindow::MainWindow(QString  exepath,
 			QTimer::singleShot(500, this, [ = ] {
 				WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
 			});
-		});
-
-	}
-
-	// Check if another instance is already running and switch to it if that's the case
-	{
-		new GuiAdaptor(this);
-
-		QDBusConnection connection                    = QDBusConnection::sessionBus();
-		bool            aboutToQuit                   = false;
-		bool            serviceRegistrationSuccessful = connection.registerObject("/Gui", this);
-		bool            objectRegistrationSuccessful  = connection.registerService("me.timschneeberger.jdsp4linux.Gui");
-
-		if (serviceRegistrationSuccessful && objectRegistrationSuccessful)
-		{
-			Log::information("DBus service registration successful");
-		}
-		else
-		{
-			Log::warning("DBus service registration failed. Name already aquired by other instance");
-
-			if (!allowMultipleInst)
-			{
-				Log::information("Attempting to switch to this instance...");
-				auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("me.timschneeberger.jdsp4linux.Gui", "/Gui",
-				                                                      QDBusConnection::sessionBus(), this);
-
-				if (!m_dbInterface->isValid())
-				{
-					Log::error("Critical: Unable to connect to other DBus instance. Continuing anyway...");
-				}
-				else
-				{
-					QDBusPendingReply<> msg = m_dbInterface->raiseWindow();
-
-					if (msg.isError() || msg.isValid())
-					{
-						Log::error("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
-					}
-					else
-					{
-						aboutToQuit = true;
-						Log::information("Success! Waiting for event loop to exit...");
-						QTimer::singleShot(0, qApp, &QCoreApplication::quit);
-					}
-				}
-			}
-		}
-
-		// Cancel constructor if quitting soon
-		if (aboutToQuit)
-		{
-			return;
-		}
-	}
+        });
+    }
 
 	// Init 3-dot menu button
 	{
@@ -658,7 +678,7 @@ void MainWindow::fireTimerSignal()
 void MainWindow::setVisible(bool visible)
 {
 	// Hide all other windows if set to invisible
-	if (!visible)
+    if (!visible && preset_dlg != nullptr)
 	{
 		preset_dlg->hide();
 	}

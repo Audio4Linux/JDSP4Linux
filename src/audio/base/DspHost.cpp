@@ -1,14 +1,16 @@
 #include "config/DspConfig.h"
 #include "Utils.h"
 
+#include <sstream>
+
 #include "DspHost.h"
 
 extern "C" {
 #include <JdspImpResToolbox.h>
 #include <EELStdOutExtension.h>
-#include <QElapsedTimer>
 }
 
+#include <QElapsedTimer>
 #include <QTextStream>
 #include <QDebug> // <-- remove this later TODO
 

@@ -32,8 +32,9 @@ public:
 	static void debug(const QString &log);
 	static void information(const QString &log);
 	static void warning(const QString &log);
-	static void error(const QString &log);
-	static void write(const QString &log,
+    static void error(const QString &log);
+    static void critical(const QString &log);
+    static void write(const QString &log,
 	                  LoggingMode    mode = LM_ALL);
 	static void clear();
 

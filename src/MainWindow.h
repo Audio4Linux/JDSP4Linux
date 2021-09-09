@@ -24,9 +24,6 @@
 
 #include "IAudioService.h"
 
-// Minimum required version of gst-plugin-jamesdsp
-#define MINIMUM_PLUGIN_VERSION "2.0.0"
-
 class AppConfig;
 class EELParser;
 class ConfigContainer;
@@ -125,7 +122,7 @@ private:
 	QAction *spectrum;
 	EELParser *_eelparser;
 
-	PresetDialog *preset_dlg;
+    PresetDialog *preset_dlg = nullptr;
 	EELEditor *m_eelEditor;
 
 	QScopedPointer<QFrame> analysisLayout;

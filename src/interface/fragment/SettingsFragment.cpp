@@ -48,7 +48,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 		{
 			case -1:
 
-				if (cur->text(0) == "Context Menu")
+                if (cur->text(0) == "Context menu")
 				{
                     ui->stackedWidget->setCurrentIndex(4);
 				}
@@ -64,11 +64,12 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                 ui->stackedWidget->setCurrentIndex(5);
 				break;
 			default:
-				ui->stackedWidget->setCurrentIndex(toplevel_index);
+            //TODO devics tab is hidden
+                ui->stackedWidget->setCurrentIndex(toplevel_index > 1 ? toplevel_index + 1 : toplevel_index);
 		}
 	});
-	ui->selector->expandItem(ui->selector->findItems("Spectrum Analyser", Qt::MatchFlag::MatchExactly).first());
-	ui->selector->expandItem(ui->selector->findItems("Systray", Qt::MatchFlag::MatchExactly).first());
+    ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());
+    ui->selector->expandItem(ui->selector->findItems("Tray icon", Qt::MatchFlag::MatchExactly).first());
 
 	/*
 	 * Prepare all combooxes
@@ -128,8 +129,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 								if (ui->systray_minOnBoot->isChecked())
 								{
 									AutostartManager::saveDesktopFile(autostart_path,
-									                                  AppConfig::instance().getExecutablePath(),
-									                                  ui->systray_autostartJDSP->isChecked(),
+                                                                      AppConfig::instance().getExecutablePath(),
 									                                  ui->systray_delay->isChecked());
 								}
 								else
@@ -137,11 +137,9 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 									QFile(autostart_path).remove();
 								}
 
-								ui->systray_autostartJDSP->setEnabled(ui->systray_minOnBoot->isChecked());
 								ui->systray_delay->setEnabled(ui->systray_minOnBoot->isChecked());
 							};
-	connect(ui->systray_minOnBoot,     &QPushButton::clicked, this, autostart_update);
-	connect(ui->systray_autostartJDSP, &QPushButton::clicked, this, autostart_update);
+    connect(ui->systray_minOnBoot,     &QPushButton::clicked, this, autostart_update);
 	connect(ui->systray_delay,         &QPushButton::clicked, this, autostart_update);
 	/*
 	 * Connect all signals for Interface
@@ -460,12 +458,9 @@ void SettingsFragment::refreshAll()
 	ui->menu_edit->setEnabled(AppConfig::instance().getTrayMode());
 
 	bool autostart_enabled     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
-	bool autostartjdsp_enabled = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::UsesJDSPAutostart);
 	bool autostart_delayed     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Delayed);
 
-	ui->systray_minOnBoot->setChecked(autostart_enabled);
-	ui->systray_autostartJDSP->setEnabled(autostart_enabled);
-	ui->systray_autostartJDSP->setChecked(autostartjdsp_enabled);
+    ui->systray_minOnBoot->setChecked(autostart_enabled);
 	ui->systray_delay->setEnabled(autostart_enabled);
 	ui->systray_delay->setChecked(autostart_delayed);
 

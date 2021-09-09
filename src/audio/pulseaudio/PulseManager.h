@@ -133,14 +133,17 @@ private:
     pa_mainloop_api* main_loop_api = nullptr;
     pa_context* context = nullptr;
 
-    std::array<std::string, 12> blacklist_apps = { "-Google Chrome", "JamesDSP", "jamesdsp",
+    std::array<std::string, 22> blacklist_apps = {"JamesDSP", "jamesdsp",
         "GstEffectManager", "jdsp-gui", "PulseEffectsWebrtcProbe", "gsd-media-keys",
-        "GNOME Shell", "libcanberra", "Screenshot", "speech-dispatcher", "gst-launch-1.0"};
+        "GNOME Shell", "libcanberra", "Screenshot", "speech-dispatcher", "gst-launch-1.0",
+        "EasyEffects", "easyeffects", "easyeffects_soe", "easyeffects_sie", "EasyEffectsWebrtcProbe", "pavucontrol",
+        "PulseAudio Volume Control", "speech-dispatcher-dummy", "Mutter","gameoverlayui"};
+
+    std::array<std::string, 2> blacklist_media_role = {"event", "Notification"};
+
 
     std::array<std::string, 4> blacklist_media_name = {"pulsesink probe", "bell-window-system", "audio-volume-change",
                                                        "screen-capture"};
-
-    std::array<std::string, 1> blacklist_media_role = {"event"};
 
     std::array<std::string, 4> blacklist_app_id = {"com.github.wwmm.pulseeffects.sinkinputs",
                                                    "com.github.wwmm.pulseeffects.sourceoutputs",

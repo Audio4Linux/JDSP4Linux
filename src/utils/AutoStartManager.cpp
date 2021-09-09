@@ -10,14 +10,12 @@ AutostartManager::AutostartManager()
 
 void AutostartManager::saveDesktopFile(QString        path,
                                        const QString &exepath,
-                                       bool           enableAutostartJDSP,
                                        bool           delayed)
 {
 	ConfigContainer *conf = new ConfigContainer();
 	conf->setValue("Exec", QString("%0%1 --tray%2%3")
 	               .arg(delayed ? "sleep 5s && " : "")
 	               .arg(exepath)
-	               .arg(enableAutostartJDSP ? " --startjdsp" : "")
 	               .arg(delayed ? " &" : ""));
 	conf->setValue("Name",                      "JamesDSP for Linux Systray");
 	conf->setValue("StartupNotify",             false);
@@ -40,8 +38,6 @@ bool AutostartManager::inspectDesktopFile(const QString &path,
 
 	switch (mode)
 	{
-		case UsesJDSPAutostart:
-			return conf.getString("Exec").contains("--startjdsp");
 		case Delayed:
 			return conf.getString("Exec").contains("sleep 5s");
 		case Exists:

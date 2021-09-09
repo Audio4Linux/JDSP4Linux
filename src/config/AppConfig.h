@@ -90,7 +90,7 @@ public:
 		save();                                  \
 	}
 
-    DEF_BOOL(LiveprogAutoExtract, "liveprog.default.autoextract", false, );
+    DEF_BOOL(LiveprogAutoExtract, "liveprog.default.autoextract", true, );
 
 	DEF_STRING(Theme,         "theme.name",           "", emit styleChanged(); );
 	DEF_STRING(Stylesheet,    "theme.stylesheet",     "", emit styleChanged(); );

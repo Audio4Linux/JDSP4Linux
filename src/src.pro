@@ -14,6 +14,8 @@ TEMPLATE = app
     QMAKE_CXXFLAGS += "-Wno-old-style-cast -Wno-double-promotion -Wno-unused-function"
 }
 
+USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
+
 include(../3rdparty/3rdparty.pri)
 
 include(audio/AudioDrivers.pri)
@@ -134,8 +136,16 @@ unix {
     QMAKE_CXXFLAGS += -g
 
     CONFIG += link_pkgconfig
-    PKGCONFIG += gstreamer-1.0 gstreamer-audio-1.0
-    PKGCONFIG += libpulse glibmm-2.4 giomm-2.4
+
+    PKGCONFIG += glibmm-2.4 giomm-2.4
+
+    USE_PULSEAUDIO {
+        PKGCONFIG += gstreamer-1.0 gstreamer-audio-1.0
+        PKGCONFIG += libpulse
+    }
+    else {
+        PKGCONFIG += libpipewire-0.3
+    }
 }
 
 # Link libjamesdsp

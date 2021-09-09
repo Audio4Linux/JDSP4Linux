@@ -1003,7 +1003,7 @@ void PulseManager::unload_module(uint idx) {
 }
 
 void PulseManager::unload_sinks() {
-    util::debug(log_tag + "unloading GstEffectManager sinks...");
+    util::debug(log_tag + "unloading JamesDSP sinks...");
 
     unload_module(apps_sink_info->owner_module);
 }

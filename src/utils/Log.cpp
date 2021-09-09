@@ -6,29 +6,34 @@
 
 void Log::debug(const QString &log)
 {
-    write(QString("[D] %1").arg(log));
+    write(QString("[DBG] %1").arg(log));
 }
 
 void Log::information(const QString &log)
 {
-    write(QString("[I] %1").arg(log));
+    write(QString("[INF] %1").arg(log));
 }
 
 void Log::warning(const QString &log)
 {
-    write(QString("[W] %1").arg(log));
+    write(QString("[WRN] %1").arg(log));
 }
 
 void Log::error(const QString &log)
 {
-    write(QString("[E] %1").arg(log));
+    write(QString("[ERR] %1").arg(log));
+}
+
+void Log::critical(const QString &log)
+{
+    write(QString("[CRT] %1").arg(log));
 }
 
 void Log::write(const QString &log,
                 LoggingMode    mode)
 {
 	QFile   file("/tmp/jamesdsp/ui.log");
-	QString formattedLog(QString("[%1] %2").arg(QTime::currentTime().toString()).arg(log));
+    QString formattedLog(QString("[%1] %2").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(log));
 
 	if (mode == LM_ALL || mode == LM_FILE)
 	{

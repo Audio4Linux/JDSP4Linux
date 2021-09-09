@@ -30,7 +30,8 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 
 	ui->stackedWidget->setAnimation(QEasingCurve::Type::OutCirc);
 	connect(ui->p1_next, &QPushButton::clicked, [&] {
-		ui->stackedWidget->slideInIdx(1);
+        //TODO skip devices section for now ui->stackedWidget->slideInIdx(1);
+        ui->stackedWidget->slideInIdx(2);
 	});
 	connect(ui->p2_next, &QPushButton::clicked, [&] {
 		ui->stackedWidget->slideInIdx(2);
@@ -80,11 +81,8 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 
 	QString autostart_path        = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 	bool    autostart_enabled     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
-	bool    autostartjdsp_enabled = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::UsesJDSPAutostart);
 
-	ui->p3_systray_minOnBoot->setChecked(autostart_enabled);
-	ui->p3_systray_autostartJDSP->setEnabled(autostart_enabled);
-	ui->p3_systray_autostartJDSP->setChecked(autostartjdsp_enabled);
+    ui->p3_systray_minOnBoot->setChecked(autostart_enabled);
 
 	auto systray_radio = [this] {
 							 if (lockslot)
@@ -115,20 +113,16 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 								   {
 									   if (ui->p3_systray_minOnBoot->isChecked())
 									   {
-										   AutostartManager::saveDesktopFile(autostart_path, AppConfig::instance().getExecutablePath(),
-										                                     ui->p3_systray_autostartJDSP->isChecked(),
+                                           AutostartManager::saveDesktopFile(autostart_path, AppConfig::instance().getExecutablePath(),
 										                                     AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Delayed));
 									   }
 									   else
 									   {
 										   QFile(autostart_path).remove();
 									   }
-
-									   ui->p3_systray_autostartJDSP->setEnabled(ui->p3_systray_minOnBoot->isChecked());
 								   };
 
 	connect(ui->p3_systray_minOnBoot,     &QPushButton::clicked,                                                              this, systray_autostart_radio);
-	connect(ui->p3_systray_autostartJDSP, &QPushButton::clicked,                                                              this, systray_autostart_radio);
 
 	connect(ui->p2_dev_mode_auto,         &QRadioButton::clicked,                                                             this, deviceUpdated);
 	connect(ui->p2_dev_mode_manual,       &QRadioButton::clicked,                                                             this, deviceUpdated);

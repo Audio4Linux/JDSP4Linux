@@ -6,7 +6,6 @@ SOURCES +=  \
     $$PWD/PulseManager.cpp \
     $$PWD/PulsePipelineManager.cpp \
     $$PWD/RealtimeKit.cpp \
-    $$PWD/Utils.cpp \
     $$PWD/pipeline/FilterElement.cpp \
     $$PWD/pipeline/GstElementProperties.cpp \
     $$PWD/pipeline/JamesDspElement.cpp \
@@ -21,7 +20,6 @@ HEADERS +=  \
     $$PWD/PulseManager.h \
     $$PWD/PulsePipelineManager.h \
     $$PWD/RealtimeKit.h \
-    $$PWD/Utils.h \
     $$PWD/pipeline/BaseElement.h \
     $$PWD/pipeline/FilterElement.h \
     $$PWD/pipeline/GstElementProperties.h \

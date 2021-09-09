@@ -78,7 +78,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>6</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -160,7 +160,7 @@
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range squasher&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A highly automated multiband dynamic range adjusting effect&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="title">
-                    <string>Dynamic range squasher</string>
+                    <string>Dynamic range compressor</string>
                    </property>
                    <property name="checkable">
                     <bool>true</bool>
@@ -627,7 +627,7 @@
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="title">
-                  <string>Soundstage widthness</string>
+                  <string>Soundstage wideness</string>
                  </property>
                  <property name="checkable">
                   <bool>true</bool>

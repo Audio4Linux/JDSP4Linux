@@ -21,15 +21,13 @@ class AutostartManager
 {
 public:
 	typedef enum InspectionMode
-	{
-		UsesJDSPAutostart,
+    {
 		Exists,
 		Delayed,
 	} InspectionMode;
 	AutostartManager();
 	static void    saveDesktopFile(QString        path,
-	                               const QString &exepath,
-	                               bool           enableAutostartJDSP,
+                                   const QString &exepath,
 	                               bool           delayed);
 	static bool    inspectDesktopFile(const QString &path,
 	                                  InspectionMode mode);
