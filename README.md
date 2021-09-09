@@ -22,11 +22,18 @@
   <a href="#contributors">Contributors</a> •
   <a href="#license">License</a> 
 </p>
+
+<p align="center">
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/screenshot.png?raw=true">
+</p>
+
+
 <p align="center">
 Currently developed by <a href="https://github.com/thepbone">@thepbone</a> (<a href="https://t.me/thepbone">Telegram</a>)
 <p/><p align="center">
 <a href="https://github.com/james34602/JamesDSPManager">JamesDSP</a> was initially published as an audio effects processor<br>for Android devices and is written by <a href="https://github.com/james34602">James Fung (@james34602)</a>.
 </p>
+
 
 
 ## Features
