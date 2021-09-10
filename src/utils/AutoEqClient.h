@@ -157,7 +157,7 @@ public:
 
 		if (net_request.lastError() != "")
 		{
-			Log::error("An error occurred (getGraphImage): " + net_request.lastError());
+            Log::error("AutoEqClient::getGraphImage: Network error: " + net_request.lastError());
 			return QPixmap();
 		}
 

@@ -35,14 +35,7 @@ PresetDialog::PresetDialog(QWidget *parent) :
 	connect(ui->files,      SIGNAL(customContextMenuRequested(QPoint)),                     this, SLOT(showContextMenu(QPoint)));
 	connect(ui->files,      SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(presetIndexChanged()));
 
-	QMenu *menu = new QMenu();
-	menu->addAction(tr("Linux Configuration"), this, SLOT(importLinux()));
-	ui->importBtn->setMenu(menu);
-
-	QMenu *menuEx = new QMenu();
-	menuEx->addAction(tr("Linux Configuration"), this, SLOT(exportLinux()));
-	ui->exportBtn->setMenu(menuEx);
-
+    connect(ui->close, &QPushButton::clicked, this, &PresetDialog::closePressed);
 }
 
 PresetDialog::~PresetDialog()
@@ -111,85 +104,13 @@ void PresetDialog::add()
 		return;
 	}
 
-	// TODO: Is this still neccessary? m_mainwin->applyConfig(false);
+    emit wantsToWriteConfig();
 
 	QString path = AppConfig::instance().getPath("presets");
 	MainWindow::savePresetFile(path + "/" + ui->presetName->text() + ".conf");
 	ui->presetName->text() = "";
 	UpdateList();
-	emit    presetChanged();
-}
-
-void PresetDialog::importLinux()
-{
-	QString filename = QFileDialog::getOpenFileName(this, tr("Load custom audio.conf"), "", "*.conf");
-
-	if (filename == "")
-	{
-		return;
-	}
-
-	QFileInfo      fileInfo(filename);
-	QString        path = AppConfig::instance().getPath("presets");
-
-	const QString &src  = filename;
-	const QString  dest = path + "/" + fileInfo.fileName();
-
-	if (QFile::exists(dest))
-	{
-		QFile::remove(dest);
-	}
-
-	QFile::copy(src, dest);
-	Log::debug("Importing from " + filename + " (presets/linuximport)");
-}
-
-void PresetDialog::exportLinux()
-{
-	if (ui->files->selectedItems().length() == 0)
-	{
-		QMessageBox::warning(this, tr("Error"), tr("Nothing selected"), QMessageBox::Ok);
-		return;
-	}
-
-	QString filename = QFileDialog::getSaveFileName(this, tr("Save audio.conf"), "", "*.conf");
-
-	if (filename == "")
-	{
-		return;
-	}
-
-	QFileInfo fi(filename);
-	QString   ext = fi.suffix();
-
-	if (ext != "conf")
-	{
-		filename.append(".conf");
-	}
-
-	QFileInfo fileInfo(filename);
-	QString   path     = AppConfig::instance().getPath("presets");
-	QString   fullpath = QDir(path).filePath(ui->files->selectedItems().first()->text() + ".conf");
-	QFile     file(fullpath);
-
-	if (!QFile::exists(fullpath))
-	{
-		QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist"), QMessageBox::Ok);
-		UpdateList();
-		emit presetChanged();
-		return;
-	}
-
-	const QString &src  = fullpath;
-	const QString  dest = filename;
-
-	if (QFile::exists(dest))
-	{
-		QFile::remove(dest);
-	}
-
-	QFile::copy(src, dest);
-	Log::debug("Exporting to " + filename + " (presets/linuxexport)");
+    emit presetChanged();
 }
 
 void PresetDialog::remove()
@@ -212,7 +133,7 @@ void PresetDialog::remove()
 	}
 
 	file.remove();
-	Log::debug("Removed " + fullpath + " (presets/remove)");
+    Log::debug("PresetDialog::remove: Deleted " + fullpath);
 	UpdateList();
 	emit presetChanged();
 }
@@ -229,7 +150,7 @@ void PresetDialog::load()
 
 	if (!QFile::exists(fullpath))
 	{
-		QMessageBox::warning(this, tr("Error"), tr("Selected File doesn't exist"), QMessageBox::Ok);
+        QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist anymore"), QMessageBox::Ok);
 		UpdateList();
 		emit presetChanged();
 		return;
@@ -295,20 +216,18 @@ void PresetDialog::showContextMenu(const QPoint &pos)
 			{
 				if (!QFile::exists(fullpath))
 				{
-					QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist"), QMessageBox::Ok);
+                    QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist anymore"), QMessageBox::Ok);
 					UpdateList();
 					emit presetChanged();
 					return;
 				}
 
 				QFile::remove(fullpath);
-				Log::debug("Removed " + fullpath);
+                Log::debug("PresetDialog::showContextMenu: Deleted via context menu: " + fullpath);
 				UpdateList();
 				emit presetChanged();
 
 			}
 		}
 	}
-
-	menu.exec(globalPos);
 }

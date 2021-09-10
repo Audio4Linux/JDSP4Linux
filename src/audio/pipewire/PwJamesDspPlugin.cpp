@@ -89,6 +89,7 @@ DspStatus PwJamesDspPlugin::status()
 {
     DspStatus status;
     status.AudioFormat = "32-bit floating point samples, little endian";
-    status.SamplingRate = rate;
+    status.SamplingRate = std::to_string(rate);
+    status.IsProcessing = !bypass;
     return status;
 }

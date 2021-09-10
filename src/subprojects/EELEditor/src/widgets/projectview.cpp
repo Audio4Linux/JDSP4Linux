@@ -19,8 +19,6 @@ void ProjectView::addFile(QString path){
     item->setSelected(true);
     addItem(item);
     this->setCurrentItem(item);
-    selectedItems().clear();
-    selectedItems().append(item);
 }
 
 void ProjectView::closeFile(QString path){

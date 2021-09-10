@@ -174,27 +174,6 @@ public:
         return convertVariant<T>(variant);
     }
 
-    void setSpectrumInput(const QString &npath)
-	{
-		_appconf->setValue("visualizer.spectrum.device", QVariant(npath));
-        emit spectrumChanged(true);
-		save();
-	}
-
-	QString getSpectrumInput()
-	{
-		QString in = _appconf->getString("visualizer.spectrum.device", true);
-
-		if (in.length() < 1)
-		{
-			QString defaultstr = "jdsp.monitor";
-			setSpectrumInput(defaultstr);
-			return defaultstr;
-		}
-
-		return in;
-	}
-
 	QString getDspConfPath()
 	{
 		return QString("%1/.config/jamesdsp/audio.conf").arg(QDir::homePath());

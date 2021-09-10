@@ -14,13 +14,12 @@
 #include <QTimer>
 #include <QUrl>
 
-
-FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
+FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::FirstLaunchWizard)
+    ui(new Ui::FirstLaunchWizard),
+    audioService(audioService)
 {
-	ui->setupUi(this);
-
+    ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
 	QTimer::singleShot(500, [&] {
@@ -32,8 +31,12 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 
 	ui->stackedWidget->setAnimation(QEasingCurve::Type::OutCirc);
 	connect(ui->p1_next, &QPushButton::clicked, [&] {
-        //TODO skip devices section for now ui->stackedWidget->slideInIdx(1);
+#ifdef USE_PULSEAUDIO
+        // Pulseaudio: skip device selection
         ui->stackedWidget->slideInIdx(2);
+#else
+        ui->stackedWidget->slideInIdx(1);
+#endif
 	});
 	connect(ui->p2_next, &QPushButton::clicked, [&] {
 		ui->stackedWidget->slideInIdx(2);
@@ -127,67 +130,41 @@ FirstLaunchWizard::~FirstLaunchWizard()
 
 void FirstLaunchWizard::refreshDevices()
 {
-	lockslot = true;
-	ui->p2_dev_select->clear();
+    lockslot = true;
+    ui->p2_dev_select->clear();
 
-	QFile               devices(AppConfig::instance().getPath("devices.conf"));
-	bool                devmode_auto = !devices.exists();
-	ui->p2_dev_mode_auto->setChecked(devmode_auto);
-	ui->p2_dev_mode_manual->setChecked(!devmode_auto);
+    ui->p2_dev_mode_auto->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault));
+    ui->p2_dev_mode_manual->setChecked(!AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault));
 
-	QProcess            process;
-	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("LC_ALL", "C");
-	process.setProcessEnvironment(env);
-	process.start("sh", QStringList() << "-c" << "pactl list sinks | grep \'Name: \' -A1");
-	process.waitForFinished(500);
+    auto devices = audioService->sinkDevices();
 
-	ConfigContainer *devconf = new ConfigContainer();
-	devconf->setConfigMap(ConfigIO::readFile(AppConfig::instance().getPath("devices.conf")));
-	QString          out     = process.readAllStandardOutput();
-	ui->p2_dev_select->addItem("...", "---");
+    ui->p2_dev_select->addItem("...", 0);
+    for (const auto& device : devices)
+    {
+        ui->p2_dev_select->addItem(QString("%1 (%2)")
+                                .arg(QString::fromStdString(device.description))
+                                .arg(QString::fromStdString(device.name)), QString::fromStdString(device.name));
+    }
 
-	for (auto item : out.split("Name:"))
-	{
-		item.prepend("Name:");
-		QRegularExpression      re(R"((?<=(Name:)\s)(?<name>.+)[\s\S]+(?<=(Description:)\s)(?<desc>.+))");
-		QRegularExpressionMatch match = re.match(item, 0, QRegularExpression::PartialPreferCompleteMatch);
+    auto current = AppConfig::instance().get<QString>(AppConfig::AudioOutputDevice);
 
-		if (match.hasMatch())
-		{
-			ui->p2_dev_select->addItem(QString("%1 (%2)").arg(match.captured("desc")).arg(match.captured("name")),
-			                           match.captured("name"));
-		}
-	}
+    bool notFound = true;
 
-	QString dev_location = devconf->getVariant("location", true).toString();
+    for (int i = 0; i < ui->p2_dev_select->count(); i++)
+    {
+        if (ui->p2_dev_select->itemData(i) == current)
+        {
+            notFound = false;
+            ui->p2_dev_select->setCurrentIndex(i);
+            break;
+        }
+    }
 
-	if (dev_location.isEmpty())
-	{
-		ui->p2_dev_select->setCurrentIndex(0);
-	}
-	else
-	{
-		bool notFound = true;
-
-		for (int i = 0; i < ui->p2_dev_select->count(); i++)
-		{
-			if (ui->p2_dev_select->itemData(i) ==
-			    dev_location)
-			{
-				notFound = false;
-				ui->p2_dev_select->setCurrentIndex(i);
-				break;
-			}
-		}
-
-		if (notFound)
-		{
-			QString name = QString("Unknown (%1)").arg(dev_location);
-			ui->p2_dev_select->addItem(name, dev_location);
-			ui->p2_dev_select->setCurrentText(name);
-		}
-	}
-
-	lockslot = false;
+    if (notFound)
+    {
+        QString name = QString("Unknown (%1)").arg(current);
+        ui->p2_dev_select->addItem(name, current);
+        ui->p2_dev_select->setCurrentText(name);
+    }
+    lockslot = false;
 }

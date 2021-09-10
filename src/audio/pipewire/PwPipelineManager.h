@@ -172,7 +172,7 @@ class PwPipelineManager {
   auto operator=(const PwPipelineManager&&) -> PwPipelineManager& = delete;
   ~PwPipelineManager();
 
-  const std::string log_tag = "pipe_manager: ";
+  const std::string log_tag = "PwPipelineManager: ";
 
   pw_thread_loop* thread_loop = nullptr;
   pw_core* core = nullptr;
@@ -193,7 +193,7 @@ class PwPipelineManager {
 
   std::vector<DeviceInfo> list_devices;
 
-  NodeInfo pe_sink_node, pe_source_node;
+  NodeInfo pe_sink_node;
 
   NodeInfo default_output_device, default_input_device;
 
@@ -230,11 +230,7 @@ class PwPipelineManager {
 
   void connect_stream_output(const uint& id, const std::string& media_class) const;
 
-  void connect_stream_input(const uint& id, const std::string& media_class) const;
-
   void disconnect_stream_output(const uint& id, const std::string& media_class) const;
-
-  void disconnect_stream_input(const uint& id, const std::string& media_class) const;
 
   static void set_node_volume(pw_proxy* proxy, const int& n_vol_ch, const float& value);
 

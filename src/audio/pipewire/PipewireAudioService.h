@@ -7,6 +7,7 @@
 #include "config/AppConfig.h"
 
 #include "PwJamesDspPlugin.h"
+#include "IOutputDevice.h"
 
 #include <memory>
 #include <QObject>
@@ -20,15 +21,14 @@ class PipewireAudioService : public IAudioService
 
 public:
     PipewireAudioService();
-    ~PipewireAudioService();
 
 public slots:
     void update(DspConfig* config) override;
     void reloadLiveprog() override;
     void reloadService() override;
+    std::vector<IOutputDevice> sinkDevices() override;
 
-private slots:
-    void notifyConfigChange(const AppConfig::Key& key, const QVariant& value);
+    DspStatus status() override;
 
 private:
     const std::string log_tag = "PipewireAudioService: ";

@@ -98,3 +98,13 @@ void PulseAudioService::reloadService()
     mgr.get()->reallocDsp();
 }
 
+std::vector<IOutputDevice> PulseAudioService::sinkDevices()
+{
+    return std::vector<IOutputDevice>();
+}
+
+DspStatus PulseAudioService::status()
+{
+    return mgr.get()->getDsp()->status();
+}
+

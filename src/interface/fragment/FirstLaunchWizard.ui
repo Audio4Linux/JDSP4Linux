@@ -100,7 +100,7 @@ QPushButton:disabled{
 </string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -352,7 +352,7 @@ font-weight: bold;
 color: white</string>
         </property>
         <property name="text">
-         <string>Devices</string>
+         <string>Output device</string>
         </property>
        </widget>
        <widget class="AnimatedJDSPIcon" name="p2_icon" native="true">
@@ -373,7 +373,7 @@ color: white</string>
          <rect>
           <x>10</x>
           <y>90</y>
-          <width>211</width>
+          <width>325</width>
           <height>73</height>
          </rect>
         </property>
@@ -827,7 +827,7 @@ color: white</string>
 font-size: 14px;</string>
            </property>
            <property name="text">
-            <string>Auto-detect output device</string>
+            <string>Use default output device (recommended)</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -1749,16 +1749,6 @@ font-size: 14px;</string>
         <property name="styleSheet">
          <string notr="true">font-size: 14px;</string>
         </property>
-        <item>
-         <property name="text">
-          <string>JDSP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Bluez</string>
-         </property>
-        </item>
        </widget>
       </widget>
      </widget>

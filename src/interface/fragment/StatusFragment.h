@@ -15,6 +15,7 @@
 #ifndef STATUSDIALOG_H
 #define STATUSDIALOG_H
 
+#include <DspStatus.h>
 #include <QDialog>
 
 namespace Ui
@@ -28,7 +29,7 @@ class StatusFragment :
 	Q_OBJECT
 
 public:
-	explicit StatusFragment(QWidget *parent = nullptr);
+    explicit StatusFragment(DspStatus status, QWidget *parent = nullptr);
 	~StatusFragment();
 
 signals:

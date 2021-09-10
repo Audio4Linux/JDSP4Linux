@@ -9,6 +9,8 @@
 #include "MainWindow.h"
 #include "utils/AutoStartManager.h"
 
+#include <IAudioService.h>
+
 #include <QAudioDeviceInfo>
 #include <QCloseEvent>
 #include <QDebug>
@@ -25,10 +27,12 @@ using namespace std;
 static bool lockslot = false;
 
 SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
+                                   IAudioService *audioService,
                                    QWidget  *parent) :
 	QDialog(parent),
 	ui(new Ui::SettingsFragment),
-	_trayIcon(trayIcon)
+    _trayIcon(trayIcon),
+    _audioService(audioService)
 {
 	ui->setupUi(this);
 
@@ -61,14 +65,14 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 				break;
             case 4:
 				// -- SA/ROOT
-                ui->stackedWidget->setCurrentIndex(5);
+                //ui->stackedWidget->setCurrentIndex(5);
 				break;
 			default:
             //TODO devics tab is hidden
-                ui->stackedWidget->setCurrentIndex(toplevel_index > 1 ? toplevel_index + 1 : toplevel_index);
+                ui->stackedWidget->setCurrentIndex(toplevel_index);
 		}
 	});
-    ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());
+    //ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());
     ui->selector->expandItem(ui->selector->findItems("Tray icon", Qt::MatchFlag::MatchExactly).first());
 
 	/*
@@ -195,33 +199,24 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	 * Connect all signals for Devices
 	 */
 	auto deviceUpdated = [this]()
-						 {
-							 if (lockslot)
-							 {
-								 return;
-							 }
+     {
+         if (lockslot)
+         {
+             return;
+         }
 
-							 QString absolute =
-								 QFileInfo(AppConfig::instance().getDspConfPath()).absoluteDir().absolutePath();
-							 QString devices(pathAppend(absolute, "devices.conf"));
+         AppConfig::instance().set(AppConfig::AudioOutputUseDefault, ui->dev_mode_auto->isChecked());
 
-							 if (ui->dev_mode_auto->isChecked())
-							 {
-								 QFile(devices).remove();
-							 }
-							 else
-							 {
-								 if (ui->dev_select->currentData() == "---")
-								 {
-									 return;
-								 }
+         if (!ui->dev_mode_auto->isChecked())
+         {
+             if (ui->dev_select->currentData() == "---")
+             {
+                 return;
+             }
 
-								 ConfigContainer *devconf = new ConfigContainer();
-								 devconf->setConfigMap(ConfigIO::readFile(devices));
-								 devconf->setValue("location", ui->dev_select->currentData());
-								 ConfigIO::writeFile(devices, devconf->getConfigMap());
-							 }
-						 };
+             AppConfig::instance().set(AppConfig::AudioOutputDevice, ui->dev_select->currentData());
+         }
+     };
 
 	connect(ui->dev_mode_auto,   &QRadioButton::clicked,                                                             this, deviceUpdated);
 	connect(ui->dev_mode_manual, &QRadioButton::clicked,                                                             this, deviceUpdated);
@@ -230,7 +225,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	/*
 	 * Connect all signals for SA/ROOT
 	 */
-	connect(ui->sa_enable,       &QGroupBox::clicked,                                                                this, [this]()
+    /*connect(ui->sa_enable,       &QGroupBox::clicked,                                                                this, [this]()
 	{
         AppConfig::instance().set(AppConfig::SpectrumEnabled, ui->sa_enable->isChecked());
 		ui->spectrum_advanced->setEnabled(ui->sa_enable->isChecked());
@@ -265,12 +260,12 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 		}
 
         AppConfig::instance().set(AppConfig::SpectrumTheme, ui->sa_type->currentIndex());
-	});
+    });*/
 
 	/*
 	 * Connect all signals for SA/Advanced
 	 */
-	connect(ui->sa_refresh, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
+    /*connect(ui->sa_refresh, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
 	{
         AppConfig::instance().set(AppConfig::SpectrumRefresh, number);
 	});
@@ -281,7 +276,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	connect(ui->sa_grid, &QCheckBox::clicked, this, [this]()
 	{
         AppConfig::instance().set(AppConfig::SpectrumGrid, ui->sa_grid->isChecked());
-	});
+    });*/
 
 	/*
 	 * Connect all signals for Global
@@ -309,6 +304,12 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	});
 	ui->menu_edit->setSourceMenu(trayIcon->buildAvailableActions());
 
+    connect(ui->run_first_launch, &QPushButton::clicked, this, [this]
+    {
+        emit closeClicked();
+        QTimer::singleShot(300, this, &SettingsFragment::launchSetupWizard);
+    });
+
 	/*
 	 * Check for systray availability
 	 */
@@ -334,67 +335,40 @@ void SettingsFragment::refreshDevices()
 {
 	lockslot = true;
 	ui->dev_select->clear();
-	QString             absolute     =
-		QFileInfo(AppConfig::instance().getDspConfPath()).absoluteDir().absolutePath();
-	QFile               devices(pathAppend(absolute, "devices.conf"));
-	bool                devmode_auto = !devices.exists();
-	ui->dev_mode_auto->setChecked(devmode_auto);
-	ui->dev_mode_manual->setChecked(!devmode_auto);
 
-	QProcess            process;
-	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("LC_ALL", "C");
-	process.setProcessEnvironment(env);
-	process.start("sh", QStringList() << "-c" << "pactl list sinks | grep \'Name: \' -A1");
-	process.waitForFinished(500);
+    ui->dev_mode_auto->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault));
+    ui->dev_mode_manual->setChecked(!AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault));
 
-	ConfigContainer *devconf = new ConfigContainer();
-	devconf->setConfigMap(ConfigIO::readFile(pathAppend(absolute, "devices.conf")));
-	QString          out     = process.readAllStandardOutput();
-	ui->dev_select->addItem("...", "---");
+    auto devices = _audioService->sinkDevices();
 
-	for (auto item : out.split("Name:"))
-	{
-		item.prepend("Name:");
-		QRegularExpression      re(R"((?<=(Name:)\s)(?<name>.+)[\s\S]+(?<=(Description:)\s)(?<desc>.+))");
-		QRegularExpressionMatch match = re.match(item, 0, QRegularExpression::PartialPreferCompleteMatch);
+    ui->dev_select->addItem("...", 0);
+    for (const auto& device : devices)
+    {
+        ui->dev_select->addItem(QString("%1 (%2)")
+                                .arg(QString::fromStdString(device.description))
+                                .arg(QString::fromStdString(device.name)), QString::fromStdString(device.name));
+    }
 
-		if (match.hasMatch())
-		{
-			ui->dev_select->addItem(QString("%1 (%2)").arg(match.captured("desc")).arg(match.captured("name")),
-			                        match.captured("name"));
-		}
-	}
+    auto current = AppConfig::instance().get<QString>(AppConfig::AudioOutputDevice);
 
-	QString dev_location = devconf->getVariant("location", true).toString();
+    bool notFound = true;
 
-	if (dev_location.isEmpty())
-	{
-		ui->dev_select->setCurrentIndex(0);
-	}
-	else
-	{
-		bool notFound = true;
+    for (int i = 0; i < ui->dev_select->count(); i++)
+    {
+        if (ui->dev_select->itemData(i) == current)
+        {
+            notFound = false;
+            ui->dev_select->setCurrentIndex(i);
+            break;
+        }
+    }
 
-		for (int i = 0; i < ui->dev_select->count(); i++)
-		{
-			if (ui->dev_select->itemData(i) ==
-			    dev_location)
-			{
-				notFound = false;
-				ui->dev_select->setCurrentIndex(i);
-				break;
-			}
-		}
-
-		if (notFound)
-		{
-			QString name = QString("Unknown (%1)").arg(dev_location);
-			ui->dev_select->addItem(name, dev_location);
-			ui->dev_select->setCurrentText(name);
-		}
-	}
-
+    if (notFound)
+    {
+        QString name = QString("Unknown (%1)").arg(current);
+        ui->dev_select->addItem(name, current);
+        ui->dev_select->setCurrentText(name);
+    }
 	lockslot = false;
 }
 
@@ -411,8 +385,6 @@ void SettingsFragment::refreshAll()
 	ui->liveprog_path->setText(AppConfig::instance().getLiveprogPath());
 
     ui->liveprog_autoextract->setChecked(AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract));
-
-	updateInputSinks();
 
     QString qvT(AppConfig::instance().get<QString>(AppConfig::Theme));
 	int     indexT = ui->themeSelect->findText(qvT);
@@ -457,7 +429,7 @@ void SettingsFragment::refreshAll()
 
 	refreshDevices();
 
-    int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
+    /*int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
     int   minfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMinFreq);
     int   maxfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMaxFreq);
     int   refresh    = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
@@ -544,7 +516,7 @@ void SettingsFragment::refreshAll()
 	ui->sa_maxfreq->setValue(maxfreq);
     ui->sa_grid->setChecked(AppConfig::instance().get<bool>(AppConfig::SpectrumGrid));
 	ui->sa_refresh->setValue(refresh);
-	ui->sa_multi->setValue(multiplier);
+    ui->sa_multi->setValue(multiplier);*/
 
 	lockslot = false;
 }
@@ -558,34 +530,4 @@ void SettingsFragment::setVisible(bool visible)
 {
 	refreshDevices();
 	QDialog::setVisible(visible);
-}
-
-void SettingsFragment::updateInputSinks()
-{
-	lockslot = true;
-	ui->sa_input->clear();
-
-	for ( const auto &dev: QAudioDeviceInfo::availableDevices(QAudio::AudioInput))
-	{
-		ui->sa_input->addItem(dev.deviceName());
-	}
-
-	QString qvSA(AppConfig::instance().getSpectrumInput());
-	int     indexSA = ui->sa_input->findText(qvSA);
-
-	if ( indexSA != -1 )
-	{
-		ui->sa_input->setCurrentIndex(indexSA);
-	}
-	else
-	{
-		int index_fallback = ui->themeSelect->findText("default");
-
-		if ( index_fallback != -1 )
-		{
-			ui->sa_input->setCurrentIndex(index_fallback);
-		}
-	}
-
-	lockslot = false;
 }

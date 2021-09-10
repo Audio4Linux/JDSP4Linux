@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PresetDialog</class>
- <widget class="QDialog" name="Preset">
+ <widget class="QDialog" name="PresetDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>393</width>
+    <width>310</width>
     <height>390</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>390</width>
+    <width>310</width>
     <height>390</height>
    </size>
   </property>
@@ -20,12 +20,32 @@
    <string>Custom Presets</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset resource="../../../resources/resources.qrc">
     <normaloff>:/icons/icon.svg</normaloff>:/icons/icon.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>9</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Presets</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>6</number>
+     </property>
      <property name="bottomMargin">
       <number>0</number>
      </property>
@@ -35,7 +55,7 @@
         <bool>false</bool>
        </property>
        <property name="placeholderText">
-        <string>Preset Name</string>
+        <string>Preset name</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
@@ -67,34 +87,9 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QToolButton" name="importBtn">
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>0</height>
-        </size>
-       </property>
+      <widget class="QPushButton" name="close">
        <property name="text">
-        <string>Import</string>
-       </property>
-       <property name="popupMode">
-        <enum>QToolButton::InstantPopup</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="exportBtn">
-       <property name="minimumSize">
-        <size>
-         <width>70</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Export</string>
-       </property>
-       <property name="popupMode">
-        <enum>QToolButton::InstantPopup</enum>
+        <string>Close</string>
        </property>
       </widget>
      </item>
@@ -144,13 +139,11 @@
  <tabstops>
   <tabstop>presetName</tabstop>
   <tabstop>add</tabstop>
-  <tabstop>importBtn</tabstop>
-  <tabstop>exportBtn</tabstop>
   <tabstop>remove</tabstop>
   <tabstop>load</tabstop>
  </tabstops>
  <resources>
-  <include location="../resources.qrc"/>
+  <include location="../../../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

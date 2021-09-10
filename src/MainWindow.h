@@ -70,9 +70,10 @@ public:
     Ui::MainWindow *ui;
     SettingsFragment *settings_dlg;
 
+    EELEditor *eelEditor() const;
+
 protected:
-	void        closeEvent(QCloseEvent *event) override;
-	void        setVisible(bool visible) override;
+    void        closeEvent(QCloseEvent *event) override;
 
 public slots:
 	void        restartSpectrum();
@@ -131,6 +132,9 @@ private:
 
 	QFrame *settingsFragmentHost;
 	QVBoxLayout *settingsHostLayout;
+
+    QFrame *presetFragmentHost;
+    QVBoxLayout *presetHostLayout;
 
     IAudioService* audioService = nullptr;
 

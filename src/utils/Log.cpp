@@ -6,34 +6,61 @@
 
 void Log::debug(const QString &log)
 {
-    write(QString("[DBG] %1").arg(log));
+    write(log, Debug);
 }
 
 void Log::information(const QString &log)
 {
-    write(QString("[INF] %1").arg(log));
+    write(log, Info);
 }
 
 void Log::warning(const QString &log)
 {
-    write(QString("[WRN] %1").arg(log));
+    write(log, Warning);
 }
 
 void Log::error(const QString &log)
 {
-    write(QString("[ERR] %1").arg(log));
+    write(log, Error);
 }
 
 void Log::critical(const QString &log)
 {
-    write(QString("[CRT] %1").arg(log));
+    write(log, Critical);
 }
 
 void Log::write(const QString &log,
+                Severity       severity,
                 LoggingMode    mode)
 {
-	QFile   file("/tmp/jamesdsp/ui.log");
-    QString formattedLog(QString("[%1] %2").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(log));
+    QString sev;
+    QString color;
+    switch(severity)
+    {
+        case Debug:
+            sev = "DBG";
+            color = C_FAINTWHITE;
+            break;
+        case Info:
+            sev = "INF";
+            color = C_WHITE;
+            break;
+        case Warning:
+            sev = "WRN";
+            color = C_YELLOW;
+            break;
+        case Error:
+            sev = "ERR";
+            color = C_RED;
+            break;
+        case Critical:
+            sev = "CRT";
+            color = C_BACKRED;
+            break;
+    }
+
+    QFile   file("/tmp/jamesdsp/application.log");
+    QString formattedLog(QString("[%1] [%2] %3").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(sev).arg(log));
 
 	if (mode == LM_ALL || mode == LM_FILE)
 	{
@@ -47,7 +74,7 @@ void Log::write(const QString &log,
 
 	if (mode == LM_ALL || mode == LM_STDOUT)
 	{
-		qDebug().noquote().nospace() << formattedLog.toUtf8().constData();
+        qDebug().noquote().nospace() << color << formattedLog.toUtf8().constData() << C_RESET;
 	}
 }
 

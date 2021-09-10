@@ -4,6 +4,7 @@
 #include "config/AppConfig.h"
 #include "interface/fragment/SettingsFragment.h"
 #include "MainWindow.h"
+#include <eeleditor.h>
 
 #include <QApplication>
 #include <QTextStream>

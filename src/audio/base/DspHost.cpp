@@ -12,7 +12,7 @@ extern "C" {
 
 #include <QElapsedTimer>
 #include <QTextStream>
-#include <QDebug> // <-- remove this later TODO
+#include <QDebug>
 
 DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
 {
@@ -391,7 +391,12 @@ void DspHost::updateCrossfeed(DspConfig* config)
         CrossfeedDisable(this->_dsp);
 }
 
-bool DspHost::update(DspConfig *config)
+void DspHost::updateFromCache()
+{
+    update(_cache, true);
+}
+
+bool DspHost::update(DspConfig *config, bool ignoreCache)
 {
     util::debug("DspHost::update called");
 
@@ -418,13 +423,15 @@ bool DspHost::update(DspConfig *config)
         bool isCached = false;
         QVariant cached = _cache->get<QVariant>(key, &isCached);
         QVariant current = config->get<QVariant>(key);
-        if(isCached && cached == current)
+        if((isCached && cached == current) && !ignoreCache)
         {
             // Value unchanged, skip
             continue;
         }
 
-        qDebug() << QVariant::fromValue(key).toString() << current;
+        QString serialization;
+        QDebug(&serialization) << current;
+        Log::debug("DspHost::update: Property changed: " + QVariant::fromValue(key).toString() + " -> " + serialization);
 
         switch(key)
         {

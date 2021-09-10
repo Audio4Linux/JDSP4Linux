@@ -5,6 +5,7 @@ HEADERS += \
     $$PWD/DspStatus.h \
     $$PWD/IAudioService.h \
     $$PWD/IDspElement.h \
+    $$PWD/IOutputDevice.h \
     $$PWD/Utils.h
 
 SOURCES += \

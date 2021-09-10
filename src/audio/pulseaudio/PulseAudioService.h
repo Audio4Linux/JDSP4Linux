@@ -23,6 +23,9 @@ public slots:
     void update(DspConfig* config) override;
     void reloadLiveprog() override;
     void reloadService() override;
+    std::vector<IOutputDevice> sinkDevices() override;
+
+    DspStatus status() override;
 
 private:
     std::shared_ptr<PulsePipelineManager> mgr;

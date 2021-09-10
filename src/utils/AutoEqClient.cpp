@@ -19,7 +19,7 @@ QVector<QueryResult> AutoEQClient::query(QueryRequest request)
 
 	if (net_request.lastError() != "")
 	{
-		Log::error("An error occurred (query): " + net_request.lastError());
+        Log::error("AutoEqClient::query: Network error: " + net_request.lastError());
 		return results;
 	}
 
@@ -79,7 +79,7 @@ HeadphoneMeasurement AutoEQClient::fetchDetails(QueryResult item)
 
 	if (net_request.lastError() != "")
 	{
-		Log::error("An error occurred (fetchDetails): " + net_request.lastError());
+        Log::error("AutoEqClient::fetchDetails: Network error:  " + net_request.lastError());
 		return hp;
 	}
 
@@ -101,7 +101,7 @@ HeadphoneMeasurement AutoEQClient::fetchDetails(QueryResult item)
 
 			if (net_request_eq.lastError() != "")
 			{
-				Log::error("An error occurred (fetchDetails/graphiceq): " + net_request_eq.lastError());
+                Log::error("AutoEqClient::fetchDetails: Network error while downloading GrapicEQ file: " + net_request_eq.lastError());
 			}
 
 			hp.setGraphicEQ(status);

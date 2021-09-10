@@ -32,10 +32,10 @@
 #include "utils/OverlayMsgProxy.h"
 #include "utils/StyleHelper.h"
 
-#include <audiostreamengine.h>
+//#include <audiostreamengine.h>
 #include <Animation/Animation.h>
 #include <eeleditor.h>
-#include <spectrograph.h>
+//#include <spectrograph.h>
 
 #include <QButtonGroup>
 #include <QClipboard>
@@ -78,7 +78,7 @@ MainWindow::MainWindow(QString  exepath,
 
         if (serviceRegistrationSuccessful && objectRegistrationSuccessful)
         {
-            Log::information("DBus service registration successful");
+            Log::information("MainWindow::ctor: DBus service registration successful");
         }
         else
         {
@@ -210,11 +210,21 @@ MainWindow::MainWindow(QString  exepath,
 		connect(trayIcon,               &TrayIcon::iconActivated,    this,     &MainWindow::trayIconActivated);
 		connect(trayIcon,               &TrayIcon::loadReverbPreset, [this](const QString &preset)
 		{
+            if(preset == "off"){
+                ui->reverb->setChecked(false);
+                applyConfig();
+                return;
+            }
+
+            ui->reverb->setChecked(true);
 			ui->roompresets->setCurrentText(preset);
 			reverbPresetSelectionUpdated();
 		});
+        connect(trayIcon, &TrayIcon::restart, this, &MainWindow::restart);
 		connect(trayIcon, &TrayIcon::loadEqPreset, [this](const QString &preset)
 		{
+            ui->enable_eq->setChecked(true);
+
 			if (preset == "Default")
 			{
 			    resetEQ();
@@ -227,20 +237,28 @@ MainWindow::MainWindow(QString  exepath,
 		});
 		connect(trayIcon, &TrayIcon::loadCrossfeedPreset, [this](int preset)
 		{
+            if(preset == -1)
+            {
+                ui->bs2b->setChecked(false);
+                applyConfig();
+                return;
+            }
+
             auto name = PresetProvider::BS2B::reverseLookup(preset);
             ui->crossfeed_mode->setCurrentText(name);
-
+            ui->bs2b->setChecked(true);
             bs2bPresetSelectionUpdated();
 		});
 		connect(trayIcon, &TrayIcon::loadIrs, [this](const QString &irs)
 		{
 			activeirs = irs;
+            ui->conv_enable->setChecked(true);
 			updateIrsSelection();
 			applyConfig();
 		});
 		connect(trayIcon, &TrayIcon::loadPreset, [this](const QString &preset)
 		{
-			loadPresetFile(preset);
+            loadPresetFile(preset);
 		});
 		connect(trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
 		connect(trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
@@ -250,13 +268,15 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Load config and initialize less important stuff
 	{
-		initializeSpectrum();
+        //initializeSpectrum();
 
 		connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
 		DspConfig::instance().load();
 
 		preset_dlg   = new PresetDialog(this);
-		settings_dlg = new SettingsFragment(trayIcon, this);
+        connect(preset_dlg, &PresetDialog::wantsToWriteConfig, this, &MainWindow::applyConfig);
+
+        settings_dlg = new SettingsFragment(trayIcon, audioService, this);
 		connect(settings_dlg, &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
 		connect(settings_dlg, &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
 
@@ -281,6 +301,21 @@ MainWindow::MainWindow(QString  exepath,
 				WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
 			});
         });
+
+        presetFragmentHost = new QFrame(this);
+        presetHostLayout   = new QVBoxLayout(presetFragmentHost);
+
+        presetHostLayout->addWidget(preset_dlg);
+        preset_dlg->show();
+        presetFragmentHost->setProperty("menu", false);
+        presetFragmentHost->hide();
+        presetFragmentHost->setAutoFillBackground(true);
+
+        connect(preset_dlg, &PresetDialog::closePressed, this, [ = ]() {
+            presetFragmentHost->update();
+            presetFragmentHost->repaint();
+            WAF::Animation::sideSlideOut(presetFragmentHost, WAF::LeftSide);
+        });
     }
 
 	// Init 3-dot menu button
@@ -290,11 +325,10 @@ MainWindow::MainWindow(QString  exepath,
 		connect(spectrum, &QAction::triggered, this, &MainWindow::restartSpectrum);
         menu->addAction(tr("Reload JamesDSP"),   this, SLOT(restart()));
 		menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
-		menu->addAction(spectrum);
+        //menu->addAction(spectrum);
 		menu->addAction(tr("Driver status"),     this, [this]()
 		{
-			// TODO
-			StatusFragment *sd      = new StatusFragment();
+            StatusFragment *sd      = new StatusFragment(audioService->status());
 			QWidget *host           = new QWidget(this);
 			host->setProperty("menu", false);
 			QVBoxLayout *hostLayout = new QVBoxLayout(host);
@@ -346,18 +380,9 @@ MainWindow::MainWindow(QString  exepath,
 		}
 		else
 		{
-			try
-			{
-				QDir d2 = QFileInfo(activeliveprog).absoluteDir();
-				ui->liveprog_dirpath->setText(d2.absolutePath());
-				reloadLiveprog();
-			}
-			catch (const exception &e)
-			{
-				Log::error("Failed to load previous Liveprog path: " + QString::fromStdString(e.what()));
-				ui->liveprog_dirpath->setText(AppConfig::instance().getLiveprogPath());
-				reloadLiveprog();
-			}
+            QDir d2 = QFileInfo(activeliveprog).absoluteDir();
+            ui->liveprog_dirpath->setText(d2.absolutePath());
+            reloadLiveprog();
 		}
 
 	}
@@ -406,7 +431,7 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Lateinit less important UI stuff and setup tabbar
 	{
-        toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
+        //toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
 		restoreGraphicEQView();
         ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
@@ -434,7 +459,7 @@ MainWindow::MainWindow(QString  exepath,
 		}
 	}
 
-	Log::information("UI initialized");
+    Log::information("MainWindow::ctor: UI initialized");
 }
 
 MainWindow::~MainWindow()
@@ -449,7 +474,7 @@ MainWindow::~MainWindow()
 // Spectrum
 void MainWindow::setSpectrumVisibility(bool v)
 {
-	m_spectrograph->setVisible(v);
+    /*m_spectrograph->setVisible(v);
 
 	if (v)
 	{
@@ -458,12 +483,12 @@ void MainWindow::setSpectrumVisibility(bool v)
 	else
 	{
 		this->findChild<QFrame*>("analysisLayout_spectrum")->setFrameShape(QFrame::NoFrame);
-	}
+    }*/
 }
 
 void MainWindow::initializeSpectrum()
 {
-	m_spectrograph = new Spectrograph(this);
+    /*m_spectrograph = new Spectrograph(this);
 	m_audioengine  = new AudioStreamEngine(this);
 
     int refresh = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
@@ -502,18 +527,18 @@ void MainWindow::initializeSpectrum()
         toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
         if(needReload)
             restartSpectrum();
-    });
+    });*/
 }
 
 void MainWindow::restartSpectrum()
 {
-	toggleSpectrum(false,                                     false);
-    toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), false);
+    //toggleSpectrum(false,                                     false);
+    //toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), false);
 }
 
 void MainWindow::refreshSpectrumParameters()
 {
-    int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
+    /*int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
     int   minfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMinFreq);
     int   maxfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMaxFreq);
     int   refresh    = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
@@ -611,13 +636,13 @@ void MainWindow::refreshSpectrumParameters()
 
 	m_spectrograph->setParams(bands, minfreq, maxfreq);
 	m_audioengine->setNotifyIntervalMs(refresh);
-	m_audioengine->setMultiplier(multiplier);
+    m_audioengine->setMultiplier(multiplier);*/
 }
 
 void MainWindow::toggleSpectrum(bool on,
                                 bool ctrl_visibility)
 {
-	refreshSpectrumParameters();
+    /*refreshSpectrumParameters();
 
 	if (ctrl_visibility)
 	{
@@ -641,10 +666,6 @@ void MainWindow::toggleSpectrum(bool on,
 				in = item;
 			}
 		}
-
-		Log::debug("Spectrum Expected Input Device: " + AppConfig::instance().getSpectrumInput());
-		Log::debug("Spectrum Found Input Device: " + in.deviceName());
-		Log::debug("Spectrum Default Input Device: " + QAudioDeviceInfo::defaultInputDevice().deviceName());
 
 		m_audioengine->setAudioInputDevice(in);
 		m_audioengine->initializeRecord();
@@ -675,31 +696,20 @@ void MainWindow::toggleSpectrum(bool on,
 
 		m_spectrograph->reset();
 		m_audioengine->reset();
-	}
+    }*/
 }
 
 void MainWindow::fireTimerSignal()
 {
-	if (spectrumReloadSignalQueued)
+    if (spectrumReloadSignalQueued)
 	{
 		restartSpectrum();
-	}
+    }
 
 	spectrumReloadSignalQueued = false;
 }
 
 // Overrides
-void MainWindow::setVisible(bool visible)
-{
-	// Hide all other windows if set to invisible
-    if (!visible && preset_dlg != nullptr)
-	{
-		preset_dlg->hide();
-	}
-
-	QMainWindow::setVisible(visible);
-}
-
 void MainWindow::closeEvent(QCloseEvent *event)
 {
 	saveGraphicEQView();
@@ -757,30 +767,10 @@ void MainWindow::dialogHandler()
 	if (sender() == ui->set)
 	{
 		WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
-        settings_dlg->updateInputSinks();
 	}
 	else if (sender() == ui->cpreset)
 	{
-		if (preset_dlg->isVisible())
-		{
-			// Hacky workaround to reliably raise the window on all distros
-			Qt::WindowFlags eFlags = preset_dlg->windowFlags();
-			eFlags |= Qt::WindowStaysOnTopHint;
-			preset_dlg->setWindowFlags(eFlags);
-			preset_dlg->show();
-			eFlags &= ~Qt::WindowStaysOnTopHint;
-			preset_dlg->setWindowFlags(eFlags);
-			preset_dlg->showNormal();
-			preset_dlg->setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-			preset_dlg->raise();
-			preset_dlg->activateWindow();
-			return;
-		}
-
-		preset_dlg->move(x() + (width() - preset_dlg->width()) / 2,
-		                 y() + (height() - preset_dlg->height()) / 2);
-
-		preset_dlg->show();
+        WAF::Animation::sideSlideIn(presetFragmentHost, WAF::LeftSide);
 	}
 }
 
@@ -837,7 +827,7 @@ void MainWindow::loadPresetFile(const QString &filename)
 	}
 
 	QFile::copy(src, dest);
-	Log::debug("Loading from " + filename + " (main/loadpreset)");
+    Log::debug("MainWindow::loadPresetFile: Loading from " + filename);
 	DspConfig::instance().load();
 }
 
@@ -852,7 +842,7 @@ void MainWindow::savePresetFile(const QString &filename)
 	}
 
 	QFile::copy(src, dest);
-	Log::debug("Saving to " + filename + " (main/savepreset)");
+    Log::debug("MainWindow::savePresetFile: Saving to " + filename);
 }
 
 void MainWindow::loadExternalFile()
@@ -884,6 +874,7 @@ void MainWindow::saveExternalFile()
 		filename.append(".conf");
 	}
 
+    applyConfig();
 	savePresetFile(filename);
 }
 
@@ -1159,6 +1150,8 @@ void MainWindow::applyConfig()
 
     DspConfig::instance().commit();
     DspConfig::instance().save();
+
+    saveGraphicEQView();
 }
 
 // ---Predefined Presets
@@ -1415,18 +1408,9 @@ void MainWindow::updateDDCSelection()
 	}
 	else
 	{
-		try
-		{
-			QDir d2 = QFileInfo(activeddc).absoluteDir();
-			ui->ddc_dirpath->setText(d2.absolutePath());
-			reloadDDC();
-		}
-		catch (const exception &e)
-		{
-			Log::error("Failed to load previous DDC path: " + QString::fromStdString(e.what()));
-			ui->ddc_dirpath->setText(AppConfig::instance().getDDCPath());
-			reloadDDC();
-		}
+        QDir d2 = QFileInfo(activeddc).absoluteDir();
+        ui->ddc_dirpath->setText(d2.absolutePath());
+        reloadDDC();
 	}
 }
 
@@ -1527,24 +1511,18 @@ void MainWindow::updateIrsSelection()
 		ui->conv_dirpath->setText(AppConfig::instance().getIrsPath());
 		reloadIRS();
 		ui->convTabs->setCurrentIndex(1);
-		try
-		{
-			if (ui->conv_files_fav->count() >= 1)
-			{
-				for (int i = 0; i < ui->conv_files_fav->count(); i++)
-				{
-					if (ui->conv_files_fav->item(i)->text() == QFileInfo(activeirs).fileName())
-					{
-						ui->conv_files_fav->setCurrentRow(i);
-						break;
-					}
-				}
-			}
-		}
-		catch (const exception &e)
-		{
-			Log::error("Failed to load previous fav-IRS path: " + QString::fromStdString(e.what()));
-		}
+
+        if (ui->conv_files_fav->count() >= 1)
+        {
+            for (int i = 0; i < ui->conv_files_fav->count(); i++)
+            {
+                if (ui->conv_files_fav->item(i)->text() == QFileInfo(activeirs).fileName())
+                {
+                    ui->conv_files_fav->setCurrentRow(i);
+                    break;
+                }
+            }
+        }
 	}
 	else if (!QFile(activeirs).exists())
 	{
@@ -1554,32 +1532,23 @@ void MainWindow::updateIrsSelection()
 	}
 	else
 	{
-		try
-		{
-			ui->convTabs->setCurrentIndex(0);
+        ui->convTabs->setCurrentIndex(0);
 
-			QDir d2 = QFileInfo(activeirs).absoluteDir();
-			ui->conv_dirpath->setText(d2.absolutePath());
-			reloadIRS();
+        QDir d2 = QFileInfo(activeirs).absoluteDir();
+        ui->conv_dirpath->setText(d2.absolutePath());
+        reloadIRS();
 
-			if (ui->conv_files->count() >= 1)
-			{
-				for (int i = 0; i < ui->conv_files->count(); i++)
-				{
-					if (ui->conv_files->item(i)->text() == QFileInfo(activeirs).fileName())
-					{
-						ui->conv_files->setCurrentRow(i);
-						break;
-					}
-				}
-			}
-		}
-		catch (const exception &e)
-		{
-			Log::error("Failed to load previous IRS path: " + QString::fromStdString(e.what()));
-			ui->conv_dirpath->setText(AppConfig::instance().getIrsPath());
-			reloadIRS();
-		}
+        if (ui->conv_files->count() >= 1)
+        {
+            for (int i = 0; i < ui->conv_files->count(); i++)
+            {
+                if (ui->conv_files->item(i)->text() == QFileInfo(activeirs).fileName())
+                {
+                    ui->conv_files->setCurrentRow(i);
+                    break;
+                }
+            }
+        }
 	}
 }
 
@@ -1679,7 +1648,12 @@ void MainWindow::convolverWaveformEdit()
 		irAdvancedWaveformEditing = text;
 
 		applyConfig();
-	}
+    }
+}
+
+EELEditor *MainWindow::eelEditor() const
+{
+    return m_eelEditor;
 }
 
 // ---Liveprog
@@ -1859,7 +1833,7 @@ int MainWindow::extractDefaultEelScripts(bool allowOverride,
 
 	if (i > 0)
 	{
-		Log::debug(QString("%1 default eel files extracted").arg(i));
+        Log::debug(QString("MainWindow::extractDefaultEelScripts: %1 default eel files extracted").arg(i));
 	}
 
 	if (user)
@@ -2167,7 +2141,7 @@ void MainWindow::connectActions()
 		}
 
 		QFile::copy(src, dest);
-		Log::debug("Adding " + src + " to bookmarks (convolver/add)");
+        Log::debug("MainWindow::ConvBookmard: Adding " + src + " to bookmarks");
 		reloadIRSFav();
 	});
 	connect(ui->conv_files_fav, &QListWidget::itemSelectionChanged, [this, absolute] {
@@ -2222,7 +2196,7 @@ void MainWindow::connectActions()
 
 		QFile file(fullpath);
 		file.remove();
-		Log::debug("Removed " + fullpath + " from favorites (convolver/remove)");
+        Log::debug("MainWindow::ConvFavRemove: Removed " + fullpath + " from favorites");
 		reloadIRSFav();
 	});
 
@@ -2277,7 +2251,7 @@ void MainWindow::launchFirstRunSetup()
 {
 	QHBoxLayout            *lbLayout = new QHBoxLayout;
 	QMessageOverlay        *lightBox = new QMessageOverlay(this);
-	FirstLaunchWizard      *wiz      = new FirstLaunchWizard(lightBox);
+    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(audioService, lightBox);
 	QGraphicsOpacityEffect *eff      = new QGraphicsOpacityEffect(lightBox);
 	QPropertyAnimation     *a        = new QPropertyAnimation(eff, "opacity");
 

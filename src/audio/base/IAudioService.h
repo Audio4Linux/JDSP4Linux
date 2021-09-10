@@ -1,6 +1,8 @@
 #ifndef IAUDIOSERVICE_H
 #define IAUDIOSERVICE_H
 
+#include "IOutputDevice.h"
+#include "DspStatus.h"
 #include <QObject>
 
 class DspConfig;
@@ -15,6 +17,9 @@ public slots:
     virtual void update(DspConfig* config) = 0;
     virtual void reloadLiveprog() = 0;
     virtual void reloadService() = 0;
+    virtual std::vector<IOutputDevice> sinkDevices() = 0;
+
+    virtual DspStatus status() = 0;
 
 signals:
     void eelCompilationStarted(const QString& scriptName);

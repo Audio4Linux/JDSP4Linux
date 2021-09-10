@@ -246,7 +246,7 @@ QString EELParser::findVariable(QString         key,
 		}
 	}
 
-	Log::warning(QString("EELParser: Unable to find a supported variable definition of '%1' in script '%2'").arg(key).arg(getDescription()));
+    Log::warning(QString("EELParser::findVariable: Unable to find a supported variable definition of '%1' in script '%2'").arg(key).arg(getDescription()));
 	return NORESULT;
 }
 

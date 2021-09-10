@@ -27,9 +27,23 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="label_6">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Status</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Driver Status</string>
+      <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -49,7 +63,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>GST plugin version</string>
+           <string>Application version</string>
           </property>
          </widget>
         </item>
@@ -70,14 +84,14 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Driver state</string>
+           <string>Audio format</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>Samplerate</string>
+           <string>Sampling rate</string>
           </property>
          </widget>
         </item>
@@ -100,7 +114,7 @@
             <number>3</number>
            </property>
            <item>
-            <widget class="QLabel" name="gst_plugin_ver">
+            <widget class="QLabel" name="app_ver">
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
@@ -218,7 +232,7 @@
             <number>3</number>
            </property>
            <item>
-            <widget class="QLabel" name="enabled">
+            <widget class="QLabel" name="format">
              <property name="text">
               <string>...</string>
              </property>

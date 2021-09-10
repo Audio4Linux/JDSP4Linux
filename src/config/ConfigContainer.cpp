@@ -25,7 +25,7 @@ QVariant ConfigContainer::getVariant(const QString &key,
 	{
 		if (!silent)
 		{
-			Log::debug(QString("Requested key '%1' (variant) not found").arg(key));
+            Log::debug(QString("ConfigContainer::getVariant: Key '%1' not found").arg(key));
 		}
 
         return QVariant();
@@ -40,7 +40,7 @@ QString ConfigContainer::getString(const QString &key,
 {
 	if (!map.contains(key))
 	{
-		Log::debug(QString("Requested key '%1' (string) not found").arg(key));
+        Log::debug(QString("ConfigContainer::getString: Key '%1' not found").arg(key));
 
 		if (setToDefaultIfMissing)
 		{
@@ -59,7 +59,7 @@ int ConfigContainer::getInt(const QString &key,
 {
 	if (!map.contains(key))
 	{
-		Log::debug(QString("Requested key '%1' (int) not found").arg(key));
+        Log::debug(QString("ConfigContainer::getInt: Key '%1' not found").arg(key));
 
 		if (setToDefaultIfMissing)
 		{
@@ -78,7 +78,7 @@ float ConfigContainer::getFloat(const QString &key,
 {
 	if (!map.contains(key))
 	{
-		Log::debug(QString("Requested key '%1' (float) not found").arg(key));
+        Log::debug(QString("ConfigContainer::getFloat: Key '%1' not found").arg(key));
 
 		if (setToDefaultIfMissing)
 		{
@@ -97,7 +97,7 @@ bool ConfigContainer::getBool(const QString &key,
 {
 	if (!map.contains(key))
 	{
-		Log::debug(QString("Requested key '%1' (bool) not found").arg(key));
+        Log::debug(QString("ConfigContainer::getBool: Key '%1' not found").arg(key));
 
 		if (setToDefaultIfMissing)
 		{

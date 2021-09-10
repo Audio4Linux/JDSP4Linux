@@ -149,13 +149,13 @@ EELEditor::EELEditor(QWidget *parent)
     connect(projectView,&ProjectView::currentFileUpdated,[this](CodeContainer* prev, CodeContainer* code){
         ui->actionSave->setEnabled(code != nullptr);
         ui->actionSave_as->setEnabled(code != nullptr);
+        ui->actionClose_filw->setEnabled(code != nullptr);
+        ui->actionRun_code->setEnabled(code != nullptr);
 
         if(code == nullptr){
             codeEdit->setText("//No code is loaded. Please create or open a file first.");
         }
         else{
-            if(prev != nullptr)
-
             codeEdit->loadCode(code);
         }
         codeEdit->setEnabled(code != nullptr);

@@ -31,11 +31,14 @@ DspStatus JamesDspElement::status()
     DspStatus status;
     const char* format = NULL;
     int srate = 0;
+    bool enabled = false;
     this->getValues("dsp_srate", &srate,
-                    "dsp_format", &format, NULL);
+                    "dsp_format", &format,
+                    "dsp_enable", &enabled, NULL);
 
     status.SamplingRate = std::to_string(srate);
     status.AudioFormat = format;
+    status.IsProcessing = enabled;
 
     return status;
 }

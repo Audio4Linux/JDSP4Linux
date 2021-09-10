@@ -16,11 +16,14 @@ TEMPLATE = app
 
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
 
+DEFINES += APP_VERSION=$$system(git describe --tags --long --always)
+DEFINES += JDSP_VERSION=3.0.5
+
 include(../3rdparty/3rdparty.pri)
 
 include(audio/AudioDrivers.pri)
 
-include(subprojects/Visualization/SpectrumAudioViewer.pri)
+#include(subprojects/Visualization/SpectrumAudioViewer.pri)
 include(subprojects/FlatTabWidget/FlatTabWidget.pri)
 include(subprojects/GraphicEQWidget/GraphicEQWidget.pri)
 

@@ -29,12 +29,29 @@ public:
 		LM_STDOUT
 	};
 
+    enum Severity
+    {
+        Debug,
+        Info,
+        Warning,
+        Error,
+        Critical
+    };
+
+    static constexpr char* C_RESET = "\u001b[0m";
+    static constexpr char* C_RED = "\u001b[31m";
+    static constexpr char* C_YELLOW = "\u001b[33m";
+    static constexpr char* C_WHITE = "\u001b[37m";
+    static constexpr char* C_FAINTWHITE = "\u001b[2;37m";
+    static constexpr char* C_BACKRED = "\u001b[41;37m";
+
 	static void debug(const QString &log);
 	static void information(const QString &log);
 	static void warning(const QString &log);
     static void error(const QString &log);
     static void critical(const QString &log);
     static void write(const QString &log,
+                      Severity       severity,
 	                  LoggingMode    mode = LM_ALL);
 	static void clear();
 

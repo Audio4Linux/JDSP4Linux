@@ -26,7 +26,8 @@ public:
     DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler);
     ~DspHost();
 
-    bool update(DspConfig* config);
+    bool update(DspConfig* config, bool ignoreCache = false);
+    void updateFromCache();
     void reloadLiveprog(DspConfig* config = nullptr);
     void dispatch(Message msg, std::any value);
 

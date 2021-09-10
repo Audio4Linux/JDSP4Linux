@@ -398,10 +398,6 @@ void on_node_event_param(void* object,
             } else if (nd->nd_info.media_class == "Audio/Source/Virtual") {
                 auto nd_info_copy = nd->nd_info;
 
-                if (nd_info_copy.id == pm->pe_source_node.id) {
-                    pm->pe_source_node = nd_info_copy;
-                }
-
                 Glib::signal_idle().connect_once([pm, nd_info_copy] { pm->source_changed.emit(nd_info_copy); });
             } else if (nd->nd_info.media_class == "Audio/Sink") {
                 auto nd_info_copy = nd->nd_info;
@@ -1111,28 +1107,12 @@ PwPipelineManager::PwPipelineManager() {
     proxy_stream_output_sink = static_cast<pw_proxy*>(
                 pw_core_create_object(core, "adapter", PW_TYPE_INTERFACE_Node, PW_VERSION_NODE, &props_sink->dict, 0));
 
-    // loading our source
-
-    pw_properties* props_source = pw_properties_new(nullptr, nullptr);
-
-    pw_properties_set(props_source, PW_KEY_NODE_NAME, "jamesdsp_source");
-    pw_properties_set(props_source, PW_KEY_NODE_DESCRIPTION, "JamesDSP Source");
-    pw_properties_set(props_source, "factory.name", "support.null-audio-sink");
-    pw_properties_set(props_source, PW_KEY_MEDIA_CLASS, "Audio/Source/Virtual");
-    pw_properties_set(props_source, "audio.position", "FL,FR");
-    pw_properties_set(props_source, "monitor.channel-volumes", "true");
-
-    proxy_stream_input_source = static_cast<pw_proxy*>(
-                pw_core_create_object(core, "adapter", PW_TYPE_INTERFACE_Node, PW_VERSION_NODE, &props_source->dict, 0));
-
     sync_wait_unlock();
 
-    while (pe_sink_node.id == SPA_ID_INVALID || pe_source_node.id == SPA_ID_INVALID) {
+    while (pe_sink_node.id == SPA_ID_INVALID) {
         for (const auto& [id, node] : node_map) {
             if (node.name == "jamesdsp_sink") {
                 pe_sink_node = node;
-            } else if (node.name == "jamesdsp_source") {
-                pe_source_node = node;
             }
         }
 
@@ -1152,7 +1132,6 @@ PwPipelineManager::~PwPipelineManager() {
     }
 
     pw_proxy_destroy(proxy_stream_output_sink);
-    pw_proxy_destroy(proxy_stream_input_source);
 
     util::debug(log_tag + "Destroying Pipewire registry...");
     pw_proxy_destroy((struct pw_proxy*)registry);
@@ -1176,12 +1155,6 @@ auto PwPipelineManager::stream_is_connected(const uint& id, const std::string& m
                 return true;
             }
         }
-    } else if (media_class == "Stream/Input/Audio") {
-        for (const auto& link : list_links) {
-            if (link.output_node_id == pe_source_node.id && link.input_node_id == id) {
-                return true;
-            }
-        }
     }
 
     return false;
@@ -1202,26 +1175,6 @@ void PwPipelineManager::disconnect_stream_output(const uint& id, const std::stri
         lock();
 
         pw_metadata_set_property(metadata, id, "target.node", "Spa:Id", std::to_string(default_output_device.id).c_str());
-
-        sync_wait_unlock();
-    }
-}
-
-void PwPipelineManager::connect_stream_input(const uint& id, const std::string& media_class) const {
-    if (media_class == "Stream/Input/Audio") {
-        lock();
-
-        pw_metadata_set_property(metadata, id, "target.node", "Spa:Id", std::to_string(pe_source_node.id).c_str());
-
-        sync_wait_unlock();
-    }
-}
-
-void PwPipelineManager::disconnect_stream_input(const uint& id, const std::string& media_class) const {
-    if (media_class == "Stream/Input/Audio") {
-        lock();
-
-        pw_metadata_set_property(metadata, id, "target.node", "Spa:Id", std::to_string(default_input_device.id).c_str());
 
         sync_wait_unlock();
     }

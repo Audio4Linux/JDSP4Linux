@@ -42,11 +42,13 @@ private slots:
 	void add();
 	void remove();
 	void load();
-	void importLinux();
-	void exportLinux();
 	void nameChanged(const QString &);
 	void showContextMenu(const QPoint &pos);
 	void presetIndexChanged();
+
+signals:
+    void wantsToWriteConfig();
+    void closePressed();
 
 private:
     Ui::PresetDialog *ui;

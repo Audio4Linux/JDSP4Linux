@@ -20,6 +20,7 @@
 
 class MainWindow;
 class TrayIcon;
+class IAudioService;
 
 namespace Ui
 {
@@ -32,11 +33,12 @@ class SettingsFragment :
 	Q_OBJECT
 
 public:
-	SettingsFragment(TrayIcon *trayIcon,
+    SettingsFragment(TrayIcon *trayIcon,
+                     IAudioService *audioService,
 	                 QWidget  *parent = nullptr);
 	Ui::SettingsFragment *ui;
 	~SettingsFragment();
-	void updateInputSinks();
+
 	void refreshDevices();
 	void refreshAll();
 	void setVisible(bool visible) override;
@@ -53,6 +55,7 @@ signals:
 
 private:
 	TrayIcon *_trayIcon;
+    IAudioService *_audioService;
 
 };
 

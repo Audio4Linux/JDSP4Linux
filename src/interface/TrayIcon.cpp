@@ -11,8 +11,8 @@ TrayIcon::TrayIcon(QObject *parent) : QObject(parent)
 {
 	createTrayIcon();
 
-	tray_disableAction = new QAction(tr("&Disable FX"), this);
-	tray_disableAction->setProperty("tag", "disablefx");
+    tray_disableAction = new QAction(tr("&Passthrough"), this);
+    tray_disableAction->setProperty("tag", "passthrough");
 	tray_disableAction->setCheckable(true);
 	tray_disableAction->setChecked(false);
 	connect(tray_disableAction, &QAction::toggled, this, &TrayIcon::changeDisableFx);
@@ -106,7 +106,7 @@ void TrayIcon::updatePresetList()
 				QAction  *newEntry = new QAction(files[i]);
 				connect(newEntry, &QAction::triggered, this, [ = ]()
 				{
-					emit loadPreset(AppConfig::instance().getPath(QString("presets/%1").arg(files[i])));
+                    emit loadPreset(AppConfig::instance().getPath(QString("presets/%1.conf").arg(files[i])));
 				});
 
 				tray_presetMenu->addAction(newEntry);
@@ -197,8 +197,13 @@ QMenu* TrayIcon::buildAvailableActions()
 	connect(showWindowAction, &QAction::triggered, this, &TrayIcon::iconActivated);
 	showWindowAction->setProperty("tag", "show");
 
-	QMenu   *reverbMenu = new QMenu(tr("Re&verberation Presets"));
+    QMenu   *reverbMenu = new QMenu(tr("Re&verberation presets"));
 
+    QAction *reverbOff = new QAction("Off");
+    connect(reverbOff, &QAction::triggered, this, [ = ]() {
+        emit loadReverbPreset("off");
+    });
+    reverbMenu->addAction(reverbOff);
 	for (auto preset : PresetProvider::Reverb::getPresetNames())
 	{
 		QAction *newEntry = new QAction(preset);
@@ -210,7 +215,7 @@ QMenu* TrayIcon::buildAvailableActions()
 
 	reverbMenu->setProperty("tag", "menu_reverb_preset");
 
-	QMenu *eqMenu = new QMenu(tr("&EQ Presets"), menuOwner);
+    QMenu *eqMenu = new QMenu(tr("&Equalizer presets"), menuOwner);
 
 	for (auto preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
 	{
@@ -223,7 +228,12 @@ QMenu* TrayIcon::buildAvailableActions()
 
 	eqMenu->setProperty("tag", "menu_eq_preset");
 
-	QMenu *bs2bMenu = new QMenu(tr("&Crossfeed Presets"), menuOwner);
+    QMenu *bs2bMenu = new QMenu(tr("&Crossfeed"), menuOwner);
+    QAction *bs2bOff = new QAction("Off");
+    connect(bs2bOff, &QAction::triggered, this, [ = ]() {
+        emit loadCrossfeedPreset(-1);
+    });
+    bs2bMenu->addAction(bs2bOff);
 
 	for (auto preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().toStdMap())
 	{
@@ -253,10 +263,6 @@ QMenu* TrayIcon::buildAvailableActions()
 
 QMenu* TrayIcon::buildDefaultActions()
 {
-	QAction *reloadAction = new QAction(tr("&Reload JamesDSP"), this);
-	reloadAction->setProperty("tag", "reload");
-	connect(reloadAction,     &QAction::triggered, this, &TrayIcon::restart);
-
 	QAction *showWindowAction = new QAction(tr("&Show/hide window"), this);
 	connect(showWindowAction, &QAction::triggered, this, &TrayIcon::iconActivated);
 	showWindowAction->setProperty("tag", "show");
@@ -266,8 +272,7 @@ QMenu* TrayIcon::buildDefaultActions()
 	quitAction->setProperty("tag", "quit");
 
 	QMenu   *menu = new QMenu();
-	menu->addAction(tray_disableAction);
-	menu->addAction(reloadAction);
+    menu->addAction(tray_disableAction);
 	menu->addMenu(tray_presetMenu);
 	menu->addSeparator();
 	menu->addAction(showWindowAction);

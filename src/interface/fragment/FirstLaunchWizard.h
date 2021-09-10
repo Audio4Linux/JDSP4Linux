@@ -4,7 +4,7 @@
 #include "config/AppConfig.h"
 #include <QWidget>
 
-class MainWindow;
+class IAudioService;
 
 namespace Ui
 {
@@ -17,7 +17,7 @@ class FirstLaunchWizard :
 	Q_OBJECT
 
 public:
-	explicit FirstLaunchWizard(QWidget *parent = nullptr);
+    explicit FirstLaunchWizard(IAudioService *audioService,QWidget *parent = nullptr);
 	~FirstLaunchWizard();
 
 signals:
@@ -26,6 +26,7 @@ signals:
 private:
 	Ui::FirstLaunchWizard *ui;
 	bool lockslot = false;
+    IAudioService* audioService;
 
 	void refreshDevices();
 
