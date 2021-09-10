@@ -168,7 +168,7 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Allocate pointers and init important variables
 	{
-		AppConfig::instance().setExecutablePath(exepath);
+        AppConfig::instance().set(AppConfig::ExecutablePath, exepath);
 
 		m_startupInTraySwitch = statupInTray;
 
@@ -207,7 +207,6 @@ MainWindow::MainWindow(QString  exepath,
 	// Prepare tray icon
 	{
 		trayIcon = new TrayIcon(this);
-		connect(&AppConfig::instance(), &AppConfig::trayModeChanged, trayIcon, &TrayIcon::setTrayVisible);
 		connect(trayIcon,               &TrayIcon::iconActivated,    this,     &MainWindow::trayIconActivated);
 		connect(trayIcon,               &TrayIcon::loadReverbPreset, [this](const QString &preset)
 		{
@@ -246,7 +245,7 @@ MainWindow::MainWindow(QString  exepath,
 		connect(trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
 		connect(trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
 
-		trayIcon->setTrayVisible(AppConfig::instance().getTrayMode() || m_startupInTraySwitch);
+        trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || m_startupInTraySwitch);
 	}
 
 	// Load config and initialize less important stuff
@@ -324,7 +323,7 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Extract default EEL files if missing
 	{
-		if (AppConfig::instance().getLiveprogAutoExtract())
+        if (AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract))
 		{
 			extractDefaultEelScripts(false, false);
 		}
@@ -378,7 +377,7 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Connect non-UI signals (DBus/ACW/...)
 	{
-		connect(&AppConfig::instance(), &AppConfig::styleChanged, this, [this]()
+        connect(&AppConfig::instance(), &AppConfig::themeChanged, this, [this]()
 		{
 			m_stylehelper->SetStyle();
 			ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
@@ -388,17 +387,28 @@ MainWindow::MainWindow(QString  exepath,
 			spectrumReloadSignalQueued = true;
 		});
 
-		connect(&AppConfig::instance(), &AppConfig::eqChanged, this, [this]()
+        connect(&AppConfig::instance(), &AppConfig::updated, this, [this](const AppConfig::Key& key, const QVariant& value)
 		{
-			ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().getEqualizerPermanentHandles());
+            switch(key)
+            {
+                case AppConfig::EqualizerShowHandles:
+                    ui->eq_widget->setAlwaysDrawHandles(value.toBool());
+                    break;
+                case AppConfig::TrayIconEnabled:
+                    trayIcon->setTrayVisible(value.toBool());
+                    break;
+                default:
+                    break;
+            }
+
 		});
 	}
 
 	// Lateinit less important UI stuff and setup tabbar
 	{
-		toggleSpectrum(AppConfig::instance().getSpectrumEnable(), true);
+        toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
 		restoreGraphicEQView();
-		ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().getEqualizerPermanentHandles());
+        ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
 		ui->tabbar->setAnimatePageChange(true);
 		ui->tabbar->setCustomStackWidget(ui->tabhost);
@@ -418,7 +428,7 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Handle first launch and diagnostic checks
 	{
-		if (!AppConfig::instance().getIntroShown())
+        if (!AppConfig::instance().get<bool>(AppConfig::SetupDone))
 		{
 			launchFirstRunSetup();
 		}
@@ -429,7 +439,10 @@ MainWindow::MainWindow(QString  exepath,
 
 MainWindow::~MainWindow()
 {
-    delete audioService;
+    if(audioService != nullptr)
+    {
+        delete audioService;
+    }
 	delete ui;
 }
 
@@ -453,7 +466,7 @@ void MainWindow::initializeSpectrum()
 	m_spectrograph = new Spectrograph(this);
 	m_audioengine  = new AudioStreamEngine(this);
 
-	int refresh = AppConfig::instance().getSpectrumRefresh();
+    int refresh = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
 
 	if (refresh == 0)
 	{
@@ -485,25 +498,26 @@ void MainWindow::initializeSpectrum()
 
 	setSpectrumVisibility(false);
 
-	connect(&AppConfig::instance(), &AppConfig::spectrumChanged, this, [this] {
-		toggleSpectrum(AppConfig::instance().getSpectrumEnable(), true);
-	});
-	connect(&AppConfig::instance(), &AppConfig::spectrumReloadRequired, this, &MainWindow::restartSpectrum);
+    connect(&AppConfig::instance(), &AppConfig::spectrumChanged, this, [this](bool needReload) {
+        toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
+        if(needReload)
+            restartSpectrum();
+    });
 }
 
 void MainWindow::restartSpectrum()
 {
 	toggleSpectrum(false,                                     false);
-	toggleSpectrum(AppConfig::instance().getSpectrumEnable(), false);
+    toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), false);
 }
 
 void MainWindow::refreshSpectrumParameters()
 {
-	int   bands      = AppConfig::instance().getSpectrumBands();
-	int   minfreq    = AppConfig::instance().getSpectrumMinFreq();
-	int   maxfreq    = AppConfig::instance().getSpectrumMaxFreq();
-	int   refresh    = AppConfig::instance().getSpectrumRefresh();
-	float multiplier = AppConfig::instance().getSpectrumMultiplier();
+    int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
+    int   minfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMinFreq);
+    int   maxfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMaxFreq);
+    int   refresh    = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
+    float multiplier = AppConfig::instance().get<float>(AppConfig::SpectrumMultiplier);
 
 	// Set default values if undefined
 	if (bands == 0)
@@ -592,8 +606,8 @@ void MainWindow::refreshSpectrumParameters()
 	                         palette().highlight().color(),
 	                         palette().text().color(),
 	                         outline.lighter(108),
-	                         AppConfig::instance().getSpectrumGrid(),
-	                         (Spectrograph::Mode) AppConfig::instance().getSpectrumShape());
+                             AppConfig::instance().get<bool>(AppConfig::SpectrumGrid),
+                             (Spectrograph::Mode) AppConfig::instance().get<int>(AppConfig::SpectrumTheme));
 
 	m_spectrograph->setParams(bands, minfreq, maxfreq);
 	m_audioengine->setNotifyIntervalMs(refresh);
@@ -731,7 +745,7 @@ void MainWindow::trayIconActivated()
 	}
 
 	// Hide tray icon if disabled and MainWin is visible (for cmdline force switch)
-	if (!AppConfig::instance().getTrayMode() && this->isVisible())
+    if (!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) && this->isVisible())
 	{
 		trayIcon->setTrayVisible(false);
 	}
@@ -805,6 +819,7 @@ void MainWindow::onUpdate()
 void MainWindow::restart()
 {
     audioService->reloadService();
+    DspConfig::instance().commit();
 
     // TODO
 	spectrumReloadSignalQueued = true;
@@ -1371,7 +1386,7 @@ void MainWindow::updateDDCSelection()
 
 		if (activeddc == AppConfig::instance().getPath("temp.vdc"))
 		{
-			QString lastId = AppConfig::instance().getLastVdcDatabaseId();
+            QString lastId = AppConfig::instance().get<QString>(AppConfig::VdcLastDatabaseId);
 			ui->ddcTabs->setCurrentIndex(1);
 
 			if (lastId.isEmpty())
@@ -2060,7 +2075,7 @@ void MainWindow::connectActions()
 
 		    if (newId != "0")
 		    {
-		        AppConfig::instance().setLastVdcDatabaseId(newId);
+                AppConfig::instance().set(AppConfig::VdcLastDatabaseId, newId);
 			}
 
             /* Workaround: Load different file to make sure the config parser notices a change and reloads the DDC engine */
@@ -2288,7 +2303,7 @@ void MainWindow::launchFirstRunSetup()
 
 		connect(b, &QAbstractAnimation::finished, [ = ]()
 		{
-			AppConfig::instance().setIntroShown(true);
+            AppConfig::instance().set(AppConfig::SetupDone, true);
 			lightBox->hide();
 			settings_dlg->refreshAll();
 			lightBox->deleteLater();

@@ -5,7 +5,7 @@
 
 typedef struct {
     std::string AudioFormat;
-    int SamplingRate;
+    std::string SamplingRate;
 } DspStatus;
 
 #endif // DSPSTATUS_H

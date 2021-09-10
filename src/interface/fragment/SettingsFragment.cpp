@@ -107,20 +107,9 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 							   return;
 						   }
 
-						   int mode = 0;
-
-						   if (ui->systray_r_none->isChecked())
-						   {
-							   mode = 0;
-						   }
-						   else if (ui->systray_r_showtray->isChecked())
-						   {
-							   mode = 1;
-						   }
-
-						   AppConfig::instance().setTrayMode(mode);
-						   ui->systray_icon_box->setEnabled(mode);
-						   ui->menu_edit->setEnabled(mode);
+                           AppConfig::instance().set(AppConfig::TrayIconEnabled, ui->systray_r_showtray->isChecked());
+                           ui->systray_icon_box->setEnabled(ui->systray_r_showtray->isChecked());
+                           ui->menu_edit->setEnabled(ui->systray_r_showtray->isChecked());
 					   };
 	connect(ui->systray_r_none,     &QRadioButton::clicked, this, systray_sel);
 	connect(ui->systray_r_showtray, &QRadioButton::clicked, this, systray_sel);
@@ -129,7 +118,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 								if (ui->systray_minOnBoot->isChecked())
 								{
 									AutostartManager::saveDesktopFile(autostart_path,
-                                                                      AppConfig::instance().getExecutablePath(),
+                                                                      AppConfig::instance().get<QString>(AppConfig::ExecutablePath),
 									                                  ui->systray_delay->isChecked());
 								}
 								else
@@ -152,7 +141,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 		    return;
 		}
 
-		AppConfig::instance().setTheme(ui->themeSelect->itemText(ui->themeSelect->currentIndex()).toUtf8().constData());
+        AppConfig::instance().set(AppConfig::Theme, ui->themeSelect->itemText(ui->themeSelect->currentIndex()).toUtf8().constData());
 	});
 	connect(ui->paletteSelect, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, [this]
 	{
@@ -161,8 +150,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 		    return;
 		}
 
-		AppConfig::instance().setColorpalette(ui->paletteSelect->itemData(ui->paletteSelect->currentIndex()).toString());
-		ui->paletteConfig->setEnabled(AppConfig::instance().getColorpalette() == "custom");
+        AppConfig::instance().set(AppConfig::ThemeColors, ui->paletteSelect->itemData(ui->paletteSelect->currentIndex()).toString());
+        ui->paletteConfig->setEnabled(AppConfig::instance().get<QString>(AppConfig::ThemeColors) == "custom");
 	});
 	connect(ui->paletteConfig, &QPushButton::clicked, this, [this]
 	{
@@ -172,7 +161,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	});
 	connect(ui->eq_alwaysdrawhandles, &QCheckBox::clicked, [this]()
 	{
-		AppConfig::instance().setEqualizerPermanentHandles(ui->eq_alwaysdrawhandles->isChecked());
+        AppConfig::instance().set(AppConfig::EqualizerShowHandles, ui->eq_alwaysdrawhandles->isChecked());
 	});
 	/*
 	 * Connect all signals for Default Paths
@@ -191,7 +180,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	});
 	connect(ui->liveprog_autoextract, &QCheckBox::clicked, [this]()
 	{
-		AppConfig::instance().setLiveprogAutoExtract(ui->liveprog_autoextract->isChecked());
+        AppConfig::instance().set(AppConfig::LiveprogAutoExtract, ui->liveprog_autoextract->isChecked());
 	});
 	connect(ui->liveprog_extractNow, &QPushButton::clicked, this, [this]
 	{
@@ -243,21 +232,21 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	 */
 	connect(ui->sa_enable,       &QGroupBox::clicked,                                                                this, [this]()
 	{
-		AppConfig::instance().setSpectrumEnable(ui->sa_enable->isChecked());
+        AppConfig::instance().set(AppConfig::SpectrumEnabled, ui->sa_enable->isChecked());
 		ui->spectrum_advanced->setEnabled(ui->sa_enable->isChecked());
 		emit reopenSettings();
 	});
 	connect(ui->sa_bands, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
 	{
-		AppConfig::instance().setSpectrumBands(number);
+        AppConfig::instance().set(AppConfig::SpectrumBands, number);
 	});
 	connect(ui->sa_minfreq, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
 	{
-		AppConfig::instance().setSpectrumMinFreq(number);
+        AppConfig::instance().set(AppConfig::SpectrumMinFreq, number);
 	});
 	connect(ui->sa_maxfreq, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
 	{
-		AppConfig::instance().setSpectrumMaxFreq(number);
+        AppConfig::instance().set(AppConfig::SpectrumMaxFreq, number);
 	});
 	connect(ui->sa_input, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, [this](const QString &str)
 	{
@@ -275,7 +264,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 		    return;
 		}
 
-		AppConfig::instance().setSpectrumShape(ui->sa_type->currentIndex());
+        AppConfig::instance().set(AppConfig::SpectrumTheme, ui->sa_type->currentIndex());
 	});
 
 	/*
@@ -283,15 +272,15 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	 */
 	connect(ui->sa_refresh, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
 	{
-		AppConfig::instance().setSpectrumRefresh(number);
+        AppConfig::instance().set(AppConfig::SpectrumRefresh, number);
 	});
 	connect(ui->sa_multi, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, [this](double number)
 	{
-		AppConfig::instance().setSpectrumMultiplier(number);
+        AppConfig::instance().set(AppConfig::SpectrumMultiplier, number);
 	});
 	connect(ui->sa_grid, &QCheckBox::clicked, this, [this]()
 	{
-		AppConfig::instance().setSpectrumGrid(ui->sa_grid->isChecked());
+        AppConfig::instance().set(AppConfig::SpectrumGrid, ui->sa_grid->isChecked());
 	});
 
 	/*
@@ -415,17 +404,17 @@ void SettingsFragment::refreshAll()
 	QString autostart_path = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 
 	ui->menu_edit->setTargetMenu(_trayIcon->getTrayMenu());
-	ui->menu_edit->setIconStyle(AppConfig::instance().getWhiteIcons());
+    ui->menu_edit->setIconStyle(AppConfig::instance().get<bool>(AppConfig::ThemeColorsCustomWhiteIcons));
 
 	ui->irspath->setText(AppConfig::instance().getIrsPath());
 	ui->ddcpath->setText(AppConfig::instance().getDDCPath());
 	ui->liveprog_path->setText(AppConfig::instance().getLiveprogPath());
 
-    ui->liveprog_autoextract->setChecked(AppConfig::instance().getLiveprogAutoExtract());
+    ui->liveprog_autoextract->setChecked(AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract));
 
 	updateInputSinks();
 
-	QString qvT(AppConfig::instance().getTheme());
+    QString qvT(AppConfig::instance().get<QString>(AppConfig::Theme));
 	int     indexT = ui->themeSelect->findText(qvT);
 
 	if ( indexT != -1 )
@@ -442,7 +431,7 @@ void SettingsFragment::refreshAll()
 		}
 	}
 
-	QVariant qvS2(AppConfig::instance().getColorpalette());
+    QVariant qvS2(AppConfig::instance().get<QString>(AppConfig::ThemeColors));
 	int      index2 = ui->paletteSelect->findData(qvS2);
 
 	if ( index2 != -1 )
@@ -450,12 +439,12 @@ void SettingsFragment::refreshAll()
 		ui->paletteSelect->setCurrentIndex(index2);
 	}
 
-	ui->paletteConfig->setEnabled(AppConfig::instance().getColorpalette() == "custom");
+    ui->paletteConfig->setEnabled(AppConfig::instance().get<QString>(AppConfig::ThemeColors) == "custom");
 
-	ui->systray_r_none->setChecked(!AppConfig::instance().getTrayMode());
-	ui->systray_r_showtray->setChecked(AppConfig::instance().getTrayMode());
-	ui->systray_icon_box->setEnabled(AppConfig::instance().getTrayMode());
-	ui->menu_edit->setEnabled(AppConfig::instance().getTrayMode());
+    ui->systray_r_none->setChecked(!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
+    ui->systray_r_showtray->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
+    ui->systray_icon_box->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
+    ui->menu_edit->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
 	bool autostart_enabled     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
 	bool autostart_delayed     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Delayed);
@@ -464,15 +453,15 @@ void SettingsFragment::refreshAll()
 	ui->systray_delay->setEnabled(autostart_enabled);
 	ui->systray_delay->setChecked(autostart_delayed);
 
-	ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().getEqualizerPermanentHandles());
+    ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
 	refreshDevices();
 
-	int   bands      = AppConfig::instance().getSpectrumBands();
-	int   minfreq    = AppConfig::instance().getSpectrumMinFreq();
-	int   maxfreq    = AppConfig::instance().getSpectrumMaxFreq();
-	int   refresh    = AppConfig::instance().getSpectrumRefresh();
-	float multiplier = AppConfig::instance().getSpectrumMultiplier();
+    int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
+    int   minfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMinFreq);
+    int   maxfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMaxFreq);
+    int   refresh    = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
+    float multiplier = AppConfig::instance().get<float>(AppConfig::SpectrumMultiplier);
 
 	// Set default values if undefined
 	if (bands == 0)
@@ -546,14 +535,14 @@ void SettingsFragment::refreshAll()
 		maxfreq = minfreq + 100;
 	}
 
-	ui->sa_enable->setChecked(AppConfig::instance().getSpectrumEnable());
-	ui->spectrum_advanced->setEnabled(AppConfig::instance().getSpectrumEnable());
+    ui->sa_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled));
+    ui->spectrum_advanced->setEnabled(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled));
 
-	ui->sa_type->setCurrentIndex(AppConfig::instance().getSpectrumShape());
+    ui->sa_type->setCurrentIndex(AppConfig::instance().get<int>(AppConfig::SpectrumTheme));
 	ui->sa_bands->setValue(bands);
 	ui->sa_minfreq->setValue(minfreq);
 	ui->sa_maxfreq->setValue(maxfreq);
-	ui->sa_grid->setChecked(AppConfig::instance().getSpectrumGrid());
+    ui->sa_grid->setChecked(AppConfig::instance().get<bool>(AppConfig::SpectrumGrid));
 	ui->sa_refresh->setValue(refresh);
 	ui->sa_multi->setValue(multiplier);
 

@@ -17,11 +17,9 @@ void StyleHelper::SetStyle()
 {
 	MainWindow *m_host = qobject_cast<MainWindow*>(m_objhost);
 
-	QApplication::setStyle(AppConfig::instance().getTheme());
+    QApplication::setStyle(AppConfig::instance().get<QString>(AppConfig::Theme));
 
-	QString     style_sheet   = AppConfig::instance().getStylesheet();
-	QString     color_palette = AppConfig::instance().getColorpalette();
-
+    QString     color_palette = AppConfig::instance().get<QString>(AppConfig::ThemeColors);
 	auto        palettes      = ColorStyleProvider::TABLE();
 
 	if (color_palette == "custom")
@@ -32,11 +30,11 @@ void StyleHelper::SetStyle()
 		QColor     selection     = QColor(loadColor(3, 0), loadColor(3, 1), loadColor(3, 2));
 		QColor     disabled      = QColor(loadColor(4, 0), loadColor(4, 1), loadColor(4, 2));
 		QColor     selectiontext = QColor(255 - loadColor(3, 0), 255 - loadColor(3, 1), 255 - loadColor(3, 2));
-		ColorStyle cs            = ColorStyle(AppConfig::instance().getWhiteIcons(),
+        ColorStyle cs            = ColorStyle(AppConfig::instance().get<bool>(AppConfig::ThemeColorsCustomWhiteIcons),
 		                                      base, background, foreground, selection, selectiontext, disabled);
 
 		setPalette(cs);
-		loadIcons(AppConfig::instance().getWhiteIcons());
+        loadIcons(AppConfig::instance().get<bool>(AppConfig::ThemeColorsCustomWhiteIcons));
 	}
 	else if (palettes.contains(color_palette))
 	{
@@ -124,7 +122,7 @@ void StyleHelper::loadIcons(bool white)
 int StyleHelper::loadColor(int index,
                            int rgb_index)
 {
-	QStringList elements = AppConfig::instance().getCustompalette().split(';');
+    QStringList elements = AppConfig::instance().get<QString>(AppConfig::ThemeColorsCustom).split(';');
 
 	if (elements.length() < 5 || elements[index].split(',').size() < 3)
 	{

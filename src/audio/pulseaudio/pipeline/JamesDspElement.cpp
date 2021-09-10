@@ -30,8 +30,11 @@ DspStatus JamesDspElement::status()
 {
     DspStatus status;
     const char* format = NULL;
-    this->getValues("dsp_srate", &status.SamplingRate,
+    int srate = 0;
+    this->getValues("dsp_srate", &srate,
                     "dsp_format", &format, NULL);
+
+    status.SamplingRate = std::to_string(srate);
     status.AudioFormat = format;
 
     return status;

@@ -132,7 +132,7 @@ private:
 	QFrame *settingsFragmentHost;
 	QVBoxLayout *settingsHostLayout;
 
-    IAudioService* audioService;
+    IAudioService* audioService = nullptr;
 
 	bool spectrumReloadSignalQueued   = false;
 	bool lockapply                    = false;

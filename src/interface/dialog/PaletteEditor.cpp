@@ -12,7 +12,7 @@ PaletteEditor::PaletteEditor(AppConfig *_appconf,
 
 	appconf = _appconf;
 
-	ui->whiteicons->setChecked(appconf->getWhiteIcons());
+    ui->whiteicons->setChecked(appconf->get<bool>(AppConfig::ThemeColorsCustomWhiteIcons));
 
 	QObject::connect(ui->base,     SIGNAL(clicked()),
 	                 this, SLOT(updateBase()));
@@ -42,13 +42,13 @@ void PaletteEditor::closeWin()
 
 void PaletteEditor::Reset()
 {
-	appconf->setCustompalette("25,25,25;53,53,53;255,255,255;42,130,218;85,85,85");
+    appconf->set(AppConfig::ThemeColorsCustom, "25,25,25;53,53,53;255,255,255;42,130,218;85,85,85");
 }
 
 int PaletteEditor::loadColor(int index,
                              int rgb_index)
 {
-	QStringList elements = appconf->getCustompalette().split(';');
+    QStringList elements = appconf->get<QString>(AppConfig::ThemeColorsCustom).split(';');
 
 	if (elements.length() < 5 || elements[index].split(',').size() < 3)
 	{
@@ -93,7 +93,7 @@ void PaletteEditor::saveColor(int           index,
                               const QColor &color)
 {
 	QString     strcolor = QString::number(color.red()) + "," + QString::number(color.green()) + "," + QString::number(color.blue());
-	QStringList elements = appconf->getCustompalette().split(';');
+    QStringList elements = appconf->get<QString>(AppConfig::ThemeColorsCustom).split(';');
 
 	while (elements.size() < 5)
 	{
@@ -101,12 +101,12 @@ void PaletteEditor::saveColor(int           index,
 	}
 
 	elements.replace(index, strcolor);
-	appconf->setCustompalette(elements.join(";"));
+    appconf->set(AppConfig::ThemeColorsCustom, elements.join(";"));
 }
 
 void PaletteEditor::updateIcons()
 {
-	appconf->setWhiteIcons(ui->whiteicons->isChecked());
+    appconf->set(AppConfig::ThemeColorsCustomWhiteIcons, ui->whiteicons->isChecked());
 }
 
 void PaletteEditor::updateBase()

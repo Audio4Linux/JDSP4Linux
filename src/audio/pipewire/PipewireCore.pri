@@ -1,11 +1,17 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/PipewireAudioProcessingThread.h \
+    $$PWD/FilterContainer.h \
     $$PWD/PipewireAudioService.h \
-    $$PWD/PipewirePipelineManager.h
+    $$PWD/PwAudioProcessingThread.h \
+    $$PWD/PwBasePlugin.h \
+    $$PWD/PwJamesDspPlugin.h \
+    $$PWD/PwPipelineManager.h
 
 SOURCES += \
-    $$PWD/PipewireAudioProcessingThread.cpp \
+    $$PWD/FilterContainer.cpp \
     $$PWD/PipewireAudioService.cpp \
-    $$PWD/PipewirePipelineManager.cpp
+    $$PWD/PwAudioProcessingThread.cpp \
+    $$PWD/PwBasePlugin.cpp \
+    $$PWD/PwJamesDspPlugin.cpp \
+    $$PWD/PwPipelineManager.cpp

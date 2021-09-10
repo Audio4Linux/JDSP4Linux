@@ -1,5 +1,5 @@
-#ifndef PIPEWIREPIPELINEMANAGER_H
-#define PIPEWIREPIPELINEMANAGER_H
+#ifndef PWPIPELINEMANAGER_H
+#define PWPIPELINEMANAGER_H
 
 /*
  *  NOTE: This C++ class is based on code from the EasyEffects/PulseEffects project
@@ -163,14 +163,14 @@ struct DeviceInfo {
   spa_param_availability output_route_available;
 };
 
-class PipewirePipelineManager {
+class PwPipelineManager {
  public:
-  PipewirePipelineManager();
-  PipewirePipelineManager(const PipewirePipelineManager&) = delete;
-  auto operator=(const PipewirePipelineManager&) -> PipewirePipelineManager& = delete;
-  PipewirePipelineManager(const PipewirePipelineManager&&) = delete;
-  auto operator=(const PipewirePipelineManager&&) -> PipewirePipelineManager& = delete;
-  ~PipewirePipelineManager();
+  PwPipelineManager();
+  PwPipelineManager(const PwPipelineManager&) = delete;
+  auto operator=(const PwPipelineManager&) -> PwPipelineManager& = delete;
+  PwPipelineManager(const PwPipelineManager&&) = delete;
+  auto operator=(const PwPipelineManager&&) -> PwPipelineManager& = delete;
+  ~PwPipelineManager();
 
   const std::string log_tag = "pipe_manager: ";
 

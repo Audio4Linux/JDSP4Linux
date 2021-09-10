@@ -21,6 +21,8 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+    ui->stackedWidget->setCurrentIndex(0);
+
 	QTimer::singleShot(500, [&] {
 		ui->p1_icon->startAnimation();
 	});
@@ -75,9 +77,9 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 	refreshDevices();
 
 
-	ui->p3_systray_disable->setChecked(!AppConfig::instance().getTrayMode());
-	ui->p3_systray_enable->setChecked(AppConfig::instance().getTrayMode());
-	ui->p3_systray_icon_box->setEnabled(AppConfig::instance().getTrayMode());
+    ui->p3_systray_disable->setChecked(!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
+    ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
+    ui->p3_systray_icon_box->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
 	QString autostart_path        = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 	bool    autostart_enabled     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
@@ -90,20 +92,8 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 								 return;
 							 }
 
-							 int mode = 0;
-
-							 if (ui->p3_systray_disable->isChecked())
-							 {
-								 mode = 0;
-							 }
-							 else if (ui->p3_systray_enable->isChecked())
-							 {
-								 mode = 1;
-							 }
-
-							 AppConfig::instance().setTrayMode(mode);
-
-							 ui->p3_systray_icon_box->setEnabled(mode);
+                             AppConfig::instance().set(AppConfig::TrayIconEnabled, ui->p3_systray_enable->isChecked());
+                             ui->p3_systray_icon_box->setEnabled(ui->p3_systray_enable->isChecked());
 						 };
 
 	connect(ui->p3_systray_disable, &QRadioButton::clicked, this, systray_radio);
@@ -113,7 +103,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 								   {
 									   if (ui->p3_systray_minOnBoot->isChecked())
 									   {
-                                           AutostartManager::saveDesktopFile(autostart_path, AppConfig::instance().getExecutablePath(),
+                                           AutostartManager::saveDesktopFile(autostart_path, AppConfig::instance().get<QString>(AppConfig::ExecutablePath),
 										                                     AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Delayed));
 									   }
 									   else

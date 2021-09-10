@@ -8,6 +8,11 @@
 
 namespace util {
 
+const float minimum_db_level = -100.0F;
+const double minimum_db_d_level = -100.0;
+const float minimum_linear_level = 0.00001F;
+const double minimum_linear_d_level = 0.00001;
+
 /**
  * @brief concat_vectors
  * Concatenate two vectors efficiently by inserting the smaller one into the larger one
@@ -34,6 +39,12 @@ bool mapContainsKey(std::map<K, V>& map, K key)
     if (map.find(key) == map.end()) return false;
     return true;
 }
+
+auto linear_to_db(const float& amp) -> float;
+auto linear_to_db(const double& amp) -> double;
+
+auto db_to_linear(const float& db) -> float;
+auto db_to_linear(const double& db) -> double;
 
 int random_number(int max);
 

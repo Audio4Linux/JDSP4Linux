@@ -23,7 +23,7 @@ TrayIcon::TrayIcon(QObject *parent) : QObject(parent)
 	tray_convMenu   = new QMenu(tr("&Convolver Bookmarks"));
 	tray_convMenu->setProperty("tag", "menu_convolver");
 
-	auto init = MenuIO::buildMenu(buildAvailableActions(), AppConfig::instance().getTrayContextMenu(), menuOwner);
+    auto init = MenuIO::buildMenu(buildAvailableActions(), AppConfig::instance().get<QString>(AppConfig::TrayIconMenu), menuOwner);
 
 	if (init->actions().count() < 1)
 	{
@@ -175,7 +175,7 @@ void TrayIcon::updateTrayMenu(QMenu *menu)
 		updateConvolverList();
 	});
 
-	AppConfig::instance().setTrayContextMenu(MenuIO::buildString(menu));
+    AppConfig::instance().set(AppConfig::TrayIconMenu, MenuIO::buildString(menu));
 }
 
 bool TrayIcon::isVisible() const

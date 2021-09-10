@@ -18,10 +18,15 @@
 #include "ConfigContainer.h"
 #include "ConfigIO.h"
 #include "utils/Common.h"
+#include "utils/Log.h"
 
 #include <QObject>
+#include <QMetaEnum>
 
 using namespace std;
+
+#define DEFINE_KEY(name, defaultValue) \
+    definitions[name] = QVariant(defaultValue);
 
 class AppConfig :
 	public QObject
@@ -41,86 +46,138 @@ public:
 	AppConfig()
 	{
 		_appconf = new ConfigContainer();
+
+        DEFINE_KEY(LiveprogAutoExtract, true);
+
+        DEFINE_KEY(Theme, "Fusion");
+        DEFINE_KEY(ThemeColors, "Default");
+        DEFINE_KEY(ThemeColorsCustom, "");
+        DEFINE_KEY(ThemeColorsCustomWhiteIcons, false);
+
+        DEFINE_KEY(TrayIconEnabled, true);
+        DEFINE_KEY(TrayIconMenu, "");
+
+        DEFINE_KEY(SpectrumEnabled, false);
+        DEFINE_KEY(SpectrumGrid, false);
+        DEFINE_KEY(SpectrumBands, 0);
+        DEFINE_KEY(SpectrumMinFreq, 0);
+        DEFINE_KEY(SpectrumMaxFreq, 0);
+        DEFINE_KEY(SpectrumTheme, 0);
+        DEFINE_KEY(SpectrumRefresh, 0);
+        DEFINE_KEY(SpectrumMultiplier, 0);
+
+        DEFINE_KEY(EqualizerShowHandles, false);
+
+        DEFINE_KEY(SetupDone, false);
+        DEFINE_KEY(ExecutablePath, "");
+        DEFINE_KEY(VdcLastDatabaseId, -1);
+
+        DEFINE_KEY(AudioOutputUseDefault, true);
+        DEFINE_KEY(AudioOutputDevice, "");
+        DEFINE_KEY(AudioAppBlocklist, QStringList());
+        DEFINE_KEY(AudioProcessAllOutputs, false);
+
+        connect(this, &AppConfig::updated, this, &AppConfig::notify);
+
+        // TODO does this belong into ctor?
 		load();
 	}
 
-#define DEF_BOOL(function, path, defaultValue, additionalSetCode) \
-	bool get ## function() {                                      \
-		return _appconf->getBool(path, true, defaultValue);       \
-	}                                                             \
-	void set ## function(bool val) {                              \
-		_appconf->setValue(path, QVariant(val));                  \
-		additionalSetCode                                         \
-		save();                                                   \
-	}
-#define DEF_INT(function, path, defaultValue, additionalSetCode) \
-	int get ## function() {                                      \
-		return _appconf->getInt(path, true, defaultValue);       \
-	}                                                            \
-	void set ## function(int val) {                              \
-		_appconf->setValue(path, QVariant(val));                 \
-		additionalSetCode                                        \
-		save();                                                  \
-	}
-#define DEF_FLOAT(function, path, defaultValue, additionalSetCode) \
-	float get ## function() {                                      \
-		return _appconf->getFloat(path, true, defaultValue);       \
-	}                                                              \
-	void set ## function(float val) {                              \
-		_appconf->setValue(path, QVariant(val));                   \
-		additionalSetCode                                          \
-		save();                                                    \
-	}
-#define DEF_STRING(function, path, defaultValue, additionalSetCode) \
-	QString get ## function() {                                     \
-		return _appconf->getString(path, true, defaultValue);       \
-	}                                                               \
-	void set ## function(const QString &val) {                      \
-		_appconf->setValue(path, QVariant(val));                    \
-		additionalSetCode                                           \
-		save();                                                     \
-	}
+    enum Key {
+        LiveprogAutoExtract,
 
-#define DEF_STRING_NO_MOD(function, path)        \
-	QString get ## function() {                  \
-		return _appconf->getString(path, false); \
-	}                                            \
-	void set ## function(const QString &val) {   \
-		_appconf->setValue(path, QVariant(val)); \
-		save();                                  \
-	}
+        Theme,
+        ThemeColors,
+        ThemeColorsCustom,
+        ThemeColorsCustomWhiteIcons,
 
-    DEF_BOOL(LiveprogAutoExtract, "liveprog.default.autoextract", true, );
+        TrayIconEnabled,
+        TrayIconMenu,
 
-	DEF_STRING(Theme,         "theme.name",           "", emit styleChanged(); );
-	DEF_STRING(Stylesheet,    "theme.stylesheet",     "", emit styleChanged(); );
-	DEF_STRING(Colorpalette,  "theme.palette",        "", emit styleChanged(); );
-	DEF_STRING(Custompalette, "theme.palette.custom", "", emit styleChanged(); );
-	DEF_BOOL(WhiteIcons, "theme.icons.white", false, emit styleChanged(); );
+        SpectrumEnabled,
+        SpectrumGrid,
+        SpectrumBands,
+        SpectrumMinFreq,
+        SpectrumMaxFreq,
+        SpectrumTheme,
+        SpectrumRefresh,
+        SpectrumMultiplier,
 
-	DEF_INT(TrayMode, "session.tray.mode", 0, emit trayModeChanged(val); );
-	DEF_STRING(TrayContextMenu, "session.tray.contextmenu", "", );
+        EqualizerShowHandles,
 
-	DEF_BOOL(SpectrumEnable, "visualizer.spectrum.enable", false, emit spectrumChanged(); );
-	DEF_BOOL(SpectrumGrid,   "visualizer.spectrum.grid",   false, emit spectrumChanged(); );
-	DEF_INT(SpectrumBands,   "visualizer.spectrum.bands",         0, emit spectrumChanged(); );
-	DEF_INT(SpectrumMinFreq, "visualizer.spectrum.frequency.min", 0, emit spectrumChanged(); );
-	DEF_INT(SpectrumMaxFreq, "visualizer.spectrum.frequency.max", 0, emit spectrumChanged(); );
-	DEF_INT(SpectrumShape,   "visualizer.spectrum.shape",         0, emit spectrumChanged(); );
-	DEF_INT(SpectrumRefresh, "visualizer.spectrum.interval",      0, emit spectrumReloadRequired(); );
-	DEF_FLOAT(SpectrumMultiplier, "visualizer.spectrum.multiplier", 0, emit spectrumChanged(); );
+        SetupDone,
+        ExecutablePath,
+        VdcLastDatabaseId,
 
-	DEF_BOOL(EqualizerPermanentHandles, "equalizer.handle.permanent", false, emit eqChanged(); );
-	DEF_BOOL(IntroShown,                "app.firstlaunch",            false, );
+        AudioOutputUseDefault,
+        AudioOutputDevice,
+        AudioAppBlocklist,
+        AudioProcessAllOutputs
+    };
+    Q_ENUM(Key);
 
-	DEF_STRING(ExecutablePath, "app.executable", "", );
-	DEF_STRING_NO_MOD(LastVdcDatabaseId, "vdc.database.lastid");
+    void set(const Key &key,
+             const QStringList &value)
+    {
+        set(key, value.join(';'));
+    }
 
+    void set(const Key &key,
+             const QVariant &value)
+    {
+        _appconf->setValue(QVariant::fromValue(key).toString(), value);
+        emit updated(key, value);
+        save();
+    }
 
-	void setSpectrumInput(const QString &npath)
+    template<class T>
+    static T convertVariant(QVariant variant){
+        if constexpr (std::is_same_v<T, QVariant>) {
+            return variant;
+        }
+        if constexpr (std::is_same_v<T, std::string>) {
+            return variant.toString().toStdString();
+        }
+        if constexpr (std::is_same_v<T, QString>) {
+            return variant.toString();
+        }
+        if constexpr (std::is_same_v<T, QStringList>) {
+            return variant.toStringList();
+        }
+        if constexpr (std::is_same_v<T, int>) {
+            return variant.toInt();
+        }
+        if constexpr (std::is_same_v<T, float>) {
+            return variant.toFloat();
+        }
+        if constexpr (std::is_same_v<T, bool>) {
+            return variant.toBool();
+        }
+
+        Log::error("AppConfig::convertVariant<T>: Unknown type T");
+    }
+
+    template<class T>
+    T get(const Key &key)
+    {
+        bool exists;
+        auto skey = QVariant::fromValue(key).toString();
+        auto variant = _appconf->getVariant(skey, true, &exists);
+
+        QVariant defaultValue = definitions[key];
+
+        if(!exists)
+        {
+            return convertVariant<T>(defaultValue);
+        }
+
+        return convertVariant<T>(variant);
+    }
+
+    void setSpectrumInput(const QString &npath)
 	{
 		_appconf->setValue("visualizer.spectrum.device", QVariant(npath));
-		emit spectrumReloadRequired();
+        emit spectrumChanged(true);
 		save();
 	}
 
@@ -147,6 +204,8 @@ public:
 	{
 		return QString("%1/.config/jamesdsp/%2").arg(QDir::homePath()).arg(subdir);
 	}
+
+    // TODO remove these functions
 
 	void setIrsPath(const QString &npath)
 	{
@@ -216,6 +275,12 @@ public:
 	{
 		auto map = ConfigIO::readFile(QString("%1/.config/jamesdsp/ui.2.conf").arg(QDir::homePath()));
 		_appconf->setConfigMap(map);
+
+        for(const auto& key : map.keys())
+        {
+            auto ekey  = static_cast<Key>(QMetaEnum::fromType<Key>().keyToValue(key.toLocal8Bit().constData()));
+            emit updated(ekey, map[key]);
+        }
 	}
 
 	QString getGraphicEQConfigFilePath()
@@ -223,14 +288,41 @@ public:
 		return pathAppend(QFileInfo(getDspConfPath()).absoluteDir().absolutePath(), "ui.graphiceq.conf");
 	}
 
+private slots:
+    void notify(const Key& key, const QVariant& value)
+    {
+        switch(key)
+        {
+        case Theme:
+        case ThemeColors:
+        case ThemeColorsCustom:
+        case ThemeColorsCustomWhiteIcons:
+            emit themeChanged(key, value);
+            break;
+        case SpectrumEnabled:
+        case SpectrumBands:
+        case SpectrumGrid:
+        case SpectrumMinFreq:
+        case SpectrumMaxFreq:
+        case SpectrumMultiplier:
+        case SpectrumTheme:
+            emit spectrumChanged(false);
+            break;
+        case SpectrumRefresh:
+            emit spectrumChanged(true);
+            break;
+        default:
+            break;
+        }
+    }
+
 signals:
-	void spectrumChanged();
-	void spectrumReloadRequired();
-	void styleChanged();
-	void eqChanged();
-	void trayModeChanged(bool);
+    void spectrumChanged(bool needReload);
+    void themeChanged(const Key&, const QVariant&);
+    void updated(const Key&, const QVariant&);
 
 private:
+    QMap<Key, QVariant> definitions;
 	ConfigContainer *_appconf;
 };
 
