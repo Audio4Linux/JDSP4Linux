@@ -45,6 +45,7 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 * Complex reverberation IIR network (Progenitor 2)
 * Interpolated FIR equalizer with flexible bands
 * Arbitrary response equalizer (also known as GraphicEQ from EqualizerAPO)
+  * AutoEQ database integration (requires network connection)
 * Partitioned convolver (Auto segmenting convolution)
   * Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse response
 * Crossfeed
@@ -68,13 +69,17 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
     * Console output support
     * Detailed error messages with inline code highlighting
 
-
-
 ## PipeWire vs PulseAudio
 
-Designed for use with PipeWire. PulseAudio is primarily supported for backward-compatibility. 
+**Designed for use with PipeWire. PulseAudio is only supported for backward-compatibility.**
 
-TBD
+PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. Unfortunately, PipeWire is not yet completely stable and does not work on virtual machines. If you cannot get any audio output when using PipeWire, consider switching to PulseAudio until proper hardware support is available.
+
+I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
+
+*Important: This application can be either compiled with PulseAudio or PipeWire support. Please make sure you choose the correct flavor for your Linux setup before installing!*
+
+*Note: PipeWire's compatibility mode for PulseAudio apps does not work with the PulseAudio flavor of this app. Use the version for PipeWire instead.*
 
 ## Installation
 
