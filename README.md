@@ -39,7 +39,7 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 ## Features
 
 * Automatic bass boost
-  * Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream
+  * Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency, by analyzing the incoming audio stream
 * Automatic dynamic range compressor
   * A highly automated multiband dynamic range adjusting effect
 * Complex reverberation IIR network (Progenitor 2)
@@ -55,19 +55,20 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 * ViPER-DDC
   * Perform parametric equalization on audio
   * Create VDC input files using [thepbone/DDCToolbox](https://github.com/thepbone/DDCToolbox)
-* Analog modelling
+* Analog modeling
   * An aliasing-free even harmonic generator
 * Output limiter
 * **Scripting engine: Live programmable DSP**
   * Write your own audio effects using the [EEL2 scripting language](https://github.com/james34602/EEL_CLI)
-  * Auto-generate a basic user interface for your script to modify certain parameters/constants without editing the actual code
-  * The scripting language has been extended using many DSP-related functions for easy access, for example: spectral processing, constant Q transform, multi-purpose FIR filter designer IIR sub-bands transformation, etc...
+  * Auto-generate a basic user interface for your script to modify specific parameters/constants without editing the actual code
+  * The scripting language has been extended using many DSP-related functions for easy access, for example, spectral processing, constant Q transform, multi-purpose FIR filter designer IIR sub-bands transformation, etc...
   * **This app also includes a custom minimal scripting IDE**:
     * Syntax highlighting
     * Basic code completion
     * Dynamic code outline window
     * Console output support
     * Detailed error messages with inline code highlighting
+
 
 ## PipeWire vs PulseAudio
 
