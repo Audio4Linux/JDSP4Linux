@@ -24,23 +24,23 @@ jobs:
         submodules: 'recursive'
  
     - name: Install dependencies (PulseAudio flavor)
-      if: matrix.flavor == "pulse"
+      if: matrix.flavor == 'pulse'
       run: |
         sudo apt update -qq
         sudo apt install lftp qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
      
     - name: Install dependencies (PipeWire flavor)
-      if: matrix.flavor == "pipewire"
+      if: matrix.flavor == 'pipewire'
       run: |
         sudo apt update -qq
         sudo apt install lftp qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.2-dev
         
     - name: Initialize project (PulseAudio flavor)
-      if: matrix.flavor == "pulse"
+      if: matrix.flavor == 'pulse'
       run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
       
     - name: Initialize project (PipeWire flavor)
-      if: matrix.flavor == "pipewire"
+      if: matrix.flavor == 'pipewire'
       run: qmake JDSP4Linux.pro "CONFIG += CI"
       
     - name: Build
