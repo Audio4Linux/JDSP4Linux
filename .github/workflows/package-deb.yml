@@ -22,7 +22,7 @@ jobs:
     - name: Update git
       run: |
         apt update -qq
-        apt upgrade git
+        apt upgrade -y git
     
     - uses: actions/checkout@v2
       with:
@@ -33,13 +33,13 @@ jobs:
       if: matrix.flavor == 'pulse'
       run: |
         apt update -qq
-        apt install lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+        apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
      
     - name: Install dependencies (PipeWire flavor)
       if: matrix.flavor == 'pipewire'
       run: |
         apt update -qq
-        apt install lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
+        apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
       
     - name: Initialize project (PulseAudio flavor)
       if: matrix.flavor == 'pulse'
