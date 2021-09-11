@@ -179,7 +179,7 @@ Minimum version requirements:
 Debian/Ubuntu + **PipeWire** clients only:
 
 ```bash
-sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.2-dev
+sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
 ```
 NOTE: Pipewire version 0.3 or later required. Unfortunately, this version is only in the official Ubuntu repository for Ubuntu 20.10 or later. If you use Ubuntu 20.04 or earlier, you need to compile this dependency yourself or use PulseAudio instead.
 
