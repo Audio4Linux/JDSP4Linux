@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/screenshot.png?raw=true">
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot.png?raw=true">
 </p>
 
 
@@ -122,8 +122,8 @@ Server Name: pulseaudio
 
 If you don't know which version fits to your Linux setup, go to the [PipeWire vs PulseAudio section](#which_one_am_i_using) above.
 
-* [PPA (Debian/Ubuntu)](#debianubuntu)
-* [AUR (Arch Linux)](#arch)
+* [Debian/Ubuntu (PPA)](#debianubuntu)
+* [Arch Linux (AUR)](#arch)
 * [Build from sources](#build-from-sources)
 
 ### Debian/Ubuntu
@@ -151,21 +151,22 @@ TBD
 
 On Arch you can install the [AUR package](https://aur.archlinux.org/packages/jdsp4linux-gui-git/) by yochananmarqos:
 ```bash
-yay -S jdsp4linux-gui-git
+yay -S jdsp4linux-git
 ```
 
 Or [this one](https://aur.archlinux.org/packages/jdsp4linux-gui) to get the latest stable release:
 ```bash
-yay -S jdsp4linux-gui
+yay -S jdsp4linux
 ```
 ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui?label=aur%20%28stable%29) ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur%20%28git%29)
 
 ### Build from sources
 
-Minimum Qt version requirement:
+Minimum requirements:
 
 * Qt 5.11 or later
 * Not designed to be used with Qt 6
+* Compiler support for C++17 standard required
 
 #### Install dependencies
 
@@ -281,7 +282,13 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 
 ## Screenshots
 
-TBD
+<p align="center">
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_presets.png?raw=true">  
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_eel.png?raw=true"> 
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_graphiceq.png?raw=true"> 
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_ide.png?raw=true">
+</p>
+
 
 ## Contributors
 
