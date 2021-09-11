@@ -61,8 +61,7 @@ jobs:
       run: |
         echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
         echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
-        DEBIAN_FRONTEND="noninteractive"
-        apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
+        DEBIAN_FRONTEND="noninteractive" apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
       
     - name: Initialize project (PipeWire flavor)
       run: qmake JDSP4Linux.pro "CONFIG += CI"
