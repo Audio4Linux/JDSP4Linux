@@ -147,13 +147,7 @@ unix {
         PKGCONFIG += libpulse
     }
     else {
-        packagesExist(libpipewire-0.3){
-            PKGCONFIG += libpipewire-0.3
-        }
-        else {
-            message("WARNING: libpipewire-0.3 not found. Falling back to v0.2")
-            PKGCONFIG += libpipewire-0.2
-        }
+        PKGCONFIG += libpipewire-0.3
     }
 }
 
