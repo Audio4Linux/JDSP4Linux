@@ -17,8 +17,8 @@ jobs:
     steps:
     - name: Update git
       run: |
-        apt update
-        apt upgrade -y git
+        sudo apt update
+        sudo apt upgrade -y git
     
     - uses: actions/checkout@v2
       with:
@@ -27,7 +27,7 @@ jobs:
  
     - name: Install dependencies (PulseAudio flavor)
       run: |
-        apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+        sudo apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
      
     - name: Initialize project (PulseAudio flavor)
       run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
