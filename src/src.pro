@@ -147,7 +147,7 @@ unix {
         PKGCONFIG += libpulse
     }
     else {
-        PKGCONFIG += libpipewire-0.3
+        PKGCONFIG += libpipewire-0.3 libspa-0.2
     }
 }
 
