@@ -41,7 +41,7 @@ jobs:
       if: matrix.flavor == 'pipewire'
       run: |
         git clone https://gitlab.freedesktop.org/pipewire/pipewire.git
-        git checkout 0.3.25
+        git checkout tags/0.3.25 master
         cd pipewire
         mkdir builddir
         meson setup builddir
