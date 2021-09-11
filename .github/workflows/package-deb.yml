@@ -35,11 +35,12 @@ jobs:
         sudo apt update -qq
         sudo apt install update-manager-core
         sudo apt dist-upgrade
-        sudo apt install lftp meson qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev
+        sudo apt install lftp qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev
         
     - name: Build pipewire-0.3
       if: matrix.flavor == 'pipewire'
       run: |
+        sudo apt install meson debhelper-compat findutils libasound2-dev libavcodec-dev libavfilter-dev libavformat-dev libdbus-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libsbc-dev libsdl2-dev libudev-dev libva-dev libv4l-dev libx11-dev ninja-build pkg-config python3-docutils systemd python3-pip
         git clone --depth 1 --branch 0.3.25 https://gitlab.freedesktop.org/pipewire/pipewire.git
         cd pipewire
         mkdir builddir
