@@ -27,14 +27,14 @@
    <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot.png?raw=true">
 </p>
 
-
 <p align="center">
 Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a href="https://t.me/thepbone">Telegram</a>)
 <p/><p align="center">
 <a href="https://github.com/james34602/JamesDSPManager">JamesDSP</a> was initially published as an audio effects processor<br>for Android devices and is written by <a href="https://github.com/james34602">James Fung (@james34602)</a>.
 </p>
-
-
+<p align="center">
+    Feel free to join our <a href="https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw">Telegram group</a> for support and updates
+</p>
 
 ## Features
 
