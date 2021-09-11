@@ -11,7 +11,6 @@
 
 #include <IAudioService.h>
 
-#include <QAudioDeviceInfo>
 #include <QCloseEvent>
 #include <QDebug>
 #include <QDesktopServices>

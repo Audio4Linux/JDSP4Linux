@@ -82,7 +82,45 @@ I'm currently not planning to add more advanced support for Pulseaudio clients. 
 
 *Note: PipeWire's compatibility mode for PulseAudio apps does not work with the PulseAudio flavor of this app. Use the version for PipeWire instead.*
 
+### Which one am I using?
+
+Follow the instructions below, if you don't know which one your Linux distribution is using. If you already know, skip to the 'Install dependencies' section.
+
+##### Step 1: Is PipeWire installed and active?
+
+Run `pw-cli dump short core` in your terminal. 
+
+Does the terminal output look similar to the pattern below after executing the command?
+
+```
+0: u="USER" h="HOSTNAME" v="0.3.35" n="pipewire-0"
+```
+
+* **YES**: You're using PipeWire. Skip ahead, and follow the instructions to install JamesDSP with PipeWire support.
+
+* **NO**: If the command `pw-cli` is not found or it returned an error, you're probably not using PipeWire. Continue to step 2 to find out if PulseAudio is available on your system.
+
+##### Step 2: Is PulseAudio installed and active?
+
+Run `LC_ALL=C pactl info | grep "Server Name:"` in your terminal. 
+
+Does the terminal output look like this after executing the command?
+
+```
+Server Name: pulseaudio
+```
+
+* **YES**: You're using PulseAudio. Skip ahead, and follow the instructions to install JamesDSP with PulseAudio support.
+
+* **NO**: If the command `pactl` is not found or it returned an error, either your PA installation is broken or you are using another audio framework like Jack. Consider switching to PipeWire in this case.
+
+**IMPORTANT:** If the output mentions PipeWire (`Server Name: PulseAudio (on PipeWire 0.3.35)`), you are using PulseAudio via PipeWire's compatibility mode. You need to install JamesDSP with PipeWire support in this case!
+
 ## Installation
+
+**Decide whether you need to install the PipeWire or PulseAudio version of this app!**
+
+If you don't know which version fits to your Linux setup, go to the [PipeWire vs PulseAudio section](#which_one_am_i_using) above.
 
 * [PPA (Debian/Ubuntu)](#debianubuntu)
 * [AUR (Arch Linux)](#arch)
@@ -122,43 +160,64 @@ yay -S jdsp4linux-gui
 ```
 ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui?label=aur%20%28stable%29) ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur%20%28git%29)
 
-
 ### Build from sources
 
-**Requirements:**
+Minimum Qt version requirement:
 
- * Qt 5.11 or later
+* Qt 5.11 or later
+* Not designed to be used with Qt 6
 
-Install dependencies (Debian)
+#### Install dependencies
 
-    sudo apt install qt5-qmake qtbase5-dev libgl1-mesa-dev
+Arch Linux + **PipeWire** clients only:
 
-Install dependencies (Arch)
 
-    sudo pacman -S qt5-base 
 
-Clone this repository
+Arch Linux + **PulseAudio** clients only:
 
-    git clone https://github.com/Audio4Linux/JDSP4Linux
+```bash
+sudo pacman -S qt5-base qt5-svg libpulse glib2 glibmm gst-plugins-base gstreamer 
+```
 
-Compile sources
+Clone git repositories and submodules:
 
-    cd JDSP4Linux
-    qmake JDSP4Linux.pro
-    make
+```bash
+git clone --recursive https://github.com/Audio4Linux/JDSP4Linux
+```
+
+Prepare build environment
+
+```bash
+cd JDSP4Linux
+mkdir build
+cd build
+```
+
+Compile application - **PipeWire** clients only:
+
+```bash
+qmake ../JDSP4Linux.pro
+make
+```
+Compile application - **PulseAudio** clients only:
+
+```bash
+qmake ../JDSP4Linux.pro "CONFIG += USE_PULSEAUDIO"
+make
+```
 
 Execute compiled binary
 
 ```bash
-./jamesdsp
+./src/jamesdsp
 ```
 
-#### Optional: Manual installation
+#### Optional: Manual installation + menu entry
 
-Copy binary to /usr/local/bin
+Copy binary to /usr/local/bin and set permissions
 
 ```bash
-sudo cp jamesdsp /usr/local/bin
+sudo cp src/jamesdsp /usr/local/bin
 sudo chmod 755 /usr/local/bin/jamesdsp
 ```
 
