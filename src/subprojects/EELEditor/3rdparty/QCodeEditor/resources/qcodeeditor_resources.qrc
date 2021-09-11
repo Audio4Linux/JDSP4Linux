@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>default_style.xml</file>
-    </qresource>
-</RCC>
