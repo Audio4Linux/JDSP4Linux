@@ -19,6 +19,11 @@ jobs:
         flavor: [pulse, pipewire]
         
     steps:
+    - name: Update git
+      run: |
+        sudo apt update -qq
+        sudo apt upgrade git
+    
     - uses: actions/checkout@v2
       with:
         ref: 'refactor' # TODO
