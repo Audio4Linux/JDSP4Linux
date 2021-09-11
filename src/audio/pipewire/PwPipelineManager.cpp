@@ -166,7 +166,7 @@ void on_destroy_node_proxy(void* data) {
 void on_node_info(void* object, const struct pw_node_info* info) {
     auto* nd = static_cast<node_data*>(object);
 
-    if (util::mapContainsKey(nd->pm->node_map, info->id)) { // TODO check <----
+    if (util::mapContainsKey(nd->pm->node_map, info->id)) {
         nd->nd_info.state = info->state;
         nd->nd_info.n_input_ports = static_cast<int>(info->n_input_ports);
         nd->nd_info.n_output_ports = static_cast<int>(info->n_output_ports);

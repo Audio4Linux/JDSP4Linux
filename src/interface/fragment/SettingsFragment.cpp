@@ -72,8 +72,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                 //ui->stackedWidget->setCurrentIndex(5);
 				break;
 			default:
-            //TODO devics tab is hidden
                 ui->stackedWidget->setCurrentIndex(toplevel_index);
+                break;
 		}
 	});
     //ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());

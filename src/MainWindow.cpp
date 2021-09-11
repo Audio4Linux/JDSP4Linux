@@ -935,7 +935,7 @@ void MainWindow::loadConfig()
     ui->postgain->setValueA(DspConfig::instance().get<int>(DspConfig::master_postgain));
 
     ui->graphicEq->chk_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::graphiceq_enable));
-    ui->graphicEq->load(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::graphiceq_param))); // TODO stress-test
+    ui->graphicEq->load(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::graphiceq_param)));
 
     ui->ddc_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::ddc_enable));
     activeddc      = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
@@ -1184,7 +1184,6 @@ void MainWindow::bs2bPresetSelectionUpdated()
 
 	const auto index = PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText());
 
-	// TODO Verify values
     lockapply = true;
 	switch (index)
 	{
@@ -1770,7 +1769,6 @@ void MainWindow::updateFromEelEditor(QString path)
 		parser.loadFile(path);
 		parser.deleteBackup();
 
-        // TODO: Should we reload here or create a dedicated button in the editor?
         audioService->reloadLiveprog();
 	}
 }

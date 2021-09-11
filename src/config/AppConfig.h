@@ -79,7 +79,6 @@ public:
 
         connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
-        // TODO does this belong into ctor?
 		load();
 	}
 
@@ -183,8 +182,6 @@ public:
 	{
 		return QString("%1/.config/jamesdsp/%2").arg(QDir::homePath()).arg(subdir);
 	}
-
-    // TODO remove these functions
 
 	void setIrsPath(const QString &npath)
 	{
