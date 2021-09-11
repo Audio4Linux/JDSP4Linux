@@ -11,13 +11,9 @@ on:
      - prereleased
 
 jobs:
-  build-amd64:
+  build-pulse-amd64:
     runs-on: ubuntu-20.04
-    container: ubuntu:21.04
-    strategy:
-      matrix:
-        flavor: [pulse, pipewire]
-        
+
     steps:
     - name: Update git
       run: |
@@ -30,23 +26,44 @@ jobs:
         submodules: 'recursive'
  
     - name: Install dependencies (PulseAudio flavor)
-      if: matrix.flavor == 'pulse'
       run: |
         apt update -qq
         apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
      
+    - name: Initialize project (PulseAudio flavor)
+      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
+      
+    - name: Build
+      run: |
+        make
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: jamesdsp-pulse_portable_linux64
+        path: src/jamesdsp
+        
+  build-pipewire-amd64:
+    runs-on: ubuntu-20.04
+    container: ubuntu:21.04
+
+    steps:
+    - name: Update git
+      run: |
+        apt update -qq
+        apt upgrade -y git
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: 'refactor' # TODO
+        submodules: 'recursive'
+
     - name: Install dependencies (PipeWire flavor)
-      if: matrix.flavor == 'pipewire'
       run: |
         apt update -qq
         apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
       
-    - name: Initialize project (PulseAudio flavor)
-      if: matrix.flavor == 'pulse'
-      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
-      
     - name: Initialize project (PipeWire flavor)
-      if: matrix.flavor == 'pipewire'
       run: qmake JDSP4Linux.pro "CONFIG += CI"
       
     - name: Build
@@ -56,12 +73,12 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
+        name: jamesdsp-pipewire_portable_linux64
         path: src/jamesdsp
     
   build-deb-amd64:
     runs-on: ubuntu-20.04
-    needs: [build-amd64]
+    needs: [build-pulse-amd64, build-pipewire-amd64]
     strategy:
       matrix:
         flavor: [pulse, pipewire]
