@@ -262,9 +262,9 @@ Create a menu entry
 sudo cat <<EOT >> /usr/share/applications/jamesdsp.desktop
 [Desktop Entry]
 Name=JamesDSP
-GenericName=Equalizer
+GenericName=Audio effect processor
 Comment=
-Keywords=equalizer
+Keywords=equalizer;audio;effect
 Categories=AudioVideo;Audio;
 Exec=jamesdsp
 Icon=/usr/share/pixmaps/jamesdsp.png
