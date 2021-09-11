@@ -65,7 +65,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_portable_amd64
+        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
         path: src/jamesdsp
     
   build-deb-amd64:
@@ -99,7 +99,7 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_portable_amd64
+        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
       
     - name: Build DEB package
       run: |
@@ -139,7 +139,7 @@ jobs:
     - name: Download portable artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_portable_amd64
+        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
               
     - name: Download package artifact
       uses: actions/download-artifact@v2
@@ -147,7 +147,7 @@ jobs:
         name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
         
     - name: Rename portable artifact
-      run: mv jamesdsp jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_amd64.bin
+      run: mv jamesdsp jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_linux64.bin
       
     - name: Upload binary to nightly server
       uses: wlixcc/SFTP-Deploy-Action@v1.0
@@ -156,7 +156,7 @@ jobs:
         server: 'local.timschneeberger.me'
         port: 22
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_amd64.bind'
+        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_linux64.bin'
         remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
         args: '-o ConnectTimeout=5'
       
