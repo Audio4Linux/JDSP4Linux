@@ -194,7 +194,7 @@ public:
 
 	QString getIrsPath()
 	{
-        QString irs_path = chopFirstLastChar(_appconf->getString("cConvolverDefaultPath", false));
+        QString irs_path = chopFirstLastChar(_appconf->getString("ConvolverDefaultPath", false));
 
 		if (irs_path.length() < 2)
 		{
