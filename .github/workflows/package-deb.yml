@@ -49,6 +49,8 @@ jobs:
         ninja -C builddir
         cd builddir
         sudo meson install
+        find /usr/lib/pkg-config
+        find /usr/lib/spa-0.2
       
     - name: Initialize project (PulseAudio flavor)
       if: matrix.flavor == 'pulse'
