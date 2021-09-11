@@ -51,34 +51,7 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 		QDesktopServices::openUrl(QUrl("https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw"));
 	});
 
-	auto deviceUpdated = [this]()
-						 {
-							 if (lockslot)
-							 {
-								 return;
-							 }
-
-							 QString devices(AppConfig::instance().getPath("devices.conf"));
-
-							 if (ui->p2_dev_mode_auto->isChecked())
-							 {
-								 QFile(devices).remove();
-							 }
-							 else
-							 {
-								 if (ui->p2_dev_select->currentData() == "---")
-								 {
-									 return;
-								 }
-
-								 ConfigContainer *devconf = new ConfigContainer();
-								 devconf->setConfigMap(ConfigIO::readFile(devices));
-								 devconf->setValue("location", ui->p2_dev_select->currentData());
-								 ConfigIO::writeFile(devices, devconf->getConfigMap());
-							 }
-						 };
 	refreshDevices();
-
 
     ui->p3_systray_disable->setChecked(!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
@@ -117,9 +90,9 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 
 	connect(ui->p3_systray_minOnBoot,     &QPushButton::clicked,                                                              this, systray_autostart_radio);
 
-	connect(ui->p2_dev_mode_auto,         &QRadioButton::clicked,                                                             this, deviceUpdated);
-	connect(ui->p2_dev_mode_manual,       &QRadioButton::clicked,                                                             this, deviceUpdated);
-	connect(ui->p2_dev_select,            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, deviceUpdated);
+    connect(ui->p2_dev_mode_auto,         &QRadioButton::clicked,                                                             this, &FirstLaunchWizard::onDeviceUpdated);
+    connect(ui->p2_dev_mode_manual,       &QRadioButton::clicked,                                                             this, &FirstLaunchWizard::onDeviceUpdated);
+    connect(ui->p2_dev_select,            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, &FirstLaunchWizard::onDeviceUpdated);
 
 }
 
@@ -167,4 +140,24 @@ void FirstLaunchWizard::refreshDevices()
         ui->p2_dev_select->setCurrentText(name);
     }
     lockslot = false;
+}
+
+void FirstLaunchWizard::onDeviceUpdated()
+{
+    if (lockslot)
+    {
+        return;
+    }
+
+    AppConfig::instance().set(AppConfig::AudioOutputUseDefault, ui->p2_dev_mode_auto->isChecked());
+
+    if (!ui->p2_dev_mode_auto->isChecked())
+    {
+        if (ui->p2_dev_select->currentData() == "---")
+        {
+            return;
+        }
+
+        AppConfig::instance().set(AppConfig::AudioOutputDevice, ui->p2_dev_select->currentData());
+    }
 }

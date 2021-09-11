@@ -30,6 +30,9 @@ private:
 
 	void refreshDevices();
 
+private slots:
+    void onDeviceUpdated();
+
 };
 
 #endif // FIRSTLAUNCHWIZARD_H

@@ -37,6 +37,7 @@
 #include <eeleditor.h>
 //#include <spectrograph.h>
 
+#include <QDesktopServices>
 #include <QButtonGroup>
 #include <QClipboard>
 #include <QDebug>
@@ -1425,12 +1426,7 @@ void MainWindow::reloadDDC()
 
 	if (files.empty())
 	{
-		QFont            font;
-		font.setItalic(true);
-		// font.setPointSize(11);
-
 		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setFont(font);
 		placeholder->setText("No VDC files found");
 		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
 		ui->ddc_files->addItem(placeholder);
@@ -1564,12 +1560,7 @@ void MainWindow::reloadIRS()
 
 	if (files.empty())
 	{
-		QFont            font;
-		font.setItalic(true);
-		// font.setPointSize(11);
-
 		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setFont(font);
 		placeholder->setText("No IRS files found");
 		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
 		ui->conv_files->addItem(placeholder);
@@ -1612,17 +1603,11 @@ void MainWindow::reloadIRSFav()
 
 	if (files.empty())
 	{
-		QFont            font;
-		font.setItalic(true);
-		// font.setPointSize(11);
-
 		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setFont(font);
 		placeholder->setText("Nothing here yet...");
 		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
 		ui->conv_files_fav->addItem(placeholder);
 		QListWidgetItem *placeholder2 = new QListWidgetItem;
-		// placeholder2->setFont(font);
 		placeholder2->setText("Bookmark some IRS files in the 'filesystem' tab");
 		placeholder2->setFlags(placeholder2->flags() & ~Qt::ItemIsEnabled);
 		ui->conv_files_fav->addItem(placeholder2);
@@ -1667,12 +1652,7 @@ void MainWindow::reloadLiveprog()
 
 	if (files.empty())
 	{
-		QFont            font;
-		font.setItalic(true);
-		// font.setPointSize(11);
-
 		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setFont(font);
 		placeholder->setText("No EEL files found");
 		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
 		ui->liveprog_files->addItem(placeholder);
@@ -2245,6 +2225,10 @@ void MainWindow::connectActions()
         m_eelEditor->raise();
 		m_eelEditor->openNewScript(activeliveprog);
 	});
+
+    connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
+        system("sh -c \"xdg-open https://github.com/thepbone/DDCToolbox\""); // QDesktopServices::openUrl is broken on some KDE systems
+    });
 }
 
 void MainWindow::launchFirstRunSetup()

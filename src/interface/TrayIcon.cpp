@@ -20,7 +20,7 @@ TrayIcon::TrayIcon(QObject *parent) : QObject(parent)
 	tray_presetMenu = new QMenu(tr("&Presets"));
 	tray_presetMenu->setProperty("tag", "menu_preset");
 
-	tray_convMenu   = new QMenu(tr("&Convolver Bookmarks"));
+    tray_convMenu   = new QMenu(tr("&Convolver bookmarks"));
 	tray_convMenu->setProperty("tag", "menu_convolver");
 
     auto init = MenuIO::buildMenu(buildAvailableActions(), AppConfig::instance().get<QString>(AppConfig::TrayIconMenu), menuOwner);

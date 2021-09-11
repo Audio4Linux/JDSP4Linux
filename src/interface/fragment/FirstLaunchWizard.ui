@@ -100,7 +100,7 @@ QPushButton:disabled{
 </string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page_1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1759,7 +1759,7 @@ font-size: 14px;</string>
          <x>130</x>
          <y>0</y>
          <width>445</width>
-         <height>230</height>
+         <height>231</height>
         </rect>
        </property>
        <widget class="QPushButton" name="p3_next">
@@ -1872,7 +1872,7 @@ color: white</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>80</y>
+          <y>90</y>
           <width>356</width>
           <height>73</height>
          </rect>
@@ -2793,9 +2793,9 @@ font-size: 14px;</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>160</y>
+          <y>170</y>
           <width>231</width>
-          <height>69</height>
+          <height>58</height>
          </rect>
         </property>
         <property name="styleSheet">

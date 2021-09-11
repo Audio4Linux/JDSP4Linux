@@ -10,7 +10,12 @@ StatusFragment::StatusFragment(DspStatus status, QWidget *parent) :
 {
 	ui->setupUi(this);
 
-    ui->app_ver->setText(STR(APP_VERSION));
+#ifdef USE_PULSEAUDIO
+    QString flavor = " (Pulseaudio flavor)";
+#else
+    QString flavor = " (Pipewire flavor)";
+#endif
+    ui->app_ver->setText(STR(APP_VERSION) + flavor);
     ui->core_ver->setText(STR(JDSP_VERSION));
     ui->proc->setText(status.IsProcessing ? tr("Processing") : tr("Not processing"));
     ui->format->setText(QString::fromStdString(status.AudioFormat));

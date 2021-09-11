@@ -13,7 +13,7 @@ void AutostartManager::saveDesktopFile(QString        path,
                                        bool           delayed)
 {
 	ConfigContainer *conf = new ConfigContainer();
-	conf->setValue("Exec", QString("%0%1 --tray%2%3")
+    conf->setValue("Exec", QString("%0%1 --tray%2")
 	               .arg(delayed ? "sleep 5s && " : "")
 	               .arg(exepath)
 	               .arg(delayed ? " &" : ""));

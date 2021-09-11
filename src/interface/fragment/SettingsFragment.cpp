@@ -36,6 +36,11 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 {
 	ui->setupUi(this);
 
+#ifdef USE_PULSEAUDIO
+    ui->devices->setEnabled(false);
+    ui->devices_group->setTitle("Select sink/device to be processed (PipeWire only)");
+#endif
+
 	QString autostart_path = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 
 	/*

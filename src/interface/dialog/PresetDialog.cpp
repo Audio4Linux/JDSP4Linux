@@ -75,12 +75,7 @@ void PresetDialog::UpdateList()
 
 	if (files.count() < 1)
 	{
-		QFont            font;
-		font.setItalic(true);
-		font.setPointSize(11);
-
 		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setFont(font);
 		placeholder->setText(tr("No presets saved"));
 		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
 		ui->files->addItem(placeholder);

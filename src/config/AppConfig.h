@@ -188,13 +188,13 @@ public:
 
 	void setIrsPath(const QString &npath)
 	{
-		_appconf->setValue("convolver.default.irspath", QVariant(QString("\"%1\"").arg(npath)));
+        _appconf->setValue("ConvolverDefaultPath", QVariant(QString("\"%1\"").arg(npath)));
 		save();
 	}
 
 	QString getIrsPath()
 	{
-		QString irs_path = chopFirstLastChar(_appconf->getString("convolver.default.irspath", false));
+        QString irs_path = chopFirstLastChar(_appconf->getString("cConvolverDefaultPath", false));
 
 		if (irs_path.length() < 2)
 		{
@@ -206,13 +206,13 @@ public:
 
 	void setDDCPath(const QString &npath)
 	{
-		_appconf->setValue("ddc.default.path", QVariant(QString("\"%1\"").arg(npath)));
+        _appconf->setValue("VdcDefaultPath", QVariant(QString("\"%1\"").arg(npath)));
 		save();
 	}
 
 	QString getDDCPath()
 	{
-		QString irs_path = chopFirstLastChar(_appconf->getString("ddc.default.path", false));
+        QString irs_path = chopFirstLastChar(_appconf->getString("VdcDefaultPath", false));
 
 		if (irs_path.length() < 2)
 		{
@@ -224,14 +224,14 @@ public:
 
 	void setLiveprogPath(const QString &npath)
 	{
-		_appconf->setValue("liveprog.default.path", QVariant(QString("\"%1\"").arg(npath)));
+        _appconf->setValue("LiveprogDefaultPath", QVariant(QString("\"%1\"").arg(npath)));
 		save();
 	}
 
 	QString getLiveprogPath()
 	{
 		QString absolute = QFileInfo(getDspConfPath()).absoluteDir().absolutePath();
-		QString lp_path  = chopFirstLastChar(_appconf->getString("liveprog.default.path", false));
+        QString lp_path  = chopFirstLastChar(_appconf->getString("LiveprogDefaultPath", false));
 
 		if (lp_path.length() < 2)
 		{
@@ -246,13 +246,13 @@ public:
 
 	void save()
 	{
-		auto file = QString("%1/.config/jamesdsp/ui.2.conf").arg(QDir::homePath());
+        auto file = QString("%1/.config/jamesdsp/application.conf").arg(QDir::homePath());
 		ConfigIO::writeFile(file, _appconf->getConfigMap());
 	}
 
 	void load()
 	{
-		auto map = ConfigIO::readFile(QString("%1/.config/jamesdsp/ui.2.conf").arg(QDir::homePath()));
+        auto map = ConfigIO::readFile(QString("%1/.config/jamesdsp/application.conf").arg(QDir::homePath()));
 		_appconf->setConfigMap(map);
 
         for(const auto& key : map.keys())
@@ -264,7 +264,7 @@ public:
 
 	QString getGraphicEQConfigFilePath()
 	{
-		return pathAppend(QFileInfo(getDspConfPath()).absoluteDir().absolutePath(), "ui.graphiceq.conf");
+        return pathAppend(QFileInfo(getDspConfPath()).absoluteDir().absolutePath(), "graphiceq.conf");
 	}
 
 private slots:

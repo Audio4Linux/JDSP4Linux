@@ -441,7 +441,7 @@
        <widget class="QWidget" name="devices">
         <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
-          <widget class="QGroupBox" name="groupBox_7">
+          <widget class="QGroupBox" name="devices_group">
            <property name="title">
             <string>Select sink/device to be processed</string>
            </property>
@@ -924,7 +924,7 @@
         </size>
        </property>
        <property name="text">
-        <string>View Github Repo</string>
+        <string>Visit Github repo</string>
        </property>
       </widget>
      </item>
