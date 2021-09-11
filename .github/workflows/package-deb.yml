@@ -1,7 +1,6 @@
 name: Debian packages
 
 on:
-  workflow-dispatch:
   push:
     branches: [ refactor ] # TODO
   pull_request:
