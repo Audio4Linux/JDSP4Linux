@@ -1,4 +1,4 @@
  
 [submodule "src/subprojects/EELEditor"]
 	path = src/subprojects/EELEditor
-	url = git@github.com:thepbone/EELEditor
+	url = https://github.com/thepbone/EELEditor
