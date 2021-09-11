@@ -1,0 +1,193 @@
+name: Debian packages
+
+on:
+  push:
+    branches: [ refactor ] # TODO
+  pull_request:
+    branches: [ master ]
+  release:
+    types: 
+     - published
+     - prereleased
+
+jobs:
+  build-amd64:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+        
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: 'refactor' # TODO
+        submodules: 'recursive'
+ 
+    - name: Install dependencies (PulseAudio flavor)
+      if: matrix.flavor == 'pulse'
+      run: |
+        sudo apt update -qq
+        sudo apt install lftp qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+     
+    - name: Install dependencies (PipeWire flavor)
+      if: matrix.flavor == 'pipewire'
+      run: |
+        sudo apt update -qq
+        sudo apt install lftp qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.2-dev
+        
+    - name: Initialize project (PulseAudio flavor)
+      if: matrix.flavor == 'pulse'
+      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
+      
+    - name: Initialize project (PipeWire flavor)
+      if: matrix.flavor == 'pipewire'
+      run: qmake JDSP4Linux.pro "CONFIG += CI"
+      
+    - name: Build
+      run: |
+        make
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_portable_amd64
+        path: src/jamesdsp
+    
+  build-deb-amd64:
+    runs-on: ubuntu-20.04
+    needs: [build-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+        ref: 'refactor' # TODO
+        
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: false
+      id: last_release  
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+      
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_portable_amd64
+      
+    - name: Build DEB package
+      run: |
+        chmod +x ./meta/build_deb_package.sh
+        ./meta/build_deb_package.sh ${{steps.version.outputs.version}} ${{ matrix.flavor }}
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        path: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+
+  publish-nightly:
+    runs-on: ubuntu-latest
+    needs: [build-amd64, build-deb-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+        
+    steps:
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: false
+      id: last_release  
+      
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+      
+    - name: Download portable artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_portable_amd64
+              
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        
+    - name: Rename portable artifact
+      run: mv jamesdsp jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_amd64.bin
+      
+    - name: Upload binary to nightly server
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: 'tim'
+        server: 'local.timschneeberger.me'
+        port: 22
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_amd64.bind'
+        remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
+        args: '-o ConnectTimeout=5'
+      
+    - name: Upload deb package to nightly server
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: 'tim'
+        server: 'local.timschneeberger.me'
+        port: 22
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb'
+        remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
+        args: '-o ConnectTimeout=5'
+
+  attach-to-release:
+    runs-on: ubuntu-latest
+    needs: [build-deb-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+        
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: true
+      id: last_release  
+      
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+      
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+      
+    - uses: AButler/upload-release-assets@v2.0
+      with:
+        files: '*.deb'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}

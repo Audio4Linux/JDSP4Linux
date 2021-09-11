@@ -180,6 +180,7 @@ Debian/Ubuntu + **PipeWire** clients only:
 ```bash
 sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.2-dev
 ```
+NOTE: If libpipewire-0.2-dev is not found, try to install libpipewire-0.3-dev instead.
 
 Debian/Ubuntu + **PulseAudio** clients only:
 
@@ -262,9 +263,9 @@ Create a menu entry
 sudo cat <<EOT >> /usr/share/applications/jamesdsp.desktop
 [Desktop Entry]
 Name=JamesDSP
-GenericName=Equalizer
+GenericName=Audio effect processor
 Comment=
-Keywords=equalizer
+Keywords=equalizer;audio;effect
 Categories=AudioVideo;Audio;
 Exec=jamesdsp
 Icon=/usr/share/pixmaps/jamesdsp.png
