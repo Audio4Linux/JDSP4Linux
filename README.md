@@ -123,7 +123,7 @@ Server Name: pulseaudio
 If you don't know which version fits to your Linux setup, go to the [PipeWire vs PulseAudio section](#which_one_am_i_using) above.
 
 * [Debian/Ubuntu (PPA)](#debianubuntu)
-* [Arch Linux (AUR)](#arch)
+<!-- * [Arch Linux (AUR)](#arch) -->
 * [Build from sources](#build-from-sources)
 
 ### Debian/Ubuntu
@@ -146,6 +146,7 @@ sudo apt install jamesdsp-pulse
 [View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
 
 
+<!--
 ### Arch
 TBD
 
@@ -159,10 +160,10 @@ Or [this one](https://aur.archlinux.org/packages/jdsp4linux-gui) to get the late
 yay -S jdsp4linux
 ```
 ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui?label=aur%20%28stable%29) ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur%20%28git%29)
-
+-->
 ### Build from sources
 
-Minimum requirements:
+Minimum version requirements:
 
 * Qt 5.11 or later
 * Not designed to be used with Qt 6
@@ -185,7 +186,6 @@ Debian/Ubuntu + **PulseAudio** clients only:
 ```bash
 sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
-
 **Fedora**
 
 Fedora 34 + **PipeWire** clients only:
@@ -266,7 +266,7 @@ GenericName=Equalizer
 Comment=
 Keywords=equalizer
 Categories=AudioVideo;Audio;
-Exec=jdsp-gui
+Exec=jamesdsp
 Icon=/usr/share/pixmaps/jamesdsp.png
 StartupNotify=false
 Terminal=false
@@ -288,7 +288,6 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
    <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_graphiceq.png?raw=true"> 
    <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_ide.png?raw=true">
 </p>
-
 
 ## Contributors
 

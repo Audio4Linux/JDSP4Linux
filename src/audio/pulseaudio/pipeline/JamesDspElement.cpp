@@ -37,7 +37,11 @@ DspStatus JamesDspElement::status()
                     "dsp_format", &format,
                     "dsp_enable", &enabled, NULL);
 
-    status.SamplingRate = std::to_string(srate);
+    if(srate == 0)
+        status.SamplingRate = "Unknown";
+    else
+        status.SamplingRate = std::to_string(srate);
+
     status.AudioFormat = format;
     status.IsProcessing = enabled;
 
