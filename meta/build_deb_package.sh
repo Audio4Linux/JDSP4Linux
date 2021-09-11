@@ -3,7 +3,7 @@
 
 deps=""
 if [ $2 = "pipewire" ]; then
-   deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpipewire-0.2-1 | libpipewire-0.3-0"
+   deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpipewire-0.3-0"
 elif [ $2 = "pulse" ]; then
    deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpulse-mainloop-glib0, libgstreamer1.0-0, libgstreamer-plugins-base1.0"
 else
