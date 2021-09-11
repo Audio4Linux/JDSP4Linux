@@ -120,7 +120,7 @@ jobs:
 
   publish-nightly:
     runs-on: ubuntu-latest
-    needs: [build-amd64, build-deb-amd64]
+    needs: [build-deb-amd64]
     strategy:
       matrix:
         flavor: [pulse, pipewire]
