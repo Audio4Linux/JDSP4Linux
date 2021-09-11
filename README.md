@@ -39,12 +39,13 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 ## Features
 
 * Automatic bass boost
-  * Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream
+  * Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency, by analyzing the incoming audio stream
 * Automatic dynamic range compressor
   * A highly automated multiband dynamic range adjusting effect
 * Complex reverberation IIR network (Progenitor 2)
 * Interpolated FIR equalizer with flexible bands
 * Arbitrary response equalizer (also known as GraphicEQ from EqualizerAPO)
+  * AutoEQ database integration (requires network connection)
 * Partitioned convolver (Auto segmenting convolution)
   * Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse response
 * Crossfeed
@@ -54,13 +55,13 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 * ViPER-DDC
   * Perform parametric equalization on audio
   * Create VDC input files using [thepbone/DDCToolbox](https://github.com/thepbone/DDCToolbox)
-* Analog modelling
+* Analog modeling
   * An aliasing-free even harmonic generator
 * Output limiter
 * **Scripting engine: Live programmable DSP**
   * Write your own audio effects using the [EEL2 scripting language](https://github.com/james34602/EEL_CLI)
-  * Auto-generate a basic user interface for your script to modify certain parameters/constants without editing the actual code
-  * The scripting language has been extended using many DSP-related functions for easy access, for example: spectral processing, constant Q transform, multi-purpose FIR filter designer IIR sub-bands transformation, etc...
+  * Auto-generate a basic user interface for your script to modify specific parameters/constants without editing the actual code
+  * The scripting language has been extended using many DSP-related functions for easy access, for example, spectral processing, constant Q transform, multi-purpose FIR filter designer IIR sub-bands transformation, etc...
   * **This app also includes a custom minimal scripting IDE**:
     * Syntax highlighting
     * Basic code completion
@@ -69,12 +70,17 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
     * Detailed error messages with inline code highlighting
 
 
-
 ## PipeWire vs PulseAudio
 
-Designed for use with PipeWire. PulseAudio is primarily supported for backward-compatibility. 
+**Designed for use with PipeWire. PulseAudio is only supported for backward-compatibility.**
 
-TBD
+PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. Unfortunately, PipeWire is not yet completely stable and does not work on virtual machines. If you cannot get any audio output when using PipeWire, consider switching to PulseAudio until proper hardware support is available.
+
+I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
+
+*Important: This application can be either compiled with PulseAudio or PipeWire support. Please make sure you choose the correct flavor for your Linux setup before installing!*
+
+*Note: PipeWire's compatibility mode for PulseAudio apps does not work with the PulseAudio flavor of this app. Use the version for PipeWire instead.*
 
 ## Installation
 
