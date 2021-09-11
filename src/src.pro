@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml network dbus svg multimedia
+QT       += core gui xml network dbus svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
