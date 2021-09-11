@@ -1,5 +1,6 @@
 #ifndef PULSEPIPELINEMANAGER_H
 #define PULSEPIPELINEMANAGER_H
+
 #include <gst/gst.h>
 #include <glibmm.h>
 #include <glib.h>

@@ -1,11 +1,13 @@
+#include "PulsePipelineManager.h"
+
 #include "PulseAudioService.h"
 
 #include "Utils.h"
-#include "PulsePipelineManager.h"
-#include "PulseAudioProcessingThread.h"
 #include "DspHost.h"
+#include "PulseAudioProcessingThread.h"
 
 #include <QDebug>
+
 
 #include <gstjamesdsp.h>
 

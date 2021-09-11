@@ -1,5 +1,6 @@
-#include "PulseAudioProcessingThread.h"
+#include "PulsePipelineManager.h"
 
+#include "PulseAudioProcessingThread.h"
 #include "Utils.h"
 
 PulseAudioProcessingThread::PulseAudioProcessingThread(std::shared_ptr<PulsePipelineManager> _mgr)

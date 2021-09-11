@@ -1,6 +1,7 @@
 #include "config/DspConfig.h"
 
 #include "JamesDspElement.h"
+
 #include "DspHost.h"
 
 JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")

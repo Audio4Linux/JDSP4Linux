@@ -1,14 +1,14 @@
 #ifndef PULSEAUDIOSERVICE_H
 #define PULSEAUDIOSERVICE_H
 
-#include "PulsePipelineManager.h"
-
 #include <memory>
-#include <QObject>
 
 #include "IAudioService.h"
 
 class PulseAudioProcessingThread;
+
+class PulsePipelineManager;
+typedef std::shared_ptr<PulsePipelineManager> PulsePipelineManagerPtr;
 
 class PulseAudioService : public IAudioService
 {
@@ -28,7 +28,7 @@ public slots:
     DspStatus status() override;
 
 private:
-    std::shared_ptr<PulsePipelineManager> mgr;
+    PulsePipelineManagerPtr mgr;
     PulseAudioProcessingThread* apt;
 
 };

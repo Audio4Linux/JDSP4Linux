@@ -1,8 +1,8 @@
 #ifndef JAMESDSPELEMENT_H
 #define JAMESDSPELEMENT_H
 
-#include "FilterElement.h"
 #include "IDspElement.h"
+#include "FilterElement.h"
 
 extern "C" {
 #include <jdsp_header.h>
