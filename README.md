@@ -120,7 +120,7 @@ Server Name: pulseaudio
 
 **Decide whether you need to install the PipeWire or PulseAudio version of this app!**
 
-If you don't know which version fits to your Linux setup, go to the [PipeWire vs PulseAudio section](#which_one_am_i_using) above.
+If you don't know which version fits to your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
 * [Debian/Ubuntu (PPA)](#debianubuntu)
 <!-- * [Arch Linux (AUR)](#arch) -->
