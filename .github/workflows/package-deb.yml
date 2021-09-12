@@ -1,0 +1,292 @@
+name: Debian packages
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  release:
+    types: 
+     - published
+     - prereleased
+
+jobs:
+  build-pulse-amd64:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Update git
+      run: |
+        sudo apt update
+        sudo apt upgrade -y git
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: 'master'
+        submodules: 'recursive'
+ 
+    - name: Install dependencies (PulseAudio flavor)
+      run: |
+        sudo apt install -y lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+     
+    - name: Initialize project (PulseAudio flavor)
+      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
+      
+    - name: Build
+      run: |
+        make
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: jamesdsp-pulse_portable_linux64
+        path: src/jamesdsp
+        
+  build-pipewire-amd64:
+    runs-on: ubuntu-20.04
+    container: ubuntu:21.04
+
+    steps:
+    - name: Update git
+      run: |
+        apt update
+        apt upgrade -y git
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: 'master'
+        submodules: 'recursive'
+
+    - name: Install dependencies (PipeWire flavor)
+      run: |
+        export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PATH"
+        echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
+        echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
+        DEBIAN_FRONTEND="noninteractive" apt install -y tree make gcc g++ lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
+      
+    - name: Initialize project (PipeWire flavor)
+      run: qmake JDSP4Linux.pro "CONFIG += CI"
+      
+    - name: Build
+      run: |
+        make
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: jamesdsp-pipewire_portable_linux64
+        path: src/jamesdsp
+    
+  build-deb-amd64:
+    runs-on: ubuntu-20.04
+    needs: [build-pulse-amd64, build-pipewire-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+        ref: 'master'
+        
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: false
+      id: last_release  
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+      
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
+      
+    - name: Build DEB package
+      run: |
+        chmod +x ./meta/build_deb_package.sh
+        ./meta/build_deb_package.sh ${{steps.version.outputs.version}} ${{ matrix.flavor }}
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        path: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+
+  publish-nightly:
+    runs-on: ubuntu-latest
+    needs: [build-deb-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+        
+    steps:
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: false
+      id: last_release  
+      
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+      
+    - name: Download portable artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
+              
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        
+    - name: Rename portable artifact
+      run: mv jamesdsp jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_linux64.bin
+      
+    - name: Upload binary to nightly server
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: 'tim'
+        server: 'local.timschneeberger.me'
+        port: 22
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_portable_linux64.bin'
+        remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
+        args: '-o ConnectTimeout=5'
+      
+    - name: Upload deb package to nightly server
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: 'tim'
+        server: 'local.timschneeberger.me'
+        port: 22
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb'
+        remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
+        args: '-o ConnectTimeout=5'
+
+  update-ppa:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    needs: [build-deb-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+      max-parallel: 1
+        
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: 'ThePBone/PPA-Repository'
+        token: ${{ secrets.REPO_AUTH_TOKEN }}
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0
+        
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: false
+      id: last_release  
+      
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+        
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@v4
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+    - name: GPG user IDs
+      run: |
+        echo "fingerprint: ${{ steps.import_gpg.outputs.fingerprint }}"
+        echo "keyid:       ${{ steps.import_gpg.outputs.keyid }}"
+        echo "name:        ${{ steps.import_gpg.outputs.name }}"
+        echo "email:       ${{ steps.import_gpg.outputs.email }}"
+
+    - name: Update packages
+      run: |
+        sudo apt install dpkg-dev apt-utils
+        export EMAIL="tim.schneeberger@outlook.de"
+        dpkg-scanpackages --multiversion . > Packages
+        gzip -k -f Packages
+        apt-ftparchive release . > Release
+        gpg --default-key "${EMAIL}" -abs -o - Release > Release.gpg
+        gpg --default-key "${EMAIL}" --clearsign -o - Release > InRelease
+
+    - name: Commit
+      run: |
+        git config --local user.email "tim.schneeberger@outlook.de"
+        git config --local user.name "Tim Schneeberger"
+        git add .
+        git commit -m "Update jamesdsp packages"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.REPO_AUTH_TOKEN }}
+        repository: ThePBone/PPA-Repository
+        force: true
+
+  attach-to-release:
+    runs-on: ubuntu-latest
+    needs: [build-deb-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+        
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: Prepare version information (1/3)
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: Audio4Linux/JDSP4Linux
+        releases-only: true
+      id: last_release  
+      
+    - name: Prepare version information (2/3)
+      uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 6
+    - name: Prepare version information (3/3)
+      run: echo '::set-output name=version::${{steps.last_release.outputs.tag}}-${{steps.short-sha.outputs.sha}}'
+      id: version
+      
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+      
+    - uses: AButler/upload-release-assets@v2.0
+      with:
+        files: '*.deb'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="headset_title">Наушники</string>
+  <string name="speaker_title">Динамик</string>
+  <string name="displaydevmsg">%1$s уведомления</string>
+  <string name="displaytext">Включить</string>
+  <string name="removetext">Отключить</string>
+  <string name="theme">Тема: %1$s</string>
+  <string name="defaulttheme">По умолчанию</string>
+  <string name="redtheme">Красно-зелёная</string>
+  <string name="ideatheme">Идея</string>
+  <string name="darktheme">Тёмная</string>
+  <string name="lighttheme">Светлая</string>
+  <string name="globaleffect_title">Режим: %1$s</string>
+  <string name="globalreg">Глобальный</string>
+  <string name="traditionalreg">Локальный</string>
+  <string name="help_title">Помощь</string>
+  <string name="help_text"><b>Благодарность:</b>\n\nИнтерфейс: Антти С. Ланкила \nПеревод: Иван Кутепов, Игорь Недобой \n</string>
+
+  <!-- Preset -->
+  <string name="save_preset">Сохранить профиль</string>
+  <string name="new_preset">Новый профиль&#8230;</string>
+  <string name="load_preset">Загрузить профиль</string>
+  <!-- Related toasts -->
+  <string name="warn_null">Название не должно быть пустым, иначе профиль не сможет быть загружен!</string>
+  <string name="save_error_headset">Не удалось сохранить headset.xml\nВы открывали вкладку Наушники?</string>
+  <string name="save_error_speaker">Не удалось сохранить speaker.xml\nВы открывали вкладку Динамик?</string>
+  <string name="save_error_bluetooth">Не удалось сохранить bluetooth.xml\nВы открывали вкладку Bluetooth?</string>
+  <string name="load_error_headset">Не удалось загрузить headset.xml\nФайл не найден или доступ запрещён</string>
+  <string name="load_error_speaker">Не удалось загрузить speaker.xml\nФайл не найден или доступ запрещён</string>
+  <string name="load_error_bluetooth">Не удалось загрузить bluetooth.xml\nФайл не найден или доступ запрещён</string>
+
+  <!-- Master switch / Output control -->
+  <string name="pref_dsp_title">Обработка / Лимитер</string>
+  <string name="pref_dsp_enable">Включить</string>
+  <string name="pref_dsp_summary_off">Обработка отключена</string>
+  <string name="pref_dsp_summary_on">Обработка включена</string>
+  <string name="limiter_threshold">Порог [вещ.: -60 &#8211; -0.1]</string>
+  <string name="limiter_release">Восстановление [вещ.: 1.5 &#8211; 2000]</string>
+  <string name="limiter_postgain">Усиление [цел.: -15 &#8211; 15]</string>
+  <!-- Related toasts -->
+  <string name="dspcrashed">Не удалось получить частоту дискретизации\nДвижок прекратил работу\nВосстановление&#8230;</string>
+  <string name="dspneedreboot">Не удалось получить идентификатор процесса</string>
+
+  <!-- Dynamic range compression -->
+  <string name="pref_compression_title">Компрессор</string>
+  <string name="pref_compression_enable">Включить</string>
+  <string name="pref_compression_summary_off">Компрессор отключён</string>
+  <string name="pref_compression_summary_on">Компрессор включён</string>
+  <string name="dialog_pregain">Предусиление</string>
+  <string name="dialog_thres1">Порог НЧ</string>
+  <string name="dialog_thres2">Порог ВЧ</string>
+  <string name="dialog_maxatk">Предел атаки [цел.: 1 &#8211; 200]</string>
+  <string name="dialog_maxrel">Предел восстановления [цел.: 5 &#8211; 800]</string>
+
+  <!-- Bass boost -->
+  <string name="pref_bassboost_title">Усиление НЧ</string>
+  <string name="pref_bassboost_enable">Включить</string>
+  <string name="pref_bassboost_summary_off">Усиление НЧ отключено</string>
+  <string name="pref_bassboost_summary_on">Усиление НЧ включено</string>
+  <string name="dialog_bassboost_cond">Чувствительность</string>
+  <string name="dialog_bassboost_maxgain">Предел усиления</string>
+  <string name="dialog_bassspsm">Постоянная спектра [цел.: 5 &#8211; 50]</string>
+  <string name="dialog_bassgsm">Постоянная усиления [цел.: 5 &#8211; 50]</string>
+
+  <!-- Interpolating FIR Equalizer -->
+  <string name="pref_equalizer_title">Эквалайзер</string>
+  <string name="pref_equalizer_enable">Включить</string>
+  <string name="pref_equalizer_summary_off">Эквалайзер отключён</string>
+  <string name="pref_equalizer_summary_on">Эквалайзер включён</string>
+  <string name="dialog_filtertype">Фильтр</string>
+  <string name="dialog_spinterpolation">Интерполяция</string>
+  <string name="pref_equalizer_preset_title">Профиль</string>
+  <string name="eq_preset_flat">Плоский</string>
+  <string name="eq_preset_custom">Вручную</string>
+
+  <!-- Arbitrary Response Equalizer -->
+  <string name="pref_strequalizer_title">Произвольная АЧХ</string>
+  <string name="pref_strequalizer_enable">Включить</string>
+  <string name="pref_strequalizer_summary_off">Произвольная АЧХ отключена</string>
+  <string name="pref_strequalizer_summary_on">Произвольная АЧХ включена</string>
+  <string name="dialog_magnitude_response">Параметры АЧХ</string>
+
+  <!-- Convolver -->
+  <string name="pref_convolver_title">Конвольвер</string>
+  <string name="pref_convolver_enable">Включить</string>
+  <string name="pref_convolver_summary_off">Конвольвер отключён</string>
+  <string name="pref_convolver_summary_on">Конвольвер включён</string>
+  <string name="dialog_offlineimpulseresponseresampler">Передискретизация</string>
+  <string name="dialog_offlineimpulseresponseresampler_title">Передискретизация</string>
+  <string name="dialog_impulseresponse">Импульс</string>
+  <string name="doesntexist">Не выбран</string>
+  <!-- Related toasts -->
+  <string name="text_ir_dir_isempty">Каталог импульсов %1$s пуст</string>
+  <string name="resamplerstr">Завершён процесс передискретизации импульса в соответствии с частотой дискретизации системы (%1$d)\nНовый импульс создан в %2$s</string>
+  <string name="resamplererror">Не удалось получить частоту дискретизации системы. Убедитесь, что обработка включена. Если выбран локальный режим, запустите музыкальный проигрыватель.</string>
+  <string name="impfilefault">Не удалось загрузить импульс, выберите корректный файл!</string>
+  <string name="unmatchedsamplerate">Частота дискретизации импульса (%2$d) %1$s не соответствует частоте дискретизации системы (%3$d)\nИспользуется упрощённый алгоритм передискретизации&#8230;\nДля получения лучшего качества воспользуйтесь функцией Передискретизация в меню!</string>
+
+  <!-- ViPER-DDC -->
+  <string name="pref_ddc_title">Цифровая коррекция</string>
+  <string name="pref_ddc_enable">Включить</string>
+  <string name="pref_ddc_summary_off">Цифровая коррекция отключена</string>
+  <string name="pref_ddc_summary_on">Цифровая коррекция включена</string>
+  <string name="dialog_sosmatrix">Профиль</string>
+  <!-- Related toasts -->
+  <string name="text_ddc_dir_isempty">Каталог DDC-профилей %1$s пуст</string>
+
+  <!-- Live programmable DSP -->
+  <string name="pref_liveprog_title">Программируемая обработка</string>
+  <string name="pref_liveprog_enable">Включить</string>
+  <string name="pref_liveprog_summary_off">Программируемая обработка отключена</string>
+  <string name="pref_liveprog_summary_on">Программируемая обработка включена</string>
+  <string name="dialog_liveprogfile">Программа</string>
+  <!-- Related toasts -->
+  <string name="text_liveprog_dir_isempty">Каталог liveprog-программ %1$s пуст</string>
+
+  <!-- Analog Modelling -->
+  <string name="pref_analogmodelling_title">Ламповый звук</string>
+  <string name="pref_analogmodelling_enable">Включить</string>
+  <string name="pref_analogmodelling_summary_off">Ламповый звук отключён</string>
+  <string name="pref_analogmodelling_summary_on">Ламповый звук включён</string>
+  <string name="dialog_tubedrive">Гармоники [цел.: -3 &#8211; 8]</string>
+
+  <!-- Sound positioning -->
+  <string name="pref_headset_soundpos_title">Позиционирование звука</string>
+  <string name="pref_headset_stereowide_enable">Включить</string>
+  <string name="pref_headset_stereowide_summary_off">Расширение стереобазы отключено</string>
+  <string name="pref_headset_stereowide_summary_on">Расширение стереобазы включено</string>
+  <string name="dialog_stereo">Уровень</string>
+  <string name="pref_headset_bs2b_enable">Включить</string>
+  <string name="pref_headset_bs2b_summary_off">Объёмный звук отключён</string>
+  <string name="pref_headset_bs2b_summary_on">Объёмный звук включён</string>
+  <string name="dialog_bs2b">Профиль</string>
+
+  <!-- Virtual room effect -->
+  <string name="pref_headset_virtual_title">Реверберация</string>
+  <string name="pref_headset_virtual_enable">Включить</string>
+  <string name="pref_headset_virtual_summary_off">Реверберация отключена</string>
+  <string name="pref_headset_virtual_summary_on">Реверберация включена</string>
+  <string name="pref_room_title">Тип</string>
+  <string name="dialog_room">Тип</string>
+</resources>

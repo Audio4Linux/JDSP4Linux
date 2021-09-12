@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/document-open.ico</file>
+        <file>icons/document-save.ico</file>
+        <file>icons/invert_response.ico</file>
+        <file>icons/normalize_response.ico</file>
+        <file>icons/reset_response.ico</file>
+    </qresource>
+</RCC>
