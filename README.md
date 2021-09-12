@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Icon" width="75" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/resources/icons/icon.png?raw=true">
+  <img alt="Icon" width="75" src="https://github.com/Audio4Linux/JDSP4Linux/blob/master/resources/icons/icon.png?raw=true">
   <br>
   JamesDSP for Linux
   <br>
@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot.png?raw=true">
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot.png?raw=true">
 </p>
 
 <p align="center">
@@ -286,10 +286,10 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 ## Screenshots
 
 <p align="center">
-   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_presets.png?raw=true">  
-   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_eel.png?raw=true"> 
-   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_graphiceq.png?raw=true"> 
-   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/refactor/meta/screenshot_ide.png?raw=true">
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot_presets.png?raw=true">  
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot_eel.png?raw=true"> 
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot_graphiceq.png?raw=true"> 
+   <img alt="Screenshot" width="702" src="https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot_ide.png?raw=true">
 </p>
 
 ## Contributors
