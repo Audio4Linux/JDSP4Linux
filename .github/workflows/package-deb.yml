@@ -190,13 +190,25 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: 'thepbone/PPA-Repository'
-        token: ${{ secrets.GITHUB_TB_TOKEN }}
+        repository: 'ThePBone/PPA-Repository'
         
     - name: Download package artifact
       uses: actions/download-artifact@v2
       with:
         name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_amd64.deb
+
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@v4
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+    - name: GPG user IDs
+      run: |
+        echo "fingerprint: ${{ steps.import_gpg.outputs.fingerprint }}"
+        echo "keyid:       ${{ steps.import_gpg.outputs.keyid }}"
+        echo "name:        ${{ steps.import_gpg.outputs.name }}"
+        echo "email:       ${{ steps.import_gpg.outputs.email }}"
 
     - name: Update packages
       run: |
@@ -211,7 +223,7 @@ jobs:
     - name: Push to PPA
       uses: cpina/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.GITHUB_TB_TOKEN }}
+        API_TOKEN_GITHUB: ${{ secrets.REPO_AUTH_TOKEN }}
       with:
         source-directory: '.'
         destination-github-username: 'ThePBone'
