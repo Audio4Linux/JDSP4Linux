@@ -1,10 +1,13 @@
 #!/bin/bash
 # Binary needs to be in working directory
 
+conflict=""
 deps=""
 if [ $2 = "pipewire" ]; then
+   conflict="jamesdsp-pulse"
    deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpipewire-0.3-0"
 elif [ $2 = "pulse" ]; then
+   conflict="jamesdsp-pipewire"
    deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpulse-mainloop-glib0, libgstreamer1.0-0, libgstreamer-plugins-base1.0-0"
 else
   echo "ERROR: Unknown flavor"
@@ -44,6 +47,7 @@ Section: sound
 Priority: optional
 Architecture: amd64
 Depends: $deps
+Conflicts: $conflict
 Maintainer: Tim Schneeberger (thepbone) <tim.schneeberger@gmail.com>
 Description: JamesDSP for Linux
 Homepage: https://github.com/Audio4Linux/JDSP4Linux
