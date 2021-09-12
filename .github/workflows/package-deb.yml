@@ -180,6 +180,45 @@ jobs:
         remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
         args: '-o ConnectTimeout=5'
 
+  update-ppa:
+    runs-on: ubuntu-latest
+    needs: [build-deb-amd64]
+    strategy:
+      matrix:
+        flavor: [pulse, pipewire]
+        
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: 'thepbone/PPA-Repository'
+        token: ${{ secrets.GITHUB_TB_TOKEN }}
+        
+    - name: Download package artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_amd64.deb
+
+    - name: Update packages
+      run: |
+        sudo apt install dpkg-dev apt-utils
+        export EMAIL = "tim.schneeberger@outlook.de"
+        dpkg-scanpackages --multiversion . > Packages
+        gzip -k -f Packages
+        apt-ftparchive release . > Release
+        gpg --default-key "${EMAIL}" -abs -o - Release > Release.gpg
+        gpg --default-key "${EMAIL}" --clearsign -o - Release > InRelease
+
+    - name: Push to PPA
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.GITHUB_TB_TOKEN }}
+      with:
+        source-directory: '.'
+        destination-github-username: 'ThePBone'
+        destination-repository-name: 'PPA-Repository'
+        user-email: tim.schneeberger@outlook.de
+        target-branch: master
+
   attach-to-release:
     runs-on: ubuntu-latest
     needs: [build-deb-amd64]
