@@ -22,7 +22,7 @@
 
 #include <giomm.h>
 #include <pipewire/filter.h>
-#include <spa/param/latency-utils.h>
+// #include <spa/param/latency-utils.h> // unavailable on Ubuntu 21.04 >:(
 #include <mutex>
 #include <ranges>
 #include <span>
