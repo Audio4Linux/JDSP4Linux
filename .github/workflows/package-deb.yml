@@ -229,7 +229,7 @@ jobs:
     - name: Update packages
       run: |
         sudo apt install dpkg-dev apt-utils
-        export EMAIL = "tim.schneeberger@outlook.de"
+        export EMAIL="tim.schneeberger@outlook.de"
         dpkg-scanpackages --multiversion . > Packages
         gzip -k -f Packages
         apt-ftparchive release . > Release
