@@ -211,7 +211,7 @@ jobs:
     - name: Download package artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_amd64.deb
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
 
     - name: Import GPG key
       id: import_gpg
