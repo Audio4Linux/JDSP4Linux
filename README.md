@@ -166,7 +166,7 @@ yay -S jdsp4linux
 
 Minimum version requirements:
 
-* Qt 5.11 or later
+* Qt 5.12.8 or later
 * Not designed to be used with Qt 6
 * Compiler support for C++17 standard required
 * Pipewire 0.3 or later
