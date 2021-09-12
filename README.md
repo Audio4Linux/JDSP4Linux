@@ -6,14 +6,14 @@
 </h1>
 <h4 align="center">Open-source sound effects for PipeWire and PulseAudio</h4>
 <p align="center">
-  <a href="https://github.com/ThePBone/DDCToolbox/releases">
-  	<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/thepbone/DDCToolbox">
+  <a href="https://github.com/Audio4Linux/JDSP4Linux/releases">
+  	<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Audio4Linux/JDSP4Linux">
   </a>
-  <a href="https://github.com/ThePBone/DDCToolbox/blob/master/LICENSE">
-      <img alt="License" src="https://img.shields.io/github/license/thepbone/DDCToolbox">
+  <a href="https://github.com/Audio4Linux/JDSP4Linux/blob/master/LICENSE">
+      <img alt="License" src="https://img.shields.io/github/license/Audio4Linux/JDSP4Linux">
   </a>
-  <a href="https://github.com/ThePBone/DDCToolbox/">
-    <img alt="Windows build" src="https://img.shields.io/github/repo-size/thepbone/ddctoolbox">
+  <a href="https://github.com/Audio4Linux/JDSP4Linux/">
+    <img alt="Windows build" src="https://img.shields.io/github/repo-size/Audio4Linux/JDSP4Linux">
   </a>
 </p>
 <p align="center">
