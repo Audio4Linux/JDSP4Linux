@@ -48,9 +48,8 @@
 #include <QMessageBox>
 #include <QWhatsThis>
 
-///TODO: --- REMOVE BEFORE RELEASE ---
-#define DISABLE_DIAGNOSTICS
-///TODO: -----------------------------
+#define STR_(x) #x
+#define STR(x) STR_(x)
 
 using namespace std;
 
@@ -66,6 +65,12 @@ MainWindow::MainWindow(QString  exepath,
 	// Prepare logger
 	{
         Log::clear();
+#ifdef USE_PULSEAUDIO
+        QString flavor = " (Pulseaudio flavor)";
+#else
+        QString flavor = " (Pipewire flavor)";
+#endif
+        Log::information("Application version: " + QString(STR(APP_VERSION)) + flavor);
 	}
 
     // Check if another instance is already running and switch to it if that's the case
