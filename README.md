@@ -136,7 +136,7 @@ sudo apt update
 ```
 Install from PPA
 
-For **PipeWire clients** only (recommended):
+For **PipeWire clients** only:
 ```bash
 sudo apt install jamesdsp-pipewire
 ```
