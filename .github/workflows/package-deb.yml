@@ -241,7 +241,6 @@ jobs:
 
     - name: Commit
       run: |
-        cd bot-test2
         git config --local user.email "tim.schneeberger@outlook.de"
         git config --local user.name "Tim Schneeberger"
         git add .
