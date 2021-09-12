@@ -136,11 +136,11 @@ sudo apt update
 ```
 Install from PPA
 
-For PipeWire clients only (recommended):
+For **PipeWire clients** only (recommended):
 ```bash
 sudo apt install jamesdsp-pipewire
 ```
-For PulseAudio clients only:
+For **PulseAudio clients** only:
 ```bash
 sudo apt install jamesdsp-pulse
 ```
