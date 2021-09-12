@@ -147,21 +147,39 @@ sudo apt install jamesdsp-pulse
 [View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
 
 
-<!--
 ### Arch
-TBD
+[AUR packages](https://aur.archlinux.org/packages/?O=0&K=jamesdsp) are available:
 
-On Arch you can install the [AUR package](https://aur.archlinux.org/packages/jdsp4linux-gui-git/) by yochananmarqos:
-```bash
-yay -S jdsp4linux-git
-```
+For **PipeWire clients** only:
+* Stable version
 
-Or [this one](https://aur.archlinux.org/packages/jdsp4linux-gui) to get the latest stable release:
-```bash
-yay -S jdsp4linux
-```
-![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui?label=aur%20%28stable%29) ![AUR version](https://img.shields.io/aur/version/jdsp4linux-gui-git?label=aur%20%28git%29)
--->
+   ![AUR version](https://img.shields.io/aur/version/jamesdsp) ![AUR version](https://img.shields.io/aur/votes/jamesdsp) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp)
+   ```
+   yay -S jamesdsp
+   ```
+
+* Development version
+
+   ![AUR version](https://img.shields.io/aur/version/jamesdsp-git) ![AUR version](https://img.shields.io/aur/votes/jamesdsp-git) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp-git) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp-git)
+   ```
+   yay -S jamesdsp-git
+   ```
+
+For **PulseAudio clients** only:
+* Stable version
+
+   ![AUR version](https://img.shields.io/aur/version/jamesdsp-pulse) ![AUR version](https://img.shields.io/aur/votes/jamesdsp-pulse) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp-pulse) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp-pulse)
+   ```
+   yay -S jamesdsp-pulse
+   ```
+
+* Development version
+
+   ![AUR version](https://img.shields.io/aur/version/jamesdsp-pulse-git) ![AUR version](https://img.shields.io/aur/votes/jamesdsp-pulse-git) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp-pulse-git) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp-pulse-git)
+   ```
+   yay -S jamesdsp-pulse-git
+   ```
+
 ### Build from sources
 
 Minimum version requirements:
