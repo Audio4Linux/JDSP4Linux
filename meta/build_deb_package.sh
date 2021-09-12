@@ -30,7 +30,7 @@ GenericName=Audio effect processor
 Comment=JamesDSP for Linux
 Keywords=equalizer;audio;effect
 Categories=AudioVideo;Audio
-Exec=jamesdsp
+Exec=/usr/bin/jamesdsp
 Icon=/usr/share/pixmaps/jamesdsp.png
 StartupNotify=false
 Terminal=false
@@ -48,5 +48,8 @@ Maintainer: Tim Schneeberger (thepbone) <tim.schneeberger@gmail.com>
 Description: JamesDSP for Linux
 Homepage: https://github.com/Audio4Linux/JDSP4Linux
 EOT
+
+chown root:root $debname"/usr/share/applications/jamesdsp.desktop"
+chmod +x $debname"/usr/bin/jamesdsp"
 
 dpkg-deb --build $debname
