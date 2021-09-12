@@ -63,8 +63,6 @@ jobs:
         echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
         echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
         DEBIAN_FRONTEND="noninteractive" apt install -y tree make gcc g++ lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
-        pkg-config --cflags-only-I libspa-0.2 --debug
-        tree /usr/include/spa-0.2
       
     - name: Initialize project (PipeWire flavor)
       run: qmake JDSP4Linux.pro "CONFIG += CI"
