@@ -74,7 +74,7 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 
 **Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
-PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. Unfortunately, PipeWire is not yet completely stable and does not work on virtual machines. If you cannot get any audio output when using PipeWire, consider switching to PulseAudio until proper hardware support is available.
+PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. Unfortunately, PipeWire is not yet completely stable and does not work correctly on virtual machines. If you cannot get any audio output when using PipeWire, consider switching to PulseAudio until proper hardware support is available.
 
 I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
 
