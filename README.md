@@ -123,7 +123,7 @@ Server Name: pulseaudio
 If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
 * [Debian/Ubuntu (PPA)](#debianubuntu)
-<!-- * [Arch Linux (AUR)](#arch) -->
+* [Arch Linux (AUR)](#arch)
 * [Build from sources](#build-from-sources)
 
 ### Debian/Ubuntu
