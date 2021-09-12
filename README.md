@@ -72,7 +72,7 @@ Linux port developed by <a href="https://github.com/thepbone">@thepbone</a> (<a 
 
 ## PipeWire vs PulseAudio
 
-**Designed for use with PipeWire. PulseAudio is only supported for backward-compatibility.**
+**Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
 PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. Unfortunately, PipeWire is not yet completely stable and does not work on virtual machines. If you cannot get any audio output when using PipeWire, consider switching to PulseAudio until proper hardware support is available.
 
@@ -84,7 +84,7 @@ I'm currently not planning to add more advanced support for Pulseaudio clients. 
 
 ### Which one am I using?
 
-Follow the instructions below, if you don't know which one your Linux distribution is using. If you already know, skip to the 'Install dependencies' section.
+Follow the instructions below if you don't know which one your Linux distribution is using. If you already know, skip to the 'Install dependencies' section.
 
 ##### Step 1: Is PipeWire installed and active?
 
@@ -120,7 +120,7 @@ Server Name: pulseaudio
 
 **Decide whether you need to install the PipeWire or PulseAudio version of this app!**
 
-If you don't know which version fits to your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
+If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
 * [Debian/Ubuntu (PPA)](#debianubuntu)
 <!-- * [Arch Linux (AUR)](#arch) -->
@@ -266,7 +266,7 @@ sudo cat <<EOT >> /usr/share/applications/jamesdsp.desktop
 [Desktop Entry]
 Name=JamesDSP
 GenericName=Audio effect processor
-Comment=
+Comment=JamesDSP for Linux
 Keywords=equalizer;audio;effect
 Categories=AudioVideo;Audio;
 Exec=jamesdsp
