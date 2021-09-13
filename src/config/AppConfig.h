@@ -75,7 +75,7 @@ public:
         DEFINE_KEY(AudioOutputUseDefault, true);
         DEFINE_KEY(AudioOutputDevice, "");
         DEFINE_KEY(AudioAppBlocklist, QStringList());
-        DEFINE_KEY(AudioProcessAllOutputs, false);
+        DEFINE_KEY(AudioProcessAllOutputs, true);
 
         connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
