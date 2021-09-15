@@ -150,7 +150,7 @@ MainWindow::MainWindow(QString  exepath,
 	{
         Log::information("============ Initializing user interface ============");
 
-        this->setWindowIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/icon.png")));
+        this->setWindowIcon(QIcon::fromTheme("jamesdsp", QIcon(":/icons/icon.png")));
 
 		ui->eq_widget->setBands(PresetProvider::EQ::defaultPreset(), false);
 		ui->eq_dyn_widget->setSidebarHidden(true);
