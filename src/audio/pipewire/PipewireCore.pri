@@ -3,6 +3,7 @@ INCLUDEPATH += $$PWD
 HEADERS += \
     $$PWD/FilterContainer.h \
     $$PWD/PipewireAudioService.h \
+    $$PWD/PwAppManager.h \
     $$PWD/PwBasePlugin.h \
     $$PWD/PwDevice.h \
     $$PWD/PwJamesDspPlugin.h \
@@ -11,6 +12,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/FilterContainer.cpp \
     $$PWD/PipewireAudioService.cpp \
+    $$PWD/PwAppManager.cpp \
     $$PWD/PwBasePlugin.cpp \
     $$PWD/PwDevice.cpp \
     $$PWD/PwJamesDspPlugin.cpp \

@@ -15,7 +15,7 @@ G_BEGIN_DECLS
 #define GST_IS_JAMESDSP_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass) ,GST_TYPE_JAMESDSP))
 
 #define PACKAGE "jamesdsp-plugin"
-#define VERSION "3.0.5"
+#define VERSION "4.1.0"
 #define ALLOWED_CAPS \
   "audio/x-raw,"                            \
   " format=(string){" GST_AUDIO_NE(F32) "," GST_AUDIO_NE(S32) "," GST_AUDIO_NE(S16) "},"  \

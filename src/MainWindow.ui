@@ -25,10 +25,6 @@
   <property name="windowTitle">
    <string>JamesDSP for Linux</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../resources/resources.qrc">
-    <normaloff>:/icons/icon.svg</normaloff>:/icons/icon.svg</iconset>
-  </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
   </property>

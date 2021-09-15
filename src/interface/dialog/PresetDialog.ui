@@ -19,10 +19,6 @@
   <property name="windowTitle">
    <string>Custom Presets</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../../resources/resources.qrc">
-    <normaloff>:/icons/icon.svg</normaloff>:/icons/icon.svg</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">
     <number>9</number>
@@ -142,8 +138,6 @@
   <tabstop>remove</tabstop>
   <tabstop>load</tabstop>
  </tabstops>
- <resources>
-  <include location="../../../resources/resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

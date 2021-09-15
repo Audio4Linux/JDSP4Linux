@@ -3,6 +3,7 @@
 
 #include "PwPipelineManager.h"
 #include "FilterContainer.h"
+#include "PwAppManager.h"
 #include "IAudioService.h"
 #include "config/AppConfig.h"
 
@@ -34,6 +35,7 @@ private:
     const std::string log_tag = "PipewireAudioService: ";
 
     std::unique_ptr<PwPipelineManager> mgr;
+    std::unique_ptr<PwAppManager> appMgr;
     std::unique_ptr<FilterContainer> effects;
     std::unique_ptr<PwJamesDspPlugin> plugin;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PaletteEditor</class>
- <widget class="QDialog" name="palette">
+ <widget class="QDialog" name="PaletteEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,11 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Palette Editor</string>
-  </property>
-  <property name="windowIcon">
-   <iconset resource="../resources.qrc">
-    <normaloff>:/icons/icon.svg</normaloff>:/icons/icon.svg</iconset>
+   <string>Palette editor</string>
   </property>
   <widget class="QPushButton" name="base">
    <property name="geometry">
@@ -196,8 +192,6 @@
   <tabstop>reset</tabstop>
   <tabstop>close</tabstop>
  </tabstops>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

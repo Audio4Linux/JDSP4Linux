@@ -38,8 +38,9 @@ void TrayIcon::createTrayIcon()
 	menuOwner = new QWidget();
 	trayIcon  = new QSystemTrayIcon(this);
 	trayIcon->setToolTip("JamesDSP for Linux");
-	connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconActivated);
-	trayIcon->setIcon(QIcon(":/icons/icon.png"));
+    trayIcon->setIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/icon.png")));
+
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconActivated);
 }
 
 void TrayIcon::setTrayVisible(bool visible)

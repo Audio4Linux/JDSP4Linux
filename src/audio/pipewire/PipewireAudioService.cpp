@@ -20,6 +20,7 @@ PipewireAudioService::PipewireAudioService()
 void PipewireAudioService::initialize()
 {
     mgr = std::make_unique<PwPipelineManager>();
+    appMgr = std::make_unique<PwAppManager>(mgr.get());
     plugin = std::make_unique<PwJamesDspPlugin>(mgr.get());
     effects = std::make_unique<FilterContainer>(mgr.get(), plugin.get(), &AppConfig::instance());
 
