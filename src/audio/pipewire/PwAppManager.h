@@ -1,11 +1,13 @@
 #ifndef PWAPPMANAGER_H
 #define PWAPPMANAGER_H
 
-#include <PwPipelineManager.h>
+#include "PwPipelineManager.h"
+#include "IAppManager.h"
+
 #include <QObject>
 #include <memory>
 
-class PwAppManager : public QObject
+class PwAppManager : public IAppManager
 {
     Q_OBJECT
 public:

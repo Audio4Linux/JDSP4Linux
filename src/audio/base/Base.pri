@@ -3,6 +3,7 @@ INCLUDEPATH += $$PWD
 HEADERS += \
     $$PWD/DspHost.h \
     $$PWD/DspStatus.h \
+    $$PWD/IAppManager.h \
     $$PWD/IAudioService.h \
     $$PWD/IDspElement.h \
     $$PWD/IOutputDevice.h \

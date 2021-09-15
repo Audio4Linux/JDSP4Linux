@@ -330,7 +330,7 @@ MainWindow::MainWindow(QString  exepath,
 	{
 		QMenu *menu = new QMenu();
 		spectrum = new QAction("Reload spectrum", this);
-		connect(spectrum, &QAction::triggered, this, &MainWindow::restartSpectrum);
+        //connect(spectrum, &QAction::triggered, this, &MainWindow::restartSpectrum);
         menu->addAction(tr("Reload JamesDSP"),   this, SLOT(restart()));
 		menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
         //menu->addAction(spectrum);
@@ -479,239 +479,11 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
-// Spectrum
-void MainWindow::setSpectrumVisibility(bool v)
-{
-    /*m_spectrograph->setVisible(v);
-
-	if (v)
-	{
-		this->findChild<QFrame*>("analysisLayout_spectrum")->setFrameShape(QFrame::StyledPanel);
-	}
-	else
-	{
-		this->findChild<QFrame*>("analysisLayout_spectrum")->setFrameShape(QFrame::NoFrame);
-    }*/
-}
-
-void MainWindow::initializeSpectrum()
-{
-    /*m_spectrograph = new Spectrograph(this);
-	m_audioengine  = new AudioStreamEngine(this);
-
-    int refresh = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
-
-	if (refresh == 0)
-	{
-		refresh = 20;
-	}
-
-	if (refresh < 10)
-	{
-		refresh = 10;
-	}
-	else if (refresh > 500)
-	{
-		refresh = 500;
-	}
-
-	m_audioengine->setNotifyIntervalMs(refresh);
-
-	analysisLayout.reset(new QFrame());
-	analysisLayout->setObjectName("analysisLayout_spectrum");
-	analysisLayout->setFrameShape(QFrame::Shape::StyledPanel);
-	analysisLayout->setLayout(new QHBoxLayout);
-	analysisLayout->layout()->setMargin(0);
-	analysisLayout->layout()->addWidget(m_spectrograph);
-
-	auto buttonbox = ui->centralWidget->layout()->takeAt(ui->centralWidget->layout()->count() - 1);
-	ui->centralWidget->layout()->addWidget(analysisLayout.data());
-	ui->centralWidget->layout()->addItem(buttonbox);
-	analysisLayout.take();
-
-	setSpectrumVisibility(false);
-
-    connect(&AppConfig::instance(), &AppConfig::spectrumChanged, this, [this](bool needReload) {
-        toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
-        if(needReload)
-            restartSpectrum();
-    });*/
-}
-
-void MainWindow::restartSpectrum()
-{
-    //toggleSpectrum(false,                                     false);
-    //toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), false);
-}
-
-void MainWindow::refreshSpectrumParameters()
-{
-    /*int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
-    int   minfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMinFreq);
-    int   maxfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMaxFreq);
-    int   refresh    = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
-    float multiplier = AppConfig::instance().get<float>(AppConfig::SpectrumMultiplier);
-
-	// Set default values if undefined
-	if (bands == 0)
-	{
-		bands = 100;
-	}
-
-	if (maxfreq == 0)
-	{
-		maxfreq = 1000;
-	}
-
-	if (refresh == 0)
-	{
-		refresh = 10;
-	}
-
-	if (multiplier == 0)
-	{
-		multiplier = 0.15;
-	}
-
-	// Check boundaries
-	if (bands < 5 )
-	{
-		bands = 5;
-	}
-	else if (bands > 300)
-	{
-		bands = 300;
-	}
-
-	if (minfreq < 0)
-	{
-		minfreq = 0;
-	}
-	else if (minfreq > 10000)
-	{
-		minfreq = 10000;
-	}
-
-	if (maxfreq < 100)
-	{
-		maxfreq = 100;
-	}
-	else if (maxfreq > 24000)
-	{
-		maxfreq = 24000;
-	}
-
-	if (refresh < 10)
-	{
-		refresh = 10;
-	}
-	else if (refresh > 500)
-	{
-		refresh = 500;
-	}
-
-	if (multiplier < 0.01)
-	{
-		multiplier = 0.01;
-	}
-	else if (multiplier > 1)
-	{
-		multiplier = 1;
-	}
-
-	if (maxfreq < minfreq)
-	{
-		maxfreq = minfreq + 100;
-	}
-
-	QColor outline;
-
-	if (palette().window().style() == Qt::TexturePattern)
-	{
-		outline = QColor(0, 0, 0, 160);
-	}
-	else
-	{
-		outline = palette().window().color().lighter(140);
-	}
-
-	m_spectrograph->setTheme(palette().window().color().lighter(),
-	                         palette().highlight().color(),
-	                         palette().text().color(),
-	                         outline.lighter(108),
-                             AppConfig::instance().get<bool>(AppConfig::SpectrumGrid),
-                             (Spectrograph::Mode) AppConfig::instance().get<int>(AppConfig::SpectrumTheme));
-
-	m_spectrograph->setParams(bands, minfreq, maxfreq);
-	m_audioengine->setNotifyIntervalMs(refresh);
-    m_audioengine->setMultiplier(multiplier);*/
-}
-
-void MainWindow::toggleSpectrum(bool on,
-                                bool ctrl_visibility)
-{
-    /*refreshSpectrumParameters();
-
-	if (ctrl_visibility)
-	{
-		spectrum->setVisible(on);
-	}
-
-	if (on && (!m_spectrograph->isVisible() || !ctrl_visibility))
-	{
-		if (ctrl_visibility)
-		{
-			setSpectrumVisibility(true);
-			this->setFixedSize(this->width(), this->height() + m_spectrograph->size().height());
-		}
-
-		QAudioDeviceInfo in;
-
-		for (auto item : QAudioDeviceInfo::availableDevices(QAudio::AudioInput))
-		{
-			if (item.deviceName() == AppConfig::instance().getSpectrumInput())
-			{
-				in = item;
-			}
-		}
-
-		m_audioengine->setAudioInputDevice(in);
-		m_audioengine->initializeRecord();
-		m_audioengine->startRecording();
-
-		connect(m_audioengine, static_cast<void (AudioStreamEngine::*)(QAudio::Mode, QAudio::State)>(&AudioStreamEngine::stateChanged),
-		        this, [this](QAudio::Mode mode, QAudio::State state) {
-			Q_UNUSED(mode);
-
-			if (QAudio::ActiveState != state && QAudio::SuspendedState != state)
-			{
-			    m_spectrograph->reset();
-			}
-		});
-
-		connect(m_audioengine, static_cast<void (AudioStreamEngine::*)(qint64, qint64, const FrequencySpectrum &)>(&AudioStreamEngine::spectrumChanged),
-		        this, [this](qint64, qint64, const FrequencySpectrum &spectrum) {
-			m_spectrograph->spectrumChanged(spectrum);
-		});
-	}
-	else if (!on && (m_spectrograph->isVisible() || !ctrl_visibility))
-	{
-		if (ctrl_visibility)
-		{
-			setSpectrumVisibility(false);
-			this->setFixedSize(this->width(), this->height() - m_spectrograph->size().height());
-		}
-
-		m_spectrograph->reset();
-		m_audioengine->reset();
-    }*/
-}
-
 void MainWindow::fireTimerSignal()
 {
     if (spectrumReloadSignalQueued)
 	{
-		restartSpectrum();
+        //restartSpectrum();
     }
 
 	spectrumReloadSignalQueued = false;
@@ -855,7 +627,7 @@ void MainWindow::savePresetFile(const QString &filename)
 
 void MainWindow::loadExternalFile()
 {
-	QString filename = QFileDialog::getOpenFileName(this, tr("Load custom audio.conf"), "", "*.conf");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Load custom audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
 
 	if (filename == "")
 	{
@@ -867,7 +639,7 @@ void MainWindow::loadExternalFile()
 
 void MainWindow::saveExternalFile()
 {
-	QString filename = QFileDialog::getSaveFileName(this, tr("Save current audio.conf"), "", "*.conf");
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save current audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
 
 	if (filename == "")
 	{

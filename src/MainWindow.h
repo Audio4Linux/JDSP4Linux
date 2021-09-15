@@ -76,7 +76,6 @@ protected:
     void        closeEvent(QCloseEvent *event) override;
 
 public slots:
-	void        restartSpectrum();
 	void        reset();
 	void        restart();
 	void        raiseWindow();
@@ -96,8 +95,7 @@ private slots:
 	void        updateAllUnitLabels();
 	void        loadExternalFile();
 	void        saveExternalFile();
-	void        dialogHandler();
-	void        refreshSpectrumParameters();
+    void        dialogHandler();
 	void        updateEqStringFromWidget();
 	void        bs2bPresetSelectionUpdated();
 	void        reverbPresetSelectionUpdated();
@@ -151,34 +149,14 @@ private:
 
 	QJsonTableModel *model;
 
-	void initializeSpectrum();
-	void toggleSpectrum(bool on,
-	                    bool ctrl_visibility);
 	void updateTooltipLabelUnit(QObject       *sender,
 	                            const QString &text,
 	                            bool);
 	void loadConfig();
 	void connectActions();
 
-	void setSpectrumVisibility(bool v);
 	void reloadDDCDB();
 	void setLiveprogSelection(QString path);
-
-	static void replaceTab(QTabWidget *tab,
-	                       int         index,
-	                       QWidget    *page,
-	                       QString     title = "")
-	{
-		if (title.isEmpty())
-		{
-			title = tab->tabText(index);
-		}
-
-		auto toDelete = tab->widget(index);
-		tab->removeTab(index);
-		toDelete->deleteLater();
-		tab->insertTab(index, page, title);
-	}
 
 	void updateIrsSelection();
 

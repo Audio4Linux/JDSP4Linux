@@ -95,6 +95,11 @@ void PipewireAudioService::reloadService()
     effects.get()->connect_filters();
 }
 
+IAppManager *PipewireAudioService::appManager()
+{
+    return appMgr.get();
+}
+
 std::vector<IOutputDevice> PipewireAudioService::sinkDevices()
 {
     std::vector<IOutputDevice> devices;

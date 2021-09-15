@@ -100,6 +100,13 @@ void PulseAudioService::reloadService()
     mgr.get()->reallocDsp();
 }
 
+IAppManager *PulseAudioService::appManager()
+{
+    util::critical("PulseAudioService::appManager: FEATURE NOT IMPLEMENTED FOR PULSEAUDIO. "
+                   "The app will probably crash. This code should be unreachable.");
+    return nullptr;
+}
+
 std::vector<IOutputDevice> PulseAudioService::sinkDevices()
 {
     return std::vector<IOutputDevice>();
