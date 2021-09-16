@@ -442,7 +442,8 @@ backward:
         sp = (uint32_t *)((uint32_t)sp + stackSize);
     }
     return depth;
-#elif defined(__arm__)
+#elif 0
+    /*defined(__arm__)*/
     uint32_t pc = MCTX_PC(uc);
     uint32_t fp = MCTXREG(uc, 14);
     uint32_t lr = MCTXREG(uc, 17);
