@@ -47,6 +47,9 @@ jobs:
     container: ubuntu:21.04
 
     steps:
+    - name: Setup APT
+      run:  echo 'APT::Acquire::Retries "4";' > /etc/apt/apt.conf.d/80-retries
+    
     - name: Update git
       run: |
         apt update
