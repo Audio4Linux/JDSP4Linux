@@ -97,7 +97,8 @@ void PulseAudioService::reloadLiveprog()
 
 void PulseAudioService::reloadService()
 {
-    mgr.get()->reallocDsp();
+    mgr.get()->relink();
+    mgr.get()->getDsp()->host()->updateFromCache();
 }
 
 IAppManager *PulseAudioService::appManager()

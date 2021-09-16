@@ -403,12 +403,9 @@ void PulsePipelineManager::getLatency() {
     gst_query_unref(q);
 }
 
-void PulsePipelineManager::reallocDsp()
+void PulsePipelineManager::relink()
 {
     unlink();
-
-    delete dsp;
-    dsp = new JamesDspElement();
 
     link();
 }

@@ -49,7 +49,7 @@ public:
 
     void                getLatency();
 
-    void                reallocDsp();
+    void                relink();
 
     sigc::signal
     <void, int>         new_latency;
