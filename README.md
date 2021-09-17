@@ -127,6 +127,11 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 * [Build from sources](#build-from-sources)
 
 ### Debian/Ubuntu
+
+Minimum system requirements:
+* Distro based on Debian 11 or later **OR**
+* Distro based on Ubuntu 20.04 or later
+
 Add PPA Repo
 ```bash
 sudo apt install -y curl
@@ -181,13 +186,6 @@ For **PulseAudio clients** only:
    ```
 
 ### Build from sources
-
-Minimum version requirements:
-
-* Qt 5.12.8 or later
-* Not designed to be used with Qt 6
-* Compiler support for C++17 standard required
-* Pipewire 0.3 or later
 
 #### Install dependencies
 
