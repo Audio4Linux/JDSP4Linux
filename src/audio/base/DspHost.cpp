@@ -13,6 +13,7 @@ extern "C" {
 #include <QElapsedTimer>
 #include <QTextStream>
 #include <QDebug>
+#include <assert.h>
 
 DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
 {
@@ -236,13 +237,14 @@ void DspHost::updateConvolver(DspConfig *config)
 
     if(!fileExists)
     {
-        util::error("DspHost::updateConvolver: convolver_file property missing. Cannot update convolver state.");
-        return;
+        util::error("DspHost::updateConvolver: convolver_file property missing. Disabling convolver.");
+        enabled = false;
     }
 
     if(file.isEmpty())
     {
-        return;
+        util::error("DspHost::updateConvolver: Impulse response is empty. Disabling convolver.");
+        enabled = false;
     }
 
     if(!optModeExists || !waveEditExists)
@@ -283,19 +285,25 @@ void DspHost::updateConvolver(DspConfig *config)
         }
     }
 
-    int* impInfo = new int[2];
-    float* impulse = ReadImpulseResponseToFloat(file.toLocal8Bit().constData(), this->_dsp->fs, impInfo, optMode, param);
-
-    if(impInfo[1] <= 0)
+    int success = 1;
+    if(enabled)
     {
-        util::warning("DspHost::updateConvolver: IR is empty and has zero frames");
+        int* impInfo = new int[2];
+        float* impulse = ReadImpulseResponseToFloat(file.toLocal8Bit().constData(), this->_dsp->fs, impInfo, optMode, param);
+
+        if(impInfo[1] <= 0)
+        {
+            util::warning("DspHost::updateConvolver: IR is empty and has zero frames");
+        }
+
+        util::debug("DspHost::updateConvolver: Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
+
+        Convolver1DDisable(this->_dsp);
+        success = Convolver1DLoadImpulseResponse(this->_dsp, impulse, impInfo[0], impInfo[1]);
+
+        delete[] impInfo;
+        free(impulse);
     }
-
-    util::debug("DspHost::updateConvolver: Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
-
-    Convolver1DDisable(this->_dsp);
-
-    int success = Convolver1DLoadImpulseResponse(this->_dsp, impulse, impInfo[0], impInfo[1]);
 
     if(enabled)
         Convolver1DEnable(this->_dsp);
@@ -306,9 +314,6 @@ void DspHost::updateConvolver(DspConfig *config)
     {
         util::debug("DspHost::updateConvolver: Failed to update convolver. Convolver1DLoadImpulseResponse returned an error.");
     }
-
-    delete[] impInfo;
-    free(impulse);
 }
 
 void DspHost::updateGraphicEq(DspConfig *config)
@@ -327,8 +332,8 @@ void DspHost::updateGraphicEq(DspConfig *config)
 
     if(!paramExists)
     {
-        util::error("DspHost::updateGraphicEq: graphiceq_param property missing. Cannot update GraphicEq state.");
-        return;
+        util::error("DspHost::updateGraphicEq: graphiceq_param property missing. Disabling graphic eq.");
+        enabled = false;
     }
 
     if(enabled)
@@ -601,8 +606,8 @@ void DspHost::reloadLiveprog(DspConfig* config)
 
     if(!propExists)
     {
-        util::warning("DspHost::refreshLiveprog: liveprog_file property not found in cache. Cannot reload.");
-        return;
+        util::warning("DspHost::refreshLiveprog: liveprog_file property not found in cache. Disabling liveprog.");
+        enabled = false;
     }
 
     // Attach log listener
@@ -611,14 +616,14 @@ void DspHost::reloadLiveprog(DspConfig* config)
     QFile f(file);
     if(!f.exists())
     {
-        util::warning("DspHost::refreshLiveprog: Referenced file does not exist anymore. Cannot reload.");
-        return;
+        util::warning("DspHost::refreshLiveprog: Referenced file does not exist anymore. Disabling liveprog.");
+        enabled = false;
     }
 
     if (!f.open(QFile::ReadOnly | QFile::Text))
     {
-        util::error("DspHost::refreshLiveprog: Cannot open file path");
-        return;
+        util::error("DspHost::refreshLiveprog: Cannot open file path. Disabling liveprog.");
+        enabled = false;
     }
     QTextStream in(&f);
 
