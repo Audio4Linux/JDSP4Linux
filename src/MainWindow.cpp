@@ -4,6 +4,8 @@
 #include <PipewireAudioService.h>
 #endif
 
+#include "IAudioService.h"
+
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
@@ -141,6 +143,7 @@ MainWindow::MainWindow(QString  exepath,
         Log::information("If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.");
         Log::information("Refer to the README for more detailed information.");
         Log::information("");
+        Log::debug("Blacklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
         audioService = new PipewireAudioService();
 #endif
         connect(&DspConfig::instance(), &DspConfig::updated, audioService, &IAudioService::update);
@@ -279,7 +282,24 @@ MainWindow::MainWindow(QString  exepath,
         //initializeSpectrum();
 
 		connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
-		DspConfig::instance().load();
+        DspConfig::instance().load();
+
+#ifndef USE_PULSEAUDIO
+        appMgrUi = new AppManagerFragment(audioService->appManager(), this);
+        appsFragmentHost = new QFrame(this);
+        appsHostLayout = new QVBoxLayout(appsFragmentHost);
+
+        appsHostLayout->addWidget(appMgrUi);
+        appsFragmentHost->setProperty("menu", false);
+        appsFragmentHost->hide();
+        appsFragmentHost->setAutoFillBackground(true);
+
+        connect(appMgrUi, &AppManagerFragment::closePressed, this, [ = ]() {
+            appsFragmentHost->update();
+            appsFragmentHost->repaint();
+            WAF::Animation::sideSlideOut(appsFragmentHost, WAF::BottomSide);
+        });
+#endif
 
 		preset_dlg   = new PresetDialog(this);
         connect(preset_dlg, &PresetDialog::wantsToWriteConfig, this, &MainWindow::applyConfig);
@@ -319,7 +339,7 @@ MainWindow::MainWindow(QString  exepath,
         presetFragmentHost->hide();
         presetFragmentHost->setAutoFillBackground(true);
 
-        connect(preset_dlg, &PresetDialog::closePressed, this, [ = ]() {
+        connect(preset_dlg, &PresetDialog::closePressed, this, [ = ]() {          
             presetFragmentHost->update();
             presetFragmentHost->repaint();
             WAF::Animation::sideSlideOut(presetFragmentHost, WAF::LeftSide);
@@ -329,28 +349,33 @@ MainWindow::MainWindow(QString  exepath,
 	// Init 3-dot menu button
 	{
 		QMenu *menu = new QMenu();
-		spectrum = new QAction("Reload spectrum", this);
-        //connect(spectrum, &QAction::triggered, this, &MainWindow::restartSpectrum);
-        menu->addAction(tr("Reload JamesDSP"),   this, SLOT(restart()));
-		menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
-        //menu->addAction(spectrum);
-		menu->addAction(tr("Driver status"),     this, [this]()
-		{
+#ifndef USE_PULSEAUDIO
+        menu->addAction(tr("Apps"),   this, [this]()
+        {
+            WAF::Animation::sideSlideIn(appsFragmentHost, WAF::BottomSide);
+        });
+#endif
+        menu->addAction(tr("Driver status"),     this, [this]()
+        {
             StatusFragment *sd      = new StatusFragment(audioService->status());
-			QWidget *host           = new QWidget(this);
-			host->setProperty("menu", false);
-			QVBoxLayout *hostLayout = new QVBoxLayout(host);
-			hostLayout->addWidget(sd);
-			host->hide();
-			host->setAutoFillBackground(true);
-			connect(sd, &StatusFragment::closePressed, this, [host]() {
-				WAF::Animation::sideSlideOut(host, WAF::BottomSide);
-			});
-			WAF::Animation::sideSlideIn(host, WAF::BottomSide);
-		});
+            QWidget *host           = new QWidget(this);
+            host->setProperty("menu", false);
+            QVBoxLayout *hostLayout = new QVBoxLayout(host);
+            hostLayout->addWidget(sd);
+            host->hide();
+            host->setAutoFillBackground(true);
+            connect(sd, &StatusFragment::closePressed, this, [host]() {
+                WAF::Animation::sideSlideOut(host, WAF::BottomSide);
+            });
+            WAF::Animation::sideSlideIn(host, WAF::BottomSide);
+        });
+        menu->addAction(tr("Relink audio pipeline"),   this, SLOT(restart()));
+        menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
+        menu->addSeparator();
 		menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
 		menu->addAction(tr("Save to file"),   this, SLOT(saveExternalFile()));
-		menu->addAction(tr("What's this..."), this, []()
+        menu->addSeparator();
+        menu->addAction(tr("What's this..."), this, []()
 		{
 			QWhatsThis::enterWhatsThisMode();
 		});

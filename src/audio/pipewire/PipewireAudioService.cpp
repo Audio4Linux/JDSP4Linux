@@ -14,11 +14,6 @@ PipewireAudioService::PipewireAudioService()
 {
     Glib::init();
 
-    initialize();
-}
-
-void PipewireAudioService::initialize()
-{
     mgr = std::make_unique<PwPipelineManager>();
     appMgr = std::make_unique<PwAppManager>(mgr.get());
     plugin = std::make_unique<PwJamesDspPlugin>(mgr.get());
@@ -67,7 +62,6 @@ void PipewireAudioService::initialize()
 
         util::debug(log_tag + "device " + device.name + " has changed its output route to: " + device.output_route_name);
     });
-
 }
 
 void PipewireAudioService::update(DspConfig *config)

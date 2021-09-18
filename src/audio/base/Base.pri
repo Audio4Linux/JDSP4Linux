@@ -1,6 +1,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
+    $$PWD/AppNode.h \
     $$PWD/DspHost.h \
     $$PWD/DspStatus.h \
     $$PWD/IAppManager.h \

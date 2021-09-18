@@ -20,10 +20,10 @@
 #include <QMainWindow>
 #include <QSystemTrayIcon>
 
+#include "interface/fragment/AppManagerFragment.h"
 #include "data/PresetProvider.h"
 
-#include "IAudioService.h"
-
+class IAudioService;
 class AppConfig;
 class EELParser;
 class ConfigContainer;
@@ -121,6 +121,7 @@ private:
 	QAction *spectrum;
 	EELParser *_eelparser;
 
+    AppManagerFragment* appMgrUi = nullptr;
     PresetDialog *preset_dlg = nullptr;
 	EELEditor *m_eelEditor;
 
@@ -133,6 +134,9 @@ private:
 
     QFrame *presetFragmentHost;
     QVBoxLayout *presetHostLayout;
+
+    QFrame *appsFragmentHost;
+    QVBoxLayout *appsHostLayout;
 
     IAudioService* audioService = nullptr;
 

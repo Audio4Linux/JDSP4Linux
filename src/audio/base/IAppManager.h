@@ -1,6 +1,7 @@
 #ifndef IAPPMANAGER_H
 #define IAPPMANAGER_H
 
+#include "AppNode.h"
 #include <QObject>
 
 class IAppManager : public QObject
@@ -9,8 +10,12 @@ class IAppManager : public QObject
 public:
     virtual ~IAppManager() {}
 
-public slots:
+    virtual QList<AppNode> activeApps() const = 0;
 
+signals:
+    void appAdded(const AppNode& node);
+    void appChanged(const AppNode& node);
+    void appRemoved(const uint id);
 
 };
 

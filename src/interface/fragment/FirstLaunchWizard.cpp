@@ -1,3 +1,5 @@
+#include <IAudioService.h>
+
 #include "FirstLaunchWizard.h"
 #include "ui_FirstLaunchWizard.h"
 

@@ -1,3 +1,5 @@
+#include <IAudioService.h>
+
 #include "SettingsFragment.h"
 #include "ui_MainWindow.h"
 #include "ui_SettingsFragment.h"
@@ -8,8 +10,6 @@
 #include "interface/TrayIcon.h"
 #include "MainWindow.h"
 #include "utils/AutoStartManager.h"
-
-#include <IAudioService.h>
 
 #include <QCloseEvent>
 #include <QDebug>
@@ -38,9 +38,10 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 #ifdef USE_PULSEAUDIO
     ui->devices->setEnabled(false);
     ui->devices_group->setTitle("Select sink/device to be processed (PipeWire only)");
+    ui->blocklistBox->setVisible(false);
 #endif
 
-	QString autostart_path = AutostartManager::getAutostartPath("jdsp-gui.desktop");
+    QString autostart_path = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 
 	/*
 	 * Prepare TreeView
@@ -312,6 +313,10 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     {
         emit closeClicked();
         QTimer::singleShot(300, this, &SettingsFragment::launchSetupWizard);
+    });
+    connect(ui->blocklistClear, &QPushButton::clicked, this, []
+    {
+        AppConfig::instance().set(AppConfig::AudioAppBlocklist, "");
     });
 
 	/*

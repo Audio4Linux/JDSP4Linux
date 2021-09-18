@@ -106,7 +106,7 @@ void FilterContainer::on_app_added(const uint id, const std::string name, const 
 
     if (is_blocklisted) {
         pm->disconnect_stream_output(id, media_class);
-    } else if (settings->get<bool>(AppConfig::AudioProcessAllOutputs)) {
+    } else {
         pm->connect_stream_output(id, media_class);
     }
 }

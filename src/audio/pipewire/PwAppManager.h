@@ -3,7 +3,9 @@
 
 #include "PwPipelineManager.h"
 #include "IAppManager.h"
+#include "config/AppConfig.h"
 
+#include "AppNode.h"
 #include <QObject>
 #include <memory>
 
@@ -13,10 +15,10 @@ class PwAppManager : public IAppManager
 public:
     explicit PwAppManager(PwPipelineManager* mgr);
 
-signals:
-    void appAdded(const NodeInfo& node);
-    void appChanged(const NodeInfo& node);
-    void appRemoved(const uint id);
+    QList<AppNode> activeApps() const override;
+
+private slots:
+    void handleSettingsUpdate(const AppConfig::Key&, const QVariant&);
 
 private:
     void onAppAdded(const uint id, const std::string name, const std::string media_class);

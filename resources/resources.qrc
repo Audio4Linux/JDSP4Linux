@@ -43,5 +43,6 @@
         <file>icons/power.svg</file>
         <file>icons/power-white.svg</file>
         <file>assets/default.conf</file>
+        <file>icons/error.svg</file>
     </qresource>
 </RCC>

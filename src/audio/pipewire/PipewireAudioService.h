@@ -40,7 +40,6 @@ private:
     std::unique_ptr<FilterContainer> effects;
     std::unique_ptr<PwJamesDspPlugin> plugin;
 
-    void initialize();
 };
 
 #endif // PIPEWIREAUDIOSERVICE_H

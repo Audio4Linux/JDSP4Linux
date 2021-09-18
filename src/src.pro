@@ -48,9 +48,12 @@ SOURCES += \
     interface/dialog/PaletteEditor.cpp \
     interface/LiquidEqualizerWidget.cpp \
     interface/dialog/PresetDialog.cpp \
+    interface/fragment/AppManagerFragment.cpp \
     interface/fragment/FirstLaunchWizard.cpp \
     interface/fragment/SettingsFragment.cpp \
     interface/fragment/StatusFragment.cpp \
+    interface/model/AppItem.cpp \
+    interface/model/AppItemModel.cpp \
     interface/model/DetailListItem.cpp \
     interface/QAnimatedSlider.cpp \
     interface/QMenuEditor.cpp \
@@ -71,9 +74,11 @@ FORMS += \
     interface/dialog/AutoEqSelector.ui \
     interface/dialog/PaletteEditor.ui \
     interface/dialog/PresetDialog.ui \
+    interface/fragment/AppManagerFragment.ui \
     interface/fragment/FirstLaunchWizard.ui \
     interface/fragment/SettingsFragment.ui \
     interface/fragment/StatusFragment.ui \
+    interface/model/AppItem.ui \
     interface/model/configitem.ui \
     interface/menueditor.ui \
     MainWindow.ui
@@ -101,9 +106,13 @@ HEADERS += \
     interface/event/EventFilter.h \
     interface/event/ScrollFilter.h \
     interface/LiquidEqualizerWidget.h \
+    interface/fragment/AppManagerFragment.h \
     interface/fragment/FirstLaunchWizard.h \
     interface/fragment/SettingsFragment.h \
     interface/fragment/StatusFragment.h \
+    interface/model/AppItem.h \
+    interface/model/AppItemModel.h \
+    interface/model/AppItemStyleDelegate.h \
     interface/model/Delegates.h \
     interface/model/DetailListItem.h \
     interface/QAnimatedSlider.h \

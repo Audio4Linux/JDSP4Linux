@@ -75,7 +75,6 @@ public:
         DEFINE_KEY(AudioOutputUseDefault, true);
         DEFINE_KEY(AudioOutputDevice, "");
         DEFINE_KEY(AudioAppBlocklist, QStringList());
-        DEFINE_KEY(AudioProcessAllOutputs, true);
 
         connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
@@ -110,8 +109,7 @@ public:
 
         AudioOutputUseDefault,
         AudioOutputDevice,
-        AudioAppBlocklist,
-        AudioProcessAllOutputs
+        AudioAppBlocklist
     };
     Q_ENUM(Key);
 
@@ -141,7 +139,7 @@ public:
             return variant.toString();
         }
         if constexpr (std::is_same_v<T, QStringList>) {
-            return variant.toStringList();
+            return variant.toString().split(';');
         }
         if constexpr (std::is_same_v<T, int>) {
             return variant.toInt();
