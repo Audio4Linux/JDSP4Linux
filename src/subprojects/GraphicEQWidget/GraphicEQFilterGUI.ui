@@ -290,7 +290,10 @@
      <normaloff>:/icons/document-open.ico</normaloff>:/icons/document-open.ico</iconset>
    </property>
    <property name="text">
-    <string>Import AutoEQ result</string>
+    <string>Import EqualizerAPO settings</string>
+   </property>
+   <property name="toolTip">
+    <string>Import EqualizerAPO settings</string>
    </property>
   </action>
  </widget>

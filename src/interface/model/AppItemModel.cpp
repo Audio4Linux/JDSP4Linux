@@ -13,15 +13,6 @@ AppItemModel::AppItemModel(IAppManager* appMgr, QObject *parent)
     connect(appMgr, &IAppManager::appRemoved, this, &AppItemModel::onAppRemoved);
 }
 
-AppItemModel::~AppItemModel()
-{
-    disconnect(appMgr, &IAppManager::appChanged, this, &AppItemModel::appChanged);
-
-    disconnect(appMgr, &IAppManager::appAdded,   this, &AppItemModel::onAppAdded);
-    disconnect(appMgr, &IAppManager::appChanged, this, &AppItemModel::onAppChanged);
-    disconnect(appMgr, &IAppManager::appRemoved, this, &AppItemModel::onAppRemoved);
-}
-
 QModelIndex AppItemModel::index(int row, int column, const QModelIndex &parent) const
 {
     Q_UNUSED(parent)

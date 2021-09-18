@@ -1,5 +1,5 @@
 desc: FFT Peak-Following Filter
-//64,128,256,512,1024,2048,4096}FFT Size
+//fftsize:{64,128,256,512,1024,2048,4096}FFT Size
 //lowestFc:60<0,24000,10>Minimum Center Freq (Hz)
 //highestFc:8000<0,24000,10>Maximum Center Freq (Hz)
 //filtWidthOct:2<0,8,0.01>Filter Width (oct)

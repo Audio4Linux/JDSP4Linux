@@ -1,5 +1,5 @@
 desc: Stereo Widener
-//width:<0,6,0.1>Stereo Width
+//width:4<0,6,0.1>Stereo Width
 //reimplemented from: https://www.musicdsp.org/en/latest/Effects/256-stereo-width-control-obtained-via-transfromation-matrix.html
 
 @init

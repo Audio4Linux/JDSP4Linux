@@ -391,7 +391,7 @@ void GraphicEQFilterGUI::on_actionImport_triggered()
     QFileDialog dialog(this, tr("Import frequency response"), fileInfo.absolutePath(), "*.csv");
     dialog.setFileMode(QFileDialog::ExistingFiles);
     QStringList nameFilters;
-    nameFilters.append(tr("Frequency response (*.csv)"));
+    nameFilters.append(tr("CSV frequency response (*.csv)"));
     nameFilters.append(tr("All files (*.*)"));
     dialog.setNameFilters(nameFilters);
     if (dialog.exec() == QDialog::Accepted)
@@ -460,10 +460,10 @@ void GraphicEQFilterGUI::on_actionImport_triggered()
 void GraphicEQFilterGUI::on_actionImport_AutoEQ_result_triggered()
 {
     QFileInfo fileInfo(configPath);
-    QFileDialog dialog(this, tr("Import AutoEQ graphic eq file"), fileInfo.absolutePath(), "*GraphicEQ.txt");
+    QFileDialog dialog(this, tr("Import EqualizerAPO graphic EQ preset"), fileInfo.absolutePath(), "*.txt");
     dialog.setFileMode(QFileDialog::ExistingFile);
     QStringList nameFilters;
-    nameFilters.append(tr("AutoEQ result (*GraphicEQ.txt)"));
+    nameFilters.append(tr("EqualizerAPO GraphicEQ (*.txt)"));
     nameFilters.append(tr("All files (*.*)"));
     dialog.setNameFilters(nameFilters);
     if (dialog.exec() == QDialog::Accepted)
@@ -484,7 +484,7 @@ void GraphicEQFilterGUI::on_actionExport_triggered()
     dialog.setFileMode(QFileDialog::AnyFile);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     QStringList nameFilters;
-    nameFilters.append(tr("Frequency response (*.csv)"));
+    nameFilters.append(tr("CSV frequency response (*.csv)"));
     nameFilters.append(tr("All files (*.*)"));
     dialog.setNameFilters(nameFilters);
     dialog.setDefaultSuffix(".csv");

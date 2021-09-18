@@ -12,7 +12,6 @@ class AppItemModel : public QAbstractListModel
 
 public:
     explicit AppItemModel(IAppManager* appMgr, QObject *parent = nullptr);
-    ~AppItemModel();
 
     QModelIndex index(int row, int column,
                       const QModelIndex &parent = QModelIndex()) const override;

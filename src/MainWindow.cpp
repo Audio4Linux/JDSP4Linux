@@ -1496,11 +1496,11 @@ void MainWindow::setLiveprogSelection(QString path)
 
 	EELProperties props = _eelparser->getProperties();
 
-	for (EELBaseProperty *propbase : props)
+    for (EELBaseProperty* propbase : props)
 	{
-		if (propbase->getType() == EELPropertyType::NumberRange)
+        if (propbase->getType() == EELPropertyType::NumberRange)
 		{
-			EELNumberRangeProperty<float> *prop        = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
+            EELNumberRangeProperty<float> *prop        = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
 			bool                           handleAsInt = is_integer(prop->getStep());
 			QLabel                        *lbl         = new QLabel(this);
 			QAnimatedSlider               *sld         = new QAnimatedSlider(this);
@@ -1526,7 +1526,7 @@ void MainWindow::setLiveprogSelection(QString path)
 				float val = sld->valueA() / 100.f;
 				prop->setValue(val);
 				_eelparser->manipulateProperty(prop);
-				ui->liveprog_reset->setEnabled(_eelparser->canLoadBackup());
+                ui->liveprog_reset->setEnabled(_eelparser->canLoadDefaults());
 
                 audioService->reloadLiveprog();
 			});
@@ -1543,14 +1543,14 @@ void MainWindow::setLiveprogSelection(QString path)
 	}
 	else
 	{
-		ui->liveprog_reset->show();
-		ui->liveprog_reset->setEnabled(_eelparser->canLoadBackup());
+        ui->liveprog_reset->setVisible(_eelparser->hasDefaultsDefined());
+        ui->liveprog_reset->setEnabled(_eelparser->canLoadDefaults());
 	}
 }
 
 void MainWindow::resetLiveprogParams()
 {
-	if (!_eelparser->loadBackup())
+    if (!_eelparser->loadDefaults())
 	{
 		QMessageBox::warning(this, "Error", "Cannot load backup\nThe backup file doesn't exist anymore.");
 	}
@@ -1564,14 +1564,12 @@ void MainWindow::updateFromEelEditor(QString path)
 {
 	if (_eelparser->getPath() == path)
 	{
-		_eelparser->deleteBackup();
 		setLiveprogSelection(_eelparser->getPath());
 	}
 	else
 	{
 		EELParser parser;
-		parser.loadFile(path);
-		parser.deleteBackup();
+        parser.loadFile(path);
 
         audioService->reloadLiveprog();
 	}
@@ -1680,6 +1678,7 @@ void MainWindow::restoreGraphicEQView()
 
 	if (state.count() >= 1)
 	{
+        qDebug() << state;
 		ui->graphicEq->loadPreferences(state);
 	}
 	else

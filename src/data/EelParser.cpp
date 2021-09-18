@@ -13,6 +13,50 @@ void EELParser::loadFile(QString path)
 	container.path = path;
 	container.code = "";
 	container.reloadCode();
+
+    clearProperties();
+
+    // Parse number range parameters
+    {
+        QRegularExpression descRe(R"((?<var>\w+):(?<def>-?\d+\.?\d*)?<(?<min>-?\d+\.?\d*),(?<max>-?\d+\.?\d*),?(?<step>-?\d+\.?\d*)?>(?<desc>[\s\S][^\n]*))");
+        for (auto line : container.code.split("\n"))
+        {
+            auto matchIterator = descRe.globalMatch(line);
+
+            if (matchIterator.hasNext())
+            {
+                auto    match = matchIterator.next();
+                QString key   = match.captured("var");
+                QString min   = match.captured("min");
+                QString max   = match.captured("max");
+                QString step  = match.captured("step");
+                QString def   = match.captured("def");
+                QString desc  = match.captured("desc").trimmed();
+
+                if (step.isEmpty())
+                {
+                    step = "0.1";
+                }
+
+                QString current = findVariable(key, EELPropertyType::NumberRange);
+
+                if (current == NORESULT)
+                {
+                    break;
+                }
+
+                bool defOk = false;
+                std::optional<float> defaultValue = def.toFloat(&defOk);
+                if(def.isEmpty() || !defOk)
+                    defaultValue = std::nullopt;
+
+                EELNumberRangeProperty<float> *prop = new EELNumberRangeProperty<float>(key, desc, defaultValue, current.toFloat(),
+                                                                                        min.toFloat(), max.toFloat(),
+                                                                                        step.toFloat());
+                properties.append(prop);
+            }
+        }
+    }
 }
 
 bool EELParser::saveFile()
@@ -26,109 +70,66 @@ bool EELParser::saveFile()
 	return true;
 }
 
-bool EELParser::loadBackup()
+bool EELParser::loadDefaults()
 {
-	if (!backupExists())
-	{
-		return false;
-	}
+    if (!isFileLoaded())
+    {
+        return false;
+    }
 
-	QString absolutePath = QFileInfo(container.path).absoluteDir().absolutePath();
-	QString fileName     = QFileInfo(container.path).fileName();
-	QFile   backup(absolutePath + "/." + fileName + ".bak");
-
-	if (!backup.open(QIODevice::ReadOnly))
-	{
-		return false;
-	}
-
-	QFile script(container.path);
-
-	if (script.open(QIODevice::WriteOnly | QIODevice::Text))
-	{
-		QTextStream stream(&script);
-		stream << backup.readAll();
-		script.close();
-	}
-
-	backup.remove();
-	return true;
+    for(const auto& prop : properties)
+    {
+        if(prop->getType() == EELPropertyType::NumberRange)
+        {
+            auto* nr = dynamic_cast<EELNumberRangeProperty<float>*>(prop);
+            nr->setValue(nr->getDefault());
+            manipulateProperty(prop);
+        }
+    }
+    return true;
 }
 
-bool EELParser::saveBackup()
+bool EELParser::hasDefaultsDefined()
+{
+    if (!isFileLoaded())
+    {
+        return false;
+    }
+
+    for(const auto& prop : properties)
+    {
+        if(prop->getType() == EELPropertyType::NumberRange)
+        {
+            if(prop->hasDefault())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool EELParser::canLoadDefaults()
 {
 	if (!isFileLoaded())
 	{
 		return false;
 	}
 
-	QString absolutePath = QFileInfo(container.path).absoluteDir().absolutePath();
-	QString fileName     = QFileInfo(container.path).fileName();
-	QFile   file(absolutePath + "/." + fileName + ".bak");
+    for(auto* prop : properties)
+    {
+        if(prop->getType() == EELPropertyType::NumberRange)
+        {
+            auto* nr = dynamic_cast<EELNumberRangeProperty<float>*>(prop);
 
-	if (file.exists())
-	{
-		return false; // We already have a backup
+            if(prop->hasDefault() && qFloatCompare(nr->getDefault(), nr->getValue()) == false)
+            {
+                return true;
+            }
+        }
+    }
 
-	}
-
-	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-	{
-		QTextStream stream(&file);
-		stream << container.code;
-		file.close();
-		return true;
-	}
-
-	return false;
-}
-
-bool EELParser::deleteBackup()
-{
-	QString absolutePath = QFileInfo(container.path).absoluteDir().absolutePath();
-	QString fileName     = QFileInfo(container.path).fileName();
-	QFile   backup(absolutePath + "/." + fileName + ".bak");
-
-	if (!backup.exists())
-	{
-		return false;
-	}
-
-	backup.remove();
-	return true;
-}
-
-bool EELParser::backupExists()
-{
-	if (!isFileLoaded())
-	{
-		return false;
-	}
-
-	QString absolutePath = QFileInfo(container.path).absoluteDir().absolutePath();
-	QString fileName     = QFileInfo(container.path).fileName();
-	QFile   file(absolutePath + "/." + fileName + ".bak");
-
-	return file.exists();
-}
-
-bool EELParser::canLoadBackup()
-{
-	if (!isFileLoaded())
-	{
-		return false;
-	}
-
-	QString absolutePath = QFileInfo(container.path).absoluteDir().absolutePath();
-	QString fileName     = QFileInfo(container.path).fileName();
-	QFile   file(absolutePath + "/." + fileName + ".bak");
-
-	if (!file.open(QIODevice::ReadOnly))
-	{
-		return false;
-	}
-
-	return file.exists() && !(file.readAll() == container.code);
+    return false;
 }
 
 bool EELParser::isFileLoaded()
@@ -161,48 +162,11 @@ QString EELParser::getDescription()
 
 EELProperties EELParser::getProperties()
 {
-	EELProperties      props;
-	QRegularExpression descRe(R"((?<var>\w+):(?<cur>-?\d+\.?\d*)?<(?<min>-?\d+\.?\d*),(?<max>-?\d+\.?\d*),?(?<step>-?\d+\.?\d*)?>(?<desc>[\s\S][^\n]*))");
-
-	for (auto line : container.code.split("\n"))
-	{
-		auto matchIterator = descRe.globalMatch(line);
-
-		if (matchIterator.hasNext())
-		{
-			auto    match = matchIterator.next();
-			QString key   = match.captured("var");
-			QString min   = match.captured("min");
-			QString max   = match.captured("max");
-			QString step  = match.captured("step");
-			QString desc  = match.captured("desc").trimmed();
-
-			if (step.isEmpty())
-			{
-				step = "0.1";
-			}
-
-			QString current = findVariable(key, EELPropertyType::NumberRange);
-
-			if (current == NORESULT)
-			{
-				break;
-			}
-
-			EELNumberRangeProperty<float> *prop = new EELNumberRangeProperty<float>(key, desc, current.toFloat(),
-			                                                                        min.toFloat(), max.toFloat(),
-			                                                                        step.toFloat());
-			props.append(prop);
-		}
-	}
-
-	return props;
+    return properties;
 }
 
 bool EELParser::manipulateProperty(EELBaseProperty *propbase)
 {
-	saveBackup();
-
 	if (propbase->getType() == EELPropertyType::NumberRange)
 	{
 		EELNumberRangeProperty<float> *prop = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
@@ -270,5 +234,16 @@ bool EELParser::replaceVariable(QString         key,
 		}
 	}
 
-	return false;
+    return false;
 }
+
+void EELParser::clearProperties()
+{
+    for(auto& prop : properties)
+    {
+        delete prop;
+        prop = nullptr;
+    }
+    properties.clear();
+}
+

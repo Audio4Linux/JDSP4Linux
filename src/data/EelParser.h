@@ -3,6 +3,10 @@
 
 #include <model/codecontainer.h>
 #include <QMap>
+#include <optional>
+#include <utils/Log.h>
+#include <QRegularExpression>
+#include <cmath>
 
 #define NORESULT "<<NO RESULT FOUND>>"
 
@@ -19,12 +23,10 @@ public:
 	EELParser();
 	void          loadFile(QString path);
 	bool          saveFile();
-	bool          loadBackup();
-	bool          saveBackup();
-	bool          deleteBackup();
-	bool          backupExists();
-	bool          canLoadBackup();
-	bool          isFileLoaded();
+    bool          loadDefaults();
+    bool          hasDefaultsDefined();
+    bool          canLoadDefaults();
+    bool          isFileLoaded();
 	QString       getPath();
 	QString       getDescription();
 	EELProperties getProperties();
@@ -33,11 +35,16 @@ public:
 private:
 	CodeContainer container;
 
-	QString       findVariable(QString         key,
-	                           EELPropertyType type);
+    QString       findVariable(QString         key,
+                               EELPropertyType type);
+
 	bool          replaceVariable(QString         key,
 	                              QString         value,
 	                              EELPropertyType type);
+
+    void clearProperties();
+
+    EELProperties properties;
 
 };
 
@@ -89,6 +96,8 @@ public:
 		return type;
 	}
 
+    virtual bool hasDefault() const = 0;
+
 protected:
 	QString key;
 	QString description;
@@ -102,17 +111,19 @@ class EELNumberRangeProperty :
 public:
 	EELNumberRangeProperty(QString _key,
 	                       QString _description,
-	                       TNum    _value,
-	                       TNum    _minimum,
+                           std::optional<TNum> _default,
+                           TNum    _value,
+                           TNum    _minimum,
 	                       TNum    _maximum,
-	                       TNum    _defaultVal = 0)
+                           TNum    _step = 0)
 	{
-		key         = _key;
-		description = _description;
-		value       = _value;
-		maximum     = _maximum;
+        key         = _key;
+        description = _description;
+        dflt        = _default;
+        value       = _value;
+        maximum     = _maximum;
 		minimum     = _minimum;
-		step        = _defaultVal;
+        step        = _step;
 		type        = EELPropertyType::NumberRange;
 	}
 
@@ -129,7 +140,7 @@ public:
 
 	void setValue(const TNum &_value)
 	{
-		value = _value;
+        value = fmin(fmax(minimum, _value), maximum);
 	}
 
 	TNum getMaximum() const
@@ -137,19 +148,9 @@ public:
 		return maximum;
 	}
 
-	void setMaximum(const TNum &value)
-	{
-		maximum = value;
-	}
-
 	TNum getMinimum() const
 	{
 		return minimum;
-	}
-
-	void setMinimum(const TNum &value)
-	{
-		minimum = value;
 	}
 
 	TNum getStep() const
@@ -157,16 +158,34 @@ public:
 		return step;
 	}
 
-	void setStep(const TNum &value)
-	{
-		step = value;
-	}
+    TNum getDefault() const
+    {
+        if(!hasDefault())
+        {
+            Log::warning("EELNumberRangeProperty<T>::getDefault(): no default value set");
+            return fmin(fmax(minimum, value), maximum);
+        }
+        return dflt.value();
+    }
+
+    bool hasDefault() const override
+    {
+        return dflt.has_value();
+    }
 
 private:
-	TNum maximum;
-	TNum minimum;
+    std::optional<TNum> dflt = std::nullopt;
+    TNum maximum;
+    TNum minimum;
 	TNum step;
 	TNum value;
 };
+
+inline bool qFloatCompare(float f1, float f2)
+{
+    if (qFuzzyIsNull(qAbs(f1 - f2)))
+        return true;
+    return qFuzzyCompare(f1, f2);
+}
 
 #endif // EELPARSER_H
