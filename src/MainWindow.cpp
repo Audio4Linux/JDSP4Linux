@@ -370,8 +370,8 @@ MainWindow::MainWindow(QString  exepath,
             WAF::Animation::sideSlideIn(host, WAF::BottomSide);
         });
         menu->addAction(tr("Relink audio pipeline"),   this, SLOT(restart()));
-        menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
         menu->addSeparator();
+        menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
 		menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
 		menu->addAction(tr("Save to file"),   this, SLOT(saveExternalFile()));
         menu->addSeparator();
