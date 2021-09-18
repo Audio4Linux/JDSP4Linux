@@ -56,7 +56,7 @@ public:
     }
 #endif
 
-    uint id = SPA_ID_INVALID;
+    uint id = ((uint32_t)0xffffffff);
 
     QString name;
 
