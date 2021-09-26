@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>5</number>
+            <number>6</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2079,8 +2079,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>229</width>
-                    <height>86</height>
+                    <width>314</width>
+                    <height>322</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -2150,7 +2150,7 @@
                        <item>
                         <widget class="QToolButton" name="liveprog_editscript">
                          <property name="text">
-                          <string>Edit script</string>
+                          <string>Create new script</string>
                          </property>
                         </widget>
                        </item>

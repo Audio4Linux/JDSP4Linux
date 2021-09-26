@@ -1485,6 +1485,7 @@ void MainWindow::setLiveprogSelection(QString path)
 {
 	_eelparser->loadFile(path);
 	ui->liveprog_name->setText(_eelparser->getDescription());
+    ui->liveprog_editscript->setText("Edit script");
 
 	QLayoutItem *item;
 
@@ -2010,9 +2011,10 @@ void MainWindow::connectActions()
 	connect(ui->liveprog_editscript, &QAbstractButton::clicked, [this] {
 		if (activeliveprog.isEmpty())
 		{
-		    QMessageBox::warning(this, "Error", "No EEL file loaded.\n"
-		                         "Please select one in the list on the left side.");
-		    return;
+            m_eelEditor->show();
+            m_eelEditor->raise();
+            m_eelEditor->newProject();
+            return;
 		}
 		else if (!QFile(activeliveprog).exists())
 		{
