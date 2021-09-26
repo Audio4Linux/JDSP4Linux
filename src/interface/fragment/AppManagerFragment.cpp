@@ -14,6 +14,9 @@ AppManagerFragment::AppManagerFragment(IAppManager* appMgr, QWidget *parent) :
     ui->setupUi(this);
 
     model = new AppItemModel(appMgr, this);
+
+    ui->apps->setEmptyViewEnabled(true);
+    ui->apps->setEmptyViewTitle("No apps are playing audio");
     ui->apps->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     ui->apps->setModel(model);
     ui->apps->setItemDelegate(new AppItemStyleDelegate(ui->apps));

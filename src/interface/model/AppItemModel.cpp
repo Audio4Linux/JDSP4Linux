@@ -33,8 +33,6 @@ QVariant AppItemModel::data(const QModelIndex &index, int role) const
 
     if(role == Qt::ItemDataRole::UserRole)
         return QVariant::fromValue(cache.at(index.row()));
-    // else if(role == Qt::ItemDataRole::DisplayRole)
-    //    return cache.at(index.row()).name;
     else
         return QVariant();
 }

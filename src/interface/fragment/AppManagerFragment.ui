@@ -75,7 +75,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QListView" name="apps">
+    <widget class="CListView" name="apps">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -83,7 +83,7 @@
       <bool>false</bool>
      </property>
      <property name="dragDropMode">
-      <enum>QAbstractItemView::NoDragDrop</enum>
+      <enum>QAbstractItemView::DragOnly</enum>
      </property>
      <property name="defaultDropAction">
       <enum>Qt::IgnoreAction</enum>
@@ -110,6 +110,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CListView</class>
+   <extends>QListView</extends>
+   <header>interface/CListView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../subprojects/EELEditor/3rdparty/docking-system/src/ads.qrc"/>
  </resources>

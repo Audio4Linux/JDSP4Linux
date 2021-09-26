@@ -43,6 +43,7 @@ SOURCES += \
     data/PresetProvider.cpp \
     data/QJsonTableModel.cpp \
     interface/AnimatedJdspIcon.cpp \
+    interface/CListView.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/AutoEqSelector.cpp \
     interface/dialog/PaletteEditor.cpp \
@@ -98,6 +99,7 @@ HEADERS += \
     data/QJsonTableModel.h \
     data/VersionContainer.h \
     interface/AnimatedJdspIcon.h \
+    interface/CListView.h \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
     interface/dialog/AutoEqSelector.h \
