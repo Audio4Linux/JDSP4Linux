@@ -40,7 +40,9 @@ QAnimatedSlider::QAnimatedSlider(QWidget *parent)
 }
 
 QAnimatedSlider::~QAnimatedSlider()
-{}
+{
+    anim->deleteLater();
+}
 
 void QAnimatedSlider::setValueA(int  val,
                                 bool animate)

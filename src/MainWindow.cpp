@@ -184,14 +184,14 @@ MainWindow::MainWindow(QString  exepath,
 		m_startupInTraySwitch = statupInTray;
 
 		m_stylehelper         = new StyleHelper(this);
-		m_eelEditor           = new EELEditor(this);
+        m_eelEditor           = new EELEditor(this);
 
 		_eelparser            = new EELParser();
 
         connect(audioService, &IAudioService::eelCompilationStarted, m_eelEditor, &EELEditor::onCompilerStarted);
         connect(audioService, &IAudioService::eelCompilationFinished, m_eelEditor, &EELEditor::onCompilerFinished);
         connect(audioService, &IAudioService::eelOutputReceived, m_eelEditor, &EELEditor::onConsoleOutputReceived);
-        connect(m_eelEditor, &EELEditor::runCode, [this](QString path){
+        connect(m_eelEditor, &EELEditor::executionRequested, [this](QString path){
             bool isSameFile = path == activeliveprog;
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())
             {
@@ -1678,7 +1678,6 @@ void MainWindow::restoreGraphicEQView()
 
 	if (state.count() >= 1)
 	{
-        qDebug() << state;
 		ui->graphicEq->loadPreferences(state);
 	}
 	else

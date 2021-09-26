@@ -144,8 +144,8 @@ else: unix:!android: target.path = /usr/bin/
 
 unix {
     LIBS += -ldl
-    QMAKE_LFLAGS += -ldl -lutil
-    QMAKE_CXXFLAGS += -g
+    QMAKE_LFLAGS += -ldl -lutil #-fsanitize=address
+    QMAKE_CXXFLAGS += -g #-fno-omit-frame-pointer -fsanitize=address
 
     CONFIG += link_pkgconfig
 

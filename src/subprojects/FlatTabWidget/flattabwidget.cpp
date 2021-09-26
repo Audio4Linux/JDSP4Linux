@@ -53,6 +53,13 @@ FlatTabWidget::FlatTabWidget(QWidget *parent)
 
 FlatTabWidget::~FlatTabWidget()
 {
+    lineMorph->deleteLater();
+    fade->deleteLater();
+    for(const auto& item : pages)
+    {
+        item.fadeIn->deleteLater();
+        item.fadeOut->deleteLater();
+    }
     delete ui;
 }
 
@@ -140,7 +147,6 @@ void FlatTabWidget::redrawTabBar(){
 }
 
 void FlatTabWidget::removePage(int id){
-    auto pal = palette();
     auto textcolor_disabled = getColor(ColorRole::Inactive);
 
     if(!pages.empty() && (id >= 0 && id < pages.size())){
@@ -170,7 +176,7 @@ void FlatTabWidget::setCurrentTab(int id){
     } else {
         pages[id].fadeIn->stop();
         pages[id].fadeOut->stop();
-        pages[id].fadeIn = new QPropertyAnimation(pages[id].label, "color");
+        pages[id].fadeIn = new QPropertyAnimation(pages[id].label, "color", this);
         pages[id].fadeIn->setDuration(300);
         pages[id].fadeIn->setStartValue(textcolor_disabled);
         pages[id].fadeIn->setEndValue(textcolor_active);
@@ -178,7 +184,7 @@ void FlatTabWidget::setCurrentTab(int id){
         if(pages.size() > currentSelection){
             pages[currentSelection].fadeIn->stop();
             pages[currentSelection].fadeOut->stop();
-            pages[currentSelection].fadeOut = new QPropertyAnimation(pages[currentSelection].label, "color");
+            pages[currentSelection].fadeOut = new QPropertyAnimation(pages[currentSelection].label, "color", this);
             pages[currentSelection].fadeOut->setDuration(300);
             pages[currentSelection].fadeOut->setStartValue(textcolor_active);
             pages[currentSelection].fadeOut->setEndValue(textcolor_disabled);
@@ -188,7 +194,7 @@ void FlatTabWidget::setCurrentTab(int id){
     }
 
     lineMorph->stop();
-    lineMorph = new QPropertyAnimation(ui->SeparatorLine, "geometry");
+    lineMorph = new QPropertyAnimation(ui->SeparatorLine, "geometry", this);
     lineMorph->setDuration(300);
     lineMorph->setEasingCurve(QEasingCurve::OutCirc);
     lineMorph->setStartValue(ui->SeparatorLine->geometry());

@@ -86,7 +86,14 @@ LiquidEqualizerWidget::LiquidEqualizerWidget(QWidget *parent)
 }
 
 LiquidEqualizerWidget::~LiquidEqualizerWidget()
-{}
+{
+    delete [] dispFreq;
+    delete [] response;
+    delete [] precomputeCurveXAxis;
+    delete [] precomputeFreqAxis;
+    delete [] mLevels;
+    delete [] mActualLevels;
+}
 
 void LiquidEqualizerWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {

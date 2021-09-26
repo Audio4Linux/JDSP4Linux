@@ -71,6 +71,13 @@ void parseStrings(char * stackFrameString, char * symbolString, char * offsetStr
         }
 
     }
+
+    if(symbolStart == NULL || offsetStart == NULL || offsetEnd == NULL)
+    {
+        safe_printf(STDOUT_FILENO, "Failed to parse backtrace: %s", stackFrameString);
+        return;
+    }
+
     //Copy the symbol string into an array pointed by symbolString
     for(char * symbolPointer = symbolStart+1; symbolPointer != offsetStart; symbolPointer++)
     {
