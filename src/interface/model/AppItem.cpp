@@ -28,7 +28,8 @@ AppItem::AppItem(AppItemModel* model, uint id, QWidget *parent) :
 
 AppItem::~AppItem()
 {
-    disconnect(model, &AppItemModel::appChanged, this, &AppItem::refresh);
+    if(model != nullptr)
+        disconnect(model, &AppItemModel::appChanged, this, &AppItem::refresh);
     delete ui;
 }
 
