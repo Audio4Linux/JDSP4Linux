@@ -5,6 +5,7 @@
 
 #include "IAudioService.h"
 
+class PulseAppManager;
 class PulseAudioProcessingThread;
 
 class PulsePipelineManager;
@@ -32,6 +33,7 @@ public slots:
 
 private:
     PulsePipelineManagerPtr mgr;
+    PulseAppManager* appMgr;
     PulseAudioProcessingThread* apt;
 
 };

@@ -3,6 +3,8 @@
 
 #ifndef USE_PULSEAUDIO
 #include "PwPipelineManager.h"
+#else
+#include "PulsePipelineManager.h"
 #endif
 
 #include <QString>
@@ -25,8 +27,6 @@ public:
         app_icon_name = QSTR(node.app_icon_name);
         media_name = QSTR(node.media_name);
         format = QSTR(node.format);
-        priority = node.priority;
-        state = node.state;
         mute = node.mute;
         n_input_ports = node.n_input_ports;
         n_output_ports = node.n_output_ports;
@@ -54,7 +54,33 @@ public:
                 break;
         }
     }
+#else
+    AppNode(AppInfo node)
+    {
+        id = node.index;
+        name = QSTR(node.name);
+        description = "";
+        media_class = QSTR(node.app_type);
+        app_icon_name = QSTR(node.icon_name);
+        media_name = "";
+        format = QSTR(node.format);
+        mute = node.mute;
+        n_input_ports = node.channels;
+        n_output_ports = node.channels;
+        rate = node.rate;
+        n_volume_channels = node.channels;
+        latency = node.latency / 1e+9;
+        volume = node.volume;
+
+        if(node.wants_to_play)
+            state = "running";
+        else if(node.connected)
+            state = "idle";
+        else
+            state = "not connected";
+    }
 #endif
+
 
     uint id = ((uint32_t)0xffffffff);
 
@@ -69,8 +95,6 @@ public:
     QString media_name;
 
     QString format;
-
-    int priority = -1;
 
     QString state;
 

@@ -172,7 +172,7 @@ bool EELParser::manipulateProperty(EELBaseProperty *propbase)
 		EELNumberRangeProperty<float> *prop = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
 		QString                        value;
 
-		if (is_integer(prop->getStep()))
+        if (std::floor(prop->getStep()) == prop->getStep()) // is integer?
 		{
 			value = QString::number((int) prop->getValue());
 		}

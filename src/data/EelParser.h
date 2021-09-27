@@ -6,6 +6,7 @@
 #include <optional>
 #include <utils/Log.h>
 #include <QRegularExpression>
+#include <QVector>
 #include <cmath>
 
 #define NORESULT "<<NO RESULT FOUND>>"

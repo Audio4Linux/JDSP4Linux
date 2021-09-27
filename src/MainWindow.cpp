@@ -290,7 +290,6 @@ MainWindow::MainWindow(QString  exepath,
 		connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
 
-#ifndef USE_PULSEAUDIO
         appMgrUi = new AppManagerFragment(audioService->appManager(), this);
         appsFragmentHost = new QFrame(this);
         appsHostLayout = new QVBoxLayout(appsFragmentHost);
@@ -305,7 +304,6 @@ MainWindow::MainWindow(QString  exepath,
             appsFragmentHost->repaint();
             WAF::Animation::sideSlideOut(appsFragmentHost, WAF::BottomSide);
         });
-#endif
 
 		preset_dlg   = new PresetDialog(this);
         connect(preset_dlg, &PresetDialog::wantsToWriteConfig, this, &MainWindow::applyConfig);
@@ -355,12 +353,10 @@ MainWindow::MainWindow(QString  exepath,
 	// Init 3-dot menu button
 	{
 		QMenu *menu = new QMenu();
-#ifndef USE_PULSEAUDIO
         menu->addAction(tr("Apps"),   this, [this]()
         {
             WAF::Animation::sideSlideIn(appsFragmentHost, WAF::BottomSide);
         });
-#endif
         menu->addAction(tr("Driver status"),     this, [this]()
         {
             StatusFragment *sd      = new StatusFragment(audioService->status());
@@ -1508,7 +1504,7 @@ void MainWindow::setLiveprogSelection(QString path)
         if (propbase->getType() == EELPropertyType::NumberRange)
 		{
             EELNumberRangeProperty<float> *prop        = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
-			bool                           handleAsInt = is_integer(prop->getStep());
+            bool                           handleAsInt = std::floor(prop->getStep()) == prop->getStep();
 			QLabel                        *lbl         = new QLabel(this);
 			QAnimatedSlider               *sld         = new QAnimatedSlider(this);
 			lbl->setText(prop->getDescription());

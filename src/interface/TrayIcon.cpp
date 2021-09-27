@@ -3,9 +3,11 @@
 #include "config/AppConfig.h"
 #include "data/PresetProvider.h"
 #include "utils/Log.h"
+#include "utils/Common.h"
 
 #include <QApplication>
 #include <QMenu>
+#include <QDir>
 
 TrayIcon::TrayIcon(QObject *parent) : QObject(parent)
 {

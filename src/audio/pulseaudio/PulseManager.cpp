@@ -4,10 +4,17 @@
 #include <glib.h>
 #include <memory>
 
+//#include <config/AppConfig.h>
+
 PulseManager::PulseManager()
     : main_loop(pa_threaded_mainloop_new()), main_loop_api(pa_threaded_mainloop_get_api(main_loop)) {
     pa_threaded_mainloop_lock(main_loop);
     pa_threaded_mainloop_start(main_loop);
+
+    /*std::vector<std::string> blocklist;
+    for(const auto& block : AppConfig::instance().get<QStringList>(AppConfig::AudioAppBlocklist))
+        blocklist.push_back(block.toStdString());
+    blacklist_out = blocklist;*/
 
     context = pa_context_new(main_loop_api, SINK_NAME);
 
@@ -121,7 +128,7 @@ void PulseManager::subscribe_to_events() {
                 },
                 pm);
             } else if (e == PA_SUBSCRIPTION_EVENT_REMOVE) {
-                Glib::signal_idle().connect_once([pm, idx]() { pm->sink_input_removed.emit(idx); });
+                Glib::signal_idle().connect_once([pm, idx]() { pm->sink_input_removed(idx); });
             }
         } else if (f == PA_SUBSCRIPTION_EVENT_SOURCE_OUTPUT) {
             auto e = t & PA_SUBSCRIPTION_EVENT_TYPE_MASK;
@@ -149,7 +156,7 @@ void PulseManager::subscribe_to_events() {
                 },
                 pm);
             } else if (e == PA_SUBSCRIPTION_EVENT_REMOVE) {
-                Glib::signal_idle().connect_once([pm, idx]() { pm->source_output_removed.emit(idx); });
+                Glib::signal_idle().connect_once([pm, idx]() { pm->source_output_removed(idx); });
             }
         } else if (f == PA_SUBSCRIPTION_EVENT_SINK) {
             auto e = t & PA_SUBSCRIPTION_EVENT_TYPE_MASK;
@@ -177,7 +184,7 @@ void PulseManager::subscribe_to_events() {
                                 si->active_port = "null";
                             }
 
-                            Glib::signal_idle().connect_once([pm, si = move(si)] { pm->sink_added.emit(si); });
+                            Glib::signal_idle().connect_once([pm, si = move(si)] { pm->sink_added(si); });
                         }
                     }
                 },
@@ -208,12 +215,12 @@ void PulseManager::subscribe_to_events() {
                             pm->apps_sink_info->format = si->format;
                         }
 
-                        Glib::signal_idle().connect_once([pm, si = move(si)] { pm->sink_changed.emit(si); });
+                        Glib::signal_idle().connect_once([pm, si = move(si)] { pm->sink_changed(si); });
                     }
                 },
                 pm);
             } else if (e == PA_SUBSCRIPTION_EVENT_REMOVE) {
-                Glib::signal_idle().connect_once([pm, idx]() { pm->sink_removed.emit(idx); });
+                Glib::signal_idle().connect_once([pm, idx]() { pm->sink_removed(idx); });
             }
         } else if (f == PA_SUBSCRIPTION_EVENT_SERVER) {
             auto e = t & PA_SUBSCRIPTION_EVENT_TYPE_MASK;
@@ -231,12 +238,12 @@ void PulseManager::subscribe_to_events() {
                         std::string source = info->default_source_name;
 
                         if (sink != std::string(SINK_NAME)) {
-                            Glib::signal_idle().connect_once([pm, sink]() { pm->new_default_sink.emit(sink); });
+                            Glib::signal_idle().connect_once([pm, sink]() { pm->new_default_sink(sink); });
                         }
 
-                        Glib::signal_idle().connect_once([pm, source]() { pm->new_default_source.emit(source); });
+                        Glib::signal_idle().connect_once([pm, source]() { pm->new_default_source(source); });
 
-                        Glib::signal_idle().connect_once([pm]() { pm->server_changed.emit(); });
+                        Glib::signal_idle().connect_once([pm]() { pm->server_changed(); });
                     }
                 },
                 pm);
@@ -552,7 +559,7 @@ void PulseManager::find_sinks() {
             si->rate = info->sample_spec.rate;
             si->format = pa_sample_format_to_string(info->sample_spec.format);
 
-            Glib::signal_idle().connect_once([pm, si = move(si)] { pm->sink_added.emit(si); });
+            Glib::signal_idle().connect_once([pm, si = move(si)] { pm->sink_added(si); });
 }
 } else {
             pa_threaded_mainloop_signal(pm->main_loop, false);
@@ -900,7 +907,7 @@ void PulseManager::get_modules_info() {
             mi->argument = "";
 }
 
-            Glib::signal_idle().connect_once([pm, mi = move(mi)] { pm->module_info.emit(mi); });
+            Glib::signal_idle().connect_once([pm, mi = move(mi)] { pm->module_info(mi); });
 }
 } else {
             pa_threaded_mainloop_signal(pm->main_loop, false);
@@ -943,7 +950,7 @@ void PulseManager::get_clients_info() {
             mi->binary = "";
 }
 
-            Glib::signal_idle().connect_once([pm, mi = move(mi)] { pm->client_info.emit(mi); });
+            Glib::signal_idle().connect_once([pm, mi = move(mi)] { pm->client_info(mi); });
 }
 } else {
             pa_threaded_mainloop_signal(pm->main_loop, false);
@@ -1045,7 +1052,7 @@ void PulseManager::new_app(const pa_sink_input_info* info) {
     if (app_info != nullptr) {
         app_info->app_type = "sink_input";
 
-        Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { sink_input_added.emit(app_info); });
+        Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { sink_input_added(app_info); });
     }
 }
 
@@ -1055,7 +1062,7 @@ void PulseManager::new_app(const pa_source_output_info* info) {
     if (app_info != nullptr) {
         app_info->app_type = "source_output";
 
-        Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { source_output_added.emit(app_info); });
+        Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { source_output_added(app_info); });
     }
 }
 
@@ -1071,7 +1078,7 @@ void PulseManager::changed_app(const pa_sink_input_info* info) {
         if (!forbidden_app) {
             app_info->app_type = "sink_input";
 
-            Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { sink_input_changed.emit(app_info); });
+            Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { sink_input_changed(app_info); });
         }
     }
 }
@@ -1088,7 +1095,7 @@ void PulseManager::changed_app(const pa_source_output_info* info) {
         if (!forbidden_app) {
             app_info->app_type = "source_output";
 
-            Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { source_output_changed.emit(app_info); });
+            Glib::signal_idle().connect_once([&, app_info = move(app_info)]() { source_output_changed(app_info); });
         }
     }
 }

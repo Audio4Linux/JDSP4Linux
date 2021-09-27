@@ -2,12 +2,13 @@
 
 #include "PulseAudioService.h"
 
+#include "PulseAppManager.h"
 #include "Utils.h"
 #include "DspHost.h"
 #include "PulseAudioProcessingThread.h"
+#include "pipeline/JamesDspElement.h"
 
 #include <QDebug>
-
 
 #include <gstjamesdsp.h>
 
@@ -35,6 +36,7 @@ PulseAudioService::PulseAudioService()
 
     /* Create a shared thread-safe pointer */
     mgr = std::make_shared<PulsePipelineManager>();
+    appMgr = new PulseAppManager(mgr.get());
 
     mgr.get()->getDsp()->setMessageHandler([this](DspHost::Message msg, std::any value){
         switch(msg)
@@ -103,9 +105,7 @@ void PulseAudioService::reloadService()
 
 IAppManager *PulseAudioService::appManager()
 {
-    util::critical("PulseAudioService::appManager: FEATURE NOT IMPLEMENTED FOR PULSEAUDIO. "
-                   "The app will probably crash. This code should be unreachable.");
-    return nullptr;
+    return appMgr;
 }
 
 std::vector<IOutputDevice> PulseAudioService::sinkDevices()
