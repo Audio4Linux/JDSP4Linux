@@ -2,10 +2,15 @@
 
 #include "pipeline/sink/PulseSinkElement.h"
 #include "pipeline/source/PulseSrcElement.h"
+#include "pipeline/JamesDspElement.h"
+#include "pipeline/sink/SinkElement.h"
+#include "pipeline/source/SourceElement.h"
 
 #include "Utils.h"
 
 #include <pipeline/GstElementProperties.h>
+
+#include <config/AppConfig.h>
 
 #define LOGTAG std::string("PipelineManager: ")
 
@@ -397,7 +402,7 @@ void PulsePipelineManager::getLatency() {
 
         util::debug(LOGTAG + "total latency: " + std::to_string(latency) + " ms");
 
-        Glib::signal_idle().connect_once([=] { new_latency.emit(latency); });
+        Glib::signal_idle().connect_once([=] { new_latency(latency); });
     }
 
     gst_query_unref(q);
@@ -449,19 +454,13 @@ void PulsePipelineManager::onAppAdded(const std::shared_ptr<AppInfo>& app_info) 
 
     updatePipelineState();
 
-    bool forbidden_app = false, success = false;
-    //auto* blacklist = g_settings_get_strv(settings, "blacklist-out");
+    bool success = false;
 
-    /*for (std::size_t i = 0; blacklist[i] != nullptr; i++) {
-        if (app_info->name == blacklist[i]) {
-            forbidden_app = true;
-        }
-
-        g_free(blacklist[i]);
-    }*/
+    const auto& blocklist = AppConfig::instance().get<QStringList>(AppConfig::AudioAppBlocklist);
+    const auto& is_blocklisted = blocklist.contains(QString::fromStdString(app_info.get()->name));
 
     if (app_info->connected) {
-        if (forbidden_app) {
+        if (is_blocklisted) {
             success = pm->remove_sink_input_from_gstmgr(app_info->name, app_info->index);
 
             if (success) {
@@ -471,7 +470,7 @@ void PulsePipelineManager::onAppAdded(const std::shared_ptr<AppInfo>& app_info) 
     } else {
         auto enable_all = true;//g_settings_get_boolean(settings, "enable-all-sinkinputs");
 
-        if (!forbidden_app && enable_all != 0) {
+        if (!is_blocklisted && enable_all != 0) {
             success = pm->move_sink_input_to_gstmgr(app_info->name, app_info->index);
 
             if (success) {
@@ -479,8 +478,6 @@ void PulsePipelineManager::onAppAdded(const std::shared_ptr<AppInfo>& app_info) 
             }
         }
     }
-
-    //g_free(blacklist);
 }
 
 void PulsePipelineManager::onAppChanged(const std::shared_ptr<AppInfo>& app_info) {

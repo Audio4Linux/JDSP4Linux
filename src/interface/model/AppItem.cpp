@@ -13,6 +13,10 @@ AppItem::AppItem(AppItemModel* model, uint id, QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef USE_PULSEAUDIO
+    ui->blocklist->hide();
+#endif
+
     auto node = model->findByNodeId(id);
     if(!node.has_value())
     {

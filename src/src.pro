@@ -36,6 +36,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++17
 
 SOURCES += \
+    config/AppConfig.cpp \
     config/ConfigContainer.cpp \
     config/ConfigIO.cpp \
     crash/airbag.c \
@@ -65,6 +66,7 @@ SOURCES += \
     main.cpp \
     utils/AutoEqClient.cpp \
     utils/AutoStartManager.cpp \
+    utils/Common.cpp \
     utils/Log.cpp \
     utils/dbus/ClientProxy.cpp \
     utils/dbus/ServerAdaptor.cpp \

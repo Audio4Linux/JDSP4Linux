@@ -6,11 +6,12 @@
 #include <glib.h>
 #include <sigc++/connection.h>
 
-#include "pipeline/JamesDspElement.h"
-#include "pipeline/sink/SinkElement.h"
-#include "pipeline/source/SourceElement.h"
 #include "PulseManager.h"
 #include "RealtimeKit.h"
+
+class JamesDspElement;
+class SinkElement;
+class SourceElement;
 
 class PulsePipelineManager
 {
@@ -61,10 +62,7 @@ public:
     void                pauseAndStart();
     void                setState(GstState state);
 
-    sigc::signal
-    <void> snapshot_loaded;
-    sigc::signal
-    <void, std::map<std::string, std::string>> snapshot_has_missing_plugins;
+    std::vector<std::shared_ptr<AppInfo>> apps_list;
 
 private:
     PulseManager*       pm;
@@ -91,7 +89,6 @@ private:
     void                onAppRemoved(uint idx);
     void                onSinkChanged(const std::shared_ptr<mySinkInfo> &sink_info);
 
-    std::vector<std::shared_ptr<AppInfo>> apps_list;
 };
 
 #endif // PULSEPIPELINEMANAGER_H

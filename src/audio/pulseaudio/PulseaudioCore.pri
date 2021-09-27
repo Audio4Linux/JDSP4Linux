@@ -1,6 +1,7 @@
 include(wrapper/GstPluginWrapper.pri)
 
 SOURCES +=  \
+    $$PWD/PulseAppManager.cpp \
     $$PWD/PulseAudioProcessingThread.cpp \
     $$PWD/PulseAudioService.cpp \
     $$PWD/PulseManager.cpp \
@@ -15,6 +16,7 @@ SOURCES +=  \
     $$PWD/pipeline/source/PulseSrcElement.cpp
 
 HEADERS +=  \
+    $$PWD/PulseAppManager.h \
     $$PWD/PulseAudioProcessingThread.h \
     $$PWD/PulseAudioService.h \
     $$PWD/PulseManager.h \

@@ -15,9 +15,30 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include <cmath>
 #include <QDir>
 #include <QMenu>
+
+#include <cmath>
+
+template<typename TReal>
+static bool isApproximatelyEqual(TReal a,
+                                 TReal b,
+                                 TReal tolerance = std::numeric_limits<TReal>::epsilon())
+{
+    TReal diff = std::fabs(a - b);
+
+    if (diff <= tolerance)
+    {
+        return true;
+    }
+
+    if (diff < std::fmax(std::fabs(a), std::fabs(b)) * tolerance)
+    {
+        return true;
+    }
+
+    return false;
+}
 
 static inline QString pathAppend(const QString &path1,
                                  const QString &path2)
@@ -54,31 +75,6 @@ static QString chopDoubleQuotes(QString str)
 	}
 
 	return "";
-}
-
-static bool is_integer(float k)
-{
-	return std::floor(k) == k;
-}
-
-template<typename TReal>
-static bool isApproximatelyEqual(TReal a,
-                                 TReal b,
-                                 TReal tolerance = std::numeric_limits<TReal>::epsilon())
-{
-	TReal diff = std::fabs(a - b);
-
-	if (diff <= tolerance)
-	{
-		return true;
-	}
-
-	if (diff < std::fmax(std::fabs(a), std::fabs(b)) * tolerance)
-	{
-		return true;
-	}
-
-	return false;
 }
 
 namespace MenuIO
