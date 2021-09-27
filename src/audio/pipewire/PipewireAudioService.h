@@ -5,15 +5,13 @@
 #include "FilterContainer.h"
 #include "PwAppManager.h"
 #include "IAudioService.h"
-#include "config/AppConfig.h"
 
-#include "PwJamesDspPlugin.h"
 #include "IOutputDevice.h"
 
 #include <memory>
 #include <QObject>
 
-class PwAudioProcessingThread;
+class PwJamesDspPlugin;
 
 class PipewireAudioService : public IAudioService
 {
@@ -22,6 +20,7 @@ class PipewireAudioService : public IAudioService
 
 public:
     PipewireAudioService();
+    ~PipewireAudioService();
 
 public slots:
     void update(DspConfig* config) override;
@@ -40,7 +39,7 @@ private:
     std::unique_ptr<PwPipelineManager> mgr;
     std::unique_ptr<PwAppManager> appMgr;
     std::unique_ptr<FilterContainer> effects;
-    std::unique_ptr<PwJamesDspPlugin> plugin;
+    PwJamesDspPlugin* plugin;
 
 };
 

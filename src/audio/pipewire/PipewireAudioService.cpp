@@ -1,6 +1,7 @@
 #include <glibmm.h>
 
 #include "PipewireAudioService.h"
+#include "PwJamesDspPlugin.h"
 
 #include "PwPipelineManager.h"
 #include "DspHost.h"
@@ -16,10 +17,10 @@ PipewireAudioService::PipewireAudioService()
 
     mgr = std::make_unique<PwPipelineManager>();
     appMgr = std::make_unique<PwAppManager>(mgr.get());
-    plugin = std::make_unique<PwJamesDspPlugin>(mgr.get());
-    effects = std::make_unique<FilterContainer>(mgr.get(), plugin.get(), &AppConfig::instance());
+    plugin = new PwJamesDspPlugin(mgr.get());
+    effects = std::make_unique<FilterContainer>(mgr.get(), plugin, &AppConfig::instance());
 
-    plugin.get()->setMessageHandler([this](DspHost::Message msg, std::any value){
+    plugin->setMessageHandler([this](DspHost::Message msg, std::any value){
         switch(msg)
         {
         case DspHost::EelCompilerResult: {
@@ -64,9 +65,14 @@ PipewireAudioService::PipewireAudioService()
     });
 }
 
+PipewireAudioService::~PipewireAudioService()
+{
+    delete plugin;
+}
+
 void PipewireAudioService::update(DspConfig *config)
 {
-    auto* ptr = plugin.get()->host();
+    auto* ptr = plugin->host();
 
     if(ptr == nullptr)
     {
@@ -74,18 +80,18 @@ void PipewireAudioService::update(DspConfig *config)
         return;
     }
 
-    plugin.get()->host()->update(config);
+    plugin->host()->update(config);
 }
 
 void PipewireAudioService::reloadLiveprog()
 {
-    plugin.get()->host()->reloadLiveprog();
+    plugin->host()->reloadLiveprog();
 }
 
 void PipewireAudioService::reloadService()
 {
     effects.get()->disconnect_filters();
-    plugin.get()->host()->updateFromCache();
+    plugin->host()->updateFromCache();
     effects.get()->connect_filters();
 }
 
@@ -115,7 +121,7 @@ std::vector<IOutputDevice> PipewireAudioService::sinkDevices()
 
 DspStatus PipewireAudioService::status()
 {
-    return plugin.get()->status();
+    return plugin->status();
 }
 
 #include <iostream>
@@ -123,7 +129,7 @@ void PipewireAudioService::enumerateLiveprogVariables()
 {
 
     // TODO
-    auto vars = plugin.get()->host()->enumEelVariables();
+    auto vars = plugin->host()->enumEelVariables();
 
     for(const auto& var : vars)
     {

@@ -27,7 +27,7 @@ public:
 
   DspStatus status() override;
 
-   JamesDSPLib* dsp;
+  JamesDSPLib* dsp;
 };
 
 #endif
