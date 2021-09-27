@@ -191,6 +191,12 @@ MainWindow::MainWindow(QString  exepath,
         connect(audioService, &IAudioService::eelCompilationStarted, m_eelEditor, &EELEditor::onCompilerStarted);
         connect(audioService, &IAudioService::eelCompilationFinished, m_eelEditor, &EELEditor::onCompilerFinished);
         connect(audioService, &IAudioService::eelOutputReceived, m_eelEditor, &EELEditor::onConsoleOutputReceived);
+
+// TODO
+//        QTimer *timer = new QTimer(this);
+//        connect(timer, SIGNAL(timeout()), audioService, SLOT(enumerateLiveprogVariables()));
+//        timer->start(200);
+
         connect(m_eelEditor, &EELEditor::executionRequested, [this](QString path){
             bool isSameFile = path == activeliveprog;
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())

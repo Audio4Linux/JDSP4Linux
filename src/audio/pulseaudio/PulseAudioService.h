@@ -28,6 +28,8 @@ public slots:
     std::vector<IOutputDevice> sinkDevices() override;
     DspStatus status() override;
 
+    void enumerateLiveprogVariables() override;
+
 private:
     PulsePipelineManagerPtr mgr;
     PulseAudioProcessingThread* apt;

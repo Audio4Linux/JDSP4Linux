@@ -663,9 +663,43 @@ void DspHost::reloadLiveprog(DspConfig* config)
         LiveProgDisable(this->_dsp);
 }
 
+std::list<EelVariable> DspHost::enumEelVariables()
+{
+    std::list<EelVariable> vars;
+
+    compileContext *c = (compileContext*)this->dsp()->eel.vm;
+    for (int i = 0; i < c->varTable_numBlocks; i++)
+    {
+        for (int j = 0; j < NSEEL_VARS_PER_BLOCK; j++)
+        {
+            EelVariable var;
+            char *valid = (char*)GetStringForIndex(c->m_string_context, c->varTable_Values[i][j], 0);
+            var.isString = valid;
+
+            if (c->varTable_Names[i][j])
+            {
+                var.name = c->varTable_Names[i][j];
+                if(var.isString)
+                    var.value = valid;
+                else
+                    var.value = c->varTable_Values[i][j];
+
+                vars.push_back(var);
+            }
+        }
+    }
+
+    return vars;
+}
+
 void DspHost::dispatch(Message msg, std::any value)
 {
     _extraFunc(msg, value);
+}
+
+JamesDSPLib *DspHost::dsp() const
+{
+    return _dsp;
 }
 
 void receiveLiveprogStdOut(const char *buffer, void* userData)
@@ -675,3 +709,4 @@ void receiveLiveprogStdOut(const char *buffer, void* userData)
 
     self->dispatch(DspHost::EelWriteOutputBuffer, QString(buffer));
 }
+

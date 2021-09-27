@@ -1,6 +1,7 @@
 #ifndef IAUDIOSERVICE_H
 #define IAUDIOSERVICE_H
 
+#include "EelVariable.h"
 #include "IOutputDevice.h"
 #include "DspStatus.h"
 #include "IAppManager.h"
@@ -24,10 +25,13 @@ public slots:
     virtual std::vector<IOutputDevice> sinkDevices() = 0;
     virtual DspStatus status() = 0;
 
+    virtual void enumerateLiveprogVariables() = 0;
+
 signals:
     void eelCompilationStarted(const QString& scriptName);
     void eelCompilationFinished(int ret, const QString& retMsg, const QString& msg, const QString& scriptName, float initMs);
     void eelOutputReceived(const QString& output);
+    void eelVariablesEnumerated(const std::list<EelVariable>& vars);
 
 };
 

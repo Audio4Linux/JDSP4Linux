@@ -32,6 +32,8 @@ public slots:
     std::vector<IOutputDevice> sinkDevices() override;
     DspStatus status() override;
 
+    void enumerateLiveprogVariables() override;
+
 private:
     const std::string log_tag = "PipewireAudioService: ";
 

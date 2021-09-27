@@ -118,3 +118,9 @@ DspStatus PulseAudioService::status()
     return mgr.get()->getDsp()->status();
 }
 
+void PulseAudioService::enumerateLiveprogVariables()
+{
+    auto vars = mgr.get()->getDsp()->host()->enumEelVariables();
+    emit eelVariablesEnumerated(vars);
+}
+

@@ -4,6 +4,7 @@ HEADERS += \
     $$PWD/AppNode.h \
     $$PWD/DspHost.h \
     $$PWD/DspStatus.h \
+    $$PWD/EelVariable.h \
     $$PWD/IAppManager.h \
     $$PWD/IAudioService.h \
     $$PWD/IDspElement.h \

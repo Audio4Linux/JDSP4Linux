@@ -118,3 +118,23 @@ DspStatus PipewireAudioService::status()
     return plugin.get()->status();
 }
 
+#include <iostream>
+void PipewireAudioService::enumerateLiveprogVariables()
+{
+
+    // TODO
+    auto vars = plugin.get()->host()->enumEelVariables();
+
+    for(const auto& var : vars)
+    {
+        if(std::holds_alternative<std::string>(var.value))
+            std::cout << std::boolalpha << var.name << "\t\t" << std::get<std::string>(var.value) << "\t" << var.isString << std::endl;
+        else
+            std::cout << std::boolalpha << var.name << "\t\t" << std::get<float>(var.value) << "\t" << var.isString << std::endl;
+    }
+
+    std::cout << "-------------------" << std::endl;
+
+    emit eelVariablesEnumerated(vars);
+}
+
