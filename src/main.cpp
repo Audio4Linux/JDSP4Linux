@@ -95,9 +95,14 @@ int main(int   argc,
 	w.setWindowFlags(Qt::WindowContextHelpButtonHint | Qt::WindowCloseButtonHint);
 	w.hide();
 
-	if (!parser.isSet(tray))
+    if (!parser.isSet(tray))
 	{
-		w.show();
+        /* Session manager: Prevent system from launching this app maximized on session restore (= system startup).
+         * Affects DEs with enabled session restore feature; is independent from the built-in autostart feature */
+        if(!qApp->isSessionRestored())
+        {
+            w.show();
+        }
 	}
 
 	QApplication::setQuitOnLastWindowClosed(true);
