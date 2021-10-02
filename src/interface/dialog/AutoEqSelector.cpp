@@ -85,6 +85,12 @@ void AutoEQSelector::updateDetails()
 
 void AutoEQSelector::doQuery()
 {
+    if(ui->searchInput->text().length() <= 2)
+    {
+        QMessageBox::warning(this, "AutoEQ", "Please enter at least 3 characters or more");
+        return;
+    }
+
 	ui->listWidget->setEnabled(false);
 	ui->search->setEnabled(false);
 

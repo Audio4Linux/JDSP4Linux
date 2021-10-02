@@ -47,19 +47,20 @@ void StyleHelper::SetStyle()
 	{
 		loadIcons(false);
 		QApplication::setPalette(m_host->style()->standardPalette());
-		QFile f(":/styles/default.qss");
-
-		if (!f.exists())
-		{
-			printf("Unable to set stylesheet, file not found\n");
-		}
-		else
-		{
-			f.open(QFile::ReadOnly | QFile::Text);
-			QTextStream ts(&f);
-			qApp->setStyleSheet(ts.readAll());
-		}
 	}
+
+    QFile f(":/styles/default.qss");
+
+    if (!f.exists())
+    {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else
+    {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        qApp->setStyleSheet(ts.readAll());
+    }
 
 	emit styleChanged();
 }

@@ -2,3 +2,4 @@ QFrame[frameShape="4"],
 QFrame[frameShape="5"]{
     color: lightgray;
 }
+
