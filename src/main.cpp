@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "config/DspConfig.h"
 
 #include "utils/FindBinary.h"
 
@@ -65,8 +66,10 @@ int main(int   argc,
 	parser.setApplicationDescription("JamesDSP for Linux");
 	parser.addHelpOption();
 
-	QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (forced)");
-	parser.addOption(tray);
+    QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (forced)");
+    parser.addOption(tray);
+    QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically");
+    parser.addOption(watch);
     QCommandLineOption minst(QStringList() << "m" << "allow-multiple-instances", "Allow multiple instances of this app");
     parser.addOption(minst);
     QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
@@ -81,8 +84,11 @@ int main(int   argc,
         setlocale(LC_NUMERIC, "C");
     }
 
+    // Prepare DspConfig based on cmdline argument
+    DspConfig::instance(parser.isSet(watch));
+
 	QApplication::setQuitOnLastWindowClosed(false);
-	MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
+    MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
 	w.setFixedSize(w.geometry().width(), w.geometry().height());
 	w.setGeometry(
 		QStyle::alignedRect(

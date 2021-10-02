@@ -55,7 +55,7 @@ class MainWindow :
 public:
 	explicit MainWindow(QString  exepath,
 	                    bool     statupInTray,
-	                    bool     allowMultipleInst,
+                        bool     allowMultipleInst,
 	                    QWidget *parent = nullptr);
 	~MainWindow();
 

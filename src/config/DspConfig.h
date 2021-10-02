@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QMetaEnum>
+#include <QFileSystemWatcher>
 
 using namespace std;
 
@@ -94,18 +95,30 @@ public:
     };
     Q_ENUM(Type)
 
-	static DspConfig &instance()
+    static DspConfig &instance(bool watcherEnabled = false)
 	{
-		static DspConfig _instance;
+        static DspConfig _instance(watcherEnabled);
 		return _instance;
 	}
 
 	DspConfig(DspConfig const &)       = delete;
 	void operator= (DspConfig const &) = delete;
 
-	DspConfig()
+    DspConfig(bool watcherEnabled = false)
 	{
 		_conf = new ConfigContainer();
+
+        if(watcherEnabled)
+        {
+            Log::debug("DspConfig::ctor: File system watcher enabled");
+
+            _watcher = new QFileSystemWatcher(this);
+            if(!_watcher->addPath(AppConfig::instance().getDspConfPath()))
+            {
+                Log::warning(QString("DspConfig::ctor: Failed to register path %0 with QFileSystemWatcher").arg(AppConfig::instance().getDspConfPath()));
+            }
+            connect(_watcher, &QFileSystemWatcher::fileChanged, this, &DspConfig::fileChanged);
+        }
 	}
 
     void set(const Key &key,
@@ -222,6 +235,8 @@ public:
 		_conf->setConfigMap(map);
 		emit configBuffered();
         emit updated(this);
+
+        save();
 	}
 
 	void loadDefault()
@@ -237,15 +252,30 @@ public:
 			_conf->setConfigMap(map);
 			emit configBuffered();
             emit updated(this);
+
+            save();
 		}
 	}
 
 signals:
 	void configBuffered();
     void updated(DspConfig* self);
+    void updatedExternally(DspConfig* self);
+
+private slots:
+    void fileChanged(const QString &path)
+    {
+        if(_watcher->files().contains(path))
+        {
+            Log::debug("DspConfig::fileChanged: Config changed");
+            load();
+            emit updatedExternally(this);
+        }
+    }
 
 private:
 	ConfigContainer *_conf;
+    QFileSystemWatcher *_watcher;
 };
 
 #endif // DSPCONFIGWRAPPER_H

@@ -143,10 +143,11 @@ MainWindow::MainWindow(QString  exepath,
         Log::information("If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.");
         Log::information("Refer to the README for more detailed information.");
         Log::information("");
-        Log::debug("Blacklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
+        Log::debug("MainWindow::ctor: Blacklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
         audioService = new PipewireAudioService();
 #endif
         connect(&DspConfig::instance(), &DspConfig::updated, audioService, &IAudioService::update);
+        connect(&DspConfig::instance(), &DspConfig::updatedExternally, audioService, &IAudioService::update);
     }
 
 	// Prepare base UI
