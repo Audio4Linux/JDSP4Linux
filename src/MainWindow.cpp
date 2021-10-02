@@ -348,6 +348,8 @@ MainWindow::MainWindow(QString  exepath,
             presetFragmentHost->repaint();
             WAF::Animation::sideSlideOut(presetFragmentHost, WAF::LeftSide);
         });
+
+        connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::saveGraphicEQView);
     }
 
 	// Init 3-dot menu button
@@ -519,7 +521,6 @@ void MainWindow::fireTimerSignal()
 // Overrides
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	saveGraphicEQView();
 #ifdef Q_OS_OSX
 
 	if (!event->spontaneous() || !isVisible())
