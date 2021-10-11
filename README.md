@@ -60,15 +60,7 @@ A: Convolver is a effect apply convolution(a mathematical operation) on input si
 
    For more info: [Convolution](https://en.wikipedia.org/wiki/Convolution) and [Convolution reverb](https://en.wikipedia.org/wiki/Convolution_reverb)
 
-#### 3. What is Analog Modelling?
-
-A: Analog Modelling internal work as a vacuum tube amplifier, was designed by [ZamAudio](https://github.com/zamaudio).
-The tube they used to model is 12AX7 double triode. They also provide a final stage of tonestack control, it make sound more rich. However, the major parameters is amplifier preamp, this is how even ordered harmonic come from, but this parameter have been limited at maximum 12.0. Input audio amplitude is decided by user, thus louder volume will generate more harmonics and internal amplifier will tend to clip the audio. Analog amplifier was built from real mathematical model, most notably is nonlinearity of vacuum tube.
-
-#### Example circuit for triode amplifier and tonestack:
-![Diagram1](./Misc/Valve/TubeTonestack.svg)
-
-#### 4. Installation method
+#### 3. Installation method
 
 A: Advanced method(Manual installation)
 
