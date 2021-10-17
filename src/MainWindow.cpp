@@ -154,6 +154,11 @@ MainWindow::MainWindow(QString  exepath,
 	{
         Log::information("============ Initializing user interface ============");
 
+        const QByteArray geometry = QSettings().value("geometry", QByteArray()).toByteArray();
+        if (!geometry.isEmpty()) {
+            restoreGeometry(geometry);
+        }
+
         this->setWindowIcon(QIcon::fromTheme("jamesdsp", QIcon(":/icons/icon.png")));
 
 		ui->eq_widget->setBands(PresetProvider::EQ::defaultPreset(), false);
@@ -522,6 +527,8 @@ void MainWindow::fireTimerSignal()
 // Overrides
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    QSettings().setValue("geometry", saveGeometry());
+
 #ifdef Q_OS_OSX
 
 	if (!event->spontaneous() || !isVisible())
@@ -537,6 +544,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
 		event->ignore();
 	}
 }
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+     QMainWindow::resizeEvent(event);
+     QSettings().setValue("geometry", saveGeometry());
+}
+
 
 // Systray
 void MainWindow::raiseWindow()

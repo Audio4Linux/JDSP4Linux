@@ -31,8 +31,8 @@ AppManagerFragment::~AppManagerFragment()
 {
     disconnect(model, &AppItemModel::rowsInserted, this, &AppManagerFragment::rowsInserted);
     disconnect(model, &AppItemModel::rowsAboutToBeRemoved, this, &AppManagerFragment::rowsAboutToBeRemoved);
-    delete model;
     delete ui;
+    delete model;
 }
 
 void AppManagerFragment::rowsInserted(const QModelIndex &parent, int first, int last)

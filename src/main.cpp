@@ -92,7 +92,7 @@ int main(int   argc,
 	QApplication::setQuitOnLastWindowClosed(false);
     MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
 
-    w.setFixedSize(w.geometry().width(), w.geometry().height());
+    //w.setFixedSize(w.geometry().width(), w.geometry().height());
 	w.setGeometry(
 		QStyle::alignedRect(
 			Qt::LeftToRight,
