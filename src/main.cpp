@@ -61,6 +61,8 @@ int main(int   argc,
 	airbag_init_fd(fd, crash_handled, EXECUTION_FILENAME);
 #endif
 
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+
 	QApplication       a(argc, argv);
 	QCommandLineParser parser;
 	parser.setApplicationDescription("JamesDSP for Linux");
@@ -89,7 +91,8 @@ int main(int   argc,
 
 	QApplication::setQuitOnLastWindowClosed(false);
     MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
-	w.setFixedSize(w.geometry().width(), w.geometry().height());
+
+    w.setFixedSize(w.geometry().width(), w.geometry().height());
 	w.setGeometry(
 		QStyle::alignedRect(
 			Qt::LeftToRight,
