@@ -78,6 +78,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                 break;
 		}
 
+        ui->stackedWidget->hide();
+        ui->stackedWidget->show();
         ui->stackedWidget->repaint();
 	});
     //ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());

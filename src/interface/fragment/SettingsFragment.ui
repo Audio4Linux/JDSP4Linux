@@ -137,6 +137,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <layout class="QFormLayout" name="formLayout">
@@ -283,6 +286,9 @@
         </layout>
        </widget>
        <widget class="QWidget" name="convolver">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QGroupBox" name="groupBox_3">
@@ -442,6 +448,9 @@
         </layout>
        </widget>
        <widget class="QWidget" name="devices">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
           <widget class="QGroupBox" name="devices_group">
@@ -564,6 +573,9 @@
         </layout>
        </widget>
        <widget class="QWidget" name="session">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
           <widget class="QGroupBox" name="systray_box">
@@ -644,6 +656,9 @@
         </layout>
        </widget>
        <widget class="QWidget" name="session_menu">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_19">
          <item>
           <widget class="QMenuEditor" name="menu_edit" native="true"/>
@@ -651,6 +666,9 @@
         </layout>
        </widget>
        <widget class="QWidget" name="spectrum">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
           <widget class="QGroupBox" name="sa_enable">
@@ -854,6 +872,9 @@
         </layout>
        </widget>
        <widget class="QWidget" name="spectrum_advanced">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_13">
          <item>
           <widget class="QGroupBox" name="groupBox_5">
