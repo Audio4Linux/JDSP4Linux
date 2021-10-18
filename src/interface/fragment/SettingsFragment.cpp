@@ -49,6 +49,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 
     ui->selector->setCurrentItem(ui->selector->topLevelItem(0));
 	ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->repaint();
 	connect(ui->selector, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, QTreeWidgetItem*)>(&QTreeWidget::currentItemChanged), this, [this](QTreeWidgetItem *cur, QTreeWidgetItem*)
 	{
 		int toplevel_index = ui->selector->indexOfTopLevelItem(cur);
@@ -76,6 +77,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                 ui->stackedWidget->setCurrentIndex(toplevel_index);
                 break;
 		}
+
+        ui->stackedWidget->repaint();
 	});
     //ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());
     ui->selector->expandItem(ui->selector->findItems("Tray icon", Qt::MatchFlag::MatchExactly).first());

@@ -106,9 +106,6 @@ bool ConfigIO::readLine(const QString &line,
 	QString qname                  = name.trimmed();
 	QString qvalue                 = value.trimmed();
 
-    //QRegExp re("\\d*");
-    QRegExp re_float("[+-]?([0-9]*[.])[0-9]+");
-
 	if (qvalue == "true")
 	{
 		out = QPair<QString, QVariant>(qname, true);
@@ -116,10 +113,6 @@ bool ConfigIO::readLine(const QString &line,
 	else if (qvalue == "false")
 	{
 		out = QPair<QString, QVariant>(qname, false);
-	}
-	else if (re_float.exactMatch(qvalue))
-	{
-		out = QPair<QString, QVariant>(qname, qvalue.toFloat());
 	}
 	else
 	{

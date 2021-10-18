@@ -124,8 +124,11 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
