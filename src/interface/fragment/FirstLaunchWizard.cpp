@@ -57,7 +57,7 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 
     ui->p3_systray_disable->setChecked(!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
-    ui->p3_systray_icon_box->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
+    ui->p3_systray_minOnBoot->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
 	QString autostart_path        = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 	bool    autostart_enabled     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
@@ -71,7 +71,7 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 							 }
 
                              AppConfig::instance().set(AppConfig::TrayIconEnabled, ui->p3_systray_enable->isChecked());
-                             ui->p3_systray_icon_box->setEnabled(ui->p3_systray_enable->isChecked());
+                             ui->p3_systray_minOnBoot->setEnabled(ui->p3_systray_enable->isChecked());
 						 };
 
 	connect(ui->p3_systray_disable, &QRadioButton::clicked, this, systray_radio);
@@ -100,7 +100,13 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 
 FirstLaunchWizard::~FirstLaunchWizard()
 {
-	delete ui;
+    delete ui;
+}
+
+void FirstLaunchWizard::resizeEvent(QResizeEvent *ev)
+{
+    QWidget::resizeEvent(ev);
+    ui->stackedWidget->setMinimumHeight(ev->size().height() * 0.7);
 }
 
 void FirstLaunchWizard::refreshDevices()

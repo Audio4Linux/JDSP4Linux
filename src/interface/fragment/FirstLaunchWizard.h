@@ -23,6 +23,9 @@ public:
 signals:
 	void wizardFinished();
 
+protected:
+    void resizeEvent(QResizeEvent* ev) override;
+
 private:
 	Ui::FirstLaunchWizard *ui;
 	bool lockslot = false;
