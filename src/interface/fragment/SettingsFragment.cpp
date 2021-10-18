@@ -78,6 +78,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                 break;
 		}
 
+        // Workaround: Force redraw
         ui->stackedWidget->hide();
         ui->stackedWidget->show();
         ui->stackedWidget->repaint();
