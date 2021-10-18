@@ -360,6 +360,18 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Init 3-dot menu button
 	{
+        // Fix tool button height
+        int tbSize = ui->disableFX->height() - 4;
+        ui->set->setMinimumSize(tbSize + 3, tbSize);
+        ui->toolButton->setMinimumSize(tbSize + 3, tbSize);
+        ui->cpreset->setMinimumSize(tbSize + 3, tbSize);
+
+        ui->set->setIconSize(QSize(16,16));
+        ui->cpreset->setIconSize(QSize(16,16));
+        ui->toolButton->setIconSize(QSize(16,16));
+        ui->disableFX->setIconSize(QSize(16,16));
+
+
 		QMenu *menu = new QMenu();
         menu->addAction(tr("Apps"),   this, [this]()
         {
@@ -374,9 +386,12 @@ MainWindow::MainWindow(QString  exepath,
             hostLayout->addWidget(sd);
             host->hide();
             host->setAutoFillBackground(true);
-            connect(sd, &StatusFragment::closePressed, this, [host]() {
+            connect(sd, &StatusFragment::closePressed, this, [host,sd]() {
                 WAF::Animation::sideSlideOut(host, WAF::BottomSide);
+                host->deleteLater();
+                sd->deleteLater();
             });
+            host->setMaximumHeight(this->height() - 20);
             WAF::Animation::sideSlideIn(host, WAF::BottomSide);
         });
         menu->addAction(tr("Relink audio pipeline"),   this, SLOT(restart()));
@@ -589,6 +604,7 @@ void MainWindow::dialogHandler()
 {
 	if (sender() == ui->set)
 	{
+        settingsFragmentHost->setMaximumHeight(this->height() - 20);
 		WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
 	}
 	else if (sender() == ui->cpreset)

@@ -284,6 +284,7 @@ bool SideSlideAnimator::eventFilter(QObject* _object, QEvent* _event)
 {
     if (_object == widgetForSlide()->parentWidget()
         && _event->type() == QEvent::Resize) {
+
         QWidget* widgetForSlideParent = widgetForSlide()->parentWidget();
         switch (m_side) {
             case WAF::RightSide: {
@@ -308,6 +309,8 @@ bool SideSlideAnimator::eventFilter(QObject* _object, QEvent* _event)
                 break;
             }
         }
+
+        m_decorator->setSlidePos(widgetForSlide()->geometry().topLeft());
 
         //
         // Сохраним картинку изменённого выкатываемого виджета

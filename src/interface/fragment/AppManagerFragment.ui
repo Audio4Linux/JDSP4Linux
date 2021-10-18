@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>310</height>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -76,6 +76,9 @@
    </item>
    <item>
     <widget class="CListView" name="apps">
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -105,6 +108,9 @@
      </property>
      <property name="spacing">
       <number>1</number>
+     </property>
+     <property name="uniformItemSizes">
+      <bool>false</bool>
      </property>
     </widget>
    </item>

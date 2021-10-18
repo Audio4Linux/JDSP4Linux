@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string notr="true"/>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,0">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,2">
    <property name="spacing">
     <number>6</number>
    </property>
@@ -56,9 +56,15 @@
    </item>
    <item>
     <widget class="QWidget" name="sidebar" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>130</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="maximumSize">
       <size>
-       <width>145</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>

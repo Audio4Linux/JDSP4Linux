@@ -15,7 +15,7 @@ class AppItem : public QWidget
     Q_OBJECT
 
 public:
-    explicit AppItem(AppItemModel* model, uint id, QWidget *parent = nullptr);
+    explicit AppItem(AppItemModel* model, int id, QWidget *parent = nullptr);
     ~AppItem();
 
 private slots:
@@ -24,7 +24,7 @@ private slots:
 
 private:
     Ui::AppItem *ui;
-    AppItemModel* model;
+    AppItemModel* model = nullptr;
     uint id;
 
 };

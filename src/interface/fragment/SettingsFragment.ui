@@ -13,13 +13,13 @@
   <property name="minimumSize">
    <size>
     <width>685</width>
-    <height>0</height>
+    <height>350</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>685</width>
-    <height>350</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -50,7 +50,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="4,0">
+    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,4">
      <property name="topMargin">
       <number>0</number>
      </property>
@@ -125,7 +125,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">

@@ -29,6 +29,8 @@ FlatTabWidget::FlatTabWidget(QWidget *parent)
 
     lineMorph = new QPropertyAnimation();
 
+    ui->TabBarContainer->layout()->setSpacing(9);
+
     connect(ui->TabBarContainer,&CustomTabBar::scrolledUp,[=]{
         if(currentSelection - 1 < 0 || pages.empty())
             return;

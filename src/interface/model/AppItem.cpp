@@ -5,13 +5,20 @@
 #include "config/AppConfig.h"
 #include "utils/Log.h"
 
-AppItem::AppItem(AppItemModel* model, uint id, QWidget *parent) :
+AppItem::AppItem(AppItemModel* _model, int id, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AppItem),
-    model(model),
     id(id)
 {
     ui->setupUi(this);
+
+    // Dummy mode
+    if(id == -1)
+    {
+        return;
+    }
+
+    model = _model;
 
 #ifdef USE_PULSEAUDIO
     ui->blocklist->hide();

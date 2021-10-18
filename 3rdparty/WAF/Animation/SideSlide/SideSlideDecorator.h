@@ -45,7 +45,7 @@ namespace WAF
         /**
          * @brief Установить позицию выкатываемого виджета
          */
-        void setSlidePos(const QPoint& _pos);
+        void setSlidePos(const QPoint& _pos, bool noCheck = false);
 
     signals:
         /**

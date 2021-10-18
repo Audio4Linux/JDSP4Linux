@@ -74,9 +74,9 @@ QPoint SideSlideDecorator::slidePos() const
     return m_slidePos;
 }
 
-void SideSlideDecorator::setSlidePos(const QPoint& _pos)
+void SideSlideDecorator::setSlidePos(const QPoint& _pos, bool noCheck)
 {
-    if (m_slidePos != _pos) {
+    if (m_slidePos != _pos || noCheck) {
         m_slidePos = _pos;
         update();
     }

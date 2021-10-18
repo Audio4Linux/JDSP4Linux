@@ -12,8 +12,7 @@ AutoEQSelector::AutoEQSelector(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::AutoEQSelector)
 {
-	ui->setupUi(this);
-	setFixedSize(geometry().width(), geometry().height());
+    ui->setupUi(this);
 	ui->listWidget->setItemDelegate(new ItemSizeDelegate);
 
 	imgSizeCache = ui->picture->size() * 11.5;
