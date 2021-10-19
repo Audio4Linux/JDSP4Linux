@@ -89,7 +89,8 @@ int main(int   argc,
     // Prepare DspConfig based on cmdline argument
     DspConfig::instance(parser.isSet(watch));
 
-	QApplication::setQuitOnLastWindowClosed(false);
+    QApplication::setFallbackSessionManagementEnabled(false);
+    QApplication::setQuitOnLastWindowClosed(false);
     MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
 
     //w.setFixedSize(w.geometry().width(), w.geometry().height());
