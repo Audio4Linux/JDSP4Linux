@@ -44,5 +44,15 @@
         <file>icons/power-white.svg</file>
         <file>assets/default.conf</file>
         <file>icons/error.svg</file>
+        <file>assets/liveprog/downmixer.eel</file>
+        <file>assets/liveprog/fftConvolution2x4x2.eel</file>
+        <file>assets/liveprog/fftConvolutionHRTF.eel</file>
+        <file>assets/liveprog/msCentreBoost.eel</file>
+        <file>assets/liveprog/polyphaseFilterbank.eel</file>
+        <file>assets/liveprog/stftCentreBoost.eel</file>
+        <file>assets/liveprog/swapChannels.eel</file>
+        <file>assets/liveprog/depthsurround.eel</file>
+        <file>assets/liveprog/dynamicbass.eel</file>
+        <file>assets/liveprog/lowpass.eel</file>
     </qresource>
 </RCC>

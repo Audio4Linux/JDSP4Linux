@@ -1,4 +1,4 @@
-desc: CentreCut
+desc: STFT CentreCut
 
 @init
 fftsize = 4096;
