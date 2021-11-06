@@ -203,7 +203,7 @@ NOTE: Pipewire version 0.3 or later required. Unfortunately, this version is onl
 Debian/Ubuntu + **PulseAudio** clients only:
 
 ```bash
-sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-good1.0-dev
 ```
 **Fedora**
 
@@ -215,7 +215,7 @@ sudo dnf install qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibm
 Fedora 34 + **PulseAudio** clients only:
 
 ```bash
-sudo dnf install qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-base-devel 
+sudo dnf install qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-good-devel 
 ```
 **Arch Linux**
 
@@ -227,8 +227,8 @@ sudo pacman -S qt5-base qt5-svg glib2 glibmm pipewire
 
 Arch Linux + **PulseAudio** clients only:
 
-```bash
-sudo pacman -S qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-base gstreamer 
+```
+sudo pacman -S qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-good gstreamer 
 ```
 
 #### Build application
