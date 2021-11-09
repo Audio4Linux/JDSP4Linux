@@ -8,7 +8,7 @@ if [ $2 = "pipewire" ]; then
    deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpipewire-0.3-0"
 elif [ $2 = "pulse" ]; then
    conflict="jamesdsp-pipewire"
-   deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpulse-mainloop-glib0, libgstreamer1.0-0, libgstreamer-plugins-base1.0-0"
+   deps="qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpulse-mainloop-glib0, libgstreamer1.0-0, libgstreamer-plugins-good1.0-0"
 else
   echo "ERROR: Unknown flavor"
   exit 1
