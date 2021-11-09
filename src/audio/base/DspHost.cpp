@@ -44,8 +44,8 @@ void DspHost::updateLimiter(DspConfig* config)
     bool releaseExists;
     bool thresholdExists;
 
-    float limThreshold = config->get<float>(DspConfig::master_limrelease, &releaseExists);
-    float limRelease = config->get<float>(DspConfig::master_limthreshold, &thresholdExists);
+    float limThreshold = config->get<float>(DspConfig::master_limthreshold, &releaseExists);
+    float limRelease = config->get<float>(DspConfig::master_limrelease, &thresholdExists);
 
     if(!releaseExists || !thresholdExists)
     {
