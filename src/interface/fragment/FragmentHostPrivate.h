@@ -11,22 +11,21 @@
 
 #include <WAF/Animation/Animation.h>
 
-class FragmentHostPrivate : public QWidget
+class FragmentHostPrivate : public QFrame
 {
     Q_OBJECT
 public:
-    FragmentHostPrivate(BaseFragment* fragment, WAF::ApplicationSide side, QWidget* parent = nullptr) : QWidget(parent)
+    FragmentHostPrivate(BaseFragment* fragment, WAF::ApplicationSide side, QWidget* parent = nullptr) : QFrame(parent)
     {
         _fragment = fragment;
         _side = side;
 
-        _frame = new QFrame(this);
-        _frameLayout = new QVBoxLayout(_frame);
-
+        _frameLayout = new QVBoxLayout(this);
         _frameLayout->addWidget(_fragment);
-        _frame->setProperty("menu", false);
-        _frame->hide();
-        _frame->setAutoFillBackground(true);
+
+        this->setProperty("menu", false);
+        this->hide();
+        this->setAutoFillBackground(true);
 
         connect(fragment, &BaseFragment::closePressed, this, &FragmentHostPrivate::slideOut);
     }
@@ -39,30 +38,29 @@ public:
 public slots:
     void slideIn()
     {
-        WAF::Animation::sideSlideIn(_frame, _side);
+        WAF::Animation::sideSlideIn(this, _side);
     }
 
     void slideOut()
     {
-        _frame->update();
-        _frame->repaint();
-        WAF::Animation::sideSlideOut(_frame, _side);
+        this->update();
+        this->repaint();
+        WAF::Animation::sideSlideOut(this, _side);
     }
 
     void slideOutIn()
     {
-        WAF::Animation::sideSlideOut(_frame, _side);
-        _frame->update();
-        _frame->repaint();
+        WAF::Animation::sideSlideOut(this, _side);
+        this->update();
+        this->repaint();
         QTimer::singleShot(500, this, [ = ] {
-            WAF::Animation::sideSlideIn(_frame, _side);
+            WAF::Animation::sideSlideIn(this, _side);
         });
     }
 
 protected:
     WAF::ApplicationSide _side;
     BaseFragment* _fragment;
-    QFrame* _frame;
     QVBoxLayout* _frameLayout;
 };
 

@@ -49,7 +49,6 @@ private slots:
 
 signals:
     void wantsToWriteConfig();
-    void closePressed();
 
 private:
     Ui::PresetDialog *ui;
