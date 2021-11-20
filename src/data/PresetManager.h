@@ -6,10 +6,20 @@
 class PresetManager : public QObject
 {
     Q_OBJECT
-public:
-    explicit PresetManager(QObject *parent = nullptr);
 
-signals:
+public:
+    static PresetManager &instance()
+    {
+        static PresetManager _instance;
+        return _instance;
+    }
+
+    PresetManager(PresetManager const &) = delete;
+    PresetManager();
+
+public slots:
+    void save(const QString &filename);
+    void load(const QString &filename);
 
 };
 

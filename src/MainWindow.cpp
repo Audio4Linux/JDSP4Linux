@@ -15,6 +15,7 @@
 #include "config/DspConfig.h"
 #include "data/EelParser.h"
 #include "data/model/VdcDatabaseModel.h"
+#include "data/PresetManager.h"
 #include "data/VersionContainer.h"
 #include "interface/dialog/AutoEqSelector.h"
 #include "interface/event/EventFilter.h"
@@ -242,10 +243,7 @@ MainWindow::MainWindow(QString  exepath,
 			updateIrsSelection();
 			applyConfig();
 		});
-		connect(trayIcon, &TrayIcon::loadPreset, [this](const QString &preset)
-		{
-            loadPresetFile(preset);
-		});
+        connect(trayIcon, &TrayIcon::loadPreset, &PresetManager::instance(), &PresetManager::load);
 		connect(trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
 		connect(trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
 
@@ -575,34 +573,7 @@ void MainWindow::restart()
 }
 
 // ---User preset management
-void MainWindow::loadPresetFile(const QString &filename)
-{
-	const QString &src  = filename;
-	const QString  dest = AppConfig::instance().getDspConfPath();
 
-	if (QFile::exists(dest))
-	{
-		QFile::remove(dest);
-	}
-
-	QFile::copy(src, dest);
-    Log::debug("MainWindow::loadPresetFile: Loading from " + filename);
-	DspConfig::instance().load();
-}
-
-void MainWindow::savePresetFile(const QString &filename)
-{
-	const QString  src  = AppConfig::instance().getDspConfPath();
-	const QString &dest = filename;
-
-	if (QFile::exists(dest))
-	{
-		QFile::remove(dest);
-	}
-
-	QFile::copy(src, dest);
-    Log::debug("MainWindow::savePresetFile: Saving to " + filename);
-}
 
 void MainWindow::loadExternalFile()
 {
@@ -613,28 +584,25 @@ void MainWindow::loadExternalFile()
 		return;
 	}
 
-	loadPresetFile(filename);
+    PresetManager::instance().load(filename);
 }
 
 void MainWindow::saveExternalFile()
 {
     QString filename = QFileDialog::getSaveFileName(this, tr("Save current audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
 
-	if (filename == "")
+    if (filename == "")
 	{
 		return;
 	}
 
-	QFileInfo fi(filename);
-	QString   ext = fi.suffix();
-
-	if (ext != "conf")
+    if (QFileInfo(filename).suffix() != "conf")
 	{
 		filename.append(".conf");
 	}
 
     applyConfig();
-	savePresetFile(filename);
+    PresetManager::instance().save(filename);
 }
 
 // ---Config IO

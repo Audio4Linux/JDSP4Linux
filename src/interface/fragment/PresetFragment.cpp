@@ -2,7 +2,7 @@
 #include "ui_PresetFragment.h"
 
 #include "config/AppConfig.h"
-#include "MainWindow.h"
+#include "data/PresetManager.h"
 #include "utils/Common.h"
 #include "utils/Log.h"
 
@@ -97,7 +97,8 @@ void PresetFragment::add()
     emit wantsToWriteConfig();
 
 	QString path = AppConfig::instance().getPath("presets");
-	MainWindow::savePresetFile(path + "/" + ui->presetName->text() + ".conf");
+    PresetManager::instance().save(path + "/" + ui->presetName->text() + ".conf");
+
 	ui->presetName->text() = "";
 	UpdateList();
     emit presetChanged();
@@ -146,7 +147,7 @@ void PresetFragment::load()
 		return;
 	}
 
-	MainWindow::loadPresetFile(fullpath);
+    PresetManager::instance().load(fullpath);
 }
 
 void PresetFragment::nameChanged(const QString &name)
