@@ -1,7 +1,7 @@
 #include "AppItem.h"
 #include "ui_AppItem.h"
 
-#include "AppItemModel.h"
+#include "data/model/AppItemModel.h"
 #include "config/AppConfig.h"
 #include "utils/Log.h"
 

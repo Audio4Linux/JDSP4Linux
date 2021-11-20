@@ -158,7 +158,6 @@ private:
 	void loadConfig();
 	void connectActions();
 
-	void reloadDDCDB();
 	void setLiveprogSelection(QString path);
 
 	void updateIrsSelection();

@@ -1,10 +1,10 @@
-#include "interface/model/AppItemModel.h"
+#include "data/model/AppItemModel.h"
 
 #include "AppManagerFragment.h"
 #include "ui_AppManagerFragment.h"
 
-#include "interface/model/AppItem.h"
-#include "interface/model/AppItemStyleDelegate.h"
+#include "interface/item/AppItem.h"
+#include "interface/item/AppItemStyleDelegate.h"
 
 AppManagerFragment::AppManagerFragment(IAppManager* appMgr, QWidget *parent) :
     BaseFragment(parent),

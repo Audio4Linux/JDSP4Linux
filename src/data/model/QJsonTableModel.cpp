@@ -7,6 +7,11 @@ QJsonTableModel::QJsonTableModel(const QJsonTableModel::Header &header,
 	, m_header(header)
 {}
 
+void QJsonTableModel::setHeader(const QJsonTableModel::Header &header)
+{
+    m_header = header;
+}
+
 bool QJsonTableModel::setJson(const QJsonDocument &json)
 {
 	return setJson(json.array());

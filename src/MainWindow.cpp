@@ -14,7 +14,7 @@
 #include "config/ConfigIO.h"
 #include "config/DspConfig.h"
 #include "data/EelParser.h"
-#include "data/QJsonTableModel.h"
+#include "data/model/VdcDatabaseModel.h"
 #include "data/VersionContainer.h"
 #include "interface/dialog/AutoEqSelector.h"
 #include "interface/event/EventFilter.h"
@@ -30,7 +30,6 @@
 #include "utils/dbus/ClientProxy.h"
 #include "utils/dbus/ServerAdaptor.h"
 #include "utils/Log.h"
-#include "utils/MathFunctions.h"
 #include "utils/OverlayMsgProxy.h"
 #include "utils/SingleInstanceMonitor.h"
 #include "utils/StyleHelper.h"
@@ -340,7 +339,12 @@ MainWindow::MainWindow(QString  exepath,
 	// Load DDC/IRS/Liveprog lists
 	{
 		// Reload DDC selection
-		reloadDDCDB();
+        ui->ddcTable->setModel(new VdcDatabaseModel(ui->ddcTable));
+        ui->ddcTable->setColumnHidden(2, true);
+        ui->ddcTable->setColumnHidden(3, true);
+        ui->ddcTable->setColumnHidden(4, true);
+        ui->ddcTable->resizeColumnsToContents();
+
 		updateDDCSelection();
 
 		// Reload IRS lists
@@ -1141,23 +1145,18 @@ void MainWindow::updateDDCSelection()
 				return;
 			}
 
-			if (ui->ddcTable->model() == nullptr)
+            VdcDatabaseModel* model = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
+            if (model == nullptr)
 			{
 				return;
 			}
 
-			QModelIndexList matches = ui->ddcTable->model()->match(model->index(0, 4), Qt::DisplayRole, lastId, 1);
-
-			foreach(const QModelIndex &index, matches)
-			{
-				if (lastId == ui->ddcTable->model()->data(ui->ddcTable->model()->index(index.row(), 4)))
-				{
-					ui->ddcTable->selectRow(index.row());
-					ui->ddcTable->scrollTo(index);
-					break;
-				}
-			}
-
+            QModelIndex lastIndex = model->findFirstById(lastId);
+            if(lastIndex.isValid())
+            {
+                ui->ddcTable->selectRow(lastIndex.row());
+                ui->ddcTable->scrollTo(lastIndex);
+            }
 		}
 	}
 	else
@@ -1202,50 +1201,6 @@ void MainWindow::reloadDDC()
 	}
 
 	lockddcupdate = false;
-}
-
-void MainWindow::reloadDDCDB()
-{
-	QJsonTableModel::Header header;
-	header.push_back(QJsonTableModel::Heading({
-		{ "title", "Company" },   { "index", "Company" }
-	}));
-	header.push_back(QJsonTableModel::Heading({
-		{ "title", "Model" }, { "index", "Model" }
-	}));
-	header.push_back(QJsonTableModel::Heading({
-		{ "title", "SR_44100_Coeffs" }, { "index", "SR_44100_Coeffs" }
-	}));
-	header.push_back(QJsonTableModel::Heading({
-		{ "title", "SR_48000_Coeffs" }, { "index", "SR_48000_Coeffs" }
-	}));
-	header.push_back(QJsonTableModel::Heading({
-		{ "title", "ID" }, { "index", "ID" }
-	}));
-
-	model = new QJsonTableModel(header, this);
-	ui->ddcTable->setModel(model);
-
-	QFile file(":/assets/DDCData.json");
-
-	if (file.open(QIODevice::ReadOnly))
-	{
-		QTextStream   instream(&file);
-		QJsonDocument jsonDocument = QJsonDocument::fromJson(instream.readAll().toLocal8Bit());
-		model->setJson(jsonDocument);
-	}
-
-	model->setHeaderData(0, Qt::Horizontal, tr("Company"));
-	model->setHeaderData(1, Qt::Horizontal, tr("Model"));
-	model->setHeaderData(5, Qt::Horizontal, tr("SR_44100_Coeffs"));
-	model->setHeaderData(6, Qt::Horizontal, tr("SR_48000_Coeffs"));
-	model->setHeaderData(7, Qt::Horizontal, tr("ID"));
-
-	ui->ddcTable->setModel(model);
-	ui->ddcTable->setColumnHidden(2, true);
-	ui->ddcTable->setColumnHidden(3, true);
-	ui->ddcTable->setColumnHidden(4, true);
-	ui->ddcTable->resizeColumnsToContents();
 }
 
 // ---IRS
@@ -1761,11 +1716,14 @@ void MainWindow::connectActions()
 		    lockddcupdate    = true;
 		    ui->ddc_files->clearSelection();
 		    lockddcupdate    = false;
+
 		    int index        = select->selectedRows().first().row();
+            VdcDatabaseModel* model = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
+
 		    ddc_coeffs      += "SR_44100:";
-		    ddc_coeffs      += ui->ddcTable->model()->data(ui->ddcTable->model()->index(index, 2)).toString();
+            ddc_coeffs      += model->coefficients(index, 44100);
 		    ddc_coeffs      += "\nSR_48000:";
-		    ddc_coeffs      += ui->ddcTable->model()->data(ui->ddcTable->model()->index(index, 3)).toString();
+            ddc_coeffs      += model->coefficients(index, 48000);
 		    QString absolute = QFileInfo(AppConfig::instance().getDspConfPath()).absoluteDir().absolutePath();
 		    QFile file(absolute + "/temp.vdc");
 
@@ -1776,7 +1734,7 @@ void MainWindow::connectActions()
 
 		    file.close();
 
-		    auto newId = ui->ddcTable->model()->data(ui->ddcTable->model()->index(index, 4)).toString();
+            auto newId = model->id(index);
 
 		    if (newId != "0")
 		    {

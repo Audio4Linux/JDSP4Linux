@@ -41,8 +41,11 @@ SOURCES += \
     config/ConfigIO.cpp \
     crash/airbag.c \
     data/EelParser.cpp \
+    data/PresetManager.cpp \
     data/PresetProvider.cpp \
-    data/QJsonTableModel.cpp \
+    data/model/AppItemModel.cpp \
+    data/model/QJsonTableModel.cpp \
+    data/model/VdcDatabaseModel.cpp \
     interface/AnimatedJdspIcon.cpp \
     interface/CListView.cpp \
     interface/TrayIcon.cpp \
@@ -54,9 +57,8 @@ SOURCES += \
     interface/fragment/PresetFragment.cpp \
     interface/fragment/SettingsFragment.cpp \
     interface/fragment/StatusFragment.cpp \
-    interface/model/AppItem.cpp \
-    interface/model/AppItemModel.cpp \
-    interface/model/DetailListItem.cpp \
+    interface/item/AppItem.cpp \
+    interface/item/DetailListItem.cpp \
     interface/QAnimatedSlider.cpp \
     interface/QMenuEditor.cpp \
     interface/QMessageOverlay.cpp \
@@ -81,8 +83,8 @@ FORMS += \
     interface/fragment/PresetFragment.ui \
     interface/fragment/SettingsFragment.ui \
     interface/fragment/StatusFragment.ui \
-    interface/model/AppItem.ui \
-    interface/model/configitem.ui \
+    interface/item/AppItem.ui \
+    interface/item/configitem.ui \
     interface/menueditor.ui \
     MainWindow.ui
 
@@ -97,9 +99,12 @@ HEADERS += \
     crash/stacktrace.h \
     data/EelParser.h \
     data/InitializableQMap.h \
+    data/PresetManager.h \
     data/PresetProvider.h \
-    data/QJsonTableModel.h \
     data/VersionContainer.h \
+    data/model/AppItemModel.h \
+    data/model/QJsonTableModel.h \
+    data/model/VdcDatabaseModel.h \
     interface/AnimatedJdspIcon.h \
     interface/CListView.h \
     interface/QMessageOverlay.h \
@@ -117,11 +122,10 @@ HEADERS += \
     interface/fragment/PresetFragment.h \
     interface/fragment/SettingsFragment.h \
     interface/fragment/StatusFragment.h \
-    interface/model/AppItem.h \
-    interface/model/AppItemModel.h \
-    interface/model/AppItemStyleDelegate.h \
-    interface/model/Delegates.h \
-    interface/model/DetailListItem.h \
+    interface/item/AppItem.h \
+    interface/item/AppItemStyleDelegate.h \
+    interface/item/Delegates.h \
+    interface/item/DetailListItem.h \
     interface/QAnimatedSlider.h \
     interface/QMenuEditor.h \
     interface/SlidingStackedWidget.h \
@@ -134,7 +138,6 @@ HEADERS += \
     utils/dbus/ClientProxy.h \
     utils/dbus/ServerAdaptor.h \
     utils/FindBinary.h \
-    utils/MathFunctions.h \
     utils/OverlayMsgProxy.h \
     utils/StyleHelper.h
 

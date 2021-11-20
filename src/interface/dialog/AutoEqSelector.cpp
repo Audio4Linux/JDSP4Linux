@@ -1,8 +1,8 @@
 #include "AutoEqSelector.h"
 #include "ui_AutoEqSelector.h"
 
-#include "interface/model/Delegates.h"
-#include "interface/model/DetailListItem.h"
+#include "interface/item/Delegates.h"
+#include "interface/item/DetailListItem.h"
 #include "utils/AutoEqClient.h"
 
 #include <QListWidget>

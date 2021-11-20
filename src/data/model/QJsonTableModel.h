@@ -30,6 +30,7 @@ public:
 	virtual QVariant    data(const QModelIndex &index,
 	                         int                role       = Qt::DisplayRole) const;
 
+    void                setHeader(const QJsonTableModel::Header &header);
 private:
 	Header m_header;
 	QJsonArray m_json;
