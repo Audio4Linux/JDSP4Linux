@@ -49,9 +49,9 @@ SOURCES += \
     interface/dialog/AutoEqSelector.cpp \
     interface/dialog/PaletteEditor.cpp \
     interface/LiquidEqualizerWidget.cpp \
-    interface/dialog/PresetDialog.cpp \
     interface/fragment/AppManagerFragment.cpp \
     interface/fragment/FirstLaunchWizard.cpp \
+    interface/fragment/PresetFragment.cpp \
     interface/fragment/SettingsFragment.cpp \
     interface/fragment/StatusFragment.cpp \
     interface/model/AppItem.cpp \
@@ -66,8 +66,8 @@ SOURCES += \
     main.cpp \
     utils/AutoEqClient.cpp \
     utils/AutoStartManager.cpp \
-    utils/Common.cpp \
     utils/Log.cpp \
+    utils/SingleInstanceMonitor.cpp \
     utils/dbus/ClientProxy.cpp \
     utils/dbus/ServerAdaptor.cpp \
     utils/OverlayMsgProxy.cpp \
@@ -76,9 +76,9 @@ SOURCES += \
 FORMS += \
     interface/dialog/AutoEqSelector.ui \
     interface/dialog/PaletteEditor.ui \
-    interface/dialog/PresetDialog.ui \
     interface/fragment/AppManagerFragment.ui \
     interface/fragment/FirstLaunchWizard.ui \
+    interface/fragment/PresetFragment.ui \
     interface/fragment/SettingsFragment.ui \
     interface/fragment/StatusFragment.ui \
     interface/model/AppItem.ui \
@@ -106,12 +106,15 @@ HEADERS += \
     interface/TrayIcon.h \
     interface/dialog/AutoEqSelector.h \
     interface/dialog/PaletteEditor.h \
-    interface/dialog/PresetDialog.h \
     interface/event/EventFilter.h \
     interface/event/ScrollFilter.h \
     interface/LiquidEqualizerWidget.h \
     interface/fragment/AppManagerFragment.h \
+    interface/fragment/BaseFragment.h \
     interface/fragment/FirstLaunchWizard.h \
+    interface/fragment/FragmentHost.h \
+    interface/fragment/FragmentHostPrivate.h \
+    interface/fragment/PresetFragment.h \
     interface/fragment/SettingsFragment.h \
     interface/fragment/StatusFragment.h \
     interface/model/AppItem.h \
@@ -126,8 +129,8 @@ HEADERS += \
     MainWindow.h \
     utils/AutoEqClient.h \
     utils/AutoStartManager.h \
-    utils/Common.h \
     utils/Log.h \
+    utils/SingleInstanceMonitor.h \
     utils/dbus/ClientProxy.h \
     utils/dbus/ServerAdaptor.h \
     utils/FindBinary.h \

@@ -40,6 +40,7 @@ private:
 
 signals:
 	void styleChanged();
+    void iconColorChanged(bool white);
 
 };
 

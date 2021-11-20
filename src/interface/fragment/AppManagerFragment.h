@@ -1,7 +1,7 @@
 #ifndef APPMANAGERFRAGMENT_H
 #define APPMANAGERFRAGMENT_H
 
-#include <QWidget>
+#include "BaseFragment.h"
 
 class IAppManager;
 class AppItemModel;
@@ -10,16 +10,12 @@ namespace Ui {
 class AppManagerFragment;
 }
 
-class AppManagerFragment : public QWidget
+class AppManagerFragment : public BaseFragment
 {
     Q_OBJECT
-
 public:
     explicit AppManagerFragment(IAppManager* appMgr, QWidget *parent = nullptr);
     ~AppManagerFragment();
-
-signals:
-    void closePressed();
 
 private slots:
     void rowsInserted(const QModelIndex &parent, int first, int last);

@@ -21,6 +21,7 @@
 #include <QSystemTrayIcon>
 
 #include "interface/fragment/AppManagerFragment.h"
+#include "interface/fragment/FragmentHost.h"
 #include "data/PresetProvider.h"
 
 class IAudioService;
@@ -31,7 +32,7 @@ class StyleHelper;
 class DBusProxy;
 class OverlayMsgProxy;
 class EELEditor;
-class PresetDialog;
+class PresetFragment;
 class SettingsFragment;
 class AudioStreamEngine;
 class Spectrograph;
@@ -39,6 +40,8 @@ class QJsonTableModel;
 class TrayIcon;
 class QVBoxLayout;
 class AudioManager;
+class SingleInstanceMonitor;
+class StatusFragment;
 
 using namespace std;
 namespace Ui
@@ -68,7 +71,6 @@ public:
 	void        updateDDCSelection();
 
     Ui::MainWindow *ui;
-    SettingsFragment *settings_dlg;
 
     EELEditor *eelEditor() const;
 
@@ -122,22 +124,18 @@ private:
 	QAction *spectrum;
 	EELParser *_eelparser;
 
-    AppManagerFragment* appMgrUi = nullptr;
-    PresetDialog *preset_dlg = nullptr;
+    SingleInstanceMonitor* _singleInstance;
+
+    FragmentHost<AppManagerFragment*>* appMgrFragment = nullptr;
+    FragmentHost<StatusFragment*>* statusFragment = nullptr;
+    FragmentHost<SettingsFragment*>* settingsFragment = nullptr;
+    FragmentHost<PresetFragment*>* presetFragment = nullptr;
+
 	EELEditor *m_eelEditor;
 
 	QScopedPointer<QFrame> analysisLayout;
 	Spectrograph *m_spectrograph;
 	AudioStreamEngine *m_audioengine;
-
-	QFrame *settingsFragmentHost;
-	QVBoxLayout *settingsHostLayout;
-
-    QFrame *presetFragmentHost;
-    QVBoxLayout *presetHostLayout;
-
-    QFrame *appsFragmentHost;
-    QVBoxLayout *appsHostLayout;
 
     IAudioService* audioService = nullptr;
 

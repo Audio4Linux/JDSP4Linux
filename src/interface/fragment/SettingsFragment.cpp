@@ -28,7 +28,7 @@ static bool lockslot = false;
 SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                                    IAudioService *audioService,
                                    QWidget  *parent) :
-	QDialog(parent),
+    BaseFragment(parent),
 	ui(new Ui::SettingsFragment),
     _trayIcon(trayIcon),
     _audioService(audioService)
@@ -292,7 +292,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	/*
 	 * Connect all signals for Global
 	 */
-	connect(ui->close,  &QPushButton::clicked, this, &SettingsFragment::closeClicked);
+    connect(ui->close,  &QPushButton::clicked, this, &SettingsFragment::closePressed);
 	connect(ui->github, &QPushButton::clicked, this, [] {
 		QDesktopServices::openUrl(QUrl("https://github.com/Audio4Linux/JDSP4Linux"));
 	});
@@ -317,7 +317,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 
     connect(ui->run_first_launch, &QPushButton::clicked, this, [this]
     {
-        emit closeClicked();
+        emit closePressed();
         QTimer::singleShot(300, this, &SettingsFragment::launchSetupWizard);
     });
     connect(ui->blocklistClear, &QPushButton::clicked, this, []
@@ -544,5 +544,5 @@ void SettingsFragment::updateButtonStyle(bool white)
 void SettingsFragment::setVisible(bool visible)
 {
 	refreshDevices();
-	QDialog::setVisible(visible);
+    BaseFragment::setVisible(visible);
 }

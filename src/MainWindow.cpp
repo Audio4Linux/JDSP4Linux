@@ -17,10 +17,10 @@
 #include "data/QJsonTableModel.h"
 #include "data/VersionContainer.h"
 #include "interface/dialog/AutoEqSelector.h"
-#include "interface/dialog/PresetDialog.h"
 #include "interface/event/EventFilter.h"
 #include "interface/event/ScrollFilter.h"
 #include "interface/fragment/FirstLaunchWizard.h"
+#include "interface/fragment/PresetFragment.h"
 #include "interface/fragment/SettingsFragment.h"
 #include "interface/fragment/StatusFragment.h"
 #include "interface/LiquidEqualizerWidget.h"
@@ -32,6 +32,7 @@
 #include "utils/Log.h"
 #include "utils/MathFunctions.h"
 #include "utils/OverlayMsgProxy.h"
+#include "utils/SingleInstanceMonitor.h"
 #include "utils/StyleHelper.h"
 
 //#include <audiostreamengine.h>
@@ -77,52 +78,10 @@ MainWindow::MainWindow(QString  exepath,
 
     // Check if another instance is already running and switch to it if that's the case
     {
-        new GuiAdaptor(this);
-
-        QDBusConnection connection                    = QDBusConnection::sessionBus();
-        bool            aboutToQuit                   = false;
-        bool            serviceRegistrationSuccessful = connection.registerObject("/Gui", this);
-        bool            objectRegistrationSuccessful  = connection.registerService("me.timschneeberger.jdsp4linux.Gui");
-
-        if (serviceRegistrationSuccessful && objectRegistrationSuccessful)
+        _singleInstance = new SingleInstanceMonitor(this);
+        if (!_singleInstance->isServiceReady() && !allowMultipleInst)
         {
-            Log::information("MainWindow::ctor: DBus service registration successful");
-        }
-        else
-        {
-            Log::warning("DBus service registration failed. Name already aquired by other instance");
-
-            if (!allowMultipleInst)
-            {
-                Log::information("Attempting to switch to this instance...");
-                auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("me.timschneeberger.jdsp4linux.Gui", "/Gui",
-                                                                      QDBusConnection::sessionBus(), this);
-
-                if (!m_dbInterface->isValid())
-                {
-                    Log::error("Critical: Unable to connect to other DBus instance. Continuing anyway...");
-                }
-                else
-                {
-                    QDBusPendingReply<> msg = m_dbInterface->raiseWindow();
-
-                    if (msg.isError() || msg.isValid())
-                    {
-                        Log::error("Critical: Other DBus instance returned (invalid) error message. Continuing anyway...");
-                    }
-                    else
-                    {
-                        aboutToQuit = true;
-                        Log::information("Success! Waiting for event loop to exit...");
-                        QTimer::singleShot(0, qApp, &QCoreApplication::quit);
-                    }
-                }
-            }
-        }
-
-        // Cancel constructor if quitting soon
-        if (aboutToQuit)
-        {
+            _singleInstance->handover();
             return;
         }
     }
@@ -154,30 +113,35 @@ MainWindow::MainWindow(QString  exepath,
 	{
         Log::information("============ Initializing user interface ============");
 
+        this->setWindowIcon(QIcon::fromTheme("jamesdsp", QIcon(":/icons/icon.png")));
+
+        // Restore window size and position
         const QByteArray geometry = QSettings().value("geometry", QByteArray()).toByteArray();
-        if (!geometry.isEmpty()) {
+        if (!geometry.isEmpty())
+        {
             restoreGeometry(geometry);
         }
 
-        this->setWindowIcon(QIcon::fromTheme("jamesdsp", QIcon(":/icons/icon.png")));
-
+        // Prepare equalizer UI
+        QButtonGroup eq_mode;
+        eq_mode.addButton(ui->eq_r_fixed);
+        eq_mode.addButton(ui->eq_r_flex);
 		ui->eq_widget->setBands(PresetProvider::EQ::defaultPreset(), false);
 		ui->eq_dyn_widget->setSidebarHidden(true);
 		ui->eq_dyn_widget->set15BandFreeMode(true);
 
+        // Set default zoom for dynamic EQ widget
+        ConfigContainer pref;
+        pref.setValue("scrollX", 160);
+        pref.setValue("scrollY", 311);
+        pref.setValue("zoomX",   0.561);
+        pref.setValue("zoomY",   1.651);
+        ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
+
+        // Prepare liveprog UI
 		ui->liveprog_reset->hide();
 
-		ConfigContainer pref;
-		pref.setValue("scrollX", 160);
-		pref.setValue("scrollY", 311);
-		pref.setValue("zoomX",   0.561);
-		pref.setValue("zoomY",   1.651);
-		ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
-
-		QButtonGroup eq_mode;
-		eq_mode.addButton(ui->eq_r_fixed);
-		eq_mode.addButton(ui->eq_r_flex);
-
+        // Clock
 		refreshTick = new QTimer(this);
 		connect(refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
 		refreshTick->start(1000);
@@ -296,64 +260,16 @@ MainWindow::MainWindow(QString  exepath,
 		connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
 
-        appMgrUi = new AppManagerFragment(audioService->appManager(), this);
-        appsFragmentHost = new QFrame(this);
-        appsHostLayout = new QVBoxLayout(appsFragmentHost);
+        appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(audioService->appManager(), this), WAF::BottomSide, this);
+        statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
+        presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(this), WAF::LeftSide, this);
+        settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(trayIcon, audioService, this), WAF::BottomSide, this);
 
-        appsHostLayout->addWidget(appMgrUi);
-        appsFragmentHost->setProperty("menu", false);
-        appsFragmentHost->hide();
-        appsFragmentHost->setAutoFillBackground(true);
-
-        connect(appMgrUi, &AppManagerFragment::closePressed, this, [ = ]() {
-            appsFragmentHost->update();
-            appsFragmentHost->repaint();
-            WAF::Animation::sideSlideOut(appsFragmentHost, WAF::BottomSide);
-        });
-
-		preset_dlg   = new PresetDialog(this);
-        connect(preset_dlg, &PresetDialog::wantsToWriteConfig, this, &MainWindow::applyConfig);
-
-        settings_dlg = new SettingsFragment(trayIcon, audioService, this);
-		connect(settings_dlg, &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
-		connect(settings_dlg, &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
-
-		settingsFragmentHost = new QFrame(this);
-		settingsHostLayout   = new QVBoxLayout(settingsFragmentHost);
-
-		settingsHostLayout->addWidget(settings_dlg);
-		settingsFragmentHost->setProperty("menu", false);
-		settingsFragmentHost->hide();
-		settingsFragmentHost->setAutoFillBackground(true);
-
-		connect(settings_dlg, &SettingsFragment::closeClicked, this, [ = ]() {
-			settingsFragmentHost->update();
-			settingsFragmentHost->repaint();
-			WAF::Animation::sideSlideOut(settingsFragmentHost, WAF::BottomSide);
-		});
-		connect(settings_dlg, &SettingsFragment::reopenSettings, this, [ = ]() {
-			settingsFragmentHost->update();
-			settingsFragmentHost->repaint();
-			WAF::Animation::sideSlideOut(settingsFragmentHost, WAF::BottomSide);
-			QTimer::singleShot(500, this, [ = ] {
-				WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
-			});
-        });
-
-        presetFragmentHost = new QFrame(this);
-        presetHostLayout   = new QVBoxLayout(presetFragmentHost);
-
-        presetHostLayout->addWidget(preset_dlg);
-        preset_dlg->show();
-        presetFragmentHost->setProperty("menu", false);
-        presetFragmentHost->hide();
-        presetFragmentHost->setAutoFillBackground(true);
-
-        connect(preset_dlg, &PresetDialog::closePressed, this, [ = ]() {          
-            presetFragmentHost->update();
-            presetFragmentHost->repaint();
-            WAF::Animation::sideSlideOut(presetFragmentHost, WAF::LeftSide);
-        });
+        connect(presetFragment->fragment(), &PresetFragment::wantsToWriteConfig, this, &MainWindow::applyConfig);
+        connect(settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
+        connect(settingsFragment->fragment(), &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
+        connect(settingsFragment->fragment(), &SettingsFragment::reopenSettings, settingsFragment, &FragmentHost<SettingsFragment*>::slideOutIn);
+        connect(m_stylehelper, &StyleHelper::iconColorChanged, settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
 
         connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::saveGraphicEQView);
     }
@@ -371,28 +287,11 @@ MainWindow::MainWindow(QString  exepath,
         ui->toolButton->setIconSize(QSize(16,16));
         ui->disableFX->setIconSize(QSize(16,16));
 
-
 		QMenu *menu = new QMenu();
-        menu->addAction(tr("Apps"),   this, [this]()
-        {
-            WAF::Animation::sideSlideIn(appsFragmentHost, WAF::BottomSide);
-        });
-        menu->addAction(tr("Driver status"),     this, [this]()
-        {
-            StatusFragment *sd      = new StatusFragment(audioService->status());
-            QWidget *host           = new QWidget(this);
-            host->setProperty("menu", false);
-            QVBoxLayout *hostLayout = new QVBoxLayout(host);
-            hostLayout->addWidget(sd);
-            host->hide();
-            host->setAutoFillBackground(true);
-            connect(sd, &StatusFragment::closePressed, this, [host,sd]() {
-                WAF::Animation::sideSlideOut(host, WAF::BottomSide);
-                host->deleteLater();
-                sd->deleteLater();
-            });
-            host->setMaximumHeight(this->height() - 20);
-            WAF::Animation::sideSlideIn(host, WAF::BottomSide);
+        menu->addAction(tr("Apps"), appMgrFragment, &FragmentHost<AppManagerFragment*>::slideIn);
+        menu->addAction(tr("Driver status"), statusFragment, [this](){
+            statusFragment->fragment()->updateStatus(audioService->status());
+            statusFragment->slideIn();
         });
         menu->addAction(tr("Relink audio pipeline"),   this, SLOT(restart()));
         menu->addSeparator();
@@ -405,6 +304,23 @@ MainWindow::MainWindow(QString  exepath,
 			QWhatsThis::enterWhatsThisMode();
 		});
 		ui->toolButton->setMenu(menu);
+
+        connect(m_stylehelper, &StyleHelper::iconColorChanged, this, [this](bool white){
+            if (white)
+            {
+                ui->set->setIcon(QPixmap(":/icons/settings-white.svg"));
+                ui->cpreset->setIcon(QPixmap(":/icons/queue-white.svg"));
+                ui->toolButton->setIcon(QPixmap(":/icons/menu-white.svg"));
+                ui->disableFX->setIcon(QPixmap(":/icons/power-white.svg"));
+            }
+            else
+            {
+                ui->set->setIcon(QPixmap(":/icons/settings.svg"));
+                ui->cpreset->setIcon(QPixmap(":/icons/queue.svg"));
+                ui->toolButton->setIcon(QPixmap(":/icons/menu.svg"));
+                ui->disableFX->setIcon(QPixmap(":/icons/power.svg"));
+            }
+        });
 	}
 
 	// Prepare styles
@@ -604,12 +520,12 @@ void MainWindow::dialogHandler()
 {
 	if (sender() == ui->set)
 	{
-        settingsFragmentHost->setMaximumHeight(this->height() - 20);
-		WAF::Animation::sideSlideIn(settingsFragmentHost, WAF::BottomSide);
+        settingsFragment->fragment()->setMaximumHeight(this->height() - 20);
+        settingsFragment->slideIn();
 	}
 	else if (sender() == ui->cpreset)
 	{
-        WAF::Animation::sideSlideIn(presetFragmentHost, WAF::LeftSide);
+        presetFragment->slideIn();
 	}
 }
 
@@ -2099,7 +2015,7 @@ void MainWindow::launchFirstRunSetup()
 		{
             AppConfig::instance().set(AppConfig::SetupDone, true);
 			lightBox->hide();
-			settings_dlg->refreshAll();
+            settingsFragment->fragment()->refreshAll();
 			lightBox->deleteLater();
 		});
 	});

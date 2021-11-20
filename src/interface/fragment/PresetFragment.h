@@ -18,6 +18,8 @@
 #include <QDialog>
 #include <QNetworkReply>
 
+#include "interface/fragment/BaseFragment.h"
+
 class AppConfig;
 class MainWindow;
 
@@ -26,19 +28,18 @@ namespace Ui
     class PresetDialog;
 }
 
-class PresetDialog :
-	public QDialog
+class PresetFragment :
+    public BaseFragment
 {
 	Q_OBJECT
 
 public:
-	explicit PresetDialog(QWidget *parent = nullptr);
+    explicit PresetFragment(QWidget *parent = nullptr);
 	void UpdateList();
 
-	~PresetDialog();
+    ~PresetFragment();
 
 private slots:
-	void reject();
 	void add();
 	void remove();
 	void load();

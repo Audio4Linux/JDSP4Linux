@@ -16,7 +16,7 @@
 #define SETTINGS_H
 
 #include "config/AppConfig.h"
-#include <QDialog>
+#include "BaseFragment.h"
 
 class MainWindow;
 class TrayIcon;
@@ -28,7 +28,7 @@ namespace Ui
 }
 
 class SettingsFragment :
-	public QDialog
+    public BaseFragment
 {
 	Q_OBJECT
 
@@ -47,7 +47,6 @@ public slots:
 	void updateButtonStyle(bool white);
 
 signals:
-	void closeClicked();
 	void requestEelScriptExtract(bool force,
 	                             bool user);
 	void launchSetupWizard();

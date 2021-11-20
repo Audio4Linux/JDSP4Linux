@@ -7,7 +7,7 @@
 #include "interface/model/AppItemStyleDelegate.h"
 
 AppManagerFragment::AppManagerFragment(IAppManager* appMgr, QWidget *parent) :
-    QWidget(parent),
+    BaseFragment(parent),
     ui(new Ui::AppManagerFragment),
     appMgr(appMgr)
 {

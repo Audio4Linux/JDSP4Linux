@@ -16,7 +16,7 @@
 #define STATUSDIALOG_H
 
 #include <DspStatus.h>
-#include <QDialog>
+#include "BaseFragment.h"
 
 namespace Ui
 {
@@ -24,16 +24,14 @@ namespace Ui
 }
 
 class StatusFragment :
-	public QDialog
+    public BaseFragment
 {
 	Q_OBJECT
 
 public:
-    explicit StatusFragment(DspStatus status, QWidget *parent = nullptr);
+    explicit StatusFragment(QWidget *parent = nullptr);
+    void updateStatus(const DspStatus& status);
 	~StatusFragment();
-
-signals:
-	void closePressed();
 
 private:
 	Ui::StatusDialog *ui;

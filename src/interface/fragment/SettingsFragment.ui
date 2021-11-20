@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SettingsFragment</class>
- <widget class="QDialog" name="SettingsFragment">
+ <widget class="QWidget" name="SettingsFragment">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -24,9 +24,6 @@
   </property>
   <property name="windowTitle">
    <string>Settings</string>
-  </property>
-  <property name="sizeGripEnabled">
-   <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">

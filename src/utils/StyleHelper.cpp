@@ -99,26 +99,7 @@ void StyleHelper::setPalette(const ColorStyle &s)
 
 void StyleHelper::loadIcons(bool white)
 {
-	MainWindow *m_host = qobject_cast<MainWindow*>(m_objhost);
-
-	if (white)
-	{
-		m_host->settings_dlg->updateButtonStyle(true);
-
-		m_host->ui->set->setIcon(QPixmap(":/icons/settings-white.svg"));
-		m_host->ui->cpreset->setIcon(QPixmap(":/icons/queue-white.svg"));
-		m_host->ui->toolButton->setIcon(QPixmap(":/icons/menu-white.svg"));
-		m_host->ui->disableFX->setIcon(QPixmap(":/icons/power-white.svg"));
-	}
-	else
-	{
-		m_host->settings_dlg->updateButtonStyle(false);
-
-		m_host->ui->set->setIcon(QPixmap(":/icons/settings.svg"));
-		m_host->ui->cpreset->setIcon(QPixmap(":/icons/queue.svg"));
-		m_host->ui->toolButton->setIcon(QPixmap(":/icons/menu.svg"));
-		m_host->ui->disableFX->setIcon(QPixmap(":/icons/power.svg"));
-	}
+    emit iconColorChanged(white);
 }
 
 int StyleHelper::loadColor(int index,

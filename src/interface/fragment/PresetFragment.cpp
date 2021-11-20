@@ -1,5 +1,5 @@
-#include "PresetDialog.h"
-#include "ui_PresetDialog.h"
+#include "PresetFragment.h"
+#include "ui_PresetFragment.h"
 
 #include "config/AppConfig.h"
 #include "MainWindow.h"
@@ -21,8 +21,8 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 
-PresetDialog::PresetDialog(QWidget *parent) :
-	QDialog(parent),
+PresetFragment::PresetFragment(QWidget *parent) :
+    BaseFragment(parent),
     ui(new Ui::PresetDialog)
 {
 	ui->setupUi(this);
@@ -35,20 +35,15 @@ PresetDialog::PresetDialog(QWidget *parent) :
 	connect(ui->files,      SIGNAL(customContextMenuRequested(QPoint)),                     this, SLOT(showContextMenu(QPoint)));
 	connect(ui->files,      SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(presetIndexChanged()));
 
-    connect(ui->close, &QPushButton::clicked, this, &PresetDialog::closePressed);
+    connect(ui->close, &QPushButton::clicked, this, &PresetFragment::closePressed);
 }
 
-PresetDialog::~PresetDialog()
+PresetFragment::~PresetFragment()
 {
 	delete ui;
 }
 
-void PresetDialog::reject()
-{
-	QDialog::reject();
-}
-
-void PresetDialog::presetIndexChanged()
+void PresetFragment::presetIndexChanged()
 {
 	if (ui->files->currentItem() == nullptr)
 	{
@@ -58,7 +53,7 @@ void PresetDialog::presetIndexChanged()
 	ui->presetName->setText(ui->files->currentItem()->text());
 }
 
-void PresetDialog::UpdateList()
+void PresetFragment::UpdateList()
 {
 	ui->files->clear();
 
@@ -91,7 +86,7 @@ void PresetDialog::UpdateList()
 	ui->files->addItems(files);
 }
 
-void PresetDialog::add()
+void PresetFragment::add()
 {
 	if (ui->presetName->text() == "")
 	{
@@ -108,7 +103,7 @@ void PresetDialog::add()
     emit presetChanged();
 }
 
-void PresetDialog::remove()
+void PresetFragment::remove()
 {
 	if (ui->files->selectedItems().length() == 0)
 	{
@@ -133,7 +128,7 @@ void PresetDialog::remove()
 	emit presetChanged();
 }
 
-void PresetDialog::load()
+void PresetFragment::load()
 {
 	if (ui->files->selectedItems().length() == 0)
 	{
@@ -154,7 +149,7 @@ void PresetDialog::load()
 	MainWindow::loadPresetFile(fullpath);
 }
 
-void PresetDialog::nameChanged(const QString &name)
+void PresetFragment::nameChanged(const QString &name)
 {
 	QString path = AppConfig::instance().getPath("presets");
 
@@ -168,7 +163,7 @@ void PresetDialog::nameChanged(const QString &name)
 	}
 }
 
-void PresetDialog::showContextMenu(const QPoint &pos)
+void PresetFragment::showContextMenu(const QPoint &pos)
 {
 	QPoint           globalPos     = ui->files->mapToGlobal(pos);
 	QMenu            menu;

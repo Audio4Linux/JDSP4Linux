@@ -4,12 +4,16 @@
 #define STR_(x) #x
 #define STR(x) STR_(x)
 
-StatusFragment::StatusFragment(DspStatus status, QWidget *parent) :
-	QDialog(parent),
+StatusFragment::StatusFragment(QWidget *parent) :
+    BaseFragment(parent),
 	ui(new Ui::StatusDialog)
 {
 	ui->setupUi(this);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &StatusFragment::closePressed);
+}
 
+void StatusFragment::updateStatus(const DspStatus &status)
+{
 #ifdef USE_PULSEAUDIO
     QString flavor = " (Pulseaudio flavor)";
 #else
@@ -20,8 +24,6 @@ StatusFragment::StatusFragment(DspStatus status, QWidget *parent) :
     ui->proc->setText(status.IsProcessing ? tr("Processing") : tr("Not processing"));
     ui->format->setText(QString::fromStdString(status.AudioFormat));
     ui->samplerate->setText(QString::fromStdString(status.SamplingRate) + "Hz");
-
-	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &StatusFragment::closePressed);
 }
 
 StatusFragment::~StatusFragment()
