@@ -1,11 +1,15 @@
 #ifndef IAUDIOSERVICE_H
 #define IAUDIOSERVICE_H
 
+#include "DspHost.h"
 #include "EelVariable.h"
 #include "IOutputDevice.h"
 #include "DspStatus.h"
+#include "EventArgs.h"
 #include "IAppManager.h"
+
 #include <QObject>
+#include <memory>
 
 class DspConfig;
 
@@ -27,13 +31,41 @@ public slots:
 
     virtual void enumerateLiveprogVariables() = 0;
 
+    void handleMessage(DspHost::Message msg, std::any arg);
+
 signals:
     void eelCompilationStarted(const QString& scriptName);
     void eelCompilationFinished(int ret, const QString& retMsg, const QString& msg, const QString& scriptName, float initMs);
     void eelOutputReceived(const QString& output);
     void eelVariablesEnumerated(const std::list<EelVariable>& vars);
+    void convolverInfoChanged(const ConvolverInfoEventArgs& args);
 
 };
+
+inline void IAudioService::handleMessage(DspHost::Message msg, std::any value)
+{
+    switch(msg)
+    {
+    case DspHost::EelCompilerResult: {
+        auto args = std::any_cast<QList<QString>>(value);
+        int ret = args[0].toInt();
+
+        emit eelCompilationFinished(ret, args[4], args[1], args[2], args[3].toFloat());
+        break;
+    }
+    case DspHost::EelCompilerStart:
+        emit eelCompilationStarted(std::any_cast<QString>(value));
+        break;
+    case DspHost::EelWriteOutputBuffer:
+        emit eelOutputReceived(std::any_cast<QString>(value));
+        break;
+    case DspHost::ConvolverInfoChanged:
+        emit convolverInfoChanged(std::any_cast<ConvolverInfoEventArgs>(value));
+        break;
+    default:
+        break;
+    }
+}
 
 Q_DECLARE_INTERFACE(IAudioService, "IAudioService")
 

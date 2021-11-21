@@ -19,6 +19,7 @@ HEADERS +=  \
     $$PWD/PulseAppManager.h \
     $$PWD/PulseAudioProcessingThread.h \
     $$PWD/PulseAudioService.h \
+    $$PWD/PulseDataTypes.h \
     $$PWD/PulseManager.h \
     $$PWD/PulsePipelineManager.h \
     $$PWD/RealtimeKit.h \

@@ -157,6 +157,12 @@ MainWindow::MainWindow(QString  exepath,
         connect(_audioService, &IAudioService::eelCompilationFinished, _eelEditor, &EELEditor::onCompilerFinished);
         connect(_audioService, &IAudioService::eelOutputReceived, _eelEditor, &EELEditor::onConsoleOutputReceived);
 
+        // Convolver file info
+        ConvolverInfoEventArgs ciArgs;
+        ciArgs.channels = ciArgs.frames = -1;
+        onConvolverInfoChanged(ciArgs);
+        connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
+
         // TODO
         //        QTimer *timer = new QTimer(this);
         //        connect(timer, SIGNAL(timeout()), _audioService, SLOT(enumerateLiveprogVariables()));
@@ -536,6 +542,15 @@ void MainWindow::onTrayIconActivated()
     {
         _trayIcon->setTrayVisible(false);
     }
+}
+
+void MainWindow::onConvolverInfoChanged(const ConvolverInfoEventArgs& args)
+{
+    ui->ir_details_full->setVisible(args.channels != -1);
+    ui->ir_details_empty->setVisible(args.channels == -1);
+
+    ui->ir_details_channel->setText(QString::number(args.channels));
+    ui->ir_details_frames->setText(QString::number(args.frames));
 }
 
 // Fragment handler

@@ -38,26 +38,7 @@ PulseAudioService::PulseAudioService()
     mgr = std::make_shared<PulsePipelineManager>();
     appMgr = new PulseAppManager(mgr.get());
 
-    mgr.get()->getDsp()->setMessageHandler([this](DspHost::Message msg, std::any value){
-        switch(msg)
-        {
-            case DspHost::EelCompilerResult: {
-                auto args = std::any_cast<QList<QString>>(value);
-                int ret = args[0].toInt();
-
-                emit eelCompilationFinished(ret, checkErrorCode(ret), args[1], args[2], args[3].toFloat());
-                break;
-            }
-            case DspHost::EelCompilerStart:
-                emit eelCompilationStarted(std::any_cast<QString>(value));
-                break;
-            case DspHost::EelWriteOutputBuffer:
-                emit eelOutputReceived(std::any_cast<QString>(value));
-                break;
-            default:
-                break;
-        }
-    });
+    mgr.get()->getDsp()->setMessageHandler(std::bind(&IAudioService::handleMessage, this, std::placeholders::_1, std::placeholders::_2));
 
     /* Launch audio processing thread */
     apt = new PulseAudioProcessingThread(mgr);

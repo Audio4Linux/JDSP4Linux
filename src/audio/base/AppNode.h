@@ -2,9 +2,9 @@
 #define APPNODE_H
 
 #ifndef USE_PULSEAUDIO
-#include "PwPipelineManager.h"
+#include "PwDataTypes.h"
 #else
-#include "PulsePipelineManager.h"
+#include "PulseDataTypes.h"
 #endif
 
 #include <QString>

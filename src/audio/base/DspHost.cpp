@@ -4,33 +4,69 @@
 #include <sstream>
 
 #include "DspHost.h"
+#include "EventArgs.h"
 
 extern "C" {
 #include <JdspImpResToolbox.h>
 #include <EELStdOutExtension.h>
+#include <jdsp_header.h>
 }
 
 #include <QElapsedTimer>
 #include <QTextStream>
 #include <QDebug>
+#include <cstring>
 #include <assert.h>
+
+/* C interop */
+inline JamesDSPLib* cast(void* raw){
+    return static_cast<JamesDSPLib*>(raw);
+}
+inline int32_t arySearch(int32_t *array, int32_t N, int32_t x)
+{
+    for (int32_t i = 0; i < N; i++)
+    {
+        if (array[i] == x)
+            return i;
+    }
+    return -1;
+}
+#define FLOIDX 20000
+inline void* GetStringForIndex(eel_string_context_state *st, float val, int32_t write)
+{
+    int32_t castedValue = (int32_t)(val + 0.5f);
+    if (castedValue < FLOIDX)
+        return 0;
+    int32_t idx = arySearch(st->map, st->slot, castedValue);
+    if (idx < 0)
+        return 0;
+    if (!write)
+    {
+        s_str *tmp = &st->m_literal_strings[idx];
+        const char *s = s_str_c_str(tmp);
+        return (void*)s;
+    }
+    else
+        return (void*)&st->m_literal_strings[idx];
+}
 
 DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
 {
-    _dsp = static_cast<JamesDSPLib*>(dspPtr);
-    if(!_dsp)
+    auto dsp = static_cast<JamesDSPLib*>(dspPtr);
+    if(!dsp)
     {
         util::error("DspHost::ctor: Failed to initialize reference to libjamesdsp class object");
         abort();
     }
 
-    if(!JamesDSPGetMutexStatus(_dsp))
+    if(!JamesDSPGetMutexStatus(dsp))
     {
         util::error("DspHost::ctor: JamesDSPGetMutexStatus returned false. "
                     "Cannot run safely in multi-threaded environment.");
         abort();
     }
 
+    _dsp = dsp;
     _cache = new DspConfig();
 }
 
@@ -64,7 +100,7 @@ void DspHost::updateLimiter(DspConfig* config)
         limRelease = 0.15;
     }
 
-    JLimiterSetCoefficients(this->_dsp, limThreshold, limRelease);
+    JLimiterSetCoefficients(cast(this->_dsp), limThreshold, limRelease);
 }
 
 void DspHost::updateFirEqualizer(DspConfig *config)
@@ -106,7 +142,7 @@ void DspHost::updateFirEqualizer(DspConfig *config)
         param[i] = (double)std::stod(v[i]);
     }
 
-    FIREqualizerAxisInterpolation(this->_dsp, interpolationMode, filterType, param, param + 15);
+    FIREqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
 }
 
 void DspHost::updateVdc(DspConfig *config)
@@ -137,24 +173,24 @@ void DspHost::updateVdc(DspConfig *config)
         {
             util::error("DspHost::updateVdc: Cannot open file path in property 'ddc_file'");
             util::error("DspHost::updateVdc: Disabling DDC engine");
-            DDCDisable(this->_dsp);
+            DDCDisable(cast(this->_dsp));
             return;
         }
         QTextStream in(&f);
-        DDCStringParser(this->_dsp, in.readAll().toLocal8Bit().data());
+        DDCStringParser(cast(this->_dsp), in.readAll().toLocal8Bit().data());
 
-        int ret = DDCEnable(this->_dsp);
+        int ret = DDCEnable(cast(this->_dsp));
         if (ret <= 0)
         {
             util::error("DspHost::updateVdc: Call to DDCEnable(this->_dsp) failed. Invalid DDC parameter?");
             util::error("DspHost::updateVdc: Disabling DDC engine");
-            DDCDisable(this->_dsp);
+            DDCDisable(cast(this->_dsp));
             return;
         }
     }
     else
     {
-        DDCDisable(this->_dsp);
+        DDCDisable(cast(this->_dsp));
     }
 }
 
@@ -177,7 +213,7 @@ void DspHost::updateCompressor(DspConfig *config)
         if(!aggrExists) adaptSpeed = 800;
     }
 
-    CompressorSetParam(this->_dsp, maxAttack, maxRelease, adaptSpeed);
+    CompressorSetParam(cast(this->_dsp), maxAttack, maxRelease, adaptSpeed);
 }
 
 void DspHost::updateReverb(DspConfig* config)
@@ -211,7 +247,7 @@ void DspHost::updateReverb(DspConfig* config)
     GET_PARAM(wet, float, 0, msg);
     GET_PARAM(width, float, 1.0, msg);
 
-    sf_advancereverb(&this->_dsp->reverb, this->_dsp->fs, osf, reflection_amount, finalwet, finaldry,
+    sf_advancereverb(&cast(this->_dsp)->reverb, cast(this->_dsp)->fs, osf, reflection_amount, finalwet, finaldry,
                      reflection_factor, reflection_width, width, wet, lfo_wander, bassboost, lfo_spin,
                      lpf_input, lpf_bass, lpf_damp, lpf_output, decay, delay / 1000.0f);
 #undef GET_PARAM
@@ -286,11 +322,32 @@ void DspHost::updateConvolver(DspConfig *config)
     }
 
     int success = 1;
+
+    int* impInfo = new int[2];
+    float* impulse = ReadImpulseResponseToFloat(file.toLocal8Bit().constData(), cast(this->_dsp)->fs, impInfo, optMode, param);
+
+    if(impulse == nullptr)
+    {
+        util::warning("DspHost::updateConvolver: Unable to read impulse response. No file selected or abnormal channel count?");
+
+        enabled = false;
+
+        ConvolverInfoEventArgs eventArgs;
+        eventArgs.channels = -1;
+        eventArgs.frames = -1;
+        dispatch(ConvolverInfoChanged, eventArgs);
+    }
+    else
+    {
+        ConvolverInfoEventArgs eventArgs;
+        eventArgs.data = std::list<float>(impulse, impulse + impInfo[1] * sizeof(float));
+        eventArgs.channels = impInfo[0];
+        eventArgs.frames = impInfo[1];
+        dispatch(ConvolverInfoChanged, eventArgs);
+    }
+
     if(enabled)
     {
-        int* impInfo = new int[2];
-        float* impulse = ReadImpulseResponseToFloat(file.toLocal8Bit().constData(), this->_dsp->fs, impInfo, optMode, param);
-
         if(impInfo[1] <= 0)
         {
             util::warning("DspHost::updateConvolver: IR is empty and has zero frames");
@@ -298,17 +355,17 @@ void DspHost::updateConvolver(DspConfig *config)
 
         util::debug("DspHost::updateConvolver: Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
 
-        Convolver1DDisable(this->_dsp);
-        success = Convolver1DLoadImpulseResponse(this->_dsp, impulse, impInfo[0], impInfo[1]);
-
-        delete[] impInfo;
-        free(impulse);
+        Convolver1DDisable(cast(this->_dsp));
+        success = Convolver1DLoadImpulseResponse(cast(this->_dsp), impulse, impInfo[0], impInfo[1]);
     }
 
+    delete[] impInfo;
+    free(impulse);
+
     if(enabled)
-        Convolver1DEnable(this->_dsp);
+        Convolver1DEnable(cast(this->_dsp));
     else
-        Convolver1DDisable(this->_dsp);
+        Convolver1DDisable(cast(this->_dsp));
 
     if(success <= 0)
     {
@@ -338,11 +395,11 @@ void DspHost::updateGraphicEq(DspConfig *config)
 
     if(enabled)
     {
-        ArbitraryResponseEqualizerStringParser(this->_dsp, eq.toLocal8Bit().data());
-        ArbitraryResponseEqualizerEnable(this->_dsp);
+        ArbitraryResponseEqualizerStringParser(cast(this->_dsp), eq.toLocal8Bit().data());
+        ArbitraryResponseEqualizerEnable(cast(this->_dsp));
     }
     else
-        ArbitraryResponseEqualizerDisable(this->_dsp);
+        ArbitraryResponseEqualizerDisable(cast(this->_dsp));
 }
 
 void DspHost::updateCrossfeed(DspConfig* config)
@@ -381,19 +438,19 @@ void DspHost::updateCrossfeed(DspConfig* config)
             feed = 95;
         }
 
-        memset(&this->_dsp->advXF.bs2b, 0, sizeof(this->_dsp->advXF.bs2b));
-        BS2BInit(&this->_dsp->advXF.bs2b[1], (unsigned int)this->_dsp->fs, ((unsigned int)fcut | ((unsigned int)feed << 16)));
-        this->_dsp->advXF.mode = 1;
+        memset(&cast(this->_dsp)->advXF.bs2b, 0, sizeof(cast(this->_dsp)->advXF.bs2b));
+        BS2BInit(&cast(this->_dsp)->advXF.bs2b[1], (unsigned int)cast(this->_dsp)->fs, ((unsigned int)fcut | ((unsigned int)feed << 16)));
+        cast(this->_dsp)->advXF.mode = 1;
     }
     else
     {
-       CrossfeedChangeMode(this->_dsp, mode);
+       CrossfeedChangeMode(cast(this->_dsp), mode);
     }
 
     if(enabled)
-        CrossfeedEnable(this->_dsp);
+        CrossfeedEnable(cast(this->_dsp));
     else
-        CrossfeedDisable(this->_dsp);
+        CrossfeedDisable(cast(this->_dsp));
 }
 
 void DspHost::updateFromCache()
@@ -442,18 +499,18 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         {
         case DspConfig::bass_enable:
             if(current.toBool())
-                BassBoostEnable(this->_dsp);
+                BassBoostEnable(cast(this->_dsp));
             else
-                BassBoostDisable(this->_dsp);
+                BassBoostDisable(cast(this->_dsp));
             break;
         case DspConfig::bass_maxgain:
-            BassBoostSetParam(this->_dsp, current.toFloat());
+            BassBoostSetParam(cast(this->_dsp), current.toFloat());
             break;
         case DspConfig::compression_enable:
             if(current.toBool())
-                CompressorEnable(this->_dsp);
+                CompressorEnable(cast(this->_dsp));
             else
-                CompressorDisable(this->_dsp);
+                CompressorDisable(cast(this->_dsp));
             break;
         case DspConfig::compression_aggressiveness:
         case DspConfig::compression_maxatk:
@@ -482,9 +539,9 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             break;
         case DspConfig::reverb_enable:
             if(current.toBool())
-                ReverbEnable(this->_dsp);
+                ReverbEnable(cast(this->_dsp));
             else
-                ReverbDisable(this->_dsp);
+                ReverbDisable(cast(this->_dsp));
             break;
         case DspConfig::reverb_bassboost:
         case DspConfig::reverb_decay:
@@ -517,22 +574,22 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             updateLimiter(config);
             break;
         case DspConfig::master_postgain:
-            JamesDSPSetPostGain(this->_dsp, current.toFloat());
+            JamesDSPSetPostGain(cast(this->_dsp), current.toFloat());
             break;
         case DspConfig::stereowide_enable:
             if(current.toBool())
-                StereoEnhancementEnable(this->_dsp);
+                StereoEnhancementEnable(cast(this->_dsp));
             else
-                StereoEnhancementDisable(this->_dsp);
+                StereoEnhancementDisable(cast(this->_dsp));
             break;
         case DspConfig::stereowide_level:
-            StereoEnhancementSetParam(this->_dsp, current.toFloat() / 100.0f);
+            StereoEnhancementSetParam(cast(this->_dsp), current.toFloat() / 100.0f);
             break;
         case DspConfig::tone_enable:
             if(current.toBool())
-                FIREqualizerEnable(this->_dsp);
+                FIREqualizerEnable(cast(this->_dsp));
             else
-                FIREqualizerDisable(this->_dsp);
+                FIREqualizerDisable(cast(this->_dsp));
             break;
         case DspConfig::tone_eq:
         case DspConfig::tone_filtertype:
@@ -541,12 +598,12 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             break;
         case DspConfig::tube_enable:
             if(current.toBool())
-                VacuumTubeEnable(this->_dsp);
+                VacuumTubeEnable(cast(this->_dsp));
             else
-                VacuumTubeDisable(this->_dsp);
+                VacuumTubeDisable(cast(this->_dsp));
             break;
         case DspConfig::tube_pregain:
-            VacuumTubeSetGain(this->_dsp, current.toFloat() / 100.0f);
+            VacuumTubeSetGain(cast(this->_dsp), current.toFloat() / 100.0f);
             break;
         }
 
@@ -628,19 +685,19 @@ void DspHost::reloadLiveprog(DspConfig* config)
     QTextStream in(&f);
 
 
-    LiveProgDisable(this->_dsp);
+    LiveProgDisable(cast(this->_dsp));
     dispatch(EelCompilerStart, f.fileName());
 
     QElapsedTimer timer;
     timer.start();
-    int ret = LiveProgStringParser(this->_dsp, in.readAll().toLocal8Bit().data());
+    int ret = LiveProgStringParser(cast(this->_dsp), in.readAll().toLocal8Bit().data());
 
     // Workaround due to library bug
-    jdsp_unlock(this->_dsp);
+    jdsp_unlock(cast(this->_dsp));
 
     float msecs = timer.nsecsElapsed() / 1000000.0;
 
-    const char* errorString = NSEEL_code_getcodeerror(this->_dsp->eel.vm);
+    const char* errorString = NSEEL_code_getcodeerror(cast(this->_dsp)->eel.vm);
     if(errorString != NULL)
     {
         util::warning("DspHost::refreshLiveprog: NSEEL_code_getcodeerror: Syntax error in script file, cannot load. Reason: " + std::string(errorString));
@@ -655,19 +712,20 @@ void DspHost::reloadLiveprog(DspConfig* config)
     resultArgs.append(errorString == NULL ? "" : errorString);
     resultArgs.append(f.fileName());
     resultArgs.append(QString::number(msecs));
+    resultArgs.append(checkErrorCode(ret));
     dispatch(EelCompilerResult, resultArgs);
 
     if(enabled)
-        LiveProgEnable(this->_dsp);
+        LiveProgEnable(cast(this->_dsp));
     else
-        LiveProgDisable(this->_dsp);
+        LiveProgDisable(cast(this->_dsp));
 }
 
 std::list<EelVariable> DspHost::enumEelVariables()
 {
     std::list<EelVariable> vars;
 
-    compileContext *c = (compileContext*)this->dsp()->eel.vm;
+    compileContext *c = (compileContext*)cast(this->_dsp)->eel.vm;
     for (int i = 0; i < c->varTable_numBlocks; i++)
     {
         for (int j = 0; j < NSEEL_VARS_PER_BLOCK; j++)
@@ -695,11 +753,6 @@ std::list<EelVariable> DspHost::enumEelVariables()
 void DspHost::dispatch(Message msg, std::any value)
 {
     _extraFunc(msg, value);
-}
-
-JamesDSPLib *DspHost::dsp() const
-{
-    return _dsp;
 }
 
 void receiveLiveprogStdOut(const char *buffer, void* userData)

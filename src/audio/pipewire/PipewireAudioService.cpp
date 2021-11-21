@@ -20,27 +20,7 @@ PipewireAudioService::PipewireAudioService()
     plugin = new PwJamesDspPlugin(mgr.get());
     effects = std::make_unique<FilterContainer>(mgr.get(), plugin, &AppConfig::instance());
 
-    plugin->setMessageHandler([this](DspHost::Message msg, std::any value){
-        switch(msg)
-        {
-        case DspHost::EelCompilerResult: {
-            auto args = std::any_cast<QList<QString>>(value);
-            int ret = args[0].toInt();
-
-            emit eelCompilationFinished(ret, checkErrorCode(ret), args[1], args[2], args[3].toFloat());
-            break;
-        }
-        case DspHost::EelCompilerStart:
-            emit eelCompilationStarted(std::any_cast<QString>(value));
-            break;
-        case DspHost::EelWriteOutputBuffer:
-            emit eelOutputReceived(std::any_cast<QString>(value));
-            break;
-        default:
-            break;
-        }
-    });
-
+    plugin->setMessageHandler(std::bind(&IAudioService::handleMessage, this, std::placeholders::_1, std::placeholders::_2));
 
     mgr.get()->new_default_sink.connect([&](NodeInfo node) {
         util::debug(log_tag + "new default output device: " + node.name);

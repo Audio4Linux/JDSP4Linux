@@ -5,6 +5,7 @@ HEADERS += \
     $$PWD/PipewireAudioService.h \
     $$PWD/PwAppManager.h \
     $$PWD/PwBasePlugin.h \
+    $$PWD/PwDataTypes.h \
     $$PWD/PwDevice.h \
     $$PWD/PwJamesDspPlugin.h \
     $$PWD/PwPipelineManager.h

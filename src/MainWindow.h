@@ -24,6 +24,7 @@
 #include "interface/fragment/AppManagerFragment.h"
 #include "interface/fragment/FragmentHost.h"
 #include "data/PresetProvider.h"
+#include "EventArgs.h"
 
 class IAudioService;
 class AppConfig;
@@ -112,6 +113,7 @@ private slots:
 
     void        onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &);
     void        onAutoEqImportRequested();
+    void        onConvolverInfoChanged(const ConvolverInfoEventArgs &args);
 private:
     Ui::MainWindow *ui;
 
