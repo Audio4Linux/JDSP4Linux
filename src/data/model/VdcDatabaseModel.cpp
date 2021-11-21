@@ -1,5 +1,6 @@
 #include "VdcDatabaseModel.h"
 
+#include <QTextStream>
 #include <QFile>
 
 VdcDatabaseModel::VdcDatabaseModel(QObject *parent)
