@@ -430,6 +430,22 @@ MainWindow::MainWindow(QString  exepath,
         ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabbar->redrawTabBar();
+
+        if (system("which ddctoolbox > /dev/null 2>&1")) {
+            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
+                int ret = system("xdg-open https://github.com/thepbone/DDCToolbox"); // QDesktopServices::openUrl broken on some KDE systems with Qt 5.15
+                if(ret > 0)
+                {
+                    Log::error("MainWindow: xdg-open failed. Trying gio instead.");
+                    system("gio open https://github.com/thepbone/DDCToolbox");
+                }
+            });
+        } else {
+            ui->ddctoolbox_install->setText("Launch application");
+            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
+                QProcess::startDetached("ddctoolbox", QStringList());
+            });
+        }
     }
 
     // Handle first launch
@@ -1438,15 +1454,6 @@ void MainWindow::connectActions()
     connect(ui->eq_r_flex,          &QRadioButton::clicked,             this, &MainWindow::onEqModeUpdated);
 
     connect(_eelEditor,             &EELEditor::scriptSaved,    ui->liveprog, &LiveprogSelectionWidget::updateFromEelEditor);
-
-    connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
-        int ret = system("xdg-open https://github.com/thepbone/DDCToolbox"); // QDesktopServices::openUrl broken on some KDE systems with Qt 5.15
-        if(ret > 0)
-        {
-            Log::error("MainWindow: xdg-open failed. Trying gio instead.");
-            system("gio open https://github.com/thepbone/DDCToolbox");
-        }
-    });
 }
 
 void MainWindow::launchFirstRunSetup()

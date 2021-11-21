@@ -51,12 +51,12 @@
        <widget class="QPushButton" name="reload">
         <property name="maximumSize">
          <size>
-          <width>70</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
         <property name="text">
-         <string>Reload</string>
+         <string>Refresh</string>
         </property>
        </widget>
       </item>
@@ -64,7 +64,7 @@
        <widget class="QPushButton" name="bookmark">
         <property name="maximumSize">
          <size>
-          <width>70</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
@@ -127,7 +127,7 @@
        <widget class="QPushButton" name="rename">
         <property name="maximumSize">
          <size>
-          <width>80</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
@@ -140,7 +140,7 @@
        <widget class="QPushButton" name="remove">
         <property name="maximumSize">
          <size>
-          <width>80</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>

@@ -98,6 +98,8 @@ void LiveprogSelectionWidget::setCurrentLiveprog(const QString &path)
 
 void LiveprogSelectionWidget::updateFromEelEditor(QString path)
 {
+    this->setCurrentLiveprog(path);
+
     if (_eelParser->getPath() == path)
     {
         loadProperties(_eelParser->getPath());
