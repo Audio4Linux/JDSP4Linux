@@ -49,6 +49,7 @@ SOURCES += \
     interface/AnimatedJdspIcon.cpp \
     interface/CListView.cpp \
     interface/FileSelectionWidget.cpp \
+    interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/AutoEqSelector.cpp \
     interface/dialog/PaletteEditor.cpp \
@@ -78,6 +79,7 @@ SOURCES += \
 
 FORMS += \
     interface/FileSelectionWidget.ui \
+    interface/LiveprogSelectionWidget.ui \
     interface/dialog/AutoEqSelector.ui \
     interface/dialog/PaletteEditor.ui \
     interface/fragment/AppManagerFragment.ui \
@@ -110,6 +112,7 @@ HEADERS += \
     interface/AnimatedJdspIcon.h \
     interface/CListView.h \
     interface/FileSelectionWidget.h \
+    interface/LiveprogSelectionWidget.h \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
     interface/dialog/AutoEqSelector.h \

@@ -5,10 +5,7 @@
 
 #include <QFile>
 
-PresetManager::PresetManager()
-{
-
-}
+PresetManager::PresetManager(){}
 
 void PresetManager::load(const QString &filename)
 {
@@ -21,7 +18,7 @@ void PresetManager::load(const QString &filename)
     }
 
     QFile::copy(src, dest);
-    Log::debug("MainWindow::loadPresetFile: Loading from " + filename);
+    Log::debug("PresetManager::load: Loading from " + filename);
     DspConfig::instance().load();
 }
 
@@ -36,5 +33,5 @@ void PresetManager::save(const QString &filename)
     }
 
     QFile::copy(src, dest);
-    Log::debug("MainWindow::savePresetFile: Saving to " + filename);
+    Log::debug("PresetManager::save: Saving to " + filename);
 }

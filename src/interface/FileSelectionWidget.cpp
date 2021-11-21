@@ -6,8 +6,6 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-#include "utils/MaybeType.h"
-
 FileSelectionWidget::FileSelectionWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FileSelectionWidget)
@@ -18,7 +16,7 @@ FileSelectionWidget::FileSelectionWidget(QWidget *parent) :
     setFileActionsVisible(false);
     setBookmarkDirectory(std::nullopt);
 
-    connect(ui->fileview, &QListWidget::clicked, this, &FileSelectionWidget::onFileSelectionChanged);
+    connect(ui->fileview, &QListWidget::itemSelectionChanged, this, &FileSelectionWidget::onFileSelectionChanged);
 
     connect(ui->rename, &QPushButton::clicked, this, &FileSelectionWidget::onRenameRequested);
     connect(ui->remove, &QPushButton::clicked, this, &FileSelectionWidget::onRemoveRequested);

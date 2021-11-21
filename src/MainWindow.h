@@ -85,7 +85,7 @@ private slots:
 
 
     void        updateAllUnitLabels();
-	void        updateUnitLabel(int,
+    void        updateUnitLabel(int,
 	                            QObject *alt = nullptr);
 
 
@@ -97,14 +97,10 @@ private slots:
     void        onEqPresetUpdated();
     void        onEqModeUpdated();
 
-	void        reloadLiveprog();
-
 	void        restoreGraphicEQView();
 	void        saveGraphicEQView();
 
-	void        fireTimerSignal();
-    void        onResetLiveprogParams();
-	void        updateFromEelEditor(QString path);
+    void        fireTimerSignal();
     void        onConvolverWaveformEdit();
 
     void        onTrayIconActivated();
@@ -126,7 +122,6 @@ private:
     TrayIcon *_trayIcon;
 
     EELEditor *_eelEditor;
-    EELParser *_eelParser;
 
     SingleInstanceMonitor* _singleInstance;
 
@@ -148,7 +143,6 @@ private:
 
     QString _currentImpuleResponse    = "";
     QString _currentVdc               = "";
-    QString _currentLiveprog          = "";
     QString _currentConvWaveformEdit  = "";
 
     void updateTooltipLabelUnit(QObject       *sender,
@@ -156,8 +150,6 @@ private:
 	                            bool);
 	void loadConfig();
 	void connectActions();
-
-	void setLiveprogSelection(QString path);
 
     void determineIrsSelection();
     void determineVdcSelection();

@@ -60,13 +60,13 @@ MainWindow::MainWindow(QString  exepath,
                        bool     statupInTray,
                        bool     allowMultipleInst,
                        QWidget *parent) :
-	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
-	ui->setupUi(this);
+    ui->setupUi(this);
 
-	// Prepare logger
-	{
+    // Prepare logger
+    {
         Log::clear();
 #ifdef USE_PULSEAUDIO
         QString flavor = " (Pulseaudio flavor)";
@@ -74,7 +74,7 @@ MainWindow::MainWindow(QString  exepath,
         QString flavor = " (Pipewire flavor)";
 #endif
         Log::information("Application version: " + QString(STR(APP_VERSION)) + flavor);
-	}
+    }
 
     // Check if another instance is already running and switch to it if that's the case
     {
@@ -109,8 +109,8 @@ MainWindow::MainWindow(QString  exepath,
         connect(&DspConfig::instance(), &DspConfig::updatedExternally, _audioService, &IAudioService::update);
     }
 
-	// Prepare base UI
-	{
+    // Prepare base UI
+    {
         Log::information("============ Initializing user interface ============");
 
         this->setWindowIcon(QIcon::fromTheme("jamesdsp", QIcon(":/icons/icon.png")));
@@ -126,9 +126,9 @@ MainWindow::MainWindow(QString  exepath,
         QButtonGroup eq_mode;
         eq_mode.addButton(ui->eq_r_fixed);
         eq_mode.addButton(ui->eq_r_flex);
-		ui->eq_widget->setBands(PresetProvider::EQ::defaultPreset(), false);
-		ui->eq_dyn_widget->setSidebarHidden(true);
-		ui->eq_dyn_widget->set15BandFreeMode(true);
+        ui->eq_widget->setBands(PresetProvider::EQ::defaultPreset(), false);
+        ui->eq_dyn_widget->setSidebarHidden(true);
+        ui->eq_dyn_widget->set15BandFreeMode(true);
 
         // Set default zoom for dynamic EQ widget
         ConfigContainer pref;
@@ -138,17 +138,14 @@ MainWindow::MainWindow(QString  exepath,
         pref.setValue("zoomY",   1.651);
         ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
 
-        // Prepare liveprog UI
-		ui->liveprog_reset->hide();
-
         // Clock
         _refreshTick = new QTimer(this);
         connect(_refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
         _refreshTick->start(1000);
-	}
+    }
 
-	// Allocate pointers and init important variables
-	{
+    // Allocate pointers and init important variables
+    {
         AppConfig::instance().set(AppConfig::ExecutablePath, exepath);
 
         _startupInTraySwitch = statupInTray;
@@ -156,22 +153,20 @@ MainWindow::MainWindow(QString  exepath,
         _styleHelper         = new StyleHelper(this);
         _eelEditor           = new EELEditor(this);
 
-        _eelParser            = new EELParser();
-
         connect(_audioService, &IAudioService::eelCompilationStarted, _eelEditor, &EELEditor::onCompilerStarted);
         connect(_audioService, &IAudioService::eelCompilationFinished, _eelEditor, &EELEditor::onCompilerFinished);
         connect(_audioService, &IAudioService::eelOutputReceived, _eelEditor, &EELEditor::onConsoleOutputReceived);
 
-// TODO
-//        QTimer *timer = new QTimer(this);
-//        connect(timer, SIGNAL(timeout()), audioService, SLOT(enumerateLiveprogVariables()));
-//        timer->start(200);
+        // TODO
+        //        QTimer *timer = new QTimer(this);
+        //        connect(timer, SIGNAL(timeout()), audioService, SLOT(enumerateLiveprogVariables()));
+        //        timer->start(200);
 
         connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
-            bool isSameFile = path == _currentLiveprog;
+            bool isSameFile = path == ui->liveprog->currentLiveprog();
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())
             {
-                _currentLiveprog = path;
+                ui->liveprog->setCurrentLiveprog(path);
             }
             else
             {
@@ -179,8 +174,6 @@ MainWindow::MainWindow(QString  exepath,
                                       QString("The current EEL file (at '%1') does not exist anymore on the filesystem. Please reopen the file manually.").arg(path));
                 return;
             }
-
-            setLiveprogSelection(_currentLiveprog);
 
             applyConfig();
 
@@ -191,12 +184,12 @@ MainWindow::MainWindow(QString  exepath,
         });
     }
 
-	// Prepare tray icon
-	{
+    // Prepare tray icon
+    {
         _trayIcon = new TrayIcon(this);
         connect(_trayIcon,               &TrayIcon::iconActivated,    this,     &MainWindow::onTrayIconActivated);
         connect(_trayIcon,               &TrayIcon::loadReverbPreset, [this](const QString &preset)
-		{
+        {
             if(preset == "off"){
                 ui->reverb->setChecked(false);
                 applyConfig();
@@ -204,26 +197,26 @@ MainWindow::MainWindow(QString  exepath,
             }
 
             ui->reverb->setChecked(true);
-			ui->roompresets->setCurrentText(preset);
+            ui->roompresets->setCurrentText(preset);
             onReverbPresetUpdated();
-		});
+        });
         connect(_trayIcon, &TrayIcon::restart, this, &MainWindow::onRelinkRequested);
         connect(_trayIcon, &TrayIcon::loadEqPreset, [this](const QString &preset)
-		{
+        {
             ui->enable_eq->setChecked(true);
 
-			if (preset == "Default")
-			{
-			    resetEQ();
-			}
-			else
-			{
-			    ui->eqpreset->setCurrentText(preset);
+            if (preset == "Default")
+            {
+                resetEQ();
+            }
+            else
+            {
+                ui->eqpreset->setCurrentText(preset);
                 onEqPresetUpdated();
-			}
-		});
+            }
+        });
         connect(_trayIcon, &TrayIcon::loadCrossfeedPreset, [this](int preset)
-		{
+        {
             if(preset == -1)
             {
                 ui->bs2b->setChecked(false);
@@ -235,26 +228,26 @@ MainWindow::MainWindow(QString  exepath,
             ui->crossfeed_mode->setCurrentText(name);
             ui->bs2b->setChecked(true);
             onBs2bPresetUpdated();
-		});
+        });
         connect(_trayIcon, &TrayIcon::loadIrs, [this](const QString &irs)
-		{
+        {
             _currentImpuleResponse = irs;
             ui->conv_enable->setChecked(true);
             determineIrsSelection();
-			applyConfig();
-		});
+            applyConfig();
+        });
         connect(_trayIcon, &TrayIcon::loadPreset, &PresetManager::instance(), &PresetManager::load);
         connect(_trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
         connect(_trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
 
         _trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || _startupInTraySwitch);
-	}
+    }
 
-	// Load config and initialize less important stuff
-	{
+    // Load config and initialize less important stuff
+    {
         //initializeSpectrum();
 
-		connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
+        connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
 
         _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
@@ -271,8 +264,8 @@ MainWindow::MainWindow(QString  exepath,
         connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::saveGraphicEQView);
     }
 
-	// Init 3-dot menu button
-	{
+    // Init 3-dot menu button
+    {
         // Fix tool button height
         int tbSize = ui->disableFX->height() - 4;
         ui->set->setMinimumSize(tbSize + 3, tbSize);
@@ -284,7 +277,7 @@ MainWindow::MainWindow(QString  exepath,
         ui->toolButton->setIconSize(QSize(16,16));
         ui->disableFX->setIconSize(QSize(16,16));
 
-		QMenu *menu = new QMenu();
+        QMenu *menu = new QMenu();
         menu->addAction(tr("Apps"), _appMgrFragment, &FragmentHost<AppManagerFragment*>::slideIn);
         menu->addAction(tr("Driver status"), _statusFragment, [this](){
             _statusFragment->fragment()->updateStatus(_audioService->status());
@@ -293,14 +286,14 @@ MainWindow::MainWindow(QString  exepath,
         menu->addAction(tr("Relink audio pipeline"),   this, SLOT(onRelinkRequested()));
         menu->addSeparator();
         menu->addAction(tr("Reset to defaults"), this, SLOT(onResetRequested()));
-		menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
-		menu->addAction(tr("Save to file"),   this, SLOT(saveExternalFile()));
+        menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
+        menu->addAction(tr("Save to file"),   this, SLOT(saveExternalFile()));
         menu->addSeparator();
         menu->addAction(tr("What's this..."), this, []()
-		{
-			QWhatsThis::enterWhatsThisMode();
-		});
-		ui->toolButton->setMenu(menu);
+        {
+            QWhatsThis::enterWhatsThisMode();
+        });
+        ui->toolButton->setMenu(menu);
 
         connect(_styleHelper, &StyleHelper::iconColorChanged, this, [this](bool white){
             if (white)
@@ -318,21 +311,21 @@ MainWindow::MainWindow(QString  exepath,
                 ui->disableFX->setIcon(QPixmap(":/icons/power.svg"));
             }
         });
-	}
+    }
 
-	// Prepare styles
-	{
+    // Prepare styles
+    {
         _styleHelper->SetStyle();
-		ui->eq_widget->setAccentColor(palette().highlight().color());
-	}
+        ui->eq_widget->setAccentColor(palette().highlight().color());
+    }
 
-	// Extract default EEL files if missing
-	{
+    // Extract default EEL files if missing
+    {
         if (AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract))
-		{
-			extractDefaultEelScripts(false, false);
-		}
-	}
+        {
+            extractDefaultEelScripts(false, false);
+        }
+    }
 
     // Setup file selectors
     {
@@ -341,6 +334,7 @@ MainWindow::MainWindow(QString  exepath,
 
         ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
         ui->conv_files->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
+        ui->conv_files->setBookmarkDirectory(QDir(AppConfig::instance().getPath("irs_favorites")));
 
         ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
         ui->conv_fav->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
@@ -369,91 +363,82 @@ MainWindow::MainWindow(QString  exepath,
         determineIrsSelection();
 
         // Liveprog
-        if (!QFile(_currentLiveprog).exists())
-		{
-			ui->liveprog_dirpath->setText(AppConfig::instance().getLiveprogPath());
-			reloadLiveprog();
-		}
-		else
-		{
-            QDir d2 = QFileInfo(_currentLiveprog).absoluteDir();
-            ui->liveprog_dirpath->setText(d2.absolutePath());
-            reloadLiveprog();
-		}
+        ui->liveprog->coupleIDE(_eelEditor);
+        connect(ui->liveprog, &LiveprogSelectionWidget::liveprogReloadRequested, _audioService, &IAudioService::reloadLiveprog);
+        connect(ui->liveprog, &LiveprogSelectionWidget::unitLabelUpdateRequested, this, &MainWindow::updateUnitLabel);
+    }
 
-	}
+    // Populate preset lists
+    {
+        for (const auto &preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
+        {
+            ui->eqpreset->addItem(preset);
+        }
+    }
 
-	// Populate preset lists
-	{
-		for (const auto &preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
-		{
-			ui->eqpreset->addItem(preset);
-		}
-	}
+    // Connect UI signals
+    {
+        connectActions();
+    }
 
-	// Connect UI signals
-	{
-		connectActions();
-	}
-
-	// Connect non-UI signals (DBus/ACW/...)
-	{
+    // Connect non-UI signals (DBus/ACW/...)
+    {
         connect(&AppConfig::instance(), &AppConfig::themeChanged, this, [this]()
-		{
+        {
             _styleHelper->SetStyle();
-			ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-			ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-			ui->tabbar->redrawTabBar();
-			ui->eq_widget->setAccentColor(palette().highlight().color());
+            ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+            ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+            ui->tabbar->redrawTabBar();
+            ui->eq_widget->setAccentColor(palette().highlight().color());
             _spectrumReloadSignalQueued = true;
-		});
+        });
 
         connect(&AppConfig::instance(), &AppConfig::updated, this, [this](const AppConfig::Key& key, const QVariant& value)
-		{
+        {
             switch(key)
             {
-                case AppConfig::EqualizerShowHandles:
-                    ui->eq_widget->setAlwaysDrawHandles(value.toBool());
-                    break;
-                case AppConfig::TrayIconEnabled:
-                    _trayIcon->setTrayVisible(value.toBool());
-                    break;
-                default:
-                    break;
+            case AppConfig::EqualizerShowHandles:
+                ui->eq_widget->setAlwaysDrawHandles(value.toBool());
+                break;
+            case AppConfig::TrayIconEnabled:
+                _trayIcon->setTrayVisible(value.toBool());
+                break;
+            default:
+                break;
             }
 
-		});
-	}
+        });
+    }
 
-	// Lateinit less important UI stuff and setup tabbar
-	{
+    // Lateinit less important UI stuff and setup tabbar
+    {
         //toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
-		restoreGraphicEQView();
+        restoreGraphicEQView();
         ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
-		ui->tabbar->setAnimatePageChange(true);
-		ui->tabbar->setCustomStackWidget(ui->tabhost);
-		ui->tabbar->setDetachCustomStackedWidget(true);
-		ui->tabbar->addPage("Bass/Misc");
-		ui->tabbar->addPage("Sound Positioning");
-		ui->tabbar->addPage("Reverb");
-		ui->tabbar->addPage("Equalizer");
-		ui->tabbar->addPage("Convolver");
-		ui->tabbar->addPage("DDC");
-		ui->tabbar->addPage("Liveprog");
-		ui->tabbar->addPage("Graphic EQ");
-		ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-		ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
-		ui->tabbar->redrawTabBar();
-	}
+        ui->tabbar->setAnimatePageChange(true);
+        ui->tabbar->setCustomStackWidget(ui->tabhost);
+        ui->tabbar->setDetachCustomStackedWidget(true);
+        ui->tabbar->addPage("Bass/Misc");
+        ui->tabbar->addPage("Sound Positioning");
+        ui->tabbar->addPage("Reverb");
+        ui->tabbar->addPage("Equalizer");
+        ui->tabbar->addPage("Convolver");
+        ui->tabbar->addPage("DDC");
+        ui->tabbar->addPage("Liveprog");
+        ui->tabbar->addPage("Graphic EQ");
+        ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+        ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
+        ui->tabbar->redrawTabBar();
+    }
 
     // Handle first launch
-	{
+    {
         if (!AppConfig::instance().get<bool>(AppConfig::SetupDone))
-		{
-			launchFirstRunSetup();
-		}
-	}
+        {
+            launchFirstRunSetup();
+        }
+    }
 
     Log::information("MainWindow::ctor: UI initialized");
 }
@@ -464,13 +449,13 @@ MainWindow::~MainWindow()
     {
         delete _audioService;
     }
-	delete ui;
+    delete ui;
 }
 
 void MainWindow::fireTimerSignal()
 {
     if (_spectrumReloadSignalQueued)
-	{
+    {
         //restartSpectrum();
     }
 
@@ -484,83 +469,83 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 #ifdef Q_OS_OSX
 
-	if (!event->spontaneous() || !isVisible())
-	{
-		return;
-	}
+    if (!event->spontaneous() || !isVisible())
+    {
+        return;
+    }
 
 #endif
 
     if (_trayIcon->isVisible())
-	{
-		hide();
-		event->ignore();
-	}
+    {
+        hide();
+        event->ignore();
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-     QMainWindow::resizeEvent(event);
-     QSettings().setValue("geometry", saveGeometry());
+    QMainWindow::resizeEvent(event);
+    QSettings().setValue("geometry", saveGeometry());
 }
 
 
 // Systray
 void MainWindow::raiseWindow()
 {
-	/*
-	 * NOTE: Raising the window does not always work!
-	 *
-	 * KDE users can disable 'Focus Stealing Prevention'
-	 * in the Window Behavior section (system settings)
-	 * as a workaround.
-	 */
-	show();
-	setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-	raise();
-	activateWindow();
+    /*
+     * NOTE: Raising the window does not always work!
+     *
+     * KDE users can disable 'Focus Stealing Prevention'
+     * in the Window Behavior section (system settings)
+     * as a workaround.
+     */
+    show();
+    setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+    raise();
+    activateWindow();
 }
 
 void MainWindow::onTrayIconActivated()
 {
-	setVisible(!this->isVisible());
+    setVisible(!this->isVisible());
 
-	if (isVisible())
-	{
-		raiseWindow();
-	}
+    if (isVisible())
+    {
+        raiseWindow();
+    }
 
-	// Hide tray icon if disabled and MainWin is visible (for cmdline force switch)
+    // Hide tray icon if disabled and MainWin is visible (for cmdline force switch)
     if (!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) && this->isVisible())
-	{
+    {
         _trayIcon->setTrayVisible(false);
-	}
+    }
 }
 
 // Fragment handler
 void MainWindow::onFragmentRequested()
 {
-	if (sender() == ui->set)
-	{
+    if (sender() == ui->set)
+    {
         _settingsFragment->fragment()->setMaximumHeight(this->height() - 20);
         _settingsFragment->slideIn();
-	}
-	else if (sender() == ui->cpreset)
-	{
+    }
+    else if (sender() == ui->cpreset)
+    {
         _presetFragment->slideIn();
-	}
+    }
 }
 
 void MainWindow::onResetRequested()
 {
-	QMessageBox::StandardButton reply;
-	reply = QMessageBox::question(this, tr("Reset Configuration"), tr("Are you sure?"),
-	                              QMessageBox::Yes | QMessageBox::No);
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, tr("Reset Configuration"), tr("Are you sure?"),
+                                  QMessageBox::Yes | QMessageBox::No);
 
-	if (reply == QMessageBox::Yes)
-	{
-		DspConfig::instance().loadDefault();
-	}
+    if (reply == QMessageBox::Yes)
+    {
+        DspConfig::instance().loadDefault();
+    }
 }
 
 void MainWindow::onPassthroughToggled()
@@ -583,10 +568,10 @@ void MainWindow::loadExternalFile()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Load custom audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
 
-	if (filename == "")
-	{
-		return;
-	}
+    if (filename == "")
+    {
+        return;
+    }
 
     PresetManager::instance().load(filename);
 }
@@ -596,14 +581,14 @@ void MainWindow::saveExternalFile()
     QString filename = QFileDialog::getSaveFileName(this, tr("Save current audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
 
     if (filename == "")
-	{
-		return;
-	}
+    {
+        return;
+    }
 
     if (QFileInfo(filename).suffix() != "conf")
-	{
-		filename.append(".conf");
-	}
+    {
+        filename.append(".conf");
+    }
 
     applyConfig();
     PresetManager::instance().save(filename);
@@ -670,8 +655,8 @@ void MainWindow::loadConfig()
     ui->ddc_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::ddc_enable));
     _currentVdc      = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
 
-    ui->liveprog_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::liveprog_enable));
-    _currentLiveprog = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::liveprog_file));
+    ui->liveprog->setActive(DspConfig::instance().get<bool>(DspConfig::liveprog_enable));
+    ui->liveprog->setCurrentLiveprog(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::liveprog_file)));
 
     ui->conv_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::convolver_enable));
     ui->conv_ir_opt->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::convolver_optimization_mode));
@@ -682,103 +667,102 @@ void MainWindow::loadConfig()
     ui->eqinterpolator->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_interpolation));
     ui->eqfiltertype->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_filtertype));
 
-	// Parse EQ String to QMap
+    // Parse EQ String to QMap
     QString rawEqString = chopFirstLastChar(DspConfig::instance().get<QString>(DspConfig::tone_eq));
-	bool    isOldFormat = rawEqString.split(";").count() == 15;
+    bool    isOldFormat = rawEqString.split(";").count() == 15;
 
-	if (isOldFormat)
-	{
-		rawEqString = "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;"
-		              + rawEqString;
-	}
+    if (isOldFormat)
+    {
+        rawEqString = "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;"
+                + rawEqString;
+    }
 
-	QVector<float> rawEqData;
+    QVector<float> rawEqData;
 
-	for (auto val : rawEqString.split(";"))
-	{
-		if (!val.isEmpty())
-		{
-			if (isOldFormat)
-			{
-				rawEqData.push_back(val.toFloat() / 100.f);
-			}
-			else
-			{
-				rawEqData.push_back(val.toFloat());
-			}
-		}
-		else
-		{
-			rawEqData.push_back(0.f);
-		}
-	}
+    for (auto val : rawEqString.split(";"))
+    {
+        if (!val.isEmpty())
+        {
+            if (isOldFormat)
+            {
+                rawEqData.push_back(val.toFloat() / 100.f);
+            }
+            else
+            {
+                rawEqData.push_back(val.toFloat());
+            }
+        }
+        else
+        {
+            rawEqData.push_back(0.f);
+        }
+    }
 
-	QMap<float, float> eqData;
-	QVector<double>    dbData;
+    QMap<float, float> eqData;
+    QVector<double>    dbData;
 
-	for (int i = 0; i < rawEqData.size(); i++)
-	{
-		if (i <= 14)
-		{
-			if ((i + 15) < rawEqData.size())
-			{
-				eqData[rawEqData.at(i)] = rawEqData.at(i + 15);
-			}
-			else
-			{
-				eqData[rawEqData.at(i)] = 0.0;
-			}
-		}
-		else
-		{
-			dbData.push_back(rawEqData.at(i));
-		}
-	}
+    for (int i = 0; i < rawEqData.size(); i++)
+    {
+        if (i <= 14)
+        {
+            if ((i + 15) < rawEqData.size())
+            {
+                eqData[rawEqData.at(i)] = rawEqData.at(i + 15);
+            }
+            else
+            {
+                eqData[rawEqData.at(i)] = 0.0;
+            }
+        }
+        else
+        {
+            dbData.push_back(rawEqData.at(i));
+        }
+    }
 
-	// Decide if fixed or flexible EQ should be enabled
-	if (rawEqString.contains("25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0"))
-	{
-		// Use fixed 15-band EQ
-		setEqMode(0);
+    // Decide if fixed or flexible EQ should be enabled
+    if (rawEqString.contains("25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0"))
+    {
+        // Use fixed 15-band EQ
+        setEqMode(0);
 
-		int  it               = 0;
-		bool eqReloadRequired = false;
+        int  it               = 0;
+        bool eqReloadRequired = false;
 
-		for (auto cur_data : ui->eq_widget->getBands())
-		{
-			if (it >= rawEqData.count())
-			{
-				break;
-			}
+        for (auto cur_data : ui->eq_widget->getBands())
+        {
+            if (it >= rawEqData.count())
+            {
+                break;
+            }
 
-			bool equal = isApproximatelyEqual<float>(cur_data, dbData.at(it));
+            bool equal = isApproximatelyEqual<float>(cur_data, dbData.at(it));
 
-			if (eqReloadRequired == false)
-			{
-				eqReloadRequired = !equal;
-			}
+            if (eqReloadRequired == false)
+            {
+                eqReloadRequired = !equal;
+            }
 
-			it++;
-		}
+            it++;
+        }
 
-		if (eqReloadRequired)
-		{
-			ui->eq_widget->setBands(dbData, false);
-		}
-	}
-	else
-	{
-		// Use flexible 15-band EQ
-		setEqMode(1);
-		ui->eq_dyn_widget->loadMap(eqData);
-	}
+        if (eqReloadRequired)
+        {
+            ui->eq_widget->setBands(dbData, false);
+        }
+    }
+    else
+    {
+        // Use flexible 15-band EQ
+        setEqMode(1);
+        ui->eq_dyn_widget->loadMap(eqData);
+    }
 
     updateAllUnitLabels();
 
     determineEqPresetName();
     determineIrsSelection();
     determineVdcSelection();
-    reloadLiveprog();
 
     _blockApply = false;
 }
@@ -801,8 +785,8 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::ddc_enable,                 QVariant(ui->ddc_enable->isChecked()));
     DspConfig::instance().set(DspConfig::ddc_file,                   QVariant("\"" + _currentVdc + "\""));
 
-    DspConfig::instance().set(DspConfig::liveprog_enable,            QVariant(ui->liveprog_enable->isChecked()));
-    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant("\"" + _currentLiveprog + "\""));
+    DspConfig::instance().set(DspConfig::liveprog_enable,            QVariant(ui->liveprog->isActive()));
+    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant("\"" + ui->liveprog->currentLiveprog() + "\""));
 
     DspConfig::instance().set(DspConfig::convolver_enable,           QVariant(ui->conv_enable->isChecked()));
     DspConfig::instance().set(DspConfig::convolver_optimization_mode,QVariant(ui->conv_ir_opt->currentIndex()));
@@ -818,32 +802,32 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::tone_filtertype,            QVariant(ui->eqfiltertype->currentIndex()));
     DspConfig::instance().set(DspConfig::tone_interpolation,         QVariant(ui->eqinterpolator->currentIndex()));
 
-	if (ui->eq_r_fixed->isChecked())
-	{
-		QVector<double> eqBands     = ui->eq_widget->getBands();
-		QString         rawEqString = "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;";
-		int             counter     = 0;
+    if (ui->eq_r_fixed->isChecked())
+    {
+        QVector<double> eqBands     = ui->eq_widget->getBands();
+        QString         rawEqString = "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;";
+        int             counter     = 0;
 
-		for (auto band : eqBands)
-		{
-			rawEqString.append(QString::number(band));
+        for (auto band : eqBands)
+        {
+            rawEqString.append(QString::number(band));
 
-			if (counter < 14)
-			{
-				rawEqString.append(';');
-			}
+            if (counter < 14)
+            {
+                rawEqString.append(';');
+            }
 
-			counter++;
-		}
+            counter++;
+        }
 
         DspConfig::instance().set(DspConfig::tone_eq, QVariant("\"" + rawEqString + "\""));
-	}
-	else
-	{
-		QString rawEqString;
-		ui->eq_dyn_widget->storeCsv(rawEqString);
+    }
+    else
+    {
+        QString rawEqString;
+        ui->eq_dyn_widget->storeCsv(rawEqString);
         DspConfig::instance().set(DspConfig::tone_eq, QVariant("\"" + rawEqString + "\""));
-	}
+    }
 
     DspConfig::instance().set(DspConfig::bass_enable,               QVariant(ui->bassboost->isChecked()));
     DspConfig::instance().set(DspConfig::bass_maxgain,              QVariant(ui->bass_maxgain->valueA()));
@@ -876,8 +860,8 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::reverb_delay,              QVariant(ui->rev_delay->valueA() / 10.0f));
 
     DspConfig::instance().set(DspConfig::graphiceq_enable,          QVariant(ui->graphicEq->chk_enable->isChecked()));
-	QString streq;
-	ui->graphicEq->store(streq);
+    QString streq;
+    ui->graphicEq->store(streq);
     DspConfig::instance().set(DspConfig::graphiceq_param,           QVariant("\"" + streq + "\""));
 
     DspConfig::instance().commit();
@@ -890,213 +874,214 @@ void MainWindow::applyConfig()
 void MainWindow::onEqPresetUpdated()
 {
     if (ui->eqpreset->currentText() == "Custom" || _blockApply)
-	{
-		return;
-	}
+    {
+        return;
+    }
 
-	auto preset = PresetProvider::EQ::lookupPreset(ui->eqpreset->currentText());
+    auto preset = PresetProvider::EQ::lookupPreset(ui->eqpreset->currentText());
 
-	if (preset.size() > 0)
-	{
-		setEq(preset);
-	}
-	else
-	{
-		resetEQ();
-	}
+    if (preset.size() > 0)
+    {
+        setEq(preset);
+    }
+    else
+    {
+        resetEQ();
+    }
 }
 
 void MainWindow::onBs2bPresetUpdated()
 {
     if (ui->crossfeed_mode->currentText() == "..." || _blockApply)
-	{
-		return;
-	}
+    {
+        return;
+    }
 
-	const auto index = PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText());
+    const auto index = PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText());
 
     _blockApply = true;
-	switch (index)
-	{
-		case 0: // BS2B weak
-			ui->bs2b_fcut->setValueA(700);
-			ui->bs2b_feed->setValueA(60);
-			break;
-		case 1: // BS2B strong
-			ui->bs2b_fcut->setValueA(650);
-			ui->bs2b_feed->setValueA(95);
-			break;
-	}
+    switch (index)
+    {
+    case 0: // BS2B weak
+        ui->bs2b_fcut->setValueA(700);
+        ui->bs2b_feed->setValueA(60);
+        break;
+    case 1: // BS2B strong
+        ui->bs2b_fcut->setValueA(650);
+        ui->bs2b_feed->setValueA(95);
+        break;
+    }
 
     ui->bs2b_custom_box->setEnabled(index == 99);
     _blockApply = false;
 
-	updateAllUnitLabels();
+    updateAllUnitLabels();
     applyConfig();
 }
 
 void MainWindow::onReverbPresetUpdated()
 {
     if (ui->roompresets->currentText() == "..." || _blockApply)
-	{
-		return;
-	}
+    {
+        return;
+    }
 
-	const auto data = PresetProvider::Reverb::lookupPreset(ui->roompresets->currentIndex());
+    const auto data = PresetProvider::Reverb::lookupPreset(ui->roompresets->currentIndex());
     _blockApply = true;
-	ui->rev_osf->setValueA(data.osf);
-	ui->rev_era->setValueA((int) (data.p1 * 100));
-	ui->rev_finalwet->setValueA((int) (data.p2 * 10));
-	ui->rev_finaldry->setValueA((int) (data.p3 * 10));
-	ui->rev_erf->setValueA((int) (data.p4 * 100));
-	ui->rev_erw->setValueA((int) (data.p5 * 100));
-	ui->rev_width->setValueA((int) (data.p6 * 100));
-	ui->rev_wet->setValueA((int) (data.p7 * 10));
-	ui->rev_wander->setValueA((int) (data.p8 * 100));
-	ui->rev_bass->setValueA((int) (data.p9 * 100));
-	ui->rev_spin->setValueA((int) (data.p10 * 100));
-	ui->rev_lci->setValueA((int) data.p11);
-	ui->rev_lcb->setValueA((int) data.p12);
-	ui->rev_lcd->setValueA((int) data.p13);
-	ui->rev_lco->setValueA((int) data.p14);
-	ui->rev_decay->setValueA((int) (data.p15 * 100));
-	ui->rev_delay->setValueA((int) (data.p16 * 10));
-	updateAllUnitLabels();
+    ui->rev_osf->setValueA(data.osf);
+    ui->rev_era->setValueA((int) (data.p1 * 100));
+    ui->rev_finalwet->setValueA((int) (data.p2 * 10));
+    ui->rev_finaldry->setValueA((int) (data.p3 * 10));
+    ui->rev_erf->setValueA((int) (data.p4 * 100));
+    ui->rev_erw->setValueA((int) (data.p5 * 100));
+    ui->rev_width->setValueA((int) (data.p6 * 100));
+    ui->rev_wet->setValueA((int) (data.p7 * 10));
+    ui->rev_wander->setValueA((int) (data.p8 * 100));
+    ui->rev_bass->setValueA((int) (data.p9 * 100));
+    ui->rev_spin->setValueA((int) (data.p10 * 100));
+    ui->rev_lci->setValueA((int) data.p11);
+    ui->rev_lcb->setValueA((int) data.p12);
+    ui->rev_lcd->setValueA((int) data.p13);
+    ui->rev_lco->setValueA((int) data.p14);
+    ui->rev_decay->setValueA((int) (data.p15 * 100));
+    ui->rev_delay->setValueA((int) (data.p16 * 10));
+    updateAllUnitLabels();
     _blockApply = false;
 
     applyConfig();
 }
 
 // ---Status
-void MainWindow::updateUnitLabel(int      d,
+void MainWindow::updateUnitLabel(int   d,
                                  QObject *alt)
 {
     if (_blockApply && alt == nullptr)
-	{
-        return; // Skip if lockapply-flag is set (when setting presets, ...)
-	}
+    {
+        return; // Skip if blockapply-flag is set (when setting presets, ...)
+    }
 
-	QObject *obj;
+    QObject *obj;
 
-	if (alt == nullptr)
-	{
-		obj = sender();
-	}
-	else
-	{
-		obj = alt;
-	}
+    if (alt == nullptr)
+    {
+        obj = sender();
+    }
+    else
+    {
+        obj = alt;
+    }
 
-	QString pre  = "";
-	QString post = "";
+    QString pre  = "";
+    QString post = "";
 
-	if (obj == ui->rev_width)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d) + "%", alt == nullptr);
-	}
-	else if (obj == ui->bs2b_feed)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "dB", alt == nullptr);
-	}
-	else if (obj == ui->analog_tubedrive)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d / 100) + "dB", alt == nullptr);
-	}
-	else if (obj == ui->rev_decay)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
-	}
-	else if (obj == ui->rev_delay)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "ms", alt == nullptr);
-	}
-	else if (obj == ui->rev_wet || obj == ui->rev_finalwet || obj == ui->rev_finaldry)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "dB", alt == nullptr);
-	}
-	else if (obj == ui->rev_era || obj == ui->rev_erf || obj == ui->rev_erw
-	         || obj == ui->rev_width || obj == ui->rev_bass || obj == ui->rev_spin
-	         || obj == ui->rev_wander)
-	{
-		updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
-	}
-	else if (obj == ui->eqfiltertype || obj == ui->eqinterpolator || obj == ui->conv_ir_opt)
-	{
-		// Ignore these UI elements
-	}
-	else if (obj->property("isCustomEELProperty").toBool())
-	{
-		if (obj->property("handleAsInt").toBool())
-		{
-			updateTooltipLabelUnit(obj, QString::number((int) d / 100), alt == nullptr);
-		}
-		else
-		{
-			updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
-		}
-	}
-	else
-	{
-		if (obj == ui->postgain)
-		{
-			post = "dB";
-		}
-		else if (obj == ui->comp_maxattack || obj == ui->comp_maxrelease || obj == ui->limrelease)
-		{
-			post = "ms";
-		}
-		else if (obj == ui->bass_maxgain)
-		{
-			post = "dB";
-		}
-		else if (obj == ui->bs2b_fcut)
-		{
-			post = "Hz";
-		}
-		else if (obj == ui->rev_lcb || obj == ui->rev_lcd
-		         || obj == ui->rev_lci || obj == ui->rev_lco)
-		{
-			post = "Hz";
-		}
-		else if (obj == ui->rev_osf)
-		{
-			post = "x";
-		}
+    if (obj == ui->rev_width)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d) + "%", alt == nullptr);
+    }
+    else if (obj == ui->bs2b_feed)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "dB", alt == nullptr);
+    }
+    else if (obj == ui->analog_tubedrive)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d / 100) + "dB", alt == nullptr);
+    }
+    else if (obj == ui->rev_decay)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
+    }
+    else if (obj == ui->rev_delay)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "ms", alt == nullptr);
+    }
+    else if (obj == ui->rev_wet || obj == ui->rev_finalwet || obj == ui->rev_finaldry)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "dB", alt == nullptr);
+    }
+    else if (obj == ui->rev_era || obj == ui->rev_erf || obj == ui->rev_erw
+             || obj == ui->rev_width || obj == ui->rev_bass || obj == ui->rev_spin
+             || obj == ui->rev_wander)
+    {
+        updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
+    }
+    else if (obj == ui->eqfiltertype || obj == ui->eqinterpolator || obj == ui->conv_ir_opt)
+    {
+        // Ignore these UI elements
+    }
+    else if(obj->property("isCustomEELProperty").toBool())
+    {
+        if (obj->property("handleAsInt").toBool())
+        {
+            updateTooltipLabelUnit(obj, QString::number((int) d / 100), true);
+        }
+        else
+        {
+            updateTooltipLabelUnit(obj, QString::number((double) d / 100), true);
+        }
+    }
 
-		updateTooltipLabelUnit(obj, pre + QString::number(d) + post, alt == nullptr);
-	}
+    else
+    {
+        if (obj == ui->postgain)
+        {
+            post = "dB";
+        }
+        else if (obj == ui->comp_maxattack || obj == ui->comp_maxrelease || obj == ui->limrelease)
+        {
+            post = "ms";
+        }
+        else if (obj == ui->bass_maxgain)
+        {
+            post = "dB";
+        }
+        else if (obj == ui->bs2b_fcut)
+        {
+            post = "Hz";
+        }
+        else if (obj == ui->rev_lcb || obj == ui->rev_lcd
+                 || obj == ui->rev_lci || obj == ui->rev_lco)
+        {
+            post = "Hz";
+        }
+        else if (obj == ui->rev_osf)
+        {
+            post = "x";
+        }
+
+        updateTooltipLabelUnit(obj, pre + QString::number(d) + post, alt == nullptr);
+    }
 }
 
 void MainWindow::updateTooltipLabelUnit(QObject       *sender,
                                         const QString &text,
                                         bool           viasignal)
 {
-	QWidget *w = qobject_cast<QWidget*>(sender);
-	w->setToolTip(text);
+    QWidget *w = qobject_cast<QWidget*>(sender);
+    w->setToolTip(text);
 
-	if (viasignal)
-	{
-		ui->info->setText(text);
-	}
+    if (viasignal)
+    {
+        ui->info->setText(text);
+    }
 }
 
 void MainWindow::updateAllUnitLabels()
 {
-	QList<QComboBox*>       comboboxesToBeUpdated({ ui->eqfiltertype, ui->eqinterpolator });
+    QList<QComboBox*>       comboboxesToBeUpdated({ ui->eqfiltertype, ui->eqinterpolator });
 
-	QList<QAnimatedSlider*> slidersToBeUpdated({
-		ui->analog_tubedrive, ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed,
-		ui->limthreshold, ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack,
-		ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw, ui->rev_lci, ui->rev_lcb, ui->rev_lcd,
-		ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin, ui->rev_wander, ui->rev_decay,
-		ui->rev_delay, ui->rev_bass, ui->postgain, ui->comp_aggressiveness, ui->bass_maxgain
-	});
+    QList<QAnimatedSlider*> slidersToBeUpdated({
+                                                   ui->analog_tubedrive, ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed,
+                                                   ui->limthreshold, ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack,
+                                                   ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw, ui->rev_lci, ui->rev_lcb, ui->rev_lcd,
+                                                   ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin, ui->rev_wander, ui->rev_decay,
+                                                   ui->rev_delay, ui->rev_bass, ui->postgain, ui->comp_aggressiveness, ui->bass_maxgain
+                                               });
 
-	foreach(auto w, slidersToBeUpdated)
-	updateUnitLabel(w->valueA(), w);
+    foreach(auto w, slidersToBeUpdated)
+        updateUnitLabel(w->valueA(), w);
 
-	foreach(auto w, comboboxesToBeUpdated)
-	updateUnitLabel(w->currentIndex(), w);
+    foreach(auto w, comboboxesToBeUpdated)
+        updateUnitLabel(w->currentIndex(), w);
 }
 
 // ---DDC
@@ -1113,9 +1098,9 @@ void MainWindow::determineVdcSelection()
 
     // File does not exist anymore
     if (!QFile(_currentVdc).exists())
-	{
+    {
         ui->ddc_files->setCurrentDirectory(AppConfig::instance().getDDCPath());
-	}
+    }
     // File is from database
     else if (_currentVdc == AppConfig::instance().getPath("temp.vdc"))
     {
@@ -1141,10 +1126,10 @@ void MainWindow::determineVdcSelection()
         }
     }
     // External file
-	else
-	{
+    else
+    {
         ui->ddc_files->setCurrentFile(_currentVdc);
-	}
+    }
 }
 
 void MainWindow::onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &) {
@@ -1201,265 +1186,134 @@ void MainWindow::determineIrsSelection()
 
     // File was selected from favorites
     if (_currentImpuleResponse.contains(AppConfig::instance().getPath("irs_favorites")))
-	{
+    {
         ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
         ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
         ui->conv_fav->setCurrentFile(_currentImpuleResponse);
-		ui->convTabs->setCurrentIndex(1);
-	}
+        ui->convTabs->setCurrentIndex(1);
+    }
     // File does not exist anymore
     else if (!QFile(_currentImpuleResponse).exists())
-	{
+    {
         ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
-	}
+    }
     // External file
-	else
-	{
+    else
+    {
         ui->conv_files->setCurrentFile(_currentImpuleResponse);
-	}
+    }
 }
 
 void MainWindow::onConvolverWaveformEdit()
 {
-	bool    ok;
-	QString text = QInputDialog::getText(this, tr("Advanced waveform editing"),
-	                                     tr("Advanced waveform editing (6 semicolon-separated values; default: -80;-100;0;0;0;0)"), QLineEdit::Normal,
+    bool    ok;
+    QString text = QInputDialog::getText(this, tr("Advanced waveform editing"),
+                                         tr("Advanced waveform editing (6 semicolon-separated values; default: -80;-100;0;0;0;0)"), QLineEdit::Normal,
                                          _currentConvWaveformEdit, &ok,
-	                                     Qt::WindowFlags(), Qt::ImhFormattedNumbersOnly);
+                                         Qt::WindowFlags(), Qt::ImhFormattedNumbersOnly);
 
-	if (ok && !text.isEmpty())
-	{
+    if (ok && !text.isEmpty())
+    {
         _currentConvWaveformEdit = text;
 
-		applyConfig();
+        applyConfig();
     }
 }
 
 // ---Liveprog
-void MainWindow::reloadLiveprog()
-{
-    _lockliveprogupdate = true;
-	QDir        path(ui->liveprog_dirpath->text());
-	QStringList nameFilter("*.eel");
-	QStringList files = path.entryList(nameFilter);
-	ui->liveprog_files->clear();
-
-	if (files.empty())
-	{
-		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setText("No EEL files found");
-		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
-		ui->liveprog_files->addItem(placeholder);
-	}
-	else
-	{
-		ui->liveprog_files->addItems(files);
-	}
-
-	if (ui->liveprog_files->count() >= 1)
-	{
-		for (int i = 0; i < ui->liveprog_files->count(); i++)
-		{
-            if (ui->liveprog_files->item(i)->text() == QFileInfo(_currentLiveprog).fileName())
-			{
-				ui->liveprog_files->setCurrentRow(i);
-                setLiveprogSelection(_currentLiveprog);
-				break;
-			}
-		}
-	}
-
-    _lockliveprogupdate = false;
-}
-
-void MainWindow::setLiveprogSelection(QString path)
-{
-    _eelParser->loadFile(path);
-    ui->liveprog_name->setText(_eelParser->getDescription());
-    ui->liveprog_editscript->setText("Edit script");
-
-	QLayoutItem *item;
-
-	while ((item = ui->liveprog_ui_container->layout()->takeAt(0)) != NULL )
-	{
-		delete item->widget();
-		delete item;
-	}
-
-    EELProperties props = _eelParser->getProperties();
-
-    for (EELBaseProperty* propbase : props)
-	{
-        if (propbase->getType() == EELPropertyType::NumberRange)
-		{
-            EELNumberRangeProperty<float> *prop        = dynamic_cast<EELNumberRangeProperty<float>*>(propbase);
-            bool                           handleAsInt = std::floor(prop->getStep()) == prop->getStep();
-			QLabel                        *lbl         = new QLabel(this);
-			QAnimatedSlider               *sld         = new QAnimatedSlider(this);
-			lbl->setText(prop->getDescription());
-
-			sld->setMinimum(prop->getMinimum() * 100);
-			sld->setMaximum(prop->getMaximum() * 100);
-			sld->setValue(prop->getMinimum() * 100);
-			sld->setValueA(prop->getValue() * 100);
-			sld->setOrientation(Qt::Horizontal);
-			sld->setToolTip(QString::number(prop->getValue()));
-			sld->setProperty("isCustomEELProperty", true);
-			sld->setProperty("handleAsInt",         handleAsInt);
-
-			sld->setObjectName(prop->getKey());
-			sld->installEventFilter(new ScrollFilter);
-
-			ui->liveprog_ui_container->layout()->addWidget(lbl);
-			ui->liveprog_ui_container->layout()->addWidget(sld);
-
-			connect(sld, SIGNAL(valueChangedA(int)),       this, SLOT(updateUnitLabel(int)));
-			connect(sld, &QAbstractSlider::sliderReleased, [this, sld, prop] {
-				float val = sld->valueA() / 100.f;
-				prop->setValue(val);
-                _eelParser->manipulateProperty(prop);
-                ui->liveprog_reset->setEnabled(_eelParser->canLoadDefaults());
-
-                _audioService->reloadLiveprog();
-			});
-
-		}
-	}
-
-	if (props.isEmpty())
-	{
-		QLabel *lbl = new QLabel(this);
-		lbl->setText("No customizable parameters");
-		ui->liveprog_ui_container->layout()->addWidget(lbl);
-		ui->liveprog_reset->hide();
-	}
-	else
-	{
-        ui->liveprog_reset->setVisible(_eelParser->hasDefaultsDefined());
-        ui->liveprog_reset->setEnabled(_eelParser->canLoadDefaults());
-	}
-}
-
-void MainWindow::onResetLiveprogParams()
-{
-    if (!_eelParser->loadDefaults())
-	{
-		QMessageBox::warning(this, "Error", "Cannot load backup\nThe backup file doesn't exist anymore.");
-	}
-
-    _audioService->reloadLiveprog();
-
-    setLiveprogSelection(_eelParser->getPath());
-}
-
-void MainWindow::updateFromEelEditor(QString path)
-{
-    if (_eelParser->getPath() == path)
-	{
-        setLiveprogSelection(_eelParser->getPath());
-	}
-	else
-	{
-		EELParser parser;
-        parser.loadFile(path);
-
-        _audioService->reloadLiveprog();
-	}
-}
-
 int MainWindow::extractDefaultEelScripts(bool allowOverride,
                                          bool user)
 {
-	QDirIterator it(":/assets/liveprog", QDirIterator::NoIteratorFlags);
-	int          i = 0;
+    QDirIterator it(":/assets/liveprog", QDirIterator::NoIteratorFlags);
+    int          i = 0;
 
-	while (it.hasNext())
-	{
-		QFile   eel(it.next());
-		QString name    = QFileInfo(eel).fileName();
-		QString newpath = AppConfig::instance().getLiveprogPath() + "/" + name;
+    while (it.hasNext())
+    {
+        QFile   eel(it.next());
+        QString name    = QFileInfo(eel).fileName();
+        QString newpath = AppConfig::instance().getLiveprogPath() + "/" + name;
 
-		if (QFile(newpath).exists() && !allowOverride)
-		{
-			continue;
-		}
+        if (QFile(newpath).exists() && !allowOverride)
+        {
+            continue;
+        }
 
         if(!QDir(AppConfig::instance().getLiveprogPath()).exists())
         {
             QDir().mkpath(AppConfig::instance().getLiveprogPath());
         }
 
-		QFile file(newpath);
+        QFile file(newpath);
 
-		if (eel.open(QIODevice::ReadOnly | QIODevice::Text) &&
-		    file.open(QIODevice::WriteOnly | QIODevice::Text))
-		{
-			QTextStream stream(&file);
-			stream << eel.readAll();
-			file.close();
-			eel.close();
-		}
+        if (eel.open(QIODevice::ReadOnly | QIODevice::Text) &&
+                file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream stream(&file);
+            stream << eel.readAll();
+            file.close();
+            eel.close();
+        }
 
-		i++;
-	}
+        i++;
+    }
 
-	if (i > 0)
-	{
+    if (i > 0)
+    {
         Log::debug(QString("MainWindow::extractDefaultEelScripts: %1 default eel files extracted").arg(i));
-	}
+    }
 
-	if (user)
-	{
-		if (i > 0)
-		{
-			QMessageBox::information(this, "Extract scripts", QString("%1 script(s) have been restored").arg(i));
-		}
-		else
-		{
-			QMessageBox::information(this, "Extract scripts", QString("No scripts have been extracted"));
-		}
-	}
+    if (user)
+    {
+        if (i > 0)
+        {
+            QMessageBox::information(this, "Extract scripts", QString("%1 script(s) have been restored").arg(i));
+        }
+        else
+        {
+            QMessageBox::information(this, "Extract scripts", QString("No scripts have been extracted"));
+        }
+    }
 
-	return i;
+    return i;
 }
 
 // ---Helper
 void MainWindow::setEq(const QVector<double> &data)
 {
     _blockApply = true;
-	ui->eq_widget->setBands(QVector<double>(data));
+    ui->eq_widget->setBands(QVector<double>(data));
     _blockApply = false;
     applyConfig();
 }
 
 void MainWindow::resetEQ()
 {
-	ui->eqpreset->setCurrentIndex(0);
-	ui->eq_dyn_widget->load(DEFAULT_GRAPHICEQ);
-	setEq(PresetProvider::EQ::defaultPreset());
-	applyConfig();
+    ui->eqpreset->setCurrentIndex(0);
+    ui->eq_dyn_widget->load(DEFAULT_GRAPHICEQ);
+    setEq(PresetProvider::EQ::defaultPreset());
+    applyConfig();
 }
 
 void MainWindow::determineEqPresetName()
 {
-	QString currentEqPresetName =
-		PresetProvider::EQ::reverseLookup(ui->eq_widget->getBands());
+    QString currentEqPresetName =
+            PresetProvider::EQ::reverseLookup(ui->eq_widget->getBands());
 
-	ui->eqpreset->setCurrentText(currentEqPresetName);
+    ui->eqpreset->setCurrentText(currentEqPresetName);
 }
 
 void MainWindow::onEqModeUpdated()
 {
-	bool isFixed = ui->eq_r_fixed->isChecked();
-	setEqMode(isFixed ? 0 : 1);
+    bool isFixed = ui->eq_r_fixed->isChecked();
+    setEqMode(isFixed ? 0 : 1);
 }
 
 void MainWindow::setEqMode(int mode)
 {
-	ui->eq_holder->setCurrentIndex(mode);
-	ui->eqpreset->setEnabled(!mode);
-	ui->eq_r_flex->setChecked(mode);
-	ui->eq_r_fixed->setChecked(!mode);
+    ui->eq_holder->setCurrentIndex(mode);
+    ui->eqpreset->setEnabled(!mode);
+    ui->eq_r_flex->setChecked(mode);
+    ui->eq_r_fixed->setChecked(!mode);
 }
 
 void MainWindow::onAutoEqImportRequested()
@@ -1488,80 +1342,78 @@ void MainWindow::onAutoEqImportRequested()
 // ---GraphicEQ States
 void MainWindow::restoreGraphicEQView()
 {
-	QVariantMap state;
-	state = ConfigIO::readFile(AppConfig::instance().getGraphicEQConfigFilePath());
+    QVariantMap state;
+    state = ConfigIO::readFile(AppConfig::instance().getGraphicEQConfigFilePath());
 
-	if (state.count() >= 1)
-	{
-		ui->graphicEq->loadPreferences(state);
-	}
-	else
-	{
-		ConfigContainer pref;
-		pref.setValue("scrollX", 165.346);
-		pref.setValue("scrollY", 50);
-		pref.setValue("zoomX",   0.561);
-		pref.setValue("zoomY",   0.713);
-		ui->graphicEq->loadPreferences(pref.getConfigMap());
-	}
+    if (state.count() >= 1)
+    {
+        ui->graphicEq->loadPreferences(state);
+    }
+    else
+    {
+        ConfigContainer pref;
+        pref.setValue("scrollX", 165.346);
+        pref.setValue("scrollY", 50);
+        pref.setValue("zoomX",   0.561);
+        pref.setValue("zoomY",   0.713);
+        ui->graphicEq->loadPreferences(pref.getConfigMap());
+    }
 }
 
 void MainWindow::saveGraphicEQView()
 {
-	QVariantMap state;
-	ui->graphicEq->storePreferences(state);
-	ConfigIO::writeFile(AppConfig::instance().getGraphicEQConfigFilePath(),
-	                    state);
+    QVariantMap state;
+    ui->graphicEq->storePreferences(state);
+    ConfigIO::writeFile(AppConfig::instance().getGraphicEQConfigFilePath(),
+                        state);
 }
 
 // ---Connect UI-Signals
 void MainWindow::connectActions()
 {
-	QString                 absolute = QFileInfo(AppConfig::instance().getDspConfPath()).absoluteDir().absolutePath();
+    QList<QAnimatedSlider*> registerValueAChange({
+                                                     ui->analog_tubedrive, ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->bass_maxgain,
+                                                     ui->limthreshold, ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
+                                                     ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw, ui->rev_lci, ui->rev_lcb, ui->rev_lcd,
+                                                     ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin, ui->rev_wander, ui->rev_decay,
+                                                     ui->rev_delay, ui->rev_bass, ui->postgain
+                                                 });
 
-	QList<QAnimatedSlider*> registerValueAChange({
-		ui->analog_tubedrive, ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->bass_maxgain,
-		ui->limthreshold, ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
-		ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw, ui->rev_lci, ui->rev_lcb, ui->rev_lcd,
-		ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin, ui->rev_wander, ui->rev_decay,
-		ui->rev_delay, ui->rev_bass, ui->postgain
-	});
+    QList<QWidget*> registerSliderRelease({
+                                              ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw,
+                                              ui->rev_lci, ui->rev_lcb, ui->rev_lcd, ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin,
+                                              ui->rev_wander, ui->rev_decay, ui->rev_delay, ui->rev_bass, ui->analog_tubedrive, ui->limthreshold,
+                                              ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
+                                              ui->bass_maxgain, ui->postgain
+                                          });
 
-	QList<QWidget*> registerSliderRelease({
-		ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw,
-		ui->rev_lci, ui->rev_lcb, ui->rev_lcd, ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin,
-		ui->rev_wander, ui->rev_decay, ui->rev_delay, ui->rev_bass, ui->analog_tubedrive, ui->limthreshold,
-		ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
-		ui->bass_maxgain, ui->postgain
-	});
+    QList<QWidget*> registerClick({
+                                      ui->bassboost, ui->bs2b, ui->stereowidener, ui->analog, ui->reverb, ui->enable_eq, ui->enable_comp, ui->ddc_enable, ui->conv_enable,
+                                      ui->graphicEq->chk_enable
+                                  });
 
-	QList<QWidget*> registerClick({
-		ui->bassboost, ui->bs2b, ui->stereowidener, ui->analog, ui->reverb, ui->enable_eq, ui->enable_comp, ui->ddc_enable, ui->conv_enable,
-		ui->graphicEq->chk_enable, ui->liveprog_enable
-	});
+    foreach(QWidget * w, registerValueAChange)
+        connect(w, SIGNAL(valueChangedA(int)), this, SLOT(updateUnitLabel(int)));
 
-	foreach(QWidget * w, registerValueAChange)
-	connect(w, SIGNAL(valueChangedA(int)), this, SLOT(updateUnitLabel(int)));
+    foreach(QWidget * w, registerSliderRelease)
+        connect(w, SIGNAL(sliderReleased()), this, SLOT(applyConfig()));
 
-	foreach(QWidget * w, registerSliderRelease)
-    connect(w, SIGNAL(sliderReleased()), this, SLOT(applyConfig()));
-
-	foreach(QWidget * w, registerClick)
-    connect(w,                      SIGNAL(clicked()),                this, SLOT(applyConfig()));
+    foreach(QWidget * w, registerClick)
+        connect(w,                      SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
     connect(ui->disableFX,          SIGNAL(clicked()),                this, SLOT(onPassthroughToggled()));
-	connect(ui->reseteq,            SIGNAL(clicked()),                this, SLOT(resetEQ()));
+    connect(ui->reseteq,            SIGNAL(clicked()),                this, SLOT(resetEQ()));
     connect(ui->cpreset,            SIGNAL(clicked()),                this, SLOT(onFragmentRequested()));
     connect(ui->set,                SIGNAL(clicked()),                this, SLOT(onFragmentRequested()));
 
-	connect(ui->eq_r_fixed,         SIGNAL(clicked()),                this, SLOT(applyConfig()));
-	connect(ui->eq_r_flex,          SIGNAL(clicked()),                this, SLOT(applyConfig()));
+    connect(ui->eq_r_fixed,         SIGNAL(clicked()),                this, SLOT(applyConfig()));
+    connect(ui->eq_r_flex,          SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
     connect(ui->eqfiltertype,       SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
     connect(ui->eqinterpolator,     SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
     connect(ui->conv_ir_opt,        SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
 
-	connect(ui->eq_widget,          SIGNAL(bandsUpdated()),           this, SLOT(applyConfig()));
+    connect(ui->eq_widget,          SIGNAL(bandsUpdated()),           this, SLOT(applyConfig()));
     connect(ui->eq_widget,          SIGNAL(mouseReleased()),          this, SLOT(determineEqPresetName()));
     connect(ui->eqpreset,           SIGNAL(currentIndexChanged(int)), this, SLOT(onEqPresetUpdated()));
     connect(ui->roompresets,        SIGNAL(currentIndexChanged(int)), this, SLOT(onReverbPresetUpdated()));
@@ -1577,65 +1429,15 @@ void MainWindow::connectActions()
     connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::updateModelEnd, this, &MainWindow::applyConfig);
 
     connect(ui->ddcTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onVdcDatabaseSelected);
+    connect(ui->liveprog,           &LiveprogSelectionWidget::toggled,       this, &MainWindow::applyConfig);
+    connect(ui->liveprog,           &LiveprogSelectionWidget::scriptChanged, this, &MainWindow::applyConfig);
 
-	connect(ui->liveprog_reload, SIGNAL(clicked()),                  this, SLOT(reloadLiveprog()));
-	connect(ui->liveprog_files,  &QListWidget::itemSelectionChanged, [this] {
-        if (_lockliveprogupdate || ui->liveprog_files->selectedItems().count() < 1)
-		{
-		    return; // Clearing Selection by code != User Interaction
-		}
+    connect(ui->graphicEq,          &GraphicEQFilterGUI::autoeqClicked, this, &MainWindow::onAutoEqImportRequested);
 
-		QString path = QDir(ui->liveprog_dirpath->text()).filePath(ui->liveprog_files->selectedItems().first()->text());
+    connect(ui->eq_r_fixed,         &QRadioButton::clicked,             this, &MainWindow::onEqModeUpdated);
+    connect(ui->eq_r_flex,          &QRadioButton::clicked,             this, &MainWindow::onEqModeUpdated);
 
-		if (QFileInfo::exists(path) && QFileInfo(path).isFile())
-		{
-            _currentLiveprog = path;
-		}
-
-        setLiveprogSelection(_currentLiveprog);
-
-        applyConfig();
-	});
-	connect(ui->liveprog_select, &QPushButton::clicked, [this] {
-		QFileDialog *fd = new QFileDialog;
-		fd->setFileMode(QFileDialog::Directory);
-		fd->setOption(QFileDialog::ShowDirsOnly);
-		fd->setViewMode(QFileDialog::Detail);
-		QString result = fd->getExistingDirectory();
-
-		if (result != "")
-		{
-		    ui->liveprog_dirpath->setText(result);
-		    reloadLiveprog();
-		}
-	});
-
-    connect(ui->graphicEq, &GraphicEQFilterGUI::autoeqClicked, this, &MainWindow::onAutoEqImportRequested);
-
-    connect(ui->eq_r_fixed,          &QRadioButton::clicked,    this, &MainWindow::onEqModeUpdated);
-    connect(ui->eq_r_flex,           &QRadioButton::clicked,    this, &MainWindow::onEqModeUpdated);
-
-    connect(_eelEditor,             &EELEditor::scriptSaved,   this, &MainWindow::updateFromEelEditor);
-    connect(ui->liveprog_reset,      &QAbstractButton::clicked, this, &MainWindow::onResetLiveprogParams);
-	connect(ui->liveprog_editscript, &QAbstractButton::clicked, [this] {
-        if (_currentLiveprog.isEmpty())
-		{
-            _eelEditor->show();
-            _eelEditor->raise();
-            _eelEditor->newProject();
-            return;
-		}
-        else if (!QFile(_currentLiveprog).exists())
-		{
-		    QMessageBox::warning(this, "Error", "Selected EEL file does not exist anymore.\n"
-		                         "Please select another one");
-		    return;
-		}
-
-        _eelEditor->show();
-        _eelEditor->raise();
-        _eelEditor->openNewScript(_currentLiveprog);
-	});
+    connect(_eelEditor,             &EELEditor::scriptSaved,    ui->liveprog, &LiveprogSelectionWidget::updateFromEelEditor);
 
     connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
         int ret = system("xdg-open https://github.com/thepbone/DDCToolbox"); // QDesktopServices::openUrl broken on some KDE systems with Qt 5.15
@@ -1649,38 +1451,38 @@ void MainWindow::connectActions()
 
 void MainWindow::launchFirstRunSetup()
 {
-	QHBoxLayout            *lbLayout = new QHBoxLayout;
-	QMessageOverlay        *lightBox = new QMessageOverlay(this);
+    QHBoxLayout            *lbLayout = new QHBoxLayout;
+    QMessageOverlay        *lightBox = new QMessageOverlay(this);
     FirstLaunchWizard      *wiz      = new FirstLaunchWizard(_audioService, lightBox);
-	QGraphicsOpacityEffect *eff      = new QGraphicsOpacityEffect(lightBox);
-	QPropertyAnimation     *a        = new QPropertyAnimation(eff, "opacity");
+    QGraphicsOpacityEffect *eff      = new QGraphicsOpacityEffect(lightBox);
+    QPropertyAnimation     *a        = new QPropertyAnimation(eff, "opacity");
 
-	lightBox->setGraphicsEffect(eff);
-	lightBox->setLayout(lbLayout);
-	lightBox->layout()->addWidget(wiz);
-	lightBox->show();
+    lightBox->setGraphicsEffect(eff);
+    lightBox->setLayout(lbLayout);
+    lightBox->layout()->addWidget(wiz);
+    lightBox->show();
 
-	a->setDuration(500);
-	a->setStartValue(0);
-	a->setEndValue(1);
-	a->setEasingCurve(QEasingCurve::InBack);
-	a->start(QPropertyAnimation::DeleteWhenStopped);
+    a->setDuration(500);
+    a->setStartValue(0);
+    a->setEndValue(1);
+    a->setEasingCurve(QEasingCurve::InBack);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
 
-	connect(wiz, &FirstLaunchWizard::wizardFinished, [ = ]
-	{
-		QPropertyAnimation *b = new QPropertyAnimation(eff, "opacity");
-		b->setDuration(500);
-		b->setStartValue(1);
-		b->setEndValue(0);
-		b->setEasingCurve(QEasingCurve::OutCirc);
-		b->start(QPropertyAnimation::DeleteWhenStopped);
+    connect(wiz, &FirstLaunchWizard::wizardFinished, [ = ]
+    {
+        QPropertyAnimation *b = new QPropertyAnimation(eff, "opacity");
+        b->setDuration(500);
+        b->setStartValue(1);
+        b->setEndValue(0);
+        b->setEasingCurve(QEasingCurve::OutCirc);
+        b->start(QPropertyAnimation::DeleteWhenStopped);
 
-		connect(b, &QAbstractAnimation::finished, [ = ]()
-		{
+        connect(b, &QAbstractAnimation::finished, [ = ]()
+        {
             AppConfig::instance().set(AppConfig::SetupDone, true);
-			lightBox->hide();
+            lightBox->hide();
             _settingsFragment->fragment()->refreshAll();
-			lightBox->deleteLater();
-		});
-	});
+            lightBox->deleteLater();
+        });
+    });
 }
