@@ -103,10 +103,10 @@ MainWindow::MainWindow(QString  exepath,
         Log::information("Refer to the README for more detailed information.");
         Log::information("");
         Log::debug("MainWindow::ctor: Blacklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
-        audioService = new PipewireAudioService();
+        _audioService = new PipewireAudioService();
 #endif
-        connect(&DspConfig::instance(), &DspConfig::updated, audioService, &IAudioService::update);
-        connect(&DspConfig::instance(), &DspConfig::updatedExternally, audioService, &IAudioService::update);
+        connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
+        connect(&DspConfig::instance(), &DspConfig::updatedExternally, _audioService, &IAudioService::update);
     }
 
 	// Prepare base UI
@@ -142,60 +142,60 @@ MainWindow::MainWindow(QString  exepath,
 		ui->liveprog_reset->hide();
 
         // Clock
-		refreshTick = new QTimer(this);
-		connect(refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
-		refreshTick->start(1000);
+        _refreshTick = new QTimer(this);
+        connect(_refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
+        _refreshTick->start(1000);
 	}
 
 	// Allocate pointers and init important variables
 	{
         AppConfig::instance().set(AppConfig::ExecutablePath, exepath);
 
-		m_startupInTraySwitch = statupInTray;
+        _startupInTraySwitch = statupInTray;
 
-		m_stylehelper         = new StyleHelper(this);
-        m_eelEditor           = new EELEditor(this);
+        _styleHelper         = new StyleHelper(this);
+        _eelEditor           = new EELEditor(this);
 
-		_eelparser            = new EELParser();
+        _eelParser            = new EELParser();
 
-        connect(audioService, &IAudioService::eelCompilationStarted, m_eelEditor, &EELEditor::onCompilerStarted);
-        connect(audioService, &IAudioService::eelCompilationFinished, m_eelEditor, &EELEditor::onCompilerFinished);
-        connect(audioService, &IAudioService::eelOutputReceived, m_eelEditor, &EELEditor::onConsoleOutputReceived);
+        connect(_audioService, &IAudioService::eelCompilationStarted, _eelEditor, &EELEditor::onCompilerStarted);
+        connect(_audioService, &IAudioService::eelCompilationFinished, _eelEditor, &EELEditor::onCompilerFinished);
+        connect(_audioService, &IAudioService::eelOutputReceived, _eelEditor, &EELEditor::onConsoleOutputReceived);
 
 // TODO
 //        QTimer *timer = new QTimer(this);
 //        connect(timer, SIGNAL(timeout()), audioService, SLOT(enumerateLiveprogVariables()));
 //        timer->start(200);
 
-        connect(m_eelEditor, &EELEditor::executionRequested, [this](QString path){
-            bool isSameFile = path == activeliveprog;
+        connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
+            bool isSameFile = path == _currentLiveprog;
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())
             {
-                activeliveprog = path;
+                _currentLiveprog = path;
             }
             else
             {
-                QMessageBox::critical(m_eelEditor, "Cannot execute",
+                QMessageBox::critical(_eelEditor, "Cannot execute",
                                       QString("The current EEL file (at '%1') does not exist anymore on the filesystem. Please reopen the file manually.").arg(path));
                 return;
             }
 
-            setLiveprogSelection(activeliveprog);
+            setLiveprogSelection(_currentLiveprog);
 
             applyConfig();
 
             if(isSameFile)
             {
-                audioService->reloadLiveprog();
+                _audioService->reloadLiveprog();
             }
         });
     }
 
 	// Prepare tray icon
 	{
-		trayIcon = new TrayIcon(this);
-		connect(trayIcon,               &TrayIcon::iconActivated,    this,     &MainWindow::trayIconActivated);
-		connect(trayIcon,               &TrayIcon::loadReverbPreset, [this](const QString &preset)
+        _trayIcon = new TrayIcon(this);
+        connect(_trayIcon,               &TrayIcon::iconActivated,    this,     &MainWindow::onTrayIconActivated);
+        connect(_trayIcon,               &TrayIcon::loadReverbPreset, [this](const QString &preset)
 		{
             if(preset == "off"){
                 ui->reverb->setChecked(false);
@@ -205,10 +205,10 @@ MainWindow::MainWindow(QString  exepath,
 
             ui->reverb->setChecked(true);
 			ui->roompresets->setCurrentText(preset);
-			reverbPresetSelectionUpdated();
+            onReverbPresetUpdated();
 		});
-        connect(trayIcon, &TrayIcon::restart, this, &MainWindow::restart);
-		connect(trayIcon, &TrayIcon::loadEqPreset, [this](const QString &preset)
+        connect(_trayIcon, &TrayIcon::restart, this, &MainWindow::onRelinkRequested);
+        connect(_trayIcon, &TrayIcon::loadEqPreset, [this](const QString &preset)
 		{
             ui->enable_eq->setChecked(true);
 
@@ -219,10 +219,10 @@ MainWindow::MainWindow(QString  exepath,
 			else
 			{
 			    ui->eqpreset->setCurrentText(preset);
-			    eqPresetSelectionUpdated();
+                onEqPresetUpdated();
 			}
 		});
-		connect(trayIcon, &TrayIcon::loadCrossfeedPreset, [this](int preset)
+        connect(_trayIcon, &TrayIcon::loadCrossfeedPreset, [this](int preset)
 		{
             if(preset == -1)
             {
@@ -234,20 +234,20 @@ MainWindow::MainWindow(QString  exepath,
             auto name = PresetProvider::BS2B::reverseLookup(preset);
             ui->crossfeed_mode->setCurrentText(name);
             ui->bs2b->setChecked(true);
-            bs2bPresetSelectionUpdated();
+            onBs2bPresetUpdated();
 		});
-		connect(trayIcon, &TrayIcon::loadIrs, [this](const QString &irs)
+        connect(_trayIcon, &TrayIcon::loadIrs, [this](const QString &irs)
 		{
-			activeirs = irs;
+            _currentImpuleResponse = irs;
             ui->conv_enable->setChecked(true);
-			updateIrsSelection();
+            determineIrsSelection();
 			applyConfig();
 		});
-        connect(trayIcon, &TrayIcon::loadPreset, &PresetManager::instance(), &PresetManager::load);
-		connect(trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
-		connect(trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
+        connect(_trayIcon, &TrayIcon::loadPreset, &PresetManager::instance(), &PresetManager::load);
+        connect(_trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
+        connect(_trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
 
-        trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || m_startupInTraySwitch);
+        _trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || _startupInTraySwitch);
 	}
 
 	// Load config and initialize less important stuff
@@ -257,16 +257,16 @@ MainWindow::MainWindow(QString  exepath,
 		connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
 
-        appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(audioService->appManager(), this), WAF::BottomSide, this);
-        statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
-        presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(this), WAF::LeftSide, this);
-        settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(trayIcon, audioService, this), WAF::BottomSide, this);
+        _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
+        _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
+        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(this), WAF::LeftSide, this);
+        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, this), WAF::BottomSide, this);
 
-        connect(presetFragment->fragment(), &PresetFragment::wantsToWriteConfig, this, &MainWindow::applyConfig);
-        connect(settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
-        connect(settingsFragment->fragment(), &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
-        connect(settingsFragment->fragment(), &SettingsFragment::reopenSettings, settingsFragment, &FragmentHost<SettingsFragment*>::slideOutIn);
-        connect(m_stylehelper, &StyleHelper::iconColorChanged, settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
+        connect(_presetFragment->fragment(), &PresetFragment::wantsToWriteConfig, this, &MainWindow::applyConfig);
+        connect(_settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
+        connect(_settingsFragment->fragment(), &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
+        connect(_settingsFragment->fragment(), &SettingsFragment::reopenSettings, _settingsFragment, &FragmentHost<SettingsFragment*>::slideOutIn);
+        connect(_styleHelper, &StyleHelper::iconColorChanged, _settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
 
         connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::saveGraphicEQView);
     }
@@ -285,14 +285,14 @@ MainWindow::MainWindow(QString  exepath,
         ui->disableFX->setIconSize(QSize(16,16));
 
 		QMenu *menu = new QMenu();
-        menu->addAction(tr("Apps"), appMgrFragment, &FragmentHost<AppManagerFragment*>::slideIn);
-        menu->addAction(tr("Driver status"), statusFragment, [this](){
-            statusFragment->fragment()->updateStatus(audioService->status());
-            statusFragment->slideIn();
+        menu->addAction(tr("Apps"), _appMgrFragment, &FragmentHost<AppManagerFragment*>::slideIn);
+        menu->addAction(tr("Driver status"), _statusFragment, [this](){
+            _statusFragment->fragment()->updateStatus(_audioService->status());
+            _statusFragment->slideIn();
         });
-        menu->addAction(tr("Relink audio pipeline"),   this, SLOT(restart()));
+        menu->addAction(tr("Relink audio pipeline"),   this, SLOT(onRelinkRequested()));
         menu->addSeparator();
-        menu->addAction(tr("Reset to defaults"), this, SLOT(reset()));
+        menu->addAction(tr("Reset to defaults"), this, SLOT(onResetRequested()));
 		menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
 		menu->addAction(tr("Save to file"),   this, SLOT(saveExternalFile()));
         menu->addSeparator();
@@ -302,7 +302,7 @@ MainWindow::MainWindow(QString  exepath,
 		});
 		ui->toolButton->setMenu(menu);
 
-        connect(m_stylehelper, &StyleHelper::iconColorChanged, this, [this](bool white){
+        connect(_styleHelper, &StyleHelper::iconColorChanged, this, [this](bool white){
             if (white)
             {
                 ui->set->setIcon(QPixmap(":/icons/settings-white.svg"));
@@ -322,7 +322,7 @@ MainWindow::MainWindow(QString  exepath,
 
 	// Prepare styles
 	{
-		m_stylehelper->SetStyle();
+        _styleHelper->SetStyle();
 		ui->eq_widget->setAccentColor(palette().highlight().color());
 	}
 
@@ -334,29 +334,49 @@ MainWindow::MainWindow(QString  exepath,
 		}
 	}
 
-	// Load DDC/IRS/Liveprog lists
-	{
-		// Reload DDC selection
+    // Setup file selectors
+    {
+        ui->ddc_files->setCurrentDirectory(AppConfig::instance().getDDCPath());
+        ui->ddc_files->setFileTypes(QStringList("*.vdc"));
+
+        ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
+        ui->conv_files->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
+
+        ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
+        ui->conv_fav->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
+        ui->conv_fav->setFileActionsVisible(true);
+        ui->conv_fav->setNavigationBarVisible(false);
+
+        connect(ui->ddc_files, &FileSelectionWidget::fileChanged, this, &MainWindow::setVdcFile);
+        connect(ui->conv_files, &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
+        connect(ui->conv_fav, &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
+
+        connect(ui->conv_files, &FileSelectionWidget::bookmarkAdded, ui->conv_fav, &FileSelectionWidget::enumerateFiles);
+
+        connect(ui->conv_files, &FileSelectionWidget::fileChanged, ui->conv_fav, &FileSelectionWidget::clearCurrentFile);
+        connect(ui->conv_fav, &FileSelectionWidget::fileChanged, ui->conv_files, &FileSelectionWidget::clearCurrentFile);
+
+        // DDC
         ui->ddcTable->setModel(new VdcDatabaseModel(ui->ddcTable));
         ui->ddcTable->setColumnHidden(2, true);
         ui->ddcTable->setColumnHidden(3, true);
         ui->ddcTable->setColumnHidden(4, true);
         ui->ddcTable->resizeColumnsToContents();
 
-		updateDDCSelection();
+        determineVdcSelection();
 
-		// Reload IRS lists
-		updateIrsSelection();
+        // Convolver
+        determineIrsSelection();
 
-		// Reload Liveprog selection
-		if (!QFile(activeliveprog).exists())
+        // Liveprog
+        if (!QFile(_currentLiveprog).exists())
 		{
 			ui->liveprog_dirpath->setText(AppConfig::instance().getLiveprogPath());
 			reloadLiveprog();
 		}
 		else
 		{
-            QDir d2 = QFileInfo(activeliveprog).absoluteDir();
+            QDir d2 = QFileInfo(_currentLiveprog).absoluteDir();
             ui->liveprog_dirpath->setText(d2.absolutePath());
             reloadLiveprog();
 		}
@@ -380,12 +400,12 @@ MainWindow::MainWindow(QString  exepath,
 	{
         connect(&AppConfig::instance(), &AppConfig::themeChanged, this, [this]()
 		{
-			m_stylehelper->SetStyle();
+            _styleHelper->SetStyle();
 			ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
 			ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
 			ui->tabbar->redrawTabBar();
 			ui->eq_widget->setAccentColor(palette().highlight().color());
-			spectrumReloadSignalQueued = true;
+            _spectrumReloadSignalQueued = true;
 		});
 
         connect(&AppConfig::instance(), &AppConfig::updated, this, [this](const AppConfig::Key& key, const QVariant& value)
@@ -396,7 +416,7 @@ MainWindow::MainWindow(QString  exepath,
                     ui->eq_widget->setAlwaysDrawHandles(value.toBool());
                     break;
                 case AppConfig::TrayIconEnabled:
-                    trayIcon->setTrayVisible(value.toBool());
+                    _trayIcon->setTrayVisible(value.toBool());
                     break;
                 default:
                     break;
@@ -440,21 +460,21 @@ MainWindow::MainWindow(QString  exepath,
 
 MainWindow::~MainWindow()
 {
-    if(audioService != nullptr)
+    if(_audioService != nullptr)
     {
-        delete audioService;
+        delete _audioService;
     }
 	delete ui;
 }
 
 void MainWindow::fireTimerSignal()
 {
-    if (spectrumReloadSignalQueued)
+    if (_spectrumReloadSignalQueued)
 	{
         //restartSpectrum();
     }
 
-	spectrumReloadSignalQueued = false;
+    _spectrumReloadSignalQueued = false;
 }
 
 // Overrides
@@ -471,7 +491,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 #endif
 
-	if (trayIcon->isVisible())
+    if (_trayIcon->isVisible())
 	{
 		hide();
 		event->ignore();
@@ -501,7 +521,7 @@ void MainWindow::raiseWindow()
 	activateWindow();
 }
 
-void MainWindow::trayIconActivated()
+void MainWindow::onTrayIconActivated()
 {
 	setVisible(!this->isVisible());
 
@@ -513,25 +533,25 @@ void MainWindow::trayIconActivated()
 	// Hide tray icon if disabled and MainWin is visible (for cmdline force switch)
     if (!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) && this->isVisible())
 	{
-		trayIcon->setTrayVisible(false);
+        _trayIcon->setTrayVisible(false);
 	}
 }
 
-// ---Dialogs/Buttons
-void MainWindow::dialogHandler()
+// Fragment handler
+void MainWindow::onFragmentRequested()
 {
 	if (sender() == ui->set)
 	{
-        settingsFragment->fragment()->setMaximumHeight(this->height() - 20);
-        settingsFragment->slideIn();
+        _settingsFragment->fragment()->setMaximumHeight(this->height() - 20);
+        _settingsFragment->slideIn();
 	}
 	else if (sender() == ui->cpreset)
 	{
-        presetFragment->slideIn();
+        _presetFragment->slideIn();
 	}
 }
 
-void MainWindow::reset()
+void MainWindow::onResetRequested()
 {
 	QMessageBox::StandardButton reply;
 	reply = QMessageBox::question(this, tr("Reset Configuration"), tr("Are you sure?"),
@@ -543,38 +563,22 @@ void MainWindow::reset()
 	}
 }
 
-void MainWindow::disableFx()
+void MainWindow::onPassthroughToggled()
 {
-	trayIcon->changedDisableFx(ui->disableFX->isChecked());
-
-	// Apply instantly
-	if (!lockapply)
-	{
-		applyConfig();
-	}
+    _trayIcon->changedDisableFx(ui->disableFX->isChecked());
+    applyConfig();
 }
 
-// ---Reloader
-void MainWindow::onUpdate()
+void MainWindow::onRelinkRequested()
 {
-    if (!lockapply)
-	{
-		applyConfig();
-	}
-}
-
-void MainWindow::restart()
-{
-    audioService->reloadService();
+    _audioService->reloadService();
     DspConfig::instance().commit();
 
     // TODO
-	spectrumReloadSignalQueued = true;
+    _spectrumReloadSignalQueued = true;
 }
 
 // ---User preset management
-
-
 void MainWindow::loadExternalFile()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Load custom audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
@@ -608,12 +612,12 @@ void MainWindow::saveExternalFile()
 // ---Config IO
 void MainWindow::loadConfig()
 {
-	lockapply = true;
+    _blockApply = true;
 
     auto dsp = &DspConfig::instance();
     dsp->get<bool>(DspConfig::master_enable);
 
-    trayIcon->changedDisableFx(!DspConfig::instance().get<bool>(DspConfig::master_enable));
+    _trayIcon->changedDisableFx(!DspConfig::instance().get<bool>(DspConfig::master_enable));
     ui->disableFX->setChecked(!DspConfig::instance().get<bool>(DspConfig::master_enable));
 
     ui->analog->setChecked(DspConfig::instance().get<bool>(DspConfig::tube_enable));
@@ -664,15 +668,15 @@ void MainWindow::loadConfig()
     ui->graphicEq->load(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::graphiceq_param)));
 
     ui->ddc_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::ddc_enable));
-    activeddc      = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
+    _currentVdc      = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
 
     ui->liveprog_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::liveprog_enable));
-    activeliveprog = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::liveprog_file));
+    _currentLiveprog = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::liveprog_file));
 
     ui->conv_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::convolver_enable));
     ui->conv_ir_opt->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::convolver_optimization_mode));
-    activeirs                 = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
-    irAdvancedWaveformEditing = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_waveform_edit));
+    _currentImpuleResponse                 = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
+    _currentConvWaveformEdit = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_waveform_edit));
 
     ui->enable_eq->setChecked(DspConfig::instance().get<bool>(DspConfig::tone_enable));
     ui->eqinterpolator->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_interpolation));
@@ -769,18 +773,19 @@ void MainWindow::loadConfig()
 		ui->eq_dyn_widget->loadMap(eqData);
 	}
 
-	updateEqStringFromWidget();
-	updateAllUnitLabels();
-	updateIrsSelection();
-	updateDDCSelection();
+    updateAllUnitLabels();
+
+    determineEqPresetName();
+    determineIrsSelection();
+    determineVdcSelection();
     reloadLiveprog();
 
-	lockapply = false;
+    _blockApply = false;
 }
 
 void MainWindow::applyConfig()
 {
-    if(lockapply)
+    if(_blockApply)
     {
         return;
     }
@@ -794,15 +799,15 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::master_postgain,            QVariant(ui->postgain->valueA()));
 
     DspConfig::instance().set(DspConfig::ddc_enable,                 QVariant(ui->ddc_enable->isChecked()));
-    DspConfig::instance().set(DspConfig::ddc_file,                   QVariant("\"" + activeddc + "\""));
+    DspConfig::instance().set(DspConfig::ddc_file,                   QVariant("\"" + _currentVdc + "\""));
 
     DspConfig::instance().set(DspConfig::liveprog_enable,            QVariant(ui->liveprog_enable->isChecked()));
-    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant("\"" + activeliveprog + "\""));
+    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant("\"" + _currentLiveprog + "\""));
 
     DspConfig::instance().set(DspConfig::convolver_enable,           QVariant(ui->conv_enable->isChecked()));
     DspConfig::instance().set(DspConfig::convolver_optimization_mode,QVariant(ui->conv_ir_opt->currentIndex()));
-    DspConfig::instance().set(DspConfig::convolver_file,             QVariant("\"" + activeirs + "\""));
-    DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant("\"" + irAdvancedWaveformEditing + "\""));
+    DspConfig::instance().set(DspConfig::convolver_file,             QVariant("\"" + _currentImpuleResponse + "\""));
+    DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant("\"" + _currentConvWaveformEdit + "\""));
 
     DspConfig::instance().set(DspConfig::compression_enable,         QVariant(ui->enable_comp->isChecked()));
     DspConfig::instance().set(DspConfig::compression_maxatk,         QVariant(ui->comp_maxattack->valueA()));
@@ -882,9 +887,9 @@ void MainWindow::applyConfig()
 }
 
 // ---Predefined Presets
-void MainWindow::eqPresetSelectionUpdated()
+void MainWindow::onEqPresetUpdated()
 {
-    if (ui->eqpreset->currentText() == "Custom" || lockapply)
+    if (ui->eqpreset->currentText() == "Custom" || _blockApply)
 	{
 		return;
 	}
@@ -901,16 +906,16 @@ void MainWindow::eqPresetSelectionUpdated()
 	}
 }
 
-void MainWindow::bs2bPresetSelectionUpdated()
+void MainWindow::onBs2bPresetUpdated()
 {
-    if (ui->crossfeed_mode->currentText() == "..." || lockapply)
+    if (ui->crossfeed_mode->currentText() == "..." || _blockApply)
 	{
 		return;
 	}
 
 	const auto index = PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText());
 
-    lockapply = true;
+    _blockApply = true;
 	switch (index)
 	{
 		case 0: // BS2B weak
@@ -924,21 +929,21 @@ void MainWindow::bs2bPresetSelectionUpdated()
 	}
 
     ui->bs2b_custom_box->setEnabled(index == 99);
-    lockapply = false;
+    _blockApply = false;
 
 	updateAllUnitLabels();
-    onUpdate();
+    applyConfig();
 }
 
-void MainWindow::reverbPresetSelectionUpdated()
+void MainWindow::onReverbPresetUpdated()
 {
-    if (ui->roompresets->currentText() == "..." || lockapply)
+    if (ui->roompresets->currentText() == "..." || _blockApply)
 	{
 		return;
 	}
 
 	const auto data = PresetProvider::Reverb::lookupPreset(ui->roompresets->currentIndex());
-	lockapply = true;
+    _blockApply = true;
 	ui->rev_osf->setValueA(data.osf);
 	ui->rev_era->setValueA((int) (data.p1 * 100));
 	ui->rev_finalwet->setValueA((int) (data.p2 * 10));
@@ -957,17 +962,18 @@ void MainWindow::reverbPresetSelectionUpdated()
 	ui->rev_decay->setValueA((int) (data.p15 * 100));
 	ui->rev_delay->setValueA((int) (data.p16 * 10));
 	updateAllUnitLabels();
-	lockapply = false;
-    onUpdate();
+    _blockApply = false;
+
+    applyConfig();
 }
 
 // ---Status
 void MainWindow::updateUnitLabel(int      d,
                                  QObject *alt)
 {
-	if (lockapply && alt == nullptr)
+    if (_blockApply && alt == nullptr)
 	{
-		return;                       // Skip if lockapply-flag is set (when setting presets, ...)
+        return; // Skip if lockapply-flag is set (when setting presets, ...)
 	}
 
 	QObject *obj;
@@ -1094,233 +1100,106 @@ void MainWindow::updateAllUnitLabels()
 }
 
 // ---DDC
-void MainWindow::updateDDCSelection()
+void MainWindow::setVdcFile(const QString& path)
 {
-	QString absolute = QFileInfo().absoluteDir().absolutePath();
-
-	if (!QFile(activeddc).exists() || activeddc == AppConfig::instance().getPath("temp.vdc"))
-	{
-		ui->ddc_dirpath->setText(AppConfig::instance().getDDCPath());
-		reloadDDC();
-
-		if (activeddc == AppConfig::instance().getPath("temp.vdc"))
-		{
-            QString lastId = AppConfig::instance().get<QString>(AppConfig::VdcLastDatabaseId);
-			ui->ddcTabs->setCurrentIndex(1);
-
-			if (lastId.isEmpty())
-			{
-				return;
-			}
-
-            VdcDatabaseModel* model = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
-            if (model == nullptr)
-			{
-				return;
-			}
-
-            QModelIndex lastIndex = model->findFirstById(lastId);
-            if(lastIndex.isValid())
-            {
-                ui->ddcTable->selectRow(lastIndex.row());
-                ui->ddcTable->scrollTo(lastIndex);
-            }
-		}
-	}
-	else
-	{
-        QDir d2 = QFileInfo(activeddc).absoluteDir();
-        ui->ddc_dirpath->setText(d2.absolutePath());
-        reloadDDC();
-	}
+    _currentVdc = path;
+    applyConfig();
 }
 
-void MainWindow::reloadDDC()
+void MainWindow::determineVdcSelection()
 {
-	lockddcupdate = true;
-	QDir        path(ui->ddc_dirpath->text());
-	QStringList nameFilter("*.vdc");
-	nameFilter.append("*.ddc");
-	QStringList files = path.entryList(nameFilter);
-	ui->ddc_files->clear();
+    ui->ddc_files->clearCurrentFile();
+    ui->ddcTabs->setCurrentIndex(0);
 
-	if (files.empty())
+    // File does not exist anymore
+    if (!QFile(_currentVdc).exists())
 	{
-		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setText("No VDC files found");
-		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
-		ui->ddc_files->addItem(placeholder);
+        ui->ddc_files->setCurrentDirectory(AppConfig::instance().getDDCPath());
 	}
+    // File is from database
+    else if (_currentVdc == AppConfig::instance().getPath("temp.vdc"))
+    {
+        QString lastId = AppConfig::instance().get<QString>(AppConfig::VdcLastDatabaseId);
+        ui->ddcTabs->setCurrentIndex(1);
+
+        if (lastId.isEmpty())
+        {
+            return;
+        }
+
+        VdcDatabaseModel* model = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
+        if (model == nullptr)
+        {
+            return;
+        }
+
+        QModelIndex lastIndex = model->findFirstById(lastId);
+        if(lastIndex.isValid())
+        {
+            ui->ddcTable->selectRow(lastIndex.row());
+            ui->ddcTable->scrollTo(lastIndex);
+        }
+    }
+    // External file
 	else
 	{
-		ui->ddc_files->addItems(files);
+        ui->ddc_files->setCurrentFile(_currentVdc);
 	}
-
-	if (ui->ddc_files->count() >= 1)
-	{
-		for (int i = 0; i < ui->ddc_files->count(); i++)
-		{
-			if (ui->ddc_files->item(i)->text() == QFileInfo(activeddc).fileName())
-			{
-				ui->ddc_files->setCurrentRow(i);
-				break;
-			}
-		}
-	}
-
-	lockddcupdate = false;
 }
 
 // ---IRS
-void MainWindow::updateIrsSelection()
+void MainWindow::setIrsFile(const QString& path)
 {
-	reloadIRSFav();
-	ui->conv_files_fav->clearSelection();
-	ui->conv_files->clearSelection();
+    _currentImpuleResponse = path;
+    applyConfig();
+}
 
-	if (activeirs.contains(AppConfig::instance().getPath("irs_favorites")))
+void MainWindow::determineIrsSelection()
+{
+    ui->conv_fav->clearCurrentFile();
+    ui->conv_files->clearCurrentFile();
+    ui->convTabs->setCurrentIndex(0);
+
+    // File was selected from favorites
+    if (_currentImpuleResponse.contains(AppConfig::instance().getPath("irs_favorites")))
 	{
-		ui->conv_dirpath->setText(AppConfig::instance().getIrsPath());
-		reloadIRS();
+        ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
+        ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
+        ui->conv_fav->setCurrentFile(_currentImpuleResponse);
 		ui->convTabs->setCurrentIndex(1);
-
-        if (ui->conv_files_fav->count() >= 1)
-        {
-            for (int i = 0; i < ui->conv_files_fav->count(); i++)
-            {
-                if (ui->conv_files_fav->item(i)->text() == QFileInfo(activeirs).fileName())
-                {
-                    ui->conv_files_fav->setCurrentRow(i);
-                    break;
-                }
-            }
-        }
 	}
-	else if (!QFile(activeirs).exists())
+    // File does not exist anymore
+    else if (!QFile(_currentImpuleResponse).exists())
 	{
-		ui->conv_dirpath->setText(AppConfig::instance().getIrsPath());
-		ui->convTabs->setCurrentIndex(0);
-		reloadIRS();
+        ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
 	}
+    // External file
 	else
 	{
-        ui->convTabs->setCurrentIndex(0);
-
-        QDir d2 = QFileInfo(activeirs).absoluteDir();
-        ui->conv_dirpath->setText(d2.absolutePath());
-        reloadIRS();
-
-        if (ui->conv_files->count() >= 1)
-        {
-            for (int i = 0; i < ui->conv_files->count(); i++)
-            {
-                if (ui->conv_files->item(i)->text() == QFileInfo(activeirs).fileName())
-                {
-                    ui->conv_files->setCurrentRow(i);
-                    break;
-                }
-            }
-        }
+        ui->conv_files->setCurrentFile(_currentImpuleResponse);
 	}
 }
 
-void MainWindow::reloadIRS()
-{
-	lockirsupdate = true;
-	QDir        path(ui->conv_dirpath->text());
-	QStringList nameFilter("*.irs");
-	nameFilter.append("*.wav");
-	nameFilter.append("*.flac");
-	QStringList files = path.entryList(nameFilter);
-	ui->conv_files->clear();
-
-	if (files.empty())
-	{
-		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setText("No IRS files found");
-		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
-		ui->conv_files->addItem(placeholder);
-	}
-	else
-	{
-		ui->conv_files->addItems(files);
-
-        ui->conv_files->clearSelection();
-
-        if (QFile(activeirs).exists() && !activeirs.contains(AppConfig::instance().getPath("irs_favorites")))
-        {
-            if (ui->conv_files->count() >= 1)
-            {
-                for (int i = 0; i < ui->conv_files->count(); i++)
-                {
-                    if (ui->conv_files->item(i)->text() == QFileInfo(activeirs).fileName())
-                    {
-                        ui->conv_files->setCurrentRow(i);
-                        break;
-                    }
-                }
-            }
-        }
-	}
-
-	lockirsupdate = false;
-}
-
-void MainWindow::reloadIRSFav()
-{
-	lockirsupdate = true;
-	QString     absolute = QFileInfo(AppConfig::instance().getDspConfPath()).absoluteDir().absolutePath();
-	QDir        path(QDir::cleanPath(absolute + QDir::separator() + "irs_favorites"));
-	QStringList nameFilter("*.wav");
-	nameFilter.append("*.irs");
-	nameFilter.append("*.flac");
-	QStringList files = path.entryList(nameFilter);
-	ui->conv_files_fav->clear();
-
-	if (files.empty())
-	{
-		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setText("Nothing here yet...");
-		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
-		ui->conv_files_fav->addItem(placeholder);
-		QListWidgetItem *placeholder2 = new QListWidgetItem;
-		placeholder2->setText("Bookmark some IRS files in the 'filesystem' tab");
-		placeholder2->setFlags(placeholder2->flags() & ~Qt::ItemIsEnabled);
-		ui->conv_files_fav->addItem(placeholder2);
-	}
-	else
-	{
-		ui->conv_files_fav->addItems(files);
-	}
-
-	lockirsupdate = false;
-}
-
-void MainWindow::convolverWaveformEdit()
+void MainWindow::onConvolverWaveformEdit()
 {
 	bool    ok;
 	QString text = QInputDialog::getText(this, tr("Advanced waveform editing"),
 	                                     tr("Advanced waveform editing (6 semicolon-separated values; default: -80;-100;0;0;0;0)"), QLineEdit::Normal,
-	                                     irAdvancedWaveformEditing, &ok,
+                                         _currentConvWaveformEdit, &ok,
 	                                     Qt::WindowFlags(), Qt::ImhFormattedNumbersOnly);
 
 	if (ok && !text.isEmpty())
 	{
-		irAdvancedWaveformEditing = text;
+        _currentConvWaveformEdit = text;
 
 		applyConfig();
     }
 }
 
-EELEditor *MainWindow::eelEditor() const
-{
-    return m_eelEditor;
-}
-
 // ---Liveprog
 void MainWindow::reloadLiveprog()
 {
-	lockliveprogupdate = true;
+    _lockliveprogupdate = true;
 	QDir        path(ui->liveprog_dirpath->text());
 	QStringList nameFilter("*.eel");
 	QStringList files = path.entryList(nameFilter);
@@ -1342,22 +1221,22 @@ void MainWindow::reloadLiveprog()
 	{
 		for (int i = 0; i < ui->liveprog_files->count(); i++)
 		{
-			if (ui->liveprog_files->item(i)->text() == QFileInfo(activeliveprog).fileName())
+            if (ui->liveprog_files->item(i)->text() == QFileInfo(_currentLiveprog).fileName())
 			{
 				ui->liveprog_files->setCurrentRow(i);
-				setLiveprogSelection(activeliveprog);
+                setLiveprogSelection(_currentLiveprog);
 				break;
 			}
 		}
 	}
 
-	lockliveprogupdate = false;
+    _lockliveprogupdate = false;
 }
 
 void MainWindow::setLiveprogSelection(QString path)
 {
-	_eelparser->loadFile(path);
-	ui->liveprog_name->setText(_eelparser->getDescription());
+    _eelParser->loadFile(path);
+    ui->liveprog_name->setText(_eelParser->getDescription());
     ui->liveprog_editscript->setText("Edit script");
 
 	QLayoutItem *item;
@@ -1368,7 +1247,7 @@ void MainWindow::setLiveprogSelection(QString path)
 		delete item;
 	}
 
-	EELProperties props = _eelparser->getProperties();
+    EELProperties props = _eelParser->getProperties();
 
     for (EELBaseProperty* propbase : props)
 	{
@@ -1399,10 +1278,10 @@ void MainWindow::setLiveprogSelection(QString path)
 			connect(sld, &QAbstractSlider::sliderReleased, [this, sld, prop] {
 				float val = sld->valueA() / 100.f;
 				prop->setValue(val);
-				_eelparser->manipulateProperty(prop);
-                ui->liveprog_reset->setEnabled(_eelparser->canLoadDefaults());
+                _eelParser->manipulateProperty(prop);
+                ui->liveprog_reset->setEnabled(_eelParser->canLoadDefaults());
 
-                audioService->reloadLiveprog();
+                _audioService->reloadLiveprog();
 			});
 
 		}
@@ -1417,35 +1296,35 @@ void MainWindow::setLiveprogSelection(QString path)
 	}
 	else
 	{
-        ui->liveprog_reset->setVisible(_eelparser->hasDefaultsDefined());
-        ui->liveprog_reset->setEnabled(_eelparser->canLoadDefaults());
+        ui->liveprog_reset->setVisible(_eelParser->hasDefaultsDefined());
+        ui->liveprog_reset->setEnabled(_eelParser->canLoadDefaults());
 	}
 }
 
-void MainWindow::resetLiveprogParams()
+void MainWindow::onResetLiveprogParams()
 {
-    if (!_eelparser->loadDefaults())
+    if (!_eelParser->loadDefaults())
 	{
 		QMessageBox::warning(this, "Error", "Cannot load backup\nThe backup file doesn't exist anymore.");
 	}
 
-    audioService->reloadLiveprog();
+    _audioService->reloadLiveprog();
 
-	setLiveprogSelection(_eelparser->getPath());
+    setLiveprogSelection(_eelParser->getPath());
 }
 
 void MainWindow::updateFromEelEditor(QString path)
 {
-	if (_eelparser->getPath() == path)
+    if (_eelParser->getPath() == path)
 	{
-		setLiveprogSelection(_eelparser->getPath());
+        setLiveprogSelection(_eelParser->getPath());
 	}
 	else
 	{
 		EELParser parser;
         parser.loadFile(path);
 
-        audioService->reloadLiveprog();
+        _audioService->reloadLiveprog();
 	}
 }
 
@@ -1508,10 +1387,10 @@ int MainWindow::extractDefaultEelScripts(bool allowOverride,
 // ---Helper
 void MainWindow::setEq(const QVector<double> &data)
 {
-	lockapply = true;
+    _blockApply = true;
 	ui->eq_widget->setBands(QVector<double>(data));
-	lockapply = false;
-    onUpdate();
+    _blockApply = false;
+    applyConfig();
 }
 
 void MainWindow::resetEQ()
@@ -1522,7 +1401,7 @@ void MainWindow::resetEQ()
 	applyConfig();
 }
 
-void MainWindow::updateEqStringFromWidget()
+void MainWindow::determineEqPresetName()
 {
 	QString currentEqPresetName =
 		PresetProvider::EQ::reverseLookup(ui->eq_widget->getBands());
@@ -1530,7 +1409,7 @@ void MainWindow::updateEqStringFromWidget()
 	ui->eqpreset->setCurrentText(currentEqPresetName);
 }
 
-void MainWindow::updateEQMode()
+void MainWindow::onEqModeUpdated()
 {
 	bool isFixed = ui->eq_r_fixed->isChecked();
 	setEqMode(isFixed ? 0 : 1);
@@ -1603,87 +1482,56 @@ void MainWindow::connectActions()
 	connect(w, SIGNAL(valueChangedA(int)), this, SLOT(updateUnitLabel(int)));
 
 	foreach(QWidget * w, registerSliderRelease)
-    connect(w, SIGNAL(sliderReleased()), this, SLOT(onUpdate()));
+    connect(w, SIGNAL(sliderReleased()), this, SLOT(applyConfig()));
 
 	foreach(QWidget * w, registerClick)
-	connect(w,                      SIGNAL(clicked()),                this, SLOT(onUpdate()));
+    connect(w,                      SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
-	connect(ui->disableFX,          SIGNAL(clicked()),                this, SLOT(disableFx()));
+    connect(ui->disableFX,          SIGNAL(clicked()),                this, SLOT(onPassthroughToggled()));
 	connect(ui->reseteq,            SIGNAL(clicked()),                this, SLOT(resetEQ()));
-	connect(ui->cpreset,            SIGNAL(clicked()),                this, SLOT(dialogHandler()));
-	connect(ui->set,                SIGNAL(clicked()),                this, SLOT(dialogHandler()));
+    connect(ui->cpreset,            SIGNAL(clicked()),                this, SLOT(onFragmentRequested()));
+    connect(ui->set,                SIGNAL(clicked()),                this, SLOT(onFragmentRequested()));
 
 	connect(ui->eq_r_fixed,         SIGNAL(clicked()),                this, SLOT(applyConfig()));
 	connect(ui->eq_r_flex,          SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
-    connect(ui->eqfiltertype,       SIGNAL(currentIndexChanged(int)), this, SLOT(onUpdate()));
-    connect(ui->eqinterpolator,     SIGNAL(currentIndexChanged(int)), this, SLOT(onUpdate()));
-    connect(ui->conv_ir_opt,        SIGNAL(currentIndexChanged(int)), this, SLOT(onUpdate()));
+    connect(ui->eqfiltertype,       SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
+    connect(ui->eqinterpolator,     SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
+    connect(ui->conv_ir_opt,        SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
 
 	connect(ui->eq_widget,          SIGNAL(bandsUpdated()),           this, SLOT(applyConfig()));
-	connect(ui->eq_widget,          SIGNAL(mouseReleased()),          this, SLOT(updateEqStringFromWidget()));
-	connect(ui->eqpreset,           SIGNAL(currentIndexChanged(int)), this, SLOT(eqPresetSelectionUpdated()));
-	connect(ui->roompresets,        SIGNAL(currentIndexChanged(int)), this, SLOT(reverbPresetSelectionUpdated()));
+    connect(ui->eq_widget,          SIGNAL(mouseReleased()),          this, SLOT(determineEqPresetName()));
+    connect(ui->eqpreset,           SIGNAL(currentIndexChanged(int)), this, SLOT(onEqPresetUpdated()));
+    connect(ui->roompresets,        SIGNAL(currentIndexChanged(int)), this, SLOT(onReverbPresetUpdated()));
 
-	connect(ui->conv_adv_wave_edit, SIGNAL(clicked()),                this, SLOT(convolverWaveformEdit()));
+    connect(ui->conv_adv_wave_edit, SIGNAL(clicked()),                this, SLOT(onConvolverWaveformEdit()));
 
-	connect(ui->crossfeed_mode,     SIGNAL(currentIndexChanged(int)), this, SLOT(bs2bPresetSelectionUpdated()));
+    connect(ui->crossfeed_mode,     SIGNAL(currentIndexChanged(int)), this, SLOT(onBs2bPresetUpdated()));
 
-    connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::onUpdate);
-    connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::onUpdate);
+    connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
+    connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
 	connect(ui->graphicEq,          &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving)
 	{
 		if (!isMoving)
 		{
-            onUpdate();
+            applyConfig();
 		}
 	});
 	connect(ui->eq_dyn_widget, &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving)
 	{
 		if (!isMoving)
 		{
-            onUpdate();
+            applyConfig();
 		}
 	});
 
-	connect(ui->ddc_reload, SIGNAL(clicked()),                  this, SLOT(reloadDDC()));
-	connect(ui->ddc_files,  &QListWidget::itemSelectionChanged, [this] {
-		if (lockddcupdate || ui->ddc_files->selectedItems().count() < 1)
-		{
-		    return; // Clearing Selection by code != User Interaction
-		}
-
-		QString path = QDir(ui->ddc_dirpath->text()).filePath(ui->ddc_files->selectedItems().first()->text());
-
-		if (QFileInfo::exists(path) && QFileInfo(path).isFile())
-		{
-		    activeddc = path;
-		}
-
-		onUpdate();
-	});
-	connect(ui->ddc_select, &QPushButton::clicked, [this] {
-		QFileDialog *fd = new QFileDialog;
-		fd->setFileMode(QFileDialog::Directory);
-		fd->setOption(QFileDialog::ShowDirsOnly);
-		fd->setViewMode(QFileDialog::Detail);
-		QString result = fd->getExistingDirectory();
-
-		if (result != "")
-		{
-		    ui->ddc_dirpath->setText(result);
-		    reloadDDC();
-		}
-	});
 	connect(ui->ddcTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, [this](const QItemSelection &, const QItemSelection &) {
 		QItemSelectionModel *select = ui->ddcTable->selectionModel();
 		QString ddc_coeffs;
 
 		if (select->hasSelection())
 		{
-		    lockddcupdate    = true;
-		    ui->ddc_files->clearSelection();
-		    lockddcupdate    = false;
+            ui->ddc_files->clearCurrentFile();
 
 		    int index        = select->selectedRows().first().row();
             VdcDatabaseModel* model = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
@@ -1713,15 +1561,15 @@ void MainWindow::connectActions()
             DspConfig::instance().set(DspConfig::ddc_file, "");
             DspConfig::instance().commit();
 
-		    activeddc = absolute + "/temp.vdc";
+            _currentVdc = absolute + "/temp.vdc";
 		}
 
-		onUpdate();
+        applyConfig();
 	});
 
 	connect(ui->liveprog_reload, SIGNAL(clicked()),                  this, SLOT(reloadLiveprog()));
 	connect(ui->liveprog_files,  &QListWidget::itemSelectionChanged, [this] {
-		if (lockliveprogupdate || ui->liveprog_files->selectedItems().count() < 1)
+        if (_lockliveprogupdate || ui->liveprog_files->selectedItems().count() < 1)
 		{
 		    return; // Clearing Selection by code != User Interaction
 		}
@@ -1730,12 +1578,12 @@ void MainWindow::connectActions()
 
 		if (QFileInfo::exists(path) && QFileInfo(path).isFile())
 		{
-		    activeliveprog = path;
+            _currentLiveprog = path;
 		}
 
-		setLiveprogSelection(activeliveprog);
+        setLiveprogSelection(_currentLiveprog);
 
-		onUpdate();
+        applyConfig();
 	});
 	connect(ui->liveprog_select, &QPushButton::clicked, [this] {
 		QFileDialog *fd = new QFileDialog;
@@ -1749,112 +1597,6 @@ void MainWindow::connectActions()
 		    ui->liveprog_dirpath->setText(result);
 		    reloadLiveprog();
 		}
-	});
-
-    connect(ui->conv_reload, &QAbstractButton::clicked, this, [this] {
-        reloadIRS();
-    });
-    connect(ui->conv_files, &QListWidget::itemSelectionChanged, [this] {
-		if (lockirsupdate || ui->conv_files->selectedItems().count() < 1)
-		{
-		    return; // Clearing Selection by code != User Interaction
-		}
-
-		QString path = QDir(ui->conv_dirpath->text()).filePath(ui->conv_files->selectedItems().first()->text());
-
-		if (QFileInfo::exists(path) && QFileInfo(path).isFile())
-		{
-		    activeirs = path;
-		}
-
-		onUpdate();
-	});
-	connect(ui->conv_select, &QPushButton::clicked, [this] {
-		QFileDialog *fd = new QFileDialog;
-		fd->setFileMode(QFileDialog::Directory);
-		fd->setOption(QFileDialog::ShowDirsOnly);
-		fd->setViewMode(QFileDialog::Detail);
-		QString result = fd->getExistingDirectory();
-
-		if (result != "")
-		{
-		    ui->conv_dirpath->setText(result);
-		    reloadIRS();
-		}
-	});
-	connect(ui->conv_bookmark, &QPushButton::clicked, [this, absolute] {
-		if (ui->conv_files->selectedItems().count() < 1)
-		{
-		    return; // Clearing Selection by code != User Interaction
-
-		}
-
-		const QString src   = QDir(ui->conv_dirpath->text()).filePath(ui->conv_files->selectedItems().first()->text());
-		const QString &dest = QDir(QDir::cleanPath(absolute + QDir::separator() + "irs_favorites")).filePath(ui->conv_files->selectedItems().first()->text());
-
-		if (QFile::exists(dest))
-		{
-		    QFile::remove(dest);
-		}
-
-		QFile::copy(src, dest);
-        Log::debug("MainWindow::ConvBookmard: Adding " + src + " to bookmarks");
-		reloadIRSFav();
-	});
-	connect(ui->conv_files_fav, &QListWidget::itemSelectionChanged, [this, absolute] {
-		if (lockirsupdate || ui->conv_files_fav->selectedItems().count() < 1)
-		{
-		    return; // Clearing Selection by code != User Interaction
-		}
-
-		QString path = QDir(QDir::cleanPath(absolute + QDir::separator() + "irs_favorites")).filePath(ui->conv_files_fav->selectedItems().first()->text());
-
-		if (QFileInfo::exists(path) && QFileInfo(path).isFile())
-		{
-		    activeirs = path;
-		}
-
-		onUpdate();
-	});
-	connect(ui->conv_fav_rename, &QPushButton::clicked, [this, absolute] {
-		if (ui->conv_files_fav->selectedItems().count() < 1)
-		{
-		    return;
-		}
-
-		bool ok;
-		QString text     = QInputDialog::getText(this, "Rename",
-		                                         "New Name", QLineEdit::Normal,
-		                                         ui->conv_files_fav->selectedItems().first()->text(), &ok);
-		QString fullpath = QDir(QDir::cleanPath(absolute + QDir::separator() + "irs_favorites")).filePath(ui->conv_files_fav->selectedItems().first()->text());;
-		QString dest     = QDir::cleanPath(absolute + QDir::separator() + "irs_favorites");
-
-		if (ok && !text.isEmpty())
-		{
-		    QFile::rename(fullpath, QDir(dest).filePath(text));
-		}
-
-		reloadIRSFav();
-	});
-	connect(ui->conv_fav_remove, &QPushButton::clicked, [this, absolute] {
-		if (ui->conv_files_fav->selectedItems().count() < 1)
-		{
-		    return;
-		}
-
-		QString fullpath = QDir(QDir::cleanPath(absolute + QDir::separator() + "irs_favorites")).filePath(ui->conv_files_fav->selectedItems().first()->text());;
-
-		if (!QFile::exists(fullpath))
-		{
-		    QMessageBox::warning(this, "Error", "Selected File doesn't exist", QMessageBox::Ok);
-		    reloadIRSFav();
-		    return;
-		}
-
-		QFile file(fullpath);
-		file.remove();
-        Log::debug("MainWindow::ConvFavRemove: Removed " + fullpath + " from favorites");
-		reloadIRSFav();
 	});
 
 	connect(ui->graphicEq, &GraphicEQFilterGUI::autoeqClicked, [this] {
@@ -1872,36 +1614,36 @@ void MainWindow::connectActions()
 		    else
 		    {
 		        ui->graphicEq->load(hp.getGraphicEQ());
-		        onUpdate();
+                applyConfig();
 			}
 		}
 
 		sel->deleteLater();
 	});
 
-	connect(ui->eq_r_fixed,          &QRadioButton::clicked,    this, &MainWindow::updateEQMode);
-	connect(ui->eq_r_flex,           &QRadioButton::clicked,    this, &MainWindow::updateEQMode);
+    connect(ui->eq_r_fixed,          &QRadioButton::clicked,    this, &MainWindow::onEqModeUpdated);
+    connect(ui->eq_r_flex,           &QRadioButton::clicked,    this, &MainWindow::onEqModeUpdated);
 
-	connect(m_eelEditor,             &EELEditor::scriptSaved,   this, &MainWindow::updateFromEelEditor);
-	connect(ui->liveprog_reset,      &QAbstractButton::clicked, this, &MainWindow::resetLiveprogParams);
+    connect(_eelEditor,             &EELEditor::scriptSaved,   this, &MainWindow::updateFromEelEditor);
+    connect(ui->liveprog_reset,      &QAbstractButton::clicked, this, &MainWindow::onResetLiveprogParams);
 	connect(ui->liveprog_editscript, &QAbstractButton::clicked, [this] {
-		if (activeliveprog.isEmpty())
+        if (_currentLiveprog.isEmpty())
 		{
-            m_eelEditor->show();
-            m_eelEditor->raise();
-            m_eelEditor->newProject();
+            _eelEditor->show();
+            _eelEditor->raise();
+            _eelEditor->newProject();
             return;
 		}
-		else if (!QFile(activeliveprog).exists())
+        else if (!QFile(_currentLiveprog).exists())
 		{
 		    QMessageBox::warning(this, "Error", "Selected EEL file does not exist anymore.\n"
 		                         "Please select another one");
 		    return;
 		}
 
-		m_eelEditor->show();
-        m_eelEditor->raise();
-		m_eelEditor->openNewScript(activeliveprog);
+        _eelEditor->show();
+        _eelEditor->raise();
+        _eelEditor->openNewScript(_currentLiveprog);
 	});
 
     connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
@@ -1913,7 +1655,7 @@ void MainWindow::launchFirstRunSetup()
 {
 	QHBoxLayout            *lbLayout = new QHBoxLayout;
 	QMessageOverlay        *lightBox = new QMessageOverlay(this);
-    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(audioService, lightBox);
+    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(_audioService, lightBox);
 	QGraphicsOpacityEffect *eff      = new QGraphicsOpacityEffect(lightBox);
 	QPropertyAnimation     *a        = new QPropertyAnimation(eff, "opacity");
 
@@ -1941,7 +1683,7 @@ void MainWindow::launchFirstRunSetup()
 		{
             AppConfig::instance().set(AppConfig::SetupDone, true);
 			lightBox->hide();
-            settingsFragment->fragment()->refreshAll();
+            _settingsFragment->fragment()->refreshAll();
 			lightBox->deleteLater();
 		});
 	});

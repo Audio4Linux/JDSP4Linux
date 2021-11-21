@@ -62,97 +62,93 @@ public:
 	                    QWidget *parent = nullptr);
 	~MainWindow();
 
-	static void loadPresetFile(const QString &);
-	static void savePresetFile(const QString &);
-	QString     executablePath();
-	void        setEq(const QVector<double> &data);
-	void        setReverbData(PresetProvider::Reverb::sf_reverb_preset_data data);
-	void        setEqMode(int mode);
-	void        updateDDCSelection();
-
-    Ui::MainWindow *ui;
-
-    EELEditor *eelEditor() const;
-
 protected:
     void        resizeEvent(QResizeEvent* event) override;
     void        closeEvent(QCloseEvent *event) override;
 
 public slots:
-	void        reset();
-	void        restart();
+    void        onResetRequested();
+    void        onRelinkRequested();
 	void        raiseWindow();
-	void        applyConfig();
-	void        trayIconActivated();
 	int         extractDefaultEelScripts(bool allowOverride,
 	                                     bool user);
 	void        launchFirstRunSetup();
 
 private slots:
-	void        disableFx();
-    void        onUpdate();
+    void        applyConfig();
+
+    void        onPassthroughToggled();
+    void        onFragmentRequested();
+
 	void        resetEQ();
-	void        eqPresetSelectionUpdated();
+
+
+    void        updateAllUnitLabels();
 	void        updateUnitLabel(int,
 	                            QObject *alt = nullptr);
-	void        updateAllUnitLabels();
+
+
 	void        loadExternalFile();
 	void        saveExternalFile();
-    void        dialogHandler();
-	void        updateEqStringFromWidget();
-	void        bs2bPresetSelectionUpdated();
-	void        reverbPresetSelectionUpdated();
-	void        reloadDDC();
-	void        reloadIRS();
-	void        reloadIRSFav();
+
+    void        onBs2bPresetUpdated();
+    void        onReverbPresetUpdated();
+    void        onEqPresetUpdated();
+    void        onEqModeUpdated();
+
 	void        reloadLiveprog();
+
 	void        restoreGraphicEQView();
 	void        saveGraphicEQView();
-	void        updateEQMode();
+
 	void        fireTimerSignal();
-	void        resetLiveprogParams();
+    void        onResetLiveprogParams();
 	void        updateFromEelEditor(QString path);
-	void        convolverWaveformEdit();
+    void        onConvolverWaveformEdit();
+
+    void        onTrayIconActivated();
+
+    void        setVdcFile(const QString &path);
+    void        setIrsFile(const QString &path);
+
+    void        determineEqPresetName();
 
 private:
-	StyleHelper *m_stylehelper;
-	QTimer *refreshTick;
+    Ui::MainWindow *ui;
 
-	bool m_startupInTraySwitch;
-	TrayIcon *trayIcon;
+    StyleHelper *_styleHelper;
+    QTimer *_refreshTick;
 
-	QAction *spectrum;
-	EELParser *_eelparser;
+    bool _startupInTraySwitch;
+    TrayIcon *_trayIcon;
+
+    EELEditor *_eelEditor;
+    EELParser *_eelParser;
 
     SingleInstanceMonitor* _singleInstance;
 
-    FragmentHost<AppManagerFragment*>* appMgrFragment = nullptr;
-    FragmentHost<StatusFragment*>* statusFragment = nullptr;
-    FragmentHost<SettingsFragment*>* settingsFragment = nullptr;
-    FragmentHost<PresetFragment*>* presetFragment = nullptr;
+    FragmentHost<AppManagerFragment*>* _appMgrFragment = nullptr;
+    FragmentHost<StatusFragment*>* _statusFragment     = nullptr;
+    FragmentHost<SettingsFragment*>* _settingsFragment = nullptr;
+    FragmentHost<PresetFragment*>* _presetFragment     = nullptr;
 
-	EELEditor *m_eelEditor;
+    QAction *_spectrum;
+    QScopedPointer<QFrame> _spectrumLayout;
+    Spectrograph *_spectrumWidget;
+    AudioStreamEngine *_spectrumEngine;
 
-	QScopedPointer<QFrame> analysisLayout;
-	Spectrograph *m_spectrograph;
-	AudioStreamEngine *m_audioengine;
+    IAudioService* _audioService       = nullptr;
 
-    IAudioService* audioService = nullptr;
+    bool _spectrumReloadSignalQueued   = false;
+    bool _blockApply                   = false;
+    bool _lockliveprogupdate           = false;
 
-	bool spectrumReloadSignalQueued   = false;
-	bool lockapply                    = false;
-	bool lockddcupdate                = false;
-	bool lockirsupdate                = false;
-	bool lockliveprogupdate           = false;
+    QString _currentImpuleResponse    = "";
+    QString _currentVdc               = "";
+    QString _currentLiveprog          = "";
+    QString _currentConvWaveformEdit  = "";
 
-	QString activeirs                 = "";
-	QString activeddc                 = "";
-	QString activeliveprog            = "";
-	QString irAdvancedWaveformEditing = "";
-
-	QJsonTableModel *model;
-
-	void updateTooltipLabelUnit(QObject       *sender,
+    void updateTooltipLabelUnit(QObject       *sender,
 	                            const QString &text,
 	                            bool);
 	void loadConfig();
@@ -160,7 +156,13 @@ private:
 
 	void setLiveprogSelection(QString path);
 
-	void updateIrsSelection();
+    void determineIrsSelection();
+    void determineVdcSelection();
+
+    void setEq(const QVector<double> &data);
+    void setEqMode(int mode);
+    void setReverbData(PresetProvider::Reverb::sf_reverb_preset_data data);
+
 
 };
 

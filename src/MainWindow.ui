@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>2</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1541,138 +1541,49 @@
                 <enum>QTabWidget::South</enum>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
-               <widget class="QWidget" name="conv_filesystem">
+               <widget class="QWidget" name="conv_filesystem_tab">
                 <attribute name="title">
                  <string>Filesystem</string>
                 </attribute>
                 <layout class="QVBoxLayout" name="verticalLayout_16">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_8">
-                   <property name="spacing">
-                    <number>6</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QLineEdit" name="conv_dirpath"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="conv_reload">
-                     <property name="maximumSize">
-                      <size>
-                       <width>70</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>Reload</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="conv_bookmark">
-                     <property name="maximumSize">
-                      <size>
-                       <width>70</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>Bookmark</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="conv_select">
-                     <property name="maximumSize">
-                      <size>
-                       <width>35</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>...</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QListWidget" name="conv_files"/>
+                  <widget class="FileSelectionWidget" name="conv_files" native="true"/>
                  </item>
                 </layout>
                </widget>
-               <widget class="QWidget" name="conv_fav">
+               <widget class="QWidget" name="conv_fav_tab">
                 <attribute name="title">
                  <string>Bookmarks</string>
                 </attribute>
                 <layout class="QVBoxLayout" name="verticalLayout_11">
                  <property name="leftMargin">
-                  <number>9</number>
+                  <number>0</number>
                  </property>
                  <property name="topMargin">
-                  <number>9</number>
+                  <number>0</number>
                  </property>
                  <property name="rightMargin">
-                  <number>9</number>
+                  <number>0</number>
                  </property>
                  <property name="bottomMargin">
-                  <number>9</number>
+                  <number>0</number>
                  </property>
                  <item>
-                  <widget class="QListWidget" name="conv_files_fav"/>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_9">
-                   <property name="spacing">
-                    <number>6</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <spacer name="horizontalSpacer_4">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="conv_fav_rename">
-                     <property name="maximumSize">
-                      <size>
-                       <width>80</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>Rename</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="conv_fav_remove">
-                     <property name="maximumSize">
-                      <size>
-                       <width>80</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>Remove</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  <widget class="FileSelectionWidget" name="conv_fav" native="true"/>
                  </item>
                 </layout>
                </widget>
@@ -1813,47 +1724,20 @@
                  <string>Filesystem</string>
                 </attribute>
                 <layout class="QVBoxLayout" name="verticalLayout_12">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_2">
-                   <property name="spacing">
-                    <number>6</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QLineEdit" name="ddc_dirpath"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="ddc_reload">
-                     <property name="maximumSize">
-                      <size>
-                       <width>70</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>Reload</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="ddc_select">
-                     <property name="maximumSize">
-                      <size>
-                       <width>35</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>...</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QListWidget" name="ddc_files"/>
+                  <widget class="FileSelectionWidget" name="ddc_files" native="true"/>
                  </item>
                 </layout>
                </widget>
@@ -2468,6 +2352,12 @@
    <extends>QLabel</extends>
    <header>interface/WidgetMarqueeLabel.h</header>
   </customwidget>
+  <customwidget>
+   <class>FileSelectionWidget</class>
+   <extends>QWidget</extends>
+   <header>interface/FileSelectionWidget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>cpreset</tabstop>
@@ -2504,20 +2394,8 @@
   <tabstop>eqfiltertype</tabstop>
   <tabstop>reseteq</tabstop>
   <tabstop>convTabs</tabstop>
-  <tabstop>conv_dirpath</tabstop>
-  <tabstop>conv_reload</tabstop>
-  <tabstop>conv_bookmark</tabstop>
-  <tabstop>conv_select</tabstop>
-  <tabstop>conv_files</tabstop>
-  <tabstop>conv_files_fav</tabstop>
-  <tabstop>conv_fav_rename</tabstop>
-  <tabstop>conv_fav_remove</tabstop>
   <tabstop>conv_enable</tabstop>
   <tabstop>ddcTabs</tabstop>
-  <tabstop>ddc_dirpath</tabstop>
-  <tabstop>ddc_reload</tabstop>
-  <tabstop>ddc_select</tabstop>
-  <tabstop>ddc_files</tabstop>
   <tabstop>ddc_enable</tabstop>
   <tabstop>liveprog_dirpath</tabstop>
   <tabstop>liveprog_reload</tabstop>

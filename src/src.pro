@@ -48,6 +48,7 @@ SOURCES += \
     data/model/VdcDatabaseModel.cpp \
     interface/AnimatedJdspIcon.cpp \
     interface/CListView.cpp \
+    interface/FileSelectionWidget.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/AutoEqSelector.cpp \
     interface/dialog/PaletteEditor.cpp \
@@ -76,6 +77,7 @@ SOURCES += \
     utils/StyleHelper.cpp
 
 FORMS += \
+    interface/FileSelectionWidget.ui \
     interface/dialog/AutoEqSelector.ui \
     interface/dialog/PaletteEditor.ui \
     interface/fragment/AppManagerFragment.ui \
@@ -107,6 +109,7 @@ HEADERS += \
     data/model/VdcDatabaseModel.h \
     interface/AnimatedJdspIcon.h \
     interface/CListView.h \
+    interface/FileSelectionWidget.h \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
     interface/dialog/AutoEqSelector.h \
