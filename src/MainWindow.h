@@ -17,6 +17,7 @@
 
 #include <QCloseEvent>
 #include <QFrame>
+#include <QItemSelection>
 #include <QMainWindow>
 #include <QSystemTrayIcon>
 
@@ -113,6 +114,8 @@ private slots:
 
     void        determineEqPresetName();
 
+    void        onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &);
+    void        onAutoEqImportRequested();
 private:
     Ui::MainWindow *ui;
 

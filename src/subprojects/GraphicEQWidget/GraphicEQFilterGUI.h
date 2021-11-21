@@ -70,6 +70,7 @@ private slots:
     void on_actionImport_AutoEQ_result_triggered();
 signals:
     void updateModel(bool isMoving);
+    void updateModelEnd();
     void mouseUp();
     void updateChannels();
     void autoeqClicked();

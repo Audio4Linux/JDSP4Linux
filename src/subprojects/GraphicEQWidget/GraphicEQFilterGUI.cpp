@@ -69,6 +69,10 @@ GraphicEQFilterGUI::GraphicEQFilterGUI(QWidget* parent) : QWidget(parent),
     connect(scene, SIGNAL(updateModel(bool)), this, SIGNAL(updateModel(bool)));
     connect(scene, SIGNAL(nodeMouseUp(int)), this, SIGNAL(mouseUp()));
 
+    connect(this, &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving){
+        if(!isMoving) emit updateModelEnd();
+    });
+
     connect(ui->autoeq,&QAbstractButton::clicked,this,&GraphicEQFilterGUI::autoeqClicked);
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

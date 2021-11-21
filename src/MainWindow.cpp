@@ -447,7 +447,7 @@ MainWindow::MainWindow(QString  exepath,
 		ui->tabbar->redrawTabBar();
 	}
 
-	// Handle first launch and diagnostic checks
+    // Handle first launch
 	{
         if (!AppConfig::instance().get<bool>(AppConfig::SetupDone))
 		{
@@ -1147,6 +1147,45 @@ void MainWindow::determineVdcSelection()
 	}
 }
 
+void MainWindow::onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &) {
+    QItemSelectionModel *select = ui->ddcTable->selectionModel();
+    QString ddc_coeffs;
+
+    if (select->hasSelection())
+    {
+        ui->ddc_files->clearCurrentFile();
+
+        int index        = select->selectedRows().first().row();
+        auto* model      = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
+
+        ddc_coeffs      += "SR_44100:";
+        ddc_coeffs      += model->coefficients(index, 44100);
+        ddc_coeffs      += "\nSR_48000:";
+        ddc_coeffs      += model->coefficients(index, 48000);
+
+        QFile file(AppConfig::instance().getPath("temp.vdc"));
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            file.write(ddc_coeffs.toUtf8().constData());
+        }
+        file.close();
+
+        auto newId = model->id(index);
+        if (newId != "0")
+        {
+            AppConfig::instance().set(AppConfig::VdcLastDatabaseId, newId);
+        }
+
+        /* Workaround: Load different file to make sure the config parser notices a change and reloads the DDC engine */
+        DspConfig::instance().set(DspConfig::ddc_file, "");
+        DspConfig::instance().commit();
+
+        _currentVdc = AppConfig::instance().getPath("temp.vdc");
+    }
+
+    applyConfig();
+}
+
 // ---IRS
 void MainWindow::setIrsFile(const QString& path)
 {
@@ -1423,6 +1462,29 @@ void MainWindow::setEqMode(int mode)
 	ui->eq_r_fixed->setChecked(!mode);
 }
 
+void MainWindow::onAutoEqImportRequested()
+{
+    AutoEQSelector *sel = new AutoEQSelector(this);
+    sel->setModal(true);
+
+    if (sel->exec() == QDialog::Accepted)
+    {
+        HeadphoneMeasurement hp = sel->getSelection();
+
+        if (hp.getGraphicEQ() == "")
+        {
+            QMessageBox::warning(this, "Error", "Unable to load GraphicEQ data.\n\nEither your network connection is experiencing issues, or you are being rate-limited by GitHub.\nKeep in mind that you can only send 60 web requests per hour to this API.\n\nYou can check your current rate limit status here: https://api.github.com/rate_limit");
+        }
+        else
+        {
+            ui->graphicEq->load(hp.getGraphicEQ());
+            applyConfig();
+        }
+    }
+
+    sel->deleteLater();
+}
+
 // ---GraphicEQ States
 void MainWindow::restoreGraphicEQView()
 {
@@ -1510,62 +1572,11 @@ void MainWindow::connectActions()
 
     connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
     connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
-	connect(ui->graphicEq,          &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving)
-	{
-		if (!isMoving)
-		{
-            applyConfig();
-		}
-	});
-	connect(ui->eq_dyn_widget, &GraphicEQFilterGUI::updateModel, this, [this](bool isMoving)
-	{
-		if (!isMoving)
-		{
-            applyConfig();
-		}
-	});
 
-	connect(ui->ddcTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, [this](const QItemSelection &, const QItemSelection &) {
-		QItemSelectionModel *select = ui->ddcTable->selectionModel();
-		QString ddc_coeffs;
+    connect(ui->graphicEq,          &GraphicEQFilterGUI::updateModelEnd, this, &MainWindow::applyConfig);
+    connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::updateModelEnd, this, &MainWindow::applyConfig);
 
-		if (select->hasSelection())
-		{
-            ui->ddc_files->clearCurrentFile();
-
-		    int index        = select->selectedRows().first().row();
-            VdcDatabaseModel* model = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
-
-		    ddc_coeffs      += "SR_44100:";
-            ddc_coeffs      += model->coefficients(index, 44100);
-		    ddc_coeffs      += "\nSR_48000:";
-            ddc_coeffs      += model->coefficients(index, 48000);
-		    QString absolute = QFileInfo(AppConfig::instance().getDspConfPath()).absoluteDir().absolutePath();
-		    QFile file(absolute + "/temp.vdc");
-
-		    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-		    {
-		        file.write(ddc_coeffs.toUtf8().constData());
-			}
-
-		    file.close();
-
-            auto newId = model->id(index);
-
-		    if (newId != "0")
-		    {
-                AppConfig::instance().set(AppConfig::VdcLastDatabaseId, newId);
-			}
-
-            /* Workaround: Load different file to make sure the config parser notices a change and reloads the DDC engine */
-            DspConfig::instance().set(DspConfig::ddc_file, "");
-            DspConfig::instance().commit();
-
-            _currentVdc = absolute + "/temp.vdc";
-		}
-
-        applyConfig();
-	});
+    connect(ui->ddcTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onVdcDatabaseSelected);
 
 	connect(ui->liveprog_reload, SIGNAL(clicked()),                  this, SLOT(reloadLiveprog()));
 	connect(ui->liveprog_files,  &QListWidget::itemSelectionChanged, [this] {
@@ -1599,27 +1610,7 @@ void MainWindow::connectActions()
 		}
 	});
 
-	connect(ui->graphicEq, &GraphicEQFilterGUI::autoeqClicked, [this] {
-		AutoEQSelector *sel = new AutoEQSelector(this);
-		sel->setModal(true);
-
-		if (sel->exec() == QDialog::Accepted)
-		{
-		    HeadphoneMeasurement hp = sel->getSelection();
-
-		    if (hp.getGraphicEQ() == "")
-		    {
-		        QMessageBox::warning(this, "Error", "Empty equalizer data.\n\nEither your network connection is experiencing issues, or you are being rate-limited by GitHub.\nKeep in mind that you can only send 60 web requests per hour to this API.\n\nYou can check your current rate limit status here: https://api.github.com/rate_limit");
-			}
-		    else
-		    {
-		        ui->graphicEq->load(hp.getGraphicEQ());
-                applyConfig();
-			}
-		}
-
-		sel->deleteLater();
-	});
+    connect(ui->graphicEq, &GraphicEQFilterGUI::autoeqClicked, this, &MainWindow::onAutoEqImportRequested);
 
     connect(ui->eq_r_fixed,          &QRadioButton::clicked,    this, &MainWindow::onEqModeUpdated);
     connect(ui->eq_r_flex,           &QRadioButton::clicked,    this, &MainWindow::onEqModeUpdated);
@@ -1647,7 +1638,12 @@ void MainWindow::connectActions()
 	});
 
     connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
-        system("sh -c \"xdg-open https://github.com/thepbone/DDCToolbox\""); // QDesktopServices::openUrl is broken on some KDE systems
+        int ret = system("xdg-open https://github.com/thepbone/DDCToolbox"); // QDesktopServices::openUrl broken on some KDE systems with Qt 5.15
+        if(ret > 0)
+        {
+            Log::error("MainWindow: xdg-open failed. Trying gio instead.");
+            system("gio open https://github.com/thepbone/DDCToolbox");
+        }
     });
 }
 
