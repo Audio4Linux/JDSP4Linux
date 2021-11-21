@@ -76,8 +76,8 @@ gst_jamesdsp_class_init(GstjamesdspClass *klass) {
                                                          G_PARAM_READABLE));
 
     g_object_class_install_property(gobject_class, PROP_DSP_SRATE,
-                                    g_param_spec_int("dsp_srate", "StreamSamplingRate", "Current sampling rate",
-                                                     0, INT_MAX, 0, G_PARAM_READABLE));
+                                    g_param_spec_string("dsp_srate", "StreamSamplingRate", "Current sampling rate",
+                                                     "0", G_PARAM_READABLE));
 
     g_object_class_install_property(gobject_class, PROP_DSP_FORMAT,
                                     g_param_spec_string("dsp_format", "StreamFormat", "Current audio format",
@@ -168,9 +168,12 @@ gst_jamesdsp_get_property(GObject *object, guint prop_id,
         case PROP_DSP_PTR:
             g_value_set_pointer(value, self->dsp);
             break;
-        case PROP_DSP_SRATE:
-            g_value_set_int(value, self->samplerate);
+        case PROP_DSP_SRATE: {
+            char str[8];
+            snprintf(str, 8, "%d", self->samplerate);
+            g_value_set_string(value, str);
             break;
+        }
         case PROP_DSP_FORMAT:
             switch(self->format){
                 case 0:

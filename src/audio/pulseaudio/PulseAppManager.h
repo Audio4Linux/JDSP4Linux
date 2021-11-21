@@ -4,6 +4,8 @@
 #include <IAppManager.h>
 #include <config/AppConfig.h>
 
+#include <memory>
+
 class PulsePipelineManager;
 
 class PulseAppManager : public IAppManager

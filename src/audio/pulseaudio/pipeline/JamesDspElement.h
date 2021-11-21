@@ -14,6 +14,10 @@ class JamesDspElement : public FilterElement, public IDspElement
 public:
     JamesDspElement();
     DspStatus status() override;
+
+private:
+    bool _state;
+
 };
 
 #endif // JAMESDSPELEMENT_H

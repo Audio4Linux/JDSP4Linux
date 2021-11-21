@@ -12,12 +12,14 @@ JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
                     "dsp_enable", &gEnabled, NULL);
 
     assert(!gEnabled); // check if underlying object is fresh
+    _state = gEnabled;
 
     _host = new DspHost(gDspPtr, [this](DspHost::Message msg, std::any value){
         switch(msg)
         {
             case DspHost::SwitchPassthrough:
                 this->setValues("dsp_enable", std::any_cast<bool>(value), NULL);
+                _state = std::any_cast<bool>(value);
                 break;
             default:
                 // Redirect to parent handler
@@ -30,20 +32,15 @@ JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
 DspStatus JamesDspElement::status()
 {
     DspStatus status;
-    const char* format = NULL;
-    int srate = 0;
-    bool enabled = false;
-    this->getValues("dsp_srate", &srate,
-                    "dsp_format", &format,
-                    "dsp_enable", &enabled, NULL);
+    char* format = NULL;
+    char* srate = NULL;
 
-    if(srate == 0)
-        status.SamplingRate = "Unknown";
-    else
-        status.SamplingRate = std::to_string(srate);
+    this->getValues("dsp_format", &format, NULL);
+    this->getValues("dsp_srate", &srate, NULL);
 
+    status.SamplingRate = srate;
     status.AudioFormat = format;
-    status.IsProcessing = enabled;
+    status.IsProcessing = _state;
 
     return status;
 }

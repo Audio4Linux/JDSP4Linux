@@ -1,6 +1,6 @@
-#include "PulseAppManager.h"
+#include "PulsePipelineManager.h"
 
-#include <PulsePipelineManager.h>
+#include "PulseAppManager.h"
 
 #include "Utils.h"
 
