@@ -95,7 +95,7 @@ MainWindow::MainWindow(QString  exepath,
         Log::information("If you want to use this application with PipeWire, you need to recompile this app with proper support enabled.");
         Log::information("Refer to the README for more detailed information.");
         Log::information("");
-        audioService = new PulseAudioService();
+        _audioService = new PulseAudioService();
 #else
         Log::information("Compiled with PipeWire support.");
         Log::information("This application flavor does not support PulseAudio.");
@@ -159,7 +159,7 @@ MainWindow::MainWindow(QString  exepath,
 
         // TODO
         //        QTimer *timer = new QTimer(this);
-        //        connect(timer, SIGNAL(timeout()), audioService, SLOT(enumerateLiveprogVariables()));
+        //        connect(timer, SIGNAL(timeout()), _audioService, SLOT(enumerateLiveprogVariables()));
         //        timer->start(200);
 
         connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
