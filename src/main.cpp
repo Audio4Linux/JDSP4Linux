@@ -22,6 +22,8 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
+#include <interface/dialog/CrashReportDialog.h>
+
 static bool SPIN_ON_CRASH = false;
 static const char* EXEC_NAME = "jamesdsp";
 
@@ -45,6 +47,8 @@ void crash_handled(int fd)
 }
 
 #endif
+
+#include <QStyleFactory>
 
 using namespace std;
 int main(int   argc,
@@ -78,6 +82,12 @@ int main(int   argc,
     parser.addOption(spinlck);
 	parser.process(a);
 
+
+    qApp->setStyle(QStyleFactory::create("Fusion"));
+    qApp->setPalette(qApp->style()->standardPalette());
+    CrashReportDialog* dlg = new CrashReportDialog();
+    dlg->show();
+
     SPIN_ON_CRASH = parser.isSet(spinlck);
 
 	QLocale::setDefault(QLocale::c());  
@@ -109,11 +119,12 @@ int main(int   argc,
 	{
         /* Session manager: Prevent system from launching this app maximized on session restore (= system startup).
          * Affects DEs with enabled session restore feature; is independent from the built-in autostart feature */
+
         if(!qApp->isSessionRestored())
         {
             w.show();
         }
-	}
+    }
 
 	QApplication::setQuitOnLastWindowClosed(true);
 	return QApplication::exec();

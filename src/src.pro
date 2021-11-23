@@ -52,6 +52,7 @@ SOURCES += \
     interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/AutoEqSelector.cpp \
+    interface/dialog/CrashReportDialog.cpp \
     interface/dialog/PaletteEditor.cpp \
     interface/LiquidEqualizerWidget.cpp \
     interface/fragment/AppManagerFragment.cpp \
@@ -81,6 +82,7 @@ FORMS += \
     interface/FileSelectionWidget.ui \
     interface/LiveprogSelectionWidget.ui \
     interface/dialog/AutoEqSelector.ui \
+    interface/dialog/CrashReportDialog.ui \
     interface/dialog/PaletteEditor.ui \
     interface/fragment/AppManagerFragment.ui \
     interface/fragment/FirstLaunchWizard.ui \
@@ -116,6 +118,7 @@ HEADERS += \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
     interface/dialog/AutoEqSelector.h \
+    interface/dialog/CrashReportDialog.h \
     interface/dialog/PaletteEditor.h \
     interface/event/EventFilter.h \
     interface/event/ScrollFilter.h \

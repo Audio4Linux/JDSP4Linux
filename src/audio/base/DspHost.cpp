@@ -340,7 +340,7 @@ void DspHost::updateConvolver(DspConfig *config)
     else
     {
         ConvolverInfoEventArgs eventArgs;
-        eventArgs.data = std::list<float>(impulse, impulse + impInfo[1] * sizeof(float));
+        // eventArgs.data = std::list<float>(impulse, impulse + impInfo[1] * sizeof(float));
         eventArgs.channels = impInfo[0];
         eventArgs.frames = impInfo[1];
         dispatch(ConvolverInfoChanged, eventArgs);
