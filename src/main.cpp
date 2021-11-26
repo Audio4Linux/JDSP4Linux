@@ -90,7 +90,7 @@ int main(int   argc,
     DspConfig::instance(parser.isSet(watch));
 
     QApplication::setFallbackSessionManagementEnabled(false);
-    QApplication::setQuitOnLastWindowClosed(false);
+    //QApplication::setQuitOnLastWindowClosed(false);
     MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
 
     //w.setFixedSize(w.geometry().width(), w.geometry().height());
@@ -115,6 +115,6 @@ int main(int   argc,
         }
 	}
 
-	QApplication::setQuitOnLastWindowClosed(true);
+    //QApplication::setQuitOnLastWindowClosed(true);
 	return QApplication::exec();
 }

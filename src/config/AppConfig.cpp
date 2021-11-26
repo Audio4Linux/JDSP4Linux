@@ -38,6 +38,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioOutputUseDefault, true);
     DEFINE_KEY(AudioOutputDevice, "");
     DEFINE_KEY(AudioAppBlocklist, QStringList());
+    DEFINE_KEY(AudioAppBlocklistInvert, true);
 
     connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
@@ -54,6 +55,17 @@ void AppConfig::set(const Key &key, const QVariant &value)
     _appconf->setValue(QVariant::fromValue(key).toString(), value);
     emit updated(key, value);
     save();
+}
+
+bool AppConfig::isAppBlocked(const QString &name) const
+{
+    const auto& blocklist = get<QStringList>(AppConfig::AudioAppBlocklist);
+    bool invert = get<bool>(AppConfig::AudioAppBlocklistInvert);
+    bool contains = blocklist.contains(name);
+
+    Log::debug("AppConfig::isAppBlocked(\""+name+"\") -> " + ((invert ? !contains : contains) ? "true" : "false"));
+
+    return invert ? !contains : contains;
 }
 
 QString AppConfig::getDspConfPath()

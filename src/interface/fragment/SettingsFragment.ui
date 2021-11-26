@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>350</height>
+    <height>365</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>685</width>
-    <height>350</height>
+    <height>365</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -125,7 +125,7 @@
         <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -519,6 +519,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="blocklistInvert">
+              <property name="text">
+               <string>Allowlist mode (apps need to be explicitly enabled instead)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <property name="topMargin">
                <number>0</number>
@@ -545,7 +552,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Clear blocklist</string>
+                 <string>Clear list</string>
                 </property>
                </widget>
               </item>

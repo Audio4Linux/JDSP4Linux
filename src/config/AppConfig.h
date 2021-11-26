@@ -68,7 +68,8 @@ public:
 
         AudioOutputUseDefault,
         AudioOutputDevice,
-        AudioAppBlocklist
+        AudioAppBlocklist,
+        AudioAppBlocklistInvert
     };
     Q_ENUM(Key);
 
@@ -106,7 +107,7 @@ public:
     }
 
     template<class T>
-    T get(const Key &key)
+    T get(const Key &key) const
     {
         bool exists;
         auto skey = QVariant::fromValue(key).toString();
@@ -121,6 +122,8 @@ public:
 
         return convertVariant<T>(variant);
     }
+
+    bool isAppBlocked(const QString& name) const;
 
     QString getDspConfPath();
 

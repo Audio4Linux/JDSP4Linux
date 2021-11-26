@@ -455,9 +455,7 @@ void PulsePipelineManager::onAppAdded(const std::shared_ptr<AppInfo>& app_info) 
     updatePipelineState();
 
     bool success = false;
-
-    const auto& blocklist = AppConfig::instance().get<QStringList>(AppConfig::AudioAppBlocklist);
-    const auto& is_blocklisted = blocklist.contains(QString::fromStdString(app_info.get()->name));
+    bool is_blocklisted = AppConfig::instance().isAppBlocked(QString::fromStdString(app_info.get()->name));
 
     if (app_info->connected) {
         if (is_blocklisted) {

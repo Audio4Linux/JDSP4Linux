@@ -30,6 +30,7 @@
 #include "utils/Common.h"
 #include "utils/dbus/ClientProxy.h"
 #include "utils/dbus/ServerAdaptor.h"
+#include "utils/DebuggerUtils.h"
 #include "utils/Log.h"
 #include "utils/OverlayMsgProxy.h"
 #include "utils/SingleInstanceMonitor.h"
@@ -102,7 +103,8 @@ MainWindow::MainWindow(QString  exepath,
         Log::information("If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.");
         Log::information("Refer to the README for more detailed information.");
         Log::information("");
-        Log::debug("MainWindow::ctor: Blacklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
+        Log::debug("MainWindow::ctor: Blocklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
+        Log::debug("MainWindow::ctor: Blocklist mode: " + QString((AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ? "allow" : "block")));
         _audioService = new PipewireAudioService();
 #endif
         connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
@@ -437,7 +439,7 @@ MainWindow::MainWindow(QString  exepath,
         ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabbar->redrawTabBar();
 
-        if (system("which ddctoolbox > /dev/null 2>&1")) {
+        if (debuggerIsAttached() || system("which ddctoolbox > /dev/null 2>&1")) { // Workaround: do not call system() when GDB is attached
             connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
                 int ret = system("xdg-open https://github.com/thepbone/DDCToolbox"); // QDesktopServices::openUrl broken on some KDE systems with Qt 5.15
                 if(ret > 0)

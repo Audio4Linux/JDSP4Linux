@@ -79,8 +79,7 @@ void PwAppManager::handleSettingsUpdate(const AppConfig::Key& key, const QVarian
         for (const auto& node : apps)
         {
             const auto& app_is_enabled = mgr->stream_is_connected(node.id, node.media_class);
-            const auto& blocklist = AppConfig::instance().get<QStringList>(AppConfig::AudioAppBlocklist);
-            const auto& is_blocklisted = blocklist.contains(QString::fromStdString(node.name));
+            bool is_blocklisted = AppConfig::instance().isAppBlocked(QString::fromStdString(node.name));
 
             if (is_blocklisted && app_is_enabled)
             {

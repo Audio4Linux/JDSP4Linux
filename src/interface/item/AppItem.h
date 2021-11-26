@@ -4,6 +4,8 @@
 #include <AppNode.h>
 #include <QWidget>
 
+#include "config/AppConfig.h"
+
 namespace Ui {
 class AppItem;
 }
@@ -21,6 +23,7 @@ public:
 private slots:
     void refresh(const AppNode& node);
     void setBlocked(bool blocked);
+    void onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value);
 
 private:
     Ui::AppItem *ui;

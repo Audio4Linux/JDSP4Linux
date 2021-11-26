@@ -101,8 +101,7 @@ FilterContainer::~FilterContainer() {
 }
 
 void FilterContainer::on_app_added(const uint id, const std::string name, const std::string media_class) {
-    const auto& blocklist = settings->get<QStringList>(AppConfig::AudioAppBlocklist);
-    const auto& is_blocklisted = blocklist.contains(QString::fromStdString(name));
+    const auto& is_blocklisted = settings->isAppBlocked(QString::fromStdString(name));
 
     if (is_blocklisted) {
         pm->disconnect_stream_output(id, media_class);

@@ -199,8 +199,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	});
 	connect(ui->liveprog_extractNow, &QPushButton::clicked, this, [this]
 	{
-		QMessageBox::StandardButton reply;
-		reply = QMessageBox::question(this, tr("Question"), tr("Do you want to override existing EEL scripts (if any)?"),
+        auto reply = QMessageBox::question(this, tr("Question"), tr("Do you want to override existing EEL scripts (if any)?"),
 		                              QMessageBox::Yes | QMessageBox::No);
 
 		emit requestEelScriptExtract(reply == QMessageBox::Yes, true);
@@ -324,7 +323,20 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     {
         AppConfig::instance().set(AppConfig::AudioAppBlocklist, "");
     });
+    connect(ui->blocklistInvert, &QCheckBox::stateChanged, this, [this](bool state)
+    {
+        auto invertInfo = "You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. "
+                          "You need to explicitly allow each app to get processed in the 'Apps' menu.\n";
+        auto button = QMessageBox::question(this, "Are you sure?",
+                              state ? invertInfo : ""
+                              "This action will reset your current blocklist or allowlist. Do you want to continue?");
 
+        if(button == QMessageBox::Yes)
+        {
+            AppConfig::instance().set(AppConfig::AudioAppBlocklistInvert, state);
+            AppConfig::instance().set(AppConfig::AudioAppBlocklist, "");
+        }
+    });
 	/*
 	 * Check for systray availability
 	 */
@@ -441,6 +453,8 @@ void SettingsFragment::refreshAll()
 	ui->systray_delay->setChecked(autostart_delayed);
 
     ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
+
+    ui->blocklistInvert->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert));
 
 	refreshDevices();
 

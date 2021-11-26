@@ -139,6 +139,7 @@ HEADERS += \
     MainWindow.h \
     utils/AutoEqClient.h \
     utils/AutoStartManager.h \
+    utils/DebuggerUtils.h \
     utils/Log.h \
     utils/SingleInstanceMonitor.h \
     utils/dbus/ClientProxy.h \

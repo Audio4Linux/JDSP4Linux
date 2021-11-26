@@ -33,6 +33,10 @@ AppItem::AppItem(AppItemModel* _model, int id, QWidget *parent) :
 
     refresh(node.value());
 
+    ui->blocklist->setText(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ?
+                           "Add to allowlist" : "Add to blocklist");
+
+    connect(&AppConfig::instance(), &AppConfig::updated, this, &AppItem::onAppConfigUpdated);
     connect(model, &AppItemModel::appChanged, this, &AppItem::refresh);
     connect(ui->blocklist, &QCheckBox::toggled, this, &AppItem::setBlocked);
 }
@@ -41,7 +45,28 @@ AppItem::~AppItem()
 {
     if(model != nullptr)
         disconnect(model, &AppItemModel::appChanged, this, &AppItem::refresh);
+    disconnect(&AppConfig::instance(), &AppConfig::updated, this, &AppItem::onAppConfigUpdated);
     delete ui;
+}
+
+void AppItem::onAppConfigUpdated(const AppConfig::Key& key, const QVariant& value)
+{
+    switch (key) {
+    case AppConfig::AudioAppBlocklistInvert: {
+        ui->blocklist->setText(value.toBool() ? "Add to allowlist" : "Add to blocklist");
+        auto node = model->findByNodeId(id);
+        if(!node.has_value())
+        {
+            Log::warning("AppItem::onAppConfigUpdated: AppItemModel::findByNodeId retuned nullopt");
+            return;
+        }
+
+        refresh(node.value());
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void AppItem::refresh(const AppNode& node)
