@@ -1,0 +1,11 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+AccessModifierOffset: -4
+ColumnLimit: 100
+AllowShortIfStatementsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Inline
+KeepEmptyLinesAtTheStartOfBlocks: false
+ContinuationIndentWidth: 8
+AlignAfterOpenBracket: true
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false
