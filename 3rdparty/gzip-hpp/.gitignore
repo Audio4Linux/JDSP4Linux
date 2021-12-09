@@ -1,0 +1,8 @@
+.DS_Store
+mason_packages
+build
+*.profdata
+*.profraw
+.toolchain
+.mason
+local.env
