@@ -1,5 +1,6 @@
 include($$PWD/asyncplusplus.pri)
-include($$PWD/http.pri)
+include($$PWD/http/http.pri)
+include($$PWD/qtpromise/qtpromise.pri)
 
 SOURCES += \
     $$PWD/WAF/Animation/Animation.cpp \
