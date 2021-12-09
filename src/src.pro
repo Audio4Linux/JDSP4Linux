@@ -24,6 +24,7 @@ include(../3rdparty/3rdparty.pri)
 include(audio/AudioDrivers.pri)
 
 #include(subprojects/Visualization/SpectrumAudioViewer.pri)
+include(subprojects/AutoEqIntegration/AutoEqIntegration.pri)
 include(subprojects/FlatTabWidget/FlatTabWidget.pri)
 include(subprojects/GraphicEQWidget/GraphicEQWidget.pri)
 
@@ -51,7 +52,6 @@ SOURCES += \
     interface/FileSelectionWidget.cpp \
     interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
-    interface/dialog/AutoEqSelector.cpp \
     interface/dialog/PaletteEditor.cpp \
     interface/LiquidEqualizerWidget.cpp \
     interface/fragment/AppManagerFragment.cpp \
@@ -68,7 +68,6 @@ SOURCES += \
     interface/WidgetMarqueeLabel.cpp \
     MainWindow.cpp \
     main.cpp \
-    utils/AutoEqClient.cpp \
     utils/AutoStartManager.cpp \
     utils/Log.cpp \
     utils/SingleInstanceMonitor.cpp \
@@ -80,7 +79,6 @@ SOURCES += \
 FORMS += \
     interface/FileSelectionWidget.ui \
     interface/LiveprogSelectionWidget.ui \
-    interface/dialog/AutoEqSelector.ui \
     interface/dialog/PaletteEditor.ui \
     interface/fragment/AppManagerFragment.ui \
     interface/fragment/FirstLaunchWizard.ui \
@@ -115,7 +113,6 @@ HEADERS += \
     interface/LiveprogSelectionWidget.h \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
-    interface/dialog/AutoEqSelector.h \
     interface/dialog/PaletteEditor.h \
     interface/event/EventFilter.h \
     interface/event/ScrollFilter.h \
@@ -137,7 +134,6 @@ HEADERS += \
     interface/SlidingStackedWidget.h \
     interface/WidgetMarqueeLabel.h \
     MainWindow.h \
-    utils/AutoEqClient.h \
     utils/AutoStartManager.h \
     utils/DebuggerUtils.h \
     utils/Log.h \

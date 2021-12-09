@@ -1,4 +1,5 @@
 include($$PWD/asyncplusplus.pri)
+include($$PWD/http.pri)
 
 SOURCES += \
     $$PWD/WAF/Animation/Animation.cpp \
@@ -9,13 +10,7 @@ SOURCES += \
     $$PWD/WAF/Animation/SideSlide/SideSlideAnimator.cpp \
     $$PWD/WAF/Animation/SideSlide/SideSlideDecorator.cpp \
     $$PWD/WAF/Animation/Slide/SlideAnimator.cpp \
-    $$PWD/WAF/Animation/Slide/SlideForegroundDecorator.cpp \
-    $$PWD/WebLoader/src/HttpMultiPart_p.cpp \
-    $$PWD/WebLoader/src/NetworkQueue_p.cpp \
-    $$PWD/WebLoader/src/NetworkRequest.cpp \
-    $$PWD/WebLoader/src/WebLoader_p.cpp \
-    $$PWD/WebLoader/src/WebRequest_p.cpp \
-    $$PWD/WebLoader/src/customcookiejar.cpp \
+    $$PWD/WAF/Animation/Slide/SlideForegroundDecorator.cpp
 
 HEADERS += \
     $$PWD/WAF/AbstractAnimator.h \
@@ -29,15 +24,7 @@ HEADERS += \
     $$PWD/WAF/Animation/SideSlide/SideSlideDecorator.h \
     $$PWD/WAF/Animation/Slide/SlideAnimator.h \
     $$PWD/WAF/Animation/Slide/SlideForegroundDecorator.h \
-    $$PWD/WAF/WAF.h \
-    $$PWD/WebLoader/src/HttpMultiPart_p.h \
-    $$PWD/WebLoader/src/NetworkQueue_p.h \
-    $$PWD/WebLoader/src/NetworkRequest.h \
-    $$PWD/WebLoader/src/NetworkRequestLoader.h \
-    $$PWD/WebLoader/src/NetworkRequestPrivate_p.h \
-    $$PWD/WebLoader/src/WebLoader_p.h \
-    $$PWD/WebLoader/src/WebRequest_p.h \
-    $$PWD/WebLoader/src/customcookiejar.h \
+    $$PWD/WAF/WAF.h
 
 INCLUDEPATH += $$PWD/WAF \
                $$PWD
