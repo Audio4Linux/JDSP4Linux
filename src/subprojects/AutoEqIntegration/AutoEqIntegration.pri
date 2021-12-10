@@ -7,16 +7,15 @@ FORMS += \
 HEADERS += \
     $$PWD/AeqPackageManager.h \
     $$PWD/AeqStructs.h \
-    $$PWD/AutoEqClient.h \
     $$PWD/AutoEqSelector.h \
-    $$PWD/FileDownloader.h \
-    $$PWD/FileDownloaderDialog.h \
-    $$PWD/HttpException.h
+    $$PWD/GzipDownloader.h \
+    $$PWD/GzipDownloaderDialog.h \
+    $$PWD/HttpException.h \
+    $$PWD/untar.h
 
 SOURCES += \
     $$PWD/AeqPackageManager.cpp \
-    $$PWD/AutoEqClient.cpp \
     $$PWD/AutoEqSelector.cpp \
-    $$PWD/FileDownloader.cpp \
-    $$PWD/FileDownloaderDialog.cpp \
+    $$PWD/GzipDownloader.cpp \
+    $$PWD/GzipDownloaderDialog.cpp \
     $$PWD/HttpException.cpp

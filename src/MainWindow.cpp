@@ -17,7 +17,7 @@
 #include "data/model/VdcDatabaseModel.h"
 #include "data/PresetManager.h"
 #include "data/VersionContainer.h"
-#include "interface/dialog/AutoEqSelector.h"
+//#include "interface/dialog/AutoEqSelector.h"
 #include "interface/event/EventFilter.h"
 #include "interface/event/ScrollFilter.h"
 #include "interface/fragment/FirstLaunchWizard.h"
@@ -1351,7 +1351,7 @@ void MainWindow::setEqMode(int mode)
 
 void MainWindow::onAutoEqImportRequested()
 {
-    AutoEQSelector *sel = new AutoEQSelector(this);
+    /*AutoEQSelector *sel = new AutoEQSelector(this);
     sel->setModal(true);
 
     if (sel->exec() == QDialog::Accepted)
@@ -1369,7 +1369,7 @@ void MainWindow::onAutoEqImportRequested()
         }
     }
 
-    sel->deleteLater();
+    sel->deleteLater();*/
 }
 
 // ---GraphicEQ States

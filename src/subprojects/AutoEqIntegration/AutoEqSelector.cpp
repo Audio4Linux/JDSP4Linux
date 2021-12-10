@@ -3,7 +3,6 @@
 
 #include "interface/item/Delegates.h"
 #include "interface/item/DetailListItem.h"
-#include "utils/AutoEqClient.h"
 
 #include <QListWidget>
 #include <QMessageBox>
@@ -33,7 +32,7 @@ AutoEQSelector::~AutoEQSelector()
 	delete ui;
 }
 
-void AutoEQSelector::appendToList(QueryResult result)
+/*void AutoEQSelector::appendToList(QueryResult result)
 {
 	DetailListItem  *item = new DetailListItem();
 	item->setData(result.getModel(), result.getGroup());
@@ -41,11 +40,11 @@ void AutoEQSelector::appendToList(QueryResult result)
 	li->setData(Qt::UserRole, QVariant::fromValue<QueryResult>(result));
 	ui->listWidget->addItem(li);
 	ui->listWidget->setItemWidget(ui->listWidget->item(ui->listWidget->count() - 1), item);
-}
+}*/
 
 void AutoEQSelector::updateDetails()
 {
-	if (ui->listWidget->selectedItems().count() < 1)
+    /*if (ui->listWidget->selectedItems().count() < 1)
 	{
 		return;
 	}
@@ -79,12 +78,12 @@ void AutoEQSelector::updateDetails()
 	}
 
 	ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(true);
-
+*/
 }
 
 void AutoEQSelector::doQuery()
 {
-    if(ui->searchInput->text().length() <= 2)
+    /*if(ui->searchInput->text().length() <= 2)
     {
         QMessageBox::warning(this, "AutoEQ", "Please enter at least 3 characters or more");
         return;
@@ -109,10 +108,10 @@ void AutoEQSelector::doQuery()
 	}
 
 	ui->listWidget->setEnabled(true);
-	ui->search->setEnabled(true);
+    ui->search->setEnabled(true);*/
 }
 
-HeadphoneMeasurement AutoEQSelector::getSelection()
+/*HeadphoneMeasurement AutoEQSelector::getSelection()
 {
 	if (ui->listWidget->selectedItems().count() < 1)
 	{
@@ -127,4 +126,4 @@ HeadphoneMeasurement AutoEQSelector::getSelection()
 	}
 
 	return hpCache;
-}
+}*/

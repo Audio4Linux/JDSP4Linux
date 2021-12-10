@@ -4,8 +4,6 @@
 #include <QDialog>
 #include <QThread>
 
-#include "utils/AutoEqClient.h"
-
 namespace Ui
 {
 	class AutoEQSelector;
@@ -19,10 +17,10 @@ class AutoEQSelector :
 public:
 	explicit AutoEQSelector(QWidget *parent = nullptr);
 	~AutoEQSelector();
-	HeadphoneMeasurement getSelection();
+    //HeadphoneMeasurement getSelection();
 
 protected:
-	void                 appendToList(QueryResult result);
+    //void                 appendToList(QueryResult result);
 
 private slots:
 	void                 updateDetails();
@@ -31,7 +29,7 @@ private slots:
 private:
 	Ui::AutoEQSelector *ui;
 	QSize imgSizeCache;
-	HeadphoneMeasurement hpCache;
+    //HeadphoneMeasurement hpCache;
 };
 
 #endif // AUTOEQSELECTOR_H

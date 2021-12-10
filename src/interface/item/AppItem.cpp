@@ -43,7 +43,7 @@ AppItem::AppItem(AppItemModel* _model, int id, QWidget *parent) :
 
 AppItem::~AppItem()
 {
-    if(model != nullptr)
+    if(model != nullptr) // TODO: fix occasional sigsegv on exit
         disconnect(model, &AppItemModel::appChanged, this, &AppItem::refresh);
     disconnect(&AppConfig::instance(), &AppConfig::updated, this, &AppItem::onAppConfigUpdated);
     delete ui;

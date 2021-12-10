@@ -11,16 +11,14 @@ class AeqPackageManager : public QObject
 public:
     explicit AeqPackageManager(QObject *parent = nullptr);
 
-    QtPromise::QPromise<void> installPackage(AeqVersion version);
+    QtPromise::QPromise<void> installPackage(AeqVersion version, QWidget* hostWindow = nullptr);
     bool uninstallPackage();
 
     bool isPackageInstalled();
-
     QString targetDirectory();
 
+    QtPromise::QPromise<AeqVersion> isUpdateAvailable();
     QtPromise::QPromise<AeqVersion> getRepositoryVersion();
-
-signals:
 
 };
 

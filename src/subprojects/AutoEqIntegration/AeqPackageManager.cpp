@@ -1,4 +1,5 @@
 #include "AeqPackageManager.h"
+#include "GzipDownloaderDialog.h"
 #include "HttpException.h"
 
 #include "config/AppConfig.h"
@@ -16,52 +17,27 @@ AeqPackageManager::AeqPackageManager(QObject *parent) : QObject(parent)
 
 }
 
-QtPromise::QPromise<void> AeqPackageManager::installPackage()
+QtPromise::QPromise<void> AeqPackageManager::installPackage(AeqVersion version, QWidget* hostWindow)
 {
     return QPromise<void>{[&](
-        const QtPromise::QPromiseResolve<void>& resolve) {
+        const QtPromise::QPromiseResolve<void>& resolve,
+        const QtPromise::QPromiseResolve<void>& reject) {
 
-        auto reply = Http::instance().get(QUrl(REPO_ROOT + "/version.json"));
-        connect(reply, &HttpReply::finished, this, [resolve](HttpReply &reply)
+        auto downloader = new GzipDownloaderDialog(version.toDownloadReply(), targetDirectory(), hostWindow);
+        bool success = downloader->exec();
+        downloader->deleteLater();
+
+        if(success)
         {
-            if (reply.isSuccessful())
-            {
-                QJsonDocument d = QJsonDocument::fromJson(reply.body());
-                QJsonArray root = d.array();
-                for(const auto& item : root)
-                {
-                    QJsonObject pkg = item.toObject();
-                    QJsonArray types = pkg.value("type").toArray();
-
-                    // Select correct package
-                    if(types.contains(QJsonValue("GraphicEQ")) &&
-                       types.contains(QJsonValue("CSV")) &&
-                       types.count() == 2)
-                    {
-                        AeqVersion version;
-                        version.commit = pkg.value("commit").toString();
-                        version.commitTime = QDateTime::fromString(pkg.value("commit_time").toString(), "yyyy/MM/dd HH:mm:ss");
-                        version.commitTime.setTimeSpec(Qt::UTC);
-                        version.packageTime = QDateTime::fromString(pkg.value("package_time").toString(), "yyyy/MM/dd HH:mm:ss");
-                        version.packageTime.setTimeSpec(Qt::UTC);
-                        version.packageUrl = pkg.value("package_url").toString();
-                        for(const auto& type : types)
-                        {
-                            version.type.append(type.toString());
-                        }
-                        resolve(version);
-                    }
-                }
-
-                throw new HttpException(900, "Requested package type currently unavailable");
-            }
-            else
-            {
-                throw new HttpException(reply);
-            }
-        });
+            resolve();
+        }
+        reject();
     }};
+}
 
+bool AeqPackageManager::uninstallPackage()
+{
+    return QDir(targetDirectory()).removeRecursively();
 }
 
 bool AeqPackageManager::isPackageInstalled()
@@ -71,13 +47,46 @@ bool AeqPackageManager::isPackageInstalled()
            QFile(targetDirectory() + "/index.json").exists();
 }
 
+QtPromise::QPromise<AeqVersion> AeqPackageManager::isUpdateAvailable()
+{
+    return QPromise<AeqVersion>{[&](
+        const QtPromise::QPromiseResolve<AeqVersion>& resolve,
+        const QtPromise::QPromiseReject<AeqVersion>& reject) {
+
+        QFile versionJson = (targetDirectory() + "/version.json");
+
+        this->getRepositoryVersion().then([&](AeqVersion remote){
+            if(!versionJson.exists())
+            {
+                resolve(remote);
+            }
+
+            QJsonDocument d = QJsonDocument::fromJson(versionJson.readAll());
+            QJsonArray root = d.array();
+            if(root.count() > 0)
+            {
+                auto local = AeqVersion(root[0].toObject());
+                if(remote.commitTime > local.commitTime)
+                {
+                    // Remote is newer
+                    resolve(remote);
+                }
+            }
+
+            reject();
+        }).fail([](const HttpException& error) {
+            throw error;
+        });
+    }};
+}
+
 QPromise<AeqVersion> AeqPackageManager::getRepositoryVersion()
 {
     return QPromise<AeqVersion>{[&](
         const QtPromise::QPromiseResolve<AeqVersion>& resolve) {
 
         auto reply = Http::instance().get(QUrl(REPO_ROOT + "/version.json"));
-        connect(reply, &HttpReply::finished, this, [resolve](HttpReply &reply)
+        connect(reply, &HttpReply::finished, this, [resolve](const HttpReply &reply)
         {
             if (reply.isSuccessful())
             {
@@ -93,18 +102,7 @@ QPromise<AeqVersion> AeqPackageManager::getRepositoryVersion()
                        types.contains(QJsonValue("CSV")) &&
                        types.count() == 2)
                     {
-                        AeqVersion version;
-                        version.commit = pkg.value("commit").toString();
-                        version.commitTime = QDateTime::fromString(pkg.value("commit_time").toString(), "yyyy/MM/dd HH:mm:ss");
-                        version.commitTime.setTimeSpec(Qt::UTC);
-                        version.packageTime = QDateTime::fromString(pkg.value("package_time").toString(), "yyyy/MM/dd HH:mm:ss");
-                        version.packageTime.setTimeSpec(Qt::UTC);
-                        version.packageUrl = pkg.value("package_url").toString();
-                        for(const auto& type : types)
-                        {
-                            version.type.append(type.toString());
-                        }
-                        resolve(version);
+                        resolve(AeqVersion(pkg));
                     }
                 }
 
