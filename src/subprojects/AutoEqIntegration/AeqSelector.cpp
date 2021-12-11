@@ -170,9 +170,20 @@ void AeqSelector::onSelectionChanged(const QItemSelection &selected, const QItem
     {
         return;
     }
+
+    auto csv = this->selection(DataFormat::dCsv, true);
+    if(csv.isEmpty())
+    {
+        ui->preview->importCsv(csv);
+    }
+    else
+    {
+        auto graphic = this->selection(DataFormat::dGraphicEq, false);
+        ui->preview->importGraphicEq(graphic);
+    }
 }
 
-QString AeqSelector::selection(DataFormat format)
+QString AeqSelector::selection(DataFormat format, bool silent)
 {
     if (ui->list->selectionModel()->selectedRows().isEmpty())
 	{
@@ -195,7 +206,10 @@ QString AeqSelector::selection(DataFormat format)
     QFile file(item.path(pkgManager->databaseDirectory(), name));
     if(!file.exists())
     {
-        QMessageBox::critical(this, "Error", "Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.");
+        if(!silent)
+        {
+            QMessageBox::critical(this, "Error", "Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.");
+        }
         return QString();
     }
 
