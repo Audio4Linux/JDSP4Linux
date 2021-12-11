@@ -497,7 +497,7 @@ public:
     void resolve(V&& value)
     {
         Q_ASSERT(this->isPending());
-        Q_ASSERT(m_value.isNull());
+        //Q_ASSERT(m_value.isNull());
         m_value = PromiseValue<T>{std::forward<V>(value)};
         this->setSettled();
     }

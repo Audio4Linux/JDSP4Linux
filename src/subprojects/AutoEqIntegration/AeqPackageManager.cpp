@@ -7,116 +7,181 @@
 #include <http/src/http.h>
 #include <QDir>
 #include <QFile>
+#include <networkhttpreply.h>
 
 #define REPO_ROOT QString("https://raw.githubusercontent.com/ThePBone/AutoEqPackages/main/")
 
 using namespace QtPromise;
 
-AeqPackageManager::AeqPackageManager(QObject *parent) : QObject(parent)
+AeqPackageManager::AeqPackageManager(QObject *parent) : QObject(parent), nam(new QNetworkAccessManager(this))
 {
 
 }
 
 QtPromise::QPromise<void> AeqPackageManager::installPackage(AeqVersion version, QWidget* hostWindow)
 {
-    return QPromise<void>{[&](
+    return QPromise<void>{[this, version, hostWindow](
         const QtPromise::QPromiseResolve<void>& resolve,
-        const QtPromise::QPromiseResolve<void>& reject) {
+                const QtPromise::QPromiseReject<void>& reject) {
 
-        auto downloader = new GzipDownloaderDialog(version.toDownloadReply(), targetDirectory(), hostWindow);
-        bool success = downloader->exec();
-        downloader->deleteLater();
+            auto downloader = new GzipDownloaderDialog(version.toDownloadReply(), databaseDirectory(), hostWindow);
+            bool success = downloader->exec();
+            downloader->deleteLater();
 
-        if(success)
-        {
-            resolve();
-        }
-        reject();
-    }};
+            if(success)
+            {
+                resolve();
+            }
+            reject();
+        }};
 }
 
 bool AeqPackageManager::uninstallPackage()
 {
-    return QDir(targetDirectory()).removeRecursively();
+    return QDir(databaseDirectory()).removeRecursively();
 }
 
 bool AeqPackageManager::isPackageInstalled()
 {
-    return QDir(targetDirectory()).exists() &&
-           QFile(targetDirectory() + "/version.json").exists() &&
-           QFile(targetDirectory() + "/index.json").exists();
+    return QDir(databaseDirectory()).exists() &&
+            QFile(databaseDirectory() + "/version.json").exists() &&
+            QFile(databaseDirectory() + "/index.json").exists();
 }
 
 QtPromise::QPromise<AeqVersion> AeqPackageManager::isUpdateAvailable()
 {
     return QPromise<AeqVersion>{[&](
         const QtPromise::QPromiseResolve<AeqVersion>& resolve,
-        const QtPromise::QPromiseReject<AeqVersion>& reject) {
+                const QtPromise::QPromiseReject<AeqVersion>& reject) {
 
-        QFile versionJson = (targetDirectory() + "/version.json");
-
-        this->getRepositoryVersion().then([&](AeqVersion remote){
-            if(!versionJson.exists())
-            {
-                resolve(remote);
-            }
-
-            QJsonDocument d = QJsonDocument::fromJson(versionJson.readAll());
-            QJsonArray root = d.array();
-            if(root.count() > 0)
-            {
-                auto local = AeqVersion(root[0].toObject());
-                if(remote.commitTime > local.commitTime)
-                {
-                    // Remote is newer
+            this->getRepositoryVersion().then([=](AeqVersion remote){
+                this->getLocalVersion().then([=](AeqVersion local){
+                    if(remote.packageTime > local.packageTime)
+                    {
+                        // Remote is newer
+                        resolve(remote);
+                    }
+                    else
+                    {
+                        reject(remote);
+                    }
+                }).fail([=]{
+                    // Local file not available, choose remote
                     resolve(remote);
-                }
-            }
-
-            reject();
-        }).fail([](const HttpException& error) {
-            throw error;
-        });
-    }};
+                });
+            }).fail([reject](const HttpException& error) {
+                // API error
+                reject(error);
+            });
+        }};
 }
 
 QPromise<AeqVersion> AeqPackageManager::getRepositoryVersion()
 {
     return QPromise<AeqVersion>{[&](
-        const QtPromise::QPromiseResolve<AeqVersion>& resolve) {
+        const QtPromise::QPromiseResolve<AeqVersion>& resolve,
+                const QtPromise::QPromiseReject<AeqVersion>& reject) {
 
-        auto reply = Http::instance().get(QUrl(REPO_ROOT + "/version.json"));
-        connect(reply, &HttpReply::finished, this, [resolve](const HttpReply &reply)
-        {
-            if (reply.isSuccessful())
+            auto reqProto = QNetworkRequest(QUrl(REPO_ROOT + "/version.json"));
+            reqProto.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::RedirectPolicy::NoLessSafeRedirectPolicy);
+
+            QtPromise::connect(nam, &QNetworkAccessManager::finished).then([=](QNetworkReply *reply)
             {
-                QJsonDocument d = QJsonDocument::fromJson(reply.body());
-                QJsonArray root = d.array();
-                for(const auto& item : root)
+                if(reply->error() != QNetworkReply::NoError)
                 {
-                    QJsonObject pkg = item.toObject();
-                    QJsonArray types = pkg.value("type").toArray();
-
-                    // Select correct package
-                    if(types.contains(QJsonValue("GraphicEQ")) &&
-                       types.contains(QJsonValue("CSV")) &&
-                       types.count() == 2)
-                    {
-                        resolve(AeqVersion(pkg));
-                    }
+                    throw HttpException(1, reply->errorString());
                 }
 
-                throw new HttpException(900, "Requested package type currently unavailable");
-            }
-            else
-            {
-                throw new HttpException(reply);
-            }
-        });
-    }};
+                QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+                QVariant reason = reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute);
+
+                if (statusCode.toInt() == 200)
+                {
+                    QJsonDocument d = QJsonDocument::fromJson(reply->readAll());
+                    QJsonArray root = d.array();
+                    for(const auto& item : root)
+                    {
+                        QJsonObject pkg = item.toObject();
+                        QJsonArray types = pkg.value("type").toArray();
+
+                        // Select correct package
+                        if(types.contains(QJsonValue("GraphicEQ")) &&
+                                types.contains(QJsonValue("CSV")) &&
+                                types.count() == 2)
+                        {
+                            resolve(AeqVersion(pkg));
+                        }
+                    }
+
+                    throw HttpException(900, "Requested package type currently unavailable");
+                }
+                else
+                {
+                    throw HttpException(statusCode.toInt(), reason.toString());
+                }
+            }).fail([reject](const HttpException& error) {
+                reject(error);
+            });
+
+            nam->get(reqProto);
+        }
+    };
 }
 
-QString AeqPackageManager::targetDirectory()
+QtPromise::QPromise<AeqVersion> AeqPackageManager::getLocalVersion()
+{
+    return QPromise<AeqVersion>{[&](
+        const QtPromise::QPromiseResolve<AeqVersion>& resolve,
+                const QtPromise::QPromiseReject<AeqVersion>& reject) {
+            QFile versionJson = (databaseDirectory() + "/version.json");
+            if(!versionJson.exists())
+            {
+                reject();
+            }
+
+            versionJson.open(QFile::ReadOnly);
+            QJsonDocument d = QJsonDocument::fromJson(versionJson.readAll());
+            QJsonArray root = d.array();
+            if(root.count() > 0)
+            {
+                versionJson.close();
+                resolve(AeqVersion(root[0].toObject()));
+            }
+
+            versionJson.close();
+            reject();
+        }
+    };
+}
+
+QtPromise::QPromise<QVector<AeqMeasurement>> AeqPackageManager::getLocalIndex()
+{
+    return QPromise<QVector<AeqMeasurement>>{[&](
+        const QtPromise::QPromiseResolve<QVector<AeqMeasurement>>& resolve,
+                const QtPromise::QPromiseReject<QVector<AeqMeasurement>>& reject) {
+            QFile indexJson = (databaseDirectory() + "/index.json");
+            if(!indexJson.exists())
+            {
+                reject();
+            }
+
+            indexJson.open(QFile::ReadOnly);
+            QJsonDocument d = QJsonDocument::fromJson(indexJson.readAll());
+            QJsonArray root = d.array();
+
+            QVector<AeqMeasurement> items;
+            for(const auto& item : root)
+            {
+                items.append(AeqMeasurement(item.toObject()));
+            }
+
+            indexJson.close();
+            resolve(std::move(items));
+        }
+    };
+}
+
+QString AeqPackageManager::databaseDirectory()
 {
     return AppConfig::instance().getPath("autoeq");
 }

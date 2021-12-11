@@ -3,20 +3,22 @@
 
 GzipDownloaderDialog::GzipDownloaderDialog(QNetworkReply* _reply, QDir _targetDirectory, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::FileDownloaderDialog),
-    gzip(this)
+    ui(new Ui::FileDownloaderDialog)
 {
     ui->setupUi(this);
+
+    gzip = new GzipDownloader(this);
 
     ui->size->setText("");
     ui->progress->setValue(0);
 
-    connect(ui->buttonBox, &QDialogButtonBox::rejected, &gzip, &GzipDownloader::abort);
-    connect(&gzip, &GzipDownloader::success, this, &QDialog::accept);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, gzip, &GzipDownloader::abort);
+    connect(gzip, &GzipDownloader::success, this, &GzipDownloaderDialog::onSuccess);
 
-    connect(&gzip, &GzipDownloader::error, this, &GzipDownloaderDialog::onError);
-    connect(&gzip, &GzipDownloader::downloadProgressUpdated, this, &GzipDownloaderDialog::onDownloadProgressUpdated);
-    connect(&gzip, &GzipDownloader::decompressionStarted, this, &GzipDownloaderDialog::onDecompressionStarted);
+    connect(gzip, &GzipDownloader::errorOccurred, this, &GzipDownloaderDialog::onError);
+    connect(gzip, &GzipDownloader::downloadProgressUpdated, this, &GzipDownloaderDialog::onDownloadProgressUpdated);
+    connect(gzip, &GzipDownloader::decompressionStarted, this, &GzipDownloaderDialog::onDecompressionStarted);
+    connect(gzip, &GzipDownloader::unarchiveStarted, this, &GzipDownloaderDialog::onUnarchiveStarted);
 
     reply = _reply;
     targetDirectory = _targetDirectory;
@@ -30,12 +32,37 @@ GzipDownloaderDialog::~GzipDownloaderDialog()
 void GzipDownloaderDialog::showEvent(QShowEvent *ev)
 {
     QDialog::showEvent(ev);
-    gzip.start(reply, targetDirectory);
+    gzip->start(reply, targetDirectory);
+}
+
+void GzipDownloaderDialog::closeEvent(QCloseEvent *ev)
+{
+    if(!closeAllowed)
+    {
+        ev->ignore();
+        return;
+    }
+
+    gzip->abort();
+    disconnect(gzip, &GzipDownloader::errorOccurred, this, &GzipDownloaderDialog::onError);
+    disconnect(gzip, &GzipDownloader::downloadProgressUpdated, this, &GzipDownloaderDialog::onDownloadProgressUpdated);
+    disconnect(gzip, &GzipDownloader::decompressionStarted, this, &GzipDownloaderDialog::onDecompressionStarted);
+    disconnect(gzip, &GzipDownloader::unarchiveStarted, this, &GzipDownloaderDialog::onUnarchiveStarted);
+    gzip->deleteLater();
+
+    QDialog::closeEvent(ev);
+}
+
+void GzipDownloaderDialog::onSuccess()
+{
+    closeAllowed = true;
+    accept();
 }
 
 void GzipDownloaderDialog::onError(const QString& msg)
 {
     QMessageBox::critical(this, "Error", msg);
+    closeAllowed = true;
     this->reject();
 }
 
@@ -50,9 +77,17 @@ void GzipDownloaderDialog::onDownloadProgressUpdated(qint64 recv, qint64 total)
 
 void GzipDownloaderDialog::onDecompressionStarted()
 {
+    closeAllowed = false;
+
     ui->progress->setMinimum(0);
     ui->progress->setMaximum(0);
     ui->title->setText("Decompressing package...");
     ui->size->setText("");
     ui->buttonBox->setEnabled(false);
+}
+
+void GzipDownloaderDialog::onUnarchiveStarted()
+{
+    ui->title->setText("Extracting package...");
+    ui->size->setText("");
 }

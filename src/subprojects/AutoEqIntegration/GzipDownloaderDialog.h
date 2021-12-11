@@ -21,18 +21,23 @@ public:
 
 protected:
     void showEvent(QShowEvent *ev) override;
+    void closeEvent(QCloseEvent *ev) override;
 
 private slots:
+    void onSuccess();
     void onError(const QString &msg);
     void onDownloadProgressUpdated(qint64 recv, qint64 total);
     void onDecompressionStarted();
+    void onUnarchiveStarted();
+
 private:
     Ui::FileDownloaderDialog *ui;
 
-    GzipDownloader gzip;
+    GzipDownloader* gzip;
 
     QNetworkReply* reply;
     QDir targetDirectory;
+    bool closeAllowed = true;
 };
 
 #endif // GZIPDOWNLOADERDIALOG_H

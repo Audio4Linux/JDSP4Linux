@@ -1,21 +1,27 @@
 INCLUDEPATH += $$PWD
 
 FORMS += \
-    $$PWD/AutoEqSelector.ui \
+    $$PWD/AeqMeasurementItem.ui \
+    $$PWD/AeqSelector.ui \
     $$PWD/FileDownloaderDialog.ui
 
 HEADERS += \
+    $$PWD/AeqListDelegates.h \
+    $$PWD/AeqMeasurementItem.h \
+    $$PWD/AeqMeasurementModel.h \
     $$PWD/AeqPackageManager.h \
+    $$PWD/AeqSelector.h \
     $$PWD/AeqStructs.h \
-    $$PWD/AutoEqSelector.h \
     $$PWD/GzipDownloader.h \
     $$PWD/GzipDownloaderDialog.h \
     $$PWD/HttpException.h \
     $$PWD/untar.h
 
 SOURCES += \
+    $$PWD/AeqMeasurementItem.cpp \
+    $$PWD/AeqMeasurementModel.cpp \
     $$PWD/AeqPackageManager.cpp \
-    $$PWD/AutoEqSelector.cpp \
+    $$PWD/AeqSelector.cpp \
     $$PWD/GzipDownloader.cpp \
     $$PWD/GzipDownloaderDialog.cpp \
     $$PWD/HttpException.cpp

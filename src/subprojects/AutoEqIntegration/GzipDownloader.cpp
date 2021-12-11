@@ -21,6 +21,11 @@ bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
     extractionPath = _extractionPath;
     networkReply = reply;
     connect(networkReply, &QIODevice::readyRead, this, &GzipDownloader::onDataAvailable);
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    connect(networkReply, &QNetworkReply::error, this, &GzipDownloader::onErrorOccurred);
+#else
+    connect(networkReply, &QNetworkReply::errorOccurred, this, &GzipDownloader::onErrorOccurred);
+#endif
     connect(networkReply, &QNetworkReply::downloadProgress, this, &GzipDownloader::downloadProgressUpdated);
     connect(networkReply, &QNetworkReply::finished, this, &GzipDownloader::onArchiveReady);
     return true;
@@ -51,7 +56,7 @@ void GzipDownloader::onArchiveReady()
     if(networkReply->error() != QNetworkReply::NoError)
     {
         cleanup();
-        emit error(networkReply->errorString());
+        emit errorOccurred(networkReply->errorString());
     }
     else
     {
@@ -69,15 +74,45 @@ void GzipDownloader::onArchiveReady()
             inflate(file, temp);
             gzclose(file);
             std::rewind(temp);
-            untar(temp, extractionPath.path().toStdString().c_str());
+
+            emit unarchiveStarted();
+
+            bool bad_checksum;
+            bool short_read;
+
+            untar(temp, extractionPath.path().toStdString().c_str(), &bad_checksum, &short_read);
             std::fclose(temp);
 
-        })).then([this]
+            if(bad_checksum)
+            {
+                return "Bad checksum, corrupted package. Please try again.";
+            }
+            if(short_read)
+            {
+                return "Short read; expected 512 bytes but received less. Please try again.";
+            }
+            return "";
+        })).then([this](const QString& msg)
         {
-            emit success();
+            if(msg.isEmpty())
+            {
+                emit success();
+            }
+            else
+            {
+                emit errorOccurred(msg);
+            }
             cleanup();
         });
     }
+}
+
+void GzipDownloader::onErrorOccurred(QNetworkReply::NetworkError ex)
+{
+    Q_UNUSED(ex)
+    // Note: Already handled by finish() signal
+    // emit errorOccurred(QVariant::fromValue(ex).toString());
+    // cleanup();
 }
 
 void GzipDownloader::cleanup()

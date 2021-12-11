@@ -33,12 +33,14 @@ public:
 signals:
     void downloadProgressUpdated(qint64 bytesReceived, qint64 bytesTotal);
     void decompressionStarted();
+    void unarchiveStarted();
     void success();
-    void error(QString errorString);
+    void errorOccurred(QString errorString);
 
 private slots:
     void onDataAvailable();
     void onArchiveReady();
+    void onErrorOccurred(QNetworkReply::NetworkError error);
 
     void cleanup();
 

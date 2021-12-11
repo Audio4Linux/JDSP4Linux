@@ -60,7 +60,6 @@ SOURCES += \
     interface/fragment/SettingsFragment.cpp \
     interface/fragment/StatusFragment.cpp \
     interface/item/AppItem.cpp \
-    interface/item/DetailListItem.cpp \
     interface/QAnimatedSlider.cpp \
     interface/QMenuEditor.cpp \
     interface/QMessageOverlay.cpp \
@@ -86,7 +85,6 @@ FORMS += \
     interface/fragment/SettingsFragment.ui \
     interface/fragment/StatusFragment.ui \
     interface/item/AppItem.ui \
-    interface/item/configitem.ui \
     interface/menueditor.ui \
     MainWindow.ui
 
@@ -127,8 +125,6 @@ HEADERS += \
     interface/fragment/StatusFragment.h \
     interface/item/AppItem.h \
     interface/item/AppItemStyleDelegate.h \
-    interface/item/Delegates.h \
-    interface/item/DetailListItem.h \
     interface/QAnimatedSlider.h \
     interface/QMenuEditor.h \
     interface/SlidingStackedWidget.h \

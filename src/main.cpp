@@ -46,6 +46,8 @@ void crash_handled(int fd)
 
 #endif
 
+#include <AeqSelector.h>
+
 using namespace std;
 int main(int   argc,
          char *argv[])
@@ -85,6 +87,9 @@ int main(int   argc,
     {
         setlocale(LC_NUMERIC, "C");
     }
+
+    AeqSelector *sel = new AeqSelector();
+    sel->show();
 
     // Prepare DspConfig based on cmdline argument
     DspConfig::instance(parser.isSet(watch));

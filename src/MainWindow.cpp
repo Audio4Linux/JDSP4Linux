@@ -17,7 +17,6 @@
 #include "data/model/VdcDatabaseModel.h"
 #include "data/PresetManager.h"
 #include "data/VersionContainer.h"
-//#include "interface/dialog/AutoEqSelector.h"
 #include "interface/event/EventFilter.h"
 #include "interface/event/ScrollFilter.h"
 #include "interface/fragment/FirstLaunchWizard.h"
@@ -39,6 +38,7 @@
 //#include <audiostreamengine.h>
 #include <Animation/Animation.h>
 #include <eeleditor.h>
+#include <AeqSelector.h>
 //#include <spectrograph.h>
 
 #include <QDesktopServices>
@@ -1351,25 +1351,21 @@ void MainWindow::setEqMode(int mode)
 
 void MainWindow::onAutoEqImportRequested()
 {
-    /*AutoEQSelector *sel = new AutoEQSelector(this);
+    auto sel = new AeqSelector(this);
     sel->setModal(true);
 
     if (sel->exec() == QDialog::Accepted)
     {
-        HeadphoneMeasurement hp = sel->getSelection();
+        auto graphicEq = sel->selection(AeqSelector::dGraphicEq);
 
-        if (hp.getGraphicEQ() == "")
+        if (!graphicEq.isEmpty())
         {
-            QMessageBox::warning(this, "Error", "Unable to load GraphicEQ data.\n\nEither your network connection is experiencing issues, or you are being rate-limited by GitHub.\nKeep in mind that you can only send 60 web requests per hour to this API.\n\nYou can check your current rate limit status here: https://api.github.com/rate_limit");
-        }
-        else
-        {
-            ui->graphicEq->load(hp.getGraphicEQ());
+            ui->graphicEq->load(graphicEq);
             applyConfig();
         }
     }
 
-    sel->deleteLater();*/
+    sel->deleteLater();
 }
 
 // ---GraphicEQ States

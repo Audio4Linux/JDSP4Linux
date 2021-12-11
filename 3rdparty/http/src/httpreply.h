@@ -8,13 +8,13 @@ class HttpReply : public QObject {
 
 public:
     HttpReply(QObject *parent = nullptr);
-    virtual QUrl url() const = 0;
-    virtual int statusCode() const = 0;
+    virtual QUrl url() const {return QUrl();};
+    virtual int statusCode() const {return -1;};
     int isSuccessful() const;
     virtual QString reasonPhrase() const;
     virtual const QList<QNetworkReply::RawHeaderPair> headers() const;
     virtual QByteArray header(const QByteArray &headerName) const;
-    virtual QByteArray body() const = 0;
+    virtual QByteArray body() const {return {};};
 
     template <typename Functor> HttpReply &onData(Functor lambda) {
         connect(this, &HttpReply::data, this, lambda);

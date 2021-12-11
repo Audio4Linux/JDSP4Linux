@@ -15,10 +15,15 @@ public:
     bool uninstallPackage();
 
     bool isPackageInstalled();
-    QString targetDirectory();
+    QString databaseDirectory();
 
     QtPromise::QPromise<AeqVersion> isUpdateAvailable();
     QtPromise::QPromise<AeqVersion> getRepositoryVersion();
+    QtPromise::QPromise<AeqVersion> getLocalVersion();
+    QtPromise::QPromise<QVector<AeqMeasurement>> getLocalIndex();
+
+private:
+    QNetworkAccessManager* nam;
 
 };
 

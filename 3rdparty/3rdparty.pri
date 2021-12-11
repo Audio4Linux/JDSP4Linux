@@ -1,6 +1,7 @@
 include($$PWD/asyncplusplus.pri)
 include($$PWD/http/http.pri)
 include($$PWD/qtpromise/qtpromise.pri)
+include($$PWD/qcustomplot/qcustomplot.pri)
 
 SOURCES += \
     $$PWD/WAF/Animation/Animation.cpp \
