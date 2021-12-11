@@ -88,9 +88,6 @@ int main(int   argc,
         setlocale(LC_NUMERIC, "C");
     }
 
-    AeqSelector *sel = new AeqSelector();
-    sel->show();
-
     // Prepare DspConfig based on cmdline argument
     DspConfig::instance(parser.isSet(watch));
 

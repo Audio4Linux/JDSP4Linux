@@ -35,10 +35,13 @@ AeqSelector::AeqSelector(QWidget *parent) :
     ui->list->setModel(proxyModel);
     ui->list->setItemDelegate(new AeqItemDelegate(ui->list));
 
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &AeqSelector::accept);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &AeqSelector::reject);
+
     connect(ui->searchInput,    &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
-    connect(ui->manageDatabase, &QPushButton::clicked,  this,        &AeqSelector::switchPane);
-    connect(ui->updateButton,   &QPushButton::clicked,  this,        &AeqSelector::updateDatabase);
-    connect(ui->deleteButton,   &QPushButton::clicked,  this,        &AeqSelector::deleteDatabase);
+    connect(ui->manageDatabase, &QPushButton::clicked,   this,        &AeqSelector::switchPane);
+    connect(ui->updateButton,   &QPushButton::clicked,   this,        &AeqSelector::updateDatabase);
+    connect(ui->deleteButton,   &QPushButton::clicked,   this,        &AeqSelector::deleteDatabase);
 
     connect(ui->list->selectionModel(), &QItemSelectionModel::selectionChanged, this, &AeqSelector::onSelectionChanged);
 
@@ -55,9 +58,10 @@ void AeqSelector::showEvent(QShowEvent *ev)
     if(!pkgManager->isPackageInstalled())
     {
         this->setEnabled(false);
-        auto res = QMessageBox::question(this, "AutoEQ database",
+        auto parent = this->parent() == nullptr ? this : this->parentWidget();
+        auto res = QMessageBox::question(parent, "AutoEQ database",
                       "Before using the AutoEQ integration, you need to download a minified version of their headphone compensation database (~50MB) to your hard drive.\n"
-                      "An internet connection is required during this step.\n"
+                      "An internet connection is required during this step.\n\n"
                       "Do you want to continue and enable this feature?",
                       QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 
@@ -85,7 +89,6 @@ void AeqSelector::showEvent(QShowEvent *ev)
             return;
         });
     }
-
 
     QDialog::showEvent(ev);
 }
@@ -197,5 +200,6 @@ QString AeqSelector::selection(DataFormat format)
     }
 
     auto guard = qScopeGuard([&]{ file.close(); });
+    file.open(QFile::ReadOnly);
     return file.readAll();
 }

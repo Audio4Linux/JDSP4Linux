@@ -307,6 +307,9 @@ This will override your current GraphicEQ configuration.</string>
             <property name="bottomMargin">
              <number>0</number>
             </property>
+            <item>
+             <widget class="AeqPreviewPlot" name="preview" native="true"/>
+            </item>
            </layout>
           </widget>
          </widget>
@@ -369,6 +372,12 @@ This will override your current GraphicEQ configuration.</string>
    <class>CListView</class>
    <extends>QListView</extends>
    <header>interface/CListView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AeqPreviewPlot</class>
+   <extends>QWidget</extends>
+   <header>AeqPreviewPlot.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
