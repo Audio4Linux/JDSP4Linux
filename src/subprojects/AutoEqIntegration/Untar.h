@@ -1,20 +1,15 @@
 #ifndef UNTAR_H
 #define UNTAR_H
 
-#include <sys/types.h>
-#include <sys/stat.h>
-
 #include <QDebug>
 #include <QString>
 #include <QDir>
 
 #include <archive.h>
 #include <archive_entry.h>
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 class Untar
 {
