@@ -196,39 +196,39 @@ For **PulseAudio clients** only:
 Debian/Ubuntu + **PipeWire** clients only:
 
 ```bash
-sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
+sudo apt install libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev 
 ```
 NOTE: Pipewire version 0.3 or later required. Unfortunately, this version is only in the official Ubuntu repository for Ubuntu 20.10 or later. If you use Ubuntu 20.04 or earlier, you need to compile this dependency yourself or use PulseAudio instead.
 
 Debian/Ubuntu + **PulseAudio** clients only:
 
 ```bash
-sudo apt install qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-good1.0-dev
+sudo apt install libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-good1.0-dev
 ```
 **Fedora**
 
 Fedora 34 + **PipeWire** clients only:
 
 ```bash
-sudo dnf install qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pipewire-devel
+sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pipewire-devel
 ```
 Fedora 34 + **PulseAudio** clients only:
 
 ```bash
-sudo dnf install qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-good-devel 
+sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-good-devel 
 ```
 **Arch Linux**
 
 Arch Linux + **PipeWire** clients only:
 
 ```bash
-sudo pacman -S qt5-base qt5-svg glib2 glibmm pipewire
+sudo pacman -S libarchive qt5-base qt5-svg glib2 glibmm pipewire
 ```
 
 Arch Linux + **PulseAudio** clients only:
 
 ```
-sudo pacman -S qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-good gstreamer 
+sudo pacman -S libarchive qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-good gstreamer 
 ```
 
 #### Build application
