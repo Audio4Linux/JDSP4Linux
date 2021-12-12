@@ -42,7 +42,7 @@ void TrayIcon::createTrayIcon()
 	trayIcon->setToolTip("JamesDSP for Linux");
     trayIcon->setIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/icon.png")));
 
-    connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconActivated);
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconEventHandler);
 }
 
 void TrayIcon::setTrayVisible(bool visible)
@@ -62,7 +62,7 @@ void TrayIcon::iconEventHandler(QSystemTrayIcon::ActivationReason reason)
 	switch (reason)
 	{
 		case QSystemTrayIcon::Trigger:
-			emit iconActivated();
+            emit iconActivated();
 			break;
 		default:
 			break;

@@ -78,6 +78,11 @@ QString AppConfig::getPath(QString subdir)
     return QString("%1/.config/jamesdsp/%2").arg(QDir::homePath()).arg(subdir);
 }
 
+QString AppConfig::getCachePath(QString subdir)
+{
+    return QString("%1/.cache/jamesdsp/%2").arg(QDir::homePath()).arg(subdir);
+}
+
 void AppConfig::setIrsPath(const QString &npath)
 {
     _appconf->setValue("ConvolverDefaultPath", QVariant(QString("\"%1\"").arg(npath)));

@@ -147,6 +147,7 @@ public:
 
     QString getGraphicEQConfigFilePath();
 
+    QString getCachePath(QString subdir);
 private slots:
     void notify(const Key& key, const QVariant& value);
 

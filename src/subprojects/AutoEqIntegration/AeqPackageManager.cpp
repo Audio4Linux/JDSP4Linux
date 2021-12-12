@@ -183,5 +183,5 @@ QtPromise::QPromise<QVector<AeqMeasurement>> AeqPackageManager::getLocalIndex()
 
 QString AeqPackageManager::databaseDirectory()
 {
-    return AppConfig::instance().getPath("autoeq");
+    return AppConfig::instance().getCachePath("autoeq");
 }
