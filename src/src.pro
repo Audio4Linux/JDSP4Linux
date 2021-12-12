@@ -152,7 +152,7 @@ else: unix:!android: target.path = /usr/bin/
 !isEmpty(target.path): INSTALLS += target
 
 unix {
-    LIBS += -ldl
+    LIBS += -ldl -lz
     QMAKE_LFLAGS += -ldl -lutil -lz #-fsanitize=address
     QMAKE_CXXFLAGS += -g #-fno-omit-frame-pointer -fsanitize=address
 
