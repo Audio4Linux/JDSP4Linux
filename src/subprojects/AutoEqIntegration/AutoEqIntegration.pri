@@ -16,7 +16,7 @@ HEADERS += \
     $$PWD/GzipDownloader.h \
     $$PWD/GzipDownloaderDialog.h \
     $$PWD/HttpException.h \
-    $$PWD/untar.h
+    $$PWD/Untar.h
 
 SOURCES += \
     $$PWD/AeqMeasurementItem.cpp \

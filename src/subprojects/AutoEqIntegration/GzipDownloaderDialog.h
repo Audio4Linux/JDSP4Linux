@@ -28,7 +28,6 @@ private slots:
     void onError(const QString &msg);
     void onDownloadProgressUpdated(qint64 recv, qint64 total);
     void onDecompressionStarted();
-    void onUnarchiveStarted();
 
 private:
     Ui::FileDownloaderDialog *ui;

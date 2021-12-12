@@ -6,8 +6,6 @@
 #include <QtConcurrent/QtConcurrent>
 
 #include <QtPromise>
-#include <untar.h>
-#include <zlib.h>
 
 #define TMP_DIR "/tmp/jamesdsp/download/"
 #define CHUNK 16384
@@ -33,7 +31,6 @@ public:
 signals:
     void downloadProgressUpdated(qint64 bytesReceived, qint64 bytesTotal);
     void decompressionStarted();
-    void unarchiveStarted();
     void success();
     void errorOccurred(QString errorString);
 
@@ -45,7 +42,7 @@ private slots:
     void cleanup();
 
     /* Decompress from file source to file dest until stream ends or EOF. */
-    inline void inflate(gzFile_s  *source, FILE *dest)
+    /*inline void inflate(gzFile_s  *source, FILE *dest)
     {
         unsigned char buf[CHUNK];
 
@@ -54,7 +51,7 @@ private slots:
              size > 0;
              size = gzread(source, buf, CHUNK)
              ) std::fwrite(buf, 1, CHUNK, dest);
-    }
+    }*/
 
 private:
     QDir extractionPath;

@@ -152,13 +152,13 @@ else: unix:!android: target.path = /usr/bin/
 !isEmpty(target.path): INSTALLS += target
 
 unix {
-    LIBS += -ldl -lz
-    QMAKE_LFLAGS += -ldl -lutil -lz #-fsanitize=address
+    LIBS += -ldl
+    QMAKE_LFLAGS += -ldl -lutil #-fsanitize=address
     QMAKE_CXXFLAGS += -g #-fno-omit-frame-pointer -fsanitize=address
 
     CONFIG += link_pkgconfig
 
-    PKGCONFIG += glibmm-2.4 giomm-2.4
+    PKGCONFIG += glibmm-2.4 giomm-2.4 libarchive
 
     USE_PULSEAUDIO {
         PKGCONFIG += gstreamer-1.0 gstreamer-audio-1.0

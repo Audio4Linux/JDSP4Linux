@@ -18,7 +18,6 @@ GzipDownloaderDialog::GzipDownloaderDialog(QNetworkReply* _reply, QDir _targetDi
     connect(gzip, &GzipDownloader::errorOccurred, this, &GzipDownloaderDialog::onError);
     connect(gzip, &GzipDownloader::downloadProgressUpdated, this, &GzipDownloaderDialog::onDownloadProgressUpdated);
     connect(gzip, &GzipDownloader::decompressionStarted, this, &GzipDownloaderDialog::onDecompressionStarted);
-    connect(gzip, &GzipDownloader::unarchiveStarted, this, &GzipDownloaderDialog::onUnarchiveStarted);
 
     reply = _reply;
     targetDirectory = _targetDirectory;
@@ -47,7 +46,6 @@ void GzipDownloaderDialog::closeEvent(QCloseEvent *ev)
     disconnect(gzip, &GzipDownloader::errorOccurred, this, &GzipDownloaderDialog::onError);
     disconnect(gzip, &GzipDownloader::downloadProgressUpdated, this, &GzipDownloaderDialog::onDownloadProgressUpdated);
     disconnect(gzip, &GzipDownloader::decompressionStarted, this, &GzipDownloaderDialog::onDecompressionStarted);
-    disconnect(gzip, &GzipDownloader::unarchiveStarted, this, &GzipDownloaderDialog::onUnarchiveStarted);
     gzip->deleteLater();
 
     QDialog::closeEvent(ev);
@@ -84,10 +82,4 @@ void GzipDownloaderDialog::onDecompressionStarted()
     ui->title->setText("Decompressing package...");
     ui->size->setText("");
     ui->buttonBox->setEnabled(false);
-}
-
-void GzipDownloaderDialog::onUnarchiveStarted()
-{
-    ui->title->setText("Extracting package...");
-    ui->size->setText("");
 }

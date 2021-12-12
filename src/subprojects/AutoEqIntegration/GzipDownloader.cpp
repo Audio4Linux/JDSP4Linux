@@ -1,5 +1,7 @@
 #include "GzipDownloader.h"
 
+#include "Untar.h"
+
 bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
 {
     if(networkReply)
@@ -66,30 +68,17 @@ void GzipDownloader::onArchiveReady()
         {
             QDir(extractionPath).mkpath(extractionPath.path());
 
-            auto file = gzopen(downloadedFile.fileName().toStdString().c_str(), "rb");
-            auto temp = std::tmpfile();
+            QString errorMsg;
+            int ret = Untar::extract(downloadedFile.fileName(), extractionPath.path(), errorMsg);
+            downloadedFile.remove();
 
-            inflate(file, temp);
-            gzclose(file);
-            std::rewind(temp);
-
-            emit unarchiveStarted();
-
-            bool bad_checksum;
-            bool short_read;
-
-            untar(temp, extractionPath.path().toStdString().c_str(), &bad_checksum, &short_read);
-            std::fclose(temp);
-
-            if(bad_checksum)
+            if(ret > 0)
             {
-                return "Bad checksum, corrupted package. Please try again.";
+                return errorMsg;
             }
-            if(short_read)
-            {
-                return "Short read; expected 512 bytes but received less. Please try again.";
-            }
-            return "";
+
+            return QString("");
+
         })).then([this](const QString& msg)
         {
             if(msg.isEmpty())
