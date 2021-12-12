@@ -8,7 +8,6 @@
 #include <QtPromise>
 
 #define TMP_DIR "/tmp/jamesdsp/download/"
-#define CHUNK 16384
 
 class GzipDownloader : public QObject
 {
@@ -40,18 +39,6 @@ private slots:
     void onErrorOccurred(QNetworkReply::NetworkError error);
 
     void cleanup();
-
-    /* Decompress from file source to file dest until stream ends or EOF. */
-    /*inline void inflate(gzFile_s  *source, FILE *dest)
-    {
-        unsigned char buf[CHUNK];
-
-        for (
-             int size = gzread(source, buf, CHUNK);
-             size > 0;
-             size = gzread(source, buf, CHUNK)
-             ) std::fwrite(buf, 1, CHUNK, dest);
-    }*/
 
 private:
     QDir extractionPath;
