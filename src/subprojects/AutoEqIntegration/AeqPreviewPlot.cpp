@@ -156,7 +156,7 @@ void AeqPreviewPlot::importGraphicEq(const QString &graphic, const QString& titl
     titleElement->setText(title);
 
     auto g = addGraph(xAxis, yAxis);
-    g->setName("Equalization (+preamp)");
+    g->setName("Equalization (normalized)");
     g->addToLegend(legend);
 
     QPen pen; \
