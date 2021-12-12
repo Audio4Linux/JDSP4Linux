@@ -38,6 +38,7 @@ AeqPreviewPlot::AeqPreviewPlot(QWidget* parent) : QCustomPlot(parent)
     connect(this, &QCustomPlot::customContextMenuRequested, this, &AeqPreviewPlot::onContextMenuRequest);
     connect(this, &QCustomPlot::mouseMove, this, &AeqPreviewPlot::onHover);
     connect(this, &QCustomPlot::legendClick, this, &AeqPreviewPlot::onLegendClick);
+    connect(this, &QCustomPlot::legendDoubleClick, this, &AeqPreviewPlot::onLegendDoubleClick);
 
 }
 
@@ -241,6 +242,31 @@ void AeqPreviewPlot::onLegendClick(QCPLegend *legend, QCPAbstractLegendItem *ite
         bool visible = plItem->plottable()->visible();
         plItem->plottable()->setVisible(!visible);
         plItem->setTextColor(!visible ? QColor(Qt::black) : QColor(Qt::gray));
+        replot();
+    }
+}
+
+void AeqPreviewPlot::onLegendDoubleClick(QCPLegend *legend, QCPAbstractLegendItem *item, QMouseEvent *event)
+{
+    Q_UNUSED(event)
+
+    if (item)
+    {
+        QCPPlottableLegendItem *plItem = qobject_cast<QCPPlottableLegendItem*>(item);
+        for(int i = 0; i < legend->itemCount(); i++)
+        {
+            auto it = qobject_cast<QCPPlottableLegendItem*>(legend->item(i));
+            if(it && it == plItem)
+            {
+                it->plottable()->setVisible(true);
+                it->setTextColor(QColor(Qt::black));
+            }
+            else if(it && it != plItem)
+            {
+                it->plottable()->setVisible(false);
+                it->setTextColor(QColor(Qt::gray));
+            }
+        }
         replot();
     }
 }

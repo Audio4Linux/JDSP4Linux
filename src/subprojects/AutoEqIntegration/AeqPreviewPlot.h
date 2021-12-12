@@ -17,6 +17,7 @@ private slots:
     void onContextMenuRequest(QPoint pos);
     void moveLegend();
     void onLegendClick(QCPLegend *legend, QCPAbstractLegendItem *item, QMouseEvent *event);
+    void onLegendDoubleClick(QCPLegend *legend, QCPAbstractLegendItem *item, QMouseEvent *event);
 private:
     bool useGraphicEq = false;
 
