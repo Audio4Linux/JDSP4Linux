@@ -9,9 +9,18 @@ class AeqPreviewPlot : public QCustomPlot
 public:
     AeqPreviewPlot(QWidget* parent = nullptr);
 
-    void importCsv(const QString& csv);
-    void importGraphicEq(const QString& graphic);
+    void importCsv(const QString& csv, const QString &title);
+    void importGraphicEq(const QString &graphic, const QString &title);
+private slots:
+    void onHover(QMouseEvent* event);
 
+    void onContextMenuRequest(QPoint pos);
+    void moveLegend();
+    void onLegendClick(QCPLegend *legend, QCPAbstractLegendItem *item, QMouseEvent *event);
+private:
+    bool useGraphicEq = false;
+
+    QCPTextElement* titleElement;
 };
 
 #endif // AEQPREVIEWPLOT_H

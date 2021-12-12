@@ -172,14 +172,16 @@ void AeqSelector::onSelectionChanged(const QItemSelection &selected, const QItem
     }
 
     auto csv = this->selection(DataFormat::dCsv, true);
-    if(csv.isEmpty())
+    auto item = proxyModel->data(ui->list->selectionModel()->selectedRows().first(), Qt::UserRole).value<AeqMeasurement>();
+    auto title = QString("%1 (%2)").arg(item.name).arg(item.source);
+    if(!csv.isEmpty())
     {
-        ui->preview->importCsv(csv);
+        ui->preview->importCsv(csv, title);
     }
     else
     {
         auto graphic = this->selection(DataFormat::dGraphicEq, false);
-        ui->preview->importGraphicEq(graphic);
+        ui->preview->importGraphicEq(graphic, title);
     }
 }
 

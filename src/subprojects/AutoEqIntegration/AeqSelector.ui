@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>884</width>
-    <height>455</height>
+    <width>912</width>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="mainContentLayout" stretch="6,0">
+    <layout class="QHBoxLayout" name="mainContentLayout" stretch="6,10">
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="frameShape">
@@ -250,7 +250,7 @@
         <item>
          <widget class="QStackedWidget" name="previewStack">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page">
            <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -294,12 +294,17 @@ This will override your current GraphicEQ configuration.</string>
            </layout>
           </widget>
           <widget class="QWidget" name="page_2">
+           <property name="styleSheet">
+            <string notr="true">#page_2 {
+	background-color: white;
+}</string>
+           </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
             <property name="leftMargin">
              <number>0</number>
             </property>
             <property name="topMargin">
-             <number>0</number>
+             <number>4</number>
             </property>
             <property name="rightMargin">
              <number>0</number>
