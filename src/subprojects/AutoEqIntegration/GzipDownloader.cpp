@@ -21,9 +21,7 @@ bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
     extractionPath = _extractionPath;
     networkReply = reply;
     connect(networkReply, &QIODevice::readyRead, this, &GzipDownloader::onDataAvailable);
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    connect(networkReply, &QNetworkReply::error, this, &GzipDownloader::onErrorOccurred);
-#else
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     connect(networkReply, &QNetworkReply::errorOccurred, this, &GzipDownloader::onErrorOccurred);
 #endif
     connect(networkReply, &QNetworkReply::downloadProgress, this, &GzipDownloader::downloadProgressUpdated);
