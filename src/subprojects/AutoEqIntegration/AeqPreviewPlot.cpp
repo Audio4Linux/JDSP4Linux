@@ -1,5 +1,7 @@
 #include "AeqPreviewPlot.h"
 
+#include "config/AppConfig.h"
+
 #include <qtcsv/reader.h>
 #include <qtcsv/variantdata.h>
 #include <QBuffer>
@@ -42,10 +44,17 @@ AeqPreviewPlot::AeqPreviewPlot(QWidget* parent) : QCustomPlot(parent)
 
 }
 
+#define ADD(name,label,color_light,width) \
+    auto name = addGraph(); \
+    name->setName(label); \
+    QPen name##_pen; \
+    name##_pen.setColor(dark ? \
+        QColor::fromHslF(color_light.hslHueF(), color_light.hslSaturationF(), fabs(color_light.lightnessF() - 1.0f)) : color_light); \
+    name##_pen.setWidthF(width); \
+    name->setPen(name##_pen);
+
 void AeqPreviewPlot::importCsv(const QString &csv, const QString& title)
 {
-    useGraphicEq = false;
-
     clearItems();
     clearGraphs();
 
@@ -69,13 +78,8 @@ void AeqPreviewPlot::importCsv(const QString &csv, const QString& title)
         return;
     }
 
-#define ADD(name,label,color,width) \
-    auto name = addGraph(); \
-    name->setName(label); \
-    QPen name##_pen; \
-    name##_pen.setColor(color); \
-    name##_pen.setWidthF(width); \
-    name->setPen(name##_pen);
+    bool dark = AppConfig::instance().get<bool>(AppConfig::AeqPlotDarkMode);
+    updateBaseColors(dark);
 
     ADD(target, "Target", QColor(173,216,230) /* light blue */,4)
     ADD(smoothed, "Raw (smoothed)", QColor(Qt::lightGray), 4)
@@ -96,8 +100,6 @@ void AeqPreviewPlot::importCsv(const QString &csv, const QString& title)
     error->addToLegend(legend);
     equalization->addToLegend(legend);
     equalized_raw->addToLegend(legend);
-
-#undef ADD
 
     double minY = -10, maxY = 2;
     for (int row = 1; row < variant.rowCount(); row++)
@@ -149,21 +151,15 @@ void AeqPreviewPlot::importCsv(const QString &csv, const QString& title)
 
 void AeqPreviewPlot::importGraphicEq(const QString &graphic, const QString& title)
 {
-    useGraphicEq = true;
-
     clearItems();
     clearGraphs();
 
     titleElement->setText(title);
 
-    auto g = addGraph(xAxis, yAxis);
-    g->setName("Equalization (normalized)");
-    g->addToLegend(legend);
+    bool dark = AppConfig::instance().get<bool>(AppConfig::AeqPlotDarkMode);
+    updateBaseColors(dark);
 
-    QPen pen; \
-    pen.setColor(QColor(119, 194, 119) /* green */);
-    pen.setWidthF(4);
-    g->setPen(pen);
+    ADD(graph, "Equalization (normalized)", QColor(119, 194, 119) /* green */,4)
 
     auto dataset = graphic;
     dataset.replace("GraphicEQ: ", "");
@@ -180,13 +176,15 @@ void AeqPreviewPlot::importGraphicEq(const QString &graphic, const QString& titl
             if(y < minY)
                 minY = y;
 
-            g->addData(set[0].toDouble(), y);
+            graph->addData(set[0].toDouble(), y);
         }
     }
 
     yAxis->setRange(QCPRange(minY - 3, maxY + 3));
     replot(QCustomPlot::rpQueuedReplot);
 }
+
+#undef ADD
 
 void AeqPreviewPlot::onHover(QMouseEvent *event)
 {
@@ -238,10 +236,20 @@ void AeqPreviewPlot::onLegendClick(QCPLegend *legend, QCPAbstractLegendItem *ite
 
     if (item)
     {
+        bool dark = AppConfig::instance().get<bool>(AppConfig::AeqPlotDarkMode);
+
         QCPPlottableLegendItem *plItem = qobject_cast<QCPPlottableLegendItem*>(item);
         bool visible = plItem->plottable()->visible();
         plItem->plottable()->setVisible(!visible);
-        plItem->setTextColor(!visible ? QColor(Qt::black) : QColor(Qt::gray));
+
+        if(dark)
+        {
+            plItem->setTextColor(!visible ? QColor(Qt::white) : QColor(Qt::darkGray));
+        }
+        else
+        {
+            plItem->setTextColor(!visible ? QColor(Qt::black) : QColor(Qt::gray));
+        }
         replot();
     }
 }
@@ -255,18 +263,46 @@ void AeqPreviewPlot::onLegendDoubleClick(QCPLegend *legend, QCPAbstractLegendIte
         QCPPlottableLegendItem *plItem = qobject_cast<QCPPlottableLegendItem*>(item);
         for(int i = 0; i < legend->itemCount(); i++)
         {
+            bool dark = AppConfig::instance().get<bool>(AppConfig::AeqPlotDarkMode);
+
             auto it = qobject_cast<QCPPlottableLegendItem*>(legend->item(i));
             if(it && it == plItem)
             {
                 it->plottable()->setVisible(true);
-                it->setTextColor(QColor(Qt::black));
+                it->setTextColor(QColor(dark ? Qt::white : Qt::black));
             }
             else if(it && it != plItem)
             {
                 it->plottable()->setVisible(false);
-                it->setTextColor(QColor(Qt::gray));
+                it->setTextColor(QColor(dark ? Qt::darkGray : Qt::gray));
             }
         }
         replot();
     }
+}
+
+void AeqPreviewPlot::updateBaseColors(bool dark)
+{
+    QColor text = dark ? QColor(222, 222, 222) : Qt::black;
+    QColor base = dark ? Qt::black : Qt::white;
+    QColor window = dark ? QColor(28, 28, 28) : Qt::black;
+
+    this->setBackground(base);
+    this->titleElement->setTextColor(text);
+
+    this->yAxis->setLabelColor(text);
+    this->yAxis->setTickLabelColor(text);
+    this->yAxis->setBasePen(text);
+    this->yAxis->setTickPen(text);
+    this->yAxis->setSubTickPen(text);
+
+    this->xAxis->setLabelColor(text);
+    this->xAxis->setTickLabelColor(text);
+    this->xAxis->setBasePen(text);
+    this->xAxis->setTickPen(text);
+    this->xAxis->setSubTickPen(text);
+
+    this->legend->setBrush(base);
+    this->legend->setBorderPen(window);
+    this->legend->setTextColor(text);
 }

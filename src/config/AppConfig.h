@@ -69,7 +69,9 @@ public:
         AudioOutputUseDefault,
         AudioOutputDevice,
         AudioAppBlocklist,
-        AudioAppBlocklistInvert
+        AudioAppBlocklistInvert,
+
+        AeqPlotDarkMode
     };
     Q_ENUM(Key);
 

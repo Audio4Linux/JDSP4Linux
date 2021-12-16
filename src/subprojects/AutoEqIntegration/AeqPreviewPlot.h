@@ -18,10 +18,12 @@ private slots:
     void moveLegend();
     void onLegendClick(QCPLegend *legend, QCPAbstractLegendItem *item, QMouseEvent *event);
     void onLegendDoubleClick(QCPLegend *legend, QCPAbstractLegendItem *item, QMouseEvent *event);
+
 private:
-    bool useGraphicEq = false;
+    void updateBaseColors(bool dark);
 
     QCPTextElement* titleElement;
+
 };
 
 #endif // AEQPREVIEWPLOT_H

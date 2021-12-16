@@ -7,6 +7,8 @@
 #include "AeqMeasurementItem.h"
 #include "AeqMeasurementModel.h"
 
+#include "config/AppConfig.h"
+
 #include <QListWidget>
 #include <QMessageBox>
 #include <QBitmap>
@@ -35,13 +37,17 @@ AeqSelector::AeqSelector(QWidget *parent) :
     ui->list->setModel(proxyModel);
     ui->list->setItemDelegate(new AeqItemDelegate(ui->list));
 
-    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &AeqSelector::accept);
-    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &AeqSelector::reject);
+    ui->darkMode->setChecked(AppConfig::instance().get<bool>(AppConfig::AeqPlotDarkMode));
 
-    connect(ui->searchInput,    &QLineEdit::textChanged, proxyModel, &QSortFilterProxyModel::setFilterWildcard);
-    connect(ui->manageDatabase, &QPushButton::clicked,   this,        &AeqSelector::switchPane);
-    connect(ui->updateButton,   &QPushButton::clicked,   this,        &AeqSelector::updateDatabase);
-    connect(ui->deleteButton,   &QPushButton::clicked,   this,        &AeqSelector::deleteDatabase);
+    connect(ui->buttonBox, &QDialogButtonBox::accepted,   this, &AeqSelector::accept);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected,   this, &AeqSelector::reject);
+
+    connect(ui->searchInput,    &QLineEdit::textChanged,  proxyModel, &QSortFilterProxyModel::setFilterWildcard);
+    connect(ui->manageDatabase, &QPushButton::clicked,    this,        &AeqSelector::switchPane);
+    connect(ui->updateButton,   &QPushButton::clicked,    this,        &AeqSelector::updateDatabase);
+    connect(ui->deleteButton,   &QPushButton::clicked,    this,        &AeqSelector::deleteDatabase);
+
+    connect(ui->darkMode,       &QCheckBox::stateChanged, this,        &AeqSelector::onDarkModeToggled);
 
     connect(ui->list->selectionModel(), &QItemSelectionModel::selectionChanged, this, &AeqSelector::onSelectionChanged);
 
@@ -109,7 +115,6 @@ void AeqSelector::updateDatabase()
             updateDatabaseInfo();
         });
     };
-
 
     pkgManager->isUpdateAvailable().then([&](AeqVersion remote)
     {
@@ -183,6 +188,13 @@ void AeqSelector::onSelectionChanged(const QItemSelection &selected, const QItem
         auto graphic = this->selection(DataFormat::dGraphicEq, false);
         ui->preview->importGraphicEq(graphic, title);
     }
+}
+
+void AeqSelector::onDarkModeToggled(int state)
+{
+    AppConfig::instance().set(AppConfig::AeqPlotDarkMode, (bool)state);
+    // Reload plot
+    onSelectionChanged(ui->list->selectionModel()->selection(), QItemSelection());
 }
 
 QString AeqSelector::selection(DataFormat format, bool silent)

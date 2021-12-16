@@ -38,6 +38,7 @@ private slots:
     void deleteDatabase();
     void updateDatabaseInfo();
     void onSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+    void onDarkModeToggled(int state);
 
 private:
     Ui::AeqSelector *ui;
