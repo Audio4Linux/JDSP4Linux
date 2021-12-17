@@ -945,6 +945,9 @@ void MainWindow::onBs2bPresetUpdated()
         break;
     }
 
+    // FIXME remove this vvv
+    ui->info->setAnimatedText("'" + ui->crossfeed_mode->currentText() + "' has been selected", true);
+
     ui->bs2b_custom_box->setEnabled(index == 99);
     _blockApply = false;
 
@@ -1094,7 +1097,7 @@ void MainWindow::updateTooltipLabelUnit(QObject       *sender,
 
     if (viasignal)
     {
-        ui->info->setText(text);
+        ui->info->setAnimatedText(text, false);
     }
 }
 

@@ -36,6 +36,8 @@ private:
     PulseAppManager* appMgr;
     PulseAudioProcessingThread* apt;
 
+    std::string last_sink_dev_name;
+
 };
 
 #endif // PULSEAUDIOSERVICE_H

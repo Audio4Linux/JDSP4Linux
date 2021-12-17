@@ -39,6 +39,7 @@ signals:
     void eelOutputReceived(const QString& output);
     void eelVariablesEnumerated(const std::list<EelVariable>& vars);
     void convolverInfoChanged(const ConvolverInfoEventArgs& args);
+    void outputDeviceChanged(const QString& deviceName, const QString& deviceId);
 
 };
 

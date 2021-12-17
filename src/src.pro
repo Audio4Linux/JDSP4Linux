@@ -49,6 +49,7 @@ SOURCES += \
     data/model/VdcDatabaseModel.cpp \
     interface/AnimatedJdspIcon.cpp \
     interface/CListView.cpp \
+    interface/FadingLabel.cpp \
     interface/FileSelectionWidget.cpp \
     interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
@@ -107,6 +108,7 @@ HEADERS += \
     data/model/VdcDatabaseModel.h \
     interface/AnimatedJdspIcon.h \
     interface/CListView.h \
+    interface/FadingLabel.h \
     interface/FileSelectionWidget.h \
     interface/LiveprogSelectionWidget.h \
     interface/QMessageOverlay.h \

@@ -583,14 +583,18 @@ void on_device_event_param(void* object,
                             device.input_route_name = name;
                             device.input_route_available = available;
 
-                            Glib::signal_idle().connect_once([pm, device] { pm->device_input_route_changed.emit(device); });
+                            Glib::signal_idle().connect_once([pm, device] {
+                                pm->device_input_route_changed.emit(device);
+                            });
                         }
                     } else if (direction == SPA_DIRECTION_OUTPUT) {
                         if (name != device.output_route_name || available != device.output_route_available) {
                             device.output_route_name = name;
                             device.output_route_available = available;
 
-                            Glib::signal_idle().connect_once([pm, device] { pm->device_output_route_changed.emit(device); });
+                            Glib::signal_idle().connect_once([pm, device] {
+                                pm->device_output_route_changed.emit(device);
+                            });
                         }
                     }
 

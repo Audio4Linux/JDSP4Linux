@@ -23,6 +23,8 @@ public:
     ~PipewireAudioService();
 
 public slots:
+    void onAppConfigUpdated(const AppConfig::Key& key, const QVariant& value);
+
     void update(DspConfig* config) override;
     void reloadLiveprog() override;
     void reloadService() override;

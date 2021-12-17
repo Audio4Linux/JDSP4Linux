@@ -40,6 +40,36 @@ PulseAudioService::PulseAudioService()
 
     mgr.get()->getDsp()->setMessageHandler(std::bind(&IAudioService::handleMessage, this, std::placeholders::_1, std::placeholders::_2));
 
+    /* Register sink change handler */
+    mgr.get()->getPulseManager()->sink_changed.connect([&](const std::shared_ptr<mySinkInfo>& info) {
+        if (info->name == mgr.get()->getPulseManager()->server_info.default_sink_name) {
+            Glib::signal_timeout().connect_seconds_once(
+                        [=]() {
+                // checking if after 3 seconds this sink still is the default sink
+                if (info->name == mgr.get()->getPulseManager()->server_info.default_sink_name) {
+                    auto current_info = mgr.get()->getPulseManager()->get_sink_info(info->name);
+
+                    if (current_info != nullptr) {
+                        auto port = current_info->active_port;
+                        std::string dev_name;
+
+                        if (port != "null") {
+                            dev_name = current_info->name + ":" + port;
+                        } else {
+                            dev_name = current_info->name;
+                        }
+
+                        if (dev_name != last_sink_dev_name) {
+                            last_sink_dev_name = dev_name;
+                            emit outputDeviceChanged(QString::fromStdString(dev_name), QString::fromStdString(dev_name));
+                        }
+                    }
+                }
+            },
+            3);
+        }
+    });
+
     /* Launch audio processing thread */
     apt = new PulseAudioProcessingThread(mgr);
     apt->start();
