@@ -22,18 +22,24 @@ public:
     PresetManager(PresetManager const &) = delete;
     PresetManager();
 
-    QVector<PresetRule> rules() const;
+    bool exists(const QString& name) const;
 
+    QVector<PresetRule> rules() const;
     void setRules(const QVector<PresetRule> &newRules);
 
     PresetListModel *presetModel() const;
 
 signals:
     void presetAutoloaded(const QString& deviceName);
+    void wantsToWriteConfig();
 
 public slots:
-    void save(const QString &filename);
-    void load(const QString &filename);
+    void saveToPath(const QString &filename);
+    bool loadFromPath(const QString &filename);
+    void rename(const QString &name, const QString &newName);
+    void remove(const QString &name);
+    bool load(const QString &filename);
+    void save(const QString &name);
 
     void onOutputDeviceChanged(const QString& deviceName, const QString& deviceId);
 

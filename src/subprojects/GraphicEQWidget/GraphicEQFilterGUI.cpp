@@ -208,13 +208,13 @@ void GraphicEQFilterGUI::loadPreferences(const QVariantMap& prefs)
     /*ui->tableWidget->setFixedWidth(DPIHelper::scale(prefs.value("tableWidth", DEFAULT_TABLE_WIDTH).toDouble()));
     ui->graphicsView->setFixedHeight(DPIHelper::scale(prefs.value("viewHeight", DEFAULT_VIEW_HEIGHT).toDouble()));*/
     double zoomX = DPIHelper::scaleZoom(prefs.value("zoomX", 0.561).toDouble());
-    double zoomY = DPIHelper::scaleZoom(prefs.value("zoomY", 0.713).toDouble());
+    double zoomY = DPIHelper::scaleZoom(prefs.value("zoomY", 3.773).toDouble());
     scene->setZoom(zoomX, zoomY);
     bool ok;
-    int scrollX = DPIHelper::scale(prefs.value("scrollX", 165.346).toDouble(&ok));
+    int scrollX = DPIHelper::scale(prefs.value("scrollX", 102).toDouble(&ok));
     if (!ok)
         scrollX = round(scene->hzToX(20));
-    int scrollY = DPIHelper::scale(prefs.value("scrollY", 50).toDouble(&ok));
+    int scrollY = DPIHelper::scale(prefs.value("scrollY", 825).toDouble(&ok));
     if (!ok)
         scrollY = round(scene->dbToY(22));
     ui->graphicsView->setScrollOffsets(scrollX, scrollY);

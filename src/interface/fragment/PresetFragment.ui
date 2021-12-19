@@ -71,7 +71,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="files">
+    <widget class="CListView" name="files">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -132,6 +132,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CListView</class>
+   <extends>QListView</extends>
+   <header>interface/CListView.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>presetName</tabstop>
   <tabstop>add</tabstop>

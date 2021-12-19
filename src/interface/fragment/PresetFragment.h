@@ -16,7 +16,8 @@
 #define PRESET_H
 
 #include <QDialog>
-#include <QNetworkReply>
+#include <QItemSelection>
+#include <QMenu>
 
 #include "interface/fragment/BaseFragment.h"
 
@@ -41,20 +42,17 @@ public:
     void updateList();
 
 private slots:
-	void add();
-	void remove();
-	void load();
-	void nameChanged(const QString &);
-	void showContextMenu(const QPoint &pos);
-	void presetIndexChanged();
-
-signals:
-    void wantsToWriteConfig();
-    void presetChanged();
+    void onAddClicked();
+    void onRemoveClicked();
+    void onLoadClicked();
+    void onNameFieldChanged(const QString &);
+    void onContextMenuRequested(const QPoint &pos);
+    void onSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
 private:
     Ui::PresetDialog *ui;
     PresetRuleDialog *ruleDialog;
+    QMenu ctxMenu;
 
 };
 

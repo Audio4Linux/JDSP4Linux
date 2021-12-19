@@ -34,7 +34,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QTableView" name="ruleTable">
+      <widget class="CTableView" name="ruleTable">
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
        </property>
@@ -44,6 +44,9 @@
        <property name="sortingEnabled">
         <bool>false</bool>
        </property>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
     </layout>
@@ -100,6 +103,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CTableView</class>
+   <extends>QTableView</extends>
+   <header>interface/CTableView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

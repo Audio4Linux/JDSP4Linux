@@ -144,6 +144,8 @@ MainWindow::MainWindow(QString  exepath,
         _refreshTick = new QTimer(this);
         connect(_refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
         _refreshTick->start(1000);
+
+        connect(&PresetManager::instance(), &PresetManager::wantsToWriteConfig, this, &MainWindow::applyConfig);
     }
 
     // Allocate pointers and init important variables
@@ -249,7 +251,7 @@ MainWindow::MainWindow(QString  exepath,
             determineIrsSelection();
             applyConfig();
         });
-        connect(_trayIcon, &TrayIcon::loadPreset, &PresetManager::instance(), &PresetManager::load);
+        connect(_trayIcon, &TrayIcon::loadPreset, &PresetManager::instance(), &PresetManager::loadFromPath);
         connect(_trayIcon, &TrayIcon::changeDisableFx, ui->disableFX, &QPushButton::setChecked);
         connect(_trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
 
@@ -268,13 +270,10 @@ MainWindow::MainWindow(QString  exepath,
         _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
         _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, this), WAF::BottomSide, this);
 
-        connect(_presetFragment->fragment(), &PresetFragment::wantsToWriteConfig, this, &MainWindow::applyConfig);
         connect(_settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
         connect(_settingsFragment->fragment(), &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
         connect(_settingsFragment->fragment(), &SettingsFragment::reopenSettings, _settingsFragment, &FragmentHost<SettingsFragment*>::slideOutIn);
         connect(_styleHelper, &StyleHelper::iconColorChanged, _settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
-
-        connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::saveGraphicEQView);
     }
 
     // Init 3-dot menu button
@@ -495,6 +494,7 @@ void MainWindow::fireTimerSignal()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     QSettings().setValue("geometry", saveGeometry());
+    saveGraphicEQView();
 
 #ifdef Q_OS_OSX
 
@@ -611,7 +611,7 @@ void MainWindow::loadExternalFile()
         return;
     }
 
-    PresetManager::instance().load(filename);
+    PresetManager::instance().loadFromPath(filename);
 }
 
 void MainWindow::saveExternalFile()
@@ -629,7 +629,7 @@ void MainWindow::saveExternalFile()
     }
 
     applyConfig();
-    PresetManager::instance().save(filename);
+    PresetManager::instance().saveToPath(filename);
 }
 
 // ---Config IO
@@ -1382,17 +1382,19 @@ void MainWindow::restoreGraphicEQView()
     QVariantMap state;
     state = ConfigIO::readFile(AppConfig::instance().getGraphicEQConfigFilePath());
 
-    if (state.count() >= 1)
+    ConfigContainer conf;
+    conf.setConfigMap(state);
+    if (state.count() >= 4 && conf.getInt("scrollY") != 0)
     {
         ui->graphicEq->loadPreferences(state);
     }
     else
     {
         ConfigContainer pref;
-        pref.setValue("scrollX", 165.346);
-        pref.setValue("scrollY", 50);
+        pref.setValue("scrollX", 102);
+        pref.setValue("scrollY", 825);
         pref.setValue("zoomX",   0.561);
-        pref.setValue("zoomY",   0.713);
+        pref.setValue("zoomY",   3.822);
         ui->graphicEq->loadPreferences(pref.getConfigMap());
     }
 }

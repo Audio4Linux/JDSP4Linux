@@ -30,6 +30,8 @@ PresetRuleDialog::PresetRuleDialog(IAudioService* service, QWidget *parent) :
     ui->ruleTable->setItemDelegate(ruleDelegate);
     ui->ruleTable->setModel(ruleModel);
     ui->ruleTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->ruleTable->setEmptyViewEnabled(true);
+    ui->ruleTable->setEmptyViewTitle("No rules defined");
 
     ruleModel->load();
     deviceModel->load(service->sinkDevices());

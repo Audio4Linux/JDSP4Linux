@@ -14,10 +14,22 @@ PresetManager::PresetManager() : _presetModel(new PresetListModel(this))
     loadRules();
 }
 
-void PresetManager::load(const QString &filename)
+bool PresetManager::exists(const QString &name) const
+{
+    return QFile::exists(AppConfig::instance().getPath("presets/") + name + ".conf");
+}
+
+bool PresetManager::loadFromPath(const QString &filename)
 {
     const QString &src  = filename;
     const QString  dest = AppConfig::instance().getDspConfPath();
+
+    if (!QFile::exists(src))
+    {
+        // Preset does not exist anymore, rescan presets
+        this->_presetModel->rescan();
+        return false;
+    }
 
     if (QFile::exists(dest))
     {
@@ -27,10 +39,44 @@ void PresetManager::load(const QString &filename)
     QFile::copy(src, dest);
     Log::debug("PresetManager::load: Loading from " + filename);
     DspConfig::instance().load();
+    return true;
 }
 
-void PresetManager::save(const QString &filename)
+
+bool PresetManager::load(const QString &name)
 {
+    return loadFromPath(AppConfig::instance().getPath("presets/") + name + ".conf");
+}
+
+void PresetManager::rename(const QString &name, const QString &newName)
+{
+    auto path = AppConfig::instance().getPath("presets/") + name + ".conf";
+    if (QFile::exists(path))
+    {
+        QFile::rename(path, QDir(path).filePath(newName + ".conf"));
+    }
+    this->_presetModel->rescan();
+}
+
+void PresetManager::remove(const QString &name)
+{
+    auto path = AppConfig::instance().getPath("presets/") + name + ".conf";
+    if (QFile::exists(path))
+    {
+        QFile::remove(path);
+    }
+    this->_presetModel->rescan();
+}
+
+void PresetManager::save(const QString &name)
+{
+    saveToPath(AppConfig::instance().getPath("presets/") + name + ".conf");
+}
+
+void PresetManager::saveToPath(const QString &filename)
+{
+    emit wantsToWriteConfig();
+
     const QString  src  = AppConfig::instance().getDspConfPath();
     const QString &dest = filename;
 
@@ -41,6 +87,7 @@ void PresetManager::save(const QString &filename)
 
     QFile::copy(src, dest);
     Log::debug("PresetManager::save: Saving to " + filename);
+    this->_presetModel->rescan();
 }
 
 void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId)
@@ -49,7 +96,7 @@ void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QStri
     {
         if(rule.deviceId == deviceId)
         {
-            load(AppConfig::instance().getPath("presets/" + rule.preset + ".conf"));
+            loadFromPath(AppConfig::instance().getPath("presets/" + rule.preset + ".conf"));
             emit presetAutoloaded(deviceName);
             break;
         }

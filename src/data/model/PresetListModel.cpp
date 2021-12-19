@@ -7,6 +7,7 @@
 PresetListModel::PresetListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    rescan();
 }
 
 int PresetListModel::rowCount(const QModelIndex &parent) const

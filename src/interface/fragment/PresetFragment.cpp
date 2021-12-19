@@ -3,24 +3,13 @@
 
 #include "config/AppConfig.h"
 #include "data/PresetManager.h"
+#include "data/model/PresetListModel.h"
 #include "interface/dialog/PresetRuleDialog.h"
-#include "utils/Common.h"
 #include "utils/Log.h"
 
-#include <Animation/Animation.h>
-
-#include <QCloseEvent>
-#include <QDebug>
-#include <QDesktopServices>
-#include <QDir>
-#include <QFileDialog>
+#include <QFile>
 #include <QInputDialog>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QMenu>
 #include <QMessageBox>
-#include <QNetworkReply>
 
 PresetFragment::PresetFragment(IAudioService* service, QWidget *parent) :
     BaseFragment(parent),
@@ -29,15 +18,23 @@ PresetFragment::PresetFragment(IAudioService* service, QWidget *parent) :
 {
 	ui->setupUi(this);
 
-    updateList();
-	connect(ui->add,        SIGNAL(clicked()),                                              SLOT(add()));
-	connect(ui->load,       SIGNAL(clicked()),                                              SLOT(load()));
-	connect(ui->remove,     SIGNAL(clicked()),                                              SLOT(remove()));
-	connect(ui->presetName, SIGNAL(textChanged(QString)),                                   this, SLOT(nameChanged(QString)));
-	connect(ui->files,      SIGNAL(customContextMenuRequested(QPoint)),                     this, SLOT(showContextMenu(QPoint)));
-	connect(ui->files,      SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(presetIndexChanged()));
+    ui->files->setModel(PresetManager::instance().presetModel());
+    ui->files->setEmptyViewEnabled(true);
+    ui->files->setEmptyViewTitle("No presets saved");
 
+    ui->add->setEnabled(false);
+    ui->remove->setEnabled(false);
+    ui->load->setEnabled(false);
+
+    connect(ui->add, &QPushButton::clicked, this, &PresetFragment::onAddClicked);
+    connect(ui->load, &QPushButton::clicked, this, &PresetFragment::onLoadClicked);
+    connect(ui->remove, &QPushButton::clicked, this, &PresetFragment::onRemoveClicked);
     connect(ui->rules, &QPushButton::clicked, ruleDialog, &PresetRuleDialog::exec);
+
+    connect(ui->presetName, &QLineEdit::textChanged, this, &PresetFragment::onNameFieldChanged);
+
+    connect(ui->files, &CListView::customContextMenuRequested, this, &PresetFragment::onContextMenuRequested);
+    connect(ui->files->selectionModel(), &QItemSelectionModel::selectionChanged, this, &PresetFragment::onSelectionChanged);
 }
 
 PresetFragment::~PresetFragment()
@@ -45,118 +42,67 @@ PresetFragment::~PresetFragment()
 	delete ui;
 }
 
-void PresetFragment::presetIndexChanged()
+void PresetFragment::onSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
-	if (ui->files->currentItem() == nullptr)
+    Q_UNUSED(deselected)
+
+    ui->load->setEnabled(!selected.empty());
+    ui->remove->setEnabled(!selected.empty());
+
+    if (selected.empty() || selected.indexes().empty())
 	{
 		return;
 	}
 
-	ui->presetName->setText(ui->files->currentItem()->text());
+    ui->presetName->setText(PresetManager::instance().presetModel()->data(selected.indexes().first(), Qt::UserRole).toString());
 }
 
-void PresetFragment::updateList()
+void PresetFragment::onAddClicked()
 {
-	ui->files->clear();
+    if(ui->presetName->text().isEmpty())
+    {
+        return;
+    }
 
-	QString path = AppConfig::instance().getPath("presets");
-	QDir    dir(path);
-
-	if (!dir.exists())
-	{
-		dir.mkpath(".");
-	}
-
-	QStringList nameFilter("*.conf");
-	QStringList files = dir.entryList(nameFilter);
-
-	if (files.count() < 1)
-	{
-		QListWidgetItem *placeholder = new QListWidgetItem;
-		placeholder->setText(tr("No presets saved"));
-		placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
-		ui->files->addItem(placeholder);
-		return;
-	}
-
-	for (int i = 0; i < files.count(); i++)  // Strip extensions
-	{
-		QFileInfo fi(files[i]);
-		files[i] = fi.completeBaseName();
-	}
-
-	ui->files->addItems(files);
-}
-
-void PresetFragment::add()
-{
-	if (ui->presetName->text() == "")
-	{
-		QMessageBox::warning(this, tr("Error"), tr("Preset Name is empty"), QMessageBox::Ok);
-		return;
-	}
-
-    emit wantsToWriteConfig();
-
-	QString path = AppConfig::instance().getPath("presets");
-    PresetManager::instance().save(path + "/" + ui->presetName->text() + ".conf");
-
+    PresetManager::instance().save(ui->presetName->text());
 	ui->presetName->text() = "";
-    updateList();
-    emit presetChanged();
 }
 
-void PresetFragment::remove()
+void PresetFragment::onRemoveClicked()
 {
-	if (ui->files->selectedItems().length() == 0)
-	{
-		QMessageBox::warning(this, tr("Error"), tr("Nothing selected"), QMessageBox::Ok);
-		return;
-	}
+    auto* select = ui->files->selectionModel();
+    if (!select->hasSelection())
+    {
+        return;
+    }
 
-	QString fullpath = AppConfig::instance().getPath("presets/" + ui->files->selectedItems().first()->text() + ".conf");
-	QFile   file(fullpath);
+    auto indexes = select->selectedIndexes();
+    PresetManager::instance().remove(PresetManager::instance().presetModel()->data(indexes.first(), Qt::UserRole).toString());
 
-	if (!QFile::exists(fullpath))
-	{
-		QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist"), QMessageBox::Ok);
-        updateList();
-		emit presetChanged();
-		return;
-	}
-
-	file.remove();
-    Log::debug("PresetDialog::remove: Deleted " + fullpath);
-    updateList();
-	emit presetChanged();
+    ui->load->setEnabled(false);
+    ui->remove->setEnabled(false);
 }
 
-void PresetFragment::load()
+void PresetFragment::onLoadClicked()
 {
-	if (ui->files->selectedItems().length() == 0)
-	{
-		QMessageBox::warning(this, tr("Error"), tr("Nothing selected"), QMessageBox::Ok);
-		return;
-	}
+    auto* select = ui->files->selectionModel();
+    if (!select->hasSelection())
+    {
+        return;
+    }
 
-	QString fullpath = AppConfig::instance().getPath("presets/" + ui->files->selectedItems().first()->text() + ".conf");
-
-	if (!QFile::exists(fullpath))
-	{
-        QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist anymore"), QMessageBox::Ok);
-        updateList();
-		emit presetChanged();
-		return;
-	}
-
-    PresetManager::instance().load(fullpath);
+    auto indexes = select->selectedIndexes();
+    if(!PresetManager::instance().load(PresetManager::instance().presetModel()->data(indexes.first(), Qt::UserRole).toString()))
+    {
+        QMessageBox::warning(this, tr("Cannot load preset"), tr("Selected file does not exist anymore"), QMessageBox::Ok);
+    }
 }
 
-void PresetFragment::nameChanged(const QString &name)
+void PresetFragment::onNameFieldChanged(const QString &name)
 {
-	QString path = AppConfig::instance().getPath("presets");
+    ui->add->setEnabled(!name.isEmpty());
 
-	if (QFile::exists(path + "/" + name + ".conf"))
+    if (PresetManager::instance().exists(name))
 	{
 		ui->add->setText(tr("Overwrite"));
 	}
@@ -166,61 +112,38 @@ void PresetFragment::nameChanged(const QString &name)
 	}
 }
 
-void PresetFragment::showContextMenu(const QPoint &pos)
+void PresetFragment::onContextMenuRequested(const QPoint &pos)
 {
-	QPoint           globalPos     = ui->files->mapToGlobal(pos);
-	QMenu            menu;
-	QAction         *action_rename = menu.addAction(tr("Rename"));
-	QAction         *action_del    = menu.addAction(tr("Delete"));
-	QListWidgetItem *pointedItem   = ui->files->itemAt(pos);
+    auto globalPos = ui->files->mapToGlobal(pos);
+    auto actionRename = ctxMenu.addAction("Rename");
+    auto actionDelete = ctxMenu.addAction("Delete");
+    auto preset = PresetManager::instance().presetModel()->data(ui->files->indexAt(pos), Qt::UserRole);
 
-	if (!pointedItem)
+    if (!preset.isValid() || preset.isNull())
 	{
 		return;
 	}
 
-	QString  path     = AppConfig::instance().getPath("presets");
-	QString  fullpath = QDir(path).filePath(pointedItem->text() + ".conf");
-	QAction *selectedAction;
+    auto result = ctxMenu.exec(globalPos);
+    if (!result)
+    {
+        return;
+    }
 
-	if (pointedItem)
-	{
-		selectedAction = menu.exec(globalPos);
+    if (result == actionRename)
+    {
+        bool ok;
+        QString newName = QInputDialog::getText(this, tr("Rename preset"),
+                                             tr("Enter new name"), QLineEdit::Normal,
+                                             preset.toString(), &ok);
 
-		if (selectedAction)
-		{
-			if (selectedAction == action_rename)
-			{
-				bool    ok;
-				QString text = QInputDialog::getText(this, tr("Rename"),
-				                                     tr("New Name"), QLineEdit::Normal,
-				                                     pointedItem->text(), &ok);
-
-				if (ok && !text.isEmpty())
-				{
-					QFile::rename(fullpath, QDir(path).filePath(text + ".conf"));
-				}
-
-                updateList();
-				emit presetChanged();
-			}
-
-			if (selectedAction == action_del)
-			{
-				if (!QFile::exists(fullpath))
-				{
-                    QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist anymore"), QMessageBox::Ok);
-                    updateList();
-					emit presetChanged();
-					return;
-				}
-
-				QFile::remove(fullpath);
-                Log::debug("PresetDialog::showContextMenu: Deleted via context menu: " + fullpath);
-                updateList();
-				emit presetChanged();
-
-			}
-		}
-	}
+        if (ok && !newName.isEmpty())
+        {
+            PresetManager::instance().rename(preset.toString(), newName);
+        }
+    }
+    else if (result == actionDelete)
+    {
+        PresetManager::instance().remove(preset.toString());
+    }
 }
