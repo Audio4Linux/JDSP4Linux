@@ -4,6 +4,7 @@
 #include "PresetRule.h"
 
 #include <QObject>
+#include <QVector>
 
 class PresetListModel;
 
