@@ -4,6 +4,7 @@ SOURCES +=  \
     $$PWD/PulseAppManager.cpp \
     $$PWD/PulseAudioProcessingThread.cpp \
     $$PWD/PulseAudioService.cpp \
+    $$PWD/PulseDevice.cpp \
     $$PWD/PulseManager.cpp \
     $$PWD/PulsePipelineManager.cpp \
     $$PWD/RealtimeKit.cpp \
@@ -20,6 +21,7 @@ HEADERS +=  \
     $$PWD/PulseAudioProcessingThread.h \
     $$PWD/PulseAudioService.h \
     $$PWD/PulseDataTypes.h \
+    $$PWD/PulseDevice.h \
     $$PWD/PulseManager.h \
     $$PWD/PulsePipelineManager.h \
     $$PWD/RealtimeKit.h \

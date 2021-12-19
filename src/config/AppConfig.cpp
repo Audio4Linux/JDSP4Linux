@@ -38,7 +38,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioOutputUseDefault, true);
     DEFINE_KEY(AudioOutputDevice, "");
     DEFINE_KEY(AudioAppBlocklist, QStringList());
-    DEFINE_KEY(AudioAppBlocklistInvert, true);
+    DEFINE_KEY(AudioAppBlocklistInvert, false);
 
     DEFINE_KEY(AeqPlotDarkMode, false);
 

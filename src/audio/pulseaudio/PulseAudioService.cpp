@@ -1,6 +1,7 @@
 #include "PulsePipelineManager.h"
 
 #include "PulseAudioService.h"
+#include "PulseDevice.h"
 
 #include "PulseAppManager.h"
 #include "Utils.h"
@@ -42,6 +43,8 @@ PulseAudioService::PulseAudioService()
 
     /* Register sink change handler */
     mgr.get()->getPulseManager()->sink_changed.connect([&](const std::shared_ptr<mySinkInfo>& info) {
+        sinks[info->index] = *info;
+
         if (info->name == mgr.get()->getPulseManager()->server_info.default_sink_name) {
             Glib::signal_timeout().connect_seconds_once(
                         [=]() {
@@ -61,7 +64,7 @@ PulseAudioService::PulseAudioService()
 
                         if (dev_name != last_sink_dev_name) {
                             last_sink_dev_name = dev_name;
-                            emit outputDeviceChanged(QString::fromStdString(dev_name), QString::fromStdString(dev_name));
+                            emit outputDeviceChanged(QString::fromStdString(current_info->description), QString::fromStdString(current_info->name));
                         }
                     }
                 }
@@ -69,6 +72,14 @@ PulseAudioService::PulseAudioService()
             3);
         }
     });
+
+    mgr.get()->getPulseManager()->sink_added.connect([&](const std::shared_ptr<mySinkInfo>& info) {
+        sinks[info->index] = *info;
+    });
+    mgr.get()->getPulseManager()->sink_removed.connect([&](uint id) {
+        sinks.erase(id);
+    });
+
 
     /* Launch audio processing thread */
     apt = new PulseAudioProcessingThread(mgr);
@@ -121,7 +132,12 @@ IAppManager *PulseAudioService::appManager()
 
 std::vector<IOutputDevice> PulseAudioService::sinkDevices()
 {
-    return std::vector<IOutputDevice>();
+    std::vector<IOutputDevice> devices;
+    for(const auto& [id, sink] : sinks)
+    {
+        devices.push_back(PulseDevice(sink));
+    }
+    return devices;
 }
 
 DspStatus PulseAudioService::status()
