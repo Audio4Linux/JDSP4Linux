@@ -40,6 +40,8 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioAppBlocklist, QStringList());
     DEFINE_KEY(AudioAppBlocklistInvert, true);
 
+    DEFINE_KEY(AeqPlotDarkMode, false);
+
     connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
     load();

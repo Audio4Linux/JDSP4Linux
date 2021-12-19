@@ -17,6 +17,7 @@
 #include "SideSlideAnimator.h"
 #include "SideSlideDecorator.h"
 
+#include <cstring>
 #include <QEvent>
 #include <QPropertyAnimation>
 #include <QWidget>
@@ -74,7 +75,7 @@ void SideSlideAnimator::animateForward()
 {
     slideIn();
 }
-
+#include <QDebug>
 void SideSlideAnimator::slideIn()
 {
     //
@@ -95,7 +96,7 @@ void SideSlideAnimator::slideIn()
     // Определим самый верхний виджет
     //
     QWidget* topWidget = widgetForSlide()->parentWidget();
-    while (topWidget->parentWidget() != 0) {
+    while (topWidget->parentWidget() != 0 && !topWidget->inherits("QDialog")) {
         topWidget = topWidget->parentWidget();
     }
 
@@ -209,7 +210,7 @@ void SideSlideAnimator::slideOut()
         // Определим самый верхний виджет
         //
         QWidget* topWidget = widgetForSlide()->parentWidget();
-        while (topWidget->parentWidget() != 0) {
+        while (topWidget->parentWidget() != 0 && !topWidget->inherits("QDialog")) {
             topWidget = topWidget->parentWidget();
         }
 

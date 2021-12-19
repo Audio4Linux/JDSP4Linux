@@ -155,9 +155,14 @@ MainWindow::MainWindow(QString  exepath,
         _styleHelper         = new StyleHelper(this);
         _eelEditor           = new EELEditor(this);
 
+        connect(&PresetManager::instance(), &PresetManager::presetAutoloaded, this, [this](const QString& device){
+            ui->info->setAnimatedText(QString("%1 connected - Preset loaded automatically").arg(device), true);
+        });
+
         connect(_audioService, &IAudioService::eelCompilationStarted, _eelEditor, &EELEditor::onCompilerStarted);
         connect(_audioService, &IAudioService::eelCompilationFinished, _eelEditor, &EELEditor::onCompilerFinished);
         connect(_audioService, &IAudioService::eelOutputReceived, _eelEditor, &EELEditor::onConsoleOutputReceived);
+        connect(_audioService, &IAudioService::outputDeviceChanged, &PresetManager::instance(), &PresetManager::onOutputDeviceChanged);
 
         // Convolver file info
         ConvolverInfoEventArgs ciArgs;
@@ -260,7 +265,7 @@ MainWindow::MainWindow(QString  exepath,
 
         _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
         _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
-        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(this), WAF::LeftSide, this);
+        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
         _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, this), WAF::BottomSide, this);
 
         connect(_presetFragment->fragment(), &PresetFragment::wantsToWriteConfig, this, &MainWindow::applyConfig);

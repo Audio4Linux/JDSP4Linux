@@ -2240,7 +2240,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>'Galaxy Buds Pro' connected - Preset loaded automatically</string>
+         <string/>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

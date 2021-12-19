@@ -21,7 +21,8 @@
 #include "interface/fragment/BaseFragment.h"
 
 class AppConfig;
-class MainWindow;
+class PresetRuleDialog;
+class IAudioService;
 
 namespace Ui
 {
@@ -34,10 +35,10 @@ class PresetFragment :
 	Q_OBJECT
 
 public:
-    explicit PresetFragment(QWidget *parent = nullptr);
-	void UpdateList();
-
+    explicit PresetFragment(IAudioService* service, QWidget *parent = nullptr);
     ~PresetFragment();
+
+    void updateList();
 
 private slots:
 	void add();
@@ -49,13 +50,11 @@ private slots:
 
 signals:
     void wantsToWriteConfig();
+    void presetChanged();
 
 private:
     Ui::PresetDialog *ui;
-	QStringList irs;
-
-signals:
-	void presetChanged();
+    PresetRuleDialog *ruleDialog;
 
 };
 

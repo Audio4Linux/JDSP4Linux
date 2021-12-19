@@ -3,6 +3,7 @@
 
 #include "config/AppConfig.h"
 #include "data/PresetManager.h"
+#include "interface/dialog/PresetRuleDialog.h"
 #include "utils/Common.h"
 #include "utils/Log.h"
 
@@ -21,13 +22,14 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 
-PresetFragment::PresetFragment(QWidget *parent) :
+PresetFragment::PresetFragment(IAudioService* service, QWidget *parent) :
     BaseFragment(parent),
-    ui(new Ui::PresetDialog)
+    ui(new Ui::PresetDialog),
+    ruleDialog(new PresetRuleDialog(service, this))
 {
 	ui->setupUi(this);
 
-	UpdateList();
+    updateList();
 	connect(ui->add,        SIGNAL(clicked()),                                              SLOT(add()));
 	connect(ui->load,       SIGNAL(clicked()),                                              SLOT(load()));
 	connect(ui->remove,     SIGNAL(clicked()),                                              SLOT(remove()));
@@ -35,7 +37,7 @@ PresetFragment::PresetFragment(QWidget *parent) :
 	connect(ui->files,      SIGNAL(customContextMenuRequested(QPoint)),                     this, SLOT(showContextMenu(QPoint)));
 	connect(ui->files,      SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(presetIndexChanged()));
 
-    connect(ui->close, &QPushButton::clicked, this, &PresetFragment::closePressed);
+    connect(ui->rules, &QPushButton::clicked, ruleDialog, &PresetRuleDialog::exec);
 }
 
 PresetFragment::~PresetFragment()
@@ -53,7 +55,7 @@ void PresetFragment::presetIndexChanged()
 	ui->presetName->setText(ui->files->currentItem()->text());
 }
 
-void PresetFragment::UpdateList()
+void PresetFragment::updateList()
 {
 	ui->files->clear();
 
@@ -100,7 +102,7 @@ void PresetFragment::add()
     PresetManager::instance().save(path + "/" + ui->presetName->text() + ".conf");
 
 	ui->presetName->text() = "";
-	UpdateList();
+    updateList();
     emit presetChanged();
 }
 
@@ -118,14 +120,14 @@ void PresetFragment::remove()
 	if (!QFile::exists(fullpath))
 	{
 		QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist"), QMessageBox::Ok);
-		UpdateList();
+        updateList();
 		emit presetChanged();
 		return;
 	}
 
 	file.remove();
     Log::debug("PresetDialog::remove: Deleted " + fullpath);
-	UpdateList();
+    updateList();
 	emit presetChanged();
 }
 
@@ -142,7 +144,7 @@ void PresetFragment::load()
 	if (!QFile::exists(fullpath))
 	{
         QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist anymore"), QMessageBox::Ok);
-		UpdateList();
+        updateList();
 		emit presetChanged();
 		return;
 	}
@@ -199,7 +201,7 @@ void PresetFragment::showContextMenu(const QPoint &pos)
 					QFile::rename(fullpath, QDir(path).filePath(text + ".conf"));
 				}
 
-				UpdateList();
+                updateList();
 				emit presetChanged();
 			}
 
@@ -208,14 +210,14 @@ void PresetFragment::showContextMenu(const QPoint &pos)
 				if (!QFile::exists(fullpath))
 				{
                     QMessageBox::warning(this, tr("Error"), tr("Selected file doesn't exist anymore"), QMessageBox::Ok);
-					UpdateList();
+                    updateList();
 					emit presetChanged();
 					return;
 				}
 
 				QFile::remove(fullpath);
                 Log::debug("PresetDialog::showContextMenu: Deleted via context menu: " + fullpath);
-				UpdateList();
+                updateList();
 				emit presetChanged();
 
 			}

@@ -45,6 +45,9 @@ SOURCES += \
     data/PresetManager.cpp \
     data/PresetProvider.cpp \
     data/model/AppItemModel.cpp \
+    data/model/DeviceListModel.cpp \
+    data/model/PresetListModel.cpp \
+    data/model/PresetRuleTableModel.cpp \
     data/model/QJsonTableModel.cpp \
     data/model/VdcDatabaseModel.cpp \
     interface/AnimatedJdspIcon.cpp \
@@ -55,8 +58,10 @@ SOURCES += \
     interface/TrayIcon.cpp \
     interface/dialog/PaletteEditor.cpp \
     interface/LiquidEqualizerWidget.cpp \
+    interface/dialog/PresetRuleDialog.cpp \
     interface/fragment/AppManagerFragment.cpp \
     interface/fragment/FirstLaunchWizard.cpp \
+    interface/fragment/PresetAddRuleFragment.cpp \
     interface/fragment/PresetFragment.cpp \
     interface/fragment/SettingsFragment.cpp \
     interface/fragment/StatusFragment.cpp \
@@ -80,8 +85,10 @@ FORMS += \
     interface/FileSelectionWidget.ui \
     interface/LiveprogSelectionWidget.ui \
     interface/dialog/PaletteEditor.ui \
+    interface/dialog/PresetRuleDialog.ui \
     interface/fragment/AppManagerFragment.ui \
     interface/fragment/FirstLaunchWizard.ui \
+    interface/fragment/PresetAddRuleFragment.ui \
     interface/fragment/PresetFragment.ui \
     interface/fragment/SettingsFragment.ui \
     interface/fragment/StatusFragment.ui \
@@ -102,8 +109,13 @@ HEADERS += \
     data/InitializableQMap.h \
     data/PresetManager.h \
     data/PresetProvider.h \
+    data/PresetRule.h \
+    data/PresetRuleTableDelegate.h \
     data/VersionContainer.h \
     data/model/AppItemModel.h \
+    data/model/DeviceListModel.h \
+    data/model/PresetListModel.h \
+    data/model/PresetRuleTableModel.h \
     data/model/QJsonTableModel.h \
     data/model/VdcDatabaseModel.h \
     interface/AnimatedJdspIcon.h \
@@ -114,6 +126,7 @@ HEADERS += \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
     interface/dialog/PaletteEditor.h \
+    interface/dialog/PresetRuleDialog.h \
     interface/event/EventFilter.h \
     interface/event/ScrollFilter.h \
     interface/LiquidEqualizerWidget.h \
@@ -122,6 +135,7 @@ HEADERS += \
     interface/fragment/FirstLaunchWizard.h \
     interface/fragment/FragmentHost.h \
     interface/fragment/FragmentHostPrivate.h \
+    interface/fragment/PresetAddRuleFragment.h \
     interface/fragment/PresetFragment.h \
     interface/fragment/SettingsFragment.h \
     interface/fragment/StatusFragment.h \

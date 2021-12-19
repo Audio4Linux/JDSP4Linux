@@ -83,9 +83,9 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="close">
+      <widget class="QPushButton" name="rules">
        <property name="text">
-        <string>Close</string>
+        <string>Rules...</string>
        </property>
       </widget>
      </item>

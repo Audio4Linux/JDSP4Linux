@@ -55,7 +55,7 @@ PipewireAudioService::PipewireAudioService()
 
         if (target_node.id != SPA_ID_INVALID)
         {
-            emit outputDeviceChanged(QString::fromStdString(target_node.name), QString::fromStdString(device.output_route_name));
+            emit outputDeviceChanged(QString::fromStdString(target_node.description), QString::fromStdString(device.name));
         }
         else
         {
@@ -98,7 +98,7 @@ void PipewireAudioService::onAppConfigUpdated(const AppConfig::Key &key, const Q
             {
                 if (device.id == device_id)
                 {
-                    emit outputDeviceChanged(name, QString::fromStdString(device.output_route_name));
+                    emit outputDeviceChanged(QString::fromStdString(device.description), name);
                     break;
                 }
             }
