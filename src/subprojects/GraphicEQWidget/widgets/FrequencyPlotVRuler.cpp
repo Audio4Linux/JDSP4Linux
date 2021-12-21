@@ -100,6 +100,11 @@ void FrequencyPlotVRuler::wheelEvent(QWheelEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
     view->zoom(0, event->angleDelta().y(), 0, event->position().y());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    view->zoom(0, event->angleDelta().y(), 0, event->y());
+#else
+    view->zoom(0, event->angleDelta().y(), 0, event->position().y());
+#endif
 }
 
 void FrequencyPlotVRuler::mouseMoveEvent(QMouseEvent* event)

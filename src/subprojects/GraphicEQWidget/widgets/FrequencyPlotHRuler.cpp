@@ -128,7 +128,11 @@ void FrequencyPlotHRuler::paintEvent(QPaintEvent*)
 void FrequencyPlotHRuler::wheelEvent(QWheelEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    view->zoom(event->angleDelta().y(), 0, event->x() - view->viewportMargins().left(), 0);
+#else
     view->zoom(event->angleDelta().y(), 0, event->position().x() - view->viewportMargins().left(), 0);
+#endif
 }
 
 void FrequencyPlotHRuler::mouseMoveEvent(QMouseEvent* event)

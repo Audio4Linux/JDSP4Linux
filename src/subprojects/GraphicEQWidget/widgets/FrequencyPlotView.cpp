@@ -180,7 +180,11 @@ void FrequencyPlotView::wheelEvent(QWheelEvent* event)
 {
 	event->accept();
 	int delta = event->angleDelta().y();
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    zoom(delta, delta, event->x(), event->y());
+#else
     zoom(delta, delta, event->position().x(), event->position().y());
+#endif
 }
 
 void FrequencyPlotView::scrollContentsBy(int dx, int dy)
