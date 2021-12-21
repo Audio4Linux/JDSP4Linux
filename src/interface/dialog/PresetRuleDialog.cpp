@@ -64,6 +64,13 @@ void PresetRuleDialog::onAddClicked()
         return;
     }
 
+    if(PresetManager::instance().presetModel()->rowCount() <= 0)
+    {
+        QMessageBox::information(this, "Cannot add new rule", "You have no presets saved.\n"
+                                                              "Please create one first before adding a new rule.");
+        return;
+    }
+
     presetModel->rescan();
     addRuleFragment->slideIn();
 }
