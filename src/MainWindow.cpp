@@ -717,7 +717,7 @@ void MainWindow::loadConfig()
 
     QVector<float> rawEqData;
 
-    for (auto val : rawEqString.split(";"))
+    for (const auto &val : rawEqString.split(";"))
     {
         if (!val.isEmpty())
         {

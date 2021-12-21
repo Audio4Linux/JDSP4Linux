@@ -133,7 +133,7 @@ bool QMenuEditor::insertAction(QAction *new_action)
 {
 	int act_before = ui->list_target->currentRow();
 
-	for (auto item : mTarget)
+	for (auto item : qAsConst(mTarget))
 	{
 		if (item->text() == new_action->text() &&
 		    !item->isSeparator())
@@ -167,7 +167,7 @@ QMenu* QMenuEditor::exportMenu()
 {
 	QMenu *menu = new QMenu();
 
-	for (auto item : mTarget)
+	for (auto item : qAsConst(mTarget))
 	{
 		if (item->isSeparator())
 		{

@@ -147,10 +147,10 @@ IAppManager *PipewireAudioService::appManager()
 std::vector<IOutputDevice> PipewireAudioService::sinkDevices()
 {
     std::vector<IOutputDevice> devices;
-    for(auto [id, node] : mgr.get()->node_map)
+    for(const auto &[id, node] : mgr.get()->node_map)
     {
         if(node.media_class == "Audio/Sink" && node.name != "jamesdsp_sink"){
-            for(auto blacklist : mgr.get()->blocklist_node_name){
+            for(const auto &blacklist : mgr.get()->blocklist_node_name){
                 if(node.name == blacklist)
                 {
                     continue;

@@ -76,7 +76,7 @@ void PwAppManager::handleSettingsUpdate(const AppConfig::Key& key, const QVarian
     switch(key)
     {
     case AppConfig::AudioAppBlocklist:
-        for (const auto& node : apps)
+        for (const auto& node : qAsConst(apps))
         {
             const auto& app_is_enabled = mgr->stream_is_connected(node.id, node.media_class);
             bool is_blocklisted = AppConfig::instance().isAppBlocked(QString::fromStdString(node.name));

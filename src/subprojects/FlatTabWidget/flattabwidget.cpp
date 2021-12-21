@@ -57,7 +57,7 @@ FlatTabWidget::~FlatTabWidget()
 {
     lineMorph->deleteLater();
     fade->deleteLater();
-    for(const auto& item : pages)
+    for(const auto& item : qAsConst(pages))
     {
         item.fadeIn->deleteLater();
         item.fadeOut->deleteLater();
@@ -66,7 +66,6 @@ FlatTabWidget::~FlatTabWidget()
 }
 
 void FlatTabWidget::addPage(QString title, QWidget* page, int index){
-    auto pal = palette();
     auto textcolor_active = getColor(ColorRole::Active);
     auto textcolor_disabled = getColor(ColorRole::Inactive);
 
@@ -102,7 +101,7 @@ void FlatTabWidget::updatePages(bool overrideSeparator){
     }
     ui->TabBarContainer->repaint();
 
-    for (auto page : pages) {
+    for (auto page : qAsConst(pages)) {
         ui->TabBarContainer->layout()->addWidget(page.label);
         if(!detachCustomStackedWidget)
             activeContainer->addWidget(page.widget);
@@ -142,7 +141,7 @@ void FlatTabWidget::showEvent(QShowEvent *event)
 }
 
 void FlatTabWidget::redrawTabBar(){
-    for (auto page : pages)
+    for (auto page : qAsConst(pages))
         page.label->setColor(getColor(ColorRole::Inactive));
     int temp = currentSelection;
     setCurrentTab(temp);

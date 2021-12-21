@@ -14,8 +14,6 @@ class ScrollText :
 
 public:
 	explicit ScrollText(QWidget *parent = 0);
-
-public slots:
 	QString      text() const;
 	void         setText(QString text);
 

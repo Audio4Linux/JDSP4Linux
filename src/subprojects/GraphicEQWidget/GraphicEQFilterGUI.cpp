@@ -135,7 +135,11 @@ void GraphicEQFilterGUI::load(const QString& parameters)
     std::vector<FilterNode> nodes;
     QStringList nodeList = parameterList.at(1).split(";");
     for(QString nodeStr : nodeList){
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        QStringList values = nodeStr.trimmed().split(" ", QString::SkipEmptyParts);
+#else
         QStringList values = nodeStr.trimmed().split(" ", Qt::SkipEmptyParts);
+#endif
         if(values.count() != 2)
             continue;
         FilterNode node(values.at(0).toDouble(),values.at(1).toDouble());

@@ -19,7 +19,7 @@ void EELParser::loadFile(QString path)
     // Parse number range parameters
     {
         QRegularExpression descRe(R"((?<var>\w+):(?<def>-?\d+\.?\d*)?<(?<min>-?\d+\.?\d*),(?<max>-?\d+\.?\d*),?(?<step>-?\d+\.?\d*)?>(?<desc>[\s\S][^\n]*))");
-        for (auto line : container.code.split("\n"))
+        for (const auto &line : container.code.split("\n"))
         {
             auto matchIterator = descRe.globalMatch(line);
 
@@ -77,7 +77,7 @@ bool EELParser::loadDefaults()
         return false;
     }
 
-    for(const auto& prop : properties)
+    for(const auto& prop : qAsConst(properties))
     {
         if(prop->getType() == EELPropertyType::NumberRange)
         {
@@ -96,7 +96,7 @@ bool EELParser::hasDefaultsDefined()
         return false;
     }
 
-    for(const auto& prop : properties)
+    for(const auto& prop : qAsConst(properties))
     {
         if(prop->getType() == EELPropertyType::NumberRange)
         {
@@ -116,7 +116,7 @@ bool EELParser::canLoadDefaults()
 		return false;
 	}
 
-    for(auto* prop : properties)
+    for(auto* prop : qAsConst(properties))
     {
         if(prop->getType() == EELPropertyType::NumberRange)
         {
@@ -146,7 +146,7 @@ QString EELParser::getDescription()
 {
 	QRegularExpression descRe(R"((?:^|(?<=\n))(?:desc:)([\s\S][^\n]*))");
 
-	for (auto line : container.code.split("\n"))
+	for (const auto &line : container.code.split("\n"))
 	{
 		auto matchIterator = descRe.globalMatch(line);
 
@@ -198,7 +198,7 @@ QString EELParser::findVariable(QString         key,
 	{
 		QRegularExpression re(QString(R"(%1\s*=\s*(?<val>-?\d+\.?\d*)\s*;)").arg(key));
 
-		for (auto line : container.code.split("\n"))
+		for (const auto &line : container.code.split("\n"))
 		{
 			auto matchIterator = re.globalMatch(line);
 

@@ -70,7 +70,7 @@ FilterContainer::FilterContainer(PwPipelineManager* pipe_manager, PwPluginBase* 
 
     connect_filters();
 
-    QObject::connect(settings, &AppConfig::updated, [&, this](const auto& key, const auto& value) {
+    QObject::connect(settings, &AppConfig::updated, nullptr, [&, this](const auto& key, const auto& value) {
         if(key != AppConfig::AudioOutputDevice)
             return;
 

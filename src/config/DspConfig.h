@@ -241,10 +241,7 @@ public:
 
 	void loadDefault()
 	{
-		QString data;
-		QString fileName(":/assets/default.conf");
-
-		QFile   file(fileName);
+        QFile file(":/assets/default.conf");
 
 		if (file.open(QIODevice::ReadOnly))
 		{
