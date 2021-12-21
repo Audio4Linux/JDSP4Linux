@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = jamesdsp
 TEMPLATE = app
 !msvc {
-    QMAKE_CXXFLAGS += "-Wno-old-style-cast -Wno-double-promotion -Wno-unused-function"
+    QMAKE_CXXFLAGS += "-Wno-missing-field-initializers -Wno-unused-variable"
 }
 
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO

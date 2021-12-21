@@ -4,6 +4,13 @@
 #include <QFile>
 #include <QTime>
 
+#define C_RESET "\u001b[0m"
+#define C_RED "\u001b[31m"
+#define C_YELLOW "\u001b[33m"
+#define C_WHITE "\u001b[37m"
+#define C_FAINTWHITE "\u001b[2;37m"
+#define C_BACKRED "\u001b[41;37m"
+
 void Log::debug(const QString &log)
 {
     write(log, Debug);

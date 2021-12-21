@@ -7,6 +7,8 @@ CONFIG += c++17
 
 QMAKE_CFLAGS += -std=gnu11 -O2
 
+CONFIG += warn_off # Disable warnings for library
+
 DEFINES += CUSTOM_CMD
 
 BASEPATH = $$PWD/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/

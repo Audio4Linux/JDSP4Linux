@@ -101,7 +101,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	ui->paletteSelect->addItem("Stone",      "stone");
 	ui->paletteSelect->addItem("Custom",     "custom");
 
-	for ( const auto &i : QStyleFactory::keys())
+    for ( const auto& i : QStyleFactory::keys())
 	{
 		ui->themeSelect->addItem(i);
 	}
@@ -193,7 +193,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	{
 		AppConfig::instance().setLiveprogPath(ui->liveprog_path->text());
 	});
-	connect(ui->liveprog_autoextract, &QCheckBox::clicked, [this]()
+    connect(ui->liveprog_autoextract, &QCheckBox::clicked, this, [this]()
 	{
         AppConfig::instance().set(AppConfig::LiveprogAutoExtract, ui->liveprog_autoextract->isChecked());
 	});
@@ -295,12 +295,12 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	connect(ui->github, &QPushButton::clicked, this, [] {
 		QDesktopServices::openUrl(QUrl("https://github.com/Audio4Linux/JDSP4Linux"));
 	});
-	connect(ui->menu_edit, &QMenuEditor::targetChanged, [this, trayIcon]
+    connect(ui->menu_edit, &QMenuEditor::targetChanged, this, [this, trayIcon]
 	{
 		auto menu = ui->menu_edit->exportMenu();
 		trayIcon->updateTrayMenu(menu);
 	});
-	connect(ui->menu_edit, &QMenuEditor::resetPressed, [this, trayIcon]
+    connect(ui->menu_edit, &QMenuEditor::resetPressed, this, [this, trayIcon]
 	{
 		QMessageBox::StandardButton reply = QMessageBox::question(this, "Warning", "Do you really want to restore the default layout?",
 		                                                          QMessageBox::Yes | QMessageBox::No);

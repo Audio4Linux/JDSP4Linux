@@ -4,9 +4,13 @@
 #include "PwBasePlugin.h"
 #include "IDspElement.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wall"
 extern "C" {
 #include "jdsp_header.h"
 }
+#pragma GCC diagnostic pop
+
 
 class PwJamesDspPlugin : public PwPluginBase, public IDspElement {
 public:
