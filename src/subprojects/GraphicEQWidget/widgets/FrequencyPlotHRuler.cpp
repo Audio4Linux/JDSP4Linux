@@ -66,7 +66,7 @@ void FrequencyPlotHRuler::paintEvent(QPaintEvent*)
 					text = QString("%0").arg(hz);
 				else
 					text = QString("%0k").arg(hz / 1000);
-				if (metrics.width(text) + 2 < s->hzToX(hz + hzBase) - x)
+                if (metrics.horizontalAdvance(text) + 2 < s->hzToX(hz + hzBase) - x)
 					painter.drawText(x - topLeft.x() + offsetLeft + 1, 0, 0, height(), Qt::TextDontClip | Qt::AlignCenter, text);
 			}
 
@@ -128,7 +128,7 @@ void FrequencyPlotHRuler::paintEvent(QPaintEvent*)
 void FrequencyPlotHRuler::wheelEvent(QWheelEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
-	view->zoom(event->angleDelta().y(), 0, event->x() - view->viewportMargins().left(), 0);
+    view->zoom(event->angleDelta().y(), 0, event->position().x() - view->viewportMargins().left(), 0);
 }
 
 void FrequencyPlotHRuler::mouseMoveEvent(QMouseEvent* event)

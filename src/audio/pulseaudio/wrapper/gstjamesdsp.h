@@ -6,10 +6,7 @@
 
 G_BEGIN_DECLS
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wall"
 #include <jdsp_header.h>
-#pragma GCC diagnostic pop
 
 #define GST_TYPE_JAMESDSP            (gst_jamesdsp_get_type())
 #define GST_JAMESDSP(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_JAMESDSP,Gstjamesdsp))

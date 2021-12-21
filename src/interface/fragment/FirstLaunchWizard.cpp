@@ -94,7 +94,7 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 
     connect(ui->p2_dev_mode_auto,         &QRadioButton::clicked,                                                             this, &FirstLaunchWizard::onDeviceUpdated);
     connect(ui->p2_dev_mode_manual,       &QRadioButton::clicked,                                                             this, &FirstLaunchWizard::onDeviceUpdated);
-    connect(ui->p2_dev_select,            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, &FirstLaunchWizard::onDeviceUpdated);
+    connect(ui->p2_dev_select,            qOverload<int>(&QComboBox::currentIndexChanged), this, &FirstLaunchWizard::onDeviceUpdated);
 
 }
 

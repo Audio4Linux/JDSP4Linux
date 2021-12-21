@@ -21,7 +21,6 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 #include <QUrl>
-
 using namespace std;
 static bool lockslot = false;
 
@@ -148,24 +147,23 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	/*
 	 * Connect all signals for Interface
 	 */
-	connect(ui->themeSelect,           static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-	        this, [this](const QString &)
+    connect(ui->themeSelect, qOverload<int>(&QComboBox::currentIndexChanged), this, [this](int index)
 	{
 		if (lockslot)
 		{
 		    return;
 		}
 
-        AppConfig::instance().set(AppConfig::Theme, ui->themeSelect->itemText(ui->themeSelect->currentIndex()).toUtf8().constData());
+        AppConfig::instance().set(AppConfig::Theme, ui->themeSelect->itemText(index).toUtf8().constData());
 	});
-	connect(ui->paletteSelect, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, [this]
+    connect(ui->paletteSelect, qOverload<int>(&QComboBox::currentIndexChanged), this, [this](int index)
 	{
 		if (lockslot)
 		{
 		    return;
 		}
 
-        AppConfig::instance().set(AppConfig::ThemeColors, ui->paletteSelect->itemData(ui->paletteSelect->currentIndex()).toString());
+        AppConfig::instance().set(AppConfig::ThemeColors, ui->paletteSelect->itemData(index).toString());
         ui->paletteConfig->setEnabled(AppConfig::instance().get<QString>(AppConfig::ThemeColors) == "custom");
 	});
 	connect(ui->paletteConfig, &QPushButton::clicked, this, [this]
@@ -230,7 +228,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 
 	connect(ui->dev_mode_auto,   &QRadioButton::clicked,                                                             this, deviceUpdated);
 	connect(ui->dev_mode_manual, &QRadioButton::clicked,                                                             this, deviceUpdated);
-	connect(ui->dev_select,      static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, deviceUpdated);
+    connect(ui->dev_select,      qOverload<int>(&QComboBox::currentIndexChanged), this, deviceUpdated);
 
 	/*
 	 * Connect all signals for SA/ROOT

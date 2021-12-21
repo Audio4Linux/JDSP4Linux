@@ -10,9 +10,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = jamesdsp
 TEMPLATE = app
-!msvc {
-    QMAKE_CXXFLAGS += "-Wno-missing-field-initializers -Wno-unused-variable"
-}
 
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
 
@@ -33,6 +30,10 @@ include(subprojects/GraphicEQWidget/GraphicEQWidget.pri)
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+
+QMAKE_CFLAGS += "-Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
+QMAKE_CXXFLAGS += "-Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
+
 
 CONFIG += c++17
 

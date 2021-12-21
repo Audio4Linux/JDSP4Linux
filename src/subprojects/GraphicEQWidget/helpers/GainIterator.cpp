@@ -33,7 +33,7 @@ GainIterator::GainIterator(const vector<FilterNode>& nodes)
 
 double GainIterator::gainAt(double freq)
 {
-	if (nodeLeft == NULL && nodeRight == NULL || nodeLeft != NULL && freq < nodeLeft->freq)
+    if ((nodeLeft == NULL && nodeRight == NULL) || (nodeLeft != NULL && freq < nodeLeft->freq))
 	{
 		FilterNode findNode(freq, 0);
 		vector<FilterNode>::iterator it = lower_bound(nodes.begin(), nodes.end(), findNode);

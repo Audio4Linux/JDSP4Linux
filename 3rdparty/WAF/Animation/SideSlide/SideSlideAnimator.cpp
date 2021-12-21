@@ -293,6 +293,7 @@ bool SideSlideAnimator::eventFilter(QObject* _object, QEvent* _event)
                 //
                 // проваливаемся, для корректировки высоты
                 //
+                [[fallthrough]];
             }
             case WAF::LeftSide: {
                 widgetForSlide()->resize(widgetForSlide()->width(), widgetForSlideParent->height());
@@ -304,6 +305,7 @@ bool SideSlideAnimator::eventFilter(QObject* _object, QEvent* _event)
                 //
                 // Проваливаемся, для корректировки ширины
                 //
+                [[fallthrough]];
             }
             case WAF::TopSide: {
                 widgetForSlide()->resize(widgetForSlideParent->width(), widgetForSlide()->height());

@@ -506,7 +506,7 @@ float* ReadImpulseResponseToFloat
     return finalName;
 }*/
 
-int ComputeEqResponse(double* jfreq, double* jgain, int interpolationMode, int queryPts, double* dispFreq, float* response)
+int ComputeEqResponse(const double* jfreq, double* jgain, int interpolationMode, int queryPts, double* dispFreq, float* response)
 {
     double freq[NUMPTS + 2];
     double gain[NUMPTS + 2];

@@ -22,8 +22,8 @@ CustomTabBar::CustomTabBar(QWidget *parent)
 
 void CustomTabBar::wheelEvent(QWheelEvent *event)
 {
-    if(event->delta() > 5)
+    if(event->angleDelta().y() > 5)
         emit scrolledUp();
-    else if(event->delta() < -5)
+    else if(event->angleDelta().y() < -5)
         emit scrolledDown();
 }

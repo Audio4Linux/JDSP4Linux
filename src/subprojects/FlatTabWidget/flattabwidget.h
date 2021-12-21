@@ -162,7 +162,7 @@ private:
     enum InsertPosition { InsertBefore, InsertAfter };
     static bool insertWidget(QBoxLayout * layout, QWidget * reference, QWidget * widget,
                       InsertPosition pos = InsertBefore, int stretch = 0,
-                      Qt::Alignment alignment = 0) {
+                      Qt::Alignment alignment = Qt::Alignment()) {
         int index = -1;
         for (int i = 0; i < layout->count(); ++i)
             if (layout->itemAt(i)->widget() == reference) {

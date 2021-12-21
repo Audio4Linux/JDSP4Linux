@@ -256,7 +256,7 @@ void LiquidEqualizerWidget::paintEvent(QPaintEvent *event)
 	QPainterPath frequencyResponse;
 	float        x, y;
 
-    ComputeEqResponse(mFreq.toStdVector().data(), mLevels, 1, RESOLUTION, dispFreq, response);
+    ComputeEqResponse(mFreq.data(), mLevels, 1, RESOLUTION, dispFreq, response);
 
 	for (int i = 0; i < RESOLUTION; i++)
 	{
@@ -322,9 +322,9 @@ void LiquidEqualizerWidget::paintEvent(QPaintEvent *event)
 		double  x         = projectX(frequency) * mWidth;
 		double  y         = projectY(mLevels[i]) * mHeight;
 		QString frequencyText;
-		frequencyText.sprintf(frequency < 1000 ? "%.0f" : "%.0fk", frequency < 1000 ? frequency : frequency / 1000);
+        frequencyText.asprintf(frequency < 1000 ? "%.0f" : "%.0fk", frequency < 1000 ? frequency : frequency / 1000);
 		QString gainText;
-		gainText.sprintf("%.1f", mLevels[i]);
+        gainText.asprintf("%.1f", mLevels[i]);
 
 		if ((mManual && i == mSelectedBand && mHoldDown) || mAlwaysDrawHandles)
 		{

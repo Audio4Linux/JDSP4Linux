@@ -44,7 +44,7 @@ void ScrollText::updateText()
 {
 	timer.stop();
 
-	singleTextWidth = fontMetrics().width(_text);
+    singleTextWidth = fontMetrics().horizontalAdvance(_text);
 	scrollEnabled   = (singleTextWidth > width() - leftMargin);
 
 	if (scrollEnabled)
@@ -59,7 +59,7 @@ void ScrollText::updateText()
 	}
 
 	staticText.prepare(QTransform(), font());
-	wholeTextSize = QSize(fontMetrics().width(staticText.text()), fontMetrics().height());
+    wholeTextSize = QSize(fontMetrics().horizontalAdvance(staticText.text()), fontMetrics().height());
 }
 
 void ScrollText::paintEvent(QPaintEvent*)

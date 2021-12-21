@@ -99,7 +99,7 @@ void FrequencyPlotVRuler::paintEvent(QPaintEvent*)
 void FrequencyPlotVRuler::wheelEvent(QWheelEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
-	view->zoom(0, event->angleDelta().y(), 0, event->y());
+    view->zoom(0, event->angleDelta().y(), 0, event->position().y());
 }
 
 void FrequencyPlotVRuler::mouseMoveEvent(QMouseEvent* event)
