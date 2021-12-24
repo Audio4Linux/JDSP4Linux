@@ -124,6 +124,7 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 
 * [Debian/Ubuntu (PPA)](#debianubuntu)
 * [Arch Linux (AUR)](#arch)
+* [Fedora/openSUSE](#fedoraopensuse)
 * [Build from sources](#build-from-sources)
 
 ### Debian/Ubuntu
@@ -184,6 +185,18 @@ For **PulseAudio clients** only:
    ```
    yay -S jamesdsp-pulse-git
    ```
+   
+### Fedora/openSUSE
+
+Package maintained by [@theAoen](https://github.com/theAoen) on [Fedora COPR](https://copr.fedorainfracloud.org/coprs/arrobbins/JDSP4Linux/).
+Built for Fedora 34/35/Rawhide and OpenSUSE Tumbleweed.
+
+For **PipeWire clients** only:
+```
+yum copr enable arrobbins/JDSP4Linux && yum update && yum install jamesdsp
+```
+
+If you are still using PulseAudio with your Fedora/openSUSE installation, refer to the '[Build from sources](#build-from-sources)' section below instead.
 
 ### Build from sources
 
