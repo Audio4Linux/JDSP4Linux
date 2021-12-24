@@ -188,7 +188,7 @@ For **PulseAudio clients** only:
    
 ### Fedora/openSUSE
 
-Package maintained by [@theAoen](https://github.com/theAoen) on [Fedora COPR](https://copr.fedorainfracloud.org/coprs/arrobbins/JDSP4Linux/).
+Package maintained by [@theAeon](https://github.com/theAeon) on [Fedora COPR](https://copr.fedorainfracloud.org/coprs/arrobbins/JDSP4Linux/).
 Built for Fedora 34/35/Rawhide and OpenSUSE Tumbleweed.
 
 For **PipeWire clients** only:
@@ -325,6 +325,7 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 
 * [James Fung](https://github.com/james34602) - Developer of the core library ['libjamesdsp'](https://github.com/james34602/JamesDSPManager/tree/master/Main)
 * [yochananmarqos](https://github.com/yochananmarqos) - AUR packages
+* [theAeon](https://github.com/theAeon) - RPM packages
 
 ##### Other credits
 * PipeWire implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects)
