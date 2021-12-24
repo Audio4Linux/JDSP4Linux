@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>4</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2299,7 +2299,7 @@
   <customwidget>
    <class>LiquidEqualizerWidget</class>
    <extends>QWidget</extends>
-   <header>interface/LiquidEqualizerWidget.h</header>
+   <header location="global">LiquidEqualizerWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -2310,13 +2310,13 @@
   <customwidget>
    <class>FlatTabWidget</class>
    <extends>QWidget</extends>
-   <header>flattabwidget.h</header>
+   <header location="global">flattabwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>GraphicEQFilterGUI</class>
    <extends>QWidget</extends>
-   <header>GraphicEQFilterGUI.h</header>
+   <header location="global">GraphicEQFilterGUI.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

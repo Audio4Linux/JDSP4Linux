@@ -7,3 +7,6 @@
 [submodule "src/subprojects/FlatTabWidget"]
 	path = src/subprojects/FlatTabWidget
 	url = https://github.com/ThePBone/FlatTabWidget.git
+[submodule "src/subprojects/LiquidEqualizerWidget"]
+	path = src/subprojects/LiquidEqualizerWidget
+	url = git@github.com:ThePBone/LiquidEqualizerWidget.git

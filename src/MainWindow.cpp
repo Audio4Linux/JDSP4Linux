@@ -23,7 +23,6 @@
 #include "interface/fragment/PresetFragment.h"
 #include "interface/fragment/SettingsFragment.h"
 #include "interface/fragment/StatusFragment.h"
-#include "interface/LiquidEqualizerWidget.h"
 #include "interface/QMessageOverlay.h"
 #include "interface/TrayIcon.h"
 #include "utils/Common.h"
@@ -39,6 +38,7 @@
 #include <Animation/Animation.h>
 #include <eeleditor.h>
 #include <AeqSelector.h>
+#include <LiquidEqualizerWidget.h>
 //#include <spectrograph.h>
 
 #include <QDesktopServices>

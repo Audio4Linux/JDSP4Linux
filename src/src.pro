@@ -60,7 +60,6 @@ SOURCES += \
     interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/PaletteEditor.cpp \
-    interface/LiquidEqualizerWidget.cpp \
     interface/dialog/PresetRuleDialog.cpp \
     interface/fragment/AppManagerFragment.cpp \
     interface/fragment/FirstLaunchWizard.cpp \
@@ -133,7 +132,6 @@ HEADERS += \
     interface/dialog/PresetRuleDialog.h \
     interface/event/EventFilter.h \
     interface/event/ScrollFilter.h \
-    interface/LiquidEqualizerWidget.h \
     interface/fragment/AppManagerFragment.h \
     interface/fragment/BaseFragment.h \
     interface/fragment/FirstLaunchWizard.h \
