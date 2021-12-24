@@ -22,7 +22,7 @@ include(audio/AudioDrivers.pri)
 
 #include(subprojects/Visualization/SpectrumAudioViewer.pri)
 include(subprojects/AutoEqIntegration/AutoEqIntegration.pri)
-include(subprojects/FlatTabWidget/FlatTabWidget.pri)
+include(subprojects/FlatTabWidget/FlatTabWidget/FlatTabWidget.pri)
 include(subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQWidget.pri)
 
 # The following define makes your compiler emit warnings if you use
