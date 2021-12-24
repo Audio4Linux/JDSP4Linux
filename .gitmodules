@@ -1,3 +1,6 @@
 [submodule "src/subprojects/EELEditor"]
 	path = src/subprojects/EELEditor
-	url = git@github.com:thepbone/EELEditor
+	url = https://github.com/ThePBone/EELEditor
+[submodule "src/subprojects/GraphicEQWidget"]
+	path = src/subprojects/GraphicEQWidget
+	url = https://github.com/ThePBone/GraphicEQWidget.git
