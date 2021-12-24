@@ -140,6 +140,10 @@ MainWindow::MainWindow(QString  exepath,
         pref.setValue("zoomY",   1.651);
         ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
 
+        // Setup graphic eq widget
+        ui->graphicEq->setEnableSwitchVisible(true);
+        ui->graphicEq->setAutoEqAvailable(true);
+
         // Clock
         _refreshTick = new QTimer(this);
         connect(_refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
