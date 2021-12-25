@@ -56,21 +56,10 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 		switch (toplevel_index)
 		{
 			case -1:
-
                 if (cur->text(0) == "Context menu")
 				{
                     ui->stackedWidget->setCurrentIndex(4);
 				}
-
-				if (cur->text(0) == "Advanced")
-				{
-                    ui->stackedWidget->setCurrentIndex(6);
-				}
-
-				break;
-            case 4:
-				// -- SA/ROOT
-                //ui->stackedWidget->setCurrentIndex(5);
 				break;
 			default:
                 ui->stackedWidget->setCurrentIndex(toplevel_index);
@@ -82,7 +71,6 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
         ui->stackedWidget->show();
         ui->stackedWidget->repaint();
 	});
-    //ui->selector->expandItem(ui->selector->findItems("Spectrum analyser", Qt::MatchFlag::MatchExactly).first());
     ui->selector->expandItem(ui->selector->findItems("Tray icon", Qt::MatchFlag::MatchExactly).first());
 
 	/*
@@ -229,62 +217,6 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	connect(ui->dev_mode_auto,   &QRadioButton::clicked,                                                             this, deviceUpdated);
 	connect(ui->dev_mode_manual, &QRadioButton::clicked,                                                             this, deviceUpdated);
     connect(ui->dev_select,      qOverload<int>(&QComboBox::currentIndexChanged), this, deviceUpdated);
-
-	/*
-	 * Connect all signals for SA/ROOT
-	 */
-    /*connect(ui->sa_enable,       &QGroupBox::clicked,                                                                this, [this]()
-	{
-        AppConfig::instance().set(AppConfig::SpectrumEnabled, ui->sa_enable->isChecked());
-		ui->spectrum_advanced->setEnabled(ui->sa_enable->isChecked());
-		emit reopenSettings();
-	});
-	connect(ui->sa_bands, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
-	{
-        AppConfig::instance().set(AppConfig::SpectrumBands, number);
-	});
-	connect(ui->sa_minfreq, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
-	{
-        AppConfig::instance().set(AppConfig::SpectrumMinFreq, number);
-	});
-	connect(ui->sa_maxfreq, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
-	{
-        AppConfig::instance().set(AppConfig::SpectrumMaxFreq, number);
-	});
-	connect(ui->sa_input, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, [this](const QString &str)
-	{
-		if (lockslot)
-		{
-		    return;
-		}
-
-		AppConfig::instance().setSpectrumInput(str);
-	});
-	connect(ui->sa_type, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this, [this](const QString &)
-	{
-		if (lockslot)
-		{
-		    return;
-		}
-
-        AppConfig::instance().set(AppConfig::SpectrumTheme, ui->sa_type->currentIndex());
-    });*/
-
-	/*
-	 * Connect all signals for SA/Advanced
-	 */
-    /*connect(ui->sa_refresh, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [this](int number)
-	{
-        AppConfig::instance().set(AppConfig::SpectrumRefresh, number);
-	});
-	connect(ui->sa_multi, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, [this](double number)
-	{
-        AppConfig::instance().set(AppConfig::SpectrumMultiplier, number);
-	});
-	connect(ui->sa_grid, &QCheckBox::clicked, this, [this]()
-	{
-        AppConfig::instance().set(AppConfig::SpectrumGrid, ui->sa_grid->isChecked());
-    });*/
 
 	/*
 	 * Connect all signals for Global
@@ -456,96 +388,7 @@ void SettingsFragment::refreshAll()
 
 	refreshDevices();
 
-    /*int   bands      = AppConfig::instance().get<int>(AppConfig::SpectrumBands);
-    int   minfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMinFreq);
-    int   maxfreq    = AppConfig::instance().get<int>(AppConfig::SpectrumMaxFreq);
-    int   refresh    = AppConfig::instance().get<int>(AppConfig::SpectrumRefresh);
-    float multiplier = AppConfig::instance().get<float>(AppConfig::SpectrumMultiplier);
-
-	// Set default values if undefined
-	if (bands == 0)
-	{
-		bands = 100;
-	}
-
-	if (maxfreq == 0)
-	{
-		maxfreq = 1000;
-	}
-
-	if (refresh == 0)
-	{
-		refresh = 10;
-	}
-
-	if (multiplier == 0)
-	{
-		multiplier = 0.15;
-	}
-
-	// Check boundaries
-	if (bands < 5 )
-	{
-		bands = 5;
-	}
-	else if (bands > 300)
-	{
-		bands = 300;
-	}
-
-	if (minfreq < 0)
-	{
-		minfreq = 0;
-	}
-	else if (minfreq > 10000)
-	{
-		minfreq = 10000;
-	}
-
-	if (maxfreq < 100)
-	{
-		maxfreq = 100;
-	}
-	else if (maxfreq > 24000)
-	{
-		maxfreq = 24000;
-	}
-
-	if (refresh < 10)
-	{
-		refresh = 10;
-	}
-	else if (refresh > 500)
-	{
-		refresh = 500;
-	}
-
-	if (multiplier < 0.01)
-	{
-		multiplier = 0.01;
-	}
-	else if (multiplier > 1)
-	{
-		multiplier = 1;
-	}
-
-	if (maxfreq < minfreq)
-	{
-		maxfreq = minfreq + 100;
-	}
-
-    ui->sa_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled));
-    ui->spectrum_advanced->setEnabled(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled));
-
-    ui->sa_type->setCurrentIndex(AppConfig::instance().get<int>(AppConfig::SpectrumTheme));
-	ui->sa_bands->setValue(bands);
-	ui->sa_minfreq->setValue(minfreq);
-	ui->sa_maxfreq->setValue(maxfreq);
-    ui->sa_grid->setChecked(AppConfig::instance().get<bool>(AppConfig::SpectrumGrid));
-	ui->sa_refresh->setValue(refresh);
-    ui->sa_multi->setValue(multiplier);*/
-
-	lockslot = false;
+    lockslot = false;
 }
 
 void SettingsFragment::updateButtonStyle(bool white)

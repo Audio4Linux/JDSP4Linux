@@ -1102,7 +1102,17 @@ void MainWindow::onConvolverWaveformEdit()
 {
     bool    ok;
     QString text = QInputDialog::getText(this, tr("Advanced waveform editing"),
-                                         tr("Advanced waveform editing (6 semicolon-separated values; default: -80;-100;0;0;0;0)"), QLineEdit::Normal,
+                                         tr("Advanced waveform editing (default: -80;-100;0;0;0;0)\n"
+                                            "\n"
+                                            "Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.\n"
+                                            "This setting is only in effect if IR optimization is enabled.\n"
+                                            "\n"
+                                            "1st value: Start threshold cropping (dB)\n"
+                                            "2nd value: End threshold cropping (dB)\n"
+                                            "3rd value: Channel 1 delay (samples)\n"
+                                            "4th value: Channel 2 delay (samples)\n"
+                                            "5th value: Channel 3 delay (samples)\n"
+                                            "6th value: Channel 4 delay (samples)\n"), QLineEdit::Normal,
                                          _currentConvWaveformEdit, &ok,
                                          Qt::WindowFlags(), Qt::ImhFormattedNumbersOnly);
 
