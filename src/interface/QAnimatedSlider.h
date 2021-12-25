@@ -41,6 +41,8 @@ class QAnimatedSlider :
 public:
 	QAnimatedSlider(QWidget *parent = nullptr);
 	~QAnimatedSlider();
+
+
 	/*!
 	    \brief Updates the current stored value and animates this change if \c animate is \c true.
 	 */
@@ -51,6 +53,8 @@ public:
 	    \brief Current value of the underlying slider widget
 	 */
 	int          valueA() const;
+
+    QString      valueString(int overrideValue = -1) const;
 
 	/*!
 	    \brief Returns the currently set easing curve used for the animation
@@ -74,15 +78,21 @@ public:
 	 */
 	void         setDuration(int duration);
 
+protected:
+    void         onSliderAction(int action);
+
 signals:
 	void         valueChangedA(int value);
+    void         stringChanged(const QString& str);
+
+private slots:
+    void         onTooltipInvalidated();
 
 private:
 	QVariantAnimation *anim;
 	int cValue                = 0;
 	int mDuration             = 300;
 	QEasingCurve mEasingCurve = QEasingCurve(QEasingCurve::Type::InOutCirc);
-	bool event(QEvent *event) override;
 
 };
 

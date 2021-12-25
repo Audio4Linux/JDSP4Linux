@@ -12,7 +12,10 @@ class FadingLabel : public QLabel
     Q_OBJECT
 public:
     FadingLabel(QWidget* parent = nullptr);
+
+public slots:
     void setAnimatedText(const QString& msg, bool highPriority);
+    void setAnimatedText(const QString& msg);
 
 private:
     QGraphicsOpacityEffect* effect = nullptr;

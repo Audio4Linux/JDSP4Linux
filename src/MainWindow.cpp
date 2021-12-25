@@ -381,7 +381,7 @@ MainWindow::MainWindow(QString  exepath,
         // Liveprog
         ui->liveprog->coupleIDE(_eelEditor);
         connect(ui->liveprog, &LiveprogSelectionWidget::liveprogReloadRequested, _audioService, &IAudioService::reloadLiveprog);
-        connect(ui->liveprog, &LiveprogSelectionWidget::unitLabelUpdateRequested, this, &MainWindow::updateUnitLabel);
+        connect(ui->liveprog, &LiveprogSelectionWidget::unitLabelUpdateRequested, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
     }
 
     // Populate preset lists
@@ -446,6 +446,8 @@ MainWindow::MainWindow(QString  exepath,
         ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabbar->redrawTabBar();
+
+        installUnitData();
 
         if (debuggerIsAttached() || system("which ddctoolbox > /dev/null 2>&1")) { // Workaround: do not call system() when GDB is attached
             connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
@@ -605,7 +607,7 @@ void MainWindow::onRelinkRequested()
     _spectrumReloadSignalQueued = true;
 }
 
-// ---User preset management
+// User preset management
 void MainWindow::loadExternalFile()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Load custom audio.conf"), "", "JamesDSP Linux configuration (*.conf)");
@@ -636,7 +638,7 @@ void MainWindow::saveExternalFile()
     PresetManager::instance().saveToPath(filename);
 }
 
-// ---Config IO
+// Load/save
 void MainWindow::loadConfig()
 {
     _blockApply = true;
@@ -800,8 +802,6 @@ void MainWindow::loadConfig()
         ui->eq_dyn_widget->loadMap(eqData);
     }
 
-    updateAllUnitLabels();
-
     determineEqPresetName();
     determineIrsSelection();
     determineVdcSelection();
@@ -912,7 +912,7 @@ void MainWindow::applyConfig()
     saveGraphicEQView();
 }
 
-// ---Predefined Presets
+// Predefined presets
 void MainWindow::onEqPresetUpdated()
 {
     if (ui->eqpreset->currentText() == "Custom" || _blockApply)
@@ -954,13 +954,9 @@ void MainWindow::onBs2bPresetUpdated()
         break;
     }
 
-    // FIXME remove this vvv
-    ui->info->setAnimatedText("'" + ui->crossfeed_mode->currentText() + "' has been selected", true);
-
     ui->bs2b_custom_box->setEnabled(index == 99);
     _blockApply = false;
 
-    updateAllUnitLabels();
     applyConfig();
 }
 
@@ -990,146 +986,40 @@ void MainWindow::onReverbPresetUpdated()
     ui->rev_lco->setValueA((int) data.p14);
     ui->rev_decay->setValueA((int) (data.p15 * 100));
     ui->rev_delay->setValueA((int) (data.p16 * 10));
-    updateAllUnitLabels();
     _blockApply = false;
 
     applyConfig();
 }
 
-// ---Status
-void MainWindow::updateUnitLabel(int   d,
-                                 QObject *alt)
+// Status
+void MainWindow::installUnitData()
 {
-    if (_blockApply && alt == nullptr)
-    {
-        return; // Skip if blockapply-flag is set (when setting presets, ...)
-    }
+    ui->rev_width->setProperty("unit", "%");
+    ui->rev_osf->setProperty("unit", "x");
 
-    QObject *obj;
+    QList<QAnimatedSlider*> div100({ui->rev_era, ui->rev_erf, ui->rev_erw, ui->rev_width, ui->rev_bass, ui->rev_spin, ui->rev_wander, ui->rev_decay,
+                                    ui->analog_tubedrive});
 
-    if (alt == nullptr)
-    {
-        obj = sender();
-    }
-    else
-    {
-        obj = alt;
-    }
+    QList<QAnimatedSlider*> div10({ui->bs2b_feed, ui->rev_delay, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->rev_width});
 
-    QString pre  = "";
-    QString post = "";
+    QList<QAnimatedSlider*> unitDecibel({ui->bs2b_feed, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->analog_tubedrive, ui->postgain, ui->bass_maxgain});
+    QList<QAnimatedSlider*> unitMs({ui->rev_delay, ui->comp_maxattack, ui->comp_maxrelease, ui->limrelease});
+    QList<QAnimatedSlider*> unitHz({ui->bs2b_fcut, ui->rev_lcb, ui->rev_lcd, ui->rev_lci, ui->rev_lco});
 
-    if (obj == ui->rev_width)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d) + "%", alt == nullptr);
-    }
-    else if (obj == ui->bs2b_feed)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "dB", alt == nullptr);
-    }
-    else if (obj == ui->analog_tubedrive)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d / 100) + "dB", alt == nullptr);
-    }
-    else if (obj == ui->rev_decay)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
-    }
-    else if (obj == ui->rev_delay)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "ms", alt == nullptr);
-    }
-    else if (obj == ui->rev_wet || obj == ui->rev_finalwet || obj == ui->rev_finaldry)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d / 10) + "dB", alt == nullptr);
-    }
-    else if (obj == ui->rev_era || obj == ui->rev_erf || obj == ui->rev_erw
-             || obj == ui->rev_width || obj == ui->rev_bass || obj == ui->rev_spin
-             || obj == ui->rev_wander)
-    {
-        updateTooltipLabelUnit(obj, QString::number((double) d / 100), alt == nullptr);
-    }
-    else if (obj == ui->eqfiltertype || obj == ui->eqinterpolator || obj == ui->conv_ir_opt)
-    {
-        // Ignore these UI elements
-    }
-    else if(obj->property("isCustomEELProperty").toBool())
-    {
-        if (obj->property("handleAsInt").toBool())
-        {
-            updateTooltipLabelUnit(obj, QString::number((int) d / 100), true);
-        }
-        else
-        {
-            updateTooltipLabelUnit(obj, QString::number((double) d / 100), true);
-        }
-    }
+    foreach(auto w, div100)
+        w->setProperty("divisor", 100);
+    foreach(auto w, div10)
+        w->setProperty("divisor", 10);
 
-    else
-    {
-        if (obj == ui->postgain)
-        {
-            post = "dB";
-        }
-        else if (obj == ui->comp_maxattack || obj == ui->comp_maxrelease || obj == ui->limrelease)
-        {
-            post = "ms";
-        }
-        else if (obj == ui->bass_maxgain)
-        {
-            post = "dB";
-        }
-        else if (obj == ui->bs2b_fcut)
-        {
-            post = "Hz";
-        }
-        else if (obj == ui->rev_lcb || obj == ui->rev_lcd
-                 || obj == ui->rev_lci || obj == ui->rev_lco)
-        {
-            post = "Hz";
-        }
-        else if (obj == ui->rev_osf)
-        {
-            post = "x";
-        }
-
-        updateTooltipLabelUnit(obj, pre + QString::number(d) + post, alt == nullptr);
-    }
+    foreach(auto w, unitDecibel)
+        w->setProperty("unit", "dB");
+    foreach(auto w, unitMs)
+        w->setProperty("unit", "ms");
+    foreach(auto w, unitHz)
+        w->setProperty("unit", "Hz");
 }
 
-void MainWindow::updateTooltipLabelUnit(QObject       *sender,
-                                        const QString &text,
-                                        bool           viasignal)
-{
-    QWidget *w = qobject_cast<QWidget*>(sender);
-    w->setToolTip(text);
-
-    if (viasignal)
-    {
-        ui->info->setAnimatedText(text, false);
-    }
-}
-
-void MainWindow::updateAllUnitLabels()
-{
-    QList<QComboBox*>       comboboxesToBeUpdated({ ui->eqfiltertype, ui->eqinterpolator });
-
-    QList<QAnimatedSlider*> slidersToBeUpdated({
-                                                   ui->analog_tubedrive, ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed,
-                                                   ui->limthreshold, ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack,
-                                                   ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw, ui->rev_lci, ui->rev_lcb, ui->rev_lcd,
-                                                   ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin, ui->rev_wander, ui->rev_decay,
-                                                   ui->rev_delay, ui->rev_bass, ui->postgain, ui->comp_aggressiveness, ui->bass_maxgain
-                                               });
-
-    foreach(auto w, slidersToBeUpdated)
-        updateUnitLabel(w->valueA(), w);
-
-    foreach(auto w, comboboxesToBeUpdated)
-        updateUnitLabel(w->currentIndex(), w);
-}
-
-// ---DDC
+// DDC
 void MainWindow::setVdcFile(const QString& path)
 {
     _currentVdc = path;
@@ -1216,7 +1106,7 @@ void MainWindow::onVdcDatabaseSelected(const QItemSelection &, const QItemSelect
     applyConfig();
 }
 
-// ---IRS
+// IRS
 void MainWindow::setIrsFile(const QString& path)
 {
     _currentImpuleResponse = path;
@@ -1265,7 +1155,7 @@ void MainWindow::onConvolverWaveformEdit()
     }
 }
 
-// ---Liveprog
+// Liveprog
 int MainWindow::extractDefaultEelScripts(bool allowOverride,
                                          bool user)
 {
@@ -1322,7 +1212,7 @@ int MainWindow::extractDefaultEelScripts(bool allowOverride,
     return i;
 }
 
-// ---Helper
+// EQ
 void MainWindow::setEq(const QVector<double> &data)
 {
     _blockApply = true;
@@ -1380,7 +1270,7 @@ void MainWindow::onAutoEqImportRequested()
     sel->deleteLater();
 }
 
-// ---GraphicEQ States
+// GraphicEQ states
 void MainWindow::restoreGraphicEQView()
 {
     QVariantMap state;
@@ -1411,37 +1301,29 @@ void MainWindow::saveGraphicEQView()
                         state);
 }
 
-// ---Connect UI-Signals
+// Connections
 void MainWindow::connectActions()
 {
-    QList<QAnimatedSlider*> registerValueAChange({
-                                                     ui->analog_tubedrive, ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->bass_maxgain,
-                                                     ui->limthreshold, ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
-                                                     ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw, ui->rev_lci, ui->rev_lcb, ui->rev_lcd,
-                                                     ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin, ui->rev_wander, ui->rev_decay,
-                                                     ui->rev_delay, ui->rev_bass, ui->postgain
-                                                 });
-
-    QList<QWidget*> registerSliderRelease({
-                                              ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw,
-                                              ui->rev_lci, ui->rev_lcb, ui->rev_lcd, ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin,
-                                              ui->rev_wander, ui->rev_decay, ui->rev_delay, ui->rev_bass, ui->analog_tubedrive, ui->limthreshold,
-                                              ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
-                                              ui->bass_maxgain, ui->postgain
-                                          });
+    QList<QAnimatedSlider*> sliders({
+                              ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw,
+                              ui->rev_lci, ui->rev_lcb, ui->rev_lcd, ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin,
+                              ui->rev_wander, ui->rev_decay, ui->rev_delay, ui->rev_bass, ui->analog_tubedrive, ui->limthreshold,
+                              ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
+                              ui->bass_maxgain, ui->postgain
+                          });
 
     QList<QWidget*> registerClick({
-                                      ui->bassboost, ui->bs2b, ui->stereowidener, ui->analog, ui->reverb, ui->enable_eq, ui->enable_comp, ui->ddc_enable, ui->conv_enable,
-                                      ui->graphicEq->chk_enable
-                                  });
+                              ui->bassboost, ui->bs2b, ui->stereowidener, ui->analog, ui->reverb, ui->enable_eq, ui->enable_comp, ui->ddc_enable, ui->conv_enable,
+                              ui->graphicEq->chk_enable
+                          });
 
-    foreach(QWidget * w, registerValueAChange)
-        connect(w, SIGNAL(valueChangedA(int)), this, SLOT(updateUnitLabel(int)));
+    foreach(QAnimatedSlider* w, sliders)
+    {        
+        connect(w, &QAnimatedSlider::stringChanged, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
+        connect(w, SIGNAL(valueChangedA(int)), this, SLOT(applyConfig()));
+    }
 
-    foreach(QWidget * w, registerSliderRelease)
-        connect(w, SIGNAL(sliderReleased()), this, SLOT(applyConfig()));
-
-    foreach(QWidget * w, registerClick)
+    foreach(QWidget* w, registerClick)
         connect(w,                      SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
     connect(ui->disableFX,          SIGNAL(clicked()),                this, SLOT(onPassthroughToggled()));
@@ -1483,6 +1365,7 @@ void MainWindow::connectActions()
     connect(_eelEditor,             &EELEditor::scriptSaved,    ui->liveprog, &LiveprogSelectionWidget::updateFromEelEditor);
 }
 
+// Setup wizard
 void MainWindow::launchFirstRunSetup()
 {
     QHBoxLayout            *lbLayout = new QHBoxLayout;

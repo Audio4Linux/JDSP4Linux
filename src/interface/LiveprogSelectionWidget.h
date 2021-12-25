@@ -30,7 +30,7 @@ signals:
     void liveprogReloadRequested();
     void toggled(bool on);
     void scriptChanged(const QString& path);
-    void unitLabelUpdateRequested(int value, QObject*);
+    void unitLabelUpdateRequested(const QString& msg);
 
 public slots:
     void updateFromEelEditor(QString path);

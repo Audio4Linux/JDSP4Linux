@@ -181,7 +181,8 @@ void LiveprogSelectionWidget::loadProperties(const QString& path)
             sld->setOrientation(Qt::Horizontal);
             sld->setToolTip(QString::number(prop->getValue()));
             sld->setProperty("isCustomEELProperty", true);
-            sld->setProperty("handleAsInt",         handleAsInt);
+            sld->setProperty("handleAsInt", handleAsInt);
+            sld->setProperty("divisor", 100);
 
             sld->setObjectName(prop->getKey());
             sld->installEventFilter(new ScrollFilter);
@@ -189,9 +190,7 @@ void LiveprogSelectionWidget::loadProperties(const QString& path)
             ui->ui_container->layout()->addWidget(lbl);
             ui->ui_container->layout()->addWidget(sld);
 
-            connect(sld, &QAnimatedSlider::valueChangedA, [this, sld](int value){
-                emit unitLabelUpdateRequested(value, sld);
-            });
+            connect(sld, &QAnimatedSlider::stringChanged, this, &LiveprogSelectionWidget::unitLabelUpdateRequested);
             connect(sld, &QAbstractSlider::sliderReleased, [this, sld, prop] {
                 float val = sld->valueA() / 100.f;
                 prop->setValue(val);

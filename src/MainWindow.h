@@ -84,12 +84,6 @@ private slots:
 
 	void        resetEQ();
 
-
-    void        updateAllUnitLabels();
-    void        updateUnitLabel(int,
-	                            QObject *alt = nullptr);
-
-
 	void        loadExternalFile();
 	void        saveExternalFile();
 
@@ -114,6 +108,7 @@ private slots:
     void        onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &);
     void        onAutoEqImportRequested();
     void        onConvolverInfoChanged(const ConvolverInfoEventArgs &args);
+
 private:
     Ui::MainWindow *ui;
 
@@ -147,11 +142,10 @@ private:
     QString _currentVdc               = "";
     QString _currentConvWaveformEdit  = "";
 
-    void updateTooltipLabelUnit(QObject       *sender,
-	                            const QString &text,
-	                            bool);
 	void loadConfig();
 	void connectActions();
+
+    void installUnitData();
 
     void determineIrsSelection();
     void determineVdcSelection();

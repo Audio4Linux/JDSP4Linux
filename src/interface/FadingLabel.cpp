@@ -54,3 +54,8 @@ void FadingLabel::setAnimatedText(const QString &msg, bool highPriority)
 
     lastAnimationHighPriority = highPriority;
 }
+
+void FadingLabel::setAnimatedText(const QString &msg)
+{
+    setAnimatedText(msg, false);
+}

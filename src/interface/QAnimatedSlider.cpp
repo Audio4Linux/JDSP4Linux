@@ -29,14 +29,9 @@ QAnimatedSlider::QAnimatedSlider(QWidget *parent)
 	: QSlider(parent)
 {
 	anim = new QPropertyAnimation(this, "value");
-	connect(this, &QSlider::sliderReleased, [this] {
-		cValue = value();
-		emit valueChangedA(cValue);
-	});
-	connect(this, &QSlider::sliderMoved, [this](int position) {
-		cValue = position;
-		emit valueChangedA(cValue);
-	});
+
+    connect(this, &QAnimatedSlider::valueChangedA, this, &QAnimatedSlider::onTooltipInvalidated);
+    connect(this, &QSlider::actionTriggered, this, &QAnimatedSlider::onSliderAction);
 }
 
 QAnimatedSlider::~QAnimatedSlider()
@@ -48,6 +43,7 @@ void QAnimatedSlider::setValueA(int  val,
                                 bool animate)
 {
 	cValue = val;
+    onTooltipInvalidated();
 
 	if (animate)
 	{
@@ -66,7 +62,21 @@ void QAnimatedSlider::setValueA(int  val,
 
 int QAnimatedSlider::valueA() const
 {
-	return cValue;
+    return cValue;
+}
+
+QString QAnimatedSlider::valueString(int overrideValue) const
+{
+    int value = overrideValue == -1 ? valueA() : overrideValue;
+
+    bool handleAsInt = !this->property("handleAsInt").canConvert(QMetaType::Bool) && this->property("handleAsInt").toBool();
+    int divisor = 1;
+    if(this->property("divisor").canConvert(QMetaType::Int))
+    {
+        divisor = this->property("divisor").toInt();
+    }
+
+    return QString::number((handleAsInt ? (int)(value / divisor) : (double)value / divisor)) + this->property("unit").toString();
 }
 
 QEasingCurve QAnimatedSlider::easingCurve() const
@@ -86,33 +96,30 @@ int QAnimatedSlider::duration() const
 
 void QAnimatedSlider::setDuration(int duration)
 {
-	mDuration = duration;
+    mDuration = duration;
 }
 
-bool QAnimatedSlider::event(QEvent *ev)
+void QAnimatedSlider::onSliderAction(int action)
 {
-	ev->ignore();
+    switch((SliderAction)action)
+    {
+    case QAbstractSlider::SliderNoAction:
+        break;
+    case QAbstractSlider::SliderSingleStepAdd:
+    case QAbstractSlider::SliderSingleStepSub:
+    case QAbstractSlider::SliderPageStepAdd:
+    case QAbstractSlider::SliderPageStepSub:
+    case QAbstractSlider::SliderToMinimum:
+    case QAbstractSlider::SliderToMaximum:
+    case QAbstractSlider::SliderMove:
+        setValueA(sliderPosition(), false);
+        emit valueChangedA(sliderPosition());
+        emit stringChanged(valueString(sliderPosition()));
+        break;
+    }
+}
 
-	if (ev->type() == QEvent::Type::KeyRelease)
-	{
-		QKeyEvent *keyEvent = static_cast<QKeyEvent*>(ev);
-
-		switch (keyEvent->key())
-		{
-			case Qt::Key::Key_Up:
-			case Qt::Key::Key_Down:
-			case Qt::Key::Key_Left:
-			case Qt::Key::Key_Right:
-			case Qt::Key::Key_PageUp:
-			case Qt::Key::Key_PageDown:
-				cValue = value();
-				emit valueChangedA(cValue);
-				return true;
-			default:
-				QSlider::event(ev);
-		}
-
-	}
-
-	return QSlider::event(ev);
+void QAnimatedSlider::onTooltipInvalidated()
+{
+    this->setToolTip(valueString());
 }
