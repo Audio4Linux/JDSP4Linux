@@ -97,7 +97,10 @@ QString AppConfig::getIrsPath()
 
     if (irs_path.length() < 2)
     {
-        return QString("%1/IRS").arg(QDir::homePath());
+        QString path = getPath("irs");
+        QDir().mkpath(path);
+        setIrsPath(path);
+        return path;
     }
 
     return irs_path;
@@ -111,14 +114,17 @@ void AppConfig::setDDCPath(const QString &npath)
 
 QString AppConfig::getDDCPath()
 {
-    QString irs_path = chopFirstLastChar(_appconf->getString("VdcDefaultPath", false));
+    QString ddc_path = chopFirstLastChar(_appconf->getString("VdcDefaultPath", false));
 
-    if (irs_path.length() < 2)
+    if (ddc_path.length() < 2)
     {
-        return QString("%1/DDC").arg(QDir::homePath());
+        QString path = getPath("vdc");
+        QDir().mkpath(path);
+        setDDCPath(path);
+        return path;
     }
 
-    return irs_path;
+    return ddc_path;
 }
 
 void AppConfig::setLiveprogPath(const QString &npath)

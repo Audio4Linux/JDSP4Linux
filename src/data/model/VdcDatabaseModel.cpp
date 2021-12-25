@@ -37,6 +37,15 @@ VdcDatabaseModel::VdcDatabaseModel(QObject *parent)
     this->setHeaderData(1, Qt::Horizontal, tr("Model"));
 }
 
+QString VdcDatabaseModel::composeVdcFile(int row) const
+{
+    QString vdc;
+    vdc += "SR_44100:";
+    vdc += coefficients(row, 44100);
+    vdc += "\nSR_48000:";
+    vdc += coefficients(row, 48000);
+    return vdc;
+}
 
 QString VdcDatabaseModel::coefficients(int row, uint srate) const
 {

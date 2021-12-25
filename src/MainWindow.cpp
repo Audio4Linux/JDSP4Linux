@@ -915,7 +915,7 @@ void MainWindow::applyConfig()
 // Predefined presets
 void MainWindow::onEqPresetUpdated()
 {
-    if (ui->eqpreset->currentText() == "Custom" || _blockApply)
+    if (ui->eqpreset->currentText() == "Custom")
     {
         return;
     }
@@ -934,14 +934,13 @@ void MainWindow::onEqPresetUpdated()
 
 void MainWindow::onBs2bPresetUpdated()
 {
-    if (ui->crossfeed_mode->currentText() == "..." || _blockApply)
+    if (ui->crossfeed_mode->currentText() == "...")
     {
         return;
     }
 
     const auto index = PresetProvider::BS2B::lookupPreset(ui->crossfeed_mode->currentText());
 
-    _blockApply = true;
     switch (index)
     {
     case 0: // BS2B weak
@@ -955,20 +954,18 @@ void MainWindow::onBs2bPresetUpdated()
     }
 
     ui->bs2b_custom_box->setEnabled(index == 99);
-    _blockApply = false;
 
     applyConfig();
 }
 
 void MainWindow::onReverbPresetUpdated()
 {
-    if (ui->roompresets->currentText() == "..." || _blockApply)
+    if (ui->roompresets->currentText() == "...")
     {
         return;
     }
 
     const auto data = PresetProvider::Reverb::lookupPreset(ui->roompresets->currentIndex());
-    _blockApply = true;
     ui->rev_osf->setValueA(data.osf);
     ui->rev_era->setValueA((int) (data.p1 * 100));
     ui->rev_finalwet->setValueA((int) (data.p2 * 10));
@@ -986,7 +983,6 @@ void MainWindow::onReverbPresetUpdated()
     ui->rev_lco->setValueA((int) data.p14);
     ui->rev_decay->setValueA((int) (data.p15 * 100));
     ui->rev_delay->setValueA((int) (data.p16 * 10));
-    _blockApply = false;
 
     applyConfig();
 }
@@ -1069,7 +1065,6 @@ void MainWindow::determineVdcSelection()
 
 void MainWindow::onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &) {
     QItemSelectionModel *select = ui->ddcTable->selectionModel();
-    QString ddc_coeffs;
 
     if (select->hasSelection())
     {
@@ -1078,15 +1073,10 @@ void MainWindow::onVdcDatabaseSelected(const QItemSelection &, const QItemSelect
         int index        = select->selectedRows().first().row();
         auto* model      = static_cast<VdcDatabaseModel*>(ui->ddcTable->model());
 
-        ddc_coeffs      += "SR_44100:";
-        ddc_coeffs      += model->coefficients(index, 44100);
-        ddc_coeffs      += "\nSR_48000:";
-        ddc_coeffs      += model->coefficients(index, 48000);
-
         QFile file(AppConfig::instance().getPath("temp.vdc"));
         if (file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
-            file.write(ddc_coeffs.toUtf8().constData());
+            file.write(model->composeVdcFile(index).toUtf8().constData());
         }
         file.close();
 
@@ -1215,16 +1205,16 @@ int MainWindow::extractDefaultEelScripts(bool allowOverride,
 // EQ
 void MainWindow::setEq(const QVector<double> &data)
 {
-    _blockApply = true;
     ui->eq_widget->setBands(QVector<double>(data));
-    _blockApply = false;
     applyConfig();
 }
 
 void MainWindow::resetEQ()
 {
     ui->eqpreset->setCurrentIndex(0);
+    _blockApply = true; // TODO: get rid of _blockApply guards
     ui->eq_dyn_widget->load(DEFAULT_GRAPHICEQ);
+    _blockApply = false;
     setEq(PresetProvider::EQ::defaultPreset());
     applyConfig();
 }
@@ -1320,32 +1310,32 @@ void MainWindow::connectActions()
     foreach(QAnimatedSlider* w, sliders)
     {        
         connect(w, &QAnimatedSlider::stringChanged, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
-        connect(w, SIGNAL(valueChangedA(int)), this, SLOT(applyConfig()));
+        connect(w, &QAnimatedSlider::valueChangedA, this, &MainWindow::applyConfig);
     }
 
     foreach(QWidget* w, registerClick)
-        connect(w,                      SIGNAL(clicked()),                this, SLOT(applyConfig()));
+        connect(w,                  SIGNAL(clicked()),                this, SLOT(applyConfig()));
 
-    connect(ui->disableFX,          SIGNAL(clicked()),                this, SLOT(onPassthroughToggled()));
-    connect(ui->reseteq,            SIGNAL(clicked()),                this, SLOT(resetEQ()));
-    connect(ui->cpreset,            SIGNAL(clicked()),                this, SLOT(onFragmentRequested()));
-    connect(ui->set,                SIGNAL(clicked()),                this, SLOT(onFragmentRequested()));
+    connect(ui->disableFX,          &QAbstractButton::clicked, this, &MainWindow::onPassthroughToggled);
+    connect(ui->reseteq,            &QAbstractButton::clicked, this, &MainWindow::resetEQ);
+    connect(ui->cpreset,            &QAbstractButton::clicked, this, &MainWindow::onFragmentRequested);
+    connect(ui->set,                &QAbstractButton::clicked, this, &MainWindow::onFragmentRequested);
 
-    connect(ui->eq_r_fixed,         SIGNAL(clicked()),                this, SLOT(applyConfig()));
-    connect(ui->eq_r_flex,          SIGNAL(clicked()),                this, SLOT(applyConfig()));
+    connect(ui->eq_r_fixed,         &QAbstractButton::clicked, this, &MainWindow::applyConfig);
+    connect(ui->eq_r_flex,          &QAbstractButton::clicked, this, &MainWindow::applyConfig);
 
-    connect(ui->eqfiltertype,       SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
-    connect(ui->eqinterpolator,     SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
-    connect(ui->conv_ir_opt,        SIGNAL(currentIndexChanged(int)), this, SLOT(applyConfig()));
+    connect(ui->eqfiltertype,       qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
+    connect(ui->eqinterpolator,     qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
+    connect(ui->conv_ir_opt,        qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
+
+    connect(ui->crossfeed_mode,     qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onBs2bPresetUpdated);
+    connect(ui->eqpreset,           qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onEqPresetUpdated);
+    connect(ui->roompresets,        qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onReverbPresetUpdated);
 
     connect(ui->eq_widget,          SIGNAL(bandsUpdated()),           this, SLOT(applyConfig()));
     connect(ui->eq_widget,          SIGNAL(mouseReleased()),          this, SLOT(determineEqPresetName()));
-    connect(ui->eqpreset,           SIGNAL(currentIndexChanged(int)), this, SLOT(onEqPresetUpdated()));
-    connect(ui->roompresets,        SIGNAL(currentIndexChanged(int)), this, SLOT(onReverbPresetUpdated()));
 
-    connect(ui->conv_adv_wave_edit, SIGNAL(clicked()),                this, SLOT(onConvolverWaveformEdit()));
-
-    connect(ui->crossfeed_mode,     SIGNAL(currentIndexChanged(int)), this, SLOT(onBs2bPresetUpdated()));
+    connect(ui->conv_adv_wave_edit, &QAbstractButton::clicked,        this, &MainWindow::onConvolverWaveformEdit);
 
     connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
     connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
