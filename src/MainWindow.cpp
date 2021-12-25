@@ -52,39 +52,21 @@
 #include <QMessageBox>
 #include <QWhatsThis>
 
-#define STR_(x) #x
-#define STR(x) STR_(x)
-
 using namespace std;
 
-MainWindow::MainWindow(QString  exepath,
-                       bool     statupInTray,
-                       bool     allowMultipleInst,
+MainWindow::MainWindow(bool     statupInTray,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    // Prepare logger
     {
-        Log::clear();
-#ifdef USE_PULSEAUDIO
-        QString flavor = " (Pulseaudio flavor)";
-#else
-        QString flavor = " (Pipewire flavor)";
-#endif
-        Log::information("Application version: " + QString(STR(APP_VERSION)) + flavor);
-    }
+        _startupInTraySwitch = statupInTray;
 
-    // Check if another instance is already running and switch to it if that's the case
-    {
-        _singleInstance = new SingleInstanceMonitor(this);
-        if (!_singleInstance->isServiceReady() && !allowMultipleInst)
-        {
-            _singleInstance->handover();
-            return;
-        }
+        _styleHelper         = new StyleHelper(this);
+        _eelEditor           = new EELEditor(this);
+        _trayIcon            = new TrayIcon(this);
     }
 
     // Prepare audio subsystem
@@ -124,7 +106,7 @@ MainWindow::MainWindow(QString  exepath,
             restoreGeometry(geometry);
         }
 
-        // Prepare equalizer UI
+        // Equalizer
         QButtonGroup eq_mode;
         eq_mode.addButton(ui->eq_r_fixed);
         eq_mode.addButton(ui->eq_r_flex);
@@ -132,7 +114,6 @@ MainWindow::MainWindow(QString  exepath,
         ui->eq_dyn_widget->setSidebarHidden(true);
         ui->eq_dyn_widget->set15BandFreeMode(true);
 
-        // Set default zoom for dynamic EQ widget
         ConfigContainer pref;
         pref.setValue("scrollX", 160);
         pref.setValue("scrollY", 311);
@@ -140,27 +121,19 @@ MainWindow::MainWindow(QString  exepath,
         pref.setValue("zoomY",   1.651);
         ui->eq_dyn_widget->loadPreferences(pref.getConfigMap());
 
-        // Setup graphic eq widget
+        // GraphicEQ
         ui->graphicEq->setEnableSwitchVisible(true);
         ui->graphicEq->setAutoEqAvailable(true);
 
-        // Clock
+        // Timer (TODO)
         _refreshTick = new QTimer(this);
         connect(_refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
         _refreshTick->start(1000);
-
-        connect(&PresetManager::instance(), &PresetManager::wantsToWriteConfig, this, &MainWindow::applyConfig);
     }
 
     // Allocate pointers and init important variables
     {
-        AppConfig::instance().set(AppConfig::ExecutablePath, exepath);
-
-        _startupInTraySwitch = statupInTray;
-
-        _styleHelper         = new StyleHelper(this);
-        _eelEditor           = new EELEditor(this);
-
+        connect(&PresetManager::instance(), &PresetManager::wantsToWriteConfig, this, &MainWindow::applyConfig);
         connect(&PresetManager::instance(), &PresetManager::presetAutoloaded, this, [this](const QString& device){
             ui->info->setAnimatedText(QString("%1 connected - Preset loaded automatically").arg(device), true);
         });
@@ -205,9 +178,8 @@ MainWindow::MainWindow(QString  exepath,
 
     // Prepare tray icon
     {
-        _trayIcon = new TrayIcon(this);
-        connect(_trayIcon,               &TrayIcon::iconActivated,    this,     &MainWindow::onTrayIconActivated);
-        connect(_trayIcon,               &TrayIcon::loadReverbPreset, [this](const QString &preset)
+        connect(_trayIcon, &TrayIcon::iconActivated, this, &MainWindow::onTrayIconActivated);
+        connect(_trayIcon, &TrayIcon::loadReverbPreset, this, [this](const QString &preset)
         {
             if(preset == "off"){
                 ui->reverb->setChecked(false);
@@ -220,7 +192,7 @@ MainWindow::MainWindow(QString  exepath,
             onReverbPresetUpdated();
         });
         connect(_trayIcon, &TrayIcon::restart, this, &MainWindow::onRelinkRequested);
-        connect(_trayIcon, &TrayIcon::loadEqPreset, [this](const QString &preset)
+        connect(_trayIcon, &TrayIcon::loadEqPreset, this, [this](const QString &preset)
         {
             ui->enable_eq->setChecked(true);
 
@@ -234,7 +206,7 @@ MainWindow::MainWindow(QString  exepath,
                 onEqPresetUpdated();
             }
         });
-        connect(_trayIcon, &TrayIcon::loadCrossfeedPreset, [this](int preset)
+        connect(_trayIcon, &TrayIcon::loadCrossfeedPreset, this, [this](int preset)
         {
             if(preset == -1)
             {
@@ -248,9 +220,9 @@ MainWindow::MainWindow(QString  exepath,
             ui->bs2b->setChecked(true);
             onBs2bPresetUpdated();
         });
-        connect(_trayIcon, &TrayIcon::loadIrs, [this](const QString &irs)
+        connect(_trayIcon, &TrayIcon::loadIrs, this, [this](const QString &irs)
         {
-            _currentImpuleResponse = irs;
+            _currentImpulseResponse = irs;
             ui->conv_enable->setChecked(true);
             determineIrsSelection();
             applyConfig();
@@ -264,8 +236,6 @@ MainWindow::MainWindow(QString  exepath,
 
     // Load config and initialize less important stuff
     {
-        //initializeSpectrum();
-
         connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
 
@@ -345,7 +315,7 @@ MainWindow::MainWindow(QString  exepath,
 
     // Setup file selectors
     {
-        ui->ddc_files->setCurrentDirectory(AppConfig::instance().getDDCPath());
+        ui->ddc_files->setCurrentDirectory(AppConfig::instance().getVdcPath());
         ui->ddc_files->setFileTypes(QStringList("*.vdc"));
 
         ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
@@ -357,14 +327,14 @@ MainWindow::MainWindow(QString  exepath,
         ui->conv_fav->setFileActionsVisible(true);
         ui->conv_fav->setNavigationBarVisible(false);
 
-        connect(ui->ddc_files, &FileSelectionWidget::fileChanged, this, &MainWindow::setVdcFile);
+        connect(ui->ddc_files,  &FileSelectionWidget::fileChanged, this, &MainWindow::setVdcFile);
         connect(ui->conv_files, &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
-        connect(ui->conv_fav, &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
+        connect(ui->conv_fav,   &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
 
         connect(ui->conv_files, &FileSelectionWidget::bookmarkAdded, ui->conv_fav, &FileSelectionWidget::enumerateFiles);
 
         connect(ui->conv_files, &FileSelectionWidget::fileChanged, ui->conv_fav, &FileSelectionWidget::clearCurrentFile);
-        connect(ui->conv_fav, &FileSelectionWidget::fileChanged, ui->conv_files, &FileSelectionWidget::clearCurrentFile);
+        connect(ui->conv_fav,   &FileSelectionWidget::fileChanged, ui->conv_files, &FileSelectionWidget::clearCurrentFile);
 
         // DDC
         ui->ddcTable->setModel(new VdcDatabaseModel(ui->ddcTable));
@@ -372,7 +342,6 @@ MainWindow::MainWindow(QString  exepath,
         ui->ddcTable->setColumnHidden(3, true);
         ui->ddcTable->setColumnHidden(4, true);
         ui->ddcTable->resizeColumnsToContents();
-
         determineVdcSelection();
 
         // Convolver
@@ -704,7 +673,7 @@ void MainWindow::loadConfig()
 
     ui->conv_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::convolver_enable));
     ui->conv_ir_opt->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::convolver_optimization_mode));
-    _currentImpuleResponse                 = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
+    _currentImpulseResponse                 = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
     _currentConvWaveformEdit = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_waveform_edit));
 
     ui->enable_eq->setChecked(DspConfig::instance().get<bool>(DspConfig::tone_enable));
@@ -832,7 +801,7 @@ void MainWindow::applyConfig()
 
     DspConfig::instance().set(DspConfig::convolver_enable,           QVariant(ui->conv_enable->isChecked()));
     DspConfig::instance().set(DspConfig::convolver_optimization_mode,QVariant(ui->conv_ir_opt->currentIndex()));
-    DspConfig::instance().set(DspConfig::convolver_file,             QVariant("\"" + _currentImpuleResponse + "\""));
+    DspConfig::instance().set(DspConfig::convolver_file,             QVariant("\"" + _currentImpulseResponse + "\""));
     DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant("\"" + _currentConvWaveformEdit + "\""));
 
     DspConfig::instance().set(DspConfig::compression_enable,         QVariant(ui->enable_comp->isChecked()));
@@ -1030,7 +999,7 @@ void MainWindow::determineVdcSelection()
     // File does not exist anymore
     if (!QFile(_currentVdc).exists())
     {
-        ui->ddc_files->setCurrentDirectory(AppConfig::instance().getDDCPath());
+        ui->ddc_files->setCurrentDirectory(AppConfig::instance().getVdcPath());
     }
     // File is from database
     else if (_currentVdc == AppConfig::instance().getPath("temp.vdc"))
@@ -1099,7 +1068,7 @@ void MainWindow::onVdcDatabaseSelected(const QItemSelection &, const QItemSelect
 // IRS
 void MainWindow::setIrsFile(const QString& path)
 {
-    _currentImpuleResponse = path;
+    _currentImpulseResponse = path;
     applyConfig();
 }
 
@@ -1110,22 +1079,22 @@ void MainWindow::determineIrsSelection()
     ui->convTabs->setCurrentIndex(0);
 
     // File was selected from favorites
-    if (_currentImpuleResponse.contains(AppConfig::instance().getPath("irs_favorites")))
+    if (_currentImpulseResponse.contains(AppConfig::instance().getPath("irs_favorites")))
     {
         ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
         ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
-        ui->conv_fav->setCurrentFile(_currentImpuleResponse);
+        ui->conv_fav->setCurrentFile(_currentImpulseResponse);
         ui->convTabs->setCurrentIndex(1);
     }
     // File does not exist anymore
-    else if (!QFile(_currentImpuleResponse).exists())
+    else if (!QFile(_currentImpulseResponse).exists())
     {
         ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
     }
     // External file
     else
     {
-        ui->conv_files->setCurrentFile(_currentImpuleResponse);
+        ui->conv_files->setCurrentFile(_currentImpulseResponse);
     }
 }
 
@@ -1264,7 +1233,7 @@ void MainWindow::onAutoEqImportRequested()
 void MainWindow::restoreGraphicEQView()
 {
     QVariantMap state;
-    state = ConfigIO::readFile(AppConfig::instance().getGraphicEQConfigFilePath());
+    state = ConfigIO::readFile(AppConfig::instance().getGraphicEqStatePath());
 
     ConfigContainer conf;
     conf.setConfigMap(state);
@@ -1287,8 +1256,7 @@ void MainWindow::saveGraphicEQView()
 {
     QVariantMap state;
     ui->graphicEq->storePreferences(state);
-    ConfigIO::writeFile(AppConfig::instance().getGraphicEQConfigFilePath(),
-                        state);
+    ConfigIO::writeFile(AppConfig::instance().getGraphicEqStatePath(), state);
 }
 
 // Connections
@@ -1314,7 +1282,7 @@ void MainWindow::connectActions()
     }
 
     foreach(QWidget* w, registerClick)
-        connect(w,                  SIGNAL(clicked()),                this, SLOT(applyConfig()));
+        connect(w,                  SIGNAL(clicked()), this, SLOT(applyConfig()));
 
     connect(ui->disableFX,          &QAbstractButton::clicked, this, &MainWindow::onPassthroughToggled);
     connect(ui->reseteq,            &QAbstractButton::clicked, this, &MainWindow::resetEQ);

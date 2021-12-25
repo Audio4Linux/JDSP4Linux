@@ -16,6 +16,7 @@
 #define APPCONFIGWRAPPER_H
 
 #include "ConfigContainer.h"
+#include "utils/Common.h"
 #include "utils/Log.h"
 
 #include <QObject>
@@ -71,7 +72,11 @@ public:
         AudioAppBlocklist,
         AudioAppBlocklistInvert,
 
-        AeqPlotDarkMode
+        AeqPlotDarkMode,
+
+        ConvolverDefaultPath,
+        VdcDefaultPath,
+        LiveprogDefaultPath
     };
     Q_ENUM(Key);
 
@@ -125,31 +130,39 @@ public:
         return convertVariant<T>(variant);
     }
 
+    bool exists(const Key &key);
+
     bool isAppBlocked(const QString& name) const;
 
-    QString getDspConfPath();
+#define DEFINE_USER_PATH(name,key) \
+    QString get##name##Path() const \
+    { \
+        QString current = chopFirstLastChar(get<QString>(key)); \
+        if (!QDir(current).exists()) \
+        { \
+            QDir().mkpath(current); \
+        } \
+        return current; \
+    } \
+    void set##name##Path(const QString& newVal) \
+    { \
+        set(key, QVariant(QString("\"%1\"").arg(newVal))); \
+    }
+
+DEFINE_USER_PATH(Irs, ConvolverDefaultPath)
+DEFINE_USER_PATH(Vdc, VdcDefaultPath)
+DEFINE_USER_PATH(Liveprog, LiveprogDefaultPath)
+
+#undef DEFINE_USER_PATH
 
     QString getPath(QString subdir = "");
-
-    void setIrsPath(const QString &npath);
-
-    QString getIrsPath();
-
-    void setDDCPath(const QString &npath);
-
-    QString getDDCPath();
-
-    void setLiveprogPath(const QString &npath);
-
-    QString getLiveprogPath();
+    QString getCachePath(QString subdir);
+    QString getDspConfPath();
+    QString getGraphicEqStatePath();
 
     void save();
-
     void load();
 
-    QString getGraphicEQConfigFilePath();
-
-    QString getCachePath(QString subdir);
 private slots:
     void notify(const Key& key, const QVariant& value);
 

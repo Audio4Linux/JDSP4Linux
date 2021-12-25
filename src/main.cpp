@@ -1,14 +1,14 @@
 #include "MainWindow.h"
 #include "config/DspConfig.h"
-
 #include "utils/FindBinary.h"
+#include "utils/SingleInstanceMonitor.h"
+#include "utils/VersionMacros.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QDesktopWidget>
 #include <QScreen>
 #include <QStyle>
-#include <QSystemTrayIcon>
+#include <QScopeGuard>
 
 #define FORCE_CRASH_HANDLER
 
@@ -25,7 +25,7 @@
 static bool SPIN_ON_CRASH = false;
 static const char* EXEC_NAME = "jamesdsp";
 
-void crash_handled(int fd)
+void onExceptionRaised(int fd)
 {
     Q_UNUSED(fd)
 	safe_printf(STDERR_FILENO, "Done! Crash report saved to /tmp/jamesdsp/crash.dmp.\n");
@@ -46,8 +46,6 @@ void crash_handled(int fd)
 
 #endif
 
-#include <AeqSelector.h>
-
 using namespace std;
 int main(int   argc,
          char *argv[])
@@ -60,16 +58,15 @@ int main(int   argc,
 	EXECUTION_FILENAME = exepath;
 	mkdir("/tmp/jamesdsp/", S_IRWXU);
 	int                fd = safe_open_wo_fd("/tmp/jamesdsp/crash.dmp");
-	airbag_init_fd(fd, crash_handled, EXECUTION_FILENAME);
+    airbag_init_fd(fd, onExceptionRaised, EXECUTION_FILENAME);
 #endif
 
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+    QApplication app(argc, argv);
 
-	QApplication       a(argc, argv);
 	QCommandLineParser parser;
 	parser.setApplicationDescription("JamesDSP for Linux");
 	parser.addHelpOption();
-
     QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (forced)");
     parser.addOption(tray);
     QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically");
@@ -78,24 +75,40 @@ int main(int   argc,
     parser.addOption(minst);
     QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
     parser.addOption(spinlck);
-	parser.process(a);
+    parser.process(app);
 
+#ifdef ENABLE_CRASH_HANDLER
     SPIN_ON_CRASH = parser.isSet(spinlck);
+#endif
 
-	QLocale::setDefault(QLocale::c());  
+    // Locale workaround
+    QLocale::setDefault(QLocale::c());
     if(setlocale(LC_NUMERIC, "en_US.UTF-8") == nullptr)
     {
         setlocale(LC_NUMERIC, "C");
     }
 
+    // Prepare logger
+    Log::clear();
+    Log::information("Application version: " + QString(APP_VERSION_FULL));
+    Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no"));
+
+    // Check if another instance is already running and switch to it if that's the case
+    auto *instanceMonitor = new SingleInstanceMonitor();
+    auto scopeGuard = qScopeGuard([instanceMonitor]{ delete instanceMonitor; });
+    if (!instanceMonitor->isServiceReady() && !parser.isSet(minst))
+    {
+        instanceMonitor->handover();
+        return 0;
+    }
+
     // Prepare DspConfig based on cmdline argument
     DspConfig::instance(parser.isSet(watch));
+    AppConfig::instance().set(AppConfig::ExecutablePath, QString::fromLocal8Bit(exepath));
 
     QApplication::setFallbackSessionManagementEnabled(false);
-    //QApplication::setQuitOnLastWindowClosed(false);
-    MainWindow w(QString::fromLocal8Bit(exepath), parser.isSet(tray), parser.isSet(minst));
+    MainWindow w(parser.isSet(tray));
 
-    //w.setFixedSize(w.geometry().width(), w.geometry().height());
 	w.setGeometry(
 		QStyle::alignedRect(
 			Qt::LeftToRight,
@@ -117,6 +130,5 @@ int main(int   argc,
         }
 	}
 
-    //QApplication::setQuitOnLastWindowClosed(true);
 	return QApplication::exec();
 }

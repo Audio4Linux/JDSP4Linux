@@ -185,7 +185,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	});
 	connect(ui->saveddcpath, &QPushButton::clicked, this, [this]
 	{
-		AppConfig::instance().setDDCPath(ui->ddcpath->text());
+        AppConfig::instance().setVdcPath(ui->ddcpath->text());
 	});
 	connect(ui->saveliveprogpath, &QPushButton::clicked, this, [this]
 	{
@@ -406,7 +406,7 @@ void SettingsFragment::refreshAll()
     ui->menu_edit->setIconStyle(AppConfig::instance().get<bool>(AppConfig::ThemeColorsCustomWhiteIcons));
 
 	ui->irspath->setText(AppConfig::instance().getIrsPath());
-	ui->ddcpath->setText(AppConfig::instance().getDDCPath());
+    ui->ddcpath->setText(AppConfig::instance().getVdcPath());
 	ui->liveprog_path->setText(AppConfig::instance().getLiveprogPath());
 
     ui->liveprog_autoextract->setChecked(AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract));

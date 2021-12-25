@@ -55,12 +55,9 @@ class MainWindow :
 	public QMainWindow
 {
 	Q_OBJECT
-	enum class Context;
 
 public:
-	explicit MainWindow(QString  exepath,
-	                    bool     statupInTray,
-                        bool     allowMultipleInst,
+    explicit MainWindow(bool     statupInTray,
 	                    QWidget *parent = nullptr);
 	~MainWindow();
 
@@ -120,8 +117,6 @@ private:
 
     EELEditor *_eelEditor;
 
-    SingleInstanceMonitor* _singleInstance;
-
     FragmentHost<AppManagerFragment*>* _appMgrFragment = nullptr;
     FragmentHost<StatusFragment*>* _statusFragment     = nullptr;
     FragmentHost<SettingsFragment*>* _settingsFragment = nullptr;
@@ -138,7 +133,7 @@ private:
     bool _blockApply                   = false;
     bool _lockliveprogupdate           = false;
 
-    QString _currentImpuleResponse    = "";
+    QString _currentImpulseResponse    = "";
     QString _currentVdc               = "";
     QString _currentConvWaveformEdit  = "";
 

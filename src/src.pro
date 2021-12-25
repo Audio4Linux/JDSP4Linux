@@ -152,6 +152,7 @@ HEADERS += \
     utils/DebuggerUtils.h \
     utils/Log.h \
     utils/SingleInstanceMonitor.h \
+    utils/VersionMacros.h \
     utils/dbus/ClientProxy.h \
     utils/dbus/ServerAdaptor.h \
     utils/FindBinary.h \
