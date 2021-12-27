@@ -642,14 +642,14 @@ void MainWindow::loadConfig()
     ui->graphicEq->load(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::graphiceq_param)));
 
     ui->ddc_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::ddc_enable));
-    _currentVdc      = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
+    _currentVdc = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::ddc_file));
 
     ui->liveprog->setActive(DspConfig::instance().get<bool>(DspConfig::liveprog_enable));
     ui->liveprog->setCurrentLiveprog(chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::liveprog_file)));
 
     ui->conv_enable->setChecked(DspConfig::instance().get<bool>(DspConfig::convolver_enable));
     ui->conv_ir_opt->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::convolver_optimization_mode));
-    _currentImpulseResponse                 = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
+    _currentImpulseResponse = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_file));
     _currentConvWaveformEdit = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::convolver_waveform_edit));
 
     ui->enable_eq->setChecked(DspConfig::instance().get<bool>(DspConfig::tone_enable));
@@ -658,7 +658,7 @@ void MainWindow::loadConfig()
 
     // Parse EQ String to QMap
     QString rawEqString = chopFirstLastChar(DspConfig::instance().get<QString>(DspConfig::tone_eq));
-    bool    isOldFormat = rawEqString.split(";").count() == 15;
+    bool isOldFormat = rawEqString.split(";").count() == 15;
 
     if (isOldFormat)
     {
