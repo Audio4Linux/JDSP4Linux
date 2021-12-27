@@ -30,7 +30,7 @@ public:
     bool update(DspConfig* config, bool ignoreCache = false);
     void updateFromCache();
     void reloadLiveprog(DspConfig* config = nullptr);
-    std::list<EelVariable> enumEelVariables();
+    std::vector<EelVariable> enumEelVariables();
     void dispatch(Message msg, std::any value);
 
 private:

@@ -39,7 +39,7 @@ signals:
     void eelCompilationStarted(const QString& scriptName);
     void eelCompilationFinished(int ret, const QString& retMsg, const QString& msg, const QString& scriptName, float initMs);
     void eelOutputReceived(const QString& output);
-    void eelVariablesEnumerated(const std::list<EelVariable>& vars);
+    void eelVariablesEnumerated(const std::vector<EelVariable>& vars);
     void convolverInfoChanged(const ConvolverInfoEventArgs& args);
     void outputDeviceChanged(const QString& deviceName, const QString& deviceId);
 
@@ -50,21 +50,9 @@ inline void IAudioService::reloadLiveprog()
     host()->reloadLiveprog();
 }
 
-#include <iostream>
 inline void IAudioService::enumerateLiveprogVariables()
 {
     auto vars = this->host()->enumEelVariables();
-
-    for(const auto& var : vars)
-    {
-        if(std::holds_alternative<std::string>(var.value))
-            std::cout << std::boolalpha << var.name << "\t\t" << std::get<std::string>(var.value) << "\t" << var.isString << std::endl;
-        else
-            std::cout << std::boolalpha << var.name << "\t\t" << std::get<float>(var.value) << "\t" << var.isString << std::endl;
-    }
-
-    std::cout << "-------------------" << std::endl;
-
     emit eelVariablesEnumerated(vars);
 }
 

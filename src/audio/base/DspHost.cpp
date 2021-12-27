@@ -721,9 +721,9 @@ void DspHost::reloadLiveprog(DspConfig* config)
         LiveProgDisable(cast(this->_dsp));
 }
 
-std::list<EelVariable> DspHost::enumEelVariables()
+std::vector<EelVariable> DspHost::enumEelVariables()
 {
-    std::list<EelVariable> vars;
+    std::vector<EelVariable> vars;
 
     compileContext *c = (compileContext*)cast(this->_dsp)->eel.vm;
     for (int i = 0; i < c->varTable_numBlocks; i++)
