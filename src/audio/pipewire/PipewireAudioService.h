@@ -26,14 +26,12 @@ public slots:
     void onAppConfigUpdated(const AppConfig::Key& key, const QVariant& value);
 
     void update(DspConfig* config) override;
-    void reloadLiveprog() override;
     void reloadService() override;
 
+    DspHost* host() override;
     IAppManager* appManager() override;
     std::vector<IOutputDevice> sinkDevices() override;
     DspStatus status() override;
-
-    void enumerateLiveprogVariables() override;
 
 private:
     const std::string log_tag = "PipewireAudioService: ";

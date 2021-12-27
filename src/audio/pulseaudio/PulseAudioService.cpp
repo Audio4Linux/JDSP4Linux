@@ -114,15 +114,15 @@ void PulseAudioService::update(DspConfig *config)
     mgr.get()->getDsp()->host()->update(config);
 }
 
-void PulseAudioService::reloadLiveprog()
-{
-    mgr.get()->getDsp()->host()->reloadLiveprog();
-}
-
 void PulseAudioService::reloadService()
 {
     mgr.get()->relink();
     mgr.get()->getDsp()->host()->updateFromCache();
+}
+
+DspHost *PulseAudioService::host()
+{
+    return mgr.get()->getDsp()->host();
 }
 
 IAppManager *PulseAudioService::appManager()
@@ -143,11 +143,5 @@ std::vector<IOutputDevice> PulseAudioService::sinkDevices()
 DspStatus PulseAudioService::status()
 {
     return mgr.get()->getDsp()->status();
-}
-
-void PulseAudioService::enumerateLiveprogVariables()
-{
-    auto vars = mgr.get()->getDsp()->host()->enumEelVariables();
-    emit eelVariablesEnumerated(vars);
 }
 

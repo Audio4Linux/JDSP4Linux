@@ -151,9 +151,9 @@ MainWindow::MainWindow(bool     statupInTray,
         connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
 
         // TODO
-        //        QTimer *timer = new QTimer(this);
-        //        connect(timer, SIGNAL(timeout()), _audioService, SLOT(enumerateLiveprogVariables()));
-        //        timer->start(200);
+       QTimer *timer = new QTimer(this);
+       connect(timer, SIGNAL(timeout()), _audioService, SLOT(enumerateLiveprogVariables()));
+       timer->start(200);
 
         connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())

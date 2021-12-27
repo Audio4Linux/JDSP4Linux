@@ -21,15 +21,17 @@ public:
 
 public slots:
     virtual void update(DspConfig* config) = 0;
-    virtual void reloadLiveprog() = 0;
+
     virtual void reloadService() = 0;
 
     virtual IAppManager* appManager() = 0;
+    virtual DspHost* host() = 0;
 
     virtual std::vector<IOutputDevice> sinkDevices() = 0;
     virtual DspStatus status() = 0;
 
-    virtual void enumerateLiveprogVariables() = 0;
+    void reloadLiveprog();
+    void enumerateLiveprogVariables();
 
     void handleMessage(DspHost::Message msg, std::any arg);
 
@@ -42,6 +44,29 @@ signals:
     void outputDeviceChanged(const QString& deviceName, const QString& deviceId);
 
 };
+
+inline void IAudioService::reloadLiveprog()
+{
+    host()->reloadLiveprog();
+}
+
+#include <iostream>
+inline void IAudioService::enumerateLiveprogVariables()
+{
+    auto vars = this->host()->enumEelVariables();
+
+    for(const auto& var : vars)
+    {
+        if(std::holds_alternative<std::string>(var.value))
+            std::cout << std::boolalpha << var.name << "\t\t" << std::get<std::string>(var.value) << "\t" << var.isString << std::endl;
+        else
+            std::cout << std::boolalpha << var.name << "\t\t" << std::get<float>(var.value) << "\t" << var.isString << std::endl;
+    }
+
+    std::cout << "-------------------" << std::endl;
+
+    emit eelVariablesEnumerated(vars);
+}
 
 inline void IAudioService::handleMessage(DspHost::Message msg, std::any value)
 {

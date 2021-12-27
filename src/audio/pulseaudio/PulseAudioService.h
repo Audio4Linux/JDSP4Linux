@@ -22,14 +22,12 @@ public:
 
 public slots:
     void update(DspConfig* config) override;
-    void reloadLiveprog() override;
     void reloadService() override;
 
+    DspHost* host() override;
     IAppManager* appManager() override;
     std::vector<IOutputDevice> sinkDevices() override;
     DspStatus status() override;
-
-    void enumerateLiveprogVariables() override;
 
 private:
     PulsePipelineManagerPtr mgr;

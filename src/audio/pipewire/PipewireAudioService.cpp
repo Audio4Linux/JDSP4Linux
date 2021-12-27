@@ -127,16 +127,16 @@ void PipewireAudioService::update(DspConfig *config)
     plugin->host()->update(config);
 }
 
-void PipewireAudioService::reloadLiveprog()
-{
-    plugin->host()->reloadLiveprog();
-}
-
 void PipewireAudioService::reloadService()
 {
     effects.get()->disconnect_filters();
     plugin->host()->updateFromCache();
     effects.get()->connect_filters();
+}
+
+DspHost *PipewireAudioService::host()
+{
+    return plugin->host();
 }
 
 IAppManager *PipewireAudioService::appManager()
@@ -166,27 +166,5 @@ std::vector<IOutputDevice> PipewireAudioService::sinkDevices()
 DspStatus PipewireAudioService::status()
 {
     return plugin->status();
-}
-
-#include <iostream>
-
-#include <config/AppConfig.h>
-void PipewireAudioService::enumerateLiveprogVariables()
-{
-
-    // TODO
-    auto vars = plugin->host()->enumEelVariables();
-
-    for(const auto& var : vars)
-    {
-        if(std::holds_alternative<std::string>(var.value))
-            std::cout << std::boolalpha << var.name << "\t\t" << std::get<std::string>(var.value) << "\t" << var.isString << std::endl;
-        else
-            std::cout << std::boolalpha << var.name << "\t\t" << std::get<float>(var.value) << "\t" << var.isString << std::endl;
-    }
-
-    std::cout << "-------------------" << std::endl;
-
-    emit eelVariablesEnumerated(vars);
 }
 

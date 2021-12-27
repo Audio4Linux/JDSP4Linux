@@ -25,6 +25,9 @@ include(subprojects/FlatTabWidget/FlatTabWidget/FlatTabWidget.pri)
 include(subprojects/LiquidEqualizerWidget/LiquidEqualizerWidget.pri)
 include(subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQWidget.pri)
 
+DEFINES += HAS_JDSP_DRIVER
+include(subprojects/EELEditor/src/EELEditor.pri)
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -193,16 +196,3 @@ INCLUDEPATH += $$PWD/../libjamesdsp/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/ 
                $$PWD/../libjamesdsp
 DEPENDPATH += $$PWD/../libjamesdsp
 unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../libjamesdsp/liblibjamesdsp.a
-
-# Link libEELEditor
-unix:!macx: LIBS += -L$$OUT_PWD/subprojects/EELEditor/src -leeleditor
-INCLUDEPATH += $$PWD/subprojects/EELEditor/src \
-               $$PWD/subprojects/EELEditor/3rdparty/QCodeEditor/include
-DEPENDPATH += $$PWD/subprojects/EELEditor/src
-unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/subprojects/EELEditor/src/libeeleditor.a
-
-# Link libqtadvanceddocking (libEELEditor)
-LIBS += -L$$OUT_PWD/subprojects/EELEditor/3rdparty/docking-system/lib
-include($$PWD/subprojects/EELEditor/3rdparty/docking-system/ads.pri)
-INCLUDEPATH += $$PWD/subprojects/EELEditor/3rdparty/docking-system/src
-DEPENDPATH += $$PWD/subprojects/EELEditor/3rdparty/docking-system/src
