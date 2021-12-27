@@ -139,9 +139,6 @@ MainWindow::MainWindow(bool     statupInTray,
             ui->info->setAnimatedText(QString("%1 connected - Preset loaded automatically").arg(device), true);
         });
 
-        connect(_audioService, &IAudioService::eelCompilationStarted, _eelEditor, &EELEditor::onCompilerStarted);
-        connect(_audioService, &IAudioService::eelCompilationFinished, _eelEditor, &EELEditor::onCompilerFinished);
-        connect(_audioService, &IAudioService::eelOutputReceived, _eelEditor, &EELEditor::onConsoleOutputReceived);
         connect(_audioService, &IAudioService::outputDeviceChanged, &PresetManager::instance(), &PresetManager::onOutputDeviceChanged);
 
         // Convolver file info
@@ -150,12 +147,8 @@ MainWindow::MainWindow(bool     statupInTray,
         onConvolverInfoChanged(ciArgs);
         connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
 
-        // TODO
-       QTimer *timer = new QTimer(this);
-       connect(timer, SIGNAL(timeout()), _audioService, SLOT(enumerateLiveprogVariables()));
-       timer->start(200);
-
-        connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
+       _eelEditor->attachHost(_audioService);
+       connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())
             {
                 ui->liveprog->setCurrentLiveprog(path);
