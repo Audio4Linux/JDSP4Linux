@@ -20,7 +20,6 @@ include(../3rdparty/3rdparty.pri)
 
 include(audio/AudioDrivers.pri)
 
-#include(subprojects/Visualization/SpectrumAudioViewer.pri)
 include(subprojects/AutoEqIntegration/AutoEqIntegration.pri)
 include(subprojects/FlatTabWidget/FlatTabWidget/FlatTabWidget.pri)
 include(subprojects/LiquidEqualizerWidget/LiquidEqualizerWidget.pri)

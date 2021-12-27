@@ -23,6 +23,7 @@
 
 #include "interface/fragment/AppManagerFragment.h"
 #include "interface/fragment/FragmentHost.h"
+#include "config/AppConfig.h"
 #include "data/PresetProvider.h"
 #include "EventArgs.h"
 
@@ -62,55 +63,55 @@ public:
 	~MainWindow();
 
 protected:
-    void        resizeEvent(QResizeEvent* event) override;
-    void        closeEvent(QCloseEvent *event) override;
+    void resizeEvent(QResizeEvent* event) override;
+    void closeEvent(QCloseEvent *event) override;
 
 public slots:
-    void        onResetRequested();
-    void        onRelinkRequested();
-	void        raiseWindow();
-	int         extractDefaultEelScripts(bool allowOverride,
-	                                     bool user);
-	void        launchFirstRunSetup();
+    void onResetRequested();
+    void onRelinkRequested();
+    void raiseWindow();
+    int  extractDefaultEelScripts(bool allowOverride, bool user);
+    void launchFirstRunSetup();
 
 private slots:
-    void        applyConfig();
+    void applyConfig();
 
-    void        onPassthroughToggled();
-    void        onFragmentRequested();
+    void onPassthroughToggled();
+    void onFragmentRequested();
 
-	void        resetEQ();
+    void resetEQ();
 
-	void        loadExternalFile();
-	void        saveExternalFile();
+    void loadExternalFile();
+    void saveExternalFile();
 
-    void        onBs2bPresetUpdated();
-    void        onReverbPresetUpdated();
-    void        onEqPresetUpdated();
-    void        onEqModeUpdated();
+    void onBs2bPresetUpdated();
+    void onReverbPresetUpdated();
+    void onEqPresetUpdated();
+    void onEqModeUpdated();
 
-	void        restoreGraphicEQView();
-	void        saveGraphicEQView();
+    void restoreGraphicEQView();
+    void saveGraphicEQView();
 
-    void        fireTimerSignal();
-    void        onConvolverWaveformEdit();
+    void onConvolverWaveformEdit();
 
-    void        onTrayIconActivated();
+    void onTrayIconActivated();
 
-    void        setVdcFile(const QString &path);
-    void        setIrsFile(const QString &path);
+    void setVdcFile(const QString &path);
+    void setIrsFile(const QString &path);
 
-    void        determineEqPresetName();
+    void determineEqPresetName();
+    void determineIrsSelection();
+    void determineVdcSelection();
 
-    void        onVdcDatabaseSelected(const QItemSelection &, const QItemSelection &);
-    void        onAutoEqImportRequested();
-    void        onConvolverInfoChanged(const ConvolverInfoEventArgs &args);
+    void onVdcDatabaseSelected(const QItemSelection&, const QItemSelection&);
+    void onAutoEqImportRequested();
+    void onConvolverInfoChanged(const ConvolverInfoEventArgs &args);
 
+    void onAppConfigUpdated(const AppConfig::Key& key, const QVariant& value);
 private:
     Ui::MainWindow *ui;
 
     StyleHelper *_styleHelper;
-    QTimer *_refreshTick;
 
     bool _startupInTraySwitch;
     TrayIcon *_trayIcon;
@@ -122,33 +123,21 @@ private:
     FragmentHost<SettingsFragment*>* _settingsFragment = nullptr;
     FragmentHost<PresetFragment*>* _presetFragment     = nullptr;
 
-    QAction *_spectrum;
-    QScopedPointer<QFrame> _spectrumLayout;
-    Spectrograph *_spectrumWidget;
-    AudioStreamEngine *_spectrumEngine;
-
     IAudioService* _audioService       = nullptr;
 
-    bool _spectrumReloadSignalQueued   = false;
     bool _blockApply                   = false;
-    bool _lockliveprogupdate           = false;
 
     QString _currentImpulseResponse    = "";
-    QString _currentVdc               = "";
-    QString _currentConvWaveformEdit  = "";
+    QString _currentVdc                = "";
+    QString _currentConvWaveformEdit   = "";
 
 	void loadConfig();
 	void connectActions();
-
     void installUnitData();
-
-    void determineIrsSelection();
-    void determineVdcSelection();
 
     void setEq(const QVector<double> &data);
     void setEqMode(int mode);
     void setReverbData(PresetProvider::Reverb::sf_reverb_preset_data data);
-
 
 };
 

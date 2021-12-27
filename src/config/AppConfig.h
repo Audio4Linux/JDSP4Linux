@@ -52,15 +52,6 @@ public:
         TrayIconEnabled,
         TrayIconMenu,
 
-        SpectrumEnabled,
-        SpectrumGrid,
-        SpectrumBands,
-        SpectrumMinFreq,
-        SpectrumMaxFreq,
-        SpectrumTheme,
-        SpectrumRefresh,
-        SpectrumMultiplier,
-
         EqualizerShowHandles,
 
         SetupDone,
@@ -167,7 +158,6 @@ private slots:
     void notify(const Key& key, const QVariant& value);
 
 signals:
-    void spectrumChanged(bool needReload);
     void themeChanged(const Key&, const QVariant&);
     void updated(const Key&, const QVariant&);
 

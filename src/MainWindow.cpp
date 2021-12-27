@@ -61,14 +61,6 @@ MainWindow::MainWindow(bool     statupInTray,
 {
     ui->setupUi(this);
 
-    {
-        _startupInTraySwitch = statupInTray;
-
-        _styleHelper         = new StyleHelper(this);
-        _eelEditor           = new EELEditor(this);
-        _trayIcon            = new TrayIcon(this);
-    }
-
     // Prepare audio subsystem
     {
         Log::information("============ Initializing audio service ============");
@@ -91,6 +83,20 @@ MainWindow::MainWindow(bool     statupInTray,
 #endif
         connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
         connect(&DspConfig::instance(), &DspConfig::updatedExternally, _audioService, &IAudioService::update);
+    }
+
+    // Allocate resources
+    {
+        _startupInTraySwitch = statupInTray;
+
+        _styleHelper         = new StyleHelper(this);
+        _eelEditor           = new EELEditor(this);
+        _trayIcon            = new TrayIcon(this);
+
+        _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
+        _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
+        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
+        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, this), WAF::BottomSide, this);
     }
 
     // Prepare base UI
@@ -124,11 +130,6 @@ MainWindow::MainWindow(bool     statupInTray,
         // GraphicEQ
         ui->graphicEq->setEnableSwitchVisible(true);
         ui->graphicEq->setAutoEqAvailable(true);
-
-        // Timer (TODO)
-        _refreshTick = new QTimer(this);
-        connect(_refreshTick, &QTimer::timeout, this, &MainWindow::fireTimerSignal);
-        _refreshTick->start(1000);
     }
 
     // Allocate pointers and init important variables
@@ -155,7 +156,6 @@ MainWindow::MainWindow(bool     statupInTray,
         //        timer->start(200);
 
         connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
-            bool isSameFile = path == ui->liveprog->currentLiveprog();
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())
             {
                 ui->liveprog->setCurrentLiveprog(path);
@@ -169,7 +169,7 @@ MainWindow::MainWindow(bool     statupInTray,
 
             applyConfig();
 
-            if(isSameFile)
+            if(path == ui->liveprog->currentLiveprog())
             {
                 _audioService->reloadLiveprog();
             }
@@ -234,15 +234,10 @@ MainWindow::MainWindow(bool     statupInTray,
         _trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || _startupInTraySwitch);
     }
 
-    // Load config and initialize less important stuff
+    // Load config and connect fragment signals
     {
         connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
-
-        _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
-        _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
-        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
-        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, this), WAF::BottomSide, this);
 
         connect(_settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
         connect(_settingsFragment->fragment(), &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
@@ -263,6 +258,7 @@ MainWindow::MainWindow(bool     statupInTray,
         ui->toolButton->setIconSize(QSize(16,16));
         ui->disableFX->setIconSize(QSize(16,16));
 
+        // Attach menu
         QMenu *menu = new QMenu();
         menu->addAction(tr("Apps"), _appMgrFragment, &FragmentHost<AppManagerFragment*>::slideIn);
         menu->addAction(tr("Driver status"), _statusFragment, [this](){
@@ -315,28 +311,11 @@ MainWindow::MainWindow(bool     statupInTray,
 
     // Setup file selectors
     {
+        // DDC
         ui->ddc_files->setCurrentDirectory(AppConfig::instance().getVdcPath());
         ui->ddc_files->setFileTypes(QStringList("*.vdc"));
-
-        ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
-        ui->conv_files->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
-        ui->conv_files->setBookmarkDirectory(QDir(AppConfig::instance().getPath("irs_favorites")));
-
-        ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
-        ui->conv_fav->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
-        ui->conv_fav->setFileActionsVisible(true);
-        ui->conv_fav->setNavigationBarVisible(false);
-
         connect(ui->ddc_files,  &FileSelectionWidget::fileChanged, this, &MainWindow::setVdcFile);
-        connect(ui->conv_files, &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
-        connect(ui->conv_fav,   &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
 
-        connect(ui->conv_files, &FileSelectionWidget::bookmarkAdded, ui->conv_fav, &FileSelectionWidget::enumerateFiles);
-
-        connect(ui->conv_files, &FileSelectionWidget::fileChanged, ui->conv_fav, &FileSelectionWidget::clearCurrentFile);
-        connect(ui->conv_fav,   &FileSelectionWidget::fileChanged, ui->conv_files, &FileSelectionWidget::clearCurrentFile);
-
-        // DDC
         ui->ddcTable->setModel(new VdcDatabaseModel(ui->ddcTable));
         ui->ddcTable->setColumnHidden(2, true);
         ui->ddcTable->setColumnHidden(3, true);
@@ -346,6 +325,20 @@ MainWindow::MainWindow(bool     statupInTray,
 
         // Convolver
         determineIrsSelection();
+        ui->conv_files->setCurrentDirectory(AppConfig::instance().getIrsPath());
+        ui->conv_files->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
+        ui->conv_files->setBookmarkDirectory(QDir(AppConfig::instance().getPath("irs_favorites")));
+
+        ui->conv_fav->setCurrentDirectory(AppConfig::instance().getPath("irs_favorites"));
+        ui->conv_fav->setFileTypes(QStringList(std::initializer_list<QString>({"*.irs", "*.wav", "*.flac"})));
+        ui->conv_fav->setFileActionsVisible(true);
+        ui->conv_fav->setNavigationBarVisible(false);
+
+        connect(ui->conv_files, &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
+        connect(ui->conv_fav,   &FileSelectionWidget::fileChanged, this, &MainWindow::setIrsFile);
+        connect(ui->conv_files, &FileSelectionWidget::fileChanged, ui->conv_fav, &FileSelectionWidget::clearCurrentFile);
+        connect(ui->conv_fav,   &FileSelectionWidget::fileChanged, ui->conv_files, &FileSelectionWidget::clearCurrentFile);
+        connect(ui->conv_files, &FileSelectionWidget::bookmarkAdded, ui->conv_fav, &FileSelectionWidget::enumerateFiles);
 
         // Liveprog
         ui->liveprog->coupleIDE(_eelEditor);
@@ -361,13 +354,10 @@ MainWindow::MainWindow(bool     statupInTray,
         }
     }
 
-    // Connect UI signals
+    // Connect remaining signals
     {
         connectActions();
-    }
 
-    // Connect non-UI signals (DBus/ACW/...)
-    {
         connect(&AppConfig::instance(), &AppConfig::themeChanged, this, [this]()
         {
             _styleHelper->SetStyle();
@@ -375,29 +365,13 @@ MainWindow::MainWindow(bool     statupInTray,
             ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
             ui->tabbar->redrawTabBar();
             ui->eq_widget->setAccentColor(palette().highlight().color());
-            _spectrumReloadSignalQueued = true;
         });
 
-        connect(&AppConfig::instance(), &AppConfig::updated, this, [this](const AppConfig::Key& key, const QVariant& value)
-        {
-            switch(key)
-            {
-            case AppConfig::EqualizerShowHandles:
-                ui->eq_widget->setAlwaysDrawHandles(value.toBool());
-                break;
-            case AppConfig::TrayIconEnabled:
-                _trayIcon->setTrayVisible(value.toBool());
-                break;
-            default:
-                break;
-            }
-
-        });
+        connect(&AppConfig::instance(), &AppConfig::updated, this, &MainWindow::onAppConfigUpdated);
     }
 
-    // Lateinit less important UI stuff and setup tabbar
+    // Tabs and other UI related things
     {
-        //toggleSpectrum(AppConfig::instance().get<bool>(AppConfig::SpectrumEnabled), true);
         restoreGraphicEQView();
         ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
@@ -453,16 +427,6 @@ MainWindow::~MainWindow()
         delete _audioService;
     }
     delete ui;
-}
-
-void MainWindow::fireTimerSignal()
-{
-    if (_spectrumReloadSignalQueued)
-    {
-        //restartSpectrum();
-    }
-
-    _spectrumReloadSignalQueued = false;
 }
 
 // Overrides
@@ -535,6 +499,21 @@ void MainWindow::onConvolverInfoChanged(const ConvolverInfoEventArgs& args)
     ui->ir_details_frames->setText(QString::number(args.frames));
 }
 
+void MainWindow::onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value)
+{
+    switch(key)
+    {
+        case AppConfig::EqualizerShowHandles:
+            ui->eq_widget->setAlwaysDrawHandles(value.toBool());
+            break;
+        case AppConfig::TrayIconEnabled:
+            _trayIcon->setTrayVisible(value.toBool());
+            break;
+        default:
+            break;
+    }
+}
+
 // Fragment handler
 void MainWindow::onFragmentRequested()
 {
@@ -571,9 +550,6 @@ void MainWindow::onRelinkRequested()
 {
     _audioService->reloadService();
     DspConfig::instance().commit();
-
-    // TODO
-    _spectrumReloadSignalQueued = true;
 }
 
 // User preset management
@@ -884,7 +860,7 @@ void MainWindow::applyConfig()
 // Predefined presets
 void MainWindow::onEqPresetUpdated()
 {
-    if (ui->eqpreset->currentText() == "Custom")
+    if (ui->eqpreset->currentText() == "Custom" || _blockApply)
     {
         return;
     }
@@ -903,7 +879,7 @@ void MainWindow::onEqPresetUpdated()
 
 void MainWindow::onBs2bPresetUpdated()
 {
-    if (ui->crossfeed_mode->currentText() == "...")
+    if (ui->crossfeed_mode->currentText() == "..." || _blockApply)
     {
         return;
     }
@@ -929,7 +905,7 @@ void MainWindow::onBs2bPresetUpdated()
 
 void MainWindow::onReverbPresetUpdated()
 {
-    if (ui->roompresets->currentText() == "...")
+    if (ui->roompresets->currentText() == "..." || _blockApply)
     {
         return;
     }
@@ -1191,7 +1167,7 @@ void MainWindow::setEq(const QVector<double> &data)
 void MainWindow::resetEQ()
 {
     ui->eqpreset->setCurrentIndex(0);
-    _blockApply = true; // TODO: get rid of _blockApply guards
+    _blockApply = true;
     ui->eq_dyn_widget->load(DEFAULT_GRAPHICEQ);
     _blockApply = false;
     setEq(PresetProvider::EQ::defaultPreset());
@@ -1310,27 +1286,27 @@ void MainWindow::connectActions()
     connect(ui->eqpreset,           qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onEqPresetUpdated);
     connect(ui->roompresets,        qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onReverbPresetUpdated);
 
-    connect(ui->eq_widget,          SIGNAL(bandsUpdated()),           this, SLOT(applyConfig()));
-    connect(ui->eq_widget,          SIGNAL(mouseReleased()),          this, SLOT(determineEqPresetName()));
+    connect(ui->eq_widget,          &LiquidEqualizerWidget::bandsUpdated, this, &MainWindow::applyConfig);
+    connect(ui->eq_widget,          &LiquidEqualizerWidget::mouseReleased, this, &MainWindow::determineEqPresetName);
 
-    connect(ui->conv_adv_wave_edit, &QAbstractButton::clicked,        this, &MainWindow::onConvolverWaveformEdit);
+    connect(ui->conv_adv_wave_edit, &QAbstractButton::clicked, this, &MainWindow::onConvolverWaveformEdit);
 
-    connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
-    connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp,     this, &MainWindow::applyConfig);
+    connect(ui->graphicEq,          &GraphicEQFilterGUI::mouseUp, this, &MainWindow::applyConfig);
+    connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::mouseUp, this, &MainWindow::applyConfig);
 
     connect(ui->graphicEq,          &GraphicEQFilterGUI::updateModelEnd, this, &MainWindow::applyConfig);
     connect(ui->eq_dyn_widget,      &GraphicEQFilterGUI::updateModelEnd, this, &MainWindow::applyConfig);
 
     connect(ui->ddcTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onVdcDatabaseSelected);
-    connect(ui->liveprog,           &LiveprogSelectionWidget::toggled,       this, &MainWindow::applyConfig);
+    connect(ui->liveprog,           &LiveprogSelectionWidget::toggled, this, &MainWindow::applyConfig);
     connect(ui->liveprog,           &LiveprogSelectionWidget::scriptChanged, this, &MainWindow::applyConfig);
 
     connect(ui->graphicEq,          &GraphicEQFilterGUI::autoeqClicked, this, &MainWindow::onAutoEqImportRequested);
 
-    connect(ui->eq_r_fixed,         &QRadioButton::clicked,             this, &MainWindow::onEqModeUpdated);
-    connect(ui->eq_r_flex,          &QRadioButton::clicked,             this, &MainWindow::onEqModeUpdated);
+    connect(ui->eq_r_fixed,         &QRadioButton::clicked, this, &MainWindow::onEqModeUpdated);
+    connect(ui->eq_r_flex,          &QRadioButton::clicked, this, &MainWindow::onEqModeUpdated);
 
-    connect(_eelEditor,             &EELEditor::scriptSaved,    ui->liveprog, &LiveprogSelectionWidget::updateFromEelEditor);
+    connect(_eelEditor,             &EELEditor::scriptSaved, ui->liveprog, &LiveprogSelectionWidget::updateFromEelEditor);
 }
 
 // Setup wizard

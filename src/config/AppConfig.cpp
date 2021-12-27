@@ -20,15 +20,6 @@ AppConfig::AppConfig()
     DEFINE_KEY(TrayIconEnabled, true);
     DEFINE_KEY(TrayIconMenu, "");
 
-    DEFINE_KEY(SpectrumEnabled, false);
-    DEFINE_KEY(SpectrumGrid, false);
-    DEFINE_KEY(SpectrumBands, 0);
-    DEFINE_KEY(SpectrumMinFreq, 0);
-    DEFINE_KEY(SpectrumMaxFreq, 0);
-    DEFINE_KEY(SpectrumTheme, 0);
-    DEFINE_KEY(SpectrumRefresh, 0);
-    DEFINE_KEY(SpectrumMultiplier, 0);
-
     DEFINE_KEY(EqualizerShowHandles, false);
 
     DEFINE_KEY(SetupDone, false);
@@ -129,18 +120,6 @@ void AppConfig::notify(const Key &key, const QVariant &value)
     case ThemeColorsCustom:
     case ThemeColorsCustomWhiteIcons:
         emit themeChanged(key, value);
-        break;
-    case SpectrumEnabled:
-    case SpectrumBands:
-    case SpectrumGrid:
-    case SpectrumMinFreq:
-    case SpectrumMaxFreq:
-    case SpectrumMultiplier:
-    case SpectrumTheme:
-        emit spectrumChanged(false);
-        break;
-    case SpectrumRefresh:
-        emit spectrumChanged(true);
         break;
     default:
         break;
