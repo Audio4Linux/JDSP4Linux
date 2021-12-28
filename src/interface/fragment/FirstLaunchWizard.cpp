@@ -53,9 +53,7 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 
     connect(ui->p3_systray_disable, &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_enable,  &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
-
     connect(ui->p3_systray_minOnBoot, &QCheckBox::stateChanged, this, &FirstLaunchWizard::onSystrayAutostartToggled);
-
 }
 
 FirstLaunchWizard::~FirstLaunchWizard()
@@ -63,10 +61,13 @@ FirstLaunchWizard::~FirstLaunchWizard()
     delete ui;
 }
 
-void FirstLaunchWizard::resizeEvent(QResizeEvent *ev)
+void FirstLaunchWizard::showEvent(QShowEvent *ev)
 {
-    QWidget::resizeEvent(ev);
-    ui->stackedWidget->setMinimumHeight(ev->size().height() * 0.7);
+    QWidget::showEvent(ev);
+    auto maxSize = ui->p1_container->size() * 1.3;
+    ui->p1_container->setMaximumSize(maxSize);
+    ui->p3_container->setMaximumSize(maxSize);
+    ui->p4_container->setMaximumSize(maxSize);
 }
 
 void FirstLaunchWizard::onSystrayRadioSelected()

@@ -20,11 +20,11 @@ public:
     explicit FirstLaunchWizard(IAudioService *audioService,QWidget *parent = nullptr);
 	~FirstLaunchWizard();
 
+protected:
+    void showEvent(QShowEvent* ev) override;
+
 signals:
 	void wizardFinished();
-
-protected:
-    void resizeEvent(QResizeEvent* ev) override;
 
 private slots:
     void onSystrayRadioSelected();
