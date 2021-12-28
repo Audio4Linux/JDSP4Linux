@@ -9,4 +9,4 @@
 	url = https://github.com/ThePBone/FlatTabWidget.git
 [submodule "src/subprojects/LiquidEqualizerWidget"]
 	path = src/subprojects/LiquidEqualizerWidget
-	url = git@github.com:ThePBone/LiquidEqualizerWidget.git
+	url = https://github.com/ThePBone/LiquidEqualizerWidget.git
