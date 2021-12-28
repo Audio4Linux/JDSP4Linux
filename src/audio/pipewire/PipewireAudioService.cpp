@@ -21,7 +21,7 @@ PipewireAudioService::PipewireAudioService()
 
     plugin->setMessageHandler(std::bind(&IAudioService::handleMessage, this, std::placeholders::_1, std::placeholders::_2));
 
-    mgr.get()->new_default_sink.connect([&](NodeInfo node) {
+    mgr.get()->new_default_sink.connect([=](NodeInfo node) {
         util::debug(log_tag + "new default output device: " + node.name);
 
         if (AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault)) {
@@ -35,7 +35,7 @@ PipewireAudioService::PipewireAudioService()
         }
     });
 
-    mgr.get()->device_output_route_changed.connect([&](DeviceInfo device) {
+    mgr.get()->device_output_route_changed.connect([=](DeviceInfo device) {
         if (device.output_route_available == SPA_PARAM_AVAILABILITY_no)
         {
             return;
@@ -64,6 +64,7 @@ PipewireAudioService::PipewireAudioService()
     });
 
     connect(&AppConfig::instance(), &AppConfig::updated, this, &PipewireAudioService::onAppConfigUpdated);
+    //connect(this, &PipewireAudioService::outputDeviceChanged, this, &PipewireAudioService::reloadService);
 }
 
 PipewireAudioService::~PipewireAudioService()
