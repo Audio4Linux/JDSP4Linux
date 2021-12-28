@@ -13,6 +13,7 @@
 #include "config/ConfigContainer.h"
 #include "config/ConfigIO.h"
 #include "config/DspConfig.h"
+#include "data/AssetManager.h"
 #include "data/EelParser.h"
 #include "data/model/VdcDatabaseModel.h"
 #include "data/PresetManager.h"
@@ -233,7 +234,6 @@ MainWindow::MainWindow(bool     statupInTray,
         DspConfig::instance().load();
 
         connect(_settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
-        connect(_settingsFragment->fragment(), &SettingsFragment::requestEelScriptExtract, this, &MainWindow::extractDefaultEelScripts);
         connect(_settingsFragment->fragment(), &SettingsFragment::reopenSettings, _settingsFragment, &FragmentHost<SettingsFragment*>::slideOutIn);
         connect(_styleHelper, &StyleHelper::iconColorChanged, _settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
     }
@@ -298,7 +298,7 @@ MainWindow::MainWindow(bool     statupInTray,
     {
         if (AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract))
         {
-            extractDefaultEelScripts(false, false);
+            AssetManager::instance().extractAll();
         }
     }
 
@@ -1091,63 +1091,6 @@ void MainWindow::onConvolverWaveformEdit()
 
         applyConfig();
     }
-}
-
-// Liveprog
-int MainWindow::extractDefaultEelScripts(bool allowOverride,
-                                         bool user)
-{
-    QDirIterator it(":/assets/liveprog", QDirIterator::NoIteratorFlags);
-    int          i = 0;
-
-    while (it.hasNext())
-    {
-        QFile   eel(it.next());
-        QString name    = QFileInfo(eel).fileName();
-        QString newpath = AppConfig::instance().getLiveprogPath() + "/" + name;
-
-        if (QFile(newpath).exists() && !allowOverride)
-        {
-            continue;
-        }
-
-        if(!QDir(AppConfig::instance().getLiveprogPath()).exists())
-        {
-            QDir().mkpath(AppConfig::instance().getLiveprogPath());
-        }
-
-        QFile file(newpath);
-
-        if (eel.open(QIODevice::ReadOnly | QIODevice::Text) &&
-                file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream stream(&file);
-            stream << eel.readAll();
-            file.close();
-            eel.close();
-        }
-
-        i++;
-    }
-
-    if (i > 0)
-    {
-        Log::debug(QString("MainWindow::extractDefaultEelScripts: %1 default eel files extracted").arg(i));
-    }
-
-    if (user)
-    {
-        if (i > 0)
-        {
-            QMessageBox::information(this, "Extract scripts", QString("%1 script(s) have been restored").arg(i));
-        }
-        else
-        {
-            QMessageBox::information(this, "Extract scripts", QString("No scripts have been extracted"));
-        }
-    }
-
-    return i;
 }
 
 // EQ

@@ -45,6 +45,7 @@ SOURCES += \
     config/ConfigContainer.cpp \
     config/ConfigIO.cpp \
     crash/airbag.c \
+    data/AssetManager.cpp \
     data/EelParser.cpp \
     data/PresetManager.cpp \
     data/PresetProvider.cpp \
@@ -109,6 +110,7 @@ HEADERS += \
     crash/killer.h \
     crash/safecall.h \
     crash/stacktrace.h \
+    data/AssetManager.h \
     data/EelParser.h \
     data/InitializableQMap.h \
     data/PresetManager.h \

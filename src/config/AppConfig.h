@@ -126,12 +126,16 @@ public:
     bool isAppBlocked(const QString& name) const;
 
 #define DEFINE_USER_PATH(name,key) \
-    QString get##name##Path() const \
+    QString get##name##Path(QString subdir = "") const \
     { \
         QString current = chopFirstLastChar(get<QString>(key)); \
         if (!QDir(current).exists()) \
         { \
             QDir().mkpath(current); \
+        } \
+        if(!subdir.isEmpty()) \
+        { \
+            return QString("%1/%2").arg(current).arg(subdir); \
         } \
         return current; \
     } \

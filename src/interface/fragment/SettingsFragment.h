@@ -21,6 +21,9 @@
 class MainWindow;
 class TrayIcon;
 class IAudioService;
+class PaletteEditor;
+
+class QTreeWidgetItem;
 
 namespace Ui
 {
@@ -46,15 +49,34 @@ public:
 public slots:
 	void updateButtonStyle(bool white);
 
+private slots:
+    void onSavePathsClicked();
+    void onExtractAssetsClicked();
+    void onDefaultDeviceSelected();
+    void onTreeItemSelected(QTreeWidgetItem *cur, QTreeWidgetItem* prev);
+    void onAutoStartToggled();
+    void onSystrayToggled();
+    void onThemeSelected(int index);
+    void onPaletteSelected(int index);
+    void onBlocklistInvertToggled(bool state);
+    void onBlocklistClearClicked();
+    void onSetupWizardLaunchClicked();
+    void onTrayEditorCommitted();
+    void onTrayEditorReset();
+    void onEqualizerHandlesToggled();
+    void onLiveprogAutoExtractToggled();
+    void onGithubLinkClicked();
+
 signals:
-	void requestEelScriptExtract(bool force,
-	                             bool user);
 	void launchSetupWizard();
 	void reopenSettings();
 
 private:
 	TrayIcon *_trayIcon;
     IAudioService *_audioService;
+    PaletteEditor *_paletteEditor;
+
+    bool _lockslot = false;
 
 };
 

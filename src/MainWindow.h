@@ -70,7 +70,6 @@ public slots:
     void onResetRequested();
     void onRelinkRequested();
     void raiseWindow();
-    int  extractDefaultEelScripts(bool allowOverride, bool user);
     void launchFirstRunSetup();
 
 private slots:
