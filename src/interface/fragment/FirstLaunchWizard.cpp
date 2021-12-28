@@ -33,7 +33,9 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
 
 	ui->stackedWidget->setAnimation(QEasingCurve::Type::OutCirc);
 	connect(ui->p1_next, &QPushButton::clicked, [&] {
-#ifdef USE_PULSEAUDIO
+
+    // always skip
+#if 1 //defined(USE_PULSEAUDIO)
         // Pulseaudio: skip device selection
         ui->stackedWidget->slideInIdx(2);
 #else
