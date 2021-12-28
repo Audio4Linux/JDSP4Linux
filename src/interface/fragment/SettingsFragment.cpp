@@ -96,6 +96,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	 */
     connect(ui->liveprog_autoextract, &QCheckBox::clicked, this, &SettingsFragment::onLiveprogAutoExtractToggled);
     connect(ui->liveprog_extractNow, &QPushButton::clicked, this, &SettingsFragment::onExtractAssetsClicked);
+    connect(ui->savePaths, &QPushButton::clicked, this, &SettingsFragment::onSavePathsClicked);
 
 	/*
      *  Devices signals
