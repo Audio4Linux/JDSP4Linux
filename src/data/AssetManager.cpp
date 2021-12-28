@@ -47,15 +47,12 @@ int AssetManager::extractGroup(AssetType type, bool allowOverride)
         {
             continue;
         }
-
-        if (sourceFile.open(QIODevice::ReadOnly | QIODevice::Text) &&
-                targetFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        else if(targetFile.exists())
         {
-            QTextStream stream(&targetFile);
-            stream << targetFile.readAll();
-            targetFile.close();
+            targetFile.remove();
         }
 
+        sourceFile.copy(targetFile.fileName());
         i++;
     }
 

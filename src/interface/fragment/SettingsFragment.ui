@@ -124,7 +124,7 @@
         <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -414,7 +414,7 @@
               <item>
                <widget class="QPushButton" name="liveprog_extractNow">
                 <property name="text">
-                 <string>Extract now</string>
+                 <string>  Extract now  </string>
                 </property>
                </widget>
               </item>
@@ -712,6 +712,22 @@
         <string>Run setup wizard</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>5</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QPushButton" name="close">

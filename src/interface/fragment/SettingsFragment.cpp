@@ -122,6 +122,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	/*
 	 * Check for systray availability
 	 */
+    ui->systray_unsupported->hide();
 #ifndef QT_NO_SYSTEMTRAYICON
 	if (!QSystemTrayIcon::isSystemTrayAvailable())
 	{

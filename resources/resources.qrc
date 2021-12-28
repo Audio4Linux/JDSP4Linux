@@ -54,5 +54,13 @@
         <file>assets/liveprog/depthsurround.eel</file>
         <file>assets/liveprog/dynamicbass.eel</file>
         <file>assets/liveprog/lowpass.eel</file>
+        <file>assets/irs/Church.wav</file>
+        <file>assets/irs/CorredHRTF_Crossfeed.wav</file>
+        <file>assets/irs/CorredHRTF_Surround1.wav</file>
+        <file>assets/irs/CorredHRTF_Surround2.wav</file>
+        <file>assets/irs/SwapChannels.wav</file>
+        <file>assets/vdc/Butterworth.vdc</file>
+        <file>assets/vdc/FrontRearContrast.vdc</file>
+        <file>assets/vdc/mh750.vdc</file>
     </qresource>
 </RCC>
