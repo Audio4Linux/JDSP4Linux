@@ -229,12 +229,10 @@ void SettingsFragment::refreshAll()
     ui->systray_icon_box->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->menu_edit->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
-	bool autostart_enabled     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
-	bool autostart_delayed     = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Delayed);
-
-    ui->systray_minOnBoot->setChecked(autostart_enabled);
-	ui->systray_delay->setEnabled(autostart_enabled);
-	ui->systray_delay->setChecked(autostart_delayed);
+    bool autostartEnabled = AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Exists);
+    ui->systray_minOnBoot->setChecked(autostartEnabled);
+    ui->systray_delay->setEnabled(autostartEnabled);
+    ui->systray_delay->setChecked(AutostartManager::inspectDesktopFile(autostart_path, AutostartManager::Delayed));
 
     ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 

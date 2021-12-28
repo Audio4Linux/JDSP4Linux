@@ -258,11 +258,13 @@ MainWindow::MainWindow(bool     statupInTray,
             _statusFragment->fragment()->updateStatus(_audioService->status());
             _statusFragment->slideIn();
         });
-        menu->addAction(tr("Relink audio pipeline"),   this, SLOT(onRelinkRequested()));
+        menu->addAction(tr("Relink audio pipeline"), this, SLOT(onRelinkRequested()));
         menu->addSeparator();
         menu->addAction(tr("Reset to defaults"), this, SLOT(onResetRequested()));
         menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
-        menu->addAction(tr("Save to file"),   this, SLOT(saveExternalFile()));
+        menu->addAction(tr("Save to file"), this, SLOT(saveExternalFile()));
+        menu->addSeparator();
+        menu->addAction(tr("Open LiveprogIDE"), _eelEditor, &EELEditor::show);
         menu->addSeparator();
         menu->addAction(tr("What's this..."), this, []()
         {
