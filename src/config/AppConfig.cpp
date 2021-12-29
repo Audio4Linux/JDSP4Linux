@@ -3,6 +3,8 @@
 #include "ConfigIO.h"
 #include "utils/Common.h"
 
+#define ENCLOSE_QUOTES(x) "\"" + x + "\""
+
 #define DEFINE_KEY(name, defaultValue) \
     definitions[name] = QVariant(defaultValue);
 
@@ -33,9 +35,9 @@ AppConfig::AppConfig()
 
     DEFINE_KEY(AeqPlotDarkMode, false);
 
-    DEFINE_KEY(ConvolverDefaultPath, getPath("irs"));
-    DEFINE_KEY(VdcDefaultPath, getPath("vdc"));
-    DEFINE_KEY(LiveprogDefaultPath, getPath("liveprog"));
+    DEFINE_KEY(ConvolverDefaultPath, ENCLOSE_QUOTES(getPath("irs")));
+    DEFINE_KEY(VdcDefaultPath, ENCLOSE_QUOTES(getPath("vdc")));
+    DEFINE_KEY(LiveprogDefaultPath, ENCLOSE_QUOTES(getPath("liveprog")));
 
     connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
