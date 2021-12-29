@@ -364,6 +364,7 @@ typedef struct
 	NSEEL_CODEHANDLE codehandleInit, codehandleProcess;
 	float *vmFs, *input1, *input2;
 	int compileSucessfully;
+    int active;
 } LiveProg;
 typedef struct
 {

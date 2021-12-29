@@ -5,7 +5,9 @@ DEFINES += LIBJAMESDSP_PLUGIN
 
 CONFIG += c++17
 
-QMAKE_CFLAGS += -std=gnu11 -O2
+# TODO: remove debug mode
+# QMAKE_CFLAGS += -std=gnu11 -O2
+QMAKE_CFLAGS += -std=gnu11 -g3 -Og -gdwarf-2 -finline-functions
 
 CONFIG += warn_off # Disable warnings for library
 

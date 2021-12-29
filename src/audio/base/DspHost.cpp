@@ -725,22 +725,22 @@ std::vector<EelVariable> DspHost::enumEelVariables()
 {
     std::vector<EelVariable> vars;
 
-    compileContext *c = (compileContext*)cast(this->_dsp)->eel.vm;
-    for (int i = 0; i < c->varTable_numBlocks; i++)
+    compileContext *ctx = (compileContext*)cast(this->_dsp)->eel.vm;
+    for (int i = 0; i < ctx->varTable_numBlocks; i++)
     {
         for (int j = 0; j < NSEEL_VARS_PER_BLOCK; j++)
         {
             EelVariable var;
-            char *valid = (char*)GetStringForIndex(c->m_string_context, c->varTable_Values[i][j], 0);
+            char *valid = (char*)GetStringForIndex(ctx->m_string_context, ctx->varTable_Values[i][j], 0);
             var.isString = valid;
 
-            if (c->varTable_Names[i][j])
+            if (ctx->varTable_Names[i][j])
             {
-                var.name = c->varTable_Names[i][j];
+                var.name = ctx->varTable_Names[i][j];
                 if(var.isString)
                     var.value = valid;
                 else
-                    var.value = c->varTable_Values[i][j];
+                    var.value = ctx->varTable_Values[i][j];
 
                 vars.push_back(var);
             }
@@ -748,6 +748,40 @@ std::vector<EelVariable> DspHost::enumEelVariables()
     }
 
     return vars;
+}
+
+bool DspHost::manipulateEelVariable(const char* name, float value)
+{
+    compileContext *ctx = (compileContext*)cast(this->_dsp)->eel.vm;
+    for (int i = 0; i < ctx->varTable_numBlocks; i++)
+    {
+        for (int j = 0; j < NSEEL_VARS_PER_BLOCK; j++)
+        {
+            if(!ctx->varTable_Names[i][j] || std::strcmp(ctx->varTable_Names[i][j], name) != 0)
+            {
+                continue;
+            }
+
+            char *validString = (char*)GetStringForIndex(ctx->m_string_context, ctx->varTable_Values[i][j], 0);
+            if(validString)
+            {
+                Log::error(QString("DspHost::manipulateEelVariable: variable '%1' is a string; currently only numerical variables can be manipulated").arg(name));
+                return false;
+            }
+
+            ctx->varTable_Values[i][j] = value;
+            return true;
+        }
+    }
+
+    Log::error(QString("DspHost::manipulateEelVariable: variable '%1' not found").arg(name));
+    return false;
+}
+
+void DspHost::freezeLiveprogExecution(bool freeze)
+{
+    cast(this->_dsp)->eel.active = !freeze;
+    Log::debug("DspHost::freezeLiveprogExecution: Liveprog execution has been " + (freeze ? QString("frozen") : "resumed"));
 }
 
 void DspHost::dispatch(Message msg, std::any value)

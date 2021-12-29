@@ -31,6 +31,8 @@ public:
     void updateFromCache();
     void reloadLiveprog(DspConfig* config = nullptr);
     std::vector<EelVariable> enumEelVariables();
+    bool manipulateEelVariable(const char *name, float value);
+    void freezeLiveprogExecution(bool freeze);
     void dispatch(Message msg, std::any value);
 
 private:

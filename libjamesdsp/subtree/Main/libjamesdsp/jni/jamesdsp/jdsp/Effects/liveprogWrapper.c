@@ -1,9 +1,11 @@
 void NSEEL_HOSTSTUB_EnterMutex() { }
 void NSEEL_HOSTSTUB_LeaveMutex() { }
 #include "../jdsp_header.h"
+
 void LiveProgConstructor(JamesDSPLib *jdsp)
 {
 	LiveProg *pg = &jdsp->eel;
+    pg->active = 1;
 	pg->compileSucessfully = 0;
 	pg->codehandleInit = 0;
 	pg->codehandleProcess = 0;
@@ -146,7 +148,7 @@ int LiveProgStringParser(JamesDSPLib *jdsp, char *eelCode)
 void LiveProgProcess(JamesDSPLib *jdsp, size_t n)
 {
 	LiveProg *eel = &jdsp->eel;
-	if (eel->compileSucessfully)
+    if (eel->compileSucessfully && eel->active)
 	{
 		for (size_t i = 0; i < n; i++)
 		{
