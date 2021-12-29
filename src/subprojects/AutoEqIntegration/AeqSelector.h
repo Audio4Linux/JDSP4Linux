@@ -27,6 +27,7 @@ public:
     explicit AeqSelector(QWidget *parent = nullptr);
     ~AeqSelector();
 
+    void forceManageMode();
     QString selection(DataFormat format, bool silent = false);
 
 protected:

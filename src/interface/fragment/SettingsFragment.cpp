@@ -12,6 +12,9 @@
 #include "MainWindow.h"
 #include "utils/AutoStartManager.h"
 
+#include <AeqSelector.h>
+
+#include <AeqPackageManager.h>
 #include <QCloseEvent>
 #include <QDebug>
 #include <QDesktopServices>
@@ -97,6 +100,12 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     connect(ui->liveprog_autoextract, &QCheckBox::clicked, this, &SettingsFragment::onLiveprogAutoExtractToggled);
     connect(ui->liveprog_extractNow, &QPushButton::clicked, this, &SettingsFragment::onExtractAssetsClicked);
     connect(ui->savePaths, &QPushButton::clicked, this, &SettingsFragment::onSavePathsClicked);
+
+    /*
+     * Network signals
+     */
+    connect(ui->crashShareAllow, &QCheckBox::toggled, this, &SettingsFragment::onCrashShareToggled);
+    connect(ui->aeqManage, &QPushButton::clicked, this, &SettingsFragment::onAeqDatabaseManageClicked);
 
 	/*
      *  Devices signals
@@ -238,6 +247,10 @@ void SettingsFragment::refreshAll()
 
     ui->blocklistInvert->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert));
 
+    ui->crashShareAllow->setChecked(AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
+
+    ui->aeqStatus->setText(AeqPackageManager().isPackageInstalled() ? "installed" : "not installed");
+
 	refreshDevices();
 
     _lockslot = false;
@@ -295,7 +308,7 @@ void SettingsFragment::onTreeItemSelected(QTreeWidgetItem *cur, QTreeWidgetItem 
         case -1:
             if (cur->text(0) == "Context menu")
             {
-                ui->stackedWidget->setCurrentIndex(4);
+                ui->stackedWidget->setCurrentIndex(5);
             }
             break;
         default:
@@ -416,6 +429,19 @@ void SettingsFragment::onLiveprogAutoExtractToggled()
 void SettingsFragment::onGithubLinkClicked()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/Audio4Linux/JDSP4Linux"));
+}
+
+void SettingsFragment::onAeqDatabaseManageClicked()
+{
+    auto* aeqSel = new AeqSelector(this);
+    aeqSel->forceManageMode();
+    aeqSel->exec();
+    refreshAll();
+}
+
+void SettingsFragment::onCrashShareToggled(bool state)
+{
+    AppConfig::instance().set(AppConfig::SendCrashReports, state);
 }
 
 void SettingsFragment::setVisible(bool visible)

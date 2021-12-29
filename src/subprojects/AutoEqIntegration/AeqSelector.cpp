@@ -59,6 +59,19 @@ AeqSelector::~AeqSelector()
     delete ui;
 }
 
+void AeqSelector::forceManageMode()
+{
+    ui->manageDatabase->setVisible(false);
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->buttonBox->clear();
+    ui->buttonBox->addButton(QDialogButtonBox::Close);
+    ui->frame->setVisible(false);
+
+    auto geo = this->geometry();
+    geo.setWidth(geo.width() / 2);
+    this->setGeometry(geo);
+}
+
 void AeqSelector::showEvent(QShowEvent *ev)
 {
     if(!pkgManager->isPackageInstalled())
@@ -169,7 +182,8 @@ void AeqSelector::onSelectionChanged(const QItemSelection &selected, const QItem
 {
     Q_UNUSED(deselected)
     ui->previewStack->setCurrentIndex(!selected.isEmpty());
-    ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(!selected.isEmpty());
+    if(ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok) != nullptr)
+        ui->buttonBox->button(QDialogButtonBox::StandardButton::Ok)->setEnabled(!selected.isEmpty());
 
     if(selected.isEmpty())
     {

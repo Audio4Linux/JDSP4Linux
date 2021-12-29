@@ -584,11 +584,64 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_10">
             <item>
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="crashShareAllow">
               <property name="text">
-               <string>Allow crash reports to b</string>
+               <string>Allow to share crash reports anonymously</string>
               </property>
              </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="title">
+            <string>AutoEQ database</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Status:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="aeqStatus">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>unknown</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="aeqManage">
+                <property name="text">
+                 <string>  Manage local database  </string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
