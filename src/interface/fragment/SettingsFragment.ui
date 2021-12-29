@@ -614,7 +614,7 @@
               <item>
                <widget class="QLabel" name="aeqStatus">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="text">
                  <string>unknown</string>
