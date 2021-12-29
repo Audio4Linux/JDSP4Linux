@@ -1252,7 +1252,7 @@ void MainWindow::launchFirstRunSetup()
 {
     QHBoxLayout            *lbLayout = new QHBoxLayout;
     QMessageOverlay        *lightBox = new QMessageOverlay(this);
-    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(_audioService, lightBox);
+    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(lightBox);
     QGraphicsOpacityEffect *eff      = new QGraphicsOpacityEffect(lightBox);
     QPropertyAnimation     *a        = new QPropertyAnimation(eff, "opacity");
 

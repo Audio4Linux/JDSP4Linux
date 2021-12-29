@@ -859,7 +859,7 @@ static void sigHandler(int sigNum, siginfo_t *si, void *ucontext)
     safe_printf(fd, "\n");
     printBacktrace(s_fd,s_execname);
     char sh[512] = {0};
-    (void)sprintf(sh,"{ echo '%sSystem:' & cat /proc/version & lsb_release -a; } >> %s", section, STACKTRACE_LOG);
+    (void)sprintf(sh,"{ echo '%sSystem:'; cat /proc/version; cat /var/lib/dbus/machine-id; lsb_release -a; } >> %s", section, STACKTRACE_LOG);
     (void)system(sh);
 
     if (s_cb)

@@ -23,6 +23,7 @@ static void * OFFSET_FRAMES_BUFFER[STACK_FRAMES_BUFFERSIZE];
 static char const * EXECUTION_FILENAME;
 static int LOG_FD = 2;
 static char const * STACKTRACE_LOG = "/tmp/jamesdsp/crash.dmp";
+static char const * STACKTRACE_LOG_OLD = "/tmp/jamesdsp/crash-prev.dmp";
 /*-----------------------------------------------------------------------------------*/
 /*
  * Use add2line on the obtained addresses to get a readable sting

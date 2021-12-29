@@ -9,6 +9,7 @@
 #include <QScreen>
 #include <QStyle>
 #include <QScopeGuard>
+#include <QTextStream>
 
 #define FORCE_CRASH_HANDLER
 
@@ -22,8 +23,9 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
+#include <utils/CrashReportSender.h>
+
 static bool SPIN_ON_CRASH = false;
-static const char* EXEC_NAME = "jamesdsp";
 
 void onExceptionRaised(int fd)
 {
@@ -55,6 +57,23 @@ int main(int   argc,
 	find_yourself(exepath, sizeof(exepath));
 
 #ifdef ENABLE_CRASH_HANDLER
+    QFile crashDmp(STACKTRACE_LOG);
+
+    bool lastSessionCrashed = false;
+    if(crashDmp.exists() && crashDmp.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream in(&crashDmp);
+        auto lastDmp = in.readAll();
+        crashDmp.close();
+
+        if(lastDmp.length() > 10)
+        {
+            lastSessionCrashed = true;
+            crashDmp.copy(STACKTRACE_LOG_OLD);
+            Log::backupLastLog();
+        }
+    }
+
 	EXECUTION_FILENAME = exepath;
 	mkdir("/tmp/jamesdsp/", S_IRWXU);
 	int                fd = safe_open_wo_fd("/tmp/jamesdsp/crash.dmp");
@@ -93,6 +112,13 @@ int main(int   argc,
     Log::information("Application version: " + QString(APP_VERSION_FULL));
     Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no"));
 
+    QFile id("/var/lib/dbus/machine-id");
+    if(id.open(QFile::ReadOnly | QFile::Text))
+    {
+        Log::debug("Environment id: " + QString::fromLocal8Bit(id.readAll()).simplified().trimmed());
+        id.close();
+    }
+
     // Check if another instance is already running and switch to it if that's the case
     auto *instanceMonitor = new SingleInstanceMonitor();
     auto scopeGuard = qScopeGuard([instanceMonitor]{ delete instanceMonitor; });
@@ -102,12 +128,25 @@ int main(int   argc,
         return 0;
     }
 
+    if(lastSessionCrashed)
+    {
+        Log::information("Last session crashed unexpectedly. A crash report has been saved here: " + QString(STACKTRACE_LOG_OLD));
+
+        if(AppConfig::instance().get<bool>(AppConfig::SendCrashReports))
+        {
+           Log::debug("Submitting anonymous crash dump...");
+           CrashReportSender::upload(Log::pathOld(), QString(STACKTRACE_LOG_OLD)); /* fire and forget */
+        }
+    }
+
     // Prepare DspConfig based on cmdline argument
     DspConfig::instance(parser.isSet(watch));
     AppConfig::instance().set(AppConfig::ExecutablePath, QString::fromLocal8Bit(exepath));
 
     QApplication::setFallbackSessionManagementEnabled(false);
     MainWindow w(parser.isSet(tray));
+
+    QObject::connect(instanceMonitor, &SingleInstanceMonitor::raiseWindow, &w, &MainWindow::raiseWindow);
 
 	w.setGeometry(
 		QStyle::alignedRect(

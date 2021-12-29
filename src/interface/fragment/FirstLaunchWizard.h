@@ -17,7 +17,7 @@ class FirstLaunchWizard :
 	Q_OBJECT
 
 public:
-    explicit FirstLaunchWizard(IAudioService *audioService,QWidget *parent = nullptr);
+    explicit FirstLaunchWizard(QWidget *parent = nullptr);
 	~FirstLaunchWizard();
 
 protected:
@@ -29,11 +29,10 @@ signals:
 private slots:
     void onSystrayRadioSelected();
     void onSystrayAutostartToggled(bool isChecked);
+    void onCrashReportRadioSelected();
 
 private:
-	Ui::FirstLaunchWizard *ui;
-	bool lockslot = false;
-    IAudioService* audioService;
+    Ui::FirstLaunchWizard *ui;
 
 };
 

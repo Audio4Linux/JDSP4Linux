@@ -79,6 +79,7 @@ SOURCES += \
     MainWindow.cpp \
     main.cpp \
     utils/AutoStartManager.cpp \
+    utils/CrashReportSender.cpp \
     utils/Log.cpp \
     utils/SingleInstanceMonitor.cpp \
     utils/dbus/ClientProxy.cpp \
@@ -153,6 +154,7 @@ HEADERS += \
     interface/WidgetMarqueeLabel.h \
     MainWindow.h \
     utils/AutoStartManager.h \
+    utils/CrashReportSender.h \
     utils/DebuggerUtils.h \
     utils/Log.h \
     utils/SingleInstanceMonitor.h \

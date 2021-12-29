@@ -1,5 +1,3 @@
-#include <IAudioService.h>
-
 #include "FirstLaunchWizard.h"
 #include "ui_FirstLaunchWizard.h"
 
@@ -16,33 +14,43 @@
 #include <QTimer>
 #include <QUrl>
 
-FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *parent) :
+FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 	QWidget(parent),
-    ui(new Ui::FirstLaunchWizard),
-    audioService(audioService)
+    ui(new Ui::FirstLaunchWizard)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
-	QTimer::singleShot(500, [&] {
+    QTimer::singleShot(500, this, [=] {
 		ui->p1_icon->startAnimation();
     });
-	ui->p3_icon->startAnimation();
-	ui->p4_icon->startAnimation();
+    ui->p3_icon->startAnimation();
+    ui->p3b_icon->startAnimation();
+    ui->p4_icon->startAnimation();
 
 	ui->stackedWidget->setAnimation(QEasingCurve::Type::OutCirc);
-	connect(ui->p1_next, &QPushButton::clicked, [&] {
+    connect(ui->p1_next, &QPushButton::clicked, this, [&] {
         ui->stackedWidget->slideInIdx(1);
 	});
-	connect(ui->p3_next, &QPushButton::clicked, [&] {
+    connect(ui->p3_next, &QPushButton::clicked, this, [&] {
         ui->stackedWidget->slideInIdx(2);
 	});
-	connect(ui->p4_next,     &QPushButton::clicked, [&] {
+    connect(ui->p3b_next, &QPushButton::clicked, this, [&] {
+        ui->stackedWidget->slideInIdx(3);
+    });
+    connect(ui->p4_next, &QPushButton::clicked, this, [&] {
 		emit wizardFinished();
 	});
-	connect(ui->p4_telegram, &QPushButton::clicked, [&] {
+    connect(ui->p4_telegram, &QPushButton::clicked, [] {
 		QDesktopServices::openUrl(QUrl("https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw"));
-	});
+    });
+
+    connect(ui->p3b_viewReports, &QPushButton::clicked, [] {
+        QDesktopServices::openUrl(QUrl("https://gist.github.com/ThePBone/3c757623c31400e799ab786ad3bf0709"));
+    });
+
+    ui->p3b_rejectReports->setChecked(!AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
+    ui->p3b_allowReports->setChecked(AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
 
     ui->p3_systray_disable->setChecked(!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
@@ -54,6 +62,9 @@ FirstLaunchWizard::FirstLaunchWizard(IAudioService *audioService, QWidget *paren
     connect(ui->p3_systray_disable, &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_enable,  &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_minOnBoot, &QCheckBox::stateChanged, this, &FirstLaunchWizard::onSystrayAutostartToggled);
+
+    connect(ui->p3b_rejectReports, &QRadioButton::clicked, this, &FirstLaunchWizard::onCrashReportRadioSelected);
+    connect(ui->p3b_allowReports,  &QRadioButton::clicked, this, &FirstLaunchWizard::onCrashReportRadioSelected);
 }
 
 FirstLaunchWizard::~FirstLaunchWizard()
@@ -72,11 +83,6 @@ void FirstLaunchWizard::showEvent(QShowEvent *ev)
 
 void FirstLaunchWizard::onSystrayRadioSelected()
 {
-    if (lockslot)
-    {
-        return;
-    }
-
     AppConfig::instance().set(AppConfig::TrayIconEnabled, ui->p3_systray_enable->isChecked());
     ui->p3_systray_minOnBoot->setEnabled(ui->p3_systray_enable->isChecked());
 }
@@ -94,4 +100,9 @@ void FirstLaunchWizard::onSystrayAutostartToggled(bool isChecked)
     {
         QFile(path).remove();
     }
+}
+
+void FirstLaunchWizard::onCrashReportRadioSelected()
+{
+    AppConfig::instance().set(AppConfig::SendCrashReports, ui->p3b_allowReports->isChecked());
 }

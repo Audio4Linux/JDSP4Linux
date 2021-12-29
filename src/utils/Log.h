@@ -47,6 +47,10 @@ public:
                       Severity       severity,
 	                  LoggingMode    mode = LM_ALL);
 	static void clear();
+    static void backupLastLog();
+
+    static QString path();
+    static QString pathOld();
 
 };
 

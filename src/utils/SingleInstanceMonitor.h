@@ -15,6 +15,9 @@ public:
     bool handover();
     bool isServiceReady();
 
+signals:
+    void raiseWindow();
+
 private:
     GuiAdaptor* _dbusAdapter;
     bool _registered;

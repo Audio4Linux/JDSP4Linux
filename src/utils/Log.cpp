@@ -66,7 +66,7 @@ void Log::write(const QString &log,
             break;
     }
 
-    QFile   file("/tmp/jamesdsp/application.log");
+    QFile   file(path());
     QString formattedLog(QString("[%1] [%2] %3").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(sev).arg(log));
 
 	if (mode == LM_ALL || mode == LM_FILE)
@@ -87,10 +87,36 @@ void Log::write(const QString &log,
 
 void Log::clear()
 {
-	QFile file("/tmp/jamesdsp/ui.log");
+    QFile file(path());
 
 	if (file.exists())
 	{
-		file.remove();
-	}
+        file.remove();
+    }
+}
+
+void Log::backupLastLog()
+{
+    QFile file(path());
+    QFile oldFile(pathOld());
+
+    if (file.exists())
+    {
+        if(oldFile.exists())
+        {
+            oldFile.remove();
+        }
+
+        file.copy(pathOld());
+    }
+}
+
+QString Log::path()
+{
+    return "/tmp/jamesdsp/application.log";
+}
+
+QString Log::pathOld()
+{
+    return "/tmp/jamesdsp/application-prev.log";
 }
