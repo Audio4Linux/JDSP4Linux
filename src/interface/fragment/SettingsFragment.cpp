@@ -446,6 +446,6 @@ void SettingsFragment::onCrashShareToggled(bool state)
 
 void SettingsFragment::setVisible(bool visible)
 {
-	refreshDevices();
+    refreshAll();
     BaseFragment::setVisible(visible);
 }
