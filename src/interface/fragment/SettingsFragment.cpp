@@ -39,8 +39,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	ui->setupUi(this);
 
 #ifdef USE_PULSEAUDIO
-    ui->devices->setEnabled(false);
-    ui->devices_group->setTitle("Select sink/device to be processed (PipeWire only)");
+    ui->devices->setVisible(false);
+    ui->selector->findItems("Devices", Qt::MatchFlag::MatchExactly).first()->setHidden(true);
     ui->blocklistBox->setVisible(false);
 #endif
 
@@ -198,8 +198,6 @@ void SettingsFragment::refreshAll()
 	QString autostart_path = AutostartManager::getAutostartPath("jdsp-gui.desktop");
 
 	ui->menu_edit->setTargetMenu(_trayIcon->getTrayMenu());
-    ui->menu_edit->setIconStyle(AppConfig::instance().get<bool>(AppConfig::ThemeColorsCustomWhiteIcons));
-
 	ui->irspath->setText(AppConfig::instance().getIrsPath());
     ui->ddcpath->setText(AppConfig::instance().getVdcPath());
 	ui->liveprog_path->setText(AppConfig::instance().getLiveprogPath());
