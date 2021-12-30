@@ -53,7 +53,7 @@ public:
 
             const char* currentFile = archive_entry_pathname(entry);
             const QString fullOutputPath = outputPath.path() + QDir::separator() + currentFile;
-            archive_entry_set_pathname_utf8(entry, fullOutputPath.toUtf8().constData());
+            archive_entry_set_pathname(entry, fullOutputPath.toLatin1().constData());
 
             r = archive_write_header(ext, entry);
             if (r < ARCHIVE_OK)

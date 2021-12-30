@@ -110,6 +110,9 @@ int main(int   argc,
     // Prepare logger
     Log::clear();
     Log::information("Application version: " + QString(APP_VERSION_FULL));
+    Log::information("Qt library version: " + QString(qVersion()));
+
+
     Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no"));
 
     QFile id("/var/lib/dbus/machine-id");

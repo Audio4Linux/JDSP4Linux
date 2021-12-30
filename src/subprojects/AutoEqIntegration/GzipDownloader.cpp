@@ -15,7 +15,7 @@ bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
     }
 
     downloadedFile.setFileName(TMP_DIR + QDateTime::currentDateTime().toString("yyyy_MM_dd_hhmmss_zzz") + ".tar.gz");
-    if(!downloadedFile.open(QIODevice::ReadWrite))
+    if(!downloadedFile.open(QIODevice::WriteOnly | QIODevice::Unbuffered))
     {
         return false;
     }
@@ -25,6 +25,8 @@ bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
     connect(networkReply, &QIODevice::readyRead, this, &GzipDownloader::onDataAvailable);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     connect(networkReply, &QNetworkReply::errorOccurred, this, &GzipDownloader::onErrorOccurred);
+#else
+    connect(networkReply, qOverload<QNetworkReply::NetworkError>(&QNetworkReply::error), this, &GzipDownloader::onErrorOccurred);
 #endif
     connect(networkReply, &QNetworkReply::downloadProgress, this, &GzipDownloader::downloadProgressUpdated);
     connect(networkReply, &QNetworkReply::finished, this, &GzipDownloader::onArchiveReady);
@@ -46,9 +48,11 @@ bool GzipDownloader::isActive()
     return networkReply;
 }
 
+static int bytes = 0;
 void GzipDownloader::onDataAvailable()
 {
-    downloadedFile.write(networkReply->readAll());
+    auto dat = networkReply->readAll();
+    downloadedFile.write(dat);
 }
 
 void GzipDownloader::onArchiveReady()
@@ -60,7 +64,9 @@ void GzipDownloader::onArchiveReady()
     }
     else
     {
-        downloadedFile.write(networkReply->readAll());
+        auto dat = networkReply->readAll();
+        downloadedFile.write(dat);
+        downloadedFile.close();
 
         emit decompressionStarted();
 

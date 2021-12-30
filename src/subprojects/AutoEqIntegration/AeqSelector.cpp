@@ -73,7 +73,7 @@ void AeqSelector::forceManageMode()
 }
 
 void AeqSelector::showEvent(QShowEvent *ev)
-{
+{   
     if(!pkgManager->isPackageInstalled())
     {
         this->setEnabled(false);
@@ -84,9 +84,10 @@ void AeqSelector::showEvent(QShowEvent *ev)
                       "Do you want to continue and enable this feature?",
                       QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 
+        auto cancel = [this]{ QTimer::singleShot(250, this, &QDialog::reject); };
         if(res == QMessageBox::Cancel)
         {
-            this->reject();
+            cancel();
             return;
         }
 
@@ -96,15 +97,15 @@ void AeqSelector::showEvent(QShowEvent *ev)
             {
                 this->setEnabled(true);
                 updateDatabaseInfo();
-            }).fail([this](){
-                this->reject();
+            }).fail([cancel](){
+                cancel();
                 return;
             });
 
-        }).fail([this](const HttpException& ex){
+        }).fail([this, cancel](const HttpException& ex){
             QMessageBox::critical(this, "Failed to retrieve version information", QString("Failed to retrieve package information from the remote repository:\n\n"
                                                                                           "Status code: %0\nReason: %1").arg(ex.statusCode()).arg(ex.reasonPhrase()));
-            this->reject();
+            cancel();
             return;
         });
     }
