@@ -64,8 +64,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	ui->paletteSelect->addItem("Dark",       "dark");
 	ui->paletteSelect->addItem("Dark Blue",  "darkblue");
 	ui->paletteSelect->addItem("Dark Green", "darkgreen");
-	ui->paletteSelect->addItem("Honeycomb",  "honeycomb");
-	ui->paletteSelect->addItem("Gray",       "gray");
+    ui->paletteSelect->addItem("Honeycomb",  "honeycomb");
 	ui->paletteSelect->addItem("Green",      "green");
 	ui->paletteSelect->addItem("Stone",      "stone");
 	ui->paletteSelect->addItem("Custom",     "custom");

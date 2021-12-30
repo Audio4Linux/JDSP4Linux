@@ -80,8 +80,12 @@ void StyleHelper::setPalette(const ColorStyle &s)
 	palette->setColor(QPalette::BrightText,      Qt::red);
 	palette->setColor(QPalette::Link,            QColor(42, 130, 218));
 	palette->setColor(QPalette::Highlight,       s.selection);
-	palette->setColor(QPalette::HighlightedText, s.selectiontext);
-	qApp->setPalette(*palette);
+    palette->setColor(QPalette::HighlightedText, s.selectiontext);
+    palette->setColor(QPalette::Disabled, QPalette::Text, s.selectiontext);
+    palette->setColor(QPalette::Disabled, QPalette::WindowText, s.disabled);
+    palette->setColor(QPalette::Disabled, QPalette::ToolTipText, s.disabled);
+    palette->setColor(QPalette::Disabled, QPalette::ButtonText, s.disabled);
+    qApp->setPalette(*palette);
 	qApp->setStyleSheet(QString(R"(QFrame[frameShape="4"], QFrame[frameShape="5"]{
                             color: gray;
                         }
