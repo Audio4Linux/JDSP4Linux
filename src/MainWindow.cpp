@@ -40,9 +40,9 @@
 #include <eeleditor.h>
 #include <AeqSelector.h>
 #include <LiquidEqualizerWidget.h>
+#include <utils/DesktopServices.h>
 //#include <spectrograph.h>
 
-#include <QDesktopServices>
 #include <QButtonGroup>
 #include <QClipboard>
 #include <QDebug>
@@ -388,13 +388,8 @@ MainWindow::MainWindow(bool     statupInTray,
         installUnitData();
 
         if (debuggerIsAttached() || system("which ddctoolbox > /dev/null 2>&1")) { // Workaround: do not call system() when GDB is attached
-            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
-                int ret = system("xdg-open https://github.com/thepbone/DDCToolbox"); // QDesktopServices::openUrl broken on some KDE systems with Qt 5.15
-                if(ret > 0)
-                {
-                    Log::error("MainWindow: xdg-open failed. Trying gio instead.");
-                    system("gio open https://github.com/thepbone/DDCToolbox");
-                }
+            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, [this]{
+                DesktopServices::openUrl("https://github.com/thepbone/DDCToolbox", this);
             });
         } else {
             ui->ddctoolbox_install->setText("Launch application");

@@ -11,13 +11,13 @@
 #include "interface/TrayIcon.h"
 #include "MainWindow.h"
 #include "utils/AutoStartManager.h"
+#include "utils/DesktopServices.h"
 
 #include <AeqSelector.h>
 
 #include <AeqPackageManager.h>
 #include <QCloseEvent>
 #include <QDebug>
-#include <QDesktopServices>
 #include <QGraphicsOpacityEffect>
 #include <QMessageBox>
 #include <QProcess>
@@ -428,7 +428,7 @@ void SettingsFragment::onLiveprogAutoExtractToggled()
 
 void SettingsFragment::onGithubLinkClicked()
 {
-    QDesktopServices::openUrl(QUrl("https://github.com/Audio4Linux/JDSP4Linux"));
+    DesktopServices::openUrl("https://github.com/Audio4Linux/JDSP4Linux", this);
 }
 
 void SettingsFragment::onAeqDatabaseManageClicked()

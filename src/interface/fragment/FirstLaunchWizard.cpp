@@ -14,6 +14,8 @@
 #include <QTimer>
 #include <QUrl>
 
+#include <utils/DesktopServices.h>
+
 FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
 	QWidget(parent),
     ui(new Ui::FirstLaunchWizard)
@@ -41,12 +43,12 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
     connect(ui->p4_next, &QPushButton::clicked, this, [&] {
 		emit wizardFinished();
 	});
-    connect(ui->p4_telegram, &QPushButton::clicked, [] {
-		QDesktopServices::openUrl(QUrl("https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw"));
+    connect(ui->p4_telegram, &QPushButton::clicked, [this] {
+        DesktopServices::openUrl("https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw", this);
     });
 
-    connect(ui->p3b_viewReports, &QPushButton::clicked, [] {
-        QDesktopServices::openUrl(QUrl("https://gist.github.com/ThePBone/3c757623c31400e799ab786ad3bf0709"));
+    connect(ui->p3b_viewReports, &QPushButton::clicked, [this] {
+        DesktopServices::openUrl("https://gist.github.com/ThePBone/3c757623c31400e799ab786ad3bf0709", this);
     });
 
     ui->p3b_rejectReports->setChecked(!AppConfig::instance().get<bool>(AppConfig::SendCrashReports));

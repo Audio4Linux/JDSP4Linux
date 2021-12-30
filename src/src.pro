@@ -80,6 +80,7 @@ SOURCES += \
     main.cpp \
     utils/AutoStartManager.cpp \
     utils/CrashReportSender.cpp \
+    utils/DesktopServices.cpp \
     utils/Log.cpp \
     utils/SingleInstanceMonitor.cpp \
     utils/dbus/ClientProxy.cpp \
@@ -156,6 +157,7 @@ HEADERS += \
     utils/AutoStartManager.h \
     utils/CrashReportSender.h \
     utils/DebuggerUtils.h \
+    utils/DesktopServices.h \
     utils/Log.h \
     utils/SingleInstanceMonitor.h \
     utils/VersionMacros.h \
