@@ -60,7 +60,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	 */
 	ui->paletteSelect->addItem("Default",    "default");
 	ui->paletteSelect->addItem("Black",      "black");
-	ui->paletteSelect->addItem("Blue",       "blue");
+    ui->paletteSelect->addItem("Blue Neon",  "blue");
 	ui->paletteSelect->addItem("Dark",       "dark");
 	ui->paletteSelect->addItem("Dark Blue",  "darkblue");
 	ui->paletteSelect->addItem("Dark Green", "darkgreen");
