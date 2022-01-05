@@ -2,6 +2,7 @@
 #include "Utils.h"
 
 #include <sstream>
+#include <string>
 
 #include "DspHost.h"
 #include "EventArgs.h"
@@ -17,6 +18,7 @@ extern "C" {
 #include <QDebug>
 #include <cstring>
 #include <assert.h>
+#include <QTimer>
 
 /* C interop */
 inline JamesDSPLib* cast(void* raw){
@@ -50,7 +52,7 @@ inline void* GetStringForIndex(eel_string_context_state *st, float val, int32_t 
         return (void*)&st->m_literal_strings[idx];
 }
 
-DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
+DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler)), _stereoWideDebounce(new QTimer())
 {
     auto dsp = static_cast<JamesDSPLib*>(dspPtr);
     if(!dsp)
@@ -68,10 +70,23 @@ DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(s
 
     _dsp = dsp;
     _cache = new DspConfig();
+
+
+    /* Workaround: calling StereoEnhancementSetParam while processing has a small chance of causing a crash inside analysisWarpedPFBStereo
+     *             due to the possiblity that snh->subband[x] is accessed before initWarpedPFB or assignPtrWarpedPFB is called by StereoEnhancementSetParam
+                      -> pausing processing not easily doable (in time); reduce strain on StereoEnhancementSetParam instead */
+    /* TODO: replace workaround with proper patch */
+    _stereoWideDebounce->setInterval(750);
+    _stereoWideDebounce->setSingleShot(true);
+    QObject::connect(_stereoWideDebounce, &QTimer::timeout, [this]{
+        util::debug("-> Timer finished!");
+        StereoEnhancementSetParam(cast(this->_dsp), _cache->get<float>(DspConfig::stereowide_level) / 100.0f);
+    });
 }
 
 DspHost::~DspHost()
 {
+    _stereoWideDebounce->deleteLater();
     setStdOutHandler(NULL, NULL);
 }
 
@@ -582,9 +597,28 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             else
                 StereoEnhancementDisable(cast(this->_dsp));
             break;
-        case DspConfig::stereowide_level:
-            StereoEnhancementSetParam(cast(this->_dsp), current.toFloat() / 100.0f);
+        case DspConfig::stereowide_level: {
+            _stereoWideClock.tock();
+            auto duration = _stereoWideClock.duration();
+            _stereoWideClock.tick();
+            util::debug(std::to_string(duration.count()));
+
+            if(duration.count() > 750 && !_stereoWideDebounce->isActive())
+            {
+                util::debug("StereoEnhancementSetParam");
+                StereoEnhancementSetParam(cast(this->_dsp), _cache->get<float>(DspConfig::stereowide_level) / 100.0f);
+            }
+            else if(!_stereoWideDebounce->isActive())
+            {
+                util::debug("Timer start!");
+                _stereoWideDebounce->start();
+            }
+            else
+            {
+                util::debug("Timer already running!");
+            }
             break;
+        }
         case DspConfig::tone_enable:
             if(current.toBool())
                 FIREqualizerEnable(cast(this->_dsp));
