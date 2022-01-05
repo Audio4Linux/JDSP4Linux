@@ -7,27 +7,6 @@
 #include <map>
 #include <chrono>
 
-template <class DT = std::chrono::milliseconds,
-          class ClockT = std::chrono::steady_clock>
-class ClockMeasure
-{
-    using timep_t = typename ClockT::time_point;
-    timep_t _start = {}, _end = {};
-
-public:
-    void tick() {
-        _end = timep_t{};
-        _start = ClockT::now();
-    }
-
-    void tock() { _end = ClockT::now(); }
-
-    template <class T = DT>
-    auto duration() const {
-        assert(_end != timep_t{} && "toc before reporting");
-        return std::chrono::duration_cast<T>(_end - _start);
-    }
-};
 namespace util {
 
 const float minimum_db_level = -100.0F;

@@ -5,7 +5,6 @@
 #include <any>
 #include <list>
 #include <memory>
-#include <chrono>
 
 #include "EelVariable.h"
 #include "Utils.h"
@@ -46,8 +45,6 @@ private:
        due to #defines and other global definitons that may conflict */
     void* _dsp; // JamesDSPLib*
     DspConfig* _cache;
-    ClockMeasure<std::chrono::milliseconds, std::chrono::steady_clock> _stereoWideClock;
-    QTimer* _stereoWideDebounce;
 
     void updateLimiter(DspConfig *config);
     void updateFirEqualizer(DspConfig *config);
