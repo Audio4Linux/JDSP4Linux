@@ -27,6 +27,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(SetupDone, false);
     DEFINE_KEY(ExecutablePath, "");
     DEFINE_KEY(VdcLastDatabaseId, -1);
+    DEFINE_KEY(LastWindowGeometry, QByteArray());
 
     DEFINE_KEY(AudioOutputUseDefault, true);
     DEFINE_KEY(AudioOutputDevice, "");
@@ -44,6 +45,11 @@ AppConfig::AppConfig()
     connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
     load();
+}
+
+void AppConfig::setBytes(const Key &key, const QByteArray &value)
+{
+    set(key, QVariant(QString::fromLocal8Bit(value.toBase64())));
 }
 
 void AppConfig::set(const Key &key, const QStringList &value)

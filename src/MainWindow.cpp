@@ -107,7 +107,7 @@ MainWindow::MainWindow(bool     statupInTray,
         this->setWindowIcon(QIcon::fromTheme("jamesdsp", QIcon(":/icons/icon.png")));
 
         // Restore window size and position
-        const QByteArray geometry = QSettings().value("geometry", QByteArray()).toByteArray();
+        const QByteArray geometry = AppConfig::instance().get<QByteArray>(AppConfig::LastWindowGeometry);
         if (!geometry.isEmpty())
         {
             restoreGeometry(geometry);
@@ -422,7 +422,7 @@ MainWindow::~MainWindow()
 // Overrides
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    QSettings().setValue("geometry", saveGeometry());
+    AppConfig::instance().setBytes(AppConfig::LastWindowGeometry, saveGeometry());
     saveGraphicEQView();
 
 #ifdef Q_OS_OSX
@@ -444,7 +444,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     QMainWindow::resizeEvent(event);
-    QSettings().setValue("geometry", saveGeometry());
+    AppConfig::instance().setBytes(AppConfig::LastWindowGeometry, saveGeometry());
 }
 
 

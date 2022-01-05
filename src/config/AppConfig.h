@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QMetaEnum>
+#include <optional>
 
 using namespace std;
 
@@ -57,6 +58,7 @@ public:
         SetupDone,
         ExecutablePath,
         VdcLastDatabaseId,
+        LastWindowGeometry,
 
         AudioOutputUseDefault,
         AudioOutputDevice,
@@ -73,6 +75,9 @@ public:
     };
     Q_ENUM(Key);
 
+    void setBytes(const Key &key,
+             const QByteArray &value);
+
     void set(const Key &key,
              const QStringList &value);
 
@@ -83,6 +88,9 @@ public:
     static T convertVariant(QVariant variant){
         if constexpr (std::is_same_v<T, QVariant>) {
             return variant;
+        }
+        if constexpr (std::is_same_v<T, QByteArray>) {
+            return QByteArray::fromBase64(variant.toString().toLocal8Bit());
         }
         if constexpr (std::is_same_v<T, std::string>) {
             return variant.toString().toStdString();
@@ -113,11 +121,9 @@ public:
         auto skey = QVariant::fromValue(key).toString();
         auto variant = _appconf->getVariant(skey, true, &exists);
 
-        QVariant defaultValue = definitions[key];
-
-        if(!exists)
+        if(!exists && definitions.contains(key))
         {
-            return convertVariant<T>(defaultValue);
+            return convertVariant<T>(definitions[key]);
         }
 
         return convertVariant<T>(variant);
