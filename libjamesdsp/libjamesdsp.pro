@@ -101,7 +101,12 @@ SOURCES += \
     JdspImpResToolbox.c
 
 unix {
-    target.path = /usr/lib
+    isEmpty(LIBDIR) {
+        LIBDIR = lib
+    }
+
+    LIBDIR = $$absolute_path($$LIBDIR, $$PREFIX)
+    target.path = $$LIBDIR
 }
 else: error("Static linking only available on Linux systems")
 
