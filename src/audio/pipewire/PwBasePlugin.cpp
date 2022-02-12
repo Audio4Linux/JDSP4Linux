@@ -48,9 +48,18 @@ void on_process(void* userdata, spa_io_position* position) {
   auto* in_left = static_cast<float*>(pw_filter_get_dsp_buffer(d->in_left, n_samples));
   auto* in_right = static_cast<float*>(pw_filter_get_dsp_buffer(d->in_right, n_samples));
 
+  if(in_left == nullptr || in_right == nullptr)
+  {
+      return;
+  }
+
   auto* out_left = static_cast<float*>(pw_filter_get_dsp_buffer(d->out_left, n_samples));
   auto* out_right = static_cast<float*>(pw_filter_get_dsp_buffer(d->out_right, n_samples));
 
+  if(out_left == nullptr || out_right == nullptr)
+  {
+      return;
+  }
 
   if (!d->pb->enable_probe) {
     d->pb->process(in_left, in_right, out_left, out_right, n_samples);
