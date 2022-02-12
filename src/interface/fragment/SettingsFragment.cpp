@@ -242,7 +242,9 @@ void SettingsFragment::refreshAll()
 
     ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
+    ui->blocklistInvert->blockSignals(true);
     ui->blocklistInvert->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert));
+    ui->blocklistInvert->blockSignals(false);
 
     ui->crashShareAllow->setChecked(AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
 
