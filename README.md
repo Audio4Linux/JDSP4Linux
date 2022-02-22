@@ -216,7 +216,7 @@ NOTE: Pipewire version 0.3 or later required. Unfortunately, this version is onl
 Debian/Ubuntu + **PulseAudio** clients only:
 
 ```bash
-sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-good1.0-dev
+sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 ```
 **Fedora**
 
@@ -228,7 +228,7 @@ sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-
 Fedora 34 + **PulseAudio** clients only:
 
 ```bash
-sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-good-devel 
+sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-base-devel 
 ```
 **Arch Linux**
 
