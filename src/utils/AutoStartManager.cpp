@@ -1,9 +1,11 @@
 #include "AutoStartManager.h"
+#include "config/AppConfig.h"
 #include "config/ConfigContainer.h"
 #include "config/ConfigIO.h"
 
 #include <QDir>
 #include <QFile>
+#include <QStandardPaths>
 
 AutostartManager::AutostartManager()
 {}
@@ -49,5 +51,11 @@ bool AutostartManager::inspectDesktopFile(const QString &path,
 
 QString AutostartManager::getAutostartPath(const QString &filename)
 {
-	return QDir::homePath() + "/.config/autostart/" + filename;
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
+    if(path.isEmpty())
+    {
+        path = QString("%1/.config/").arg(QDir::homePath());
+    }
+
+    return QString("%1/autostart/%2").arg(path).arg(filename);
 }

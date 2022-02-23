@@ -3,6 +3,8 @@
 #include "ConfigIO.h"
 #include "utils/Common.h"
 
+#include <QStandardPaths>
+
 #define ENCLOSE_QUOTES(x) "\"" + x + "\""
 
 #define DEFINE_KEY(name, defaultValue) \
@@ -85,28 +87,39 @@ bool AppConfig::isAppBlocked(const QString &name) const
 
 QString AppConfig::getDspConfPath()
 {
-    return QString("%1/.config/jamesdsp/audio.conf").arg(QDir::homePath());
+    return getPath("audio.conf");
 }
 
 QString AppConfig::getPath(QString subdir)
 {
-    return QString("%1/.config/jamesdsp/%2").arg(QDir::homePath()).arg(subdir);
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
+    if(path.isEmpty())
+    {
+        path = QString("%1/.config/").arg(QDir::homePath());
+    }
+
+    return QString("%1/jamesdsp/%2").arg(path).arg(subdir);
 }
 
 QString AppConfig::getCachePath(QString subdir)
 {
-    return QString("%1/.cache/jamesdsp/%2").arg(QDir::homePath()).arg(subdir);
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation);
+    if(path.isEmpty())
+    {
+        path = QString("%1/.cache/").arg(QDir::homePath());
+    }
+    return QString("%1/jamesdsp/%2").arg(path).arg(subdir);
 }
 
 void AppConfig::save()
 {
-    auto file = QString("%1/.config/jamesdsp/application.conf").arg(QDir::homePath());
+    auto file = getPath("application.conf");
     ConfigIO::writeFile(file, _appconf->getConfigMap());
 }
 
 void AppConfig::load()
 {
-    auto map = ConfigIO::readFile(QString("%1/.config/jamesdsp/application.conf").arg(QDir::homePath()));
+    auto map = ConfigIO::readFile(getPath("application.conf"));
     _appconf->setConfigMap(map);
 
     for(const auto& key : map.keys())
