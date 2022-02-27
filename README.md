@@ -129,9 +129,15 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 
 ### Debian/Ubuntu
 
-Minimum system requirements:
+##### Minimum system requirements:
+
+**Pulseaudio version**
 * Distro based on Debian 11 or later **OR**
 * Distro based on Ubuntu 20.04 or later
+ 
+**Pipewire version**
+* Distro based on Debian 11 or later **OR**
+* Distro based on Ubuntu 21.04 or later
 
 Add PPA Repo
 ```bash
