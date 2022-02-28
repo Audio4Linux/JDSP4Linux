@@ -48,7 +48,7 @@ Priority: optional
 Architecture: amd64
 Depends: $deps
 Conflicts: $conflict
-Maintainer: Tim Schneeberger (thepbone) <tim.schneeberger@gmail.com>
+Maintainer: Tim Schneeberger (thepbone) <tim.schneeberger@outlook.de>
 Description: JamesDSP for Linux
 Homepage: https://github.com/Audio4Linux/JDSP4Linux
 EOT
