@@ -45,17 +45,18 @@ jobs:
         
   build-pipewire-amd64:
     runs-on: ubuntu-20.04
-    container: ubuntu:21.04
+    #container: ubuntu:21.04
 
     steps:
     - name: Setup APT
       run:  echo 'APT::Acquire::Retries "4";' > /etc/apt/apt.conf.d/80-retries
     
-    - name: Update git
+    - name: Run APT updates
       run: |
+        add-apt-repository ppa:pipewire-debian/pipewire-upstream
         apt update
         apt upgrade -y git
-    
+
     - uses: actions/checkout@v2
       with:
         ref: 'master'
