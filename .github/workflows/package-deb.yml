@@ -51,11 +51,11 @@ jobs:
     - name: Setup APT
       run:  echo 'APT::Acquire::Retries "4";' > /etc/apt/apt.conf.d/80-retries
     
-    - name: Update git
+    - name: Run APT updates
       run: |
         apt update
         apt upgrade -y git
-    
+
     - uses: actions/checkout@v2
       with:
         ref: 'master'

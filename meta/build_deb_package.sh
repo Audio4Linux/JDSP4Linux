@@ -5,7 +5,7 @@ conflict=""
 deps=""
 if [ $2 = "pipewire" ]; then
    conflict="jamesdsp-pulse"
-   deps="libarchive13, qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpipewire-0.3-0"
+   deps="libarchive13, qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpipewire-0.3-0 (>= 0.3.19-4)"
 elif [ $2 = "pulse" ]; then
    conflict="jamesdsp-pipewire"
    deps="libarchive13, qtbase5-dev (>= 5.12.8), libqt5svg5 (>= 5.12.8), libglibmm-2.4-1v5, libglib2.0-0, libpulse-mainloop-glib0, libgstreamer1.0-0, gstreamer1.0-plugins-good"
@@ -48,7 +48,7 @@ Priority: optional
 Architecture: amd64
 Depends: $deps
 Conflicts: $conflict
-Maintainer: Tim Schneeberger (thepbone) <tim.schneeberger@gmail.com>
+Maintainer: Tim Schneeberger (thepbone) <tim.schneeberger@outlook.de>
 Description: JamesDSP for Linux
 Homepage: https://github.com/Audio4Linux/JDSP4Linux
 EOT
