@@ -10,6 +10,7 @@
 #include <QStyle>
 #include <QScopeGuard>
 #include <QTextStream>
+#include <QSessionManager>
 
 #define FORCE_CRASH_HANDLER
 
@@ -112,8 +113,13 @@ int main(int   argc,
     Log::information("Application version: " + QString(APP_VERSION_FULL));
     Log::information("Qt library version: " + QString(qVersion()));
 
-
-    Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no"));
+    Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no")); /* unreliable */
+    QGuiApplication::setFallbackSessionManagementEnabled(false);   
+    QObject::connect(qApp, &QGuiApplication::saveStateRequest, qApp, [](QSessionManager &manager){
+        // Block session restore requests
+        manager.setRestartHint(QSessionManager::RestartNever);
+        manager.release();
+    }, Qt::DirectConnection);
 
     QFile id("/var/lib/dbus/machine-id");
     if(id.open(QFile::ReadOnly | QFile::Text))
@@ -146,7 +152,6 @@ int main(int   argc,
     DspConfig::instance(parser.isSet(watch));
     AppConfig::instance().set(AppConfig::ExecutablePath, QString::fromLocal8Bit(exepath));
 
-    QApplication::setFallbackSessionManagementEnabled(false);
     MainWindow w(parser.isSet(tray));
 
     QObject::connect(instanceMonitor, &SingleInstanceMonitor::raiseWindow, &w, &MainWindow::raiseWindow);
@@ -160,7 +165,7 @@ int main(int   argc,
 			)
 		);
 	w.setWindowFlags(Qt::WindowContextHelpButtonHint | Qt::WindowCloseButtonHint);
-	w.hide();
+    w.hide();
 
     if (!parser.isSet(tray))
 	{
@@ -170,7 +175,7 @@ int main(int   argc,
         {
             w.show();
         }
-	}
+    }
 
 	return QApplication::exec();
 }

@@ -71,6 +71,7 @@ public slots:
     void onRelinkRequested();
     void raiseWindow();
     void launchFirstRunSetup();
+    void shutdown();
 
 private slots:
     void applyConfig();
@@ -125,6 +126,7 @@ private:
     IAudioService* _audioService       = nullptr;
 
     bool _blockApply                   = false;
+    bool _allowCloseEvent = false;
 
     QString _currentImpulseResponse    = "";
     QString _currentVdc                = "";
