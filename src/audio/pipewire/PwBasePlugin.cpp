@@ -85,7 +85,7 @@ PwPluginBase::PwPluginBase(std::string tag,
       pm(pipe_manager) {
   pf_data.pb = this;
 
-  const auto& filter_name = "pe_" + log_tag.substr(0, log_tag.size() - 2) + "_" + name;
+  const auto& filter_name = "jdsp_" + log_tag.substr(0, log_tag.size() - 2) + "_" + name;
 
   pm->lock();
 
