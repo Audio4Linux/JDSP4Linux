@@ -14,6 +14,8 @@
 #include <QTimer>
 #include <QUrl>
 
+#include "Global.h"
+
 #include <utils/DesktopServices.h>
 
 FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
@@ -35,7 +37,11 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
         ui->stackedWidget->slideInIdx(1);
 	});
     connect(ui->p3_next, &QPushButton::clicked, this, [&] {
+#ifdef ENABLE_CRASH_HANDLER
         ui->stackedWidget->slideInIdx(2);
+#else
+        ui->stackedWidget->slideInIdx(3);
+#endif
 	});
     connect(ui->p3b_next, &QPushButton::clicked, this, [&] {
         ui->stackedWidget->slideInIdx(3);

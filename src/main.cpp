@@ -12,11 +12,7 @@
 #include <QTextStream>
 #include <QSessionManager>
 
-#define FORCE_CRASH_HANDLER
-
-#if defined(Q_OS_UNIX) && defined(QT_NO_DEBUG) || defined(FORCE_CRASH_HANDLER)
-#define ENABLE_CRASH_HANDLER
-#endif
+#include "Global.h"
 
 #ifdef ENABLE_CRASH_HANDLER
 #include "crash/airbag.h"
@@ -137,6 +133,7 @@ int main(int   argc,
         return 0;
     }
 
+#ifdef ENABLE_CRASH_HANDLER
     if(lastSessionCrashed)
     {
         Log::information("Last session crashed unexpectedly. A crash report has been saved here: " + QString(STACKTRACE_LOG_OLD));
@@ -147,6 +144,7 @@ int main(int   argc,
            CrashReportSender::upload(Log::pathOld(), QString(STACKTRACE_LOG_OLD)); /* fire and forget */
         }
     }
+#endif
 
     // Prepare DspConfig based on cmdline argument
     DspConfig::instance(parser.isSet(watch));

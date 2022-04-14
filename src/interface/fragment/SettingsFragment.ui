@@ -578,7 +578,7 @@
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
-          <widget class="QGroupBox" name="groupBox_2">
+          <widget class="QGroupBox" name="crashShareGroup">
            <property name="title">
             <string>Share crash reports</string>
            </property>

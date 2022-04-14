@@ -13,6 +13,8 @@
 #include "utils/AutoStartManager.h"
 #include "utils/DesktopServices.h"
 
+#include "Global.h"
+
 #include <AeqSelector.h>
 
 #include <AeqPackageManager.h>
@@ -141,6 +143,10 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
         ui->session_menu->setEnabled(false);
 #ifndef QT_NO_SYSTEMTRAYICON
 	}
+#endif
+
+#ifndef ENABLE_CRASH_HANDLER
+    ui->crashShareGroup->setVisible(false);
 #endif
 }
 
