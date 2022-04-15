@@ -13,8 +13,6 @@
 #include "utils/AutoStartManager.h"
 #include "utils/DesktopServices.h"
 
-#include "Global.h"
-
 #include <AeqSelector.h>
 
 #include <AeqPackageManager.h>

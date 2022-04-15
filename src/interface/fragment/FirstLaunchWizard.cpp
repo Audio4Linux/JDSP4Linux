@@ -14,8 +14,6 @@
 #include <QTimer>
 #include <QUrl>
 
-#include "Global.h"
-
 #include <utils/DesktopServices.h>
 
 FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :

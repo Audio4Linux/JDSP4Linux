@@ -12,6 +12,10 @@ TARGET = jamesdsp
 TEMPLATE = app
 
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
+NO_CRASH_HANDLER: DEFINES += NO_CRASH_HANDLER
+!unix {
+    DEFINES += NO_CRASH_HANDLER
+}
 
 DEFINES += APP_VERSION=$$system(git describe --tags --long --always)
 DEFINES += JDSP_VERSION=4.1.0
@@ -44,7 +48,6 @@ SOURCES += \
     config/AppConfig.cpp \
     config/ConfigContainer.cpp \
     config/ConfigIO.cpp \
-    crash/airbag.c \
     data/AssetManager.cpp \
     data/EelParser.cpp \
     data/PresetManager.cpp \
@@ -104,15 +107,10 @@ FORMS += \
     MainWindow.ui
 
 HEADERS += \
-    Global.h \
     config/AppConfig.h \
     config/ConfigContainer.h \
     config/ConfigIO.h \
     config/DspConfig.h \
-    crash/airbag.h \
-    crash/killer.h \
-    crash/safecall.h \
-    crash/stacktrace.h \
     data/AssetManager.h \
     data/EelParser.h \
     data/InitializableQMap.h \
@@ -167,6 +165,17 @@ HEADERS += \
     utils/FindBinary.h \
     utils/OverlayMsgProxy.h \
     utils/StyleHelper.h
+
+!NO_CRASH_HANDLER {
+    HEADERS += \
+        crash/airbag.h \
+        crash/killer.h \
+        crash/safecall.h \
+        crash/stacktrace.h \
+
+    SOURCES += \
+        crash/airbag.c \
+}
 
 DISTFILES += utils/dbus/manifest.xml
 

@@ -12,8 +12,6 @@
 #include <QTextStream>
 #include <QSessionManager>
 
-#include "Global.h"
-
 #ifdef ENABLE_CRASH_HANDLER
 #include "crash/airbag.h"
 #include "crash/stacktrace.h"
