@@ -271,13 +271,13 @@ Compile application - **PipeWire** clients only:
 
 ```bash
 qmake ../JDSP4Linux.pro
-make
+make -j4
 ```
 Compile application - **PulseAudio** clients only:
 
 ```bash
 qmake ../JDSP4Linux.pro "CONFIG += USE_PULSEAUDIO"
-make
+make -j4
 ```
 
 Execute compiled binary
