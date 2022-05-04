@@ -271,13 +271,13 @@ Compile application - **PipeWire** clients only:
 
 ```bash
 qmake ../JDSP4Linux.pro
-make
+make -j4
 ```
 Compile application - **PulseAudio** clients only:
 
 ```bash
 qmake ../JDSP4Linux.pro "CONFIG += USE_PULSEAUDIO"
-make
+make -j4
 ```
 
 Execute compiled binary
@@ -319,6 +319,11 @@ Download icon
 sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/Audio4Linux/JDSP4Linux-GUI/master/resources/icons/icon.png -q --show-progress
 ```
 
+## Troubleshooting
+* Your CPU may be too slow to process the audio sample in time; try to disable some effects (especially resource-hungry ones like the convolver)
+* Set JamesDSP's process to real-time or high priority using a task manager of your choice
+* [Pipewire] Try out the workaround mentioned in [issue #47](https://github.com/Audio4Linux/JDSP4Linux/issues/47)
+
 ## Screenshots
 
 <p align="center">
@@ -335,7 +340,7 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 * [theAeon](https://github.com/theAeon) - RPM packages
 
 ##### Other credits
-* PipeWire implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects)
+* PipeWire/Pulse implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects)
 
 ## License
 
