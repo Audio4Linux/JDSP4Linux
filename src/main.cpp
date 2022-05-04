@@ -12,7 +12,7 @@
 #include <QTextStream>
 #include <QSessionManager>
 
-#ifdef ENABLE_CRASH_HANDLER
+#ifndef NO_CRASH_HANDLER
 #include "crash/airbag.h"
 #include "crash/stacktrace.h"
 #include <sys/stat.h>
@@ -51,7 +51,8 @@ int main(int   argc,
 	char exepath[PATH_MAX];
 	find_yourself(exepath, sizeof(exepath));
 
-#ifdef ENABLE_CRASH_HANDLER
+    mkdir("/tmp/jamesdsp/", S_IRWXU);
+#ifndef NO_CRASH_HANDLER
     QFile crashDmp(STACKTRACE_LOG);
 
     bool lastSessionCrashed = false;
@@ -70,7 +71,6 @@ int main(int   argc,
     }
 
 	EXECUTION_FILENAME = exepath;
-	mkdir("/tmp/jamesdsp/", S_IRWXU);
 	int                fd = safe_open_wo_fd("/tmp/jamesdsp/crash.dmp");
     airbag_init_fd(fd, onExceptionRaised, EXECUTION_FILENAME);
 #endif
@@ -91,7 +91,7 @@ int main(int   argc,
     parser.addOption(spinlck);
     parser.process(app);
 
-#ifdef ENABLE_CRASH_HANDLER
+#ifndef NO_CRASH_HANDLER
     SPIN_ON_CRASH = parser.isSet(spinlck);
 #endif
 
@@ -131,7 +131,7 @@ int main(int   argc,
         return 0;
     }
 
-#ifdef ENABLE_CRASH_HANDLER
+#ifndef NO_CRASH_HANDLER
     if(lastSessionCrashed)
     {
         Log::information("Last session crashed unexpectedly. A crash report has been saved here: " + QString(STACKTRACE_LOG_OLD));

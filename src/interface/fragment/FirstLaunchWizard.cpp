@@ -35,7 +35,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
         ui->stackedWidget->slideInIdx(1);
 	});
     connect(ui->p3_next, &QPushButton::clicked, this, [&] {
-#ifdef ENABLE_CRASH_HANDLER
+#ifndef NO_CRASH_HANDLER
         ui->stackedWidget->slideInIdx(2);
 #else
         ui->stackedWidget->slideInIdx(3);

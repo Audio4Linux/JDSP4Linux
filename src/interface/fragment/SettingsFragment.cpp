@@ -143,7 +143,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	}
 #endif
 
-#ifndef ENABLE_CRASH_HANDLER
+#ifdef NO_CRASH_HANDLER
     ui->crashShareGroup->setVisible(false);
 #endif
 }
