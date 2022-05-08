@@ -24,8 +24,6 @@
 #include <pipewire/filter.h>
 // #include <spa/param/latency-utils.h> // unavailable on Ubuntu 21.04 >:(
 #include <mutex>
-#include <ranges>
-#include <span>
 
 #include "PwPipelineManager.h"
 #include "Utils.h"
