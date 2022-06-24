@@ -589,9 +589,7 @@ void STFT_DynInit(int32_t *indexFw, float *analysisWnd)
 	getAsymmetricWindow(analysisWnd, synthesisWnd, indexFw[0], ovpSmps, indexFw[5] / (float)32767);
 	// Pre-shift window function
 	for (i = 0; i < indexFw[0] - indexFw[2]; i++)
-		synthesisWnd[i] = synthesisWnd[i + indexFw[2]];
-	for (i = 0; i < indexFw[0]; i++)
-		analysisWnd[i] *= (1.0f / indexFw[0]) * 0.5f;
+		synthesisWnd[i] = synthesisWnd[i + indexFw[2]] * (1.0f / indexFw[0]) * 0.5f;
 }
 int32_t STFTCartesian(float *indexer, float *analysisWnd, float *ptr)
 {
