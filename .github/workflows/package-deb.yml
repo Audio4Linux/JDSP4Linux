@@ -158,7 +158,7 @@ jobs:
       uses: wlixcc/SFTP-Deploy-Action@v1.0
       with:
         username: 'tim'
-        server: 'local.timschneeberger.me'
+        server: 'srv1.timschneeberger.me'
         port: 22
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
         local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb'
