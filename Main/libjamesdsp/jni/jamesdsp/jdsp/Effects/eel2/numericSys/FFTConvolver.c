@@ -3,6 +3,7 @@
 #include <string.h>
 #include <float.h>
 #include <math.h>
+#include "../ns-eel.h"
 #include "codelet.h"
 unsigned int upper_power_of_two(unsigned int v)
 {
@@ -1072,10 +1073,6 @@ int FFTConvolver1x2LoadImpulseResponse(FFTConvolver1x2 *conv, unsigned int block
 	conv->gain = 1.0f / ((float)conv->_segSize * 2.0f);
 	return 1;
 }
-
-#ifndef min
-#define min(a,b) (((a)<(b))?(a):(b))
-#endif
 void FFTConvolver1x1Process(FFTConvolver1x1 *conv, const float* input, float* output, unsigned int len)
 {
 	unsigned int j, symIdx;

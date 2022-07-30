@@ -71,12 +71,6 @@ void xgetrf(const int32_t m, double A[], int32_t ipiv_data[])
 		}
 	}
 }
-#ifndef min
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-#endif
-#ifndef max
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#endif
 extern double rt_hypotd(double u0, double u1);
 void mldivide(const double A[], const int32_t rows1, const int32_t cols1, const double b[], const int32_t rows2, const int32_t cols2, double Y[], int32_t Y_size[2])
 {

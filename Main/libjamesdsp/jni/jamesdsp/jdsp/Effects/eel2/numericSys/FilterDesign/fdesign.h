@@ -79,21 +79,8 @@ extern int32_t firls(int32_t N, double *freq, double *M, double *weight, int32_t
 extern void subsamplingCal(unsigned int M, double alpha, double *f_def, unsigned int *Sk);
 extern float* allpass_char(double alpha, unsigned int L, unsigned int *CFiltLen);
 extern void cos_fib_paraunitary1(unsigned int N, unsigned int m, unsigned int L, double df, double *h_opt);
-#define DENORMAL_BUFFER (128)
-typedef struct
-{
-	unsigned int N, m, L, N2;
-	float *subbandData, *freqLabel;
-	float *channelMatrix, *h;
-	float *allpass_delay_chain, *virtualHilbertTransformDelay;
-	float *APC_delay_1, *APC_delay_2, *Xk2;
-	unsigned int *Sk, *decimationCounter;
-	float alpha, postGain;
-	// Denormal buster
-	float noiseBuffer[DENORMAL_BUFFER];
-	unsigned int noiseLoop;
-} WarpedPFB;
 #include "polyphaseASRC.h"
+#include "polyphaseFilterbank.h"
 #include <stdint.h>
 typedef struct
 {

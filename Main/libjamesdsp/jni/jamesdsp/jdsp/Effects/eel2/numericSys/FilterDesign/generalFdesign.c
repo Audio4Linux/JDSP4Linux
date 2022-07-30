@@ -5,9 +5,6 @@
 #include "../quadprog.h"
 #include "fdesign.h"
 #include "../../ns-eel.h"
-#ifndef max
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#endif
 void LLsinHalfTbl(double *dst, uint32_t n)
 {
 	const double twopi_over_n = 6.283185307179586476925286766559 / n;

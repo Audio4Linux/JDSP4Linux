@@ -4,12 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "qr_fact.h"
-#ifndef min
-#define min(a,b) (((a)<(b))?(a):(b))
-#endif
-#ifndef max
-#define max(a,b) (((a)>(b))?(a):(b))
-#endif
+#include "../../ns-eel.h"
 void xzlarf(int32_t cols1, int32_t rows1, int32_t iv0, double tau, double C_data[], int32_t ic0, int32_t ldc, double work_data[])
 {
 	int32_t lastv;

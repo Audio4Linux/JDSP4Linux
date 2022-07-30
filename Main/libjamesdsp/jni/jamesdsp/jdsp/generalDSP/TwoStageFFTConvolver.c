@@ -3,6 +3,7 @@
 #include <string.h>
 #include <float.h>
 #include <math.h>
+#include "../Effects/eel2/ns-eel.h"
 #include "../jdsp_header.h"
 void TwoStageFFTConvolver1x1Init(TwoStageFFTConvolver1x1 *conv)
 {
@@ -700,10 +701,6 @@ void TwoStageFFTConvolver1x2Free(TwoStageFFTConvolver1x2 *conv)
 	conv->_tailInputFill = 0;
 	conv->_precalculatedPos = 0;
 }
-
-#ifndef min
-#define min(a,b) (((a)<(b))?(a):(b))
-#endif
 int TwoStageFFTConvolver1x1LoadImpulseResponse(TwoStageFFTConvolver1x1 *conv, unsigned int headBlockSize, unsigned int tailBlockSize, const float* ir, unsigned int irLen)
 {
 	if (headBlockSize == 0 || tailBlockSize == 0)

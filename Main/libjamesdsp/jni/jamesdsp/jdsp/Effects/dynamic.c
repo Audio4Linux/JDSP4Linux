@@ -18,12 +18,7 @@ void JLimiterInit(JamesDSPLib *jdsp)
 #include <math.h>
 #include <float.h>
 #include "eel2/numericSys/codelet.h"
-#ifndef min
-#define min(a,b) (((a)<(b))?(a):(b))
-#endif
-#ifndef max
-#define max(a,b) (((a)>(b))?(a):(b))
-#endif
+#include "eel2/ns-eel.h"
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -77,7 +72,7 @@ unsigned LLRevBitsM(unsigned int x, unsigned int bits)
 void LLbitReversalTblM(unsigned *dst, unsigned int fftLen)
 {
 	unsigned int bits = LLIntegerLog2M(fftLen);
-	for (int i = 0; i < fftLen; ++i)
+	for (unsigned int i = 0; i < fftLen; ++i)
 		dst[i] = LLRevBitsM(i, bits);
 }
 void LLsinHalfTblFloatM(float *dst, unsigned int fftLen)
@@ -154,7 +149,7 @@ static float lerp1DNoExtrapo(float val, float *x, float *y, int n)
 void FFTCompressorSetSpectralFollowingRate(FFTDynamicRangeSquasher *comp, float fs, float fgt_facT)
 {
 	comp->spectralRate = fs / (float)comp->fftLen * (float)ANALYSIS_OVERLAP_DRS;
-	comp->fgt_fac = 1.0 - exp(-1.0 / (fgt_facT / 1000.0 * comp->spectralRate));
+	comp->fgt_fac = (float)(1.0 - exp(-1.0 / (fgt_facT / 1000.0 * comp->spectralRate)));
 }
 void FFTCompressorSetParam(FFTDynamicRangeSquasher *comp, float fs, float maxAtk, float maxRel, float adapt)
 {

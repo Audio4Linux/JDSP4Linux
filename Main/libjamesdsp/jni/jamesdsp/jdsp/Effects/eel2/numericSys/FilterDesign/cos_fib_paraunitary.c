@@ -4,6 +4,7 @@
 #include <float.h>
 #include <string.h>
 #include <stdint.h>
+#include "../../ns-eel.h"
 #include "../SolveLinearSystem/qr_fact.h"
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -150,8 +151,6 @@ void inv_chol(double *L, double *Y, unsigned int n)
 	}
 	free(S);
 }
-#define min(a,b) (((a)<(b))?(a):(b))
-#define max(a,b) (((a)>(b))?(a):(b))
 void geninv(double *G, unsigned int m1, unsigned int n1, double *Y, unsigned int size[2])
 {
 	unsigned int i, j, k;

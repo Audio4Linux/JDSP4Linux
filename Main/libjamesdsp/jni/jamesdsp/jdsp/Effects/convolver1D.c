@@ -59,7 +59,7 @@ void Convolver1DProcessTwoStageFFTConvolver2x4x2(JamesDSPLib *jdsp, size_t n)
 {
 	TwoStageFFTConvolver2x4x2Process(jdsp->conv.conv1d2x4x2_T_S, jdsp->tmpBuffer[0], jdsp->tmpBuffer[1], jdsp->tmpBuffer[0], jdsp->tmpBuffer[1], (unsigned int)n);
 }
-int Convolver1DLoadImpulseResponse(JamesDSPLib *jdsp, float *tempImpulseFloat, unsigned int impChannels, unsigned int impulseLengthActual)
+int Convolver1DLoadImpulseResponse(JamesDSPLib *jdsp, float *tempImpulseFloat, unsigned int impChannels, size_t impulseLengthActual)
 {
 	jdsp->convolverEnabled = 0;
 	Convolver1DDestructor(jdsp, 0);

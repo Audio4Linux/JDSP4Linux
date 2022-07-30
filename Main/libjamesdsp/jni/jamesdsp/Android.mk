@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := \
 	jdsp/Effects/eel2/numericSys/libsamplerate/src_sinc.c \
 	jdsp/Effects/eel2/numericSys/FilterDesign/generalFdesign.c \
 	jdsp/Effects/eel2/numericSys/FilterDesign/cos_fib_paraunitary.c \
+	jdsp/Effects/eel2/numericSys/FilterDesign/polyphaseFilterbank.c \
 	jdsp/Effects/eel2/numericSys/FilterDesign/polyphaseASRC.c \
 	jdsp/Effects/eel2/numericSys/FilterDesign/eqnerror.c \
 	jdsp/Effects/eel2/numericSys/FilterDesign/firls.c \
