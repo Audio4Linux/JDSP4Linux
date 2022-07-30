@@ -69,6 +69,7 @@ SOURCES += \
     $$BASEPATH/Effects/eel2/numericSys/FilterDesign/firls.c \
     $$BASEPATH/Effects/eel2/numericSys/FilterDesign/generalFdesign.c \
     $$BASEPATH/Effects/eel2/numericSys/FilterDesign/polyphaseASRC.c \
+    $$BASEPATH/Effects/eel2/numericSys/FilterDesign/polyphaseFilterbank.c \
     $$BASEPATH/Effects/eel2/numericSys/MersenneTwister.c \
     $$BASEPATH/Effects/eel2/numericSys/SolveLinearSystem/inv.c \
     $$BASEPATH/Effects/eel2/numericSys/SolveLinearSystem/mldivide.c \
