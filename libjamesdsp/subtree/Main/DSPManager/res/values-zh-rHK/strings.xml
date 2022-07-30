@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">JamesDSP 總管</string>
+  <string name="select_configuration_title">選擇要編輯的設置</string>
+  <string name="headset_title">有線耳機</string>
+  <string name="speaker_title">手機喇叭</string>
+  <string name="bluetooth_title">藍牙裝置</string>
+  <string name="audio_effects">音訊效果</string>
+  <string name="pref_unavailable">此功能不可用於您的裝置上</string>
+  <string name="dsp_settings_headset">有線耳機</string>
+  <string name="dsp_settings_speaker">手機喇叭</string>
+  <string name="dsp_settings_bluetooth">藍牙裝置</string>
+  <string name="pref_dsp_title">總音頻效果開關 / 輸出控制</string>
+  <string name="pref_dsp_summary_on">音訊效果已打開</string>
+  <string name="pref_dsp_summary_off">音訊效果已關閉</string>
+  <string name="pref_dsp_enable">總音訊效果控制</string>
+  <string name="dspcrashed">DSP採樣率出問題\n引擎崩潰\n正在重啟引擎!</string>
+  <string name="dspneedreboot">獲取引擎進程PID失敗</string>
+  <string name="pref_compression_title">動態範圍壓縮</string>
+  <string name="pref_compression_summary_on">已啟用壓縮</string>
+  <string name="pref_compression_summary_off">已停用壓縮</string>
+  <string name="pref_compression_enable">啟用壓縮動態範圍</string>
+  <string name="dialog_maxatk">功率包絡上升沿</string>
+  <string name="dialog_maxrel">功率包絡下降沿</string>
+  <string name="dialog_adaptspeed">強度</string>
+  <string name="pref_effect_title">選擇效果程度</string>
+  <string name="dialog_filtertype">濾波器類型</string>
+  <string name="dialog_spinterpolation">插值器</string>
+  <string name="dialog_effect">效果程度</string>
+  <string name="pref_equalizer_title">基於插值的FIR均衡器</string>
+  <string name="pref_strequalizer_title">任意響應濾波器</string>
+  <string name="pref_strequalizer_summary_on">使用任意響應濾波器</string>
+  <string name="pref_strequalizer_summary_off">關閉任意響應濾波器</string>
+  <string name="dialog_magnitude_response">幅度增益字串輸入</string>
+  <string name="pref_equalizer_summary_on">已啟用FIR等化器</string>
+  <string name="pref_equalizer_summary_off">已停用FIR等化器</string>
+  <string name="pref_equalizer_enable">使用插值FIR等化器</string>
+  <string name="pref_strequalizer_enable">使用任意幅度響應濾波器</string>
+  <string name="pref_strphase_enable">使用任意移相器</string>
+  <string name="pref_equalizer_preset_title">選擇設置</string>
+  <string name="pref_bassboost_title">低音強化</string>
+  <string name="pref_bassboost_summary_on">已啟用低音強化</string>
+  <string name="pref_bassboost_summary_off">已停用低音強化</string>
+  <string name="pref_bassboost_enable">使用低音強化</string>
+  <string name="dialog_dbb_maxgain">最大增益</string>
+  <string name="pref_headset_virtual_title">耳機虛擬室內效果</string>
+  <string name="pref_headset_virtual_summary_on">已啟用耳機虛擬室內</string>
+  <string name="pref_headset_virtual_summary_off">已停用耳機虛擬室內</string>
+  <string name="pref_headset_virtual_enable">使用耳機虛擬室</string>
+  <string name="pref_room_title">選擇房間種類</string>
+  <string name="dialog_room">房間種類</string>
+  <string name="pref_convolver_title">卷積器</string>
+  <string name="pref_convolver_summary_on">已啟用卷積器</string>
+  <string name="pref_convolver_summary_off">已停用卷積器</string>
+  <string name="pref_convolver_enable">使用卷積器</string>
+  <string name="dialog_convolution_mode">脈衝響應長度優化</string>
+  <string name="dialog_conv_advimp">高級波形修改</string>
+  <string name="pref_ddc_title">ViPER-DDC</string>
+  <string name="pref_ddc_summary_on">已啟用ViPER-DDC</string>
+  <string name="pref_ddc_summary_off">已停用ViPER-DDC</string>
+  <string name="pref_ddc_enable">使用ViPER-DDC</string>
+  <string name="dialog_sosmatrix">加載DDC文件</string>
+  <string name="text_ddc_dir_isempty">空白DDC目錄%1$s</string>
+  <string name="pref_liveprog_title">現場編程DSP</string>
+  <string name="pref_liveprog_summary_on">現場可編程 DSP已啟用</string>
+  <string name="pref_liveprog_summary_off">現場可編程 DSP已停用</string>
+  <string name="pref_liveprog_enable">使用現場可編程 DSP</string>
+  <string name="dialog_liveprogfile">加載代碼文件</string>
+  <string name="text_liveprog_dir_isempty">空白代碼目錄%1$s</string>
+  <string name="pref_analogmodelling_title">超採樣電子管放大器</string>
+  <string name="pref_analogmodelling_summary_on">已啟用電子管放大器</string>
+  <string name="pref_analogmodelling_summary_off">已停用電子管放大器</string>
+  <string name="pref_analogmodelling_enable">使用電子放大器</string>
+  <string name="dialog_tubedrive">預增益</string>
+  <string name="dialog_offlineimpulseresponseresampler">離線重採樣器</string>
+  <string name="dialog_offlineimpulseresponseresampler_title">選擇需要重採樣的脈衝響應</string>
+  <string name="dialog_impulseresponse">脈衝響應</string>
+  <string name="dialog_length">脈衝響應長度</string>
+  <string name="text_ir_dir_isempty">空白脈衝響應目錄 %1$s</string>
+  <string name="doesntexist">錯誤:未選擇脈衝響應檔案</string>
+  <string name="mono_conv">單聲道</string>
+  <string name="stereo_conv">立體聲</string>
+  <string name="fullstereo_conv">全立體聲</string>
+  <string name="resamplerstr">已重採樣至DSP模組採樣率:%1$d\n重採樣後檔案路徑:%2$s</string>
+  <string name="resamplererror">請先啟用全域模式或者慣用模式來註冊DSP，以便從音訊DSP中獲取採樣率</string>
+  <string name="impfilefault">載入脈衝響應失敗\n請選擇正確脈衝響應檔案</string>
+  <string name="unmatchedsamplerate">脈衝響應檔案%1$s的採樣率%2$d與DSP模組採樣率%3$d不吻合\n目前正使用快速重採樣器\n預先使用離線重採樣器可改善脈衝響應質量。</string>
+  <string name="basicinfo">緩衝區大小:%1$s\n動態容器容量:%2$d\n採樣率:%3$d</string>
+  <string name="convolversuccess">成功載入脈衝響應:%1$s\n聲道:%2$s\n每聲道樣本總數:%3$d\n截短後的每聲道樣本總數:%4$d</string>
+  <string name="limiter_threshold">壓限器閾值[-60 到 -0.1 dB]</string>
+  <string name="limiter_release">壓限器時間常數[1.5 到 500 ms]</string>
+  <string name="limiter_postgain">後增益 [-15 到 15 dB]</string>
+
+  <string name="menu_reset">重設</string>
+  <string name="pref_headset_soundpos_title">空間位置效果</string>
+  <string name="pref_headset_stereowide_summary_on">已啟用立體聲寬度</string>
+  <string name="pref_headset_stereowide_summary_off">已停用立體聲寬度</string>
+  <string name="pref_headset_stereowide_enable">使用立體聲寬度控制</string>
+  <string name="dialog_stereo">寬度</string>
+  <string name="pref_headset_bs2b_summary_on">已啟用立體聲聲場增強</string>
+  <string name="pref_headset_bs2b_summary_off">已停用立體聲聲場增強</string>
+  <string name="dialog_bs2b">立體聲聲場增強預置</string>
+  <string name="pref_headset_bs2b_enable">使用立體聲聲場增強</string>
+
+  <string name="eq_preset_flat">平淡</string>
+  <string name="eq_preset_custom">自訂</string>
+  <string name="save_preset">保存設置</string>
+  <string name="load_preset">載入設置</string>
+  <string name="new_preset">新設置…</string>
+  <string name="displaydevmsg">%1$sDSP模組資訊</string>
+  <string name="removetext">清除</string>
+  <string name="displaytext">顯示</string>
+  <string name="theme">當前主題:%1$s</string>
+  <string name="globaleffect_title">註冊模式:%1$s</string>
+  <string name="darktheme">暗色</string>
+  <string name="lighttheme">明亮</string>
+  <string name="defaulttheme">預設</string>
+  <string name="redtheme">紅綠補色</string>
+  <string name="globalreg">全域(需關閉直接音量控制)</string>
+  <string name="traditionalreg">慣用</string>
+  <!-- IO ERROR -->
+  <string name="save_error_bluetooth">"無法保存bluetooth.xml。你有沒有打開過藍牙裝置面板?"</string>
+  <string name="save_error_headset">"無法保存headset.xml。你有沒有打開過有線耳機面板?"</string>
+  <string name="save_error_speaker">"無法保存speaker.xml。你有沒有打開過手機喇叭面板?"</string>
+  <string name="load_error_bluetooth">加載bluetooth.xml失敗。未找到文件或權限不足</string>
+  <string name="load_error_headset">加載headset.xml失敗。未找到文件或權限不足</string>
+  <string name="load_error_speaker">加載speaker.xml失敗。未找到文件或權限不足</string>
+  <string name="warn_null">請勿輸入空白設置名，下次加載時，會造成失敗。</string>
+  <string name="help_title">說明</string>
+  <string name="help_text"><b>JamesDSP用戶手冊</b>
+\n\n
+入門\n\n
+注意:老用戶需清除舊預置(清除數據)\n
+新版JamesDSP預置不相容老JamesDSP預置，不然的話JamesDSP會崩潰，我們更建議你跑新版JamesDSP之前，把老JamesDSP預置目錄刪除\n
+\n\n
+App右上角的「三橫」符號是預置菜單，你可從預置文件恢復App設置，你也可存儲App設置成預置文件\n\n
+有線耳機 / 手機喇叭 / 藍牙裝置\n
+當前輸出模式字眼在在App的頂部出現，按一下App的左上角「三橫」符號以查看或修改效果設置\n\n
+總音頻效果開關 / 輸出控制\n\n
+●總音頻效果開關\n
+總音頻效果開關，顧名思義，為所有本DSP提供的效果開關，當有線耳機連接我們會顯示「有線耳機」，當有線耳機或藍牙裝置斷開我們會顯示「手機喇叭」，當藍牙裝置已連接我們會顯示「藍牙裝置」\n\n
+●限幅器閾值\n
+音頻幅度接近數字最大容許值時候，限幅器自動開動。設閾值在-0.1以外的值會使得系統於更小幅度進行限幅切峰\n\n
+●限幅器檢測器下降沿\n
+下降沿速度越快，限幅器越早因無高幅度採樣值而被快速關閉，反之，限幅器會被緩慢關閉，一般而言，緩慢下降沿會減少非線性失真\n\n
+●後期增益\n
+本為數字音量鈕，信號送入限幅器前的音量衰減或增益.\n
+\n
+*舊版jDSP的後期增益置限幅器後，新版jdsp後期增益在限幅器前進行\n
+\n\n
+動態範圍壓縮\n\n
+●啟動動態範圍壓縮\n
+動態範圍壓縮根據累加頻譜統計以自動調整壓平量以降低瞬態，你可以視其專用來降低鼓聲響度\n
+●功率包絡上升沿\n
+由於動態範圍壓縮內部有信號功率檢測器控制，其設置調節動態範圍壓縮的反應速度\n
+●功率包絡下降沿\n
+由於動態範圍壓縮內部有信號功率檢測器控制，其設置調節動態範圍壓縮量的衰減速度\n
+強度\n
+調整壓縮強度\n
+\n\n
+動態低音增強\n\n
+●啟動動態低音增強\n
+為你加入令人愉快的低音增益量，如果你對效果不滿，可以以均衡器代替ߘꜮ\n
+●最大增益\n
+本選項調節最大低頻增益\n
+\n\n
+基於插值的FIR均衡器\n\n
+FIR為有限衝擊響應，啟動 / 關閉FIR均衡器\n
+\n
+●濾波器類型\n
+可選最小相位或線性相位，我們建議使用最小相位，因為在大部分情況下，最小相位是沒有延時的，人類聽覺單耳對相位變化極不敏感。而線性相位濾波一般在音樂製作時候更有價值，因為你希望在多音軌混音時候保持多音軌之間的相位關係。\n
+在播放音頻時候，線性相位濾波為信號加入延時，延時剛好是濾波器長度的一半\n
+\n
+●選擇預置\n
+我們只有「平淡」和「自訂」，你手繪EQ響應就是「自訂」預置，選擇「平淡」會重設EQ響應\n
+\n\n
+任意響應濾波器\n\n
+如你熟悉EqualizerAPO你一定聽過GraphicEq這玩意，想在jDSP重現在EqualizerAPO體現到的相同效果，用戶可從EqualizerAPO安裝目錄下的config.txt提取你對應的GraphicEq: ... 字串然後貼在jDSP任意響應濾波器裡面\n
+\n\n
+卷積器\n\n
+從菜單選擇脈衝響應文件(.wav, .irs, .flac)\n我們會把其信號特性實時套用到輸入音頻\n\n
+脈衝響應長度優化\n
+本功能盡力降低脈衝響應的延時和卷積器功耗\n\n
+ViPER-DDC\n
+本功能實現參數化IIR濾波器，用戶可用效果進行頻率響應均衡化，目前只有DDCToolbox才可生成.ddc文件供ViPER-DDC加載, ViPER-DDC在jDSP裡屬級聯二階濾波器,本實現跟Viper4Android(V4A)有所不同, 由於鍾形參數化濾波器(Peaking)有兩個相同IIR係數，所以V4A只能加載由鍾形參數化濾波器組成的.ddc文件，而jDSP沒有IIR係數共用的假設\n\n
+\n
+現場可編程DSP\n\n
+本功能實現一個現場編譯的虛擬機，用戶編寫EEL語言，虛擬機加載.eel文件並編譯成op碼，簡單講就是用戶可透過eel語言實現自己的音效\n\n\n
+我們支持大量函數供調用，EEL虛擬機官網:《github.com/james34602/EEL_VM》\n\n
+EEL有龐大的代碼庫，包含了常用運算如傅立葉變換，多相位濾波器組，有點創意的建議玩玩，著名一句話：Don\'t Be a Programmer, Be a Problem Solver!\n\n 
+EEL是一個類C的語言\n
+\n
+超採樣電子管放大器\n\n
+●預增益\n\n
+電子管放大器是一個無混疊偶諧波發生器.\n\n
+\n
+空間位置效果\n\n
+●立體聲寬度控制\n\n
+本效果基於子頻帶立體聲分析，調立體聲窄一點還是寬一點？調高調低試試！\n\n
+●啟動立體聲聲場增強\n\n
+給你環繞聲效果！\n\n
+\n
+混響\n\n
+●選擇房間種類\n\n
+為音頻加入些空間感\n
+\n
+    <b>鳴謝:</b>\n\n
+    圖形界面作者: Antti S. Lankila \n
+  </string>
+</resources>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">James DSP</string>
+  <string name="headset_title">Headset</string>
+  <string name="speaker_title">Speaker</string>
+  <string name="bluetooth_title">Bluetooth</string>
+  <string name="usb_title">USB/Dock</string>
+  <string name="pref_unavailable">Functionality is not available on your device</string>
+  <string name="pref_dsp_title">Master switch / Output control</string>
+  <string name="pref_dsp_summary_on">Master audio is enabled</string>
+  <string name="pref_dsp_summary_off">Master audio is disabled</string>
+  <string name="pref_dsp_enable">Master switch</string>
+  <string name="dspcrashed">DSP sample rate go wrong?\nEngine crashed\nResurrecting!</string>
+  <string name="dspneedreboot">Get engine PID failed</string>
+  <string name="pref_compression_title">Auto Dynamic range compressor</string>
+  <string name="pref_compression_summary_on">Compression is enabled</string>
+  <string name="pref_compression_summary_off">Compression is disabled</string>
+  <string name="pref_compression_enable">Enable Dynamic range compressor</string>
+  <string name="dialog_maxatk">Max attack</string>
+  <string name="dialog_maxrel">Max release</string>
+  <string name="dialog_adaptspeed">Aggressiveness</string>
+  <string name="pref_effect_title">Select effect strength</string>
+  <string name="dialog_filtertype">Filter type</string>
+  <string name="dialog_spinterpolation">Interpolator</string>
+  <string name="pref_equalizer_title">Interpolating FIR Equalizer</string>
+  <string name="pref_strequalizer_enable">Enable Arbitrary Magnitude Response Equalizer</string>
+  <string name="pref_strphase_enable">Enable Arbitrary Phase Response Equalizer</string>
+  <string name="pref_strequalizer_title">Arbitrary Response Equalizer</string>
+  <string name="pref_strequalizer_summary_on">Arbitrary magnitude is enabled</string>
+  <string name="pref_strequalizer_summary_off">Arbitrary magnitude is disabled</string>
+  <string name="dialog_magnitude_response">Magnitude response string</string>
+  <string name="pref_equalizer_summary_on">FIR Equalizer is enabled</string>
+  <string name="pref_equalizer_summary_off">FIR Equalizer is disabled</string>
+  <string name="pref_equalizer_enable">Enable FIR equalizer</string>
+  <string name="pref_equalizer_preset_title">Select preset</string>
+  <string name="pref_bassboost_title">Dynamic Bass boost</string>
+  <string name="pref_bassboost_summary_on">Dynamic Bass boost is enabled</string>
+  <string name="pref_bassboost_summary_off">Dynamic Bass boost is disabled</string>
+  <string name="pref_bassboost_enable">Enable Dynamic Bass boost</string>
+  <string name="dialog_dbb_maxgain">Max gain</string>
+  <string name="pref_headset_virtual_title">Virtual room effect</string>
+  <string name="pref_headset_virtual_summary_on">Virtual room effect is enabled</string>
+  <string name="pref_headset_virtual_summary_off">Virtual room effect is disabled</string>
+  <string name="pref_headset_virtual_enable">Enable Reverberation</string>
+  <string name="pref_room_title">Select room type</string>
+  <string name="dialog_room">Room type</string>
+
+  <string name="pref_convolver_title">Convolver</string>
+  <string name="pref_convolver_summary_on">Convolver is enabled</string>
+  <string name="pref_convolver_summary_off">Convolver is disabled</string>
+  <string name="pref_convolver_enable">Convolver enable</string>
+  <string name="dialog_convolution_mode">Impulse response optimization</string>
+  <string name="dialog_conv_advimp">Advanced waveform editing</string>
+  <string name="pref_ddc_title">ViPER-DDC</string>
+  <string name="pref_ddc_summary_on">ViPER-DDC is enabled</string>
+  <string name="pref_ddc_summary_off">ViPER-DDC is disabled</string>
+  <string name="pref_ddc_enable">Enable</string>
+  <string name="dialog_sosmatrix">DDC file</string>
+  <string name="text_ddc_dir_isempty">DDC directory %1$s is empty</string>
+  
+  <string name="pref_liveprog_title">Live programmable DSP</string>
+  <string name="pref_liveprog_summary_on">Live programmable DSP is enabled</string>
+  <string name="pref_liveprog_summary_off">Live programmable DSP is disabled</string>
+  <string name="pref_liveprog_enable">Enable</string>
+  <string name="dialog_liveprogfile">liveprog file</string>
+  <string name="text_liveprog_dir_isempty">liveprog directory %1$s is empty</string>
+  
+  <string name="pref_analogmodelling_title">Oversampled Analog Modelling</string>
+  <string name="pref_analogmodelling_summary_on">Analog Modelling is enabled</string>
+  <string name="pref_analogmodelling_summary_off">Analog Modelling is disabled</string>
+  <string name="pref_analogmodelling_enable">Enable Analog Modelling</string>
+  <string name="dialog_tubedrive">Preamp</string>
+  <string name="dialog_offlineimpulseresponseresampler">Offline Resampler</string>
+  <string name="dialog_offlineimpulseresponseresampler_title">Select IR to resample</string>
+  <string name="dialog_impulseresponse">Impulse response</string>
+  <string name="dialog_length">Impulse response length</string>
+  <string name="text_ir_dir_isempty">IR sample directory %1$s is empty</string>
+  <string name="doesntexist">Error: No IR file selected</string>
+  <string name="mono_conv">Mono</string>
+  <string name="stereo_conv">Stereo</string>
+  <string name="fullstereo_conv">Full Stereo</string>
+  <string name="resamplerstr">Resampled to audio device sample rate:%1$d\nNew impulse response created at: %2$s</string>
+  <string name="resamplererror">Please first register audio engine by enabling global effect or open a music player if using conventional mode in order to retrive sample rate from audio engine</string>
+  <string name="impfilefault">Load impulse failed\nPlease choose right impulse response file!</string>
+  <string name="unmatchedsamplerate">Impulse response %1$s sample rate (%2$d) is not matching with driver sample rate(%3$d)\nWill use low quality resampler to resample&#8230;\nUse Offline Resampler for higher qualtiy resampling!</string>
+  <string name="basicinfo">Buffer len: %1$s\nAllocated block size: %2$d\nSample rate: %3$d</string>
+  <string name="convolversuccess">Impulse response %1$s loaded\nChannel info:%2$s\nSamples per channel:%3$d\nSamples per channel(Truncated):%4$d</string>
+  <string name="limiter_threshold">Limiter threshold [-60 &#8211; -0.1 dB]</string>
+  <string name="limiter_release">Limiter release [1.5 &#8211; 500 ms]</string>
+  <string name="limiter_postgain">Post gain [-15 &#8211; 15 dB]</string>
+  <string name="pref_headset_soundpos_title">Sound positioning</string>
+  <string name="pref_headset_stereowide_summary_on">Soundstage widthness is enabled</string>
+  <string name="pref_headset_stereowide_summary_off">Soundstage widthness is disabled</string>
+  <string name="pref_headset_stereowide_enable">Enable Soundstage widthness modification</string>
+  <string name="dialog_stereo">Widen Level</string>
+  <string name="pref_headset_bs2b_summary_on">Crossfeed is enabled</string>
+  <string name="pref_headset_bs2b_summary_off">Crossfeed is disabled</string>
+  <string name="dialog_bs2b">Crossfeed Preset</string>
+  <string name="pref_headset_bs2b_enable">Enable Crossfeed</string>
+
+  <string name="eq_preset_flat">Flat</string>
+  <string name="eq_preset_custom">Custom</string>
+  <string name="save_preset">Save preset</string>
+  <string name="load_preset">Load preset</string>
+  <string name="new_preset">New preset&#8230;</string>
+  <string name="displaydevmsg">%1$s module info</string>
+  <string name="removetext">Remove</string>
+  <string name="displaytext">Display</string>
+  <string name="theme">Current theme:%1$s</string>
+  <string name="globaleffect_title">Reg:%1$s</string>
+  <string name="darktheme">Dark</string>
+  <string name="lighttheme">Light</string>
+  <string name="defaulttheme">Default</string>
+  <string name="redtheme">R/G Complementary</string>
+  <string name="ideatheme">Idea</string>
+  <string name="globalreg">Global(Require Direct volume disabled)</string>
+  <string name="traditionalreg">Conventional</string>
+  <!-- Drawer -->
+  <string name="navigation_drawer_toggle">Toggle Drawer</string>
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="navigation_toggle_drawer">Switch to Drawer</string>
+  <string name="navigation_toggle_tabbed">Switch to Tabbed</string>
+  <!-- IO ERROR -->
+  <string name="save_error_bluetooth">"Cannot save bluetooth.xml. Have you ever open Bluetooth tab?"</string>
+  <string name="save_error_headset">"Cannot save headset.xml. Have you ever open Headset tab?"</string>
+  <string name="save_error_speaker">"Cannot save speaker.xml. Have you ever open Speaker tab?"</string>
+  <string name="load_error_bluetooth">Load bluetooth.xml fail. File not found or permission denied</string>
+  <string name="load_error_headset">Load headset.xml fail. File not found or permission denied</string>
+  <string name="load_error_speaker">Load speaker.xml fail. File not found or permission denied</string>
+  <string name="warn_null">File name must NOT be EMPTY, or load fail upon next preset load</string>
+  <string name="help_title">Help</string>
+  <string name="help_text"><b>JamesDSP Guide</b>
+\n\n
+Getting Started\n\n
+For old users: Delete old JamesDSP Presets\n
+Note that JamesDSP presets are not compatible across versions—new versions of jDSP will crash if they attempt to load an old preset.  It is recommended to delete your old Presets folder before running a new jDSP version.\n
+\n\n
+Save a new preset (3-dot menu on upper right)\n\n
+Headset / Speaker / Bluetooth\n
+One of these appears at the top of the screen.  This indicates the device for which you are adjusting settings.  Tap the hamburger icon to the upper left to change between these.\n\n
+Master switch / Output control\n\n
++Master switch\n
+The switch itself is the on-off switch of everything (when a Headset is connected (“Headset”), when the onboard speaker is in use (“Speaker”), or when using Bluetooth (“Bluetooth”), depending on which is shown at the top).\n\n
++Limiter threshold\n
+This is an output limiter that tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum).  This should be set to -0.1, unless for some reason your audio is clipping before digital clipping, in which case you can set it to lower values.\n\n
++Limiter release\n
+The Limiter is only as effective as the release time it is given.  Short release times will lead to audible distortion of the limited sound, especially of low frequencies;  a long release is usually preferred, but reduces the volume that can be achieved somewhat.  If “pumping” (ducking of limited sound and it coming back up over time) becomes objectionable, making the release longer OR shorter can make the effect less noticeable.\n\n
++Post gain\n
+This acts as a digital volume knob for all effects, after all effects have been applied but before the sound reaches the limiter.\n
+\n
+*for old versions of jDSP, the Post gain really is after everything, including the limiter;  this usually led to distorted sound when the post gain is set to any positive value.  This has been fixed in the latest version.\n
+\n\n
+Dynamic Range Compressor\n\n
++Enable Dynamic Range Compressor\n
+Enables / disables the dynamic range compressor, a automatic dynamic range flattener which able to flatten the signal spectral to reduce transient, it is like a drum volume reducer.\n
++Max attack\n
+This adjusts how fast the Dynamic Range Compressor react\n
++Max release\n
+This adjusts how slow the Dynamic Range Compressor performing gain decay\n
++Aggressiveness\n
+This adjusts how strong the spectral flattenning gonna be\n
+\n\n
+Dynamic Bass Boost\n\n
++Enable Dynamic Bass Boost\n
+This is the button to enable jDSP’s dynamic bass boost, which attempts to create a pleasing bass sound with various dynamic algorithms.  If the results don’t satisfy, one can always adjust the bass using the equalizer, DDC or convolver 😊\n\n
+Max gain\n
+This adjusts the amount of the dynamic bass boost effects.\n
+\n\n
+Interpolating FIR Equalizer\n\n
++Enable FIR equalizer\n
+Enables / disables the FIR equalizer.  FIR stands for “Finite Impulse Response”.\n
+\n
++Filter type\n
+Chooses between Minimum phase and Linear phase filtering.  Minimum phase is the recommended filter type, as it minimizes latency (effectively zero, for any sensible filter shape) while the phase changes introduced are not usually noticeable (linear phase is useful in pre- / post-production of multitrack recordings, in cases where phase relationships between tracks need to be preserved.  In realtime playback, however, linear phase EQ introduces latency at least half as long as the filter length.)\n
+\n
++Select preset\n
+This switches between “Flat” and Custom, where Custom is whatever thing that’s not Flat that you’ve drawn yourself.  Choose Flat if you want to reset this filter.\n
+\n\n
+Arbitrary Response Equalizer\n\n
+If you familiar with EqualizerAPO, you may already know GraphicEq, you can go to config.txt inside EqualizerAPO installation directory, copy the corresponding GraphicEq: ... string and paste it into Arbitrary Response Equalizer, jDSP able to provide identical result that you get from EqualizerAPO.\n
+\n\n
+Convolver\n\n
+Select your impulse response file(.wav, .irs, .flac) to be convolved\nIt takes the signal characteristics of impulse response and apply to the incoming audio in real time.\n\n
+Impulse response optimization\n
+It tries to reduce the length of impulse response as much as possible, the whole point is to reduce latency as much as we can, possibly reduce power consumption.\n\n
+ViPER-DDC\n
+Main job of it is to perform parametric equalization on audio, but doing so require user to provide .ddc file that DDCToolbox generates, ViPER-DDC in jDSP is a generalized implementation of second order section filters, which is a little bit different than the implementation in Viper4Android(V4A), V4A support only Peaking parametric filter, the reason for that is V4A uses share coefficient property of Peaking filter, while jDSP do not have such assumption.\n\n
+\n
+Live programmable DSP\n\n
+This is a virtual machine that compile .eel code file as input and run the instructions, in simple word, it allow user to program their own audio effect.\n\n\n
+The number of supported operation is enormous, go check out the official page: github.com/james34602/EEL_VM\n\n
+The internal codebase is so huge, I have built-in some useful operations like Fourier transform, Polyphase filterbank, let\'s show off your creativity, Don\'t Be a Programmer, Be a Problem Solver!\n\n
+EEL is a C-liked language\n
+\n
+Oversampled Analog Modelling\n\n
++Preamp\n\n
+Oversampled Analog Modelling is a aliasing-free even harmonic generator.\n\n
+\n
+Sound positioning\n\n
++Soundstage widthness\n\n
+A multiband stereo wideness controller, you like wider sound? Narrower sound?\n\n
++Enable Crossfeed\n\n
+Tick this option if you want some realistic surround effect!\n\n
+\n
+Reverberation\n\n
++Select room type\n\n
+Add some spatialness into the audio\n
+\n
+    <b>Credit:</b>\n
+    GUI Author: Antti S. Lankila \n
+  </string>
+</resources>

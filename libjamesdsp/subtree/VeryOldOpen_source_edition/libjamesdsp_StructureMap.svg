@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<svg width="1798" height="994" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <polygon points="4,991 4,4 1795,4 1795,991 4,991" stroke="#ffffff" fill="#ffffff"/>
+ <polygon points="24,982 73,982 206,982 402,982 640,982 899,982 1158,982 1396,982 1592,982 1725,982 1774,982 1776,982 1778,981 1779,981 1781,980 1782,978 1784,977 1785,975 1785,974 1786,972 1786,970 1786,944 1786,872 1786,766 1786,637 1786,497 1786,357 1786,228 1786,122 1786,50 1786,24 1786,22 1785,20 1785,19 1784,17 1782,16 1781,14 1779,13 1778,13 1776,12 1774,12 1725,12 1592,12 1396,12 1158,12 899,12 640,12 402,12 206,12 73,12 24,12 22,12 20,13 19,13 17,14 16,16 14,17 13,19 13,20 12,22 12,24 12,50 12,122 12,228 12,357 12,497 12,637 12,766 12,872 12,944 12,970 12,972 13,974 13,975 14,977 16,978 17,980 19,981 20,981 22,982 24,982" stroke="#000000" fill="#FFFFCC"/>
+ <text x="857" y="28" fill="#000000" font-family="Arial" font-size="12">JamesDSP</text>
+ <polygon points="32,298 66,298 157,298 291,298 454,298 631,298 808,298 971,298 1105,298 1196,298 1230,298 1232,298 1234,297 1235,297 1237,296 1238,294 1240,293 1241,291 1241,290 1242,288 1242,286 1242,280 1242,262 1242,237 1242,206 1242,172 1242,138 1242,107 1242,82 1242,64 1242,58 1242,56 1241,54 1241,53 1240,51 1238,50 1237,48 1235,47 1234,47 1232,46 1230,46 1196,46 1105,46 971,46 808,46 631,46 454,46 291,46 157,46 66,46 32,46 30,46 28,47 27,47 25,48 24,50 22,51 21,53 21,54 20,56 20,58 20,64 20,82 20,107 20,138 20,172 20,206 20,237 20,262 20,280 20,286 20,288 21,290 21,291 22,293 24,294 25,296 27,297 28,297 30,298 32,298" stroke="#000000" fill="#F0FFF0"/>
+ <text x="569" y="62" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve</text>
+ <polygon points="40,246 73,246 163,246 295,246 456,246 631,246 806,246 967,246 1099,246 1189,246 1222,246 1224,246 1226,245 1227,245 1229,244 1230,242 1232,241 1233,239 1233,238 1234,236 1234,234 1234,230 1234,219 1234,203 1234,184 1234,163 1234,142 1234,123 1234,107 1234,96 1234,92 1234,90 1233,88 1233,87 1232,85 1230,84 1229,82 1227,81 1226,81 1224,80 1222,80 1189,80 1099,80 967,80 806,80 631,80 456,80 295,80 163,80 73,80 40,80 38,80 36,81 35,81 33,82 32,84 30,85 29,87 29,88 28,90 28,92 28,96 28,107 28,123 28,142 28,163 28,184 28,203 28,219 28,230 28,234 28,236 29,238 29,239 30,241 32,242 33,244 35,245 36,245 38,246 40,246" stroke="#000000" fill="#DFFFFF"/>
+ <text x="530" y="96" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/12ax7amp</text>
+ <polygon points="1226,165 873,165 870,168 870,191 1223,191 1226,188 1226,165" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1223,168 870,168" stroke="#bebebe" fill="none"/>
+ <polyline points="1223,168 1223,191" stroke="#bebebe" fill="none"/>
+ <polyline points="1223,168 1226,165" stroke="#bebebe" fill="none"/>
+ <text x="878" y="181" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/12ax7amp/wdfcircuits_triode.h</text>
+ <polygon points="770,212 417,212 414,215 414,238 767,238 770,235 770,212" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="767,215 414,215" stroke="#bebebe" fill="none"/>
+ <polyline points="767,215 767,238" stroke="#bebebe" fill="none"/>
+ <polyline points="767,215 770,212" stroke="#bebebe" fill="none"/>
+ <text x="422" y="228" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/12ax7amp/wdfcircuits_triode.c</text>
+ <polyline points="710,212 725,210 741,209 757,207 773,205 789,204 806,202 822,200 838,198 854,197 870,195 873,195 877,194 880,194 884,194 887,194 891,193 894,193 898,193 901,192 905,192" stroke="#0000cd" fill="none"/>
+ <text x="807" y="192" fill="#000000" font-family="Arial" font-size="12">304</text>
+ <polygon points="905,190 910,191 905,193 905,190" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="727,114 460,114 458,117 458,140 724,140 727,137 727,114" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="724,117 458,117" stroke="#bebebe" fill="none"/>
+ <polyline points="724,117 724,140" stroke="#bebebe" fill="none"/>
+ <polyline points="724,117 727,114" stroke="#bebebe" fill="none"/>
+ <text x="466" y="130" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/12ax7amp/Tube.h</text>
+ <polyline points="709,140 729,142 750,145 772,147 795,149 817,152 840,155 862,157 884,159 905,162 926,164" stroke="#0000cd" fill="none"/>
+ <text x="807" y="144" fill="#000000" font-family="Arial" font-size="12">287</text>
+ <polygon points="926,163 931,165 926,166 926,163" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="306,163 39,163 37,166 37,189 303,189 306,186 306,163" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="303,166 37,166" stroke="#bebebe" fill="none"/>
+ <polyline points="303,166 303,189" stroke="#bebebe" fill="none"/>
+ <polyline points="303,166 306,163" stroke="#bebebe" fill="none"/>
+ <text x="45" y="179" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/12ax7amp/Tube.c</text>
+ <polyline points="265,189 273,190 280,191 288,192 296,193 304,194 311,195 319,196 327,197 334,198 342,199 353,200 364,201 375,203 386,204 398,205 409,207 420,208 432,209 443,210 454,211" stroke="#0000cd" fill="none"/>
+ <text x="356" y="193" fill="#000000" font-family="Arial" font-size="12">5</text>
+ <polygon points="454,210 459,212 454,213 454,210" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="306,176 348,176 394,176 444,175 497,175 551,175 607,175 664,175 722,176 778,176 834,176 837,176 840,176 843,176 846,176 849,176 852,176 855,176 859,176 862,176 865,176" stroke="#0000cd" fill="none"/>
+ <text x="579" y="169" fill="#000000" font-family="Arial" font-size="12">473</text>
+ <polygon points="865,174 870,176 865,178 865,174" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="283,163 301,161 320,159 339,156 359,154 379,152 398,150 418,148 438,145 457,143 475,141" stroke="#0000cd" fill="none"/>
+ <text x="343" y="146" fill="#000000" font-family="Arial" font-size="12">1163</text>
+ <polygon points="474,139 480,140 475,142 474,139" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1143,259 956,259 953,262 953,285 1140,285 1143,282 1143,259" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1140,262 953,262" stroke="#bebebe" fill="none"/>
+ <polyline points="1140,262 1140,285" stroke="#bebebe" fill="none"/>
+ <polyline points="1140,262 1143,259" stroke="#bebebe" fill="none"/>
+ <text x="961" y="275" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/Misc.h</text>
+ <polygon points="712,258 475,258 473,261 473,284 709,284 712,281 712,258" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="709,261 473,261" stroke="#bebebe" fill="none"/>
+ <polyline points="709,261 709,284" stroke="#bebebe" fill="none"/>
+ <polyline points="709,261 712,258" stroke="#bebebe" fill="none"/>
+ <text x="481" y="274" fill="#000000" font-family="Arial" font-size="12">JamesDSP/valve/wavechild670</text>
+ <polyline points="712,271 734,271 758,271 782,271 806,271 831,272 856,272 880,272 904,272 926,272 948,272" stroke="#0000cd" fill="none"/>
+ <text x="811" y="265" fill="#000000" font-family="Arial" font-size="12">23</text>
+ <polygon points="948,270 953,272 948,274 948,270" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="712,262 718,261 724,260 730,259 736,258 741,257 747,256 753,254 759,253 764,251 770,250 778,248 786,246 792,244 798,242 803,240 808,237 814,234 820,231 826,227 834,223 839,220 842,217 846,214 849,211 851,208 854,205 857,202 861,200 865,197 870,195 871,195 871,194 872,194 872,194 873,194 874,193 874,193 875,193 875,193 876,193" stroke="#0000cd" fill="none"/>
+ <text x="807" y="217" fill="#000000" font-family="Arial" font-size="12">549</text>
+ <polygon points="876,191 881,191 877,194 876,191" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1523,556 1352,556 1349,559 1349,582 1520,582 1523,579 1523,556" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1520,559 1349,559" stroke="#bebebe" fill="none"/>
+ <polyline points="1520,559 1520,582" stroke="#bebebe" fill="none"/>
+ <polyline points="1520,559 1523,556" stroke="#bebebe" fill="none"/>
+ <text x="1357" y="572" fill="#000000" font-family="Arial" font-size="12">JamesDSP/JLimiter.h</text>
+ <polygon points="1135,610 964,610 961,613 961,636 1132,636 1135,633 1135,610" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1132,613 961,613" stroke="#bebebe" fill="none"/>
+ <polyline points="1132,613 1132,636" stroke="#bebebe" fill="none"/>
+ <polyline points="1132,613 1135,610" stroke="#bebebe" fill="none"/>
+ <text x="969" y="626" fill="#000000" font-family="Arial" font-size="12">JamesDSP/JLimiter.c</text>
+ <polyline points="1135,622 1149,622 1164,621 1179,620 1195,619 1211,618 1227,617 1243,615 1259,613 1275,611 1290,609 1301,607 1311,605 1322,602 1333,600 1343,597 1354,595 1364,592 1374,589 1383,586 1392,584" stroke="#0000cd" fill="none"/>
+ <text x="1267" y="603" fill="#000000" font-family="Arial" font-size="12">26</text>
+ <polygon points="1391,582 1396,582 1392,585 1391,582" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1163,566 936,566 933,569 933,592 1160,592 1163,589 1163,566" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1160,569 933,569" stroke="#bebebe" fill="none"/>
+ <polyline points="1160,569 1160,592" stroke="#bebebe" fill="none"/>
+ <polyline points="1160,569 1163,566" stroke="#bebebe" fill="none"/>
+ <text x="941" y="582" fill="#000000" font-family="Arial" font-size="12">JamesDSP/EffectDSPMain.h</text>
+ <polyline points="1163,570 1171,569 1179,568 1187,567 1195,566 1203,565 1211,563 1219,562 1227,560 1234,559 1242,557 1245,556 1247,556 1249,555 1250,554 1252,554 1254,553 1255,552 1257,551 1259,551 1262,550 1265,549 1268,549 1271,549 1274,549 1276,549 1278,549 1281,549 1284,549 1287,550 1290,550 1295,550 1301,551 1306,551 1312,552 1318,552 1323,553 1329,553 1334,554 1340,554 1345,555" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="542" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="1345,554 1350,556 1345,557 1345,554" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1515,250 1360,250 1357,253 1357,276 1512,276 1515,273 1515,250" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1512,253 1357,253" stroke="#bebebe" fill="none"/>
+ <polyline points="1512,253 1512,276" stroke="#bebebe" fill="none"/>
+ <polyline points="1512,253 1515,250" stroke="#bebebe" fill="none"/>
+ <text x="1365" y="266" fill="#000000" font-family="Arial" font-size="12">JamesDSP/Effect.h</text>
+ <polyline points="1163,590 1172,589 1180,587 1189,586 1197,583 1206,580 1213,577 1221,573 1229,568 1235,563 1242,557 1249,547 1253,532 1255,514 1256,494 1255,473 1255,452 1255,431 1256,412 1258,396 1262,384 1264,380 1267,377 1269,375 1272,373 1275,371 1277,369 1280,367 1283,365 1287,363 1290,360 1294,356 1298,352 1301,348 1304,345 1307,342 1310,339 1313,336 1317,333 1321,330 1326,326 1334,321 1342,315 1350,310 1358,305 1366,300 1374,295 1382,291 1389,286 1397,283 1404,279" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="354" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="1403,277 1408,276 1405,280 1403,277" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1512,744 1363,744 1360,747 1360,770 1509,770 1512,767 1512,744" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1509,747 1360,747" stroke="#bebebe" fill="none"/>
+ <polyline points="1509,747 1509,770" stroke="#bebebe" fill="none"/>
+ <polyline points="1509,747 1512,744" stroke="#bebebe" fill="none"/>
+ <text x="1368" y="760" fill="#000000" font-family="Arial" font-size="12">JamesDSP/bs2b.h</text>
+ <polyline points="1163,575 1171,576 1180,577 1188,579 1196,581 1204,584 1212,586 1220,589 1228,593 1235,597 1242,601 1246,604 1248,607 1250,610 1252,613 1253,616 1254,619 1255,623 1257,626 1259,630 1262,634 1275,648 1290,661 1305,674 1321,686 1336,697 1352,708 1367,718 1381,726 1394,734 1406,741" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="628" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="1407,740 1411,744 1405,743 1407,740" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1517,433 1358,433 1356,436 1356,459 1514,459 1517,456 1517,433" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1514,436 1356,436" stroke="#bebebe" fill="none"/>
+ <polyline points="1514,436 1514,459" stroke="#bebebe" fill="none"/>
+ <polyline points="1514,436 1517,433" stroke="#bebebe" fill="none"/>
+ <text x="1364" y="449" fill="#000000" font-family="Arial" font-size="12">JamesDSP/reverb.h</text>
+ <polyline points="1163,582 1171,581 1180,580 1188,578 1196,576 1204,574 1212,571 1220,568 1228,565 1235,561 1242,557 1246,554 1248,551 1250,548 1252,545 1253,542 1254,539 1255,536 1257,533 1259,529 1262,526 1273,517 1285,508 1297,501 1310,493 1323,486 1336,480 1349,474 1361,469 1374,465 1385,461" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="501" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="1385,459 1390,459 1386,462 1385,459" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1536,335 1339,335 1337,338 1337,361 1533,361 1536,358 1536,335" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1533,338 1337,338" stroke="#bebebe" fill="none"/>
+ <polyline points="1533,338 1533,361" stroke="#bebebe" fill="none"/>
+ <polyline points="1533,338 1536,335" stroke="#bebebe" fill="none"/>
+ <text x="1345" y="351" fill="#000000" font-family="Arial" font-size="12">JamesDSP/compressor.h</text>
+ <polyline points="1163,589 1172,588 1180,586 1189,585 1197,582 1206,579 1213,576 1221,572 1229,568 1235,563 1242,557 1252,545 1257,533 1258,521 1257,509 1255,497 1252,484 1250,471 1251,459 1254,445 1262,432 1271,422 1280,412 1290,403 1301,396 1313,389 1325,382 1337,376 1349,371 1360,367 1372,363" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="400" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="1372,361 1377,361 1373,364 1372,361" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1536,796 1339,796 1336,799 1336,822 1533,822 1536,819 1536,796" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1533,799 1336,799" stroke="#bebebe" fill="none"/>
+ <polyline points="1533,799 1533,822" stroke="#bebebe" fill="none"/>
+ <polyline points="1533,799 1536,796" stroke="#bebebe" fill="none"/>
+ <text x="1344" y="812" fill="#000000" font-family="Arial" font-size="12">JamesDSP/ArbFIRGen.h</text>
+ <polyline points="1163,569 1172,570 1180,572 1189,573 1197,576 1206,579 1213,582 1221,586 1229,590 1235,595 1242,601 1251,611 1256,622 1258,632 1258,643 1257,653 1256,664 1255,676 1255,687 1257,700 1262,713 1267,723 1273,732 1278,739 1283,746 1288,752 1294,757 1300,762 1308,768 1316,773 1326,779 1329,781 1333,782 1336,784 1340,786 1343,787 1347,789 1350,790 1354,791 1357,793 1361,794" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="707" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="1362,793 1366,796 1361,796 1362,793" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1526,640 1349,640 1347,643 1347,666 1523,666 1526,663 1526,640" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1523,643 1347,643" stroke="#bebebe" fill="none"/>
+ <polyline points="1523,643 1523,666" stroke="#bebebe" fill="none"/>
+ <polyline points="1523,643 1526,640" stroke="#bebebe" fill="none"/>
+ <text x="1355" y="656" fill="#000000" font-family="Arial" font-size="12">JamesDSP/mnspline.h</text>
+ <polyline points="1163,576 1175,577 1188,577 1201,578 1214,580 1227,581 1239,582 1252,584 1265,586 1278,588 1290,591 1303,594 1316,598 1329,603 1342,607 1354,613 1366,618 1378,623 1388,628 1398,633 1407,637" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="579" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="1408,636 1412,640 1407,639 1408,636" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1546,894 1329,894 1327,897 1327,920 1543,920 1546,917 1546,894" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1543,897 1327,897" stroke="#bebebe" fill="none"/>
+ <polyline points="1543,897 1543,920" stroke="#bebebe" fill="none"/>
+ <polyline points="1543,897 1546,894" stroke="#bebebe" fill="none"/>
+ <text x="1335" y="910" fill="#000000" font-family="Arial" font-size="12">JamesDSP/AutoConvolver.h</text>
+ <polyline points="1163,568 1172,569 1180,571 1189,572 1197,575 1206,578 1213,581 1221,585 1229,590 1235,595 1242,601 1250,613 1255,630 1257,651 1258,674 1258,698 1257,723 1256,747 1256,769 1258,788 1262,803 1265,810 1270,818 1276,827 1283,836 1290,845 1298,854 1305,862 1313,869 1320,875 1326,880 1328,881 1331,883 1333,884 1336,886 1338,887 1341,888 1343,889 1346,890 1348,891 1351,892" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="797" fill="#000000" font-family="Arial" font-size="12">6</text>
+ <polygon points="1352,891 1356,894 1351,894 1352,891" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1778,845 1631,845 1629,848 1629,871 1775,871 1778,868 1778,845" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1775,848 1629,848" stroke="#bebebe" fill="none"/>
+ <polyline points="1775,848 1775,871" stroke="#bebebe" fill="none"/>
+ <polyline points="1775,848 1778,845" stroke="#bebebe" fill="none"/>
+ <text x="1637" y="861" fill="#000000" font-family="Arial" font-size="12">JamesDSP/fftw3.h</text>
+ <polyline points="1507,822 1518,824 1530,826 1542,829 1554,831 1567,833 1579,835 1591,837 1603,840 1615,842 1626,844" stroke="#0000cd" fill="none"/>
+ <text x="1583" y="830" fill="#000000" font-family="Arial" font-size="12">5</text>
+ <polygon points="1627,842 1631,845 1626,846 1627,842" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1136,380 963,380 960,383 960,406 1133,406 1136,403 1136,380" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1133,383 960,383" stroke="#bebebe" fill="none"/>
+ <polyline points="1133,383 1133,406" stroke="#bebebe" fill="none"/>
+ <polyline points="1133,383 1136,380" stroke="#bebebe" fill="none"/>
+ <text x="968" y="396" fill="#000000" font-family="Arial" font-size="12">JamesDSP/Effect.cpp</text>
+ <polyline points="1136,400 1147,399 1158,398 1169,397 1181,395 1192,392 1203,388 1213,384 1223,379 1233,373 1242,366 1247,360 1250,354 1252,348 1252,341 1252,335 1252,328 1252,322 1254,315 1257,309 1262,303 1269,297 1278,291 1286,286 1295,282 1304,278 1313,274 1323,271 1333,269 1342,267 1352,265" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="278" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="1352,263 1357,264 1352,267 1352,263" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="716,633 471,633 468,636 468,659 713,659 716,656 716,633" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="713,636 468,636" stroke="#bebebe" fill="none"/>
+ <polyline points="713,636 713,659" stroke="#bebebe" fill="none"/>
+ <polyline points="713,636 716,633" stroke="#bebebe" fill="none"/>
+ <text x="476" y="649" fill="#000000" font-family="Arial" font-size="12">JamesDSP/EffectDSPMain.cpp</text>
+ <polyline points="716,640 739,639 764,638 788,636 813,635 839,634 864,632 888,631 912,630 935,629 956,628" stroke="#0000cd" fill="none"/>
+ <text x="816" y="627" fill="#000000" font-family="Arial" font-size="12">5</text>
+ <polygon points="956,626 961,627 956,629 956,626" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="668,633 685,630 704,627 723,624 743,620 764,617 785,614 806,610 828,607 849,604 870,601 876,600 882,599 888,598 895,597 901,597 908,596 914,595 920,594 927,594 933,593" stroke="#0000cd" fill="none"/>
+ <text x="807" y="600" fill="#000000" font-family="Arial" font-size="12">657</text>
+ <polygon points="933,591 938,592 933,594 933,591" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="601,633 612,616 628,594 647,568 671,539 697,508 727,477 759,447 794,418 831,392 870,371 897,363 931,358 971,356 1015,356 1060,357 1105,357 1148,355 1186,351 1218,343 1242,330 1248,324 1251,317 1252,310 1252,303 1252,296 1251,288 1251,281 1253,274 1256,268 1262,262 1273,255 1285,249 1298,246 1311,243 1325,242 1338,242 1352,243 1365,244 1377,246 1389,249" stroke="#0000cd" fill="none"/>
+ <text x="1044" y="324" fill="#000000" font-family="Arial" font-size="12">8</text>
+ <polygon points="1390,247 1394,250 1389,251 1390,247" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="643,659 661,663 680,668 702,673 724,678 748,683 772,689 796,694 821,698 846,703 870,707 916,713 956,717 992,718 1025,719 1057,719 1089,719 1122,721 1157,725 1197,732 1242,743 1245,744 1247,745 1249,746 1250,747 1252,748 1254,749 1255,750 1257,751 1259,751 1262,752 1271,754 1280,756 1290,757 1299,758 1309,759 1318,760 1327,760 1337,761 1346,761 1355,761" stroke="#0000cd" fill="none"/>
+ <text x="1044" y="701" fill="#000000" font-family="Arial" font-size="12">3</text>
+ <polygon points="1355,759 1360,761 1355,763 1355,759" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="614,633 629,624 648,612 669,600 694,587 720,573 748,559 778,546 808,534 839,522 870,513 898,508 933,506 974,506 1018,507 1063,507 1107,507 1149,505 1187,500 1219,491 1242,477 1249,469 1253,460 1254,450 1253,441 1252,431 1250,421 1249,412 1251,403 1255,394 1262,386 1271,382 1282,381 1296,383 1311,387 1328,393 1345,399 1362,407 1379,415 1394,423 1408,430" stroke="#0000cd" fill="none"/>
+ <text x="1044" y="471" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="1409,429 1412,433 1407,432 1409,429" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1148,850 951,850 948,853 948,876 1145,876 1148,873 1148,850" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1145,853 948,853" stroke="#bebebe" fill="none"/>
+ <polyline points="1145,853 1145,876" stroke="#bebebe" fill="none"/>
+ <polyline points="1145,853 1148,850" stroke="#bebebe" fill="none"/>
+ <text x="956" y="866" fill="#000000" font-family="Arial" font-size="12">JamesDSP/ArbFIRGen.c</text>
+ <polyline points="715,659 721,661 727,664 733,666 739,669 744,673 750,676 755,680 760,683 765,688 770,692 781,706 787,721 789,736 789,751 787,766 785,780 785,795 788,810 794,824 806,837 819,847 833,855 848,862 864,867 880,871 897,874 913,876 929,877 945,877 961,876" stroke="#0000cd" fill="none"/>
+ <text x="816" y="831" fill="#000000" font-family="Arial" font-size="12">4</text>
+ <polygon points="961,875 966,876 962,878 961,875" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1138,654 961,654 959,657 959,680 1135,680 1138,677 1138,654" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1135,657 959,657" stroke="#bebebe" fill="none"/>
+ <polyline points="1135,657 1135,680" stroke="#bebebe" fill="none"/>
+ <polyline points="1135,657 1138,654" stroke="#bebebe" fill="none"/>
+ <text x="967" y="670" fill="#000000" font-family="Arial" font-size="12">JamesDSP/mnspline.c</text>
+ <polyline points="716,658 725,659 734,659 743,660 752,661 761,661 770,662 779,663 788,663 797,664 806,664 821,665 835,665 851,666 866,666 881,666 896,667 911,667 925,667 939,667 953,667" stroke="#0000cd" fill="none"/>
+ <text x="816" y="658" fill="#000000" font-family="Arial" font-size="12">3</text>
+ <polygon points="953,666 958,667 953,669 953,666" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1124,752 975,752 972,755 972,778 1121,778 1124,775 1124,752" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1121,755 972,755" stroke="#bebebe" fill="none"/>
+ <polyline points="1121,755 1121,778" stroke="#bebebe" fill="none"/>
+ <polyline points="1121,755 1124,752" stroke="#bebebe" fill="none"/>
+ <text x="980" y="768" fill="#000000" font-family="Arial" font-size="12">JamesDSP/bs2b.c</text>
+ <polyline points="690,659 698,661 706,664 715,666 723,669 731,672 739,675 747,679 755,683 763,687 770,692 776,697 780,701 783,706 786,711 788,716 790,721 792,726 796,731 800,735 806,739 821,746 837,753 853,758 869,762 886,766 903,768 919,770 936,771 952,772 967,772" stroke="#0000cd" fill="none"/>
+ <text x="816" y="733" fill="#000000" font-family="Arial" font-size="12">4</text>
+ <polygon points="967,770 972,772 967,774 967,770" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="698,659 706,661 713,664 721,666 729,669 736,672 743,675 750,679 757,683 764,687 770,692 777,698 781,703 785,709 787,715 790,721 791,727 794,734 797,740 801,747 806,754 813,762 819,769 824,775 829,780 834,785 840,789 846,793 853,797 861,801 870,805 898,814 934,821 974,827 1018,831 1064,834 1110,836 1154,838 1196,839 1232,840 1262,841 1265,841 1268,841 1271,842 1274,842 1276,842 1278,842 1281,842 1284,841 1287,841 1290,841 1299,840 1309,839 1319,837 1328,835 1338,834 1348,831 1357,829 1366,827 1375,825 1383,823" stroke="#0000cd" fill="none"/>
+ <text x="1044" y="799" fill="#000000" font-family="Arial" font-size="12">5</text>
+ <polygon points="1383,822 1388,822 1384,825 1383,822" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1158,894 941,894 939,897 939,920 1155,920 1158,917 1158,894" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1155,897 939,897" stroke="#bebebe" fill="none"/>
+ <polyline points="1155,897 1155,920" stroke="#bebebe" fill="none"/>
+ <polyline points="1155,897 1158,894" stroke="#bebebe" fill="none"/>
+ <text x="947" y="910" fill="#000000" font-family="Arial" font-size="12">JamesDSP/AutoConvolver.c</text>
+ <polyline points="716,659 722,661 728,664 734,666 739,669 745,673 750,676 756,680 761,683 765,688 770,692 783,710 790,729 792,748 790,767 787,786 784,804 783,823 785,841 792,859 806,876 816,885 828,893 839,899 852,905 865,909 878,913 892,915 906,917 919,918 933,919" stroke="#0000cd" fill="none"/>
+ <text x="811" y="870" fill="#000000" font-family="Arial" font-size="12">14</text>
+ <polygon points="933,918 938,919 933,921 933,918" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1148,424 951,424 949,427 949,450 1145,450 1148,447 1148,424" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1145,427 949,427" stroke="#bebebe" fill="none"/>
+ <polyline points="1145,427 1145,450" stroke="#bebebe" fill="none"/>
+ <polyline points="1145,427 1148,424" stroke="#bebebe" fill="none"/>
+ <text x="957" y="440" fill="#000000" font-family="Arial" font-size="12">JamesDSP/compressor.c</text>
+ <polyline points="606,633 617,622 631,609 647,594 666,578 686,561 708,543 731,526 756,510 781,495 806,481 819,475 832,470 846,465 860,460 874,456 888,453 902,450 916,447 930,445 943,443" stroke="#0000cd" fill="none"/>
+ <text x="816" y="464" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="943,441 948,443 944,445 943,441" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="1129,522 970,522 968,525 968,548 1126,548 1129,545 1129,522" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="1126,525 968,525" stroke="#bebebe" fill="none"/>
+ <polyline points="1126,525 1126,548" stroke="#bebebe" fill="none"/>
+ <polyline points="1126,525 1129,522" stroke="#bebebe" fill="none"/>
+ <text x="976" y="538" fill="#000000" font-family="Arial" font-size="12">JamesDSP/reverb.c</text>
+ <polyline points="627,633 644,627 663,619 685,612 709,603 734,595 760,587 787,578 815,571 843,563 870,557 879,555 888,553 898,551 907,550 916,548 926,547 935,546 944,544 953,543 962,542" stroke="#0000cd" fill="none"/>
+ <text x="816" y="560" fill="#000000" font-family="Arial" font-size="12">2</text>
+ <polygon points="962,541 967,542 962,544 962,541" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="716,659 722,661 728,664 734,666 740,669 746,672 751,675 756,679 761,683 766,687 770,692 785,712 793,732 796,752 796,771 794,791 791,811 789,832 790,853 795,875 806,898 811,907 817,914 822,920 827,925 832,930 838,934 845,937 852,941 860,944 870,947 914,960 953,969 989,974 1022,976 1053,975 1085,971 1119,966 1155,960 1196,954 1242,947 1253,945 1262,944 1270,942 1277,939 1284,937 1291,935 1298,932 1306,930 1315,927 1326,925 1328,925 1330,924 1332,924 1334,923 1336,923 1338,923 1340,922 1342,922 1344,921 1346,921" stroke="#0000cd" fill="none"/>
+ <text x="1039" y="941" fill="#000000" font-family="Arial" font-size="12">25</text>
+ <polygon points="1346,919 1351,920 1347,923 1346,919" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1148,873 1159,874 1170,875 1182,876 1193,876 1205,877 1216,878 1228,879 1239,879 1251,880 1262,880 1300,881 1339,881 1379,881 1418,880 1457,878 1494,876 1530,873 1564,871 1595,868 1623,866" stroke="#0000cd" fill="none"/>
+ <text x="1427" y="866" fill="#000000" font-family="Arial" font-size="12">23</text>
+ <polygon points="1623,864 1628,866 1624,868 1623,864" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1104,876 1120,879 1137,881 1155,883 1174,884 1193,885 1213,884 1233,883 1252,880 1272,875 1290,869 1295,866 1300,863 1303,860 1306,857 1308,853 1311,850 1314,846 1317,843 1321,839 1326,836 1329,835 1332,833 1335,832 1338,830 1341,829 1344,828 1347,827 1350,826 1353,825 1356,824" stroke="#0000cd" fill="none"/>
+ <text x="1263" y="863" fill="#000000" font-family="Arial" font-size="12">171</text>
+ <polygon points="1355,822 1361,822 1356,825 1355,822" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1137,680 1154,682 1172,684 1190,686 1207,688 1224,690 1240,691 1255,692 1268,692 1280,692 1290,691 1301,690 1311,688 1322,686 1333,683 1343,681 1353,678 1363,676 1373,673 1382,670 1391,668" stroke="#0000cd" fill="none"/>
+ <text x="1272" y="685" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="1391,666 1396,666 1392,669 1391,666" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1124,775 1139,776 1154,778 1171,779 1187,780 1204,781 1222,781 1239,782 1256,781 1273,781 1290,780 1297,779 1304,779 1312,778 1319,777 1326,776 1334,775 1341,774 1348,773 1355,772 1362,771" stroke="#0000cd" fill="none"/>
+ <text x="1267" y="774" fill="#000000" font-family="Arial" font-size="12">56</text>
+ <polygon points="1362,769 1367,770 1362,773 1362,769" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1144,920 1153,921 1163,923 1173,924 1183,925 1193,927 1203,928 1213,930 1222,931 1232,933 1242,934 1280,940 1312,946 1342,952 1369,957 1395,961 1421,963 1448,963 1477,961 1509,956 1546,947 1562,942 1578,936 1593,929 1608,922 1623,914 1637,905 1650,897 1662,889 1673,881 1682,874" stroke="#0000cd" fill="none"/>
+ <text x="1427" y="941" fill="#000000" font-family="Arial" font-size="12">10</text>
+ <polygon points="1680,873 1686,871 1683,876 1680,873" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1158,915 1170,916 1183,916 1196,917 1210,917 1223,917 1237,917 1250,917 1264,917 1277,917 1290,917 1293,917 1296,917 1299,917 1302,917 1306,917 1309,916 1312,916 1315,916 1318,916 1321,916" stroke="#0000cd" fill="none"/>
+ <text x="1263" y="911" fill="#000000" font-family="Arial" font-size="12">139</text>
+ <polygon points="1321,914 1326,915 1321,917 1321,914" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1148,447 1158,446 1168,445 1178,443 1188,441 1198,439 1207,435 1216,431 1225,427 1234,421 1242,415 1248,408 1252,400 1253,392 1253,384 1252,376 1251,368 1250,360 1252,352 1255,345 1262,338 1274,330 1287,325 1301,321 1316,320 1331,319 1345,321 1360,323 1374,326 1387,329 1399,333" stroke="#0000cd" fill="none"/>
+ <text x="1267" y="319" fill="#000000" font-family="Arial" font-size="12">59</text>
+ <polygon points="1399,332 1404,335 1398,335 1399,332" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="1129,540 1140,539 1152,538 1164,537 1176,535 1187,532 1199,529 1210,525 1222,520 1232,514 1242,508 1246,504 1249,500 1250,496 1251,492 1252,488 1253,483 1254,479 1255,475 1258,471 1262,468 1270,463 1278,458 1286,455 1295,451 1304,449 1313,446 1322,444 1332,443 1341,442 1350,441" stroke="#0000cd" fill="none"/>
+ <text x="1263" y="448" fill="#000000" font-family="Arial" font-size="12">621</text>
+ <polygon points="1350,439 1355,441 1350,443 1350,439" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="273,348 72,348 70,351 70,374 270,374 273,371 273,348" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="270,351 70,351" stroke="#bebebe" fill="none"/>
+ <polyline points="270,351 270,374" stroke="#bebebe" fill="none"/>
+ <polyline points="270,351 273,348" stroke="#bebebe" fill="none"/>
+ <text x="78" y="364" fill="#000000" font-family="Arial" font-size="12">JamesDSP/jamesdsp.cpp</text>
+ <polyline points="273,362 326,363 386,365 451,368 517,373 584,380 648,388 707,399 760,413 803,429 834,448 843,458 849,469 852,480 852,491 852,503 852,514 852,526 855,537 861,547 870,557 875,561 880,564 886,567 891,570 897,573 903,575 909,578 915,580 922,581 928,583" stroke="#0000cd" fill="none"/>
+ <text x="588" y="360" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="928,581 933,584 927,584 928,581" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="273,354 286,353 300,352 314,351 328,350 342,349 357,348 371,347 386,346 400,345 414,344 466,341 512,339 552,338 589,338 625,337 660,336 697,334 737,331 782,327 834,320 838,319 842,319 846,318 849,317 852,316 855,315 858,314 862,313 866,313 870,312 885,311 915,311 956,311 1005,311 1058,310 1110,310 1158,309 1199,307 1228,305 1242,302 1247,298 1250,293 1251,287 1252,282 1252,276 1252,270 1253,265 1254,259 1257,254 1262,250 1275,243 1288,238 1303,235 1317,233 1332,234 1347,235 1361,237 1374,241 1387,244 1399,248" stroke="#0000cd" fill="none"/>
+ <text x="816" y="314" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="1400,247 1404,250 1399,250 1400,247" stroke="#0000cd" fill="#0000cd"/>
+ <polyline points="191,374 216,391 250,414 289,440 332,470 377,501 423,531 467,561 507,588 541,612 568,630" stroke="#0000cd" fill="none"/>
+ <text x="356" y="471" fill="#000000" font-family="Arial" font-size="12">1</text>
+ <polygon points="569,629 572,633 567,632 569,629" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="677,701 510,701 507,704 507,727 674,727 677,724 677,701" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="674,704 507,704" stroke="#bebebe" fill="none"/>
+ <polyline points="674,704 674,727" stroke="#bebebe" fill="none"/>
+ <polyline points="674,704 677,701" stroke="#bebebe" fill="none"/>
+ <text x="515" y="717" fill="#000000" font-family="Arial" font-size="12">JamesDSP/hardware</text>
+ <polygon points="246,701 99,701 97,704 97,727 243,727 246,724 246,701" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="243,704 97,704" stroke="#bebebe" fill="none"/>
+ <polyline points="243,704 243,727" stroke="#bebebe" fill="none"/>
+ <polyline points="243,704 246,701" stroke="#bebebe" fill="none"/>
+ <text x="105" y="717" fill="#000000" font-family="Arial" font-size="12">JamesDSP/media</text>
+ <polyline points="246,714 268,714 292,714 318,714 345,714 372,714 399,714 426,714 453,714 478,714 502,714" stroke="#0000cd" fill="none"/>
+ <text x="351" y="708" fill="#000000" font-family="Arial" font-size="12">26</text>
+ <polygon points="502,712 507,714 502,716 502,712" stroke="#0000cd" fill="#0000cd"/>
+ <polygon points="282,906 63,906 61,909 61,932 279,932 282,929 282,906" stroke="#bebebe" fill="#ffffff"/>
+ <polyline points="279,909 61,909" stroke="#bebebe" fill="none"/>
+ <polyline points="279,909 279,932" stroke="#bebebe" fill="none"/>
+ <polyline points="279,909 282,906" stroke="#bebebe" fill="none"/>
+ <text x="69" y="922" fill="#000000" font-family="Arial" font-size="12">JamesDSP/MemoryUsage.h</text>
+</svg>
