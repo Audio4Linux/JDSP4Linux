@@ -348,6 +348,8 @@ typedef enum
 	SF_REVERB_PRESET_LONGREVERB1,
 	SF_REVERB_PRESET_LONGREVERB2
 } sf_reverb_preset;
+extern void sf_advancereverb(sf_reverb_state_st *rv, int rate, int oversamplefactor, float ertolate, float erefwet, float dry, float ereffactor, float erefwidth, float width, float wet, float wander, float bassb, float spin, float inputlpf, float basslpf, float damplpf, float outputlpf, float rt60, float delay);
+
 typedef struct
 {
 	char *subband[2];
@@ -362,6 +364,7 @@ typedef struct
 	NSEEL_CODEHANDLE codehandleInit, codehandleProcess;
 	float *vmFs, *input1, *input2;
 	int compileSucessfully;
+    int active;
 } LiveProg;
 typedef struct
 {

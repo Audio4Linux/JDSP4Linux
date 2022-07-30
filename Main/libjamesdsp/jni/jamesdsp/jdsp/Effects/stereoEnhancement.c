@@ -9,6 +9,7 @@ void analysisWarpedPFBStereo(WarpedPFB *pfb1, WarpedPFB *pfb2, float *x1, float 
 void synthesisWarpedPFBStereo(WarpedPFB *pfb1, WarpedPFB *pfb2, float *y1, float *y2);
 void StereoEnhancementSetParam(JamesDSPLib *jdsp, float mix)
 {
+    jdsp_lock(jdsp);
 	jdsp->sterEnh.mix = mix;
 	jdsp->sterEnh.minusMix = 1.0f - jdsp->sterEnh.mix;
 	if (jdsp->sterEnh.mix > 0.5f)
@@ -36,17 +37,22 @@ void StereoEnhancementSetParam(JamesDSPLib *jdsp, float mix)
 	float ms = 0.75f; // 0.75 ms
 	for (unsigned int i = 0; i < 5; i++)
 		jdsp->sterEnh.emaAlpha[i] = 1.0f - powf(10.0f, (log10f(0.5f) / (ms / 1000.0f) / (jdsp->fs / (float)Sk[i])));
+    jdsp_unlock(jdsp);
 }
 void StereoEnhancementConstructor(JamesDSPLib *jdsp)
 {
+    jdsp_lock(jdsp);
 	jdsp->sterEnh.subband[1] = jdsp->sterEnh.subband[0] = 0;
+    jdsp_unlock(jdsp);
 }
 void StereoEnhancementDestructor(JamesDSPLib *jdsp)
 {
+    jdsp_lock(jdsp);
 	if (jdsp->sterEnh.subband[0])
 		free(jdsp->sterEnh.subband[0]);
 	if (jdsp->sterEnh.subband[1])
 		free(jdsp->sterEnh.subband[1]);
+    jdsp_unlock(jdsp);
 }
 void StereoEnhancementEnable(JamesDSPLib *jdsp)
 {

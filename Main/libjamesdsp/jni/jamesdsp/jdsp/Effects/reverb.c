@@ -78,6 +78,12 @@ static inline void delay_make(sf_rv_delay_st *delay, int size)
 
 static inline float delay_step(sf_rv_delay_st *delay, float v)
 {
+    // Prevent FPE due to division by zero! Usually caused by an empty delay buffer (init phase)
+    if(delay->size == 0)
+    {
+        return 0;
+    }
+
     float out = delay->buf[delay->pos];
     delay->buf[delay->pos] = v;
     delay->pos = (delay->pos + 1) % delay->size;
