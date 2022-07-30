@@ -574,7 +574,7 @@ extern void Convolver1DEnable(JamesDSPLib *jdsp);
 extern void Convolver1DDisable(JamesDSPLib *jdsp);
 extern void Convolver1DConstructor(JamesDSPLib *jdsp);
 extern void Convolver1DDestructor(JamesDSPLib *jdsp, int reqUnlock);
-extern int Convolver1DLoadImpulseResponse(JamesDSPLib *jdsp, float *imp, unsigned int channels, unsigned int frameCount);
+extern int Convolver1DLoadImpulseResponse(JamesDSPLib *jdsp, float *imp, unsigned int channels, size_t frameCount);
 // Arbitrary magnitude response
 extern void ArbitraryResponseEqualizerConstructor(JamesDSPLib *jdsp);
 extern void ArbitraryResponseEqualizerDestructor(JamesDSPLib *jdsp);

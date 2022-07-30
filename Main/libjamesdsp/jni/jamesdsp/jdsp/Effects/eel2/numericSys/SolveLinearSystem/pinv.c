@@ -2,6 +2,7 @@
 #include <string.h>
 #include <math.h>
 #include <float.h>
+#include "../../ns-eel.h"
 #include "../quadprog.h"
 void ppp(int32_t m, int32_t n, double *a, double *v, double *s, double *e)
 {
@@ -422,9 +423,6 @@ void uav(int32_t m, int32_t n, double *u, double *a, double *v, double *s, doubl
 		}
 	}
 }
-#ifndef max
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#endif
 void pinv(double *A, int32_t m, int32_t n, double *Y, int32_t *size)
 {
 	int32_t ka = (max(m, n) + 1);

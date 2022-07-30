@@ -37,9 +37,11 @@ typedef unsigned long long WDL_UINT64;
 typedef intptr_t INT_PTR;
 typedef uintptr_t UINT_PTR;
 #endif
+#ifndef min
+#define min(x,y) ((x)<(y)?(x):(y))
+#endif
 #if !defined(max)
 #define max(x,y) ((x)<(y)?(y):(x))
-#define min(x,y) ((x)<(y)?(x):(y))
 #endif
 #ifndef _WIN32
 #ifndef strnicmp 

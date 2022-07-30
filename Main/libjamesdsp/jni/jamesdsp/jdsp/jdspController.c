@@ -5,6 +5,7 @@
 #include <time.h>
 #include <float.h>
 #include "Effects/eel2/dr_flac.h"
+#include "Effects/eel2/ns-eel.h"
 #include "jdsp_header.h"
 void JamesDSPGlobalMemoryAllocation()
 {
@@ -60,9 +61,6 @@ void jdsp_unlock(JamesDSPLib *jdsp)
 	if (jdsp->isMutexSuccess)
 		pthread_mutex_unlock(&jdsp->m_in_processing);
 }
-#ifndef max
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#endif
 // Process
 void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 {
@@ -453,9 +451,9 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 	memset(tmpBuf, 0, outLen * channelsBlobsShort * sizeof(float));
 
 	drflac *pFlac = drflac_open_memory((void*)jdspImp, compressedLen_jdspImp, 0);
-	int totalSmps = pFlac->totalPCMFrameCount * pFlac->channels;
+	size_t totalSmps = pFlac->totalPCMFrameCount * (size_t)pFlac->channels;
 	float *pFrameImpulse = (float*)malloc(totalSmps * sizeof(float));
-	int sampleCount = pFlac->totalPCMFrameCount;
+	size_t sampleCount = pFlac->totalPCMFrameCount;
 	drflac_read_pcm_frames_f32(pFlac, totalSmps, pFrameImpulse);
 	size_t copySize = (hrtfLenPerChannel << 2) * sizeof(float);
 	float *CorredHRTF_Surround1 = (float*)malloc(copySize);
@@ -485,7 +483,7 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 
 	pFlac = drflac_open_memory((void*)CCConv, compressedLen_CCConv, 0);
 	ratio = targetFs / (double)(pFlac->sampleRate);
-	totalSmps = pFlac->totalPCMFrameCount * pFlac->channels;
+	totalSmps = pFlac->totalPCMFrameCount * (size_t)pFlac->channels;
 	pFrameImpulse = (float*)malloc(totalSmps * sizeof(float));
 	sampleCount = pFlac->totalPCMFrameCount;
 	drflac_read_pcm_frames_f32(pFlac, totalSmps, pFrameImpulse);
@@ -530,31 +528,21 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	jdsp->processInt32Multiplexd = pint32Multiplexed;
 	jdsp->processFloatMultiplexd = pfloat32Multiplexed;
 	//
-	const unsigned int asrc_taps = 16;
+	const unsigned int asrc_taps = 32;
 	char isminphase = 1;
-	if (sample_rate > 48000.0f)
+	if (sample_rate < 44100.0f || sample_rate > 48000.0f)
 	{
 		jdsp->enableASRC = 1;
 		int roundedRate = (int)(sample_rate);
-		jdsp->trueSampleRate = roundedRate;
-		if ((roundedRate % 48000 == 0) && roundedRate != 48000)
-		{
+		jdsp->trueSampleRate = sample_rate;
+		if (((roundedRate % 48000 == 0) || (48000 % roundedRate == 0)) && roundedRate != 48000)
 			jdsp->fs = 48000;
-			InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
-			InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
-		}
-		else if ((roundedRate % 44100 == 0) && roundedRate != 44100)
-		{
+		else if (((roundedRate % 44100 == 0) || (44100 % roundedRate == 0)) && roundedRate != 44100)
 			jdsp->fs = 44100;
-			InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
-			InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
-		}
 		else
-		{
 			jdsp->fs = 48000;
-			InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
-			InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
-		}
+		InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
+		InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
 		double ratio = (double)jdsp->fs / (double)jdsp->trueSampleRate;
 		unsigned int maxDecimatedLength = (unsigned int)ceil(n * ratio);
 		unsigned int maxInterpolatedLength = (unsigned int)ceil(maxDecimatedLength / ratio);
@@ -627,40 +615,29 @@ int JamesDSPGetMutexStatus(JamesDSPLib *jdsp)
 }
 void JamesDSPSetSampleRate(JamesDSPLib *jdsp, float new_sample_rate, int forceRefresh)
 {
-	if (jdsp->fs == new_sample_rate)
+	if (jdsp->trueSampleRate == new_sample_rate)
 		return;
-	jdsp->fs = new_sample_rate;
+	jdsp->trueSampleRate = new_sample_rate;
 	jdsp_lock(jdsp);
 	if (jdsp->enableASRC)
 	{
 		FreeIntegerASRCHandler(&jdsp->asrc[0]);
 		FreeIntegerASRCHandler(&jdsp->asrc[1]);
 	}
-	const unsigned int asrc_taps = 16;
+	const unsigned int asrc_taps = 32;
 	char isminphase = 1;
-	if (new_sample_rate > 48000.0f)
+	if (new_sample_rate < 44100.0f || new_sample_rate > 48000.0f)
 	{
 		jdsp->enableASRC = 1;
 		int roundedRate = (int)(new_sample_rate);
-		jdsp->trueSampleRate = roundedRate;
-		if ((roundedRate % 48000 == 0) && roundedRate != 48000)
-		{
+		if (((roundedRate % 48000 == 0) || (48000 % roundedRate == 0)) && roundedRate != 48000)
 			jdsp->fs = 48000;
-			InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
-			InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
-		}
-		else if ((roundedRate % 44100 == 0) && roundedRate != 44100)
-		{
+		else if (((roundedRate % 44100 == 0) || (44100 % roundedRate == 0)) && roundedRate != 44100)
 			jdsp->fs = 44100;
-			InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
-			InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
-		}
 		else
-		{
 			jdsp->fs = 48000;
-			InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
-			InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
-		}
+		InitIntegerASRCHandler(&jdsp->asrc[0], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, 0, 0);
+		InitIntegerASRCHandler(&jdsp->asrc[1], (unsigned long long)jdsp->fs, (unsigned long long)jdsp->trueSampleRate, asrc_taps, isminphase, &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[0].polyphaseInterpolator);
 		double ratio = (double)jdsp->fs / (double)jdsp->trueSampleRate;
 		unsigned int maxDecimatedLength = (unsigned int)ceil(jdsp->blockSizeMax * ratio);
 		unsigned int maxInterpolatedLength = (unsigned int)ceil(maxDecimatedLength / ratio);
@@ -676,7 +653,10 @@ void JamesDSPSetSampleRate(JamesDSPLib *jdsp, float new_sample_rate, int forceRe
 		jdsp->tmpBuffer[5] = jdsp->tmpBuffer[4] + jdsp->pw2BlockMemSize;
 	}
 	else
+	{
 		jdsp->enableASRC = 0;
+		jdsp->fs = jdsp->trueSampleRate;
+	}
 	JamesDSPRefreshBlob(jdsp, jdsp->fs);
 	jdsp_unlock(jdsp);
 	if (forceRefresh)

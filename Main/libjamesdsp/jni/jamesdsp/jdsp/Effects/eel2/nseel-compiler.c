@@ -808,13 +808,13 @@ double predictArburg(double *Z, double *a, int n)
 	Z[n - 1] = -a[n] * Yi;
 	return Yi; // Write to output
 }
-void TrainArburg(char *bg, float *xn, int positionStart, int positionEnd)
+void TrainArburg(char *bg, float *xn, unsigned int xLen)
 {
 	unsigned int i, j;
 	char getPredictionState = *bg;
 	unsigned int *flag = (unsigned int*)(bg + 1);
 	const unsigned int _mCoefficientsNumber = *flag;
-	int to = positionEnd + 1;
+	unsigned int lenM1 = xLen - 1;
 
 	// Creates internal variables with desirable length
 	double *predictionCoefficients = (double*)(flag + 1);
@@ -836,12 +836,12 @@ void TrainArburg(char *bg, float *xn, int positionStart, int positionEnd)
 	for (j = 0; j <= _mCoefficientsNumber; j++)
 	{
 		_c[j] = 0.0;
-		for (i = 0; i <= positionEnd - j; i++)
-			_c[j] += xn[i + positionStart] * xn[i + positionStart + j];
+		for (i = 0; i < xLen - j; i++)
+			_c[j] += xn[i] * xn[i + j];
 	}
 	unsigned int _iIterationCounter = 0;
 	predictionCoefficients[0] = 1.0;
-	_g[0] = 2.0 * _c[0] - fabs(xn[0 + positionStart]) * fabs(xn[0 + positionStart]) - fabs(xn[positionEnd + positionStart]) * fabs(xn[positionEnd + positionStart]);
+	_g[0] = 2.0 * _c[0] - fabs(xn[0]) * fabs(xn[0]) - fabs(xn[lenM1]) * fabs(xn[lenM1]);
 	_g[1] = 2.0 * _c[1];
 	// the paper says r[1], error in paper?
 	_r[0] = 2.0 * _c[1];
@@ -850,16 +850,13 @@ void TrainArburg(char *bg, float *xn, int positionStart, int positionEnd)
 	{
 		// Computes vector of reflection coefficients. For details see step 1 of algorithm on page 3 of the paper
 		double nominator = 0.0;
-		double denominator = ((double)FLT_EPSILON) * 100.0;
+		double denominator = (double)FLT_EPSILON;
 		for (i = 0; i <= _iIterationCounter + 1; i++)
 		{
 			nominator += predictionCoefficients[i] * _g[(_iIterationCounter + 1) - i];
 			denominator += predictionCoefficients[i] * _g[i];
 		}
-		if (fabs(nominator) < ((double)FLT_EPSILON) * 10.0 && fabs(denominator) < ((double)FLT_EPSILON) * 10.0)
-			reflectionCoefficient[_iIterationCounter] = -1.0 + FLT_EPSILON;
-		else
-			reflectionCoefficient[_iIterationCounter] = -nominator / denominator;
+		reflectionCoefficient[_iIterationCounter] = -nominator / denominator;
 		// Updates vector of prediction coefficients. For details see step 2 of algorithm on page 3 of the paper
 		memcpy(tmp, predictionCoefficients, (_mCoefficientsNumber + 1) * sizeof(double));
 		for (i = 0; i <= _iIterationCounter + 1; i++)
@@ -871,11 +868,10 @@ void TrainArburg(char *bg, float *xn, int positionStart, int positionEnd)
 			{
 				memset(forwardState, 0, (_mCoefficientsNumber + 1) * sizeof(double));
 				memset(backwardState, 0, (_mCoefficientsNumber + 1) * sizeof(double));
-				int idx2 = to - 1 + positionStart;
-				for (int i = positionStart; i < to; i++)
+				for (i = 0; i < xLen; i++)
 				{
 					runStateArburg(forwardState, predictionCoefficients, xn[i], _mCoefficientsNumber); // Forward
-					runStateArburg(backwardState, predictionCoefficients, xn[idx2 - i], _mCoefficientsNumber); // Backward
+					runStateArburg(backwardState, predictionCoefficients, xn[lenM1 - i], _mCoefficientsNumber); // Backward
 				}
 			}
 			break;
@@ -883,22 +879,22 @@ void TrainArburg(char *bg, float *xn, int positionStart, int positionEnd)
 		// Updates vector r. For details see step 5 of algorithm on page 3 of the paper
 		memcpy(tmp, _r, (_mCoefficientsNumber + 1) * sizeof(double));
 		for (i = 0; i <= _iIterationCounter - 1; i++)
-			_r[i + 1] = tmp[i] - xn[i + positionStart] * xn[_iIterationCounter + positionStart] - xn[positionEnd - i + positionStart] * xn[positionEnd - _iIterationCounter + positionStart];
+			_r[i + 1] = tmp[i] - xn[i] * xn[_iIterationCounter] - xn[lenM1 - i] * xn[lenM1 - _iIterationCounter];
 		_r[0] = 2.0 * _c[_iIterationCounter + 1];
 
 		// Calculates vector deltaRAndAProduct. For details see step 6 of algorithm on page 3 of the paper
-		int posBegin = _iIterationCounter;
-		int posEnd = positionEnd - _iIterationCounter;
+		unsigned int posEnd = lenM1 - _iIterationCounter;
+		unsigned int _iIterationCounterA1 = _iIterationCounter + 1;
 		for (i = 0; i <= _iIterationCounter; i++)
 		{
 			double innerProduct1 = 0.0;
 			double innerProduct2 = 0.0;
 			for (j = 0; j <= _iIterationCounter; j++)
 			{
-				innerProduct1 += xn[posBegin - j + positionStart] * predictionCoefficients[j];
-				innerProduct2 += xn[posEnd + j + positionStart] * predictionCoefficients[j];
+				innerProduct1 += xn[_iIterationCounter - j] * predictionCoefficients[j];
+				innerProduct2 += xn[posEnd + j] * predictionCoefficients[j];
 			}
-			_deltaRAndAProduct[i] = -xn[posBegin - i + positionStart] * innerProduct1 - xn[posEnd + i + positionStart] * innerProduct2;
+			_deltaRAndAProduct[i] = -xn[_iIterationCounter - i] * innerProduct1 - xn[posEnd + i] * innerProduct2;
 		}
 		// Updates vector g. For details see step 7 of algorithm on page 3 of the paper
 		memcpy(tmp, _g, (_mCoefficientsNumber + 2) * sizeof(double));
@@ -927,9 +923,29 @@ static float NSEEL_CGEN_CALL arburgTrainModel(void *opaque, INT_PTR num_param, f
 	*burg = (char)(*parms[2] + NSEEL_CLOSEFACTOR);
 	unsigned int *flag = (unsigned int*)(burg + 1);
 	*flag = (unsigned int)(*parms[1] + NSEEL_CLOSEFACTOR);
-	int32_t from = (int32_t)(*parms[4] + NSEEL_CLOSEFACTOR);
-	int32_t to = (int32_t)(*parms[5] + NSEEL_CLOSEFACTOR);
-	TrainArburg(burg, xn, from, to);
+	uint32_t xLen = (uint32_t)(*parms[4] + NSEEL_CLOSEFACTOR);
+	TrainArburg(burg, xn, xLen);
+	return 0.0f;
+}
+static float NSEEL_CGEN_CALL arburgGetPredictionReflectionCoeff(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext*)opaque;
+	float *blocks = c->ram_state;
+	int32_t offs = (int32_t)(*parms[0] + NSEEL_CLOSEFACTOR);
+	char *bg = (char*)__NSEEL_RAMAlloc(blocks, (uint64_t)offs);
+	int32_t offs1 = (int32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float *pdC = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	int32_t offs2 = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
+	float *rfC = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	unsigned int *flag = (unsigned int*)(bg + 1);
+	const unsigned int _mCoefficientsNumber = *flag;
+	double *predictionCoefficients = (double*)(flag + 1);
+	double *reflectionCoefficient = predictionCoefficients + (_mCoefficientsNumber + 1);
+	for (unsigned int i = 0; i < _mCoefficientsNumber + 1; i++)
+	{
+		pdC[i] = (float)predictionCoefficients[i];
+		rfC[i] = (float)reflectionCoefficient[i];
+	}
 	return 0.0f;
 }
 static float NSEEL_CGEN_CALL arburgPredictBackward(float *blocks, float *start)
@@ -1179,7 +1195,7 @@ static float NSEEL_CGEN_CALL  eel_max(float *blocks, float *start, float *length
 	float ma = ptr[0];
 	for (uint32_t i = 1; i < (uint32_t)(*length + NSEEL_CLOSEFACTOR); i++)
 	{
-		if (fabsf(ptr[i]) > fabsf(ma))
+		if (ptr[i] > ma)
 			ma = ptr[i];
 	}
 	return ma;
@@ -1190,7 +1206,7 @@ static float NSEEL_CGEN_CALL  eel_min(float *blocks, float *start, float *length
 	float mi = ptr[0];
 	for (uint32_t i = 1; i < (uint32_t)(*length + NSEEL_CLOSEFACTOR); i++)
 	{
-		if (fabsf(ptr[i]) < fabsf(mi))
+		if (ptr[i] < mi)
 			mi = ptr[i];
 	}
 	return mi;
@@ -2423,46 +2439,6 @@ static float NSEEL_CGEN_CALL FIRProcess(float *blocks, float *start, float *x, f
 		fir[0] = (float)pos;
 	return y;
 }
-static float NSEEL_CGEN_CALL IIRInit(float *blocks, float *start, float *bLen, float *aLen)
-{
-	uint32_t offs1 = (uint32_t)(*start + NSEEL_CLOSEFACTOR);
-	int32_t blen = (int32_t)(*bLen + NSEEL_CLOSEFACTOR);
-	int32_t alen = (int32_t)(*aLen + NSEEL_CLOSEFACTOR);
-	float *iir = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
-	iir[0] = (float)blen;
-	iir[1] = (float)alen;
-	memset(iir + 2, 0, (blen + 1 + (alen + 1)) * sizeof(float));
-	return (float)(blen + alen + 4);
-}
-static float NSEEL_CGEN_CALL IIRProcess(void *opaque, INT_PTR num_param, float **parms)
-{
-	compileContext *c = (compileContext*)opaque;
-	float *blocks = c->ram_state;
-	int32_t offs1 = (int32_t)(*parms[0] + NSEEL_CLOSEFACTOR);
-	float *iir = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
-	int32_t offs2 = (int32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
-	float *b = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-	int32_t offs3 = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
-	float *a = __NSEEL_RAMAlloc(blocks, (uint64_t)offs3);
-	int32_t i;
-	int32_t bLen = (int32_t)(iir[0] + NSEEL_CLOSEFACTOR);
-	int32_t aLen = (int32_t)(iir[1] + NSEEL_CLOSEFACTOR);
-	float *x = iir + 2;
-	float *y = x + bLen + 1;
-	float tmp = 0.0f;
-	for (i = bLen; i > 0; i--)
-		x[i] = x[i - 1];
-	for (i = aLen; i > 0; i--)
-		y[i] = y[i - 1];
-	x[0] = *parms[3];
-	for (i = 0; i < bLen; i++)
-		tmp += (b[i] * x[i]);
-	for (i = 1; i < aLen; i++)
-		tmp -= (a[i] * y[i]);
-	tmp /= a[0];
-	y[0] = tmp;
-	return tmp;
-}
 #define NRAND 624
 #define MRAND 397
 #define MATRIX_A 0x9908b0dfUL   /* constant vector a */
@@ -2642,7 +2618,7 @@ static float NSEEL_CGEN_CALL PolyphaseFilterbankInit(void *opaque, INT_PTR num_p
 	initWarpedPFB(pfbPtr, fs, N, m);
 	if (pfbPtr2)
 		assignPtrWarpedPFB(pfbPtr2, N, m);
-	return (float)aligned;
+	return (float)requiredMemSize;
 }
 static float NSEEL_CGEN_CALL PolyphaseFilterbankChangeWarpingFactor(void *opaque, INT_PTR num_param, float **parms)
 {
@@ -4120,7 +4096,8 @@ static functionType fnTable1[] = {
   {"resetStringContainers",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_TAKES_VARPARM_EX | BIF_RETURNSONSTACK,{(void**)&_eel_delete_all_strings},NSEEL_PProc_THIS},
   {"importFLTFromStr",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&_eel_importFloatArrayFromString},NSEEL_PProc_THIS},
   {"arburgCheckMemoryRequirement",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&arburgCheckMemoryRequirement},NSEEL_PProc_RAM},
-  {"arburgTrainModel",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&arburgTrainModel},NSEEL_PProc_THIS},
+  {"arburgTrainModel",_asm_generic2parm_retd,_asm_generic2parm_retd_end,5 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&arburgTrainModel},NSEEL_PProc_THIS},
+  {"arburgGetPredictionReflectionCoeff",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&arburgGetPredictionReflectionCoeff},NSEEL_PProc_THIS},
   {"arburgPredictBackward",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&arburgPredictBackward},NSEEL_PProc_RAM},
   {"arburgPredictForward",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&arburgPredictForward},NSEEL_PProc_RAM},
   {"stftCheckMemoryRequirement",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftCheckMemoryRequirement},NSEEL_PProc_THIS},
@@ -4140,8 +4117,6 @@ static functionType fnTable1[] = {
   {"PolyphaseFilterbankSynthesisStereo",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&PolyphaseFilterbankSynthesisStereo},NSEEL_PProc_THIS},
   {"FIRInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&FIRInit},NSEEL_PProc_RAM},
   {"FIRProcess",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void**)&FIRProcess},NSEEL_PProc_RAM},
-  {"IIRInit",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void**)&IIRInit},NSEEL_PProc_RAM},
-  {"IIRProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM_EX | BIF_RETURNSONSTACK,{(void**)&IIRProcess},NSEEL_PProc_THIS},
   {"fractionalDelayLineInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&fractionalDelayLineInit},NSEEL_PProc_RAM},
   {"fractionalDelayLineClear",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&fractionalDelayLineClear},NSEEL_PProc_RAM},
   {"fractionalDelayLineSetDelay",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&fractionalDelayLineSetDelay},NSEEL_PProc_RAM},
