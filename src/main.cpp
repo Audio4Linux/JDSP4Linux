@@ -12,11 +12,12 @@
 #include <QTextStream>
 #include <QSessionManager>
 
+#include <sys/stat.h>
+#include <sys/time.h>
+
 #ifndef NO_CRASH_HANDLER
 #include "crash/airbag.h"
 #include "crash/stacktrace.h"
-#include <sys/stat.h>
-#include <sys/time.h>
 
 #include <utils/CrashReportSender.h>
 
