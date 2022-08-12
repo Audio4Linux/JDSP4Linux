@@ -139,26 +139,26 @@ public:
         auto variant = _conf->getVariant(skey, true, exists);
 
         if constexpr (std::is_same_v<T, QVariant>) {
-            return variant;
+            return (T)(variant);
         }
         if constexpr (std::is_same_v<T, std::string>) {
-            return variant.toString().toStdString();
+            return (T)(variant.toString().toStdString());
         }
         if constexpr (std::is_same_v<T, QString>) {
-            return variant.toString();
+            return (T)(variant.toString());
         }
         if constexpr (std::is_same_v<T, int>) {
-            return variant.toInt();
+            return (T)(variant.toInt());
         }
         if constexpr (std::is_same_v<T, float>) {
-            return variant.toFloat();
+            return (T)(variant.toFloat());
         }
         if constexpr (std::is_same_v<T, bool>) {
-            return variant.toBool();
+            return (T)(variant.toBool());
         }
 
         Log::error("DspConfig::get<T>: Unknown type T");
-        return 0;
+        throw new std::exception;
 	}
 
     Type type(const Key &key)
