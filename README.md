@@ -242,13 +242,13 @@ sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-
 Arch Linux + **PipeWire** clients only:
 
 ```bash
-sudo pacman -S libarchive qt5-base qt5-svg glib2 glibmm pipewire
+sudo pacman -S gcc make pkgconfig libarchive qt5-base qt5-svg glib2 glibmm pipewire
 ```
 
 Arch Linux + **PulseAudio** clients only:
 
 ```
-sudo pacman -S libarchive qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-good gstreamer 
+sudo pacman -S gcc make pkgconfig libarchive qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-good gstreamer 
 ```
 
 #### Build application
