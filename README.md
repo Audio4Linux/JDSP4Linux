@@ -142,9 +142,11 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 Add PPA Repo
 ```bash
 sudo apt install -y curl
+# TheBone’s PPA Repository key
 curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
-cat thepbone_ppa.gpg | sudo tee -a /usr/share/keyrings/thepbone_ppa.gpg > /dev/null
-sudo curl -s --compressed -o /etc/apt/sources.list.d/thepbone_ppa.list "https://thepbone.github.io/PPA-Repository/thepbone_ppa.list"
+
+cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
+echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list
 sudo apt update
 ```
 Install from PPA
