@@ -318,7 +318,7 @@ EOT
 Download icon
 
 ```bash
-sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/Audio4Linux/JDSP4Linux-GUI/master/resources/icons/icon.png -q --show-progress
+sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/Audio4Linux/JDSP4Linux/master/resources/icons/icon.png -q --show-progress
 ```
 
 ## Troubleshooting
