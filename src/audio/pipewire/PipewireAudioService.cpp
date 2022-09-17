@@ -72,6 +72,9 @@ PipewireAudioService::PipewireAudioService()
 
 PipewireAudioService::~PipewireAudioService()
 {
+    mgr.release();
+    appMgr.release();
+    effects.release();
     delete plugin;
 }
 

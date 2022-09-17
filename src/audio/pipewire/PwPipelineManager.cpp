@@ -1535,7 +1535,7 @@ PwPipelineManager::~PwPipelineManager() {
   }
 
   pw_proxy_destroy(proxy_stream_output_sink);
-  pw_proxy_destroy(proxy_stream_input_source);
+  //pw_proxy_destroy(proxy_stream_input_source);
 
   util::debug("Destroying PipeWire registry...");
   pw_proxy_destroy((struct pw_proxy*)registry);
