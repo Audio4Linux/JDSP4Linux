@@ -74,7 +74,7 @@ Linux port developed by <a href="https://github.com/thepbone">Tim Schneeberger (
 
 **Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
-PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. Unfortunately, PipeWire is not yet completely stable and does not work correctly on virtual machines. If you cannot get any audio output when using PipeWire, consider switching to PulseAudio until proper hardware support is available.
+PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. 
 
 I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
 
@@ -133,16 +133,18 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 
 **Pulseaudio version**
 * Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 20.04 or later
+* Distro based on Ubuntu 21.10 or later
  
 **Pipewire version**
 * Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 21.04 or later
+* Distro based on Ubuntu 21.10 or later
+
+If you need to install this app on an older distro, you need to compile it manually with GCC 11.0 or later.
 
 Add PPA Repo
 ```bash
 sudo apt install -y curl
-# TheBone’s PPA Repository key
+# thepbone’s PPA Repository key
 curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
 
 cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
