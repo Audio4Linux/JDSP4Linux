@@ -110,12 +110,12 @@ public:
 
         if(watcherEnabled)
         {
-            Log::debug("DspConfig::ctor: File system watcher enabled");
+            Log::debug("File system watcher enabled");
 
             _watcher = new QFileSystemWatcher(this);
             if(!_watcher->addPath(AppConfig::instance().getDspConfPath()))
             {
-                Log::warning(QString("DspConfig::ctor: Failed to register path %0 with QFileSystemWatcher").arg(AppConfig::instance().getDspConfPath()));
+                Log::warning(QString("Failed to register path %0 with QFileSystemWatcher").arg(AppConfig::instance().getDspConfPath()));
             }
             connect(_watcher, &QFileSystemWatcher::fileChanged, this, &DspConfig::fileChanged);
         }
@@ -157,7 +157,7 @@ public:
             return (T)(variant.toBool());
         }
 
-        Log::error("DspConfig::get<T>: Unknown type T");
+        Log::error("Unknown type T");
         throw new std::exception;
 	}
 
@@ -194,7 +194,7 @@ public:
             return Type::Boolean;
         }
 
-        Log::error("DspConfig::type: Unknown type");
+        Log::error("Unknown type");
         return Type::Unknown;
     }
 
@@ -211,7 +211,7 @@ public:
 
 		if (map.count() < 1)
 		{
-			Log::debug("DspConfig::load: Empty config file, using defaults");
+            Log::debug("Empty config file, using defaults");
 			loadDefault();
 			return;
 		}
@@ -227,7 +227,7 @@ public:
 
 		if (map.count() < 1)
 		{
-			Log::debug("DspConfig::load: Empty config file, using defaults");
+            Log::debug("Empty config file, using defaults");
 			loadDefault();
 			return;
 		}
@@ -264,7 +264,7 @@ private slots:
     {
         if(_watcher->files().contains(path))
         {
-            Log::debug("DspConfig::fileChanged: Config changed");
+            Log::debug("Config changed");
             load();
             emit updatedExternally(this);
         }

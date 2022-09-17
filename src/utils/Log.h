@@ -18,8 +18,14 @@
 #include <string>
 #include <QString>
 
+// TODO Move Utils.h out of AudioDrivers/Base into a common subproject
+#include "Utils.h"
+
 class Log
 {
+
+private:
+    Log(){};
 
 public:
 	enum LoggingMode
@@ -38,20 +44,46 @@ public:
         Critical
     };
 
-	static void debug(const QString &log);
-	static void information(const QString &log);
-	static void warning(const QString &log);
-    static void error(const QString &log);
-    static void critical(const QString &log);
-    static void write(const QString &log,
-                      Severity       severity,
-	                  LoggingMode    mode = LM_ALL);
+    Log(const Log&) = delete;
+    Log& operator=(const Log &) = delete;
+    Log(Log &&) = delete;
+    Log & operator=(Log &&) = delete;
+
+    static auto& instance(){
+        static Log log;
+        return log;
+    }
+
+    static void console(const QString &rawMessage, bool overrideSilence);
+    static void debug(const QString &log, util::source_location location = util::source_location::current());
+    static void information(const QString &log, util::source_location location = util::source_location::current());
+    static void warning(const QString &log, util::source_location location = util::source_location::current());
+    static void error(const QString &log, util::source_location location = util::source_location::current());
+    static void critical(const QString &log, util::source_location location = util::source_location::current());
+
 	static void clear();
     static void backupLastLog();
 
     static QString path();
     static QString pathOld();
 
+    void write(const QString &msg, bool force = false, LoggingMode mode = LM_ALL);
+    void write(const QString &log,
+               Severity       severity,
+               util::source_location location,
+               LoggingMode    mode = LM_ALL);
+
+    bool getColoredOutput() const;
+    void setColoredOutput(bool newColoredOutput);
+
+    bool getSilent() const;
+    void setSilent(bool newSilent);
+
+private:
+    static QString prepareDebugMessage(const QString &message, util::source_location location);
+
+    bool coloredOutput = true;
+    bool silent = false;
 };
 
 #endif // LOG_H

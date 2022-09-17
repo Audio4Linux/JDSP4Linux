@@ -83,6 +83,8 @@ class PwPluginBase {
 
   void set_active(const bool& state) const;
 
+  void set_post_messages(const bool& state);
+
   auto connect_to_pw() -> bool;
 
   void disconnect_from_pw();
@@ -116,6 +118,8 @@ class PwPluginBase {
   spa_hook listener{};
 
   data pf_data = {};
+
+  uint n_ports = 4;
 
   float input_gain = 1.0F;
   float output_gain = 1.0F;

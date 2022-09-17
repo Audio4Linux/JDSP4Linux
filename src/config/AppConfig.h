@@ -64,6 +64,7 @@ public:
         AudioOutputDevice,
         AudioAppBlocklist,
         AudioAppBlocklistInvert,
+        AudioInactivityTimeout,
 
         AeqPlotDarkMode,
 
@@ -111,7 +112,7 @@ public:
             return variant.toBool();
         }
 
-        Log::error("AppConfig::convertVariant<T>: Unknown type T");
+        Log::error("Unknown generic type T");
     }
 
     template<class T>

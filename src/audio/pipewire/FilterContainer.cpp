@@ -1,5 +1,12 @@
 /*
- *  Copyright © 2017-2022 Wellington Wallace
+ *  Note: The code in this file was adopted from EasyEffects (https://github.com/wwmm/easyeffects)
+ *  This version includes minor changes that enable compatibility with JamesDSP.
+ *
+ *  The original copyright notice is attached below.
+ */
+
+/*
+ *  Copyright © 2017-2023 Wellington Wallace
  *
  *  This file is part of EasyEffects.
  *
@@ -19,17 +26,17 @@
 
 #include "FilterContainer.h"
 
+#include <thread>
 #include <config/AppConfig.h>
 
 FilterContainer::FilterContainer(PwPipelineManager* pipe_manager, PwPluginBase* plugin, AppConfig* settings) :
-    log_tag("FilterContainer: "),
     pm(pipe_manager),
     settings(settings),
     plugin(plugin)
 {
-    pm->output_device = pm->default_output_device;
 
-    if (settings->get<bool>(AppConfig::AudioOutputUseDefault)) {
+    // TODO remove
+    /*if (settings->get<bool>(AppConfig::AudioOutputUseDefault)) {
         settings->set(AppConfig::AudioOutputDevice, QString::fromStdString(pm->output_device.name));
     } else {
         auto found = false;
@@ -49,20 +56,19 @@ FilterContainer::FilterContainer(PwPipelineManager* pipe_manager, PwPluginBase* 
         if (!found) {
             settings->set(AppConfig::AudioOutputDevice, QString::fromStdString(pm->output_device.name));
         }
-    }
+    }*/
 
     auto* PULSE_SINK = std::getenv("PULSE_SINK");
+    if (PULSE_SINK != nullptr && PULSE_SINK != tags::pipewire::ee_sink_name) {
+      for (const auto& [serial, node] : pm->node_map) {
+        if (node.name == PULSE_SINK) {
+          pm->output_device = node;
 
-    if (PULSE_SINK != nullptr) {
-        for (const auto& [id, node] : pm->node_map) {
-            if (node.name == PULSE_SINK) {
-                pm->output_device = node;
+          settings->set(AppConfig::AudioOutputDevice, QString::fromStdString(pm->output_device.name));
 
-                settings->set(AppConfig::AudioOutputDevice, QString::fromStdString(pm->output_device.name));
-
-                break;
-            }
+          break;
         }
+      }
     }
 
     pm->stream_output_added.connect(sigc::mem_fun(*this, &FilterContainer::on_app_added));
@@ -80,134 +86,224 @@ FilterContainer::FilterContainer(PwPipelineManager* pipe_manager, PwPluginBase* 
             return;
         }
 
-        for (const auto& [id, node] : pm->node_map) {
+        for (const auto& [serial, node] : pm->node_map) {
             if (node.name == name) {
                 pm->output_device = node;
 
-                disconnect_filters();
-
-                connect_filters();
-
+                set_bypass(false);
                 break;
             }
         }
+
+
     });
+
+//------
+     pm->sink_added.connect([=, this](const NodeInfo node) {
+       if (node.name == settings->get<std::string>(AppConfig::AudioOutputDevice)) {
+         pm->output_device = node;
+
+         /*if (g_settings_get_boolean(global_settings, "bypass") != 0) {
+           g_settings_set_boolean(global_settings, "bypass", 0);
+
+           return;  // filter connected through update_bypass_state
+         }*/
+
+         util::debug("Target output device added: " + node.name);
+         set_bypass(false);
+       }
+     });
+
+     pm->sink_removed.connect([=, this](const NodeInfo node) {
+
+       if (!settings->get<bool>(AppConfig::AudioOutputUseDefault)) {
+         if (node.name == settings->get<std::string>(AppConfig::AudioOutputDevice)) {
+           pm->output_device.id = SPA_ID_INVALID;
+           pm->output_device.serial = SPA_ID_INVALID;
+           util::debug("Target output device removed; fallback disabled");
+         }
+       }
+     });
 }
 
 FilterContainer::~FilterContainer() {
     disconnect_filters();
 
-    util::debug(log_tag + "destroyed");
+    util::debug("destroyed");
 }
 
-void FilterContainer::on_app_added(const uint id, const std::string name, const std::string media_class) {
-    const auto& is_blocklisted = settings->isAppBlocked(QString::fromStdString(name));
+void FilterContainer::on_app_added(const NodeInfo node_info) {
+    const auto& is_blocklisted = settings->isAppBlocked(QString::fromStdString(node_info.name)); // TODO application_id or name?
 
-    if (is_blocklisted) {
-        pm->disconnect_stream_output(id, media_class);
-    } else {
-        pm->connect_stream_output(id, media_class);
+    if (!is_blocklisted) {
+        pm->connect_stream_output(node_info.id);
     }
 }
 
-void FilterContainer::on_link_changed(LinkInfo link_info) {
-    /*
+auto FilterContainer::apps_want_to_play() -> bool {
+  for (const auto& link : pm->list_links) {
+    if (link.input_node_id == pm->ee_sink_node.id) {
+      if (link.state == PW_LINK_STATE_ACTIVE) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+void FilterContainer::on_link_changed(const LinkInfo link_info) {
+  // We are not interested in the other link states
+
+  if (link_info.state != PW_LINK_STATE_ACTIVE && link_info.state != PW_LINK_STATE_PAUSED) {
+    return;
+  }
+
+  /*
     If bypass is enabled do not touch the plugin pipeline
-   */
+  */
 
-    if (bypass) {
-        return;
-    }
+  if (bypass) {
+    return;
+  }
 
-    auto want_to_play = false;
-
-    for (const auto& link : pm->list_links) {
-        if (link.input_node_id == pm->pe_sink_node.id) {
-            if (link.state == PW_LINK_STATE_ACTIVE) {
-                want_to_play = true;
-
-                break;
-            }
-        }
-    }
-
-    if (!want_to_play) {
-        disconnect_filters();
-
-        return;
-    }
-
+  if (apps_want_to_play()) {
     if (list_proxies.empty()) {
-        connect_filters();
+      util::debug("At least one app linked to our device wants to play. Linking our filters.");
+
+      connect_filters();
     }
+  } else {
+
+    int inactivity_timeout = settings->get<int>(AppConfig::AudioInactivityTimeout);
+
+    g_timeout_add_seconds(inactivity_timeout, GSourceFunc(+[](FilterContainer* self) {
+                            if (!self->apps_want_to_play() && !self->list_proxies.empty()) {
+                              util::debug("No app linked to our device wants to play. Unlinking our filters.");
+
+                              self->disconnect_filters();
+                            }
+
+                            return G_SOURCE_REMOVE;
+                          }),
+                          this);
+  }
 }
 
 void FilterContainer::connect_filters(const bool& bypass) {
-    uint prev_node_id = pm->pe_sink_node.id;
-    uint next_node_id = 0U;
+  const auto output_device_name = settings->get<std::string>(AppConfig::AudioOutputDevice); // TODO test
 
-    // link plugin
-    if ((!plugin->connected_to_pw) ? plugin->connect_to_pw() : true) {
-        next_node_id = plugin->get_node_id();
+  // checking if the output device exists
+  if (output_device_name.empty()) {
+    util::debug("No output device set. Aborting the link");
 
-        const auto& links = pm->link_nodes(prev_node_id, next_node_id);
+    return;
+  }
 
-        const auto& link_size = links.size();
+  bool dev_exists = false;
 
-        for (size_t n = 0U; n < link_size; n++) {
-            list_proxies.emplace_back(links[n]);
-        }
+  for (const auto& [serial, node] : pm->node_map) {
+    if (node.name == output_device_name) {
+      dev_exists = true;
 
-        if (link_size == 2U) {
-            prev_node_id = next_node_id;
-        } else {
-            util::warning(log_tag + " link from node " + std::to_string(prev_node_id) + " to node " +
-                          std::to_string(next_node_id) + " failed");
-        }
+      pm->output_device = node;
+
+      break;
     }
+  }
 
-    // link output device
+  if (!dev_exists) {
+    util::debug("The output device " + output_device_name + " is not available. Aborting the link");
 
-    next_node_id = pm->output_device.id;
+    return;
+  }
 
-    const auto& links = pm->link_nodes(prev_node_id, next_node_id);
+  uint prev_node_id = pm->ee_sink_node.id;
+  uint next_node_id = 0U;
 
-    const auto& link_size = links.size();
+  // link plugin
+  if ((!plugin->connected_to_pw) ? plugin->connect_to_pw() : true) {
+      next_node_id = plugin->get_node_id();
 
-    for (size_t n = 0U; n < link_size; n++) {
-        list_proxies.emplace_back(links[n]);
+      const auto links = pm->link_nodes(prev_node_id, next_node_id);
+
+      for (auto* link : links) {
+        list_proxies.push_back(link);
+      }
+
+      if (links.size() == 2U) {
+        prev_node_id = next_node_id;
+      } else {
+        util::warning(" link from node " + util::to_string(prev_node_id) + " to node " +
+                      util::to_string(next_node_id) + " failed");
+      }
+  }
+
+  // waiting for the output device ports information to be available.
+
+  int timeout = 0;
+
+  while (pm->count_node_ports(pm->output_device.id) < 2) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+    timeout++;
+
+    if (timeout > 10000) {  // 10 seconds
+      util::warning("Information about the ports of the output device " + pm->output_device.name + " with id " +
+                    util::to_string(pm->output_device.id) + " are taking to long to be available. Aborting the link");
+
+      return;
     }
+  }
 
-    if (link_size < 2U) {
-        util::warning(log_tag + " link from node " + std::to_string(prev_node_id) + " to output device " +
-                      std::to_string(next_node_id) + " failed");
-    }
+  // link output device
+
+   next_node_id = pm->output_device.id;
+
+   const auto links = pm->link_nodes(prev_node_id, next_node_id);
+
+   for (auto* link : links) {
+     list_proxies.push_back(link);
+   }
+
+   if (links.size() < 2U) {
+     util::warning(" link from node " + util::to_string(prev_node_id) + " to output device " +
+                   util::to_string(next_node_id) + " failed");
+   }
 }
 
 void FilterContainer::disconnect_filters() {
-    std::set<uint> list;
+    std::set<uint> link_id_list;
 
     for (const auto& link : pm->list_links) {
-        if (link.input_node_id == plugin->get_node_id() || link.output_node_id == plugin->get_node_id()) {
-            list.insert(link.id);
-        }
+      if (link.input_node_id == plugin->get_node_id() || link.output_node_id == plugin->get_node_id()) {
+        link_id_list.insert(link.id);
+      }
     }
 
-    for (const auto& id : list) {
-        pm->destroy_object(static_cast<int>(id));
+    if (plugin->connected_to_pw) {
+        util::debug("disconnecting the " + plugin->name + " filter from PipeWire");
+
+        plugin->disconnect_from_pw();
+    }
+
+    for (const auto& id : link_id_list) {
+      pm->destroy_object(static_cast<int>(id));
     }
 
     pm->destroy_links(list_proxies);
 
     list_proxies.clear();
+
+    // remove_unused_filters();
 }
 
 void FilterContainer::set_bypass(const bool& state) {
-    bypass = state;
+  bypass = state;
 
-    disconnect_filters();
+  disconnect_filters();
 
-    connect_filters(state);
+  connect_filters(state);
 }
 
 void FilterContainer::activate_filters() {

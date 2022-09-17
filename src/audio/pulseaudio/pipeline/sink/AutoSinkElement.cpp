@@ -1,8 +1,14 @@
 #include "AutoSinkElement.h"
+#include "Utils.h"
 
 AutoSinkElement::AutoSinkElement()
 {
     sink = gst_element_factory_make ("autoaudiosink", "autoaudiosink");
+    if(sink == NULL) {
+        util::critical("'autoaudiosink' gstreamer plugin not installed");
+        exit(1);
+    }
+
     gst_object_ref(sink);
 }
 

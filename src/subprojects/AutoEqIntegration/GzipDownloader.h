@@ -3,11 +3,12 @@
 
 #include <QtWidgets>
 #include <QtNetwork>
-#include <QtConcurrent/QtConcurrent>
 
 #include <QtPromise>
 
 #define TMP_DIR "/tmp/jamesdsp/download/"
+
+class ExtractionThread;
 
 class GzipDownloader : public QObject
 {
@@ -36,6 +37,7 @@ signals:
 private slots:
     void onDataAvailable();
     void onArchiveReady();
+    void onArchiveExtracted(const QString& errorString);
     void onErrorOccurred(QNetworkReply::NetworkError error);
 
     void cleanup();
@@ -45,6 +47,8 @@ private:
     QFile downloadedFile;
     QNetworkAccessManager* nam;
     QPointer<QNetworkReply> networkReply;
+    ExtractionThread *extractThread;
 };
+
 
 #endif // GZIPDOWNLOADER_H

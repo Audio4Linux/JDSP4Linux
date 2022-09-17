@@ -57,13 +57,13 @@ DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(s
     auto dsp = static_cast<JamesDSPLib*>(dspPtr);
     if(!dsp)
     {
-        util::error("DspHost::ctor: Failed to initialize reference to libjamesdsp class object");
+        util::error("Failed to initialize reference to libjamesdsp class object");
         abort();
     }
 
     if(!JamesDSPGetMutexStatus(dsp))
     {
-        util::error("DspHost::ctor: JamesDSPGetMutexStatus returned false. "
+        util::error("JamesDSPGetMutexStatus returned false. "
                     "Cannot run safely in multi-threaded environment.");
         abort();
     }
@@ -87,7 +87,7 @@ void DspHost::updateLimiter(DspConfig* config)
 
     if(!releaseExists || !thresholdExists)
     {
-        util::warning("DspHost::updateLimiter: Limiter threshold or limiter release unset. Using defaults.");
+        util::warning("Limiter threshold or limiter release unset. Using defaults.");
 
         if(!releaseExists) limRelease = -0.1;
         else if (!thresholdExists) limThreshold = 60;
@@ -115,7 +115,7 @@ void DspHost::updateFirEqualizer(DspConfig *config)
 
     if(!typeExists || !interpolationExists)
     {
-        util::warning("DspHost::updateFirEqualizer: Filter type or interpolation mode unset. Using defaults.");
+        util::warning("Filter type or interpolation mode unset. Using defaults.");
 
         if(!typeExists)  filterType = 0;
         else if (!interpolationExists) interpolationMode = 0;
@@ -133,7 +133,7 @@ void DspHost::updateFirEqualizer(DspConfig *config)
 
     if(v.size() != 30)
     {
-        util::warning("DspHost::updateFirEqualizer: Invalid EQ data. 30 semicolon-separateds field expected, "
+        util::warning("Invalid EQ data. 30 semicolon-separateds field expected, "
                       "found " + std::to_string(v.size()) + " fields instead.");
         return;
     }
@@ -157,7 +157,7 @@ void DspHost::updateVdc(DspConfig *config)
 
     if(!enableExists || !fileExists)
     {
-        util::warning("DspHost::updateVdc: DDC file or enable switch unset. Disabling DDC engine.");
+        util::warning("DDC file or enable switch unset. Disabling DDC engine.");
 
         ddcEnable = false;
     }
@@ -167,14 +167,14 @@ void DspHost::updateVdc(DspConfig *config)
         QFile f(ddcFile);
         if(!f.exists())
         {
-            util::warning("DspHost::updateVdc: Referenced file does not exist 'ddc_file'");
+            util::warning("Referenced file does not exist 'ddc_file'");
             return;
         }
 
         if (!f.open(QFile::ReadOnly | QFile::Text))
         {
-            util::error("DspHost::updateVdc: Cannot open file path in property 'ddc_file'");
-            util::error("DspHost::updateVdc: Disabling DDC engine");
+            util::error("Cannot open file path in property 'ddc_file'");
+            util::error("Disabling DDC engine");
             DDCDisable(cast(this->_dsp));
             return;
         }
@@ -184,8 +184,8 @@ void DspHost::updateVdc(DspConfig *config)
         int ret = DDCEnable(cast(this->_dsp));
         if (ret <= 0)
         {
-            util::error("DspHost::updateVdc: Call to DDCEnable(this->_dsp) failed. Invalid DDC parameter?");
-            util::error("DspHost::updateVdc: Disabling DDC engine");
+            util::error("Call to DDCEnable(this->_dsp) failed. Invalid DDC parameter?");
+            util::error("Disabling DDC engine");
             DDCDisable(cast(this->_dsp));
             return;
         }
@@ -208,7 +208,7 @@ void DspHost::updateCompressor(DspConfig *config)
 
     if(!maxAtkExists || !maxRelExists || !aggrExists)
     {
-        util::warning("DspHost::updateLimiter: Limiter threshold or limiter release unset. Using defaults.");
+        util::warning("Limiter threshold or limiter release unset. Using defaults.");
 
         if(!maxAtkExists) maxAttack = 30;
         if(!maxRelExists) maxRelease = 200;
@@ -228,7 +228,7 @@ void DspHost::updateReverb(DspConfig* config)
         key = defaults; \
     }
 
-    std::string msg = "DspHost::updateReverb: At least one reverb parameter is unset. "
+    std::string msg = "At least one reverb parameter is unset. "
                       "Attempting to fill out with defaults; this may cause unexpected audio changes.";
 
     GET_PARAM(bassboost, float, 0.15, msg);
@@ -269,25 +269,25 @@ void DspHost::updateConvolver(DspConfig *config)
 
     if(!enableExists)
     {
-        util::warning("DspHost::updateConvolver: Enable switch unset. Disabling convolver.");
+        util::warning("Enable switch unset. Disabling convolver.");
         enabled = false;
     }
 
     if(!fileExists)
     {
-        util::error("DspHost::updateConvolver: convolver_file property missing. Disabling convolver.");
+        util::error("convolver_file property missing. Disabling convolver.");
         enabled = false;
     }
 
     if(file.isEmpty())
     {
-        util::error("DspHost::updateConvolver: Impulse response is empty. Disabling convolver.");
+        util::error("Impulse response is empty. Disabling convolver.");
         enabled = false;
     }
 
     if(!optModeExists || !waveEditExists)
     {
-        util::warning("DspHost::updateConvolver: Opt mode or advanced wave editing unset. Using defaults.");
+        util::warning("Opt mode or advanced wave editing unset. Using defaults.");
 
         if(!optModeExists) optMode = 0;
         if(!waveEditExists) waveEdit = "-80;-100;23;12;17;28";
@@ -305,7 +305,7 @@ void DspHost::updateConvolver(DspConfig *config)
     int param[6];
     if(v.size() != 6)
     {
-        util::warning("DspHost::updateConvolver: Invalid advanced impulse editing data. 6 semicolon-separateds field expected, "
+        util::warning("Invalid advanced impulse editing data. 6 semicolon-separateds field expected, "
                       "found " + std::to_string(v.size()) + " fields instead.");
 
         param[0] = -80;
@@ -330,7 +330,7 @@ void DspHost::updateConvolver(DspConfig *config)
 
     if(impulse == nullptr)
     {
-        util::warning("DspHost::updateConvolver: Unable to read impulse response. No file selected or abnormal channel count?");
+        util::warning("Unable to read impulse response. No file selected or abnormal channel count?");
 
         enabled = false;
 
@@ -352,10 +352,10 @@ void DspHost::updateConvolver(DspConfig *config)
     {
         if(impInfo[1] <= 0)
         {
-            util::warning("DspHost::updateConvolver: IR is empty and has zero frames");
+            util::warning("IR is empty and has zero frames");
         }
 
-        util::debug("DspHost::updateConvolver: Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
+        util::debug("Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
 
         Convolver1DDisable(cast(this->_dsp));
         success = Convolver1DLoadImpulseResponse(cast(this->_dsp), impulse, impInfo[0], impInfo[1]);
@@ -371,7 +371,7 @@ void DspHost::updateConvolver(DspConfig *config)
 
     if(success <= 0)
     {
-        util::debug("DspHost::updateConvolver: Failed to update convolver. Convolver1DLoadImpulseResponse returned an error.");
+        util::debug("Failed to update convolver. Convolver1DLoadImpulseResponse returned an error.");
     }
 }
 
@@ -385,13 +385,13 @@ void DspHost::updateGraphicEq(DspConfig *config)
 
     if(!enableExists)
     {
-        util::warning("DspHost::updateGraphicEq: Enable switch unset. Disabling graphic eq.");
+        util::warning("Enable switch unset. Disabling graphic eq.");
         enabled = false;
     }
 
     if(!paramExists)
     {
-        util::error("DspHost::updateGraphicEq: graphiceq_param property missing. Disabling graphic eq.");
+        util::error("graphiceq_param property missing. Disabling graphic eq.");
         enabled = false;
     }
 
@@ -413,12 +413,12 @@ void DspHost::updateCrossfeed(DspConfig* config)
 
     if(!modeExists)
     {
-        util::warning("DspHost::update: Crossfeed mode unset, using defaults");
+        util::warning("Crossfeed mode unset, using defaults");
     }
 
     if(!enableExists)
     {
-        util::warning("DspHost::update: Crossfeed enable switch unset, disabling crossfeed.");
+        util::warning("Crossfeed enable switch unset, disabling crossfeed.");
         enabled = false;
     }
 
@@ -431,12 +431,12 @@ void DspHost::updateCrossfeed(DspConfig* config)
 
         if(!fcutExists)
         {
-            util::warning("DspHost::update: Crossfeed custom fcut unset, using defaults");
+            util::warning("Crossfeed custom fcut unset, using defaults");
             fcut = 650;
         }
         if(!feedExists)
         {
-            util::warning("DspHost::update: Crossfeed custom feed unset, using defaults");
+            util::warning("Crossfeed custom feed unset, using defaults");
             feed = 95;
         }
 
@@ -462,7 +462,7 @@ void DspHost::updateFromCache()
 
 bool DspHost::update(DspConfig *config, bool ignoreCache)
 {
-    util::debug("DspHost::update called");
+    util::debug("Config update started");
 
     QMetaEnum e = QMetaEnum::fromType<DspConfig::Key>();
 
@@ -495,7 +495,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
 
         QString serialization;
         QDebug(&serialization) << current;
-        Log::debug("DspHost::update: Property changed: " + QVariant::fromValue(key).toString() + " -> " + serialization);
+        Log::debug("Property changed: " + QVariant::fromValue(key).toString() + " -> " + serialization);
 
         switch(key)
         {
@@ -664,13 +664,13 @@ void DspHost::reloadLiveprog(DspConfig* config)
 
     if(!enableExists)
     {
-        util::warning("DspHost::refreshLiveprog: Liveprog enable switch unset. Disabling liveprog.");
+        util::warning("Liveprog enable switch unset. Disabling liveprog.");
         enabled = false;
     }
 
     if(!propExists)
     {
-        util::warning("DspHost::refreshLiveprog: liveprog_file property not found in cache. Disabling liveprog.");
+        util::warning("liveprog_file property not found in cache. Disabling liveprog.");
         enabled = false;
     }
 
@@ -680,13 +680,13 @@ void DspHost::reloadLiveprog(DspConfig* config)
     QFile f(file);
     if(!f.exists())
     {
-        util::warning("DspHost::refreshLiveprog: Referenced file does not exist anymore. Disabling liveprog.");
+        util::warning("Referenced file does not exist anymore. Disabling liveprog.");
         enabled = false;
     }
 
     if (!f.open(QFile::ReadOnly | QFile::Text))
     {
-        util::error("DspHost::refreshLiveprog: Cannot open file path. Disabling liveprog.");
+        util::error("Cannot open file path. Disabling liveprog.");
         enabled = false;
     }
     QTextStream in(&f);
@@ -707,11 +707,11 @@ void DspHost::reloadLiveprog(DspConfig* config)
     const char* errorString = NSEEL_code_getcodeerror(cast(this->_dsp)->eel.vm);
     if(errorString != NULL)
     {
-        util::warning("DspHost::refreshLiveprog: NSEEL_code_getcodeerror: Syntax error in script file, cannot load. Reason: " + std::string(errorString));
+        util::warning("Syntax error in script file, cannot load. Reason: " + std::string(errorString));
     }
     if(ret <= 0)
     {
-        util::warning("DspHost::refreshLiveprog: " + std::string(checkErrorCode(ret)));
+        util::warning("" + std::string(checkErrorCode(ret)));
     }
 
     QList<QString> resultArgs;
@@ -772,7 +772,7 @@ bool DspHost::manipulateEelVariable(const char* name, float value)
             char *validString = (char*)GetStringForIndex(ctx->m_string_context, ctx->varTable_Values[i][j], 0);
             if(validString)
             {
-                Log::error(QString("DspHost::manipulateEelVariable: variable '%1' is a string; currently only numerical variables can be manipulated").arg(name));
+                Log::error(QString("variable '%1' is a string; currently only numerical variables can be manipulated").arg(name));
                 return false;
             }
 
@@ -781,14 +781,14 @@ bool DspHost::manipulateEelVariable(const char* name, float value)
         }
     }
 
-    Log::error(QString("DspHost::manipulateEelVariable: variable '%1' not found").arg(name));
+    Log::error(QString("variable '%1' not found").arg(name));
     return false;
 }
 
 void DspHost::freezeLiveprogExecution(bool freeze)
 {
     cast(this->_dsp)->eel.active = !freeze;
-    Log::debug("DspHost::freezeLiveprogExecution: Liveprog execution has been " + (freeze ? QString("frozen") : "resumed"));
+    Log::debug("Liveprog execution has been " + (freeze ? QString("frozen") : "resumed"));
 }
 
 void DspHost::dispatch(Message msg, std::any value)

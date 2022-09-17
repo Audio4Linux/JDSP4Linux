@@ -21,9 +21,10 @@ private slots:
     void handleSettingsUpdate(const AppConfig::Key&, const QVariant&);
 
 private:
-    void onAppAdded(const uint id, const std::string name, const std::string media_class);
-    void onAppChanged(const uint id);
-    void onAppRemoved(const uint id);
+    // TODO const ref?
+    void onAppAdded(const NodeInfo& serial);
+    void onAppChanged(const NodeInfo& serial);
+    void onAppRemoved(const uint64_t serial);
 
     QList<NodeInfo> apps;
 

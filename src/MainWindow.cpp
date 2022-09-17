@@ -79,8 +79,8 @@ MainWindow::MainWindow(bool     statupInTray,
         Log::information("If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.");
         Log::information("Refer to the README for more detailed information.");
         Log::information("");
-        Log::debug("MainWindow::ctor: Blocklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
-        Log::debug("MainWindow::ctor: Blocklist mode: " + QString((AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ? "allow" : "block")));
+        Log::debug("Blocklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
+        Log::debug("Blocklist mode: " + QString((AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ? "allow" : "block")));
         _audioService = new PipewireAudioService();
 #endif
         connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
@@ -408,7 +408,7 @@ MainWindow::MainWindow(bool     statupInTray,
         }
     }
 
-    Log::information("MainWindow::ctor: UI initialized");
+    Log::information("UI initialized");
 }
 
 MainWindow::~MainWindow()

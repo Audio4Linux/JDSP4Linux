@@ -12,8 +12,6 @@
 
 #include <config/AppConfig.h>
 
-#define LOGTAG std::string("PipelineManager: ")
-
 static void on_src_pad_added   (GstElement *element,
                                 GstPad     *pad,
                                 gpointer    data);
@@ -28,8 +26,8 @@ void on_message_error([[maybe_unused]] const GstBus* gst_bus, GstMessage* messag
 
     gst_message_parse_error(message, &err, &debug);
 
-    util::critical(LOGTAG + err->message);
-    util::debug(LOGTAG + debug);
+    util::critical(err->message);
+    util::debug(debug);
 
     p->setNullPipeline();
 
@@ -95,7 +93,7 @@ void on_message_state_changed([[maybe_unused]] const GstBus* gst_bus, GstMessage
 
         gst_message_parse_state_changed(message, &old_state, &new_state, &pending);
 
-        util::debug(LOGTAG + gst_element_state_get_name(old_state) + " -> " + gst_element_state_get_name(new_state) +
+        util::debug(std::string(gst_element_state_get_name(old_state)) + " -> " + gst_element_state_get_name(new_state) +
                     " -> " + gst_element_state_get_name(pending));
 
         if (new_state == GST_STATE_PLAYING) {
@@ -116,8 +114,8 @@ void on_message_latency([[maybe_unused]] const GstBus* gst_bus, GstMessage* mess
         g_object_get(p->getSource()->getGstElement(), "latency-time", &latency, nullptr);
         g_object_get(p->getSource()->getGstElement(), "buffer-time", &buffer, nullptr);
 
-        util::debug(LOGTAG + "pulsesrc latency [us]: " + std::to_string(latency));
-        util::debug(LOGTAG + "pulsesrc buffer [us]: " + std::to_string(buffer));
+        util::debug("pulsesrc latency [us]: " + std::to_string(latency));
+        util::debug("pulsesrc buffer [us]: " + std::to_string(buffer));
     } else if (std::strcmp(GST_OBJECT_NAME(message->src), "sink") == 0) {
         int latency;
         int buffer;
@@ -125,8 +123,8 @@ void on_message_latency([[maybe_unused]] const GstBus* gst_bus, GstMessage* mess
         g_object_get(p->getSink()->getGstElement(), "latency-time", &latency, nullptr);
         g_object_get(p->getSink()->getGstElement(), "buffer-time", &buffer, nullptr);
 
-        util::debug(LOGTAG + "pulsesink latency [us]: " + std::to_string(latency));
-        util::debug(LOGTAG + "pulsesink buffer [us]: " + std::to_string(buffer));
+        util::debug("pulsesink latency [us]: " + std::to_string(latency));
+        util::debug("pulsesink buffer [us]: " + std::to_string(buffer));
     }
 
     p->getLatency();
@@ -163,7 +161,7 @@ PulsePipelineManager::PulsePipelineManager()
 {
     /* Initialisation */
     loop     = g_main_loop_new (NULL, FALSE);
-    rtkit    = new RealtimeKit(LOGTAG);
+    rtkit    = new RealtimeKit();
     pm       = new PulseManager();
     dsp      = new JamesDspElement();
 
@@ -228,19 +226,19 @@ PulsePipelineManager::PulsePipelineManager()
 PulsePipelineManager::~PulsePipelineManager(){
     timeout_connection.disconnect();
 
-    g_debug ("Stopping playback");
+    util::debug ("Stopping playback");
     setNullPipeline();
 
-    g_debug ("Deleting pipeline");
+    util::debug ("Deleting pipeline");
     gst_object_unref (GST_OBJECT (pipeline));
 
     gst_object_unref (bus);
     g_main_loop_unref(loop);
 
-    g_debug ("Deleting jamesdsp object");
+    util::debug ("Deleting jamesdsp object");
     delete dsp;
 
-    g_debug ("Deleting pulse manager");
+    util::debug ("Deleting pulse manager");
     delete pm;
 }
 
@@ -293,7 +291,7 @@ void PulsePipelineManager::setNullPipeline() {
         playing = false;
     }
 
-    util::debug(LOGTAG + gst_element_state_get_name(state) + " -> " + gst_element_state_get_name(pending));
+    util::debug(std::string(gst_element_state_get_name(state)) + " -> " + gst_element_state_get_name(pending));
 
 }
 
@@ -320,7 +318,7 @@ void PulsePipelineManager::updatePipelineState() {
             gst_element_get_state(pipeline, &s, &p, state_check_timeout);
 
             if (s == GST_STATE_PLAYING && !appsWantToPlay()) {
-                util::debug(LOGTAG + "No app wants to play audio. We will pause our pipeline.");
+                util::debug("No app wants to play audio. We will pause our pipeline.");
 
                 gst_element_set_state(pipeline, GST_STATE_PAUSED);
             }
@@ -347,6 +345,10 @@ void PulsePipelineManager::setSourceMonitorName(const std::string& name) {
 
     g_object_get(source->getGstElement(), "current-device", &current_device, nullptr);
 
+    if(current_device == NULL) {
+        return;
+    }
+
     if (name != current_device) {
         if (playing) {
             setNullPipeline();
@@ -362,7 +364,7 @@ void PulsePipelineManager::setSourceMonitorName(const std::string& name) {
             g_object_set(source->getGstElement(), "device", name.c_str(), nullptr);
         }
 
-        util::debug(LOGTAG + "using input device: " + name);
+        util::debug("using input device: " + name);
     }
 
     g_free(current_device);
@@ -374,7 +376,7 @@ void PulsePipelineManager::setSourceMonitorName(const std::string& name) {
 void PulsePipelineManager::setOutputSinkName(const std::string& name) {
     g_object_set(sink->getGstElement(), "device", name.c_str(), nullptr);
 
-    util::debug(LOGTAG + "using output device: " + name);
+    util::debug("using output device: " + name);
 }
 
 void PulsePipelineManager::setPulseaudioProps(const std::string& props) {
@@ -400,7 +402,7 @@ void PulsePipelineManager::getLatency() {
 
         int latency = GST_TIME_AS_MSECONDS(min);
 
-        util::debug(LOGTAG + "total latency: " + std::to_string(latency) + " ms");
+        util::debug("total latency: " + std::to_string(latency) + " ms");
 
         Glib::signal_idle().connect_once([=] { new_latency(latency); });
     }
@@ -540,8 +542,7 @@ void PulsePipelineManager::unlink(){
 
         for(auto element : elements){
             if(prev != NULL){
-                g_debug("%sUnlinking previous element '%s' from current element '%s'", LOGTAG.c_str(),
-                        GST_OBJECT_NAME(prev), GST_OBJECT_NAME(element));
+                util::debug("Unlinking previous element '" + std::string(GST_OBJECT_NAME(prev)) + "' from current element '" + GST_OBJECT_NAME(element) + "'");
                 assert(GST_IS_OBJECT(prev));
                 assert(GST_IS_OBJECT(element));
                 gst_pad_push_event(gst_element_get_static_pad(prev, "src"),
@@ -556,8 +557,7 @@ void PulsePipelineManager::unlink(){
     /* remove everything from the bin */
     {
         for(auto element : elements){
-            g_debug("%sRemoving element '%s' from bin", LOGTAG.c_str(),
-                    GST_OBJECT_NAME(element));
+            util::debug("Removing element '" + std::string(GST_OBJECT_NAME(element)) + "' from bin");
             gst_bin_remove(GST_BIN(pipeline), element);
         }
     }
@@ -582,7 +582,7 @@ void PulsePipelineManager::link(){
             auto next    = (i + 1) < elements.size() ? elements.at(i + 1) : NULL;
 
             /* Assert that both elements are a gst-object.
-             * The next element is allowed to be NULL is the end of the pipeline was reached */
+             * The next element is allowed to be NULL if the end of the pipeline was reached */
             assert(GST_IS_OBJECT(element));
             assert(GST_IS_OBJECT(next) || next == NULL);
 
@@ -592,8 +592,7 @@ void PulsePipelineManager::link(){
             /* Check if element requires stream conversion */
             if(next != NULL){
                 if(!GstElementProperties(element).hasCompatibleCapsWith(next)){
-                    g_debug("[%s] Incompatible caps with %s. Inserting 'audioconvert' element...",
-                            GST_OBJECT_NAME(element), GST_OBJECT_NAME(next));
+                    util::debug("[" + std::string(GST_OBJECT_NAME(element)) +  "] Incompatible caps with " + GST_OBJECT_NAME(next) + ". Inserting 'audioconvert' element...");
 
                     GstElement* converter = gst_element_factory_make("audioconvert",
                                                                      (std::string(GST_OBJECT_NAME(element)) + "_audioconvert_" + std::to_string(util::random_number(INT_MAX))).c_str());
@@ -696,15 +695,12 @@ static void on_src_pad_added (GstElement *element,
     /* We can now link this pad with the sink pad */
     sinkpad = gst_element_get_static_pad (nextElement, "sink");
 
-
     assert(G_IS_OBJECT(sinkpad));
 
-    g_debug("%s -> %s: dynamic source pad created (%s -> %s)", GST_OBJECT_NAME(element),GST_OBJECT_NAME(nextElement),
-            GST_OBJECT_NAME(pad), GST_OBJECT_NAME(sinkpad));
-
+    util::debug(std::string(GST_OBJECT_NAME(element)) + " -> " + GST_OBJECT_NAME(nextElement) + ": dynamic source pad created (" + GST_OBJECT_NAME(pad) + " -> " + GST_OBJECT_NAME(sinkpad) + ")");
 
     GstPadLinkReturn result = gst_pad_link (pad, sinkpad);
-    g_debug(" ~~> %s\n", (result == GST_PAD_LINK_OK ? "success" : "failed"));
+    util::debug(" ~~> " + std::string(result == GST_PAD_LINK_OK ? "success" : "failed"));
 
     gst_object_unref (sinkpad);
 }
@@ -724,12 +720,10 @@ static void on_sink_pad_added (GstElement *nextElement,
 
     assert(G_IS_OBJECT(srcpad));
 
-    g_debug("%s -> %s: dynamic source pad created (%s -> %s)", GST_OBJECT_NAME(element),GST_OBJECT_NAME(nextElement),
-            GST_OBJECT_NAME(srcpad), GST_OBJECT_NAME(pad));
-
+    util::debug(std::string(GST_OBJECT_NAME(element)) + " -> " + GST_OBJECT_NAME(nextElement) + ": dynamic sink pad created (" + GST_OBJECT_NAME(pad) + " -> " + GST_OBJECT_NAME(srcpad) + ")");
 
     GstPadLinkReturn result = gst_pad_link (srcpad, pad);
-    g_debug(" ~~> %s\n", (result == GST_PAD_LINK_OK ? "success" : "failed"));
+    util::debug(" ~~> " + std::string(result == GST_PAD_LINK_OK ? "success" : "failed"));
 
     gst_object_unref (srcpad);
 }

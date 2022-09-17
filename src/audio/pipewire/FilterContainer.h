@@ -1,4 +1,11 @@
 /*
+ *  Note: The code in this file was adopted from EasyEffects (https://github.com/wwmm/easyeffects)
+ *  This version includes minor changes that enable compatibility with JamesDSP.
+ *
+ *  The original copyright notice is attached below.
+ */
+
+/*
  *  Copyright © 2017-2022 Wellington Wallace
  *
  *  This file is part of EasyEffects.
@@ -40,8 +47,6 @@ class FilterContainer {
 
   void disconnect_filters();
 
-  const std::string log_tag;
-
   PwPipelineManager* pm = nullptr;
 
   AppConfig* settings;
@@ -57,9 +62,12 @@ class FilterContainer {
 
   void deactivate_filters();
 
-  void on_app_added(const uint id, const std::string name, const std::string media_class);
+  void on_app_added(NodeInfo node_info);
 
   void on_link_changed(LinkInfo link_info);
+
+  auto apps_want_to_play() -> bool;
+
 };
 
 #endif

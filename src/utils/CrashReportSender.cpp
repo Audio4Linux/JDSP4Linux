@@ -25,7 +25,7 @@ QtPromise::QPromise<void> CrashReportSender::upload(const QString &logPath, cons
 
         if(!log.open(QFile::ReadOnly) || !dump.open(QFile::ReadOnly))
         {
-            Log::error("CrashReportSender::upload: Failed to open previous log or/and crash dump");
+            Log::error("Failed to open previous log or/and crash dump");
             reject();
             return;
         }
@@ -60,14 +60,14 @@ QtPromise::QPromise<void> CrashReportSender::upload(const QString &logPath, cons
 
             if (statusCode.toInt() == 200)
             {
-                Log::debug("CrashReportSender::upload: Successfully submitted");
+                Log::debug("Successfully submitted");
             }
             else
             {
                 throw HttpException(statusCode.toInt(), reason.toString());
             }
         }).fail([reject](const HttpException& error) {
-            Log::error("CrashReportSender::upload: Http exception: " + error.reasonPhrase() + " (" + error.statusCode() + ")");
+            Log::error("Http exception: " + error.reasonPhrase() + " (" + error.statusCode() + ")");
             reject();
         }).finally([=]{
             nam->deleteLater();

@@ -11,10 +11,10 @@ PwAppManager::PwAppManager(PwPipelineManager* mgr) : mgr(mgr)
     mgr->stream_output_removed.connect(sigc::mem_fun(*this, &PwAppManager::onAppRemoved));
 }
 
-void PwAppManager::onAppAdded(const uint id, const std::string name, const std::string media_class)
+void PwAppManager::onAppAdded(const NodeInfo& node)
 {
     for (int n = 0; n < apps.length(); n++) {
-        if (apps[n].id == id) {
+        if (apps[n].serial == node.serial) {
             return;
         }
     }
@@ -22,7 +22,7 @@ void PwAppManager::onAppAdded(const uint id, const std::string name, const std::
     NodeInfo node_info;
 
     try {
-        node_info = mgr->node_map.at(id);
+        node_info = mgr->node_map.at(node.serial);
     } catch (...) {
         return;
     }
@@ -31,12 +31,12 @@ void PwAppManager::onAppAdded(const uint id, const std::string name, const std::
     emit appAdded(AppNode(node_info));
 }
 
-void PwAppManager::onAppChanged(const uint id)
+void PwAppManager::onAppChanged(const NodeInfo& node)
 {
     for (int n = 0; n < apps.length(); n++) {
-        if (auto item = apps[n]; item.id == id) {
+        if (auto item = apps[n]; item.serial == node.serial) {
             try {
-                item = mgr->node_map.at(id);
+                item = mgr->node_map.at(node.serial);
             } catch (...) {
                 return;
             }
@@ -47,14 +47,14 @@ void PwAppManager::onAppChanged(const uint id)
     }
 }
 
-void PwAppManager::onAppRemoved(const uint id)
+void PwAppManager::onAppRemoved(const uint64_t serial)
 {
     for (int n = 0; n < apps.length(); n++)
     {
-        if (apps[n].id == id)
+        if (apps[n].serial == serial)
         {
             apps.removeAt(n);
-            emit appRemoved(id);
+            emit appRemoved(serial);
             break;
         }
     }
@@ -83,11 +83,13 @@ void PwAppManager::handleSettingsUpdate(const AppConfig::Key& key, const QVarian
 
             if (is_blocklisted && app_is_enabled)
             {
-                mgr->disconnect_stream_output(node.id, node.media_class);
+                mgr->disconnect_stream(node.id);
             }
             else if (!app_is_enabled)
             {
-                mgr->connect_stream_output(node.id, node.media_class);
+                if (node.media_class == tags::pipewire::media_class::output_stream) {
+                  mgr->connect_stream_output(node.id);
+                }
             }
         }
         break;

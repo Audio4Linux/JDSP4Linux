@@ -1,6 +1,7 @@
 #include "GzipDownloader.h"
 
 #include "Untar.h"
+#include "ExtractionThread.h"
 
 bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
 {
@@ -70,34 +71,22 @@ void GzipDownloader::onArchiveReady()
 
         emit decompressionStarted();
 
-        auto promise = QtPromise::resolve(QtConcurrent::run([this]()
-        {
-            QDir(extractionPath).mkpath(extractionPath.path());
-
-            QString errorMsg;
-            int ret = Untar::extract(downloadedFile.fileName(), extractionPath.path(), errorMsg);
-            downloadedFile.remove();
-
-            if(ret > 0)
-            {
-                return errorMsg;
-            }
-
-            return QString("");
-
-        })).then([this](const QString& msg)
-        {
-            if(msg.isEmpty())
-            {
-                emit success();
-            }
-            else
-            {
-                emit errorOccurred(msg);
-            }
-            cleanup();
-        });
+        extractThread = new ExtractionThread(extractionPath.path(), downloadedFile.fileName(), this);
+        connect(extractThread, &ExtractionThread::onFinished, this, &GzipDownloader::onArchiveExtracted);
     }
+}
+
+void GzipDownloader::onArchiveExtracted(const QString &errorString)
+{
+    if(errorString.isEmpty())
+    {
+        emit success();
+    }
+    else
+    {
+        emit errorOccurred(errorString);
+    }
+    cleanup();
 }
 
 void GzipDownloader::onErrorOccurred(QNetworkReply::NetworkError ex)
@@ -114,7 +103,15 @@ void GzipDownloader::cleanup()
     {
         networkReply->abort();
         networkReply->deleteLater();
+        networkReply = nullptr;
     }
     downloadedFile.close();
     downloadedFile.remove();
+
+    if(extractThread) {
+        disconnect(extractThread, &ExtractionThread::onFinished, this, &GzipDownloader::onArchiveExtracted);
+        extractThread->requestInterruption();
+        extractThread->deleteLater();
+        extractThread = nullptr;
+    }
 }

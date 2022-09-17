@@ -10,7 +10,7 @@
 
 class RealtimeKit {
  public:
-  RealtimeKit(const std::string& tag);
+  RealtimeKit();
 
   void set_priority(const std::string& source_name, const int& priority);
   void set_nice(const std::string& source_name, const int& nice_value);
@@ -22,8 +22,6 @@ class RealtimeKit {
   };
 
  private:
-  std::string log_tag;
-
   Glib::RefPtr<Gio::DBus::Proxy> proxy;
   Glib::RefPtr<Gio::DBus::Proxy> properties_proxy;
 

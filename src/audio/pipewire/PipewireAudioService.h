@@ -34,8 +34,6 @@ public slots:
     DspStatus status() override;
 
 private:
-    const std::string log_tag = "PipewireAudioService: ";
-
     std::unique_ptr<PwPipelineManager> mgr;
     std::unique_ptr<PwAppManager> appMgr;
     std::unique_ptr<FilterContainer> effects;

@@ -13,6 +13,7 @@ HEADERS += \
     $$PWD/AeqPreviewPlot.h \
     $$PWD/AeqSelector.h \
     $$PWD/AeqStructs.h \
+    $$PWD/ExtractionThread.h \
     $$PWD/GzipDownloader.h \
     $$PWD/GzipDownloaderDialog.h \
     $$PWD/HttpException.h \

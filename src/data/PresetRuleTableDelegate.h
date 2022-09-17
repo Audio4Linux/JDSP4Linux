@@ -44,7 +44,7 @@ public:
     {
         if(!_ruleModel)
         {
-            Log::error("PresetRuleTableDelegate::setEditorData: Rule model not attached");
+            Log::error("Rule model not attached");
             return;
         }
 

@@ -12,6 +12,8 @@ struct NodeInfo {
 
   uint device_id = SPA_ID_INVALID;
 
+  uint64_t serial = SPA_ID_INVALID;
+
   std::string name;
 
   std::string description;
@@ -28,19 +30,23 @@ struct NodeInfo {
 
   std::string format;
 
+  std::string application_id;
+
   int priority = -1;
 
-  pw_node_state state;
+  pw_node_state state = PW_NODE_STATE_IDLE;
 
   bool mute = false;
+
+  bool connected = false;
 
   int n_input_ports = 0;
 
   int n_output_ports = 0;
 
-  uint rate = 0U;
+  int rate = 1;  // used as divisor to calculate latency, so do not initialize it as 0
 
-  int n_volume_channels = 0;
+  uint n_volume_channels = 0U;
 
   float latency = 0.0F;
 
@@ -60,9 +66,11 @@ struct LinkInfo {
 
   uint output_port_id = 0U;
 
+  uint64_t serial = SPA_ID_INVALID;
+
   bool passive = false;  // does not cause the graph to be runnable
 
-  pw_link_state state;
+  pw_link_state state = PW_LINK_STATE_UNLINKED;
 };
 
 struct PortInfo {
@@ -87,10 +95,14 @@ struct PortInfo {
   uint node_id = 0U;
 
   uint port_id = 0U;
+
+  uint64_t serial = SPA_ID_INVALID;
 };
 
 struct ModuleInfo {
   uint id;
+
+  uint64_t serial = SPA_ID_INVALID;
 
   std::string name;
 
@@ -102,6 +114,8 @@ struct ModuleInfo {
 struct ClientInfo {
   uint id;
 
+  uint64_t serial = SPA_ID_INVALID;
+
   std::string name;
 
   std::string access;
@@ -111,6 +125,8 @@ struct ClientInfo {
 
 struct DeviceInfo {
   uint id;
+
+  uint64_t serial = SPA_ID_INVALID;
 
   std::string name;
 
@@ -125,6 +141,10 @@ struct DeviceInfo {
   std::string input_route_name;
 
   std::string output_route_name;
+
+  std::string bus_id;
+
+  std::string bus_path;
 
   spa_param_availability input_route_available;
 

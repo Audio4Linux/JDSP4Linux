@@ -105,7 +105,7 @@ PwPluginBase::PwPluginBase(std::string tag,
   auto* props_in_left = pw_properties_new(nullptr, nullptr);
 
   pw_properties_set(props_in_left, PW_KEY_FORMAT_DSP, "32 bit float mono audio");
-  pw_properties_set(props_in_left, PW_KEY_PORT_NAME, "input_fl");
+  pw_properties_set(props_in_left, PW_KEY_PORT_NAME, "input_FL");
   pw_properties_set(props_in_left, "audio.channel", "FL");
 
   pf_data.in_left = static_cast<port*>(pw_filter_add_port(filter, PW_DIRECTION_INPUT, PW_FILTER_PORT_FLAG_MAP_BUFFERS,
@@ -116,7 +116,7 @@ PwPluginBase::PwPluginBase(std::string tag,
   auto* props_in_right = pw_properties_new(nullptr, nullptr);
 
   pw_properties_set(props_in_right, PW_KEY_FORMAT_DSP, "32 bit float mono audio");
-  pw_properties_set(props_in_right, PW_KEY_PORT_NAME, "input_fr");
+  pw_properties_set(props_in_right, PW_KEY_PORT_NAME, "input_FR");
   pw_properties_set(props_in_right, "audio.channel", "FR");
 
   pf_data.in_right = static_cast<port*>(pw_filter_add_port(filter, PW_DIRECTION_INPUT, PW_FILTER_PORT_FLAG_MAP_BUFFERS,
@@ -127,7 +127,7 @@ PwPluginBase::PwPluginBase(std::string tag,
   auto* props_out_left = pw_properties_new(nullptr, nullptr);
 
   pw_properties_set(props_out_left, PW_KEY_FORMAT_DSP, "32 bit float mono audio");
-  pw_properties_set(props_out_left, PW_KEY_PORT_NAME, "output_fl");
+  pw_properties_set(props_out_left, PW_KEY_PORT_NAME, "output_FL");
   pw_properties_set(props_out_left, "audio.channel", "FL");
 
   pf_data.out_left = static_cast<port*>(pw_filter_add_port(filter, PW_DIRECTION_OUTPUT, PW_FILTER_PORT_FLAG_MAP_BUFFERS,
@@ -138,7 +138,7 @@ PwPluginBase::PwPluginBase(std::string tag,
   auto* props_out_right = pw_properties_new(nullptr, nullptr);
 
   pw_properties_set(props_out_right, PW_KEY_FORMAT_DSP, "32 bit float mono audio");
-  pw_properties_set(props_out_right, PW_KEY_PORT_NAME, "output_fr");
+  pw_properties_set(props_out_right, PW_KEY_PORT_NAME, "output_FR");
   pw_properties_set(props_out_right, "audio.channel", "FR");
 
   pf_data.out_right = static_cast<port*>(pw_filter_add_port(
@@ -146,11 +146,12 @@ PwPluginBase::PwPluginBase(std::string tag,
 
   if (enable_probe) {
     // probe left input
+    n_ports += 2;
 
     auto* props_left = pw_properties_new(nullptr, nullptr);
 
     pw_properties_set(props_left, PW_KEY_FORMAT_DSP, "32 bit float mono audio");
-    pw_properties_set(props_left, PW_KEY_PORT_NAME, "probe_fl");
+    pw_properties_set(props_left, PW_KEY_PORT_NAME, "probe_FL");
     pw_properties_set(props_left, "audio.channel", "PROBE_FL");
 
     pf_data.probe_left = static_cast<port*>(pw_filter_add_port(
@@ -161,7 +162,7 @@ PwPluginBase::PwPluginBase(std::string tag,
     auto* props_right = pw_properties_new(nullptr, nullptr);
 
     pw_properties_set(props_right, PW_KEY_FORMAT_DSP, "32 bit float mono audio");
-    pw_properties_set(props_right, PW_KEY_PORT_NAME, "probe_fr");
+    pw_properties_set(props_right, PW_KEY_PORT_NAME, "probe_FR");
     pw_properties_set(props_right, "audio.channel", "PROBE_FR");
 
     pf_data.probe_right = static_cast<port*>(pw_filter_add_port(
@@ -172,39 +173,67 @@ PwPluginBase::PwPluginBase(std::string tag,
 }
 
 PwPluginBase::~PwPluginBase() {
+    post_messages = false;
+
   if (listener.link.next != nullptr || listener.link.prev != nullptr) {
     spa_hook_remove(&listener);
   }
+
+  pw_filter_destroy(filter);
+}
+
+void PwPluginBase::set_post_messages(const bool& state) {
+  post_messages = state;
 }
 
 auto PwPluginBase::connect_to_pw() -> bool {
-  auto success = false;
+    connected_to_pw = false;
 
-  pm->lock();
+    /*
+      I still do not understand why we have to lock the main loop before using pw_filter_get_state after a call to
+      pw_filter_connect...
+    */
 
-  if (pw_filter_connect(filter, PW_FILTER_FLAG_RT_PROCESS, nullptr, 0) == 0) {
-    connected_to_pw = true;
-  }
+    pm->lock();
 
-  pm->sync_wait_unlock();
+    if (pw_filter_connect(filter, PW_FILTER_FLAG_RT_PROCESS, nullptr, 0) == 0) {
+      pm->sync_wait_unlock();
 
-  if (connected_to_pw) {
-    do {
+      while (pw_filter_get_state(filter, nullptr) != PW_FILTER_STATE_PAUSED) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+      }
+
       node_id = pw_filter_get_node_id(filter);
 
-      std::this_thread::sleep_for(std::chrono::milliseconds(1));
-    } while (node_id == SPA_ID_INVALID);
+      while (node_id == SPA_ID_INVALID) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-    initialize_listener();
+        node_id = pw_filter_get_node_id(filter);
+      }
 
-    success = true;
+      /*
+        The filter we link in our pipeline have at least 4 ports. Some have six. Before we try to link filters we have to
+        wait until the information about their ports is available in PipeManager's list_ports vector.
+      */
 
-    util::debug(log_tag + name + " successfully connected to pipewire graph");
-  } else {
-    util::error(log_tag + name + " can not connect the filter to pipewire!");
-  }
+      while (pm->count_node_ports(node_id) != n_ports) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+      }
 
-  return success;
+      initialize_listener();
+
+      connected_to_pw = true;
+
+      util::debug(log_tag + name + " successfully connected to PipeWire graph");
+
+      return true;
+    }
+
+    pm->unlock();
+
+    util::warning(log_tag + name + " cannot connect the filter to PipeWire!");
+
+    return false;
 }
 
 void PwPluginBase::initialize_listener() {
@@ -224,9 +253,17 @@ void PwPluginBase::disconnect_from_pw() {
 
   set_active(false);
 
+  if (listener.link.next != nullptr || listener.link.prev != nullptr) {
+    spa_hook_remove(&listener);
+  }
+
   pw_filter_disconnect(filter);
 
+  connected_to_pw = false;
+
   pm->sync_wait_unlock();
+
+  node_id = SPA_ID_INVALID;
 }
 
 void PwPluginBase::setup() {}

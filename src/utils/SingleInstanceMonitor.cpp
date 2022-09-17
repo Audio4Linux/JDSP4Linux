@@ -23,24 +23,24 @@ bool SingleInstanceMonitor::isServiceReady()
 {
     if (_registered)
     {
-        Log::information("SingleInstanceMonitor::isServiceReady: Service registration successful");
+        Log::information("Service registration successful");
         return true;
     }
     else
     {
-        Log::warning("SingleInstanceMonitor::isServiceReady: Service registration failed. Name already aquired by other instance");
+        Log::warning("Service registration failed. Name already aquired by other instance");
         return false;
     }
 }
 
 bool SingleInstanceMonitor::handover()
 {
-    Log::information("SingleInstanceMonitor::handover: Attempting to switch to this instance...");
+    Log::information("Attempting to switch to this instance...");
     auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("me.timschneeberger.jdsp4linux.Gui", "/Gui",
                                                           QDBusConnection::sessionBus(), this);
     if (!m_dbInterface->isValid())
     {
-        Log::error("SingleInstanceMonitor::handover: Unable to connect to other DBus instance. Continuing anyway...");
+        Log::error("Unable to connect to other DBus instance. Continuing anyway...");
     }
     else
     {
@@ -48,11 +48,13 @@ bool SingleInstanceMonitor::handover()
 
         if (msg.isError() || msg.isValid())
         {
-            Log::error("SingleInstanceMonitor::handover: Other instance returned (invalid) error message. Continuing anyway...");
+            Log::error("Other instance returned (invalid) error message. Continuing anyway...");
         }
         else
         {
-            Log::information("SingleInstanceMonitor::handover: Success! Waiting for event loop to exit...");
+            Log::information("Success! Waiting for event loop to exit...");
+            Log::console("\nAnother instance of JamesDSP is already active and has been put in the foreground.", true);
+
             QTimer::singleShot(0, qApp, &QCoreApplication::quit);
             return true;
         }

@@ -5,8 +5,7 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 
-RealtimeKit::RealtimeKit(const std::string& tag) {
-  log_tag = tag + "rtkit: ";
+RealtimeKit::RealtimeKit() {
 
   try {
     proxy = Gio::DBus::Proxy::create_for_bus_sync(Gio::DBus::BusType::BUS_TYPE_SYSTEM, RTKIT_SERVICE_NAME,
@@ -15,7 +14,7 @@ RealtimeKit::RealtimeKit(const std::string& tag) {
     properties_proxy = Gio::DBus::Proxy::create_for_bus_sync(Gio::DBus::BusType::BUS_TYPE_SYSTEM, RTKIT_SERVICE_NAME,
                                                              RTKIT_OBJECT_PATH, "org.freedesktop.DBus.Properties");
   } catch (const Glib::Error& err) {
-    util::warning(log_tag + "Failed to connect to system bus: " + err.what().c_str());
+    util::warning("Failed to connect to system bus: " + err.what());
   }
 }
 
@@ -45,13 +44,13 @@ auto RealtimeKit::get_int_property(const char* propname) -> long long {
       } else if (child.get_type_string() == "x") {
         propval = *(const gint64*)Glib::VariantBase::cast_dynamic<Glib::Variant<gint64>>(child).get_data();
       } else {
-        util::warning(log_tag + " Expected value of type i or x but received " + child.get_type_string());
+        util::warning(" Expected value of type i or x but received " + child.get_type_string());
       }
     } else {
-      util::warning(log_tag + " Expected value of type (v) but received " + reply_body.get_type_string());
+      util::warning(" Expected value of type (v) but received " + reply_body.get_type_string());
     }
   } catch (const Glib::Error& err) {
-    util::warning(log_tag + err.what().c_str());
+    util::warning(err.what().c_str());
   }
 
   return propval;
@@ -70,9 +69,9 @@ void RealtimeKit::make_realtime(const std::string& source_name, const int& prior
   try {
     proxy->call_sync("MakeThreadRealtime", args);
 
-    util::debug(log_tag + "changed " + source_name + " thread real-time priority value to " + std::to_string(priority));
+    util::debug("changed " + source_name + " thread real-time priority value to " + std::to_string(priority));
   } catch (const Glib::Error& err) {
-    util::warning(log_tag + "MakeThreadRealtime: " + err.what().c_str());
+    util::warning("MakeThreadRealtime: " + err.what());
   }
 
 #endif
@@ -91,9 +90,9 @@ void RealtimeKit::make_high_priority(const std::string& source_name, const int& 
   try {
     proxy->call_sync("MakeThreadHighPriority", args);
 
-    util::debug(log_tag + "changed " + source_name + " thread nice value to " + std::to_string(nice_value));
+    util::debug("changed " + source_name + " thread nice value to " + std::to_string(nice_value));
   } catch (const Glib::Error& err) {
-    util::warning(log_tag + "MakeThreadHighPriority: " + err.what().c_str());
+    util::warning("MakeThreadHighPriority: " + err.what());
   }
 
 #endif
@@ -123,10 +122,10 @@ void RealtimeKit::set_priority(const std::string& source_name, const int& priori
     rl.rlim_cur = rl.rlim_max = rttime;
 
     if (setrlimit(RLIMIT_RTTIME, &rl) < 0) {
-      util::warning(log_tag + "failed to set rlimit value for the " + source_name + " thread");
+      util::warning("failed to set rlimit value for the " + source_name + " thread");
     }
   } else {
-    util::warning(log_tag + "failed to get rlimit value for the " + source_name + " thread");
+    util::warning("failed to get rlimit value for the " + source_name + " thread");
   }
 
 #endif

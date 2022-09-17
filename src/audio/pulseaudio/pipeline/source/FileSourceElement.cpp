@@ -1,4 +1,5 @@
 #include "FileSourceElement.h"
+#include "Utils.h"
 
 FileSourceElement::FileSourceElement(std::string _path)
 {
@@ -6,6 +7,16 @@ FileSourceElement::FileSourceElement(std::string _path)
 
     source  = gst_element_factory_make ("filesrc",      "filesrc");
     decoder = gst_element_factory_make ("decodebin",    "decodebin");
+
+    if(source == NULL) {
+        util::critical("'filesrc' gstreamer plugin not installed");
+        exit(1);
+    }
+
+    if(decoder == NULL) {
+        util::critical("'decodebin' gstreamer plugin not installed");
+        exit(1);
+    }
 
     /* set the input filename to the source element */
     g_object_set (G_OBJECT (source), "location", path.c_str(), NULL);

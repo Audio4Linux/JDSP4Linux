@@ -37,7 +37,7 @@ bool PresetManager::loadFromPath(const QString &filename)
     }
 
     QFile::copy(src, dest);
-    Log::debug("PresetManager::load: Loading from " + filename);
+    Log::debug("Loading from " + filename);
     DspConfig::instance().load();
     return true;
 }
@@ -86,7 +86,7 @@ void PresetManager::saveToPath(const QString &filename)
     }
 
     QFile::copy(src, dest);
-    Log::debug("PresetManager::save: Saving to " + filename);
+    Log::debug("Saving to " + filename);
     this->_presetModel->rescan();
 }
 

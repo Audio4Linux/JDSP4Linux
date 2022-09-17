@@ -2,10 +2,14 @@
 #define PWPIPELINEMANAGER_H
 
 /*
- *  NOTE: This C++ class is based on code from the EasyEffects/PulseEffects project
- *        and has been adapted to work with JDSP. The original copyright text is attached below:
+ *  Note: The code in this file was adopted from EasyEffects (https://github.com/wwmm/easyeffects)
+ *  This version includes minor changes that enable compatibility with JamesDSP.
  *
- *  Copyright © 2017-2022 Wellington Wallace
+ *  The original copyright notice is attached below.
+ */
+
+/*
+ *  Copyright © 2017-2023 Wellington Wallace
  *
  *  This file is part of EasyEffects.
  *
@@ -31,11 +35,16 @@
 #include <spa/param/props.h>
 #include <spa/utils/json.h>
 #include <spa/utils/result.h>
+#include <spa/param/audio/type-info.h>
+#include <spa/monitor/device.h>
+#include <spa/utils/keys.h>
 #include <algorithm>
 #include <array>
 #include <memory>
 #include <string>
 #include <map>
+#include <span>
+#include <ranges>
 
 #include "PwDataTypes.h"
 
@@ -48,16 +57,18 @@ class PwPipelineManager {
   auto operator=(const PwPipelineManager&&) -> PwPipelineManager& = delete;
   ~PwPipelineManager();
 
-  const std::string log_tag = "PwPipelineManager: ";
-
   pw_thread_loop* thread_loop = nullptr;
   pw_core* core = nullptr;
   pw_registry* registry = nullptr;
   pw_metadata* metadata = nullptr;
 
+  inline static bool exiting = false;
+
+  inline static bool exclude_monitor_stream = true;
+
   spa_hook metadata_listener{};
 
-  std::map<uint, NodeInfo> node_map;
+  std::map<uint64_t, NodeInfo> node_map;
 
   std::vector<LinkInfo> list_links;
 
@@ -69,48 +80,60 @@ class PwPipelineManager {
 
   std::vector<DeviceInfo> list_devices;
 
-  NodeInfo pe_sink_node;
+  std::string default_output_device_name, default_input_device_name;
 
-  NodeInfo default_output_device, default_input_device;
-
+  NodeInfo ee_sink_node, ee_source_node;
   NodeInfo output_device, input_device;
 
-  std::array<std::string, 21> blocklist_node_name = {"EasyEffects",
-                                                     "easyeffects",
-                                                     "easyeffects_soe",
-                                                     "easyeffects_sie",
-                                                     "EasyEffectsWebrtcProbe",
-                                                     "pavucontrol",
-                                                     "PulseAudio Volume Control",
-                                                     "libcanberra",
-                                                     "gsd-media-keys",
-                                                     "GNOME Shell",
-                                                     "speech-dispatcher",
-                                                     "speech-dispatcher-dummy",
-                                                     "Mutter",
-                                                     "gameoverlayui",
-                                                     "JamesDSP",
-                                                     "jamesdsp",
-                                                     "GstEffectManager",
-                                                     "jdsp-gui",
-                                                     "PulseEffectsWebrtcProbe",
-                                                     "Screenshot",
-                                                     "gst-launch-1.0"};
+  constexpr static auto blocklist_node_name =   {"Easy Effects",
+                                                 "EasyEffects",
+                                                 "easyeffects",
+                                                 "easyeffects_soe",
+                                                 "easyeffects_sie",
+                                                 "EasyEffectsWebrtcProbe",
+                                                 "pavucontrol",
+                                                 "PulseAudio Volume Control",
+                                                 "libcanberra",
+                                                 "gsd-media-keys",
+                                                 "GNOME Shell",
+                                                 "speech-dispatcher-espeak-ng",
+                                                 "speech-dispatcher",
+                                                 "speech-dispatcher-dummy",
+                                                 "Mutter",
+                                                 "gameoverlayui",
+                                                 "JamesDSP",
+                                                 "jamesdsp",
+                                                 "GstEffectManager",
+                                                 "jdsp-gui",
+                                                 "PulseEffectsWebrtcProbe",
+                                                 "Screenshot",
+                                                 "gst-launch-1.0"};
 
-  std::array<std::string, 2> blocklist_media_role = {"event", "Notification"};
+  std::array<std::string, 2U> blocklist_app_id = {"org.PulseAudio.pavucontrol", "org.gnome.VolumeControl"}; // <- TODO double-check
 
-  std::string header_version, library_version, core_name, default_clock_rate, default_min_quantum, default_max_quantum,
-      default_quantum;
+  std::array<std::string, 2U> blocklist_media_role = {"event", "Notification"};
+
+  std::string header_version, library_version, core_name;
+  std::string default_clock_rate = "0";
+  std::string default_min_quantum = "0";
+  std::string default_max_quantum = "0";
+  std::string default_quantum = "0";
+
+  auto node_map_at_id(const uint& id) -> NodeInfo&;
 
   auto stream_is_connected(const uint& id, const std::string& media_class) -> bool;
 
-  void connect_stream_output(const uint& id, const std::string& media_class) const;
+  void connect_stream_output(const uint& id) const;
 
-  void disconnect_stream_output(const uint& id, const std::string& media_class) const;
+  void connect_stream_input(const uint& id) const;
 
-  static void set_node_volume(pw_proxy* proxy, const int& n_vol_ch, const float& value);
+  void disconnect_stream(const uint& id) const;
+
+  static void set_node_volume(pw_proxy* proxy, const uint& n_vol_ch, const float& value);
 
   static void set_node_mute(pw_proxy* proxy, const bool& state);
+
+  auto count_node_ports(const uint& node_id) -> uint;
 
   /*
     Links the output ports of the node output_node_id to the input ports of the node input_node_id
@@ -137,37 +160,68 @@ class PwPipelineManager {
 
   static auto json_object_find(const char* obj, const char* key, char* value, const size_t& len) -> int;
 
-  sigc::signal<void(const uint, const std::string, const std::string)> stream_output_added;
-  sigc::signal<void(const uint, const std::string, const std::string)> stream_input_added;
-  sigc::signal<void(const uint)> stream_output_changed;
-  sigc::signal<void(const uint)> stream_input_changed;
-  sigc::signal<void(const uint)> stream_output_removed;
-  sigc::signal<void(const uint)> stream_input_removed;
+  sigc::signal<void(const NodeInfo)> stream_output_added;
+  sigc::signal<void(const NodeInfo)> stream_input_added;
+  sigc::signal<void(const NodeInfo)> stream_output_changed;
+  sigc::signal<void(const NodeInfo)> stream_input_changed;
+  sigc::signal<void(const uint64_t)> stream_output_removed;
+  sigc::signal<void(const uint64_t)> stream_input_removed;
 
   /*
     Do not pass NodeInfo by reference. Sometimes it dies before we use it and a segmentation fault happens.
   */
 
-  sigc::signal<void(NodeInfo)> source_added;
-  sigc::signal<void(NodeInfo)> source_changed;
-  sigc::signal<void(NodeInfo)> source_removed;
-  sigc::signal<void(NodeInfo)> sink_added;
-  sigc::signal<void(NodeInfo)> sink_changed;
-  sigc::signal<void(NodeInfo)> sink_removed;
-  sigc::signal<void(NodeInfo)> new_default_sink;
-  sigc::signal<void(NodeInfo)> new_default_source;
-  sigc::signal<void(DeviceInfo)> device_input_route_changed;
-  sigc::signal<void(DeviceInfo)> device_output_route_changed;
+  sigc::signal<void(const NodeInfo)> source_added;
+  sigc::signal<void(const NodeInfo)> source_changed;
+  sigc::signal<void(const NodeInfo)> source_removed;
+  sigc::signal<void(const NodeInfo)> sink_added;
+  sigc::signal<void(const NodeInfo)> sink_changed;
+  sigc::signal<void(const NodeInfo)> sink_removed;
+  sigc::signal<void(const std::string)> new_default_sink_name;
+  sigc::signal<void(const std::string)> new_default_source_name;
+  sigc::signal<void(const DeviceInfo)> device_input_route_changed;
+  sigc::signal<void(const DeviceInfo)> device_output_route_changed;
 
-  sigc::signal<void(LinkInfo)> link_changed;
+  sigc::signal<void(const LinkInfo)> link_changed;
 
  private:
-  bool context_ready = false;
-
   pw_context* context = nullptr;
   pw_proxy *proxy_stream_output_sink = nullptr, *proxy_stream_input_source = nullptr;
 
   spa_hook core_listener{}, registry_listener{};
+
+  void set_metadata_target_node(const uint& origin_id, const uint& target_id, const uint64_t& target_serial) const;
+
 };
 
+namespace tags::pipewire {
+
+inline constexpr auto ee_source_name = "jamesdsp_source";
+
+inline constexpr auto ee_sink_name = "jamesdsp_sink";
+
+}  // namespace tags::pipewire
+
+namespace tags::pipewire::media_class {
+
+inline constexpr auto device = "Audio/Device";
+
+inline constexpr auto sink = "Audio/Sink";
+
+inline constexpr auto source = "Audio/Source";
+
+inline constexpr auto virtual_source = "Audio/Source/Virtual";
+
+inline constexpr auto input_stream = "Stream/Input/Audio";
+
+inline constexpr auto output_stream = "Stream/Output/Audio";
+
+}  // namespace tags::pipewire::media_class
+
+
+namespace tags::app {
+
+inline constexpr auto id = "me.timschneeberger.JDSP4Linux";
+
+}  // namespace tags::app
 #endif

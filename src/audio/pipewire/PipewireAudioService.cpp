@@ -21,17 +21,17 @@ PipewireAudioService::PipewireAudioService()
 
     plugin->setMessageHandler(std::bind(&IAudioService::handleMessage, this, std::placeholders::_1, std::placeholders::_2));
 
-    mgr.get()->new_default_sink.connect([=](NodeInfo node) {
-        util::debug(log_tag + "new default output device: " + node.name);
+    mgr.get()->new_default_sink_name.connect([=](const std::string& name) {
+        util::debug("new default output device: " + name);
 
         if (AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault)) {
             /*
-            Depending on the hardware headphones can cause a node recreation where the id and the name are kept.
-            So we clear the key to force the callbacks to be called
-          */
+             *  Depending on the hardware headphones can cause a node recreation where the id and the name are kept.
+             *  So we clear the key to force the callbacks to be called
+             */
 
             AppConfig::instance().set(AppConfig::AudioOutputDevice, "");
-            AppConfig::instance().set(AppConfig::AudioOutputDevice, QString::fromStdString(node.name));
+            AppConfig::instance().set(AppConfig::AudioOutputDevice, QString::fromStdString(name));
         }
     });
 
@@ -41,25 +41,28 @@ PipewireAudioService::PipewireAudioService()
             return;
         }
 
-        NodeInfo target_node;
-        for (const auto& [ts, node] : mgr.get()->node_map)
-        {
-            target_node = node;
+        util::debug("device "s + device.name + " has changed its output route to: "s + device.output_route_name);
 
-            if (node.device_id == device.id && node.media_class == "Audio/Sink")
-            {
+
+        NodeInfo target_node;
+        for (const auto& [serial, node] : mgr.get()->node_map)
+        {
+            if (node.media_class == tags::pipewire::media_class::sink) {
+              if (util::str_contains(node.name, device.bus_path) || util::str_contains(node.name, device.bus_id)) {
                 target_node = node;
+
                 break;
+              }
             }
         }
 
-        if (target_node.id != SPA_ID_INVALID)
+        if (target_node.serial != SPA_ID_INVALID)
         {
             emit outputDeviceChanged(QString::fromStdString(target_node.description), QString::fromStdString(device.name));
         }
         else
         {
-            util::debug(log_tag + "device_output_route_changed: could not find target node");
+            util::debug("device_output_route_changed: could not find target node");
         }
     });
 
@@ -106,7 +109,7 @@ void PipewireAudioService::onAppConfigUpdated(const AppConfig::Key &key, const Q
         }
         else
         {
-            util::debug(log_tag + "AudioOutputDevice changed: could not find target node");
+            util::debug("AudioOutputDevice changed: could not find target node");
         }
         break;
     }
@@ -121,7 +124,7 @@ void PipewireAudioService::update(DspConfig *config)
 
     if(ptr == nullptr)
     {
-        util::error("PipewireAudioService::update: PwJamesDspPlugin is NULL. Cannot update configuration.");
+        util::error("PwJamesDspPlugin is NULL. Cannot update configuration.");
         return;
     }
 

@@ -35,6 +35,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioOutputDevice, "");
     DEFINE_KEY(AudioAppBlocklist, QStringList());
     DEFINE_KEY(AudioAppBlocklistInvert, false);
+    DEFINE_KEY(AudioInactivityTimeout, 10);
 
     DEFINE_KEY(AeqPlotDarkMode, false);
 
@@ -80,7 +81,7 @@ bool AppConfig::isAppBlocked(const QString &name) const
     bool invert = get<bool>(AppConfig::AudioAppBlocklistInvert);
     bool contains = blocklist.contains(name);
 
-    Log::debug("AppConfig::isAppBlocked(\""+name+"\") -> " + ((invert ? !contains : contains) ? "true" : "false"));
+    Log::debug(name + " is " + ((invert ? !contains : contains) ? "blocked" : "not blocked"));
 
     return invert ? !contains : contains;
 }

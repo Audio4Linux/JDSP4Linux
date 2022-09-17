@@ -58,7 +58,7 @@ int AssetManager::extractGroup(AssetType type, bool allowOverride)
 
     if (i > 0)
     {
-        Log::debug(QString("AssetManager::extractGroup: %1 assets extracted (type %2)").arg(i).arg(type));
+        Log::debug(QString("%1 assets extracted (type %2)").arg(i).arg(type));
     }
 
     return i;

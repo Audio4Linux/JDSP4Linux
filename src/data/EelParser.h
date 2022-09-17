@@ -163,7 +163,7 @@ public:
     {
         if(!hasDefault())
         {
-            Log::warning("EELNumberRangeProperty<T>::getDefault(): no default value set");
+            Log::warning("No default value set");
             return fmin(fmax(minimum, value), maximum);
         }
         return dflt.value();

@@ -31,7 +31,7 @@ PulseAudioService::PulseAudioService()
 
     if(!reg)
     {
-        util::error("gst_plugin_register_static: Unable to register internal JamesDSP plugin from memory. Aborting...");
+        util::error("Unable to register internal JamesDSP plugin from memory. Aborting...");
         abort();
     }
 
@@ -107,7 +107,7 @@ void PulseAudioService::update(DspConfig *config)
 
     if(ptr == nullptr)
     {
-        util::error("PulseAudioService::update: JamesDspElement is NULL. Cannot update configuration.");
+        util::error("JamesDspElement is NULL. Cannot update configuration.");
         return;
     }
 

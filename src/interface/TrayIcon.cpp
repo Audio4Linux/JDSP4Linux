@@ -161,7 +161,7 @@ void TrayIcon::updateTrayMenu(QMenu *menu)
 {
 	if (menu == nullptr)
 	{
-		Log::error("TrayIcon::updateTrayMenu: menu is nullptr");
+        Log::error("Menu is null");
 		return;
 	}
 

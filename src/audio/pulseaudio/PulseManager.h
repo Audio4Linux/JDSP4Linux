@@ -73,8 +73,6 @@ public:
     sigc::signal<void, std::shared_ptr<myClientInfo>> client_info;
 
 private:
-    std::string log_tag = "pulse_manager: ";
-
     bool context_ready = false;
 
     pa_mainloop_api* main_loop_api = nullptr;

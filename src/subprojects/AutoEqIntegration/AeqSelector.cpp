@@ -13,7 +13,6 @@
 #include <QMessageBox>
 #include <QBitmap>
 #include <QSortFilterProxyModel>
-#include <QtConcurrent/QtConcurrent>
 
 AeqSelector::AeqSelector(QWidget *parent) :
 	QDialog(parent),

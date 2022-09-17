@@ -90,6 +90,10 @@ int main(int   argc,
     parser.addOption(minst);
     QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
     parser.addOption(spinlck);
+    QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
+    parser.addOption(silent);
+    QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
+    parser.addOption(nocolor);
     parser.process(app);
 
 #ifndef NO_CRASH_HANDLER
@@ -104,6 +108,9 @@ int main(int   argc,
     }
 
     // Prepare logger
+    Log::instance().setSilent(parser.isSet(silent));
+    Log::instance().setColoredOutput(!parser.isSet(nocolor));
+
     Log::clear();
     Log::information("Application version: " + QString(APP_VERSION_FULL));
     Log::information("Qt library version: " + QString(qVersion()));

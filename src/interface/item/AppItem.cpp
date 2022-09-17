@@ -27,7 +27,7 @@ AppItem::AppItem(AppItemModel* _model, int id, QWidget *parent) :
     auto node = model->findByNodeId(id);
     if(!node.has_value())
     {
-        Log::warning("AppItem::ctor: AppItemModel::findByNodeId retuned nullopt");
+        Log::warning("AppItemModel::findByNodeId retuned nullopt");
         return;
     }
 
@@ -57,7 +57,7 @@ void AppItem::onAppConfigUpdated(const AppConfig::Key& key, const QVariant& valu
         auto node = model->findByNodeId(id);
         if(!node.has_value())
         {
-            Log::warning("AppItem::onAppConfigUpdated: AppItemModel::findByNodeId retuned nullopt");
+            Log::warning("AppItemModel::findByNodeId retuned nullopt");
             return;
         }
 
@@ -92,11 +92,11 @@ void AppItem::setBlocked(bool blocked)
     auto node = model->findByNodeId(id);
     if(!node.has_value())
     {
-        Log::error("AppItem::setBlocked: AppItemModel::findByNodeId retuned nullopt");
+        Log::error("AppItemModel::findByNodeId retuned nullopt");
         return;
     }
 
-    Log::debug("AppItem::setBlocked: '" + node.value().name + "' -> " + (blocked ? "true" : "false"));
+    Log::debug(node.value().name + " has been " + (blocked ? "blocked" : "unblocked"));
 
     auto list = AppConfig::instance().get<QStringList>(AppConfig::AudioAppBlocklist);
     if(blocked)
@@ -107,7 +107,7 @@ void AppItem::setBlocked(bool blocked)
         }
         else
         {
-            Log::debug("AppItem::setBlocked: Already in list, ignoring");
+            Log::debug("Already in list, ignoring");
         }
     }
     else if(list.contains(node.value().name))
@@ -116,7 +116,7 @@ void AppItem::setBlocked(bool blocked)
     }
     else
     {
-        Log::debug("AppItem::setBlocked: Not in list, ignoring");
+        Log::debug("Not in list, ignoring");
     }
 
     AppConfig::instance().set(AppConfig::AudioAppBlocklist, list);

@@ -1,7 +1,7 @@
 #include "PwJamesDspPlugin.h"
 
 PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager)
-    : PwPluginBase("PwJamesDspPlugin: ", "JamesDsp", pipe_manager)
+    : PwPluginBase("@PwJamesDspPlugin: ", "JamesDsp", pipe_manager)
 {
     this->dsp = (JamesDSPLib*) malloc(sizeof(JamesDSPLib));
     memset(this->dsp, 0, sizeof(JamesDSPLib));

@@ -28,7 +28,7 @@ PulseManager::PulseManager()
         load_apps_sink();
         subscribe_to_events();
     } else {
-        util::error(log_tag + "context initialization failed");
+        util::error("context initialization failed");
     }
 }
 
@@ -39,20 +39,20 @@ PulseManager::~PulseManager() {
 
     pa_threaded_mainloop_lock(main_loop);
 
-    util::debug(log_tag + "disconnecting Pulseaudio context...");
+    util::debug("disconnecting Pulseaudio context...");
     pa_context_disconnect(context);
 
-    util::debug(log_tag + "Pulseaudio context was disconnected");
+    util::debug("Pulseaudio context was disconnected");
 
-    util::debug(log_tag + "unreferencing Pulseaudio context");
+    util::debug("unreferencing Pulseaudio context");
     pa_context_unref(context);
 
     pa_threaded_mainloop_unlock(main_loop);
 
-    util::debug(log_tag + "stopping pulseaudio threaded main loop");
+    util::debug("stopping pulseaudio threaded main loop");
     pa_threaded_mainloop_stop(main_loop);
 
-    util::debug(log_tag + "freeing Pulseaudio threaded main loop");
+    util::debug("freeing Pulseaudio threaded main loop");
     pa_threaded_mainloop_free(main_loop);
 }
 
@@ -62,32 +62,32 @@ void PulseManager::context_state_cb(pa_context* ctx, void* data) {
     auto state = pa_context_get_state(ctx);
 
     if (state == PA_CONTEXT_UNCONNECTED) {
-        util::debug(pm->log_tag + "context is unconnected");
+        util::debug("context is unconnected");
     } else if (state == PA_CONTEXT_CONNECTING) {
-        util::debug(pm->log_tag + "context is connecting");
+        util::debug("context is connecting");
     } else if (state == PA_CONTEXT_AUTHORIZING) {
-        util::debug(pm->log_tag + "context is authorizing");
+        util::debug("context is authorizing");
     } else if (state == PA_CONTEXT_SETTING_NAME) {
-        util::debug(pm->log_tag + "context is setting name");
+        util::debug("context is setting name");
     } else if (state == PA_CONTEXT_READY) {
-        util::debug(pm->log_tag + "context is ready");
-        util::debug(pm->log_tag + "connected to: " + pa_context_get_server(ctx));
+        util::debug("context is ready");
+        util::debug("connected to: " + std::string(pa_context_get_server(ctx)));
 
         auto protocol = std::to_string(pa_context_get_protocol_version(ctx));
 
         pm->server_info.protocol = protocol;
 
-        util::debug(pm->log_tag + "protocol version: " + protocol);
+        util::debug("protocol version: " + protocol);
 
         pm->context_ready = true;
         pa_threaded_mainloop_signal(pm->main_loop, 0);
     } else if (state == PA_CONTEXT_FAILED) {
-        util::debug(pm->log_tag + "failed to connect context");
+        util::debug("failed to connect context");
 
         pm->context_ready = false;
         pa_threaded_mainloop_signal(pm->main_loop, 0);
     } else if (state == PA_CONTEXT_TERMINATED) {
-        util::debug(pm->log_tag + "context was terminated");
+        util::debug("context was terminated");
 
         pm->context_ready = false;
         pa_threaded_mainloop_signal(pm->main_loop, 0);
@@ -262,7 +262,7 @@ void PulseManager::subscribe_to_events() {
         auto pm = static_cast<PulseManager*>(d);
 
         if (success == 0) {
-            util::critical(pm->log_tag + "context event subscribe failed!");
+            util::critical("context event subscribe failed!");
         }
     },
     this);
@@ -295,9 +295,9 @@ void PulseManager::get_server_info() {
         if (info != nullptr) {
             pm->update_server_info(info);
 
-            util::debug(pm->log_tag + "Pulseaudio version: " + info->server_version);
-            util::debug(pm->log_tag + "default pulseaudio source: " + info->default_source_name);
-            util::debug(pm->log_tag + "default pulseaudio sink: " + info->default_sink_name);
+            util::debug("Pulseaudio version: " + std::string(info->server_version));
+            util::debug("default pulseaudio source: " + std::string(info->default_source_name));
+            util::debug("default pulseaudio sink: " + std::string(info->default_sink_name));
         }
 
         pa_threaded_mainloop_signal(pm->main_loop, false);
@@ -311,7 +311,7 @@ void PulseManager::get_server_info() {
 
         pa_operation_unref(o);
     } else {
-        util::critical(log_tag + " failed to get server info");
+        util::critical(" failed to get server info");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -366,7 +366,7 @@ auto PulseManager::get_sink_info(const std::string& name) -> std::shared_ptr<myS
 
         pa_operation_unref(o);
     } else {
-        util::critical(log_tag + " failed to get sink info: " + name);
+        util::critical(" failed to get sink info: " + name);
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -375,7 +375,7 @@ auto PulseManager::get_sink_info(const std::string& name) -> std::shared_ptr<myS
         return si;
     }
 
-    util::debug(log_tag + " failed to get sink info: " + name);
+    util::debug(" failed to get sink info: " + name);
 
     return nullptr;
 }
@@ -384,13 +384,13 @@ auto PulseManager::get_default_sink_info() -> std::shared_ptr<mySinkInfo> {
     auto info = get_sink_info(server_info.default_sink_name);
 
     if (info != nullptr) {
-        util::debug(log_tag + "default pulseaudio sink sampling rate: " + std::to_string(info->rate) + " Hz");
-        util::debug(log_tag + "default pulseaudio sink audio format: " + info->format);
+        util::debug("default pulseaudio sink sampling rate: " + std::to_string(info->rate) + " Hz");
+        util::debug("default pulseaudio sink audio format: " + info->format);
 
         return info;
     }
 
-    util::critical(log_tag + "could not get default sink info");
+    util::critical("could not get default sink info");
 
     return nullptr;
 }
@@ -440,12 +440,12 @@ auto PulseManager::load_sink(const std::string& name, const std::string& descrip
         bool ok = load_module("module-null-sink", argument);
 
         if (ok) {
-            util::debug(log_tag + "loaded module-null-sink: " + argument);
+            util::debug("loaded module-null-sink: " + argument);
 
             si = get_sink_info(name);
         } else {
             util::warning(
-                        log_tag + "Pulseaudio " + server_info.server_version +
+                        "Pulseaudio " + server_info.server_version +
                         " does not support norewinds. Loading the sink the old way. Changing apps volume will cause cracklings");
 
             argument = "sink_name=" + name + " " + "sink_properties=" + description + "device.class=\"sound\"" + " " +
@@ -454,11 +454,11 @@ auto PulseManager::load_sink(const std::string& name, const std::string& descrip
             ok = load_module("module-null-sink", argument);
 
             if (ok) {
-                util::debug(log_tag + "loaded module-null-sink: " + argument);
+                util::debug("loaded module-null-sink: " + argument);
 
                 si = get_sink_info(name);
             } else {
-                util::critical(log_tag + "failed to load module-null-sink with argument: " + argument);
+                util::critical("failed to load module-null-sink with argument: " + argument);
             }
         }
     }
@@ -467,7 +467,7 @@ auto PulseManager::load_sink(const std::string& name, const std::string& descrip
 }
 
 void PulseManager::load_apps_sink() {
-    util::debug(log_tag + "loading applications output sink...");
+    util::debug("loading applications output sink...");
 
     auto info = get_default_sink_info();
 
@@ -504,7 +504,7 @@ void PulseManager::find_sink_inputs() {
 
         pa_operation_unref(o);
     } else {
-        util::warning(log_tag + " failed to find sink inputs");
+        util::warning(" failed to find sink inputs");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -534,7 +534,7 @@ void PulseManager::find_source_outputs() {
 
         pa_operation_unref(o);
     } else {
-        util::warning(log_tag + " failed to find source outputs");
+        util::warning(" failed to find source outputs");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -574,7 +574,7 @@ void PulseManager::find_sinks() {
 
         pa_operation_unref(o);
     } else {
-        util::warning(log_tag + " failed to find sinks");
+        util::warning(" failed to find sinks");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -599,9 +599,9 @@ auto PulseManager::move_sink_input_to_gstmgr(const std::string& name, uint idx) 
         auto d = static_cast<Data*>(data);
 
         if (success) {
-            util::debug(d->pm->log_tag + "sink input: " + d->name + ", idx = " + std::to_string(d->idx) + " moved to PE");
+            util::debug("sink input: " + d->name + ", idx = " + std::to_string(d->idx) + " moved to PE");
         } else {
-            util::critical(d->pm->log_tag + "failed to move sink input: " + d->name +
+            util::critical("failed to move sink input: " + d->name +
                            ", idx = " + std::to_string(d->idx) + " to " SINK_NAME);
         }
 
@@ -618,7 +618,7 @@ auto PulseManager::move_sink_input_to_gstmgr(const std::string& name, uint idx) 
 
         added_successfully = true;
     } else {
-        util::critical(log_tag + "failed to move sink input: " + name + ", idx = " + std::to_string(idx) + " to PE");
+        util::critical("failed to move sink input: " + name + ", idx = " + std::to_string(idx) + " to PE");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -645,10 +645,10 @@ auto PulseManager::remove_sink_input_from_gstmgr(const std::string& name, uint i
         auto d = static_cast<Data*>(data);
 
         if (success) {
-            util::debug(d->pm->log_tag + "sink input: " + d->name + ", idx = " + std::to_string(d->idx) +
+            util::debug("sink input: " + d->name + ", idx = " + std::to_string(d->idx) +
                         " removed from PE");
         } else {
-            util::critical(d->pm->log_tag + "failed to remove sink input: " + d->name +
+            util::critical("failed to remove sink input: " + d->name +
                            ", idx = " + std::to_string(d->idx) + " from PE");
         }
 
@@ -665,7 +665,7 @@ auto PulseManager::remove_sink_input_from_gstmgr(const std::string& name, uint i
 
         removed_successfully = true;
     } else {
-        util::critical(log_tag + "failed to remove sink input: " + name + ", idx = " + std::to_string(idx) + " from PE");
+        util::critical("failed to remove sink input: " + name + ", idx = " + std::to_string(idx) + " from PE");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -697,10 +697,10 @@ void PulseManager::set_sink_input_volume(const std::string& name, uint idx, uint
             auto d = static_cast<Data*>(data);
 
             if (success == 1) {
-                util::debug(d->pm->log_tag + "changed volume of sink input: " + d->name +
+                util::debug("changed volume of sink input: " + d->name +
                             ", idx = " + std::to_string(d->idx));
             } else {
-                util::critical(d->pm->log_tag + "failed to change volume of sink input: " + d->name +
+                util::critical("failed to change volume of sink input: " + d->name +
                                ", idx = " + std::to_string(d->idx));
             }
 
@@ -717,7 +717,7 @@ void PulseManager::set_sink_input_volume(const std::string& name, uint idx, uint
 
             pa_threaded_mainloop_unlock(main_loop);
         } else {
-            util::warning(log_tag + "failed to change volume of sink input: " + name + ", idx = " + std::to_string(idx));
+            util::warning("failed to change volume of sink input: " + name + ", idx = " + std::to_string(idx));
 
             pa_threaded_mainloop_unlock(main_loop);
         }
@@ -741,9 +741,9 @@ void PulseManager::set_sink_input_mute(const std::string& name, uint idx, bool s
         auto d = static_cast<Data*>(data);
 
         if (success == 1) {
-            util::debug(d->pm->log_tag + "sink input: " + d->name + ", idx = " + std::to_string(d->idx) + " is muted");
+            util::debug("sink input: " + d->name + ", idx = " + std::to_string(d->idx) + " is muted");
         } else {
-            util::critical(d->pm->log_tag + "failed to mute sink input: " + d->name +
+            util::critical("failed to mute sink input: " + d->name +
                            ", idx = " + std::to_string(d->idx));
         }
 
@@ -758,7 +758,7 @@ void PulseManager::set_sink_input_mute(const std::string& name, uint idx, bool s
 
         pa_operation_unref(o);
     } else {
-        util::warning(log_tag + "failed to mute set sink input: " + name + ", idx = " + std::to_string(idx) + " to PE");
+        util::warning("failed to mute set sink input: " + name + ", idx = " + std::to_string(idx) + " to PE");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -788,10 +788,10 @@ void PulseManager::set_source_output_volume(const std::string& name, uint idx, u
             auto d = static_cast<Data*>(data);
 
             if (success == 1) {
-                util::debug(d->pm->log_tag + "changed volume of source output: " + d->name +
+                util::debug("changed volume of source output: " + d->name +
                             ", idx = " + std::to_string(d->idx));
             } else {
-                util::debug(d->pm->log_tag + "failed to change volume of source output: " + d->name +
+                util::debug("failed to change volume of source output: " + d->name +
                             ", idx = " + std::to_string(d->idx));
             }
 
@@ -808,7 +808,7 @@ void PulseManager::set_source_output_volume(const std::string& name, uint idx, u
 
             pa_threaded_mainloop_unlock(main_loop);
         } else {
-            util::warning(log_tag + "failed to change volume of source output: " + name + ", idx = " + std::to_string(idx));
+            util::warning("failed to change volume of source output: " + name + ", idx = " + std::to_string(idx));
 
             pa_threaded_mainloop_unlock(main_loop);
         }
@@ -832,9 +832,9 @@ void PulseManager::set_source_output_mute(const std::string& name, uint idx, boo
         auto d = static_cast<Data*>(data);
 
         if (success == 1) {
-            util::debug(d->pm->log_tag + "source output: " + d->name + ", idx = " + std::to_string(d->idx) + " is muted");
+            util::debug("source output: " + d->name + ", idx = " + std::to_string(d->idx) + " is muted");
         } else {
-            util::critical(d->pm->log_tag + "failed to mute source output: " + d->name +
+            util::critical("failed to mute source output: " + d->name +
                            ", idx = " + std::to_string(d->idx));
         }
 
@@ -849,7 +849,7 @@ void PulseManager::set_source_output_mute(const std::string& name, uint idx, boo
 
         pa_operation_unref(o);
     } else {
-        util::warning(log_tag + "failed to mute source output: " + name + ", idx = " + std::to_string(idx) + " to PE");
+        util::warning("failed to mute source output: " + name + ", idx = " + std::to_string(idx) + " to PE");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -879,7 +879,7 @@ void PulseManager::get_sink_input_info(uint idx) {
 
         pa_operation_unref(o);
     } else {
-        util::critical(log_tag + "failed to get sink input info: " + std::to_string(idx));
+        util::critical("failed to get sink input info: " + std::to_string(idx));
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -922,7 +922,7 @@ void PulseManager::get_modules_info() {
 
         pa_operation_unref(o);
     } else {
-        util::critical(log_tag + "failed to get modules info");
+        util::critical("failed to get modules info");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -965,7 +965,7 @@ void PulseManager::get_clients_info() {
 
         pa_operation_unref(o);
     } else {
-        util::critical(log_tag + "failed to get clients info");
+        util::critical("failed to get clients info");
     }
 
     pa_threaded_mainloop_unlock(main_loop);
@@ -987,9 +987,9 @@ void PulseManager::unload_module(uint idx) {
         auto d = static_cast<Data*>(data);
 
         if (success) {
-            util::debug(d->pm->log_tag + "module " + std::to_string(d->idx) + " unloaded");
+            util::debug("module " + std::to_string(d->idx) + " unloaded");
         } else {
-            util::critical(d->pm->log_tag + "failed to unload module " + std::to_string(d->idx));
+            util::critical("failed to unload module " + std::to_string(d->idx));
         }
 
         pa_threaded_mainloop_signal(d->pm->main_loop, false);
@@ -1003,14 +1003,14 @@ void PulseManager::unload_module(uint idx) {
 
         pa_operation_unref(o);
     } else {
-        util::critical(log_tag + "failed to unload module: " + std::to_string(idx));
+        util::critical("failed to unload module: " + std::to_string(idx));
     }
 
     pa_threaded_mainloop_unlock(main_loop);
 }
 
 void PulseManager::unload_sinks() {
-    util::debug(log_tag + "unloading JamesDSP sinks...");
+    util::debug("unloading JamesDSP sinks...");
 
     unload_module(apps_sink_info->owner_module);
 }
@@ -1038,11 +1038,11 @@ void PulseManager::drain_context() {
 
         pa_threaded_mainloop_unlock(main_loop);
 
-        util::debug(log_tag + "Context was drained");
+        util::debug("Context was drained");
     } else {
         pa_threaded_mainloop_unlock(main_loop);
 
-        util::debug(log_tag + "Context did not need draining");
+        util::debug("Context did not need draining");
     }
 }
 

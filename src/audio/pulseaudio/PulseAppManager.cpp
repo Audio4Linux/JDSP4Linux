@@ -103,7 +103,7 @@ void PulseAppManager::handleSettingsUpdate(const AppConfig::Key& key, const QVar
 
         if(!success)
         {
-            util::error("PulseAppManager::handleSettingsUpdate: Blocklist: cannot disable/enable sink");
+            util::error("Blocklist: cannot disable/enable sink");
         }*/
         break;
     }
