@@ -7,19 +7,20 @@
 #include <map>
 #include <chrono>
 #include <charconv>
-#include <source_location>
 #include <functional>
 
-#ifdef __clang__
+#if __cplusplus > 201703L && __has_builtin(__builtin_source_location)
+#include <source_location>
+#elif __cplusplus > 201402L
 #include <experimental/source_location>
 #endif
 
 namespace util {
 
-#ifdef __clang__
-using source_location = std::experimental::source_location;
-#else
+#if __cplusplus > 201703L && __has_builtin(__builtin_source_location)
 using source_location = std::source_location;
+#elif __cpp_lib_experimental_source_location >= 201505
+using source_location = std::experimental::source_location;
 #endif
 
 const float minimum_db_level = -100.0F;
