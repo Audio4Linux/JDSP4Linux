@@ -73,6 +73,7 @@ void GzipDownloader::onArchiveReady()
 
         extractThread = new ExtractionThread(extractionPath.path(), downloadedFile.fileName(), this);
         connect(extractThread, &ExtractionThread::onFinished, this, &GzipDownloader::onArchiveExtracted);
+        extractThread->start();
     }
 }
 
