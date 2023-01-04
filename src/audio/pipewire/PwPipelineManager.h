@@ -119,28 +119,28 @@ class PwPipelineManager {
   std::string default_max_quantum = "0";
   std::string default_quantum = "0";
 
-  auto node_map_at_id(const uint& id) -> NodeInfo&;
+  auto node_map_at_id(const uint32_t& id) -> NodeInfo&;
 
-  auto stream_is_connected(const uint& id, const std::string& media_class) -> bool;
+  auto stream_is_connected(const uint32_t& id, const std::string& media_class) -> bool;
 
-  void connect_stream_output(const uint& id) const;
+  void connect_stream_output(const uint32_t& id) const;
 
-  void connect_stream_input(const uint& id) const;
+  void connect_stream_input(const uint32_t& id) const;
 
-  void disconnect_stream(const uint& id) const;
+  void disconnect_stream(const uint32_t& id) const;
 
-  static void set_node_volume(pw_proxy* proxy, const uint& n_vol_ch, const float& value);
+  static void set_node_volume(pw_proxy* proxy, const uint32_t& n_vol_ch, const float& value);
 
   static void set_node_mute(pw_proxy* proxy, const bool& state);
 
-  auto count_node_ports(const uint& node_id) -> uint;
+  auto count_node_ports(const uint32_t& node_id) -> uint32_t;
 
   /*
     Links the output ports of the node output_node_id to the input ports of the node input_node_id
   */
 
-  auto link_nodes(const uint& output_node_id,
-                  const uint& input_node_id,
+  auto link_nodes(const uint32_t& output_node_id,
+                  const uint32_t& input_node_id,
                   const bool& probe_link = false,
                   const bool& link_passive = true) -> std::vector<pw_proxy*>;
 
@@ -190,7 +190,7 @@ class PwPipelineManager {
 
   spa_hook core_listener{}, registry_listener{};
 
-  void set_metadata_target_node(const uint& origin_id, const uint& target_id, const uint64_t& target_serial) const;
+  void set_metadata_target_node(const uint32_t& origin_id, const uint32_t& target_id, const uint64_t& target_serial) const;
 
 };
 

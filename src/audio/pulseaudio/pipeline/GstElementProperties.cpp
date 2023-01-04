@@ -102,7 +102,7 @@ gboolean GstElementProperties::hasNonMonoTemplate(GstPadDirection direction)
 
         GstCaps* caps = gst_caps_ref (GST_PAD_TEMPLATE_CAPS (l->data));
 
-        for (uint i = 0; i < gst_caps_get_size (caps); i++) {
+        for (uint32_t i = 0; i < gst_caps_get_size (caps); i++) {
             GstStructure *structure = gst_caps_get_structure (caps, i);
 
             int isMono = 2; /* No = 0; Yes = 1; Unrelated key = 2 */

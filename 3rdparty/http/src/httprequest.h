@@ -9,7 +9,7 @@ public:
     QUrl url;
     QNetworkAccessManager::Operation operation;
     QByteArray body;
-    uint offset;
+    uint32_t offset;
     QMap<QByteArray, QByteArray> headers;
 };
 

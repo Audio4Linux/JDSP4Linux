@@ -54,7 +54,7 @@ struct proxy_data {
 
   PwPipelineManager* pm = nullptr;
 
-  uint id = SPA_ID_INVALID;
+  uint32_t id = SPA_ID_INVALID;
 
   uint64_t serial = SPA_ID_INVALID;
 };
@@ -502,7 +502,7 @@ void on_node_event_param(void* object,
   SPA_POD_OBJECT_FOREACH(obj, pod_prop) {
     switch (pod_prop->key) {
       case SPA_FORMAT_AUDIO_format: {
-        uint format = 0U;
+        uint32_t format = 0U;
 
         if (spa_pod_get_id(&pod_prop->value, &format) != 0) {
           break;
@@ -591,7 +591,7 @@ void on_node_event_param(void* object,
 
         float max = 0.0F;
 
-        for (uint i = 0U; i < n_volumes; i++) {
+        for (uint32_t i = 0U; i < n_volumes; i++) {
           max = std::max(volumes.at(i), max);
         }
 
@@ -1555,7 +1555,7 @@ PwPipelineManager::~PwPipelineManager() {
   pw_thread_loop_destroy(thread_loop);
 }
 
-auto PwPipelineManager::node_map_at_id(const uint& id) -> NodeInfo& {
+auto PwPipelineManager::node_map_at_id(const uint32_t& id) -> NodeInfo& {
   // Helper method to access easily a node by id, same functionality as map.at()
 
   for (auto& [serial, node] : node_map) {
@@ -1567,7 +1567,7 @@ auto PwPipelineManager::node_map_at_id(const uint& id) -> NodeInfo& {
   throw std::out_of_range("");
 }
 
-auto PwPipelineManager::stream_is_connected(const uint& id, const std::string& media_class) -> bool {
+auto PwPipelineManager::stream_is_connected(const uint32_t& id, const std::string& media_class) -> bool {
   if (media_class == tags::pipewire::media_class::output_stream) {
     for (const auto& link : list_links) {
       if (link.output_node_id == id && link.input_node_id == ee_sink_node.id) {
@@ -1585,16 +1585,16 @@ auto PwPipelineManager::stream_is_connected(const uint& id, const std::string& m
   return false;
 }
 
-void PwPipelineManager::connect_stream_output(const uint& id) const {
+void PwPipelineManager::connect_stream_output(const uint32_t& id) const {
   set_metadata_target_node(id, ee_sink_node.id, ee_sink_node.serial);
 }
 
-void PwPipelineManager::connect_stream_input(const uint& id) const {
+void PwPipelineManager::connect_stream_input(const uint32_t& id) const {
   //set_metadata_target_node(id, ee_source_node.id, ee_source_node.serial);
 }
 
-void PwPipelineManager::set_metadata_target_node(const uint& origin_id,
-                                           const uint& target_id,
+void PwPipelineManager::set_metadata_target_node(const uint32_t& origin_id,
+                                           const uint32_t& target_id,
                                            const uint64_t& target_serial) const {
   if (metadata == nullptr) {
     return;
@@ -1609,7 +1609,7 @@ void PwPipelineManager::set_metadata_target_node(const uint& origin_id,
   sync_wait_unlock();
 }
 
-void PwPipelineManager::disconnect_stream(const uint& stream_id) const {
+void PwPipelineManager::disconnect_stream(const uint32_t& stream_id) const {
   if (metadata == nullptr) {
     return;
   }
@@ -1623,7 +1623,7 @@ void PwPipelineManager::disconnect_stream(const uint& stream_id) const {
   sync_wait_unlock();
 }
 
-void PwPipelineManager::set_node_volume(pw_proxy* proxy, const uint& n_vol_ch, const float& value) {
+void PwPipelineManager::set_node_volume(pw_proxy* proxy, const uint32_t& n_vol_ch, const float& value) {
   std::array<float, SPA_AUDIO_MAX_CHANNELS> volumes{};
 
   std::ranges::fill(volumes, 0.0F);
@@ -1649,8 +1649,8 @@ void PwPipelineManager::set_node_mute(pw_proxy* proxy, const bool& state) {
                                                          SPA_PROP_mute, SPA_POD_Bool(state)));
 }
 
-auto PwPipelineManager::count_node_ports(const uint& node_id) -> uint {
-  uint count = 0;
+auto PwPipelineManager::count_node_ports(const uint32_t& node_id) -> uint32_t {
+  uint32_t count = 0;
 
   for (const auto& port : list_ports) {
     if (port.node_id == node_id) {
@@ -1661,8 +1661,8 @@ auto PwPipelineManager::count_node_ports(const uint& node_id) -> uint {
   return count;
 }
 
-auto PwPipelineManager::link_nodes(const uint& output_node_id,
-                             const uint& input_node_id,
+auto PwPipelineManager::link_nodes(const uint32_t& output_node_id,
+                             const uint32_t& input_node_id,
                              const bool& probe_link,
                              const bool& link_passive) -> std::vector<pw_proxy*> {
   std::vector<pw_proxy*> list;

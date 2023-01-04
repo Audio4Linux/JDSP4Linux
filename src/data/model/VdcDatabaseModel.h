@@ -11,7 +11,7 @@ public:
     explicit VdcDatabaseModel(QObject *parent = nullptr);
 
     QString composeVdcFile(int row) const;
-    QString coefficients(int row, uint srate) const;
+    QString coefficients(int row, uint32_t srate) const;
     QString id(int row) const;
     QModelIndex findFirstById(const QString &id) const;
 };

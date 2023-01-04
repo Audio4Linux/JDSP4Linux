@@ -20,7 +20,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    std::optional<AppNode> findByNodeId(uint id);
+    std::optional<AppNode> findByNodeId(uint32_t id);
 
 signals:
     void appChanged(const AppNode& node);
@@ -28,7 +28,7 @@ signals:
 private slots:
     void onAppAdded(const AppNode& node);
     void onAppChanged(const AppNode& node);
-    void onAppRemoved(const uint id);
+    void onAppRemoved(const uint32_t id);
 
 private:
     IAppManager* appMgr = nullptr;

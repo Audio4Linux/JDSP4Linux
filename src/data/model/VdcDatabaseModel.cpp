@@ -47,7 +47,7 @@ QString VdcDatabaseModel::composeVdcFile(int row) const
     return vdc;
 }
 
-QString VdcDatabaseModel::coefficients(int row, uint srate) const
+QString VdcDatabaseModel::coefficients(int row, uint32_t srate) const
 {
     Q_ASSERT(srate == 44100 || srate == 48000);
 

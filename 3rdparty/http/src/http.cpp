@@ -109,7 +109,7 @@ HttpReply *Http::request(const HttpRequest &req) {
 HttpReply *Http::request(const QUrl &url,
                          QNetworkAccessManager::Operation operation,
                          const QByteArray &body,
-                         uint offset) {
+                         uint32_t offset) {
     HttpRequest req;
     req.url = url;
     req.operation = operation;

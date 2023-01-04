@@ -82,7 +82,7 @@ public:
 #endif
 
 
-    uint id = ((uint32_t)0xffffffff);
+    uint32_t id = ((uint32_t)0xffffffff);
 
     QString name;
 
@@ -104,7 +104,7 @@ public:
 
     int n_output_ports = 0;
 
-    uint rate = 0U;
+    uint32_t rate = 0U;
 
     int n_volume_channels = 0;
 

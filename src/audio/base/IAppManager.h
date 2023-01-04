@@ -15,7 +15,7 @@ public:
 signals:
     void appAdded(const AppNode& node);
     void appChanged(const AppNode& node);
-    void appRemoved(const uint id);
+    void appRemoved(const uint32_t id);
 
 };
 

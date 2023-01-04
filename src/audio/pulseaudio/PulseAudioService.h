@@ -35,7 +35,7 @@ private:
     PulseAudioProcessingThread* apt;
 
     std::string last_sink_dev_name;
-    std::map<uint, mySinkInfo> sinks;
+    std::map<uint32_t, mySinkInfo> sinks;
 
 };
 

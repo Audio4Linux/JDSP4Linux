@@ -76,11 +76,11 @@ void WrappedHttpReply::originFinished(const HttpReply &reply) {
 CachedHttp::CachedHttp(Http &http, const char *name)
     : http(http), cache(LocalCache::instance(name)), cachePostRequests(false) {}
 
-void CachedHttp::setMaxSeconds(uint seconds) {
+void CachedHttp::setMaxSeconds(uint32_t seconds) {
     cache->setMaxSeconds(seconds);
 }
 
-void CachedHttp::setMaxSize(uint maxSize) {
+void CachedHttp::setMaxSize(uint32_t maxSize) {
     cache->setMaxSize(maxSize);
 }
 

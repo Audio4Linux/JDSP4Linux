@@ -30,7 +30,7 @@ public:
     request(const QUrl &url,
             QNetworkAccessManager::Operation operation = QNetworkAccessManager::GetOperation,
             const QByteArray &body = QByteArray(),
-            uint offset = 0);
+            uint32_t offset = 0);
     HttpReply *get(const QUrl &url);
     HttpReply *head(const QUrl &url);
     HttpReply *post(const QUrl &url, const QMap<QString, QString> &params);

@@ -67,9 +67,9 @@ class PwPluginBase {
 
   bool enable_probe = false;
 
-  uint n_samples = 0U;
+  uint32_t n_samples = 0U;
 
-  uint rate = 0U;
+  uint32_t rate = 0U;
 
   float sample_duration = 0.0F;
 
@@ -79,7 +79,7 @@ class PwPluginBase {
 
   bool post_messages = false;
 
-  [[nodiscard]] auto get_node_id() const -> uint;
+  [[nodiscard]] auto get_node_id() const -> uint32_t;
 
   void set_active(const bool& state) const;
 
@@ -119,7 +119,7 @@ class PwPluginBase {
 
   data pf_data = {};
 
-  uint n_ports = 4;
+  uint32_t n_ports = 4;
 
   float input_gain = 1.0F;
   float output_gain = 1.0F;
@@ -138,7 +138,7 @@ class PwPluginBase {
                  size_t length);
 
  private:
-  uint node_id = 0U;
+  uint32_t node_id = 0U;
 
   float input_peak_left = util::minimum_linear_level, input_peak_right = util::minimum_linear_level;
   float output_peak_left = util::minimum_linear_level, output_peak_right = util::minimum_linear_level;

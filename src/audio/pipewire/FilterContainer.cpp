@@ -218,8 +218,8 @@ void FilterContainer::connect_filters(const bool& bypass) {
     return;
   }
 
-  uint prev_node_id = pm->ee_sink_node.id;
-  uint next_node_id = 0U;
+  uint32_t prev_node_id = pm->ee_sink_node.id;
+  uint32_t next_node_id = 0U;
 
   // link plugin
   if ((!plugin->connected_to_pw) ? plugin->connect_to_pw() : true) {
@@ -273,7 +273,7 @@ void FilterContainer::connect_filters(const bool& bypass) {
 }
 
 void FilterContainer::disconnect_filters() {
-    std::set<uint> link_id_list;
+    std::set<uint32_t> link_id_list;
 
     for (const auto& link : pm->list_links) {
       if (link.input_node_id == plugin->get_node_id() || link.output_node_id == plugin->get_node_id()) {

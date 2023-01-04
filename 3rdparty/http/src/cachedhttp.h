@@ -8,8 +8,8 @@ class LocalCache;
 class CachedHttp : public Http {
 public:
     CachedHttp(Http &http = Http::instance(), const char *name = "http");
-    void setMaxSeconds(uint seconds);
-    void setMaxSize(uint maxSize);
+    void setMaxSeconds(uint32_t seconds);
+    void setMaxSize(uint32_t maxSize);
     void setCachePostRequests(bool value) { cachePostRequests = value; }
     void setIgnoreHostname(bool value) { ignoreHostname = value; }
     QMap<QByteArray, std::function<bool(const HttpReply &)>> &getValidators() { return validators; };

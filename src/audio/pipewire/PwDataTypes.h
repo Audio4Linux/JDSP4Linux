@@ -8,9 +8,9 @@
 struct NodeInfo {
   pw_proxy* proxy = nullptr;
 
-  uint id = SPA_ID_INVALID;
+  uint32_t id = SPA_ID_INVALID;
 
-  uint device_id = SPA_ID_INVALID;
+  uint32_t device_id = SPA_ID_INVALID;
 
   uint64_t serial = SPA_ID_INVALID;
 
@@ -46,7 +46,7 @@ struct NodeInfo {
 
   int rate = 1;  // used as divisor to calculate latency, so do not initialize it as 0
 
-  uint n_volume_channels = 0U;
+  uint32_t n_volume_channels = 0U;
 
   float latency = 0.0F;
 
@@ -56,15 +56,15 @@ struct NodeInfo {
 struct LinkInfo {
   std::string path;
 
-  uint id = SPA_ID_INVALID;
+  uint32_t id = SPA_ID_INVALID;
 
-  uint input_node_id = 0U;
+  uint32_t input_node_id = 0U;
 
-  uint input_port_id = 0U;
+  uint32_t input_port_id = 0U;
 
-  uint output_node_id = 0U;
+  uint32_t output_node_id = 0U;
 
-  uint output_port_id = 0U;
+  uint32_t output_port_id = 0U;
 
   uint64_t serial = SPA_ID_INVALID;
 
@@ -90,17 +90,17 @@ struct PortInfo {
 
   bool monitor = false;
 
-  uint id = SPA_ID_INVALID;
+  uint32_t id = SPA_ID_INVALID;
 
-  uint node_id = 0U;
+  uint32_t node_id = 0U;
 
-  uint port_id = 0U;
+  uint32_t port_id = 0U;
 
   uint64_t serial = SPA_ID_INVALID;
 };
 
 struct ModuleInfo {
-  uint id;
+  uint32_t id;
 
   uint64_t serial = SPA_ID_INVALID;
 
@@ -112,7 +112,7 @@ struct ModuleInfo {
 };
 
 struct ClientInfo {
-  uint id;
+  uint32_t id;
 
   uint64_t serial = SPA_ID_INVALID;
 
@@ -124,7 +124,7 @@ struct ClientInfo {
 };
 
 struct DeviceInfo {
-  uint id;
+  uint32_t id;
 
   uint64_t serial = SPA_ID_INVALID;
 

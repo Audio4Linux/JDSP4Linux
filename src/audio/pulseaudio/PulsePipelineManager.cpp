@@ -431,7 +431,7 @@ bool PulsePipelineManager::appsWantToPlay() {
     return wants_to_play;
 }
 
-void PulsePipelineManager::setCaps(const uint& sampling_rate) {
+void PulsePipelineManager::setCaps(const uint32_t& sampling_rate) {
     current_rate = sampling_rate;
 
     /*auto caps_str = "audio/x-raw,format=F32LE,channels=2,rate=" + std::to_string(sampling_rate);
@@ -488,7 +488,7 @@ void PulsePipelineManager::onAppChanged(const std::shared_ptr<AppInfo>& app_info
     updatePipelineState();
 }
 
-void PulsePipelineManager::onAppRemoved(uint idx) {
+void PulsePipelineManager::onAppRemoved(uint32_t idx) {
     apps_list.erase(std::remove_if(apps_list.begin(), apps_list.end(), [=](auto& a) { return a->index == idx; }),
                     apps_list.end());
 

@@ -28,7 +28,7 @@ private slots:
 private:
     Ui::AppItem *ui;
     AppItemModel* model = nullptr;
-    uint id;
+    uint32_t id;
 
 };
 

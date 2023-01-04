@@ -76,7 +76,7 @@ PulseAudioService::PulseAudioService()
     mgr.get()->getPulseManager()->sink_added.connect([&](const std::shared_ptr<mySinkInfo>& info) {
         sinks[info->index] = *info;
     });
-    mgr.get()->getPulseManager()->sink_removed.connect([&](uint id) {
+    mgr.get()->getPulseManager()->sink_removed.connect([&](uint32_t id) {
         sinks.erase(id);
     });
 

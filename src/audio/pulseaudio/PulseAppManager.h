@@ -21,7 +21,7 @@ private slots:
 private:
     void onAppAdded(const std::shared_ptr<AppInfo> &app_info);
     void onAppChanged(const std::shared_ptr<AppInfo> &app_info);
-    void onAppRemoved(const uint id);
+    void onAppRemoved(const uint32_t id);
 
     QList<AppInfo> apps;
     PulsePipelineManager* mgr;

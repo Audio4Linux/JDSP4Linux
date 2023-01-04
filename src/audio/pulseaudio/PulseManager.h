@@ -46,28 +46,28 @@ public:
     void find_sink_inputs();
     void find_source_outputs();
     void find_sinks();
-    auto move_sink_input_to_gstmgr(const std::string& name, uint idx) -> bool;
-    auto remove_sink_input_from_gstmgr(const std::string& name, uint idx) -> bool;
-    void set_sink_input_volume(const std::string& name, uint idx, uint8_t channels, uint value);
-    void set_sink_input_mute(const std::string& name, uint idx, bool state);
-    void set_source_output_volume(const std::string& name, uint idx, uint8_t channels, uint value);
-    void set_source_output_mute(const std::string& name, uint idx, bool state);
-    void get_sink_input_info(uint idx);
+    auto move_sink_input_to_gstmgr(const std::string& name, uint32_t idx) -> bool;
+    auto remove_sink_input_from_gstmgr(const std::string& name, uint32_t idx) -> bool;
+    void set_sink_input_volume(const std::string& name, uint32_t idx, uint8_t channels, uint32_t value);
+    void set_sink_input_mute(const std::string& name, uint32_t idx, bool state);
+    void set_source_output_volume(const std::string& name, uint32_t idx, uint8_t channels, uint32_t value);
+    void set_source_output_mute(const std::string& name, uint32_t idx, bool state);
+    void get_sink_input_info(uint32_t idx);
     void update_server_info(const pa_server_info* info);
     void get_modules_info();
     void get_clients_info();
 
     sigc::signal<void, std::shared_ptr<mySinkInfo>> sink_added;
     sigc::signal<void, std::shared_ptr<mySinkInfo>> sink_changed;
-    sigc::signal<void, uint> sink_removed;
+    sigc::signal<void, uint32_t> sink_removed;
     sigc::signal<void, std::string> new_default_sink;
     sigc::signal<void, std::string> new_default_source;
     sigc::signal<void, std::shared_ptr<AppInfo>> sink_input_added;
     sigc::signal<void, std::shared_ptr<AppInfo>> sink_input_changed;
-    sigc::signal<void, uint> sink_input_removed;
+    sigc::signal<void, uint32_t> sink_input_removed;
     sigc::signal<void, std::shared_ptr<AppInfo>> source_output_added;
     sigc::signal<void, std::shared_ptr<AppInfo>> source_output_changed;
-    sigc::signal<void, uint> source_output_removed;
+    sigc::signal<void, uint32_t> source_output_removed;
     sigc::signal<void> server_changed;
     sigc::signal<void, std::shared_ptr<myModuleInfo>> module_info;
     sigc::signal<void, std::shared_ptr<myClientInfo>> client_info;
@@ -102,13 +102,13 @@ private:
 
     auto get_default_sink_info() -> std::shared_ptr<mySinkInfo>;
 
-    auto load_sink(const std::string& name, const std::string& description, uint rate) -> std::shared_ptr<mySinkInfo>;
+    auto load_sink(const std::string& name, const std::string& description, uint32_t rate) -> std::shared_ptr<mySinkInfo>;
 
     void load_apps_sink();
 
     auto load_module(const std::string& name, const std::string& argument) -> bool;
 
-    void unload_module(uint idx);
+    void unload_module(uint32_t idx);
 
     void unload_sinks();
 
@@ -128,9 +128,9 @@ private:
 
     auto app_is_connected(const pa_source_output_info* info) -> bool;
 
-    static auto get_latency(const pa_sink_input_info* info) -> uint { return info->sink_usec; }
+    static auto get_latency(const pa_sink_input_info* info) -> uint32_t { return info->sink_usec; }
 
-    static auto get_latency(const pa_source_output_info* info) -> uint { return info->source_usec; }
+    static auto get_latency(const pa_source_output_info* info) -> uint32_t { return info->source_usec; }
 
     template <typename T>
     auto parse_app_info(const T& info) -> std::shared_ptr<AppInfo> {

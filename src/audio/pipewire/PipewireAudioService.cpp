@@ -89,7 +89,7 @@ void PipewireAudioService::onAppConfigUpdated(const AppConfig::Key &key, const Q
             return;
         }
 
-        uint device_id = SPA_ID_INVALID;
+        uint32_t device_id = SPA_ID_INVALID;
         for (const auto& [ts, node2] : mgr.get()->node_map)
         {
             if (node2.name == name.toStdString())

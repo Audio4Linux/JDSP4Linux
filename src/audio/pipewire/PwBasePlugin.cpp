@@ -240,7 +240,7 @@ void PwPluginBase::initialize_listener() {
   pw_filter_add_listener(filter, &listener, &filter_events, &pf_data);
 }
 
-auto PwPluginBase::get_node_id() const -> uint {
+auto PwPluginBase::get_node_id() const -> uint32_t {
   return node_id;
 }
 

@@ -429,7 +429,7 @@ auto PulseManager::load_module(const std::string& name, const std::string& argum
     return data.status;
 }
 
-auto PulseManager::load_sink(const std::string& name, const std::string& description, uint rate)
+auto PulseManager::load_sink(const std::string& name, const std::string& description, uint32_t rate)
 -> std::shared_ptr<mySinkInfo> {
     auto si = get_sink_info(name);
 
@@ -580,10 +580,10 @@ void PulseManager::find_sinks() {
     pa_threaded_mainloop_unlock(main_loop);
 }
 
-auto PulseManager::move_sink_input_to_gstmgr(const std::string& name, uint idx) -> bool {
+auto PulseManager::move_sink_input_to_gstmgr(const std::string& name, uint32_t idx) -> bool {
     struct Data {
         std::string name;
-        uint idx;
+        uint32_t idx;
         PulseManager* pm;
     };
 
@@ -626,10 +626,10 @@ auto PulseManager::move_sink_input_to_gstmgr(const std::string& name, uint idx) 
     return added_successfully;
 }
 
-auto PulseManager::remove_sink_input_from_gstmgr(const std::string& name, uint idx) -> bool {
+auto PulseManager::remove_sink_input_from_gstmgr(const std::string& name, uint32_t idx) -> bool {
     struct Data {
         std::string name;
-        uint idx;
+        uint32_t idx;
         PulseManager* pm;
     };
 
@@ -673,7 +673,7 @@ auto PulseManager::remove_sink_input_from_gstmgr(const std::string& name, uint i
     return removed_successfully;
 }
 
-void PulseManager::set_sink_input_volume(const std::string& name, uint idx, uint8_t channels, uint value) {
+void PulseManager::set_sink_input_volume(const std::string& name, uint32_t idx, uint8_t channels, uint32_t value) {
     pa_volume_t raw_value = PA_VOLUME_NORM * value / 100.0;
 
     auto cvol = pa_cvolume();
@@ -683,7 +683,7 @@ void PulseManager::set_sink_input_volume(const std::string& name, uint idx, uint
     if (cvol_ptr != nullptr) {
         struct Data {
             std::string name;
-            uint idx;
+            uint32_t idx;
             PulseManager* pm;
         };
 
@@ -724,10 +724,10 @@ void PulseManager::set_sink_input_volume(const std::string& name, uint idx, uint
     }
 }
 
-void PulseManager::set_sink_input_mute(const std::string& name, uint idx, bool state) {
+void PulseManager::set_sink_input_mute(const std::string& name, uint32_t idx, bool state) {
     struct Data {
         std::string name;
-        uint idx;
+        uint32_t idx;
         PulseManager* pm;
     };
 
@@ -764,7 +764,7 @@ void PulseManager::set_sink_input_mute(const std::string& name, uint idx, bool s
     pa_threaded_mainloop_unlock(main_loop);
 }
 
-void PulseManager::set_source_output_volume(const std::string& name, uint idx, uint8_t channels, uint value) {
+void PulseManager::set_source_output_volume(const std::string& name, uint32_t idx, uint8_t channels, uint32_t value) {
     pa_volume_t raw_value = PA_VOLUME_NORM * value / 100.0;
 
     auto cvol = pa_cvolume();
@@ -774,7 +774,7 @@ void PulseManager::set_source_output_volume(const std::string& name, uint idx, u
     if (cvol_ptr != nullptr) {
         struct Data {
             std::string name;
-            uint idx;
+            uint32_t idx;
             PulseManager* pm;
         };
 
@@ -815,10 +815,10 @@ void PulseManager::set_source_output_volume(const std::string& name, uint idx, u
     }
 }
 
-void PulseManager::set_source_output_mute(const std::string& name, uint idx, bool state) {
+void PulseManager::set_source_output_mute(const std::string& name, uint32_t idx, bool state) {
     struct Data {
         std::string name;
-        uint idx;
+        uint32_t idx;
         PulseManager* pm;
     };
 
@@ -855,7 +855,7 @@ void PulseManager::set_source_output_mute(const std::string& name, uint idx, boo
     pa_threaded_mainloop_unlock(main_loop);
 }
 
-void PulseManager::get_sink_input_info(uint idx) {
+void PulseManager::get_sink_input_info(uint32_t idx) {
     pa_threaded_mainloop_lock(main_loop);
 
     auto o = pa_context_get_sink_input_info(
@@ -971,9 +971,9 @@ void PulseManager::get_clients_info() {
     pa_threaded_mainloop_unlock(main_loop);
 }
 
-void PulseManager::unload_module(uint idx) {
+void PulseManager::unload_module(uint32_t idx) {
     struct Data {
-        uint idx;
+        uint32_t idx;
         PulseManager* pm;
     };
 

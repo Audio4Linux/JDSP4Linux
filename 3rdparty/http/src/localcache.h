@@ -14,8 +14,8 @@ public:
 
     const QByteArray &getName() const { return name; }
 
-    void setMaxSeconds(uint value) { maxSeconds = value; }
-    void setMaxSize(uint value) { maxSize = value; }
+    void setMaxSeconds(uint32_t value) { maxSeconds = value; }
+    void setMaxSize(uint32_t value) { maxSize = value; }
 
     QByteArray value(const QByteArray &key);
     QByteArray possiblyStaleValue(const QByteArray &key);
@@ -33,15 +33,15 @@ private:
 
     QByteArray name;
     QString directory;
-    uint maxSeconds;
+    uint32_t maxSeconds;
     qint64 maxSize;
     qint64 size;
     QMutex mutex;
-    uint insertCount;
+    uint32_t insertCount;
 
 #ifndef QT_NO_DEBUG_OUTPUT
-    uint hits;
-    uint misses;
+    uint32_t hits;
+    uint32_t misses;
 #endif
 };
 

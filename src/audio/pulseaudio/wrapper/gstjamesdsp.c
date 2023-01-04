@@ -268,7 +268,7 @@ gst_jamesdsp_transform_ip(GstBaseTransform *base, GstBuffer *buf) {
             int16_t* out = malloc(2 * num_samples * sizeof(int16_t));
 
             filter->dsp->processInt16Multiplexd(filter->dsp, data, out, num_samples);
-            for(uint i = 0; i < num_samples * 2; i++)
+            for(uint32_t i = 0; i < num_samples * 2; i++)
             {
                 data[i] = out[i];
             }
@@ -283,7 +283,7 @@ gst_jamesdsp_transform_ip(GstBaseTransform *base, GstBuffer *buf) {
             int32_t* out = malloc(2 * num_samples * sizeof(int32_t));
 
             filter->dsp->processInt32Multiplexd(filter->dsp, data, out, num_samples);
-            for(uint i = 0; i < num_samples * 2; i++)
+            for(uint32_t i = 0; i < num_samples * 2; i++)
             {
                 data[i] = out[i];
             }
@@ -298,7 +298,7 @@ gst_jamesdsp_transform_ip(GstBaseTransform *base, GstBuffer *buf) {
             float* out = malloc(2 * num_samples * sizeof(float));
 
             filter->dsp->processFloatMultiplexd(filter->dsp, data, out, num_samples);
-            for(uint i = 0; i < num_samples * 2; i++)
+            for(uint32_t i = 0; i < num_samples * 2; i++)
             {
                 data[i] = out[i];
             }

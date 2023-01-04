@@ -49,7 +49,7 @@ void PulseAppManager::onAppChanged(const std::shared_ptr<AppInfo>& app_info)
     }
 }
 
-void PulseAppManager::onAppRemoved(const uint id)
+void PulseAppManager::onAppRemoved(const uint32_t id)
 {
     for (int n = 0; n < apps.length(); n++)
     {

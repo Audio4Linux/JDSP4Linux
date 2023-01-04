@@ -78,15 +78,15 @@ private:
 
     bool                sinkSourceAdded = false;
 
-    uint                current_rate = 0;
+    uint32_t                current_rate = 0;
 
     sigc::connection    timeout_connection;
 
-    void                setCaps(const uint &sampling_rate);
+    void                setCaps(const uint32_t &sampling_rate);
 
     void                onAppAdded(const std::shared_ptr<AppInfo> &app_info);
     void                onAppChanged(const std::shared_ptr<AppInfo> &app_info);
-    void                onAppRemoved(uint idx);
+    void                onAppRemoved(uint32_t idx);
     void                onSinkChanged(const std::shared_ptr<mySinkInfo> &sink_info);
 
 };

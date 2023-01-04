@@ -37,7 +37,7 @@ QVariant AppItemModel::data(const QModelIndex &index, int role) const
         return QVariant();
 }
 
-std::optional<AppNode> AppItemModel::findByNodeId(uint id)
+std::optional<AppNode> AppItemModel::findByNodeId(uint32_t id)
 {
     for(int i = 0; i < cache.count(); i++)
     {
@@ -72,7 +72,7 @@ void AppItemModel::onAppChanged(const AppNode &node)
     }
 }
 
-void AppItemModel::onAppRemoved(const uint id)
+void AppItemModel::onAppRemoved(const uint32_t id)
 {
     for(int i = 0; i < cache.count(); i++)
     {
