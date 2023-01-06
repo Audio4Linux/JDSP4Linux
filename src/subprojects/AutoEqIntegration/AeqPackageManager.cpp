@@ -54,8 +54,8 @@ QtPromise::QPromise<AeqVersion> AeqPackageManager::isUpdateAvailable()
         const QtPromise::QPromiseResolve<AeqVersion>& resolve,
                 const QtPromise::QPromiseReject<AeqVersion>& reject) {
 
-            this->getRepositoryVersion().then([=](AeqVersion remote){
-                this->getLocalVersion().then([=](AeqVersion local){
+            this->getRepositoryVersion().then([&](AeqVersion remote){
+                this->getLocalVersion().then([&](AeqVersion local){
                     if(remote.packageTime > local.packageTime)
                     {
                         // Remote is newer
@@ -65,7 +65,7 @@ QtPromise::QPromise<AeqVersion> AeqPackageManager::isUpdateAvailable()
                     {
                         reject(remote);
                     }
-                }).fail([=]{
+                }).fail([&]{
                     // Local file not available, choose remote
                     resolve(remote);
                 });
