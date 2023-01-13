@@ -4,6 +4,7 @@
 #include <list>
 #include <gst/gst.h>
 #include <cassert>
+#include <cstdint>
 
 class GstElementProperties {
 public:
