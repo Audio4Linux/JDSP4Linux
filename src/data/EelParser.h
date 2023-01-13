@@ -133,6 +133,7 @@ public:
 	{
 		type = EELPropertyType::NumberRange;
 	};
+
 	~EELNumberRangeProperty() {}
 
 	TNum getValue() const
