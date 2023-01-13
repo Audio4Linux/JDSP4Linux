@@ -17,8 +17,8 @@ bool DesktopServices::openUrl(const QString &url, QWidget* parent)
             {
                 if(parent != nullptr)
                 {
-                    QMessageBox::critical(parent, "Something went wrong", "Failed to open URL using 'xdg-open', 'gio open', and 'kde-open5'.\n"
-                                                                          "Please copy this URL manually: " + url);
+                    QMessageBox::critical(parent, QObject::tr("Something went wrong"),
+                                          QObject::tr("Failed to open URL with default browser.\n Please copy this URL manually: ") + url);
                 }
                 return false;
             }

@@ -31,7 +31,7 @@ PresetRuleDialog::PresetRuleDialog(IAudioService* service, QWidget *parent) :
     ui->ruleTable->setModel(ruleModel);
     ui->ruleTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->ruleTable->setEmptyViewEnabled(true);
-    ui->ruleTable->setEmptyViewTitle("No rules defined");
+    ui->ruleTable->setEmptyViewTitle(tr("No rules defined"));
 
     ruleModel->load();
     deviceModel->load(service->sinkDevices());
@@ -59,15 +59,16 @@ void PresetRuleDialog::onAddClicked()
 {
     if(!deviceModel->loadRemaining(ruleModel))
     {
-        QMessageBox::information(this, "Cannot add new rule", "All connected audio devices have already a rule defined.\n"
-                                                              "You can only create one rule per device.");
+        QMessageBox::information(this, tr("Cannot add new rule"),
+                                 tr("All connected audio devices have already a rule defined.\n"
+                                 "You can only create one rule per device."));
         return;
     }
 
     if(PresetManager::instance().presetModel()->rowCount() <= 0)
     {
-        QMessageBox::information(this, "Cannot add new rule", "You have no presets saved.\n"
-                                                              "Please create one first before adding a new rule.");
+        QMessageBox::information(this, tr("Cannot add new rule"), tr("You have no presets saved.\n"
+                                                              "Please create one first before adding a new rule."));
         return;
     }
 

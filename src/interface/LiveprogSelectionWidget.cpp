@@ -77,7 +77,7 @@ void LiveprogSelectionWidget::onResetLiveprogParams()
 {
     if (!_eelParser->loadDefaults())
     {
-        QMessageBox::warning(this, "Error", "Cannot restore defaults.\nNo EEL file is currently loaded.");
+        QMessageBox::warning(this, tr("Error"), tr("Cannot restore defaults.\nNo EEL file is currently loaded."));
     }
 
     emit liveprogReloadRequested();
@@ -131,8 +131,8 @@ void LiveprogSelectionWidget::onEditScript()
     }
     else if (!QFile(_currentLiveprog).exists())
     {
-        QMessageBox::warning(this, "Error", "Selected EEL file does not exist anymore.\n"
-                             "Please select another one");
+        QMessageBox::warning(this, tr("Error"), tr("Selected EEL file does not exist anymore.\n"
+                             "Please select another one"));
         return;
     }
 
@@ -154,14 +154,14 @@ void LiveprogSelectionWidget::loadProperties(const QString& path)
     if(path.isEmpty())
     {
         ui->reset->setVisible(false);
-        ui->editScript->setText("Create new script");
-        ui->name->setText("No script has been loaded");
+        ui->editScript->setText(tr("Create new script"));
+        ui->name->setText(tr("No script has been loaded"));
         return;
     }
 
     _eelParser->loadFile(path);
     ui->name->setText(_eelParser->getDescription());
-    ui->editScript->setText("Edit script");
+    ui->editScript->setText(tr("Edit script"));
 
     EELProperties props = _eelParser->getProperties();
 
@@ -233,7 +233,7 @@ void LiveprogSelectionWidget::loadProperties(const QString& path)
     if (props.isEmpty())
     {
         QLabel *lbl = new QLabel(this);
-        lbl->setText("No customizable parameters");
+        lbl->setText(tr("No customizable parameters"));
         ui->ui_container->layout()->addWidget(lbl);
         ui->reset->hide();
     }

@@ -89,7 +89,7 @@ void FileSelectionWidget::enumerateFiles()
     if (files.empty())
     {
         QListWidgetItem *placeholder = new QListWidgetItem;
-        placeholder->setText("No supported files found");
+        placeholder->setText(tr("No supported files found"));
         placeholder->setFlags(placeholder->flags() & ~Qt::ItemIsEnabled);
         ui->fileview->addItem(placeholder);
     }

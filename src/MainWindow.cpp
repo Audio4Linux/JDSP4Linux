@@ -138,7 +138,7 @@ MainWindow::MainWindow(bool     statupInTray,
     {
         connect(&PresetManager::instance(), &PresetManager::wantsToWriteConfig, this, &MainWindow::applyConfig);
         connect(&PresetManager::instance(), &PresetManager::presetAutoloaded, this, [this](const QString& device){
-            ui->info->setAnimatedText(QString("%1 connected - Preset loaded automatically").arg(device), true);
+            ui->info->setAnimatedText(tr("%1 connected - Preset loaded automatically").arg(device), true);
         });
 
         connect(_audioService, &IAudioService::outputDeviceChanged, &PresetManager::instance(), &PresetManager::onOutputDeviceChanged);
@@ -157,8 +157,8 @@ MainWindow::MainWindow(bool     statupInTray,
             }
             else
             {
-                QMessageBox::critical(_eelEditor, "Cannot execute",
-                                      QString("The current EEL file (at '%1') does not exist anymore on the filesystem. Please reopen the file manually.").arg(path));
+                QMessageBox::critical(_eelEditor, tr("Cannot execute script"),
+                                      tr("The current EEL file (at '%1') does not exist anymore on the filesystem. Please reopen the file manually.").arg(path));
                 return;
             }
 
@@ -389,12 +389,12 @@ MainWindow::MainWindow(bool     statupInTray,
         installUnitData();
 
         if (debuggerIsAttached() || system("which ddctoolbox > /dev/null 2>&1")) { // Workaround: do not call system() when GDB is attached
-            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, [this]{
+            connect(ui->ddctoolbox_install, this, &QAbstractButton::clicked, [this]{
                 DesktopServices::openUrl("https://github.com/thepbone/DDCToolbox", this);
             });
         } else {
-            ui->ddctoolbox_install->setText("Launch application");
-            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, []{
+            ui->ddctoolbox_install->setText(tr("Launch application"));
+            connect(ui->ddctoolbox_install, this, &QAbstractButton::clicked, []{
                 QProcess::startDetached("ddctoolbox", QStringList());
             });
         }

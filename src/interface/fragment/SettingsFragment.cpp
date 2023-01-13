@@ -188,7 +188,7 @@ void SettingsFragment::refreshDevices()
 
     if (notFound)
     {
-        QString name = QString("Unknown (%1)").arg(current);
+        QString name = QString(tr("Unknown (%1)")).arg(current);
         ui->dev_select->addItem(name, current);
         ui->dev_select->setCurrentText(name);
     }
@@ -252,7 +252,7 @@ void SettingsFragment::refreshAll()
 
     ui->crashShareAllow->setChecked(AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
 
-    ui->aeqStatus->setText(AeqPackageManager().isPackageInstalled() ? "installed" : "not installed");
+    ui->aeqStatus->setText(AeqPackageManager().isPackageInstalled() ? tr("installed") : tr("not installed"));
 
 	refreshDevices();
 
@@ -273,11 +273,11 @@ void SettingsFragment::onSavePathsClicked()
 
 void SettingsFragment::onExtractAssetsClicked()
 {
-    auto result = QMessageBox::question(this, "Override liveprog scripts?",
-                                        "Do you want to override existing default liveprog scripts?\nIf they have been modified, they will be reset.");
+    auto result = QMessageBox::question(this, tr("Override liveprog scripts?"),
+                                        tr("Do you want to override existing default liveprog scripts?\nIf they have been modified, they will be reset."));
 
     int i = AssetManager::instance().extractAll(result == QMessageBox::Yes);
-    QMessageBox::information(this, "Extract assets", QString("%1 files have been restored").arg(i));
+    QMessageBox::information(this, tr("Extract assets"), tr("%1 files have been restored").arg(i));
 }
 
 void SettingsFragment::onDefaultDeviceSelected()
@@ -377,11 +377,10 @@ void SettingsFragment::onPaletteSelected(int index)
 
 void SettingsFragment::onBlocklistInvertToggled(bool state)
 {
-    auto invertInfo = "You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. "
-                      "You need to explicitly allow each app to get processed in the 'Apps' menu.\n";
-    auto button = QMessageBox::question(this, "Are you sure?",
-                          state ? invertInfo : ""
-                          "This action will reset your current blocklist or allowlist. Do you want to continue?");
+    auto invertInfo = tr("You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. "
+                      "You need to explicitly allow each app to get processed in the 'Apps' menu.\n");
+    auto button = QMessageBox::question(this, tr("Are you sure?"),
+                          state ? invertInfo : tr("This action will reset your current blocklist or allowlist. Do you want to continue?"));
 
     if(button == QMessageBox::Yes)
     {
@@ -409,7 +408,7 @@ void SettingsFragment::onTrayEditorCommitted()
 
 void SettingsFragment::onTrayEditorReset()
 {
-    QMessageBox::StandardButton reply = QMessageBox::question(this, "Warning", "Do you really want to restore the default menu layout?",
+    QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Warning"), tr("Do you really want to restore the default menu layout?"),
                                                               QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes)

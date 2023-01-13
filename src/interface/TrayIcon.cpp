@@ -39,7 +39,7 @@ void TrayIcon::createTrayIcon()
 {
 	menuOwner = new QWidget();
 	trayIcon  = new QSystemTrayIcon(this);
-	trayIcon->setToolTip("JamesDSP for Linux");
+    trayIcon->setToolTip(tr("JamesDSP for Linux"));
     trayIcon->setIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/icon.png")));
 
     connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconEventHandler);
@@ -93,7 +93,7 @@ void TrayIcon::updatePresetList()
 
 		if (files.count() < 1)
 		{
-			QAction *noPresets = new QAction("No presets found");
+            QAction *noPresets = new QAction(tr("No presets found"));
 			noPresets->setEnabled(false);
 			tray_presetMenu->addAction(noPresets);
 		}
@@ -137,7 +137,7 @@ void TrayIcon::updateConvolverList()
 
 		if (files.count() < 1)
 		{
-			QAction *noPresets = new QAction("No impulse responses found");
+            QAction *noPresets = new QAction(tr("No impulse responses found"));
 			noPresets->setEnabled(false);
 			tray_convMenu->addAction(noPresets);
 		}
@@ -202,7 +202,7 @@ QMenu* TrayIcon::buildAvailableActions()
 
     QMenu   *reverbMenu = new QMenu(tr("Re&verberation presets"));
 
-    QAction *reverbOff = new QAction("Off");
+    QAction *reverbOff = new QAction(tr("Off"));
     connect(reverbOff, &QAction::triggered, this, [ = ]() {
         emit loadReverbPreset("off");
     });

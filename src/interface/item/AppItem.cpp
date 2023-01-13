@@ -34,7 +34,7 @@ AppItem::AppItem(AppItemModel* _model, int id, QWidget *parent) :
     refresh(node.value());
 
     ui->blocklist->setText(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ?
-                           "Add to allowlist" : "Add to blocklist");
+                           tr("Add to allowlist") : tr("Add to blocklist"));
 
     connect(&AppConfig::instance(), &AppConfig::updated, this, &AppItem::onAppConfigUpdated);
     connect(model, &AppItemModel::appChanged, this, &AppItem::refresh);
