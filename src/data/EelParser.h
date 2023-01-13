@@ -52,7 +52,8 @@ private:
 enum class EELPropertyType
 {
 	Unknown,
-	NumberRange
+    NumberRange,
+    List
 };
 
 class EELBaseProperty
@@ -181,6 +182,39 @@ private:
 	TNum step;
 	TNum value;
 };
+
+class EELListProperty :
+    public EELNumberRangeProperty<int>
+{
+public:
+    EELListProperty(QString _key,
+                    QString _description,
+                    std::optional<int> _default,
+                    int _value,
+                    int _minimum,
+                    int _maximum,
+                    QStringList _options) : EELNumberRangeProperty(_key, _description, _default, _value, _minimum, _maximum, 1)
+    {
+        options = _options;
+        type = EELPropertyType::List;
+    }
+
+    ~EELListProperty() {}
+
+    const QStringList &getOptions() const
+    {
+        return options;
+    }
+
+    void setOptions(const QStringList &newOptions)
+    {
+        options = newOptions;
+    }
+
+private:
+    QStringList options;
+};
+
 
 inline bool qFloatCompare(float f1, float f2)
 {

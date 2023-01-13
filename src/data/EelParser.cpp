@@ -57,6 +57,48 @@ void EELParser::loadFile(QString path)
             }
         }
     }
+
+    // Parse list parameters
+    {
+        QRegularExpression descRe(R"((?<var>\w+):(?<def>-?\d+\.?\d*)?<(?<min>-?\d+\.?\d*),(?<max>-?\d+\.?\d*),?(?<step>-?\d+\.?\d*)?\{(?<opt>[^\}]*)\}>(?<desc>[\s\S][^\n]*))");
+        for (const auto &line : container.code.split("\n"))
+        {
+            auto matchIterator = descRe.globalMatch(line);
+
+            if (matchIterator.hasNext())
+            {
+                auto    match = matchIterator.next();
+                QString key   = match.captured("var");
+                QString min   = match.captured("min");
+                QString max   = match.captured("max");
+                QString step  = match.captured("step");
+                QString opt   = match.captured("opt");
+                QString def   = match.captured("def");
+                QString desc  = match.captured("desc").trimmed();
+
+                if (step.isEmpty())
+                {
+                    step = "1";
+                }
+
+                QString current = findVariable(key, EELPropertyType::List);
+
+                if (current == NORESULT)
+                {
+                    break;
+                }
+
+                bool defOk = false;
+                std::optional<float> defaultValue = def.toFloat(&defOk);
+                if(def.isEmpty() || !defOk)
+                    defaultValue = std::nullopt;
+
+                EELListProperty *prop = new EELListProperty(key, desc, defaultValue, current.toInt(),
+                                                            min.toInt(), max.toInt(), opt.split(',', Qt::SkipEmptyParts));
+                properties.append(prop);
+            }
+        }
+    }
 }
 
 bool EELParser::saveFile()
@@ -85,6 +127,11 @@ bool EELParser::loadDefaults()
             nr->setValue(nr->getDefault());
             manipulateProperty(prop);
         }
+        else if (prop->getType() == EELPropertyType::List) {
+            auto* list = dynamic_cast<EELListProperty*>(prop);
+            list->setValue(list->getDefault());
+            manipulateProperty(prop);
+        }
     }
     return true;
 }
@@ -98,12 +145,9 @@ bool EELParser::hasDefaultsDefined()
 
     for(const auto& prop : qAsConst(properties))
     {
-        if(prop->getType() == EELPropertyType::NumberRange)
+        if(prop->hasDefault())
         {
-            if(prop->hasDefault())
-            {
-                return true;
-            }
+            return true;
         }
     }
     return false;
@@ -127,6 +171,15 @@ bool EELParser::canLoadDefaults()
                 return true;
             }
         }
+        else if(prop->getType() == EELPropertyType::List)
+        {
+            auto* nr = dynamic_cast<EELListProperty*>(prop);
+
+            if(prop->hasDefault() && nr->getDefault() != nr->getValue())
+            {
+                return true;
+            }
+        }
     }
 
     return false;
@@ -146,11 +199,11 @@ QString EELParser::getDescription()
 {
 	QRegularExpression descRe(R"((?:^|(?<=\n))(?:desc:)([\s\S][^\n]*))");
 
-	for (const auto &line : container.code.split("\n"))
-	{
-		auto matchIterator = descRe.globalMatch(line);
+    for (const auto &line : container.code.split("\n"))
+    {
+        auto matchIterator = descRe.globalMatch(line);
 
-		if (matchIterator.hasNext())
+        if (matchIterator.hasNext())
 		{
 			auto match = matchIterator.next();
 			return match.captured(1).trimmed();
@@ -185,6 +238,15 @@ bool EELParser::manipulateProperty(EELBaseProperty *propbase)
 		bool save_res    = saveFile();
 		return replace_res && save_res;
 	}
+    else if (propbase->getType() == EELPropertyType::List)
+    {
+        EELListProperty *prop = dynamic_cast<EELListProperty*>(propbase);
+        QString          value = QString::number((int) prop->getValue());
+
+        bool replace_res = replaceVariable(prop->getKey(), value, prop->getType());
+        bool save_res    = saveFile();
+        return replace_res && save_res;
+    }
 
 	return false;
 }
@@ -194,7 +256,7 @@ bool EELParser::manipulateProperty(EELBaseProperty *propbase)
 QString EELParser::findVariable(QString         key,
                                 EELPropertyType type)
 {
-	if (type == EELPropertyType::NumberRange)
+    if (type == EELPropertyType::NumberRange || type == EELPropertyType::List)
 	{
 		QRegularExpression re(QString(R"(%1\s*=\s*(?<val>-?\d+\.?\d*)\s*;)").arg(key));
 
@@ -218,7 +280,7 @@ bool EELParser::replaceVariable(QString         key,
                                 QString         value,
                                 EELPropertyType type)
 {
-	if (type == EELPropertyType::NumberRange)
+    if (type == EELPropertyType::NumberRange || type == EELPropertyType::List)
 	{
 		QRegularExpression re(QString(R"(%1\s*=\s*(?<val>-?\d+\.?\d*)\s*;)").arg(key));
 		auto               matchIterator = re.globalMatch(container.code);
@@ -232,7 +294,7 @@ bool EELParser::replaceVariable(QString         key,
 			container.code.insert(start, value);
 			return true;
 		}
-	}
+    }
 
     return false;
 }

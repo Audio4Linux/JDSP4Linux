@@ -6,6 +6,7 @@
 #include "interface/event/ScrollFilter.h"
 #include "QAnimatedSlider.h"
 
+#include <QComboBox>
 #include <QLabel>
 #include <QMessageBox>
 #include <eeleditor.h>
@@ -199,7 +200,33 @@ void LiveprogSelectionWidget::loadProperties(const QString& path)
 
                 emit liveprogReloadRequested();
             });
+        }
+        else if (propbase->getType() == EELPropertyType::List)
+        {
+            EELListProperty *prop = dynamic_cast<EELListProperty*>(propbase);
+            QLabel          *lbl         = new QLabel(this);
+            QComboBox       *cbx         = new QComboBox(this);
+            lbl->setText(prop->getDescription());
 
+            cbx->addItems(prop->getOptions());
+            cbx->setProperty("isCustomEELProperty", true);
+
+            cbx->setObjectName(prop->getKey());
+            cbx->installEventFilter(new ScrollFilter);
+
+            ui->ui_container->layout()->addWidget(lbl);
+            ui->ui_container->layout()->addWidget(cbx);
+
+            connect(cbx, qOverload<int>(&QComboBox::currentIndexChanged), [this, prop](int index) {
+                if(index < prop->getMinimum() || index > prop->getMaximum())
+                    return;
+
+                prop->setValue(index);
+                _eelParser->manipulateProperty(prop);
+                ui->reset->setEnabled(_eelParser->canLoadDefaults());
+
+                emit liveprogReloadRequested();
+            });
         }
     }
 
