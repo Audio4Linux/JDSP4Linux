@@ -389,12 +389,12 @@ MainWindow::MainWindow(bool     statupInTray,
         installUnitData();
 
         if (debuggerIsAttached() || system("which ddctoolbox > /dev/null 2>&1")) { // Workaround: do not call system() when GDB is attached
-            connect(ui->ddctoolbox_install, this, &QAbstractButton::clicked, [this]{
+            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, this, [this]{
                 DesktopServices::openUrl("https://github.com/thepbone/DDCToolbox", this);
             });
         } else {
             ui->ddctoolbox_install->setText(tr("Launch application"));
-            connect(ui->ddctoolbox_install, this, &QAbstractButton::clicked, []{
+            connect(ui->ddctoolbox_install, &QAbstractButton::clicked, this, []{
                 QProcess::startDetached("ddctoolbox", QStringList());
             });
         }
