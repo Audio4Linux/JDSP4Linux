@@ -10,3 +10,5 @@
 [submodule "src/subprojects/LiquidEqualizerWidget"]
 	path = src/subprojects/LiquidEqualizerWidget
 	url = https://github.com/ThePBone/LiquidEqualizerWidget.git
+[submodule "src/subprojects/EELEditor/"]
+	url = https://github.com/ThePBone/LiveprogIDE
