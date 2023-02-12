@@ -302,7 +302,7 @@ sudo chmod 755 /usr/local/bin/jamesdsp
 Create a menu entry
 
 ```bash
-sudo cat <<EOT >> /usr/share/applications/jamesdsp.desktop
+sudo sh -c 'sudo cat <<EOT >> /usr/share/applications/jamesdsp-test.desktop
 [Desktop Entry]
 Name=JamesDSP
 GenericName=Audio effect processor
@@ -314,7 +314,7 @@ Icon=/usr/share/pixmaps/jamesdsp.png
 StartupNotify=false
 Terminal=false
 Type=Application
-EOT
+EOT'
 ```
 
 Download icon
