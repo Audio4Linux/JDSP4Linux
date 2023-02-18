@@ -180,6 +180,7 @@ DISTFILES += utils/dbus/manifest.xml
 
 RESOURCES += \
     ../resources/resources.qrc
+    ../translations.qrc
 
 # Default rules for deployment.
 isEmpty(PREFIX){
