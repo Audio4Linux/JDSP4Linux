@@ -276,17 +276,17 @@ MainWindow::MainWindow(bool     statupInTray,
         connect(_styleHelper, &StyleHelper::iconColorChanged, this, [this](bool white){
             if (white)
             {
-                ui->set->setIcon(QPixmap(":/icons/settings-white.svg"));
-                ui->cpreset->setIcon(QPixmap(":/icons/queue-white.svg"));
-                ui->toolButton->setIcon(QPixmap(":/icons/menu-white.svg"));
-                ui->disableFX->setIcon(QPixmap(":/icons/power-white.svg"));
+                ui->set->setIcon(QIcon(":/icons/settings-white.svg"));
+                ui->cpreset->setIcon(QIcon(":/icons/queue-white.svg"));
+                ui->toolButton->setIcon(QIcon(":/icons/menu-white.svg"));
+                ui->disableFX->setIcon(QIcon(":/icons/power-white.svg"));
             }
             else
             {
-                ui->set->setIcon(QPixmap(":/icons/settings.svg"));
-                ui->cpreset->setIcon(QPixmap(":/icons/queue.svg"));
-                ui->toolButton->setIcon(QPixmap(":/icons/menu.svg"));
-                ui->disableFX->setIcon(QPixmap(":/icons/power.svg"));
+                ui->set->setIcon(QIcon(":/icons/settings.svg"));
+                ui->cpreset->setIcon(QIcon(":/icons/queue.svg"));
+                ui->toolButton->setIcon(QIcon(":/icons/menu.svg"));
+                ui->disableFX->setIcon(QIcon(":/icons/power.svg"));
             }
         });
     }
