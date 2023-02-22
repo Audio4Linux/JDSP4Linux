@@ -353,6 +353,11 @@ MainWindow::MainWindow(bool     statupInTray,
         {
             ui->roompresets->addItem(preset);
         }
+
+        for (const auto &preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().keys())
+        {
+            ui->crossfeed_mode->addItem(preset);
+        }
     }
 
     // Connect remaining signals
@@ -885,7 +890,7 @@ void MainWindow::onEqPresetUpdated()
 
 void MainWindow::onBs2bPresetUpdated()
 {
-    if (ui->crossfeed_mode->currentText() == "..." || _blockApply)
+    if (_blockApply)
     {
         return;
     }

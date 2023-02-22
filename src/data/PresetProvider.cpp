@@ -97,13 +97,13 @@ namespace PresetProvider
 	const QMap<BS2B_UNIT> BS2B::BS2B_LOOKUP_TABLE()
 	{
 		InitializableQMap<BS2B_UNIT> table;
-        table << QPair<BS2B_UNIT>("bs2b_custom", 99)
-              << QPair<BS2B_UNIT>("bs2b_weak", 0)
-              << QPair<BS2B_UNIT>("bs2b_strong", 1)
-              << QPair<BS2B_UNIT>("bs2b_outofhead", 2)
-              << QPair<BS2B_UNIT>("surround_1", 3)
-              << QPair<BS2B_UNIT>("surround_2", 4)
-              << QPair<BS2B_UNIT>("joe0bloggs_realistic_surround", 5);
+        table << QPair<BS2B_UNIT>(QObject::tr("BS2B Custom"), 99)
+              << QPair<BS2B_UNIT>(QObject::tr("BS2B Weak"), 0)
+              << QPair<BS2B_UNIT>(QObject::tr("BS2B Strong"), 1)
+              << QPair<BS2B_UNIT>(QObject::tr("Out of head"), 2)
+              << QPair<BS2B_UNIT>(QObject::tr("Surround 1"), 3)
+              << QPair<BS2B_UNIT>(QObject::tr("Surround 2"), 4)
+              << QPair<BS2B_UNIT>(QObject::tr("Joe0Bloggs Realistic surround"), 5);
 		return std::move(table);
 	}
 
@@ -113,19 +113,23 @@ namespace PresetProvider
 
 		if (table.contains(preset))
 		{
-			return table[preset];
+            for (const auto& [key, value] : table.toStdMap())
+            {
+                if (key == preset)
+                {
+                    return value;
+                }
+            }
 		}
-		else
-		{
-            return table["bs2b_weak"];
-		}
+
+        return 0; // bs2b_weak
 	}
 
 	const QString BS2B::reverseLookup(int data)
 	{
 		auto table = BS2B_LOOKUP_TABLE();
 
-		for (auto key : table.keys())
+        for (const auto& key : table.keys())
 		{
 			if (table[key] == data)
 			{
@@ -133,7 +137,7 @@ namespace PresetProvider
 			}
 		}
 
-        return "bs2b_weak";
+        return table.keys().first(); // fallback
 	}
 
     const Reverb::sf_reverb_preset_data Reverb::lookupPreset(int preset)

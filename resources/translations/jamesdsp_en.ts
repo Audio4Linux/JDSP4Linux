@@ -842,7 +842,7 @@ Please select another one</source>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="454"/>
-        <location filename="../../src/MainWindow.ui" line="545"/>
+        <location filename="../../src/MainWindow.ui" line="510"/>
         <source>Crossfeed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -852,379 +852,344 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="489"/>
-        <source>BS2B Weak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="494"/>
-        <source>BS2B Strong</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="499"/>
-        <source>BS2B Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="504"/>
-        <source>Out of head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="509"/>
-        <source>Surround 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="514"/>
-        <source>Surround 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="519"/>
-        <source>Joe0Bloggs Realistic surround</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/MainWindow.ui" line="527"/>
+        <location filename="../../src/MainWindow.ui" line="492"/>
         <source>Custom BS2B parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="568"/>
+        <location filename="../../src/MainWindow.ui" line="533"/>
         <source>Cut frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="623"/>
+        <location filename="../../src/MainWindow.ui" line="588"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="626"/>
+        <location filename="../../src/MainWindow.ui" line="591"/>
         <source>Soundstage wideness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="647"/>
+        <location filename="../../src/MainWindow.ui" line="612"/>
         <source>Widen level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="692"/>
+        <location filename="../../src/MainWindow.ui" line="657"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="718"/>
+        <location filename="../../src/MainWindow.ui" line="683"/>
         <source>Enable reverberation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="738"/>
+        <location filename="../../src/MainWindow.ui" line="703"/>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="771"/>
-        <location filename="../../src/MainWindow.ui" line="2125"/>
+        <location filename="../../src/MainWindow.ui" line="736"/>
+        <location filename="../../src/MainWindow.ui" line="2090"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="785"/>
+        <location filename="../../src/MainWindow.ui" line="750"/>
         <source>Oversampling factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="805"/>
+        <location filename="../../src/MainWindow.ui" line="770"/>
         <source>Early reflection factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="828"/>
+        <location filename="../../src/MainWindow.ui" line="793"/>
         <source>Early reflection amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="845"/>
+        <location filename="../../src/MainWindow.ui" line="810"/>
         <source>Early reflection width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="868"/>
+        <location filename="../../src/MainWindow.ui" line="833"/>
         <source>Lowpass cutoff (Input)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="888"/>
+        <location filename="../../src/MainWindow.ui" line="853"/>
         <source>Lowpass cutoff (Bass)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="908"/>
+        <location filename="../../src/MainWindow.ui" line="873"/>
         <source>Lowpass cutoff (Damp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="928"/>
+        <location filename="../../src/MainWindow.ui" line="893"/>
         <source>Lowpass cutoff (Output)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="955"/>
+        <location filename="../../src/MainWindow.ui" line="920"/>
         <source>Final wet mix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="962"/>
+        <location filename="../../src/MainWindow.ui" line="927"/>
         <source>Final dry mix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="969"/>
+        <location filename="../../src/MainWindow.ui" line="934"/>
         <source>Reverb wetness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="976"/>
+        <location filename="../../src/MainWindow.ui" line="941"/>
         <source>Width L/R mix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="983"/>
+        <location filename="../../src/MainWindow.ui" line="948"/>
         <source>LFO wander amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="990"/>
+        <location filename="../../src/MainWindow.ui" line="955"/>
         <source>LFO spin amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="997"/>
+        <location filename="../../src/MainWindow.ui" line="962"/>
         <source>Time decay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1004"/>
+        <location filename="../../src/MainWindow.ui" line="969"/>
         <source>Delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1011"/>
+        <location filename="../../src/MainWindow.ui" line="976"/>
         <source>Bass boost</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1159"/>
+        <location filename="../../src/MainWindow.ui" line="1124"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1251"/>
+        <location filename="../../src/MainWindow.ui" line="1216"/>
         <source>Enable EQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1271"/>
+        <location filename="../../src/MainWindow.ui" line="1236"/>
         <source>Presets...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1291"/>
+        <location filename="../../src/MainWindow.ui" line="1256"/>
         <source>Filter type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1295"/>
+        <location filename="../../src/MainWindow.ui" line="1260"/>
         <source>Minimum phase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1300"/>
+        <location filename="../../src/MainWindow.ui" line="1265"/>
         <source>Linear phase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1320"/>
+        <location filename="../../src/MainWindow.ui" line="1285"/>
         <source>Interpolator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1323"/>
+        <location filename="../../src/MainWindow.ui" line="1288"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1327"/>
+        <location filename="../../src/MainWindow.ui" line="1292"/>
         <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1332"/>
+        <location filename="../../src/MainWindow.ui" line="1297"/>
         <source>Modified Hiroshi Akima spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1352"/>
+        <location filename="../../src/MainWindow.ui" line="1317"/>
         <source>Reset EQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1380"/>
+        <location filename="../../src/MainWindow.ui" line="1345"/>
         <source>Fixed bands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1396"/>
+        <location filename="../../src/MainWindow.ui" line="1361"/>
         <source>Flexible bands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1428"/>
+        <location filename="../../src/MainWindow.ui" line="1393"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1453"/>
-        <location filename="../../src/MainWindow.ui" line="1775"/>
+        <location filename="../../src/MainWindow.ui" line="1418"/>
+        <location filename="../../src/MainWindow.ui" line="1740"/>
         <source>Filesystem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1475"/>
+        <location filename="../../src/MainWindow.ui" line="1440"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1514"/>
+        <location filename="../../src/MainWindow.ui" line="1479"/>
         <source>Enable convolver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1521"/>
+        <location filename="../../src/MainWindow.ui" line="1486"/>
         <source>IR optimization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1541"/>
+        <location filename="../../src/MainWindow.ui" line="1506"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1546"/>
+        <location filename="../../src/MainWindow.ui" line="1511"/>
         <source>Shrink</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1551"/>
+        <location filename="../../src/MainWindow.ui" line="1516"/>
         <source>Minimum phase transform and shrink</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1559"/>
+        <location filename="../../src/MainWindow.ui" line="1524"/>
         <source>Adv. waveform editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1578"/>
+        <location filename="../../src/MainWindow.ui" line="1543"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1624"/>
+        <location filename="../../src/MainWindow.ui" line="1589"/>
         <source>Channels:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1644"/>
+        <location filename="../../src/MainWindow.ui" line="1609"/>
         <source>Samples:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1703"/>
+        <location filename="../../src/MainWindow.ui" line="1668"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1750"/>
+        <location filename="../../src/MainWindow.ui" line="1715"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1797"/>
+        <location filename="../../src/MainWindow.ui" line="1762"/>
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1838"/>
+        <location filename="../../src/MainWindow.ui" line="1803"/>
         <source>Create</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1862"/>
+        <location filename="../../src/MainWindow.ui" line="1827"/>
         <source>Create your custom DDC files using DDCToolbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1872"/>
+        <location filename="../../src/MainWindow.ui" line="1837"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1928"/>
+        <location filename="../../src/MainWindow.ui" line="1893"/>
         <source>View installation instructions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1984"/>
+        <location filename="../../src/MainWindow.ui" line="1949"/>
         <source>Enable ViPER-DDC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2007"/>
+        <location filename="../../src/MainWindow.ui" line="1972"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2029"/>
+        <location filename="../../src/MainWindow.ui" line="1994"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2067"/>
+        <location filename="../../src/MainWindow.ui" line="2032"/>
         <source>Custom Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2070"/>
+        <location filename="../../src/MainWindow.ui" line="2035"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2096"/>
+        <location filename="../../src/MainWindow.ui" line="2061"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2102"/>
+        <location filename="../../src/MainWindow.ui" line="2067"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2122"/>
+        <location filename="../../src/MainWindow.ui" line="2087"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2180"/>
+        <location filename="../../src/MainWindow.ui" line="2145"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2183"/>
+        <location filename="../../src/MainWindow.ui" line="2148"/>
         <source>Passthrough</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1284,77 +1249,77 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="382"/>
+        <location filename="../../src/MainWindow.cpp" line="387"/>
         <source>Bass/Misc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="383"/>
+        <location filename="../../src/MainWindow.cpp" line="388"/>
         <source>Sound Positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="384"/>
+        <location filename="../../src/MainWindow.cpp" line="389"/>
         <source>Reverb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="385"/>
+        <location filename="../../src/MainWindow.cpp" line="390"/>
         <source>Equalizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="386"/>
+        <location filename="../../src/MainWindow.cpp" line="391"/>
         <source>Convolver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="387"/>
+        <location filename="../../src/MainWindow.cpp" line="392"/>
         <source>DDC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="388"/>
+        <location filename="../../src/MainWindow.cpp" line="393"/>
         <source>Liveprog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="389"/>
+        <location filename="../../src/MainWindow.cpp" line="394"/>
         <source>Graphic EQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="401"/>
+        <location filename="../../src/MainWindow.cpp" line="406"/>
         <source>Launch application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="540"/>
+        <location filename="../../src/MainWindow.cpp" line="545"/>
         <source>Reset Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="540"/>
+        <location filename="../../src/MainWindow.cpp" line="545"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="564"/>
+        <location filename="../../src/MainWindow.cpp" line="569"/>
         <source>Load custom audio.conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="576"/>
+        <location filename="../../src/MainWindow.cpp" line="581"/>
         <source>Save current audio.conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1087"/>
+        <location filename="../../src/MainWindow.cpp" line="1092"/>
         <source>Advanced waveform editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1088"/>
+        <location filename="../../src/MainWindow.cpp" line="1093"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1694,6 +1659,41 @@ Please create one first before adding a new rule.</source>
         <location filename="../../src/utils/DesktopServices.cpp" line="21"/>
         <source>Failed to open URL with default browser.
  Please copy this URL manually: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="100"/>
+        <source>BS2B Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="101"/>
+        <source>BS2B Weak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="102"/>
+        <source>BS2B Strong</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="103"/>
+        <source>Out of head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="104"/>
+        <source>Surround 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="105"/>
+        <source>Surround 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="106"/>
+        <source>Joe0Bloggs Realistic surround</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

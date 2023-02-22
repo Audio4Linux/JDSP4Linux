@@ -44,7 +44,7 @@ public:
 	class BS2B
 	{
 public:
-		static const QMap<BS2B_UNIT> BS2B_LOOKUP_TABLE();
+        static const QMap<BS2B_UNIT> BS2B_LOOKUP_TABLE();
 		static int                   lookupPreset(const QString &preset);
 		static const QString         reverseLookup(int data);
 
