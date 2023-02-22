@@ -38,19 +38,19 @@ public:
         switch(node.state)
         {
             case PW_NODE_STATE_ERROR:
-                state = "error";
+                state = QObject::tr("error");
                 break;
             case PW_NODE_STATE_CREATING:
-                state = "creating";
+                state = QObject::tr("creating");
                 break;
             case PW_NODE_STATE_SUSPENDED:
-                state = "suspended";
+                state = QObject::tr("suspended");
                 break;
             case PW_NODE_STATE_IDLE:
-                state = "idle";
+                state = QObject::tr("idle");
                 break;
             case PW_NODE_STATE_RUNNING:
-                state = "running";
+                state = QObject::tr("running");
                 break;
         }
     }
@@ -73,11 +73,11 @@ public:
         volume = node.volume;
 
         if(node.wants_to_play)
-            state = "running";
+            state = QObject::tr("running");
         else if(node.connected)
-            state = "idle";
+            state = QObject::tr("idle");
         else
-            state = "not connected";
+            state = QObject::tr("not connected");
     }
 #endif
 

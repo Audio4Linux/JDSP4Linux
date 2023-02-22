@@ -98,6 +98,7 @@ This will override your current GraphicEQ configuration.</source>
     <message>
         <location filename="../../src/interface/item/AppItem.ui" line="84"/>
         <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
+        <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
         <source>Add to blocklist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -118,7 +119,23 @@ This will override your current GraphicEQ configuration.</source>
     </message>
     <message>
         <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
+        <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
         <source>Add to allowlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
+        <source>Rate: %1Hz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
+        <source>Latency: %1ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
+        <source>Format: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1209,42 +1226,42 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="257"/>
+        <location filename="../../src/MainWindow.cpp" line="275"/>
         <source>Apps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="258"/>
+        <location filename="../../src/MainWindow.cpp" line="276"/>
         <source>Driver status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="262"/>
+        <location filename="../../src/MainWindow.cpp" line="280"/>
         <source>Relink audio pipeline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="264"/>
+        <location filename="../../src/MainWindow.cpp" line="282"/>
         <source>Reset to defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="265"/>
+        <location filename="../../src/MainWindow.cpp" line="283"/>
         <source>Load from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="266"/>
+        <location filename="../../src/MainWindow.cpp" line="284"/>
         <source>Save to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="268"/>
+        <location filename="../../src/MainWindow.cpp" line="286"/>
         <source>Open LiveprogIDE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="270"/>
+        <location filename="../../src/MainWindow.cpp" line="288"/>
         <source>What&apos;s this... (Select UI element)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1314,12 +1331,12 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1092"/>
+        <location filename="../../src/MainWindow.cpp" line="1096"/>
         <source>Advanced waveform editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1093"/>
+        <location filename="../../src/MainWindow.cpp" line="1097"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1697,98 +1714,130 @@ Please create one first before adding a new rule.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Small hall 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Small hall 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Medium hall 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Medium hall 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Large hall 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Large hall 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Small room 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Small room 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Medium room 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Medium room 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Large room 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Large room 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Medium ER 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Medium ER 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Plate high</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Plate low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Long reverb 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Long reverb 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="41"/>
+        <source>error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="44"/>
+        <source>creating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="47"/>
+        <source>suspended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="50"/>
+        <location filename="../../src/audio/base/AppNode.h" line="78"/>
+        <source>idle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="53"/>
+        <location filename="../../src/audio/base/AppNode.h" line="76"/>
+        <source>running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="80"/>
+        <source>not connected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

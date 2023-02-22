@@ -99,6 +99,7 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
     <message>
         <location filename="../../src/interface/item/AppItem.ui" line="84"/>
         <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
+        <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
         <source>Add to blocklist</source>
         <translation>Zur Blockliste hinzufügen</translation>
     </message>
@@ -119,8 +120,24 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
     </message>
     <message>
         <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
+        <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
         <source>Add to allowlist</source>
         <translation>Zur Erlaubnisliste hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
+        <source>Rate: %1Hz</source>
+        <translation>Abtastrate: %1Hz</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
+        <source>Latency: %1ms</source>
+        <translation>Latenz: %1ms</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
+        <source>Format: %1</source>
+        <translation>Format: %1</translation>
     </message>
 </context>
 <context>
@@ -561,7 +578,7 @@ Doch bevor du JamesDSP für Linux testen kannst, müssen wir einige Anpassungen 
     <message>
         <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2491"/>
         <source>No, don&apos;t share any data</source>
-        <translation>Nein, keine Daten teilen&apos;t</translation>
+        <translation>Nein, keine Daten teilen</translation>
     </message>
     <message>
         <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2944"/>
@@ -1166,7 +1183,7 @@ Bitte wählen Sie eine andere</translation>
     <message>
         <location filename="../../src/MainWindow.ui" line="1393"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Konvolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitionierter Konvolver (Auto-Segmentierung-Konvolution). Der Konvolver nimmt die Signaleigenschaften der Impulsantwort auf und wendet diese in Echtzeit auf den eingehenden Ton an.&lt;/p&gt;&lt;p&gt;Unterstützt mono, stereo, full/true Stereo (LL, LR, RL, RR) Impulsantworten.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Optimierung der Impulsantwort:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dieser Parameter versucht, die Länge der Impulsantwort so weit wie möglich zu verringern; es geht darum, die Latenz so weit wie möglich zu reduzieren und möglicherweise den Stromverbrauch zu verringern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitionierter Convolver (Auto-Segmentierung-Convolution). Der Convolver nimmt die Signaleigenschaften der Impulsantwort auf und wendet diese in Echtzeit auf den eingehenden Ton an.&lt;/p&gt;&lt;p&gt;Unterstützt mono, stereo, full/true Stereo (LL, LR, RL, RR) Impulsantworten.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Optimierung der Impulsantwort:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dieser Parameter versucht, die Länge der Impulsantwort so weit wie möglich zu verringern; es geht darum, die Latenz so weit wie möglich zu reduzieren und möglicherweise den Stromverbrauch zu verringern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1418"/>
@@ -1182,7 +1199,7 @@ Bitte wählen Sie eine andere</translation>
     <message>
         <location filename="../../src/MainWindow.ui" line="1479"/>
         <source>Enable convolver</source>
-        <translation>Konvolver aktivieren</translation>
+        <translation>Convolver aktivieren</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1486"/>
@@ -1325,42 +1342,42 @@ Bitte wählen Sie eine andere</translation>
         <translation>Die aktuelle EEL-Datei (bei &apos;%1&apos;) existiert nicht mehr auf dem Dateisystem. Bitte öffnen Sie die Datei manuell erneut.</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="257"/>
+        <location filename="../../src/MainWindow.cpp" line="275"/>
         <source>Apps</source>
         <translation>Apps</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="258"/>
+        <location filename="../../src/MainWindow.cpp" line="276"/>
         <source>Driver status</source>
         <translation>Treiberstatus</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="262"/>
+        <location filename="../../src/MainWindow.cpp" line="280"/>
         <source>Relink audio pipeline</source>
         <translation>Audio-Pipeline neu laden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="264"/>
+        <location filename="../../src/MainWindow.cpp" line="282"/>
         <source>Reset to defaults</source>
         <translation>Auf Standard zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="265"/>
+        <location filename="../../src/MainWindow.cpp" line="283"/>
         <source>Load from file</source>
         <translation>Aus Datei laden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="266"/>
+        <location filename="../../src/MainWindow.cpp" line="284"/>
         <source>Save to file</source>
         <translation>In Datei speichern</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="268"/>
+        <location filename="../../src/MainWindow.cpp" line="286"/>
         <source>Open LiveprogIDE</source>
         <translation>LiveprogIDE öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="270"/>
+        <location filename="../../src/MainWindow.cpp" line="288"/>
         <source>What&apos;s this... (Select UI element)</source>
         <translation>Was ist das? (UI-Element wählen)</translation>
     </message>
@@ -1387,7 +1404,7 @@ Bitte wählen Sie eine andere</translation>
     <message>
         <location filename="../../src/MainWindow.cpp" line="391"/>
         <source>Convolver</source>
-        <translation>Konvolver</translation>
+        <translation>Convolver</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.cpp" line="392"/>
@@ -1430,12 +1447,12 @@ Bitte wählen Sie eine andere</translation>
         <translation>Aktuelle audio.conf speichern</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1092"/>
+        <location filename="../../src/MainWindow.cpp" line="1096"/>
         <source>Advanced waveform editing</source>
         <translation>Erweiterte Wellenform-Bearbeitung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1093"/>
+        <location filename="../../src/MainWindow.cpp" line="1097"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1906,99 +1923,131 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
         <translation>Joe0Bloggs Realistischer Surround</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Default</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Small hall 1</source>
         <translation>Kleine Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Small hall 2</source>
         <translation>Kleine Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Medium hall 1</source>
         <translation>Mittelgroße Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
         <source>Medium hall 2</source>
         <translation>Mittelgroße Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Large hall 1</source>
         <translation>Große Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Large hall 2</source>
         <translation>Große Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Small room 1</source>
         <translation>Kleiner Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Small room 2</source>
         <translation>Kleiner Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
         <source>Medium room 1</source>
         <translation>Mittelgroßer Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Medium room 2</source>
         <translation>Mittelgroßer Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Large room 1</source>
         <translation>Großer Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Large room 2</source>
         <translation>Großer Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Medium ER 1</source>
         <translation>Mittelgroßer ER 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
         <source>Medium ER 2</source>
         <translation>Mittelgroßer ER 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Plate high</source>
         <translation>Platte hoch</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Plate low</source>
         <translation>Platte tief</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Long reverb 1</source>
         <translation>Langer Hall 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
         <source>Long reverb 2</source>
         <translation>Langer Hall 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="41"/>
+        <source>error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="44"/>
+        <source>creating</source>
+        <translation>wird erstellt...</translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="47"/>
+        <source>suspended</source>
+        <translation>unterbrochen</translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="50"/>
+        <location filename="../../src/audio/base/AppNode.h" line="78"/>
+        <source>idle</source>
+        <translation>inaktiv</translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="53"/>
+        <location filename="../../src/audio/base/AppNode.h" line="76"/>
+        <source>running</source>
+        <translation>aktiv</translation>
+    </message>
+    <message>
+        <location filename="../../src/audio/base/AppNode.h" line="80"/>
+        <source>not connected</source>
+        <translation>nicht verbunden</translation>
     </message>
 </context>
 <context>
@@ -2377,7 +2426,7 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
     <message>
         <location filename="../../src/interface/TrayIcon.cpp" line="25"/>
         <source>&amp;Convolver bookmarks</source>
-        <translation>&amp;Konvolver-Lesezeichen</translation>
+        <translation>&amp;Convolver-Lesezeichen</translation>
     </message>
     <message>
         <location filename="../../src/interface/TrayIcon.cpp" line="42"/>

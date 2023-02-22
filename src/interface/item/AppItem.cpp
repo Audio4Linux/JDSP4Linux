@@ -53,7 +53,7 @@ void AppItem::onAppConfigUpdated(const AppConfig::Key& key, const QVariant& valu
 {
     switch (key) {
     case AppConfig::AudioAppBlocklistInvert: {
-        ui->blocklist->setText(value.toBool() ? "Add to allowlist" : "Add to blocklist");
+        ui->blocklist->setText(value.toBool() ? tr("Add to allowlist") : tr("Add to blocklist"));
         auto node = model->findByNodeId(id);
         if(!node.has_value())
         {
@@ -77,9 +77,9 @@ void AppItem::refresh(const AppNode& node)
     }
 
     ui->name->setText(node.name);
-    ui->rate->setText("Rate: " + QString::number(node.rate) + "Hz");
-    ui->latency->setText("Latency: " + QString::number(node.latency * 1000, 'f', 2) + "ms");
-    ui->format->setText("Format: " + node.format);
+    ui->rate->setText(tr("Rate: %1Hz").arg(QString::number(node.rate)));
+    ui->latency->setText(tr("Latency: %1ms").arg(QString::number(node.latency * 1000, 'f', 2)));
+    ui->format->setText(tr("Format: %1").arg(node.format));
     ui->state->setText(node.state);
     ui->icon->setPixmap(QIcon::fromTheme(node.app_icon_name, QIcon(":/icons/Procedure_16x.svg")).pixmap(QSize(16, 16)));
 
