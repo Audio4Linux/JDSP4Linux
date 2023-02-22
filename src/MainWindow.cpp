@@ -267,7 +267,7 @@ MainWindow::MainWindow(bool     statupInTray,
         menu->addSeparator();
         menu->addAction(tr("Open LiveprogIDE"), _eelEditor, &EELEditor::show);
         menu->addSeparator();
-        menu->addAction(tr("What's this..."), this, []()
+        menu->addAction(tr("What's this... (Select UI element)"), this, []()
         {
             QWhatsThis::enterWhatsThisMode();
         });
