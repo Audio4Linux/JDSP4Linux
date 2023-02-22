@@ -718,7 +718,7 @@ int TwoStageFFTConvolver1x1LoadImpulseResponse(TwoStageFFTConvolver1x1 *conv, un
 	while (irLen > 0 && fabsf(ir[irLen - 1]) < FLT_EPSILON)
 		--irLen;
 	if (irLen == 0)
-		return 1;
+		return 0;
 	if (conv->_headConvolver.bit)
 		TwoStageFFTConvolver1x1Free(conv);
 
@@ -772,10 +772,10 @@ int TwoStageFFTConvolver2x4x2LoadImpulseResponse(TwoStageFFTConvolver2x4x2 *conv
 		tailBlockSize = tmp;
 	}
 	// Ignore zeros at the end of the impulse response because they only waste computation time
-	while (irLen > 0 && fabsf(irLL[irLen - 1] + irLR[irLen - 1] + irRL[irLen - 1] + irRR[irLen - 1]) < (FLT_EPSILON * 4.0f))
+	while (irLen > 0 && (fabsf(irLL[irLen - 1]) + fabsf(irLR[irLen - 1]) + fabsf(irRL[irLen - 1]) + fabsf(irRR[irLen - 1])) < (FLT_EPSILON * 4.0f))
 		--irLen;
 	if (irLen == 0)
-		return 1;
+		return 0;
 
 	if (conv->_headConvolver.bit)
 		TwoStageFFTConvolver2x4x2Free(conv);
@@ -839,10 +839,10 @@ int TwoStageFFTConvolver2x2LoadImpulseResponse(TwoStageFFTConvolver2x2 *conv, un
 		tailBlockSize = tmp;
 	}
 	// Ignore zeros at the end of the impulse response because they only waste computation time
-	while (irLen > 0 && fabsf(irL[irLen - 1] + irR[irLen - 1]) < (FLT_EPSILON * 2.0f))
+	while (irLen > 0 && (fabsf(irL[irLen - 1]) + fabsf(irR[irLen - 1])) < (FLT_EPSILON * 2.0f))
 		--irLen;
 	if (irLen == 0)
-		return 1;
+		return 0;
 
 	if (conv->_headConvolver.bit)
 		TwoStageFFTConvolver2x2Free(conv);
@@ -906,10 +906,10 @@ int TwoStageFFTConvolver1x2LoadImpulseResponse(TwoStageFFTConvolver1x2 *conv, un
 		tailBlockSize = tmp;
 	}
 	// Ignore zeros at the end of the impulse response because they only waste computation time
-	while (irLen > 0 && fabsf(irL[irLen - 1] + irR[irLen - 1]) < (FLT_EPSILON * 2.0f))
+	while (irLen > 0 && (fabsf(irL[irLen - 1]) + fabsf(irR[irLen - 1])) < (FLT_EPSILON * 2.0f))
 		--irLen;
 	if (irLen == 0)
-		return 1;
+		return 0;
 
 	if (conv->_headConvolver.bit)
 		TwoStageFFTConvolver1x2Free(conv);

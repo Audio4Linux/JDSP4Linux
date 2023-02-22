@@ -104,23 +104,29 @@ int32_t configure(EffectDSPMain *dspmain, void* pCmdData, effect_buffer_access_e
     }
     if (in.mask & EFFECT_CONFIG_FORMAT)
     {
-        if (in.format != AUDIO_FORMAT_PCM_16_BIT)
-        {
-        	if (in.format == AUDIO_FORMAT_PCM_FLOAT)
-        		dspmain->formatFloatModeInt32Mode = 1;
-        	else if (in.format == AUDIO_FORMAT_PCM_32_BIT)
-        		dspmain->formatFloatModeInt32Mode = 2;
-        }
+        if (in.format == AUDIO_FORMAT_PCM_FLOAT)
+        	dspmain->formatFloatModeInt32Mode = 1;
+        else if (in.format == AUDIO_FORMAT_PCM_32_BIT)
+        	dspmain->formatFloatModeInt32Mode = 2;
+        else if (in.format == AUDIO_FORMAT_PCM_24_BIT_PACKED)
+        	dspmain->formatFloatModeInt32Mode = 3;
+        else if (in.format == AUDIO_FORMAT_PCM_8_24_BIT)
+        	dspmain->formatFloatModeInt32Mode = 4;
+        else if (in.format == AUDIO_FORMAT_PCM_16_BIT)
+        	dspmain->formatFloatModeInt32Mode = 0;
     }
     if (out.mask & EFFECT_CONFIG_FORMAT)
     {
-        if (out.format != AUDIO_FORMAT_PCM_16_BIT)
-        {
-        	if (out.format == AUDIO_FORMAT_PCM_FLOAT)
-        		dspmain->formatFloatModeInt32Mode = 1;
-        	else if (in.format == AUDIO_FORMAT_PCM_32_BIT)
-        		dspmain->formatFloatModeInt32Mode = 2;
-        }
+        if (out.format == AUDIO_FORMAT_PCM_FLOAT)
+        	dspmain->formatFloatModeInt32Mode = 1;
+        else if (out.format == AUDIO_FORMAT_PCM_32_BIT)
+        	dspmain->formatFloatModeInt32Mode = 2;
+        else if (out.format == AUDIO_FORMAT_PCM_24_BIT_PACKED)
+        	dspmain->formatFloatModeInt32Mode = 3;
+        else if (out.format == AUDIO_FORMAT_PCM_8_24_BIT)
+        	dspmain->formatFloatModeInt32Mode = 4;
+        else if (out.format == AUDIO_FORMAT_PCM_16_BIT)
+        	dspmain->formatFloatModeInt32Mode = 0;
     }
 #ifdef DEBUG
 	LOGW("I/O FMT = { %u, %u }", in.format, out.format);
@@ -667,6 +673,12 @@ int32_t EffectDSPMainProcess(EffectDSPMain *dspmain, audio_buffer_t *in, audio_b
 	case 2:
 		dspmain->jdsp.processInt32Multiplexd(&dspmain->jdsp, in->s32, out->s32, actualFrameCount);
 		break;
+	case 3:
+		dspmain->jdsp.processInt24PackedMultiplexd(&dspmain->jdsp, (uint8_t*)in->raw, (uint8_t*)out->raw, actualFrameCount);
+		break;
+	case 4:
+		dspmain->jdsp.processInt8_24Multiplexd(&dspmain->jdsp, in->s32, out->s32, actualFrameCount);
+		break;
 	}
 	return dspmain->mEnable ? 0 : -ENODATA;
 }
@@ -679,7 +691,7 @@ static effect_descriptor_t jamesdsp_descriptor =
 	EFFECT_FLAG_TYPE_INSERT | EFFECT_FLAG_INSERT_FIRST,
 	10,
 	1,
-	"JamesDSP v3.05",
+	"JamesDSP v3.12",
 	"James Fung"
 };
 __attribute__((constructor)) static void initialize(void)

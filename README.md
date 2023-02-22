@@ -1,6 +1,8 @@
-# JamesDSP (Audio Effect Digital Signal Processing library for Android)
+# JamesDSP (Cross-platform Audio Effect / Digital Signal Processing library)
 GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include Samsung, AOSP, Cyanogenmod, recent HTC and Huawei(arm64). 
 This app include many cool features.
+
+This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audio4Linux/JDSP4Linux) uses core library from current repo.
 
 ##### Features:
 
@@ -8,21 +10,20 @@ This app include many cool features.
    --> A highly automated multiband dynamic range adjusting effect
 
 2. Auto Bass Boost
-   --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arcordingly
+   --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arccordingly
 
 3. Reverb
    --> Progenitor 2 (Complicated IIR network)
 
 4. Interpolating FIR Equalizer
+
 5. Partitioned Convolver (Auto segmenting convolution)
    --> Support mono, stereo, full/true stereo(LL, LR, RL, RR) IR
 
 6. Live programmable DSP
    --> A effect that can compile EEL code into opcode, and do processing base on the compiled code.
 The EEL virtual machine had pre-built tons of advanced math routines and DSP function.
-Including: Basic C String manipulation functions, Linear algebra solver(Least square, inv(), pinv()), Mathematical optimization(linprog(), quadprog(), lsqlin()), polynomial roots solver(roots()), spectral processing(Short-time Fourier Transform), Constant Q Transform, multi-purpose FIR filter designer(firls()), IIR Subbands transform, Direct form FIR filter, Fractional delay line.
-
-Although STFT, DF-FIR and Fractional delay line are the only components that have been opened.
+Including: Basic C String manipulation functions, Linear algebra solver(Least square, inv(), pinv()), Mathematical optimization(linprog(), quadprog(), lsqlin()), polynomial roots solver(roots()), spectral processing(Short-time Fourier Transform), Polyphase filterbank(Constant Q Transform), multi-purpose IIR / FIR filter designer(eqnerror() / firls()), IIR Subbands transform, Direct form FIR filter, Fractional delay line, Polyphase resampler, real time 1D convolution, Autoregressive Burg estimator, simple peak finding algorithm.
 
 More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
 
@@ -50,7 +51,7 @@ More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
 ### FAQ
 #### 1. Computation datatype?
 
-A: Float32(Close source due to proprietary spatialization algorithm).
+A: Float32.
 
 #### 2. What is convolver?
 
@@ -101,9 +102,6 @@ B: Automatic installation(Supported up to Android Pie)
    1. Copy zip package to your phone, reboot to custom recovery, install package, reboot, done.
    2. Get Magisk manager to install JDSP.
 Now work on most Android device from Lollipop to Pie
-
-##### Coming up:
-1. Auto-detected bit rates MP3 high frequency harmonic excitor
 
 ## Download Link
 1. See my project release page
