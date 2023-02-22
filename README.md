@@ -36,6 +36,14 @@ Linux port developed by <a href="https://github.com/thepbone">Tim Schneeberger (
     Feel free to join our <a href="https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw">Telegram group</a> for support and updates
 </p>
 
+____________
+
+<p align="center">
+    <a href="https://crowdin.com/?utm_source=badge&utm_medium=referral&utm_campaign=badge-add-on" rel="nofollow"><img style="width:140;height:40px" src="https://badges.crowdin.net/badge/light/crowdin-on-dark.png" srcset="https://badges.crowdin.net/badge/light/crowdin-on-dark.png 1x,https://badges.crowdin.net/badge/light/crowdin-on-dark@2x.png 2x" alt="Crowdin | Agile localization for tech companies" /></a>
+    <br/>
+    Please help us to <a href="https://crowdin.com/translate/jdsp4linux">translate this app</a> on <a href="https://crowdin.com/translate/jdsp4linux">Crowdin</a>!
+</p>
+
 ## Features
 
 * Automatic bass boost
