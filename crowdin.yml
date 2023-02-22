@@ -1,0 +1,3 @@
+files:
+  - source: /resources/translations/jamesdsp_en.ts
+    translation: /resources/translations/jamesdsp_%two_letters_code%.ts

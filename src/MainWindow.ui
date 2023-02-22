@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>3</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1726,7 +1726,7 @@
                         <bool>false</bool>
                        </property>
                        <property name="text">
-                        <string>2</string>
+                        <string notr="true">2</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1746,7 +1746,7 @@
                         <bool>false</bool>
                        </property>
                        <property name="text">
-                        <string>32768</string>
+                        <string notr="true">32768</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2297,6 +2297,12 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>FileSelectionWidget</class>
+   <extends>QWidget</extends>
+   <header>interface/FileSelectionWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>LiquidEqualizerWidget</class>
    <extends>QWidget</extends>
    <header location="global">LiquidEqualizerWidget.h</header>
@@ -2317,12 +2323,6 @@
    <class>GraphicEQFilterGUI</class>
    <extends>QWidget</extends>
    <header location="global">GraphicEQFilterGUI.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>FileSelectionWidget</class>
-   <extends>QWidget</extends>
-   <header>interface/FileSelectionWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

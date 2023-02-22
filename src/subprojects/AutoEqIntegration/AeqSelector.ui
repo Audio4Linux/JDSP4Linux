@@ -135,7 +135,7 @@
                  <item row="0" column="1">
                   <widget class="QLabel" name="db_commit">
                    <property name="text">
-                    <string>deadbeef0123456</string>
+                    <string notr="true">deadbeef0123456</string>
                    </property>
                   </widget>
                  </item>
@@ -149,7 +149,7 @@
                  <item row="1" column="1">
                   <widget class="QLabel" name="db_committime">
                    <property name="text">
-                    <string>2021/12/11 00:00:00</string>
+                    <string notr="true">2021/12/11 00:00:00</string>
                    </property>
                   </widget>
                  </item>
@@ -163,7 +163,7 @@
                  <item row="2" column="1">
                   <widget class="QLabel" name="db_uploadtime">
                    <property name="text">
-                    <string>2021/12/11 00:00:00</string>
+                    <string notr="true">2021/12/11 00:00:00</string>
                    </property>
                   </widget>
                  </item>
@@ -274,7 +274,6 @@
              <widget class="QLabel" name="title">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
