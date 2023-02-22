@@ -89,7 +89,7 @@ namespace ColorStyleProvider
             << QPair<CS_UNIT>("darkgreen", ColorStyle(true, QColor(30, 30, 30), QColor(27, 34, 36), QColor(197, 209, 217), QColor(153, 199, 190), Qt::black, QColor(100, 100, 100)))
             << QPair<CS_UNIT>("green", ColorStyle(true, QColor(6, 29, 12), QColor(0, 12, 0), Qt::white, QColor(86, 191, 121), Qt::black, QColor(102, 111, 102)))
             << QPair<CS_UNIT>("stone", ColorStyle(true, QColor(27, 36, 40), QColor(34, 45, 50), Qt::white, QColor(165, 206, 255), Qt::black, QColor(115, 126, 129)));
-		return std::move(map);
+        return map;
 	}
 
 }

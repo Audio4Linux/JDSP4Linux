@@ -53,7 +53,7 @@ bool SingleInstanceMonitor::handover()
         else
         {
             Log::information("Success! Waiting for event loop to exit...");
-            Log::console("\nAnother instance of JamesDSP is already active and has been put in the foreground.", true);
+            Log::console("\n" + tr("Another instance of JamesDSP is already active and has been put in the foreground."), true);
 
             QTimer::singleShot(0, qApp, &QCoreApplication::quit);
             return true;

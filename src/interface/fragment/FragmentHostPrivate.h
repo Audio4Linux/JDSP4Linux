@@ -53,7 +53,7 @@ public slots:
         WAF::Animation::sideSlideOut(this, _side);
         this->update();
         this->repaint();
-        QTimer::singleShot(500, this, [ = ] {
+        QTimer::singleShot(500, this, [this] {
             WAF::Animation::sideSlideIn(this, _side);
         });
     }

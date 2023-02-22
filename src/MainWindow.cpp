@@ -348,6 +348,11 @@ MainWindow::MainWindow(bool     statupInTray,
         {
             ui->eqpreset->addItem(preset);
         }
+
+        for (const auto &preset : PresetProvider::Reverb::getPresetNames())
+        {
+            ui->roompresets->addItem(preset);
+        }
     }
 
     // Connect remaining signals
@@ -374,14 +379,14 @@ MainWindow::MainWindow(bool     statupInTray,
         ui->tabbar->setAnimatePageChange(true);
         ui->tabbar->setCustomStackWidget(ui->tabhost);
         ui->tabbar->setDetachCustomStackedWidget(true);
-        ui->tabbar->addPage("Bass/Misc");
-        ui->tabbar->addPage("Sound Positioning");
-        ui->tabbar->addPage("Reverb");
-        ui->tabbar->addPage("Equalizer");
-        ui->tabbar->addPage("Convolver");
-        ui->tabbar->addPage("DDC");
-        ui->tabbar->addPage("Liveprog");
-        ui->tabbar->addPage("Graphic EQ");
+        ui->tabbar->addPage(tr("Bass/Misc"));
+        ui->tabbar->addPage(tr("Sound Positioning"));
+        ui->tabbar->addPage(tr("Reverb"));
+        ui->tabbar->addPage(tr("Equalizer"));
+        ui->tabbar->addPage(tr("Convolver"));
+        ui->tabbar->addPage(tr("DDC"));
+        ui->tabbar->addPage(tr("Liveprog"));
+        ui->tabbar->addPage(tr("Graphic EQ"));
         ui->frame->setStyleSheet(QString("QFrame#frame{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7,QWidget#tabHostPage8,QWidget#tabHostPage9{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
         ui->tabbar->redrawTabBar();
@@ -911,7 +916,8 @@ void MainWindow::onReverbPresetUpdated()
         return;
     }
 
-    const auto data = PresetProvider::Reverb::lookupPreset(ui->roompresets->currentIndex());
+    // index - 1 because 1st entry is '...'
+    const auto data = PresetProvider::Reverb::lookupPreset(ui->roompresets->currentIndex() - 1);
     ui->rev_osf->setValueA(data.osf);
     ui->rev_era->setValueA((int) (data.p1 * 100));
     ui->rev_finalwet->setValueA((int) (data.p2 * 10));
@@ -1273,7 +1279,7 @@ void MainWindow::launchFirstRunSetup()
     a->setEasingCurve(QEasingCurve::InBack);
     a->start(QPropertyAnimation::DeleteWhenStopped);
 
-    connect(wiz, &FirstLaunchWizard::wizardFinished, [ = ]
+    connect(wiz, &FirstLaunchWizard::wizardFinished, [lightBox, eff, this]
     {
         QPropertyAnimation *b = new QPropertyAnimation(eff, "opacity");
         b->setDuration(500);
@@ -1282,7 +1288,7 @@ void MainWindow::launchFirstRunSetup()
         b->setEasingCurve(QEasingCurve::OutCirc);
         b->start(QPropertyAnimation::DeleteWhenStopped);
 
-        connect(b, &QAbstractAnimation::finished, [ = ]()
+        connect(b, &QAbstractAnimation::finished, [lightBox, this]()
         {
             AppConfig::instance().set(AppConfig::SetupDone, true);
             lightBox->hide();

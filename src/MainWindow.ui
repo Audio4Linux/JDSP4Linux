@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>4</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -769,101 +769,6 @@
                  <item>
                   <property name="text">
                    <string>...</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Default</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Small hall 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Small hall 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium hall 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium hall 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Large hall 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Large hall 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Small room 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Small room 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium room 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium room 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Large room 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Large room 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium ER 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium ER 2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Plate high</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Plate low</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Long reverb 1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Long reverb 2</string>
                   </property>
                  </item>
                 </widget>

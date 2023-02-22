@@ -23,7 +23,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
-    QTimer::singleShot(500, this, [=] {
+    QTimer::singleShot(500, this, [this] {
 		ui->p1_icon->startAnimation();
     });
     ui->p3_icon->startAnimation();

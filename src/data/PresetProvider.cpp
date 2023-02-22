@@ -21,7 +21,7 @@ namespace PresetProvider
 {
 	const DOUBLE_LIST EQ::defaultPreset()
 	{
-		return EQ_LOOKUP_TABLE()["Default"];
+        return EQ_LOOKUP_TABLE()["Default"];
 	}
 
 	const DOUBLE_LIST EQ::lookupPreset(const QString &preset)
@@ -34,7 +34,7 @@ namespace PresetProvider
 		}
 		else
 		{
-			return table["Default"];
+            return table["Default"];
 		}
 	}
 
@@ -67,7 +67,7 @@ namespace PresetProvider
 			}
 		}
 
-		return "Custom";
+        return "Custom";
 	}
 
 	const QMap<EQ_UNIT> EQ::EQ_LOOKUP_TABLE()
@@ -97,13 +97,13 @@ namespace PresetProvider
 	const QMap<BS2B_UNIT> BS2B::BS2B_LOOKUP_TABLE()
 	{
 		InitializableQMap<BS2B_UNIT> table;
-        table << QPair<BS2B_UNIT>("BS2B Custom", 99)
-		      << QPair<BS2B_UNIT>("BS2B Weak", 0)
-		      << QPair<BS2B_UNIT>("BS2B Strong", 1)
-		      << QPair<BS2B_UNIT>("Out of head", 2)
-		      << QPair<BS2B_UNIT>("Surround 1", 3)
-		      << QPair<BS2B_UNIT>("Surround 2", 4)
-		      << QPair<BS2B_UNIT>("Joe0Bloggs Realistic surround", 5);
+        table << QPair<BS2B_UNIT>("bs2b_custom", 99)
+              << QPair<BS2B_UNIT>("bs2b_weak", 0)
+              << QPair<BS2B_UNIT>("bs2b_strong", 1)
+              << QPair<BS2B_UNIT>("bs2b_outofhead", 2)
+              << QPair<BS2B_UNIT>("surround_1", 3)
+              << QPair<BS2B_UNIT>("surround_2", 4)
+              << QPair<BS2B_UNIT>("joe0bloggs_realistic_surround", 5);
 		return std::move(table);
 	}
 
@@ -117,7 +117,7 @@ namespace PresetProvider
 		}
 		else
 		{
-			return table["BS2B Weak"];
+            return table["bs2b_weak"];
 		}
 	}
 
@@ -133,7 +133,7 @@ namespace PresetProvider
 			}
 		}
 
-		return "BS2B Weak";
+        return "bs2b_weak";
 	}
 
     const Reverb::sf_reverb_preset_data Reverb::lookupPreset(int preset)
@@ -191,11 +191,11 @@ namespace PresetProvider
 	}
 
 	const QStringList Reverb::getPresetNames()
-	{
-		return QStringList({ "Default", "Small hall 1", "Small hall 2", "Medium hall 1", "Medium hall 2",
-		                     "Large hall 1", "Large hall 2", "Small room 1", "Small room 2", "Medium room 1",
-		                     "Medium room 2", "Large room 1", "Large room 2", "Medium ER 1", "Medium ER 2",
-		                     "Plate high", "Plate low", "Long reverb 1", "Long reverb 2" });
+    {
+        return QStringList({ QObject::tr("Default"), QObject::tr("Small hall 1"), QObject::tr("Small hall 2"), QObject::tr("Medium hall 1"), QObject::tr("Medium hall 2"),
+                             QObject::tr("Large hall 1"), QObject::tr("Large hall 2"), QObject::tr("Small room 1"), QObject::tr("Small room 2"), QObject::tr("Medium room 1"),
+                             QObject::tr("Medium room 2"), QObject::tr("Large room 1"), QObject::tr("Large room 2"), QObject::tr("Medium ER 1"), QObject::tr("Medium ER 2"),
+                             QObject::tr("Plate high"), QObject::tr("Plate low"), QObject::tr("Long reverb 1"), QObject::tr("Long reverb 2") });
 	}
 
 }

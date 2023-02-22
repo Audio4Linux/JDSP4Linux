@@ -940,398 +940,379 @@ Bitte wählen Sie eine andere</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="771"/>
-        <location filename="../../src/MainWindow.ui" line="2220"/>
+        <location filename="../../src/MainWindow.ui" line="2125"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="776"/>
         <source>Default</source>
-        <translation>Standard</translation>
+        <translation type="vanished">Standard</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="781"/>
         <source>Small hall 1</source>
-        <translation>Kleine Halle 1</translation>
+        <translation type="vanished">Kleine Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="786"/>
         <source>Small hall 2</source>
-        <translation>Kleine Halle 2</translation>
+        <translation type="vanished">Kleine Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="791"/>
         <source>Medium hall 1</source>
-        <translation>Mittelgroße Halle 1</translation>
+        <translation type="vanished">Mittelgroße Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="796"/>
         <source>Medium hall 2</source>
-        <translation>Mittelgroße Halle 2</translation>
+        <translation type="vanished">Mittelgroße Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="801"/>
         <source>Large hall 1</source>
-        <translation>Große Halle 1</translation>
+        <translation type="vanished">Große Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="806"/>
         <source>Large hall 2</source>
-        <translation>Große Halle 2</translation>
+        <translation type="vanished">Große Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="811"/>
         <source>Small room 1</source>
-        <translation>Kleiner Raum 1</translation>
+        <translation type="vanished">Kleiner Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="816"/>
         <source>Small room 2</source>
-        <translation>Kleiner Raum 2</translation>
+        <translation type="vanished">Kleiner Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="821"/>
         <source>Medium room 1</source>
-        <translation>Mittelgroßer Raum 1</translation>
+        <translation type="vanished">Mittelgroßer Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="826"/>
         <source>Medium room 2</source>
-        <translation>Mittelgroßer Raum 2</translation>
+        <translation type="vanished">Mittelgroßer Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="831"/>
         <source>Large room 1</source>
-        <translation>Großer Raum 1</translation>
+        <translation type="vanished">Großer Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="836"/>
         <source>Large room 2</source>
-        <translation>Großer Raum 2</translation>
+        <translation type="vanished">Großer Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="841"/>
         <source>Medium ER 1</source>
-        <translation>Mittelgroßer ER 1</translation>
+        <translation type="vanished">Mittelgroßer ER 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="846"/>
         <source>Medium ER 2</source>
-        <translation>Mittelgroßer ER 2</translation>
+        <translation type="vanished">Mittelgroßer ER 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="851"/>
         <source>Plate high</source>
-        <translation>Platte hoch</translation>
+        <translation type="vanished">Platte hoch</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="856"/>
         <source>Plate low</source>
-        <translation>Platte tief</translation>
+        <translation type="vanished">Platte tief</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="861"/>
         <source>Long reverb 1</source>
-        <translation>Langer Hall 1</translation>
+        <translation type="vanished">Langer Hall 1</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="866"/>
         <source>Long reverb 2</source>
-        <translation>Langer Hall 2</translation>
+        <translation type="vanished">Langer Hall 2</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="880"/>
+        <location filename="../../src/MainWindow.ui" line="785"/>
         <source>Oversampling factor</source>
         <translation>Oversampling-Faktor</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="900"/>
+        <location filename="../../src/MainWindow.ui" line="805"/>
         <source>Early reflection factor</source>
         <translation>Frühzeitiger Reflexionsfaktor</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="923"/>
+        <location filename="../../src/MainWindow.ui" line="828"/>
         <source>Early reflection amount</source>
         <translation>Frühzeitige Reflexionsmenge</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="940"/>
+        <location filename="../../src/MainWindow.ui" line="845"/>
         <source>Early reflection width</source>
         <translation>Breite der frühzeitigen Reflexion</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="963"/>
+        <location filename="../../src/MainWindow.ui" line="868"/>
         <source>Lowpass cutoff (Input)</source>
         <translation>Lowpass-Abschnitt (Eingabe)</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="983"/>
+        <location filename="../../src/MainWindow.ui" line="888"/>
         <source>Lowpass cutoff (Bass)</source>
         <translation>Lowpass-Abschnitt (Bass)</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1003"/>
+        <location filename="../../src/MainWindow.ui" line="908"/>
         <source>Lowpass cutoff (Damp)</source>
         <translation>Lowpass-Abschnitt (Dämpfung)</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1023"/>
+        <location filename="../../src/MainWindow.ui" line="928"/>
         <source>Lowpass cutoff (Output)</source>
         <translation>Lowpass-Abschnitt (Ausgabe)</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1050"/>
+        <location filename="../../src/MainWindow.ui" line="955"/>
         <source>Final wet mix</source>
         <translation>Finaler Effektmix</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1057"/>
+        <location filename="../../src/MainWindow.ui" line="962"/>
         <source>Final dry mix</source>
         <translation>Finaler Trockenmix</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1064"/>
+        <location filename="../../src/MainWindow.ui" line="969"/>
         <source>Reverb wetness</source>
         <translation>Effektstärke</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1071"/>
+        <location filename="../../src/MainWindow.ui" line="976"/>
         <source>Width L/R mix</source>
         <translation>Weite L/R Mix</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1078"/>
+        <location filename="../../src/MainWindow.ui" line="983"/>
         <source>LFO wander amount</source>
         <translation>LFO Wanderbetrag</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1085"/>
+        <location filename="../../src/MainWindow.ui" line="990"/>
         <source>LFO spin amount</source>
         <translation>LFO-Drehbetrag</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1092"/>
+        <location filename="../../src/MainWindow.ui" line="997"/>
         <source>Time decay</source>
         <translation>Zeitverfall</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1099"/>
+        <location filename="../../src/MainWindow.ui" line="1004"/>
         <source>Delay</source>
         <translation>Verzögerung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1106"/>
+        <location filename="../../src/MainWindow.ui" line="1011"/>
         <source>Bass boost</source>
         <translation>Bassverstärkung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1254"/>
+        <location filename="../../src/MainWindow.ui" line="1159"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolierender FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt; FIR steht für &amp;quot;Finite Impulse Response&amp;Quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filtertyp:&lt;/span&gt; Die minimale Phase ist der empfohlene Filtertyp, da er die Latenz minimiert (effektiv null bei jeder sinnvollen Filterform). Im Gegensatz dazu sind die eingeleiteten Phasenänderungen in der Regel nicht auffällig (lineare Phase ist hilfreich bei der Vor/Nachproduktion von Multitrack-Recordings, wobei die Phasenbeziehungen zwischen den Spuren erhalten bleiben. Bei der Echtzeitwiedergabe führt der lineare EQ jedoch zu einer Latenz von mindestens der Hälfte der Filterlänge.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1346"/>
+        <location filename="../../src/MainWindow.ui" line="1251"/>
         <source>Enable EQ</source>
         <translation>EQ aktivieren</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1366"/>
+        <location filename="../../src/MainWindow.ui" line="1271"/>
         <source>Presets...</source>
         <translation>Voreinstellungen...</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1386"/>
+        <location filename="../../src/MainWindow.ui" line="1291"/>
         <source>Filter type</source>
         <translation>Filtertyp</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1390"/>
+        <location filename="../../src/MainWindow.ui" line="1295"/>
         <source>Minimum phase</source>
         <translation>Minimale Phase</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1395"/>
+        <location filename="../../src/MainWindow.ui" line="1300"/>
         <source>Linear phase</source>
         <translation>Lineare Phase</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1415"/>
+        <location filename="../../src/MainWindow.ui" line="1320"/>
         <source>Interpolator</source>
         <translation>Interpolator</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1418"/>
+        <location filename="../../src/MainWindow.ui" line="1323"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolationsmodus&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1422"/>
+        <location filename="../../src/MainWindow.ui" line="1327"/>
         <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
         <translation>Stückweise kubische Hermite-Interpolation Polynomiale</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1427"/>
+        <location filename="../../src/MainWindow.ui" line="1332"/>
         <source>Modified Hiroshi Akima spline</source>
         <translation>Modifizierte Hiroshi Akima-Spline</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1447"/>
+        <location filename="../../src/MainWindow.ui" line="1352"/>
         <source>Reset EQ</source>
         <translation>EQ zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1475"/>
+        <location filename="../../src/MainWindow.ui" line="1380"/>
         <source>Fixed bands</source>
         <translation>Feste Bänder</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1491"/>
+        <location filename="../../src/MainWindow.ui" line="1396"/>
         <source>Flexible bands</source>
         <translation>Flexible Bänder</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1523"/>
+        <location filename="../../src/MainWindow.ui" line="1428"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Konvolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitionierter Konvolver (Auto-Segmentierung-Konvolution). Der Konvolver nimmt die Signaleigenschaften der Impulsantwort auf und wendet diese in Echtzeit auf den eingehenden Ton an.&lt;/p&gt;&lt;p&gt;Unterstützt mono, stereo, full/true Stereo (LL, LR, RL, RR) Impulsantworten.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Optimierung der Impulsantwort:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dieser Parameter versucht, die Länge der Impulsantwort so weit wie möglich zu verringern; es geht darum, die Latenz so weit wie möglich zu reduzieren und möglicherweise den Stromverbrauch zu verringern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1548"/>
-        <location filename="../../src/MainWindow.ui" line="1870"/>
+        <location filename="../../src/MainWindow.ui" line="1453"/>
+        <location filename="../../src/MainWindow.ui" line="1775"/>
         <source>Filesystem</source>
         <translation>Dateisystem</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1570"/>
+        <location filename="../../src/MainWindow.ui" line="1475"/>
         <source>Bookmarks</source>
         <translation>Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1609"/>
+        <location filename="../../src/MainWindow.ui" line="1514"/>
         <source>Enable convolver</source>
         <translation>Konvolver aktivieren</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1616"/>
+        <location filename="../../src/MainWindow.ui" line="1521"/>
         <source>IR optimization</source>
         <translation>IR-Optimierung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1636"/>
+        <location filename="../../src/MainWindow.ui" line="1541"/>
         <source>Original</source>
         <translation>Original</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1641"/>
+        <location filename="../../src/MainWindow.ui" line="1546"/>
         <source>Shrink</source>
         <translation>Schrumpfen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1646"/>
+        <location filename="../../src/MainWindow.ui" line="1551"/>
         <source>Minimum phase transform and shrink</source>
         <translation>Minimale Phasenumwandlung und Schrumpfen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1654"/>
+        <location filename="../../src/MainWindow.ui" line="1559"/>
         <source>Adv. waveform editing</source>
         <translation>Erw. Wellenform-Bearb.</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1673"/>
+        <location filename="../../src/MainWindow.ui" line="1578"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1719"/>
+        <location filename="../../src/MainWindow.ui" line="1624"/>
         <source>Channels:</source>
         <translation>Kanäle:</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1739"/>
+        <location filename="../../src/MainWindow.ui" line="1644"/>
         <source>Samples:</source>
         <translation>Samples:</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1798"/>
+        <location filename="../../src/MainWindow.ui" line="1703"/>
         <source>No selection</source>
         <translation>Keine Auswahl</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1845"/>
+        <location filename="../../src/MainWindow.ui" line="1750"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wendet einen parametrischen EQ auf das Audiosignal an. Dabeio muss der Benutzer jedoch eine .vdc Datei, die DDCToolbox generieren kann, auswählen.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP ist eine generalisierte Implementierung von Sektionsfiltern zweiter Ordnung, was sich leicht von der Implementierung in Viper4Android unterscheidet. V4A unterstützt nur Peaking parametric; der Grund dafür ist, dass V4A einen &apos;share coefficient property&apos; des Peaking Filters verwendet. Im Gegensatz dazu hat jDSP keine derartige Annahme.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1892"/>
+        <location filename="../../src/MainWindow.ui" line="1797"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1933"/>
+        <location filename="../../src/MainWindow.ui" line="1838"/>
         <source>Create</source>
         <translation>Erstellen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1957"/>
+        <location filename="../../src/MainWindow.ui" line="1862"/>
         <source>Create your custom DDC files using DDCToolbox</source>
         <translation>Erstelle deine eigenen DDC-Dateien mit DDCToolbox</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1967"/>
+        <location filename="../../src/MainWindow.ui" line="1872"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2023"/>
+        <location filename="../../src/MainWindow.ui" line="1928"/>
         <source>View installation instructions</source>
         <translation>Zur Installationsanleitung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2079"/>
+        <location filename="../../src/MainWindow.ui" line="1984"/>
         <source>Enable ViPER-DDC</source>
         <translation>ViPER-DDC aktivieren</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2102"/>
+        <location filename="../../src/MainWindow.ui" line="2007"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmierbare DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dies ist eine virtuelle Maschine, die ein .eel-Skript als Eingabe kompiliert und ausführt. In einfachen Worten erlaubt es Benutzern, ihre eigenen Audio-Effekte zu programmieren.&lt;/p&gt;&lt;p&gt;Die Anzahl der unterstützten Operationen ist enorm. Schaue dir die offizielle Dokumentation an: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github. om/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Drücke &apos;Skript bearbeiten&apos; um eine eingebaute Skripting-Umgebung für EEL-Codedateien zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2124"/>
+        <location filename="../../src/MainWindow.ui" line="2029"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbiträrer Response Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Auch bekannt als GraphicEQ von EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2162"/>
+        <location filename="../../src/MainWindow.ui" line="2067"/>
         <source>Custom Presets</source>
         <translation>Benutzerdefinierte Voreinstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2165"/>
+        <location filename="../../src/MainWindow.ui" line="2070"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Benutzerdefinierte Voreinstellungen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Benutzerdefinierte Voreinstellungen anlegen und verwalten&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2191"/>
+        <location filename="../../src/MainWindow.ui" line="2096"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2197"/>
+        <location filename="../../src/MainWindow.ui" line="2102"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Einstellungen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Diese Anwendung konfigurieren&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2217"/>
+        <location filename="../../src/MainWindow.ui" line="2122"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Sonstige&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Verschiedene Aktionen, die weniger häufig verwendet werden&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2275"/>
+        <location filename="../../src/MainWindow.ui" line="2180"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Deaktivieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Diese Option legt fest, ob Soundeffekte aktiviert oder deaktiviert werden sollen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2278"/>
+        <location filename="../../src/MainWindow.ui" line="2183"/>
         <source>Passthrough</source>
         <translation>Deaktivieren</translation>
     </message>
@@ -1391,37 +1372,77 @@ Bitte wählen Sie eine andere</translation>
         <translation>Was ist das? (UI-Element wählen)</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="396"/>
+        <location filename="../../src/MainWindow.cpp" line="382"/>
+        <source>Bass/Misc</source>
+        <translation>Bass/Sonstiges</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="383"/>
+        <source>Sound Positioning</source>
+        <translation>Sound Positioning</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="384"/>
+        <source>Reverb</source>
+        <translation>Raumklang</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="385"/>
+        <source>Equalizer</source>
+        <translation>Equalizer</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="386"/>
+        <source>Convolver</source>
+        <translation>Konvolver</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="387"/>
+        <source>DDC</source>
+        <translation>DDC</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="388"/>
+        <source>Liveprog</source>
+        <translation>Liveprog</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="389"/>
+        <source>Graphic EQ</source>
+        <translation>Graphic EQ</translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="401"/>
         <source>Launch application</source>
         <translation>Anwendung starten</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="535"/>
+        <location filename="../../src/MainWindow.cpp" line="540"/>
         <source>Reset Configuration</source>
         <translation>Konfiguration zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="535"/>
+        <location filename="../../src/MainWindow.cpp" line="540"/>
         <source>Are you sure?</source>
         <translation>Bist du dir sicher?</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="559"/>
+        <location filename="../../src/MainWindow.cpp" line="564"/>
         <source>Load custom audio.conf</source>
         <translation>Benutzerdefinierte audio.conf laden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="571"/>
+        <location filename="../../src/MainWindow.cpp" line="576"/>
         <source>Save current audio.conf</source>
         <translation>Aktuelle audio.conf speichern</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1081"/>
+        <location filename="../../src/MainWindow.cpp" line="1087"/>
         <source>Advanced waveform editing</source>
         <translation>Erweiterte Wellenform-Bearbeitung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1082"/>
+        <location filename="../../src/MainWindow.cpp" line="1088"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1678,6 +1699,85 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
     </message>
 </context>
 <context>
+    <name>PresetProvider::Reverb</name>
+    <message>
+        <source>Default</source>
+        <translation type="vanished">Standard</translation>
+    </message>
+    <message>
+        <source>Small hall 1</source>
+        <translation type="vanished">Kleine Halle 1</translation>
+    </message>
+    <message>
+        <source>Small hall 2</source>
+        <translation type="vanished">Kleine Halle 2</translation>
+    </message>
+    <message>
+        <source>Medium hall 1</source>
+        <translation type="vanished">Mittelgroße Halle 1</translation>
+    </message>
+    <message>
+        <source>Medium hall 2</source>
+        <translation type="vanished">Mittelgroße Halle 2</translation>
+    </message>
+    <message>
+        <source>Large hall 1</source>
+        <translation type="vanished">Große Halle 1</translation>
+    </message>
+    <message>
+        <source>Large hall 2</source>
+        <translation type="vanished">Große Halle 2</translation>
+    </message>
+    <message>
+        <source>Small room 1</source>
+        <translation type="vanished">Kleiner Raum 1</translation>
+    </message>
+    <message>
+        <source>Small room 2</source>
+        <translation type="vanished">Kleiner Raum 2</translation>
+    </message>
+    <message>
+        <source>Medium room 1</source>
+        <translation type="vanished">Mittelgroßer Raum 1</translation>
+    </message>
+    <message>
+        <source>Medium room 2</source>
+        <translation type="vanished">Mittelgroßer Raum 2</translation>
+    </message>
+    <message>
+        <source>Large room 1</source>
+        <translation type="vanished">Großer Raum 1</translation>
+    </message>
+    <message>
+        <source>Large room 2</source>
+        <translation type="vanished">Großer Raum 2</translation>
+    </message>
+    <message>
+        <source>Medium ER 1</source>
+        <translation type="vanished">Mittelgroßer ER 1</translation>
+    </message>
+    <message>
+        <source>Medium ER 2</source>
+        <translation type="vanished">Mittelgroßer ER 2</translation>
+    </message>
+    <message>
+        <source>Plate high</source>
+        <translation type="vanished">Platte hoch</translation>
+    </message>
+    <message>
+        <source>Plate low</source>
+        <translation type="vanished">Platte tief</translation>
+    </message>
+    <message>
+        <source>Long reverb 1</source>
+        <translation type="vanished">Langer Hall 1</translation>
+    </message>
+    <message>
+        <source>Long reverb 2</source>
+        <translation type="vanished">Langer Hall 2</translation>
+    </message>
+</context>
+<context>
     <name>PresetRuleDialog</name>
     <message>
         <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="14"/>
@@ -1776,6 +1876,101 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
  Please copy this URL manually: </source>
         <translation>Fehler beim Öffnen der URL mit Standard-Browser.
  Bitte kopieren Sie diese URL manuell: </translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <source>Small hall 1</source>
+        <translation type="unfinished">Kleine Halle 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <source>Small hall 2</source>
+        <translation type="unfinished">Kleine Halle 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <source>Medium hall 1</source>
+        <translation type="unfinished">Mittelgroße Halle 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="195"/>
+        <source>Medium hall 2</source>
+        <translation type="unfinished">Mittelgroße Halle 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <source>Large hall 1</source>
+        <translation type="unfinished">Große Halle 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <source>Large hall 2</source>
+        <translation type="unfinished">Große Halle 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <source>Small room 1</source>
+        <translation type="unfinished">Kleiner Raum 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <source>Small room 2</source>
+        <translation type="unfinished">Kleiner Raum 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="196"/>
+        <source>Medium room 1</source>
+        <translation type="unfinished">Mittelgroßer Raum 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <source>Medium room 2</source>
+        <translation type="unfinished">Mittelgroßer Raum 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <source>Large room 1</source>
+        <translation type="unfinished">Großer Raum 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <source>Large room 2</source>
+        <translation type="unfinished">Großer Raum 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <source>Medium ER 1</source>
+        <translation type="unfinished">Mittelgroßer ER 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="197"/>
+        <source>Medium ER 2</source>
+        <translation type="unfinished">Mittelgroßer ER 2</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <source>Plate high</source>
+        <translation type="unfinished">Platte hoch</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <source>Plate low</source>
+        <translation type="unfinished">Platte tief</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <source>Long reverb 1</source>
+        <translation type="unfinished">Langer Hall 1</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="198"/>
+        <source>Long reverb 2</source>
+        <translation type="unfinished">Langer Hall 2</translation>
     </message>
 </context>
 <context>
@@ -2069,6 +2264,14 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
         <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="411"/>
         <source>Do you really want to restore the default menu layout?</source>
         <translation>Möchtest du das Standard-Menülayout wirklich wiederherstellen?</translation>
+    </message>
+</context>
+<context>
+    <name>SingleInstanceMonitor</name>
+    <message>
+        <location filename="../../src/utils/SingleInstanceMonitor.cpp" line="56"/>
+        <source>Another instance of JamesDSP is already active and has been put in the foreground.</source>
+        <translation>Eine weitere Instanz von JamesDSP ist bereits aktiv und wurde in den Vordergrund gestellt.</translation>
     </message>
 </context>
 <context>
