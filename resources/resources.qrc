@@ -64,20 +64,8 @@
         <file>assets/vdc/mh750.vdc</file>
         <file>assets/liveprog/pfb.eel</file>
         <file>assets/liveprog/stftDenoise.eel</file>
-        <file>translations/jamesdsp_el.ts</file>
-        <file>translations/jamesdsp_ar.qm</file>
-        <file>translations/jamesdsp_cs.qm</file>
         <file>translations/jamesdsp_de.qm</file>
-        <file>translations/jamesdsp_el.qm</file>
         <file>translations/jamesdsp_en.qm</file>
-        <file>translations/jamesdsp_eo.qm</file>
-        <file>translations/jamesdsp_fr.qm</file>
-        <file>translations/jamesdsp_it.qm</file>
-        <file>translations/jamesdsp_jp.qm</file>
-        <file>translations/jamesdsp_ko.qm</file>
-        <file>translations/jamesdsp_no.qm</file>
         <file>translations/jamesdsp_ru.qm</file>
-        <file>translations/jamesdsp_sv.qm</file>
-        <file>translations/jamesdsp_zh.qm</file>
     </qresource>
 </RCC>
