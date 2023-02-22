@@ -18,7 +18,7 @@ NO_CRASH_HANDLER: DEFINES += NO_CRASH_HANDLER
 }
 
 DEFINES += APP_VERSION=$$system(git describe --tags --long --always)
-DEFINES += JDSP_VERSION=4.1.1
+DEFINES += JDSP_VERSION=3.12
 
 include(../3rdparty/3rdparty.pri)
 
