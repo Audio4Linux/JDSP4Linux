@@ -486,10 +486,17 @@ typedef struct dspsys
 	// I/O function pointer
 	void(*processInt16Deinterleaved)(struct dspsys*, int16_t*, int16_t*, int16_t*, int16_t*, size_t);
 	void(*processInt32Deinterleaved)(struct dspsys*, int32_t*, int32_t*, int32_t*, int32_t*, size_t);
+	void(*processInt8_24Deinterleaved)(struct dspsys *, int32_t*, int32_t*, int32_t*, int32_t*, size_t);
+	void(*processInt24PackedDeinterleaved)(struct dspsys *, uint8_t*, uint8_t*, uint8_t*, uint8_t*, size_t);
 	void(*processFloatDeinterleaved)(struct dspsys*, float*, float*, float*, float*, size_t);
 	void(*processInt16Multiplexd)(struct dspsys*, int16_t*, int16_t*, size_t);
 	void(*processInt32Multiplexd)(struct dspsys*, int32_t*, int32_t*, size_t);
+	void(*processInt8_24Multiplexd)(struct dspsys*, int32_t*, int32_t*, size_t);
+	void(*processInt24PackedMultiplexd)(struct dspsys*, uint8_t*, uint8_t*, size_t);
 	void(*processFloatMultiplexd)(struct dspsys*, float*, float*, size_t);
+	// Endianness function pointer
+	int32_t(*i32_from_p24)(const uint8_t *);
+	void (*p24_from_i32)(int32_t, uint8_t *);
 	// Blobs(resampled)
 	int blobsResampledLen;
 	float *blobsCh1[3];

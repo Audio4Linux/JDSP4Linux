@@ -7,6 +7,44 @@
 #include "Effects/eel2/dr_flac.h"
 #include "Effects/eel2/ns-eel.h"
 #include "jdsp_header.h"
+// Range: 0x800000, 0x7fffff
+int32_t i32_from_p24_big_endian(const uint8_t *packed24)
+{
+	return (packed24[2] << 8) | (packed24[1] << 16) | (packed24[0] << 24);
+}
+int32_t i32_from_p24_little_endian(const uint8_t *packed24)
+{
+	return (packed24[0] << 8) | (packed24[1] << 16) | (packed24[2] << 24);
+}
+void p24_from_i32_big_endian(int32_t ival, uint8_t *packed24)
+{
+	uint8_t *dst = packed24;
+	*dst++ = ival >> 16;
+	*dst++ = ival >> 8;
+	*dst++ = ival;
+}
+void p24_from_i32_little_endian(int32_t ival, uint8_t *packed24)
+{
+	uint8_t *dst = packed24;
+	*dst++ = ival;
+	*dst++ = ival >> 8;
+	*dst++ = ival >> 16;
+}
+int32_t clamp24_from_float(float f)
+{
+	static const float scale = (float)(1 << 23);
+	float limpos = 0x7fffff / scale;
+	float limneg = -0x800000 / scale;
+	if (f <= limneg)
+		return -0x800000;
+	else if (f >= limpos)
+		return 0x7fffff;
+	f *= scale;
+	/* integer conversion is through truncation (though int to float is not).
+	 * ensure that we round to nearest, ties away from 0.
+	 */
+	return f > 0 ? f + 0.5f : f - 0.5f;
+}
 void JamesDSPGlobalMemoryAllocation()
 {
 	NSEEL_start();
@@ -103,6 +141,8 @@ void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 	// Output
 	for (i = 0; i < n; i++)
 	{
+		//jdsp->tmpBuffer[0][i] = 4124;
+		//jdsp->tmpBuffer[1][i] = -4124;
 		float xL = jdsp->tmpBuffer[0][i] * jdsp->postGain;
 		float xR = jdsp->tmpBuffer[1][i] * jdsp->postGain;
 		float rect1 = fabsf(xL);
@@ -117,14 +157,6 @@ void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 		float gR = jdsp->limiter.threshold / jdsp->limiter.envOverThreshold;
 		rect1 = xL * gR;
 		rect2 = xR * gR;
-		if (rect1 > 1.0f)
-			rect1 = 1.0f;
-		if (rect1 < -1.0f)
-			rect1 = -1.0f;
-		if (rect2 > 1.0f)
-			rect2 = 1.0f;
-		if (rect2 < -1.0f)
-			rect2 = -1.0f;
 		jdsp->tmpBuffer[0][i] = rect1;
 		jdsp->tmpBuffer[1][i] = rect2;
 	}
@@ -267,10 +299,19 @@ void pint16(JamesDSPLib *jdsp, int16_t *x1, int16_t *x2, int16_t *y1, int16_t *y
 		JamesDSPReallocateBlock(jdsp, n);
 	if (iabs(jdsp->blockSize - n) > 128)
 		jdsp->blockSize = n;
+	static const float scale = (float)(1UL << 15UL);
+	static const float offset = (float)(3 << (22 - 15));
+	/* zero = (0x10f << 22) =  0x43c00000 (not directly used) */
+	static const int32_t limneg = (0x10f << 22) /*zero*/ - 32768; /* 0x43bf8000 */
+	static const int32_t limpos = (0x10f << 22) /*zero*/ + 32767; /* 0x43c07fff */
+	union {
+		float f;
+		int32_t i;
+	} u;
 	for (size_t i = 0; i < n; i++)
 	{
-		jdsp->tmpBuffer[0][i] = x1[i] * 0.000030517578125f;
-		jdsp->tmpBuffer[1][i] = x2[i] * 0.000030517578125f;
+		jdsp->tmpBuffer[0][i] = x1[i] / scale;
+		jdsp->tmpBuffer[1][i] = x2[i] / scale;
 	}
 	if (jdsp->enableASRC)
 	{
@@ -282,8 +323,18 @@ void pint16(JamesDSPLib *jdsp, int16_t *x1, int16_t *x2, int16_t *y1, int16_t *y
 		JamesDSPProcess(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
-		y1[i] = (int16_t)(jdsp->tmpBuffer[0][i] * 32768.0f);
-		y2[i] = (int16_t)(jdsp->tmpBuffer[1][i] * 32768.0f);
+		u.f = jdsp->tmpBuffer[0][i] + offset;
+		if (u.i < limneg)
+			u.i = -32768;
+		else if (u.i > limpos)
+			u.i = 32767;
+		y1[i] = u.i;
+		u.f = jdsp->tmpBuffer[1][i] + offset;
+		if (u.i < limneg)
+			u.i = -32768;
+		else if (u.i > limpos)
+			u.i = 32767;
+		y2[i] = u.i;
 	}
 }
 void pint16Multiplexed(JamesDSPLib *jdsp, int16_t *x, int16_t *y, size_t n)
@@ -292,6 +343,14 @@ void pint16Multiplexed(JamesDSPLib *jdsp, int16_t *x, int16_t *y, size_t n)
 		JamesDSPReallocateBlock(jdsp, n);
 	if (iabs(jdsp->blockSize - n) > 128)
 		jdsp->blockSize = n;
+	static const float offset = (float)(3 << (22 - 15));
+	/* zero = (0x10f << 22) =  0x43c00000 (not directly used) */
+	static const int32_t limneg = (0x10f << 22) /*zero*/ - 32768; /* 0x43bf8000 */
+	static const int32_t limpos = (0x10f << 22) /*zero*/ + 32767; /* 0x43c07fff */
+	union {
+		float f;
+		int32_t i;
+	} u;
 	for (size_t i = 0; i < n; i++)
 	{
 		jdsp->tmpBuffer[0][i] = x[i << 1] * 0.000030517578125f;
@@ -307,8 +366,18 @@ void pint16Multiplexed(JamesDSPLib *jdsp, int16_t *x, int16_t *y, size_t n)
 		JamesDSPProcess(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
-		y[i << 1] = (int16_t)(jdsp->tmpBuffer[0][i] * 32768.0f);
-		y[(i << 1) + 1] = (int16_t)(jdsp->tmpBuffer[1][i] * 32768.0f);
+		u.f = jdsp->tmpBuffer[0][i] + offset;
+		if (u.i < limneg)
+			u.i = -32768;
+		else if (u.i > limpos)
+			u.i = 32767;
+		y[i << 1] = (int16_t)u.i;
+		u.f = jdsp->tmpBuffer[1][i] + offset;
+		if (u.i < limneg)
+			u.i = -32768;
+		else if (u.i > limpos)
+			u.i = 32767;
+		y[(i << 1) + 1] = (int16_t)u.i;
 	}
 }
 void pint32(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t *y2, size_t n)
@@ -317,10 +386,11 @@ void pint32(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t *y
 		JamesDSPReallocateBlock(jdsp, n);
 	if (iabs(jdsp->blockSize - n) > 128)
 		jdsp->blockSize = n;
+	static const float scale = (float)(1UL << 31UL);
 	for (size_t i = 0; i < n; i++)
 	{
-		jdsp->tmpBuffer[0][i] = (float)((double)x1[i] * 4.656612875245797e-10);
-		jdsp->tmpBuffer[1][i] = (float)((double)x2[i] * 4.656612875245797e-10);
+		jdsp->tmpBuffer[0][i] = (float)((double)x1[i] / scale);
+		jdsp->tmpBuffer[1][i] = (float)((double)x2[i] / scale);
 	}
 	if (jdsp->enableASRC)
 	{
@@ -330,10 +400,27 @@ void pint32(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t *y
 	}
 	else
 		JamesDSPProcess(jdsp, n);
+	float f;
 	for (size_t i = 0; i < n; i++)
 	{
-		y1[i] = (int32_t)(jdsp->tmpBuffer[0][i] * 2147483647.0f);
-		y2[i] = (int32_t)(jdsp->tmpBuffer[1][i] * 2147483647.0f);
+		if (jdsp->tmpBuffer[0][i] <= -1.0f)
+			y1[i] = INT32_MIN;
+		else if (jdsp->tmpBuffer[0][i] >= 1.0f)
+			y1[i] = INT32_MAX;
+		else
+		{
+			f = jdsp->tmpBuffer[0][i] * scale;
+			y1[i] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+		}
+		if (jdsp->tmpBuffer[1][i] <= -1.0f)
+			y2[i] = INT32_MIN;
+		else if (jdsp->tmpBuffer[1][i] >= 1.0f)
+			y2[i] = INT32_MAX;
+		else
+		{
+			f = jdsp->tmpBuffer[1][i] * scale;
+			y2[i] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+		}
 	}
 }
 void pint32Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
@@ -342,10 +429,116 @@ void pint32Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
 		JamesDSPReallocateBlock(jdsp, n);
 	if (iabs(jdsp->blockSize - n) > 128)
 		jdsp->blockSize = n;
+	static const float scale = (float)(1UL << 31UL);
 	for (size_t i = 0; i < n; i++)
 	{
-		jdsp->tmpBuffer[0][i] = (float)((double)x[i << 1] * 4.656612875245797e-10);
-		jdsp->tmpBuffer[1][i] = (float)((double)x[(i << 1) + 1] * 4.656612875245797e-10);
+		jdsp->tmpBuffer[0][i] = (float)((double)x[i << 1] / scale);
+		jdsp->tmpBuffer[1][i] = (float)((double)x[(i << 1) + 1] / scale);
+	}
+	if (jdsp->enableASRC)
+	{
+		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
+		JamesDSPProcess(jdsp, curDecimatedLen);
+		DoASRC_bwd(jdsp, curDecimatedLen, n);
+	}
+	else
+		JamesDSPProcess(jdsp, n);
+	float f;
+	for (size_t i = 0; i < n; i++)
+	{
+		if (jdsp->tmpBuffer[0][i] <= -1.0f)
+			y[i << 1] = INT32_MIN;
+		else if (jdsp->tmpBuffer[0][i] >= 1.0f)
+			y[i << 1] = INT32_MAX;
+		else
+		{
+			f = jdsp->tmpBuffer[0][i] * scale;
+			y[i << 1] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+		}
+		if (jdsp->tmpBuffer[1][i] <= -1.0f)
+			y[(i << 1) + 1] = INT32_MIN;
+		else if (jdsp->tmpBuffer[1][i] >= 1.0f)
+			y[(i << 1) + 1] = INT32_MAX;
+		else
+		{
+			f = jdsp->tmpBuffer[1][i] * scale;
+			y[(i << 1) + 1] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+		}
+	}
+}
+void pint8_24(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t *y2, size_t n)
+{
+	if (jdsp->blockSizeMax < n)
+		JamesDSPReallocateBlock(jdsp, n);
+	if (iabs(jdsp->blockSize - n) > 128)
+		jdsp->blockSize = n;
+	static const float scale = (float)(1 << 23);
+	float limpos = 0x7fffff / scale;
+	float limneg = -0x800000 / scale;
+	for (size_t i = 0; i < n; i++)
+	{
+		jdsp->tmpBuffer[0][i] = (float)((double)x1[i] / scale);
+		jdsp->tmpBuffer[1][i] = (float)((double)x2[i] / scale);
+	}
+	if (jdsp->enableASRC)
+	{
+		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
+		JamesDSPProcess(jdsp, curDecimatedLen);
+		DoASRC_bwd(jdsp, curDecimatedLen, n);
+	}
+	else
+		JamesDSPProcess(jdsp, n);
+	float f;
+	for (size_t i = 0; i < n; i++)
+	{
+		f = jdsp->tmpBuffer[0][i] * scale;
+		y1[i] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+		f = jdsp->tmpBuffer[1][i] * scale;
+		y2[i] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+	}
+}
+void pint8_24Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
+{
+	if (jdsp->blockSizeMax < n)
+		JamesDSPReallocateBlock(jdsp, n);
+	if (iabs(jdsp->blockSize - n) > 128)
+		jdsp->blockSize = n;
+	static const float scale = (float)(1 << 23);
+	float limpos = 0x7fffff / scale;
+	float limneg = -0x800000 / scale;
+	for (size_t i = 0; i < n; i++)
+	{
+		jdsp->tmpBuffer[0][i] = (float)((double)x[i << 1] / scale);
+		jdsp->tmpBuffer[1][i] = (float)((double)x[(i << 1) + 1] / scale);
+	}
+	if (jdsp->enableASRC)
+	{
+		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
+		JamesDSPProcess(jdsp, curDecimatedLen);
+		DoASRC_bwd(jdsp, curDecimatedLen, n);
+	}
+	else
+		JamesDSPProcess(jdsp, n);
+	float f;
+	for (size_t i = 0; i < n; i++)
+	{
+		f = jdsp->tmpBuffer[0][i] * scale;
+		y[i << 1] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+		f = jdsp->tmpBuffer[1][i] * scale;
+		y[(i << 1) + 1] = (int32_t)(f > 0 ? f + 0.5f : f - 0.5f);
+	}
+}
+void pintp24(JamesDSPLib *jdsp, uint8_t *x1, uint8_t *x2, uint8_t *y1, uint8_t *y2, size_t n)
+{
+	if (jdsp->blockSizeMax < n)
+		JamesDSPReallocateBlock(jdsp, n);
+	if (iabs(jdsp->blockSize - n) > 128)
+		jdsp->blockSize = n;
+	static const float scale = 1.0f / (float)(1UL << 31);
+	for (size_t i = 0; i < n; i++)
+	{
+		jdsp->tmpBuffer[0][i] = jdsp->i32_from_p24(x1 + i * 3) * scale;
+		jdsp->tmpBuffer[1][i] = jdsp->i32_from_p24(x2 + i * 3) * scale;
 	}
 	if (jdsp->enableASRC)
 	{
@@ -357,8 +550,34 @@ void pint32Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
 		JamesDSPProcess(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
-		y[i << 1] = (int32_t)(jdsp->tmpBuffer[0][i] * 2147483647.0f);
-		y[(i << 1) + 1] = (int32_t)(jdsp->tmpBuffer[1][i] * 2147483647.0f);
+		jdsp->p24_from_i32(clamp24_from_float(jdsp->tmpBuffer[0][i]), y1 + i * 3);
+		jdsp->p24_from_i32(clamp24_from_float(jdsp->tmpBuffer[1][i]), y2 + i * 3);
+	}
+}
+void pintp24Multiplexed(JamesDSPLib *jdsp, uint8_t *x, uint8_t *y, size_t n)
+{
+	if (jdsp->blockSizeMax < n)
+		JamesDSPReallocateBlock(jdsp, n);
+	if (iabs(jdsp->blockSize - n) > 128)
+		jdsp->blockSize = n;
+	static const float scale = 1.0f / (float)(1UL << 31);
+	for (size_t i = 0; i < n; i++)
+	{
+		jdsp->tmpBuffer[0][i] = jdsp->i32_from_p24(x + (i << 1) * 3) * scale;
+		jdsp->tmpBuffer[1][i] = jdsp->i32_from_p24(x + ((i << 1) + 1) * 3) * scale;
+	}
+	if (jdsp->enableASRC)
+	{
+		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
+		JamesDSPProcess(jdsp, curDecimatedLen);
+		DoASRC_bwd(jdsp, curDecimatedLen, n);
+	}
+	else
+		JamesDSPProcess(jdsp, n);
+	for (size_t i = 0; i < n; i++)
+	{
+		jdsp->p24_from_i32(clamp24_from_float(jdsp->tmpBuffer[0][i]), y + (i << 1) * 3);
+		jdsp->p24_from_i32(clamp24_from_float(jdsp->tmpBuffer[1][i]), y + ((i << 1) + 1) * 3);
 	}
 }
 void pfloat32(JamesDSPLib *jdsp, float *x1, float *x2, float *y1, float *y2, size_t n)
@@ -513,6 +732,19 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 {
 	memset(jdsp, 0, sizeof(JamesDSPLib));
+	// Endianness detection
+	unsigned int x = 1;
+	if ((((char *)&x)[0]) == 1)
+	{
+		jdsp->i32_from_p24 = i32_from_p24_little_endian;
+		jdsp->p24_from_i32 = p24_from_i32_little_endian;
+	}
+	else
+	{
+		jdsp->i32_from_p24 = i32_from_p24_big_endian;
+		jdsp->p24_from_i32 = p24_from_i32_big_endian;
+	}
+	//
 	if (pthread_mutex_init(&jdsp->m_in_processing, NULL) != 0)
 		jdsp->isMutexSuccess = 0;
 	else
@@ -527,6 +759,10 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	jdsp->processInt16Multiplexd = pint16Multiplexed;
 	jdsp->processInt32Multiplexd = pint32Multiplexed;
 	jdsp->processFloatMultiplexd = pfloat32Multiplexed;
+	jdsp->processInt8_24Multiplexd = pint8_24Multiplexed;
+	jdsp->processInt24PackedMultiplexd = pintp24Multiplexed;
+	jdsp->processInt8_24Deinterleaved = pint8_24;
+	jdsp->processInt24PackedDeinterleaved = pintp24;
 	//
 	const unsigned int asrc_taps = 32;
 	char isminphase = 1;
