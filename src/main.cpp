@@ -77,6 +77,7 @@ int main(int   argc,
 #endif
 
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QApplication app(argc, argv);
 
 	QCommandLineParser parser;
