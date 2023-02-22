@@ -6,6 +6,7 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QLibraryInfo>
 #include <QScreen>
 #include <QStyle>
 #include <QScopeGuard>
@@ -109,7 +110,7 @@ int main(int   argc,
     app.installTranslator(&translator);
 
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + locale + ".qm");
+    qtTranslator.load("qt_" + locale + ".qm", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
 
 #ifndef NO_CRASH_HANDLER
