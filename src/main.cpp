@@ -81,10 +81,6 @@ int main(int   argc,
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QApplication app(argc, argv);
 
-    QTranslator translator;
-    translator.load(":/translations/jamesdsp_" + QLocale::system().name());
-    app.installTranslator(&translator);
-
 	QCommandLineParser parser;
 	parser.setApplicationDescription("JamesDSP for Linux");
 	parser.addHelpOption();
@@ -100,7 +96,21 @@ int main(int   argc,
     parser.addOption(silent);
     QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
     parser.addOption(nocolor);
+    QCommandLineOption lang(QStringList() << "l" << "lang", "Force language (two letter country code)", "lang");
+    parser.addOption(lang);
     parser.process(app);
+
+    QString defaultLocale = QLocale::system().name(); // e.g. "de_DE"
+    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
+    QString locale = (parser.isSet(lang) ? parser.value(lang) : defaultLocale);
+
+    QTranslator translator;
+    translator.load(":/translations/jamesdsp_" + locale + ".qm");
+    app.installTranslator(&translator);
+
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + locale + ".qm");
+    app.installTranslator(&qtTranslator);
 
 #ifndef NO_CRASH_HANDLER
     SPIN_ON_CRASH = parser.isSet(spinlck);
@@ -118,8 +128,10 @@ int main(int   argc,
     Log::instance().setColoredOutput(!parser.isSet(nocolor));
 
     Log::clear();
+
     Log::information("Application version: " + QString(APP_VERSION_FULL));
     Log::information("Qt library version: " + QString(qVersion()));
+    Log::information("Using language: " + QString(locale));
 
     Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no")); /* unreliable */
     QGuiApplication::setFallbackSessionManagementEnabled(false);   
