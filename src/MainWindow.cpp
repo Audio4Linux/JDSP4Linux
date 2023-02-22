@@ -229,6 +229,24 @@ MainWindow::MainWindow(bool     statupInTray,
         _trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || _startupInTraySwitch);
     }
 
+    // Populate preset lists
+    {
+        for (const auto &preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
+        {
+            ui->eqpreset->addItem(preset);
+        }
+
+        for (const auto &preset : PresetProvider::Reverb::getPresetNames())
+        {
+            ui->roompresets->addItem(preset);
+        }
+
+        for (const auto &[key, value] : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().toStdMap())
+        {
+            ui->crossfeed_mode->addItem(key, value);
+        }
+    }
+
     // Load config and connect fragment signals
     {
         connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
@@ -340,24 +358,6 @@ MainWindow::MainWindow(bool     statupInTray,
         ui->liveprog->coupleIDE(_eelEditor);
         connect(ui->liveprog, &LiveprogSelectionWidget::liveprogReloadRequested, _audioService, &IAudioService::reloadLiveprog);
         connect(ui->liveprog, &LiveprogSelectionWidget::unitLabelUpdateRequested, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
-    }
-
-    // Populate preset lists
-    {
-        for (const auto &preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
-        {
-            ui->eqpreset->addItem(preset);
-        }
-
-        for (const auto &preset : PresetProvider::Reverb::getPresetNames())
-        {
-            ui->roompresets->addItem(preset);
-        }
-
-        for (const auto &preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().keys())
-        {
-            ui->crossfeed_mode->addItem(preset);
-        }
     }
 
     // Connect remaining signals
@@ -635,7 +635,11 @@ void MainWindow::loadConfig()
 
     ui->bs2b->setChecked(DspConfig::instance().get<bool>(DspConfig::crossfeed_enable));
     int bs2bMode = DspConfig::instance().get<int>(DspConfig::crossfeed_mode);
-    ui->crossfeed_mode->setCurrentText(PresetProvider::BS2B::reverseLookup(bs2bMode));
+    int bs2bIndex = ui->crossfeed_mode->findData(bs2bMode);
+    if(bs2bIndex < 0)
+        Log::error(QString("BS2B index for value %1 not found").arg(bs2bMode));
+    else
+        ui->crossfeed_mode->setCurrentIndex(bs2bIndex);
     ui->bs2b_feed->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_feed));
     ui->bs2b_fcut->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_fcut));
     ui->bs2b_custom_box->setEnabled(bs2bMode == 99);
