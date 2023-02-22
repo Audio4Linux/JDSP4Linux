@@ -11,6 +11,7 @@
 #include <QScopeGuard>
 #include <QTextStream>
 #include <QSessionManager>
+#include <QTranslator>
 
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -79,6 +80,10 @@ int main(int   argc,
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QApplication app(argc, argv);
+
+    QTranslator translator;
+    translator.load(":/translations/jamesdsp_" + QLocale::system().name());
+    app.installTranslator(&translator);
 
 	QCommandLineParser parser;
 	parser.setApplicationDescription("JamesDSP for Linux");

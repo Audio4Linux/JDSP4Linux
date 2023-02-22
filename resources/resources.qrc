@@ -64,5 +64,6 @@
         <file>assets/vdc/mh750.vdc</file>
         <file>assets/liveprog/pfb.eel</file>
         <file>assets/liveprog/stftDenoise.eel</file>
+        <file>../translations.qrc</file>
     </qresource>
 </RCC>
