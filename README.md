@@ -39,9 +39,9 @@ Linux port developed by <a href="https://github.com/thepbone">Tim Schneeberger (
 ____________
 
 <p align="center">
-    <a href="https://crowdin.com/translate/jdsp4linux" rel="nofollow"><img style="width:140;height:40px" src="https://badges.crowdin.net/badge/light/crowdin-on-dark.png" srcset="https://badges.crowdin.net/badge/light/crowdin-on-dark.png 1x,https://badges.crowdin.net/badge/light/crowdin-on-dark@2x.png 2x" alt="Crowdin" /></a>
+    <a href="https://crowdin.com/project/jdsp4linux" rel="nofollow"><img style="width:140;height:40px" src="https://badges.crowdin.net/badge/light/crowdin-on-dark.png" srcset="https://badges.crowdin.net/badge/light/crowdin-on-dark.png 1x,https://badges.crowdin.net/badge/light/crowdin-on-dark@2x.png 2x" alt="Crowdin" /></a>
     <br/>
-    Please help us to <a href="https://crowdin.com/translate/jdsp4linux">translate this app</a> on <a href="https://crowdin.com/translate/jdsp4linux">Crowdin</a>!
+    Please help us to <a href="https://crowdin.com/project/jdsp4linux">translate this app</a> on <a href="https://crowdin.com/project/jdsp4linux">Crowdin</a>!
 </p>
 
 ## Features
