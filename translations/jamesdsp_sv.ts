@@ -4,22 +4,7 @@
 <context>
     <name>AeqMeasurementItem</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="30"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;lt;Name&amp;gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="42"/>
-        <source>&lt;Desc&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="72"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="71"/>
         <source>Best</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27,89 +12,78 @@
 <context>
     <name>AeqSelector</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
         <source>AutoEQ Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
         <source>Filter...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
         <source>Local database version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
         <source>Checked out at commit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="138"/>
-        <source>deadbeef0123456</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
         <source>Last commit created at:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="152"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="166"/>
-        <source>2021/12/11 00:00:00</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
         <source>Package generated at:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
         <source>Display settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
         <source>Dark mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
         <source>Update database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
         <source>Download latest AutoEQ package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
         <source>Delete database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
         <source>Cleanup local database and exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="282"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
         <source>No measurement selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="289"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
         <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/AeqSelector.ui" line="355"/>
+        <location filename="../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
         <source>Manage database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -117,38 +91,28 @@ This will override your current GraphicEQ configuration.</source>
 <context>
     <name>AppItem</name>
     <message>
-        <location filename="../src/interface/item/AppItem.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/interface/item/AppItem.ui" line="53"/>
-        <source>???</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/interface/item/AppItem.ui" line="65"/>
+        <location filename="../src/interface/item/AppItem.ui" line="64"/>
         <source>(unset)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/item/AppItem.ui" line="85"/>
+        <location filename="../src/interface/item/AppItem.ui" line="84"/>
         <location filename="../src/interface/item/AppItem.cpp" line="37"/>
         <source>Add to blocklist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/item/AppItem.ui" line="99"/>
+        <location filename="../src/interface/item/AppItem.ui" line="98"/>
         <source>Latency: 0ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/item/AppItem.ui" line="106"/>
+        <location filename="../src/interface/item/AppItem.ui" line="105"/>
         <source>Rate: 0Hz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/item/AppItem.ui" line="113"/>
+        <location filename="../src/interface/item/AppItem.ui" line="112"/>
         <source>Format: Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -161,12 +125,7 @@ This will override your current GraphicEQ configuration.</source>
 <context>
     <name>AppManagerFragment</name>
     <message>
-        <location filename="../src/interface/fragment/AppManagerFragment.ui" line="26"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/interface/fragment/AppManagerFragment.ui" line="44"/>
+        <location filename="../src/interface/fragment/AppManagerFragment.ui" line="43"/>
         <source>Active apps</source>
         <translation type="unfinished"></translation>
     </message>
@@ -179,224 +138,219 @@ This will override your current GraphicEQ configuration.</source>
 <context>
     <name>EELEditor</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
         <source>EEL Scripting IDE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
         <source>Navigation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="88"/>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
         <source>Open script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
         <source>Close file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
         <source>Ctrl+Shift+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
         <source>Save as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
         <source>Ctrl+Shift+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
         <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
         <source>Ctrl+Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
         <source>Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
         <source>Ctrl+Shift+Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
         <source>Find/Replace...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
         <source>Go to line...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
         <source>Go to line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
         <source>Jump to function...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
         <source>Go to @init</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
         <source>Go to @sample</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
         <source>Automatic Parentheses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
         <source>Replace Tabs with Spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
         <source>EEL2 documentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
         <source>Run code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
         <source>New script wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
         <source>Freeze</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
         <source>F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
         <source>Open EEL script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
+        <location filename="../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
         <source>EEL2 Script (*.eel)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -404,12 +358,7 @@ This will override your current GraphicEQ configuration.</source>
 <context>
     <name>EmptyView</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
         <source>No project loaded</source>
         <translation type="unfinished"></translation>
     </message>
@@ -417,28 +366,23 @@ This will override your current GraphicEQ configuration.</source>
 <context>
     <name>FileDownloaderDialog</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
+        <location filename="../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
         <source>Package manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
+        <location filename="../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
         <source>Downloading package...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
+        <location filename="../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
         <source>0MB/49.56MB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FileSelectionWidget</name>
-    <message>
-        <location filename="../src/interface/FileSelectionWidget.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../src/interface/FileSelectionWidget.ui" line="59"/>
         <source>Refresh</source>
@@ -473,37 +417,37 @@ This will override your current GraphicEQ configuration.</source>
 <context>
     <name>FindReplaceForm</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
         <source>&amp;Find:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
         <source>R&amp;eplace with:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
         <source>&amp;Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -515,42 +459,42 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="149"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="149"/>
         <source>R&amp;egular expression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
         <source>&amp;Whole words </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
         <source>&amp;Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
         <source>&amp;Replace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="221"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="221"/>
         <source>Replace &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
         <source>no match found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="170"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="170"/>
         <source>Replaced %1 occurrence(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -644,7 +588,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
 <context>
     <name>FlatTabWidget</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
+        <location filename="../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
         <source>FlatTabWidget</source>
         <translation type="unfinished"></translation>
     </message>
@@ -652,101 +596,101 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
 <context>
     <name>GraphicEQFilterGUI</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
         <source>Enable Graphic EQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
         <source>Freq.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
         <source>Gain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
         <source>AutoEQ database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
         <source>15-band</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
         <source>31-band</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
         <source>variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="263"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="263"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
         <source>Invert response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
         <source>Normalize response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
         <source>Reset response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
         <source>Import EqualizerAPO settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
         <source>Import frequency response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
         <source>CSV frequency response (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
         <source>All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
         <source>Import EqualizerAPO graphic EQ preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
         <source>EqualizerAPO GraphicEQ (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
+        <location filename="../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
         <source>Export frequency response</source>
         <translation type="unfinished"></translation>
     </message>
@@ -754,28 +698,23 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
 <context>
     <name>LiveprogSelectionWidget</name>
     <message>
-        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="91"/>
+        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="90"/>
         <location filename="../src/interface/LiveprogSelectionWidget.cpp" line="158"/>
         <source>No script has been loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="114"/>
+        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="113"/>
         <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="121"/>
+        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="120"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="128"/>
+        <location filename="../src/interface/LiveprogSelectionWidget.ui" line="127"/>
         <location filename="../src/interface/LiveprogSelectionWidget.cpp" line="157"/>
         <source>Create new script</source>
         <translation type="unfinished"></translation>
@@ -1295,18 +1234,8 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.ui" line="1729"/>
-        <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/MainWindow.ui" line="1739"/>
         <source>Samples:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.ui" line="1749"/>
-        <source>32768</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1499,57 +1428,57 @@ This setting is only in effect if IR optimization is enabled.
 <context>
     <name>NewFileWizard</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
         <source>Create new script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="64"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="64"/>
         <source>New script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="71"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="71"/>
         <source>Define and generate a basic script template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="111"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="111"/>
         <source>Workspace directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="151"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="151"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="160"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="160"/>
         <source>File name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="169"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="169"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="204"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="204"/>
         <source>.eel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="213"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="213"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="220"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="220"/>
         <source>Untitled script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
         <source>Select directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1782,27 +1711,27 @@ Please create one first before adding a new rule.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="159"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="159"/>
         <source>List All Tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
         <source>Detach Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
         <source>Close Active Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
         <source>Close Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="248"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="248"/>
         <source>Close Tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2242,22 +2171,22 @@ If they have been modified, they will be reset.</source>
 <context>
     <name>VariableWatchWidget</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="14"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="86"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="86"/>
         <source>Refresh every</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
+        <location filename="../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
         <source>Click a variable to manipulate its value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2278,17 +2207,17 @@ If they have been modified, they will be reset.</source>
 <context>
     <name>ads::CDockAreaTitleBar</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="584"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="584"/>
         <source>Detach Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="587"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="587"/>
         <source>Close Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="589"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="589"/>
         <source>Close Other Groups</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2296,7 +2225,7 @@ If they have been modified, they will be reset.</source>
 <context>
     <name>ads::CDockManager</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockManager.cpp" line="489"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockManager.cpp" line="489"/>
         <source>Show View</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2304,28 +2233,23 @@ If they have been modified, they will be reset.</source>
 <context>
     <name>ads::CDockWidgetTab</name>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
         <source>Detach</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../Git/JDSP4Linux/src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
+        <location filename="../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
         <source>Close Others</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>menueditor</name>
-    <message>
-        <location filename="../src/interface/menueditor.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../src/interface/menueditor.ui" line="25"/>
         <source>Available entries</source>
@@ -2398,7 +2322,7 @@ If they have been modified, they will be reset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/interface/menueditor.ui" line="278"/>
+        <location filename="../src/interface/menueditor.ui" line="279"/>
         <source>Context menu contents</source>
         <translation type="unfinished"></translation>
     </message>
