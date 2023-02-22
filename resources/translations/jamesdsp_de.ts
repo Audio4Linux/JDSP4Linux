@@ -1258,7 +1258,7 @@ Bitte wählen Sie eine andere</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1845"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wendet einen parametrischen EQ auf das Audiosignal an. Dabeio muss der Benutzer jedoch eine .vdc Datei, die DDCToolbox generieren kann, auswählen.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP ist eine generalisierte Implementierung von Sektionsfiltern zweiter Ordnung, was sich leicht von der Implementierung in Viper4Android unterscheidet. V4A unterstützt nur Peaking parametric; der Grund dafür ist, dass V4A einen 'share coefficient property' des Peaking Filters verwendet. Im Gegensatz dazu hat jDSP keine derartige Annahme.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wendet einen parametrischen EQ auf das Audiosignal an. Dabeio muss der Benutzer jedoch eine .vdc Datei, die DDCToolbox generieren kann, auswählen.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP ist eine generalisierte Implementierung von Sektionsfiltern zweiter Ordnung, was sich leicht von der Implementierung in Viper4Android unterscheidet. V4A unterstützt nur Peaking parametric; der Grund dafür ist, dass V4A einen &apos;share coefficient property&apos; des Peaking Filters verwendet. Im Gegensatz dazu hat jDSP keine derartige Annahme.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1892"/>
@@ -1273,7 +1273,7 @@ Bitte wählen Sie eine andere</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1957"/>
       <source>Create your custom DDC files using DDCToolbox</source>
-      <translation>Erstellen Sie Ihre eigenen DDC-Dateien mit DDCToolbox</translation>
+      <translation>Erstelle deine eigenen DDC-Dateien mit DDCToolbox</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1967"/>
