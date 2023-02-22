@@ -721,7 +721,7 @@ Besuche unsere Telegram-Community für Support und Updates!</translation>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
       <source>Reset</source>
-      <translation>Zurücksetzen</translation>
+      <translation>Reset</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
