@@ -1619,6 +1619,11 @@ This setting is only in effect if IR optimization is enabled.
 <context>
     <name>PresetFragment</name>
     <message>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="23"/>
+        <source>No presets saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/interface/fragment/PresetFragment.cpp" line="97"/>
         <source>Cannot load preset</source>
         <translation type="unfinished"></translation>

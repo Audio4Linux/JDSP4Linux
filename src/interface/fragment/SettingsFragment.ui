@@ -129,7 +129,7 @@
         <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -174,7 +174,7 @@
              <item>
               <widget class="QComboBox" name="paletteSelect">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
@@ -213,7 +213,7 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>50</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -795,7 +795,7 @@
       <widget class="QPushButton" name="run_first_launch">
        <property name="minimumSize">
         <size>
-         <width>131</width>
+         <width>140</width>
          <height>0</height>
         </size>
        </property>

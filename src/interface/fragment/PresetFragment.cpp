@@ -20,7 +20,7 @@ PresetFragment::PresetFragment(IAudioService* service, QWidget *parent) :
 
     ui->files->setModel(PresetManager::instance().presetModel());
     ui->files->setEmptyViewEnabled(true);
-    ui->files->setEmptyViewTitle("No presets saved");
+    ui->files->setEmptyViewTitle(tr("No presets saved"));
 
     ui->add->setEnabled(false);
     ui->remove->setEnabled(false);

@@ -39,8 +39,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	ui->setupUi(this);
 
 #ifdef USE_PULSEAUDIO
+    ui->selector->topLevelItem(2)->setHidden(true); // Hide devices
     ui->devices->setVisible(false);
-    ui->selector->findItems("Devices", Qt::MatchFlag::MatchExactly).first()->setHidden(true);
     ui->blocklistBox->setVisible(false);
 #endif
 
@@ -52,7 +52,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     ui->selector->setCurrentItem(ui->selector->topLevelItem(0));
 	ui->stackedWidget->setCurrentIndex(0);
     ui->stackedWidget->repaint();
-    ui->selector->expandItem(ui->selector->findItems("Tray icon", Qt::MatchFlag::MatchExactly).first());
+    ui->selector->expandItem(ui->selector->topLevelItem(4)); // Expand tray-icon
     connect(ui->selector, &QTreeWidget::currentItemChanged, this, &SettingsFragment::onTreeItemSelected);
 
 	/*
@@ -309,9 +309,9 @@ void SettingsFragment::onTreeItemSelected(QTreeWidgetItem *cur, QTreeWidgetItem 
     switch (topLevelIndex)
     {
         case -1:
-            if (cur->text(0) == "Context menu")
+            if (ui->selector->indexOfTopLevelItem(cur->parent()) == 4 /* Tray-icon */)
             {
-                ui->stackedWidget->setCurrentIndex(5);
+                ui->stackedWidget->setCurrentIndex(5); // Context menu
             }
             break;
         default:

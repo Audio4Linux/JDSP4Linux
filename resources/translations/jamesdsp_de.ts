@@ -1642,6 +1642,11 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
 <context>
     <name>PresetFragment</name>
     <message>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="23"/>
+        <source>No presets saved</source>
+        <translation>Keine Voreinstellungen gefunden</translation>
+    </message>
+    <message>
         <location filename="../../src/interface/fragment/PresetFragment.cpp" line="97"/>
         <source>Cannot load preset</source>
         <translation>Kann Voreinstellung nicht laden</translation>
@@ -2341,7 +2346,7 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
     <message>
         <location filename="../../src/interface/menueditor.ui" line="215"/>
         <source>&amp;Del</source>
-        <translation>Entf</translation>
+        <translation>&amp;Entf</translation>
     </message>
     <message>
         <location filename="../../src/interface/menueditor.ui" line="245"/>
