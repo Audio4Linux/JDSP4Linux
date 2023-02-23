@@ -191,7 +191,7 @@ MainWindow::MainWindow(bool     statupInTray,
         {
             ui->enable_eq->setChecked(true);
 
-            if (preset == "Default")
+            if (preset == PresetProvider::EQ::defaultPresetName())
             {
                 resetEQ();
             }
@@ -875,20 +875,15 @@ void MainWindow::applyConfig()
 // Predefined presets
 void MainWindow::onEqPresetUpdated()
 {
-    if (ui->eqpreset->currentText() == "Custom" || _blockApply)
+    if (_blockApply)
     {
         return;
     }
 
     auto preset = PresetProvider::EQ::lookupPreset(ui->eqpreset->currentText());
-
     if (preset.size() > 0)
     {
         setEq(preset);
-    }
-    else
-    {
-        resetEQ();
     }
 }
 
@@ -1130,7 +1125,7 @@ void MainWindow::resetEQ()
     ui->eq_dyn_widget->load(DEFAULT_GRAPHICEQ);
     _blockApply = false;
     setEq(PresetProvider::EQ::defaultPreset());
-    applyConfig();
+    // setEq calls applyConfig();
 }
 
 void MainWindow::determineEqPresetName()
@@ -1138,7 +1133,10 @@ void MainWindow::determineEqPresetName()
     QString currentEqPresetName =
             PresetProvider::EQ::reverseLookup(ui->eq_widget->getBands());
 
-    ui->eqpreset->setCurrentText(currentEqPresetName);
+    if(currentEqPresetName.isEmpty())
+        ui->eqpreset->setCurrentIndex(0);
+    else
+        ui->eqpreset->setCurrentText(currentEqPresetName);
 }
 
 void MainWindow::onEqModeUpdated()

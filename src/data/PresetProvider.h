@@ -35,6 +35,7 @@ namespace PresetProvider
 	{
 public:
 		static const DOUBLE_LIST   defaultPreset();
+        static const QString       defaultPresetName();
 		static const DOUBLE_LIST   lookupPreset(const QString &preset);
 		static const QMap<EQ_UNIT> EQ_LOOKUP_TABLE();
 		static const QString       reverseLookup(const QVector<double> &data);

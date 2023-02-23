@@ -4,17 +4,17 @@
 <context>
     <name>AeqItemDelegate</name>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="44"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
         <source>2nd choice</source>
         <translation>2. Wahl</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="47"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
         <source>3rd choice</source>
         <translation>3. Wahl</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="50"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
         <source>%1th choice</source>
         <translation>%1. Wahl</translation>
     </message>
@@ -200,13 +200,13 @@ Möchtest du fortfahren und diese Funktion aktivieren?</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="137"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
         <source>Failed to retrieve version information</source>
         <translation>Fehler beim Abrufen der Versionsinformation</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="137"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
         <source>Failed to retrieve package information from the remote repository:
 
 Status code: %0
@@ -222,12 +222,12 @@ Grund: %1</translation>
         <translation>Zurück zur Datenbank</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
         <source>No new updates available</source>
         <translation>Keine neuen Updates verfügbar</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="141"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
         <source>The local database is currently up-to-date; no new updates are available at this time.
 
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
@@ -240,22 +240,22 @@ Es kann bis zu 24 Stunden dauern, bis neue Änderungen im AutoEQ Upstream Reposi
 Möchtest du trotzdem das aktuelle Datenbankupdate neu installieren?</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="158"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
         <source>Database cleared</source>
         <translation>Datenbank gelöscht</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="158"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
         <source>The database has been removed from your hard disk</source>
         <translation>Die Datenbank wurde von aus dem Speicher gelöscht</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="240"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="240"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
         <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
         <translation>Die entsprechende Datei konnte nicht aus der Datenbank abgerufen werden. Bitte aktualisiere die lokale Datenbank, da sie unvollständig erscheint.</translation>
     </message>
@@ -1984,132 +1984,222 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
  Bitte kopieren Sie diese URL manuell: </translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="100"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="29"/>
+        <source>Flat</source>
+        <translation>Flach</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="82"/>
+        <source>Pop</source>
+        <translation>Pop</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="83"/>
+        <source>Rock</source>
+        <translation>Rock</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="84"/>
+        <source>Jazz</source>
+        <translation>Jazz</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="85"/>
+        <source>Classic</source>
+        <translation>Klassik</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="86"/>
+        <source>Bass</source>
+        <translation>Bass</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="87"/>
+        <source>Clear</source>
+        <translation>Klar</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="88"/>
+        <source>Hip-Hop</source>
+        <translation>Hip-Hop</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="89"/>
+        <source>Dubstep</source>
+        <translation>Dubstep</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="90"/>
+        <source>Movie</source>
+        <translation>Film</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="91"/>
+        <source>Metal</source>
+        <translation>Metal</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="92"/>
+        <source>Vocal Booster</source>
+        <translation>Stimmenverstärker</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="93"/>
+        <source>Hardstyle</source>
+        <translation>Hardstyle</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="94"/>
+        <source>Acoustic</source>
+        <translation>Akustik</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="95"/>
+        <source>R&amp;B</source>
+        <translation>R&amp;B</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="96"/>
+        <source>Electronic</source>
+        <translation>Elektro</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="97"/>
+        <source>Deep Bass</source>
+        <translation>Tiefer Bass</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="98"/>
+        <source>Beats</source>
+        <translation>Beats</translation>
+    </message>
+    <message>
+        <location filename="../../src/data/PresetProvider.cpp" line="105"/>
         <source>BS2B Custom</source>
         <translation>BS2B Benutzerdefiniert</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="101"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="106"/>
         <source>BS2B Weak</source>
         <translation>BS2B Schwach</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="102"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="107"/>
         <source>BS2B Strong</source>
         <translation>BS2B Stark</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="103"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="108"/>
         <source>Out of head</source>
         <translation>Außerhalb des Kopfes</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="104"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="109"/>
         <source>Surround 1</source>
         <translation>Surround 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="105"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="110"/>
         <source>Surround 2</source>
         <translation>Surround 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="106"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="111"/>
         <source>Joe0Bloggs Realistic surround</source>
         <translation>Joe0Bloggs Realistischer Surround</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="204"/>
         <source>Default</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="204"/>
         <source>Small hall 1</source>
         <translation>Kleine Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="204"/>
         <source>Small hall 2</source>
         <translation>Kleine Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="204"/>
         <source>Medium hall 1</source>
         <translation>Mittelgroße Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="199"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="204"/>
         <source>Medium hall 2</source>
         <translation>Mittelgroße Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="205"/>
         <source>Large hall 1</source>
         <translation>Große Halle 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="205"/>
         <source>Large hall 2</source>
         <translation>Große Halle 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="205"/>
         <source>Small room 1</source>
         <translation>Kleiner Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="205"/>
         <source>Small room 2</source>
         <translation>Kleiner Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="200"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="205"/>
         <source>Medium room 1</source>
         <translation>Mittelgroßer Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="206"/>
         <source>Medium room 2</source>
         <translation>Mittelgroßer Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="206"/>
         <source>Large room 1</source>
         <translation>Großer Raum 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="206"/>
         <source>Large room 2</source>
         <translation>Großer Raum 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="206"/>
         <source>Medium ER 1</source>
         <translation>Mittelgroßer ER 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="201"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="206"/>
         <source>Medium ER 2</source>
         <translation>Mittelgroßer ER 2</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="207"/>
         <source>Plate high</source>
         <translation>Platte hoch</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="207"/>
         <source>Plate low</source>
         <translation>Platte tief</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="207"/>
         <source>Long reverb 1</source>
         <translation>Langer Hall 1</translation>
     </message>
     <message>
-        <location filename="../../src/data/PresetProvider.cpp" line="202"/>
+        <location filename="../../src/data/PresetProvider.cpp" line="207"/>
         <source>Long reverb 2</source>
         <translation>Langer Hall 2</translation>
     </message>
