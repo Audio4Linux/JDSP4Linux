@@ -90,9 +90,9 @@ void AeqSelector::showEvent(QShowEvent *ev)
             return;
         }
 
-        pkgManager->getRepositoryVersion().then([=](AeqVersion remote)
+        pkgManager->getRepositoryVersion().then([this, cancel](AeqVersion remote)
         {
-            pkgManager->installPackage(remote, this).then([=]()
+            pkgManager->installPackage(remote, this).then([this]()
             {
                 this->setEnabled(true);
                 updateDatabaseInfo();
@@ -129,10 +129,9 @@ void AeqSelector::updateDatabase()
         });
     };
 
-    pkgManager->isUpdateAvailable().then([this, doInstallation](AeqVersion remote)
+    pkgManager->isUpdateAvailable().then([doInstallation](AeqVersion remote)
     {
         doInstallation(remote);
-
     }).fail([this](const HttpException& ex){
         QMessageBox::critical(this, tr("Failed to retrieve version information"), tr("Failed to retrieve package information from the remote repository:\n\n"
                                                                                      "Status code: %0\nReason: %1").arg(ex.statusCode()).arg(ex.reasonPhrase()));
@@ -164,17 +163,17 @@ void AeqSelector::updateDatabaseInfo()
     ui->searchInput->setText("");
     ui->list->selectionModel()->clearSelection();
 
-    pkgManager->getLocalVersion().then([=](AeqVersion local){
+    pkgManager->getLocalVersion().then([this](AeqVersion local){
         ui->db_commit->setText(local.commit.left(7));
         ui->db_committime->setText(local.commitTime.toString("yy/MM/dd HH:mm:ss") + " UTC");
         ui->db_uploadtime->setText(local.packageTime.toString("yy/MM/dd HH:mm:ss") + " UTC");
-    }).fail([=]{
+    }).fail([this]{
         ui->db_commit->setText("N.A.");
         ui->db_committime->setText("N.A.");
         ui->db_uploadtime->setText("N.A.");
     });
 
-    pkgManager->getLocalIndex().then([=](const QVector<AeqMeasurement>& items){
+    pkgManager->getLocalIndex().then([this](const QVector<AeqMeasurement>& items){
         model->import(items);
     });
 }
@@ -193,7 +192,7 @@ void AeqSelector::onSelectionChanged(const QItemSelection &selected, const QItem
 
     auto csv = this->selection(DataFormat::dCsv, true);
     auto item = proxyModel->data(ui->list->selectionModel()->selectedRows().first(), Qt::UserRole).value<AeqMeasurement>();
-    auto title = QString("%1 (%2)").arg(item.name).arg(item.source);
+    auto title = QString("%1 (%2)").arg(item.name, item.source);
     if(!csv.isEmpty())
     {
         ui->preview->importCsv(csv, title);
