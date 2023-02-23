@@ -26,6 +26,10 @@ PresetFragment::PresetFragment(IAudioService* service, QWidget *parent) :
     ui->remove->setEnabled(false);
     ui->load->setEnabled(false);
 
+#ifdef USE_PULSEAUDIO
+    ui->rules->setVisible(false);
+#endif
+
     connect(ui->add, &QPushButton::clicked, this, &PresetFragment::onAddClicked);
     connect(ui->load, &QPushButton::clicked, this, &PresetFragment::onLoadClicked);
     connect(ui->remove, &QPushButton::clicked, this, &PresetFragment::onRemoveClicked);
