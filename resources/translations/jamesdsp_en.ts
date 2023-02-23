@@ -20,14 +20,6 @@
     </message>
 </context>
 <context>
-    <name>AeqMeasurementItem</name>
-    <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="71"/>
-        <source>Best</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AeqPreviewPlot</name>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
@@ -228,7 +220,7 @@ Reason: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="141"/>
         <source>The local database is currently up-to-date; no new updates are available at this time.
 
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
@@ -237,22 +229,22 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="158"/>
         <source>Database cleared</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="158"/>
         <source>The database has been removed from your hard disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="240"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="240"/>
         <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -795,11 +787,6 @@ p, li { white-space: pre-wrap; }
 </context>
 <context>
     <name>FirstLaunchWizard</name>
-    <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="20"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
         <source>Welcome!</source>
@@ -1772,22 +1759,17 @@ This setting is only in effect if IR optimization is enabled.
 <context>
     <name>PresetAddRuleFragment</name>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="27"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="26"/>
         <source>Add new rule...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="39"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="38"/>
         <source>If</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="56"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="55"/>
         <source>is connected, then load preset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1795,42 +1777,37 @@ This setting is only in effect if IR optimization is enabled.
 <context>
     <name>PresetDialog</name>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="20"/>
-        <source>Custom Presets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="36"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="54"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
         <source>Preset name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="64"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
         <source>Adds current config as a preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="67"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="88"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
         <source>Rules...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="114"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="127"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2136,7 +2113,6 @@ Please create one first before adding a new rule.</source>
 <context>
     <name>SettingsFragment</name>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="26"/>
         <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
@@ -2425,46 +2401,41 @@ If they have been modified, they will be reset.</source>
 <context>
     <name>StatusDialog</name>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="26"/>
-        <source>Driver Status Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="39"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="38"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="66"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="65"/>
         <source>Application version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="73"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
         <source>JamesDSP core version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="80"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
         <source>Processing state</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="87"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
         <source>Audio format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="94"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
         <source>Sampling rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="125"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="153"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="181"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="209"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="237"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>

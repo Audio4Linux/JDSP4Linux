@@ -6,25 +6,24 @@
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="44"/>
         <source>2nd choice</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Wahl</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="47"/>
         <source>3rd choice</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Wahl</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="50"/>
         <source>%1th choice</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. Wahl</translation>
     </message>
 </context>
 <context>
     <name>AeqMeasurementItem</name>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="71"/>
         <source>Best</source>
-        <translation>Optimal</translation>
+        <translation type="vanished">Optimal</translation>
     </message>
 </context>
 <context>
@@ -32,7 +31,7 @@
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
         <source>Frequency (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Frequenz (Hz)</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
@@ -67,7 +66,7 @@
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
@@ -188,12 +187,12 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
         <source>No measurements found</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Messungen gefunden</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
         <source>AutoEQ database</source>
-        <translation type="unfinished">AutoEQ-Datenbank</translation>
+        <translation>AutoEQ-Datenbank</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -221,15 +220,15 @@ Reason: %1</source>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
         <source>Return to database</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zur Datenbank</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
         <source>No new updates available</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine neuen Updates verfügbar</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="141"/>
         <source>The local database is currently up-to-date; no new updates are available at this time.
 
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
@@ -238,22 +237,22 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="158"/>
         <source>Database cleared</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenbank gelöscht</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="158"/>
         <source>The database has been removed from your hard disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datenbank wurde von aus dem Speicher gelöscht</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="240"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="240"/>
         <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -776,7 +775,7 @@ p, li { white-space: pre-wrap ; }
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
         <source>&amp;Whole words </source>
-        <translation>Ganze &amp;Wörter</translation>
+        <translation>Ganze &amp;Wörter </translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
@@ -812,9 +811,8 @@ p, li { white-space: pre-wrap ; }
 <context>
     <name>FirstLaunchWizard</name>
     <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="20"/>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation type="vanished">Form</translation>
     </message>
     <message>
         <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
@@ -1008,17 +1006,17 @@ Besuche unsere Telegram-Community für Support und Updates!</translation>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="62"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
         <source>%1MB of %2MB downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>%1MB von %2MB heruntergeladen</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
         <source>Decompressing package...</source>
-        <translation type="unfinished"></translation>
+        <translation>Entpacke Paket...</translation>
     </message>
 </context>
 <context>
@@ -1931,22 +1929,21 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
 <context>
     <name>PresetAddRuleFragment</name>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="14"/>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="27"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="26"/>
         <source>Add new rule...</source>
         <translation>Neue Regel hinzufügen...</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="39"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="38"/>
         <source>If</source>
         <translation>Falls</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="56"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="55"/>
         <source>is connected, then load preset</source>
         <translation>ist verbunden, dann lade Preset</translation>
     </message>
@@ -1954,42 +1951,41 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
 <context>
     <name>PresetDialog</name>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="20"/>
         <source>Custom Presets</source>
-        <translation>Benutzerdefinierte Voreinstellungen</translation>
+        <translation type="vanished">Benutzerdefinierte Voreinstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="36"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
         <source>Presets</source>
         <translation>Voreinstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="54"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
         <source>Preset name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="64"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
         <source>Adds current config as a preset</source>
         <translation>Fügt aktuelle Konfiguration als Voreinstellung hinzu</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="67"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="88"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
         <source>Rules...</source>
         <translation>Regeln...</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="114"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.ui" line="127"/>
+        <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
         <source>Load</source>
         <translation>Laden</translation>
     </message>
@@ -2349,7 +2345,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
         <location filename="../../src/audio/base/AppNode.h" line="44"/>
         <source>creating</source>
-        <translation>wird erstellt...</translation>
+        <translation>wird erstellt</translation>
     </message>
     <message>
         <location filename="../../src/audio/base/AppNode.h" line="47"/>
@@ -2377,7 +2373,6 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
 <context>
     <name>SettingsFragment</name>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="26"/>
         <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
@@ -2676,46 +2671,45 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
 <context>
     <name>StatusDialog</name>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="26"/>
         <source>Driver Status Information</source>
-        <translation>Treiber-Statusinformationen</translation>
+        <translation type="vanished">Treiber-Statusinformationen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="39"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="38"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="66"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="65"/>
         <source>Application version</source>
         <translation>Anwendungsversion</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="73"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
         <source>JamesDSP core version</source>
         <translation>JamesDSP-Core Version</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="80"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
         <source>Processing state</source>
         <translation>Verarbeitungsstatus</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="87"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
         <source>Audio format</source>
         <translation>Audio-Format</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="94"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
         <source>Sampling rate</source>
         <translation>Abtastrate</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="125"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="153"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="181"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="209"/>
-        <location filename="../../src/interface/fragment/StatusFragment.ui" line="237"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
+        <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -2784,7 +2778,7 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
         <location filename="../../src/interface/TrayIcon.cpp" line="199"/>
         <location filename="../../src/interface/TrayIcon.cpp" line="269"/>
         <source>&amp;Show/hide window</source>
-        <translation>Fenster ein-/ausblenden</translation>
+        <translation>Fenster ein-/au&amp;sblenden</translation>
     </message>
     <message>
         <location filename="../../src/interface/TrayIcon.cpp" line="203"/>
