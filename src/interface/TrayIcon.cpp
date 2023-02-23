@@ -13,7 +13,7 @@ TrayIcon::TrayIcon(QObject *parent) : QObject(parent)
 {
 	createTrayIcon();
 
-    tray_disableAction = new QAction(tr("&Passthrough"), this);
+    tray_disableAction = new QAction(tr("&Bypass"), this);
     tray_disableAction->setProperty("tag", "passthrough");
 	tray_disableAction->setCheckable(true);
 	tray_disableAction->setChecked(false);

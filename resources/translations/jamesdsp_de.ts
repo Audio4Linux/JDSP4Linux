@@ -1439,8 +1439,12 @@ Bitte wählen Sie eine andere</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="2148"/>
-        <source>Passthrough</source>
+        <source>Bypass</source>
         <translation>Deaktivieren</translation>
+    </message>
+    <message>
+        <source>Passthrough</source>
+        <translation type="vanished">Deaktivieren</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.cpp" line="141"/>
@@ -2326,92 +2330,92 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
         <translation>Der Abschnitt &apos;Apps&apos; ist über das Drei-Punkte-Menü im Hauptfenster zugänglich, womit du Apps blockieren kannst, die von JamesDSP nicht verarbeitet werden sollen.</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="523"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="529"/>
         <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
         <translation>Erlaubnisliste-Modus (Apps müssen stattdessen explizit aktiviert werden)</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="560"/>
         <source>Clear list</source>
         <translation>Liste leeren</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="583"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
         <source>Share crash reports</source>
         <translation>Absturzberichte teilen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="595"/>
         <source>Allow to share crash reports anonymously</source>
         <translation>Fehlerberichte anonym teilen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="599"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="605"/>
         <source>AutoEQ database</source>
         <translation>AutoEQ-Datenbank</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="610"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="616"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="620"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="626"/>
         <source>unknown</source>
         <translation>unbekannt</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="640"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="646"/>
         <source>  Manage local database  </source>
         <translation>  Lokale Datenbank verwalten  </translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="672"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
         <source>Run in background (tray icon)</source>
         <translation>Im Hintergrund ausführen (Tray-Symbol)</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
         <source>No, shutdown audio effects when closing app</source>
         <translation>Nein, Audio-Effekte beim Schließen der App stoppen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="685"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="691"/>
         <source>Yes, minimize to tray icon when closing app</source>
         <translation>Ja, zum Tray-Symbol minimieren, wenn die App geschlossen wird</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="692"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="698"/>
         <source>Auto-start</source>
         <translation>Autostart</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="698"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="704"/>
         <source>Start minimized on boot</source>
         <translation>Beim Booten minimiert starten</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="705"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="711"/>
         <source>Delay autostart by 5 seconds</source>
         <translation>Autostart um 5 Sekunden verzögern</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="727"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="733"/>
         <source>Systray not supported on this system</source>
         <translation>Systray wird nicht von diesem System unterstützt</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="777"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="783"/>
         <source>Visit Github repo</source>
         <translation>Github-Repo besuchen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="803"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="809"/>
         <source>Run setup wizard</source>
         <translation>Setup-Assistent ausführen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="826"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="832"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -2551,8 +2555,12 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
         <source>&amp;Passthrough</source>
+        <translation type="vanished">&amp;Deaktivieren</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
+        <source>&amp;Bypass</source>
         <translation>&amp;Deaktivieren</translation>
     </message>
     <message>

@@ -1315,7 +1315,7 @@ Please select another one</source>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="2148"/>
-        <source>Passthrough</source>
+        <source>Bypass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2105,92 +2105,92 @@ Please create one first before adding a new rule.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="523"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="529"/>
         <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="560"/>
         <source>Clear list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="583"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
         <source>Share crash reports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="595"/>
         <source>Allow to share crash reports anonymously</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="599"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="605"/>
         <source>AutoEQ database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="610"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="616"/>
         <source>Status:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="620"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="626"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="640"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="646"/>
         <source>  Manage local database  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="672"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
         <source>Run in background (tray icon)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
         <source>No, shutdown audio effects when closing app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="685"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="691"/>
         <source>Yes, minimize to tray icon when closing app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="692"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="698"/>
         <source>Auto-start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="698"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="704"/>
         <source>Start minimized on boot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="705"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="711"/>
         <source>Delay autostart by 5 seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="727"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="733"/>
         <source>Systray not supported on this system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="777"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="783"/>
         <source>Visit Github repo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="803"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="809"/>
         <source>Run setup wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="826"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="832"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2328,9 +2328,13 @@ If they have been modified, they will be reset.</source>
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
         <source>&amp;Passthrough</source>
-        <translation>&amp;Включить</translation>
+        <translation type="vanished">&amp;Включить</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
+        <source>&amp;Bypass</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/interface/TrayIcon.cpp" line="22"/>
