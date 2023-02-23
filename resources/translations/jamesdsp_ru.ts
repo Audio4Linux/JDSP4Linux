@@ -1593,12 +1593,12 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1096"/>
+        <location filename="../../src/MainWindow.cpp" line="1091"/>
         <source>Advanced waveform editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1097"/>
+        <location filename="../../src/MainWindow.cpp" line="1092"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1820,32 +1820,42 @@ This setting is only in effect if IR optimization is enabled.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="97"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
         <source>Cannot load preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="97"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
         <source>Selected file does not exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="107"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
         <source>Overwrite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="136"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
         <source>Rename preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="137"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="141"/>
         <source>Enter new name</source>
         <translation type="unfinished"></translation>
     </message>

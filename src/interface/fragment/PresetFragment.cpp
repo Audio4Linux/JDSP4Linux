@@ -119,8 +119,8 @@ void PresetFragment::onNameFieldChanged(const QString &name)
 void PresetFragment::onContextMenuRequested(const QPoint &pos)
 {
     auto globalPos = ui->files->mapToGlobal(pos);
-    auto actionRename = ctxMenu.addAction("Rename");
-    auto actionDelete = ctxMenu.addAction("Delete");
+    auto actionRename = ctxMenu.addAction(tr("Rename"));
+    auto actionDelete = ctxMenu.addAction(tr("Delete"));
     auto preset = PresetManager::instance().presetModel()->data(ui->files->indexAt(pos), Qt::UserRole);
 
     if (!preset.isValid() || preset.isNull())

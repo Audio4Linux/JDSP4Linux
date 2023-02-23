@@ -1615,12 +1615,12 @@ Bitte wählen Sie eine andere</translation>
         <translation>Aktuelle audio.conf speichern</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1096"/>
+        <location filename="../../src/MainWindow.cpp" line="1091"/>
         <source>Advanced waveform editing</source>
         <translation>Erweiterte Wellenform-Bearbeitung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1097"/>
+        <location filename="../../src/MainWindow.cpp" line="1092"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1853,32 +1853,42 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
         <translation>Keine Voreinstellungen gefunden</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="97"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
         <source>Cannot load preset</source>
         <translation>Kann Voreinstellung nicht laden</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="97"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
         <source>Selected file does not exist anymore</source>
         <translation>Die ausgewählte Datei existiert nicht mehr</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="107"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
         <source>Overwrite</source>
         <translation>Überschreiben</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="136"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
+        <source>Rename</source>
+        <translation>Umbenennen</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
+        <source>Delete</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
         <source>Rename preset</source>
         <translation>Preset umbenennen</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="137"/>
+        <location filename="../../src/interface/fragment/PresetFragment.cpp" line="141"/>
         <source>Enter new name</source>
         <translation>Neuen Namen eingeben</translation>
     </message>
