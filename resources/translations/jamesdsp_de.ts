@@ -154,6 +154,42 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
     </message>
 </context>
 <context>
+    <name>CodeOutline</name>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
+        <source>Annotations</source>
+        <translation>Annotationen</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
+        <source>Functions</source>
+        <translation>Funktionen</translation>
+    </message>
+</context>
+<context>
+    <name>ConsoleOutput</name>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
+        <source>Auto-scroll</source>
+        <translation>Automatisches Scrolling</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
+        <source>Copy selection</source>
+        <translation>Auswahl kopieren</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
+        <source>Copy all</source>
+        <translation>Alles kopieren</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
+        <source>Clear</source>
+        <translation>Löschen</translation>
+    </message>
+</context>
+<context>
     <name>EELEditor</name>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
@@ -263,6 +299,7 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
         <source>Go to line...</source>
         <translation>Gehe zu Zeile...</translation>
     </message>
@@ -278,6 +315,7 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
         <source>Jump to function...</source>
         <translation>Springe zur Funktion...</translation>
     </message>
@@ -363,6 +401,59 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
         <translation>F6</translation>
     </message>
     <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
+        <source>Loaded projects</source>
+        <translation>Geöffnete Projekte</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
+        <source>Code outline</source>
+        <translation>Codeumriss</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
+        <source>Variable view</source>
+        <translation>Variablen-Ansicht</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
+        <source>Console output</source>
+        <translation>Konsolenausgabe</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
+        <source>&apos;%1&apos; started compiling at %2</source>
+        <translation>&apos;%1&apos; begann um %2 zu kompilieren</translation>
+    </message>
+    <message>
+        <source>%1 in &apos;%2&apos;&lt;br&gt;</source>
+        <translation type="vanished">%1 in &apos;%2&apos;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>Line %1:%2</source>
+        <translation type="vanished">Zeile %1:%2</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="295"/>
+        <source>&lt;br&gt;Compilation stopped at %2</source>
+        <translation>&lt;br&gt;Kompilation gestoppt um %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="299"/>
+        <source>Script initialization took %1ms</source>
+        <translation>Skript-Initialisierung benötigte %1ms</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
+        <source>Cannot write file</source>
+        <translation>Kann Datei nicht schreiben</translation>
+    </message>
+    <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
         <source>Open EEL script</source>
         <translation>EEL-Skript öffnen</translation>
@@ -371,6 +462,31 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
         <source>EEL2 Script (*.eel)</source>
         <translation>EEL2 Script (*.eel)</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
+        <source>Save as</source>
+        <translation>Speichern unter</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
+        <source>Cannot execute</source>
+        <translation>Kann nicht ausführen</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
+        <source>No script file opened. Please open one first and try again.</source>
+        <translation>Keine Skriptdatei geöffnet. Bitte öffne zuerst eine und versuche es nochmal.</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
+        <source>Enter line number:</source>
+        <translation>Zeile eingeben:</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="472"/>
+        <source>Enter function name:</source>
+        <translation>Funktionsname eingeben:</translation>
     </message>
 </context>
 <context>
@@ -1487,47 +1603,46 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
         <translation>Neues Script erstellen</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="64"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="63"/>
         <source>New script</source>
         <translation>Neues Skript</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="71"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
         <source>Define and generate a basic script template</source>
         <translation>Erstellen Sie eine einfache Skriptvorlage</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="111"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
         <source>Workspace directory</source>
         <translation>Arbeitsverzeichnis</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="151"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="160"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
         <source>File name</source>
         <translation>Dateiname</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="169"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="204"/>
         <source>.eel</source>
-        <translation>.eel</translation>
+        <translation type="vanished">.eel</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="213"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
         <source>Description</source>
         <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="220"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
         <source>Untitled script</source>
         <translation>Unbenanntes Skript</translation>
     </message>
@@ -1535,6 +1650,28 @@ Diese Einstellung ist nur wirksam, wenn die IR-Optimierung aktiviert ist.
         <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
         <source>Select directory</source>
         <translation>Verzeichnis auswählen</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
+        <source>Workspace directory does not exist</source>
+        <translation>Arbeitsverzeichnis existiert nicht</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
+        <source>A file with the same name already exists at this loction</source>
+        <translation>Eine Datei mit dem gleichen Namen existiert bereits an diesem Ort</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
+        <source>File name is empty or contains illegal characters</source>
+        <translation>Dateiname ist leer oder enthält ungültige Zeichen</translation>
     </message>
 </context>
 <context>
@@ -2482,6 +2619,19 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
     </message>
 </context>
 <context>
+    <name>VariableItemModel</name>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="56"/>
+        <source>Parameter</source>
+        <translation>Parameter</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="57"/>
+        <source>Value</source>
+        <translation>Wert</translation>
+    </message>
+</context>
+<context>
     <name>VariableWatchWidget</name>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="14"/>
@@ -2502,6 +2652,32 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
         <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
         <source>Click a variable to manipulate its value.</source>
         <translation>Klicke auf eine Variable, um den Wert zu manipulieren.</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
+        <source>This variable is a string. Currently only numerical value types can be modified.</source>
+        <translation>Diese Variable ist eine Zeichenkette. Momentan können nur numerische Typen modifiziert werden.</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="74"/>
+        <source>Manipulate variable</source>
+        <translation>Variable manipulieren</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="75"/>
+        <source>Enter a new value for variable &apos;%1&apos;:</source>
+        <translation>Neuen Wert für Variable &apos;%1&apos; eingeben:</translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
+        <source>Failed to manipulate variable &apos;%1&apos;. Either it does not exist anymore, or it cannot be changed.</source>
+        <translation>Konnte Variable &apos;%1&apos; nicht manipulieren. Entweder existiert sie nicht mehr oder sie kann nicht verändert werden.</translation>
     </message>
 </context>
 <context>

@@ -129,7 +129,7 @@
         <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -519,6 +519,12 @@
             </item>
             <item>
              <widget class="QCheckBox" name="blocklistInvert">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Allowlist mode (apps need to be explicitly enabled instead)</string>
               </property>
