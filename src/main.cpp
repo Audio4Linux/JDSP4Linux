@@ -21,8 +21,6 @@
 #include "crash/airbag.h"
 #include "crash/stacktrace.h"
 
-#include <utils/CrashReportSender.h>
-
 static bool SPIN_ON_CRASH = false;
 
 void onExceptionRaised(int fd)
@@ -55,6 +53,7 @@ int main(int   argc,
 	find_yourself(exepath, sizeof(exepath));
 
     mkdir("/tmp/jamesdsp/", S_IRWXU);
+
 #ifndef NO_CRASH_HANDLER
     QFile crashDmp(STACKTRACE_LOG);
 
@@ -142,13 +141,6 @@ int main(int   argc,
         manager.release();
     }, Qt::DirectConnection);
 
-    QFile id("/var/lib/dbus/machine-id");
-    if(id.open(QFile::ReadOnly | QFile::Text))
-    {
-        Log::debug("Environment id: " + QString::fromLocal8Bit(id.readAll()).simplified().trimmed());
-        id.close();
-    }
-
     // Check if another instance is already running and switch to it if that's the case
     auto *instanceMonitor = new SingleInstanceMonitor();
     auto scopeGuard = qScopeGuard([instanceMonitor]{ delete instanceMonitor; });
@@ -162,12 +154,6 @@ int main(int   argc,
     if(lastSessionCrashed)
     {
         Log::information("Last session crashed unexpectedly. A crash report has been saved here: " + QString(STACKTRACE_LOG_OLD));
-
-        if(AppConfig::instance().get<bool>(AppConfig::SendCrashReports))
-        {
-           Log::debug("Submitting anonymous crash dump...");
-           CrashReportSender::upload(Log::pathOld(), QString(STACKTRACE_LOG_OLD)); /* fire and forget */
-        }
     }
 #endif
 

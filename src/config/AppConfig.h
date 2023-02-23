@@ -70,9 +70,7 @@ public:
 
         ConvolverDefaultPath,
         VdcDefaultPath,
-        LiveprogDefaultPath,
-
-        SendCrashReports
+        LiveprogDefaultPath
     };
     Q_ENUM(Key);
 

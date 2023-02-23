@@ -103,7 +103,6 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     /*
      * Network signals
      */
-    connect(ui->crashShareAllow, &QCheckBox::toggled, this, &SettingsFragment::onCrashShareToggled);
     connect(ui->aeqManage, &QPushButton::clicked, this, &SettingsFragment::onAeqDatabaseManageClicked);
 
 	/*
@@ -141,10 +140,6 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
         ui->session_menu->setEnabled(false);
 #ifndef QT_NO_SYSTEMTRAYICON
 	}
-#endif
-
-#ifdef NO_CRASH_HANDLER
-    ui->crashShareGroup->setVisible(false);
 #endif
 }
 
@@ -249,8 +244,6 @@ void SettingsFragment::refreshAll()
     ui->blocklistInvert->blockSignals(true);
     ui->blocklistInvert->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert));
     ui->blocklistInvert->blockSignals(false);
-
-    ui->crashShareAllow->setChecked(AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
 
     ui->aeqStatus->setText(AeqPackageManager().isPackageInstalled() ? tr("installed") : tr("not installed"));
 
@@ -439,11 +432,6 @@ void SettingsFragment::onAeqDatabaseManageClicked()
     aeqSel->forceManageMode();
     aeqSel->exec();
     refreshAll();
-}
-
-void SettingsFragment::onCrashShareToggled(bool state)
-{
-    AppConfig::instance().set(AppConfig::SendCrashReports, state);
 }
 
 void SettingsFragment::setVisible(bool visible)

@@ -67,7 +67,6 @@ private slots:
     void onLiveprogAutoExtractToggled();
     void onGithubLinkClicked();
     void onAeqDatabaseManageClicked();
-    void onCrashShareToggled(bool state);
 
 signals:
 	void launchSetupWizard();

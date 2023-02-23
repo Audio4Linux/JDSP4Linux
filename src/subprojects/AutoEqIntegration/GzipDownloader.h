@@ -46,8 +46,8 @@ private:
     QDir extractionPath;
     QFile downloadedFile;
     QNetworkAccessManager* nam;
-    QPointer<QNetworkReply> networkReply;
-    ExtractionThread *extractThread;
+    QPointer<QNetworkReply> networkReply = nullptr;
+    ExtractionThread *extractThread = nullptr;
 };
 
 

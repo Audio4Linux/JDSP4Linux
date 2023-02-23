@@ -68,7 +68,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Best</string>
+          <string notr="true">Best</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>

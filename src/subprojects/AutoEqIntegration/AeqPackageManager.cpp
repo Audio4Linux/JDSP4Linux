@@ -29,10 +29,9 @@ QtPromise::QPromise<void> AeqPackageManager::installPackage(AeqVersion version, 
             downloader->deleteLater();
 
             if(success)
-            {
                 resolve();
-            }
-            reject();
+            else
+                reject();
         }};
 }
 
@@ -50,28 +49,31 @@ bool AeqPackageManager::isPackageInstalled()
 
 QtPromise::QPromise<AeqVersion> AeqPackageManager::isUpdateAvailable()
 {
-    return QPromise<AeqVersion>{[&](
+    return QPromise<AeqVersion>{[this](
         const QtPromise::QPromiseResolve<AeqVersion>& resolve,
-                const QtPromise::QPromiseReject<AeqVersion>& reject) {
+        const QtPromise::QPromiseReject<AeqVersion>& reject) {
 
-            this->getRepositoryVersion().then([&](AeqVersion remote){
-                this->getLocalVersion().then([&](AeqVersion local){
-                    if(remote.packageTime > local.packageTime)
-                    {
-                        // Remote is newer
+            QtPromisePrivate::qtpromise_defer([=]() {
+
+                this->getRepositoryVersion().then([=](AeqVersion remote){
+                    this->getLocalVersion().then([=](AeqVersion local){
+                        if(remote.packageTime > local.packageTime)
+                        {
+                            // Remote is newer
+                            resolve(remote);
+                        }
+                        else
+                        {
+                            reject(remote);
+                        }
+                    }).fail([=]{
+                        // Local file not available, choose remote
                         resolve(remote);
-                    }
-                    else
-                    {
-                        reject(remote);
-                    }
-                }).fail([&]{
-                    // Local file not available, choose remote
-                    resolve(remote);
+                    });
+                }).fail([=](const HttpException& error) {
+                    // API error
+                    reject(error);
                 });
-            }).fail([reject](const HttpException& error) {
-                // API error
-                reject(error);
             });
         }};
 }

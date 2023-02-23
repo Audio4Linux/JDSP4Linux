@@ -41,13 +41,13 @@ public:
             best = "";
             break;
         case 2:
-            best = "2nd choice";
+            best = tr("2nd choice");
             break;
         case 3:
-            best = "3rd choice";
+            best = tr("3rd choice");
             break;
         default:
-            best = QString("%1th choice").arg(item.rank);
+            best = QString(tr("%1th choice")).arg(item.rank);
             break;
         }
         auto bestWidth = painter->fontMetrics().horizontalAdvance(best);

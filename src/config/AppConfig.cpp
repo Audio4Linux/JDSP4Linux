@@ -43,8 +43,6 @@ AppConfig::AppConfig()
     DEFINE_KEY(VdcDefaultPath, ENCLOSE_QUOTES(getPath("vdc")));
     DEFINE_KEY(LiveprogDefaultPath, ENCLOSE_QUOTES(getPath("liveprog")));
 
-    DEFINE_KEY(SendCrashReports, true);
-
     connect(this, &AppConfig::updated, this, &AppConfig::notify);
 
     load();

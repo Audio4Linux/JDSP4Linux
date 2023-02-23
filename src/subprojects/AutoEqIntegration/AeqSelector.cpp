@@ -32,7 +32,7 @@ AeqSelector::AeqSelector(QWidget *parent) :
     proxyModel->setSourceModel(model);
 
     ui->list->setEmptyViewEnabled(true);
-    ui->list->setEmptyViewTitle("No measurements found");
+    ui->list->setEmptyViewTitle(tr("No measurements found"));
     ui->list->setModel(proxyModel);
     ui->list->setItemDelegate(new AeqItemDelegate(ui->list));
 
@@ -77,10 +77,10 @@ void AeqSelector::showEvent(QShowEvent *ev)
     {
         this->setEnabled(false);
         auto parent = this->parent() == nullptr ? this : this->parentWidget();
-        auto res = QMessageBox::question(parent, "AutoEQ database",
-                      "Before using the AutoEQ integration, you need to download a minified version of their headphone compensation database (~50MB) to your hard drive.\n"
+        auto res = QMessageBox::question(parent, tr("AutoEQ database"),
+                      tr("Before using the AutoEQ integration, you need to download a minified version of their headphone compensation database (~50MB) to your hard drive.\n"
                       "An internet connection is required during this step.\n\n"
-                      "Do you want to continue and enable this feature?",
+                      "Do you want to continue and enable this feature?"),
                       QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 
         auto cancel = [this]{ QTimer::singleShot(250, this, &QDialog::reject); };
@@ -102,7 +102,7 @@ void AeqSelector::showEvent(QShowEvent *ev)
             });
 
         }).fail([this, cancel](const HttpException& ex){
-            QMessageBox::critical(this, "Failed to retrieve version information", QString("Failed to retrieve package information from the remote repository:\n\n"
+            QMessageBox::critical(this, tr("Failed to retrieve version information"), tr("Failed to retrieve package information from the remote repository:\n\n"
                                                                                           "Status code: %0\nReason: %1").arg(ex.statusCode()).arg(ex.reasonPhrase()));
             cancel();
             return;
@@ -114,7 +114,7 @@ void AeqSelector::showEvent(QShowEvent *ev)
 
 void AeqSelector::switchPane()
 {
-    ui->manageDatabase->setText(!ui->stackedWidget->currentIndex() ? "Return to database" : "Manage database");
+    ui->manageDatabase->setText(!ui->stackedWidget->currentIndex() ? tr("Return to database") : tr("Manage database"));
     ui->stackedWidget->setCurrentIndex(!ui->stackedWidget->currentIndex());
 }
 
@@ -129,18 +129,19 @@ void AeqSelector::updateDatabase()
         });
     };
 
-    pkgManager->isUpdateAvailable().then([&](AeqVersion remote)
+    pkgManager->isUpdateAvailable().then([this, doInstallation](AeqVersion remote)
     {
         doInstallation(remote);
 
     }).fail([this](const HttpException& ex){
-        QMessageBox::critical(this, "Failed to retrieve version information", QString("Failed to retrieve package information from the remote repository:\n\n"
-                                                                                      "Status code: %0\nReason: %1").arg(ex.statusCode()).arg(ex.reasonPhrase()));
+        QMessageBox::critical(this, tr("Failed to retrieve version information"), tr("Failed to retrieve package information from the remote repository:\n\n"
+                                                                                     "Status code: %0\nReason: %1").arg(ex.statusCode()).arg(ex.reasonPhrase()));
     }).fail([this, doInstallation](const AeqVersion& remote){
-        auto button = QMessageBox::question(this, "No new updates available", QString("The local database is currently up-to-date; no new updates are available at this time.\n\n"
-                                                                                      "It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. "
-                                                                                      "Packages are generated at 4am UTC daily.\n\n"
-                                                                                      "Do you want to re-install the latest database update anyway?"));
+        auto button = QMessageBox::question(this, tr("No new updates available"),
+                                            tr("The local database is currently up-to-date; no new updates are available at this time.\n\n"
+                                               "It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. "
+                                               "Packages are generated at 4am UTC daily.\n\n"
+                                               "Do you want to re-install the latest database update anyway?"));
 
         if(button == QMessageBox::Yes)
         {
@@ -154,7 +155,7 @@ void AeqSelector::updateDatabase()
 void AeqSelector::deleteDatabase()
 {
     pkgManager->uninstallPackage();
-    QMessageBox::information(this, "Database cleared", "The database has been removed from your hard disk");
+    QMessageBox::information(this, tr("Database cleared"), tr("The database has been removed from your hard disk"));
     reject();
 }
 
@@ -236,7 +237,7 @@ QString AeqSelector::selection(DataFormat format, bool silent)
     {
         if(!silent)
         {
-            QMessageBox::critical(this, "Error", "Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.");
+            QMessageBox::critical(this, tr("Error"), tr("Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete."));
         }
         return QString();
     }

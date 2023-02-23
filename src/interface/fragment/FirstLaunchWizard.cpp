@@ -35,11 +35,8 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
         ui->stackedWidget->slideInIdx(1);
 	});
     connect(ui->p3_next, &QPushButton::clicked, this, [&] {
-#ifndef NO_CRASH_HANDLER
-        ui->stackedWidget->slideInIdx(2);
-#else
+        // Note: p3b (crash report) has been removed and is now a placeholder
         ui->stackedWidget->slideInIdx(3);
-#endif
 	});
     connect(ui->p3b_next, &QPushButton::clicked, this, [&] {
         ui->stackedWidget->slideInIdx(3);
@@ -51,13 +48,6 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
         DesktopServices::openUrl("https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw", this);
     });
 
-    connect(ui->p3b_viewReports, &QPushButton::clicked, [this] {
-        DesktopServices::openUrl("https://gist.github.com/ThePBone/3c757623c31400e799ab786ad3bf0709", this);
-    });
-
-    ui->p3b_rejectReports->setChecked(!AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
-    ui->p3b_allowReports->setChecked(AppConfig::instance().get<bool>(AppConfig::SendCrashReports));
-
     ui->p3_systray_disable->setChecked(!AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_minOnBoot->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
@@ -68,9 +58,6 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
     connect(ui->p3_systray_disable, &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_enable,  &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_minOnBoot, &QCheckBox::stateChanged, this, &FirstLaunchWizard::onSystrayAutostartToggled);
-
-    connect(ui->p3b_rejectReports, &QRadioButton::clicked, this, &FirstLaunchWizard::onCrashReportRadioSelected);
-    connect(ui->p3b_allowReports,  &QRadioButton::clicked, this, &FirstLaunchWizard::onCrashReportRadioSelected);
 }
 
 FirstLaunchWizard::~FirstLaunchWizard()
@@ -106,9 +93,4 @@ void FirstLaunchWizard::onSystrayAutostartToggled(bool isChecked)
     {
         QFile(path).remove();
     }
-}
-
-void FirstLaunchWizard::onCrashReportRadioSelected()
-{
-    AppConfig::instance().set(AppConfig::SendCrashReports, ui->p3b_allowReports->isChecked());
 }

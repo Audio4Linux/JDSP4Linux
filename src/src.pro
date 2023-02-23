@@ -39,7 +39,7 @@ include(subprojects/EELEditor/src/EELEditor.pri)
 DEFINES += QT_DEPRECATED_WARNINGS
 
 QMAKE_CFLAGS += "-Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
-QMAKE_CXXFLAGS += "-Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
+QMAKE_CXXFLAGS += "-Wno-deprecated-enum-enum-conversion -Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
 
 CONFIG += c++2a
 

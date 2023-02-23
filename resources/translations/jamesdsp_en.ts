@@ -2,10 +2,106 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>AeqItemDelegate</name>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="44"/>
+        <source>2nd choice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="47"/>
+        <source>3rd choice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="50"/>
+        <source>%1th choice</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AeqMeasurementItem</name>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqMeasurementItem.ui" line="71"/>
         <source>Best</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AeqPreviewPlot</name>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
+        <source>Frequency (Hz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
+        <source>Amplitude (dBr)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
+        <source>Target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
+        <source>Raw (smoothed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
+        <source>Error (smoothed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
+        <source>Equalization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
+        <source>Raw</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
+        <source>Equalized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
+        <source>Equalization (normalized)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
+        <source>Move to top left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="210"/>
+        <source>Move to top center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
+        <source>Move to top right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="212"/>
+        <source>Move to bottom right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="213"/>
+        <source>Move to bottom left</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -84,7 +180,80 @@ This will override your current GraphicEQ configuration.</source>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
         <source>Manage database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
+        <source>No measurements found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
+        <source>AutoEQ database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
+        <source>Before using the AutoEQ integration, you need to download a minified version of their headphone compensation database (~50MB) to your hard drive.
+An internet connection is required during this step.
+
+Do you want to continue and enable this feature?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="137"/>
+        <source>Failed to retrieve version information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="137"/>
+        <source>Failed to retrieve package information from the remote repository:
+
+Status code: %0
+Reason: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
+        <source>Return to database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
+        <source>No new updates available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
+        <source>The local database is currently up-to-date; no new updates are available at this time.
+
+It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
+
+Do you want to re-install the latest database update anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
+        <source>Database cleared</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
+        <source>The database has been removed from your hard disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
+        <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -645,7 +814,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
         <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
         <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="3082"/>
+        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
         <source>Next &gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -670,42 +839,22 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2014"/>
-        <source>Share crash reports?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2491"/>
-        <source>No, don&apos;t share any data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2944"/>
-        <source>Yes, submit anonymous crash reports</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2968"/>
-        <source>View example report</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="3176"/>
+        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
         <source>That&apos;s it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="3204"/>
+        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
         <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="3313"/>
+        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
         <source>Telegram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="3388"/>
+        <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -817,6 +966,24 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
         <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
         <source>Export frequency response</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GzipDownloaderDialog</name>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="62"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
+        <source>%1MB of %2MB downloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
+        <source>Decompressing package...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2116,143 +2283,133 @@ Please create one first before adding a new rule.</source>
     </message>
     <message>
         <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
-        <source>Share crash reports</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="595"/>
-        <source>Allow to share crash reports anonymously</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="605"/>
         <source>AutoEQ database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="616"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="600"/>
         <source>Status:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="626"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="610"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="646"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="630"/>
         <source>  Manage local database  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
         <source>Run in background (tray icon)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
         <source>No, shutdown audio effects when closing app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="691"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="675"/>
         <source>Yes, minimize to tray icon when closing app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="698"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="682"/>
         <source>Auto-start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="704"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="688"/>
         <source>Start minimized on boot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="711"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="695"/>
         <source>Delay autostart by 5 seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="733"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="717"/>
         <source>Systray not supported on this system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="783"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="767"/>
         <source>Visit Github repo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="809"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="793"/>
         <source>Run setup wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="832"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.ui" line="816"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="191"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="186"/>
         <source>Unknown (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="255"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="248"/>
         <source>installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="255"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="248"/>
         <source>not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="276"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="269"/>
         <source>Override liveprog scripts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="270"/>
         <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="273"/>
         <source>Extract assets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="273"/>
         <source>%1 files have been restored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="380"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="373"/>
         <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="382"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="375"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="383"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
         <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="411"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="404"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="411"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="404"/>
         <source>Do you really want to restore the default menu layout?</source>
         <translation type="unfinished"></translation>
     </message>

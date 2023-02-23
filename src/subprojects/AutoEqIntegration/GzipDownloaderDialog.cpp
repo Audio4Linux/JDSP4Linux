@@ -59,7 +59,7 @@ void GzipDownloaderDialog::onSuccess()
 
 void GzipDownloaderDialog::onError(const QString& msg)
 {
-    QMessageBox::critical(this, "Error", msg);
+    QMessageBox::critical(this, tr("Error"), msg);
     closeAllowed = true;
     this->reject();
 }
@@ -68,7 +68,7 @@ void GzipDownloaderDialog::onDownloadProgressUpdated(qint64 recv, qint64 total)
 {
 
     ui->progress->setValue((double)recv/total * 100);
-    ui->size->setText(QString("%1MB of %2MB downloaded")
+    ui->size->setText(tr("%1MB of %2MB downloaded")
                       .arg(QString::number(recv/1000000.f, 'g', 2))
                       .arg(QString::number(total/1000000.f, 'g', 2)));
 }
@@ -79,7 +79,7 @@ void GzipDownloaderDialog::onDecompressionStarted()
 
     ui->progress->setMinimum(0);
     ui->progress->setMaximum(0);
-    ui->title->setText("Decompressing package...");
+    ui->title->setText(tr("Decompressing package..."));
     ui->size->setText("");
     ui->buttonBox->setEnabled(false);
 }

@@ -36,11 +36,6 @@ bool GzipDownloader::start(QNetworkReply *reply, QDir _extractionPath)
 
 void GzipDownloader::abort()
 {
-    if(!networkReply)
-    {
-        return;
-    }
-
     cleanup();
 }
 
@@ -49,19 +44,26 @@ bool GzipDownloader::isActive()
     return networkReply;
 }
 
-static int bytes = 0;
 void GzipDownloader::onDataAvailable()
 {
+    if(!isActive()) {
+        return;
+    }
+
     auto dat = networkReply->readAll();
     downloadedFile.write(dat);
 }
 
 void GzipDownloader::onArchiveReady()
 {
+    if(!isActive()) {
+        return;
+    }
+
     if(networkReply->error() != QNetworkReply::NoError)
     {
-        cleanup();
         emit errorOccurred(networkReply->errorString());
+        cleanup();
     }
     else
     {

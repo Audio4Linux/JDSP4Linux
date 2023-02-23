@@ -29,7 +29,6 @@ signals:
 private slots:
     void onSystrayRadioSelected();
     void onSystrayAutostartToggled(bool isChecked);
-    void onCrashReportRadioSelected();
 
 private:
     Ui::FirstLaunchWizard *ui;

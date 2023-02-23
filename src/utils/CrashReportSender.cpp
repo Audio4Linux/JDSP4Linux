@@ -1,5 +1,7 @@
 #include "CrashReportSender.h"
 
+#if 0
+
 #include "Log.h"
 
 #include <QFile>
@@ -77,3 +79,5 @@ QtPromise::QPromise<void> CrashReportSender::upload(const QString &logPath, cons
         resolve();
     }};
 }
+
+#endif
