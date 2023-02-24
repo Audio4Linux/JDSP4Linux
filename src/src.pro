@@ -38,8 +38,8 @@ include(subprojects/EELEditor/src/EELEditor.pri)
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-QMAKE_CFLAGS += "-Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
-QMAKE_CXXFLAGS += "-Wno-deprecated-enum-enum-conversion -Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-unused-const-variable"
+QMAKE_CFLAGS += "-Wno-unused-variable -Wno-unused-function -Wno-unused-const-variable"
+QMAKE_CXXFLAGS += "-Wno-deprecated-enum-enum-conversion -Wno-missing-field-initializers -Wno-unused-function -Wno-unused-parameter"
 
 CONFIG += c++2a
 

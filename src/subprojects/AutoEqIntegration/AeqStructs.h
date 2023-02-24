@@ -5,8 +5,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QString>
-
-#include <http.h>
+#include <QDir>
 
 class AeqVersion {
 public:
@@ -23,13 +22,6 @@ public:
         {
             type.append(item.toString());
         }
-    }
-
-    QNetworkReply* toDownloadReply() const
-    {
-        HttpRequest req;
-        req.url = packageUrl;
-        return Http::instance().networkReply(req);
     }
 
     QString commit;

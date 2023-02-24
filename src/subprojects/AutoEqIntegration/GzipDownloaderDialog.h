@@ -1,6 +1,7 @@
 #ifndef GZIPDOWNLOADERDIALOG_H
 #define GZIPDOWNLOADERDIALOG_H
 
+#include "AeqStructs.h"
 #include "GzipDownloader.h"
 
 #include <QDialog>
@@ -16,7 +17,7 @@ class GzipDownloaderDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit GzipDownloaderDialog(QNetworkReply* reply, QDir targetDirectory, QWidget *parent = nullptr);
+    explicit GzipDownloaderDialog(QNetworkReply* _reply, QDir targetDirectory, QWidget *parent = nullptr);
     ~GzipDownloaderDialog();
 
 protected:

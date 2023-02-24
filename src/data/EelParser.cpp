@@ -56,7 +56,7 @@ void EELParser::loadFile(QString path)
                     defaultValue = std::nullopt;
 
                 EELListProperty *prop = new EELListProperty(key, desc, defaultValue, current.toInt(),
-                                                            min.toInt(), max.toInt(), opt.split(',', QString::SkipEmptyParts));
+                                                            min.toInt(), max.toInt(), opt.split(',', Qt::SkipEmptyParts));
                 properties.append(prop);
                 continue;
             }

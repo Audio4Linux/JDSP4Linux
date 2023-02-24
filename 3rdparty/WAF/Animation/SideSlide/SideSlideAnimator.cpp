@@ -40,7 +40,7 @@ SideSlideAnimator::SideSlideAnimator(QWidget* _widgetForSlide) :
 
     m_decorator->hide();
 
-    connect(m_animation, &QPropertyAnimation::finished, [=] {
+    connect(m_animation, &QPropertyAnimation::finished, [this] {
         setAnimatedStopped();
         if (isAnimatedForward()) {
             widgetForSlide()->move(m_decorator->slidePos());

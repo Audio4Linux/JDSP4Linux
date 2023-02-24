@@ -22,7 +22,7 @@ CircleFillAnimator::CircleFillAnimator(QWidget* _widgetForFill) :
     m_decorator->setAttribute(Qt::WA_TransparentForMouseEvents);
     m_decorator->hide();
 
-    connect(m_animation, &QPropertyAnimation::finished, [=] {
+    connect(m_animation, &QPropertyAnimation::finished, [this] {
         setAnimatedStopped();
         if (m_hideAfterFinish) {
             hideDecorator();
@@ -161,7 +161,7 @@ void CircleFillAnimator::hideDecorator()
     hideAnimation->setDuration(400);
     hideAnimation->setStartValue(1.);
     hideAnimation->setEndValue(0.);
-    connect(hideAnimation, &QPropertyAnimation::finished, [=] {
+    connect(hideAnimation, &QPropertyAnimation::finished, [this, hideEffect] {
         m_decorator->hide();
         hideEffect->setOpacity(1.);
     });

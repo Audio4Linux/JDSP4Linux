@@ -3,6 +3,8 @@
 
 #include <QtPromise>
 #include <QObject>
+#include <QNetworkAccessManager>
+
 #include "AeqStructs.h"
 
 class AeqPackageManager : public QObject

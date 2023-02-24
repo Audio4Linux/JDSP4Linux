@@ -21,7 +21,7 @@ ExpandAnimator::ExpandAnimator(QWidget* _widgetForFill) :
 
 	m_decorator->hide();
 
-	connect(m_animation, &QPropertyAnimation::finished, [=] {
+    connect(m_animation, &QPropertyAnimation::finished, [this] {
 		setAnimatedStopped();
 		if (isAnimatedBackward()) {
 			m_decorator->hide();

@@ -4,10 +4,9 @@
 
 #include "config/AppConfig.h"
 
-#include <http/src/http.h>
 #include <QDir>
 #include <QFile>
-#include <networkhttpreply.h>
+#include <QNetworkAccessManager>
 
 #define REPO_ROOT QString("https://raw.githubusercontent.com/ThePBone/AutoEqPackages/main/")
 
@@ -15,7 +14,7 @@ using namespace QtPromise;
 
 AeqPackageManager::AeqPackageManager(QObject *parent) : QObject(parent), nam(new QNetworkAccessManager(this))
 {
-
+    nam->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
 }
 
 QtPromise::QPromise<void> AeqPackageManager::installPackage(AeqVersion version, QWidget* hostWindow)
@@ -24,7 +23,8 @@ QtPromise::QPromise<void> AeqPackageManager::installPackage(AeqVersion version, 
         const QtPromise::QPromiseResolve<void>& resolve,
                 const QtPromise::QPromiseReject<void>& reject) {
 
-            auto downloader = new GzipDownloaderDialog(version.toDownloadReply(), databaseDirectory(), hostWindow);
+            auto reply = nam->get(QNetworkRequest(QUrl(version.packageUrl)));
+            auto downloader = new GzipDownloaderDialog(reply, databaseDirectory(), hostWindow);
             bool success = downloader->exec();
             downloader->deleteLater();
 
@@ -53,9 +53,9 @@ QtPromise::QPromise<AeqVersion> AeqPackageManager::isUpdateAvailable()
         const QtPromise::QPromiseResolve<AeqVersion>& resolve,
         const QtPromise::QPromiseReject<AeqVersion>& reject) {
 
-            QtPromisePrivate::qtpromise_defer([=]() {
+            QtPromisePrivate::qtpromise_defer([=, this]() {
 
-                this->getRepositoryVersion().then([=](AeqVersion remote){
+                this->getRepositoryVersion().then([=, this](AeqVersion remote){
                     this->getLocalVersion().then([=](AeqVersion local){
                         if(remote.packageTime > local.packageTime)
                         {

@@ -37,7 +37,7 @@ SideSlideDecorator::SideSlideDecorator(QWidget* _parent) :
     //
     // Анимируем затемнение/осветление
     //
-    connect(&m_timeline, &QTimeLine::frameChanged, [=](int _value){
+    connect(&m_timeline, &QTimeLine::frameChanged, [this](int _value){
         m_decorationColor = QColor(0, 0, 0, _value/100);
         update();
     });

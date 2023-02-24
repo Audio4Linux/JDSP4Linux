@@ -96,12 +96,12 @@ namespace PresetProvider
               << QPair<EQ_UNIT>(QObject::tr("Electronic"), DOUBLE_LIST({ 4.0, 4.0, 3.5, 1.0, 0.0, -0.5, -2.0, 0.0, 2.0, 0.0, 0.0, 1.0, 3.0, 4.0, 4.5 }))
               << QPair<EQ_UNIT>(QObject::tr("Deep Bass"), DOUBLE_LIST({ 12.0, 8.0, 0.0, -6.7, -12.0, -9.0, -3.5, -3.5, -6.1, 0.0, -3.0, -5.0, 0.0, 1.2, 3.0 }))
               << QPair<EQ_UNIT>(QObject::tr("Beats"), DOUBLE_LIST({ -5.5, -5.0, -4.5, -4.2, -3.5, -3.0, -1.9, 0, 0, 0, 0, 0, 0, 0, 0 }));
-		return std::move(table);
+        return table;
 	}
 
 	const QMap<BS2B_UNIT> BS2B::BS2B_LOOKUP_TABLE()
 	{
-		InitializableQMap<BS2B_UNIT> table;
+        InitializableQMap<BS2B_UNIT> table;
         table << QPair<BS2B_UNIT>(QObject::tr("BS2B Custom"), 99)
               << QPair<BS2B_UNIT>(QObject::tr("BS2B Weak"), 0)
               << QPair<BS2B_UNIT>(QObject::tr("BS2B Strong"), 1)
@@ -109,7 +109,7 @@ namespace PresetProvider
               << QPair<BS2B_UNIT>(QObject::tr("Surround 1"), 3)
               << QPair<BS2B_UNIT>(QObject::tr("Surround 2"), 4)
               << QPair<BS2B_UNIT>(QObject::tr("Joe0Bloggs Realistic surround"), 5);
-		return std::move(table);
+        return table;
 	}
 
 	int BS2B::lookupPreset(const QString &preset)

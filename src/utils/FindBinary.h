@@ -86,9 +86,9 @@ int find_yourself(char  *result,
 
 		strncpy(newpath2, findyourself_save_pwd, sizeof(newpath2));
 		newpath2[sizeof(newpath2) - 1] = 0;
-		strncat(newpath2, findyourself_path_separator_as_string, sizeof(newpath2));
+        strncat(newpath2, findyourself_path_separator_as_string, sizeof(newpath2) - strlen(newpath2) - 1);
 		newpath2[sizeof(newpath2) - 1] = 0;
-		strncat(newpath2, findyourself_save_argv0,               sizeof(newpath2));
+        strncat(newpath2, findyourself_save_argv0,               sizeof(newpath2) - strlen(newpath2) - 1);
 		newpath2[sizeof(newpath2) - 1] = 0;
 		realpath(newpath2, newpath);
 
@@ -127,9 +127,9 @@ int find_yourself(char  *result,
 
 			strncpy(newpath2, pathitem, sizeof(newpath2));
 			newpath2[sizeof(newpath2) - 1] = 0;
-			strncat(newpath2, findyourself_path_separator_as_string, sizeof(newpath2));
+            strncat(newpath2, findyourself_path_separator_as_string, sizeof(newpath2) - strlen(newpath2) - 1);
 			newpath2[sizeof(newpath2) - 1] = 0;
-			strncat(newpath2, findyourself_save_argv0,               sizeof(newpath2));
+            strncat(newpath2, findyourself_save_argv0,               sizeof(newpath2) - strlen(newpath2) - 1);
 			newpath2[sizeof(newpath2) - 1] = 0;
 			realpath(newpath2, newpath);
 

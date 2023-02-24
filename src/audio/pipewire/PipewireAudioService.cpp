@@ -35,7 +35,7 @@ PipewireAudioService::PipewireAudioService()
         }
     });
 
-    mgr.get()->device_output_route_changed.connect([=](DeviceInfo device) {
+    mgr.get()->device_output_route_changed.connect([this](DeviceInfo device) {
         if (device.output_route_available == SPA_PARAM_AVAILABILITY_no)
         {
             return;

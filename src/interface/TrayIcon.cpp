@@ -107,7 +107,7 @@ void TrayIcon::updatePresetList()
 
 				// Add entry
 				QAction  *newEntry = new QAction(files[i]);
-				connect(newEntry, &QAction::triggered, this, [ = ]()
+                connect(newEntry, &QAction::triggered, this, [this, files, i]()
 				{
                     emit loadPreset(AppConfig::instance().getPath(QString("presets/%1.conf").arg(files[i])));
 				});
@@ -147,7 +147,7 @@ void TrayIcon::updateConvolverList()
 			{
 				// Add entry
 				QAction *newEntry = new QAction(files[i]);
-				connect(newEntry, &QAction::triggered, this, [ = ]()
+                connect(newEntry, &QAction::triggered, this, [this, path, files, i]()
 				{
                     emit loadIrs(path + "/" + files[i]);
 				});
@@ -203,14 +203,14 @@ QMenu* TrayIcon::buildAvailableActions()
     QMenu   *reverbMenu = new QMenu(tr("Re&verberation presets"));
 
     QAction *reverbOff = new QAction(tr("Off"));
-    connect(reverbOff, &QAction::triggered, this, [ = ]() {
+    connect(reverbOff, &QAction::triggered, this, [this]() {
         emit loadReverbPreset("off");
     });
     reverbMenu->addAction(reverbOff);
 	for (auto preset : PresetProvider::Reverb::getPresetNames())
 	{
 		QAction *newEntry = new QAction(preset);
-		connect(newEntry, &QAction::triggered, this, [ = ]() {
+        connect(newEntry, &QAction::triggered, this, [this, preset]() {
 			emit loadReverbPreset(preset);
 		});
 		reverbMenu->addAction(newEntry);
@@ -223,7 +223,7 @@ QMenu* TrayIcon::buildAvailableActions()
 	for (auto preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
 	{
 		QAction *newEntry = new QAction(preset);
-		connect(newEntry, &QAction::triggered, this, [ = ]() {
+        connect(newEntry, &QAction::triggered, this, [this, preset]() {
 			emit loadEqPreset(preset);
 		});
 		eqMenu->addAction(newEntry);
@@ -233,7 +233,7 @@ QMenu* TrayIcon::buildAvailableActions()
 
     QMenu *bs2bMenu = new QMenu(tr("&Crossfeed"), menuOwner);
     QAction *bs2bOff = new QAction("Off");
-    connect(bs2bOff, &QAction::triggered, this, [ = ]() {
+    connect(bs2bOff, &QAction::triggered, this, [this]() {
         emit loadCrossfeedPreset(-1);
     });
     bs2bMenu->addAction(bs2bOff);
@@ -241,7 +241,7 @@ QMenu* TrayIcon::buildAvailableActions()
 	for (auto preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().toStdMap())
 	{
 		QAction *newEntry = new QAction(preset.first);
-		connect(newEntry, &QAction::triggered, this, [ = ]() {
+        connect(newEntry, &QAction::triggered, this, [this, preset]() {
 			emit loadCrossfeedPreset(preset.second);
 		});
 		bs2bMenu->addAction(newEntry);

@@ -50,5 +50,5 @@ QString AutostartManager::getAutostartPath(const QString &filename)
         path = QString("%1/.config/").arg(QDir::homePath());
     }
 
-    return QString("%1/autostart/%2").arg(path).arg(filename);
+    return QString("%1/autostart/%2").arg(path, filename);
 }

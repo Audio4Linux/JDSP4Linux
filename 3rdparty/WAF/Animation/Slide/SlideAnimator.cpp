@@ -44,7 +44,7 @@ SlideAnimator::SlideAnimator(QWidget* _widgetForSlide) :
     //
     // Синхронизируем изменение минимальных границ с максимальными
     //
-    connect(m_animation, &QPropertyAnimation::valueChanged, [=] {
+    connect(m_animation, &QPropertyAnimation::valueChanged, [this] {
         if (isWidth()) {
             widgetForSlide()->setMinimumWidth(widgetForSlide()->maximumWidth());
         } else {
@@ -55,7 +55,7 @@ SlideAnimator::SlideAnimator(QWidget* _widgetForSlide) :
 	//
 	// Корректировки размера по завершению
 	//
-	connect(m_animation, &QPropertyAnimation::finished, [=] {
+    connect(m_animation, &QPropertyAnimation::finished, [this] {
 		setAnimatedStopped();
         m_decorator->hide();
 	});

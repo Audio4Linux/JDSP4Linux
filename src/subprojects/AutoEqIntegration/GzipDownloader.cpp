@@ -44,6 +44,11 @@ bool GzipDownloader::isActive()
     return networkReply;
 }
 
+QNetworkAccessManager* GzipDownloader::getManager()
+{
+    return nam;
+}
+
 void GzipDownloader::onDataAvailable()
 {
     if(!isActive()) {

@@ -116,7 +116,7 @@ QString Log::prepareDebugMessage(const QString& message, util::source_location l
         function = function.mid(0, function.indexOf("<lambda(") + 7);
     }
 
-    auto namespaces = function.split("::", QString::SkipEmptyParts);
+    auto namespaces = function.split("::", Qt::SkipEmptyParts);
     auto actual_function_name = function;
     if(!namespaces.isEmpty()) {
         auto last = namespaces.takeLast();

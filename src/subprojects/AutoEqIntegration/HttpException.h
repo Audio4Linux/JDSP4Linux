@@ -3,12 +3,9 @@
 
 #include <QException>
 
-#include <http.h>
-
 class HttpException : public QException
 {
 public:
-    HttpException(const HttpReply& reply);
     HttpException(int statusCode, const QString& reasonPhrase);
 
     void raise() const override { throw *this; }

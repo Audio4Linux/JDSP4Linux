@@ -1,11 +1,5 @@
 #include "HttpException.h"
 
-HttpException::HttpException(const HttpReply& reply)
-{
-    _statusCode = reply.statusCode();
-    _reasonPhrase = reply.reasonPhrase();
-}
-
 HttpException::HttpException(int statusCode, const QString &reasonPhrase)
 {
     _statusCode = statusCode;
