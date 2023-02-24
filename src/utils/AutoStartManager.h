@@ -15,22 +15,15 @@
 #ifndef AUTOSTARTMANAGER_H
 #define AUTOSTARTMANAGER_H
 
-#include <QObject>
+#include <QString>
 
 class AutostartManager
 {
 public:
-	typedef enum InspectionMode
-    {
-		Exists,
-		Delayed,
-	} InspectionMode;
 	AutostartManager();
-	static void    saveDesktopFile(QString        path,
-                                   const QString &exepath,
-	                               bool           delayed);
-	static bool    inspectDesktopFile(const QString &path,
-	                                  InspectionMode mode);
+    static void    setEnabled(bool enabled);
+    static bool    isEnabled();
+private:
 	static QString getAutostartPath(const QString &filename);
 
 };

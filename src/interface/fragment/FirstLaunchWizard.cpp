@@ -44,7 +44,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
     connect(ui->p4_next, &QPushButton::clicked, this, [&] {
 		emit wizardFinished();
 	});
-    connect(ui->p4_telegram, &QPushButton::clicked, [this] {
+    connect(ui->p4_telegram, &QPushButton::clicked, this, [this] {
         DesktopServices::openUrl("https://t.me/joinchat/FTKC2A2bolHkFAyO-fuPjw", this);
     });
 
@@ -52,8 +52,7 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
     ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_minOnBoot->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
-    ui->p3_systray_minOnBoot->setChecked(AutostartManager::inspectDesktopFile(AutostartManager::getAutostartPath("jdsp-gui.desktop"),
-                                                                              AutostartManager::Exists));
+    ui->p3_systray_minOnBoot->setChecked(AutostartManager::isEnabled());
 
     connect(ui->p3_systray_disable, &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_enable,  &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
@@ -82,15 +81,5 @@ void FirstLaunchWizard::onSystrayRadioSelected()
 
 void FirstLaunchWizard::onSystrayAutostartToggled(bool isChecked)
 {
-    auto path = AutostartManager::getAutostartPath("jdsp-gui.desktop");
-    if (isChecked)
-    {
-        AutostartManager::saveDesktopFile(path,
-                                          AppConfig::instance().get<QString>(AppConfig::ExecutablePath),
-                                          AutostartManager::inspectDesktopFile(path, AutostartManager::Delayed));
-    }
-    else
-    {
-        QFile(path).remove();
-    }
+    AutostartManager::setEnabled(isChecked);
 }

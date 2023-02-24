@@ -129,7 +129,7 @@
         <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -686,13 +686,6 @@
                 <widget class="QCheckBox" name="systray_minOnBoot">
                  <property name="text">
                   <string>Start minimized on boot</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="systray_delay">
-                 <property name="text">
-                  <string>Delay autostart by 5 seconds</string>
                  </property>
                 </widget>
                </item>
