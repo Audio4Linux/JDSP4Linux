@@ -350,9 +350,12 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 * [James Fung](https://github.com/james34602) - Developer of the core library ['libjamesdsp'](https://github.com/james34602/JamesDSPManager/tree/master/Main)
 * [yochananmarqos](https://github.com/yochananmarqos) - AUR packages
 * [theAeon](https://github.com/theAeon) - RPM packages
-
-##### Other credits
 * PipeWire/Pulse implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects)
+
+### Translators
+
+<!-- CROWDIN-CONTRIBUTORS-START -->
+<!-- CROWDIN-CONTRIBUTORS-END -->
 
 ## License
 
