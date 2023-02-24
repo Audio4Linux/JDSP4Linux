@@ -207,7 +207,7 @@ QMenu* TrayIcon::buildAvailableActions()
         emit loadReverbPreset("off");
     });
     reverbMenu->addAction(reverbOff);
-	for (auto preset : PresetProvider::Reverb::getPresetNames())
+    for (const auto& preset : PresetProvider::Reverb::getPresetNames())
 	{
 		QAction *newEntry = new QAction(preset);
         connect(newEntry, &QAction::triggered, this, [this, preset]() {
@@ -220,7 +220,7 @@ QMenu* TrayIcon::buildAvailableActions()
 
     QMenu *eqMenu = new QMenu(tr("&Equalizer presets"), menuOwner);
 
-	for (auto preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
+    for (const auto& preset : PresetProvider::EQ::EQ_LOOKUP_TABLE().keys())
 	{
 		QAction *newEntry = new QAction(preset);
         connect(newEntry, &QAction::triggered, this, [this, preset]() {
@@ -238,7 +238,7 @@ QMenu* TrayIcon::buildAvailableActions()
     });
     bs2bMenu->addAction(bs2bOff);
 
-	for (auto preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().toStdMap())
+    for (const auto& preset : PresetProvider::BS2B::BS2B_LOOKUP_TABLE().toStdMap())
 	{
 		QAction *newEntry = new QAction(preset.first);
         connect(newEntry, &QAction::triggered, this, [this, preset]() {
@@ -274,7 +274,7 @@ QMenu* TrayIcon::buildDefaultActions()
 	connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 	quitAction->setProperty("tag", "quit");
 
-	QMenu   *menu = new QMenu();
+    QMenu *menu = new QMenu();
     menu->addAction(tray_disableAction);
 	menu->addMenu(tray_presetMenu);
 	menu->addSeparator();

@@ -445,7 +445,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 #endif
 
-    if (_trayIcon->isVisible() && !_allowCloseEvent)
+    if (_trayIcon->isVisible())
     {
         hide();
         event->ignore();
@@ -461,12 +461,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
     QMainWindow::resizeEvent(event);
     AppConfig::instance().setBytes(AppConfig::LastWindowGeometry, saveGeometry());
-}
-
-void MainWindow::shutdown()
-{
-    _allowCloseEvent = true;
-    this->close();
 }
 
 // Systray
