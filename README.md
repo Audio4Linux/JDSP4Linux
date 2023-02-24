@@ -355,6 +355,31 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 ### Translators
 
 <!-- CROWDIN-CONTRIBUTORS-START -->
+<table>
+  <tr>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/ThePBone"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15683553/medium/d13428d1e0922bc2069500aef57d1459.png" />
+        <br />
+        <sub><b>Tim Schneeberger (ThePBone)</b></sub></a>
+      <br />
+      <sub><b>6708 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/Kazevic"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15680393/medium/4393ae8969da30fc9475409e95e74867.png" />
+        <br />
+        <sub><b>Kazevic</b></sub></a>
+      <br />
+      <sub><b>2677 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/Camellan"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13410766/medium/b4019516b3323e817b7e77712961de69_default.png" />
+        <br />
+        <sub><b>Camellan</b></sub></a>
+      <br />
+      <sub><b>1670 words</b></sub>
+    </td>
+  </tr>
+</table><a href="https://crowdin.com/project/jdsp4linux" target="_blank">Translate in Crowdin 🚀</a>
 <!-- CROWDIN-CONTRIBUTORS-END -->
 
 ## License
