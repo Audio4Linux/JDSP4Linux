@@ -939,7 +939,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
       <source>Import EqualizerAPO settings</source>
-      <translation>Импорт настроек EqualizerAPO</translation>
+      <translation>Импорт параметров EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
@@ -1088,7 +1088,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="206"/>
       <source>Maximum release</source>
-      <translation>Максимальное высвобождение</translation>
+      <translation>Максимальный релиз</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="229"/>
@@ -1128,7 +1128,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="362"/>
       <source>Release</source>
-      <translation>Отдача</translation>
+      <translation>Релиз</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="385"/>
@@ -1154,12 +1154,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="492"/>
       <source>Custom BS2B parameters</source>
-      <translation>Custom BS2B parameters</translation>
+      <translation>Пользовательские параметры BS2B</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="533"/>
       <source>Cut frequency</source>
-      <translation>Cut frequency</translation>
+      <translation>Срез частоты</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="588"/>
@@ -1169,12 +1169,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="591"/>
       <source>Soundstage wideness</source>
-      <translation>Soundstage wideness</translation>
+      <translation>Ширина звуковой сцены</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="612"/>
       <source>Widen level</source>
-      <translation>Widen level</translation>
+      <translation>Расширение уровня</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="657"/>
@@ -1486,12 +1486,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2145"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Сквозной режим&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Этот параметр определяет, включать или отключать звуковые эффекты.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Байпас&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Это функция, позволяющая выполнить коммутацию входного сигнала непосредственно на выход, минуя все функциональные блоки. Другими словами этот параметр определяет, включать или отключать звуковые эффекты. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2148"/>
       <source>Bypass</source>
-      <translation>Обход</translation>
+      <translation>Байпас</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="141"/>
@@ -1561,7 +1561,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="389"/>
       <source>Reverb</source>
-      <translation>Эхо</translation>
+      <translation>Реверберация</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="390"/>
@@ -2205,12 +2205,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation>Долгое эхо 1</translation>
+      <translation>Длинная реверберация 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation>Долгое эхо 2</translation>
+      <translation>Длинная реверберация 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
@@ -2595,7 +2595,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
       <source>&amp;Bypass</source>
-      <translation>&amp;Обход</translation>
+      <translation>&amp;Байпас</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="22"/>
