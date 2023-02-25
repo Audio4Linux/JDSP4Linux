@@ -6,12 +6,12 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation type="unfinished"/>
+      <translation>2ª opción</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation type="unfinished"/>
+      <translation>3ª opción</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
@@ -24,17 +24,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation type="unfinished"/>
+      <translation>Frecuencia (Hz)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>Amplitud (dB)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation type="unfinished"/>
+      <translation>Destino</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
@@ -49,7 +49,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>Equalización</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
@@ -59,7 +59,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
@@ -69,32 +69,32 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>Equalización (normalizado)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
       <source>Move to top left</source>
-      <translation type="unfinished"/>
+      <translation>Mover arriba a la izquierda</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="210"/>
       <source>Move to top center</source>
-      <translation type="unfinished"/>
+      <translation>Mover al centro superior</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
       <source>Move to top right</source>
-      <translation type="unfinished"/>
+      <translation>Mover arriba a la derecha</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="212"/>
       <source>Move to bottom right</source>
-      <translation type="unfinished"/>
+      <translation>Mover abajo a la derecha</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="213"/>
       <source>Move to bottom left</source>
-      <translation type="unfinished"/>
+      <translation>Mover abajo a la izquierda</translation>
     </message>
   </context>
   <context>
@@ -107,42 +107,42 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation type="unfinished"/>
+      <translation>Filtro...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation type="unfinished"/>
+      <translation>Versión de la base de datos de archivos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
       <source>Checked out at commit:</source>
-      <translation type="unfinished"/>
+      <translation>Verificado en commit:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
       <source>Last commit created at:</source>
-      <translation type="unfinished"/>
+      <translation>Último commit creado en:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation type="unfinished"/>
+      <translation>Paquete generado en:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
       <source>Display settings</source>
-      <translation type="unfinished"/>
+      <translation>Ajustes de pantalla</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
       <source>Dark mode</source>
-      <translation type="unfinished"/>
+      <translation>Modo oscuro</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
       <source>Update database</source>
-      <translation type="unfinished"/>
+      <translation>Actualizar base de datos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
@@ -152,17 +152,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
       <source>Delete database</source>
-      <translation type="unfinished"/>
+      <translation>Borrar base de datos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
       <source>Cleanup local database and exit</source>
-      <translation type="unfinished"/>
+      <translation>Limpiar base de datos local y salir</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
       <source>No measurement selected</source>
-      <translation type="unfinished"/>
+      <translation>Sin datos de medición</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
@@ -174,12 +174,12 @@ This will override your current GraphicEQ configuration.</source>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Manage database</source>
-      <translation type="unfinished"/>
+      <translation>Administrar base de datos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
       <source>No measurements found</source>
-      <translation type="unfinished"/>
+      <translation>No hay módulo de medición</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
@@ -192,13 +192,16 @@ This will override your current GraphicEQ configuration.</source>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation type="unfinished"/>
+      <translation>Antes de usar la integración AutoEQ, necesita descargar una versión minimizada de su base de datos de compensación para auriculares (~50MB) a su disco duro.
+Se requiere una conexión a Internet durante este paso.
+
+¿Desea continuar y habilitar esta característica?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
       <source>Failed to retrieve version information</source>
-      <translation type="unfinished"/>
+      <translation>Error al recuperar la información</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
@@ -217,7 +220,7 @@ Reason: %1</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
       <source>No new updates available</source>
-      <translation type="unfinished"/>
+      <translation>No hay actualizaciones disponibles</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
@@ -226,7 +229,11 @@ Reason: %1</source>
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
 
 Do you want to re-install the latest database update anyway?</source>
-      <translation type="unfinished"/>
+      <translation>La base de datos local está actualizada actualmente; no hay nuevas actualizaciones disponibles en este momento.
+
+Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principal de AutoEQ estén disponibles para su descarga aquí. Los paquetes se generan a las 4am UTC diariamente.
+
+¿Desea volver a instalar la última actualización de la base de datos de todos modos?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
@@ -236,17 +243,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>The database has been removed from your hard disk</source>
-      <translation type="unfinished"/>
+      <translation>La base de datos ha sido eliminada del disco duro</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
-      <translation type="unfinished"/>
+      <translation>No se puede recuperar el archivo correspondiente de la base de datos. Por favor, actualice la base de datos local, ya que parece estar incompleta.</translation>
     </message>
   </context>
   <context>
@@ -261,7 +268,7 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to blocklist</source>
-      <translation type="unfinished"/>
+      <translation>Añadir a la lista negra</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="98"/>
@@ -276,7 +283,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="112"/>
       <source>Format: Unknown</source>
-      <translation type="unfinished"/>
+      <translation>Formato: Desconocido</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
@@ -405,68 +412,68 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
       <source>Ctrl+Shift+W</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Mayús+W</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Guardar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
       <source>Ctrl+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>Guardar como...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Mayús+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
       <source>Undo</source>
-      <translation type="unfinished"/>
+      <translation>Deshacer</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
       <source>Redo</source>
-      <translation type="unfinished"/>
+      <translation>Rehacer</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
       <source>Ctrl+Shift+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Mayús+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation type="unfinished"/>
+      <translation>Buscar/Reemplazar...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
       <source>Ctrl+F</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Go to line...</source>
-      <translation type="unfinished"/>
+      <translation>Ir a la línea...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
       <source>Go to line</source>
-      <translation type="unfinished"/>
+      <translation>Ir a la línea</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
@@ -512,7 +519,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>Reemplazar tabuladores por espacios</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
@@ -537,7 +544,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
       <source>New</source>
-      <translation type="unfinished"/>
+      <translation>Nuevo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
@@ -547,18 +554,18 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
       <source>Ctrl+N</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
       <source>Freeze</source>
-      <translation type="unfinished"/>
+      <translation>Congelar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
@@ -578,7 +585,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
       <source>Console output</source>
-      <translation type="unfinished"/>
+      <translation>Salida de la consola</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
@@ -598,12 +605,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>No se puede escribir archivo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
@@ -613,22 +620,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
       <source>EEL2 Script (*.eel)</source>
-      <translation type="unfinished"/>
+      <translation>EEL2 Script (*.eel)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>Guardar como</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>No se puede ejecutar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>No script file opened. Please open one first and try again.</source>
-      <translation type="unfinished"/>
+      <translation>No se ha abierto ningún archivo de script. Por favor, abra uno primero y vuelva a intentarlo.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
@@ -654,12 +661,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
       <source>Package manager</source>
-      <translation type="unfinished"/>
+      <translation>Gestor de paquetes</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
       <source>Downloading package...</source>
-      <translation type="unfinished"/>
+      <translation>Descargando paquetes...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
@@ -672,12 +679,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>Actualizar</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
+      <translation>Marcador</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
@@ -687,12 +694,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Renombrar</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Eliminar</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
@@ -720,17 +727,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>Anterior</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>Siguiente</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
       <source>&amp;Options</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Opciones</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
@@ -790,7 +797,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
       <source>Welcome!</source>
-      <translation type="unfinished"/>
+      <translation>¡Bienvenido!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
@@ -808,7 +815,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
       <source>Run in background?</source>
-      <translation type="unfinished"/>
+      <translation>¿Ejecutar en segundo plano?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
@@ -818,12 +825,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
       <source>Yes, minimize to tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Sí, minimizar al icono de la bandeja</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1817"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Iniciar minimizado al arrancar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
@@ -838,12 +845,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
       <source>Telegram</source>
-      <translation type="unfinished"/>
+      <translation>Telegram</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar</translation>
     </message>
   </context>
   <context>
@@ -889,17 +896,17 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
       <source>variable</source>
-      <translation type="unfinished"/>
+      <translation>variable</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
       <source>Import</source>
-      <translation type="unfinished"/>
+      <translation>Importar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="263"/>
       <source>Export</source>
-      <translation type="unfinished"/>
+      <translation>Exportar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
@@ -961,7 +968,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="62"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
@@ -985,46 +992,48 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
       <source>Enable</source>
-      <translation type="unfinished"/>
+      <translation>Habilitar</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Reiniciar</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="157"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Crear nuevo script</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <source>Cannot restore defaults.
 No EEL file is currently loaded.</source>
-      <translation type="unfinished"/>
+      <translation>No se pueden restaurar los valores predeterminados.
+No hay archivo EEL actualmente cargado.</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
       <source>Selected EEL file does not exist anymore.
 Please select another one</source>
-      <translation type="unfinished"/>
+      <translation>El archivo EEL seleccionado ya no existe.
+Por favor, seleccione otro</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="164"/>
       <source>Edit script</source>
-      <translation type="unfinished"/>
+      <translation>Editar script</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="236"/>
       <source>No customizable parameters</source>
-      <translation type="unfinished"/>
+      <translation>No hay parámetros personalizables</translation>
     </message>
   </context>
   <context>
@@ -1032,7 +1041,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="26"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP para Linux</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
@@ -1042,12 +1051,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Refuerzo de bajos dinámico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>Ganancia máxima</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
@@ -1057,7 +1066,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Dynamic range compressor</source>
-      <translation type="unfinished"/>
+      <translation>Compresión de rango dinámico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
@@ -1072,7 +1081,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="229"/>
       <source>Aggressiveness</source>
-      <translation type="unfinished"/>
+      <translation>Agresivo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="275"/>
@@ -1082,7 +1091,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="278"/>
       <source>Analog modelling</source>
-      <translation type="unfinished"/>
+      <translation>Modelo analógico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="290"/>
@@ -1097,12 +1106,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="316"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>Limitador/Maestro</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="333"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>Umbral</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="362"/>
@@ -1254,12 +1263,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="969"/>
       <source>Delay</source>
-      <translation type="unfinished"/>
+      <translation>Retraso</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="976"/>
       <source>Bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Refuerzo de graves</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1124"/>
@@ -1269,7 +1278,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1216"/>
       <source>Enable EQ</source>
-      <translation type="unfinished"/>
+      <translation>Activar EQ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1236"/>
@@ -1279,7 +1288,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1256"/>
       <source>Filter type</source>
-      <translation type="unfinished"/>
+      <translation>Tipo de filtro</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1260"/>
@@ -1309,7 +1318,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1297"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation type="unfinished"/>
+      <translation>Curva modificada de Hiroshi Akima</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1317"/>
@@ -1335,17 +1344,17 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="1418"/>
       <location filename="../../src/MainWindow.ui" line="1740"/>
       <source>Filesystem</source>
-      <translation type="unfinished"/>
+      <translation>Sistema de archivos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1440"/>
       <source>Bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>Marcadores</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1479"/>
       <source>Enable convolver</source>
-      <translation type="unfinished"/>
+      <translation>Habilitar convolver</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1486"/>
@@ -1380,7 +1389,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1589"/>
       <source>Channels:</source>
-      <translation type="unfinished"/>
+      <translation>Canales:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1609"/>
@@ -1400,17 +1409,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1762"/>
       <source>Database</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1803"/>
       <source>Create</source>
-      <translation type="unfinished"/>
+      <translation>Crear</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1827"/>
       <source>Create your custom DDC files using DDCToolbox</source>
-      <translation type="unfinished"/>
+      <translation>Crea tus archivos DDC personalizados usando DDCToolbox</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1837"/>
@@ -1420,12 +1429,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1893"/>
       <source>View installation instructions</source>
-      <translation type="unfinished"/>
+      <translation>Ver instrucciones de instalación</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1949"/>
       <source>Enable ViPER-DDC</source>
-      <translation type="unfinished"/>
+      <translation>Activar ViPER-DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1972"/>
@@ -1440,7 +1449,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2032"/>
       <source>Custom Presets</source>
-      <translation type="unfinished"/>
+      <translation>Preajustes Personalizados</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2035"/>
@@ -1450,7 +1459,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2061"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>Ajustes</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2067"/>
@@ -1470,7 +1479,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2148"/>
       <source>Bypass</source>
-      <translation type="unfinished"/>
+      <translation>By-pass</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="141"/>
@@ -1480,7 +1489,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="160"/>
       <source>Cannot execute script</source>
-      <translation type="unfinished"/>
+      <translation>No se puede ejecutar script</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="161"/>
@@ -1495,12 +1504,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="276"/>
       <source>Driver status</source>
-      <translation type="unfinished"/>
+      <translation>Estado del driver</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="280"/>
       <source>Relink audio pipeline</source>
-      <translation type="unfinished"/>
+      <translation>Volver a enlazar tubería de audio</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="282"/>
@@ -2295,7 +2304,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="379"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Guardar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="388"/>
@@ -2310,37 +2319,37 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="402"/>
       <source>Extract bundled assets on startup</source>
-      <translation type="unfinished"/>
+      <translation>Extraer activos empaquetados al iniciar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="422"/>
       <source>  Extract now  </source>
-      <translation type="unfinished"/>
+      <translation>  Extraer ahora  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="454"/>
       <source>Select sink/device to be processed</source>
-      <translation type="unfinished"/>
+      <translation>Seleccione sink/dispositivo a procesar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="460"/>
       <source>Use default output device (recommended)</source>
-      <translation type="unfinished"/>
+      <translation>Usar dispositivo de salida por defecto (recomendado)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="467"/>
       <source>Manually select device</source>
-      <translation type="unfinished"/>
+      <translation>Seleccionar dispositivo manualmente</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="479"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>Dispositivo</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="507"/>
       <source>Blocklisted apps</source>
-      <translation type="unfinished"/>
+      <translation>Apps bloqueadas</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="513"/>
@@ -2350,12 +2359,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="529"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
-      <translation type="unfinished"/>
+      <translation>Modo de lista permitida (las aplicaciones deben estar explícitamente habilitadas en su lugar)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="560"/>
       <source>Clear list</source>
-      <translation type="unfinished"/>
+      <translation>Borrar lista</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
@@ -2365,72 +2374,72 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="600"/>
       <source>Status:</source>
-      <translation type="unfinished"/>
+      <translation>Estado:</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="610"/>
       <source>unknown</source>
-      <translation type="unfinished"/>
+      <translation>desconocido</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="630"/>
       <source>  Manage local database  </source>
-      <translation type="unfinished"/>
+      <translation>  Administrar base de datos  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
       <source>Run in background (tray icon)</source>
-      <translation type="unfinished"/>
+      <translation>Ejecutar en segundo plano (icono de la bandeja)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>No, shutdown audio effects when closing app</source>
-      <translation type="unfinished"/>
+      <translation>No, apagar efectos de audio al cerrar la aplicación</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="675"/>
       <source>Yes, minimize to tray icon when closing app</source>
-      <translation type="unfinished"/>
+      <translation>Sí, minimizar el icono de la bandeja al cerrar la aplicación</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="682"/>
       <source>Auto-start</source>
-      <translation type="unfinished"/>
+      <translation>Autoiniciar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="688"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Iniciar minimizado al arrancar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="695"/>
       <source>Delay autostart by 5 seconds</source>
-      <translation type="unfinished"/>
+      <translation>Retraso de inicio automático por 5 segundos</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="717"/>
       <source>Systray not supported on this system</source>
-      <translation type="unfinished"/>
+      <translation>Systray no soportado en este sistema</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="767"/>
       <source>Visit Github repo</source>
-      <translation type="unfinished"/>
+      <translation>Visitar el repositorio de Github</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="793"/>
       <source>Run setup wizard</source>
-      <translation type="unfinished"/>
+      <translation>Ejecutar el Asistente de Configuración</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="816"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="186"/>
       <source>Unknown (%1)</source>
-      <translation type="unfinished"/>
+      <translation>Desconocido (%1)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="248"/>
@@ -2467,27 +2476,28 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="373"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation type="unfinished"/>
+      <translation>Está a punto de activar el modo listas permitidas. JamesDSP no procesará todas las aplicaciones por defecto mientras este modo esté activo. Necesitas permitir explícitamente que cada aplicación se procese en el menú &apos;Aplicaciones&apos;.
+</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="375"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>¿Estás seguro?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
-      <translation type="unfinished"/>
+      <translation>Esta acción restablecerá su actual lista de bloqueos o lista permitida. ¿Desea continuar?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="404"/>
       <source>Warning</source>
-      <translation type="unfinished"/>
+      <translation>Advertencia</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="404"/>
       <source>Do you really want to restore the default menu layout?</source>
-      <translation type="unfinished"/>
+      <translation>¿Seguro que quieres volver a la configuración por defecto?</translation>
     </message>
   </context>
   <context>
@@ -2495,7 +2505,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/utils/SingleInstanceMonitor.cpp" line="56"/>
       <source>Another instance of JamesDSP is already active and has been put in the foreground.</source>
-      <translation type="unfinished"/>
+      <translation>Otra instancia de JamesDSP ya está activa y se ha puesto en primer plano.</translation>
     </message>
   </context>
   <context>
@@ -2503,12 +2513,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="38"/>
       <source>Status</source>
-      <translation type="unfinished"/>
+      <translation>Estado</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="65"/>
       <source>Application version</source>
-      <translation type="unfinished"/>
+      <translation>Versión de la aplicación</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
@@ -2594,7 +2604,7 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/TrayIcon.cpp" line="195"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="273"/>
       <source>&amp;Quit</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Salir</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="199"/>
@@ -2610,7 +2620,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="205"/>
       <source>Off</source>
-      <translation type="unfinished"/>
+      <translation>Apagado</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="221"/>
@@ -2628,7 +2638,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="56"/>
       <source>Parameter</source>
-      <translation type="unfinished"/>
+      <translation>Parámetro</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="57"/>
@@ -2646,43 +2656,43 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
       <source>ms</source>
-      <translation type="unfinished"/>
+      <translation>ms</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="86"/>
       <source>Refresh every</source>
-      <translation type="unfinished"/>
+      <translation>Actualizar cada</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
       <source>Click a variable to manipulate its value.</source>
-      <translation type="unfinished"/>
+      <translation>Haz clic en una variable para manipular su valor.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <source>This variable is a string. Currently only numerical value types can be modified.</source>
-      <translation type="unfinished"/>
+      <translation>Esta variable es una cadena. Actualmente sólo se pueden modificar los tipos de valores numéricos.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="74"/>
       <source>Manipulate variable</source>
-      <translation type="unfinished"/>
+      <translation>Modificar variable</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="75"/>
       <source>Enter a new value for variable &apos;%1&apos;:</source>
-      <translation type="unfinished"/>
+      <translation>Introduzca un nuevo valor para la variable &apos;%1&apos;:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Failed to manipulate variable &apos;%1&apos;. Either it does not exist anymore, or it cannot be changed.</source>
-      <translation type="unfinished"/>
+      <translation>Error al manipular la variable &apos;%1&apos;. Ya no existe o no se puede cambiar.</translation>
     </message>
   </context>
   <context>
@@ -2695,7 +2705,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="37"/>
       <source>Model</source>
-      <translation type="unfinished"/>
+      <translation>Modelo</translation>
     </message>
   </context>
   <context>
@@ -2713,7 +2723,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="589"/>
       <source>Close Other Groups</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar Otros Grupos</translation>
     </message>
   </context>
   <context>
@@ -2721,7 +2731,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockManager.cpp" line="489"/>
       <source>Show View</source>
-      <translation type="unfinished"/>
+      <translation>Mostrar vista</translation>
     </message>
   </context>
   <context>
@@ -2729,17 +2739,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
       <source>Detach</source>
-      <translation type="unfinished"/>
+      <translation>Desconectar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
       <source>Close Others</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar los demás</translation>
     </message>
   </context>
   <context>
@@ -2747,12 +2757,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="25"/>
       <source>Available entries</source>
-      <translation type="unfinished"/>
+      <translation>Entradas disponibles</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="73"/>
       <source>Move Up</source>
-      <translation type="unfinished"/>
+      <translation>Mover hacia arriba</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
@@ -2762,47 +2772,47 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="79"/>
       <source>&amp;Up</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Subir</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="114"/>
       <source>Move Down</source>
-      <translation type="unfinished"/>
+      <translation>Mover hacia abajo</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="117"/>
       <source>moves the selected toolbar item down</source>
-      <translation type="unfinished"/>
+      <translation>mueve abajo el elemento de la barra de herramientas</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="120"/>
       <source>&amp;Down</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Bajar</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="168"/>
       <source>Insert</source>
-      <translation type="unfinished"/>
+      <translation>Insertar</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="171"/>
       <source>Adds the selected menu action to the toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Añade la acción del menú seleccionado a la barra de herramientas</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="174"/>
       <source>&amp;Add</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Agregar</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="209"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Eliminar</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="212"/>
       <source>Removes the selected item from the active toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Elimina el elemento seleccionado de la barra de herramientas activa</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="215"/>
@@ -2813,12 +2823,12 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/menueditor.ui" line="245"/>
       <location filename="../../src/interface/menueditor.ui" line="248"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Reiniciar</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="279"/>
       <source>Context menu contents</source>
-      <translation type="unfinished"/>
+      <translation>Elementos de menú contextual</translation>
     </message>
   </context>
 </TS>
