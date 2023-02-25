@@ -878,7 +878,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation>Включить эквалайзер</translation>
+      <translation>Включить Graphic EQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
@@ -1133,7 +1133,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="385"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Пост-усиление</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="451"/>
