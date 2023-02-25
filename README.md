@@ -369,14 +369,14 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
         <br />
         <sub><b>Kazevic</b></sub></a>
       <br />
-      <sub><b>2677 words</b></sub>
+      <sub><b>3173 words</b></sub>
     </td>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/Camellan"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13410766/medium/b4019516b3323e817b7e77712961de69_default.png" />
         <br />
         <sub><b>Camellan</b></sub></a>
       <br />
-      <sub><b>1670 words</b></sub>
+      <sub><b>3150 words</b></sub>
     </td>
   </tr>
 </table><a href="https://crowdin.com/project/jdsp4linux" target="_blank">Translate in Crowdin 🚀</a>
