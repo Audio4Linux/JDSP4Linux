@@ -39,12 +39,12 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation>Raw (smoothed)</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation>Error (smoothed)</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
@@ -54,7 +54,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation>Raw</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
@@ -870,7 +870,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation>FlatTabWidget</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -1113,7 +1113,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="313"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="316"/>
@@ -1138,7 +1138,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="451"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="454"/>
@@ -1164,7 +1164,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="588"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="591"/>
@@ -1179,7 +1179,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="657"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="683"/>
@@ -1200,52 +1200,52 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="750"/>
       <source>Oversampling factor</source>
-      <translation>Oversampling factor</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="770"/>
       <source>Early reflection factor</source>
-      <translation>Early reflection factor</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="793"/>
       <source>Early reflection amount</source>
-      <translation>Early reflection amount</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="810"/>
       <source>Early reflection width</source>
-      <translation>Early reflection width</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="833"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation>Lowpass cutoff (Input)</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="853"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation>Lowpass cutoff (Bass)</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="873"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation>Lowpass cutoff (Damp)</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="893"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation>Lowpass cutoff (Output)</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="920"/>
       <source>Final wet mix</source>
-      <translation>Final wet mix</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="927"/>
       <source>Final dry mix</source>
-      <translation>Final dry mix</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="934"/>
@@ -1255,17 +1255,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="941"/>
       <source>Width L/R mix</source>
-      <translation>Width L/R mix</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="948"/>
       <source>LFO wander amount</source>
-      <translation>LFO wander amount</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="955"/>
       <source>LFO spin amount</source>
-      <translation>LFO spin amount</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="962"/>
@@ -1285,7 +1285,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1124"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1216"/>
@@ -1320,17 +1320,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1288"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1292"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation>Piecewise Cubic Hermite Interpolating Polynomial</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1297"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation>Modified Hiroshi Akima spline</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1317"/>
@@ -1350,7 +1350,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1393"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1418"/>
@@ -1371,22 +1371,22 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1486"/>
       <source>IR optimization</source>
-      <translation>IR optimization</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1506"/>
       <source>Original</source>
-      <translation>Original</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1511"/>
       <source>Shrink</source>
-      <translation>Shrink</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1516"/>
       <source>Minimum phase transform and shrink</source>
-      <translation>Minimum phase transform and shrink</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1524"/>
@@ -1416,7 +1416,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1715"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1762"/>
@@ -1451,7 +1451,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1972"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1994"/>
@@ -1632,18 +1632,7 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation>Advanced waveform editing (default: -80;-100;0;0;0;0)
-
-Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
-This setting is only in effect if IR optimization is enabled.
-
-1st value: Start threshold auto-cropping (dB)
-2nd value: End threshold auto-cropping (dB)
-3rd value: Channel 1 delay (samples)
-4th value: Channel 2 delay (samples)
-5th value: Channel 3 delay (samples)
-6th value: Channel 4 delay (samples)
-</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -2085,37 +2074,37 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="105"/>
       <source>BS2B Custom</source>
-      <translation>BS2B Custom</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="106"/>
       <source>BS2B Weak</source>
-      <translation>BS2B Weak</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="107"/>
       <source>BS2B Strong</source>
-      <translation>BS2B Strong</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation>Out of head</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
       <source>Surround 1</source>
-      <translation>Surround 1</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="110"/>
       <source>Surround 2</source>
-      <translation>Surround 2</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
       <source>Joe0Bloggs Realistic surround</source>
-      <translation>Joe0Bloggs Realistic surround</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
@@ -2185,22 +2174,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 1</source>
-      <translation>Medium ER 1</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 2</source>
-      <translation>Medium ER 2</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation>Plate high</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation>Plate low</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
@@ -2678,7 +2667,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
       <source>ms</source>
-      <translation>ьс</translation>
+      <translation>мс</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="86"/>
