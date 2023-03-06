@@ -376,7 +376,14 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
         <br />
         <sub><b>Camellan</b></sub></a>
       <br />
-      <sub><b>3150 words</b></sub>
+      <sub><b>3152 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/mefsaal"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13221907/medium/c0b751a37f076028f7271b00392736aa.jpg" />
+        <br />
+        <sub><b>Gabriel Cabrera Davila (mefsaal)</b></sub></a>
+      <br />
+      <sub><b>652 words</b></sub>
     </td>
   </tr>
 </table><a href="https://crowdin.com/project/jdsp4linux" target="_blank">Translate in Crowdin 🚀</a>
