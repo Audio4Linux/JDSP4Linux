@@ -96,20 +96,16 @@ int main(int   argc,
     parser.addOption(silent);
     QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
     parser.addOption(nocolor);
-    QCommandLineOption lang(QStringList() << "l" << "lang", "Force language (two letter country code)", "lang");
-    parser.addOption(lang);
     parser.process(app);
 
-    QString defaultLocale = QLocale::system().name(); // e.g. "de_DE"
-    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString locale = (parser.isSet(lang) ? parser.value(lang) : defaultLocale);
+    QLocale locale = QLocale::system();
 
     QTranslator translator;
-    translator.load(":/translations/jamesdsp_" + locale + ".qm");
+    translator.load(locale, "jamesdsp", "_", ":/translations");
     app.installTranslator(&translator);
 
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + locale + ".qm", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    qtTranslator.load(locale, "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
 
 #ifndef NO_CRASH_HANDLER
@@ -131,7 +127,7 @@ int main(int   argc,
 
     Log::information("Application version: " + QString(APP_VERSION_FULL));
     Log::information("Qt library version: " + QString(qVersion()));
-    Log::information("Using language: " + QString(locale));
+    Log::information("Using language: " + QString(locale.name()));
 
     Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no")); /* unreliable */
     QGuiApplication::setFallbackSessionManagementEnabled(false);   
