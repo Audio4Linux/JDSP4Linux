@@ -184,7 +184,7 @@ RESOURCES += \
 TRANSLATIONS += ../resources/translations/jamesdsp_de.ts \
                 ../resources/translations/jamesdsp_en.ts \
                 ../resources/translations/jamesdsp_ru.ts \
-                ../resources/translations/jamesdsp_br.ts
+                ../resources/translations/jamesdsp_pt_BR.ts
 
 # Default rules for deployment.
 isEmpty(PREFIX){
