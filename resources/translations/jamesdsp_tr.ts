@@ -6,17 +6,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation type="unfinished"/>
+      <translation>2. Seçim</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation type="unfinished"/>
+      <translation>3. Seçim</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation type="unfinished"/>
+      <translation>%1 lik seçim</translation>
     </message>
   </context>
   <context>
@@ -24,27 +24,27 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation type="unfinished"/>
+      <translation>Frekans (Hz)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>Genlik (dBR)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation type="unfinished"/>
+      <translation>Hedef</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>İşlenmemiş (düzleştirilmiş)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Hata (düzleştirilmiş)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
