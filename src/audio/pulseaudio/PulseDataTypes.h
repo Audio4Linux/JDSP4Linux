@@ -2,6 +2,7 @@
 #define PULSEDATATYPES_H
 
 #include <string>
+#include <stdint.h>
 
 struct myServerInfo {
     std::string server_name;
