@@ -92,10 +92,9 @@ QVariantMap ConfigIO::readString(const QString &string)
 bool ConfigIO::readLine(const QString &line,
                         QPair<QString, QVariant> &out)
 {
-	if (line.isEmpty() || line.trimmed()[0] == '#' ||
-	    line.trimmed()[0] == '[')
+    if (line.trimmed().isEmpty() || line.trimmed()[0] == '#' || line.trimmed()[0] == '[')
 	{
-		return false;                                                                       // Skip commented lines
+        return false; // Skip commented lines
 	}
 
 	auto    delimiterInlineComment = line.indexOf('#'); // Look for config properties mixed up with comments

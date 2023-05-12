@@ -19,6 +19,7 @@
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
+  <a href="#scripting--ipc-apis">Scripting/API</a> •
   <a href="#contributors">Contributors</a> •
   <a href="#license">License</a> 
 </p>
@@ -83,46 +84,23 @@ ____________
 **Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
 PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. 
-
 I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
-
-*Important: This application can be either compiled with PulseAudio or PipeWire support. Please make sure you choose the correct flavor for your Linux setup before installing!*
-
-*Note: PipeWire's compatibility mode for PulseAudio apps does not work with the PulseAudio flavor of this app. Use the version for PipeWire instead.*
 
 ### Which one am I using?
 
 Follow the instructions below if you don't know which one your Linux distribution is using. If you already know, skip to the 'Install dependencies' section.
 
-##### Step 1: Is PipeWire installed and active?
-
-Run `pw-cli dump short core` in your terminal. 
-
-Does the terminal output look similar to the pattern below after executing the command?
-
-```
-0: u="USER" h="HOSTNAME" v="0.3.35" n="pipewire-0"
-```
-
-* **YES**: You're using PipeWire. Skip ahead, and follow the instructions to install JamesDSP with PipeWire support.
-
-* **NO**: If the command `pw-cli` is not found or it returned an error, you're probably not using PipeWire. Continue to step 2 to find out if PulseAudio is available on your system.
-
-##### Step 2: Is PulseAudio installed and active?
-
 Run `LC_ALL=C pactl info | grep "Server Name:"` in your terminal. 
 
-Does the terminal output look like this after executing the command?
+If you are using **Pipewire** the output should look similar to this:
+```
+Server Name: PulseAudio (on PipeWire 0.3.35)
+```
 
+If you are using **Pulseaudio** the output should look exactly like this:
 ```
 Server Name: pulseaudio
 ```
-
-* **YES**: You're using PulseAudio. Skip ahead, and follow the instructions to install JamesDSP with PulseAudio support.
-
-* **NO**: If the command `pactl` is not found or it returned an error, either your PA installation is broken or you are using another audio framework like Jack. Consider switching to PipeWire in this case.
-
-**IMPORTANT:** If the output mentions PipeWire (`Server Name: PulseAudio (on PipeWire 0.3.35)`), you are using PulseAudio via PipeWire's compatibility mode. You need to install JamesDSP with PipeWire support in this case!
 
 ## Installation
 
@@ -139,11 +117,6 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 
 ##### Minimum system requirements:
 
-**Pulseaudio version**
-* Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 21.10 or later
- 
-**Pipewire version**
 * Distro based on Debian 11 or later **OR**
 * Distro based on Ubuntu 21.10 or later
 
@@ -230,7 +203,6 @@ Debian/Ubuntu + **PipeWire** clients only:
 ```bash
 sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev 
 ```
-NOTE: Pipewire version 0.3 or later required. Unfortunately, this version is only in the official Ubuntu repository for Ubuntu 20.10 or later. If you use Ubuntu 20.04 or earlier, you need to compile this dependency yourself or use PulseAudio instead.
 
 Debian/Ubuntu + **PulseAudio** clients only:
 
@@ -330,6 +302,43 @@ Download icon
 ```bash
 sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/Audio4Linux/JDSP4Linux/master/resources/icons/icon.png -q --show-progress
 ```
+## Scripting & IPC APIs
+
+Since 12th May 2023, this app supports IPC via D-Bus and is also configurable via a CLI. These new features are not yet included in a stable release.
+
+### Remote control via CLI
+You can list all supported commands using `jamesdsp --help`. 
+Currently, these commands for remote-controlling JamesDSP's audio engine are available:
+```
+  --is-connected               Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)
+  --list-keys                  List available audio configuration keys (Remote)
+  --get <key>                  Get audio configuration value (Remote)
+  --set <key=value>            Set audio configuration value (format: key=value) (Remote)
+  --load-preset <name>         Load preset by name (Remote)
+  --save-preset <name>         Save current settings as preset (Remote)
+  --delete-preset <name>       Delete preset by name (Remote)
+  --list-presets               List presets (Remote)
+  --status                     Show status (Remote)
+```
+The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible setting keys and their syntax.
+
+> **Note**: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
+
+### D-Bus IPC
+
+This app also exposes a D-Bus service on the session bus which can be used by other developers or users:
+
+Service name: `me.timschneeberger.jdsp4linux`
+* GUI-related interface:
+  * Path name: `/jdsp4linux/gui`
+  * Interface name: `me.timschneeberger.jdsp4linux.Gui`
+* Audio service-related interface:
+  * Path name: `/jdsp4linux/service`
+  * Interface name: `me.timschneeberger.jdsp4linux.Service`
+
+If you want to test it out, you can use an app like [D-Feet](https://wiki.gnome.org/Apps/DFeet) to interact with the D-Bus services.
+
+The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JDSP4Linux/blob/master/src/utils/dbus/manifest.xml.
 
 ## Troubleshooting
 * Your CPU may be too slow to process the audio sample in time; try to disable some effects (especially resource-hungry ones like the convolver)
@@ -350,7 +359,7 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 * [James Fung](https://github.com/james34602) - Developer of the core library ['libjamesdsp'](https://github.com/james34602/JamesDSPManager/tree/master/Main)
 * [yochananmarqos](https://github.com/yochananmarqos) - AUR packages
 * [theAeon](https://github.com/theAeon) - RPM packages
-* PipeWire/Pulse implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects)
+* PipeWire/Pulse implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects) by [Wellington Wallace](https://github.com/wwmm)
 
 ### Translators
 

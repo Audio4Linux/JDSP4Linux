@@ -17,6 +17,7 @@
 
 #include <string>
 #include <QString>
+#include <QTextStream>
 
 // TODO Move Utils.h out of AudioDrivers/Base into a common subproject
 #include "Utils.h"
@@ -30,6 +31,7 @@ private:
 public:
 	enum LoggingMode
 	{
+        LM_UNSPECIFIED,
 		LM_ALL,
 		LM_FILE,
 		LM_STDOUT
@@ -67,11 +69,11 @@ public:
     static QString path();
     static QString pathOld();
 
-    void write(const QString &msg, bool force = false, LoggingMode mode = LM_ALL);
+    void write(const QString &msg, bool force = false, bool useStdErr = false, LoggingMode mode = LM_UNSPECIFIED);
     void write(const QString &log,
                Severity       severity,
                util::source_location location,
-               LoggingMode    mode = LM_ALL);
+               LoggingMode    mode = LM_UNSPECIFIED);
 
     bool getColoredOutput() const;
     void setColoredOutput(bool newColoredOutput);
@@ -79,11 +81,23 @@ public:
     bool getSilent() const;
     void setSilent(bool newSilent);
 
+    LoggingMode getLoggingMode() const;
+    void setLoggingMode(LoggingMode newLoggingMode);
+
+    bool getUseSimpleFormat() const;
+    void setUseSimpleFormat(bool newUseSimpleFormat);
+
+    Severity getMinSeverity() const;
+    void setMinSeverity(Severity newMinSeverity);
+
 private:
     static QString prepareDebugMessage(const QString &message, util::source_location location);
 
     bool coloredOutput = true;
     bool silent = false;
+    LoggingMode loggingMode = LM_ALL;
+    bool useSimpleFormat = false;
+    Severity minSeverity = Debug;
 };
 
 #endif // LOG_H

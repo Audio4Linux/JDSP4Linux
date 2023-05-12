@@ -14,6 +14,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     void rescan();
+    QStringList getList() const;
 
 private:
 

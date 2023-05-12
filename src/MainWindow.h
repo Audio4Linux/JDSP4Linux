@@ -45,6 +45,7 @@ class QVBoxLayout;
 class AudioManager;
 class SingleInstanceMonitor;
 class StatusFragment;
+class IpcHandler;
 
 using namespace std;
 namespace Ui
@@ -123,6 +124,7 @@ private:
     FragmentHost<PresetFragment*>* _presetFragment     = nullptr;
 
     IAudioService* _audioService       = nullptr;
+    IpcHandler* _ipcHandler            = nullptr;
 
     bool _blockApply                   = false;
 

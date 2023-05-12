@@ -28,6 +28,7 @@
 #include "interface/TrayIcon.h"
 #include "utils/Common.h"
 #include "utils/dbus/ClientProxy.h"
+#include "utils/dbus/IpcHandler.h"
 #include "utils/dbus/ServerAdaptor.h"
 #include "utils/DebuggerUtils.h"
 #include "utils/Log.h"
@@ -94,6 +95,7 @@ MainWindow::MainWindow(bool     statupInTray,
         _styleHelper         = new StyleHelper(this);
         _eelEditor           = new EELEditor(this);
         _trayIcon            = new TrayIcon(this);
+        _ipcHandler          = new IpcHandler(_audioService, this);
 
         _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
         _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
@@ -424,9 +426,8 @@ MainWindow::MainWindow(bool     statupInTray,
 MainWindow::~MainWindow()
 {
     if(_audioService != nullptr)
-    {
         delete _audioService;
-    }
+    delete _ipcHandler;
     delete ui;
 }
 
@@ -779,15 +780,15 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::master_postgain,            QVariant(ui->postgain->valueA()));
 
     DspConfig::instance().set(DspConfig::ddc_enable,                 QVariant(ui->ddc_enable->isChecked()));
-    DspConfig::instance().set(DspConfig::ddc_file,                   QVariant("\"" + _currentVdc + "\""));
+    DspConfig::instance().set(DspConfig::ddc_file,                   QVariant(_currentVdc));
 
     DspConfig::instance().set(DspConfig::liveprog_enable,            QVariant(ui->liveprog->isActive()));
-    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant("\"" + ui->liveprog->currentLiveprog() + "\""));
+    DspConfig::instance().set(DspConfig::liveprog_file,              QVariant(ui->liveprog->currentLiveprog()));
 
     DspConfig::instance().set(DspConfig::convolver_enable,           QVariant(ui->conv_enable->isChecked()));
     DspConfig::instance().set(DspConfig::convolver_optimization_mode,QVariant(ui->conv_ir_opt->currentIndex()));
-    DspConfig::instance().set(DspConfig::convolver_file,             QVariant("\"" + _currentImpulseResponse + "\""));
-    DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant("\"" + _currentConvWaveformEdit + "\""));
+    DspConfig::instance().set(DspConfig::convolver_file,             QVariant(_currentImpulseResponse));
+    DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant(_currentConvWaveformEdit));
 
     DspConfig::instance().set(DspConfig::compression_enable,         QVariant(ui->enable_comp->isChecked()));
     DspConfig::instance().set(DspConfig::compression_maxatk,         QVariant(ui->comp_maxattack->valueA()));
@@ -816,13 +817,13 @@ void MainWindow::applyConfig()
             counter++;
         }
 
-        DspConfig::instance().set(DspConfig::tone_eq, QVariant("\"" + rawEqString + "\""));
+        DspConfig::instance().set(DspConfig::tone_eq, QVariant(rawEqString));
     }
     else
     {
         QString rawEqString;
         ui->eq_dyn_widget->storeCsv(rawEqString);
-        DspConfig::instance().set(DspConfig::tone_eq, QVariant("\"" + rawEqString + "\""));
+        DspConfig::instance().set(DspConfig::tone_eq, QVariant(rawEqString));
     }
 
     DspConfig::instance().set(DspConfig::bass_enable,               QVariant(ui->bassboost->isChecked()));
@@ -858,7 +859,7 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::graphiceq_enable,          QVariant(ui->graphicEq->chk_enable->isChecked()));
     QString streq;
     ui->graphicEq->store(streq);
-    DspConfig::instance().set(DspConfig::graphiceq_param,           QVariant("\"" + streq + "\""));
+    DspConfig::instance().set(DspConfig::graphiceq_param,           QVariant(streq));
 
     DspConfig::instance().commit();
     DspConfig::instance().save();

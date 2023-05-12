@@ -121,6 +121,17 @@ public:
         }
 	}
 
+    static QStringList getKeys()
+    {
+        QMetaEnum meta = QMetaEnum::fromType<Key>();
+        QStringList keys;
+        for (int k = 0; k < meta.keyCount(); k++)
+        {
+            keys.push_back(QString::fromLocal8Bit(meta.key(k)));
+        }
+        return keys;
+    }
+
     void set(const Key &key,
 	         const QVariant &value)
 	{
@@ -133,10 +144,9 @@ public:
     }
 
 	template<class T>
-    T get(const Key &key, bool* exists = nullptr)
-	{
-        auto skey = QVariant::fromValue(key).toString();
-        auto variant = _conf->getVariant(skey, true, exists);
+    T get(const QString &key, bool* exists = nullptr)
+    {
+        auto variant = _conf->getVariant(key, true, exists);
 
         if constexpr (std::is_same_v<T, QVariant>) {
             return (T)(variant);
@@ -160,6 +170,12 @@ public:
         Log::error("Unknown type T");
         throw new std::exception;
 	}
+
+    template<class T>
+    T get(const Key &key, bool* exists = nullptr)
+    {
+        return get<T>(QVariant::fromValue(key).toString(), exists);
+    }
 
     Type type(const Key &key)
     {

@@ -9,8 +9,8 @@ SingleInstanceMonitor::SingleInstanceMonitor(QObject* parent) : QObject(parent)
     QDBusConnection connection = QDBusConnection::sessionBus();
 
     _dbusAdapter = new GuiAdaptor(this);
-    _registered  = connection.registerObject("/Gui", this) &&
-            connection.registerService("me.timschneeberger.jdsp4linux.Gui");
+    _registered  = connection.registerObject("/jdsp4linux/gui", this) &&
+            connection.registerService("me.timschneeberger.jdsp4linux");
 
 }
 
@@ -36,7 +36,7 @@ bool SingleInstanceMonitor::isServiceReady()
 bool SingleInstanceMonitor::handover()
 {
     Log::information("Attempting to switch to this instance...");
-    auto m_dbInterface = new cf::thebone::jdsp4linux::Gui("me.timschneeberger.jdsp4linux.Gui", "/Gui",
+    auto m_dbInterface = new me::timschneeberger::jdsp4linux::Gui("me.timschneeberger.jdsp4linux", "/jdsp4linux/gui",
                                                           QDBusConnection::sessionBus(), this);
     if (!m_dbInterface->isValid())
     {

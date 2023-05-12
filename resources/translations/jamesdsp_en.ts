@@ -1473,132 +1473,132 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="141"/>
+        <location filename="../../src/MainWindow.cpp" line="143"/>
         <source>%1 connected - Preset loaded automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="160"/>
+        <location filename="../../src/MainWindow.cpp" line="162"/>
         <source>Cannot execute script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="161"/>
+        <location filename="../../src/MainWindow.cpp" line="163"/>
         <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="275"/>
+        <location filename="../../src/MainWindow.cpp" line="277"/>
         <source>Apps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="276"/>
+        <location filename="../../src/MainWindow.cpp" line="278"/>
         <source>Driver status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="280"/>
+        <location filename="../../src/MainWindow.cpp" line="282"/>
         <source>Relink audio pipeline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="282"/>
+        <location filename="../../src/MainWindow.cpp" line="284"/>
         <source>Reset to defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="283"/>
+        <location filename="../../src/MainWindow.cpp" line="285"/>
         <source>Load from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="284"/>
+        <location filename="../../src/MainWindow.cpp" line="286"/>
         <source>Save to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="286"/>
+        <location filename="../../src/MainWindow.cpp" line="288"/>
         <source>Open LiveprogIDE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="288"/>
+        <location filename="../../src/MainWindow.cpp" line="290"/>
         <source>What&apos;s this... (Select UI element)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="387"/>
+        <location filename="../../src/MainWindow.cpp" line="389"/>
         <source>Bass/Misc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="388"/>
+        <location filename="../../src/MainWindow.cpp" line="390"/>
         <source>Sound Positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="389"/>
+        <location filename="../../src/MainWindow.cpp" line="391"/>
         <source>Reverb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="390"/>
+        <location filename="../../src/MainWindow.cpp" line="392"/>
         <source>Equalizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="391"/>
+        <location filename="../../src/MainWindow.cpp" line="393"/>
         <source>Convolver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="392"/>
+        <location filename="../../src/MainWindow.cpp" line="394"/>
         <source>DDC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="393"/>
+        <location filename="../../src/MainWindow.cpp" line="395"/>
         <source>Liveprog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="394"/>
+        <location filename="../../src/MainWindow.cpp" line="396"/>
         <source>Graphic EQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="406"/>
+        <location filename="../../src/MainWindow.cpp" line="408"/>
         <source>Launch application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="539"/>
+        <location filename="../../src/MainWindow.cpp" line="540"/>
         <source>Reset Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="539"/>
+        <location filename="../../src/MainWindow.cpp" line="540"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="563"/>
+        <location filename="../../src/MainWindow.cpp" line="564"/>
         <source>Load custom audio.conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="575"/>
+        <location filename="../../src/MainWindow.cpp" line="576"/>
         <source>Save current audio.conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1085"/>
+        <location filename="../../src/MainWindow.cpp" line="1086"/>
         <source>Advanced waveform editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1086"/>
+        <location filename="../../src/MainWindow.cpp" line="1087"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -2207,6 +2207,11 @@ Please create one first before adding a new rule.</source>
     <message>
         <location filename="../../src/audio/base/AppNode.h" line="80"/>
         <source>not connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="176"/>
+        <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

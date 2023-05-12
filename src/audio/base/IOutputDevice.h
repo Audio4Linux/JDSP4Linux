@@ -1,6 +1,7 @@
 #ifndef IOUTPUTDEVICE_H
 #define IOUTPUTDEVICE_H
 
+#include <stdint.h>
 #include <string>
 
 class IOutputDevice

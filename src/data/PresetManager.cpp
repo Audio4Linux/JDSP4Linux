@@ -37,8 +37,8 @@ bool PresetManager::loadFromPath(const QString &filename)
     }
 
     QFile::copy(src, dest);
-    Log::debug("Loading from " + filename);
     DspConfig::instance().load();
+    Log::debug("Loaded " + filename);
     return true;
 }
 
@@ -58,14 +58,16 @@ void PresetManager::rename(const QString &name, const QString &newName)
     this->_presetModel->rescan();
 }
 
-void PresetManager::remove(const QString &name)
+bool PresetManager::remove(const QString &name)
 {
     auto path = AppConfig::instance().getPath("presets/") + name + ".conf";
     if (QFile::exists(path))
     {
         QFile::remove(path);
+        this->_presetModel->rescan();
+        return true;
     }
-    this->_presetModel->rescan();
+    return false;
 }
 
 void PresetManager::save(const QString &name)
@@ -86,8 +88,8 @@ void PresetManager::saveToPath(const QString &filename)
     }
 
     QFile::copy(src, dest);
-    Log::debug("Saving to " + filename);
     this->_presetModel->rescan();
+    Log::debug("Saved to " + filename);
 }
 
 void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId)

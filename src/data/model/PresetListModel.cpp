@@ -57,3 +57,8 @@ void PresetListModel::rescan()
 
     endResetModel();
 }
+
+QStringList PresetListModel::getList() const
+{
+    return presets;
+}
