@@ -311,19 +311,17 @@ Since 12th May 2023, this app supports IPC via D-Bus and is also configurable vi
 You can list all supported commands using `jamesdsp --help`. 
 Currently, these commands for remote-controlling JamesDSP's audio engine are available:
 ```
-  --is-connected               Check if JamesDSP service is active. Returns
-                               exit code 1 if not. (Remote)
+  --is-connected               Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)
   --list-keys                  List available audio configuration keys (Remote)
   --get <key>                  Get audio configuration value (Remote)
-  --set <key=value>            Set audio configuration value (format:
-                               key=value) (Remote)
+  --set <key=value>            Set audio configuration value (format: key=value) (Remote)
   --load-preset <name>         Load preset by name (Remote)
   --save-preset <name>         Save current settings as preset (Remote)
   --delete-preset <name>       Delete preset by name (Remote)
   --list-presets               List presets (Remote)
   --status                     Show status (Remote)
 ```
-The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible settings and their syntax.
+The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible setting keys and their syntax.
 
 Note: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
 
