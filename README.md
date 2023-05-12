@@ -203,7 +203,6 @@ Debian/Ubuntu + **PipeWire** clients only:
 ```bash
 sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev 
 ```
-NOTE: Pipewire version 0.3 or later required. Unfortunately, this version is only in the official Ubuntu repository for Ubuntu 20.10 or later. If you use Ubuntu 20.04 or earlier, you need to compile this dependency yourself or use PulseAudio instead.
 
 Debian/Ubuntu + **PulseAudio** clients only:
 
@@ -323,7 +322,7 @@ Currently, these commands for remote-controlling JamesDSP's audio engine are ava
 ```
 The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible setting keys and their syntax.
 
-Note: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
+> **Note**: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
 
 ### D-Bus IPC
 
@@ -333,7 +332,6 @@ Service name: `me.timschneeberger.jdsp4linux`
 * GUI-related interface:
   * Path name: `/jdsp4linux/gui`
   * Interface name: `me.timschneeberger.jdsp4linux.Gui`
-  * Description: 
 * Audio service-related interface:
   * Path name: `/jdsp4linux/service`
   * Interface name: `me.timschneeberger.jdsp4linux.Service`
