@@ -19,6 +19,7 @@
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
+  <a href="#scripting--ipc-apis">Scripting/API</a> •
   <a href="#contributors">Contributors</a> •
   <a href="#license">License</a> 
 </p>
@@ -83,12 +84,7 @@ ____________
 **Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
 PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. 
-
 I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
-
-*Important: This application can be either compiled with PulseAudio or PipeWire support. Please make sure you choose the correct flavor for your Linux setup before installing!*
-
-*Note: PipeWire's compatibility mode for PulseAudio apps does not work with the PulseAudio flavor of this app. Use the version for PipeWire instead.*
 
 ### Which one am I using?
 
@@ -307,6 +303,46 @@ Download icon
 ```bash
 sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/Audio4Linux/JDSP4Linux/master/resources/icons/icon.png -q --show-progress
 ```
+## Scripting & IPC APIs
+
+Since 12th May 2023, this app supports IPC via D-Bus and is also configurable via a CLI. These new features are not yet included in a stable release.
+
+### Remote control via CLI
+You can list all supported commands using `jamesdsp --help`. 
+Currently, these commands for remote-controlling JamesDSP's audio engine are available:
+```
+  --is-connected               Check if JamesDSP service is active. Returns
+                               exit code 1 if not. (Remote)
+  --list-keys                  List available audio configuration keys (Remote)
+  --get <key>                  Get audio configuration value (Remote)
+  --set <key=value>            Set audio configuration value (format:
+                               key=value) (Remote)
+  --load-preset <name>         Load preset by name (Remote)
+  --save-preset <name>         Save current settings as preset (Remote)
+  --delete-preset <name>       Delete preset by name (Remote)
+  --list-presets               List presets (Remote)
+  --status                     Show status (Remote)
+```
+The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting.
+
+Note: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
+
+### D-Bus IPC
+
+This app also exposes a D-Bus service on the session bus which can be used by other developers or users:
+
+Service name: `me.timschneeberger.jdsp4linux`
+* GUI-related interface:
+  * Path name: `/jdsp4linux/gui`
+  * Interface name: `me.timschneeberger.jdsp4linux.Gui`
+  * Description: 
+* Audio service-related interface:
+  * Path name: `/jdsp4linux/service`
+  * Interface name: `me.timschneeberger.jdsp4linux.Service`
+
+If you want to test it out, you can use an app like [D-Feet](https://wiki.gnome.org/Apps/DFeet) to interact with the D-Bus services.
+
+The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JDSP4Linux/blob/master/src/utils/dbus/manifest.xml.
 
 ## Troubleshooting
 * Your CPU may be too slow to process the audio sample in time; try to disable some effects (especially resource-hungry ones like the convolver)
