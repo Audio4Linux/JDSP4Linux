@@ -323,7 +323,7 @@ Currently, these commands for remote-controlling JamesDSP's audio engine are ava
   --list-presets               List presets (Remote)
   --status                     Show status (Remote)
 ```
-The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting.
+The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible settings and their syntax.
 
 Note: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
 
