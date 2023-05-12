@@ -94,35 +94,17 @@ I'm currently not planning to add more advanced support for Pulseaudio clients. 
 
 Follow the instructions below if you don't know which one your Linux distribution is using. If you already know, skip to the 'Install dependencies' section.
 
-##### Step 1: Is PipeWire installed and active?
-
-Run `pw-cli dump short core` in your terminal. 
-
-Does the terminal output look similar to the pattern below after executing the command?
-
-```
-0: u="USER" h="HOSTNAME" v="0.3.35" n="pipewire-0"
-```
-
-* **YES**: You're using PipeWire. Skip ahead, and follow the instructions to install JamesDSP with PipeWire support.
-
-* **NO**: If the command `pw-cli` is not found or it returned an error, you're probably not using PipeWire. Continue to step 2 to find out if PulseAudio is available on your system.
-
-##### Step 2: Is PulseAudio installed and active?
-
 Run `LC_ALL=C pactl info | grep "Server Name:"` in your terminal. 
 
-Does the terminal output look like this after executing the command?
+If you are using **Pipewire** the output should look similar to this:
+```
+Server Name: PulseAudio (on PipeWire 0.3.35)
+```
 
+If you are using **Pulseaudio** the output should look exactly like this:
 ```
 Server Name: pulseaudio
 ```
-
-* **YES**: You're using PulseAudio. Skip ahead, and follow the instructions to install JamesDSP with PulseAudio support.
-
-* **NO**: If the command `pactl` is not found or it returned an error, either your PA installation is broken or you are using another audio framework like Jack. Consider switching to PipeWire in this case.
-
-**IMPORTANT:** If the output mentions PipeWire (`Server Name: PulseAudio (on PipeWire 0.3.35)`), you are using PulseAudio via PipeWire's compatibility mode. You need to install JamesDSP with PipeWire support in this case!
 
 ## Installation
 
@@ -139,11 +121,6 @@ If you don't know which version fits your Linux setup, go to the [PipeWire vs Pu
 
 ##### Minimum system requirements:
 
-**Pulseaudio version**
-* Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 21.10 or later
- 
-**Pipewire version**
 * Distro based on Debian 11 or later **OR**
 * Distro based on Ubuntu 21.10 or later
 
@@ -350,7 +327,7 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 * [James Fung](https://github.com/james34602) - Developer of the core library ['libjamesdsp'](https://github.com/james34602/JamesDSPManager/tree/master/Main)
 * [yochananmarqos](https://github.com/yochananmarqos) - AUR packages
 * [theAeon](https://github.com/theAeon) - RPM packages
-* PipeWire/Pulse implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects)
+* PipeWire/Pulse implementation based on [EasyEffects](https://github.com/wwmm/EasyEffects) by [Wellington Wallace](https://github.com/wwmm)
 
 ### Translators
 
