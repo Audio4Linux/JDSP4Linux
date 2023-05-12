@@ -27,8 +27,6 @@ public:
 	                             const QString &    prefix = "");
 	static QVariantMap readFile(const QString &path);
 	static QVariantMap readString(const QString &string);
-
-private:
 	static bool        readLine(const QString &line,
 	                            QPair<QString, QVariant> &out);
 

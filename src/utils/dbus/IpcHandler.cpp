@@ -68,13 +68,7 @@ QString IpcHandler::audioFormat() const
 
 QStringList IpcHandler::getKeys() const
 {
-    QMetaEnum meta = QMetaEnum::fromType<DspConfig::Key>();
-    QStringList keys;
-    for (int k = 0; k < meta.keyCount(); k++)
-    {
-        keys.push_back(QString::fromLocal8Bit(meta.key(k)));
-    }
-    return keys;
+    return DspConfig::getKeys();
 }
 
 void IpcHandler::commit() const
@@ -127,7 +121,8 @@ void IpcHandler::savePreset(const QString &name) const
 
 void IpcHandler::deletePreset(const QString &name) const
 {
-    PresetManager::instance().remove(name);
+    if(!PresetManager::instance().remove(name))
+        sendErrorReply(QDBusError::InvalidArgs, "Preset does not exist");
 }
 
 void IpcHandler::setInternal(const QString &key, const QDBusVariant &value) const

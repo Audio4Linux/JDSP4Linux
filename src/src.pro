@@ -81,6 +81,7 @@ SOURCES += \
     MainWindow.cpp \
     main.cpp \
     utils/AutoStartManager.cpp \
+    utils/CliRemoteController.cpp \
     utils/CrashReportSender.cpp \
     utils/DesktopServices.cpp \
     utils/Log.cpp \
@@ -154,6 +155,7 @@ HEADERS += \
     interface/WidgetMarqueeLabel.h \
     MainWindow.h \
     utils/AutoStartManager.h \
+    utils/CliRemoteController.h \
     utils/CrashReportSender.h \
     utils/DebuggerUtils.h \
     utils/DesktopServices.h \

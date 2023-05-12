@@ -37,7 +37,7 @@ public slots:
     void saveToPath(const QString &filename);
     bool loadFromPath(const QString &filename);
     void rename(const QString &name, const QString &newName);
-    void remove(const QString &name);
+    bool remove(const QString &name);
     bool load(const QString &filename);
     void save(const QString &name);
 

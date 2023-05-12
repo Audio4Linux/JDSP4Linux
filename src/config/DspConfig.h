@@ -121,6 +121,17 @@ public:
         }
 	}
 
+    static QStringList getKeys()
+    {
+        QMetaEnum meta = QMetaEnum::fromType<Key>();
+        QStringList keys;
+        for (int k = 0; k < meta.keyCount(); k++)
+        {
+            keys.push_back(QString::fromLocal8Bit(meta.key(k)));
+        }
+        return keys;
+    }
+
     void set(const Key &key,
 	         const QVariant &value)
 	{

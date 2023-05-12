@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTime>
 #include <filesystem>
+#include <stdio.h>
 
 #define C_RESET "\u001b[0m"
 #define C_RED "\u001b[31m"
@@ -11,6 +12,9 @@
 #define C_WHITE "\u001b[37m"
 #define C_FAINTWHITE "\u001b[2;37m"
 #define C_BACKRED "\u001b[41;37m"
+
+static QTextStream out(stdout);
+static QTextStream err(stderr);
 
 void Log::console(const QString &log, bool overrideSilence)
 {
@@ -47,42 +51,64 @@ void Log::write(const QString &log,
                 util::source_location location,
                 LoggingMode    mode)
 {
-    QString msg = prepareDebugMessage(log, location);
+    if(severity < minSeverity)
+        return;
+
+    QString msg = useSimpleFormat ? log : prepareDebugMessage(log, location);
     QString sev;
+    QString sevSimple;
     QString color;
+    bool useStdErr = false;
+
     switch(severity)
     {
     case Debug:
         sev = "DBG";
+        sevSimple = "";
         color = C_FAINTWHITE;
         break;
     case Info:
         sev = "INF";
+        sevSimple = "";
         color = C_WHITE;
         break;
     case Warning:
         sev = "WRN";
+        sevSimple = "warning: ";
         color = C_YELLOW;
+        useStdErr = true;
         break;
     case Error:
         sev = "ERR";
+        sevSimple = "error: ";
         color = C_RED;
+        useStdErr = true;
         break;
     case Critical:
         sev = "WTF";
+        sevSimple = "critical: ";
         color = C_BACKRED;
+        useStdErr = true;
         break;
     }
 
-    auto formattedLog = QString("[%1] [%2] %3").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(sev).arg(msg);
-    if(coloredOutput) {
+    QString formattedLog;
+    if(useSimpleFormat)
+        formattedLog = QString("%1%2").arg(sevSimple).arg(msg);
+    else
+        formattedLog = QString("[%1] [%2] %3").arg(QTime::currentTime().toString("hh:mm:ss.zzz")).arg(sev).arg(msg);
+
+    if(coloredOutput)
         formattedLog = QString("%1%2%3").arg(color).arg(formattedLog).arg(C_RESET);
-    }
-    write(formattedLog, false, mode);
+
+    write(formattedLog, false, useStdErr, mode);
 }
 
-void Log::write(const QString& msg, bool force, LoggingMode mode)
+void Log::write(const QString& msg, bool force, bool useStdErr, LoggingMode mode)
 {
+    if(mode == LM_UNSPECIFIED)
+        mode = loggingMode;
+
     QFile file(path());
     if (mode == LM_ALL || mode == LM_FILE)
     {
@@ -96,7 +122,8 @@ void Log::write(const QString& msg, bool force, LoggingMode mode)
 
     if ((mode == LM_ALL || mode == LM_STDOUT) && (!silent || force))
     {
-        qDebug().noquote().nospace() << msg.toUtf8().constData();
+        (useStdErr ? err : out) << msg.toUtf8().constData() << Qt::endl;
+        (useStdErr ? err : out).flush();
     }
 }
 
@@ -156,6 +183,36 @@ QString Log::prepareDebugMessage(const QString& message, util::source_location l
     }
 
     return filename.split(".").first() + "::" + actual_function_name + ": " + message;
+}
+
+Log::Severity Log::getMinSeverity() const
+{
+    return minSeverity;
+}
+
+void Log::setMinSeverity(Severity newMinSeverity)
+{
+    minSeverity = newMinSeverity;
+}
+
+bool Log::getUseSimpleFormat() const
+{
+    return useSimpleFormat;
+}
+
+void Log::setUseSimpleFormat(bool newUseSimpleFormat)
+{
+    useSimpleFormat = newUseSimpleFormat;
+}
+
+Log::LoggingMode Log::getLoggingMode() const
+{
+    return loggingMode;
+}
+
+void Log::setLoggingMode(LoggingMode newLoggingMode)
+{
+    loggingMode = newLoggingMode;
 }
 
 bool Log::getSilent() const
