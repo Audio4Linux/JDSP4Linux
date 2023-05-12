@@ -86,6 +86,7 @@ SOURCES += \
     utils/Log.cpp \
     utils/SingleInstanceMonitor.cpp \
     utils/dbus/ClientProxy.cpp \
+    utils/dbus/IpcHandler.cpp \
     utils/dbus/ServerAdaptor.cpp \
     utils/OverlayMsgProxy.cpp \
     utils/StyleHelper.cpp
@@ -160,6 +161,7 @@ HEADERS += \
     utils/SingleInstanceMonitor.h \
     utils/VersionMacros.h \
     utils/dbus/ClientProxy.h \
+    utils/dbus/IpcHandler.h \
     utils/dbus/ServerAdaptor.h \
     utils/FindBinary.h \
     utils/OverlayMsgProxy.h \

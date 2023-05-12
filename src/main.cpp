@@ -81,20 +81,21 @@ int main(int   argc,
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QApplication app(argc, argv);
 
+    QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (forced)");
+    QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically");
+    QCommandLineOption minst(QStringList() << "m" << "allow-multiple-instances", "Allow multiple instances of this app");
+    QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
+    QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
+    QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
+
 	QCommandLineParser parser;
 	parser.setApplicationDescription("JamesDSP for Linux");
 	parser.addHelpOption();
-    QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (forced)");
     parser.addOption(tray);
-    QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically");
     parser.addOption(watch);
-    QCommandLineOption minst(QStringList() << "m" << "allow-multiple-instances", "Allow multiple instances of this app");
     parser.addOption(minst);
-    QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
     parser.addOption(spinlck);
-    QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
     parser.addOption(silent);
-    QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
     parser.addOption(nocolor);
     parser.process(app);
 
@@ -139,7 +140,10 @@ int main(int   argc,
 
     // Check if another instance is already running and switch to it if that's the case
     auto *instanceMonitor = new SingleInstanceMonitor();
-    auto scopeGuard = qScopeGuard([instanceMonitor]{ delete instanceMonitor; });
+    auto scopeGuard = qScopeGuard([instanceMonitor]{
+        delete instanceMonitor;
+    });
+
     if (!instanceMonitor->isServiceReady() && !parser.isSet(minst))
     {
         instanceMonitor->handover();
