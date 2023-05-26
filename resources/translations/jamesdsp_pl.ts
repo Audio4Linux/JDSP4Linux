@@ -212,12 +212,12 @@ Reason: %1</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Return to database</source>
-      <translation type="unfinished"/>
+      <translation>Wróć do bazy danych</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
       <source>No new updates available</source>
-      <translation type="unfinished"/>
+      <translation>Brak dostępnych aktualizacji</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
@@ -231,17 +231,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>Database cleared</source>
-      <translation type="unfinished"/>
+      <translation>Baza danych wyczyszczona</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>The database has been removed from your hard disk</source>
-      <translation type="unfinished"/>
+      <translation>Baza danych została usunięta z dysku twardego</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
@@ -261,12 +261,12 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to blocklist</source>
-      <translation type="unfinished"/>
+      <translation>Dodaj do listy blokowanych</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="98"/>
       <source>Latency: 0ms</source>
-      <translation type="unfinished"/>
+      <translation>Opóźnienie: 0ms</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="105"/>
@@ -276,7 +276,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="112"/>
       <source>Format: Unknown</source>
-      <translation type="unfinished"/>
+      <translation>Format: Nieznany</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
@@ -618,7 +618,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz jako</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
@@ -646,7 +646,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
       <source>No project loaded</source>
-      <translation type="unfinished"/>
+      <translation>Nie załadowano projektu</translation>
     </message>
   </context>
   <context>
@@ -654,12 +654,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
       <source>Package manager</source>
-      <translation type="unfinished"/>
+      <translation>Menedżer pakietów</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
       <source>Downloading package...</source>
-      <translation type="unfinished"/>
+      <translation>Pobieranie pakietu...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
@@ -672,7 +672,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>Odśwież</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
@@ -687,12 +687,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Zmień nazwę</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Usuń</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
