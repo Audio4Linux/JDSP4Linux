@@ -211,7 +211,14 @@ unix {
 
     CONFIG += link_pkgconfig
 
-    PKGCONFIG += glibmm-2.4 giomm-2.4 libarchive
+    PKGCONFIG += libarchive
+
+    packagesExist(glibmm-2.4) {
+        PKGCONFIG += glibmm-2.4 giomm-2.4
+    }
+    else {
+        PKGCONFIG += glibmm-2.68 giomm-2.68
+    }
 
     USE_PULSEAUDIO {
         PKGCONFIG += gstreamer-1.0 gstreamer-audio-1.0
