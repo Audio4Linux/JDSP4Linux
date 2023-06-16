@@ -21,7 +21,6 @@ private slots:
     void handleSettingsUpdate(const AppConfig::Key&, const QVariant&);
 
 private:
-    // TODO const ref?
     void onAppAdded(const NodeInfo& serial);
     void onAppChanged(const NodeInfo& serial);
     void onAppRemoved(const uint64_t serial);
