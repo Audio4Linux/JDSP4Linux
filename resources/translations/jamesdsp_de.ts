@@ -329,7 +329,7 @@ Möchtest du trotzdem das aktuelle Datenbankupdate neu installieren?</translatio
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>Autostart-Berechtigung für JamesDSP verwalten</translation>
     </message>
   </context>
   <context>
@@ -2261,22 +2261,22 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>Autostart-Berechtigung wurde verweigert</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
       <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Bitte führe &apos;flatpak permission-reset %1&apos; aus und aktiviere die Autostart-Einstellung erneut.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Unbekannter Fehler</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>Bitte stellen sicher, dass eine XDG Background Portal Implementierung verfügbar und aktiv ist, um Autostart zu nutzen. %1</translation>
     </message>
   </context>
   <context>
