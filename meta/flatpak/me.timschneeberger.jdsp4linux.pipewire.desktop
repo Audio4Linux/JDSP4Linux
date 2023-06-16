@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=JamesDSP
+Comment=Audio effect processor for Pipewire
+Categories=AudioVideo;Audio;Qt;
+
+Icon=me.timschneeberger.jdsp4linux.pipewire
+Exec=jamesdsp
+Terminal=false
