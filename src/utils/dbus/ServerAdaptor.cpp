@@ -111,6 +111,14 @@ QString ServiceAdaptor::get(const QString &key)
     return value;
 }
 
+QString ServiceAdaptor::getAll()
+{
+    // handle method call me.timschneeberger.jdsp4linux.Service.getAll
+    QString kvpairs;
+    QMetaObject::invokeMethod(parent(), "getAll", Q_RETURN_ARG(QString, kvpairs));
+    return kvpairs;
+}
+
 QStringList ServiceAdaptor::getKeys()
 {
     // handle method call me.timschneeberger.jdsp4linux.Service.getKeys

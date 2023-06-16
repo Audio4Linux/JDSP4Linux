@@ -25,6 +25,10 @@
                 <arg name="value" type="s" direction="out"/>
             </method>
 
+            <method name="getAll">
+                <arg name="kvpairs" type="s" direction="out"/>
+            </method>
+
             <method name="set">
                 <arg name="key" type="s" direction="in"/>
                 <arg name="value" type="v" direction="in"/>

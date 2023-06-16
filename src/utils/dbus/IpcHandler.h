@@ -43,6 +43,7 @@ public slots:
     void set(const QString &key, const QDBusVariant &value) const;
     void setAndCommit(const QString &key, const QDBusVariant &value) const;
     QString get(const QString &key) const;
+    QString getAll() const;
     QStringList getPresets() const;
     void loadPreset(const QString &name) const;
     void savePreset(const QString &name) const;
