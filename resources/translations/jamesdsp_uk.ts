@@ -6,17 +6,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation type="unfinished"/>
+      <translation>Другий варіант</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation type="unfinished"/>
+      <translation>Третій варіант</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation type="unfinished"/>
+      <translation>%1 варіант</translation>
     </message>
   </context>
   <context>
@@ -24,27 +24,27 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation type="unfinished"/>
+      <translation>Частота (Гц)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>Амплітуда (дБв)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation type="unfinished"/>
+      <translation>Ціль</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Сира (згладжена)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Помилка (згладжена)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
