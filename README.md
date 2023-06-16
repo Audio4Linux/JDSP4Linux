@@ -108,42 +108,10 @@ Server Name: pulseaudio
 
 If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
-* [Debian/Ubuntu (PPA)](#debianubuntu)
 * [Arch Linux (AUR)](#arch)
 * [Fedora/openSUSE](#fedoraopensuse)
+* [Debian/Ubuntu (PPA)](#debianubuntu)
 * [Build from sources](#build-from-sources)
-
-### Debian/Ubuntu
-
-##### Minimum system requirements:
-
-* Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 21.10 or later
-
-If you need to install this app on an older distro, you need to compile it manually with GCC 11.0 or later.
-
-Add PPA Repo
-```bash
-sudo apt install -y curl
-# thepbone’s PPA Repository key
-curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
-
-cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list
-sudo apt update
-```
-Install from PPA
-
-For **PipeWire clients** only:
-```bash
-sudo apt install jamesdsp-pipewire
-```
-For **PulseAudio clients** only:
-```bash
-sudo apt install jamesdsp-pulse
-```
-[View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
-
 
 ### Arch
 [AUR packages](https://aur.archlinux.org/packages/?O=0&K=jamesdsp) are available:
@@ -189,6 +157,40 @@ yum copr enable arrobbins/JDSP4Linux && yum update && yum install jamesdsp
 ```
 
 If you are still using PulseAudio with your Fedora/openSUSE installation, refer to the '[Build from sources](#build-from-sources)' section below instead.
+
+### Debian/Ubuntu
+
+> **Warning**: The PPA repo is unmaintained and deprecated. At th moment, it is still being auto-updated by an automated GitHub CI workflow. I'm working on setting up flatpak packages as a more stable and universal alternative.
+
+##### Minimum system requirements:
+
+* Distro based on Debian 11 or later **OR**
+* Distro based on Ubuntu 21.10 or later
+
+If you need to install this app on an older distro, you need to compile it manually with GCC 11.0 or later.
+
+Add PPA Repo
+```bash
+sudo apt install -y curl
+# thepbone’s PPA Repository key
+curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
+
+cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
+echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list
+sudo apt update
+```
+Install from PPA
+
+For **PipeWire clients** only:
+```bash
+sudo apt install jamesdsp-pipewire
+```
+For **PulseAudio clients** only:
+```bash
+sudo apt install jamesdsp-pulse
+```
+[View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
+
 
 ### Build from sources
 
@@ -304,7 +306,7 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 ```
 ## Scripting & IPC APIs
 
-Since 12th May 2023, this app supports IPC via D-Bus and is also configurable via a CLI. These new features are not yet included in a stable release.
+Since version 2.5.0, this app supports IPC via D-Bus and is also configurable via a CLI.
 
 ### Remote control via CLI
 You can list all supported commands using `jamesdsp --help`. 
