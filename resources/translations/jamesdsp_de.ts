@@ -325,6 +325,14 @@ Möchtest du trotzdem das aktuelle Datenbankupdate neu installieren?</translatio
     </message>
   </context>
   <context>
+    <name>AutostartManager</name>
+    <message>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
+      <source>Manage auto-start permission for JamesDSP</source>
+      <translation type="unfinished"/>
+    </message>
+  </context>
+  <context>
     <name>CodeOutline</name>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
@@ -998,7 +1006,7 @@ Besuche unsere Telegram-Community für Support und Updates!</translation>
     <name>LiveprogSelectionWidget</name>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="158"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
       <translation>Kein Skript wurde geladen</translation>
     </message>
@@ -1014,13 +1022,13 @@ Besuche unsere Telegram-Community für Support und Updates!</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="157"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
       <translation>Neues Script erstellen</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Error</source>
       <translation>Fehler</translation>
     </message>
@@ -1032,19 +1040,19 @@ No EEL file is currently loaded.</source>
 Derzeit ist keine EEL-Datei geladen.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Selected EEL file does not exist anymore.
 Please select another one</source>
       <translation>Ausgewählte EEL-Datei existiert nicht mehr.
 Bitte wählen Sie eine andere</translation>
     </message>
     <message>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="164"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
       <source>Edit script</source>
       <translation>Skript bearbeiten</translation>
     </message>
     <message>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="236"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
       <source>No customizable parameters</source>
       <translation>Keine anpassbaren Parameter</translation>
     </message>
@@ -1495,132 +1503,132 @@ Bitte wählen Sie eine andere</translation>
       <translation>Deaktivieren</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="143"/>
+      <location filename="../../src/MainWindow.cpp" line="145"/>
       <source>%1 connected - Preset loaded automatically</source>
       <translation>%1 verbunden - Voreinstellung automatisch geladen</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="162"/>
+      <location filename="../../src/MainWindow.cpp" line="164"/>
       <source>Cannot execute script</source>
       <translation>Skript kann nicht ausgeführt werden</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="163"/>
+      <location filename="../../src/MainWindow.cpp" line="165"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
       <translation>Die aktuelle EEL-Datei (bei &apos;%1&apos;) existiert nicht mehr auf dem Dateisystem. Bitte öffnen Sie die Datei manuell erneut.</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="277"/>
+      <location filename="../../src/MainWindow.cpp" line="279"/>
       <source>Apps</source>
       <translation>Apps</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="278"/>
+      <location filename="../../src/MainWindow.cpp" line="280"/>
       <source>Driver status</source>
       <translation>Treiberstatus</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="282"/>
+      <location filename="../../src/MainWindow.cpp" line="284"/>
       <source>Relink audio pipeline</source>
       <translation>Audio-Pipeline neu laden</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="284"/>
+      <location filename="../../src/MainWindow.cpp" line="286"/>
       <source>Reset to defaults</source>
       <translation>Auf Standard zurücksetzen</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="285"/>
+      <location filename="../../src/MainWindow.cpp" line="287"/>
       <source>Load from file</source>
       <translation>Aus Datei laden</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="286"/>
+      <location filename="../../src/MainWindow.cpp" line="288"/>
       <source>Save to file</source>
       <translation>In Datei speichern</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="288"/>
+      <location filename="../../src/MainWindow.cpp" line="290"/>
       <source>Open LiveprogIDE</source>
       <translation>LiveprogIDE öffnen</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="290"/>
+      <location filename="../../src/MainWindow.cpp" line="292"/>
       <source>What&apos;s this... (Select UI element)</source>
       <translation>Was ist das? (UI-Element wählen)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="389"/>
+      <location filename="../../src/MainWindow.cpp" line="393"/>
       <source>Bass/Misc</source>
       <translation>Bass/Sonstiges</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="390"/>
+      <location filename="../../src/MainWindow.cpp" line="394"/>
       <source>Sound Positioning</source>
       <translation>Sound Positioning</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="391"/>
+      <location filename="../../src/MainWindow.cpp" line="395"/>
       <source>Reverb</source>
       <translation>Raumklang</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="392"/>
+      <location filename="../../src/MainWindow.cpp" line="396"/>
       <source>Equalizer</source>
       <translation>Equalizer</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="393"/>
+      <location filename="../../src/MainWindow.cpp" line="397"/>
       <source>Convolver</source>
       <translation>Convolver</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="394"/>
+      <location filename="../../src/MainWindow.cpp" line="398"/>
       <source>DDC</source>
       <translation>DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="395"/>
+      <location filename="../../src/MainWindow.cpp" line="399"/>
       <source>Liveprog</source>
       <translation>Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="396"/>
+      <location filename="../../src/MainWindow.cpp" line="400"/>
       <source>Graphic EQ</source>
       <translation>Graphic EQ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="408"/>
+      <location filename="../../src/MainWindow.cpp" line="412"/>
       <source>Launch application</source>
       <translation>Anwendung starten</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="540"/>
+      <location filename="../../src/MainWindow.cpp" line="554"/>
       <source>Reset Configuration</source>
       <translation>Konfiguration zurücksetzen</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="540"/>
+      <location filename="../../src/MainWindow.cpp" line="554"/>
       <source>Are you sure?</source>
       <translation>Bist du dir sicher?</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="564"/>
+      <location filename="../../src/MainWindow.cpp" line="578"/>
       <source>Load custom audio.conf</source>
       <translation>Benutzerdefinierte audio.conf laden</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="576"/>
+      <location filename="../../src/MainWindow.cpp" line="590"/>
       <source>Save current audio.conf</source>
       <translation>Aktuelle audio.conf speichern</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1086"/>
+      <location filename="../../src/MainWindow.cpp" line="1100"/>
       <source>Advanced waveform editing</source>
       <translation>Erweiterte Wellenform-Bearbeitung</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1087"/>
+      <location filename="../../src/MainWindow.cpp" line="1101"/>
       <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -2246,9 +2254,29 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
       <translation>nicht verbunden</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="176"/>
+      <location filename="../../src/main.cpp" line="178"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP ist eine erweiterte Audioverarbeitungs-Engine für Linux und Android-Systeme.</translation>
+    </message>
+    <message>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
+      <source>Auto-start permission has been denied</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
+      <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
+      <source>Unknown error</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
+      <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -2464,66 +2492,66 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
       <translation>Schließen</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="185"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="201"/>
       <source>Unknown (%1)</source>
       <translation>Unbekannt (%1)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="243"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
       <source>installed</source>
       <translation>installiert</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="243"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
       <source>not installed</source>
       <translation>nicht installiert</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="264"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
       <source>Override liveprog scripts?</source>
       <translation>Liveprog-Skripte überschreiben?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="265"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
       <translation>Möchtest du bestehende Liveprog-Standardskripte überschreiben?
 Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="268"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
       <source>Extract assets</source>
       <translation>Assets extrahieren</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="268"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
       <source>%1 files have been restored</source>
       <translation>%1 Dateien wurden exportiert</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="356"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
       <translation>Du bist dabei, den Erlaubnislisten-Modus zu aktivieren. JamesDSP wird alle Anwendungen standardmäßig nicht mehr verarbeiten, solange dieser Modus aktiv ist. Sie müssen Apps explizit im Menü &apos;Apps&apos; zulassen.
 </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="358"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
       <source>Are you sure?</source>
       <translation>Bist du dir sicher?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="359"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
       <translation>Diese Aktion wird deine aktuelle Sperrliste oder Erlaubnisliste zurücksetzen. Möchtest du fortfahren?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
       <source>Warning</source>
       <translation>Warnung</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
       <source>Do you really want to restore the default menu layout?</source>
       <translation>Möchtest du das Standard-Menülayout wirklich wiederherstellen?</translation>
     </message>
