@@ -16,9 +16,10 @@
 
 #include <utils/DesktopServices.h>
 
-FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
+FirstLaunchWizard::FirstLaunchWizard(AutostartManager *autostart, QWidget *parent) :
 	QWidget(parent),
-    ui(new Ui::FirstLaunchWizard)
+    ui(new Ui::FirstLaunchWizard),
+    _autostart(autostart)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
@@ -52,16 +53,30 @@ FirstLaunchWizard::FirstLaunchWizard(QWidget *parent) :
     ui->p3_systray_enable->setChecked(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->p3_systray_minOnBoot->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
-    ui->p3_systray_minOnBoot->setChecked(AutostartManager::isEnabled());
+    ui->p3_systray_minOnBoot->setChecked(_autostart->isEnabled());
 
     connect(ui->p3_systray_disable, &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_enable,  &QRadioButton::clicked, this, &FirstLaunchWizard::onSystrayRadioSelected);
     connect(ui->p3_systray_minOnBoot, &QCheckBox::stateChanged, this, &FirstLaunchWizard::onSystrayAutostartToggled);
+
+    connect(&AppConfig::instance(), &AppConfig::updated, this, &FirstLaunchWizard::onAppConfigUpdated);
 }
 
 FirstLaunchWizard::~FirstLaunchWizard()
 {
+    disconnect(&AppConfig::instance(), &AppConfig::updated, this, &FirstLaunchWizard::onAppConfigUpdated);
     delete ui;
+}
+
+void FirstLaunchWizard::onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value)
+{
+    switch(key)
+    {
+        case AppConfig::AutoStartEnabled:
+            ui->p3_systray_minOnBoot->setChecked(value.toBool());
+        default:
+            break;
+    }
 }
 
 void FirstLaunchWizard::showEvent(QShowEvent *ev)
@@ -81,5 +96,5 @@ void FirstLaunchWizard::onSystrayRadioSelected()
 
 void FirstLaunchWizard::onSystrayAutostartToggled(bool isChecked)
 {
-    AutostartManager::setEnabled(isChecked);
+    _autostart->setEnabled(isChecked);
 }

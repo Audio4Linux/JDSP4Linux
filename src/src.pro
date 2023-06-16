@@ -12,9 +12,17 @@ TARGET = jamesdsp
 TEMPLATE = app
 
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
+USE_PORTALS: DEFINES += USE_PORTALS
 NO_CRASH_HANDLER: DEFINES += NO_CRASH_HANDLER
 !unix {
     DEFINES += NO_CRASH_HANDLER
+}
+
+USE_PULSEAUDIO {
+    DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pulse\\\"
+}
+else {
+    DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pipewire\\\"
 }
 
 DEFINES += APP_VERSION=$$system(git describe --tags --long --always)
@@ -162,6 +170,7 @@ HEADERS += \
     utils/Log.h \
     utils/SingleInstanceMonitor.h \
     utils/VersionMacros.h \
+    utils/WindowUtils.h \
     utils/dbus/ClientProxy.h \
     utils/dbus/IpcHandler.h \
     utils/dbus/ServerAdaptor.h \
@@ -212,12 +221,10 @@ unix {
     CONFIG += link_pkgconfig
 
     PKGCONFIG += libarchive
+    PKGCONFIG += glibmm-2.4 giomm-2.4
 
-    packagesExist(glibmm-2.4) {
-        PKGCONFIG += glibmm-2.4 giomm-2.4
-    }
-    else {
-        PKGCONFIG += glibmm-2.68 giomm-2.68
+    USE_PORTALS {
+        PKGCONFIG += libportal-qt5
     }
 
     USE_PULSEAUDIO {

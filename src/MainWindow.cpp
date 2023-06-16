@@ -26,6 +26,7 @@
 #include "interface/fragment/StatusFragment.h"
 #include "interface/QMessageOverlay.h"
 #include "interface/TrayIcon.h"
+#include "utils/AutoStartManager.h"
 #include "utils/Common.h"
 #include "utils/dbus/ClientProxy.h"
 #include "utils/dbus/IpcHandler.h"
@@ -96,11 +97,12 @@ MainWindow::MainWindow(bool     statupInTray,
         _eelEditor           = new EELEditor(this);
         _trayIcon            = new TrayIcon(this);
         _ipcHandler          = new IpcHandler(_audioService, this);
+        _autostart           = new AutostartManager(this);
 
         _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
         _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
         _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
-        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, this), WAF::BottomSide, this);
+        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, _autostart, this), WAF::BottomSide, this);
     }
 
     // Prepare base UI
@@ -322,6 +324,7 @@ MainWindow::MainWindow(bool     statupInTray,
         if (AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract))
         {
             AssetManager::instance().extractAll();
+
         }
     }
 
@@ -358,6 +361,7 @@ MainWindow::MainWindow(bool     statupInTray,
 
         // Liveprog
         ui->liveprog->coupleIDE(_eelEditor);
+        ui->liveprog->updateList();
         connect(ui->liveprog, &LiveprogSelectionWidget::liveprogReloadRequested, _audioService, &IAudioService::reloadLiveprog);
         connect(ui->liveprog, &LiveprogSelectionWidget::unitLabelUpdateRequested, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
     }
@@ -432,6 +436,16 @@ MainWindow::~MainWindow()
 }
 
 // Overrides
+void MainWindow::showEvent(QShowEvent *event)
+{
+    if(_firstShowEvent) {
+        _firstShowEvent = false;
+        // Deferred auto-start setup re-check
+        _autostart->setup();
+    }
+    QMainWindow::showEvent(event);
+}
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     AppConfig::instance().setBytes(AppConfig::LastWindowGeometry, saveGeometry());
@@ -667,7 +681,7 @@ void MainWindow::loadConfig()
     ui->eqfiltertype->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_filtertype));
 
     // Parse EQ String to QMap
-    QString rawEqString = chopFirstLastChar(DspConfig::instance().get<QString>(DspConfig::tone_eq));
+    QString rawEqString = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::tone_eq));
     bool isOldFormat = rawEqString.split(";").count() == 15;
 
     if (isOldFormat)
@@ -1266,7 +1280,7 @@ void MainWindow::launchFirstRunSetup()
 {
     QHBoxLayout            *lbLayout = new QHBoxLayout;
     QMessageOverlay        *lightBox = new QMessageOverlay(this);
-    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(lightBox);
+    FirstLaunchWizard      *wiz      = new FirstLaunchWizard(_autostart, lightBox);
     QGraphicsOpacityEffect *eff      = new QGraphicsOpacityEffect(lightBox);
     QPropertyAnimation     *a        = new QPropertyAnimation(eff, "opacity");
 

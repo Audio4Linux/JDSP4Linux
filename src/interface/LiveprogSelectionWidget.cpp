@@ -114,6 +114,10 @@ void LiveprogSelectionWidget::updateFromEelEditor(QString path)
     }
 }
 
+void LiveprogSelectionWidget::updateList()
+{
+    ui->files->enumerateFiles();
+}
 
 void LiveprogSelectionWidget::onEditScript()
 {

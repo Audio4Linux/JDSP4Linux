@@ -5,6 +5,7 @@
 #include <QWidget>
 
 class IAudioService;
+class AutostartManager;
 
 namespace Ui
 {
@@ -17,7 +18,7 @@ class FirstLaunchWizard :
 	Q_OBJECT
 
 public:
-    explicit FirstLaunchWizard(QWidget *parent = nullptr);
+    explicit FirstLaunchWizard(AutostartManager *autostart, QWidget *parent = nullptr);
 	~FirstLaunchWizard();
 
 protected:
@@ -29,10 +30,11 @@ signals:
 private slots:
     void onSystrayRadioSelected();
     void onSystrayAutostartToggled(bool isChecked);
+    void onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value);
 
 private:
     Ui::FirstLaunchWizard *ui;
-
+    AutostartManager *_autostart;
 };
 
 #endif // FIRSTLAUNCHWIZARD_H

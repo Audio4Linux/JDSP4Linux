@@ -21,6 +21,7 @@
 class MainWindow;
 class TrayIcon;
 class IAudioService;
+class AutostartManager;
 class PaletteEditor;
 
 class QTreeWidgetItem;
@@ -38,6 +39,7 @@ class SettingsFragment :
 public:
     SettingsFragment(TrayIcon *trayIcon,
                      IAudioService *audioService,
+                     AutostartManager *autostart,
 	                 QWidget  *parent = nullptr);
 	Ui::SettingsFragment *ui;
 	~SettingsFragment();
@@ -67,13 +69,15 @@ private slots:
     void onLiveprogAutoExtractToggled();
     void onGithubLinkClicked();
     void onAeqDatabaseManageClicked();
+    void onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value);
 
 signals:
 	void launchSetupWizard();
 	void reopenSettings();
 
 private:
-	TrayIcon *_trayIcon;
+    TrayIcon *_trayIcon;
+    AutostartManager *_autostart;
     IAudioService *_audioService;
     PaletteEditor *_paletteEditor;
 

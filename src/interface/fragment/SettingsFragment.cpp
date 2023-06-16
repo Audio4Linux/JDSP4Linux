@@ -29,10 +29,12 @@ using namespace std;
 
 SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
                                    IAudioService *audioService,
+                                   AutostartManager *autostart,
                                    QWidget  *parent) :
     BaseFragment(parent),
 	ui(new Ui::SettingsFragment),
     _trayIcon(trayIcon),
+    _autostart(autostart),
     _audioService(audioService),
     _paletteEditor(new PaletteEditor(&AppConfig::instance(), this))
 {
@@ -121,6 +123,8 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     connect(ui->blocklistClear, &QPushButton::clicked, this, &SettingsFragment::onBlocklistClearClicked);
     connect(ui->blocklistInvert, &QCheckBox::stateChanged, this, &SettingsFragment::onBlocklistInvertToggled);
 
+    connect(&AppConfig::instance(), &AppConfig::updated, this, &SettingsFragment::onAppConfigUpdated);
+
     /*
      * Refresh all input fields
      */
@@ -144,7 +148,19 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 
 SettingsFragment::~SettingsFragment()
 {
+    disconnect(&AppConfig::instance(), &AppConfig::updated, this, &SettingsFragment::onAppConfigUpdated);
 	delete ui;
+}
+
+void SettingsFragment::onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value)
+{
+    switch(key)
+    {
+        case AppConfig::AutoStartEnabled:
+            ui->systray_minOnBoot->setChecked(value.toBool());
+        default:
+            break;
+    }
 }
 
 void SettingsFragment::refreshDevices()
@@ -232,7 +248,7 @@ void SettingsFragment::refreshAll()
     ui->systray_icon_box->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
     ui->menu_edit->setEnabled(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled));
 
-    ui->systray_minOnBoot->setChecked(AutostartManager::isEnabled());
+    ui->systray_minOnBoot->setChecked(AppConfig::instance().get<bool>(AppConfig::AutoStartEnabled));
 
     ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
@@ -315,7 +331,7 @@ void SettingsFragment::onTreeItemSelected(QTreeWidgetItem *cur, QTreeWidgetItem 
 
 void SettingsFragment::onAutoStartToggled()
 {
-    AutostartManager::setEnabled(ui->systray_minOnBoot->isChecked());
+    _autostart->setEnabled(ui->systray_minOnBoot->isChecked());
 }
 
 void SettingsFragment::onSystrayToggled()
@@ -328,6 +344,10 @@ void SettingsFragment::onSystrayToggled()
     AppConfig::instance().set(AppConfig::TrayIconEnabled, ui->systray_r_showtray->isChecked());
     ui->systray_icon_box->setEnabled(ui->systray_r_showtray->isChecked());
     ui->menu_edit->setEnabled(ui->systray_r_showtray->isChecked());
+    if(!ui->systray_r_showtray->isChecked()) {
+        ui->systray_minOnBoot->setChecked(false);
+        onAutoStartToggled();
+    }
 }
 
 void SettingsFragment::onThemeSelected(int index)

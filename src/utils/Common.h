@@ -46,17 +46,6 @@ static inline QString pathAppend(const QString &path1,
 	return QDir::cleanPath(path1 + QDir::separator() + path2);
 }
 
-static QString chopFirstLastChar(QString i)
-{
-	if (i.size() > 2)
-	{
-		i.remove(0, 1);
-		i.chop(1);
-	}
-
-	return i;
-}
-
 static QString chopDoubleQuotes(QString str)
 {
 	if (str.size() > 2)

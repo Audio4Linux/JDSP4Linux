@@ -16,16 +16,22 @@
 #define AUTOSTARTMANAGER_H
 
 #include <QString>
+#include <QObject>
 
-class AutostartManager
+class QMainWindow;
+
+class AutostartManager : public QObject
 {
+    Q_OBJECT
 public:
-	AutostartManager();
-    static void    setEnabled(bool enabled);
-    static bool    isEnabled();
-private:
-	static QString getAutostartPath(const QString &filename);
+    explicit AutostartManager(QMainWindow* parent = nullptr);
+    ~AutostartManager(){};
 
+    void setup();
+    void setEnabled(bool enabled);
+    bool isEnabled();
+
+    static QString getAutostartPath();
 };
 
 #endif // AUTOSTARTMANAGER_H

@@ -1,6 +1,7 @@
 #include "AppConfig.h"
 
 #include "ConfigIO.h"
+#include "utils/AutoStartManager.h"
 #include "utils/Common.h"
 
 #include <QStandardPaths>
@@ -30,6 +31,11 @@ AppConfig::AppConfig()
     DEFINE_KEY(ExecutablePath, "");
     DEFINE_KEY(VdcLastDatabaseId, -1);
     DEFINE_KEY(LastWindowGeometry, QByteArray());
+#ifdef USE_PORTALS
+    DEFINE_KEY(AutoStartEnabled, false);
+#else
+    DEFINE_KEY(AutoStartEnabled, QFile(AutostartManager::getAutostartPath()).exists());
+#endif
 
     DEFINE_KEY(AudioOutputUseDefault, true);
     DEFINE_KEY(AudioOutputDevice, "");
