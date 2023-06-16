@@ -37,14 +37,14 @@
         <translation>Цель</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
-      <source>Raw (smoothed)</source>
-      <translation>Сырость (сглаженная)</translation>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
+        <source>Raw (smoothed)</source>
+        <translation>Сырость (сглаженная)</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
-      <source>Error (smoothed)</source>
-      <translation>Ошибка (сглаженная)</translation>
+        <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
+        <source>Error (smoothed)</source>
+        <translation>Ошибка (сглаженная)</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
@@ -322,6 +322,14 @@ Do you want to re-install the latest database update anyway?</source>
         <location filename="../../src/interface/fragment/AppManagerFragment.cpp" line="19"/>
         <source>No apps are playing audio</source>
         <translation>Ни одно приложение не воспроизводит звук</translation>
+    </message>
+</context>
+<context>
+    <name>AutostartManager</name>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
+        <source>Manage auto-start permission for JamesDSP</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -997,7 +1005,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <name>LiveprogSelectionWidget</name>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="158"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
         <source>No script has been loaded</source>
         <translation>Нет активных сценариев</translation>
     </message>
@@ -1013,13 +1021,13 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     </message>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="157"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
         <source>Create new script</source>
         <translation>Создать новый сценарий</translation>
     </message>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -1031,19 +1039,19 @@ No EEL file is currently loaded.</source>
 В настоящее время не загружен файл EEL.</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
         <source>Selected EEL file does not exist anymore.
 Please select another one</source>
         <translation>Выбранный файл EEL больше не существует.
 Пожалуйста, выберите другой</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="164"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
         <source>Edit script</source>
         <translation>Редактировать сценарий</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="236"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
         <source>No customizable parameters</source>
         <translation>Нет настраиваемых параметров</translation>
     </message>
@@ -1494,133 +1502,133 @@ Please select another one</source>
         <translation>Байпас</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="143"/>
-      <source>%1 connected - Preset loaded automatically</source>
-      <translation>%1 подключен - предустановка загружается автоматически</translation>
+        <location filename="../../src/MainWindow.cpp" line="145"/>
+        <source>%1 connected - Preset loaded automatically</source>
+        <translation>%1 подключен - предустановка загружается автоматически</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="162"/>
-      <source>Cannot execute script</source>
-      <translation>Невозможно выполнить сценарий</translation>
+        <location filename="../../src/MainWindow.cpp" line="164"/>
+        <source>Cannot execute script</source>
+        <translation>Невозможно выполнить сценарий</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="163"/>
-      <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation>Текущий файл EEL (по адресу &apos;%1&apos;) больше не существует в файловой системе. Пожалуйста, откройте файл заново вручную.</translation>
+        <location filename="../../src/MainWindow.cpp" line="165"/>
+        <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
+        <translation>Текущий файл EEL (по адресу &apos;%1&apos;) больше не существует в файловой системе. Пожалуйста, откройте файл заново вручную.</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="277"/>
-      <source>Apps</source>
-      <translation>Приложения</translation>
+        <location filename="../../src/MainWindow.cpp" line="279"/>
+        <source>Apps</source>
+        <translation>Приложения</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="278"/>
-      <source>Driver status</source>
-      <translation>Статус драйвера</translation>
+        <location filename="../../src/MainWindow.cpp" line="280"/>
+        <source>Driver status</source>
+        <translation>Статус драйвера</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="282"/>
-      <source>Relink audio pipeline</source>
-      <translation>Перелинковка аудиоканала</translation>
+        <location filename="../../src/MainWindow.cpp" line="284"/>
+        <source>Relink audio pipeline</source>
+        <translation>Перелинковка аудиоканала</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="284"/>
-      <source>Reset to defaults</source>
-      <translation>Сброс к значениям по умолчанию</translation>
+        <location filename="../../src/MainWindow.cpp" line="286"/>
+        <source>Reset to defaults</source>
+        <translation>Сброс к значениям по умолчанию</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="285"/>
-      <source>Load from file</source>
-      <translation>Загрузить из файла</translation>
+        <location filename="../../src/MainWindow.cpp" line="287"/>
+        <source>Load from file</source>
+        <translation>Загрузить из файла</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="286"/>
-      <source>Save to file</source>
-      <translation>Сохранить в файл</translation>
+        <location filename="../../src/MainWindow.cpp" line="288"/>
+        <source>Save to file</source>
+        <translation>Сохранить в файл</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="288"/>
-      <source>Open LiveprogIDE</source>
-      <translation>Открыть LiveprogIDE</translation>
+        <location filename="../../src/MainWindow.cpp" line="290"/>
+        <source>Open LiveprogIDE</source>
+        <translation>Открыть LiveprogIDE</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="290"/>
-      <source>What&apos;s this... (Select UI element)</source>
-      <translation>Что это... (Выберите элемент пользовательского интерфейса)</translation>
+        <location filename="../../src/MainWindow.cpp" line="292"/>
+        <source>What&apos;s this... (Select UI element)</source>
+        <translation>Что это... (Выберите элемент пользовательского интерфейса)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="389"/>
-      <source>Bass/Misc</source>
-      <translation>Басы/Прочее</translation>
+        <location filename="../../src/MainWindow.cpp" line="393"/>
+        <source>Bass/Misc</source>
+        <translation>Басы/Прочее</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="390"/>
-      <source>Sound Positioning</source>
-      <translation>Позиционирование звука</translation>
+        <location filename="../../src/MainWindow.cpp" line="394"/>
+        <source>Sound Positioning</source>
+        <translation>Позиционирование звука</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="391"/>
-      <source>Reverb</source>
-      <translation>Реверберация</translation>
+        <location filename="../../src/MainWindow.cpp" line="395"/>
+        <source>Reverb</source>
+        <translation>Реверберация</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="392"/>
-      <source>Equalizer</source>
-      <translation>Эквалайзер</translation>
+        <location filename="../../src/MainWindow.cpp" line="396"/>
+        <source>Equalizer</source>
+        <translation>Эквалайзер</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="393"/>
-      <source>Convolver</source>
-      <translation>Конвольвер</translation>
+        <location filename="../../src/MainWindow.cpp" line="397"/>
+        <source>Convolver</source>
+        <translation>Конвольвер</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="394"/>
-      <source>DDC</source>
-      <translation>DDC</translation>
+        <location filename="../../src/MainWindow.cpp" line="398"/>
+        <source>DDC</source>
+        <translation>DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="395"/>
-      <source>Liveprog</source>
-      <translation>Liveprog</translation>
+        <location filename="../../src/MainWindow.cpp" line="399"/>
+        <source>Liveprog</source>
+        <translation>Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="396"/>
-      <source>Graphic EQ</source>
-      <translation>Graphic EQ</translation>
+        <location filename="../../src/MainWindow.cpp" line="400"/>
+        <source>Graphic EQ</source>
+        <translation>Graphic EQ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="408"/>
-      <source>Launch application</source>
-      <translation>Запуск приложения</translation>
+        <location filename="../../src/MainWindow.cpp" line="412"/>
+        <source>Launch application</source>
+        <translation>Запуск приложения</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="540"/>
-      <source>Reset Configuration</source>
-      <translation>Сброс конфигурации</translation>
+        <location filename="../../src/MainWindow.cpp" line="554"/>
+        <source>Reset Configuration</source>
+        <translation>Сброс конфигурации</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="540"/>
-      <source>Are you sure?</source>
-      <translation>Вы уверены?</translation>
+        <location filename="../../src/MainWindow.cpp" line="554"/>
+        <source>Are you sure?</source>
+        <translation>Вы уверены?</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="564"/>
-      <source>Load custom audio.conf</source>
-      <translation>Загрузка пользовательского audio.conf</translation>
+        <location filename="../../src/MainWindow.cpp" line="578"/>
+        <source>Load custom audio.conf</source>
+        <translation>Загрузка пользовательского audio.conf</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="576"/>
-      <source>Save current audio.conf</source>
-      <translation>Сохраните текущий файл audio.conf</translation>
+        <location filename="../../src/MainWindow.cpp" line="590"/>
+        <source>Save current audio.conf</source>
+        <translation>Сохраните текущий файл audio.conf</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1086"/>
-      <source>Advanced waveform editing</source>
-      <translation>Расширенное редактирование формы сигнала</translation>
+        <location filename="../../src/MainWindow.cpp" line="1100"/>
+        <source>Advanced waveform editing</source>
+        <translation>Расширенное редактирование формы сигнала</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1087"/>
-      <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
+        <location filename="../../src/MainWindow.cpp" line="1101"/>
+        <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
 This setting is only in effect if IR optimization is enabled.
@@ -2234,12 +2242,32 @@ Please create one first before adding a new rule.</source>
         <translation>не подключено</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="176"/>
-      <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+        <location filename="../../src/main.cpp" line="178"/>
+        <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
+        <translation type="unfinished"></translation>
     </message>
-  </context>
-  <context>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
+        <source>Auto-start permission has been denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
+        <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
+        <source>Unknown error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
+        <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsFragment</name>
     <message>
         <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
@@ -2452,66 +2480,66 @@ Please create one first before adding a new rule.</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="185"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="201"/>
         <source>Unknown (%1)</source>
         <translation>Неизвестно (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="243"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
         <source>installed</source>
         <translation>установлено</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="243"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
         <source>not installed</source>
         <translation>не установлен</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="264"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
         <source>Override liveprog scripts?</source>
         <translation>Переопределить скрипты LiveProg?</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="265"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
         <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
         <translation>Вы хотите отменить существующие сценарии liveprog по умолчанию?
 Если они были изменены, они будут сброшены.</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="268"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
         <source>Extract assets</source>
         <translation>Извлечь ресурсы</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="268"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
         <source>%1 files have been restored</source>
         <translation>%1 файл(ов) были восстановлены</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="356"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
         <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
         <translation>Вы собираетесь включить режим белого списка. JamesDSP не будет обрабатывать все приложения по умолчанию, пока этот режим активен. Вам необходимо явно разрешить обработку каждого приложения в меню «Приложения».
 </translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="358"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
         <source>Are you sure?</source>
         <translation>Вы уверены?</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="359"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
         <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
         <translation>Это действие сбросит ваш текущий черный или белый список. Вы хотите продолжать?</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
         <source>Warning</source>
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
         <source>Do you really want to restore the default menu layout?</source>
         <translation>Вы действительно хотите восстановить структуру меню по умолчанию?</translation>
     </message>

@@ -325,6 +325,14 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
     </message>
 </context>
 <context>
+    <name>AutostartManager</name>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
+        <source>Manage auto-start permission for JamesDSP</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CodeOutline</name>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
@@ -997,7 +1005,7 @@ Contudo, antes de começar a brincar com JamesDSP para Linux, teremos de fazer a
     <name>LiveprogSelectionWidget</name>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="158"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
         <source>No script has been loaded</source>
         <translation>Nenhum script foi carregado</translation>
     </message>
@@ -1013,13 +1021,13 @@ Contudo, antes de começar a brincar com JamesDSP para Linux, teremos de fazer a
     </message>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="157"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
         <source>Create new script</source>
         <translation>Criar novo script</translation>
     </message>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
@@ -1031,19 +1039,19 @@ No EEL file is currently loaded.</source>
 Nenhum arquivo EEL está carregado.</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="134"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
         <source>Selected EEL file does not exist anymore.
 Please select another one</source>
         <translation>O arquivo EEL selecionado já não existe.
 Selecione outro</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="164"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
         <source>Edit script</source>
         <translation>Editar script</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="236"/>
+        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
         <source>No customizable parameters</source>
         <translation>Nenhum parâmetro customizável</translation>
     </message>
@@ -1494,133 +1502,133 @@ Selecione outro</translation>
         <translation>Ignorar</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="143"/>
-      <source>%1 connected - Preset loaded automatically</source>
-      <translation>%1 conectado - Predefinição carregada automaticamente</translation>
+        <location filename="../../src/MainWindow.cpp" line="145"/>
+        <source>%1 connected - Preset loaded automatically</source>
+        <translation>%1 conectado - Predefinição carregada automaticamente</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="162"/>
-      <source>Cannot execute script</source>
-      <translation>Impossível executar script</translation>
+        <location filename="../../src/MainWindow.cpp" line="164"/>
+        <source>Cannot execute script</source>
+        <translation>Impossível executar script</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="163"/>
-      <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation>O arquivo EEL atual (em &apos;%1&apos;) já não existe no sistema de arquivos. Reabra o arquivo manualmente.</translation>
+        <location filename="../../src/MainWindow.cpp" line="165"/>
+        <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
+        <translation>O arquivo EEL atual (em &apos;%1&apos;) já não existe no sistema de arquivos. Reabra o arquivo manualmente.</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="277"/>
-      <source>Apps</source>
-      <translation>Aplicativos</translation>
+        <location filename="../../src/MainWindow.cpp" line="279"/>
+        <source>Apps</source>
+        <translation>Aplicativos</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="278"/>
-      <source>Driver status</source>
-      <translation>Estado do driver</translation>
+        <location filename="../../src/MainWindow.cpp" line="280"/>
+        <source>Driver status</source>
+        <translation>Estado do driver</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="282"/>
-      <source>Relink audio pipeline</source>
-      <translation>Reconectar pipeline de áudio</translation>
+        <location filename="../../src/MainWindow.cpp" line="284"/>
+        <source>Relink audio pipeline</source>
+        <translation>Reconectar pipeline de áudio</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="284"/>
-      <source>Reset to defaults</source>
-      <translation>Redefinir para padrões</translation>
+        <location filename="../../src/MainWindow.cpp" line="286"/>
+        <source>Reset to defaults</source>
+        <translation>Redefinir para padrões</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="285"/>
-      <source>Load from file</source>
-      <translation>Carregar do arquivo</translation>
+        <location filename="../../src/MainWindow.cpp" line="287"/>
+        <source>Load from file</source>
+        <translation>Carregar do arquivo</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="286"/>
-      <source>Save to file</source>
-      <translation>Salvar em arquivo</translation>
+        <location filename="../../src/MainWindow.cpp" line="288"/>
+        <source>Save to file</source>
+        <translation>Salvar em arquivo</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="288"/>
-      <source>Open LiveprogIDE</source>
-      <translation>Abrir LiveprogIDE</translation>
+        <location filename="../../src/MainWindow.cpp" line="290"/>
+        <source>Open LiveprogIDE</source>
+        <translation>Abrir LiveprogIDE</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="290"/>
-      <source>What&apos;s this... (Select UI element)</source>
-      <translation>O que é isto... (selecione elemento da IU)</translation>
+        <location filename="../../src/MainWindow.cpp" line="292"/>
+        <source>What&apos;s this... (Select UI element)</source>
+        <translation>O que é isto... (selecione elemento da IU)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="389"/>
-      <source>Bass/Misc</source>
-      <translation>Grave/Diversos</translation>
+        <location filename="../../src/MainWindow.cpp" line="393"/>
+        <source>Bass/Misc</source>
+        <translation>Grave/Diversos</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="390"/>
-      <source>Sound Positioning</source>
-      <translation>Posicionamento de som</translation>
+        <location filename="../../src/MainWindow.cpp" line="394"/>
+        <source>Sound Positioning</source>
+        <translation>Posicionamento de som</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="391"/>
-      <source>Reverb</source>
-      <translation>Reverberação</translation>
+        <location filename="../../src/MainWindow.cpp" line="395"/>
+        <source>Reverb</source>
+        <translation>Reverberação</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="392"/>
-      <source>Equalizer</source>
-      <translation>Equalizador</translation>
+        <location filename="../../src/MainWindow.cpp" line="396"/>
+        <source>Equalizer</source>
+        <translation>Equalizador</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="393"/>
-      <source>Convolver</source>
-      <translation>Convolver</translation>
+        <location filename="../../src/MainWindow.cpp" line="397"/>
+        <source>Convolver</source>
+        <translation>Convolver</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="394"/>
-      <source>DDC</source>
-      <translation>DDC</translation>
+        <location filename="../../src/MainWindow.cpp" line="398"/>
+        <source>DDC</source>
+        <translation>DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="395"/>
-      <source>Liveprog</source>
-      <translation>Liveprog</translation>
+        <location filename="../../src/MainWindow.cpp" line="399"/>
+        <source>Liveprog</source>
+        <translation>Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="396"/>
-      <source>Graphic EQ</source>
-      <translation>EQ Gráfico</translation>
+        <location filename="../../src/MainWindow.cpp" line="400"/>
+        <source>Graphic EQ</source>
+        <translation>EQ Gráfico</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="408"/>
-      <source>Launch application</source>
-      <translation>Iniciar aplicativo</translation>
+        <location filename="../../src/MainWindow.cpp" line="412"/>
+        <source>Launch application</source>
+        <translation>Iniciar aplicativo</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="540"/>
-      <source>Reset Configuration</source>
-      <translation>Redefinir configuração</translation>
+        <location filename="../../src/MainWindow.cpp" line="554"/>
+        <source>Reset Configuration</source>
+        <translation>Redefinir configuração</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="540"/>
-      <source>Are you sure?</source>
-      <translation>Você tem certeza?</translation>
+        <location filename="../../src/MainWindow.cpp" line="554"/>
+        <source>Are you sure?</source>
+        <translation>Você tem certeza?</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="564"/>
-      <source>Load custom audio.conf</source>
-      <translation>Carregar audio.conf customizado</translation>
+        <location filename="../../src/MainWindow.cpp" line="578"/>
+        <source>Load custom audio.conf</source>
+        <translation>Carregar audio.conf customizado</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="576"/>
-      <source>Save current audio.conf</source>
-      <translation>Salvar audio.conf atual</translation>
+        <location filename="../../src/MainWindow.cpp" line="590"/>
+        <source>Save current audio.conf</source>
+        <translation>Salvar audio.conf atual</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1086"/>
-      <source>Advanced waveform editing</source>
-      <translation>Edição avançada de formas de onda</translation>
+        <location filename="../../src/MainWindow.cpp" line="1100"/>
+        <source>Advanced waveform editing</source>
+        <translation>Edição avançada de formas de onda</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1087"/>
-      <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
+        <location filename="../../src/MainWindow.cpp" line="1101"/>
+        <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
 This setting is only in effect if IR optimization is enabled.
@@ -2245,12 +2253,32 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
         <translation>não conectado</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="176"/>
-      <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+        <location filename="../../src/main.cpp" line="178"/>
+        <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
+        <translation type="unfinished"></translation>
     </message>
-  </context>
-  <context>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
+        <source>Auto-start permission has been denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
+        <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
+        <source>Unknown error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
+        <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsFragment</name>
     <message>
         <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
@@ -2463,66 +2491,66 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="185"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="201"/>
         <source>Unknown (%1)</source>
         <translation>Desconhecido (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="243"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
         <source>installed</source>
         <translation>Instalado</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="243"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
         <source>not installed</source>
         <translation>Não instalado</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="264"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
         <source>Override liveprog scripts?</source>
         <translation>Substituir scripts do liveprog?</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="265"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
         <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
         <translation>Você quer substituir os scripts padrão do liveprog existentes?
 Se eles foram modificados, eles serão redefinidos.</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="268"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
         <source>Extract assets</source>
         <translation>Extrair recursos</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="268"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
         <source>%1 files have been restored</source>
         <translation>%1 arquivos foram restaurados</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="356"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
         <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
         <translation>Você está prestes a ativar o modo de lista de permissões. O JamesDSP não processará todo aplicativo por padrão enquanto este modo estiver ativo. Você tem de permitir explicitamente que cada aplicativo seja processado no menu de &apos;Aplicativos&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="358"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
         <source>Are you sure?</source>
         <translation>Você tem certeza?</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="359"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
         <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
         <translation>Esta ação redefinirá a sua lista de bloqueio atual ou lista de permissões. Você quer continuar?</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+        <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
         <source>Do you really want to restore the default menu layout?</source>
         <translation>Você realmente quer restaurar a disposição padrão do menu?</translation>
     </message>
