@@ -29,6 +29,7 @@
 
 class IAudioService;
 class AppConfig;
+class AutostartManager;
 class EELParser;
 class ConfigContainer;
 class StyleHelper;
@@ -64,6 +65,7 @@ public:
 	~MainWindow();
 
 protected:
+    void showEvent(QShowEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
     void closeEvent(QCloseEvent *event) override;
 
@@ -115,6 +117,7 @@ private:
 
     bool _startupInTraySwitch;
     TrayIcon *_trayIcon;
+    AutostartManager *_autostart;
 
     EELEditor *_eelEditor;
 
@@ -127,6 +130,7 @@ private:
     IpcHandler* _ipcHandler            = nullptr;
 
     bool _blockApply                   = false;
+    bool _firstShowEvent               = true;
 
     QString _currentImpulseResponse    = "";
     QString _currentVdc                = "";

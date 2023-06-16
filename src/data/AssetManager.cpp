@@ -53,6 +53,7 @@ int AssetManager::extractGroup(AssetType type, bool allowOverride)
         }
 
         sourceFile.copy(targetFile.fileName());
+        targetFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadGroup | QFileDevice::ReadOther);
         i++;
     }
 

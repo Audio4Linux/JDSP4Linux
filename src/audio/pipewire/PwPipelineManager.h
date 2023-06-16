@@ -113,7 +113,7 @@ class PwPipelineManager {
 
   std::array<std::string, 2U> blocklist_media_role = {"event", "Notification"};
 
-  std::string header_version, library_version, core_name;
+  std::string header_version, library_version, core_name, version;
   std::string default_clock_rate = "0";
   std::string default_min_quantum = "0";
   std::string default_max_quantum = "0";
@@ -157,6 +157,12 @@ class PwPipelineManager {
   void unlock() const;
 
   void sync_wait_unlock() const;
+
+  auto wait_full() const -> int;
+
+  static void lock_node_map();
+
+  static void unlock_node_map();
 
   static auto json_object_find(const char* obj, const char* key, char* value, const size_t& len) -> int;
 

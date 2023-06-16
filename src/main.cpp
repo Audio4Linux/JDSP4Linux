@@ -98,7 +98,9 @@ MainWindow* initGui(bool launchInTray, bool watchConfig) {
     auto *instanceMonitor = new SingleInstanceMonitor(qApp);
     if (!instanceMonitor->isServiceReady())
     {
-        instanceMonitor->handover();
+        // Only push existing app to foreground if not launched using --tray
+        if(!launchInTray)
+            instanceMonitor->handover();
         return nullptr;
     }
 

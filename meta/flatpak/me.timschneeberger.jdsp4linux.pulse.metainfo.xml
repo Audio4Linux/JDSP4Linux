@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2023 Tim Schneeberger -->
+<component type="desktop-application">
+  <id>me.timschneeberger.jdsp4linux.pulse</id>
+  
+  <name>JamesDSP for PulseAudio (Legacy)</name>
+  <developer_name>Tim Schneeberger</developer_name>
+  <summary>Open-source audio effect processor for PulseAudio (Legacy)</summary>
+  <content_rating type="oars-1.1" />
+  <keywords>
+    <keyword>audio</keyword>
+    <keyword>dsp</keyword>
+    <keyword>effects</keyword>
+    <keyword>jdsp</keyword>
+    <keyword>pulseaudio</keyword>
+    <keyword>convolver</keyword>
+    <keyword>reverb</keyword>
+    <keyword>surround</keyword>
+    <keyword>equalizer</keyword>
+  </keywords>
+  
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  
+  <description>
+    <p>
+      JamesDSP is an advanced audio effects processor initially developed for Android devices by James Fung. It has been ported to Linux by Tim Schneeberger.
+    </p>
+    <p>
+      This app provides various sound effects for PipeWire and PulseAudio systems. It offers features such as automatic bass boost, dynamic range compression, reverberation, equalizers, surround effects, stereo wideness control, parametric equalization, scripting engine, and more. Users can also create their own audio effects using the EEL2 scripting language supported by the app. The app includes a minimal scripting IDE with syntax highlighting, code completion, and some debugging features.
+    </p>
+    <p>
+      A package with PipeWire support is also available.
+    </p>
+  </description>
+  
+  <url type="homepage">https://github.com/Audio4Linux/JDSP4Linux</url>
+  <url type="bugtracker">https://github.com/Audio4Linux/JDSP4Linux/issues</url>
+  <url type="help">https://github.com/Audio4Linux/JDSP4Linux/blob/master/README.md</url>
+  <url type="translate">https://crowdin.com/project/jdsp4linux</url>
+  <url type="donation">https://ko-fi.com/thepbone</url>
+
+  <recommends>
+    <display_length>700</display_length>
+  </recommends>
+
+  <supports>
+    <control>pointing</control>
+    <control>console</control>
+    <control>touch</control>
+  </supports>
+
+  <provides>
+    <binary>jamesdsp</binary>
+    <dbus type="user">me.timschneeberger.jdsp4linux</dbus>
+  </provides>
+
+  <releases>
+    <release type="stable" version="2.5.0" date="2023-06-16T00:00:00Z">
+      <description>
+        <ul>
+          <li>Features:</li>
+          <li>Scripting/IPC support</li>
+          <li>Translation support</li>
+          <li>Merged upstream updates for libjamesdsp</li>
+          <li>Bug fixes:</li>
+          <li>Fixed crashes when updating the AutoEQ database</li>
+          <li>Fixed various issues with the audio backend</li>
+          <li>Suspend audio pipeline after 10s if no apps are connected to save CPU power</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="2.4.0" date="2022-09-08T00:00:00Z">
+      <description>
+        <ul>
+          <li>Features:</li>
+          <li>Merged upstream updates for libjamesdsp</li>
+          <li>Bug fixes:</li>
+          <li>Respect XDG base directory specification</li>
+          <li>Fixed crash when rapidly dragging the Soundstage wideness slider</li>
+          <li>Fixed save issues in the EEL script editor</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+
+  <launchable type="desktop-id">me.timschneeberger.jdsp4linux.pulse.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot.png?raw=true</image>
+      <caption>Equalizer</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot_eel.png?raw=true</image>
+      <caption>Liveprog scripting</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot_presets.png?raw=true</image>
+      <caption>Preset management</caption>
+    </screenshot>
+  </screenshots>
+</component>

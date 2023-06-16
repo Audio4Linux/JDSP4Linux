@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=JamesDSP
+Comment=Audio effect processor for PulseAudio (Legacy)
+Categories=AudioVideo;Audio;Qt;
+
+Icon=me.timschneeberger.jdsp4linux.pulse
+Exec=jamesdsp
+Terminal=false
+StartupNotify=true

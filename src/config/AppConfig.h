@@ -59,6 +59,7 @@ public:
         ExecutablePath,
         VdcLastDatabaseId,
         LastWindowGeometry,
+        AutoStartEnabled,
 
         AudioOutputUseDefault,
         AudioOutputDevice,
@@ -135,7 +136,7 @@ public:
 #define DEFINE_USER_PATH(name,key) \
     QString get##name##Path(QString subdir = "") const \
     { \
-        QString current = chopFirstLastChar(get<QString>(key)); \
+        QString current = chopDoubleQuotes(get<QString>(key)); \
         if (!QDir(current).exists()) \
         { \
             QDir().mkpath(current); \

@@ -22,7 +22,7 @@
 
 #include <giomm.h>
 #include <pipewire/filter.h>
-// #include <spa/param/latency-utils.h> // unavailable on Ubuntu 21.04 >:(
+// #include <spa/param/latency-utils.h>
 #include <mutex>
 
 #include "PwPipelineManager.h"
@@ -65,19 +65,31 @@ class PwPluginBase {
 
   pw_filter* filter = nullptr;
 
+  pw_filter_state state = PW_FILTER_STATE_UNCONNECTED;
+
+  bool can_get_node_id = false;
+
   bool enable_probe = false;
 
   uint32_t n_samples = 0U;
 
   uint32_t rate = 0U;
 
-  float sample_duration = 0.0F;
-
   bool bypass = false;
 
   bool connected_to_pw = false;
 
-  bool post_messages = false;
+  bool send_notifications = false;
+
+  float delta_t = 0.0F;
+
+  float notification_time_window = 1.0F / 20.0F;  // seconds
+
+  float latency_value = 0.0F;  // seconds
+
+  std::chrono::time_point<std::chrono::system_clock> clock_start;
+
+  std::vector<float> dummy_left, dummy_right;
 
   [[nodiscard]] auto get_node_id() const -> uint32_t;
 
@@ -119,13 +131,12 @@ class PwPluginBase {
 
   data pf_data = {};
 
+  bool post_messages = false;
+
   uint32_t n_ports = 4;
 
   float input_gain = 1.0F;
   float output_gain = 1.0F;
-
-  float notification_time_window = 1.0F / 20.0F;  // seconds
-  float notification_dt = 0.0F;
 
   void initialize_listener();
 

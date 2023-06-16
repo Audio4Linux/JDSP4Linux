@@ -19,6 +19,7 @@ public:
     ~LiveprogSelectionWidget();
 
     void coupleIDE(EELEditor *editor);
+    void updateList();
 
     bool isActive() const;
     void setActive(bool active);
