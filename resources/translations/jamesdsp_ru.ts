@@ -275,21 +275,6 @@ Do you want to re-install the latest database update anyway?</source>
       <translation>Добавить в список блокировки</translation>
     </message>
     <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="98"/>
-      <source>Latency: 0ms</source>
-      <translation>Задержка: 0мс</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="105"/>
-      <source>Rate: 0Hz</source>
-      <translation>Частота: 0Гц</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="112"/>
-      <source>Format: Unknown</source>
-      <translation>Формат: Неизвестно</translation>
-    </message>
-    <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
@@ -680,11 +665,6 @@ Do you want to re-install the latest database update anyway?</source>
       <source>Downloading package...</source>
       <translation>Загрузка пакета...</translation>
     </message>
-    <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
-      <source>0MB/49.56MB</source>
-      <translation>0MB/49.56МБ</translation>
-    </message>
   </context>
   <context>
     <name>FileSelectionWidget</name>
@@ -697,11 +677,6 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
       <translation>Закладка</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
-      <source>...</source>
-      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
@@ -1666,19 +1641,9 @@ This setting is only in effect if IR optimization is enabled.
       <translation>Рабочий каталог</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
-      <source>...</source>
-      <translation>...</translation>
-    </message>
-    <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
       <translation>Имя файла</translation>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
-      <source>untitled</source>
-      <translation>без названия</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
@@ -2242,7 +2207,7 @@ Please create one first before adding a new rule.</source>
       <translation>не подключено</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation type="unfinished"/>
     </message>
@@ -2583,15 +2548,6 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
       <translation>Частота дискретизации</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
-      <source>...</source>
-      <translation>...</translation>
     </message>
   </context>
   <context>
