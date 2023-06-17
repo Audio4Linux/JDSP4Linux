@@ -81,7 +81,8 @@ jobs:
       
     - name: Build
       run: |
-        make
+        make -j4
+        strip --strip-unneeded src/jamesdsp
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v2

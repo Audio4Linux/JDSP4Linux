@@ -176,7 +176,7 @@ sudo apt install -y curl
 curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
 
 cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list
+sudo sh -c ' echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list '
 sudo apt update
 ```
 Install from PPA
