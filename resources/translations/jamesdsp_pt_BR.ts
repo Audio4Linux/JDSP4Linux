@@ -275,21 +275,6 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
       <translation>Adicionar à lista de bloqueio</translation>
     </message>
     <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="98"/>
-      <source>Latency: 0ms</source>
-      <translation>Latência: 0 ms</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="105"/>
-      <source>Rate: 0Hz</source>
-      <translation>Taxa: 0 Hz</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="112"/>
-      <source>Format: Unknown</source>
-      <translation>Formato: desconhecido</translation>
-    </message>
-    <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
@@ -680,11 +665,6 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
       <source>Downloading package...</source>
       <translation>Baixando pacote...</translation>
     </message>
-    <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
-      <source>0MB/49.56MB</source>
-      <translation>0 MB/49,56 MB</translation>
-    </message>
   </context>
   <context>
     <name>FileSelectionWidget</name>
@@ -697,11 +677,6 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
       <translation>Marcar</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
-      <source>...</source>
-      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
@@ -1677,19 +1652,9 @@ Esta configuração só terá efeito se a otimização de IR estiver ativada.
       <translation>Pasta do espaço de trabalho</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
-      <source>...</source>
-      <translation>...</translation>
-    </message>
-    <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
       <translation>Nome do arquivo</translation>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
-      <source>untitled</source>
-      <translation>sem título</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
@@ -2253,7 +2218,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
       <translation>não conectado</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP é um mecanismo avançado de processamento de áudio disponível para sistemas Linux e Android.</translation>
     </message>
@@ -2594,15 +2559,6 @@ Se eles foram modificados, eles serão redefinidos.</translation>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
       <translation>Taxa de amostragem</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
-      <source>...</source>
-      <translation>...</translation>
     </message>
   </context>
   <context>
