@@ -271,21 +271,6 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <translation>Añadir a la lista negra</translation>
     </message>
     <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="98"/>
-      <source>Latency: 0ms</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="105"/>
-      <source>Rate: 0Hz</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="112"/>
-      <source>Format: Unknown</source>
-      <translation>Formato: Desconocido</translation>
-    </message>
-    <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
@@ -676,11 +661,6 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <source>Downloading package...</source>
       <translation>Descargando paquetes...</translation>
     </message>
-    <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
-      <source>0MB/49.56MB</source>
-      <translation type="unfinished"/>
-    </message>
   </context>
   <context>
     <name>FileSelectionWidget</name>
@@ -693,11 +673,6 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
       <translation>Marcador</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
-      <source>...</source>
-      <translation type="unfinished"/>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
@@ -1654,18 +1629,8 @@ This setting is only in effect if IR optimization is enabled.
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
-      <source>...</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
-      <source>untitled</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -2227,7 +2192,7 @@ Please create one first before adding a new rule.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation type="unfinished"/>
     </message>
@@ -2566,15 +2531,6 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
-      <source>...</source>
       <translation type="unfinished"/>
     </message>
   </context>
