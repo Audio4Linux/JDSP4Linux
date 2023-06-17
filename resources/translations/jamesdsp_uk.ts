@@ -642,7 +642,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>Неможливо виконати</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
