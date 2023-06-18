@@ -197,6 +197,10 @@ RESOURCES += \
 TRANSLATIONS += ../resources/translations/jamesdsp_de.ts \
                 ../resources/translations/jamesdsp_en.ts \
                 ../resources/translations/jamesdsp_ru.ts \
+                ../resources/translations/jamesdsp_uk.ts \
+                ../resources/translations/jamesdsp_pl.ts \
+                ../resources/translations/jamesdsp_es.ts \
+                ../resources/translations/jamesdsp_zh_CN.ts \
                 ../resources/translations/jamesdsp_pt_BR.ts
 
 # Default rules for deployment.
