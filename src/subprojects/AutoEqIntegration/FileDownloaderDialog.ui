@@ -52,7 +52,7 @@
      <item>
       <widget class="QLabel" name="size">
        <property name="text">
-        <string>0MB/49.56MB</string>
+        <string notr="true">0MB/49.56MB</string>
        </property>
       </widget>
      </item>

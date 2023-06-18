@@ -95,21 +95,21 @@
      <item>
       <widget class="QLabel" name="latency">
        <property name="text">
-        <string>Latency: 0ms</string>
+        <string notr="true">Latency: 0ms</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="rate">
        <property name="text">
-        <string>Rate: 0Hz</string>
+        <string notr="true">Rate: 0Hz</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="format">
        <property name="text">
-        <string>Format: Unknown</string>
+        <string notr="true">Format: Unknown</string>
        </property>
       </widget>
      </item>

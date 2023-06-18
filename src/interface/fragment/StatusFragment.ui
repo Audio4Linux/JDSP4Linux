@@ -121,7 +121,7 @@
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>...</string>
+              <string notr="true">...</string>
              </property>
             </widget>
            </item>
@@ -149,7 +149,7 @@
            <item>
             <widget class="QLabel" name="samplerate">
              <property name="text">
-              <string>...</string>
+              <string notr="true">...</string>
              </property>
             </widget>
            </item>
@@ -177,7 +177,7 @@
            <item>
             <widget class="QLabel" name="core_ver">
              <property name="text">
-              <string>...</string>
+              <string notr="true">...</string>
              </property>
             </widget>
            </item>
@@ -205,7 +205,7 @@
            <item>
             <widget class="QLabel" name="proc">
              <property name="text">
-              <string>...</string>
+              <string notr="true">...</string>
              </property>
             </widget>
            </item>
@@ -233,7 +233,7 @@
            <item>
             <widget class="QLabel" name="format">
              <property name="text">
-              <string>...</string>
+              <string notr="true">...</string>
              </property>
             </widget>
            </item>
