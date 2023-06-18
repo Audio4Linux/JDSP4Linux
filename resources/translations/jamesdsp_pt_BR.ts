@@ -275,22 +275,10 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
         <translation>Adicionar à lista de bloqueio</translation>
     </message>
     <message>
-        <source>Latency: 0ms</source>
-        <translation type="vanished">Latência: 0 ms</translation>
-    </message>
-    <message>
-        <source>Rate: 0Hz</source>
-        <translation type="vanished">Taxa: 0 Hz</translation>
-    </message>
-    <message>
-        <source>Format: Unknown</source>
-        <translation type="vanished">Formato: desconhecido</translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
-        <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
-        <source>Add to allowlist</source>
-        <translation>Adicionar à lista de permissão</translation>
+      <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
+      <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
+      <source>Add to allowlist</source>
+      <translation>Adicionar à lista de permissão</translation>
     </message>
     <message>
         <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
@@ -677,12 +665,8 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
         <source>Downloading package...</source>
         <translation>Baixando pacote...</translation>
     </message>
-    <message>
-        <source>0MB/49.56MB</source>
-        <translation type="vanished">0 MB/49,56 MB</translation>
-    </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>FileSelectionWidget</name>
     <message>
         <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
@@ -695,13 +679,9 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
         <translation>Marcar</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
-        <source>Rename</source>
-        <translation>Renomear</translation>
+      <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
+      <source>Rename</source>
+      <translation>Renomear</translation>
     </message>
     <message>
         <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
@@ -747,52 +727,34 @@ Você quer reinstalar a última atualização do banco de dados mesmo assim?</tr
         <translation>&amp;Opções</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whether the text to search should be interpreted as a regular expression.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may want to take a look at the syntax of regular expressions:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0/EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict. td&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;se o texto a pesquisar deve ser interpretado como uma expressão regular.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Talvez você queira dar uma olhada na sintaxe de expressões regulares:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
+      <source>R&amp;egular expression</source>
+      <translation>Expressão r&amp;egular</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
-        <source>R&amp;egular expression</source>
-        <translation>Expressão r&amp;egular</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
+      <source>&amp;Whole words </source>
+      <translation>&amp;Palavras inteiras </translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
-        <source>&amp;Whole words </source>
-        <translation>&amp;Palavras inteiras </translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
+      <source>&amp;Case sensitive</source>
+      <translation>&amp;Sensível à maiúsculas e minúsculas</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
-        <source>&amp;Case sensitive</source>
-        <translation>&amp;Sensível à maiúsculas e minúsculas</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
+      <source>&amp;Close</source>
+      <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
-        <source>&amp;Close</source>
-        <translation>&amp;Fechar</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
+      <source>&amp;Replace</source>
+      <translation>&amp;Substituir</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
-        <source>&amp;Replace</source>
-        <translation>&amp;Substituir</translation>
-    </message>
-    <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
-        <source>Replace &amp;All</source>
-        <translation>Substituir &amp;tudo</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
+      <source>Replace &amp;All</source>
+      <translation>Substituir &amp;tudo</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
@@ -1671,22 +1633,14 @@ Esta configuração só terá efeito se a otimização de IR estiver ativada.
         <translation>Pasta do espaço de trabalho</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
+      <source>File name</source>
+      <translation>Nome do arquivo</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
-        <source>File name</source>
-        <translation>Nome do arquivo</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="vanished">sem título</translation>
-    </message>
-    <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
-        <source>Description</source>
-        <translation>Descrição</translation>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
+      <source>Description</source>
+      <translation>Descrição</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
@@ -2245,9 +2199,9 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
         <translation>não conectado</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="179"/>
-        <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-        <translation>JamesDSP é um mecanismo avançado de processamento de áudio disponível para sistemas Linux e Android.</translation>
+      <location filename="../../src/main.cpp" line="179"/>
+      <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
+      <translation>JamesDSP é um mecanismo avançado de processamento de áudio disponível para sistemas Linux e Android.</translation>
     </message>
     <message>
         <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
@@ -2587,12 +2541,8 @@ Se eles foram modificados, eles serão redefinidos.</translation>
         <source>Sampling rate</source>
         <translation>Taxa de amostragem</translation>
     </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>StatusFragment</name>
     <message>
         <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>

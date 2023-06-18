@@ -264,21 +264,6 @@ Do you want to re-install the latest database update anyway?</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="98"/>
-      <source>Latency: 0ms</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="105"/>
-      <source>Rate: 0Hz</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="112"/>
-      <source>Format: Unknown</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
@@ -669,11 +654,6 @@ Do you want to re-install the latest database update anyway?</source>
       <source>Downloading package...</source>
       <translation type="unfinished"/>
     </message>
-    <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
-      <source>0MB/49.56MB</source>
-      <translation type="unfinished"/>
-    </message>
   </context>
   <context>
     <name>FileSelectionWidget</name>
@@ -685,11 +665,6 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
-      <source>...</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -742,43 +717,31 @@ Do you want to re-install the latest database update anyway?</source>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
-      <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whether the text to search should be interpreted as a regular expression.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may want to take a look at the syntax of regular expressions:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="149"/>
       <source>R&amp;egular expression</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
       <source>&amp;Close</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="221"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
       <source>Replace &amp;All</source>
       <translation type="unfinished"/>
     </message>
@@ -1645,18 +1608,8 @@ This setting is only in effect if IR optimization is enabled.
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
-      <source>...</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
-      <source>untitled</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -2218,7 +2171,7 @@ Please create one first before adding a new rule.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="179"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation type="unfinished"/>
     </message>
@@ -2556,15 +2509,6 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
-      <source>...</source>
       <translation type="unfinished"/>
     </message>
   </context>
