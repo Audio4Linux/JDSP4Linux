@@ -671,27 +671,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>Оновити</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
+      <translation>Додати до обраного</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Перейменувати</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Видалити</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>Не знайдено підтримуваних файлів</translation>
     </message>
   </context>
   <context>
@@ -699,12 +699,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>Знайти:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
