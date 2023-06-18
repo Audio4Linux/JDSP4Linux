@@ -728,50 +728,31 @@ Möchtest du trotzdem das aktuelle Datenbankupdate neu installieren?</translatio
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
-      <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whether the text to search should be interpreted as a regular expression.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may want to take a look at the syntax of regular expressions:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict. td&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap ; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;ob der zu suchende Text als regulärer Ausdruck interpretiert werden soll.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Du kannst einen Blick auf die Syntax der regulären Ausdrücke werfen:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc. rollTech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="149"/>
       <source>R&amp;egular expression</source>
       <translation>R&amp;egulärer Ausdruck</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
       <translation>Ganze &amp;Wörter </translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
       <translation>&amp;Groß-/Kleinschreibung</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
       <source>&amp;Close</source>
       <translation>&amp;Schließen</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
       <translation>&amp;Ersetzen</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="221"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
       <source>Replace &amp;All</source>
       <translation>&amp;Alle ersetzen</translation>
     </message>
