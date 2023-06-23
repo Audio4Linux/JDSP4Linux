@@ -2289,22 +2289,22 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="265"/>
       <source>Always display handles</source>
-      <translation type="unfinished"/>
+      <translation>Zawsze wyświetlaj uchwyty</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="311"/>
       <source>Impluse responses</source>
-      <translation type="unfinished"/>
+      <translation>Odpowiedzi impulsowe</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="328"/>
       <source>VDCs</source>
-      <translation type="unfinished"/>
+      <translation>VDC</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="342"/>
       <source>Liveprog scripts</source>
-      <translation type="unfinished"/>
+      <translation>Skrypty Liveprog</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="379"/>
@@ -2314,22 +2314,22 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="388"/>
       <source>Built-in assets</source>
-      <translation type="unfinished"/>
+      <translation>Wbudowane zasoby</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="399"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ta opcja sprawdzi przy każdym uruchomieniu, czy brakuje jednego z domyślnych skryptów EEL. W takim przypadku brakujące pliki zostaną automatycznie przywrócone z zasobów. (Nie zastąpi ich, jeśli już istnieją!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="402"/>
       <source>Extract bundled assets on startup</source>
-      <translation type="unfinished"/>
+      <translation>Rozpakuj pakiety zasobów podczas uruchamiania</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="422"/>
       <source>  Extract now  </source>
-      <translation type="unfinished"/>
+      <translation>  Rozpakuj teraz  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="454"/>
