@@ -67,6 +67,9 @@ class ServiceAdaptor: public QDBusAbstractAdaptor
 "      <arg direction=\"in\" type=\"s\" name=\"key\"/>\n"
 "      <arg direction=\"out\" type=\"s\" name=\"value\"/>\n"
 "    </method>\n"
+"    <method name=\"getAll\">\n"
+"      <arg direction=\"out\" type=\"s\" name=\"kvpairs\"/>\n"
+"    </method>\n"
 "    <method name=\"set\">\n"
 "      <arg direction=\"in\" type=\"s\" name=\"key\"/>\n"
 "      <arg direction=\"in\" type=\"v\" name=\"value\"/>\n"
@@ -117,6 +120,7 @@ public Q_SLOTS: // METHODS
     void commit();
     void deletePreset(const QString &name);
     QString get(const QString &key);
+    QString getAll();
     QStringList getKeys();
     QStringList getPresets();
     void loadPreset(const QString &name);

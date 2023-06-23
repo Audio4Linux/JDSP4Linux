@@ -14,6 +14,7 @@ public:
     bool isConnected() const;
     bool set(const QString& key, const QVariant& value) const;
     bool get(const QString& key) const;
+    bool getAll() const;
     bool listKeys() const;
     bool listPresets() const;
     bool loadPreset(const QString& name) const;

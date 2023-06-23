@@ -108,42 +108,10 @@ Server Name: pulseaudio
 
 If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
-* [Debian/Ubuntu (PPA)](#debianubuntu)
 * [Arch Linux (AUR)](#arch)
 * [Fedora/openSUSE](#fedoraopensuse)
+* [Debian/Ubuntu (PPA)](#debianubuntu)
 * [Build from sources](#build-from-sources)
-
-### Debian/Ubuntu
-
-##### Minimum system requirements:
-
-* Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 21.10 or later
-
-If you need to install this app on an older distro, you need to compile it manually with GCC 11.0 or later.
-
-Add PPA Repo
-```bash
-sudo apt install -y curl
-# thepbone’s PPA Repository key
-curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
-
-cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list
-sudo apt update
-```
-Install from PPA
-
-For **PipeWire clients** only:
-```bash
-sudo apt install jamesdsp-pipewire
-```
-For **PulseAudio clients** only:
-```bash
-sudo apt install jamesdsp-pulse
-```
-[View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
-
 
 ### Arch
 [AUR packages](https://aur.archlinux.org/packages/?O=0&K=jamesdsp) are available:
@@ -189,6 +157,40 @@ yum copr enable arrobbins/JDSP4Linux && yum update && yum install jamesdsp
 ```
 
 If you are still using PulseAudio with your Fedora/openSUSE installation, refer to the '[Build from sources](#build-from-sources)' section below instead.
+
+### Debian/Ubuntu
+
+> **Warning**: The PPA repo is unmaintained and deprecated. At th moment, it is still being auto-updated by an automated GitHub CI workflow. I'm working on setting up flatpak packages as a more stable and universal alternative.
+
+##### Minimum system requirements:
+
+* Distro based on Debian 11 or later **OR**
+* Distro based on Ubuntu 21.10 or later
+
+If you need to install this app on an older distro, you need to compile it manually with GCC 11.0 or later.
+
+Add PPA Repo
+```bash
+sudo apt install -y curl
+# thepbone’s PPA Repository key
+curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
+
+cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
+sudo sh -c ' echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list '
+sudo apt update
+```
+Install from PPA
+
+For **PipeWire clients** only:
+```bash
+sudo apt install jamesdsp-pipewire
+```
+For **PulseAudio clients** only:
+```bash
+sudo apt install jamesdsp-pulse
+```
+[View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
+
 
 ### Build from sources
 
@@ -304,7 +306,7 @@ sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/A
 ```
 ## Scripting & IPC APIs
 
-Since 12th May 2023, this app supports IPC via D-Bus and is also configurable via a CLI. These new features are not yet included in a stable release.
+Since version 2.5.0, this app supports IPC via D-Bus and is also configurable via a CLI.
 
 ### Remote control via CLI
 You can list all supported commands using `jamesdsp --help`. 
@@ -371,7 +373,7 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <br />
         <sub><b>Tim Schneeberger (ThePBone)</b></sub></a>
       <br />
-      <sub><b>6708 words</b></sub>
+      <sub><b>6808 words</b></sub>
     </td>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/Kazevic"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15680393/medium/4393ae8969da30fc9475409e95e74867.png" />
@@ -395,6 +397,20 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>652 words</b></sub>
     </td>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/seqfault"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15878639/medium/bf4af8eeefcd4c065fd867a7ad16994b.jpeg" />
+        <br />
+        <sub><b>NullPointerException (seqfault)</b></sub></a>
+      <br />
+      <sub><b>1106 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/mariachini"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13113640/medium/99ff648dd8f28efebdce9713cee1b9c3.png" />
+        <br />
+        <sub><b>mariachini</b></sub></a>
+      <br />
+      <sub><b>373 words</b></sub>
+    </td>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/so1ar"><img alt="logo" style="width: 64px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1" />
         <br />
         <sub><b>so1ar</b></sub></a>
@@ -402,11 +418,27 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>126 words</b></sub>
     </td>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/arifesat"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15670651/medium/46177c3d13c90ed767700bb49413107f.jpeg" />
+        <br />
+        <sub><b>Arif Esat Yılmaz (arifesat)</b></sub></a>
+      <br />
+      <sub><b>24 words</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/andmydignity"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15821563/medium/cce9327c6cd8879f307495fab2077633.png" />
         <br />
         <sub><b>Semih Aslan (andmydignity)</b></sub></a>
       <br />
       <sub><b>15 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/deathrobert2010"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13559998/medium/429e149d92ed6c461f601e7d30d280df.jpg" />
+        <br />
+        <sub><b>Robert Abreu (deathrobert2010)</b></sub></a>
+      <br />
+      <sub><b>13 words</b></sub>
     </td>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/artemgrebennikov310"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13820153/medium/d1565ef34bd253f67a995f1fd3811887.jpg" />

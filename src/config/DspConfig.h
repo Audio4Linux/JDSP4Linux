@@ -215,11 +215,16 @@ public:
     }
 
 
-	void save()
-	{
-		auto file = AppConfig::instance().getDspConfPath();
-		ConfigIO::writeFile(file, _conf->getConfigMap());
-	}
+    QString serialize()
+    {
+        return ConfigIO::writeString(_conf->getConfigMap());
+    }
+
+    void save()
+    {
+        auto file = AppConfig::instance().getDspConfPath();
+        ConfigIO::writeFile(file, _conf->getConfigMap());
+    }
 
 	void load()
 	{

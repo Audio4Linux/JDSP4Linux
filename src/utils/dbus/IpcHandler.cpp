@@ -90,6 +90,11 @@ QString IpcHandler::get(const QString &key) const
     return value.toString();
 }
 
+QString IpcHandler::getAll() const
+{
+    return DspConfig::instance().serialize();
+}
+
 void IpcHandler::set(const QString &key, const QDBusVariant &value) const
 {
     setInternal(key, value);

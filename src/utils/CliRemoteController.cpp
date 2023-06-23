@@ -91,6 +91,25 @@ bool CliRemoteController::get(const QString &key) const
     return result.has_value();
 }
 
+bool CliRemoteController::getAll() const
+{
+    std::optional<QString> result;
+    if(!checkConnectionAndLog()) {
+        result = DspConfig::instance().serialize();
+    }
+    else {
+        auto reply = service->getAll();
+        auto received = handleReply<QString>(reply);
+        result = received;
+    }
+
+    if(result.has_value()) {
+        Log::console(result.value(), true);
+    }
+
+    return result.has_value();
+}
+
 bool CliRemoteController::listKeys() const
 {
     QStringList keys;

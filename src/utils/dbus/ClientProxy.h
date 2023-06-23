@@ -105,6 +105,12 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QStringLiteral("get"), argumentList);
     }
 
+    inline QDBusPendingReply<QString> getAll()
+    {
+        QList<QVariant> argumentList;
+        return asyncCallWithArgumentList(QStringLiteral("getAll"), argumentList);
+    }
+
     inline QDBusPendingReply<QStringList> getKeys()
     {
         QList<QVariant> argumentList;

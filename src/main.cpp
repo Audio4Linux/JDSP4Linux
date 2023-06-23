@@ -167,6 +167,7 @@ int main(int   argc,
     QCommandLineOption isConnected(QStringList() << "is-connected", "Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)");
     QCommandLineOption status(QStringList() << "status", "Show status (Remote)");
     QCommandLineOption listKeys(QStringList() << "list-keys", "List available audio configuration keys (Remote)");
+    QCommandLineOption getAll(QStringList() << "get-all", "Get all audio configuration values (Remote)");
     QCommandLineOption get(QStringList() << "get", "Get audio configuration value (Remote)", "key");
     QCommandLineOption set(QStringList() << "set", "Set audio configuration value (format: key=value) (Remote)", "key=value");
     QCommandLineOption loadPreset(QStringList() << "load-preset", "Load preset by name (Remote)", "name");
@@ -189,7 +190,7 @@ int main(int   argc,
     parser.addOptions({silent, nocolor, minVerbosity});
 
     // Remote control
-    auto remoteCmds = {isConnected, listKeys, get, set, loadPreset, savePreset, deletePreset, listPresets, status};
+    auto remoteCmds = {isConnected, listKeys, getAll, get, set, loadPreset, savePreset, deletePreset, listPresets, status};
     parser.addOptions(remoteCmds);
 
     parser.process(*app.get());
@@ -245,6 +246,9 @@ int main(int   argc,
             else {
                 result = ctrl.set(out.first, out.second);
             }
+        }
+        else if(parser.isSet(getAll)) {
+            result = ctrl.getAll();
         }
         else if(!parser.value(get).isEmpty()) {
             result = ctrl.get(parser.value(get));

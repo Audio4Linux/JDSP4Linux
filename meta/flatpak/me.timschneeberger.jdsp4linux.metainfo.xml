@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2023 Tim Schneeberger -->
 <component type="desktop-application">
-  <id>me.timschneeberger.jdsp4linux.pipewire</id>
+  <id>me.timschneeberger.jdsp4linux</id>
   
-  <name>JamesDSP for Pipewire</name>
+  <name>JamesDSP</name>
   <developer_name>Tim Schneeberger</developer_name>
   <summary>Open-source audio effect processor for Pipewire</summary>
   <content_rating type="oars-1.1" />
@@ -27,10 +27,10 @@
       JamesDSP is an advanced audio effects processor initially developed for Android devices by James Fung. It has been ported to Linux by Tim Schneeberger.
     </p>
     <p>
-      This app provides various sound effects for PipeWire and PulseAudio systems. It offers features such as automatic bass boost, dynamic range compression, reverberation, equalizers, surround effects, stereo wideness control, parametric equalization, scripting engine, and more. Users can also create their own audio effects using the EEL2 scripting language supported by the app. The app includes a minimal scripting IDE with syntax highlighting, code completion, and some debugging features.
+      This package only supports PipeWire. Please check the README for the legacy PulseAudio version.
     </p>
     <p>
-      A legacy package with PulseAudio support is also available; however, it is recommended to switch to Pipewire if possible.
+      This app provides various sound effects for PipeWire systems. It offers features such as automatic bass boost, dynamic range compression, reverberation, equalizers, surround effects, stereo wideness control, parametric equalization, scripting engine, and more. Users can also create their own audio effects using the EEL2 scripting language supported by the app. The app includes a minimal scripting IDE with syntax highlighting, code completion, and some debugging features.
     </p>
   </description>
   
@@ -56,6 +56,14 @@
   </provides>
 
   <releases>
+    <release type="stable" version="2.5.1" date="2023-06-17T00:00:00Z">
+      <description>
+        <ul>
+          <li>Other changes:</li>
+          <li>Finalize flatpak support</li>
+        </ul>
+      </description>
+    </release>
     <release type="stable" version="2.5.0" date="2023-06-16T00:00:00Z">
       <description>
         <ul>
@@ -84,7 +92,7 @@
     </release>
   </releases>
 
-  <launchable type="desktop-id">me.timschneeberger.jdsp4linux.pipewire.desktop</launchable>
+  <launchable type="desktop-id">me.timschneeberger.jdsp4linux.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/Audio4Linux/JDSP4Linux/blob/master/meta/screenshot.png?raw=true</image>

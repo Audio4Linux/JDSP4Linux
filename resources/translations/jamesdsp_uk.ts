@@ -6,17 +6,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation type="unfinished"/>
+      <translation>Другий варіант</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation type="unfinished"/>
+      <translation>Третій варіант</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation type="unfinished"/>
+      <translation>%1 варіант</translation>
     </message>
   </context>
   <context>
@@ -24,77 +24,77 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation type="unfinished"/>
+      <translation>Частота (Гц)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>Амплітуда (дБв)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation type="unfinished"/>
+      <translation>Ціль</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Неформатовані дані (згладжено)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Помилка (згладжена)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>Еквалайзер</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>Неформатовані дані</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Помилка</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
       <source>Equalized</source>
-      <translation type="unfinished"/>
+      <translation>Еквалізовано</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>Еквалізація (нормалізована)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
       <source>Move to top left</source>
-      <translation type="unfinished"/>
+      <translation>Перемістити ліворуч угору</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="210"/>
       <source>Move to top center</source>
-      <translation type="unfinished"/>
+      <translation>Перемістити ліворуч до центру</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
       <source>Move to top right</source>
-      <translation type="unfinished"/>
+      <translation>Перемістити праворуч угору</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="212"/>
       <source>Move to bottom right</source>
-      <translation type="unfinished"/>
+      <translation>Перемістити праворуч униз</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="213"/>
       <source>Move to bottom left</source>
-      <translation type="unfinished"/>
+      <translation>Перемістити ліворуч униз</translation>
     </message>
   </context>
   <context>
@@ -102,89 +102,90 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>База даних AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation type="unfinished"/>
+      <translation>Сортування...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation type="unfinished"/>
+      <translation>Версія локальної бази даних</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
       <source>Checked out at commit:</source>
-      <translation type="unfinished"/>
+      <translation>Локальний коміт:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
       <source>Last commit created at:</source>
-      <translation type="unfinished"/>
+      <translation>Останній коміт створено:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation type="unfinished"/>
+      <translation>Пакунок створено:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
       <source>Display settings</source>
-      <translation type="unfinished"/>
+      <translation>Налаштування відображення</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
       <source>Dark mode</source>
-      <translation type="unfinished"/>
+      <translation>Темний режим</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
       <source>Update database</source>
-      <translation type="unfinished"/>
+      <translation>Оновити базу даних</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
       <source>Download latest AutoEQ package</source>
-      <translation type="unfinished"/>
+      <translation>Завантажити останню версію AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
       <source>Delete database</source>
-      <translation type="unfinished"/>
+      <translation>Видалити базу даних</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
       <source>Cleanup local database and exit</source>
-      <translation type="unfinished"/>
+      <translation>Очистити локальну базу даних і вийти</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
       <source>No measurement selected</source>
-      <translation type="unfinished"/>
+      <translation>Не обрано вимірювань</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
       <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
-      <translation type="unfinished"/>
+      <translation>Скористайтесь пошуковим полем зліва для знаходження відповідного вимірювання для навушників. Натисніть &apos;OK&apos; для завантаження даних еквалайзер до аудіо двигуна.
+Це перевизначить поточну конфігурацію GraphicEQ.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Manage database</source>
-      <translation type="unfinished"/>
+      <translation>Керування базою даних</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
       <source>No measurements found</source>
-      <translation type="unfinished"/>
+      <translation>Вимірювання відсутні</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>База даних AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -192,13 +193,16 @@ This will override your current GraphicEQ configuration.</source>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation type="unfinished"/>
+      <translation>Перед використанням інтеграції з AutoEQ, вам потрібно завантажити мінімізовану версію бази компенсацій навушників (~50Мб) на жорсткий диск.
+Для цього кроку потрібне підключення до Інтернету.
+
+Продовжити та увімкнути цю функцію?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
       <source>Failed to retrieve version information</source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося отримати інформацію про версію</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
@@ -207,17 +211,20 @@ Do you want to continue and enable this feature?</source>
 
 Status code: %0
 Reason: %1</source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося отримати інформацію про пакет із віддаленого сховища:
+
+ Код стану: %0
+ Причина: %1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Return to database</source>
-      <translation type="unfinished"/>
+      <translation>Повернутися до бази даних</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
       <source>No new updates available</source>
-      <translation type="unfinished"/>
+      <translation>Немає нових оновлень</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
@@ -226,27 +233,31 @@ Reason: %1</source>
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
 
 Do you want to re-install the latest database update anyway?</source>
-      <translation type="unfinished"/>
+      <translation>Локальна база даних наразі актуальна; зараз немає нових оновлень.
+
+Може знадобитися до 24-х годин для нових змін у репозиторії AutoEQ, щоб вони стали доступними для завантаження. Пакунки генеруються щодня о четвертій годині ранку по UTC.
+
+Все одно бажаєте перевстановити останнє оновлення бази даних?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>Database cleared</source>
-      <translation type="unfinished"/>
+      <translation>Базу даних очищено</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>The database has been removed from your hard disk</source>
-      <translation type="unfinished"/>
+      <translation>База даних була видалена з жорсткого диску</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Помилка</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося отримати відповідний файл з бази даних. Будь ласка, оновіть локальну базу даних, оскільки вона виглядає неповною.</translation>
     </message>
   </context>
   <context>
@@ -254,50 +265,35 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(не встановлено)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to blocklist</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="98"/>
-      <source>Latency: 0ms</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="105"/>
-      <source>Rate: 0Hz</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="112"/>
-      <source>Format: Unknown</source>
-      <translation type="unfinished"/>
+      <translation>Додати до чорного списку</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
-      <translation type="unfinished"/>
+      <translation>Додати до списку дозволених</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
       <source>Rate: %1Hz</source>
-      <translation type="unfinished"/>
+      <translation>Швидкість: %1Гц</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Затримка: %1мс</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
       <source>Format: %1</source>
-      <translation type="unfinished"/>
+      <translation>Формат: %1</translation>
     </message>
   </context>
   <context>
@@ -305,12 +301,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.ui" line="43"/>
       <source>Active apps</source>
-      <translation type="unfinished"/>
+      <translation>Активні додатки</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.cpp" line="19"/>
       <source>No apps are playing audio</source>
-      <translation type="unfinished"/>
+      <translation>Немає додатків, що відтворюють аудіо</translation>
     </message>
   </context>
   <context>
@@ -318,7 +314,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>Керування дозволом для автопочатку JamesDSP</translation>
     </message>
   </context>
   <context>
@@ -326,12 +322,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
       <source>Annotations</source>
-      <translation type="unfinished"/>
+      <translation>Примітки</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
       <source>Functions</source>
-      <translation type="unfinished"/>
+      <translation>Функції</translation>
     </message>
   </context>
   <context>
@@ -339,22 +335,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
       <source>Auto-scroll</source>
-      <translation type="unfinished"/>
+      <translation>Автоматичне прокручування</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>Копіювати виділене</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
       <source>Copy all</source>
-      <translation type="unfinished"/>
+      <translation>Скопіювати все</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Очистити</translation>
     </message>
   </context>
   <context>
@@ -362,291 +358,291 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation type="unfinished"/>
+      <translation>IDE сценаріїв EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
       <source>File</source>
-      <translation type="unfinished"/>
+      <translation>Файл</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Редагувати</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>Навігація</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>Вигляд</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
       <source>Help</source>
-      <translation type="unfinished"/>
+      <translation>Довідка</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
       <source>Open</source>
-      <translation type="unfinished"/>
+      <translation>Відкрити</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
       <source>Open script</source>
-      <translation type="unfinished"/>
+      <translation>Відкрити сценарій</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
       <source>Ctrl+O</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>Закрити файл</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
       <source>Ctrl+Shift+W</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Зберегти</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
       <source>Ctrl+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>Зберегти як...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
       <source>Undo</source>
-      <translation type="unfinished"/>
+      <translation>Скасувати дію</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
       <source>Redo</source>
-      <translation type="unfinished"/>
+      <translation>Повторити дію</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
       <source>Ctrl+Shift+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation type="unfinished"/>
+      <translation>Знайти/Замінити...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
       <source>Ctrl+F</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Go to line...</source>
-      <translation type="unfinished"/>
+      <translation>Перейти до рядка...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
       <source>Go to line</source>
-      <translation type="unfinished"/>
+      <translation>Перейти до рядка</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
       <source>Ctrl+L</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+L</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
       <source>Jump to function...</source>
-      <translation type="unfinished"/>
+      <translation>Перейти до функції...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
       <source>Ctrl+M</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+M</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
       <source>Go to @init</source>
-      <translation type="unfinished"/>
+      <translation>Перейти до @init</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
       <source>F2</source>
-      <translation type="unfinished"/>
+      <translation>F2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
       <source>Go to @sample</source>
-      <translation type="unfinished"/>
+      <translation>Перейти до @sample</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
       <source>F3</source>
-      <translation type="unfinished"/>
+      <translation>F3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>Автоматичні дужки</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>Замінювати табуляції пробілами</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>Документація EEL2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
       <source>F1</source>
-      <translation type="unfinished"/>
+      <translation>F1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>Запустити код</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
       <source>F5</source>
-      <translation type="unfinished"/>
+      <translation>F5</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
       <source>New</source>
-      <translation type="unfinished"/>
+      <translation>Новий</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation type="unfinished"/>
+      <translation>Майстер нового сценарію</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
       <source>Ctrl+N</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
       <source>Freeze</source>
-      <translation type="unfinished"/>
+      <translation>Заморозити</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
       <source>Loaded projects</source>
-      <translation type="unfinished"/>
+      <translation>Завантажені проекти</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>Контур коду</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
       <source>Variable view</source>
-      <translation type="unfinished"/>
+      <translation>Змінний вигляд</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
       <source>Console output</source>
-      <translation type="unfinished"/>
+      <translation>Вивід з консолі</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; почали компілюватися о %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="295"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;Компіляція зупинилася о %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="299"/>
       <source>Script initialization took %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Ініціалізація сценарію забрала %1мс</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Помилка</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося записати до файлу</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>Відкрити EEL-сценарій</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
       <source>EEL2 Script (*.eel)</source>
-      <translation type="unfinished"/>
+      <translation>EEL2 сценарій (*.eel)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>Зберегти як</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>Неможливо виконати</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>No script file opened. Please open one first and try again.</source>
-      <translation type="unfinished"/>
+      <translation>Не відкрито жодного файлу сценарію. Відкрийте якийсь спочатку і повторіть спробу.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
       <source>Enter line number:</source>
-      <translation type="unfinished"/>
+      <translation>Введіть номер рядка:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="472"/>
       <source>Enter function name:</source>
-      <translation type="unfinished"/>
+      <translation>Введіть назву функції:</translation>
     </message>
   </context>
   <context>
@@ -654,7 +650,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
       <source>No project loaded</source>
-      <translation type="unfinished"/>
+      <translation>Немає завантаженого проекту</translation>
     </message>
   </context>
   <context>
@@ -662,17 +658,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
       <source>Package manager</source>
-      <translation type="unfinished"/>
+      <translation>Менеджер пакетів</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
       <source>Downloading package...</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
-      <source>0MB/49.56MB</source>
-      <translation type="unfinished"/>
+      <translation>Завантаження пакету...</translation>
     </message>
   </context>
   <context>
@@ -680,32 +671,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>Оновити</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
-      <source>...</source>
-      <translation type="unfinished"/>
+      <translation>Додати до обраного</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Перейменувати</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Видалити</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>Не знайдено підтримуваних файлів</translation>
     </message>
   </context>
   <context>
@@ -713,72 +699,60 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>Знайти:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>Замінити:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>Попередній</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>Далі</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
       <source>&amp;Options</source>
-      <translation type="unfinished"/>
+      <translation>Параметри</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
-      <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whether the text to search should be interpreted as a regular expression.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may want to take a look at the syntax of regular expressions:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="149"/>
       <source>R&amp;egular expression</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
       <source>&amp;Close</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="221"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
       <source>Replace &amp;All</source>
       <translation type="unfinished"/>
     </message>
@@ -804,54 +778,55 @@ p, li { white-space: pre-wrap; }
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>Дякуємо, що встановили цей додаток!
+Проте, перед тим як ви зможете почати гратись з JamesDSP для Linux, ми повинні внести деякі корективи, щоб забезпечити найкращий можливий досвід з JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
       <source>Next &gt;</source>
-      <translation type="unfinished"/>
+      <translation>Далі &gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
       <source>Run in background?</source>
-      <translation type="unfinished"/>
+      <translation>Працювати у фоновому режимі?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
       <source>No, don&apos;t apply effects in background</source>
-      <translation type="unfinished"/>
+      <translation>Ні, не застосовувати ефекти у фоновому режимі</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
       <source>Yes, minimize to tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Так, згортати до системного лотка</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1817"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Запускати згорнутим при увімкненні комп'ютера</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
       <source>That&apos;s it!</source>
-      <translation type="unfinished"/>
+      <translation>От і все!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation type="unfinished"/>
+      <translation>Ви готові! Ви можете змінити будь-який вибір, який ви щойно зробили, у розділі налаштувань. Перегляньте його, щоб отримати додаткові параметри налаштування. Відвідайте нашу спільноту у Телеграмі, щоб отримати підтримку та першим дізнаватися про оновлення!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
       <source>Telegram</source>
-      <translation type="unfinished"/>
+      <translation>Телеграм</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Закрити</translation>
     </message>
   </context>
   <context>
@@ -1645,18 +1620,8 @@ This setting is only in effect if IR optimization is enabled.
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
-      <source>...</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
-      <source>untitled</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -2218,7 +2183,7 @@ Please create one first before adding a new rule.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation type="unfinished"/>
     </message>
@@ -2556,15 +2521,6 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
-      <source>...</source>
       <translation type="unfinished"/>
     </message>
   </context>

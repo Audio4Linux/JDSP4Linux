@@ -39,22 +39,22 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Surowy (wygładzony)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Błąd (wygładzony)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>Korekcja</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>Surowy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
@@ -64,12 +64,12 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
       <source>Equalized</source>
-      <translation type="unfinished"/>
+      <translation>Wykorektowany</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>Korekcja (znormalizowana)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
@@ -102,7 +102,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>Baza danych AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
@@ -117,17 +117,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
       <source>Checked out at commit:</source>
-      <translation type="unfinished"/>
+      <translation>Sprawdzone w commicie:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
       <source>Last commit created at:</source>
-      <translation type="unfinished"/>
+      <translation>Ostatni commit utworzony:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation type="unfinished"/>
+      <translation>Pakiet wygenerowany:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
@@ -162,13 +162,14 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
       <source>No measurement selected</source>
-      <translation type="unfinished"/>
+      <translation>Nie wybrano pomiaru</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
       <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
-      <translation type="unfinished"/>
+      <translation>Użyj pola wyszukiwania po lewej stronie, aby znaleźć odpowiedni pomiar dla swoich słuchawek. Naciśnij &apos;OK&apos;, aby załadować dane korekcji do silnika audio.
+Spowoduje to zastąpienie bieżącej konfiguracji korektora graficznego.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
@@ -179,7 +180,7 @@ This will override your current GraphicEQ configuration.</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
       <source>No measurements found</source>
-      <translation type="unfinished"/>
+      <translation>Nie znaleziono pomiaru</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
@@ -192,13 +193,16 @@ This will override your current GraphicEQ configuration.</source>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation type="unfinished"/>
+      <translation>Przed skorzystaniem z integracji AutoEQ należy pobrać zminimalizowaną wersję bazy danych kompensacji słuchawek (~50 MB) na dysk twardy.
+Na tym etapie wymagane jest połączenie z internetem.
+
+Czy chcesz kontynuować i włączyć tę funkcję?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
       <source>Failed to retrieve version information</source>
-      <translation type="unfinished"/>
+      <translation>Nie udało się pobrać informacji o wersji</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
@@ -207,7 +211,10 @@ Do you want to continue and enable this feature?</source>
 
 Status code: %0
 Reason: %1</source>
-      <translation type="unfinished"/>
+      <translation>Nie udało się pobrać informacji o pakiecie ze zdalnego repozytorium:
+
+Kod statusu: %0
+Powód: %1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
@@ -226,7 +233,11 @@ Reason: %1</source>
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
 
 Do you want to re-install the latest database update anyway?</source>
-      <translation type="unfinished"/>
+      <translation>Lokalna baza danych jest obecnie aktualna; w tej chwili nie są dostępne żadne nowe aktualizacje.
+
+Nowe zmiany w repozytorium upstream AutoEQ mogą zająć do 24 godzin, zanim staną się dostępne do pobrania tutaj. Paczki są generowane codziennie o godzinie 4:00 czasu UTC.
+
+Czy mimo to chcesz ponownie zainstalować najnowszą aktualizację bazy danych?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
@@ -246,7 +257,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
-      <translation type="unfinished"/>
+      <translation>Nie można pobrać odpowiedniego pliku z bazy danych. Zaktualizuj lokalną bazę danych, ponieważ wydaje się być niekompletna.</translation>
     </message>
   </context>
   <context>
@@ -254,7 +265,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(nieustawione)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
@@ -264,40 +275,25 @@ Do you want to re-install the latest database update anyway?</source>
       <translation>Dodaj do listy blokowanych</translation>
     </message>
     <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="98"/>
-      <source>Latency: 0ms</source>
-      <translation>Opóźnienie: 0ms</translation>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="105"/>
-      <source>Rate: 0Hz</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/item/AppItem.ui" line="112"/>
-      <source>Format: Unknown</source>
-      <translation>Format: Nieznany</translation>
-    </message>
-    <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
-      <translation type="unfinished"/>
+      <translation>Dodaj do listy dozwolonych</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
       <source>Rate: %1Hz</source>
-      <translation type="unfinished"/>
+      <translation>Częstotliwość: %1Hz</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Opóźnienie: %1ms</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
       <source>Format: %1</source>
-      <translation type="unfinished"/>
+      <translation>Format: %1</translation>
     </message>
   </context>
   <context>
@@ -305,12 +301,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.ui" line="43"/>
       <source>Active apps</source>
-      <translation type="unfinished"/>
+      <translation>Aktywne aplikacje</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.cpp" line="19"/>
       <source>No apps are playing audio</source>
-      <translation type="unfinished"/>
+      <translation>Żadna aplikacja nie odtwarza dźwięku</translation>
     </message>
   </context>
   <context>
@@ -318,7 +314,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>Zarządzaj uprawnieniami automatycznego uruchamiania dla JamesDSP</translation>
     </message>
   </context>
   <context>
@@ -326,12 +322,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
       <source>Annotations</source>
-      <translation type="unfinished"/>
+      <translation>Adnotacje</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
       <source>Functions</source>
-      <translation type="unfinished"/>
+      <translation>Funkcje</translation>
     </message>
   </context>
   <context>
@@ -339,22 +335,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
       <source>Auto-scroll</source>
-      <translation type="unfinished"/>
+      <translation>Automatyczne przewijanie</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>Kopiuj zaznaczenie</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
       <source>Copy all</source>
-      <translation type="unfinished"/>
+      <translation>Kopiuj wszystko</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Wyczyść</translation>
     </message>
   </context>
   <context>
@@ -362,266 +358,266 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation type="unfinished"/>
+      <translation>IDE skryptów EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
       <source>File</source>
-      <translation type="unfinished"/>
+      <translation>Plik</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Edytuj</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>Nawigacja</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>Widok</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
       <source>Help</source>
-      <translation type="unfinished"/>
+      <translation>Pomoc</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
       <source>Open</source>
-      <translation type="unfinished"/>
+      <translation>Otwórz</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
       <source>Open script</source>
-      <translation type="unfinished"/>
+      <translation>Otwórz skrypt</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
       <source>Ctrl+O</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij plik</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
       <source>Ctrl+Shift+W</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
       <source>Ctrl+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz jako...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
       <source>Undo</source>
-      <translation type="unfinished"/>
+      <translation>Cofnij</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
       <source>Redo</source>
-      <translation type="unfinished"/>
+      <translation>Ponów</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
       <source>Ctrl+Shift+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation type="unfinished"/>
+      <translation>Znajdź i zamień...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
       <source>Ctrl+F</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Go to line...</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do wiersza...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
       <source>Go to line</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do wiersza</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
       <source>Ctrl+L</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+L</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
       <source>Jump to function...</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do funkcji...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
       <source>Ctrl+M</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+M</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
       <source>Go to @init</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do @init</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
       <source>F2</source>
-      <translation type="unfinished"/>
+      <translation>F2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
       <source>Go to @sample</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do @sample</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
       <source>F3</source>
-      <translation type="unfinished"/>
+      <translation>F3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>Zamykaj nawiasy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>Zastąp tabulatory spacjami</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>Dokumentacja EEL2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
       <source>F1</source>
-      <translation type="unfinished"/>
+      <translation>F1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>Wykonaj kod</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
       <source>F5</source>
-      <translation type="unfinished"/>
+      <translation>F5</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
       <source>New</source>
-      <translation type="unfinished"/>
+      <translation>Nowy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation type="unfinished"/>
+      <translation>Kreator nowego skryptu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
       <source>Ctrl+N</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
       <source>Freeze</source>
-      <translation type="unfinished"/>
+      <translation>Zamróź</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
       <source>Loaded projects</source>
-      <translation type="unfinished"/>
+      <translation>Załadowane projekty</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>Konspekt kodu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
       <source>Variable view</source>
-      <translation type="unfinished"/>
+      <translation>Widok zmiennych</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
       <source>Console output</source>
-      <translation type="unfinished"/>
+      <translation>Dane wyjściowe konsoli</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>Kompilacja &apos;%1&apos; rozpoczęła się o %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="295"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;Kompilacja zatrzymała się o %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="299"/>
       <source>Script initialization took %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Inicjalizacja skryptu zajęła %1ms</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>Nie można zapisać pliku</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>Otwórz skrypt EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
       <source>EEL2 Script (*.eel)</source>
-      <translation type="unfinished"/>
+      <translation>Skrypt EEL2 (*.eel)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
@@ -631,22 +627,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>Nie można wykonać</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>No script file opened. Please open one first and try again.</source>
-      <translation type="unfinished"/>
+      <translation>Nie otwarto pliku skryptu. Proszę najpierw otworzyć plik i spróbować ponownie.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
       <source>Enter line number:</source>
-      <translation type="unfinished"/>
+      <translation>Wprowadź numer wiersza:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="472"/>
       <source>Enter function name:</source>
-      <translation type="unfinished"/>
+      <translation>Wprowadź nazwę funkcji:</translation>
     </message>
   </context>
   <context>
@@ -669,11 +665,6 @@ Do you want to re-install the latest database update anyway?</source>
       <source>Downloading package...</source>
       <translation>Pobieranie pakietu...</translation>
     </message>
-    <message>
-      <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="55"/>
-      <source>0MB/49.56MB</source>
-      <translation type="unfinished"/>
-    </message>
   </context>
   <context>
     <name>FileSelectionWidget</name>
@@ -685,12 +676,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="85"/>
-      <source>...</source>
-      <translation type="unfinished"/>
+      <translation>Dodaj do zakładek</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
@@ -705,7 +691,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>Nie znaleziono obsługiwanych plików</translation>
     </message>
   </context>
   <context>
@@ -713,84 +699,72 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Formularz</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Znajdź:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>Z&amp;astąp:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do poprzedniego</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>Przejdź do następnego</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
       <source>&amp;Options</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Opcje</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
-      <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whether the text to search should be interpreted as a regular expression.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You may want to take a look at the syntax of regular expressions:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="149"/>
       <source>R&amp;egular expression</source>
-      <translation type="unfinished"/>
+      <translation>Wyraż&amp;enie regularne</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="165"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
-      <translation type="unfinished"/>
+      <translation>Całe sło&amp;wa </translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="181"/>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Rozróżniaj wielkość liter</translation>
+    </message>
+    <message>
+      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
+      <source>&amp;Close</source>
+      <translation>&amp;Zamknij</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
-      <source>&amp;Close</source>
-      <translation type="unfinished"/>
+      <source>&amp;Replace</source>
+      <translation>&amp;Zastąp</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
-      <source>&amp;Replace</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="221"/>
       <source>Replace &amp;All</source>
-      <translation type="unfinished"/>
+      <translation>Zastąp wsz&amp;ystko</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
       <source>no match found</source>
-      <translation type="unfinished"/>
+      <translation>nie znaleziono dopasowania</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="170"/>
       <source>Replaced %1 occurrence(s)</source>
-      <translation type="unfinished"/>
+      <translation>Wykonano %1 zastąpień</translation>
     </message>
   </context>
   <context>
@@ -798,60 +772,61 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
       <source>Welcome!</source>
-      <translation type="unfinished"/>
+      <translation>Witaj!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>Dziękujemy za instalację tej aplikacji!
+Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprowadzić pewne poprawki, aby zapewnić najlepsze możliwe wrażenia z JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
       <source>Next &gt;</source>
-      <translation type="unfinished"/>
+      <translation>Dalej &gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
       <source>Run in background?</source>
-      <translation type="unfinished"/>
+      <translation>Uruchamiać w tle?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
       <source>No, don&apos;t apply effects in background</source>
-      <translation type="unfinished"/>
+      <translation>Nie, nie stosuj efektów w tle</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
       <source>Yes, minimize to tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Tak, minimalizuj ikonę do zasobnika</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1817"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom zminimalizowany przy starcie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
       <source>That&apos;s it!</source>
-      <translation type="unfinished"/>
+      <translation>To jest to!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation type="unfinished"/>
+      <translation>Wszystko jest gotowe! Możesz zmienić wszystkie te opcje w sekcji ustawień. Przejrzyj ustawienia, aby uzyskać dalsze opcje dostosowywania. Odwiedź naszą społeczność Telegram, aby uzyskać wsparcie i aktualizacje!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
       <source>Telegram</source>
-      <translation type="unfinished"/>
+      <translation>Telegram</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij</translation>
     </message>
   </context>
   <context>
@@ -859,7 +834,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>FlatTabWidget</translation>
     </message>
   </context>
   <context>
@@ -867,101 +842,101 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Włącz korektor graficzny</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
       <source>Freq.</source>
-      <translation type="unfinished"/>
+      <translation>Częstotliwość</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
       <source>Gain</source>
-      <translation type="unfinished"/>
+      <translation>Wzmocnienie</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>Baza danych AutoEQ...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
       <source>15-band</source>
-      <translation type="unfinished"/>
+      <translation>15-pasmowy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
       <source>31-band</source>
-      <translation type="unfinished"/>
+      <translation>31-pasmowy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
       <source>variable</source>
-      <translation type="unfinished"/>
+      <translation>zmienna</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
       <source>Import</source>
-      <translation type="unfinished"/>
+      <translation>Importuj</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="263"/>
       <source>Export</source>
-      <translation type="unfinished"/>
+      <translation>Eksportuj</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
       <source>Invert response</source>
-      <translation type="unfinished"/>
+      <translation>Odwróć wyjście</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>Normalizuj wyjście</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
       <source>Reset response</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj wyjście</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
       <source>Import EqualizerAPO settings</source>
-      <translation type="unfinished"/>
+      <translation>Importuj ustawienia EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
       <source>Import frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Importuj reakcję na częstotliwość</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
       <source>CSV frequency response (*.csv)</source>
-      <translation type="unfinished"/>
+      <translation>Reakcja na częstotliwość CSV (*.csv)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
       <source>All files (*.*)</source>
-      <translation type="unfinished"/>
+      <translation>Wszystkie pliki (*.*)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
       <source>Import EqualizerAPO graphic EQ preset</source>
-      <translation type="unfinished"/>
+      <translation>Zaimportuj profil korektora graficznego EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
       <source>EqualizerAPO GraphicEQ (*.txt)</source>
-      <translation type="unfinished"/>
+      <translation>Ustawienie korektora graficznego EqualizerAPO (*.txt)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
       <source>Export frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Eksportuj reakcję na częstotliwość</translation>
     </message>
   </context>
   <context>
@@ -969,17 +944,17 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="62"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
       <source>%1MB of %2MB downloaded</source>
-      <translation type="unfinished"/>
+      <translation>Pobrano %1MB z %2MB</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
       <source>Decompressing package...</source>
-      <translation type="unfinished"/>
+      <translation>Rozpakowywanie pakietu...</translation>
     </message>
   </context>
   <context>
@@ -988,51 +963,53 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
-      <translation type="unfinished"/>
+      <translation>Nie załadowano żadnego skryptu</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
       <source>Enable</source>
-      <translation type="unfinished"/>
+      <translation>Włącz</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Utwórz nowy skrypt</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <source>Cannot restore defaults.
 No EEL file is currently loaded.</source>
-      <translation type="unfinished"/>
+      <translation>Nie można przywrócić wartości domyślnych.
+Żaden plik EEL nie jest załadowany.</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Selected EEL file does not exist anymore.
 Please select another one</source>
-      <translation type="unfinished"/>
+      <translation>Wybrany plik EEL już nie istnieje.
+Proszę wybrać inny plik</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
       <source>Edit script</source>
-      <translation type="unfinished"/>
+      <translation>Edytuj skrypt</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
       <source>No customizable parameters</source>
-      <translation type="unfinished"/>
+      <translation>Brak konfigurowalnych opcji</translation>
     </message>
   </context>
   <context>
@@ -1040,570 +1017,570 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="26"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP dla Linuxa</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamiczne wzmocnienie basów&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wzmocnienie basów z wykrywaniem częstotliwości. Automatycznie ustawia własne parametry, takie jak wzmocnienie, szerokość pasma i częstotliwość odcięcia, analizując przychodzący strumień audio&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalne wzmocnienie:&lt;/span&gt; dostosowuje ilość dynamicznych efektów wzmocnienia basów.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Dynamiczne wzmocnienie basów</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>Maksymalne wzmocnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compressor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compressor, an automatic dynamic range flattener that can flatten the signal spectral to reduce transient; it is like a drum volume reducer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max attack:&lt;/span&gt; adjusts how fast the Dynamic Range Compressor reacts.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max release:&lt;/span&gt; adjusts how slow the Dynamic Range Compressor is performing gain decay.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Aggressiveness:&lt;/span&gt; adjusts how strong the spectral flattening is going to be&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Kompresor dynamiki&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza kompresor dynamiki, automatyczny spłaszczacz dynamiki, który może spłaszczyć widmo sygnału w celu zmniejszenia przejściowości; to jest jak osłabiacz głośności perkusji.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalny atak:&lt;/span&gt; dostosowuje szybkość reakcji kompresora dynamiki.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalne uwolnienie:&lt;/span&gt; określa, jak wolno kompresor dynamiki wykonuje zanik wzmocnienia.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Agresywność:&lt;/span&gt; określa, jak silne będzie spłaszczenie widma&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Dynamic range compressor</source>
-      <translation type="unfinished"/>
+      <translation>Kompresor dynamiki</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
       <source>Maximum attack</source>
-      <translation type="unfinished"/>
+      <translation>Maksymalny atak</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="206"/>
       <source>Maximum release</source>
-      <translation type="unfinished"/>
+      <translation>Maksymalne uwolnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="229"/>
       <source>Aggressiveness</source>
-      <translation type="unfinished"/>
+      <translation>Agresywność</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="275"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Modelowanie analogowe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Nadpróbkowane modelowanie analogowe to wolny od aliasingu generator równych składowych harmonicznych.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="278"/>
       <source>Analog modelling</source>
-      <translation type="unfinished"/>
+      <translation>Modelowanie analogowe</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="290"/>
       <source>Preamp (Harmonics)</source>
-      <translation type="unfinished"/>
+      <translation>Przedwzmacniacz (składowych harmonicznych)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="313"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ten limiter wyjściowy próbuje uniknąć obcinania sygnału wyjściowego (spowodowanego przez procesor DSP, który próbuje sprawić, by część lub całość dźwięku była głośniejsza niż wcześniej, jeśli wejście jest już bliskie maksimum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Próg limitera:&lt;/span&gt; Powinno to być ustawione na -0.1, chyba że z jakiegoś powodu dźwięk jest przycinany przed obcinaniem cyfrowym, w takim przypadku można ustawić niższe wartości.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Uwolnienie limitera:&lt;/span&gt; Limiter działa tylko wtedy, gdy ustawiony jest czas uwolnienia. Krótki czas uwolnienia spowoduje do słyszalnego zniekształcenia ograniczonego dźwięku, zwłaszcza dźwięków o niskich częstotliwościach; przedłużone uwolnienie jest zwykle preferowane, ale zmniejsza nieco objętość, którą można osiągnąć. Jeśli &amp;quot;pompowanie&amp;quot; (znikanie ograniczonego dźwięku i powracanie do niego z czasem) staje się niepożądane, dłuższe lub krótsze uwolnienie może sprawić, że efekt będzie mniej zauważalny.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Wzmocnienie po przetwarzaniu:&lt;/span&gt; Wzmocnienie po przetwarzaniu działa jak cyfrowy suwak głośności dla wszystkich efektów, po ich zastosowaniu, ale zanim dźwięk dotrze do limitera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="316"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>Limiter/master</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="333"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>Próg</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="362"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>Uwolnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="385"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Wzmocnienie po przetwarzaniu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="451"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Obejmuje tradycyjny tryb BS2B (DSP stereofoniczny na binauralny Bauera) oraz bardziej zaawansowane, oparte na splocie, podejście HRTF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="454"/>
       <location filename="../../src/MainWindow.ui" line="510"/>
       <source>Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>Crossfeed</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="475"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>Tryb</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="492"/>
       <source>Custom BS2B parameters</source>
-      <translation type="unfinished"/>
+      <translation>Własne parametry BS2B</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="533"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>Częstotliwość cięcia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="588"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Rozpiętość dźwięku&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Algorytm, który wykrywa stereofoniczną zależność fazową w kilku obszarach widmowych i poprawia stereofoniczną scenę dźwiękową bez wpływu na integralność wokalu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="591"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>Rozpiętość dźwięku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="612"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>Poszerz poziom</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="657"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Pogłos&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zaawansowana sieć pogłosowa IIR (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="683"/>
       <source>Enable reverberation</source>
-      <translation type="unfinished"/>
+      <translation>Włącz pogłos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="703"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>Profil ustawień</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
       <location filename="../../src/MainWindow.ui" line="2090"/>
       <source>...</source>
-      <translation type="unfinished"/>
+      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="750"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>Współczynnik nadpróbkowania</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="770"/>
       <source>Early reflection factor</source>
-      <translation type="unfinished"/>
+      <translation>Współczynnik wczesnego odbicia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="793"/>
       <source>Early reflection amount</source>
-      <translation type="unfinished"/>
+      <translation>Ilość wczesnych odbić</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="810"/>
       <source>Early reflection width</source>
-      <translation type="unfinished"/>
+      <translation>Szerokość wczesnego odbicia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="833"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (wejścia)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="853"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (basu)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="873"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (tłumienia)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="893"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (wyjścia)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="920"/>
       <source>Final wet mix</source>
-      <translation type="unfinished"/>
+      <translation>Końcowy mokry miks</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="927"/>
       <source>Final dry mix</source>
-      <translation type="unfinished"/>
+      <translation>Końcowy suchy miks</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="934"/>
       <source>Reverb wetness</source>
-      <translation type="unfinished"/>
+      <translation>Wilgotność pogłosu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="941"/>
       <source>Width L/R mix</source>
-      <translation type="unfinished"/>
+      <translation>Szerokość miksu L/R</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="948"/>
       <source>LFO wander amount</source>
-      <translation type="unfinished"/>
+      <translation>Wielkość fluktuacji LFO</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="955"/>
       <source>LFO spin amount</source>
-      <translation type="unfinished"/>
+      <translation>Wielkość wirowania LFO</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="962"/>
       <source>Time decay</source>
-      <translation type="unfinished"/>
+      <translation>Czas zaniku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="969"/>
       <source>Delay</source>
-      <translation type="unfinished"/>
+      <translation>Opóźnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="976"/>
       <source>Bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Wzmocnienie basu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1124"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolujący korektor FIR (SOI)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza korektor FIR czyli SOI. FIR to skrót od &amp;quot;Finite Impulse Response&amp;quot; (skrót SOI jest tłumaczeniem poprzedniego, &amp;quot;skończona odpowiedź impulsowa&amp;quot;)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Typ filtra:&lt;/span&gt; Wybiera pomiędzy filtrowaniem minimalnej fazy a liniowym filtrowaniem fazy. Minimalna faza jest zalecanym typem filtra, ponieważ minimalizuje opóźnienie (efektywnie zero dla dowolnego rozsądnego kształtu filtra). Natomiast wprowadzone zmiany fazowe zwykle nie są zauważalne (faza liniowa jest pomocna w przed/postprodukcji nagrań wielościeżkowych, gdzie trzeba zachować relacje fazowe między ścieżkami. Jednak w przypadku odtwarzania w czasie rzeczywistym korektor fazy liniowej wprowadza opóźnienie co najmniej o połowę długości filtra.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1216"/>
       <source>Enable EQ</source>
-      <translation type="unfinished"/>
+      <translation>Włącz korektor</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1236"/>
       <source>Presets...</source>
-      <translation type="unfinished"/>
+      <translation>Profil ustawień...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1256"/>
       <source>Filter type</source>
-      <translation type="unfinished"/>
+      <translation>Typ filtra</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1260"/>
       <source>Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>Minimalna faza</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1265"/>
       <source>Linear phase</source>
-      <translation type="unfinished"/>
+      <translation>Liniowa faza</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1285"/>
       <source>Interpolator</source>
-      <translation type="unfinished"/>
+      <translation>Interpolator</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1288"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tryb interpolacji&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1292"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>Kawałkowy sześcienny interpolujący wielomian Hermite'a</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1297"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation type="unfinished"/>
+      <translation>Zmodyfikowany splajn Hiroshi Akima</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1317"/>
       <source>Reset EQ</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj korektor</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Fixed bands</source>
-      <translation type="unfinished"/>
+      <translation>Ustalone pasma</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1361"/>
       <source>Flexible bands</source>
-      <translation type="unfinished"/>
+      <translation>Elastyczne pasma</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1393"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Konwolwer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Podzielony na partycje konwolwer (konwolwer z automatyczną segmentacją). Wybierz plik odpowiedzi impulsowej, który ma zostać spleciony. Pobiera charakterystykę sygnału odpowiedzi impulsowej i stosuje ją do przychodzącego dźwięku w czasie rzeczywistym.&lt;/p&gt;&lt;p&gt;Obsługuje odpowiedzi impulsowe mono, stereo, pełne/prawdziwe stereo (LL, LR, RL, RR).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Optymalizacja odpowiedzi impulsowej:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ta opcja ma na celu maksymalne skrócenie długości odpowiedzi impulsowej; chodzi o to, aby maksymalnie zmniejszyć opóźnienie, prawdopodobnie zmniejszając zużycie energii.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1418"/>
       <location filename="../../src/MainWindow.ui" line="1740"/>
       <source>Filesystem</source>
-      <translation type="unfinished"/>
+      <translation>System plików</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1440"/>
       <source>Bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>Zakładki</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1479"/>
       <source>Enable convolver</source>
-      <translation type="unfinished"/>
+      <translation>Włącz konwolwer</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1486"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>Optymalizacja IR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1506"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>Oryginalny</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1511"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>Zmniejsz</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1516"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>Przekształć układ minimalnofazowy i zmniejsz</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1524"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Zaaw. edycja kształtu fali</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1543"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Edytuj</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1589"/>
       <source>Channels:</source>
-      <translation type="unfinished"/>
+      <translation>Kanały:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1609"/>
       <source>Samples:</source>
-      <translation type="unfinished"/>
+      <translation>Próbki:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1668"/>
       <source>No selection</source>
-      <translation type="unfinished"/>
+      <translation>Brak wyboru</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1715"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Głównym celem jest wykonanie korekcji parametrycznej dźwięku, jednak wymaga to od użytkownika dostarczenia pliku .vdc, który generuje DDCToolbox.&lt;/p&gt;&lt;p&gt;ViPER-DDC w jDSP to uogólniona implementacja filtrów sekcji drugiego rzędu, która różni się nieco od implementacji w Viper4Android. V4A obsługuje tylko szczytowy filtr parametryczny; powodem jest to, że V4A używa właściwości współczynnika udziału filtra szczytowego. Natomiast jDSP nie ma takiego założenia.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1762"/>
       <source>Database</source>
-      <translation type="unfinished"/>
+      <translation>Baza danych</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1803"/>
       <source>Create</source>
-      <translation type="unfinished"/>
+      <translation>Utwórz</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1827"/>
       <source>Create your custom DDC files using DDCToolbox</source>
-      <translation type="unfinished"/>
+      <translation>Utwórz własne pliki DDC za pomocą DDCToolbox</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1837"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1893"/>
       <source>View installation instructions</source>
-      <translation type="unfinished"/>
+      <translation>Pokaż instrukcje instalacji</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1949"/>
       <source>Enable ViPER-DDC</source>
-      <translation type="unfinished"/>
+      <translation>Włącz ViPER-DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1972"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Programowalny DSP na żywo&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Jest to maszyna wirtualna, która kompiluje plik kodu .eel jako dane wejściowe i uruchamia instrukcje; w prostych słowach pozwala użytkownikom programować własne efekty dźwiękowe.&lt;/p&gt;&lt;p&gt;Liczba obsługiwanych operacji jest ogromna; sprawdź oficjalną dokumentację: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Naciśnij &apos;Edytuj skrypt&apos;, aby uruchomić wbudowane środowisko skryptowe dla plików kodu EEL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1994"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Korektor odpowiedzi samowolnej&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Znany również jako GraphicEQ z EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2032"/>
       <source>Custom Presets</source>
-      <translation type="unfinished"/>
+      <translation>Profili użytkownika</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2035"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Profili użytkownika&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Twórz własne profili użytkownika i zarządzaj nimi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2061"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>Ustawienia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2067"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ustawienia&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Skonfiguruj tę aplikację&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2087"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reszta&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Różne akcje, które są używane rzadziej&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2145"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Pomiń filtry&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ta opcja określa, czy efekty dźwiękowe mają być włączone, czy wyłączone.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2148"/>
       <source>Bypass</source>
-      <translation type="unfinished"/>
+      <translation>Pomiń filtry</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="145"/>
       <source>%1 connected - Preset loaded automatically</source>
-      <translation type="unfinished"/>
+      <translation>%1 podłączone - profil użytkownika został załadowany samoczynnie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="164"/>
       <source>Cannot execute script</source>
-      <translation type="unfinished"/>
+      <translation>Nie można wykonać skryptu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="165"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation type="unfinished"/>
+      <translation>Bieżący plik EEL (w &apos;%1&apos;) nie istnieje już w systemie plików. Proszę ponownie otworzyć plik ręcznie.</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="279"/>
       <source>Apps</source>
-      <translation type="unfinished"/>
+      <translation>Aplikacje</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="280"/>
       <source>Driver status</source>
-      <translation type="unfinished"/>
+      <translation>Stan sterownika</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="284"/>
       <source>Relink audio pipeline</source>
-      <translation type="unfinished"/>
+      <translation>Połącz potok audio ponownie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="286"/>
       <source>Reset to defaults</source>
-      <translation type="unfinished"/>
+      <translation>Przywróć domyślne</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="287"/>
       <source>Load from file</source>
-      <translation type="unfinished"/>
+      <translation>Załaduj z pliku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="288"/>
       <source>Save to file</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz do pliku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="290"/>
       <source>Open LiveprogIDE</source>
-      <translation type="unfinished"/>
+      <translation>Otwórz LiveprogIDE</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="292"/>
       <source>What&apos;s this... (Select UI element)</source>
-      <translation type="unfinished"/>
+      <translation>Co to jest... (Wybierz element UI)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="393"/>
       <source>Bass/Misc</source>
-      <translation type="unfinished"/>
+      <translation>Bas/różne</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="394"/>
       <source>Sound Positioning</source>
-      <translation type="unfinished"/>
+      <translation>Pozycjonowanie dźwięku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="395"/>
       <source>Reverb</source>
-      <translation type="unfinished"/>
+      <translation>Pogłos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="396"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>Korektor</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="397"/>
       <source>Convolver</source>
-      <translation type="unfinished"/>
+      <translation>Konwolwer</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="398"/>
       <source>DDC</source>
-      <translation type="unfinished"/>
+      <translation>DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="399"/>
       <source>Liveprog</source>
-      <translation type="unfinished"/>
+      <translation>Liveprog</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="400"/>
       <source>Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Korektor graficzny</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="412"/>
       <source>Launch application</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom aplikację</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="554"/>
       <source>Reset Configuration</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj konfigurację</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="554"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>Na pewno?</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="578"/>
       <source>Load custom audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>Wczytaj własne audio.conf</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="590"/>
       <source>Save current audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz bieżący audio.conf</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1100"/>
       <source>Advanced waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Zaawansowana edycja kształtu fali</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1101"/>
@@ -1619,7 +1596,18 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>Zaawansowana edycja przebiegów (domyślnie: -80;-100;0;0;0;0)
+
+Ustaw próg automatycznego przycinania IR i dodaj opóźnienie do pociętego IR/przekształconego w układ minimalnofazowy.
+To ustawienie działa tylko wtedy, gdy włączona jest optymalizacja IR.
+
+Wartość 1: próg początkowy automatycznego przycinania (dB)
+Wartość 2: próg końcowy automatycznego przycinania (dB)
+Wartość 3: opóźnienie kanału 1 (próbki)
+Wartość 4: opóźnienie kanału 2 (próbki)
+Wartość 5: opóźnienie kanału 3 (próbki)
+Wartość 6: opóźnienie kanału 4 (próbki)
+</translation>
     </message>
   </context>
   <context>
@@ -1627,74 +1615,64 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Utwórz nowy skrypt</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="63"/>
       <source>New script</source>
-      <translation type="unfinished"/>
+      <translation>Nowy skrypt</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
       <source>Define and generate a basic script template</source>
-      <translation type="unfinished"/>
+      <translation>Zdefiniuj i wygeneruj podstawowy szablon skryptu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
       <source>Workspace directory</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="150"/>
-      <source>...</source>
-      <translation type="unfinished"/>
+      <translation>Katalog projektu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="168"/>
-      <source>untitled</source>
-      <translation type="unfinished"/>
+      <translation>Nazwa pliku</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
       <source>Description</source>
-      <translation type="unfinished"/>
+      <translation>Opis</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
       <source>Untitled script</source>
-      <translation type="unfinished"/>
+      <translation>Skrypt bez nazwy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
       <source>Select directory</source>
-      <translation type="unfinished"/>
+      <translation>Wybierz katalog</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <source>Workspace directory does not exist</source>
-      <translation type="unfinished"/>
+      <translation>Katalog projektu nie istnieje</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <source>A file with the same name already exists at this loction</source>
-      <translation type="unfinished"/>
+      <translation>Plik o tej samej nazwie już istnieje w tej lokalizacji</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>File name is empty or contains illegal characters</source>
-      <translation type="unfinished"/>
+      <translation>Nazwa pliku jest pusta lub zawiera niedozwolone znaki</translation>
     </message>
   </context>
   <context>
@@ -1704,7 +1682,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/utils/OverlayMsgProxy.h" line="33"/>
       <location filename="../../src/utils/OverlayMsgProxy.h" line="37"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij</translation>
     </message>
   </context>
   <context>
@@ -1712,7 +1690,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="14"/>
       <source>Palette editor</source>
-      <translation type="unfinished"/>
+      <translation>Edytor palet</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="26"/>
@@ -1721,47 +1699,47 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="143"/>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="169"/>
       <source>Select...</source>
-      <translation type="unfinished"/>
+      <translation>Wybierz...</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="39"/>
       <source>Base Color</source>
-      <translation type="unfinished"/>
+      <translation>Kolor podstawowy</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="52"/>
       <source>Background Color</source>
-      <translation type="unfinished"/>
+      <translation>Kolor tła</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="65"/>
       <source>Foreground Color</source>
-      <translation type="unfinished"/>
+      <translation>Kolor pierwszoplanowy</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="104"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="117"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="130"/>
       <source>White Icons</source>
-      <translation type="unfinished"/>
+      <translation>Białe ikony</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="156"/>
       <source>Selection Color</source>
-      <translation type="unfinished"/>
+      <translation>Kolor zaznaczenia</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="182"/>
       <source>Disabled Color</source>
-      <translation type="unfinished"/>
+      <translation>Kolor nieaktywnego elementu</translation>
     </message>
   </context>
   <context>
@@ -1769,17 +1747,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="26"/>
       <source>Add new rule...</source>
-      <translation type="unfinished"/>
+      <translation>Dodaj nową zasadę...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="38"/>
       <source>If</source>
-      <translation type="unfinished"/>
+      <translation>Jeśli</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="55"/>
       <source>is connected, then load preset</source>
-      <translation type="unfinished"/>
+      <translation>jest połączone, załaduj profil</translation>
     </message>
   </context>
   <context>
@@ -1787,37 +1765,37 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>Profile ustawień</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
       <source>Preset name</source>
-      <translation type="unfinished"/>
+      <translation>Nazwa profilu</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
       <source>Adds current config as a preset</source>
-      <translation type="unfinished"/>
+      <translation>Dodaje bieżącą konfigurację jako profil</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
       <source>Rules...</source>
-      <translation type="unfinished"/>
+      <translation>Zasady...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Usuń</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
       <source>Load</source>
-      <translation type="unfinished"/>
+      <translation>Załaduj</translation>
     </message>
   </context>
   <context>
@@ -1825,47 +1803,47 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="23"/>
       <source>No presets saved</source>
-      <translation type="unfinished"/>
+      <translation>Brak zapisanych profili</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
       <source>Cannot load preset</source>
-      <translation type="unfinished"/>
+      <translation>Nie można wczytać profilu</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
       <source>Selected file does not exist anymore</source>
-      <translation type="unfinished"/>
+      <translation>Wybrany plik już nie istnieje</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
       <source>Overwrite</source>
-      <translation type="unfinished"/>
+      <translation>Nadpisz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Zmień nazwę</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
       <source>Delete</source>
-      <translation type="unfinished"/>
+      <translation>Usuń</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
       <source>Rename preset</source>
-      <translation type="unfinished"/>
+      <translation>Zmień nazwę profilu</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="141"/>
       <source>Enter new name</source>
-      <translation type="unfinished"/>
+      <translation>Wpisz nową nazwę</translation>
     </message>
   </context>
   <context>
@@ -1873,45 +1851,47 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="14"/>
       <source>Preset auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>Zasady samo-przełączania profili</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="27"/>
       <source>Auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>Zasady samo-przełączania</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="62"/>
       <source>  Add new rule...  </source>
-      <translation type="unfinished"/>
+      <translation>  Dodaj nową zasadę...  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="75"/>
       <source>  Delete selection  </source>
-      <translation type="unfinished"/>
+      <translation>  Usuń wybrane  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="34"/>
       <source>No rules defined</source>
-      <translation type="unfinished"/>
+      <translation>Nie ustalono żadnych zasad</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="62"/>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
       <source>Cannot add new rule</source>
-      <translation type="unfinished"/>
+      <translation>Nie można dodać nowej zasady</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="63"/>
       <source>All connected audio devices have already a rule defined.
 You can only create one rule per device.</source>
-      <translation type="unfinished"/>
+      <translation>Wszystkie podłączone urządzenia audio mają już ustaloną zasadę.
+Możesz utworzyć tylko jedną zasadę na urządzenie.</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
       <source>You have no presets saved.
 Please create one first before adding a new rule.</source>
-      <translation type="unfinished"/>
+      <translation>Nie masz zapisanych profili.
+Utwórz profil, zanim dodasz nową regułę.</translation>
     </message>
   </context>
   <context>
@@ -1919,12 +1899,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="77"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>Urządzenie</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
       <source>Assigned preset</source>
-      <translation type="unfinished"/>
+      <translation>Przypisany profil</translation>
     </message>
   </context>
   <context>
@@ -1932,315 +1912,316 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="159"/>
       <source>List All Tabs</source>
-      <translation type="unfinished"/>
+      <translation>Wyświetl listę wszystkich kart</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>Odłącz grupę</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
       <source>Close Active Tab</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij aktywną kartę</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij grupę</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="248"/>
       <source>Close Tab</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij kartę</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="20"/>
       <source>Something went wrong</source>
-      <translation type="unfinished"/>
+      <translation>Coś poszło nie tak</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="21"/>
       <source>Failed to open URL with default browser.
  Please copy this URL manually: </source>
-      <translation type="unfinished"/>
+      <translation>Nie udało się otworzyć adresu URL w domyślnej przeglądarce.
+ Skopiuj ten adres URL ręcznie: </translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="29"/>
       <source>Flat</source>
-      <translation type="unfinished"/>
+      <translation>Płaski</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="82"/>
       <source>Pop</source>
-      <translation type="unfinished"/>
+      <translation>Pop</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="83"/>
       <source>Rock</source>
-      <translation type="unfinished"/>
+      <translation>Rock</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="84"/>
       <source>Jazz</source>
-      <translation type="unfinished"/>
+      <translation>Jazz</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="85"/>
       <source>Classic</source>
-      <translation type="unfinished"/>
+      <translation>Klasyka</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="86"/>
       <source>Bass</source>
-      <translation type="unfinished"/>
+      <translation>Bas</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="87"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Czysty</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="88"/>
       <source>Hip-Hop</source>
-      <translation type="unfinished"/>
+      <translation>Hip-hop</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="89"/>
       <source>Dubstep</source>
-      <translation type="unfinished"/>
+      <translation>Dubstep</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="90"/>
       <source>Movie</source>
-      <translation type="unfinished"/>
+      <translation>Film</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="91"/>
       <source>Metal</source>
-      <translation type="unfinished"/>
+      <translation>Metal</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="92"/>
       <source>Vocal Booster</source>
-      <translation type="unfinished"/>
+      <translation>Wzmocnienie wokalu</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="93"/>
       <source>Hardstyle</source>
-      <translation type="unfinished"/>
+      <translation>Hardstyle</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="94"/>
       <source>Acoustic</source>
-      <translation type="unfinished"/>
+      <translation>Akustyka</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="95"/>
       <source>R&amp;B</source>
-      <translation type="unfinished"/>
+      <translation>R&amp;B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="96"/>
       <source>Electronic</source>
-      <translation type="unfinished"/>
+      <translation>Muzyka elektroniczna</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="97"/>
       <source>Deep Bass</source>
-      <translation type="unfinished"/>
+      <translation>Głęboki bas</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="98"/>
       <source>Beats</source>
-      <translation type="unfinished"/>
+      <translation>Beats</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="105"/>
       <source>BS2B Custom</source>
-      <translation type="unfinished"/>
+      <translation>Własny BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="106"/>
       <source>BS2B Weak</source>
-      <translation type="unfinished"/>
+      <translation>Słaby BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="107"/>
       <source>BS2B Strong</source>
-      <translation type="unfinished"/>
+      <translation>Silny BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation type="unfinished"/>
+      <translation>Poza głową</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
       <source>Surround 1</source>
-      <translation type="unfinished"/>
+      <translation>Dźwięk przestrzenny 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="110"/>
       <source>Surround 2</source>
-      <translation type="unfinished"/>
+      <translation>Dźwięk przestrzenny 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
       <source>Joe0Bloggs Realistic surround</source>
-      <translation type="unfinished"/>
+      <translation>Realistyczny dźwięk przestrzenny Joe0Bloggs</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Default</source>
-      <translation type="unfinished"/>
+      <translation>Domyślne</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Mała hala 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Mała hala 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Średnia hala 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Średnia hala 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Duża hala 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Duża hala 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 1</source>
-      <translation type="unfinished"/>
+      <translation>Mały pokój 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 2</source>
-      <translation type="unfinished"/>
+      <translation>Mały pokój 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Medium room 1</source>
-      <translation type="unfinished"/>
+      <translation>Średni pokój 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium room 2</source>
-      <translation type="unfinished"/>
+      <translation>Średni pokój 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 1</source>
-      <translation type="unfinished"/>
+      <translation>Duży pokój 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 2</source>
-      <translation type="unfinished"/>
+      <translation>Duży pokój 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 1</source>
-      <translation type="unfinished"/>
+      <translation>Średni ER 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 2</source>
-      <translation type="unfinished"/>
+      <translation>Średni ER 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation type="unfinished"/>
+      <translation>Wysoka płyta</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation type="unfinished"/>
+      <translation>Niska płyta</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation type="unfinished"/>
+      <translation>Długi pogłos 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation type="unfinished"/>
+      <translation>Długi pogłos 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
       <source>error</source>
-      <translation type="unfinished"/>
+      <translation>błąd</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="44"/>
       <source>creating</source>
-      <translation type="unfinished"/>
+      <translation>tworzenie</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="47"/>
       <source>suspended</source>
-      <translation type="unfinished"/>
+      <translation>zawieszony</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="50"/>
       <location filename="../../src/audio/base/AppNode.h" line="78"/>
       <source>idle</source>
-      <translation type="unfinished"/>
+      <translation>bezczynny</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="53"/>
       <location filename="../../src/audio/base/AppNode.h" line="76"/>
       <source>running</source>
-      <translation type="unfinished"/>
+      <translation>uruchomiony</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="80"/>
       <source>not connected</source>
-      <translation type="unfinished"/>
+      <translation>nie połączony</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="178"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP to zaawansowany silnik przetwarzania dźwięku dostępny dla systemów Linux i Android.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>Odmowa dostępu do automatycznego uruchamiania</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
       <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom &apos;flatpak permission-reset %1&apos; i włącz automatyczne uruchamianie ponownie.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Nieznany błąd</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>Upewnij się, że implementacja portalu XDG w tle jest dostępna i aktywna, aby korzystać z funkcji automatycznego uruchamiania. %1</translation>
     </message>
   </context>
   <context>
@@ -2248,62 +2229,62 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>Ustawienia</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
       <source>Category</source>
-      <translation type="unfinished"/>
+      <translation>Kategoria</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="88"/>
       <source>Interface</source>
-      <translation type="unfinished"/>
+      <translation>Interfejs</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Default paths</source>
-      <translation type="unfinished"/>
+      <translation>Domyślne ścieżki</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
       <source>Devices</source>
-      <translation type="unfinished"/>
+      <translation>Urządzenia</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Network</source>
-      <translation type="unfinished"/>
+      <translation>Sieć</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Ikona w zasobniku systemowym</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="112"/>
       <source>Context menu</source>
-      <translation type="unfinished"/>
+      <translation>Menu kontekstowe</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="159"/>
       <source>Theme</source>
-      <translation type="unfinished"/>
+      <translation>Motyw</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="221"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Edytuj</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="245"/>
       <source>Color scheme</source>
-      <translation type="unfinished"/>
+      <translation>Schemat kolorów</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="259"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>Korektor</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="265"/>
@@ -2328,7 +2309,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="379"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="388"/>
@@ -2368,7 +2349,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="479"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>Urządzenie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="507"/>
@@ -2393,7 +2374,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>Baza danych AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="600"/>
@@ -2510,7 +2491,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
       <source>Warning</source>
-      <translation type="unfinished"/>
+      <translation>Uwaga</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
@@ -2558,15 +2539,6 @@ If they have been modified, they will be reset.</source>
       <source>Sampling rate</source>
       <translation type="unfinished"/>
     </message>
-    <message>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="124"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="152"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="180"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="208"/>
-      <location filename="../../src/interface/fragment/StatusFragment.ui" line="236"/>
-      <source>...</source>
-      <translation type="unfinished"/>
-    </message>
   </context>
   <context>
     <name>StatusFragment</name>
@@ -2601,7 +2573,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="42"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP dla Linuxa</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="96"/>
@@ -2656,12 +2628,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="56"/>
       <source>Parameter</source>
-      <translation type="unfinished"/>
+      <translation>Parametr</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="57"/>
       <source>Value</source>
-      <translation type="unfinished"/>
+      <translation>Wartość</translation>
     </message>
   </context>
   <context>
@@ -2674,12 +2646,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
       <source>ms</source>
-      <translation type="unfinished"/>
+      <translation>ms</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="86"/>
       <source>Refresh every</source>
-      <translation type="unfinished"/>
+      <translation>Odźwieżaj co</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
@@ -2690,12 +2662,12 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <source>This variable is a string. Currently only numerical value types can be modified.</source>
-      <translation type="unfinished"/>
+      <translation>Ta zmienna jest ciągiem znaków. Obecnie tylko typy wartości numerycznych mogą być modyfikowane.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="74"/>
@@ -2723,7 +2695,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="37"/>
       <source>Model</source>
-      <translation type="unfinished"/>
+      <translation>Model</translation>
     </message>
   </context>
   <context>
@@ -2731,17 +2703,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="584"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>Odłącz grupę</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="587"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij grupę</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="589"/>
       <source>Close Other Groups</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij pozostałe grupy</translation>
     </message>
   </context>
   <context>
@@ -2749,7 +2721,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockManager.cpp" line="489"/>
       <source>Show View</source>
-      <translation type="unfinished"/>
+      <translation>Pokaż widok</translation>
     </message>
   </context>
   <context>
@@ -2757,17 +2729,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
       <source>Detach</source>
-      <translation type="unfinished"/>
+      <translation>Odłącz</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
       <source>Close Others</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij pozostałe</translation>
     </message>
   </context>
   <context>
@@ -2780,7 +2752,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="73"/>
       <source>Move Up</source>
-      <translation type="unfinished"/>
+      <translation>Przesuń w górę</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
@@ -2795,7 +2767,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="114"/>
       <source>Move Down</source>
-      <translation type="unfinished"/>
+      <translation>Przesuń w dół</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="117"/>
@@ -2825,7 +2797,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="209"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Usuń</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="212"/>
