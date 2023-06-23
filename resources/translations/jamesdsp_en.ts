@@ -2171,7 +2171,7 @@ Please create one first before adding a new rule.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="179"/>
+        <location filename="../../src/main.cpp" line="185"/>
         <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
         <translation type="unfinished"></translation>
     </message>

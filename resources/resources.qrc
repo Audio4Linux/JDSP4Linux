@@ -68,5 +68,9 @@
         <file>translations/jamesdsp_en.qm</file>
         <file>translations/jamesdsp_ru.qm</file>
         <file>translations/jamesdsp_pt_BR.qm</file>
+        <file>translations/jamesdsp_zh_CN.qm</file>
+        <file>translations/jamesdsp_es.qm</file>
+        <file>translations/jamesdsp_pl.qm</file>
+        <file>translations/jamesdsp_uk.qm</file>
     </qresource>
 </RCC>
