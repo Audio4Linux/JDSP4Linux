@@ -24,6 +24,9 @@
 
 static bool SPIN_ON_CRASH = false;
 
+static QTranslator* qtTranslator = nullptr;
+static QTranslator* translator = nullptr;
+
 void onExceptionRaised(int fd)
 {
     Q_UNUSED(fd)
@@ -72,17 +75,15 @@ bool initCrashHandler(const char* exePath) {
 #endif
 }
 
-void initTranslator() {
+void initTranslator(const QLocale& locale) {
+    qtTranslator = new QTranslator(qApp);
+    translator = new QTranslator(qApp);
+
     // Locale & translation setup
-    QLocale locale = QLocale::system();
-
-    QTranslator translator;
-    translator.load(locale, "jamesdsp", "_", ":/translations");
-    QCoreApplication::installTranslator(&translator);
-
-    QTranslator qtTranslator;
-    qtTranslator.load(locale, "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    QCoreApplication::installTranslator(&qtTranslator);
+    qtTranslator->load(locale, "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    QApplication::installTranslator(qtTranslator);
+    translator->load(locale, "jamesdsp", "_", ":/translations");
+    QApplication::installTranslator(translator);
 }
 
 MainWindow* initGui(bool launchInTray, bool watchConfig) {
@@ -151,7 +152,7 @@ int main(int   argc,
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
     QScopedPointer<QCoreApplication> app(new QCoreApplication(argc, argv));
-    initTranslator();
+    initTranslator(QLocale::system());
 
     QCoreApplication::setApplicationName("jamesdsp");
     QCoreApplication::setApplicationVersion(APP_VERSION_FULL);
@@ -159,6 +160,7 @@ int main(int   argc,
     QCommandLineOption help(QStringList() << "h" << "help", "Displays help on command line options");
     QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (GUI)");
     QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically (GUI)");
+    QCommandLineOption lang(QStringList() << "l" << "lang", "Override language (example: de, es, uk, zh_CN)", "lang");
     QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
     QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
     QCommandLineOption minVerbosity(QStringList() << "m" << "min-verbosity", "Minimum log verbosity (0 = Debug; ...; 4 = Critical)", "level");
@@ -181,7 +183,7 @@ int main(int   argc,
     parser.addVersionOption();
 
     // GUI
-    parser.addOptions({tray, watch});
+    parser.addOptions({tray, watch, lang});
 
     // Debug
     parser.addOption(spinlck);
@@ -274,7 +276,8 @@ int main(int   argc,
         // GUI service mode
         app.reset();
         app.reset(new QApplication(argc, argv));
-        initTranslator();
+        QString langOverride = parser.value(lang);
+        initTranslator(langOverride.isEmpty() ? QLocale::system() : QLocale(langOverride));
 
         Log::clear();
 

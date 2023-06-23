@@ -275,10 +275,10 @@ Do you want to re-install the latest database update anyway?</source>
         <translation>Добавить в список блокировки</translation>
     </message>
     <message>
-      <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
-      <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
-      <source>Add to allowlist</source>
-      <translation>Добавить в список разрешенных</translation>
+        <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
+        <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
+        <source>Add to allowlist</source>
+        <translation>Добавить в список разрешенных</translation>
     </message>
     <message>
         <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
@@ -665,8 +665,8 @@ Do you want to re-install the latest database update anyway?</source>
         <source>Downloading package...</source>
         <translation>Загрузка пакета...</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>FileSelectionWidget</name>
     <message>
         <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
@@ -679,9 +679,9 @@ Do you want to re-install the latest database update anyway?</source>
         <translation>Закладка</translation>
     </message>
     <message>
-      <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
-      <source>Rename</source>
-      <translation>Переименовать</translation>
+        <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
+        <source>Rename</source>
+        <translation>Переименовать</translation>
     </message>
     <message>
         <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
@@ -727,34 +727,34 @@ Do you want to re-install the latest database update anyway?</source>
         <translation>&amp;Параметры</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
-      <source>R&amp;egular expression</source>
-      <translation>Р&amp;егулярные выражения</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
+        <source>R&amp;egular expression</source>
+        <translation>Р&amp;егулярные выражения</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
-      <source>&amp;Whole words </source>
-      <translation>&amp;Целые слова </translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
+        <source>&amp;Whole words </source>
+        <translation>&amp;Целые слова </translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
-      <source>&amp;Case sensitive</source>
-      <translation>&amp;С учетом регистра</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
+        <source>&amp;Case sensitive</source>
+        <translation>&amp;С учетом регистра</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
-      <source>&amp;Close</source>
-      <translation>&amp;Закрыть</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
-      <source>&amp;Replace</source>
-      <translation>&amp;Заменить</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
+        <source>&amp;Replace</source>
+        <translation>&amp;Заменить</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
-      <source>Replace &amp;All</source>
-      <translation>Заменить &amp;все</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
+        <source>Replace &amp;All</source>
+        <translation>Заменить &amp;все</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
@@ -1622,14 +1622,14 @@ This setting is only in effect if IR optimization is enabled.
         <translation>Рабочий каталог</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
-      <source>File name</source>
-      <translation>Имя файла</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
+        <source>File name</source>
+        <translation>Имя файла</translation>
     </message>
     <message>
-      <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
-      <source>Description</source>
-      <translation>Описание</translation>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
+        <source>Description</source>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
@@ -2188,9 +2188,9 @@ Please create one first before adding a new rule.</source>
         <translation>не подключено</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="179"/>
-      <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+        <location filename="../../src/main.cpp" line="185"/>
+        <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
@@ -2530,8 +2530,8 @@ If they have been modified, they will be reset.</source>
         <source>Sampling rate</source>
         <translation>Частота дискретизации</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>StatusFragment</name>
     <message>
         <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
