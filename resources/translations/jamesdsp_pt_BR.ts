@@ -2199,7 +2199,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
       <translation>não conectado</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="179"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP é um mecanismo avançado de processamento de áudio disponível para sistemas Linux e Android.</translation>
     </message>
