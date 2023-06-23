@@ -1289,32 +1289,32 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1292"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>Kawałkowy sześcienny interpolujący wielomian Hermite'a</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1297"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation type="unfinished"/>
+      <translation>Zmodyfikowany splajn Hiroshi Akima</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1317"/>
       <source>Reset EQ</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj korektor</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Fixed bands</source>
-      <translation type="unfinished"/>
+      <translation>Ustalone pasma</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1361"/>
       <source>Flexible bands</source>
-      <translation type="unfinished"/>
+      <translation>Elastyczne pasma</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1393"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Konwolwer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Podzielony na partycje konwolwer (konwolwer z automatyczną segmentacją). Wybierz plik odpowiedzi impulsowej, który ma zostać spleciony. Pobiera charakterystykę sygnału odpowiedzi impulsowej i stosuje ją do przychodzącego dźwięku w czasie rzeczywistym.&lt;/p&gt;&lt;p&gt;Obsługuje odpowiedzi impulsowe mono, stereo, pełne/prawdziwe stereo (LL, LR, RL, RR).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Optymalizacja odpowiedzi impulsowej:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ta opcja ma na celu maksymalne skrócenie długości odpowiedzi impulsowej; chodzi o to, aby maksymalnie zmniejszyć opóźnienie, prawdopodobnie zmniejszając zużycie energii.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1418"/>
@@ -1325,37 +1325,37 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1440"/>
       <source>Bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>Zakładki</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1479"/>
       <source>Enable convolver</source>
-      <translation type="unfinished"/>
+      <translation>Włącz konwolwer</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1486"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>Optymalizacja IR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1506"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>Oryginalny</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1511"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>Zmniejsz</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1516"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>Przekształć układ minimalnofazowy i zmniejsz</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1524"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Zaaw. edycja kształtu fali</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1543"/>
@@ -1370,17 +1370,17 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1609"/>
       <source>Samples:</source>
-      <translation type="unfinished"/>
+      <translation>Próbki:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1668"/>
       <source>No selection</source>
-      <translation type="unfinished"/>
+      <translation>Brak wyboru</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1715"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Głównym celem jest wykonanie korekcji parametrycznej dźwięku, jednak wymaga to od użytkownika dostarczenia pliku .vdc, który generuje DDCToolbox.&lt;/p&gt;&lt;p&gt;ViPER-DDC w jDSP to uogólniona implementacja filtrów sekcji drugiego rzędu, która różni się nieco od implementacji w Viper4Android. V4A obsługuje tylko szczytowy filtr parametryczny; powodem jest to, że V4A używa właściwości współczynnika udziału filtra szczytowego. Natomiast jDSP nie ma takiego założenia.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1762"/>
@@ -1400,7 +1400,7 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1837"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1893"/>
@@ -1415,22 +1415,22 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1972"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Programowalny DSP na żywo&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Jest to maszyna wirtualna, która kompiluje plik kodu .eel jako dane wejściowe i uruchamia instrukcje; w prostych słowach pozwala użytkownikom programować własne efekty dźwiękowe.&lt;/p&gt;&lt;p&gt;Liczba obsługiwanych operacji jest ogromna; sprawdź oficjalną dokumentację: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Naciśnij &apos;Edytuj skrypt&apos;, aby uruchomić wbudowane środowisko skryptowe dla plików kodu EEL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1994"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Korektor odpowiedzi samowolnej&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Znany również jako GraphicEQ z EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2032"/>
       <source>Custom Presets</source>
-      <translation type="unfinished"/>
+      <translation>Profili użytkownika</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2035"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Profili użytkownika&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Twórz własne profili użytkownika i zarządzaj nimi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2061"/>
@@ -1440,27 +1440,27 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="2067"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ustawienia&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Skonfiguruj tę aplikację&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2087"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reszta&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Różne akcje, które są używane rzadziej&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2145"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Pomiń filtry&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ta opcja określa, czy efekty dźwiękowe mają być włączone, czy wyłączone.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2148"/>
       <source>Bypass</source>
-      <translation type="unfinished"/>
+      <translation>Pomiń filtry</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="145"/>
       <source>%1 connected - Preset loaded automatically</source>
-      <translation type="unfinished"/>
+      <translation>%1 podłączone - profil użytkownika został załadowany samoczynnie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="164"/>
@@ -1470,22 +1470,22 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="165"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation type="unfinished"/>
+      <translation>Bieżący plik EEL (w &apos;%1&apos;) nie istnieje już w systemie plików. Proszę ponownie otworzyć plik ręcznie.</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="279"/>
       <source>Apps</source>
-      <translation type="unfinished"/>
+      <translation>Aplikacje</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="280"/>
       <source>Driver status</source>
-      <translation type="unfinished"/>
+      <translation>Stan sterownika</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="284"/>
       <source>Relink audio pipeline</source>
-      <translation type="unfinished"/>
+      <translation>Połącz potok audio ponownie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="286"/>
@@ -1505,82 +1505,82 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="290"/>
       <source>Open LiveprogIDE</source>
-      <translation type="unfinished"/>
+      <translation>Otwórz LiveprogIDE</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="292"/>
       <source>What&apos;s this... (Select UI element)</source>
-      <translation type="unfinished"/>
+      <translation>Co to jest... (Wybierz element UI)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="393"/>
       <source>Bass/Misc</source>
-      <translation type="unfinished"/>
+      <translation>Bas/różne</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="394"/>
       <source>Sound Positioning</source>
-      <translation type="unfinished"/>
+      <translation>Pozycjonowanie dźwięku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="395"/>
       <source>Reverb</source>
-      <translation type="unfinished"/>
+      <translation>Pogłos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="396"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>Korektor</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="397"/>
       <source>Convolver</source>
-      <translation type="unfinished"/>
+      <translation>Konwolwer</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="398"/>
       <source>DDC</source>
-      <translation type="unfinished"/>
+      <translation>DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="399"/>
       <source>Liveprog</source>
-      <translation type="unfinished"/>
+      <translation>Liveprog</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="400"/>
       <source>Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Korektor graficzny</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="412"/>
       <source>Launch application</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom aplikację</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="554"/>
       <source>Reset Configuration</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj konfigurację</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="554"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>Na pewno?</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="578"/>
       <source>Load custom audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>Wczytaj własne audio.conf</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="590"/>
       <source>Save current audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>Zapisz bieżący audio.conf</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1100"/>
       <source>Advanced waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Zaawansowana edycja kształtu fali</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1101"/>
@@ -1596,7 +1596,18 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>Zaawansowana edycja przebiegów (domyślnie: -80;-100;0;0;0;0)
+
+Ustaw próg automatycznego przycinania IR i dodaj opóźnienie do pociętego IR/przekształconego w układ minimalnofazowy.
+To ustawienie działa tylko wtedy, gdy włączona jest optymalizacja IR.
+
+Wartość 1: próg początkowy automatycznego przycinania (dB)
+Wartość 2: próg końcowy automatycznego przycinania (dB)
+Wartość 3: opóźnienie kanału 1 (próbki)
+Wartość 4: opóźnienie kanału 2 (próbki)
+Wartość 5: opóźnienie kanału 3 (próbki)
+Wartość 6: opóźnienie kanału 4 (próbki)
+</translation>
     </message>
   </context>
   <context>
@@ -1604,7 +1615,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Utwórz nowy skrypt</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="63"/>
@@ -1614,12 +1625,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
       <source>Define and generate a basic script template</source>
-      <translation type="unfinished"/>
+      <translation>Zdefiniuj i wygeneruj podstawowy szablon skryptu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
       <source>Workspace directory</source>
-      <translation type="unfinished"/>
+      <translation>Katalog projektu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
@@ -1634,12 +1645,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
       <source>Untitled script</source>
-      <translation type="unfinished"/>
+      <translation>Skrypt bez nazwy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
       <source>Select directory</source>
-      <translation type="unfinished"/>
+      <translation>Wybierz katalog</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
@@ -1651,17 +1662,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <source>Workspace directory does not exist</source>
-      <translation type="unfinished"/>
+      <translation>Katalog projektu nie istnieje</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <source>A file with the same name already exists at this loction</source>
-      <translation type="unfinished"/>
+      <translation>Plik o tej samej nazwie już istnieje w tej lokalizacji</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>File name is empty or contains illegal characters</source>
-      <translation type="unfinished"/>
+      <translation>Nazwa pliku jest pusta lub zawiera niedozwolone znaki</translation>
     </message>
   </context>
   <context>
