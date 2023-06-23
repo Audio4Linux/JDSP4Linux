@@ -2334,17 +2334,17 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="454"/>
       <source>Select sink/device to be processed</source>
-      <translation type="unfinished"/>
+      <translation>Wybierz sink/urządzenie do przetworzenia</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="460"/>
       <source>Use default output device (recommended)</source>
-      <translation type="unfinished"/>
+      <translation>Użyj domyślnego urządzenia wyjściowego (zalecane)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="467"/>
       <source>Manually select device</source>
-      <translation type="unfinished"/>
+      <translation>Wybierz urządzenie ręcznie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="479"/>
@@ -2354,22 +2354,22 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="507"/>
       <source>Blocklisted apps</source>
-      <translation type="unfinished"/>
+      <translation>Zablokowane aplikacje</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="513"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation type="unfinished"/>
+      <translation>W sekcji &apos;Aplikacje&apos;, dostępnej w menu z trzema kropkami w oknie głównym, możesz zablokować aplikacje odtwarzające dźwięk przed przetwarzaniem przez JamesDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="529"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
-      <translation type="unfinished"/>
+      <translation>Tryb listy dozwolonych (w zamian aplikacje muszą być konkretnie włączone)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="560"/>
       <source>Clear list</source>
-      <translation type="unfinished"/>
+      <translation>Wyczyść listę</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
@@ -2379,114 +2379,116 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="600"/>
       <source>Status:</source>
-      <translation type="unfinished"/>
+      <translation>Stan:</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="610"/>
       <source>unknown</source>
-      <translation type="unfinished"/>
+      <translation>nieznane</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="630"/>
       <source>  Manage local database  </source>
-      <translation type="unfinished"/>
+      <translation>  Zarządzaj lokalną bazą danych  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
       <source>Run in background (tray icon)</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom w tle (ikona w zasobniku)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>No, shutdown audio effects when closing app</source>
-      <translation type="unfinished"/>
+      <translation>Nie, wyłącz efekty dźwiękowe po zamknięciu aplikacji</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="675"/>
       <source>Yes, minimize to tray icon when closing app</source>
-      <translation type="unfinished"/>
+      <translation>Tak, zminimalizuj do ikony w zasobniku po zamknięciu aplikacji</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="682"/>
       <source>Auto-start</source>
-      <translation type="unfinished"/>
+      <translation>Samouruchamianie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="688"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom zminimalizowane przy starcie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
       <source>Systray not supported on this system</source>
-      <translation type="unfinished"/>
+      <translation>Zasobnik systemowy nie jest obsługiwany w tym systemie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="760"/>
       <source>Visit Github repo</source>
-      <translation type="unfinished"/>
+      <translation>Odwiedź repozytorium Github</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="786"/>
       <source>Run setup wizard</source>
-      <translation type="unfinished"/>
+      <translation>Uruchom kreatora konfiguracji</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="809"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Zamknij</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="201"/>
       <source>Unknown (%1)</source>
-      <translation type="unfinished"/>
+      <translation>Nieznane (%1)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
       <source>installed</source>
-      <translation type="unfinished"/>
+      <translation>zainstalowano</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
       <source>not installed</source>
-      <translation type="unfinished"/>
+      <translation>nie zainstalowano</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
       <source>Override liveprog scripts?</source>
-      <translation type="unfinished"/>
+      <translation>Zastąpić skrypty liveprog?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
-      <translation type="unfinished"/>
+      <translation>Czy chcesz zastąpić istniejące domyślne skrypty liveprog?
+Jeśli zostały zmodyfikowane, zostaną zresetowane.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
       <source>Extract assets</source>
-      <translation type="unfinished"/>
+      <translation>Rozpakuj zasoby</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
       <source>%1 files have been restored</source>
-      <translation type="unfinished"/>
+      <translation>%1 plików zostało przywróconych</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation type="unfinished"/>
+      <translation>Zamierzasz włączyć tryb listy dozwolonych. JamesDSP nie będzie domyślnie przetwarzać wszystkich aplikacji, gdy ten tryb jest aktywny. Musisz konkretnie zezwolić na przetwarzanie każdej aplikacji w menu &apos;Aplikacje&apos;.
+</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>Na pewno?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
-      <translation type="unfinished"/>
+      <translation>Spowoduje to zresetowanie bieżącej listy zablokowanych lub dozwolonych. Czy chcesz kontynuować?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
@@ -2496,7 +2498,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
       <source>Do you really want to restore the default menu layout?</source>
-      <translation type="unfinished"/>
+      <translation>Czy na pewno chcesz przywrócić domyślny układ menu?</translation>
     </message>
   </context>
   <context>
@@ -2504,7 +2506,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/utils/SingleInstanceMonitor.cpp" line="56"/>
       <source>Another instance of JamesDSP is already active and has been put in the foreground.</source>
-      <translation type="unfinished"/>
+      <translation>Inna instancja JamesDSP jest już aktywna i została umieszczona na pierwszym planie.</translation>
     </message>
   </context>
   <context>
@@ -2512,32 +2514,32 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="38"/>
       <source>Status</source>
-      <translation type="unfinished"/>
+      <translation>Stan</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="65"/>
       <source>Application version</source>
-      <translation type="unfinished"/>
+      <translation>Wersja aplikacji</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
       <source>JamesDSP core version</source>
-      <translation type="unfinished"/>
+      <translation>Wersja jądra JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
       <source>Processing state</source>
-      <translation type="unfinished"/>
+      <translation>Stan przetwarzania</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
       <source>Audio format</source>
-      <translation type="unfinished"/>
+      <translation>Format audio</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>Częstotliwość próbkowania</translation>
     </message>
   </context>
   <context>
@@ -2545,12 +2547,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Processing</source>
-      <translation type="unfinished"/>
+      <translation>Przetwarzane</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Not processing</source>
-      <translation type="unfinished"/>
+      <translation>Nie przetwarzane</translation>
     </message>
   </context>
   <context>
@@ -2558,17 +2560,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
       <source>&amp;Bypass</source>
-      <translation type="unfinished"/>
+      <translation>P&amp;omiń filtry</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="22"/>
       <source>&amp;Presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Profile ustawień</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="25"/>
       <source>&amp;Convolver bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>Za&amp;kładki konwolweru</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="42"/>
@@ -2578,49 +2580,49 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="96"/>
       <source>No presets found</source>
-      <translation type="unfinished"/>
+      <translation>Nie znaleziono profili</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="140"/>
       <source>No impulse responses found</source>
-      <translation type="unfinished"/>
+      <translation>Nie znaleziono odpowiedzi impulsowych</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="191"/>
       <source>&amp;Reload JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Załaduj ponownie JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="195"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="273"/>
       <source>&amp;Quit</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Wyjdź</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="199"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="269"/>
       <source>&amp;Show/hide window</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Pokaż/ukryj okno</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="203"/>
       <source>Re&amp;verberation presets</source>
-      <translation type="unfinished"/>
+      <translation>P&amp;rofile pogłosu</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="205"/>
       <source>Off</source>
-      <translation type="unfinished"/>
+      <translation>Wyłączone</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="221"/>
       <source>&amp;Equalizer presets</source>
-      <translation type="unfinished"/>
+      <translation>Pr&amp;ofile korektora</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="234"/>
       <source>&amp;Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Crossfeed</translation>
     </message>
   </context>
   <context>
@@ -2641,7 +2643,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Formularz</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
@@ -2656,7 +2658,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
       <source>Click a variable to manipulate its value.</source>
-      <translation type="unfinished"/>
+      <translation>Kliknij zmienną, aby manipulować jej wartością.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
@@ -2672,17 +2674,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="74"/>
       <source>Manipulate variable</source>
-      <translation type="unfinished"/>
+      <translation>Manipuluj zmienną</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="75"/>
       <source>Enter a new value for variable &apos;%1&apos;:</source>
-      <translation type="unfinished"/>
+      <translation>Wprowadź nową wartość dla zmiennej &apos;%1&apos;:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Failed to manipulate variable &apos;%1&apos;. Either it does not exist anymore, or it cannot be changed.</source>
-      <translation type="unfinished"/>
+      <translation>Nie udało się manipulować zmienną &apos;%1&apos;. Albo już nie istnieje, albo nie da się jej zmienić.</translation>
     </message>
   </context>
   <context>
@@ -2690,7 +2692,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="36"/>
       <source>Company</source>
-      <translation type="unfinished"/>
+      <translation>Firma</translation>
     </message>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="37"/>
@@ -2747,7 +2749,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="25"/>
       <source>Available entries</source>
-      <translation type="unfinished"/>
+      <translation>Dostępne wpisy</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="73"/>
@@ -2757,12 +2759,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
       <source>Moves the selected toolbar item up</source>
-      <translation type="unfinished"/>
+      <translation>Przesuwa wybrany element paska narzędzi w górę</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="79"/>
       <source>&amp;Up</source>
-      <translation type="unfinished"/>
+      <translation>W &amp;górę</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="114"/>
@@ -2772,27 +2774,27 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="117"/>
       <source>moves the selected toolbar item down</source>
-      <translation type="unfinished"/>
+      <translation>przesuwa wybrany element paska narzędzi w dół</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="120"/>
       <source>&amp;Down</source>
-      <translation type="unfinished"/>
+      <translation>W &amp;dół</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="168"/>
       <source>Insert</source>
-      <translation type="unfinished"/>
+      <translation>Wstaw</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="171"/>
       <source>Adds the selected menu action to the toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Dodaje wybraną akcję menu do paska narzędzi</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="174"/>
       <source>&amp;Add</source>
-      <translation type="unfinished"/>
+      <translation>Dod&amp;aj</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="209"/>
@@ -2802,23 +2804,23 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="212"/>
       <source>Removes the selected item from the active toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Usuwa wybrany element z aktywnego paska narzędzi</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="215"/>
       <source>&amp;Del</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Usuń</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="245"/>
       <location filename="../../src/interface/menueditor.ui" line="248"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="279"/>
       <source>Context menu contents</source>
-      <translation type="unfinished"/>
+      <translation>Zawartość menu kontekstowego</translation>
     </message>
   </context>
 </TS>
