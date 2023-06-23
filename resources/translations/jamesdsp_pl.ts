@@ -1249,12 +1249,12 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1124"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolujący korektor FIR (SOI)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza korektor FIR czyli SOI. FIR to skrót od &amp;quot;Finite Impulse Response&amp;quot; (skrót SOI jest tłumaczeniem poprzedniego, &amp;quot;skończona odpowiedź impulsowa&amp;quot;)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Typ filtra:&lt;/span&gt; Wybiera pomiędzy filtrowaniem minimalnej fazy a liniowym filtrowaniem fazy. Minimalna faza jest zalecanym typem filtra, ponieważ minimalizuje opóźnienie (efektywnie zero dla dowolnego rozsądnego kształtu filtra). Natomiast wprowadzone zmiany fazowe zwykle nie są zauważalne (faza liniowa jest pomocna w przed/postprodukcji nagrań wielościeżkowych, gdzie trzeba zachować relacje fazowe między ścieżkami. Jednak w przypadku odtwarzania w czasie rzeczywistym korektor fazy liniowej wprowadza opóźnienie co najmniej o połowę długości filtra.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1216"/>
       <source>Enable EQ</source>
-      <translation type="unfinished"/>
+      <translation>Włącz korektor</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1236"/>
@@ -1264,27 +1264,27 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1256"/>
       <source>Filter type</source>
-      <translation type="unfinished"/>
+      <translation>Typ filtra</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1260"/>
       <source>Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>Minimalna faza</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1265"/>
       <source>Linear phase</source>
-      <translation type="unfinished"/>
+      <translation>Liniowa faza</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1285"/>
       <source>Interpolator</source>
-      <translation type="unfinished"/>
+      <translation>Interpolator</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1288"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tryb interpolacji&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1292"/>
