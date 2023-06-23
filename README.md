@@ -83,7 +83,7 @@ ____________
 
 **Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
-PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio graph. 
+PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio pipeline. 
 I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
 
 ### Which one am I using?
@@ -107,6 +107,13 @@ Server Name: pulseaudio
 **Decide whether you need to install the PipeWire or PulseAudio version of this app!**
 
 If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
+
+It is recommended to switch to PipeWire, if possible. JamesDSP's audio backend for PulseAudio is in maintance-mode; however, it will continue to receive UI-related feature updates.
+
+The installation instructions for the PulseAudio version have been moved to a separate file: [INSTALL_PULSE.md](INSTALL_PULSE.md).
+
+## Installation for PipeWire
+This section is dedicated to systems using PipeWire as the audio server. If you are still using PulseAudio, please go [here](INSTALL_PULSE.md).
 
 * [Flatpak](#flatpak)
 * [Arch Linux (AUR)](#arch)
@@ -136,7 +143,6 @@ flatpak install me.timschneeberger.jdsp4linux.pulse
 ### Arch
 [AUR packages](https://aur.archlinux.org/packages/?O=0&K=jamesdsp) are available:
 
-For **PipeWire clients** only:
 * Stable version
 
    ![AUR version](https://img.shields.io/aur/version/jamesdsp) ![AUR version](https://img.shields.io/aur/votes/jamesdsp) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp)
@@ -151,110 +157,37 @@ For **PipeWire clients** only:
    yay -S jamesdsp-git
    ```
 
-For **PulseAudio clients** only:
-* Stable version
-
-   ![AUR version](https://img.shields.io/aur/version/jamesdsp-pulse) ![AUR version](https://img.shields.io/aur/votes/jamesdsp-pulse) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp-pulse) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp-pulse)
-   ```
-   yay -S jamesdsp-pulse
-   ```
-
-* Development version
-
-   ![AUR version](https://img.shields.io/aur/version/jamesdsp-pulse-git) ![AUR version](https://img.shields.io/aur/votes/jamesdsp-pulse-git) ![AUR version](https://img.shields.io/aur/maintainer/jamesdsp-pulse-git) ![AUR version](https://img.shields.io/aur/last-modified/jamesdsp-pulse-git)
-   ```
-   yay -S jamesdsp-pulse-git
-   ```
-   
 ### Fedora/openSUSE
 
 Package maintained by [@theAeon](https://github.com/theAeon) on [Fedora COPR](https://copr.fedorainfracloud.org/coprs/arrobbins/JDSP4Linux/).
 Built for Fedora 34/35/Rawhide and OpenSUSE Tumbleweed.
 
-For **PipeWire clients** only:
 ```
 yum copr enable arrobbins/JDSP4Linux && yum update && yum install jamesdsp
 ```
 
 If you are still using PulseAudio with your Fedora/openSUSE installation, refer to the '[Build from sources](#build-from-sources)' section below instead.
 
-### Debian/Ubuntu
-
-> **Warning**: The PPA repo is unmaintained and deprecated. At th moment, it is still being auto-updated by an automated GitHub CI workflow. I'm working on setting up flatpak packages as a more stable and universal alternative.
-
-##### Minimum system requirements:
-
-* Distro based on Debian 11 or later **OR**
-* Distro based on Ubuntu 21.10 or later
-
-If you need to install this app on an older distro, you need to compile it manually with GCC 11.0 or later.
-
-Add PPA Repo
-```bash
-sudo apt install -y curl
-# thepbone’s PPA Repository key
-curl -s --compressed "https://thepbone.github.io/PPA-Repository/KEY.gpg" -o thepbone_ppa.gpg
-
-cat thepbone_ppa.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/thepbone_ppa.gpg
-sudo sh -c ' echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/thepbone_ppa.gpg] https://thepbone.github.io/PPA-Repository ./" > /etc/apt/sources.list.d/thepbone_ppa.list '
-sudo apt update
-```
-Install from PPA
-
-For **PipeWire clients** only:
-```bash
-sudo apt install jamesdsp-pipewire
-```
-For **PulseAudio clients** only:
-```bash
-sudo apt install jamesdsp-pulse
-```
-[View PPA on GitHub](https://github.com/ThePBone/PPA-Repository)
-
-
 ### Build from sources
 
 #### Install dependencies
 
-*NOTE:* Only execute the line that applies to your system configuration. If your distro is not included here, you need to research which packages to install by yourself.
-
 **Debian/Ubuntu-based distros**
-
-Debian/Ubuntu + **PipeWire** clients only:
 
 ```bash
 sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev 
 ```
 
-Debian/Ubuntu + **PulseAudio** clients only:
-
-```bash
-sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-```
-**Fedora**
-
-Fedora 34 + **PipeWire** clients only:
+**Fedora 34**
 
 ```bash
 sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pipewire-devel
 ```
-Fedora 34 + **PulseAudio** clients only:
 
-```bash
-sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pulseaudio-libs-devel gstreamer1-devel gstreamer1-plugins-base-devel 
-```
 **Arch Linux**
-
-Arch Linux + **PipeWire** clients only:
 
 ```bash
 sudo pacman -S gcc make pkgconfig libarchive qt5-base qt5-svg glib2 glibmm pipewire
-```
-
-Arch Linux + **PulseAudio** clients only:
-
-```
-sudo pacman -S gcc make pkgconfig libarchive qt5-base qt5-svg glib2 glibmm libpulse gst-plugins-good gstreamer 
 ```
 
 #### Build application
@@ -271,18 +204,8 @@ Prepare build environment
 cd JDSP4Linux
 mkdir build
 cd build
-```
-
-Compile application - **PipeWire** clients only:
-
-```bash
+# Compile app
 qmake ../JDSP4Linux.pro
-make -j4
-```
-Compile application - **PulseAudio** clients only:
-
-```bash
-qmake ../JDSP4Linux.pro "CONFIG += USE_PULSEAUDIO"
 make -j4
 ```
 
