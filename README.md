@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-Linux port developed by <a href="https://github.com/thepbone">Tim Schneeberger (@thepbone)</a> (<a href="https://t.me/thepbone">Telegram</a>)
+Linux port developed by <a href="https://github.com/thepbone">Tim Schneeberger (@thepbone)</a>
 <p/><p align="center">
 <a href="https://github.com/james34602/JamesDSPManager">JamesDSP</a> was initially published as an audio effects processor<br>for Android devices and is written by <a href="https://github.com/james34602">James Fung (@james34602)</a>.
 </p>
@@ -108,10 +108,30 @@ Server Name: pulseaudio
 
 If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
+* [Flatpak](#flatpak)
 * [Arch Linux (AUR)](#arch)
 * [Fedora/openSUSE](#fedoraopensuse)
-* [Debian/Ubuntu (PPA)](#debianubuntu)
 * [Build from sources](#build-from-sources)
+
+### Flatpak
+
+Universal binary packages for all distros.
+
+The recommended **Pipewire version** is available for download on FlatHub: https://flathub.org/apps/me.timschneeberger.jdsp4linux
+```
+flatpak install me.timschneeberger.jdsp4linux
+```
+
+<a href='https://flathub.org/apps/me.timschneeberger.jdsp4linux'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
+
+If you are still using **PulseAudio**, you need to download the legacy package from my personal repository:
+```
+sudo flatpak remote-add --if-not-exists thepbones-repo https://raw.githubusercontent.com/ThePBone/flatpak-repo/main/thepbone.flatpakrepo
+flatpak install me.timschneeberger.jdsp4linux.pulse
+```
+
+> **Note**: Flatpaks are sandboxed. This application can only access `~/.var/app/me.timschneeberger.jdsp4linux/` by default.
 
 ### Arch
 [AUR packages](https://aur.archlinux.org/packages/?O=0&K=jamesdsp) are available:
