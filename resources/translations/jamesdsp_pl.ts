@@ -834,7 +834,7 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>FlatTabWidget</translation>
     </message>
   </context>
   <context>
@@ -842,17 +842,17 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Włącz korektor graficzny</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
       <source>Freq.</source>
-      <translation type="unfinished"/>
+      <translation>Częstotliwość</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
       <source>Gain</source>
-      <translation type="unfinished"/>
+      <translation>Wzmocnienie</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
@@ -862,12 +862,12 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
       <source>15-band</source>
-      <translation type="unfinished"/>
+      <translation>15-pasmowy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
       <source>31-band</source>
-      <translation type="unfinished"/>
+      <translation>31-pasmowy</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
@@ -887,34 +887,34 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
       <source>Invert response</source>
-      <translation type="unfinished"/>
+      <translation>Odwróć wyjście</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>Normalizuj wyjście</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
       <source>Reset response</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj wyjście</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
       <source>Import EqualizerAPO settings</source>
-      <translation type="unfinished"/>
+      <translation>Importuj ustawienia EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
       <source>Import frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Importuj reakcję na częstotliwość</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
       <source>CSV frequency response (*.csv)</source>
-      <translation type="unfinished"/>
+      <translation>Reakcja na częstotliwość CSV (*.csv)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
@@ -926,17 +926,17 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
       <source>Import EqualizerAPO graphic EQ preset</source>
-      <translation type="unfinished"/>
+      <translation>Zaimportuj ustawienie wstępne korektora graficznego EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
       <source>EqualizerAPO GraphicEQ (*.txt)</source>
-      <translation type="unfinished"/>
+      <translation>Ustawienie korektora graficznego EqualizerAPO (*.txt)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
       <source>Export frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Eksportuj reakcję na częstotliwość</translation>
     </message>
   </context>
   <context>
@@ -954,7 +954,7 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
       <source>Decompressing package...</source>
-      <translation type="unfinished"/>
+      <translation>Rozpakowywanie pakietu...</translation>
     </message>
   </context>
   <context>
@@ -963,7 +963,7 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
-      <translation type="unfinished"/>
+      <translation>Nie załadowano żadnego skryptu</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
@@ -973,31 +973,33 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Zresetuj</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Utwórz nowy skrypt</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Błąd</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <source>Cannot restore defaults.
 No EEL file is currently loaded.</source>
-      <translation type="unfinished"/>
+      <translation>Nie można przywrócić wartości domyślnych.
+Żaden plik EEL nie jest załadowany.</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Selected EEL file does not exist anymore.
 Please select another one</source>
-      <translation type="unfinished"/>
+      <translation>Wybrany plik EEL już nie istnieje.
+Proszę wybrać inny plik</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
@@ -1007,7 +1009,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
       <source>No customizable parameters</source>
-      <translation type="unfinished"/>
+      <translation>Brak konfigurowalnych opcji</translation>
     </message>
   </context>
   <context>
@@ -1020,57 +1022,57 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamiczne wzmocnienie basów&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wzmocnienie basów z wykrywaniem częstotliwości. Automatycznie ustawia własne parametry, takie jak wzmocnienie, szerokość pasma i częstotliwość odcięcia, analizując przychodzący strumień audio&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalne wzmocnienie:&lt;/span&gt; dostosowuje ilość dynamicznych efektów wzmocnienia basów.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Dynamiczne wzmocnienie basów</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>Maksymalne wzmocnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compressor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compressor, an automatic dynamic range flattener that can flatten the signal spectral to reduce transient; it is like a drum volume reducer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max attack:&lt;/span&gt; adjusts how fast the Dynamic Range Compressor reacts.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max release:&lt;/span&gt; adjusts how slow the Dynamic Range Compressor is performing gain decay.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Aggressiveness:&lt;/span&gt; adjusts how strong the spectral flattening is going to be&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Kompresor dynamiki&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza kompresor dynamiki, automatyczny spłaszczacz dynamiki, który może spłaszczyć widmo sygnału w celu zmniejszenia przejściowości; to jest jak osłabiacz głośności perkusji.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalny atak:&lt;/span&gt; dostosowuje szybkość reakcji kompresora dynamiki.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalne puszczenie:&lt;/span&gt; określa, jak wolno kompresor dynamiki wykonuje zanik wzmocnienia.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Agresywność:&lt;/span&gt; określa, jak silne będzie spłaszczenie widma&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Dynamic range compressor</source>
-      <translation type="unfinished"/>
+      <translation>Kompresor dynamiki</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
       <source>Maximum attack</source>
-      <translation type="unfinished"/>
+      <translation>Maksymalny atak</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="206"/>
       <source>Maximum release</source>
-      <translation type="unfinished"/>
+      <translation>Maksymalne puszczenie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="229"/>
       <source>Aggressiveness</source>
-      <translation type="unfinished"/>
+      <translation>Agresywność</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="275"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Modelowanie analogowe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Nadpróbkowane modelowanie analogowe to wolny od aliasingu generator równych składowych harmonicznych.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="278"/>
       <source>Analog modelling</source>
-      <translation type="unfinished"/>
+      <translation>Modelowanie analogowe</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="290"/>
       <source>Preamp (Harmonics)</source>
-      <translation type="unfinished"/>
+      <translation>Przedwzmacniacz (składowych harmonicznych)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="313"/>
