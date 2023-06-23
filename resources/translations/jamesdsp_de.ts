@@ -2200,7 +2200,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
       <translation>nicht verbunden</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="179"/>
+      <location filename="../../src/main.cpp" line="185"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP ist eine erweiterte Audioverarbeitungs-Engine für Linux und Android-Systeme.</translation>
     </message>
