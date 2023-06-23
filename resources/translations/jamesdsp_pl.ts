@@ -926,7 +926,7 @@ Jednak zanim zaczniesz korzystać z JamesDSP dla Linuxa, będziemy musieli wprow
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
       <source>Import EqualizerAPO graphic EQ preset</source>
-      <translation>Zaimportuj ustawienie wstępne korektora graficznego EqualizerAPO</translation>
+      <translation>Zaimportuj profil korektora graficznego EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
@@ -1037,7 +1037,7 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compressor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compressor, an automatic dynamic range flattener that can flatten the signal spectral to reduce transient; it is like a drum volume reducer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max attack:&lt;/span&gt; adjusts how fast the Dynamic Range Compressor reacts.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max release:&lt;/span&gt; adjusts how slow the Dynamic Range Compressor is performing gain decay.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Aggressiveness:&lt;/span&gt; adjusts how strong the spectral flattening is going to be&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Kompresor dynamiki&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza kompresor dynamiki, automatyczny spłaszczacz dynamiki, który może spłaszczyć widmo sygnału w celu zmniejszenia przejściowości; to jest jak osłabiacz głośności perkusji.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalny atak:&lt;/span&gt; dostosowuje szybkość reakcji kompresora dynamiki.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalne puszczenie:&lt;/span&gt; określa, jak wolno kompresor dynamiki wykonuje zanik wzmocnienia.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Agresywność:&lt;/span&gt; określa, jak silne będzie spłaszczenie widma&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Kompresor dynamiki&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza kompresor dynamiki, automatyczny spłaszczacz dynamiki, który może spłaszczyć widmo sygnału w celu zmniejszenia przejściowości; to jest jak osłabiacz głośności perkusji.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalny atak:&lt;/span&gt; dostosowuje szybkość reakcji kompresora dynamiki.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Maksymalne uwolnienie:&lt;/span&gt; określa, jak wolno kompresor dynamiki wykonuje zanik wzmocnienia.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Agresywność:&lt;/span&gt; określa, jak silne będzie spłaszczenie widma&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
@@ -1052,7 +1052,7 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="206"/>
       <source>Maximum release</source>
-      <translation>Maksymalne puszczenie</translation>
+      <translation>Maksymalne uwolnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="229"/>
@@ -1077,164 +1077,164 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="313"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ten limiter wyjściowy próbuje uniknąć obcinania sygnału wyjściowego (spowodowanego przez procesor DSP, który próbuje sprawić, by część lub całość dźwięku była głośniejsza niż wcześniej, jeśli wejście jest już bliskie maksimum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Próg limitera:&lt;/span&gt; Powinno to być ustawione na -0.1, chyba że z jakiegoś powodu dźwięk jest przycinany przed obcinaniem cyfrowym, w takim przypadku można ustawić niższe wartości.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Uwolnienie limitera:&lt;/span&gt; Limiter działa tylko wtedy, gdy ustawiony jest czas uwolnienia. Krótki czas uwolnienia spowoduje do słyszalnego zniekształcenia ograniczonego dźwięku, zwłaszcza dźwięków o niskich częstotliwościach; przedłużone uwolnienie jest zwykle preferowane, ale zmniejsza nieco objętość, którą można osiągnąć. Jeśli &amp;quot;pompowanie&amp;quot; (znikanie ograniczonego dźwięku i powracanie do niego z czasem) staje się niepożądane, dłuższe lub krótsze uwolnienie może sprawić, że efekt będzie mniej zauważalny.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Wzmocnienie po przetwarzaniu:&lt;/span&gt; Wzmocnienie po przetwarzaniu działa jak cyfrowy suwak głośności dla wszystkich efektów, po ich zastosowaniu, ale zanim dźwięk dotrze do limitera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="316"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>Limiter/master</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="333"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>Próg</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="362"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>Uwolnienie</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="385"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Wzmocnienie po przetwarzaniu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="451"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Obejmuje tradycyjny tryb BS2B (DSP stereofoniczny na binauralny Bauera) oraz bardziej zaawansowane, oparte na splocie, podejście HRTF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="454"/>
       <location filename="../../src/MainWindow.ui" line="510"/>
       <source>Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>Crossfeed</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="475"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>Tryb</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="492"/>
       <source>Custom BS2B parameters</source>
-      <translation type="unfinished"/>
+      <translation>Własne parametry BS2B</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="533"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>Częstotliwość cięcia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="588"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Rozpiętość dźwięku&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Algorytm, który wykrywa stereofoniczną zależność fazową w kilku obszarach widmowych i poprawia stereofoniczną scenę dźwiękową bez wpływu na integralność wokalu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="591"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>Rozpiętość dźwięku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="612"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>Poszerz poziom</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="657"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Pogłos&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zaawansowana sieć pogłosowa IIR (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="683"/>
       <source>Enable reverberation</source>
-      <translation type="unfinished"/>
+      <translation>Włącz pogłos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="703"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>Profil ustawień</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
       <location filename="../../src/MainWindow.ui" line="2090"/>
       <source>...</source>
-      <translation type="unfinished"/>
+      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="750"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>Współczynnik nadpróbkowania</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="770"/>
       <source>Early reflection factor</source>
-      <translation type="unfinished"/>
+      <translation>Współczynnik wczesnego odbicia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="793"/>
       <source>Early reflection amount</source>
-      <translation type="unfinished"/>
+      <translation>Ilość wczesnych odbić</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="810"/>
       <source>Early reflection width</source>
-      <translation type="unfinished"/>
+      <translation>Szerokość wczesnego odbicia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="833"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (wejścia)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="853"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (basu)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="873"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (tłumienia)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="893"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>Odcięcie dolnoprzepustowe (wyjścia)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="920"/>
       <source>Final wet mix</source>
-      <translation type="unfinished"/>
+      <translation>Końcowy mokry miks</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="927"/>
       <source>Final dry mix</source>
-      <translation type="unfinished"/>
+      <translation>Końcowy suchy miks</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="934"/>
       <source>Reverb wetness</source>
-      <translation type="unfinished"/>
+      <translation>Wilgotność pogłosu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="941"/>
       <source>Width L/R mix</source>
-      <translation type="unfinished"/>
+      <translation>Szerokość miksu L/R</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="948"/>
       <source>LFO wander amount</source>
-      <translation type="unfinished"/>
+      <translation>Wielkość fluktuacji LFO</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="955"/>
       <source>LFO spin amount</source>
-      <translation type="unfinished"/>
+      <translation>Wielkość wirowania LFO</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="962"/>
       <source>Time decay</source>
-      <translation type="unfinished"/>
+      <translation>Czas zaniku</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="969"/>
@@ -1259,7 +1259,7 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1236"/>
       <source>Presets...</source>
-      <translation type="unfinished"/>
+      <translation>Profil ustawień...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1256"/>
