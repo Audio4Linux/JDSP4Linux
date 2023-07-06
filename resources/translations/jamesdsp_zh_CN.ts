@@ -892,7 +892,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
       <source>Reset response</source>
-      <translation type="unfinished"/>
+      <translation>重置响应</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
@@ -949,7 +949,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
       <source>Decompressing package...</source>
-      <translation type="unfinished"/>
+      <translation>正在解压文件...</translation>
     </message>
   </context>
   <context>
@@ -958,51 +958,53 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
-      <translation type="unfinished"/>
+      <translation>未加载脚本</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
       <source>Enable</source>
-      <translation type="unfinished"/>
+      <translation>启用</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>重置</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>创建新脚本</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>错误</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <source>Cannot restore defaults.
 No EEL file is currently loaded.</source>
-      <translation type="unfinished"/>
+      <translation>无法恢复默认值。
+当前没有加载EEL文件。</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Selected EEL file does not exist anymore.
 Please select another one</source>
-      <translation type="unfinished"/>
+      <translation>所选EEL文件不再存在。
+请另选一个</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
       <source>Edit script</source>
-      <translation type="unfinished"/>
+      <translation>编辑脚本</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
       <source>No customizable parameters</source>
-      <translation type="unfinished"/>
+      <translation>没有可自定义参数</translation>
     </message>
   </context>
   <context>
@@ -1010,7 +1012,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="26"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP for Linux</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
@@ -1146,18 +1148,18 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="703"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>预设</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
       <location filename="../../src/MainWindow.ui" line="2090"/>
       <source>...</source>
-      <translation type="unfinished"/>
+      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="750"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>过采样系数：</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="770"/>
@@ -1313,12 +1315,12 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="1418"/>
       <location filename="../../src/MainWindow.ui" line="1740"/>
       <source>Filesystem</source>
-      <translation type="unfinished"/>
+      <translation>文件系统</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1440"/>
       <source>Bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>收藏夹</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1479"/>
@@ -1328,7 +1330,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1486"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>IR优化</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1506"/>
@@ -1353,7 +1355,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1543"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>编辑</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1589"/>
@@ -1378,17 +1380,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1762"/>
       <source>Database</source>
-      <translation type="unfinished"/>
+      <translation>数据库</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1803"/>
       <source>Create</source>
-      <translation type="unfinished"/>
+      <translation>创建</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1827"/>
       <source>Create your custom DDC files using DDCToolbox</source>
-      <translation type="unfinished"/>
+      <translation>使用DDCToolbox创建您的自定义DDC文件</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1837"/>
@@ -1398,7 +1400,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1893"/>
       <source>View installation instructions</source>
-      <translation type="unfinished"/>
+      <translation>查看安装说明</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1949"/>
@@ -1418,7 +1420,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2032"/>
       <source>Custom Presets</source>
-      <translation type="unfinished"/>
+      <translation>自定义预设</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2035"/>
@@ -1428,7 +1430,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2061"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>设置</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2067"/>
@@ -1453,17 +1455,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="145"/>
       <source>%1 connected - Preset loaded automatically</source>
-      <translation type="unfinished"/>
+      <translation>%1已连接 - 预设已自动加载</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="164"/>
       <source>Cannot execute script</source>
-      <translation type="unfinished"/>
+      <translation>无法执行脚本</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="165"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation type="unfinished"/>
+      <translation>当前EEL文件 ( &apos;%1&apos;) 在文件系统中不再存在。请手动重新打开文件。</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="279"/>
@@ -1473,7 +1475,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="280"/>
       <source>Driver status</source>
-      <translation type="unfinished"/>
+      <translation>驱动程序状态</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="284"/>
@@ -1483,27 +1485,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="286"/>
       <source>Reset to defaults</source>
-      <translation type="unfinished"/>
+      <translation>重置为默认</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="287"/>
       <source>Load from file</source>
-      <translation type="unfinished"/>
+      <translation>从文件加载</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="288"/>
       <source>Save to file</source>
-      <translation type="unfinished"/>
+      <translation>保存到文件</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="290"/>
       <source>Open LiveprogIDE</source>
-      <translation type="unfinished"/>
+      <translation>打开LiveprogIDE</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="292"/>
       <source>What&apos;s this... (Select UI element)</source>
-      <translation type="unfinished"/>
+      <translation>这是什么。。。(选择UI元素)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="393"/>
