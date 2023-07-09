@@ -553,4 +553,5 @@ int ComputeCompResponse(int n, const double* jfreq, const double* jgain, int que
     ierper *lerpPtr = &pch3;
     for (int i = 0; i < queryPts; i++)
         response[i] = (float)getValueAt(&lerpPtr->cb, dispFreq[i]);
+    return 0;
 }
