@@ -10,10 +10,11 @@ QMAKE_CFLAGS += -std=gnu11 -O2
 
 CONFIG += warn_off # Disable warnings for library
 
+# Enable liveprog logging redirection
 DEFINES += CUSTOM_CMD
-DEFINES += DEBUG # TODO remove?
 
-DEFINES += printf=redirected_printf ANDROID_LOG_INFO=0
+# Redirect printf & android logging to our custom handlers
+DEFINES += printf=redirected_printf ANDROID_LOG_INFO=0 DEBUG
 
 BASEPATH = $$PWD/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/
 
