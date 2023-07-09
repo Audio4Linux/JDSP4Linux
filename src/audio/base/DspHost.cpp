@@ -144,7 +144,7 @@ void DspHost::updateFirEqualizer(DspConfig *config)
         param[i] = (double)std::stod(v[i]);
     }
 
-    FIREqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
+    // TODO FIREqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
 }
 
 void DspHost::updateVdc(DspConfig *config)
@@ -181,7 +181,7 @@ void DspHost::updateVdc(DspConfig *config)
         QTextStream in(&f);
         DDCStringParser(cast(this->_dsp), in.readAll().toLocal8Bit().data());
 
-        int ret = DDCEnable(cast(this->_dsp));
+        int ret = DDCEnable(cast(this->_dsp), 1);
         if (ret <= 0)
         {
             util::error("Call to DDCEnable(this->_dsp) failed. Invalid DDC parameter?");
@@ -358,7 +358,7 @@ void DspHost::updateConvolver(DspConfig *config)
         util::debug("Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
 
         Convolver1DDisable(cast(this->_dsp));
-        success = Convolver1DLoadImpulseResponse(cast(this->_dsp), impulse, impInfo[0], impInfo[1]);
+        success = Convolver1DLoadImpulseResponse(cast(this->_dsp), impulse, impInfo[0], impInfo[1], 1);
     }
 
     delete[] impInfo;
@@ -398,7 +398,7 @@ void DspHost::updateGraphicEq(DspConfig *config)
     if(enabled)
     {
         ArbitraryResponseEqualizerStringParser(cast(this->_dsp), eq.toLocal8Bit().data());
-        ArbitraryResponseEqualizerEnable(cast(this->_dsp));
+        ArbitraryResponseEqualizerEnable(cast(this->_dsp), 1);
     }
     else
         ArbitraryResponseEqualizerDisable(cast(this->_dsp));
@@ -450,7 +450,7 @@ void DspHost::updateCrossfeed(DspConfig* config)
     }
 
     if(enabled)
-        CrossfeedEnable(cast(this->_dsp));
+        CrossfeedEnable(cast(this->_dsp), 1);
     else
         CrossfeedDisable(cast(this->_dsp));
 }
@@ -510,7 +510,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             break;
         case DspConfig::compression_enable:
             if(current.toBool())
-                CompressorEnable(cast(this->_dsp));
+                CompressorEnable(cast(this->_dsp), 1);
             else
                 CompressorDisable(cast(this->_dsp));
             break;
@@ -593,10 +593,10 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             }
             break;
         case DspConfig::tone_enable:
-            if(current.toBool())
+            /*if(current.toBool())
                 FIREqualizerEnable(cast(this->_dsp));
             else
-                FIREqualizerDisable(cast(this->_dsp));
+                FIREqualizerDisable(cast(this->_dsp));*/ //TODO
             break;
         case DspConfig::tone_eq:
         case DspConfig::tone_filtertype:

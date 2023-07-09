@@ -12,7 +12,8 @@ CONFIG += warn_off # Disable warnings for library
 
 DEFINES += CUSTOM_CMD
 DEFINES += DEBUG # TODO remove?
-DEFINES += printf=redirected_printf
+
+DEFINES += printf=redirected_printf ANDROID_LOG_INFO=0
 
 BASEPATH = $$PWD/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/
 
@@ -87,7 +88,6 @@ SOURCES += \
     $$BASEPATH/Effects/eel2/numericSys/solvopt.c \
     $$BASEPATH/Effects/eel2/s_str.c \
     $$BASEPATH/Effects/eel2/y.tab.c \
-    $$BASEPATH/Effects/firEqualizer.c \
     $$BASEPATH/Effects/liveprogWrapper.c \
     $$BASEPATH/Effects/reverb.c \
     $$BASEPATH/Effects/stereoEnhancement.c \
@@ -103,7 +103,8 @@ SOURCES += \
     $$BASEPATH/jdspController.c \
     EELStdOutExtension.c \
     PrintfStdOutExtension.c \
-    JdspImpResToolbox.c
+    JdspImpResToolbox.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/multimodalEQ.c
 
 unix {
     isEmpty(LIBDIR) {
