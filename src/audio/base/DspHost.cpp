@@ -594,9 +594,9 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             break;
         case DspConfig::tone_enable:
             if(current.toBool())
-                MultimodalEqualizerDisable(cast(this->_dsp));
-            else
                 MultimodalEqualizerEnable(cast(this->_dsp), 1);
+            else
+                MultimodalEqualizerDisable(cast(this->_dsp));
             break;
         case DspConfig::tone_eq:
         case DspConfig::tone_filtertype:
