@@ -26,6 +26,11 @@ public:
         _msgHandler = std::move(extraHandler);
     }
 
+    void callMessageHandler(DspHost::Message msg, std::any param)
+    {
+        _msgHandler(msg, param);
+    }
+
 protected:
     DspHost* _host = nullptr;
     DspHost::MessageHandlerFunc _msgHandler;

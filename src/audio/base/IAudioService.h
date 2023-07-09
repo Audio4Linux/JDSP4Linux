@@ -41,6 +41,7 @@ signals:
     void eelOutputReceived(const QString& output);
     void eelVariablesEnumerated(const std::vector<EelVariable>& vars);
     void convolverInfoChanged(const ConvolverInfoEventArgs& args);
+    void logOutputReceived(const QString& output);
     void outputDeviceChanged(const QString& deviceName, const QString& deviceId);
 
 };
@@ -75,6 +76,9 @@ inline void IAudioService::handleMessage(DspHost::Message msg, std::any value)
         break;
     case DspHost::ConvolverInfoChanged:
         emit convolverInfoChanged(std::any_cast<ConvolverInfoEventArgs>(value));
+        break;
+    case DspHost::PrintfWriteOutputBuffer:
+        emit logOutputReceived(std::any_cast<QString>(value));
         break;
     default:
         break;

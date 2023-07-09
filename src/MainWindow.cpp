@@ -85,6 +85,7 @@ MainWindow::MainWindow(bool     statupInTray,
         Log::debug("Blocklist mode: " + QString((AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ? "allow" : "block")));
         _audioService = new PipewireAudioService();
 #endif
+        connect(_audioService, &IAudioService::logOutputReceived, this, [](const QString& msg){ Log::kernel(msg); });
         connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
         connect(&DspConfig::instance(), &DspConfig::updatedExternally, _audioService, &IAudioService::update);
     }
@@ -146,6 +147,7 @@ MainWindow::MainWindow(bool     statupInTray,
         });
 
         connect(_audioService, &IAudioService::outputDeviceChanged, &PresetManager::instance(), &PresetManager::onOutputDeviceChanged);
+        connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
 
         // Convolver file info
         ConvolverInfoEventArgs ciArgs;

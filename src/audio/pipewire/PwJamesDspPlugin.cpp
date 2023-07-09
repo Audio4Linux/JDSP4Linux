@@ -1,8 +1,22 @@
 #include "PwJamesDspPlugin.h"
+#include <QString>
+
+extern "C" {
+#include <PrintfStdOutExtension.h>
+}
+
+void receivePrintfStdout(const char* msg, void* userdata) {
+    auto* plugin = static_cast<PwJamesDspPlugin*>(userdata);
+    if(plugin != nullptr) {
+        plugin->callMessageHandler(DspHost::PrintfWriteOutputBuffer, QString(msg));
+    }
+}
 
 PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager)
     : PwPluginBase("@PwJamesDspPlugin: ", "JamesDsp", pipe_manager)
 {
+    setPrintfStdOutHandler(receivePrintfStdout, this);
+
     this->dsp = (JamesDSPLib*) malloc(sizeof(JamesDSPLib));
     memset(this->dsp, 0, sizeof(JamesDSPLib));
 
@@ -31,6 +45,7 @@ PwJamesDspPlugin::~PwJamesDspPlugin() {
   JamesDSPFree(this->dsp);
   JamesDSPGlobalMemoryDeallocation();
 
+  setPrintfStdOutHandler(nullptr, nullptr);
   util::debug(log_tag + name + " destroyed");
 }
 

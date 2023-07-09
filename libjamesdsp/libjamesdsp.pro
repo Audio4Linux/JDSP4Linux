@@ -11,6 +11,8 @@ QMAKE_CFLAGS += -std=gnu11 -O2
 CONFIG += warn_off # Disable warnings for library
 
 DEFINES += CUSTOM_CMD
+DEFINES += DEBUG # TODO remove?
+DEFINES += printf=redirected_printf
 
 BASEPATH = $$PWD/subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/
 
@@ -50,6 +52,7 @@ HEADERS += \
     $$BASEPATH/generalDSP/spectralInterpolatorFloat.h \
     $$BASEPATH/jdsp_header.h \
     EELStdOutExtension.h \
+    PrintfStdOutExtension.h \
     JdspImpResToolbox.h
 
 SOURCES += \
@@ -99,6 +102,7 @@ SOURCES += \
     $$BASEPATH/generalDSP/spectralInterpolatorFloat.c \
     $$BASEPATH/jdspController.c \
     EELStdOutExtension.c \
+    PrintfStdOutExtension.c \
     JdspImpResToolbox.c
 
 unix {

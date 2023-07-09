@@ -21,7 +21,8 @@ public:
         EelCompilerStart,
         EelCompilerResult,
         EelWriteOutputBuffer,
-        ConvolverInfoChanged
+        ConvolverInfoChanged,
+        PrintfWriteOutputBuffer
     };
 
     typedef std::function<void(Message,std::any)> MessageHandlerFunc;
