@@ -302,10 +302,12 @@ public class HeadsetService extends Service
 	*/
 	public static boolean mUseBluetooth = false;
 
-	private double[] DRC_Input_Levels;
-	private double[] DRC_Output_Levels;
-
+	private double[] EQ_Input_Levels;
+	private double[] EQ_Output_Levels;
 	private float[] eqLevels = new float[30];
+	private double[] COMP_Input_Levels;
+	private double[] COMP_Output_Levels;
+	private float[] compLevels = new float[14];
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
@@ -616,10 +618,16 @@ public class HeadsetService extends Service
 	*
 	* @param levels
 	*/
-	public void setDRCLevels(double[] in, double[] out)
+	public void setEQLevels(double[] in, double[] out)
 	{
-		DRC_Input_Levels = in;
-		DRC_Output_Levels = out;
+		EQ_Input_Levels = in;
+		EQ_Output_Levels = out;
+		updateDsp(false, false);
+	}
+	public void setCompLevels(double[] in, double[] out)
+	{
+		COMP_Input_Levels = in;
+		COMP_Output_Levels = out;
 		updateDsp(false, false);
 	}
 
@@ -736,11 +744,28 @@ public class HeadsetService extends Service
 			prepostgain = postgain;
 			if (compressorEnabled == 1)
 			{
-				float maxAttack = Float.valueOf(preferences.getString("dsp.compression.maxatk", "30"));
-				float maxRelease = Float.valueOf(preferences.getString("dsp.compression.maxrel", "200"));
-				float adaptSpeed = Float.valueOf(preferences.getString("dsp.compression.adaptspeed", "800"));
-				float compConfig[] = new float[]{ maxAttack, maxRelease, adaptSpeed };
-				session.setParameterFloatArray(session.JamesDSP, 115, compConfig);
+				/* Compander state is in a single string preference with all values separated by ; */
+				if (COMP_Input_Levels != null && COMP_Output_Levels != null)
+				{
+					for (short i = 0; i < COMP_Output_Levels.length; i++)
+					{
+						compLevels[i] = (float)COMP_Input_Levels[i];
+						compLevels[i + 7] = (float)COMP_Output_Levels[i];
+					}
+				}
+				else
+				{
+					String[] levels = preferences.getString("dsp.compression.eq.custom", "95.0;200.0;400.0;800.0;1600.0;3400.0;7500.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0").split(";");
+					for (short i = 0; i < levels.length; i++)
+						compLevels[i] = Float.valueOf(levels[i]);
+				}
+				float timeConstant = Float.valueOf(preferences.getString("dsp.compression.timeconstant", "0.22"));
+				float granularity = Float.valueOf(preferences.getString("dsp.compression.granularity", "4"));
+				float tfresolution = Float.valueOf(preferences.getString("dsp.compression.tfresolution", "1"));
+				float compConfig[] = new float[]{ timeConstant, granularity, tfresolution };
+				float sendAry[] = mergeFloatArray(compConfig, compLevels);
+				//Log.i(DSPManager.TAG, "Compander: " + Arrays.toString(compLevels));
+				session.setParameterFloatArray(session.JamesDSP, 115, sendAry);
 			}
 			session.setParameterShort(session.JamesDSP, 1200, (short)compressorEnabled); // Compressor switch
 			if (bassBoostEnabled == 1)
@@ -752,12 +777,12 @@ public class HeadsetService extends Service
 			if (equalizerEnabled == 1)
 			{
 				/* Equalizer state is in a single string preference with all values separated by ; */
-				if (DRC_Input_Levels != null && DRC_Output_Levels != null)
+				if (EQ_Input_Levels != null && EQ_Output_Levels != null)
 				{
-					for (short i = 0; i < DRC_Output_Levels.length; i++)
+					for (short i = 0; i < EQ_Output_Levels.length; i++)
 					{
-						eqLevels[i] = (float)DRC_Input_Levels[i];
-						eqLevels[i + 15] = (float)DRC_Output_Levels[i];
+						eqLevels[i] = (float)EQ_Input_Levels[i];
+						eqLevels[i + 15] = (float)EQ_Output_Levels[i];
 					}
 				}
 				else
@@ -766,14 +791,13 @@ public class HeadsetService extends Service
 					for (short i = 0; i < levels.length; i++)
 						eqLevels[i] = Float.valueOf(levels[i]);
 				}
-				float filtertype = -1.0f;
-				if (Short.valueOf(preferences.getString("dsp.tone.filtertype", "0")) == 1)
-					filtertype = 1.0f;
+				short filtertype = Short.valueOf(preferences.getString("dsp.tone.filtertype", "3"));
 				float interpolationMode = -1.0f;
 				if (Short.valueOf(preferences.getString("dsp.tone.interpolation", "0")) == 1)
 					interpolationMode = 1.0f;
-				float ftype[] = new float[]{ filtertype, interpolationMode };
+				float ftype[] = new float[]{ (float)filtertype, interpolationMode };
 				float sendAry[] = mergeFloatArray(ftype, eqLevels);
+				//Log.i(DSPManager.TAG, "Equalizer: " + Arrays.toString(eqLevels));
 				session.setParameterFloatArray(session.JamesDSP, 116, sendAry);
 			}
 			session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch

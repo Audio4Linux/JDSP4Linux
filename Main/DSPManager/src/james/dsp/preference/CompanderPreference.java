@@ -18,11 +18,11 @@ import james.dsp.service.HeadsetService;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class DRCPreference extends DialogPreference
+public class CompanderPreference extends DialogPreference
 {
-    protected static final String TAG = DRCPreference.class.getSimpleName();
+    protected static final String TAG = CompanderPreference.class.getSimpleName();
 
-    protected DRCSurface mDRC, mDialogDRC;
+    protected CompanderSurface mDynamicResponse, mDialogDynamicResponse;
 
     private HeadsetService mHeadsetService;
 
@@ -32,7 +32,7 @@ public class DRCPreference extends DialogPreference
         public void onServiceConnected(ComponentName name, IBinder binder)
         {
             mHeadsetService = ((HeadsetService.LocalBinder) binder).getService();
-            updateDspFromDialogDRC();
+            updateDspFromDialogDynamicResponse();
         }
         @Override
         public void onServiceDisconnected(ComponentName name)
@@ -41,39 +41,39 @@ public class DRCPreference extends DialogPreference
         }
     };
 
-    public DRCPreference(Context context, AttributeSet attributeSet)
+    public CompanderPreference(Context context, AttributeSet attributeSet)
     {
         super(context, attributeSet);
-        setLayoutResource(R.layout.drc);
-        setDialogLayoutResource(R.layout.drc_popup);
+        setLayoutResource(R.layout.compander);
+        setDialogLayoutResource(R.layout.compander_popup);
     }
 
-    protected void updateDspFromDialogDRC()
+    protected void updateDspFromDialogDynamicResponse()
     {
         if (mHeadsetService != null)
         {
-            double[] inputs = new double[15];
-            double[] outputs = new double[15];
+            double[] inputs = new double[7];
+            double[] outputs = new double[7];
             for (int i = 0; i < outputs.length; i++)
             {
-            	inputs[i] = mDialogDRC.getInput(i);
-            	outputs[i] = mDialogDRC.getOutput(i);
+            	inputs[i] = mDialogDynamicResponse.getInput(i);
+            	outputs[i] = mDialogDynamicResponse.getOutput(i);
             }
-            mHeadsetService.setDRCLevels(inputs, outputs);
+            mHeadsetService.setCompLevels(inputs, outputs);
         }
     }
 
-    private void updateListDRCFromValue()
+    private void updateListDynamicResponseFromValue()
     {
         String value = getPersistedString(null);
-        if (value != null && mDRC != null)
+        if (value != null && mDynamicResponse != null)
         {
             String[] levelsStr = value.split(";");
-//    		Log.e("DRC", "levelsStr: " + Arrays.toString(levelsStr));
-            for (int i = 0; i < 15; i++)
+//    		Log.e("DynamicResponse", "levelsStr: " + Arrays.toString(levelsStr));
+            for (int i = 0; i < 7; i++)
             {
-            	mDRC.setInput(i, Float.valueOf(levelsStr[i]));
-                mDRC.setOutput(i, Float.valueOf(levelsStr[i + 15]));
+            	mDynamicResponse.setInput(i, Float.valueOf(levelsStr[i]));
+                mDynamicResponse.setOutput(i, Float.valueOf(levelsStr[i + 7]));
             }
         }
     }
@@ -82,8 +82,8 @@ public class DRCPreference extends DialogPreference
     protected void onBindDialogView(View view)
     {
         super.onBindDialogView(view);
-        mDialogDRC = (DRCSurface) view.findViewById(R.id.IOGraph);
-        mDialogDRC.setOnTouchListener(new OnTouchListener()
+        mDialogDynamicResponse = (CompanderSurface) view.findViewById(R.id.DynamicResponse);
+        mDialogDynamicResponse.setOnTouchListener(new OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -91,7 +91,7 @@ public class DRCPreference extends DialogPreference
                 float x = event.getX();
                 float y = event.getY();
                 /* Which band is closest to the position user pressed? */
-                int band = mDialogDRC.findClosest(x);
+                int band = mDialogDynamicResponse.findClosest(x);
                 int wx = v.getWidth();
                 int wy = v.getHeight();
                 float levelInput = (x / wx) * 24000.0f;
@@ -99,23 +99,23 @@ public class DRCPreference extends DialogPreference
                 	levelInput = 0.0f;
                 if (levelInput > 24000.0f)
                 	levelInput = 24000.0f;
-                float levelOutput = (y / wy) * (DRCSurface.MIN_DB - DRCSurface.MAX_DB) - DRCSurface.MIN_DB;
-                if (levelOutput < DRCSurface.MIN_DB)
-                	levelOutput = DRCSurface.MIN_DB;
-                if (levelOutput > DRCSurface.MAX_DB)
-                	levelOutput = DRCSurface.MAX_DB;
-//                mDialogDRC.setInput(band, levelInput);
-                mDialogDRC.setOutput(band, levelOutput);
-                updateDspFromDialogDRC();
+                float levelOutput = (y / wy) * (CompanderSurface.MIN_DB - CompanderSurface.MAX_DB) - CompanderSurface.MIN_DB;
+                if (levelOutput < CompanderSurface.MIN_DB)
+                	levelOutput = CompanderSurface.MIN_DB;
+                if (levelOutput > CompanderSurface.MAX_DB)
+                	levelOutput = CompanderSurface.MAX_DB;
+//                mDialogDynamicResponse.setInput(band, levelInput);
+                mDialogDynamicResponse.setOutput(band, levelOutput);
+                updateDspFromDialogDynamicResponse();
                 return true;
             }
         });
-        if (mDRC != null)
+        if (mDynamicResponse != null)
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 7; i++)
             {
-                mDialogDRC.setInput(i, mDRC.getInput(i));
-                mDialogDRC.setOutput(i, mDRC.getOutput(i));
+                mDialogDynamicResponse.setInput(i, mDynamicResponse.getInput(i));
+                mDialogDynamicResponse.setOutput(i, mDynamicResponse.getOutput(i));
             }
         }
         getContext().bindService(new Intent(getContext(), HeadsetService.class), connectionForDialog, 0);
@@ -127,19 +127,19 @@ public class DRCPreference extends DialogPreference
         if (positiveResult)
         {
             String value = "";
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 14; i++)
             {
-            	if (i < 15)
-            		value += String.format(Locale.ROOT, "%.7f", mDialogDRC.getInput(i)) + ";";
+            	if (i < 7)
+            		value += String.format(Locale.ROOT, "%.7f", mDialogDynamicResponse.getInput(i)) + ";";
             	else
-            		value += String.format(Locale.ROOT, "%.7f", mDialogDRC.getOutput(i - 15)) + ";";
+            		value += String.format(Locale.ROOT, "%.7f", mDialogDynamicResponse.getOutput(i - 7)) + ";";
             }
             persistString(value);
-            updateListDRCFromValue();
-//    		Log.e("DRC", "Save variable: " + value);
+            updateListDynamicResponseFromValue();
+//    		Log.e("DynamicResponse", "Save variable: " + value);
         }
         if (mHeadsetService != null)
-            mHeadsetService.setDRCLevels(null, null);
+            mHeadsetService.setCompLevels(null, null);
         getContext().unbindService(connectionForDialog);
     }
 
@@ -147,15 +147,15 @@ public class DRCPreference extends DialogPreference
     protected void onBindView(View view)
     {
         super.onBindView(view);
-        mDRC = (DRCSurface) view.findViewById(R.id.IOGraph);
-        updateListDRCFromValue();
+        mDynamicResponse = (CompanderSurface) view.findViewById(R.id.DynamicResponse);
+        updateListDynamicResponseFromValue();
     }
 
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue)
     {
         String value = restorePersistedValue ? getPersistedString(null) : (String) defaultValue;
-//		Log.e("DRC", "Load variable: " + value);
+//		Log.e("DynamicResponse", "Load variable: " + value);
         if (shouldPersist())
             persistString(value);
     }

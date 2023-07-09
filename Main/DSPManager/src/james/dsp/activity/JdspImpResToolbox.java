@@ -17,4 +17,5 @@ public class JdspImpResToolbox
     public static native float[] ReadImpulseResponseToFloat(String path, int targetSampleRate, int audioInfo[], int convMode, int advParam[]);
     public static native String OfflineAudioResample(String path, String filename, int targetSampleRate);
     public static native int ComputeEqResponse(int n, double freq[], double gain[], int interpolationMode, int queryPts, double dispFreq[], float response[]);
+    public static native int ComputeCompResponse(int n, double freq[], double gain[], int queryPts, double dispFreq[], float response[]);
 }

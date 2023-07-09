@@ -4,8 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="300dp">
 
-  <james.dsp.preference.DRCSurface
-      android:id="@+id/IOGraph"
+  <james.dsp.preference.CompanderSurface
+      android:id="@+id/DynamicResponse"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent" />
 </LinearLayout>

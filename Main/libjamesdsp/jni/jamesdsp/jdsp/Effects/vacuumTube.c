@@ -60,17 +60,17 @@ void VTProcess(VacuumTube *tb, float *x1, float *x2, float *out1, float *out2, s
 				bandCh2[3] = -bandCh2[3];
 				bandCh2[5] = -bandCh2[5];
 				double allpassCh1 = bandCh1[1] + bandCh1[2] + bandCh1[3] + bandCh1[4];
-				double harmonic2Ch1 = bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1];
-				double harmonic3Ch1 = bandCh1[2] * bandCh1[2] * bandCh1[2] * bandCh1[2] * bandCh1[2] * bandCh1[2];
-				double harmonic4Ch1 = bandCh1[3] * bandCh1[3] * bandCh1[3] * bandCh1[3];
+				double harmonic2Ch1 = bandCh1[1] * bandCh1[1];
+				double harmonic3Ch1 = bandCh1[2] * bandCh1[2];
+				double harmonic4Ch1 = bandCh1[3] * bandCh1[3];
 				double harmonic5Ch1 = bandCh1[4] * bandCh1[4];
 				double allpassCh2 = bandCh2[1] + bandCh2[2] + bandCh2[3] + bandCh2[4];
-				double harmonic2Ch2 = bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1];
-				double harmonic3Ch2 = bandCh2[2] * bandCh2[2] * bandCh2[2] * bandCh2[2] * bandCh2[2] * bandCh2[2];
-				double harmonic4Ch2 = bandCh2[3] * bandCh2[3] * bandCh2[3] * bandCh2[3];
+				double harmonic2Ch2 = bandCh2[1] * bandCh2[1];
+				double harmonic3Ch2 = bandCh2[2] * bandCh2[2];
+				double harmonic4Ch2 = bandCh2[3] * bandCh2[3];
 				double harmonic5Ch2 = bandCh2[4] * bandCh2[4];
-				upsample[0][j] = (float)(bandCh1[0] + (harmonic2Ch1 + harmonic3Ch1 + harmonic4Ch1 + harmonic5Ch1) + allpassCh1 + bandCh1[5]);
-				upsample[1][j] = (float)(bandCh2[0] + (harmonic2Ch2 + harmonic3Ch2 + harmonic4Ch2 + harmonic5Ch2) + allpassCh2 + bandCh2[5]);
+				upsample[0][j] = (float)(bandCh1[0] + (harmonic2Ch1 + harmonic3Ch1 + harmonic4Ch1 + harmonic5Ch1) * 0.2 + allpassCh1 + bandCh1[5]);
+				upsample[1][j] = (float)(bandCh2[0] + (harmonic2Ch2 + harmonic3Ch2 + harmonic4Ch2 + harmonic5Ch2) * 0.2 + allpassCh2 + bandCh2[5]);
 			}
 			out1[i] = oversample_stepdownSmpFloat(&tb->smp[0], upsample[0]) * tb->postgain;
 			out2[i] = oversample_stepdownSmpFloat(&tb->smp[1], upsample[1]) * tb->postgain;
@@ -89,17 +89,17 @@ void VTProcess(VacuumTube *tb, float *x1, float *x2, float *out1, float *out2, s
 			bandCh2[3] = -bandCh2[3];
 			bandCh2[5] = -bandCh2[5];
 			double allpassCh1 = bandCh1[1] + bandCh1[2] + bandCh1[3] + bandCh1[4];
-			double harmonic2Ch1 = bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1] * bandCh1[1];
-			double harmonic3Ch1 = bandCh1[2] * bandCh1[2] * bandCh1[2] * bandCh1[2] * bandCh1[2] * bandCh1[2];
-			double harmonic4Ch1 = bandCh1[3] * bandCh1[3] * bandCh1[3] * bandCh1[3];
+			double harmonic2Ch1 = bandCh1[1] * bandCh1[1];
+			double harmonic3Ch1 = bandCh1[2] * bandCh1[2];
+			double harmonic4Ch1 = bandCh1[3] * bandCh1[3];
 			double harmonic5Ch1 = bandCh1[4] * bandCh1[4];
 			double allpassCh2 = bandCh2[1] + bandCh2[2] + bandCh2[3] + bandCh2[4];
-			double harmonic2Ch2 = bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1] * bandCh2[1];
-			double harmonic3Ch2 = bandCh2[2] * bandCh2[2] * bandCh2[2] * bandCh2[2] * bandCh2[2] * bandCh2[2];
-			double harmonic4Ch2 = bandCh2[3] * bandCh2[3] * bandCh2[3] * bandCh2[3];
+			double harmonic2Ch2 = bandCh2[1] * bandCh2[1];
+			double harmonic3Ch2 = bandCh2[2] * bandCh2[2];
+			double harmonic4Ch2 = bandCh2[3] * bandCh2[3];
 			double harmonic5Ch2 = bandCh2[4] * bandCh2[4];
-			out1[j] = (float)(bandCh1[0] + (harmonic2Ch1 + harmonic3Ch1 + harmonic4Ch1 + harmonic5Ch1) + allpassCh1 + bandCh1[5]) * tb->postgain;
-			out2[j] = (float)(bandCh2[0] + (harmonic2Ch2 + harmonic3Ch2 + harmonic4Ch2 + harmonic5Ch2) + allpassCh2 + bandCh2[5]) * tb->postgain;
+			out1[j] = (float)(bandCh1[0] + (harmonic2Ch1 + harmonic3Ch1 + harmonic4Ch1 + harmonic5Ch1) * 0.25f + allpassCh1 + bandCh1[5]) * tb->postgain;
+			out2[j] = (float)(bandCh2[0] + (harmonic2Ch2 + harmonic3Ch2 + harmonic4Ch2 + harmonic5Ch2) * 0.25f + allpassCh2 + bandCh2[5]) * tb->postgain;
 		}
 	}
 }
@@ -114,8 +114,8 @@ void VacuumTubeDisable(JamesDSPLib *jdsp)
 }
 void VacuumTubeSetGain(JamesDSPLib *jdsp, double dbGain)
 {
-	if (dbGain > 8.0)
-		dbGain = 8.0;
+	if (dbGain > 12.0)
+		dbGain = 12.0;
 	if (dbGain < -3.0)
 		dbGain = -3.0;
 	jdsp->tube.pregain = db2magf(dbGain);

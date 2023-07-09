@@ -1,0 +1,2 @@
+https://android.googlesource.com/platform/system/media/+/42165c2/audio_utils/primitives.c
+https://android.googlesource.com/platform/system/media/+/42165c2/audio_utils/include/audio_utils/primitives.h
