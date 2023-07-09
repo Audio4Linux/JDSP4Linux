@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>6</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -297,7 +297,7 @@
                        <number>-300</number>
                       </property>
                       <property name="maximum">
-                       <number>800</number>
+                       <number>1200</number>
                       </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
