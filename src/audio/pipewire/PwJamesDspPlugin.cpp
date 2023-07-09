@@ -12,9 +12,10 @@ void receivePrintfStdout(const char* msg, void* userdata) {
     }
 }
 
-PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager)
+PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, IAudioService* parent_service)
     : PwPluginBase("@PwJamesDspPlugin: ", "JamesDsp", pipe_manager)
 {
+    setMessageHandler(std::bind(&IAudioService::handleMessage, parent_service, std::placeholders::_1, std::placeholders::_2));
     setPrintfStdOutHandler(receivePrintfStdout, this);
 
     this->dsp = (JamesDSPLib*) malloc(sizeof(JamesDSPLib));

@@ -144,7 +144,7 @@ void DspHost::updateFirEqualizer(DspConfig *config)
         param[i] = (double)std::stod(v[i]);
     }
 
-    // TODO FIREqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
+    MultimodalEqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
 }
 
 void DspHost::updateVdc(DspConfig *config)
@@ -593,10 +593,10 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             }
             break;
         case DspConfig::tone_enable:
-            /*if(current.toBool())
-                FIREqualizerEnable(cast(this->_dsp));
+            if(current.toBool())
+                MultimodalEqualizerDisable(cast(this->_dsp));
             else
-                FIREqualizerDisable(cast(this->_dsp));*/ //TODO
+                MultimodalEqualizerEnable(cast(this->_dsp), 1);
             break;
         case DspConfig::tone_eq:
         case DspConfig::tone_filtertype:

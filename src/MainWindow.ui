@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>0</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1257,12 +1257,32 @@
                  </property>
                  <item>
                   <property name="text">
-                   <string>Minimum phase</string>
+                   <string>FIR Minimum phase</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Linear phase</string>
+                   <string>IIR 4 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 6 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 8 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 10 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 12 order</string>
                   </property>
                  </item>
                 </widget>
