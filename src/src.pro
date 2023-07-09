@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = jamesdsp
 TEMPLATE = app
 
+
+UI_DEBUG: DEFINES += UI_DEBUG
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
 USE_PORTALS: DEFINES += USE_PORTALS
 NO_CRASH_HANDLER: DEFINES += NO_CRASH_HANDLER
@@ -22,7 +24,7 @@ USE_PULSEAUDIO {
     DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pulse\\\"
 }
 else {
-    DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pipewire\\\"
+    DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux\\\"
 }
 
 DEFINES += APP_VERSION=$$system(git describe --tags --long --always)
