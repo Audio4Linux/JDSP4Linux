@@ -7,6 +7,7 @@
 #include "MemoryUsage.h"
 #endif
 #include <string.h>
+#include <math.h>
 #include "essential.h"
 // Effect section
 #include "jdsp/jdsp_header.h"
@@ -201,7 +202,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				replyData->psize = 4;
 				replyData->vsize = 4;
 				replyData->cmd = 20001;
-				replyData->data = (int32_t)dspmain->jdsp.fs;
+				replyData->data = (int32_t)dspmain->jdsp.trueSampleRate;
 				*replySize = sizeof(reply1x4_1x4_t);
 				return 0;
 			}
@@ -275,7 +276,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (!compressorEnabled)
 					CompressorDisable(&dspmain->jdsp);
 				else
-					CompressorEnable(&dspmain->jdsp);
+					CompressorEnable(&dspmain->jdsp, 1);
 #ifdef DEBUG
 				LOGE("Compressor enabled: %d", compressorEnabled);
 #endif
@@ -309,9 +310,9 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 			{
 				int16_t equalizerEnabled = ((int16_t *)cep)[8];
 				if (!equalizerEnabled)
-					FIREqualizerDisable(&dspmain->jdsp);
+					MultimodalEqualizerDisable(&dspmain->jdsp);
 				else
-					FIREqualizerEnable(&dspmain->jdsp);
+					MultimodalEqualizerEnable(&dspmain->jdsp, 1);
 #ifdef DEBUG
 				LOGE("FIR equalizer enabled: %d", equalizerEnabled);
 #endif
@@ -377,7 +378,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (!bs2bEnabled)
 					CrossfeedDisable(&dspmain->jdsp);
 				else
-					CrossfeedEnable(&dspmain->jdsp);
+					CrossfeedEnable(&dspmain->jdsp, 1);
 #ifdef DEBUG
 				LOGE("Crossfeed enabled: %d", bs2bEnabled);
 #endif
@@ -390,7 +391,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (!arbitraryResponseEnabled)
 					ArbitraryResponseEqualizerDisable(&dspmain->jdsp);
 				else
-					ArbitraryResponseEqualizerEnable(&dspmain->jdsp);
+					ArbitraryResponseEqualizerEnable(&dspmain->jdsp, 1);
 #ifdef DEBUG
 				LOGE("Arbitrary response eq enabled: %d", arbitraryResponseEnabled);
 #endif
@@ -404,7 +405,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (!viperddcEnabled)
 					DDCDisable(&dspmain->jdsp);
 				else
-					errCode = DDCEnable(&dspmain->jdsp);
+					errCode = DDCEnable(&dspmain->jdsp, 1);
 #ifdef DEBUG
 				LOGE("viperddcEnabled: %d, success?: %d", viperddcEnabled, errCode);
 #endif
@@ -434,7 +435,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 					LOGI("Ops! Buffer slices got %d missing holes", dspmain->numTime2Send - dspmain->samplesInc);
 #endif
 				dspmain->samplesInc = 0;
-				int success = Convolver1DLoadImpulseResponse(&dspmain->jdsp, dspmain->tempImpulseIncoming, dspmain->impChannels, dspmain->impulseLengthActual);
+				int success = Convolver1DLoadImpulseResponse(&dspmain->jdsp, dspmain->tempImpulseIncoming, dspmain->impChannels, dspmain->impulseLengthActual, 1);
 				free(dspmain->tempImpulseIncoming);
 				dspmain->tempImpulseIncoming = 0;
 #ifdef DEBUG
@@ -449,13 +450,13 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (dspmain->stringEq)
 				{
 #ifdef DEBUG
-				LOGI("%s", dspmain->stringEq);
+					LOGI("%s", dspmain->stringEq);
 #endif
 					ArbitraryResponseEqualizerStringParser(&dspmain->jdsp, dspmain->stringEq);
 					free(dspmain->stringEq);
 					dspmain->stringEq = 0;
 #ifdef DEBUG
-				LOGI("Arbitrary response initialized");
+					LOGI("Arbitrary response initialized");
 #endif
 				}
 				*replyData = 0;
@@ -467,14 +468,14 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (dspmain->stringEq)
 				{
 #ifdef DEBUG
-				LOGI("%s", dspmain->stringEq);
+					LOGI("%s", dspmain->stringEq);
 #endif
 					// Initialize DDC
 					DDCStringParser(&dspmain->jdsp, dspmain->stringEq);
 					free(dspmain->stringEq);
 					dspmain->stringEq = 0;
 #ifdef DEBUG
-				LOGI("DDC initialized");
+					LOGI("DDC initialized");
 #endif
 				}
 				*replyData = 0;
@@ -486,14 +487,14 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				if (dspmain->stringEq)
 				{
 #ifdef DEBUG
-				LOGI("%s", dspmain->stringEq);
+					LOGI("%s", dspmain->stringEq);
 #endif
-				// Initialize EEL
-				int errorCode = LiveProgStringParser(&dspmain->jdsp, dspmain->stringEq);
-				free(dspmain->stringEq);
-				dspmain->stringEq = 0;
+					// Initialize EEL
+					int errorCode = LiveProgStringParser(&dspmain->jdsp, dspmain->stringEq);
+					free(dspmain->stringEq);
+					dspmain->stringEq = 0;
 #ifdef DEBUG
-				LOGI("Live prog error message: %s", checkErrorCode(errorCode));
+					LOGI("Live prog error message: %s", checkErrorCode(errorCode));
 #endif
 				}
 				*replyData = 0;
@@ -503,7 +504,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 		if (cep->psize == 4 && cep->vsize == 12)
 		{
 			int32_t cmd = ((int32_t *)cep)[3];
-			if (cmd == 1500) // Implemented
+			if (cmd == 1500)
 			{
 				double limThreshold = (double)((float*)cep)[4];
 				double limRelease = (double)((float*)cep)[5];
@@ -525,18 +526,32 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				return 0;
 			}
 		}
-		if (cep->psize == 4 && cep->vsize == (4 * 3))
+		if (cep->psize == 4 && cep->vsize == 68)
 		{
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 115)
 			{
-				float maxAttack = ((float*)cep)[4 + 0];
-				float maxRelease = ((float*)cep)[4 + 1];
-				float adaptSpeed = ((float*)cep)[4 + 2];
+				float timeconstant = ((float*)cep)[4 + 0];
+				int granularity = (int)roundf(((float*)cep)[4 + 1]);
+				int tfresolution = (int)roundf(((float*)cep)[4 + 2]);
+				float *ptrFreqAxis = &((float*)cep)[4 + 3];
+				float *ptrGainAxis = ptrFreqAxis + 7;
+				double param[14];
+				for (int i = 0; i < 7; i++)
+				{
+					param[i] = (double)ptrFreqAxis[i];
+					param[i + 7] = (double)ptrGainAxis[i];
+				}
 #ifdef DEBUG
-				LOGE("maxAttack: %f, maxRelease: %f, adaptSpeed: %f", maxAttack, maxRelease, adaptSpeed);
+				LOGI("Compander timeconstant = %1.8f", timeconstant);
+				LOGI("Compander granularity = %d", granularity);
+				LOGI("Compander tfresolution = %d", tfresolution);
+				LOGI("Compander axis: ");
+				for (int i = 0; i < 7; i++)
+					LOGI("%1.7lf %1.7lf; ", param[i], param[i + 7]);
 #endif
-				CompressorSetParam(&dspmain->jdsp, maxAttack, maxRelease, adaptSpeed);
+				CompressorSetParam(&dspmain->jdsp, timeconstant, granularity, tfresolution);
+				CompressorSetGain(&dspmain->jdsp, param, param + 7, 1);
 				*replyData = 0;
 				return 0;
 			}
@@ -546,7 +561,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 			int32_t cmd = ((int32_t *)cep)[3];
 			if (cmd == 116)
 			{
-				int filtertype = (((float*)cep)[4 + 0]) < 0.0f ? 0 : 1;
+				int filtertype = roundf(((float*)cep)[4 + 0]);
 				int interpolationMode = (((float*)cep)[4 + 1]) < 0.0f ? 0 : 1;
 				float *ptrFreqAxis = &((float*)cep)[4 + 2];
 				float *ptrGainAxis = ptrFreqAxis + 15;
@@ -557,13 +572,23 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 					param[i + 15] = (double)ptrGainAxis[i];
 				}
 #ifdef DEBUG
+				if (filtertype == 0)
+					LOGI("filtertype: FIR Minimum phase");
+				else if (filtertype == 1)
+					LOGI("filtertype: IIR 4 order");
+				else if (filtertype == 2)
+					LOGI("filtertype: IIR 6 order");
+				else if (filtertype == 3)
+					LOGI("filtertype: IIR 8 order");
+				else if (filtertype == 4)
+					LOGI("filtertype: IIR 10 order");
+				else
+					LOGI("filtertype: IIR 12 order");
 				LOGI("Eq axis: ");
 				for (int i = 0; i < 15; i++)
-				{
 					LOGI("%1.7lf %1.7lf; ", param[i], param[i + 15]);
-				}
 #endif
-				FIREqualizerAxisInterpolation(&dspmain->jdsp, interpolationMode, filtertype, param, param + 15);
+				MultimodalEqualizerAxisInterpolation(&dspmain->jdsp, interpolationMode, filtertype, param, param + 15);
 				*replyData = 0;
 				return 0;
 			}
@@ -691,7 +716,7 @@ static effect_descriptor_t jamesdsp_descriptor =
 	EFFECT_FLAG_TYPE_INSERT | EFFECT_FLAG_INSERT_FIRST,
 	10,
 	1,
-	"JamesDSP v3.12",
+	"JamesDSP v4.01",
 	"James Fung"
 };
 __attribute__((constructor)) static void initialize(void)

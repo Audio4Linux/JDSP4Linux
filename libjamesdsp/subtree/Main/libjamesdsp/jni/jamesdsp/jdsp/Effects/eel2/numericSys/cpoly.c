@@ -4,33 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include "FilterDesign/fdesign.h"
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
-// COMPLEX DIVISION C = A/B, AVOIDING OVERFLOW
-static void cdivid(const double ar, const double ai, const double br, const double bi, double *cr, double *ci)
-{
-	double r, d;
-	if (br == 0 && bi == 0)
-	{
-		// Division by zero, c = infinity
-		*cr = DBL_MAX;
-		*ci = DBL_MAX;
-		return;
-	}
-	if (fabs(br) < fabs(bi))
-	{
-		r = br / bi;
-		d = bi + r * br;
-		*cr = (ar * r + ai) / d;
-		*ci = (ai * r - ar) / d;
-		return;
-	}
-	r = bi / br;
-	d = br + r * bi;
-	*cr = (ar + ai * r) / d;
-	*ci = (ai - ar * r) / d;
-}
 // MODULUS OF A COMPLEX NUMBER AVOIDING OVERFLOW
 static double cmod(const double r, const double i)
 {

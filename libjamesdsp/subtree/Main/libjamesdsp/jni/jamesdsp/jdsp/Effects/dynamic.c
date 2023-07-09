@@ -134,104 +134,25 @@ static float lerp1DNoExtrapo(float val, float *x, float *y, int n)
 }
 #define MIN(a, b) (((a)<(b))?(a):(b))
 #define MAX(a, b) (((a)>(b))?(a):(b))
-#define CLAMP(x, min, max) ((x)>(max)?(max):(((x)<(min))?(min):(x)))
-#define ABS(x) ((x)<0?(-(x)):(x))
-#define SQUARE(x) ((x)*(x))
-#define MIX(x0, y1, coeff) (((x0)-(y1))*(coeff)+(y1))
-// Constants
-#define MINATTACKTIME 0.1
-#define MAXATTACKTIME 200.0
-#define MINRELEASETIME 5.0
-#define MAXRELEASETIME 800.0
-#define MINADAPTTIME (MAXRELEASETIME / 2.0)
-#define MAXADAPTTIME (MAXRELEASETIME * 2.0)
-#include <stdint.h>
-void FFTCompressorSetSpectralFollowingRate(FFTDynamicRangeSquasher *comp, float fs, float fgt_facT)
+static float db2mag2(float db)
 {
-	comp->spectralRate = fs / (float)comp->fftLen * (float)ANALYSIS_OVERLAP_DRS;
-	comp->fgt_fac = (float)(1.0 - exp(-1.0 / (fgt_facT / 1000.0 * comp->spectralRate)));
+	return powf(10.0f, db / 20.0f);
 }
-void FFTCompressorSetParam(FFTDynamicRangeSquasher *comp, float fs, float maxAtk, float maxRel, float adapt)
+static float mag2db(float mag)
 {
-	comp->spectralRate = fs / (float)comp->fftLen * (float)ANALYSIS_OVERLAP_DRS;
-	comp->metaMaxAttackTime = 2.0f * ((float)maxAtk / 1000.0f);
-	comp->metaMaxReleaseTime = 2.0f * ((float)maxRel / 1000.0f);
-	float metaAdaptTime = (float)adapt / 1000.0f;// 电平回复系数，回复对数电平到0dB
-	for (unsigned int i = 0; i < comp->procUpTo; i++)
-		comp->metaAdaptCoeff[i] = (float)(1.0 - exp(-1.0 / (metaAdaptTime * comp->spectralRate)));
+	return 20.0f * log10f(mag);
 }
-static float my_logf(float a)
+static inline float processfftComp(FFTCompander *comp, unsigned int idx, float logIn)
 {
-	float m, r, s, t, i, f;
-	int32_t e;
-
-	if ((a > 0.0f) && (a <= 3.40e+38f)) { // 0x1.fffffep+127
-		m = frexpf(a, &e);
-		if (m < 0.666666667f) {
-			m = m + m;
-			e = e - 1;
-		}
-		i = (float)e;
-		/* m in [2/3, 4/3] */
-		f = m - 1.0f;
-		s = f * f;
-		/* Compute log1p(f) for f in [-1/3, 1/3] */
-		r = fmaf(-0.130187988f, f, 0.140889585f); // -0x1.0aa000p-3, 0x1.208ab8p-3
-		t = fmaf(-0.121489584f, f, 0.139809534f); // -0x1.f19f10p-4, 0x1.1e5476p-3
-		r = fmaf(r, s, t);
-		r = fmaf(r, f, -0.166845024f); // -0x1.55b2d8p-3
-		r = fmaf(r, f, 0.200121149f); //  0x1.99d91ep-3
-		r = fmaf(r, f, -0.249996364f); // -0x1.fffe18p-3
-		r = fmaf(r, f, 0.333331943f); //  0x1.5554f8p-2
-		r = fmaf(r, f, -0.500000000f); // -0x1.000000p-1
-		r = fmaf(r, s, f);
-		r = fmaf(i, 0.693147182f, r); //   0x1.62e430p-1 // log(2) 
-		return r;
-	}
-	return 0.0f;
+	float multBuf = logIn - comp->oldBuf[idx];
+	if (multBuf < 0.0f)
+		multBuf = 0.0f;
+	multBuf *= comp->DREmult[idx];
+	if (multBuf > comp->headRoomdB)
+		multBuf = comp->headRoomdB;
+	return db2mag2(multBuf);
 }
-static float processfftComp(FFTDynamicRangeSquasher *comp, unsigned int idx, float logIn)
-{
-	// Attack and release coefficients
-	float myAttackCoeff;
-	if (comp->metaMaxAttackTime < FLT_EPSILON)
-		myAttackCoeff = 1.0f;
-	else
-		myAttackCoeff = 1.0f - expf(-1.0f / (comp->metaMaxAttackTime * comp->spectralRate));
-	float trRel = comp->metaMaxReleaseTime - comp->metaMaxAttackTime;
-	float myReleaseCoeff;
-	if (trRel < FLT_EPSILON)
-		myReleaseCoeff = 1.0f;
-	else
-		myReleaseCoeff = 1.0f - expf(-1.0f / (trRel * comp->spectralRate));
-	float logOvershoot = logIn - comp->logThreshold[idx];
-	// Set estimate for average log gain
-	float logGainEstimate = comp->logThreshold[idx] * 0.5f;
-	// Set knee width
-	float myLogWidth = MAX(-(comp->smoothLogGain[idx] + logGainEstimate), 0.0f);
-	// Soft knee rectification
-	float logGain = 0.0f;
-	if (logOvershoot >= myLogWidth * 0.5f)
-		logGain = logOvershoot;
-	else if (logOvershoot > (-myLogWidth * 0.5f) && logOvershoot < (myLogWidth * 0.5f))
-		logGain = 1.0f / (2.0f * myLogWidth) * SQUARE(logOvershoot + (myLogWidth * 0.5f));
-	// 更新功率包络的上升沿、下降沿
-	comp->adaptiveRelease[idx] = MAX(logGain, MIX(logGain, comp->adaptiveRelease[idx], myReleaseCoeff));
-	comp->adaptiveAttack[idx] = MIX(comp->adaptiveRelease[idx], comp->adaptiveAttack[idx], myAttackCoeff);
-	// 反增益
-	logGain = -comp->adaptiveAttack[idx];
-	// 平滑增益
-	comp->smoothLogGain[idx] = MIX(logGain - logGainEstimate, comp->smoothLogGain[idx], comp->metaAdaptCoeff[idx]);
-	// 防止超越0dB
-	if (logIn + logGain - (comp->smoothLogGain[idx] + logGainEstimate) > 0.0f)
-		comp->smoothLogGain[idx] = logIn + logGain - logGainEstimate;
-	// Apply automatic gain
-	logGain -= comp->smoothLogGain[idx] + logGainEstimate;
-	// Update threshold to recent average
-	comp->logThreshold[idx] = comp->logThreshold[idx] + comp->fgt_fac * (logIn - comp->logThreshold[idx]);
-	return expf(logGain); // Convert to linear
-}
-int FFTDynamicRangeSquasherProcessSamples(FFTDynamicRangeSquasher *cm, const float *inLeft, const float *inRight, unsigned int inSampleCount, float *outL, float *outR)
+int FFTCompanderProcessSamples(FFTCompander *cm, const float *inLeft, const float *inRight, unsigned int inSampleCount, float *outL, float *outR)
 {
 	unsigned int outSampleCount, maxOutSampleCount, copyCount;
 	outSampleCount = 0;
@@ -307,14 +228,10 @@ int FFTDynamicRangeSquasherProcessSamples(FFTDynamicRangeSquasher *cm, const flo
 				ShrinkGridSpectralInterpolator(cm->octaveSmooth, cm->procUpTo, cm->mag, cm->aheight);
 				for (i = 0; i < cm->smallGridSize; i++)
 				{
-					float magNormalized = cm->aheight[i];
+					float magNormalized = mag2db(cm->aheight[i]);
+					cm->oldBuf[i] = cm->oldBuf[i] + cm->fgt_fac * (magNormalized - cm->oldBuf[i]);
 					// Log conversion
-					float logIn;
-					if (magNormalized <= FLT_EPSILON)
-						logIn = -15.942385152f;
-					else
-						logIn = my_logf(magNormalized);
-					float mask = processfftComp(cm, i, logIn);
+					float mask = processfftComp(cm, i, magNormalized);
 					cm->finalGain[i] = mask;
 				}
 				for (i = 1; i < cm->procUpTo; i++)
@@ -348,14 +265,10 @@ int FFTDynamicRangeSquasherProcessSamples(FFTDynamicRangeSquasher *cm, const flo
 				leftMag = fabsf(cm->mTempLBuffer[0]);
 				rightMag = fabsf(cm->mTempRBuffer[0]);
 				currentMagnitude = leftMag > rightMag ? leftMag : rightMag;
-				float magNormalized = currentMagnitude;
+				float magNormalized = mag2db(currentMagnitude);
+				cm->oldBuf[0] = cm->oldBuf[0] + cm->fgt_fac * (magNormalized - cm->oldBuf[0]);
 				// Log conversion
-				float logIn;
-				if (magNormalized <= FLT_EPSILON)
-					logIn = -15.942385152f;
-				else
-					logIn = my_logf(magNormalized);
-				float mask = processfftComp(cm, 0, logIn);
+				float mask = processfftComp(cm, 0, magNormalized);
 				cm->timeDomainOut[0][0] = cm->mTempLBuffer[0] * mask;
 				cm->timeDomainOut[1][0] = cm->mTempRBuffer[0] * mask;
 				for (i = 1; i < cm->procUpTo; i++)
@@ -374,13 +287,10 @@ int FFTDynamicRangeSquasherProcessSamples(FFTDynamicRangeSquasher *cm, const flo
 					absV2 = fabsf(rI);
 					rightMag = max((127.0f / 128.0f) * max(absV1, absV2) + (3.0f / 16.0f) * min(absV1, absV2), (27.0f / 32.0f) * max(absV1, absV2) + (71.0f / 128.0f) * min(absV1, absV2));
 					currentMagnitude = leftMag > rightMag ? leftMag : rightMag;
-					magNormalized = currentMagnitude;
+					magNormalized = mag2db(currentMagnitude);
+					cm->oldBuf[i] = cm->oldBuf[i] + cm->fgt_fac * (magNormalized - cm->oldBuf[i]);
 					// Log conversion
-					if (magNormalized <= FLT_EPSILON)
-						logIn = -15.942385152f;
-					else
-						logIn = my_logf(magNormalized);
-					mask = processfftComp(cm, i, logIn);
+					mask = processfftComp(cm, i, magNormalized);
 					cm->timeDomainOut[0][bitRevFwd] = (lR + lI) * mask;
 					cm->timeDomainOut[0][bitRevSym] = (lR - lI) * mask;
 					cm->timeDomainOut[1][bitRevFwd] = (rR + rI) * mask;
@@ -461,7 +371,7 @@ int FFTDynamicRangeSquasherProcessSamples(FFTDynamicRangeSquasher *cm, const flo
 	}
 	return outSampleCount;
 }
-void FFTDynamicRangeSquasherSetavgBW(FFTDynamicRangeSquasher *cm, double avgBW)
+void FFTCompanderSetavgBW(FFTCompander *cm, double avgBW)
 {
 	unsigned int fcLen;
 	size_t virtualStructSize = EstimateMemorySpectralInterpolator(&fcLen, cm->procUpTo, avgBW, &cm->smallGridSize);
@@ -469,20 +379,16 @@ void FFTDynamicRangeSquasherSetavgBW(FFTDynamicRangeSquasher *cm, double avgBW)
 	{
 		cm->noGridDownsampling = 0;
 		InitSpectralInterpolator(cm->octaveSmooth, fcLen, cm->procUpTo, avgBW);
-		//for (unsigned int i = 0; i < cm->smallGridSize; i++)
-			//cm->ratioOld[i] = cm->ratio[i] = cm->ratio2[i] = 1.0f;
 	}
 	else
 	{
 		cm->smallGridSize = 0;
 		cm->noGridDownsampling = 1;
-		//for (unsigned int i = 0; i < cm->procUpTo; i++)
-			//cm->ratioOld[i] = cm->ratio[i] = cm->ratio2[i] = 1.0f;
 	}
 }
-void FFTDynamicRangeSquasherInit(FFTDynamicRangeSquasher *cm, float fs)
+void FFTCompanderInit(FFTCompander *cm, float fs)
 {
-	memset(cm, 0, sizeof(FFTDynamicRangeSquasher));
+	//memset(cm, 0, sizeof(FFTCompander));
 	unsigned int i;
 	const float oX[10] = { 750, 1500, 3000, 6000, 12000, 24000, 48000, 96000, 192000, 256000 };
 	const float oY[10] = { 24, 48, 96, 192, 384, 768, 1536, 3072, 6144, 8192 };
@@ -535,36 +441,96 @@ void FFTDynamicRangeSquasherInit(FFTDynamicRangeSquasher *cm, float fs)
 	float sum = 0.0f;
 	for (i = 0; i < cm->fftLen; i++)
 		sum += cm->analysisWnd[i];
+	FFTCompanderSetavgBW(cm, 1.2);
 	cm->spectralRate = fs / (float)cm->fftLen * (float)ANALYSIS_OVERLAP_DRS;
-	float fgt_facT = 30.0f; // Adaptive threshold
-	double avgBW = 1.00005;
-	for (unsigned int i = 0; i < cm->procUpTo; i++)
-	{
-		cm->metaAdaptCoeff[i] = 0.0f;
-		cm->adaptiveRelease[i] = 1.2f;
-		cm->adaptiveAttack[i] = 1.2f;
-		cm->smoothLogGain[i] = 2.0f;
-		cm->logThreshold[i] = -7.0f;
-	}
-	FFTDynamicRangeSquasherSetavgBW(cm, avgBW);
-	FFTCompressorSetSpectralFollowingRate(cm, fs, fgt_facT);
-	FFTCompressorSetParam(cm, fs, 100.0, 500.0, 800.0);
 }
-void CompressorEnable(JamesDSPLib *jdsp)
+void CompressorConstructor(JamesDSPLib *jdsp)
 {
-	jdsp->compEnabled = 1;
+	FFTCompander *cm = (FFTCompander *)(&jdsp->comp);
+	double freq[NUMPTS_DRS] = { 95.0, 200.0, 400.0, 800.0, 1600.0, 3400.0, 7500.0 };
+	memcpy(cm->freq2 + 1, freq, NUMPTS_DRS * sizeof(double));
+	cm->freq2[0] = 0.0;
+	cm->gains2[0] = cm->gains2[1];
+	cm->freq2[NUMPTS_DRS + 1] = 24000.0;
+	initIerper(&cm->pch, NUMPTS_DRS + 2);
+	FFTCompanderInit(cm, jdsp->fs);
+}
+void CompressorDestructor(JamesDSPLib *jdsp)
+{
+	freeIerper(&jdsp->comp.pch);
+}
+void CompressorEnable(JamesDSPLib *jdsp, char enable)
+{
+	if (jdsp->compForceRefresh)
+	{
+		FFTCompanderInit(&jdsp->comp, jdsp->fs);
+		CompressorSetParam(jdsp, jdsp->comp.fgt_facT, jdsp->comp.granularity, jdsp->comp.tfresolution);
+		CompressorSetGain(jdsp, 0, 0, 0);
+	}
+	if (enable)
+		jdsp->compEnabled = 1;
 }
 void CompressorDisable(JamesDSPLib *jdsp)
 {
 	jdsp->compEnabled = 0;
 }
-void CompressorReset(JamesDSPLib *jdsp)
+void CompressorSetParam(JamesDSPLib *jdsp, float fgt_facT, int granularity, int tfresolution)
 {
-	FFTDynamicRangeSquasherInit(&jdsp->comp, jdsp->fs);
+	FFTCompander *cm = (FFTCompander *)(&jdsp->comp);
+	cm->fgt_facT = fgt_facT;
+	cm->fgt_fac = (float)(1.0 - exp(-1.0 / (cm->fgt_facT * jdsp->comp.spectralRate)));
+	cm->granularity = granularity;
+	cm->tfresolution = tfresolution;
+	double avgBW;
+	if (!cm->granularity)
+		avgBW = 1.65;
+	else if (cm->granularity == 1)
+		avgBW = 1.45;
+	else if (cm->granularity == 2)
+		avgBW = 1.2;
+	else if (cm->granularity == 3)
+		avgBW = 1.15;
+	else
+		avgBW = 1.1;
+	FFTCompanderSetavgBW(cm, avgBW);
 }
-void CompressorSetParam(JamesDSPLib *jdsp, float maxAtk, float maxRel, float adapt)
+void CompressorSetGain(JamesDSPLib *jdsp, double *freq, double *gains, char cpy)
 {
-	FFTCompressorSetParam(&jdsp->comp, jdsp->fs, maxAtk, maxRel, adapt);
+	FFTCompander *cm = (FFTCompander*)(&jdsp->comp);
+	if (cpy)
+	{
+		memcpy(cm->freq2 + 1, freq, NUMPTS_DRS * sizeof(double));
+		memcpy(cm->gains2 + 1, gains, NUMPTS_DRS * sizeof(double));
+	}
+	cm->freq2[0] = 0.0;
+	cm->gains2[0] = cm->gains2[1];
+	cm->freq2[NUMPTS_DRS + 1] = 24000.0;
+	cm->gains2[NUMPTS_DRS + 1] = cm->gains2[NUMPTS_DRS];
+	makima(&cm->pch, cm->freq2, cm->gains2, NUMPTS_DRS + 2, 1, 1);
+	unsigned int specLen = *((unsigned int *)(cm->octaveSmooth));
+	float reciprocal = *((float *)(cm->octaveSmooth + sizeof(unsigned int)));
+	unsigned int lpLen = *((unsigned int *)(cm->octaveSmooth + sizeof(unsigned int) + sizeof(float)));
+	float *lv1 = (float *)(cm->octaveSmooth + sizeof(unsigned int) + sizeof(float) + sizeof(unsigned int) + (lpLen << 1) * sizeof(unsigned int) + lpLen * sizeof(float));
+	float *lv2 = (float *)(cm->octaveSmooth + sizeof(unsigned int) + sizeof(float) + sizeof(unsigned int) + (lpLen << 1) * sizeof(unsigned int) + lpLen * sizeof(float) + (lpLen + 3) * sizeof(float));
+	for (int i = 0; i < HALFWNDLEN_DRS; i++)
+		cm->DREmultUniform[i] = getValueAt(&cm->pch.cb, i * jdsp->fs / cm->fftLen * 0.25);
+	if (!cm->noGridDownsampling)
+		ShrinkGridSpectralInterpolator(cm->octaveSmooth, cm->procUpTo, cm->DREmultUniform, cm->DREmult);
+	else
+		memcpy(cm->DREmult, cm->DREmultUniform, cm->procUpTo * sizeof(float));
+	cm->headRoomdB = 10.0f;
+	if (!cm->noGridDownsampling)
+	{
+		for (int i = 0; i < cm->smallGridSize; i++)
+			if (cm->headRoomdB < cm->DREmult[i] * 12.0f)
+				cm->headRoomdB = cm->DREmult[i] * 12.0f;
+	}
+	else
+	{
+		for (int i = 0; i < cm->procUpTo; i++)
+			if (cm->headRoomdB < cm->DREmult[i] * 12.0f)
+				cm->headRoomdB = cm->DREmult[i] * 12.0f;
+	}
 }
 void CompressorProcess(JamesDSPLib *jdsp, size_t n)
 {
@@ -572,7 +538,7 @@ void CompressorProcess(JamesDSPLib *jdsp, size_t n)
 	while (offset < n)
 	{
 		const unsigned int processing = min(n - offset, jdsp->comp.ovpLen);
-		FFTDynamicRangeSquasherProcessSamples(&jdsp->comp, jdsp->tmpBuffer[0] + offset, jdsp->tmpBuffer[1] + offset, processing, jdsp->tmpBuffer[0] + offset, jdsp->tmpBuffer[1] + offset);
+		FFTCompanderProcessSamples(&jdsp->comp, jdsp->tmpBuffer[0] + offset, jdsp->tmpBuffer[1] + offset, processing, jdsp->tmpBuffer[0] + offset, jdsp->tmpBuffer[1] + offset);
 		offset += processing;
 	}
 }

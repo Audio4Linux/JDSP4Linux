@@ -37,26 +37,34 @@
         android:disableDependentsState="false"
         android:title="@string/pref_compression_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedListPreference
-        android:key="dsp.compression.maxatk"
-        android:defaultValue="30"
-        android:dialogTitle="@string/dialog_maxatk"
-        android:entries="@array/compression_atk"
-        android:entryValues="@array/compression_atk_values"
-        android:title="@string/dialog_maxatk" />
+        android:key="dsp.compression.timeconstant"
+        android:defaultValue="0.22"
+        android:dialogTitle="@string/dialog_compression_timeconstant"
+        android:entries="@array/compression_timeconstant"
+        android:entryValues="@array/compression_timeconstant_values"
+        android:title="@string/dialog_compression_timeconstant" />
     <james.dsp.preference.SummariedListPreference
-        android:key="dsp.compression.maxrel"
-        android:defaultValue="200"
-        android:dialogTitle="@string/dialog_maxrel"
-        android:entries="@array/compression_rel"
-        android:entryValues="@array/compression_rel_values"
-        android:title="@string/dialog_maxrel" />
+        android:key="dsp.compression.granularity"
+        android:defaultValue="2"
+        android:dialogTitle="@string/dialog_compression_granularity"
+        android:entries="@array/compression_granularity"
+        android:entryValues="@array/compression_granularity_values"
+        android:title="@string/dialog_compression_granularity" />
     <james.dsp.preference.SummariedListPreference
-        android:key="dsp.compression.adaptspeed"
-        android:defaultValue="800"
-        android:dialogTitle="@string/dialog_adaptspeed"
-        android:entries="@array/compression_adaptspeed"
-        android:entryValues="@array/compression_adaptspeed_values"
-        android:title="@string/dialog_adaptspeed" />
+        android:key="dsp.compression.tfresolution"
+        android:defaultValue="0"
+        android:dialogTitle="@string/dialog_compression_tfresolution"
+        android:entries="@array/compression_tfresolution"
+        android:entryValues="@array/compression_tfresolution_values"
+        android:title="@string/dialog_compression_tfresolution" />
+    <james.dsp.preference.SummariedListPreference
+        android:entries="@array/equalizer_preset_modes"
+        android:dialogTitle="@string/pref_equalizer_preset_title"
+        android:key="dsp.compression.eq"
+        android:defaultValue="95.0;200.0;400.0;800.0;1600.0;3400.0;7500.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0"
+        android:title="@string/pref_equalizer_preset_title"
+        android:entryValues="@array/equalizer_preset_values" />
+    <james.dsp.preference.CompanderPreference android:key="dsp.compression.eq.custom" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/pref_bassboost_title">
@@ -83,7 +91,7 @@
         android:summaryOff="@string/pref_equalizer_summary_off"
         android:title="@string/pref_equalizer_enable"></CheckBoxPreference>
     <james.dsp.preference.SummariedListPreference
-        android:defaultValue="0"
+        android:defaultValue="3"
         android:dialogTitle="@string/dialog_filtertype"
         android:entries="@array/equalizer_filtertype"
         android:entryValues="@array/equalizer_filtertype_values"
@@ -103,7 +111,7 @@
         android:defaultValue="25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0"
         android:title="@string/pref_equalizer_preset_title"
         android:entryValues="@array/equalizer_preset_values" />
-    <james.dsp.preference.DRCPreference android:key="dsp.tone.eq.custom" />
+    <james.dsp.preference.EQPreference android:key="dsp.tone.eq.custom" />
   </PreferenceCategory>
   <PreferenceCategory android:title="@string/pref_strequalizer_title">
     <CheckBoxPreference

@@ -57,24 +57,6 @@ public class SummariedTextPreferenceRanged extends EditTextPreference
             setSummary(valueFloat + " dB");
             value = Float.toString(valueFloat);
     	}
-    	if(key.equals("dsp.compression.maxatk"))
-    	{
-            if(valueFloat < 1.0f)
-            	valueFloat = 1.0f;
-            if(valueFloat > 200.0f)
-            	valueFloat = 200.0f;
-            setSummary(valueFloat + " ms");
-            value = Float.toString(valueFloat);
-    	}
-    	if(key.equals("dsp.compression.maxrel"))
-    	{
-            if(valueFloat < 5.0f)
-            	valueFloat = 5.0f;
-            if(valueFloat > 800.0f)
-            	valueFloat = 800.0f;
-            setSummary(valueFloat + " ms");
-            value = Float.toString(valueFloat);
-    	}
     	if(key.equals("dsp.streq.stringp"))
     	{
             if(key.length() < 12)

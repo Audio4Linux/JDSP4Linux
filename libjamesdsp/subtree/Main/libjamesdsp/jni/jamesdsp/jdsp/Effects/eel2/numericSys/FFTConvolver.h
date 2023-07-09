@@ -163,5 +163,5 @@ extern void FFTConvolver1x2Free(FFTConvolver1x2 *conv);
 * blockSize, irLen must be the same as the one in initialization
 */
 extern int FFTConvolver1x1RefreshImpulseResponse(FFTConvolver1x1 *conv, unsigned int blockSize, const float* ir, unsigned int irLen);
-extern int FFTConvolver2x2RefreshImpulseResponse(FFTConvolver2x2 *conv, unsigned int blockSize, const float* irL, const float* irR, unsigned int irLen);
+extern void FFTConvolver2x2RefreshImpulseResponse(FFTConvolver2x2 *conv1, FFTConvolver2x2 *conv2, const float *irL, const float *irR, unsigned int irLen);
 #endif

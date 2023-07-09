@@ -878,52 +878,48 @@ int FFTConvolver2x2LoadImpulseResponse(FFTConvolver2x2 *conv, unsigned int block
 	conv->gain = 1.0f / ((float)conv->_segSize * 2.0f);
 	return 1;
 }
-int FFTConvolver2x2RefreshImpulseResponse(FFTConvolver2x2 *conv, unsigned int blockSize, const float* irL, const float* irR, unsigned int irLen)
+void FFTConvolver2x2RefreshImpulseResponse(FFTConvolver2x2 *conv1, FFTConvolver2x2 *conv2, const float* irL, const float* irR, unsigned int irLen)
 {
-	if (blockSize == 0)
-		return 0;
-	if (irLen == 0)
-		return 0;
-	for (unsigned int i = 0; i < conv->_segCount; ++i)
+	for (unsigned int i = 0; i < conv1->_segCount; ++i)
 	{
 		unsigned int j, symIdx;
-		float* segmentLLRe = conv->_segmentsLLIRRe[i];
-		float* segmentLLIm = conv->_segmentsLLIRIm[i];
-		unsigned int remaining = irLen - (i * conv->_blockSize);
-		unsigned int sizeCopy = (remaining >= conv->_blockSize) ? conv->_blockSize : remaining;
+		conv2->_segmentsLLIRRe[1];
+		float* segmentLLRe = conv2->_segmentsLLIRRe[i];
+		float* segmentLLIm = conv2->_segmentsLLIRIm[i];
+		unsigned int remaining = irLen - (i * conv1->_blockSize);
+		unsigned int sizeCopy = (remaining >= conv1->_blockSize) ? conv1->_blockSize : remaining;
 		for (j = 0; j < sizeCopy; j++)
-			conv->_fftBuffer[0][conv->bit[j]] = irL[i*conv->_blockSize + j];
-		for (j = sizeCopy; j < conv->_segSize; j++)
-			conv->_fftBuffer[0][conv->bit[j]] = 0.0f;
-		conv->fft(conv->_fftBuffer[0], conv->sine);
-		segmentLLRe[0] = conv->_fftBuffer[0][0] * 2.0f;
+			conv1->_fftBuffer[0][conv1->bit[j]] = irL[i*conv1->_blockSize + j];
+		for (j = sizeCopy; j < conv1->_segSize; j++)
+			conv1->_fftBuffer[0][conv1->bit[j]] = 0.0f;
+		conv1->fft(conv1->_fftBuffer[0], conv1->sine);
+		segmentLLRe[0] = conv1->_fftBuffer[0][0] * 2.0f;
 		segmentLLIm[0] = 0.0f;
-		for (j = 1; j < conv->_fftComplexSize; j++)
+		for (j = 1; j < conv1->_fftComplexSize; j++)
 		{
-			symIdx = conv->_segSize - j;
-			segmentLLRe[j] = conv->_fftBuffer[0][j] + conv->_fftBuffer[0][symIdx];
-			segmentLLIm[j] = conv->_fftBuffer[0][j] - conv->_fftBuffer[0][symIdx];
+			symIdx = conv1->_segSize - j;
+			segmentLLRe[j] = conv1->_fftBuffer[0][j] + conv1->_fftBuffer[0][symIdx];
+			segmentLLIm[j] = conv1->_fftBuffer[0][j] - conv1->_fftBuffer[0][symIdx];
 		}
 		//
-		float* segmentRRRe = conv->_segmentsRRIRRe[i];
-		float* segmentRRIm = conv->_segmentsRRIRIm[i];
-		remaining = irLen - (i * conv->_blockSize);
-		sizeCopy = (remaining >= conv->_blockSize) ? conv->_blockSize : remaining;
+		float* segmentRRRe = conv2->_segmentsRRIRRe[i];
+		float* segmentRRIm = conv2->_segmentsRRIRIm[i];
+		remaining = irLen - (i * conv1->_blockSize);
+		sizeCopy = (remaining >= conv1->_blockSize) ? conv1->_blockSize : remaining;
 		for (j = 0; j < sizeCopy; j++)
-			conv->_fftBuffer[0][conv->bit[j]] = irR[i*conv->_blockSize + j];
-		for (j = sizeCopy; j < conv->_segSize; j++)
-			conv->_fftBuffer[0][conv->bit[j]] = 0.0f;
-		conv->fft(conv->_fftBuffer[0], conv->sine);
-		segmentRRRe[0] = conv->_fftBuffer[0][0] * 2.0f;
+			conv1->_fftBuffer[0][conv1->bit[j]] = irR[i*conv1->_blockSize + j];
+		for (j = sizeCopy; j < conv1->_segSize; j++)
+			conv1->_fftBuffer[0][conv1->bit[j]] = 0.0f;
+		conv1->fft(conv1->_fftBuffer[0], conv1->sine);
+		segmentRRRe[0] = conv1->_fftBuffer[0][0] * 2.0f;
 		segmentRRIm[0] = 0.0f;
-		for (j = 1; j < conv->_fftComplexSize; j++)
+		for (j = 1; j < conv1->_fftComplexSize; j++)
 		{
-			symIdx = conv->_segSize - j;
-			segmentRRRe[j] = conv->_fftBuffer[0][j] + conv->_fftBuffer[0][symIdx];
-			segmentRRIm[j] = conv->_fftBuffer[0][j] - conv->_fftBuffer[0][symIdx];
+			symIdx = conv1->_segSize - j;
+			segmentRRRe[j] = conv1->_fftBuffer[0][j] + conv1->_fftBuffer[0][symIdx];
+			segmentRRIm[j] = conv1->_fftBuffer[0][j] - conv1->_fftBuffer[0][symIdx];
 		}
 	}
-	return 1;
 }
 int FFTConvolver1x2LoadImpulseResponse(FFTConvolver1x2 *conv, unsigned int blockSize, const float* irL, const float* irR, unsigned int irLen)
 {
