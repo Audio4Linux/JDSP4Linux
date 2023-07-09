@@ -258,7 +258,8 @@ void circshift(float *x, int n, int k)
     k < 0 ? shift(x, -k, n) : shift(x, n - k, n);
 }
 #define NUMPTS 15
-ierper pch1, pch2;
+#define NUMPTS_DRS (7)
+ierper pch1, pch2, pch3;
 __attribute__((constructor)) static void initialize(void)
 {
     if (decompressedCoefficients)
@@ -267,6 +268,7 @@ __attribute__((constructor)) static void initialize(void)
     decompressResamplerMQ(compressedCoeffMQ, decompressedCoefficients);
     initIerper(&pch1, NUMPTS + 2);
     initIerper(&pch2, NUMPTS + 2);
+    initIerper(&pch3, NUMPTS_DRS + 2);
 }
 __attribute__((destructor)) static void destruction(void)
 {
@@ -274,7 +276,8 @@ __attribute__((destructor)) static void destruction(void)
     decompressedCoefficients = 0;
     freeIerper(&pch1);
     freeIerper(&pch2);
-}
+    freeIerper(&pch3);
+ }
 static void JamesDSPOfflineResampling(float const *in, float *out, size_t lenIn, size_t lenOut, int channels, double src_ratio, int resampleQuality)
 {
     if (lenOut == lenIn && lenIn == 1)
@@ -534,3 +537,20 @@ int ComputeEqResponse(const double* jfreq, double* jgain, int interpolationMode,
     return 0;
 }
 
+int ComputeCompResponse(int n, const double* jfreq, const double* jgain, int queryPts, const double* dispFreq, float* response)
+{
+    double freqComp[NUMPTS_DRS + 2];
+    double gainComp[NUMPTS_DRS + 2];
+
+    memcpy(freqComp + 1, jfreq, NUMPTS_DRS * sizeof(double));
+    memcpy(gainComp + 1, jgain, NUMPTS_DRS * sizeof(double));
+
+    freqComp[0] = 0.0;
+    gainComp[0] = gainComp[1];
+    freqComp[NUMPTS_DRS + 1] = 24000.0;
+    gainComp[NUMPTS_DRS + 1] = gainComp[NUMPTS_DRS];
+    makima(&pch3, freqComp, gainComp, NUMPTS_DRS + 2, 1, 1);
+    ierper *lerpPtr = &pch3;
+    for (int i = 0; i < queryPts; i++)
+        response[i] = (float)getValueAt(&lerpPtr->cb, dispFreq[i]);
+}
