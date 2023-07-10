@@ -2,6 +2,9 @@
 #include <QString>
 
 extern "C" {
+#ifdef DEBUG_FPE
+#include <fenv.h>
+#endif
 #include <PrintfStdOutExtension.h>
 }
 
@@ -21,9 +24,14 @@ PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, IAudioServic
     this->dsp = (JamesDSPLib*) malloc(sizeof(JamesDSPLib));
     memset(this->dsp, 0, sizeof(JamesDSPLib));
 
+#ifdef DEBUG_FPE
+    feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
+#endif
     JamesDSPGlobalMemoryAllocation();
     JamesDSPInit(this->dsp, 128, 48000);
-
+#ifdef DEBUG_FPE
+    fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
+#endif
     _host = new DspHost(this->dsp, [this](DspHost::Message msg, std::any value){
         switch(msg)
         {
@@ -43,8 +51,15 @@ PwJamesDspPlugin::~PwJamesDspPlugin() {
     disconnect_from_pw();
   }
 
+
+#ifdef DEBUG_FPE
+  feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+#endif
   JamesDSPFree(this->dsp);
   JamesDSPGlobalMemoryDeallocation();
+#ifdef DEBUG_FPE
+  fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+#endif
 
   setPrintfStdOutHandler(nullptr, nullptr);
   util::debug(log_tag + name + " destroyed");
@@ -67,6 +82,9 @@ void PwJamesDspPlugin::process(float* left_in,
       return;
   }
 
+#ifdef DEBUG_FPE
+  feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+#endif
   this->dsp->processFloatDeinterleaved(this->dsp, left_in, right_in, left_out, right_out, length);
 
   if (post_messages) {
@@ -76,6 +94,9 @@ void PwJamesDspPlugin::process(float* left_in,
       notify();
     }
   }
+#ifdef DEBUG_FPE
+  fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+#endif
 }
 
 DspStatus PwJamesDspPlugin::status()

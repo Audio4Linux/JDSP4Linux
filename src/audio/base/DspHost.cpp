@@ -8,6 +8,9 @@
 #include "EventArgs.h"
 
 extern "C" {
+#ifdef DEBUG_FPE
+#include <fenv.h>
+#endif
 #include <JdspImpResToolbox.h>
 #include <EELStdOutExtension.h>
 #include <jdsp_header.h>
@@ -484,6 +487,10 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     bool refreshVdc = false;
     bool refreshCompander = false;
 
+#ifdef DEBUG_FPE
+    feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+#endif
+
     for (int k = 0; k < e.keyCount(); k++)
     {
         DspConfig::Key key = (DspConfig::Key) e.value(k);
@@ -664,6 +671,9 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         updateCompander(config);
     }
 
+#ifdef DEBUG_FPE
+    fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+#endif
     return true;
 }
 
