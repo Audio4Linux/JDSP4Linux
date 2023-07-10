@@ -419,38 +419,19 @@ void DspHost::updateGraphicEq(DspConfig *config)
 
 void DspHost::updateCrossfeed(DspConfig* config)
 {
-    bool modeExists;
-    bool enableExists;
-    int mode = config->get<int>(DspConfig::crossfeed_mode, &modeExists);
-    int enabled = config->get<bool>(DspConfig::crossfeed_enable, &enableExists);
+    int mode = config->get<int>(DspConfig::crossfeed_mode);
 
-    if(!modeExists)
+    // Workaround: CrossfeedChangeMode for mode 0 (weak) leads to audio loss. so let's just do it directly like BS2B custom above
+    if(mode == 99 /* custom */ || mode == 0 /* weak */)
     {
-        util::warning("Crossfeed mode unset, using defaults");
-    }
+        int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut);
+        int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed);
 
-    if(!enableExists)
-    {
-        util::warning("Crossfeed enable switch unset, disabling crossfeed.");
-        enabled = false;
-    }
-
-    if(mode == 99)
-    {
-        bool fcutExists;
-        bool feedExists;
-        int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut, &fcutExists);
-        int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed, &feedExists);
-
-        if(!fcutExists)
+        // Workaround, see comment above
+        if(mode == 0)
         {
-            util::warning("Crossfeed custom fcut unset, using defaults");
-            fcut = 650;
-        }
-        if(!feedExists)
-        {
-            util::warning("Crossfeed custom feed unset, using defaults");
-            feed = 95;
+            fcut = 700;
+            feed = 65;
         }
 
         memset(&cast(this->_dsp)->advXF.bs2b, 0, sizeof(cast(this->_dsp)->advXF.bs2b));
@@ -458,7 +439,7 @@ void DspHost::updateCrossfeed(DspConfig* config)
         cast(this->_dsp)->advXF.mode = 1;
     }
     else
-    {
+    {        
        CrossfeedChangeMode(cast(this->_dsp), mode);
     }
 }
