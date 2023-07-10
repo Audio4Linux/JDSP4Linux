@@ -56,6 +56,8 @@ public:
 
     QString      valueString(int overrideValue = -1) const;
 
+
+
 	/*!
 	    \brief Returns the currently set easing curve used for the animation
 	 */
@@ -78,6 +80,10 @@ public:
 	 */
 	void         setDuration(int duration);
 
+    const QStringList &getCustomValueStrings() const;
+
+    void setCustomValueStrings(const QStringList &newCustomValueStrings);
+
 protected:
     void         onSliderAction(int action);
 
@@ -93,6 +99,7 @@ private:
 	int cValue                = 0;
 	int mDuration             = 300;
 	QEasingCurve mEasingCurve = QEasingCurve(QEasingCurve::Type::InOutCirc);
+    QStringList customValueStrings;
 
 };
 

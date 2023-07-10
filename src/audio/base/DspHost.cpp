@@ -18,7 +18,6 @@ extern "C" {
 #include <QDebug>
 #include <cstring>
 #include <assert.h>
-#include <QTimer>
 
 /* C interop */
 inline JamesDSPLib* cast(void* raw){
@@ -196,26 +195,37 @@ void DspHost::updateVdc(DspConfig *config)
     }
 }
 
-void DspHost::updateCompressor(DspConfig *config)
+void DspHost::updateCompander(DspConfig *config)
 {
-    bool maxAtkExists;
-    bool maxRelExists;
-    bool aggrExists;
+    int granularity = config->get<int>(DspConfig::compander_granularity);
+    float timeconstant = config->get<float>(DspConfig::compander_timeconstant);
+    int tftransforms = config->get<int>(DspConfig::compander_time_freq_transforms);
 
-    float maxAttack = config->get<float>(DspConfig::compression_maxatk, &maxAtkExists);
-    float maxRelease = config->get<float>(DspConfig::compression_maxrel, &maxRelExists);
-    float adaptSpeed = config->get<float>(DspConfig::compression_aggressiveness, &aggrExists);
+    std::string str = chopDoubleQuotes(config->get<QString>(DspConfig::compander_response)).toStdString();
+    std::vector<string> v;
+    std::stringstream ss(str);
 
-    if(!maxAtkExists || !maxRelExists || !aggrExists)
-    {
-        util::warning("Limiter threshold or limiter release unset. Using defaults.");
-
-        if(!maxAtkExists) maxAttack = 30;
-        if(!maxRelExists) maxRelease = 200;
-        if(!aggrExists) adaptSpeed = 800;
+    while (ss.good()) {
+        std::string substr;
+        getline(ss, substr, ';');
+        v.push_back(substr);
     }
 
-    CompressorSetParam(cast(this->_dsp), maxAttack, maxRelease, adaptSpeed);
+    if(v.size() != 14)
+    {
+        util::warning("Invalid compander data. 14 semicolon-separateds field expected, "
+                      "found " + std::to_string(v.size()) + " fields instead.");
+        return;
+    }
+
+    double param[14];
+    for (int i = 0; i < 14; i++)
+    {
+        param[i] = (double)std::stod(v[i]);
+    }
+
+    CompressorSetParam(cast(this->_dsp), timeconstant, granularity, tftransforms);
+    CompressorSetGain(cast(this->_dsp), param, param + 7, 1);
 }
 
 void DspHost::updateReverb(DspConfig* config)
@@ -472,6 +482,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     bool refreshLiveprog = false;
     bool refreshGraphicEq = false;
     bool refreshVdc = false;
+    bool refreshCompander = false;
 
     for (int k = 0; k < e.keyCount(); k++)
     {
@@ -485,7 +496,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         }
 
         bool isCached = false;
-        QVariant cached = _cache->get<QVariant>(key, &isCached);
+        QVariant cached = _cache->get<QVariant>(key, &isCached, false);
         QVariant current = config->get<QVariant>(key);
         if((isCached && cached == current) && !ignoreCache)
         {
@@ -508,16 +519,17 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         case DspConfig::bass_maxgain:
             BassBoostSetParam(cast(this->_dsp), current.toFloat());
             break;
-        case DspConfig::compression_enable:
+        case DspConfig::compander_enable:
             if(current.toBool())
                 CompressorEnable(cast(this->_dsp), 1);
             else
                 CompressorDisable(cast(this->_dsp));
             break;
-        case DspConfig::compression_aggressiveness:
-        case DspConfig::compression_maxatk:
-        case DspConfig::compression_maxrel:
-            updateCompressor(config);
+        case DspConfig::compander_granularity:
+        case DspConfig::compander_response:
+        case DspConfig::compander_time_freq_transforms:
+        case DspConfig::compander_timeconstant:
+            refreshCompander = true;
             break;
         case DspConfig::convolver_enable:
         case DspConfig::convolver_file:
@@ -645,6 +657,11 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     if(refreshCrossfeed)
     {
         updateCrossfeed(config);
+    }
+
+    if(refreshCompander)
+    {
+        updateCompander(config);
     }
 
     return true;

@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>410</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>700</width>
-    <height>410</height>
+    <height>430</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -308,10 +308,10 @@
                  <item>
                   <widget class="QGroupBox" name="enable_comp">
                    <property name="whatsThis">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compressor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compressor, an automatic dynamic range flattener that can flatten the signal spectral to reduce transient; it is like a drum volume reducer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max attack:&lt;/span&gt; adjusts how fast the Dynamic Range Compressor reacts.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max release:&lt;/span&gt; adjusts how slow the Dynamic Range Compressor is performing gain decay.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Aggressiveness:&lt;/span&gt; adjusts how strong the spectral flattening is going to be&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="title">
-                    <string>Dynamic range compressor</string>
+                    <string>Dynamic range compander</string>
                    </property>
                    <property name="checkable">
                     <bool>true</bool>
@@ -321,14 +321,14 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_4">
                     <item>
-                     <widget class="QLabel" name="comp_atk_label">
+                     <widget class="QLabel" name="comp_timeconst_label">
                       <property name="text">
-                       <string>Maximum attack</string>
+                       <string>Time constant</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QAnimatedSlider" name="comp_maxattack">
+                     <widget class="QAnimatedSlider" name="comp_timeconstant">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -342,10 +342,13 @@
                        </size>
                       </property>
                       <property name="minimum">
-                       <number>0</number>
+                       <number>6</number>
                       </property>
                       <property name="maximum">
-                       <number>400</number>
+                       <number>30</number>
+                      </property>
+                      <property name="pageStep">
+                       <number>5</number>
                       </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -358,20 +361,23 @@
                     <item>
                      <widget class="QLabel" name="label_7">
                       <property name="text">
-                       <string>Maximum release</string>
+                       <string>Granularity</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QAnimatedSlider" name="comp_maxrelease">
+                     <widget class="QAnimatedSlider" name="comp_granularity">
                       <property name="minimum">
                        <number>0</number>
                       </property>
                       <property name="maximum">
-                       <number>400</number>
+                       <number>4</number>
+                      </property>
+                      <property name="pageStep">
+                       <number>1</number>
                       </property>
                       <property name="value">
-                       <number>200</number>
+                       <number>0</number>
                       </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -381,37 +387,40 @@
                     <item>
                      <widget class="QLabel" name="label_5">
                       <property name="text">
-                       <string>Aggressiveness</string>
+                       <string>Time-frequency transforms</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QAnimatedSlider" name="comp_aggressiveness">
-                      <property name="minimum">
-                       <number>10</number>
-                      </property>
-                      <property name="maximum">
-                       <number>1000</number>
-                      </property>
-                      <property name="value">
-                       <number>800</number>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
+                     <widget class="QComboBox" name="comp_tf_transforms">
+                      <item>
+                       <property name="text">
+                        <string>Uniform (Short-time Fourier)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Multiresolution (Continuous wavelet)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Multiresolution (Time domain)</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="LiquidCompanderWidget" name="comp_response" native="true">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>145</height>
+                       </size>
                       </property>
                      </widget>
                     </item>
                    </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LiquidCompanderWidget" name="widget" native="true">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>150</height>
-                    </size>
-                   </property>
                   </widget>
                  </item>
                  <item>

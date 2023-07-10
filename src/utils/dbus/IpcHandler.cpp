@@ -82,7 +82,7 @@ QString IpcHandler::get(const QString &key) const
 {
     bool exists = false;
 
-    QVariant value = DspConfig::instance().get<QVariant>(key, &exists);
+    QVariant value = DspConfig::instance().get<QVariant>(key, &exists, false);
     if(!exists) {
         sendErrorReply(QDBusError::InvalidArgs, "Configuration key does not exist");
         return "";
