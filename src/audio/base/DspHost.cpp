@@ -461,11 +461,6 @@ void DspHost::updateCrossfeed(DspConfig* config)
     {
        CrossfeedChangeMode(cast(this->_dsp), mode);
     }
-
-    if(enabled)
-        CrossfeedEnable(cast(this->_dsp), 1);
-    else
-        CrossfeedDisable(cast(this->_dsp));
 }
 
 void DspHost::updateFromCache()
@@ -488,7 +483,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     bool refreshCompander = false;
 
 #ifdef DEBUG_FPE
-    feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+    feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
 #endif
 
     for (int k = 0; k < e.keyCount(); k++)
@@ -545,6 +540,11 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             refreshConvolver = true;
             break;
         case DspConfig::crossfeed_enable:
+            if(current.toBool())
+                CrossfeedEnable(cast(this->_dsp), 1);
+            else
+                CrossfeedDisable(cast(this->_dsp));
+            break;
         case DspConfig::crossfeed_bs2b_fcut:
         case DspConfig::crossfeed_bs2b_feed:
         case DspConfig::crossfeed_mode:
@@ -672,7 +672,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     }
 
 #ifdef DEBUG_FPE
-    fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+    fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
 #endif
     return true;
 }
