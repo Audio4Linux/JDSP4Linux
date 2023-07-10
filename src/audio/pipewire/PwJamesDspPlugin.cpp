@@ -83,7 +83,7 @@ void PwJamesDspPlugin::process(float* left_in,
   }
 
 #ifdef DEBUG_FPE
-  feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+  feenableexcept(FPE_INTDIV | FPE_FLTDIV);
 #endif
   this->dsp->processFloatDeinterleaved(this->dsp, left_in, right_in, left_out, right_out, length);
 
@@ -95,7 +95,7 @@ void PwJamesDspPlugin::process(float* left_in,
     }
   }
 #ifdef DEBUG_FPE
-  fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT);
+  fedisableexcept(FPE_INTDIV | FPE_FLTDIV);
 #endif
 }
 

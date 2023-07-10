@@ -1034,7 +1034,7 @@ void MainWindow::installUnitData()
 
     QList<QAnimatedSlider*> div10({ui->bs2b_feed, ui->rev_delay, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->rev_width});
 
-    QList<QAnimatedSlider*> unitDecibel({ui->bs2b_feed, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->analog_tubedrive, ui->postgain, ui->bass_maxgain});
+    QList<QAnimatedSlider*> unitDecibel({ui->limthreshold, ui->bs2b_feed, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->analog_tubedrive, ui->postgain, ui->bass_maxgain});
     QList<QAnimatedSlider*> unitMs({ui->rev_delay, ui->limrelease});
     QList<QAnimatedSlider*> unitS({ui->comp_timeconstant});
     QList<QAnimatedSlider*> unitHz({ui->bs2b_fcut, ui->rev_lcb, ui->rev_lcd, ui->rev_lci, ui->rev_lco});
