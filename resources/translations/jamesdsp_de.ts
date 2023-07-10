@@ -1526,157 +1526,157 @@ Bitte wählen Sie eine andere</translation>
         <translation>Deaktivieren</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="146"/>
+        <location filename="../../src/MainWindow.cpp" line="151"/>
         <source>%1 connected - Preset loaded automatically</source>
         <translation>%1 verbunden - Voreinstellung automatisch geladen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="166"/>
+        <location filename="../../src/MainWindow.cpp" line="171"/>
         <source>Cannot execute script</source>
         <translation>Skript kann nicht ausgeführt werden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="167"/>
+        <location filename="../../src/MainWindow.cpp" line="172"/>
         <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
         <translation>Die aktuelle EEL-Datei (bei &apos;%1&apos;) existiert nicht mehr auf dem Dateisystem. Bitte öffnen Sie die Datei manuell erneut.</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="281"/>
+        <location filename="../../src/MainWindow.cpp" line="286"/>
         <source>Apps</source>
         <translation>Apps</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="282"/>
+        <location filename="../../src/MainWindow.cpp" line="287"/>
         <source>Driver status</source>
         <translation>Treiberstatus</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="286"/>
+        <location filename="../../src/MainWindow.cpp" line="291"/>
         <source>Relink audio pipeline</source>
         <translation>Audio-Pipeline neu laden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="288"/>
+        <location filename="../../src/MainWindow.cpp" line="293"/>
         <source>Reset to defaults</source>
         <translation>Auf Standard zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="289"/>
+        <location filename="../../src/MainWindow.cpp" line="294"/>
         <source>Load from file</source>
         <translation>Aus Datei laden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="290"/>
+        <location filename="../../src/MainWindow.cpp" line="295"/>
         <source>Save to file</source>
         <translation>In Datei speichern</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="292"/>
+        <location filename="../../src/MainWindow.cpp" line="297"/>
         <source>Open LiveprogIDE</source>
         <translation>LiveprogIDE öffnen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="294"/>
+        <location filename="../../src/MainWindow.cpp" line="299"/>
         <source>What&apos;s this... (Select UI element)</source>
         <translation>Was ist das? (UI-Element wählen)</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="398"/>
+        <location filename="../../src/MainWindow.cpp" line="403"/>
         <source>Bass/Misc</source>
         <translation>Bass/Sonstiges</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="399"/>
+        <location filename="../../src/MainWindow.cpp" line="404"/>
         <source>Sound Positioning</source>
         <translation>Sound Positioning</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="400"/>
+        <location filename="../../src/MainWindow.cpp" line="405"/>
         <source>Reverb</source>
         <translation>Raumklang</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="401"/>
+        <location filename="../../src/MainWindow.cpp" line="406"/>
         <source>Equalizer</source>
         <translation>Equalizer</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="402"/>
+        <location filename="../../src/MainWindow.cpp" line="407"/>
         <source>Convolver</source>
         <translation>Convolver</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="403"/>
+        <location filename="../../src/MainWindow.cpp" line="408"/>
         <source>DDC</source>
         <translation>DDC</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="404"/>
+        <location filename="../../src/MainWindow.cpp" line="409"/>
         <source>Liveprog</source>
         <translation>Liveprog</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="405"/>
+        <location filename="../../src/MainWindow.cpp" line="410"/>
         <source>Graphic EQ</source>
         <translation>Graphic EQ</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="417"/>
+        <location filename="../../src/MainWindow.cpp" line="422"/>
         <source>Launch application</source>
         <translation>Anwendung starten</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="560"/>
+        <location filename="../../src/MainWindow.cpp" line="565"/>
         <source>Reset Configuration</source>
         <translation>Konfiguration zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="560"/>
+        <location filename="../../src/MainWindow.cpp" line="565"/>
         <source>Are you sure?</source>
         <translation>Bist du dir sicher?</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="584"/>
+        <location filename="../../src/MainWindow.cpp" line="589"/>
         <source>Load custom audio.conf</source>
         <translation>Benutzerdefinierte audio.conf laden</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="596"/>
+        <location filename="../../src/MainWindow.cpp" line="601"/>
         <source>Save current audio.conf</source>
         <translation>Aktuelle audio.conf speichern</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1051"/>
+        <location filename="../../src/MainWindow.cpp" line="1056"/>
         <source>Very low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1051"/>
+        <location filename="../../src/MainWindow.cpp" line="1056"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1051"/>
+        <location filename="../../src/MainWindow.cpp" line="1056"/>
         <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1051"/>
+        <location filename="../../src/MainWindow.cpp" line="1056"/>
         <source>High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1051"/>
+        <location filename="../../src/MainWindow.cpp" line="1056"/>
         <source>Extreme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1171"/>
+        <location filename="../../src/MainWindow.cpp" line="1176"/>
         <source>Advanced waveform editing</source>
         <translation>Erweiterte Wellenform-Bearbeitung</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1172"/>
+        <location filename="../../src/MainWindow.cpp" line="1177"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
