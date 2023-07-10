@@ -140,6 +140,11 @@ static float db2mag2(float db)
 }
 static float mag2db(float mag)
 {
+	// Fix: mag is zero after stopping playback since the input buffer is zeroed.
+    	//      This would cause a div-by-zero FPE, so we define a special case for zero.
+    	if(mag == 0)
+        	return -100;
+
 	return 20.0f * log10f(mag);
 }
 static inline float processfftComp(FFTCompander *comp, unsigned int idx, float logIn)
