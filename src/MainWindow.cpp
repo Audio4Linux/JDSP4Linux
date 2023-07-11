@@ -667,12 +667,7 @@ void MainWindow::loadConfig()
     ui->enable_comp->setChecked(DspConfig::instance().get<bool>(DspConfig::compander_enable));
     ui->comp_granularity->setValueA(DspConfig::instance().get<int>(DspConfig::compander_granularity));
     ui->comp_timeconstant->setValueA(100 * DspConfig::instance().get<float>(DspConfig::compander_timeconstant));
-    int companderTrans = DspConfig::instance().get<int>(DspConfig::compander_time_freq_transforms);
-    int companderTransIdx = ui->crossfeed_mode->findData(companderTrans);
-    if(companderTransIdx < 0)
-        Log::error(QString("Compander TF transform index for value %1 not found").arg(companderTrans));
-    else
-        ui->comp_tf_transforms->setCurrentIndex(companderTransIdx);
+    ui->comp_tf_transforms->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::compander_time_freq_transforms));
 
     {
         // Parse compander response
@@ -728,7 +723,11 @@ void MainWindow::loadConfig()
 
     ui->enable_eq->setChecked(DspConfig::instance().get<bool>(DspConfig::tone_enable));
     ui->eqinterpolator->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_interpolation));
-    ui->eqfiltertype->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_filtertype));
+
+    int filterType = DspConfig::instance().get<int>(DspConfig::tone_filtertype);
+    if(ui->eqfiltertype->currentIndex() != filterType)
+        onEqTypeUpdated(filterType);
+    ui->eqfiltertype->setCurrentIndex(filterType);
 
     // Parse EQ String to QMap
     QString rawEqString = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::tone_eq));
@@ -1230,6 +1229,29 @@ void MainWindow::onEqModeUpdated()
     setEqMode(isFixed ? 0 : 1);
 }
 
+void MainWindow::onEqTypeUpdated(int index)
+{
+    ui->eq_widget->setMode(index == 0 ? LiquidMultiEqualizerWidget::FIR : LiquidMultiEqualizerWidget::IIR);
+    ui->eqinterpolator->setEnabled(index == 0);
+    switch(index) {
+    case 1:
+        ui->eq_widget->setIirOrder(4);
+        break;
+    case 2:
+        ui->eq_widget->setIirOrder(6);
+        break;
+    case 3:
+        ui->eq_widget->setIirOrder(8);
+        break;
+    case 4:
+        ui->eq_widget->setIirOrder(10);
+        break;
+    case 5:
+        ui->eq_widget->setIirOrder(12);
+        break;
+    }
+}
+
 void MainWindow::setEqMode(int mode)
 {
     ui->eq_holder->setCurrentIndex(mode);
@@ -1321,6 +1343,7 @@ void MainWindow::connectActions()
     connect(ui->eq_r_flex,          &QAbstractButton::clicked, this, &MainWindow::applyConfig);
 
     connect(ui->eqfiltertype,       qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
+    connect(ui->eqfiltertype,       qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onEqTypeUpdated);
     connect(ui->eqinterpolator,     qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
     connect(ui->conv_ir_opt,        qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
 

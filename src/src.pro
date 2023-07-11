@@ -72,6 +72,7 @@ SOURCES += \
     interface/CTableView.cpp \
     interface/FadingLabel.cpp \
     interface/FileSelectionWidget.cpp \
+    interface/LiquidMultiEqualizerWidget.cpp \
     interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/PaletteEditor.cpp \
@@ -141,6 +142,7 @@ HEADERS += \
     interface/CTableView.h \
     interface/FadingLabel.h \
     interface/FileSelectionWidget.h \
+    interface/LiquidMultiEqualizerWidget.h \
     interface/LiveprogSelectionWidget.h \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \

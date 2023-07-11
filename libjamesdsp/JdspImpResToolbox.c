@@ -555,3 +555,31 @@ int ComputeCompResponse(int n, const double* jfreq, const double* jgain, int que
         response[i] = (float)getValueAt(&lerpPtr->cb, dispFreq[i]);
     return 0;
 }
+
+void ComputeIIREqualizerCplx(int srate, int order, const double* freqs, double* gains, int nPts, const double* dispFreq, double* cplxRe, double* cplxIm)
+{
+    for (int i = 0; i < nPts; i++)
+    {
+        cplxRe[i] = 1;
+        cplxIm[i] = 0;
+    }
+
+    for (int i = 0; i < bandsNum() - 1; i++)
+    {
+        double dB = gains[i + 1] - gains[i];
+        double designFreq;
+        if (i)
+            designFreq = (freqs[i + 1] + freqs[i]) * 0.5;
+        else
+            designFreq = freqs[i];
+        double overallGain = i == 0 ? gains[i] : 0.0;
+        HSHOResponse(48000, designFreq, order, dB, overallGain, nPts, dispFreq, cplxRe, cplxIm);
+    }
+}
+
+void ComputeIIREqualizerResponse(int nPts, const double* cplxRe, const double* cplxIm, float* response)
+{
+    for(int i = 0; i < nPts; i++) {
+        response[i] = 20.0f * log10f(hypot(cplxRe[i], cplxIm[i]));
+    }
+}

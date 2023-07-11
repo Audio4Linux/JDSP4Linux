@@ -221,6 +221,7 @@ void MultimodalEqualizerAxisInterpolation(JamesDSPLib *jdsp, int interpolationMo
 	jdsp->mEQ.operatingMode = operatingMode;
 	jdsp->mEQ.currentInterpolationMode = interpolationMode;
 }
+
 void MultimodalEqualizerEnable(JamesDSPLib *jdsp, char enable)
 {
 	if (jdsp->equalizerForceRefresh)

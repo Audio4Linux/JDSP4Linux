@@ -609,4 +609,5 @@ extern void MultimodalEqualizerAxisInterpolation(JamesDSPLib *jdsp, int interpol
 extern void MultimodalEqualizerEnable(JamesDSPLib *jdsp, char enable);
 extern void MultimodalEqualizerDisable(JamesDSPLib *jdsp);
 extern void MultimodalEqualizerProcess(JamesDSPLib *jdsp, size_t n);
+extern void HSHOResponse(double fs, double fc, unsigned int filterOrder, double gain, double overallGainDb, unsigned int queryPts, double *dispFreq, double *cplxRe, double *cplxIm);
 #endif

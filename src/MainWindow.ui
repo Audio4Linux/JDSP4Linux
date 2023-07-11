@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>0</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1181,7 +1181,7 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="LiquidEqualizerWidget" name="eq_widget" native="true"/>
+                  <widget class="LiquidMultiEqualizerWidget" name="eq_widget" native="true"/>
                  </item>
                 </layout>
                </widget>
@@ -2212,12 +2212,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>LiquidEqualizerWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">LiquidEqualizerWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>QAnimatedSlider</class>
    <extends>QSlider</extends>
    <header>interface/QAnimatedSlider.h</header>
@@ -2249,6 +2243,12 @@
    <class>LiquidCompanderWidget</class>
    <extends>QWidget</extends>
    <header location="global">LiquidCompanderWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LiquidMultiEqualizerWidget</class>
+   <extends>QWidget</extends>
+   <header>interface/LiquidMultiEqualizerWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
