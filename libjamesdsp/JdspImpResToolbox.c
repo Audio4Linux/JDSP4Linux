@@ -564,7 +564,7 @@ void ComputeIIREqualizerCplx(int srate, int order, const double* freqs, double* 
         cplxIm[i] = 0;
     }
 
-    for (int i = 0; i < bandsNum() - 1; i++)
+    for (int i = 0; i < NUMPTS - 1; i++)
     {
         double dB = gains[i + 1] - gains[i];
         double designFreq;
