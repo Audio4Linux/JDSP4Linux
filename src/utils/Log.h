@@ -41,6 +41,7 @@ public:
     {
         Debug,
         Info,
+        Kernel,
         Warning,
         Error,
         Critical
@@ -56,6 +57,7 @@ public:
         return log;
     }
 
+    static void kernel(const QString &log); // Receives libjamesdsp core messages
     static void console(const QString &rawMessage, bool overrideSilence);
     static void debug(const QString &log, util::source_location location = util::source_location::current());
     static void information(const QString &log, util::source_location location = util::source_location::current());
@@ -89,6 +91,7 @@ public:
 
     Severity getMinSeverity() const;
     void setMinSeverity(Severity newMinSeverity);
+
 
 private:
     static QString prepareDebugMessage(const QString &message, util::source_location location);

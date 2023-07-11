@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string-array name="equalizer_filtertype">
-    <item>Минимально-фазовый</item>
-    <item>Линейно-фазовый</item>
+    <item>КИХ Минимально-фазовый</item>
+    <item>IIR 4 order</item>
+    <item>IIR 6 order</item>
+    <item>IIR 8 order</item>
+    <item>IIR 10 order</item>
+    <item>IIR 12 order</item>
   </string-array>
   <string-array name="equalizer_dialog_spinterpolation">
     <item>Кубический сплайн Эрмита</item>

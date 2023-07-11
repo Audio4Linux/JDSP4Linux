@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>410</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>700</width>
-    <height>410</height>
+    <height>430</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>6</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -151,125 +151,6 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QGroupBox" name="enable_comp">
-                   <property name="whatsThis">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compressor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compressor, an automatic dynamic range flattener that can flatten the signal spectral to reduce transient; it is like a drum volume reducer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max attack:&lt;/span&gt; adjusts how fast the Dynamic Range Compressor reacts.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max release:&lt;/span&gt; adjusts how slow the Dynamic Range Compressor is performing gain decay.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Aggressiveness:&lt;/span&gt; adjusts how strong the spectral flattening is going to be&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="title">
-                    <string>Dynamic range compressor</string>
-                   </property>
-                   <property name="checkable">
-                    <bool>true</bool>
-                   </property>
-                   <property name="checked">
-                    <bool>false</bool>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_4">
-                    <item>
-                     <widget class="QLabel" name="comp_atk_label">
-                      <property name="text">
-                       <string>Maximum attack</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QAnimatedSlider" name="comp_maxattack">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>14</height>
-                       </size>
-                      </property>
-                      <property name="minimum">
-                       <number>0</number>
-                      </property>
-                      <property name="maximum">
-                       <number>400</number>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="tickPosition">
-                       <enum>QSlider::NoTicks</enum>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_7">
-                      <property name="text">
-                       <string>Maximum release</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QAnimatedSlider" name="comp_maxrelease">
-                      <property name="minimum">
-                       <number>0</number>
-                      </property>
-                      <property name="maximum">
-                       <number>400</number>
-                      </property>
-                      <property name="value">
-                       <number>200</number>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_5">
-                      <property name="text">
-                       <string>Aggressiveness</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QAnimatedSlider" name="comp_aggressiveness">
-                      <property name="minimum">
-                       <number>10</number>
-                      </property>
-                      <property name="maximum">
-                       <number>1000</number>
-                      </property>
-                      <property name="value">
-                       <number>800</number>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="verticalSpacer_3">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QVBoxLayout" name="bass_right">
-                 <item>
                   <widget class="QGroupBox" name="analog">
                    <property name="whatsThis">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -297,7 +178,7 @@
                        <number>-300</number>
                       </property>
                       <property name="maximum">
-                       <number>800</number>
+                       <number>1200</number>
                       </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -400,6 +281,144 @@
                        </widget>
                       </item>
                      </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Expanding</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="bass_right">
+                 <item>
+                  <widget class="QGroupBox" name="enable_comp">
+                   <property name="whatsThis">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="title">
+                    <string>Dynamic range compander</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="checked">
+                    <bool>false</bool>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_4">
+                    <item>
+                     <widget class="QLabel" name="comp_timeconst_label">
+                      <property name="text">
+                       <string>Time constant</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QAnimatedSlider" name="comp_timeconstant">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>14</height>
+                       </size>
+                      </property>
+                      <property name="minimum">
+                       <number>6</number>
+                      </property>
+                      <property name="maximum">
+                       <number>30</number>
+                      </property>
+                      <property name="pageStep">
+                       <number>5</number>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="tickPosition">
+                       <enum>QSlider::NoTicks</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_7">
+                      <property name="text">
+                       <string>Granularity</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QAnimatedSlider" name="comp_granularity">
+                      <property name="minimum">
+                       <number>0</number>
+                      </property>
+                      <property name="maximum">
+                       <number>4</number>
+                      </property>
+                      <property name="pageStep">
+                       <number>1</number>
+                      </property>
+                      <property name="value">
+                       <number>0</number>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_5">
+                      <property name="text">
+                       <string>Time-frequency transforms</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="comp_tf_transforms">
+                      <item>
+                       <property name="text">
+                        <string>Uniform (Short-time Fourier)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Multiresolution (Continuous wavelet)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Multiresolution (Time domain)</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="LiquidCompanderWidget" name="comp_response" native="true">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>145</height>
+                       </size>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </widget>
@@ -1121,7 +1140,7 @@
            </widget>
            <widget class="QWidget" name="tabHostPage4">
             <property name="whatsThis">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Interpolating FIR Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the FIR equalizer. FIR stands for &amp;quot;Finite Impulse Response&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; Chooses between Minimum phase and Linear phase filtering. The minimum phase is the recommended filter type, as it minimizes latency (effectively zero for any sensible filter shape). In contrast, the phase changes introduced are not usually noticeable (linear phase is helpful in pre-/post-production of multitrack recordings, where phase relationships between tracks need to be preserved. However, in real-time playback, linear phase EQ introduces latency at least half as long as the filter length.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="7,2">
              <property name="spacing">
@@ -1162,7 +1181,7 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="LiquidEqualizerWidget" name="eq_widget" native="true"/>
+                  <widget class="LiquidMultiEqualizerWidget" name="eq_widget" native="true"/>
                  </item>
                 </layout>
                </widget>
@@ -1257,12 +1276,32 @@
                  </property>
                  <item>
                   <property name="text">
-                   <string>Minimum phase</string>
+                   <string>FIR Minimum phase</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Linear phase</string>
+                   <string>IIR 4 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 6 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 8 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 10 order</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>IIR 12 order</string>
                   </property>
                  </item>
                 </widget>
@@ -2173,12 +2212,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>LiquidEqualizerWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">LiquidEqualizerWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>QAnimatedSlider</class>
    <extends>QSlider</extends>
    <header>interface/QAnimatedSlider.h</header>
@@ -2206,12 +2239,23 @@
    <extends>QLabel</extends>
    <header>interface/FadingLabel.h</header>
   </customwidget>
+  <customwidget>
+   <class>LiquidCompanderWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">LiquidCompanderWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LiquidMultiEqualizerWidget</class>
+   <extends>QWidget</extends>
+   <header>interface/LiquidMultiEqualizerWidget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>cpreset</tabstop>
   <tabstop>set</tabstop>
   <tabstop>toolButton</tabstop>
-  <tabstop>bassboost</tabstop>
   <tabstop>analog_tubedrive</tabstop>
   <tabstop>limthreshold</tabstop>
   <tabstop>limrelease</tabstop>

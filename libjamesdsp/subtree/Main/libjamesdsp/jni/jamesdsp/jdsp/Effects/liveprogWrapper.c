@@ -16,14 +16,12 @@ void LiveProgConstructor(JamesDSPLib *jdsp)
 }
 void LiveProgDestructor(JamesDSPLib *jdsp)
 {
-	jdsp_lock(jdsp);
 	if (jdsp->eel.vm)
 	{
 		NSEEL_code_free(jdsp->eel.codehandleInit);
 		NSEEL_code_free(jdsp->eel.codehandleProcess);
 		NSEEL_VM_free(jdsp->eel.vm);
 	}
-	jdsp_unlock(jdsp);
 }
 void LiveProgEnable(JamesDSPLib *jdsp)
 {

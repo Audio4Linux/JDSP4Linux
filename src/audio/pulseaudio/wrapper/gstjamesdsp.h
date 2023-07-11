@@ -4,6 +4,10 @@
 #include <gst/gst.h>
 #include <gst/audio/audio.h>
 
+#ifdef DEBUG_FPE
+#error DEBUG_FPE only implemented in the PipeWire version
+#endif
+
 G_BEGIN_DECLS
 
 #include <jdsp_header.h>

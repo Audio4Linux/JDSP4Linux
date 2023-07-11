@@ -5,8 +5,8 @@
     android:layout_gravity="center"
     android:layout_width="fill_parent">
 
-  <james.dsp.preference.EqualizerSurface
-      android:id="@+id/FrequencyResponse"
+  <james.dsp.preference.EQSurface
+      android:id="@+id/MagnitudeResponse"
       android:layout_height="fill_parent"
       android:layout_width="fill_parent" />
 </LinearLayout>

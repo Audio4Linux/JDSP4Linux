@@ -23,18 +23,18 @@ import james.dsp.activity.DSPManager;
 import james.dsp.activity.JdspImpResToolbox;
 import james.dsp.service.HeadsetService;
 
-public class DRCSurface extends SurfaceView
+public class CompanderSurface extends SurfaceView
 {
-    private static int MIN_FREQ = 21;
-    private static int MAX_FREQ = 20000;
-    public static int MIN_DB = -15;
-    public static int MAX_DB = 15;
+    private static int MIN_FRCompander = 21;
+    private static int MAX_FRCompander = 20000;
+    public static float MIN_DB = -1.2f;
+    public static float MAX_DB = 1.2f;
 
     private int mWidth;
     private int mHeight;
 
-    private double[] mLevels = new double[15];
-    private double[] mFreq = {25.0f, 40.0f, 63.0f, 100.0f, 160.0f, 250.0f, 400.0f, 630.0f, 1000.0f, 1600.0f, 2500.0f, 4000.0f, 6300.0f, 10000.0f, 16000.0f};
+    private double[] mLevels = new double[7];
+    private double[] mFreq = {95.0f, 200.0f, 400.0f, 800.0f, 1600.0f, 3400.0f, 7500.0f};
     private final Paint mWhite, mGridLines, mControlBarText, mControlBar, mControlBarKnob;
     private final Paint mFrequencyResponseBg, mFrequencyResponseHighlight, mFrequencyResponseHighlight2;
     int nPts = 128;
@@ -48,7 +48,7 @@ public class DRCSurface extends SurfaceView
         result[org.length] = added;
         return result;
     }
-    public DRCSurface(Context context, AttributeSet attributeSet)
+    public CompanderSurface(Context context, AttributeSet attributeSet)
     {
         super(context, attributeSet);
         setWillNotDraw(false);
@@ -56,7 +56,7 @@ public class DRCSurface extends SurfaceView
         	dispFreq[i] = reverseProjectX(i / (float)(nPts - 1));
         for (int i = 0; i < nPts; i++)
         	precomputeCurveXAxis[i] = projectX(dispFreq[i]);
-        for (int freq = MIN_FREQ; freq < MAX_FREQ; )
+        for (int freq = MIN_FRCompander; freq < MAX_FRCompander; )
         {
         	precomputeFreqAxis = addElement(precomputeFreqAxis, projectX(freq));
             if (freq < 100)
@@ -229,7 +229,7 @@ public class DRCSurface extends SurfaceView
         /* clear canvas */
         canvas.drawRGB(0, 0, 0);
         Path freqResponse = new Path();
-        int ret = JdspImpResToolbox.ComputeEqResponse(15, mFreq, mLevels, 1, nPts, dispFreq, response);
+        int ret = JdspImpResToolbox.ComputeCompResponse(7, mFreq, mLevels, nPts, dispFreq, response);
         float x, y;
         for (int i = 0; i < nPts; i++)
         {
@@ -269,25 +269,25 @@ public class DRCSurface extends SurfaceView
         for (int i = 0; i < precomputeFreqAxis.length; i++)
             x = precomputeFreqAxis[i] * mWidth;
         // draw horizontal lines
-        for (int dB = MIN_DB + 3; dB <= MAX_DB - 3; dB += 3)
+        for (float dB = MIN_DB + 0.2f; dB <= MAX_DB - 0.2f; dB += 0.2f)
         {
             y = projectY(dB) * mHeight;
             canvas.drawLine(0, y, mWidth - 1, y, mGridLines);
-            canvas.drawText(String.format("%+d", dB), 1, (y - 1), mWhite);
+            canvas.drawText(String.format("%+f", dB), 1, (y - 1), mWhite);
         }
     }
 
     private float projectX(double freq)
     {
     	double pos = Math.log(freq);
-        double minPos = Math.log(MIN_FREQ);
-        double maxPos = Math.log(MAX_FREQ);
+        double minPos = Math.log(MIN_FRCompander);
+        double maxPos = Math.log(MAX_FRCompander);
         return (float)(((pos - minPos) / (maxPos - minPos)));
     }
     
     private double reverseProjectX(float pos) {
-        double minPos = Math.log(MIN_FREQ);
-        double maxPos = Math.log(MAX_FREQ);
+        double minPos = Math.log(MIN_FRCompander);
+        double maxPos = Math.log(MAX_FRCompander);
         return Math.exp(pos * (maxPos - minPos) + minPos);
     }
 
@@ -309,7 +309,7 @@ public class DRCSurface extends SurfaceView
         double best = 1e8;
         for (int i = 0; i < mLevels.length; i++)
         {
-        	double freq = 15.625 * Math.pow(1.6, i+1);
+        	double freq = 15.625 * Math.pow(2.6, i+1);
             double cx = projectX(freq) * mWidth;
             double distance = Math.abs(cx - px);
             if (distance < best)

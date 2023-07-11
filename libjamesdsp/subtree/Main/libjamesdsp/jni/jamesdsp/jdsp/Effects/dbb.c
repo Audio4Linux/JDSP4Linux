@@ -185,7 +185,7 @@ const double resonanceToQ(const double resonance)
 {
 	return 1.0 / (2.0 * (1.0 - resonance));
 }
-void refreshStateVariable2ndOrder(StateVariable2ndOrder *svf, const double fs, const double cutoffFreq, const double Q, const double shelfGain)
+static inline void refreshStateVariable2ndOrder(StateVariable2ndOrder *svf, const double fs, const double cutoffFreq, const double Q, const double shelfGain)
 {
 	const double T = 1.0 / fs;
 	const double wa = (2.0 / T) * tan((cutoffFreq * 2.0 * M_PI) * T / 2.0);
@@ -239,27 +239,27 @@ float ProcessStateVariable2ndOrder(StateVariable2ndOrder *svf, const float x)
 		break;
 	}
 }
-void ProcessStateVariable2ndOrderStereo(StateVariable2ndOrder *svf[2], const float x1, const float x2, float *y1, float *y2)
+static inline void ProcessStateVariable2ndOrderStereo(StateVariable2ndOrder *svf0, StateVariable2ndOrder *svf1, const float x1, const float x2, float *y1, float *y2)
 {
-	const float HPL = (x1 - svf[0]->precomputeCoeff1 * svf[0]->z1_A - svf[0]->z2_A) * svf[0]->precomputeCoeff2;
-	const float BPL = HPL * svf[0]->gCoeff + svf[0]->z1_A;
-	const float LPL = BPL * svf[0]->gCoeff + svf[0]->z2_A;
-	const float UBPL = svf[0]->precomputeCoeff3 * BPL;
-	const float PeakL = x1 + UBPL * svf[0]->KCoeff;
+	const float HPL = (x1 - svf0->precomputeCoeff1 * svf0->z1_A - svf0->z2_A) * svf0->precomputeCoeff2;
+	const float BPL = HPL * svf0->gCoeff + svf0->z1_A;
+	const float LPL = BPL * svf0->gCoeff + svf0->z2_A;
+	const float UBPL = svf0->precomputeCoeff3 * BPL;
+	const float PeakL = x1 + UBPL * svf0->KCoeff;
 	const float NotchL = x1 - UBPL;
-	const float APL = x1 - svf[0]->precomputeCoeff4 * BPL;
-	svf[0]->z1_A = svf[0]->gCoeff * HPL + BPL;
-	svf[0]->z2_A = svf[0]->gCoeff * BPL + LPL;
-	const float HPR = (x2 - svf[0]->precomputeCoeff1 * svf[1]->z1_A - svf[1]->z2_A) * svf[0]->precomputeCoeff2;
-	const float BPR = HPR * svf[0]->gCoeff + svf[1]->z1_A;
-	const float LPR = BPR * svf[0]->gCoeff + svf[1]->z2_A;
-	const float UBPR = svf[0]->precomputeCoeff3 * BPR;
-	const float PeakR = x2 + UBPR * svf[0]->KCoeff;
+	const float APL = x1 - svf0->precomputeCoeff4 * BPL;
+	svf0->z1_A = svf0->gCoeff * HPL + BPL;
+	svf0->z2_A = svf0->gCoeff * BPL + LPL;
+	const float HPR = (x2 - svf0->precomputeCoeff1 * svf1->z1_A - svf1->z2_A) * svf0->precomputeCoeff2;
+	const float BPR = HPR * svf0->gCoeff + svf1->z1_A;
+	const float LPR = BPR * svf0->gCoeff + svf1->z2_A;
+	const float UBPR = svf0->precomputeCoeff3 * BPR;
+	const float PeakR = x2 + UBPR * svf0->KCoeff;
 	const float NotchR = x2 - UBPR;
-	const float APR = x2 - svf[0]->precomputeCoeff4 * BPR;
-	svf[1]->z1_A = svf[0]->gCoeff * HPR + BPR;
-	svf[1]->z2_A = svf[0]->gCoeff * BPR + LPR;
-	switch (svf[0]->filterType)
+	const float APR = x2 - svf0->precomputeCoeff4 * BPR;
+	svf1->z1_A = svf0->gCoeff * HPR + BPR;
+	svf1->z2_A = svf0->gCoeff * BPR + LPR;
+	switch (svf0->filterType)
 	{
 	case SVFLowpass:
 		*y1 = LPL;
@@ -418,9 +418,8 @@ static void DBBProcess(DBB *dbb, float *x1, float *x2, float *y1, float *y2, siz
 		}
 	}
 	dbb->downsamplerPos = pos;
-	const StateVariable2ndOrder *ptr[2] = { &dbb->svf[0], &dbb->svf[1] };
 	for (size_t i = 0; i < n; i++)
-		ProcessStateVariable2ndOrderStereo(ptr, integerDelayLineProcess(&dbb->dL[0], x1[i]), integerDelayLineProcess(&dbb->dL[1], x2[i]), &y1[i], &y2[i]);
+		ProcessStateVariable2ndOrderStereo(&dbb->svf[0], &dbb->svf[1], integerDelayLineProcess(&dbb->dL[0], x1[i]), integerDelayLineProcess(&dbb->dL[1], x2[i]), &y1[i], &y2[i]);
 }
 // Bass boost
 void BassBoostEnable(JamesDSPLib *jdsp)
