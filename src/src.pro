@@ -200,6 +200,7 @@ RESOURCES += \
 
 TRANSLATIONS += ../resources/translations/jamesdsp_de.ts \
                 ../resources/translations/jamesdsp_en.ts \
+                ../resources/translations/jamesdsp_fr.ts \
                 ../resources/translations/jamesdsp_ru.ts \
                 ../resources/translations/jamesdsp_uk.ts \
                 ../resources/translations/jamesdsp_pl.ts \
