@@ -1078,42 +1078,42 @@ Bitte wählen Sie eine andere</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamikbereich-Kompander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Aktiviert/deaktiviert den Dynamikbereich-Kompander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>Dynamikbereich-Kompander</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>Zeitkonstante</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>Granularität</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>Zeit-Frequenz Transformationen</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="398"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>Uniform (Kurzzeit-Fourier)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="403"/>
       <source>Multiresolution (Continuous wavelet)</source>
-      <translation type="unfinished"/>
+      <translation>Multiresolution (Kontinuierliches Wavelet)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="408"/>
       <source>Multiresolution (Time domain)</source>
-      <translation type="unfinished"/>
+      <translation>Multiresolution (Zeitdomäne)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="470"/>
@@ -1265,37 +1265,37 @@ Bitte wählen Sie eine andere</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1143"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodaler Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Aktiviert/deaktiviert den multimodalen Equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filtertyp:&lt;/span&gt; Der multimodale Equalizer unterstützt sowohl FIR (Minimale Phase) als auch mehrere IIR-Filtermodi.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1279"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>FIR Minimale Phase</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1284"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 4. Ordnung</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 6. Ordnung</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1294"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 8. Ordnung</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1299"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 10. Ordnung</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1304"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 12. Ordnung</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1235"/>
@@ -1616,27 +1616,27 @@ Bitte wählen Sie eine andere</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>Sehr niedrig</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>Niedrig</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>Medium</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>Hoch</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>Extrem</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1175"/>
