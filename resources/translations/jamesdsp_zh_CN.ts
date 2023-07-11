@@ -377,9 +377,9 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
+      <source>Help</source>
+      <translation>帮助</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
@@ -387,122 +387,122 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
-        <source>Open script</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
+      <source>Open script</source>
+      <translation>打开脚本</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
+      <source>Ctrl+O</source>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
-        <source>Close file</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
+      <source>Close file</source>
+      <translation>关闭文件</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
-        <source>Ctrl+Shift+W</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
+      <source>Ctrl+Shift+W</source>
+      <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
+      <source>Save</source>
+      <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
-        <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
+      <source>Ctrl+S</source>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
-        <source>Save as...</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
+      <source>Save as...</source>
+      <translation>另存为...</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
-        <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
+      <source>Ctrl+Shift+S</source>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
-        <source>Undo</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
+      <source>Undo</source>
+      <translation>撤销</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
-        <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
+      <source>Ctrl+Z</source>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
-        <source>Redo</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
+      <source>Redo</source>
+      <translation>恢复</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
-        <source>Ctrl+Shift+Z</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
+      <source>Ctrl+Shift+Z</source>
+      <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
-        <source>Find/Replace...</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
+      <source>Find/Replace...</source>
+      <translation>查找/替换…...</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
-        <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
+      <source>Ctrl+F</source>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
-        <source>Go to line...</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
+      <source>Go to line...</source>
+      <translation>转到行…</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
-        <source>Go to line</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
+      <source>Go to line</source>
+      <translation>转到行</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
-        <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
+      <source>Ctrl+L</source>
+      <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
-        <source>Jump to function...</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
+      <source>Jump to function...</source>
+      <translation>跳转到函数...</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
-        <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
+      <source>Ctrl+M</source>
+      <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
-        <source>Go to @init</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
+      <source>Go to @init</source>
+      <translation>转到@init</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
-        <source>F2</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
+      <source>F2</source>
+      <translation>F2</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
-        <source>Go to @sample</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
+      <source>Go to @sample</source>
+      <translation>转到@sample</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
-        <source>F3</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
+      <source>F3</source>
+      <translation>F3</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
@@ -510,44 +510,44 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
-        <source>Replace Tabs with Spaces</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
+      <source>Replace Tabs with Spaces</source>
+      <translation>用空格替换制表符</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
-        <source>EEL2 documentation</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
+      <source>EEL2 documentation</source>
+      <translation>EEL2文档</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
-        <source>F1</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
+      <source>F1</source>
+      <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
-        <source>Run code</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
+      <source>Run code</source>
+      <translation>运行代码</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
-        <source>F5</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
+      <source>F5</source>
+      <translation>F5</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
-        <source>New</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
+      <source>New</source>
+      <translation>新建</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
-        <source>New script wizard</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
+      <source>New script wizard</source>
+      <translation>新建脚本向导</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
-        <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
+      <source>Ctrl+N</source>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
@@ -556,14 +556,14 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
-        <source>F6</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
+      <source>F6</source>
+      <translation>F6</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
-        <source>Loaded projects</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
+      <source>Loaded projects</source>
+      <translation>加载项目</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
@@ -571,14 +571,14 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
-        <source>Variable view</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
+      <source>Variable view</source>
+      <translation>变量视图</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
-        <source>Console output</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
+      <source>Console output</source>
+      <translation>控制台输出</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
@@ -591,54 +591,54 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="299"/>
-        <source>Script initialization took %1ms</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="299"/>
+      <source>Script initialization took %1ms</source>
+      <translation>脚本初始化耗时 %1毫秒</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
+      <source>Error</source>
+      <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
-        <source>Cannot write file</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
+      <source>Cannot write file</source>
+      <translation>无法写入文件。</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
-        <source>Open EEL script</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
+      <source>Open EEL script</source>
+      <translation>打开EEL脚本</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
-        <source>EEL2 Script (*.eel)</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
+      <source>EEL2 Script (*.eel)</source>
+      <translation>EEL2脚本 (*.eel)</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
-        <source>Save as</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
+      <source>Save as</source>
+      <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
-        <source>Cannot execute</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
+      <source>Cannot execute</source>
+      <translation>无法执行</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
-        <source>No script file opened. Please open one first and try again.</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
+      <source>No script file opened. Please open one first and try again.</source>
+      <translation>没有脚本文件被打开。请先打开一个，然后重试。</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
-        <source>Enter line number:</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
+      <source>Enter line number:</source>
+      <translation>输入行号：</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="472"/>
-        <source>Enter function name:</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="472"/>
+      <source>Enter function name:</source>
+      <translation>输入函数名称：</translation>
     </message>
 </context>
 <context>
@@ -890,33 +890,33 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
-        <source>Reset response</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
+      <source>Reset response</source>
+      <translation>重置响应</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
-        <source>Import EqualizerAPO settings</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
+      <source>Import EqualizerAPO settings</source>
+      <translation>导入均衡器APO设置</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
-        <source>Import frequency response</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
+      <source>Import frequency response</source>
+      <translation>导入频率响应</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
-        <source>CSV frequency response (*.csv)</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
+      <source>CSV frequency response (*.csv)</source>
+      <translation>CSV频率响应 (*.csv)</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
-        <source>All files (*.*)</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
+      <source>All files (*.*)</source>
+      <translation>所有文件 (*.*)</translation>
     </message>
     <message>
         <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
@@ -929,88 +929,90 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
-        <source>Export frequency response</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
+      <source>Export frequency response</source>
+      <translation>导出频率响应</translation>
     </message>
 </context>
 <context>
     <name>GzipDownloaderDialog</name>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="62"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="62"/>
+      <source>Error</source>
+      <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
-        <source>%1MB of %2MB downloaded</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
+      <source>%1MB of %2MB downloaded</source>
+      <translation>已下载%1MB，共需要下载%2MB</translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
-        <source>Decompressing package...</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
+      <source>Decompressing package...</source>
+      <translation>正在解压文件...</translation>
     </message>
 </context>
 <context>
     <name>LiveprogSelectionWidget</name>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
-        <source>No script has been loaded</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
+      <source>No script has been loaded</source>
+      <translation>未加载脚本</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
-        <source>Enable</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
+      <source>Enable</source>
+      <translation>启用</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
-        <source>Reset</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
+      <source>Reset</source>
+      <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
-        <source>Create new script</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
+      <source>Create new script</source>
+      <translation>创建新脚本</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
+      <source>Error</source>
+      <translation>错误</translation>
     </message>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
         <source>Cannot restore defaults.
 No EEL file is currently loaded.</source>
-        <translation type="unfinished"></translation>
+      <translation>无法恢复默认值。
+当前没有加载EEL文件。</translation>
     </message>
     <message>
         <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
         <source>Selected EEL file does not exist anymore.
 Please select another one</source>
-        <translation type="unfinished"></translation>
+      <translation>所选EEL文件不再存在。
+请另选一个</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
-        <source>Edit script</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
+      <source>Edit script</source>
+      <translation>编辑脚本</translation>
     </message>
     <message>
-        <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
-        <source>No customizable parameters</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
+      <source>No customizable parameters</source>
+      <translation>没有可自定义参数</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../src/MainWindow.ui" line="26"/>
-        <source>JamesDSP for Linux</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="26"/>
+      <source>JamesDSP for Linux</source>
+      <translation>JamesDSP for Linux</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="106"/>
@@ -1144,19 +1146,20 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="631"/>
-        <source>Widen level</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="703"/>
+      <source>Presets</source>
+      <translation>预设</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="676"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="736"/>
+      <location filename="../../src/MainWindow.ui" line="2090"/>
+      <source>...</source>
+      <translation>...</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="702"/>
-        <source>Enable reverberation</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="750"/>
+      <source>Oversampling factor</source>
+      <translation>过采样系数：</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="722"/>
@@ -1310,14 +1313,15 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1327"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1418"/>
+      <location filename="../../src/MainWindow.ui" line="1740"/>
+      <source>Filesystem</source>
+      <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1331"/>
-        <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1440"/>
+      <source>Bookmarks</source>
+      <translation>收藏夹</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1336"/>
@@ -1325,9 +1329,9 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1356"/>
-        <source>Reset EQ</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1486"/>
+      <source>IR optimization</source>
+      <translation>IR优化</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1384"/>
@@ -1351,9 +1355,9 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1479"/>
-        <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1543"/>
+      <source>Edit</source>
+      <translation>编辑</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1518"/>
@@ -1376,19 +1380,19 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1555"/>
-        <source>Minimum phase transform and shrink</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1762"/>
+      <source>Database</source>
+      <translation>数据库</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1563"/>
-        <source>Adv. waveform editing</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1803"/>
+      <source>Create</source>
+      <translation>创建</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1582"/>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1827"/>
+      <source>Create your custom DDC files using DDCToolbox</source>
+      <translation>使用DDCToolbox创建您的自定义DDC文件</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1628"/>
@@ -1396,9 +1400,9 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1648"/>
-        <source>Samples:</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="1893"/>
+      <source>View installation instructions</source>
+      <translation>查看安装说明</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1707"/>
@@ -1416,9 +1420,9 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1842"/>
-        <source>Create</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="2032"/>
+      <source>Custom Presets</source>
+      <translation>自定义预设</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1866"/>
@@ -1426,9 +1430,9 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="1876"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.ui" line="2061"/>
+      <source>Settings</source>
+      <translation>设置</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="1932"/>
@@ -1451,19 +1455,19 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2071"/>
-        <source>Custom Presets</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="145"/>
+      <source>%1 connected - Preset loaded automatically</source>
+      <translation>%1已连接 - 预设已自动加载</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2074"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="164"/>
+      <source>Cannot execute script</source>
+      <translation>无法执行脚本</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2100"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="165"/>
+      <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
+      <translation>当前EEL文件 ( &apos;%1&apos;) 在文件系统中不再存在。请手动重新打开文件。</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="2106"/>
@@ -1471,9 +1475,9 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2126"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="280"/>
+      <source>Driver status</source>
+      <translation>驱动程序状态</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.ui" line="2184"/>
@@ -1481,29 +1485,29 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.ui" line="2187"/>
-        <source>Bypass</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="286"/>
+      <source>Reset to defaults</source>
+      <translation>重置为默认</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="151"/>
-        <source>%1 connected - Preset loaded automatically</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="287"/>
+      <source>Load from file</source>
+      <translation>从文件加载</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="171"/>
-        <source>Cannot execute script</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="288"/>
+      <source>Save to file</source>
+      <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="172"/>
-        <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="290"/>
+      <source>Open LiveprogIDE</source>
+      <translation>打开LiveprogIDE</translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="286"/>
-        <source>Apps</source>
-        <translation type="unfinished"></translation>
+      <location filename="../../src/MainWindow.cpp" line="292"/>
+      <source>What&apos;s this... (Select UI element)</source>
+      <translation>这是什么。。。(选择UI元素)</translation>
     </message>
     <message>
         <location filename="../../src/MainWindow.cpp" line="287"/>
