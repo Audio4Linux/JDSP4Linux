@@ -1,11 +1,24 @@
 #include "config/DspConfig.h"
 
 #include "JamesDspElement.h"
-
 #include "DspHost.h"
+
+extern "C" {
+#include <PrintfStdOutExtension.h>
+}
+
+void receivePrintfStdout(const char* msg, void* userdata) {
+    auto* plugin = static_cast<JamesDspElement*>(userdata);
+    if(plugin != nullptr) {
+        plugin->callMessageHandler(DspHost::PrintfWriteOutputBuffer, QString(msg));
+    }
+}
+
 
 JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
 {
+    setPrintfStdOutHandler(receivePrintfStdout, this);
+
     gboolean gEnabled;
     gpointer gDspPtr = NULL;
     this->getValues("dsp_ptr", &gDspPtr,
@@ -26,7 +39,12 @@ JamesDspElement::JamesDspElement() : FilterElement("jamesdsp", "jamesdsp")
                 _msgHandler(msg, value);
                 break;
         }
-    });
+});
+}
+
+JamesDspElement::~JamesDspElement()
+{
+    setPrintfStdOutHandler(nullptr, nullptr);
 }
 
 DspStatus JamesDspElement::status()

@@ -17,7 +17,7 @@ LOCAL_SRC_FILES := \
 	jdsp/Effects/stereoEnhancement.c \
 	jdsp/Effects/reverb.c \
 	jdsp/Effects/liveprogWrapper.c \
-	jdsp/Effects/firEqualizer.c \
+	jdsp/Effects/multimodalEQ.c \
 	jdsp/Effects/dynamic.c \
 	jdsp/Effects/dbb.c \
 	jdsp/Effects/convolver1D.c \
@@ -52,17 +52,17 @@ LOCAL_SRC_FILES := \
 # terminator
 LOCAL_LDLIBS := -llog
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
-LOCAL_CPPFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -fvisibility=hidden -DDEBUG
-LOCAL_CFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -fvisibility=hidden -DDEBUG
+LOCAL_CPPFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -fvisibility=hidden #-DDEBUG
+LOCAL_CFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv7-a -mfpu=neon -ftree-vectorize -fvisibility=hidden #-DDEBUG
 else ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
-LOCAL_CPPFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv8-a -mfpu=neon -ftree-vectorize -fvisibility=hidden -DDEBUG
-LOCAL_CFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv8-a -mfpu=neon -ftree-vectorize -fvisibility=hidden -DDEBUG
+LOCAL_CPPFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv8-a -mfpu=neon -ftree-vectorize -fvisibility=hidden #-DDEBUG
+LOCAL_CFLAGS += -Wall -Wextra -ffunction-sections -fdata-sections -Ofast -march=armv8-a -mfpu=neon -ftree-vectorize -fvisibility=hidden #-DDEBUG
 else ifeq ($(TARGET_ARCH_ABI), x86)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden -DDEBUG
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden -DDEBUG
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden #-DDEBUG
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden #-DDEBUG
 else ifeq ($(TARGET_ARCH_ABI), armeabi)
-LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden -DDEBUG
-LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden -DDEBUG
+LOCAL_CPPFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden #-DDEBUG
+LOCAL_CFLAGS += -ffunction-sections -fdata-sections -Ofast -ftree-vectorize -fvisibility=hidden #-DDEBUG
 endif
 LOCAL_LDFLAGS += -Wl,--gc-sections,--exclude-libs,ALL
 include $(BUILD_SHARED_LIBRARY)

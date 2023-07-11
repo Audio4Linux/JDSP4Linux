@@ -7,6 +7,7 @@
 #include "Effects/eel2/dr_flac.h"
 #include "Effects/eel2/ns-eel.h"
 #include "jdsp_header.h"
+#define TAG "EffectDSPMain"
 // Range: 0x800000, 0x7fffff
 int32_t i32_from_p24_big_endian(const uint8_t *packed24)
 {
@@ -45,9 +46,162 @@ int32_t clamp24_from_float(float f)
 	 */
 	return f > 0 ? f + 0.5f : f - 0.5f;
 }
+double crossPlatformCurTime(void)
+{
+#ifdef WIN32
+	DWORD t;
+
+	t = GetTickCount();
+	return (double)t * 0.001;
+#else
+	struct timeval tv;
+
+	gettimeofday(&tv, NULL);
+	return tv.tv_sec + tv.tv_usec * 0.000001;
+#endif
+}
+double getProcTime(int flen, int num, double dur)
+{
+	int pos;
+	double t_start, t_diff;
+	int counter = 0.0;
+	double proc_time;
+
+	int xlen = 2048 * 2048;
+	float *x = (float *)malloc(sizeof(float) * xlen);
+	float lin = (float)pow(10.0, -100.0 / 20.0);	// 0.00001 = -100dB
+	float mul = (float)pow(lin, 1.0 / (double)xlen);
+	x[0] = 1.0;
+	for (int n = 1; n < xlen; n++)
+		x[n] = -mul * x[n - 1];
+
+	int hlen = flen * num;
+	float *h = (float *)malloc(sizeof(float) * hlen);
+	lin = (float)pow(10.0, -60.0 / 20.0);	// 0.001 = -60dB
+	mul = (float)pow(lin, 1.0 / (double)hlen);
+	h[0] = 1.0;
+	for (int n = 1; n < hlen; n++)
+		h[n] = mul * h[n - 1];
+
+	float *y = (float *)malloc(sizeof(float) * flen);
+
+	FFTConvolver1x1 filter;
+	FFTConvolver1x1Init(&filter);
+	FFTConvolver1x1LoadImpulseResponse(&filter, flen, h, hlen);
+
+	t_diff = 0.0;
+	t_start = crossPlatformCurTime();
+	pos = 0;
+	while (t_diff < dur)
+	{
+		FFTConvolver1x1Process(&filter, &x[pos], y, flen);
+		pos += flen;
+		if (pos >= xlen)
+			pos = 0;
+		counter++;
+		t_diff = crossPlatformCurTime() - t_start;
+	}
+	FFTConvolver1x1Free(&filter);
+	free(x);
+	free(h);
+	free(y);
+	return t_diff / (double)counter;
+}
+char benchmarkCompletionFlag = 0;
+double convbench_c0[MAX_BENCHMARK] = { 2.4999999e-05f,4.9999999e-05f,9.9999997e-05f,0.0002f,0.0005f,0.001f,0.0021f,0.0057f,0.0126f,0.0293f };
+double convbench_c1[MAX_BENCHMARK] = { 3.1249999e-06f,6.2499998e-06f,1.2500000e-05f,2.4999999e-05f,4.9999999e-05f,9.9999997e-05f,0.0002f,0.0004f,0.0009f,0.0019f };
+void *convBench(void *arg)
+{
+	size_t sleepMs = 30000; // 30 second after library being loaded
+#ifdef _WIN32
+	Sleep(sleepMs);
+#else
+	usleep(sleepMs * 1000ULL);
+#endif
+#ifdef DEBUG
+	__android_log_print(ANDROID_LOG_INFO, TAG, "Benchmark start");
+#endif
+	const int sflen_start = 64;
+	int s, m;
+	int sflen_best = sflen_start;
+	int mflen_best = 256;
+	int counter = 0;
+	double _c0[MAX_BENCHMARK];
+	double _c1[MAX_BENCHMARK];
+	for (s = 0; s < MAX_BENCHMARK; s++)
+	{
+		int sflen = sflen_start << s;
+		int num = 1;
+		double tau_1 = getProcTime(sflen, num, 1.0);
+		counter++;
+		num = 16;
+		double tau_16 = getProcTime(sflen, num, 1.0);
+		counter++;
+		_c1[s] = (tau_16 - tau_1) / 15.0;
+		_c0[s] = tau_1 - convbench_c1[s];
+	}
+	memcpy(convbench_c1, _c1, sizeof(_c1));
+	memcpy(convbench_c0, _c0, sizeof(_c0));
+#ifdef DEBUG
+	__android_log_print(ANDROID_LOG_INFO, TAG, "Benchmark done");
+#endif
+	benchmarkCompletionFlag = 1;
+	pthread_exit(NULL);
+	return 0;
+}
+int selectConvPartitions(JamesDSPLib *jdsp, unsigned int impulseLengthActual, unsigned int *seg2Len)
+{
+	double tau_s, tau_m;
+	int mflen_best = 256;
+	int num_s, num_m;
+	int latency = jdsp->blockSize;
+	int type_best, begin_m, end_m;
+	int s = (int)log2(latency) - 6;
+	if (s < 0)
+	{
+		printf("Latency must not smaller than 64\n");
+		return 1;
+	}
+	double cpu_load;
+	double cpu_load_best = 1e12;
+	// performance prediction with 2 segment lengths
+	begin_m = 1;
+	end_m = MAX_BENCHMARK - s;
+	for (int m = begin_m; m < end_m; m++)
+	{
+		int mflen = latency << m;
+		num_s = 2 * mflen / latency;
+		num_m = (int)ceil((impulseLengthActual - num_s * latency) / (double)mflen);
+		if (num_m < 1)
+			num_m = 1;
+		tau_s = convbench_c0[s] + convbench_c1[s] * num_s;
+		tau_m = convbench_c0[s + m] + convbench_c1[s + m] * num_m;
+		cpu_load = 400.0 * (tau_s * mflen / latency + tau_m) * jdsp->fs / (double)mflen;
+		if (cpu_load < cpu_load_best)
+		{
+			cpu_load_best = cpu_load;
+			mflen_best = mflen;
+			type_best = 2;
+		}
+	}
+	// performance prediction with 1 segment length
+	num_s = (int)ceil(impulseLengthActual / (double)latency);
+	tau_s = convbench_c0[s] + convbench_c1[s] * num_s;
+	cpu_load = 400.0 * tau_s * jdsp->fs / (double)latency;
+	if (cpu_load < cpu_load_best)
+	{
+		cpu_load_best = cpu_load;
+		type_best = 1;
+	}
+	*seg2Len = mflen_best;
+	return type_best;
+}
 void JamesDSPGlobalMemoryAllocation()
 {
+	benchmarkCompletionFlag = 0;
 	NSEEL_start();
+	pthread_t benchmarkThread;
+	pthread_create(&benchmarkThread, NULL, convBench, 0);
 }
 void JamesDSPGlobalMemoryDeallocation()
 {
@@ -80,7 +234,7 @@ void JamesDSPReallocateBlock(JamesDSPLib *jdsp, size_t n)
 	if (!jdsp->enableASRC)
 		jdsp->pw2BlockMemSize = 0;
 	size_t ctMemBlk = jdsp->blockSizeMax * 2 + maxInterpolatedLength * 2 + jdsp->pw2BlockMemSize * 2;
-	jdsp->tmpBuffer[0] = (float*)malloc(ctMemBlk * sizeof(float));
+	jdsp->tmpBuffer[0] = (float *)malloc(ctMemBlk * sizeof(float));
 	jdsp->tmpBuffer[1] = jdsp->tmpBuffer[0] + jdsp->blockSizeMax;
 	jdsp->tmpBuffer[2] = jdsp->tmpBuffer[1] + jdsp->blockSizeMax;
 	jdsp->tmpBuffer[3] = jdsp->tmpBuffer[2] + maxInterpolatedLength;
@@ -88,6 +242,23 @@ void JamesDSPReallocateBlock(JamesDSPLib *jdsp, size_t n)
 	jdsp->tmpBuffer[5] = jdsp->tmpBuffer[4] + jdsp->pw2BlockMemSize;
 	if (tmp1)
 		free(tmp1);
+}
+void JamesDSPRefreshConvolutions(JamesDSPLib *jdsp, char refreshAll)
+{
+#ifdef DEBUG
+	__android_log_print(ANDROID_LOG_INFO, TAG, "Buffer size changed, update convolution object to maximize performance");
+#endif
+	if (jdsp->impulseResponseStorage.impulseResponse)
+		Convolver1DLoadImpulseResponse(jdsp, jdsp->impulseResponseStorage.impulseResponse, jdsp->impulseResponseStorage.impChannels, jdsp->impulseResponseStorage.impulseLengthActual, 0);
+	jdsp->crossfeedForceRefresh = 1;
+	CrossfeedEnable(jdsp, jdsp->crossfeedEnabled);
+	if (refreshAll)
+	{
+		jdsp->arbMagForceRefresh = 1;
+		ArbitraryResponseEqualizerEnable(jdsp, jdsp->arbitraryMagEnabled);
+		jdsp->equalizerForceRefresh = 1;
+		MultimodalEqualizerEnable(jdsp, jdsp->equalizerEnabled);
+	}
 }
 void jdsp_lock(JamesDSPLib *jdsp)
 {
@@ -102,8 +273,9 @@ void jdsp_unlock(JamesDSPLib *jdsp)
 // Process
 void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 {
-	jdsp_lock(jdsp);
-	size_t i;
+	// Analog modelling
+	if (jdsp->tubeEnabled)
+		VacuumTubeProcess(jdsp, n);
 	// Input / Compressor
 	if (jdsp->compEnabled)
 		CompressorProcess(jdsp, n);
@@ -112,37 +284,34 @@ void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 		BassBoostProcess(jdsp, n);
 	// Equalizer
 	if (jdsp->equalizerEnabled)
-		FIREqualizerProcess(jdsp, n);
+		MultimodalEqualizerProcess(jdsp, n);
 	// Arbitrary magnitude eq
 	if (jdsp->arbitraryMagEnabled)
 		ArbitraryResponseEqualizerProcess(jdsp, n);
-	// Stereo widening
-	if (jdsp->sterEnhEnabled)
-		StereoEnhancementProcess(jdsp, n);
-	// Reverb
-	if (jdsp->reverbEnabled)
-		ReverbProcess(jdsp, n);
+	jdsp_lock(jdsp);
 	// Convolver
 	if (jdsp->convolverEnabled)
 		if (jdsp->conv.process)
 			jdsp->conv.process(jdsp, n);
-	// Analog modelling
-	if (jdsp->tubeEnabled)
-		VacuumTubeProcess(jdsp, n);
-	// BS2B
-	if (jdsp->crossfeedEnabled)
-		CrossfeedProcess(jdsp, n);
 	// Viper DDC
 	if (jdsp->ddcEnabled)
 		DDCProcess(jdsp, n);
 	// Live programmable
 	if (jdsp->liveprogEnabled)
 		LiveProgProcess(jdsp, n);
+	jdsp_unlock(jdsp);
+	// BS2B
+	if (jdsp->crossfeedEnabled)
+		CrossfeedProcess(jdsp, n);
+	// Stereo widening
+	if (jdsp->sterEnhEnabled)
+		StereoEnhancementProcess(jdsp, n);
+	// Reverb
+	if (jdsp->reverbEnabled)
+		ReverbProcess(jdsp, n);
 	// Output
-	for (i = 0; i < n; i++)
+	for (size_t i = 0; i < n; i++)
 	{
-		//jdsp->tmpBuffer[0][i] = 4124;
-		//jdsp->tmpBuffer[1][i] = -4124;
 		float xL = jdsp->tmpBuffer[0][i] * jdsp->postGain;
 		float xR = jdsp->tmpBuffer[1][i] * jdsp->postGain;
 		float rect1 = fabsf(xL);
@@ -160,7 +329,73 @@ void JamesDSPProcess(JamesDSPLib *jdsp, size_t n)
 		jdsp->tmpBuffer[0][i] = rect1;
 		jdsp->tmpBuffer[1][i] = rect2;
 	}
+}
+void JamesDSPProcessCheckBenchmarkReady(JamesDSPLib *jdsp, size_t n)
+{
+	// Analog modelling
+	if (jdsp->tubeEnabled)
+		VacuumTubeProcess(jdsp, n);
+	// Input / Compressor
+	if (jdsp->compEnabled)
+		CompressorProcess(jdsp, n);
+	// IIR bass boost
+	if (jdsp->bassBoostEnabled)
+		BassBoostProcess(jdsp, n);
+	// Equalizer
+	if (jdsp->equalizerEnabled)
+		MultimodalEqualizerProcess(jdsp, n);
+	// Arbitrary magnitude eq
+	if (jdsp->arbitraryMagEnabled)
+		ArbitraryResponseEqualizerProcess(jdsp, n);
+	jdsp_lock(jdsp);
+	// Convolver
+	if (jdsp->convolverEnabled)
+		if (jdsp->conv.process)
+			jdsp->conv.process(jdsp, n);
+	// Viper DDC
+	if (jdsp->ddcEnabled)
+		DDCProcess(jdsp, n);
+	// Live programmable
+	if (jdsp->liveprogEnabled)
+		LiveProgProcess(jdsp, n);
 	jdsp_unlock(jdsp);
+	// BS2B
+	if (jdsp->crossfeedEnabled)
+		CrossfeedProcess(jdsp, n);
+	// Stereo widening
+	if (jdsp->sterEnhEnabled)
+		StereoEnhancementProcess(jdsp, n);
+	// Reverb
+	if (jdsp->reverbEnabled)
+		ReverbProcess(jdsp, n);
+	// Output
+	for (size_t i = 0; i < n; i++)
+	{
+		float xL = jdsp->tmpBuffer[0][i] * jdsp->postGain;
+		float xR = jdsp->tmpBuffer[1][i] * jdsp->postGain;
+		float rect1 = fabsf(xL);
+		float rect2 = fabsf(xR);
+		float maxLR = max(rect1, rect2);
+		if (maxLR < jdsp->limiter.threshold)
+			maxLR = jdsp->limiter.threshold;
+		if (maxLR > jdsp->limiter.envOverThreshold)
+			jdsp->limiter.envOverThreshold = maxLR;
+		else
+			jdsp->limiter.envOverThreshold = maxLR + jdsp->limiter.relCoef * (jdsp->limiter.envOverThreshold - maxLR);
+		float gR = jdsp->limiter.threshold / jdsp->limiter.envOverThreshold;
+		rect1 = xL * gR;
+		rect2 = xR * gR;
+		jdsp->tmpBuffer[0][i] = rect1;
+		jdsp->tmpBuffer[1][i] = rect2;
+	}
+	if (benchmarkCompletionFlag == 1)
+	{
+#ifdef DEBUG
+		__android_log_print(ANDROID_LOG_INFO, TAG, "Benchmark flag == 1, refreshing convolutions");
+#endif
+		JamesDSPRefreshConvolutions(jdsp, 0);
+		jdsp->processInternal = JamesDSPProcess;
+	}
 }
 size_t iabs(size_t value)
 {
@@ -247,7 +482,7 @@ void InitIntegerASRCHandler(IntegerASRCHandler *asrc, unsigned long long working
 	asrc->calculatedLatencyWholeSystem = minimumInputBufLen;
 	unsigned long long num, denom;
 	sample_ratio(workingFs, inFs, &num, &denom);
-	if (workingFs == num && inFs == denom || num > 2000)
+	if ((workingFs == num && inFs == denom) || num > 2000)
 		minphase = 0;
 	unsigned int maxDecimatedLength = (unsigned int)ceil(asrc->calculatedLatencyWholeSystem * ratio);
 	if (!inst1)
@@ -271,7 +506,7 @@ unsigned int DoASRC_fwd(JamesDSPLib *jdsp, size_t n)
 {
 	//unsigned int curDecimatedLen = psrc_filt(&jdsp->asrc[0].polyphaseDecimator, jdsp->tmpBuffer[0], n, jdsp->tmpBuffer[2]);
 	//curDecimatedLen = psrc_filt(&jdsp->asrc[1].polyphaseDecimator, jdsp->tmpBuffer[1], n, jdsp->tmpBuffer[3]);
-	const SRCResampler *ptr[2] = { &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[1].polyphaseDecimator };
+	SRCResampler *ptr[2] = { &jdsp->asrc[0].polyphaseDecimator, &jdsp->asrc[1].polyphaseDecimator };
 	unsigned int curDecimatedLen = psrc_filt_stereo(ptr, jdsp->tmpBuffer[0], jdsp->tmpBuffer[1], n, jdsp->tmpBuffer[2], jdsp->tmpBuffer[3]);
 	for (unsigned int i = 0; i < curDecimatedLen; i++)
 	{
@@ -284,11 +519,11 @@ void DoASRC_bwd(JamesDSPLib *jdsp, unsigned int curDecimatedLen, size_t n)
 {
 	//unsigned int curInterpolatedLen = psrc_filt(&jdsp->asrc[0].polyphaseInterpolator, jdsp->tmpBuffer[0], curDecimatedLen, jdsp->tmpBuffer[2]);
 	//curInterpolatedLen = psrc_filt(&jdsp->asrc[1].polyphaseInterpolator, jdsp->tmpBuffer[1], curDecimatedLen, jdsp->tmpBuffer[3]);
-	const SRCResampler *ptr[2] = { &jdsp->asrc[0].polyphaseInterpolator, &jdsp->asrc[1].polyphaseInterpolator };
+	SRCResampler *ptr[2] = { &jdsp->asrc[0].polyphaseInterpolator, &jdsp->asrc[1].polyphaseInterpolator };
 	unsigned int curInterpolatedLen = psrc_filt_stereo(ptr, jdsp->tmpBuffer[0], jdsp->tmpBuffer[1], curDecimatedLen, jdsp->tmpBuffer[2], jdsp->tmpBuffer[3]);
 	//unsigned int dequeued = RingBuffering(&jdsp->asrc[0].intermediateRing, jdsp->tmpBuffer[4], jdsp->tmpBuffer[2], curInterpolatedLen, jdsp->tmpBuffer[0], n, jdsp->pw2BlockMemSize);
 	//dequeued = RingBuffering(&jdsp->asrc[1].intermediateRing, jdsp->tmpBuffer[5], jdsp->tmpBuffer[3], curInterpolatedLen, jdsp->tmpBuffer[1], n, jdsp->pw2BlockMemSize);
-	const RingBuffer *ptr2[2] = { &jdsp->asrc[0].intermediateRing, &jdsp->asrc[1].intermediateRing };
+	RingBuffer *ptr2[2] = { &jdsp->asrc[0].intermediateRing, &jdsp->asrc[1].intermediateRing };
 	unsigned int dequeued = RingBufferingStereo(ptr2, jdsp->tmpBuffer[4], jdsp->tmpBuffer[5], jdsp->tmpBuffer[2], jdsp->tmpBuffer[3], curInterpolatedLen, jdsp->tmpBuffer[0], jdsp->tmpBuffer[1], n, jdsp->pw2BlockMemSize);
 	const int howManyItemsLeft1 = (int)jdsp->asrc[0].intermediateRing.in - (int)jdsp->asrc[0].intermediateRing.out;
 	const int howManyItemsLeft2 = (int)jdsp->asrc[0].intermediateRing.in - (int)jdsp->asrc[0].intermediateRing.out;
@@ -297,8 +532,11 @@ void pint16(JamesDSPLib *jdsp, int16_t *x1, int16_t *x2, int16_t *y1, int16_t *y
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = (float)(1UL << 15UL);
 	static const float offset = (float)(3 << (22 - 15));
 	/* zero = (0x10f << 22) =  0x43c00000 (not directly used) */
@@ -316,11 +554,11 @@ void pint16(JamesDSPLib *jdsp, int16_t *x1, int16_t *x2, int16_t *y1, int16_t *y
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
 		u.f = jdsp->tmpBuffer[0][i] + offset;
@@ -341,8 +579,11 @@ void pint16Multiplexed(JamesDSPLib *jdsp, int16_t *x, int16_t *y, size_t n)
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float offset = (float)(3 << (22 - 15));
 	/* zero = (0x10f << 22) =  0x43c00000 (not directly used) */
 	static const int32_t limneg = (0x10f << 22) /*zero*/ - 32768; /* 0x43bf8000 */
@@ -359,11 +600,11 @@ void pint16Multiplexed(JamesDSPLib *jdsp, int16_t *x, int16_t *y, size_t n)
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
 		u.f = jdsp->tmpBuffer[0][i] + offset;
@@ -384,8 +625,11 @@ void pint32(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t *y
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = (float)(1UL << 31UL);
 	for (size_t i = 0; i < n; i++)
 	{
@@ -395,11 +639,11 @@ void pint32(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t *y
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	float f;
 	for (size_t i = 0; i < n; i++)
 	{
@@ -427,8 +671,11 @@ void pint32Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = (float)(1UL << 31UL);
 	for (size_t i = 0; i < n; i++)
 	{
@@ -438,11 +685,11 @@ void pint32Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	float f;
 	for (size_t i = 0; i < n; i++)
 	{
@@ -470,8 +717,11 @@ void pint8_24(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t 
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = (float)(1 << 23);
 	float limpos = 0x7fffff / scale;
 	float limneg = -0x800000 / scale;
@@ -483,11 +733,11 @@ void pint8_24(JamesDSPLib *jdsp, int32_t *x1, int32_t *x2, int32_t *y1, int32_t 
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	float f;
 	for (size_t i = 0; i < n; i++)
 	{
@@ -501,8 +751,11 @@ void pint8_24Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = (float)(1 << 23);
 	float limpos = 0x7fffff / scale;
 	float limneg = -0x800000 / scale;
@@ -514,11 +767,11 @@ void pint8_24Multiplexed(JamesDSPLib *jdsp, int32_t *x, int32_t *y, size_t n)
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	float f;
 	for (size_t i = 0; i < n; i++)
 	{
@@ -532,8 +785,11 @@ void pintp24(JamesDSPLib *jdsp, uint8_t *x1, uint8_t *x2, uint8_t *y1, uint8_t *
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = 1.0f / (float)(1UL << 31);
 	for (size_t i = 0; i < n; i++)
 	{
@@ -543,11 +799,11 @@ void pintp24(JamesDSPLib *jdsp, uint8_t *x1, uint8_t *x2, uint8_t *y1, uint8_t *
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
 		jdsp->p24_from_i32(clamp24_from_float(jdsp->tmpBuffer[0][i]), y1 + i * 3);
@@ -558,8 +814,11 @@ void pintp24Multiplexed(JamesDSPLib *jdsp, uint8_t *x, uint8_t *y, size_t n)
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	static const float scale = 1.0f / (float)(1UL << 31);
 	for (size_t i = 0; i < n; i++)
 	{
@@ -569,11 +828,11 @@ void pintp24Multiplexed(JamesDSPLib *jdsp, uint8_t *x, uint8_t *y, size_t n)
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
 		jdsp->p24_from_i32(clamp24_from_float(jdsp->tmpBuffer[0][i]), y + (i << 1) * 3);
@@ -584,8 +843,11 @@ void pfloat32(JamesDSPLib *jdsp, float *x1, float *x2, float *y1, float *y2, siz
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	for (size_t i = 0; i < n; i++)
 	{
 		jdsp->tmpBuffer[0][i] = x1[i];
@@ -594,11 +856,11 @@ void pfloat32(JamesDSPLib *jdsp, float *x1, float *x2, float *y1, float *y2, siz
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
 		y1[i] = jdsp->tmpBuffer[0][i];
@@ -609,8 +871,11 @@ void pfloat32Multiplexed(JamesDSPLib *jdsp, float *x, float *y, size_t n)
 {
 	if (jdsp->blockSizeMax < n)
 		JamesDSPReallocateBlock(jdsp, n);
-	if (iabs(jdsp->blockSize - n) > 128)
+	if (jdsp->blockSize != n)
+	{
 		jdsp->blockSize = n;
+		JamesDSPRefreshConvolutions(jdsp, 1);
+	}
 	for (size_t i = 0; i < n; i++)
 	{
 		jdsp->tmpBuffer[0][i] = x[i << 1];
@@ -619,11 +884,11 @@ void pfloat32Multiplexed(JamesDSPLib *jdsp, float *x, float *y, size_t n)
 	if (jdsp->enableASRC)
 	{
 		unsigned int curDecimatedLen = DoASRC_fwd(jdsp, n);
-		JamesDSPProcess(jdsp, curDecimatedLen);
+		jdsp->processInternal(jdsp, curDecimatedLen);
 		DoASRC_bwd(jdsp, curDecimatedLen, n);
 	}
 	else
-		JamesDSPProcess(jdsp, n);
+		jdsp->processInternal(jdsp, n);
 	for (size_t i = 0; i < n; i++)
 	{
 		y[i << 1] = jdsp->tmpBuffer[0][i];
@@ -660,26 +925,26 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 	}
 	for (i = 0; i < 3; i++)
 	{
-		jdsp->blobsCh1[i] = (float*)malloc(outLen * sizeof(float));
-		jdsp->blobsCh2[i] = (float*)malloc(outLen * sizeof(float));
-		jdsp->blobsCh3[i] = (float*)malloc(outLen * sizeof(float));
-		jdsp->blobsCh4[i] = (float*)malloc(outLen * sizeof(float));
+		jdsp->blobsCh1[i] = (float *)malloc(outLen * sizeof(float));
+		jdsp->blobsCh2[i] = (float *)malloc(outLen * sizeof(float));
+		jdsp->blobsCh3[i] = (float *)malloc(outLen * sizeof(float));
+		jdsp->blobsCh4[i] = (float *)malloc(outLen * sizeof(float));
 	}
 	jdsp->blobsResampledLen = outLen;
-	float *tmpBuf = (float*)malloc(outLen * channelsBlobsShort * sizeof(float));
+	float *tmpBuf = (float *)malloc(outLen * channelsBlobsShort * sizeof(float));
 	memset(tmpBuf, 0, outLen * channelsBlobsShort * sizeof(float));
 
-	drflac *pFlac = drflac_open_memory((void*)jdspImp, compressedLen_jdspImp, 0);
+	drflac *pFlac = drflac_open_memory((void *)jdspImp, compressedLen_jdspImp, 0);
 	size_t totalSmps = pFlac->totalPCMFrameCount * (size_t)pFlac->channels;
-	float *pFrameImpulse = (float*)malloc(totalSmps * sizeof(float));
+	float *pFrameImpulse = (float *)malloc(totalSmps * sizeof(float));
 	size_t sampleCount = pFlac->totalPCMFrameCount;
 	drflac_read_pcm_frames_f32(pFlac, totalSmps, pFrameImpulse);
 	size_t copySize = (hrtfLenPerChannel << 2) * sizeof(float);
-	float *CorredHRTF_Surround1 = (float*)malloc(copySize);
+	float *CorredHRTF_Surround1 = (float *)malloc(copySize);
 	memcpy(CorredHRTF_Surround1, pFrameImpulse, copySize);
-	float *CorredHRTF_Surround2 = (float*)malloc(copySize);
+	float *CorredHRTF_Surround2 = (float *)malloc(copySize);
 	memcpy(CorredHRTF_Surround2, pFrameImpulse + (hrtfLenPerChannel << 2), copySize);
-	float *CorredHRTFCrossfeed = (float*)malloc(copySize);
+	float *CorredHRTFCrossfeed = (float *)malloc(copySize);
 	memcpy(CorredHRTFCrossfeed, pFrameImpulse + ((hrtfLenPerChannel << 2) << 1), copySize);
 	drflac_close(pFlac);
 	free(pFrameImpulse);
@@ -700,10 +965,10 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 	channel_splitFloat(tmpBuf, outLen, ptr3, channelsBlobsShort);
 	free(tmpBuf);
 
-	pFlac = drflac_open_memory((void*)CCConv, compressedLen_CCConv, 0);
+	pFlac = drflac_open_memory((void *)CCConv, compressedLen_CCConv, 0);
 	ratio = targetFs / (double)(pFlac->sampleRate);
 	totalSmps = pFlac->totalPCMFrameCount * (size_t)pFlac->channels;
-	pFrameImpulse = (float*)malloc(totalSmps * sizeof(float));
+	pFrameImpulse = (float *)malloc(totalSmps * sizeof(float));
 	sampleCount = pFlac->totalPCMFrameCount;
 	drflac_read_pcm_frames_f32(pFlac, totalSmps, pFrameImpulse);
 	drflac_close(pFlac);
@@ -712,9 +977,9 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 		for (i = 0; i < 4; i++)
 			free(jdsp->hrtfblobsResampled[i]);
 	for (i = 0; i < 4; i++)
-		jdsp->hrtfblobsResampled[i] = (float*)malloc(outLen * sizeof(float));
+		jdsp->hrtfblobsResampled[i] = (float *)malloc(outLen * sizeof(float));
 	jdsp->frameLenSVirResampled = outLen;
-	tmpBuf = (float*)malloc(outLen * channelsBlobsShort * sizeof(float));
+	tmpBuf = (float *)malloc(outLen * channelsBlobsShort * sizeof(float));
 	memset(tmpBuf, 0, outLen * channelsBlobsShort * sizeof(float));
 	JamesDSPOfflineResampling(pFrameImpulse, tmpBuf, sampleCount, outLen, channelsBlobsShort, ratio);
 	free(pFrameImpulse);
@@ -763,6 +1028,7 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	jdsp->processInt24PackedMultiplexd = pintp24Multiplexed;
 	jdsp->processInt8_24Deinterleaved = pint8_24;
 	jdsp->processInt24PackedDeinterleaved = pintp24;
+	jdsp->processInternal = JamesDSPProcessCheckBenchmarkReady;
 	//
 	const unsigned int asrc_taps = 32;
 	char isminphase = 1;
@@ -784,7 +1050,7 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 		unsigned int maxInterpolatedLength = (unsigned int)ceil(maxDecimatedLength / ratio);
 		jdsp->pw2BlockMemSize = next_pow_2(maxInterpolatedLength);
 		size_t ctMemBlk = jdsp->blockSizeMax * 2 + maxInterpolatedLength * 2 + jdsp->pw2BlockMemSize * 2;
-		jdsp->tmpBuffer[0] = (float*)malloc(ctMemBlk * sizeof(float));
+		jdsp->tmpBuffer[0] = (float *)malloc(ctMemBlk * sizeof(float));
 		jdsp->tmpBuffer[1] = jdsp->tmpBuffer[0] + jdsp->blockSizeMax;
 		jdsp->tmpBuffer[2] = jdsp->tmpBuffer[1] + jdsp->blockSizeMax;
 		jdsp->tmpBuffer[3] = jdsp->tmpBuffer[2] + maxInterpolatedLength;
@@ -794,7 +1060,7 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	else
 	{
 		size_t ctMemBlk = jdsp->blockSizeMax * 2;
-		jdsp->tmpBuffer[0] = (float*)malloc(ctMemBlk * sizeof(float));
+		jdsp->tmpBuffer[0] = (float *)malloc(ctMemBlk * sizeof(float));
 		jdsp->tmpBuffer[1] = jdsp->tmpBuffer[0] + jdsp->blockSizeMax;
 		jdsp->trueSampleRate = sample_rate;
 		jdsp->fs = sample_rate;
@@ -806,11 +1072,12 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	jdsp->postGain = 1.0f;
 	// Init effect
 	LiveProgConstructor(jdsp);
-	CompressorReset(jdsp);
+	CompressorConstructor(jdsp);
 	CompressorDisable(jdsp);
 	BassBoostConstructor(jdsp);
 	BassBoostDisable(jdsp);
 	ReverbDisable(jdsp);
+	StereoEnhancementConstructor(jdsp);
 	StereoEnhancementDisable(jdsp);
 	VacuumTubeDisable(jdsp);
 	LiveProgDisable(jdsp);
@@ -821,8 +1088,8 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	Convolver1DConstructor(jdsp);
 	ArbitraryResponseEqualizerConstructor(jdsp);
 	ArbitraryResponseEqualizerDisable(jdsp);
-	FIREqualizerConstructor(jdsp);
-	FIREqualizerDisable(jdsp);
+	MultimodalEqualizerConstructor(jdsp);
+	MultimodalEqualizerDisable(jdsp);
 	// Init binary blobs, random number generator
 	jdsp->rndstate[0] = time(0);
 	for (int i = 0; i < 3; i++)
@@ -836,6 +1103,12 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 	}
 	JamesDSPRefreshBlob(jdsp, (double)sample_rate);
 	jdsp->rndstate[1] = (uint64_t)(randXorshift(jdsp->rndstate) * 2.0);
+#ifdef DEBUG
+	__android_log_print(ANDROID_LOG_INFO, TAG, "Printing benchmark data start");
+	for (int s = 0; s < MAX_BENCHMARK; s++)
+		__android_log_print(ANDROID_LOG_INFO, TAG, "%1.7lf,%1.7lf", convbench_c0[s], convbench_c1[s]);
+	__android_log_print(ANDROID_LOG_INFO, TAG, "Printing benchmark data end");
+#endif
 }
 void JamesDSPSetPostGain(JamesDSPLib *jdsp, double pGaindB)
 {
@@ -881,7 +1154,7 @@ void JamesDSPSetSampleRate(JamesDSPLib *jdsp, float new_sample_rate, int forceRe
 		if (jdsp->tmpBuffer[0])
 			free(jdsp->tmpBuffer[0]);
 		size_t ctMemBlk = jdsp->blockSizeMax * 2 + maxInterpolatedLength * 2 + jdsp->pw2BlockMemSize * 2;
-		jdsp->tmpBuffer[0] = (float*)malloc(ctMemBlk * sizeof(float));
+		jdsp->tmpBuffer[0] = (float *)malloc(ctMemBlk * sizeof(float));
 		jdsp->tmpBuffer[1] = jdsp->tmpBuffer[0] + jdsp->blockSizeMax;
 		jdsp->tmpBuffer[2] = jdsp->tmpBuffer[1] + jdsp->blockSizeMax;
 		jdsp->tmpBuffer[3] = jdsp->tmpBuffer[2] + maxInterpolatedLength;
@@ -894,24 +1167,34 @@ void JamesDSPSetSampleRate(JamesDSPLib *jdsp, float new_sample_rate, int forceRe
 		jdsp->fs = jdsp->trueSampleRate;
 	}
 	JamesDSPRefreshBlob(jdsp, jdsp->fs);
-	jdsp_unlock(jdsp);
 	if (forceRefresh)
 	{
+		BassBoostSetParam(jdsp, jdsp->dbb.maxGain);
 		jdsp->ddcForceRefresh = 1;
+		DDCEnable(jdsp, jdsp->ddcEnabled);
 		jdsp->crossfeedForceRefresh = 1;
+		CrossfeedEnable(jdsp, jdsp->crossfeedEnabled);
 		jdsp->arbMagForceRefresh = 1;
+		ArbitraryResponseEqualizerEnable(jdsp, jdsp->arbitraryMagEnabled);
 		jdsp->equalizerForceRefresh = 1;
+		MultimodalEqualizerEnable(jdsp, jdsp->equalizerEnabled);
+		jdsp->compForceRefresh = 1;
+		CompressorEnable(jdsp, jdsp->compEnabled);
+		StereoEnhancementRefresh(jdsp);
 	}
+	jdsp_unlock(jdsp);
 }
 void JamesDSPFree(JamesDSPLib *jdsp)
 {
+	jdsp_lock(jdsp);
 	StereoEnhancementDestructor(jdsp);
+	CompressorDestructor(jdsp);
 	LiveProgDestructor(jdsp);
 	DDCDestructor(jdsp);
 	CrossfeedDestructor(jdsp);
-	Convolver1DDestructor(jdsp, 1);
+	Convolver1DDestructor(jdsp);
 	ArbitraryResponseEqualizerDestructor(jdsp);
-	FIREqualizerDestructor(jdsp);
+	MultimodalEqualizerDestructor(jdsp);
 	if (jdsp->tmpBuffer[0])
 		free(jdsp->tmpBuffer[0]);
 	int i;
@@ -930,6 +1213,8 @@ void JamesDSPFree(JamesDSPLib *jdsp)
 		for (i = 0; i < 4; i++)
 			free(jdsp->hrtfblobsResampled[i]);
 	}
+	if (jdsp->impulseResponseStorage.impulseResponse)
+		free(jdsp->impulseResponseStorage.impulseResponse);
 	if (jdsp->isMutexSuccess)
 		pthread_mutex_destroy(&jdsp->m_in_processing);
 	if (jdsp->enableASRC)
@@ -937,4 +1222,5 @@ void JamesDSPFree(JamesDSPLib *jdsp)
 		FreeIntegerASRCHandler(&jdsp->asrc[0]);
 		FreeIntegerASRCHandler(&jdsp->asrc[1]);
 	}
+	jdsp_unlock(jdsp);
 }

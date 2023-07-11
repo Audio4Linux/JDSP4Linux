@@ -1,13 +1,13 @@
 # JamesDSP (Cross-platform Audio Effect / Digital Signal Processing library)
-GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include Samsung, AOSP, Cyanogenmod, recent HTC and Huawei(arm64). 
+GUI is based on Omnirom DSP Manager and able to run on most Android devices from 5 to 10 include AOSP, Cyanogenmod, Huawei(arm64), LineageOS, Samsung and recent HTC. 
 This app include many cool features.
 
 This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audio4Linux/JDSP4Linux) uses core library from current repo.
 
 ##### Features:
 
-1. Auto dynamic range compression
-   --> A highly automated multiband dynamic range adjusting effect
+1. Multiband, multiresolution dynamic range compander
+   --> A highly tunable multiband dynamic range booster/reducer
 
 2. Auto Bass Boost
    --> Frequency detecting bass boost. Effect detect interesting frequency, and adjust gain, bandwidth and cut-off frequency arccordingly
@@ -15,7 +15,8 @@ This repo is a Android variant of JamesDSP, [JDSP4Linux](https://github.com/Audi
 3. Reverb
    --> Progenitor 2 (Complicated IIR network)
 
-4. Interpolating FIR Equalizer
+4. Interpolating FIR Equalizer and IIR Equalizer
+   -->Both FIR and IIR equalizer yield flat response when the gain is uniform, unlike some competitors
 
 5. Partitioned Convolver (Auto segmenting convolution)
    --> Support mono, stereo, full/true stereo(LL, LR, RL, RR) IR
@@ -34,16 +35,18 @@ More details:[EEL2 open source variant](https://github.com/james34602/EEL_CLI)
    --> Include traditional BS2B mode and convolution-based HRTF
 
 9. Vacuum tube modelling
+   --> Second harmonic generator
 
-10. Viper DDC (IIR Cascaded Second-Order Sections Form II)
+10. Viper DDC (Cascaded Second-Order Sections Form II IIR filterbank)
 
 ##### Supported bit depth:
 
-| # bits   | Status      |
-|----------|-------------|
+| # bits   | Status     |
+|----------|------------|
 | 8        | Unsupported |
 | 16       | Supported   |
-| 24(Int)  | Unsupported |
+| 24(3bInt)| Supported   |
+| 24(4bInt)| Supported   |
 | 32(Int)  | Supported   |
 | 32(Float)| Supported   |
 
@@ -122,7 +125,7 @@ Better contact me by email. Send to james34602@gmail.com
 The engine frame is based on Antti S. Lankila's DSPManager.
 
 ### Credit
-1. Joseph Young (Impulse response provider)
+1. Joseph Young (Provider of dynamic range compander logic and varies impulse responses)
 2. Christopher Blomeyer (Very patient app tester and inspiring me bit depth issue)
 3. [ahrion](https://github.com/therealahrion) (Making installation tools)
 4. [Zackptg5](https://github.com/Zackptg5) (Making installation tools)

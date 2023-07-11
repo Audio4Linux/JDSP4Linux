@@ -90,6 +90,7 @@ private slots:
     void onReverbPresetUpdated();
     void onEqPresetUpdated();
     void onEqModeUpdated();
+    void onEqTypeUpdated(int index);
 
     void restoreGraphicEQView();
     void saveGraphicEQView();

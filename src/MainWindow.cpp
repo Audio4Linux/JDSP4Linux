@@ -85,6 +85,7 @@ MainWindow::MainWindow(bool     statupInTray,
         Log::debug("Blocklist mode: " + QString((AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ? "allow" : "block")));
         _audioService = new PipewireAudioService();
 #endif
+        connect(_audioService, &IAudioService::logOutputReceived, this, [](const QString& msg){ Log::kernel(msg); });
         connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
         connect(&DspConfig::instance(), &DspConfig::updatedExternally, _audioService, &IAudioService::update);
     }
@@ -136,6 +137,11 @@ MainWindow::MainWindow(bool     statupInTray,
         // GraphicEQ
         ui->graphicEq->setEnableSwitchVisible(true);
         ui->graphicEq->setAutoEqAvailable(true);
+
+        // Compander
+        // TODO remove this once the option is actually implemented in libjamesdsp
+        ui->label_5->setVisible(false);
+        ui->comp_tf_transforms->setVisible(false);
     }
 
     // Allocate pointers and init important variables
@@ -146,6 +152,7 @@ MainWindow::MainWindow(bool     statupInTray,
         });
 
         connect(_audioService, &IAudioService::outputDeviceChanged, &PresetManager::instance(), &PresetManager::onOutputDeviceChanged);
+        connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
 
         // Convolver file info
         ConvolverInfoEventArgs ciArgs;
@@ -153,8 +160,8 @@ MainWindow::MainWindow(bool     statupInTray,
         onConvolverInfoChanged(ciArgs);
         connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
 
-       _eelEditor->attachHost(_audioService);
-       connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
+        _eelEditor->attachHost(_audioService);
+        connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
             if (QFileInfo::exists(path) && QFileInfo(path).isFile())
             {
                 ui->liveprog->setCurrentLiveprog(path);
@@ -317,6 +324,7 @@ MainWindow::MainWindow(bool     statupInTray,
     {
         _styleHelper->SetStyle();
         ui->eq_widget->setAccentColor(palette().highlight().color());
+        ui->comp_response->setAccentColor(palette().highlight().color());
     }
 
     // Extract default EEL files if missing
@@ -377,6 +385,7 @@ MainWindow::MainWindow(bool     statupInTray,
             ui->tabhost->setStyleSheet(QString("QWidget#tabHostPage1,QWidget#tabHostPage2,QWidget#tabHostPage3,QWidget#tabHostPage4,QWidget#tabHostPage5,QWidget#tabHostPage6,QWidget#tabHostPage7{background-color: %1;}").arg(qApp->palette().window().color().lighter().name()));
             ui->tabbar->redrawTabBar();
             ui->eq_widget->setAccentColor(palette().highlight().color());
+            ui->comp_response->setAccentColor(palette().highlight().color());
         });
 
         connect(&AppConfig::instance(), &AppConfig::updated, this, &MainWindow::onAppConfigUpdated);
@@ -386,6 +395,7 @@ MainWindow::MainWindow(bool     statupInTray,
     {
         restoreGraphicEQView();
         ui->eq_widget->setAlwaysDrawHandles(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
+        ui->comp_response->setAlwaysDrawHandles(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
         ui->tabbar->setAnimatePageChange(true);
         ui->tabbar->setCustomStackWidget(ui->tabhost);
@@ -523,14 +533,15 @@ void MainWindow::onAppConfigUpdated(const AppConfig::Key &key, const QVariant &v
 {
     switch(key)
     {
-        case AppConfig::EqualizerShowHandles:
-            ui->eq_widget->setAlwaysDrawHandles(value.toBool());
-            break;
-        case AppConfig::TrayIconEnabled:
-            _trayIcon->setTrayVisible(value.toBool());
-            break;
-        default:
-            break;
+    case AppConfig::EqualizerShowHandles:
+        ui->eq_widget->setAlwaysDrawHandles(value.toBool());
+        ui->comp_response->setAlwaysDrawHandles(value.toBool());
+        break;
+    case AppConfig::TrayIconEnabled:
+        _trayIcon->setTrayVisible(value.toBool());
+        break;
+    default:
+        break;
     }
 }
 
@@ -653,10 +664,44 @@ void MainWindow::loadConfig()
     ui->bs2b_fcut->setValueA(DspConfig::instance().get<int>(DspConfig::crossfeed_bs2b_fcut));
     ui->bs2b_custom_box->setEnabled(bs2bMode == 99);
 
-    ui->enable_comp->setChecked(DspConfig::instance().get<bool>(DspConfig::compression_enable));
-    ui->comp_maxattack->setValueA(DspConfig::instance().get<int>(DspConfig::compression_maxatk));
-    ui->comp_maxrelease->setValueA(DspConfig::instance().get<int>(DspConfig::compression_maxrel));
-    ui->comp_aggressiveness->setValueA(DspConfig::instance().get<int>(DspConfig::compression_aggressiveness));
+    ui->enable_comp->setChecked(DspConfig::instance().get<bool>(DspConfig::compander_enable));
+    ui->comp_granularity->setValueA(DspConfig::instance().get<int>(DspConfig::compander_granularity));
+    ui->comp_timeconstant->setValueA(100 * DspConfig::instance().get<float>(DspConfig::compander_timeconstant));
+    ui->comp_tf_transforms->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::compander_time_freq_transforms));
+
+    {
+        // Parse compander response
+        QVector<float> rawCompanderData;
+
+        for (const auto &val : chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::compander_response)).split(";"))
+        {
+            rawCompanderData.push_back(val.isEmpty() ? 0.f : val.toFloat());
+        }
+
+        // TODO: This needs to be cleaned up and put into LiquidEq subproject instead
+        int  it = 7;
+        bool eqReloadRequired = false;
+        for (auto cur_data : ui->comp_response->getBands())
+        {
+            if (it >= rawCompanderData.count())
+            {
+                break;
+            }
+
+            bool equal = isApproximatelyEqual<float>(cur_data, rawCompanderData.at(it));
+            if (eqReloadRequired == false)
+            {
+                eqReloadRequired = !equal;
+            }
+
+            it++;
+        }
+
+        if (eqReloadRequired && rawCompanderData.length() >= 14)
+        {
+            ui->comp_response->setBands(QVector<double>(rawCompanderData.cbegin() + 7, rawCompanderData.constEnd()), false);
+        }
+    }
 
     ui->limthreshold->setValueA(DspConfig::instance().get<int>(DspConfig::master_limthreshold));
     ui->limrelease->setValueA(DspConfig::instance().get<int>(DspConfig::master_limrelease));
@@ -678,7 +723,11 @@ void MainWindow::loadConfig()
 
     ui->enable_eq->setChecked(DspConfig::instance().get<bool>(DspConfig::tone_enable));
     ui->eqinterpolator->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_interpolation));
-    ui->eqfiltertype->setCurrentIndex(DspConfig::instance().get<int>(DspConfig::tone_filtertype));
+
+    int filterType = DspConfig::instance().get<int>(DspConfig::tone_filtertype);
+    if(ui->eqfiltertype->currentIndex() != filterType)
+        onEqTypeUpdated(filterType);
+    ui->eqfiltertype->setCurrentIndex(filterType);
 
     // Parse EQ String to QMap
     QString rawEqString = chopDoubleQuotes(DspConfig::instance().get<QString>(DspConfig::tone_eq));
@@ -804,10 +853,31 @@ void MainWindow::applyConfig()
     DspConfig::instance().set(DspConfig::convolver_file,             QVariant(_currentImpulseResponse));
     DspConfig::instance().set(DspConfig::convolver_waveform_edit,    QVariant(_currentConvWaveformEdit));
 
-    DspConfig::instance().set(DspConfig::compression_enable,         QVariant(ui->enable_comp->isChecked()));
-    DspConfig::instance().set(DspConfig::compression_maxatk,         QVariant(ui->comp_maxattack->valueA()));
-    DspConfig::instance().set(DspConfig::compression_maxrel,         QVariant(ui->comp_maxrelease->valueA()));
-    DspConfig::instance().set(DspConfig::compression_aggressiveness, QVariant(ui->comp_aggressiveness->valueA()));
+    DspConfig::instance().set(DspConfig::compander_enable,           QVariant(ui->enable_comp->isChecked()));
+    DspConfig::instance().set(DspConfig::compander_granularity,      QVariant(ui->comp_granularity->valueA()));
+    DspConfig::instance().set(DspConfig::compander_timeconstant,     QVariant(ui->comp_timeconstant->valueA() / 100.0f));
+    DspConfig::instance().set(DspConfig::compander_time_freq_transforms, QVariant(ui->comp_tf_transforms->currentIndex()));
+    // TODO: this needs to be moved into LiquidEQ subproject too
+    {
+        QVector<double> compBands     = ui->comp_response->getBands();
+        QString         rawCompString = "95.0;200.0;400.0;800.0;1600.0;3400.0;7500.0;";
+        int             counter     = 0;
+
+        for (auto band : compBands)
+        {
+            rawCompString.append(QString::number(band));
+
+            if (counter < 6)
+            {
+                rawCompString.append(';');
+            }
+
+            counter++;
+        }
+
+        DspConfig::instance().set(DspConfig::compander_response, QVariant(rawCompString));
+    }
+
 
     DspConfig::instance().set(DspConfig::tone_enable,                QVariant(ui->enable_eq->isChecked()));
     DspConfig::instance().set(DspConfig::tone_filtertype,            QVariant(ui->eqfiltertype->currentIndex()));
@@ -959,12 +1029,13 @@ void MainWindow::installUnitData()
     ui->rev_osf->setProperty("unit", "x");
 
     QList<QAnimatedSlider*> div100({ui->rev_era, ui->rev_erf, ui->rev_erw, ui->rev_width, ui->rev_bass, ui->rev_spin, ui->rev_wander, ui->rev_decay,
-                                    ui->analog_tubedrive});
+                                    ui->analog_tubedrive, ui->comp_timeconstant});
 
     QList<QAnimatedSlider*> div10({ui->bs2b_feed, ui->rev_delay, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->rev_width});
 
-    QList<QAnimatedSlider*> unitDecibel({ui->bs2b_feed, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->analog_tubedrive, ui->postgain, ui->bass_maxgain});
-    QList<QAnimatedSlider*> unitMs({ui->rev_delay, ui->comp_maxattack, ui->comp_maxrelease, ui->limrelease});
+    QList<QAnimatedSlider*> unitDecibel({ui->limthreshold, ui->bs2b_feed, ui->rev_wet, ui->rev_finalwet, ui->rev_finaldry, ui->analog_tubedrive, ui->postgain, ui->bass_maxgain});
+    QList<QAnimatedSlider*> unitMs({ui->rev_delay, ui->limrelease});
+    QList<QAnimatedSlider*> unitS({ui->comp_timeconstant});
     QList<QAnimatedSlider*> unitHz({ui->bs2b_fcut, ui->rev_lcb, ui->rev_lcd, ui->rev_lci, ui->rev_lco});
 
     foreach(auto w, div100)
@@ -976,8 +1047,12 @@ void MainWindow::installUnitData()
         w->setProperty("unit", "dB");
     foreach(auto w, unitMs)
         w->setProperty("unit", "ms");
+    foreach(auto w, unitS)
+        w->setProperty("unit", "s");
     foreach(auto w, unitHz)
         w->setProperty("unit", "Hz");
+
+    ui->comp_granularity->setCustomValueStrings({tr("Very low"), tr("Low"), tr("Medium"), tr("High"), tr("Extreme")});
 }
 
 // DDC
@@ -1154,6 +1229,29 @@ void MainWindow::onEqModeUpdated()
     setEqMode(isFixed ? 0 : 1);
 }
 
+void MainWindow::onEqTypeUpdated(int index)
+{
+    ui->eq_widget->setMode(index == 0 ? LiquidMultiEqualizerWidget::FIR : LiquidMultiEqualizerWidget::IIR);
+    ui->eqinterpolator->setEnabled(index == 0);
+    switch(index) {
+    case 1:
+        ui->eq_widget->setIirOrder(4);
+        break;
+    case 2:
+        ui->eq_widget->setIirOrder(6);
+        break;
+    case 3:
+        ui->eq_widget->setIirOrder(8);
+        break;
+    case 4:
+        ui->eq_widget->setIirOrder(10);
+        break;
+    case 5:
+        ui->eq_widget->setIirOrder(12);
+        break;
+    }
+}
+
 void MainWindow::setEqMode(int mode)
 {
     ui->eq_holder->setCurrentIndex(mode);
@@ -1215,20 +1313,20 @@ void MainWindow::saveGraphicEQView()
 void MainWindow::connectActions()
 {
     QList<QAnimatedSlider*> sliders({
-                              ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw,
-                              ui->rev_lci, ui->rev_lcb, ui->rev_lcd, ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin,
-                              ui->rev_wander, ui->rev_decay, ui->rev_delay, ui->rev_bass, ui->analog_tubedrive, ui->limthreshold,
-                              ui->limrelease, ui->comp_maxrelease, ui->comp_maxattack, ui->comp_aggressiveness,
-                              ui->bass_maxgain, ui->postgain
-                          });
+                                        ui->stereowide_level, ui->bs2b_fcut, ui->bs2b_feed, ui->rev_osf, ui->rev_erf, ui->rev_era, ui->rev_erw,
+                                        ui->rev_lci, ui->rev_lcb, ui->rev_lcd, ui->rev_lco, ui->rev_finalwet, ui->rev_finaldry, ui->rev_wet, ui->rev_width, ui->rev_spin,
+                                        ui->rev_wander, ui->rev_decay, ui->rev_delay, ui->rev_bass, ui->analog_tubedrive, ui->limthreshold,
+                                        ui->limrelease, ui->comp_granularity, ui->comp_timeconstant,
+                                        ui->bass_maxgain, ui->postgain
+                                    });
 
     QList<QWidget*> registerClick({
-                              ui->bassboost, ui->bs2b, ui->stereowidener, ui->analog, ui->reverb, ui->enable_eq, ui->enable_comp, ui->ddc_enable, ui->conv_enable,
-                              ui->graphicEq->chk_enable
-                          });
+                                      ui->bassboost, ui->bs2b, ui->stereowidener, ui->analog, ui->reverb, ui->enable_eq, ui->enable_comp, ui->ddc_enable, ui->conv_enable,
+                                      ui->graphicEq->chk_enable
+                                  });
 
     foreach(QAnimatedSlider* w, sliders)
-    {        
+    {
         connect(w, &QAnimatedSlider::stringChanged, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
         connect(w, &QAnimatedSlider::valueChangedA, this, &MainWindow::applyConfig);
     }
@@ -1245,6 +1343,7 @@ void MainWindow::connectActions()
     connect(ui->eq_r_flex,          &QAbstractButton::clicked, this, &MainWindow::applyConfig);
 
     connect(ui->eqfiltertype,       qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
+    connect(ui->eqfiltertype,       qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::onEqTypeUpdated);
     connect(ui->eqinterpolator,     qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
     connect(ui->conv_ir_opt,        qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
 
@@ -1254,6 +1353,9 @@ void MainWindow::connectActions()
 
     connect(ui->eq_widget,          &LiquidEqualizerWidget::bandsUpdated, this, &MainWindow::applyConfig);
     connect(ui->eq_widget,          &LiquidEqualizerWidget::mouseReleased, this, &MainWindow::determineEqPresetName);
+
+    connect(ui->comp_response,      &LiquidCompanderWidget::bandsUpdated, this, &MainWindow::applyConfig);
+    connect(ui->comp_tf_transforms, qOverload<int>(&QComboBox::currentIndexChanged), this, &MainWindow::applyConfig);
 
     connect(ui->conv_adv_wave_edit, &QAbstractButton::clicked, this, &MainWindow::onConvolverWaveformEdit);
 

@@ -8,7 +8,8 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import james.dsp.R;
-import james.dsp.preference.DRCPreference;
+import james.dsp.preference.CompanderPreference;
+import james.dsp.preference.EQPreference;
 import james.dsp.preference.SummariedListPreference;
 import james.dsp.service.HeadsetService;
 
@@ -39,8 +40,7 @@ public final class DSPScreen extends PreferenceFragment
                     e.putString("dsp.tone.eq.custom", newValue);
                     e.commit();
                     /* Now tell the equalizer that it must display something else. */
-                    DRCPreference eq = (DRCPreference)
-                                             getPreferenceScreen().findPreference("dsp.tone.eq.custom");
+                    EQPreference eq = (EQPreference)getPreferenceScreen().findPreference("dsp.tone.eq.custom");
                     eq.refreshFromPreference();
                 }
             }
@@ -49,8 +49,7 @@ public final class DSPScreen extends PreferenceFragment
             {
                 String newValue = sharedPreferences.getString(key, null);
                 String desiredValue = "custom";
-                SummariedListPreference preset = (SummariedListPreference)
-                                                 getPreferenceScreen().findPreference("dsp.tone.eq");
+                SummariedListPreference preset = (SummariedListPreference)getPreferenceScreen().findPreference("dsp.tone.eq");
                 for (CharSequence entry : preset.getEntryValues())
                 {
                     if (entry.equals(newValue))
@@ -64,6 +63,43 @@ public final class DSPScreen extends PreferenceFragment
                 {
                     Editor e = sharedPreferences.edit();
                     e.putString("dsp.tone.eq", desiredValue);
+                    e.commit();
+                    preset.refreshFromPreference();
+                }
+            }
+            /* If the listpref is updated, copy the changed setting to the eq. */
+            if ("dsp.compression.eq".equals(key))
+            {
+                String newValue = sharedPreferences.getString(key, null);
+                if (!"custom".equals(newValue))
+                {
+                    Editor e = sharedPreferences.edit();
+                    e.putString("dsp.compression.eq.custom", newValue);
+                    e.commit();
+                    /* Now tell the equalizer that it must display something else. */
+                    CompanderPreference eq = (CompanderPreference)getPreferenceScreen().findPreference("dsp.compression.eq.custom");
+                    eq.refreshFromPreference();
+                }
+            }
+            /* If the equalizer surface is updated, select matching pref entry or "custom". */
+            if ("dsp.compression.eq.custom".equals(key))
+            {
+                String newValue = sharedPreferences.getString(key, null);
+                String desiredValue = "custom";
+                SummariedListPreference preset = (SummariedListPreference)getPreferenceScreen().findPreference("dsp.compression.eq");
+                for (CharSequence entry : preset.getEntryValues())
+                {
+                    if (entry.equals(newValue))
+                    {
+                        desiredValue = newValue;
+                        break;
+                    }
+                }
+                /* Tell listpreference that it must display something else. */
+                if (!desiredValue.equals(preset.getEntry()))
+                {
+                    Editor e = sharedPreferences.edit();
+                    e.putString("dsp.compression.eq", desiredValue);
                     e.commit();
                     preset.refreshFromPreference();
                 }

@@ -9,9 +9,17 @@
     <item>超長混響1</item>
     <item>超長混響2</item>
   </string-array>
-  <string-array name="compression_modes">
-    <item>輕微</item>
-    <item>中等</item>
+  <string-array name="compression_granularity">
+    <item>很低</item>
+    <item>低</item>
+    <item>中</item>
+    <item>高</item>
+    <item>極高</item>
+  </string-array>
+  <string-array name="compression_tfresolution">
+    <item>均勻(短時傅立葉)</item>
+    <item>多解析率(連續小波)</item>
+    <item>多解析率(時域)</item>
   </string-array>
   <string-array name="bassboost_modes">
     <item>開啟</item>
@@ -22,8 +30,12 @@
     <item>極端</item>
   </string-array>
   <string-array name="equalizer_filtertype">
-    <item>最小相位</item>
-    <item>線性相位</item>
+    <item>最小相位FIR</item>
+    <item>4階IIR</item>
+    <item>6階IIR</item>
+    <item>8階IIR</item>
+    <item>10階IIR</item>
+    <item>12階IIR</item>
   </string-array>
   <string-array name="equalizer_dialog_spinterpolation">
     <item>分段三次Hermite插值</item>

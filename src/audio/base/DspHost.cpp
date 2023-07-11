@@ -8,6 +8,9 @@
 #include "EventArgs.h"
 
 extern "C" {
+#ifdef DEBUG_FPE
+#include <fenv.h>
+#endif
 #include <JdspImpResToolbox.h>
 #include <EELStdOutExtension.h>
 #include <jdsp_header.h>
@@ -18,7 +21,6 @@ extern "C" {
 #include <QDebug>
 #include <cstring>
 #include <assert.h>
-#include <QTimer>
 
 /* C interop */
 inline JamesDSPLib* cast(void* raw){
@@ -144,7 +146,7 @@ void DspHost::updateFirEqualizer(DspConfig *config)
         param[i] = (double)std::stod(v[i]);
     }
 
-    FIREqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
+    MultimodalEqualizerAxisInterpolation(cast(this->_dsp), interpolationMode, filterType, param, param + 15);
 }
 
 void DspHost::updateVdc(DspConfig *config)
@@ -181,7 +183,7 @@ void DspHost::updateVdc(DspConfig *config)
         QTextStream in(&f);
         DDCStringParser(cast(this->_dsp), in.readAll().toLocal8Bit().data());
 
-        int ret = DDCEnable(cast(this->_dsp));
+        int ret = DDCEnable(cast(this->_dsp), 1);
         if (ret <= 0)
         {
             util::error("Call to DDCEnable(this->_dsp) failed. Invalid DDC parameter?");
@@ -196,26 +198,37 @@ void DspHost::updateVdc(DspConfig *config)
     }
 }
 
-void DspHost::updateCompressor(DspConfig *config)
+void DspHost::updateCompander(DspConfig *config)
 {
-    bool maxAtkExists;
-    bool maxRelExists;
-    bool aggrExists;
+    int granularity = config->get<int>(DspConfig::compander_granularity);
+    float timeconstant = config->get<float>(DspConfig::compander_timeconstant);
+    int tftransforms = config->get<int>(DspConfig::compander_time_freq_transforms);
 
-    float maxAttack = config->get<float>(DspConfig::compression_maxatk, &maxAtkExists);
-    float maxRelease = config->get<float>(DspConfig::compression_maxrel, &maxRelExists);
-    float adaptSpeed = config->get<float>(DspConfig::compression_aggressiveness, &aggrExists);
+    std::string str = chopDoubleQuotes(config->get<QString>(DspConfig::compander_response)).toStdString();
+    std::vector<string> v;
+    std::stringstream ss(str);
 
-    if(!maxAtkExists || !maxRelExists || !aggrExists)
-    {
-        util::warning("Limiter threshold or limiter release unset. Using defaults.");
-
-        if(!maxAtkExists) maxAttack = 30;
-        if(!maxRelExists) maxRelease = 200;
-        if(!aggrExists) adaptSpeed = 800;
+    while (ss.good()) {
+        std::string substr;
+        getline(ss, substr, ';');
+        v.push_back(substr);
     }
 
-    CompressorSetParam(cast(this->_dsp), maxAttack, maxRelease, adaptSpeed);
+    if(v.size() != 14)
+    {
+        util::warning("Invalid compander data. 14 semicolon-separateds field expected, "
+                      "found " + std::to_string(v.size()) + " fields instead.");
+        return;
+    }
+
+    double param[14];
+    for (int i = 0; i < 14; i++)
+    {
+        param[i] = (double)std::stod(v[i]);
+    }
+
+    CompressorSetParam(cast(this->_dsp), timeconstant, granularity, tftransforms);
+    CompressorSetGain(cast(this->_dsp), param, param + 7, 1);
 }
 
 void DspHost::updateReverb(DspConfig* config)
@@ -358,7 +371,7 @@ void DspHost::updateConvolver(DspConfig *config)
         util::debug("Impulse response loaded: channels=" + std::to_string(impInfo[0]) + ", frames=" + std::to_string(impInfo[1]));
 
         Convolver1DDisable(cast(this->_dsp));
-        success = Convolver1DLoadImpulseResponse(cast(this->_dsp), impulse, impInfo[0], impInfo[1]);
+        success = Convolver1DLoadImpulseResponse(cast(this->_dsp), impulse, impInfo[0], impInfo[1], 1);
     }
 
     delete[] impInfo;
@@ -398,7 +411,7 @@ void DspHost::updateGraphicEq(DspConfig *config)
     if(enabled)
     {
         ArbitraryResponseEqualizerStringParser(cast(this->_dsp), eq.toLocal8Bit().data());
-        ArbitraryResponseEqualizerEnable(cast(this->_dsp));
+        ArbitraryResponseEqualizerEnable(cast(this->_dsp), 1);
     }
     else
         ArbitraryResponseEqualizerDisable(cast(this->_dsp));
@@ -406,38 +419,19 @@ void DspHost::updateGraphicEq(DspConfig *config)
 
 void DspHost::updateCrossfeed(DspConfig* config)
 {
-    bool modeExists;
-    bool enableExists;
-    int mode = config->get<int>(DspConfig::crossfeed_mode, &modeExists);
-    int enabled = config->get<bool>(DspConfig::crossfeed_enable, &enableExists);
+    int mode = config->get<int>(DspConfig::crossfeed_mode);
 
-    if(!modeExists)
+    // Workaround: CrossfeedChangeMode for mode 0 (weak) leads to audio loss. so let's just do it directly like BS2B custom above
+    if(mode == 99 /* custom */ || mode == 0 /* weak */)
     {
-        util::warning("Crossfeed mode unset, using defaults");
-    }
+        int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut);
+        int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed);
 
-    if(!enableExists)
-    {
-        util::warning("Crossfeed enable switch unset, disabling crossfeed.");
-        enabled = false;
-    }
-
-    if(mode == 99)
-    {
-        bool fcutExists;
-        bool feedExists;
-        int fcut = config->get<int>(DspConfig::crossfeed_bs2b_fcut, &fcutExists);
-        int feed = config->get<int>(DspConfig::crossfeed_bs2b_feed, &feedExists);
-
-        if(!fcutExists)
+        // Workaround, see comment above
+        if(mode == 0)
         {
-            util::warning("Crossfeed custom fcut unset, using defaults");
-            fcut = 650;
-        }
-        if(!feedExists)
-        {
-            util::warning("Crossfeed custom feed unset, using defaults");
-            feed = 95;
+            fcut = 700;
+            feed = 65;
         }
 
         memset(&cast(this->_dsp)->advXF.bs2b, 0, sizeof(cast(this->_dsp)->advXF.bs2b));
@@ -445,14 +439,9 @@ void DspHost::updateCrossfeed(DspConfig* config)
         cast(this->_dsp)->advXF.mode = 1;
     }
     else
-    {
+    {        
        CrossfeedChangeMode(cast(this->_dsp), mode);
     }
-
-    if(enabled)
-        CrossfeedEnable(cast(this->_dsp));
-    else
-        CrossfeedDisable(cast(this->_dsp));
 }
 
 void DspHost::updateFromCache()
@@ -472,6 +461,11 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     bool refreshLiveprog = false;
     bool refreshGraphicEq = false;
     bool refreshVdc = false;
+    bool refreshCompander = false;
+
+#ifdef DEBUG_FPE
+    feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
+#endif
 
     for (int k = 0; k < e.keyCount(); k++)
     {
@@ -485,7 +479,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         }
 
         bool isCached = false;
-        QVariant cached = _cache->get<QVariant>(key, &isCached);
+        QVariant cached = _cache->get<QVariant>(key, &isCached, false);
         QVariant current = config->get<QVariant>(key);
         if((isCached && cached == current) && !ignoreCache)
         {
@@ -508,16 +502,17 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         case DspConfig::bass_maxgain:
             BassBoostSetParam(cast(this->_dsp), current.toFloat());
             break;
-        case DspConfig::compression_enable:
+        case DspConfig::compander_enable:
             if(current.toBool())
-                CompressorEnable(cast(this->_dsp));
+                CompressorEnable(cast(this->_dsp), 1);
             else
                 CompressorDisable(cast(this->_dsp));
             break;
-        case DspConfig::compression_aggressiveness:
-        case DspConfig::compression_maxatk:
-        case DspConfig::compression_maxrel:
-            updateCompressor(config);
+        case DspConfig::compander_granularity:
+        case DspConfig::compander_response:
+        case DspConfig::compander_time_freq_transforms:
+        case DspConfig::compander_timeconstant:
+            refreshCompander = true;
             break;
         case DspConfig::convolver_enable:
         case DspConfig::convolver_file:
@@ -526,6 +521,11 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             refreshConvolver = true;
             break;
         case DspConfig::crossfeed_enable:
+            if(current.toBool())
+                CrossfeedEnable(cast(this->_dsp), 1);
+            else
+                CrossfeedDisable(cast(this->_dsp));
+            break;
         case DspConfig::crossfeed_bs2b_fcut:
         case DspConfig::crossfeed_bs2b_feed:
         case DspConfig::crossfeed_mode:
@@ -594,9 +594,9 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             break;
         case DspConfig::tone_enable:
             if(current.toBool())
-                FIREqualizerEnable(cast(this->_dsp));
+                MultimodalEqualizerEnable(cast(this->_dsp), 1);
             else
-                FIREqualizerDisable(cast(this->_dsp));
+                MultimodalEqualizerDisable(cast(this->_dsp));
             break;
         case DspConfig::tone_eq:
         case DspConfig::tone_filtertype:
@@ -647,6 +647,14 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
         updateCrossfeed(config);
     }
 
+    if(refreshCompander)
+    {
+        updateCompander(config);
+    }
+
+#ifdef DEBUG_FPE
+    fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
+#endif
     return true;
 }
 

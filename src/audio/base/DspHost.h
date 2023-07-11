@@ -11,7 +11,6 @@
 
 class DspConfig;
 class QVariant;
-class QTimer;
 
 class DspHost
 {
@@ -21,7 +20,8 @@ public:
         EelCompilerStart,
         EelCompilerResult,
         EelWriteOutputBuffer,
-        ConvolverInfoChanged
+        ConvolverInfoChanged,
+        PrintfWriteOutputBuffer
     };
 
     typedef std::function<void(Message,std::any)> MessageHandlerFunc;
@@ -49,7 +49,7 @@ private:
     void updateLimiter(DspConfig *config);
     void updateFirEqualizer(DspConfig *config);
     void updateVdc(DspConfig *config);
-    void updateCompressor(DspConfig *config);
+    void updateCompander(DspConfig *config);
     void updateReverb(DspConfig *config);
     void updateConvolver(DspConfig *config);
     void updateGraphicEq(DspConfig *config);

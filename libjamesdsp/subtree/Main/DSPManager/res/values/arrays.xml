@@ -30,103 +30,47 @@
     <item>14</item>
     <item>15</item>
   </string-array>
-  <string-array name="compression_atk">
-    <item>0 ms</item>
-    <item>20 ms</item>
-    <item>30 ms</item>
-    <item>40 ms</item>
-    <item>60 ms</item>
-    <item>80 ms</item>
-    <item>100 ms</item>
-    <item>125 ms</item>
-    <item>150 ms</item>
-    <item>175 ms</item>
-    <item>200 ms</item>
-    <item>250 ms</item>
-    <item>300 ms</item>
-    <item>350 ms</item>
-    <item>400 ms</item>
+  <string-array name="compression_timeconstant">
+    <item>0.06 s</item>
+    <item>0.1 s</item>
+    <item>0.14 s</item>
+    <item>0.18 s</item>
+    <item>0.22 s</item>
+    <item>0.26 s</item>
+    <item>0.3 s</item>
   </string-array>
-  <string-array name="compression_atk_values" translatable="false">
+  <string-array name="compression_timeconstant_values" translatable="false">
+    <item>0.06</item>
+    <item>0.1</item>
+    <item>0.14</item>
+    <item>0.18</item>
+    <item>0.22</item>
+    <item>0.26</item>
+    <item>0.3</item>
+  </string-array>
+  <string-array name="compression_granularity">
+    <item>Very low</item>
+    <item>Low</item>
+    <item>Medium</item>
+    <item>High</item>
+    <item>Extreme</item>
+  </string-array>
+  <string-array name="compression_granularity_values" translatable="false">
     <item>0</item>
-    <item>20</item>
-    <item>30</item>
-    <item>40</item>
-    <item>60</item>
-    <item>80</item>
-    <item>100</item>
-    <item>125</item>
-    <item>150</item>
-    <item>175</item>
-    <item>200</item>
-    <item>250</item>
-    <item>300</item>
-    <item>350</item>
-    <item>400</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
   </string-array>
-  <string-array name="compression_rel">
-    <item>0 ms</item>
-    <item>20 ms</item>
-    <item>30 ms</item>
-    <item>40 ms</item>
-    <item>60 ms</item>
-    <item>80 ms</item>
-    <item>100 ms</item>
-    <item>125 ms</item>
-    <item>150 ms</item>
-    <item>175 ms</item>
-    <item>200 ms</item>
-    <item>250 ms</item>
-    <item>300 ms</item>
-    <item>350 ms</item>
-    <item>400 ms</item>
+  <string-array name="compression_tfresolution">
+    <item>Uniform(Short time Fourier)</item>
+    <item>Multiresolution(Continuous wavelet)</item>
+    <item>Multiresolution(Time domain)</item>
   </string-array>
-  <string-array name="compression_rel_values" translatable="false">
+  <string-array name="compression_tfresolution_values" translatable="false">
     <item>0</item>
-    <item>20</item>
-    <item>30</item>
-    <item>40</item>
-    <item>60</item>
-    <item>80</item>
-    <item>100</item>
-    <item>125</item>
-    <item>150</item>
-    <item>175</item>
-    <item>200</item>
-    <item>250</item>
-    <item>300</item>
-    <item>350</item>
-    <item>400</item>
-  </string-array>
-  <string-array name="compression_adaptspeed">
-    <item>10</item>
-    <item>50</item>
-    <item>100</item>
-    <item>150</item>
-    <item>200</item>
-    <item>300</item>
-    <item>400</item>
-    <item>500</item>
-    <item>600</item>
-    <item>700</item>
-    <item>800</item>
-    <item>900</item>
-    <item>1000</item>
-  </string-array>
-  <string-array name="compression_adaptspeed_values" translatable="false">
-    <item>10</item>
-    <item>50</item>
-    <item>100</item>
-    <item>150</item>
-    <item>200</item>
-    <item>300</item>
-    <item>400</item>
-    <item>500</item>
-    <item>600</item>
-    <item>700</item>
-    <item>800</item>
-    <item>900</item>
-    <item>1000</item>
+    <item>1</item>
+    <item>2</item>
   </string-array>
 
   <string-array name="headphone_preset">
@@ -161,13 +105,21 @@
   </string-array>
 
   <string-array name="equalizer_filtertype">
-    <item>Minimum phase</item>
-    <item>Linear phase</item>
+    <item>FIR Minimum phase</item>
+    <item>IIR 4 order</item>
+    <item>IIR 6 order</item>
+    <item>IIR 8 order</item>
+    <item>IIR 10 order</item>
+    <item>IIR 12 order</item>
   </string-array>
 
   <string-array name="equalizer_filtertype_values" translatable="false">
     <item>0</item>
     <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
   </string-array>
   
   <string-array name="equalizer_dialog_spinterpolation">
@@ -189,11 +141,11 @@
   </string-array>
 
   <string-array name="stereowide_values" translatable="false">
-    <item>30</item>
+    <item>35</item>
     <item>40</item>
     <item>50</item>
     <item>60</item>
-    <item>75</item>
+    <item>65</item>
   </string-array>
   
   <string-array name="bs2b_modes">

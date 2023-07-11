@@ -9,6 +9,7 @@
 #include "Effects/eel2/numericSys/FilterDesign/fdesign.h"
 #include "Effects/eel2/eelCommon.h"
 #include "generalDSP/ArbFIRGen.h"
+#define MAX_BENCHMARK (10)
 // Misc
 extern double mapVal(double x, double in_min, double in_max, double out_min, double out_max);
 extern double mag2dB(double lin);
@@ -36,35 +37,12 @@ typedef struct
 	float relCoef;
 	float envOverThreshold;
 } JLimiter;
-typedef double EnvelopeDetector;
-typedef struct
-{
-	EnvelopeDetector att_;
-	EnvelopeDetector rel_;
-} AttRelEnvelope;
-typedef struct
-{
-	float *fs;
-	float rampCoeff;
-	float cvRelease;
-	float cvAttack;
-	float cvSmooth;
-	float logThreshold[2];
-	float crestPeak;
-	float crestRms;
-	float metaKneeMult;
-	float metaMaxAttackTime;
-	float metaMaxReleaseTime;
-	float metaCrestTime;
-	float metaCrestCoeff;
-	float metaAdaptTime;
-	float metaAdaptCoeff;
-} AutoComp;
 #define FFTSIZE_DRS (8192)
 #define ANALYSIS_OVERLAP_DRS 4
 #define OVPSIZE_DRS (FFTSIZE_DRS / ANALYSIS_OVERLAP_DRS)
 #define HALFWNDLEN_DRS ((FFTSIZE_DRS >> 1) + 1)
 #define MAX_OUTPUT_BUFFERS_DRS 2
+#define NUMPTS_DRS (7)
 typedef struct
 {
 	// Constant
@@ -92,16 +70,17 @@ typedef struct
 	unsigned int smallGridSize;
 	char octaveSmooth[sizeof(unsigned int) + sizeof(float) + sizeof(unsigned int) + ((HALFWNDLEN_DRS + 1) << 1) * sizeof(unsigned int) + (HALFWNDLEN_DRS + 1) * sizeof(float) + ((HALFWNDLEN_DRS + 1) + 3) * 2 * sizeof(float)];
 	float finalGain[HALFWNDLEN_DRS];
-	// Global parameter
-	float fgt_fac, spectralRate, metaMaxAttackTime, metaMaxReleaseTime;
-	// Subband parameter
-	float metaAdaptCoeff[HALFWNDLEN_DRS];
-	// Subband states
-	float adaptiveRelease[HALFWNDLEN_DRS], adaptiveAttack[HALFWNDLEN_DRS], smoothLogGain[HALFWNDLEN_DRS], logThreshold[HALFWNDLEN_DRS];
-} FFTDynamicRangeSquasher;
-void FFTDynamicRangeSquasherSetavgBW(FFTDynamicRangeSquasher *cm, double avgBW);
-void FFTDynamicRangeSquasherInit(FFTDynamicRangeSquasher *msr, float fs);
-int FFTDynamicRangeSquasherProcessSamples(FFTDynamicRangeSquasher *msr, const float *inLeft, const float *inRight, unsigned int inSampleCount, float *outL, float *outR);
+	double freq2[NUMPTS_DRS + 2];
+	double gains2[NUMPTS_DRS + 2];
+	float DREmultUniform[HALFWNDLEN_DRS];
+	float DREmult[HALFWNDLEN_DRS];
+	float oldBuf[HALFWNDLEN_DRS];
+	ierper pch;
+	float headRoomdB;
+	float fgt_fac, fgt_facT;
+	float spectralRate;
+	int granularity, tfresolution;
+} FFTCompander;
 typedef struct
 {
 	int needOversample;
@@ -352,7 +331,7 @@ extern void sf_advancereverb(sf_reverb_state_st *rv, int rate, int oversamplefac
 
 typedef struct
 {
-	char *subband[2];
+	char subband[2][getMemSizeWarpedPFB(5, 2)];
 	float emaAlpha[5];
 	float sumStates[5];
 	float diffStates[5];
@@ -375,7 +354,7 @@ typedef struct
 {
 	char *oldFile;
 	int usedSOSCount;
-	DirectForm2 **sosPointer;
+	DirectForm2 *sosPointer;
 } DDC;
 /* Minimum/maximum cut frequency (Hz) */
 /* bs2b_set_level_fcut() */
@@ -412,7 +391,9 @@ typedef struct
 	int mode; // 0: BS2B Lv 1, 1: BS2B Lv 2, 2: HRTF crossfeed, 2: HRTF surround 1, 2: HRTF surround 2, 2: HRTF surround 3
 	t_bs2bdp bs2b[2];
 	FFTConvolver2x4x2 *conv[3];
-	TwoStageFFTConvolver2x4x2 *convLong;
+	TwoStageFFTConvolver2x4x2 *convLong_T_S;
+	FFTConvolver2x4x2 *convLong_S_S;
+	void(*process)(struct dspsys *, size_t);
 } Crossfeed;
 typedef struct dspsys dspsys;
 typedef struct
@@ -430,14 +411,40 @@ typedef struct
 	FFTConvolver2x2 convState;
 } ArbEqConv;
 #define NUMPTS 15
+#define MAXORDER (12)
+#define MAXSECTIONS (MAXORDER >> 1)
 typedef struct
 {
-	int currentInterpolationMode, currentPhaseMode;
+	// FIR
+	int currentInterpolationMode, operatingMode;
 	ierper pch1, pch2;
 	ArbEqConv instance;
+	FFTConvolver2x2 conv;
 	double freq[NUMPTS + 2];
 	double gain[NUMPTS + 2];
-} FIREqualizer;
+	// IIR
+	int order, nSec;
+	float c1[(NUMPTS - 1) * MAXSECTIONS];
+	float c2[(NUMPTS - 1) * MAXSECTIONS];
+	float d0[(NUMPTS - 1) * MAXSECTIONS];
+	float d1[(NUMPTS - 1) * MAXSECTIONS];
+	float z1_AL[(NUMPTS - 1) * MAXSECTIONS];
+	float z2_AL[(NUMPTS - 1) * MAXSECTIONS];
+	float z1_AR[(NUMPTS - 1) * MAXSECTIONS];
+	float z2_AR[(NUMPTS - 1) * MAXSECTIONS];
+	float overallGain[NUMPTS - 1];
+	char sec[NUMPTS - 1];
+} MultimodalEQ;
+typedef struct
+{
+	ArbEqConv instance;
+	FFTConvolver2x2 conv;
+} arbitraryMagnitude;
+typedef struct
+{
+	float *impulseResponse;
+	unsigned int impChannels, impulseLengthActual;
+} tmpIRData;
 typedef struct dspsys
 {
 	// Sys var
@@ -446,14 +453,14 @@ typedef struct dspsys
 	float trueSampleRate, fs;
 	// Effect
 	// Compressor
-	int compEnabled;
-	FFTDynamicRangeSquasher comp;
+	int compEnabled, compForceRefresh;
+	FFTCompander comp;
 	// Bass boost
 	int bassBoostEnabled;
 	DBB dbb;
 	// Equalizer
 	int equalizerEnabled, equalizerForceRefresh;
-	FIREqualizer fireq;
+	MultimodalEQ mEQ;
 	// Reverb
 	int reverbEnabled;
 	sf_reverb_state_st reverb;
@@ -477,12 +484,16 @@ typedef struct dspsys
 	LiveProg eel;
 	// Arbitrary magnitude response
 	int arbitraryMagEnabled, arbMagForceRefresh;
-	ArbEqConv arbMag;
+	arbitraryMagnitude arbMag;
 	// Output limiter
 	float postGain;
 	JLimiter limiter;
 	size_t blockSize, blockSizeMax, pw2BlockMemSize;
 	float *tmpBuffer[6];
+	// Internal function pointer
+	void(*processInternal)(struct dspsys *, size_t);
+	int32_t(*i32_from_p24)(const uint8_t *);
+	void (*p24_from_i32)(int32_t, uint8_t *);
 	// I/O function pointer
 	void(*processInt16Deinterleaved)(struct dspsys*, int16_t*, int16_t*, int16_t*, int16_t*, size_t);
 	void(*processInt32Deinterleaved)(struct dspsys*, int32_t*, int32_t*, int32_t*, int32_t*, size_t);
@@ -494,9 +505,6 @@ typedef struct dspsys
 	void(*processInt8_24Multiplexd)(struct dspsys*, int32_t*, int32_t*, size_t);
 	void(*processInt24PackedMultiplexd)(struct dspsys*, uint8_t*, uint8_t*, size_t);
 	void(*processFloatMultiplexd)(struct dspsys*, float*, float*, size_t);
-	// Endianness function pointer
-	int32_t(*i32_from_p24)(const uint8_t *);
-	void (*p24_from_i32)(int32_t, uint8_t *);
 	// Blobs(resampled)
 	int blobsResampledLen;
 	float *blobsCh1[3];
@@ -505,6 +513,7 @@ typedef struct dspsys
 	float *blobsCh4[3];
 	int frameLenSVirResampled;
 	float *hrtfblobsResampled[4];
+	tmpIRData impulseResponseStorage;
 	// Mutex lock(pthread)
 	int isMutexSuccess;
 	pthread_mutex_t m_in_processing;
@@ -522,13 +531,16 @@ extern void JamesDSPInit(JamesDSPLib *jdsp, int blockSizeMax, float sample_rate)
 extern void JamesDSPSetPostGain(JamesDSPLib *jdsp, double pGaindB);
 extern int JamesDSPGetMutexStatus(JamesDSPLib *jdsp);
 extern void JamesDSPSetSampleRate(JamesDSPLib *jdsp, float new_sample_rate, int forceRefresh);
+extern int selectConvPartitions(JamesDSPLib *jdsp, unsigned int impulseLengthActual, unsigned int *seg2Len);
 // Limiter
 extern void JLimiterSetCoefficients(JamesDSPLib *jdsp, double thresholddB, double msRelease);
 extern void JLimiterInit(JamesDSPLib *jdsp);
 // Compressor
-extern void CompressorReset(JamesDSPLib *jdsp);
-extern void CompressorSetParam(JamesDSPLib *jdsp, float maxAtk, float maxRel, float adapt);
-extern void CompressorEnable(JamesDSPLib *jdsp);
+extern void CompressorConstructor(JamesDSPLib *jdsp);
+extern void CompressorDestructor(JamesDSPLib *jdsp);
+extern void CompressorSetParam(JamesDSPLib *jdsp, float fgt_facT, int granularity, int tfresolution);
+extern void CompressorSetGain(JamesDSPLib *jdsp, double *freq, double *gains, char cpy);
+extern void CompressorEnable(JamesDSPLib *jdsp, char enable);
 extern void CompressorDisable(JamesDSPLib *jdsp);
 extern void CompressorProcess(JamesDSPLib *jdsp, size_t n);
 // Bass boost
@@ -543,8 +555,9 @@ extern void ReverbEnable(JamesDSPLib *jdsp);
 extern void ReverbDisable(JamesDSPLib *jdsp);
 extern void ReverbProcess(JamesDSPLib *jdsp, size_t n);
 // Stereo enhancement
-void StereoEnhancementDestructor(JamesDSPLib *jdsp);
-void StereoEnhancementConstructor(JamesDSPLib *jdsp);
+extern void StereoEnhancementDestructor(JamesDSPLib *jdsp);
+extern void StereoEnhancementConstructor(JamesDSPLib *jdsp);
+extern void StereoEnhancementRefresh(JamesDSPLib *jdsp);
 extern void StereoEnhancementSetParam(JamesDSPLib *jdsp, float mix);
 extern void StereoEnhancementEnable(JamesDSPLib *jdsp);
 extern void StereoEnhancementDisable(JamesDSPLib *jdsp);
@@ -565,14 +578,14 @@ extern void LiveProgProcess(JamesDSPLib *jdsp, size_t n);
 // DDC
 extern void DDCConstructor(JamesDSPLib *jdsp);
 extern void DDCDestructor(JamesDSPLib *jdsp);
-extern int DDCEnable(JamesDSPLib *jdsp);
+extern int DDCEnable(JamesDSPLib *jdsp, char enable);
 extern void DDCDisable(JamesDSPLib *jdsp);
 extern int DDCStringParser(JamesDSPLib *jdsp, char *newStr);
 extern void DDCProcess(JamesDSPLib *jdsp, size_t n);
 // Crossfeed
 extern void CrossfeedConstructor(JamesDSPLib *jdsp);
 extern void CrossfeedDestructor(JamesDSPLib *jdsp);
-extern void CrossfeedEnable(JamesDSPLib *jdsp);
+extern void CrossfeedEnable(JamesDSPLib *jdsp, char enable);
 extern void CrossfeedDisable(JamesDSPLib *jdsp);
 extern void CrossfeedChangeMode(JamesDSPLib *jdsp, int nMode);
 extern void CrossfeedProcess(JamesDSPLib *jdsp, size_t n);
@@ -580,20 +593,21 @@ extern void CrossfeedProcess(JamesDSPLib *jdsp, size_t n);
 extern void Convolver1DEnable(JamesDSPLib *jdsp);
 extern void Convolver1DDisable(JamesDSPLib *jdsp);
 extern void Convolver1DConstructor(JamesDSPLib *jdsp);
-extern void Convolver1DDestructor(JamesDSPLib *jdsp, int reqUnlock);
-extern int Convolver1DLoadImpulseResponse(JamesDSPLib *jdsp, float *imp, unsigned int channels, size_t frameCount);
+extern void Convolver1DDestructor(JamesDSPLib *jdsp);
+extern int Convolver1DLoadImpulseResponse(JamesDSPLib *jdsp, float *tempImpulseFloat, unsigned int impChannels, size_t impulseLengthActual, char updateOld);
 // Arbitrary magnitude response
 extern void ArbitraryResponseEqualizerConstructor(JamesDSPLib *jdsp);
 extern void ArbitraryResponseEqualizerDestructor(JamesDSPLib *jdsp);
 extern void ArbitraryResponseEqualizerStringParser(JamesDSPLib *jdsp, char *stringEq);
-extern void ArbitraryResponseEqualizerEnable(JamesDSPLib *jdsp);
+extern void ArbitraryResponseEqualizerEnable(JamesDSPLib *jdsp, char enable);
 extern void ArbitraryResponseEqualizerDisable(JamesDSPLib *jdsp);
 extern void ArbitraryResponseEqualizerProcess(JamesDSPLib *jdsp, size_t n);
 // FIR Equalizer
-extern void FIREqualizerConstructor(JamesDSPLib *jdsp);
-extern void FIREqualizerDestructor(JamesDSPLib *jdsp);
-extern void FIREqualizerAxisInterpolation(JamesDSPLib *jdsp, int interpolationMode, int phaseMode, double *freqAx, double *gaindB);
-extern void FIREqualizerEnable(JamesDSPLib *jdsp);
-extern void FIREqualizerDisable(JamesDSPLib *jdsp);
-extern void FIREqualizerProcess(JamesDSPLib *jdsp, size_t n);
+extern void MultimodalEqualizerConstructor(JamesDSPLib *jdsp);
+extern void MultimodalEqualizerDestructor(JamesDSPLib *jdsp);
+extern void MultimodalEqualizerAxisInterpolation(JamesDSPLib *jdsp, int interpolationMode, int operatingMode, double *freqAx, double *gaindB);
+extern void MultimodalEqualizerEnable(JamesDSPLib *jdsp, char enable);
+extern void MultimodalEqualizerDisable(JamesDSPLib *jdsp);
+extern void MultimodalEqualizerProcess(JamesDSPLib *jdsp, size_t n);
+extern void HSHOResponse(double fs, double fc, unsigned int filterOrder, double gain, double overallGainDb, unsigned int queryPts, double *dispFreq, double *cplxRe, double *cplxIm);
 #endif

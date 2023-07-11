@@ -76,7 +76,7 @@ bool CliRemoteController::get(const QString &key) const
         if(!valid)
             result = std::nullopt;
 
-        result = DspConfig::instance().get<QString>(resolvedKey);
+        result = DspConfig::instance().get<QString>(resolvedKey, nullptr, false);
     }
     else {
         auto reply = service->get(key);
