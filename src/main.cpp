@@ -18,14 +18,14 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
+static QTranslator* qtTranslator = nullptr;
+static QTranslator* translator = nullptr;
+
 #ifndef NO_CRASH_HANDLER
 #include "crash/airbag.h"
 #include "crash/stacktrace.h"
 
 static bool SPIN_ON_CRASH = false;
-
-static QTranslator* qtTranslator = nullptr;
-static QTranslator* translator = nullptr;
 
 void onExceptionRaised(int fd)
 {
