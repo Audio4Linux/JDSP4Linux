@@ -286,9 +286,13 @@ If you want to test it out, you can use an app like [D-Feet](https://wiki.gnome.
 The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JDSP4Linux/blob/master/src/utils/dbus/manifest.xml.
 
 ## Troubleshooting
-* Your CPU may be too slow to process the audio sample in time; try to disable some effects (especially resource-hungry ones like the convolver)
-* Set JamesDSP's process to real-time or high priority using a task manager of your choice
-* [Pipewire] Try out the workaround mentioned in [issue #47](https://github.com/Audio4Linux/JDSP4Linux/issues/47)
+* My volume control not working anymore
+  * Don't set the virtual JamesDSP device as the default audio output device. The virtual device has no audio volume controls and should never be used directly. Please set your actual speakers/headphones as the default output device instead.
+
+* Crackling audio
+  * Your CPU may be too slow to process the audio sample in time; try to disable some effects (especially resource-hungry ones like the convolver)
+  * Set JamesDSP's process to real-time or high priority using a task manager of your choice
+  * [Pipewire] Try out the workaround mentioned in [issue #47](https://github.com/Audio4Linux/JDSP4Linux/issues/47)
 
 ## Screenshots
 
