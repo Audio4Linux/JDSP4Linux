@@ -41,6 +41,44 @@ LOCAL_SRC_FILES := \
 	jdsp/Effects/eel2/numericSys/cpoly.c \
 	jdsp/Effects/eel2/numericSys/MersenneTwister.c \
 	jdsp/Effects/eel2/numericSys/quadprog.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/atox.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/constant.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxaop.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxbasic.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxconstant.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxconvf.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxexp.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxhypb.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxidiv.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxpow.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxprcmp.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/cxtrig.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/hpaconf.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/prcxpr.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/print.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/prxpr.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/sfmod.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/shift.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xadd.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xchcof.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xdiv.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xevtch.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xexp.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xfmod.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xfrac.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xhypb.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xivhypb.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xivtrg.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xlog.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xmul.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xneg.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xprcmp.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xpwr.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xsigerr.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xsqrt.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xtodbl.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xtoflt.c \
+	jdsp/Effects/eel2/numericSys/HPFloat/xtrig.c \
 	jdsp/Effects/eel2/s_str.c \
 	jdsp/Effects/eel2/fft.c \
 	jdsp/Effects/eel2/nseel-compiler.c \
