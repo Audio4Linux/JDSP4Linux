@@ -1101,7 +1101,7 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 		for (int j = 0; j < ((n > 1) ? (n / (i + 1)) : (128)); j++)
 			randXorshift(jdsp->rndstate);
 	}
-	JamesDSPRefreshBlob(jdsp, (double)sample_rate);
+	JamesDSPRefreshBlob(jdsp, (double)jdsp->fs);
 	jdsp->rndstate[1] = (uint64_t)(randXorshift(jdsp->rndstate) * 2.0);
 #ifdef DEBUG
 	__android_log_print(ANDROID_LOG_INFO, TAG, "Printing benchmark data start");

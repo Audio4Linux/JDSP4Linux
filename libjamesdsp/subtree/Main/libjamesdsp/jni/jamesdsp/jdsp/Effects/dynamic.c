@@ -393,7 +393,6 @@ void FFTCompanderSetavgBW(FFTCompander *cm, double avgBW)
 }
 void FFTCompanderInit(FFTCompander *cm, float fs)
 {
-	//memset(cm, 0, sizeof(FFTCompander));
 	unsigned int i;
 	const float oX[10] = { 750, 1500, 3000, 6000, 12000, 24000, 48000, 96000, 192000, 256000 };
 	const float oY[10] = { 24, 48, 96, 192, 384, 768, 1536, 3072, 6144, 8192 };
@@ -448,6 +447,8 @@ void FFTCompanderInit(FFTCompander *cm, float fs)
 		sum += cm->analysisWnd[i];
 	FFTCompanderSetavgBW(cm, 1.2);
 	cm->spectralRate = fs / (float)cm->fftLen * (float)ANALYSIS_OVERLAP_DRS;
+	for (i = 0; i < HALFWNDLEN_DRS; i++)
+		cm->oldBuf[i] = -20.0f;
 }
 void CompressorConstructor(JamesDSPLib *jdsp)
 {

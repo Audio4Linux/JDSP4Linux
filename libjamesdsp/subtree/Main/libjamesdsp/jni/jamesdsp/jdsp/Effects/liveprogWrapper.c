@@ -38,7 +38,8 @@ int LiveProgLoadCode(JamesDSPLib *jdsp, char *codeTextInit, char *codeTextProces
 	pg->compileSucessfully = 0;
 	compileContext *ctx = (compileContext*)pg->vm;
 	NSEEL_VM_freevars(pg->vm);
-	NSEEL_init_string(pg->vm);
+	NSEEL_init_memRegion(pg->vm);
+	memset(ctx->ram_state, 0, sizeof(ctx->ram_state));
 	pg->vmFs = NSEEL_VM_regvar(pg->vm, "srate");
 	*pg->vmFs = jdsp->fs;
 	pg->input1 = NSEEL_VM_regvar(pg->vm, "spl0");

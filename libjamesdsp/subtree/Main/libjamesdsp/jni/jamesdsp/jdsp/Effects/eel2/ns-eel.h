@@ -40,7 +40,7 @@ typedef uintptr_t UINT_PTR;
 #ifndef min
 #define min(x,y) ((x)<(y)?(x):(y))
 #endif
-#if !defined(max)
+#ifndef max
 #define max(x,y) ((x)<(y)?(y):(x))
 #endif
 #ifndef _WIN32
@@ -73,7 +73,7 @@ void NSEEL_start(); // Init global variables
 void NSEEL_quit(); // Delete global variables
 int32_t *NSEEL_getstats(); // returns a pointer to 5 ints... source bytes, static code bytes, call code bytes, data bytes, number of code handles
 void NSEEL_VM_freevars(NSEEL_VMCTX _ctx);
-void NSEEL_init_string(NSEEL_VMCTX ctx);
+void NSEEL_init_memRegion(NSEEL_VMCTX ctx);
 NSEEL_VMCTX NSEEL_VM_alloc(); // return a handle
 void NSEEL_VM_free(NSEEL_VMCTX ctx); // free when done with a VM and ALL of its code have been freed, as well
 // validateFunc can return error message if not permitted
@@ -108,7 +108,6 @@ int32_t *NSEEL_code_getstats(NSEEL_CODEHANDLE code); // 4 ints...source bytes, s
 #include <limits.h>
 #define NSEEL_NATIVE_FLT_MAX_INT (1 << FLT_MANT_DIG) // Next value will no longer be accurately represented
 #define NSEEL_MAX_FUNCTION_SIZE_FOR_INLINE 2048
-#define NSEEL_RAM_ITEMSPERBLOCK_LOG2 24 // How many float precision floating point items per block
 #define NSEEL_RAM_ITEMSPERBLOCK NSEEL_NATIVE_FLT_MAX_INT // Must be smaller or equal than max floating pointing representable integer
 #define EEL_BC_TYPE int32_t
 #ifdef CUSTOM_CMD

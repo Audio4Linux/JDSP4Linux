@@ -26,6 +26,9 @@
 #include <float.h>
 #include "eelCommon.h"
 #include "glue_port.h"
+#include <assert.h>
+#include "eel_matrix.h"
+#include "numericSys/FFTConvolver.h"
 static void lstrcpyn_safe(char *o, const char *in, int32_t count)
 {
 	if (count > 0)
@@ -535,7 +538,7 @@ void discreteHartleyTransformFloat(float *A, const int32_t nPoints, const float 
 		theta_inc >>= 1;
 	}
 }
-#define M_PIDouble 3.1415926535897932384626433832795f
+#define M_PIDouble 3.1415926535897932384626433832795
 void getAsymmetricWindow(float *analysisWnd, float *synthesisWnd, int32_t k, int32_t m, float freq_temporal)
 {
 	int32_t i;
@@ -546,15 +549,77 @@ void getAsymmetricWindow(float *analysisWnd, float *synthesisWnd, int32_t k, int
 		freq_temporal = 1.8f;
 	int32_t n = ((k - m) << 1) + 2;
 	for (i = 0; i < k - m; ++i)
-		analysisWnd[i] = (float)pow(sqrt(0.5f * (1.0f - cos(2.0f * M_PIDouble * (i + 1.0f) / (float)n))), freq_temporal);
+		analysisWnd[i] = (float)pow(sqrt(0.5 * (1.0 - cos(2.0 * M_PIDouble * (i + 1.0) / (double)n))), freq_temporal);
 	n = (m << 1) + 2;
 	if (freq_temporal > 1.5f)
 		freq_temporal = 1.5f;
 	for (i = k - m; i < k; ++i)
-		analysisWnd[i] = (float)pow(sqrt(0.5f * (1.0f - cos(2.0f * M_PIDouble * ((m + i - (k - m)) + 1.0f) / (float)n))), freq_temporal);
+		analysisWnd[i] = (float)pow(sqrt(0.5 * (1.0 - cos(2.0 * M_PIDouble * ((m + i - (k - m)) + 1.0) / (double)n))), freq_temporal);
 	n = m << 1;
 	for (i = k - (m << 1); i < k; ++i)
-		synthesisWnd[i] = (float)(0.5f * (1.0f - cos(2.0f * M_PIDouble * (float)(i - (k - (m << 1))) / (float)n))) / analysisWnd[i];
+		synthesisWnd[i - (k - (m << 1))] = (float)(0.5 * (1.0 - cos(2.0 * M_PIDouble * (double)(i - (k - (m << 1))) / (double)n))) / analysisWnd[i];
+}
+void getwnd(float *wnd, unsigned int m, unsigned int n, char *mode)
+{
+	unsigned int i;
+	double x;
+	if (!strcmp(mode, "hann"))
+	{
+		for (i = 0; i < m; i++)
+		{
+			x = i / (double)(n - 1);
+			wnd[i] = (float)(0.5 - 0.5 * cos(2 * M_PIDouble * x));
+		}
+	}
+	else if (!strcmp(mode, "hamming"))
+	{
+		for (i = 0; i < m; i++)
+		{
+			x = i / (double)(n - 1);
+			wnd[i] = (float)(0.54 - 0.46 * cos(2 * M_PIDouble * x));
+		}
+	}
+	else if (!strcmp(mode, "blackman"))
+	{
+		for (i = 0; i < m; i++)
+		{
+			x = i / (double)(n - 1);
+			wnd[i] = (float)(0.42 - 0.5 * cos(2 * M_PIDouble * x) + 0.08 * cos(4 * M_PIDouble * x));
+		}
+	}
+	else if (!strcmp(mode, "flattop"))
+	{
+		double a0 = 0.21557895;
+		double a1 = 0.41663158;
+		double a2 = 0.277263158;
+		double a3 = 0.083578947;
+		double a4 = 0.006947368;
+		for (i = 0; i < m; i++)
+		{
+			x = i / (double)(n - 1);
+			wnd[i] = (float)(a0 - a1 * cos(2 * M_PIDouble * x) + a2 * cos(4 * M_PIDouble * x) - a3 * cos(6 * M_PIDouble * x) + a4 * cos(8 * M_PIDouble * x));
+		}
+	}
+}
+void genWnd(float *wnd, unsigned int N, char *type)
+{
+	unsigned int plus1 = N + 1;
+	unsigned int half;
+	unsigned int i;
+	if (plus1 % 2 == 0)
+	{
+		half = plus1 / 2;
+		getwnd(wnd, half, plus1, type);
+		for (i = 0; i < half - 1; i++)
+			wnd[i + half] = wnd[half - i - 1];
+	}
+	else
+	{
+		half = (plus1 + 1) / 2;
+		getwnd(wnd, half, plus1, type);
+		for (i = 0; i < half - 2; i++)
+			wnd[i + half] = wnd[half - i - 2];
+	}
 }
 void STFT_DynInit(int32_t *indexFw, float *analysisWnd)
 {
@@ -589,7 +654,7 @@ void STFT_DynInit(int32_t *indexFw, float *analysisWnd)
 	getAsymmetricWindow(analysisWnd, synthesisWnd, indexFw[0], ovpSmps, indexFw[5] / (float)32767);
 	// Pre-shift window function
 	for (i = 0; i < indexFw[0] - indexFw[2]; i++)
-		synthesisWnd[i] = synthesisWnd[i + indexFw[2]] * (1.0f / indexFw[0]) * 0.5f;
+		synthesisWnd[i] = synthesisWnd[i] * (1.0f / indexFw[0]) * 0.5f;
 }
 int32_t STFTCartesian(float *indexer, float *analysisWnd, float *ptr)
 {
@@ -611,31 +676,7 @@ int32_t STFTCartesian(float *indexer, float *analysisWnd, float *ptr)
 		lR = mTempBuffer[i] + mTempBuffer[symIdx];
 		lI = mTempBuffer[i] - mTempBuffer[symIdx];
 		ptr[i << 1] = lR;
-		ptr[(i << 1) + 1] = lI;
-	}
-	return indexFw[0] + 2;
-}
-int32_t STFTPolar(float *indexer, float *analysisWnd, float *ptr)
-{
-	int32_t *indexFw = (int32_t*)indexer;
-	float *mSineTab = analysisWnd + indexFw[0] * 2;
-	float *mInput = mSineTab + indexFw[0];
-	float *mTempBuffer = mInput + indexFw[0];
-	uint32_t *bitRevTbl = (uint32_t*)(analysisWnd + (indexFw[0] * 6) + indexFw[3] + indexFw[3]);
-	int32_t i, symIdx;
-	for (i = 0; i < indexFw[0]; ++i)
-		mTempBuffer[bitRevTbl[i]] = mInput[(i + indexFw[4]) & (indexFw[0] - 1)] * analysisWnd[i];
-	discreteHartleyTransformFloat(mTempBuffer, indexFw[0], mSineTab);
-	ptr[0] = fabsf(mTempBuffer[0] * 2.0f);
-	ptr[1] = ((mTempBuffer[0] < 0.0f) ? M_PIDouble : 0.0f);
-	float lR, lI;
-	for (i = 1; i < ((indexFw[0] >> 1) + 1); i++)
-	{
-		symIdx = indexFw[0] - i;
-		lR = mTempBuffer[i] + mTempBuffer[symIdx];
-		lI = mTempBuffer[i] - mTempBuffer[symIdx];
-		ptr[i << 1] = hypotf(lR, lI);
-		ptr[(i << 1) + 1] = atan2f(lI, lR);
+		ptr[(i << 1) + 1] = -lI;
 	}
 	return indexFw[0] + 2;
 }
@@ -654,40 +695,7 @@ int32_t STFTCartesianInverse(float *indexer, float *analysisWnd, float *ptr)
 	for (i = 1; i < ((indexFw[0] >> 1) + 1); i++)
 	{
 		lR = ptr[i << 1];
-		lI = ptr[(i << 1) + 1];
-		timeDomainOut[bitRevTbl[i]] = (lR + lI);
-		timeDomainOut[bitRevTbl[indexFw[0] - i]] = (lR - lI);
-	}
-	discreteHartleyTransformFloat(timeDomainOut, indexFw[0], mSineTab);
-	for (i = 0; i < indexFw[0] - indexFw[2]; i++)
-		timeDomainOut[i] = timeDomainOut[i + indexFw[2]] * synthesisWnd[i];
-	for (i = 0; i < indexFw[3]; ++i)
-	{
-		mOutputBuffer[i] = mOverlapStage2Ldash[i] + timeDomainOut[i];
-		mOverlapStage2Ldash[i] = timeDomainOut[indexFw[3] + i];
-	}
-	return indexFw[3];
-}
-int32_t STFTPolarInverse(float *indexer, float *analysisWnd, float *ptr)
-{
-	int32_t *indexFw = (int32_t*)indexer;
-	float *synthesisWnd = analysisWnd + indexFw[0];
-	float *mSineTab = synthesisWnd + indexFw[0];
-	float *timeDomainOut = mSineTab + indexFw[0] * 3;
-	float *mOutputBuffer = timeDomainOut + indexFw[0];
-	float *mOverlapStage2Ldash = mOutputBuffer + indexFw[3];
-	uint32_t *bitRevTbl = (uint32_t*)(analysisWnd + (indexFw[0] * 6) + indexFw[3] + indexFw[3]);
-	int32_t i;
-	float magnitude = ptr[0];
-	float phase = ptr[1];
-	float lR, lI;
-	timeDomainOut[0] = magnitude * cosf(phase);
-	for (i = 1; i < ((indexFw[0] >> 1) + 1); i++)
-	{
-		magnitude = ptr[i << 1];
-		phase = ptr[(i << 1) + 1];
-		lR = magnitude * cosf(phase);
-		lI = magnitude * sinf(phase);
+		lI = -ptr[(i << 1) + 1];
 		timeDomainOut[bitRevTbl[i]] = (lR + lI);
 		timeDomainOut[bitRevTbl[indexFw[0] - i]] = (lR - lI);
 	}
@@ -715,6 +723,35 @@ static float NSEEL_CGEN_CALL stftInit(void *opaque, INT_PTR num_param, float **p
 	STFT_DynInit(indexFw, stftFloatStruct);
 	return (float)indexFw[3];
 }
+void STFT_SetWnd(int32_t *indexFw, float *stftFloatStruct, float *desired_analysisWnd, float *desired_synthesisWnd)
+{
+	int32_t i;
+	float *synthesisWnd = stftFloatStruct + indexFw[0];
+	for (i = 0; i < indexFw[0]; i++)
+		stftFloatStruct[i] = desired_analysisWnd[i];
+	for (i = 0; i < indexFw[0] - indexFw[2]; i++)
+		synthesisWnd[i] = desired_synthesisWnd[i] * (1.0f / indexFw[0]) * 0.5f;
+}
+static float NSEEL_CGEN_CALL stftSetAsymWnd(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext *)opaque;
+	float *blocks = c->ram_state;
+	float *start1 = parms[0];
+	int32_t offs1 = (int32_t)(*start1 + NSEEL_CLOSEFACTOR);
+	float *start2 = parms[1];
+	int32_t offs2 = (int32_t)(*start2 + NSEEL_CLOSEFACTOR);
+	float *start3 = parms[2];
+	int32_t offs3 = (int32_t)(*start3 + NSEEL_CLOSEFACTOR);
+	float *start4 = parms[3];
+	int32_t offs4 = (int32_t)(*start4 + NSEEL_CLOSEFACTOR);
+	float *indexer = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	float *stftFloatStruct = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	float *desired_analysisWnd = __NSEEL_RAMAlloc(blocks, (uint64_t)offs3);
+	float *desired_synthesisWnd = __NSEEL_RAMAlloc(blocks, (uint64_t)offs4);
+	int32_t *indexFw = (int32_t *)indexer;
+	STFT_SetWnd(indexFw, stftFloatStruct, desired_analysisWnd, desired_synthesisWnd);
+	return 0;
+}
 static float NSEEL_CGEN_CALL stftGetWindowPower(void *opaque, INT_PTR num_param, float **parms)
 {
 	compileContext *c = (compileContext*)opaque;
@@ -741,15 +778,11 @@ static float NSEEL_CGEN_CALL stftForward(void *opaque, INT_PTR num_param, float 
 	int32_t offs2 = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 	float *indexer = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
 	float *stftFloatStruct = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-	int32_t cartesian = (int32_t)(*parms[3]);
 	int32_t *indexFw = (int32_t*)indexer;
 	float *mInput = stftFloatStruct + indexFw[0] * 3;
 	memcpy(&mInput[indexFw[4]], ptr, indexFw[3] * sizeof(float));
 	indexFw[4] = (indexFw[4] + indexFw[3]) & (indexFw[0] - 1);
-	if (cartesian)
-		return (float)STFTCartesian(indexer, stftFloatStruct, ptr);
-	else
-		return (float)STFTPolar(indexer, stftFloatStruct, ptr);
+	return (float)STFTCartesian(indexer, stftFloatStruct, ptr);
 }
 static float NSEEL_CGEN_CALL stftBackward(void *opaque, INT_PTR num_param, float **parms)
 {
@@ -761,13 +794,9 @@ static float NSEEL_CGEN_CALL stftBackward(void *opaque, INT_PTR num_param, float
 	int32_t offs2 = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 	float *indexer = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
 	float *stftFloatStruct = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-	int32_t cartesian = (int32_t)(*parms[3]);
 	int32_t *indexFw = (int32_t*)indexer;
 	int32_t ret;
-	if (cartesian)
-		ret = STFTCartesianInverse(indexer, stftFloatStruct, ptr);
-	else
-		ret = STFTPolarInverse(indexer, stftFloatStruct, ptr);
+	ret = STFTCartesianInverse(indexer, stftFloatStruct, ptr);
 	memcpy(ptr, stftFloatStruct + indexFw[0] * 6, indexFw[3] * sizeof(float));
 	return (float)ret;
 }
@@ -794,6 +823,391 @@ static float NSEEL_CGEN_CALL stftCheckMemoryRequirement(void *opaque, INT_PTR nu
 	int32_t analyOv = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 	return (float)STFT_DynConstructor(indexer, fftlen, analyOv, *parms[3]);
 }
+static inline double ipowp(double x, long n)
+{
+	assert(n >= 0);
+	double z = 1.0;
+	while (n != 0)
+	{
+		if ((n & 1) != 0)
+			z *= x;
+		n >>= 1;
+		x *= x;
+	}
+	return z;
+}
+static inline void compute_transition_param(double *k, double *q, double transition)
+{
+	assert(transition > 0);
+	assert(transition < 0.5);
+	*k = tan((1 - transition * 2) * M_PIDouble / 4);
+	*k *= *k;
+	assert(*k < 1);
+	assert(*k > 0);
+	double         kksqrt = pow(1.0 - *k * *k, 0.25);
+	const double   e = 0.5 * (1 - kksqrt) / (1 + kksqrt);
+	const double   e2 = e * e;
+	const double   e4 = e2 * e2;
+	*q = e * (1 + e4 * (2 + e4 * (15 + 150 * e4)));
+	assert(*q > 0);
+}
+static inline double compute_acc_num(double q, int order, int c)
+{
+	assert(c >= 1);
+	assert(c < order * 2);
+	int            i = 0;
+	int            j = 1;
+	double         acc = 0;
+	double         q_ii1;
+	do
+	{
+		q_ii1 = ipowp(q, i * (i + 1));
+		q_ii1 *= sin((i * 2 + 1) * c * M_PIDouble / order) * j;
+		acc += q_ii1;
+		j = -j;
+		++i;
+	} while (fabs(q_ii1) > 1e-100);
+	return acc;
+}
+static inline double compute_acc_den(double q, int order, int c)
+{
+	assert(c >= 1);
+	assert(c < order * 2);
+	int            i = 1;
+	int            j = -1;
+	double         acc = 0;
+	double         q_i2;
+	do
+	{
+		q_i2 = ipowp(q, i * i);
+		q_i2 *= cos(i * 2 * c * M_PIDouble / order) * j;
+		acc += q_i2;
+		j = -j;
+		++i;
+	} while (fabs(q_i2) > 1e-100);
+	return acc;
+}
+static inline double compute_coef(int index, double k, double q, int order)
+{
+	assert(index >= 0);
+	assert(index * 2 < order);
+	const int      c = index + 1;
+	const double   num = compute_acc_num(q, order, c) * pow(q, 0.25);
+	const double   den = compute_acc_den(q, order, c) + 0.5;
+	const double   ww = num / den;
+	const double   wwsq = ww * ww;
+	const double   x = sqrt((1 - wwsq * k) * (1 - wwsq / k)) / (1 + wwsq);
+	const double   coef = (1 - x) / (1 + x);
+	return coef;
+}
+static inline void compute_coefs_spec_order_tbw(double coef_arr[], int nbr_coefs, double transition)
+{
+	assert(nbr_coefs > 0);
+	assert(transition > 0);
+	assert(transition < 0.5);
+	double         k;
+	double         q;
+	compute_transition_param(&k, &q, transition);
+	const int      order = nbr_coefs * 2 + 1;
+	// Coefficient calculation
+	for (int index = 0; index < nbr_coefs; ++index)
+		coef_arr[index] = compute_coef(index, k, q, order);
+}
+static inline double IIR2thOrder(double *Xi, double *b, double z[2])
+{
+	double Yi = *b * *Xi + z[0];
+	z[0] = z[1];
+	z[1] = *b * Yi - *Xi;
+	return Yi;
+}
+typedef struct
+{
+	unsigned int stages;
+	double *path, *z;
+	double imOld;
+} IIRHilbert;
+static inline void ProcessIIRHilbert(IIRHilbert *hil, double Xi, double *re, double *im)
+{
+	double imTmp;
+	imTmp = *re = Xi;
+	for (unsigned int j = 0; j < hil->stages; j++)
+	{
+		imTmp = IIR2thOrder(&imTmp, &hil->path[j], &hil->z[2 * j]);
+		*re = IIR2thOrder(re, &hil->path[hil->stages + j], &hil->z[hil->stages * 2 + 2 * j]);
+	}
+	*im = hil->imOld;
+	hil->imOld = imTmp;
+}
+static float NSEEL_CGEN_CALL iirHilbertProcess(float *blocks, float *offptr, float *x, float *y)
+{
+	uint32_t offs1 = (uint32_t)(*offptr + NSEEL_CLOSEFACTOR);
+	IIRHilbert *hil = (IIRHilbert *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	uint32_t offs2 = (uint32_t)(*y + NSEEL_CLOSEFACTOR);
+	float *out = (float *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	double re, im;
+	ProcessIIRHilbert(hil, *x, &re, &im);
+	out[0] = re;
+	out[1] = im;
+	return 2;
+}
+static float NSEEL_CGEN_CALL iirHilbertInit(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext *)opaque;
+	float *blocks = c->ram_state;
+	float *start1 = parms[0];
+	int32_t offs1 = (int32_t)(*start1 + NSEEL_CLOSEFACTOR);
+	IIRHilbert *hil = (IIRHilbert *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	unsigned int numStages = (unsigned int)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float transition = *parms[2];
+	unsigned int numCoefs = numStages << 1;
+	size_t memSize = sizeof(IIRHilbert) + (numCoefs + (numStages << 2));
+	hil->stages = numStages;
+	double *coefs = (double *)malloc(numCoefs * sizeof(double));
+	hil->path = hil + 1;
+	hil->z = hil->path + numCoefs;
+	memset(hil->z, 0, (hil->stages << 2) * sizeof(double));
+	compute_coefs_spec_order_tbw(coefs, numCoefs, transition);
+	unsigned int i;
+	// Phase reference path coefficients
+	for (i = 1; i < numCoefs; i += 2)
+		hil->path[i >> 1] = coefs[i];
+	// +90 deg path coefficients
+	for (i = 0; i < numCoefs; i += 2)
+		hil->path[hil->stages + (i >> 1)] = coefs[i];
+	free(coefs);
+	hil->imOld = 0.0;
+	return (float)(1 + memSize / sizeof(float));
+}
+typedef struct
+{
+	float data;
+	float maximum, minimum;
+} node;
+typedef struct
+{
+	unsigned int capacity, top;
+	node *items;
+} stack;
+static inline void insertDat(stack *s2, float val)
+{
+	if (!s2->top)
+	{
+		s2->items[s2->top].data = val;
+		s2->items[s2->top].maximum = val;
+		s2->items[s2->top++].minimum = val;
+	}
+	else
+	{
+		s2->items[s2->top].data = val;
+		s2->items[s2->top].minimum = min(val, s2->items[s2->top - 1].minimum);
+		s2->items[s2->top++].maximum = max(val, s2->items[s2->top - 1].maximum);
+	}
+}
+static inline void removeDat(stack *s1, stack *s2)
+{
+	if (s1->top)
+		s1->top--;
+	else
+	{
+		while (s2->top)
+		{
+			insertDat(s1, s2->items[s2->top - 1].data);
+			s2->top--;
+		}
+		s1->top--;
+	}
+}
+typedef struct mmStk
+{
+	stack s1, s2;
+	unsigned int windowSize, cnt;
+	void(*process)(struct mmStk *stk, float, float *, float *);
+} runningMinMax;
+void ProcessStkMaxLater(runningMinMax *stk, float a, float *minV, float *maxV)
+{
+	removeDat(&stk->s1, &stk->s2);
+	insertDat(&stk->s2, a);
+	// the maximum of both stack will be the maximum of overall window
+	if (stk->s1.top)
+	{
+		*minV = min(stk->s1.items[stk->s1.top - 1].minimum, stk->s2.items[stk->s2.top - 1].minimum);
+		*maxV = max(stk->s1.items[stk->s1.top - 1].maximum, stk->s2.items[stk->s2.top - 1].maximum);
+	}
+	else
+	{
+		*minV = stk->s2.items[stk->s2.top - 1].minimum;
+		*maxV = stk->s2.items[stk->s2.top - 1].maximum;
+	}
+}
+void ProcessStkBeginning(runningMinMax *stk, float a, float *minV, float *maxV)
+{
+	stk->cnt++;
+	if (stk->cnt >= stk->windowSize)
+		stk->process = ProcessStkMaxLater;
+	insertDat(&stk->s2, a);
+	// the maximum of both stack will be the maximum of overall window
+	*minV = stk->s2.items[stk->s2.top - 1].minimum;
+	*maxV = stk->s2.items[stk->s2.top - 1].maximum;
+}
+static float NSEEL_CGEN_CALL movingMinMaxProcess(float *blocks, float *offptr, float *x, float *y)
+{
+	uint32_t offs1 = (uint32_t)(*offptr + NSEEL_CLOSEFACTOR);
+	runningMinMax *stk = (runningMinMax *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	uint32_t offs2 = (uint32_t)(*y + NSEEL_CLOSEFACTOR);
+	float *out = (float *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	float minV = 0, maxV = 0;
+	stk->process(stk, *x, &minV, &maxV);
+	out[0] = minV;
+	out[1] = maxV;
+	return 2;
+}
+static float NSEEL_CGEN_CALL movingMinMaxInit(float *blocks, float *offptr, float *parm1)
+{
+	uint32_t offs1 = (uint32_t)(*offptr + NSEEL_CLOSEFACTOR);
+	runningMinMax *stk = (runningMinMax *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	uint32_t windowSize = (uint32_t)(*parm1 + NSEEL_CLOSEFACTOR);
+	size_t memSize = sizeof(runningMinMax) + sizeof(node) * windowSize * 2;
+	stk->s1.top = 0;
+	stk->s1.capacity = windowSize;
+	stk->s2.top = 0;
+	stk->s2.capacity = windowSize;
+	stk->s1.items = stk + 1;
+	stk->s2.items = (node*)(((char*)stk->s1.items) + sizeof(node) * windowSize);
+	stk->windowSize = windowSize;
+	stk->cnt = 0;
+	stk->process = ProcessStkBeginning;
+	return (float)(1 + memSize / sizeof(float));
+}
+#define ItemLess(a,b)  ((a)<(b))
+#define ItemMean(a,b)  (((a)+(b))/2)
+typedef struct
+{
+	float *data;  //circular queue of values
+	int *pos;   //index into `heap` for each value
+	int *heap;  //max/median/min heap holding indexes into `data`.
+	int   N;     //allocated size.
+	int   idx;   //position in circular queue
+	int   ct;    //count of items in queue
+} runningMedian;
+#define minCt(m) (((m)->ct-1)/2) //count of items in minheap
+#define maxCt(m) (((m)->ct)/2)   //count of items in maxheap 
+//returns 1 if heap[i] < heap[j]
+static inline int mmless(runningMedian *m, int i, int j)
+{
+	return ItemLess(m->data[m->heap[i]], m->data[m->heap[j]]);
+}
+//swaps items i&j in heap, maintains indexes
+static inline int mmexchange(runningMedian *m, int i, int j)
+{
+	int t = m->heap[i];
+	m->heap[i] = m->heap[j];
+	m->heap[j] = t;
+	m->pos[m->heap[i]] = i;
+	m->pos[m->heap[j]] = j;
+	return 1;
+}
+//swaps items i&j if i<j;  returns true if swapped
+static inline int mmCmpExch(runningMedian *m, int i, int j)
+{
+	return mmless(m, i, j) && mmexchange(m, i, j);
+}
+//maintains minheap property for all items below i/2.
+static inline void minSortDown(runningMedian *m, int i)
+{
+	for (; i <= minCt(m); i *= 2)
+	{
+		if (i > 1 && i < minCt(m) && mmless(m, i + 1, i))
+			++i;
+		if (!mmCmpExch(m, i, i / 2))
+			break;
+	}
+}
+//maintains maxheap property for all items below i/2. (negative indexes)
+static inline void maxSortDown(runningMedian *m, int i)
+{
+	for (; i >= -maxCt(m); i *= 2)
+	{
+		if (i<-1 && i > -maxCt(m) && mmless(m, i, i - 1))
+			--i;
+		if (!mmCmpExch(m, i / 2, i))
+			break;
+	}
+}
+//maintains minheap property for all items above i, including median
+//returns true if median changed
+static inline int minSortUp(runningMedian *m, int i)
+{
+	while (i > 0 && mmCmpExch(m, i, i / 2))
+		i /= 2;
+	return i == 0;
+}
+//maintains maxheap property for all items above i, including median
+//returns true if median changed
+static inline int maxSortUp(runningMedian *m, int i)
+{
+	while (i < 0 && mmCmpExch(m, i / 2, i))
+		i /= 2;
+	return i == 0;
+}
+//Inserts item, maintains median in O(lg nItems)
+float runningMedianInsert(runningMedian *m, float v)
+{
+	int isNew = (m->ct < m->N);
+	int p = m->pos[m->idx];
+	float old = m->data[m->idx];
+	m->data[m->idx] = v;
+	m->idx = (m->idx + 1) % m->N;
+	m->ct += isNew;
+	if (p > 0) //new item is in minHeap
+	{
+		if (!isNew && ItemLess(old, v))
+			minSortDown(m, p * 2);
+		else if (minSortUp(m, p))
+			maxSortDown(m, -1);
+	}
+	else if (p < 0) //new item is in maxheap
+	{
+		if (!isNew && ItemLess(v, old))
+			maxSortDown(m, p * 2);
+		else if (maxSortUp(m, p))
+			minSortDown(m, 1);
+	}
+	else //new item is at median
+	{
+		if (maxCt(m))
+			maxSortDown(m, -1);
+		if (minCt(m))
+			minSortDown(m, 1);
+	}
+	v = m->data[m->heap[0]];
+	if ((m->ct & 1) == 0)
+		v = ItemMean(v, m->data[m->heap[-1]]);
+	return v;
+}
+static float NSEEL_CGEN_CALL movingMedianProcess(float *blocks, float *offptr, float *x)
+{
+	uint32_t offs1 = (uint32_t)(*offptr + NSEEL_CLOSEFACTOR);
+	runningMedian *m = (runningMedian *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	return runningMedianInsert(m, *x);
+}
+static float NSEEL_CGEN_CALL movingMedianInit(float *blocks, float *offptr, float *parm1)
+{
+	uint32_t offs1 = (uint32_t)(*offptr + NSEEL_CLOSEFACTOR);
+	runningMedian *m = (runningMedian *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	uint32_t windowSize = (uint32_t)(*parm1 + NSEEL_CLOSEFACTOR);
+	size_t memSize = sizeof(runningMedian) + windowSize * (sizeof(float) + sizeof(int) * 2);
+	m->data = (float *)(m + 1);
+	m->pos = (int *)(m->data + windowSize);
+	m->heap = m->pos + windowSize + (windowSize / 2); //points to middle of storage.
+	m->N = windowSize;
+	m->ct = m->idx = 0;
+	while (windowSize--)  //set up initial heap fill pattern: median,max,min,max,...
+	{
+		m->pos[windowSize] = ((windowSize + 1) / 2) * ((windowSize & 1) ? -1 : 1);
+		m->heap[m->pos[windowSize]] = windowSize;
+	}
+	return (float)(1 + memSize / sizeof(float));
+}
 void runStateArburg(double *Z, double *b, double x, int n)
 {
 	for (int j = 1; j < n; j++) // Update conditions
@@ -808,13 +1222,13 @@ double predictArburg(double *Z, double *a, int n)
 	Z[n - 1] = -a[n] * Yi;
 	return Yi; // Write to output
 }
-void TrainArburg(char *bg, float *xn, unsigned int xLen)
+void TrainArburg(char *bg, float *xn, int positionStart, int positionEnd)
 {
 	unsigned int i, j;
 	char getPredictionState = *bg;
 	unsigned int *flag = (unsigned int*)(bg + 1);
 	const unsigned int _mCoefficientsNumber = *flag;
-	unsigned int lenM1 = xLen - 1;
+	int to = positionEnd + 1;
 
 	// Creates internal variables with desirable length
 	double *predictionCoefficients = (double*)(flag + 1);
@@ -836,12 +1250,12 @@ void TrainArburg(char *bg, float *xn, unsigned int xLen)
 	for (j = 0; j <= _mCoefficientsNumber; j++)
 	{
 		_c[j] = 0.0;
-		for (i = 0; i < xLen - j; i++)
-			_c[j] += xn[i] * xn[i + j];
+		for (i = 0; i <= positionEnd - j; i++)
+			_c[j] += xn[i + positionStart] * xn[i + positionStart + j];
 	}
 	unsigned int _iIterationCounter = 0;
 	predictionCoefficients[0] = 1.0;
-	_g[0] = 2.0 * _c[0] - fabs(xn[0]) * fabs(xn[0]) - fabs(xn[lenM1]) * fabs(xn[lenM1]);
+	_g[0] = 2.0 * _c[0] - fabs(xn[0 + positionStart]) * fabs(xn[0 + positionStart]) - fabs(xn[positionEnd + positionStart]) * fabs(xn[positionEnd + positionStart]);
 	_g[1] = 2.0 * _c[1];
 	// the paper says r[1], error in paper?
 	_r[0] = 2.0 * _c[1];
@@ -850,13 +1264,16 @@ void TrainArburg(char *bg, float *xn, unsigned int xLen)
 	{
 		// Computes vector of reflection coefficients. For details see step 1 of algorithm on page 3 of the paper
 		double nominator = 0.0;
-		double denominator = (double)FLT_EPSILON;
+		double denominator = ((double)FLT_EPSILON) * 100.0;
 		for (i = 0; i <= _iIterationCounter + 1; i++)
 		{
 			nominator += predictionCoefficients[i] * _g[(_iIterationCounter + 1) - i];
 			denominator += predictionCoefficients[i] * _g[i];
 		}
-		reflectionCoefficient[_iIterationCounter] = -nominator / denominator;
+		if (fabs(nominator) < ((double)FLT_EPSILON) * 10.0 && fabs(denominator) < ((double)FLT_EPSILON) * 10.0)
+			reflectionCoefficient[_iIterationCounter] = -1.0 + FLT_EPSILON;
+		else
+			reflectionCoefficient[_iIterationCounter] = -nominator / denominator;
 		// Updates vector of prediction coefficients. For details see step 2 of algorithm on page 3 of the paper
 		memcpy(tmp, predictionCoefficients, (_mCoefficientsNumber + 1) * sizeof(double));
 		for (i = 0; i <= _iIterationCounter + 1; i++)
@@ -868,10 +1285,11 @@ void TrainArburg(char *bg, float *xn, unsigned int xLen)
 			{
 				memset(forwardState, 0, (_mCoefficientsNumber + 1) * sizeof(double));
 				memset(backwardState, 0, (_mCoefficientsNumber + 1) * sizeof(double));
-				for (i = 0; i < xLen; i++)
+				int idx2 = to - 1 + positionStart;
+				for (int i = positionStart; i < to; i++)
 				{
 					runStateArburg(forwardState, predictionCoefficients, xn[i], _mCoefficientsNumber); // Forward
-					runStateArburg(backwardState, predictionCoefficients, xn[lenM1 - i], _mCoefficientsNumber); // Backward
+					runStateArburg(backwardState, predictionCoefficients, xn[idx2 - i], _mCoefficientsNumber); // Backward
 				}
 			}
 			break;
@@ -879,22 +1297,22 @@ void TrainArburg(char *bg, float *xn, unsigned int xLen)
 		// Updates vector r. For details see step 5 of algorithm on page 3 of the paper
 		memcpy(tmp, _r, (_mCoefficientsNumber + 1) * sizeof(double));
 		for (i = 0; i <= _iIterationCounter - 1; i++)
-			_r[i + 1] = tmp[i] - xn[i] * xn[_iIterationCounter] - xn[lenM1 - i] * xn[lenM1 - _iIterationCounter];
+			_r[i + 1] = tmp[i] - xn[i + positionStart] * xn[_iIterationCounter + positionStart] - xn[positionEnd - i + positionStart] * xn[positionEnd - _iIterationCounter + positionStart];
 		_r[0] = 2.0 * _c[_iIterationCounter + 1];
 
 		// Calculates vector deltaRAndAProduct. For details see step 6 of algorithm on page 3 of the paper
-		unsigned int posEnd = lenM1 - _iIterationCounter;
-		unsigned int _iIterationCounterA1 = _iIterationCounter + 1;
+		int posBegin = _iIterationCounter;
+		int posEnd = positionEnd - _iIterationCounter;
 		for (i = 0; i <= _iIterationCounter; i++)
 		{
 			double innerProduct1 = 0.0;
 			double innerProduct2 = 0.0;
 			for (j = 0; j <= _iIterationCounter; j++)
 			{
-				innerProduct1 += xn[_iIterationCounter - j] * predictionCoefficients[j];
-				innerProduct2 += xn[posEnd + j] * predictionCoefficients[j];
+				innerProduct1 += xn[posBegin - j + positionStart] * predictionCoefficients[j];
+				innerProduct2 += xn[posEnd + j + positionStart] * predictionCoefficients[j];
 			}
-			_deltaRAndAProduct[i] = -xn[_iIterationCounter - i] * innerProduct1 - xn[posEnd + i] * innerProduct2;
+			_deltaRAndAProduct[i] = -xn[posBegin - i + positionStart] * innerProduct1 - xn[posEnd + i + positionStart] * innerProduct2;
 		}
 		// Updates vector g. For details see step 7 of algorithm on page 3 of the paper
 		memcpy(tmp, _g, (_mCoefficientsNumber + 2) * sizeof(double));
@@ -923,29 +1341,9 @@ static float NSEEL_CGEN_CALL arburgTrainModel(void *opaque, INT_PTR num_param, f
 	*burg = (char)(*parms[2] + NSEEL_CLOSEFACTOR);
 	unsigned int *flag = (unsigned int*)(burg + 1);
 	*flag = (unsigned int)(*parms[1] + NSEEL_CLOSEFACTOR);
-	uint32_t xLen = (uint32_t)(*parms[4] + NSEEL_CLOSEFACTOR);
-	TrainArburg(burg, xn, xLen);
-	return 0.0f;
-}
-static float NSEEL_CGEN_CALL arburgGetPredictionReflectionCoeff(void *opaque, INT_PTR num_param, float **parms)
-{
-	compileContext *c = (compileContext*)opaque;
-	float *blocks = c->ram_state;
-	int32_t offs = (int32_t)(*parms[0] + NSEEL_CLOSEFACTOR);
-	char *bg = (char*)__NSEEL_RAMAlloc(blocks, (uint64_t)offs);
-	int32_t offs1 = (int32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
-	float *pdC = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
-	int32_t offs2 = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
-	float *rfC = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-	unsigned int *flag = (unsigned int*)(bg + 1);
-	const unsigned int _mCoefficientsNumber = *flag;
-	double *predictionCoefficients = (double*)(flag + 1);
-	double *reflectionCoefficient = predictionCoefficients + (_mCoefficientsNumber + 1);
-	for (unsigned int i = 0; i < _mCoefficientsNumber + 1; i++)
-	{
-		pdC[i] = (float)predictionCoefficients[i];
-		rfC[i] = (float)reflectionCoefficient[i];
-	}
+	int32_t from = (int32_t)(*parms[4] + NSEEL_CLOSEFACTOR);
+	int32_t to = (int32_t)(*parms[5] + NSEEL_CLOSEFACTOR);
+	TrainArburg(burg, xn, from, to);
 	return 0.0f;
 }
 static float NSEEL_CGEN_CALL arburgPredictBackward(float *blocks, float *start)
@@ -1195,7 +1593,7 @@ static float NSEEL_CGEN_CALL  eel_max(float *blocks, float *start, float *length
 	float ma = ptr[0];
 	for (uint32_t i = 1; i < (uint32_t)(*length + NSEEL_CLOSEFACTOR); i++)
 	{
-		if (ptr[i] > ma)
+		if (fabsf(ptr[i]) > fabsf(ma))
 			ma = ptr[i];
 	}
 	return ma;
@@ -1206,7 +1604,7 @@ static float NSEEL_CGEN_CALL  eel_min(float *blocks, float *start, float *length
 	float mi = ptr[0];
 	for (uint32_t i = 1; i < (uint32_t)(*length + NSEEL_CLOSEFACTOR); i++)
 	{
-		if (ptr[i] < mi)
+		if (fabsf(ptr[i]) < fabsf(mi))
 			mi = ptr[i];
 	}
 	return mi;
@@ -1312,7 +1710,7 @@ static float * NSEEL_CGEN_CALL eel_convolve_c(float *blocks, float *dest, float 
 	WDL_fft_complexmul((WDL_FFT_COMPLEX*)destptr, (WDL_FFT_COMPLEX*)srcptr, (len / 2)&~1);
 	return dest;
 }
-int32_t nseel_stringsegments_tobuf(char *bufOut, int32_t bufout_sz, eelStringSegmentRec *list) // call with NULL to calculate size, or non-null to generate to buffer (returning size used)
+static inline int32_t nseel_stringsegments_tobuf(char *bufOut, int32_t bufout_sz, eelStringSegmentRec *list) // call with NULL to calculate size, or non-null to generate to buffer (returning size used)
 {
 	int32_t pos = 0;
 	while (list)
@@ -1328,96 +1726,152 @@ int32_t nseel_stringsegments_tobuf(char *bufOut, int32_t bufout_sz, eelStringSeg
 	}
 	return pos;
 }
-void Initeel_string_context_state(eel_string_context_state *st)
+static inline void eelThread_start(abstractThreads *info)
+{
+	// ensure worker is waiting
+	pthread_mutex_lock(&(info->work_mtx));
+	// set job information & state
+	info->state = EEL_WORKING;
+	// wake-up signal
+	pthread_cond_signal(&(info->work_cond));
+	pthread_mutex_unlock(&(info->work_mtx));
+}
+static inline void eelThread_wait(abstractThreads *info)
+{
+	while (1)
+	{
+		pthread_cond_wait(&(info->boss_cond), &(info->boss_mtx));
+		if (EEL_IDLE == info->state)
+			break;
+	}
+}
+static inline void InitRegion_context(eel_builtin_memRegion *st)
 {
 	st->inuse = 0;
 	st->slot = 2;
-	st->map = (int32_t*)malloc(st->slot * sizeof(s_str));
-	st->m_literal_strings = (s_str*)malloc(st->slot * sizeof(s_str));
+	st->type = (char*)malloc(st->slot * sizeof(char));
+	st->memRegion = (s_str*)malloc(st->slot * sizeof(s_str));
 	for (int32_t i = 0; i < st->slot; i++)
 	{
-		st->map[i] = 0;
-		st->m_literal_strings[i] = 0;
+		st->type[i] = 0;
+		st->memRegion[i] = 0;
 	}
 }
-void Freeel_string_context_state(eel_string_context_state *st)
+void* GetStringForIndex(eel_builtin_memRegion *st, float val, int32_t write)
 {
-	for (int32_t i = 0; i < st->slot; i++)
-		s_str_destroy(&st->m_literal_strings[i]);
-	free(st->map);
-	free(st->m_literal_strings);
-	st->slot = 0;
-	st->inuse = 0;
-}
-int32_t arySearch(int32_t *array, int32_t N, int32_t x)
-{
-	for (int32_t i = 0; i < N; i++)
-	{
-		if (array[i] == x)
-			return i;
-	}
-	return -1;
-}
-#define FLOIDX 20000
-void* GetStringForIndex(eel_string_context_state *st, float val, int32_t write)
-{
-	int32_t castedValue = (int32_t)(val + 0.5f);
-	if (castedValue < FLOIDX)
-		return 0;
-	int32_t idx = arySearch(st->map, st->slot, castedValue);
-	if (idx < 0)
-		return 0;
+	int32_t idx = (int32_t)(val + 0.5f);
 	if (!write)
 	{
-		s_str *tmp = &st->m_literal_strings[idx];
+		s_str *tmp = &st->memRegion[idx];
 		const char *s = s_str_c_str(tmp);
 		return (void*)s;
 	}
 	else
-		return (void*)&st->m_literal_strings[idx];
+		return (void*)&st->memRegion[idx];
 }
-int32_t AddString(eel_string_context_state *st, char *ns)
+int32_t getEmptyRegion(eel_builtin_memRegion *st)
 {
-	const int32_t l = strlen(ns);
 	int32_t x;
-	for (x = 0; x < st->inuse; x++)
-	{
-		s_str *tmp = &st->m_literal_strings[x];
-		const char *s = s_str_c_str(tmp);
-		if (strlen(s) == l && !strcmp(s, ns))
+	for (x = 0; x < st->slot; x++)
+		if (!st->memRegion[x])
 			break;
-	}
-	if (x < st->inuse)
-		free(ns);
-	else
+	if (st->inuse > (st->slot - 1))
 	{
-		int32_t currentSlot = st->inuse;
-		if (currentSlot > (st->slot - 1))
+		st->slot += 10;
+		st->memRegion = (void**)realloc(st->memRegion, st->slot * sizeof(void*));
+		st->memRegion[st->inuse] = 0;
+		st->type = (char*)realloc(st->type, st->slot * sizeof(char));
+		for (int32_t i = st->inuse; i < st->slot; i++)
 		{
-			st->slot++;
-			st->m_literal_strings = (s_str*)realloc(st->m_literal_strings, st->slot * sizeof(s_str));
-			st->m_literal_strings[st->inuse] = 0;
-			st->map = (int32_t*)realloc(st->map, st->slot * sizeof(int32_t));
-			st->map[st->inuse] = 0;
+			st->memRegion[i] = 0;
+			st->type[i] = 0;
 		}
-		st->m_literal_strings[st->inuse] = s_str_create_from_c_str(ns);
-		st->map[st->inuse] = x + FLOIDX;
-		st->inuse++;
+	}
+	st->inuse++;
+	return x;
+}
+void DeleteSlot(eel_builtin_memRegion *st, float val)
+{
+	int32_t idx = (int32_t)(val + 0.5f);
+	if (!st->memRegion[idx])
+		goto decrement;
+	if (st->type[idx] == 0)
+		s_str_destroy(&st->memRegion[idx]);
+	else if (st->type[idx] == 1)
+	{
+		FFTConvolver1x1 *conv = (FFTConvolver1x1 *)st->memRegion[idx];
+		FFTConvolver1x1Free(conv);
+		free(conv);
+	}
+	else if (st->type[idx] == 2)
+	{
+		FFTConvolver2x2 *conv = (FFTConvolver2x2 *)st->memRegion[idx];
+		FFTConvolver2x2Free(conv);
+		free(conv);
+	}
+	else if (st->type[idx] == 3)
+	{
+		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2 *)st->memRegion[idx];
+		FFTConvolver2x4x2Free(conv);
+		free(conv);
+	}
+	else if (st->type[idx] == 4)
+	{
+		abstractThreads *ptr = (abstractThreads*)st->memRegion[idx];
+		// ensure the worker is waiting
+		if (ptr->state == EEL_WORKING)
+			eelThread_wait(ptr);
+		pthread_mutex_lock(&(ptr->work_mtx));
+		ptr->state = EEL_GET_OFF_FROM_WORK;
+		// wake-up signal
+		pthread_cond_signal(&(ptr->work_cond));
+		pthread_mutex_unlock(&(ptr->work_mtx));
+		// wait for thread to exit
+		pthread_join(ptr->threadID, NULL);
+		pthread_mutex_destroy(&(ptr->work_mtx));
+		pthread_cond_destroy(&(ptr->work_cond));
+		pthread_mutex_unlock(&(ptr->boss_mtx));
+		pthread_mutex_destroy(&(ptr->boss_mtx));
+		pthread_cond_destroy(&(ptr->boss_cond));
+		NSEEL_code_free(ptr->codePtr);
+		free(ptr);
+	}
+	st->memRegion[idx] = 0;
+decrement:
+	st->inuse--;
+}
+void FreeRegion_context(eel_builtin_memRegion *st)
+{
+	for (int32_t i = 0; i < st->slot; i++)
+		DeleteSlot(st, (float)i + 0.1f);
+	free(st->type);
+	free(st->memRegion);
+	st->slot = 0;
+	st->inuse = 0;
+}
+int32_t AddData(eel_builtin_memRegion *st, void *ns, char type)
+{
+	int32_t x = getEmptyRegion(st);
+	if (type == 0)
+	{
+		st->memRegion[x] = s_str_create_from_c_str((char *)ns);
 		free(ns);
 	}
-	return x + FLOIDX;
+	else
+		st->memRegion[x] = ns;
+	st->type[x] = type;
+	return x;
 }
 static float addStringCallback(void *opaque, eelStringSegmentRec *list)
 {
 	compileContext *c = (compileContext*)opaque;
-	eel_string_context_state *_this = c->m_string_context;
 	// could probably do a faster implementation using AddRaw() etc but this should also be OK
 	int32_t sz = nseel_stringsegments_tobuf(NULL, 0, list);
 	char *ns = (char*)malloc(sz + 32);
 	memset(ns, 0, sz + 32);
 	sz = nseel_stringsegments_tobuf(ns, sz, list) + 1;
 	ns = (char*)realloc(ns, sz);
-	int32_t id = AddString(_this, ns);
+	int32_t id = AddData(c->region_context, (void*)ns, 0);
 	return (float)id;
 }
 static int32_t eel_string_match(compileContext *c, const char *fmt, const char *msg, int32_t match_fmt_pos, int32_t ignorecase, const char *fmt_endptr, const char *msg_endptr, int32_t num_fmt_parms, float **fmt_parms)
@@ -1514,7 +1968,7 @@ static int32_t eel_string_match(compileContext *c, const char *fmt, const char *
 				{
 					if (varOut == &vv) // %{#foo}c
 					{
-						s_str *wr = (s_str*)GetStringForIndex(c->m_string_context, vv, 1);
+						s_str *wr = (s_str*)GetStringForIndex(c->region_context, vv, 1);
 						if (wr)
 							s_str_destroy(wr);
 						*wr = s_str_create_from_c_str(msg);
@@ -1585,7 +2039,7 @@ static int32_t eel_string_match(compileContext *c, const char *fmt, const char *
 				{
 					if (fmt_char == 's')
 					{
-						s_str *wr = (s_str*)GetStringForIndex(c->m_string_context, *varOut, 1);
+						s_str *wr = (s_str*)GetStringForIndex(c->region_context, *varOut, 1);
 						if (wr)
 							s_str_destroy(wr);
 						if (wr)
@@ -1622,7 +2076,7 @@ static int32_t eel_string_match(compileContext *c, const char *fmt, const char *
 						lstrcpyn_safe(tmp, msg, min(len + 1, (int32_t)sizeof(tmp)));
 						if (varOut == &vv)
 						{
-							s_str *wr = (s_str*)GetStringForIndex(c->m_string_context, vv, 1);
+							s_str *wr = (s_str*)GetStringForIndex(c->region_context, vv, 1);
 							if (wr)
 								s_str_destroy(wr);
 							*wr = s_str_create_from_c_str(tmp);
@@ -1651,13 +2105,40 @@ static int32_t eel_string_match(compileContext *c, const char *fmt, const char *
 		}
 	}
 }
+static float NSEEL_CGEN_CALL getCosineWindows(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext *)opaque;
+	float *blocks = c->ram_state;
+	float *start1 = parms[0];
+	int32_t offs2 = (int32_t)(*start1 + NSEEL_CLOSEFACTOR);
+	float *indexer = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	float *fmt_index = parms[2];
+	const char *fmt = (const char *)GetStringForIndex(c->region_context, *fmt_index, 0);
+	float *start2 = parms[1];
+	genWnd(indexer, (int32_t)(*start2 + NSEEL_CLOSEFACTOR), fmt);
+	return 0;
+}
+static float NSEEL_CGEN_CALL getAsymmetricCosine(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext *)opaque;
+	float *blocks = c->ram_state;
+	uint32_t offs1 = (uint32_t)(*parms[0] + NSEEL_CLOSEFACTOR);
+	float *analysisWnd = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
+	uint32_t offs2 = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float *synthesisWnd = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	int32_t fftlen = (int32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
+	int32_t ovpSmps = (int32_t)(*parms[3] + NSEEL_CLOSEFACTOR);
+	float tf_res = *parms[4];
+	getAsymmetricWindow(analysisWnd, synthesisWnd, fftlen, ovpSmps, tf_res);
+	return 0;
+}
 static float NSEEL_CGEN_CALL _eel_match(void *opaque, INT_PTR num_parms, float **parms)
 {
 	if (num_parms >= 2)
 	{
 		compileContext *c = (compileContext*)opaque;
-		const char *fmt = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
-		const char *msg = (const char*)GetStringForIndex(c->m_string_context, *parms[1], 0);
+		const char *fmt = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
+		const char *msg = (const char*)GetStringForIndex(c->region_context, *parms[1], 0);
 		if (fmt && msg)
 			return eel_string_match(c, fmt, msg, 0, 0, fmt + strlen(fmt), msg + strlen(msg), (int32_t)num_parms - 2, parms + 2) ? 1.0f : 0.0f;
 	}
@@ -1668,8 +2149,8 @@ static float NSEEL_CGEN_CALL _eel_matchi(void *opaque, INT_PTR num_parms, float 
 	if (num_parms >= 2)
 	{
 		compileContext *c = (compileContext*)opaque;
-		const char *fmt = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
-		const char *msg = (const char*)GetStringForIndex(c->m_string_context, *parms[1], 0);
+		const char *fmt = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
+		const char *msg = (const char*)GetStringForIndex(c->region_context, *parms[1], 0);
 		if (fmt && msg)
 			return eel_string_match(opaque, fmt, msg, 0, 1, fmt + strlen(fmt), msg + strlen(msg), (int32_t)num_parms - 2, parms + 2) ? 1.0f : 0.0f;
 	}
@@ -1756,7 +2237,7 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 			else if (ct == 's' || ct == 'S')
 			{
 				compileContext *c = (compileContext*)opaque;
-				const char *str = (const char*)GetStringForIndex(c->m_string_context, v, 0);
+				const char *str = (const char*)GetStringForIndex(c->region_context, v, 0);
 				const size_t maxl = (size_t)(buf + buf_sz - 2u - op);
 				stbsp_snprintf(op, maxl, fs, str ? str : "");
 			}
@@ -1796,7 +2277,7 @@ float NSEEL_CGEN_CALL _eel_printf(void *opaque, INT_PTR num_param, float **parms
 	if (num_param > 0)
 	{
 		compileContext *c = (compileContext*)opaque;
-		const char *fmt = (const char*)GetStringForIndex(c->m_string_context, *(parms[0]), 0);
+		const char *fmt = (const char*)GetStringForIndex(c->region_context, *(parms[0]), 0);
 		if (fmt)
 		{
 			int32_t stringLength = strlen(fmt);
@@ -1825,10 +2306,10 @@ float NSEEL_CGEN_CALL _eel_sprintf(void *opaque, INT_PTR num_param, float **parm
 	if (num_param > 0)
 	{
 		compileContext *c = (compileContext*)opaque;
-		s_str *wr = (s_str*)GetStringForIndex(c->m_string_context, *(parms[0]), 1);
+		s_str *wr = (s_str*)GetStringForIndex(c->region_context, *(parms[0]), 1);
 		if (wr)
 			s_str_destroy(wr);
-		const char *fmt = (const char*)GetStringForIndex(c->m_string_context, *(parms[1]), 0);
+		const char *fmt = (const char*)GetStringForIndex(c->region_context, *(parms[1]), 0);
 		if (wr && fmt)
 		{
 			int32_t stringLength = strlen(fmt);
@@ -1882,8 +2363,8 @@ static float _eel_strcmp_int(const char *a, int32_t a_len, const char *b, int32_
 static float NSEEL_CGEN_CALL _eel_strncmp(void *opaque, float *aa, float *bb, float *maxlen)
 {
 	compileContext *c = (compileContext*)opaque;
-	const char *a = (const char*)GetStringForIndex(c->m_string_context, *aa, 0);
-	const char *b = (const char*)GetStringForIndex(c->m_string_context, *bb, 0);
+	const char *a = (const char*)GetStringForIndex(c->region_context, *aa, 0);
+	const char *b = (const char*)GetStringForIndex(c->region_context, *bb, 0);
 	if (!a || !b)
 	{
 		const char *badStr = "strncmp: bad specifier(s)";
@@ -1900,8 +2381,8 @@ static float NSEEL_CGEN_CALL _eel_strncmp(void *opaque, float *aa, float *bb, fl
 static float NSEEL_CGEN_CALL _eel_strnicmp(void *opaque, float *aa, float *bb, float *maxlen)
 {
 	compileContext *c = (compileContext*)opaque;
-	const char *a = (const char*)GetStringForIndex(c->m_string_context, *aa, 0);
-	const char *b = (const char*)GetStringForIndex(c->m_string_context, *bb, 0);
+	const char *a = (const char*)GetStringForIndex(c->region_context, *aa, 0);
+	const char *b = (const char*)GetStringForIndex(c->region_context, *bb, 0);
 	if (!a || !b)
 	{
 		const char *badStr = "strnicmp: bad specifier(s)";
@@ -1926,7 +2407,7 @@ static float NSEEL_CGEN_CALL _eel_stricmp(void *opaque, float *strOut, float *fm
 static float NSEEL_CGEN_CALL _eel_strlen(void *opaque, float *fmt_index)
 {
 	compileContext *c = (compileContext*)opaque;
-	const char *fmt = (const char*)GetStringForIndex(c->m_string_context, *fmt_index, 0);
+	const char *fmt = (const char*)GetStringForIndex(c->region_context, *fmt_index, 0);
 	if (fmt)
 		return (float)strlen(fmt);
 	return 0.0f;
@@ -1961,7 +2442,7 @@ static float NSEEL_CGEN_CALL _eel_cd(void *opaque, float *fmt_index)
 	if (opaque)
 	{
 		compileContext *c = (compileContext*)opaque;
-		const char *fmt = (const char*)GetStringForIndex(c->m_string_context, *fmt_index, 0);
+		const char *fmt = (const char*)GetStringForIndex(c->region_context, *fmt_index, 0);
 		if (fmt)
 #ifdef _WIN32
 			return (float)_chdir(fmt);
@@ -1977,7 +2458,7 @@ static float NSEEL_CGEN_CALL _eel_eval(void *opaque, float *s)
 	NSEEL_CODEHANDLE ch = NULL;
 	if (r)
 	{
-		const char *str = (const char*)GetStringForIndex(r->m_string_context, *s, 0);
+		const char *str = (const char*)GetStringForIndex(r->region_context, *s, 0);
 		if (!str)
 		{
 			const char *badStr = "eval() passed invalid string handle\n";
@@ -2009,7 +2490,7 @@ static float NSEEL_CGEN_CALL _eel_evalFile(void *opaque, float *s)
 	compileContext *r = (compileContext*)opaque;
 	if (r)
 	{
-		const char *str = (const char*)GetStringForIndex(r->m_string_context, *s, 0);
+		const char *str = (const char*)GetStringForIndex(r->region_context, *s, 0);
 		if (!str)
 		{
 			const char *badStr = "eval() passed invalid string handle\n";
@@ -2059,10 +2540,10 @@ static float NSEEL_CGEN_CALL _eel_base64_encode(void *opaque, float *destination
 	if (opaque)
 	{
 		compileContext *c = (compileContext*)opaque;
-		s_str *dest = (s_str*)GetStringForIndex(c->m_string_context, *destination, 1);
+		s_str *dest = (s_str*)GetStringForIndex(c->region_context, *destination, 1);
 		if (dest)
 			s_str_destroy(dest);
-		s_str *srcClass = (s_str*)GetStringForIndex(c->m_string_context, *source, 1);
+		s_str *srcClass = (s_str*)GetStringForIndex(c->region_context, *source, 1);
 		size_t len = (size_t)(*maxlen + NSEEL_CLOSEFACTOR);
 		if (len > s_str_capacity(srcClass))
 			return -1;
@@ -2130,8 +2611,8 @@ static float NSEEL_CGEN_CALL _eel_base64_encodeBinaryToTextFile(void *opaque, fl
 	if (opaque)
 	{
 		compileContext *c = (compileContext*)opaque;
-		const char *dest = (const char*)GetStringForIndex(c->m_string_context, *destination, 0);
-		const char *src = (const char *)GetStringForIndex(c->m_string_context, *source, 0);
+		const char *dest = (const char*)GetStringForIndex(c->region_context, *destination, 0);
+		const char *src = (const char *)GetStringForIndex(c->region_context, *source, 0);
 		if (dest && src)
 		{
 			unsigned char *buffer = 0;
@@ -2172,10 +2653,10 @@ static float NSEEL_CGEN_CALL _eel_base64_decode(void *opaque, float *destination
 	if (opaque)
 	{
 		compileContext *c = (compileContext*)opaque;
-		s_str *dest = (s_str*)GetStringForIndex(c->m_string_context, *destination, 1);
+		s_str *dest = (s_str*)GetStringForIndex(c->region_context, *destination, 1);
 		if (dest)
 			s_str_destroy(dest);
-		s_str *srcClass = (s_str*)GetStringForIndex(c->m_string_context, *source, 1);
+		s_str *srcClass = (s_str*)GetStringForIndex(c->region_context, *source, 1);
 		size_t len = (size_t)(*maxlen + NSEEL_CLOSEFACTOR);
 		if (len > s_str_capacity(srcClass))
 			return -1;
@@ -2244,8 +2725,8 @@ static float NSEEL_CGEN_CALL _eel_base64_decodeBinaryToTextFile(void *opaque, fl
 	if (opaque)
 	{
 		compileContext *c = (compileContext*)opaque;
-		const char *dest = (const char*)GetStringForIndex(c->m_string_context, *destination, 0);
-		const char *src = (const char *)GetStringForIndex(c->m_string_context, *source, 0);
+		const char *dest = (const char*)GetStringForIndex(c->region_context, *destination, 0);
+		const char *src = (const char *)GetStringForIndex(c->region_context, *source, 0);
 		if (dest && src)
 		{
 			unsigned char *buffer = 0;
@@ -2281,12 +2762,12 @@ static float NSEEL_CGEN_CALL _eel_base64_decodeBinaryToTextFile(void *opaque, fl
 	}
 	return 0.0f;
 }
-static float NSEEL_CGEN_CALL _eel_delete_all_strings(void *opaque, INT_PTR num_param, float **parms)
+static float NSEEL_CGEN_CALL _eel_resetSysMemRegion(void *opaque, INT_PTR num_param, float **parms)
 {
 	compileContext *c = (compileContext*)opaque;
-	eel_string_context_state *state = c->m_string_context;
-	Freeel_string_context_state(state);
-	Initeel_string_context_state(state);
+	eel_builtin_memRegion *state = c->region_context;
+	FreeRegion_context(state);
+	InitRegion_context(state);
 	return 0.0f;
 }
 int32_t get_float(char *val, float *F)
@@ -2334,7 +2815,7 @@ float* string2FloatArray(char *frArbitraryEqString, int32_t *elements)
 static float NSEEL_CGEN_CALL _eel_importFloatArrayFromString(void *opaque, float *fn_index, float *pointer)
 {
 	compileContext *c = (compileContext*)opaque;
-	const char *FLTBuf = (const char*)GetStringForIndex(c->m_string_context, *fn_index, 0);
+	const char *FLTBuf = (const char*)GetStringForIndex(c->region_context, *fn_index, 0);
 	uint32_t offs1 = (uint32_t)(*pointer + NSEEL_CLOSEFACTOR);
 	float *userspaceFLT = __NSEEL_RAMAlloc(c->ram_state, offs1);
 	int32_t elements;
@@ -2754,7 +3235,7 @@ static float NSEEL_CGEN_CALL _eel_iirBandSplitterInit(void *opaque, INT_PTR num_
 	if (num_param > 9)
 		return -1;
 	size_t requireMemSize;
-	void *ptr = 0;
+	void *ptr;
 	if (num_param == 3)
 	{
 		requireMemSize = sizeof(LinkwitzRileyCrossover);
@@ -2803,7 +3284,7 @@ static float NSEEL_CGEN_CALL _eel_iirBandSplitterInit(void *opaque, INT_PTR num_
 		init7BandsCrossover(bps, fs, *parms[2], *parms[3], *parms[4], *parms[5], *parms[6], *parms[7]);
 		ptr = bps;
 	}
-	else if (num_param == 9)
+	else
 	{
 		requireMemSize = sizeof(EightBandsCrossover);
 		EightBandsCrossover *bps = (EightBandsCrossover*)malloc(requireMemSize);
@@ -2913,38 +3394,18 @@ static float NSEEL_CGEN_CALL _eel_iirBandSplitterProcess(void *opaque, INT_PTR n
 	}
 	return 1;
 }
-#include "eel_matrix.h"
-#include "numericSys/FFTConvolver.h"
 static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param, float **parms)
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	if (c->numberOfConvolver > 1024 - 1)
-		return -1;
-	uint32_t ranN;
-	while (1)
-	{
-		ranN = (uint32_t)(nseel_int_rand(1.0f) * 1024.0);
-		uint32_t counter = 0;
-		for (uint32_t i = 0; i < c->numberOfConvolver; i++)
-		{
-			if (ranN == c->convolverMap[i])
-			{
-				counter++;
-				break;
-			}
-		}
-		if (!counter)
-			break;
-	}
-	void *ptr = 0;
-	uint32_t convType;
+	void *ptr;
+	char convType;
 	if (num_param == 3)
 		convType = 1;
 	else if (num_param == 4)
 		convType = 2;
 	else if (num_param == 6)
-		convType = 4;
+		convType = 3;
 	else
 		return -2;
 	uint32_t latency = (uint32_t)(*parms[0] + NSEEL_CLOSEFACTOR);
@@ -2953,23 +3414,23 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 	{
 		int32_t offs1 = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 		float *impulseresponse = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
-		FFTConvolver1x1 *conv = (FFTConvolver1x1*)malloc(sizeof(FFTConvolver1x1));
+		FFTConvolver1x1 *conv = (FFTConvolver1x1 *)malloc(sizeof(FFTConvolver1x1));
 		FFTConvolver1x1Init(conv);
 		FFTConvolver1x1LoadImpulseResponse(conv, latency, impulseresponse, irLen);
-		ptr = (void*)conv;
+		ptr = (void *)conv;
 	}
-	if (convType == 2)
+	else if (convType == 2)
 	{
 		uint32_t offs1 = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 		uint32_t offs2 = (uint32_t)(*parms[3] + NSEEL_CLOSEFACTOR);
 		float *leftImp = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
 		float *rightImp = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-		FFTConvolver2x2 *conv = (FFTConvolver2x2*)malloc(sizeof(FFTConvolver2x2));
+		FFTConvolver2x2 *conv = (FFTConvolver2x2 *)malloc(sizeof(FFTConvolver2x2));
 		FFTConvolver2x2Init(conv);
 		FFTConvolver2x2LoadImpulseResponse(conv, latency, leftImp, rightImp, irLen);
-		ptr = (void*)conv;
+		ptr = (void *)conv;
 	}
-	if (convType == 4)
+	else
 	{
 		uint32_t offs1 = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 		uint32_t offs2 = (uint32_t)(*parms[3] + NSEEL_CLOSEFACTOR);
@@ -2979,93 +3440,27 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 		float *LR = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
 		float *RL = __NSEEL_RAMAlloc(blocks, (uint64_t)offs3);
 		float *RR = __NSEEL_RAMAlloc(blocks, (uint64_t)offs4);
-		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2*)malloc(sizeof(FFTConvolver2x4x2));
+		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2 *)malloc(sizeof(FFTConvolver2x4x2));
 		FFTConvolver2x4x2Init(conv);
 		FFTConvolver2x4x2LoadImpulseResponse(conv, latency, LL, LR, RL, RR, irLen);
-		ptr = (void*)conv;
+		ptr = (void *)conv;
 	}
-	c->numberOfConvolver++;
-	int32_t idx = c->numberOfConvolver - 1;
-	if (idx)
-	{
-		c->convolverMap = (uint32_t*)realloc(c->convolverMap, c->numberOfConvolver * sizeof(uint32_t));
-		c->convolverType = (uint32_t*)realloc(c->convolverType, c->numberOfConvolver * sizeof(uint32_t));
-		c->convolverSink = (void**)realloc(c->convolverSink, c->numberOfConvolver * sizeof(void*));
-	}
-	else
-	{
-		c->convolverMap = (uint32_t*)malloc(c->numberOfConvolver * sizeof(uint32_t));
-		c->convolverType = (uint32_t*)malloc(c->numberOfConvolver * sizeof(uint32_t));
-		c->convolverSink = (void**)malloc(c->numberOfConvolver * sizeof(void*));
-	}
-	c->convolverMap[idx] = ranN;
-	c->convolverType[idx] = convType;
-	c->convolverSink[idx] = ptr;
-	return (float)ranN;
+	int32_t id = AddData(c->region_context, ptr, convType);
+	return (float)id;
 }
 static float NSEEL_CGEN_CALL _eel_deletefftconv1d(void *opaque, float *v)
 {
 	compileContext *c = (compileContext*)opaque;
-	if (!c->convolverMap)
-		return -1;
-	int32_t idx = arySearch(c->convolverMap, c->numberOfConvolver, (int32_t)(*v + NSEEL_CLOSEFACTOR));
-	if (idx < 0)
-		return -2;
-	void *ptr = c->convolverSink[idx];
-	int32_t convType = c->convolverType[idx];
-	if (convType == 1)
-	{
-		FFTConvolver1x1 *conv = (FFTConvolver1x1*)ptr;
-		FFTConvolver1x1Free(conv);
-		free(conv);
-	}
-	if (convType == 2)
-	{
-		FFTConvolver2x2 *conv = (FFTConvolver2x2*)ptr;
-		FFTConvolver2x2Free(conv);
-		free(conv);
-	}
-	if (convType == 4)
-	{
-		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2*)ptr;
-		FFTConvolver2x4x2Free(conv);
-		free(conv);
-	}
-	for (uint32_t i = idx; i < c->numberOfConvolver - 1; i++)
-	{
-		c->convolverMap[i] = c->convolverMap[i + 1];
-		c->convolverType[i] = c->convolverType[i + 1];
-		c->convolverSink[i] = c->convolverSink[i + 1];
-	}
-	c->numberOfConvolver--;
-	if (c->numberOfConvolver)
-	{
-		c->convolverMap = (uint32_t*)realloc(c->convolverMap, c->numberOfConvolver * sizeof(uint32_t));
-		c->convolverType = (uint32_t*)realloc(c->convolverType, c->numberOfConvolver * sizeof(uint32_t));
-		c->convolverSink = (void**)realloc(c->convolverSink, c->numberOfConvolver * sizeof(void*));
-	}
-	else
-	{
-		free(c->convolverMap);
-		free(c->convolverType);
-		free(c->convolverSink);
-		c->convolverMap = 0;
-		c->convolverType = 0;
-		c->convolverSink = 0;
-	}
+	DeleteSlot(c->region_context, (int32_t)(*v + NSEEL_CLOSEFACTOR));
 	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_processfftconv1d(void *opaque, INT_PTR num_param, float **parms)
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	if (!c->convolverMap)
-		return -1;
-	int32_t idx = arySearch(c->convolverMap, c->numberOfConvolver, (uint32_t)(*parms[0] + NSEEL_CLOSEFACTOR));
-	if (idx < 0)
-		return 0;
-	void *ptr = c->convolverSink[idx];
-	int32_t convType = c->convolverType[idx];
+	int32_t idx = (uint32_t)(*parms[0] + NSEEL_CLOSEFACTOR);
+	void *ptr = c->region_context->memRegion[idx];
+	char convType = c->region_context->type[idx];
 	if (convType == 1)
 	{
 		FFTConvolver1x1 *conv = (FFTConvolver1x1*)ptr;
@@ -3082,7 +3477,7 @@ static float NSEEL_CGEN_CALL _eel_processfftconv1d(void *opaque, INT_PTR num_par
 		float *x2 = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
 		FFTConvolver2x2Process(conv, x1, x2, x1, x2, conv->_blockSize);
 	}
-	if (convType == 4)
+	if (convType == 3)
 	{
 		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2*)ptr;
 		uint32_t offs1 = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
@@ -3093,7 +3488,6 @@ static float NSEEL_CGEN_CALL _eel_processfftconv1d(void *opaque, INT_PTR num_par
 	}
 	return 1;
 }
-
 void *task_user_created(void *arg)
 {
 	abstractThreads *info = (abstractThreads *)arg;
@@ -3127,30 +3521,8 @@ void *task_user_created(void *arg)
 	pthread_exit(NULL);
 	return 0;
 }
-void eelThread_start(compileContext *st, size_t task)
+void thread_init(abstractThreads *info)
 {
-	abstractThreads *info = st->codePtrThreadSink[task];
-	// ensure worker is waiting
-	pthread_mutex_lock(&(info->work_mtx));
-	// set job information & state
-	info->state = EEL_WORKING;
-	// wake-up signal
-	pthread_cond_signal(&(info->work_cond));
-	pthread_mutex_unlock(&(info->work_mtx));
-}
-void eelThread_wait(compileContext *st, size_t task)
-{
-	abstractThreads *info = st->codePtrThreadSink[task];
-	while (1)
-	{
-		pthread_cond_wait(&(info->boss_cond), &(info->boss_mtx));
-		if (EEL_IDLE == info->state)
-			break;
-	}
-}
-void thread_init(compileContext *st, int task)
-{
-	abstractThreads *info = st->codePtrThreadSink[task];
 	info->state = EEL_SETUP;
 	pthread_cond_init(&(info->work_cond), NULL);
 	pthread_mutex_init(&(info->work_mtx), NULL);
@@ -3158,32 +3530,12 @@ void thread_init(compileContext *st, int task)
 	pthread_mutex_init(&(info->boss_mtx), NULL);
 	pthread_mutex_lock(&(info->boss_mtx));
 	pthread_create(&info->threadID, NULL, task_user_created, (void *)info);
-	eelThread_wait(st, task);
-}
-void thread_delete(compileContext *st, int task)
-{
-	abstractThreads *info = st->codePtrThreadSink[task];
-	// ensure the worker is waiting
-	if (info->state == EEL_WORKING)
-		eelThread_wait(st, task);
-	pthread_mutex_lock(&(info->work_mtx));
-	info->state = EEL_GET_OFF_FROM_WORK;
-	// wake-up signal
-	pthread_cond_signal(&(info->work_cond));
-	pthread_mutex_unlock(&(info->work_mtx));
-	// wait for thread to exit
-	pthread_join(info->threadID, NULL);
-	pthread_mutex_destroy(&(info->work_mtx));
-	pthread_cond_destroy(&(info->work_cond));
-	pthread_mutex_unlock(&(info->boss_mtx));
-	pthread_mutex_destroy(&(info->boss_mtx));
-	pthread_cond_destroy(&(info->boss_cond));
-	NSEEL_code_free(info->codePtr);
+	eelThread_wait(info);
 }
 static float NSEEL_CGEN_CALL _eel_initthread(void *opaque, float *stringID)
 {
 	compileContext *c = (compileContext*)opaque;
-	const char *codePtr = (const char*)GetStringForIndex(c->m_string_context, *stringID, 0);
+	const char *codePtr = (const char*)GetStringForIndex(c->region_context, *stringID, 0);
 	NSEEL_CODEHANDLE compiledCode = NSEEL_code_compile_ex(c, codePtr, 0, 1);
 	char *err;
 	char badStr[128];
@@ -3193,73 +3545,32 @@ static float NSEEL_CGEN_CALL _eel_initthread(void *opaque, float *stringID)
 		EEL_STRING_STDOUT_WRITE(badStr, strlen(badStr));
 		return -2;
 	}
-	float *blocks = c->ram_state;
-	if (c->numberOfThreads > 1024 - 1)
-		return -1;
-	uint32_t ranN;
-	while (1)
-	{
-		ranN = (uint32_t)(nseel_int_rand(1.0f) * 1024.0);
-		uint32_t counter = 0;
-		for (uint32_t i = 0; i < c->numberOfThreads; i++)
-		{
-			if (ranN == c->threadMap[i])
-			{
-				counter++;
-				break;
-			}
-		}
-		if (!counter)
-			break;
-	}
-	c->numberOfThreads++;
-	int32_t idx = c->numberOfThreads - 1;
-	c->codePtrThreadSink[idx] = (abstractThreads*)malloc(sizeof(abstractThreads));
-	thread_init(c, idx);
-	c->codePtrThreadSink[idx]->codePtr = compiledCode;
-	c->threadMap[idx] = ranN;
-	return (float)ranN;
+	abstractThreads *pth = (abstractThreads*)malloc(sizeof(abstractThreads));
+	pth->codePtr = compiledCode;
+	thread_init(pth);
+	int32_t id = AddData(c->region_context, (void *)pth, 4);
+	return (float)id;
 }
 static float NSEEL_CGEN_CALL _eel_deletethread(void *opaque, float *v)
 {
 	compileContext *c = (compileContext*)opaque;
-	if (!c->threadMap)
-		return -1;
-	int32_t idx = arySearch(c->threadMap, c->numberOfThreads, (int32_t)(*v + NSEEL_CLOSEFACTOR));
-	if (idx < 0)
-		return -2;
-	thread_delete(c, idx);
-	free(c->codePtrThreadSink[idx]);
-	for (uint32_t i = idx; i < c->numberOfThreads - 1; i++)
-	{
-		c->threadMap[i] = c->threadMap[i + 1];
-		c->codePtrThreadSink[i] = c->codePtrThreadSink[i + 1];
-	}
-	c->numberOfThreads--;
+	DeleteSlot(c->region_context, *v);
 	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_createThread(void *opaque, float *v)
 {
 	compileContext *c = (compileContext*)opaque;
-	float *blocks = c->ram_state;
-	if (!c->threadMap)
-		return -1;
-	int32_t idx = arySearch(c->threadMap, c->numberOfThreads, (uint32_t)(*v + NSEEL_CLOSEFACTOR));
-	if (idx < 0)
-		return 0;
-	eelThread_start(c, idx);
+	int32_t idx = (int32_t)(*v + NSEEL_CLOSEFACTOR);
+	abstractThreads *ptr = (abstractThreads *)c->region_context->memRegion[idx];
+	eelThread_start(ptr);
 	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_joinThread(void *opaque, float *v)
 {
 	compileContext *c = (compileContext*)opaque;
-	float *blocks = c->ram_state;
-	if (!c->threadMap)
-		return -1;
-	int32_t idx = arySearch(c->threadMap, c->numberOfThreads, (uint32_t)(*v + NSEEL_CLOSEFACTOR));
-	if (idx < 0)
-		return 0;
-	eelThread_wait(c, idx);
+	int32_t idx = (int32_t)(*v + NSEEL_CLOSEFACTOR);
+	abstractThreads *ptr = (abstractThreads *)c->region_context->memRegion[idx];
+	eelThread_wait(ptr);
 	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_lockThread(void *opaque, float *v)
@@ -3394,7 +3705,7 @@ static float NSEEL_CGEN_CALL _eel_flacDecodeFile(void *opaque, INT_PTR num_param
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	const char *filename = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
+	const char *filename = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
 	uint32_t channels, fs;
 	uint64_t frameCount;
 	float *signal = drflac_open_file_and_read_pcm_frames_f32(filename, &channels, &fs, &frameCount, 0);
@@ -3454,7 +3765,7 @@ static float NSEEL_CGEN_CALL _eel_flacDecodeMemory(void *opaque, INT_PTR num_par
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	const char *base64String = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
+	const char *base64String = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
 	size_t actualSize;
 	unsigned char *memoryBlk = base64_decode((const unsigned char*)base64String, strlen(base64String), &actualSize);
 	uint32_t channels, fs;
@@ -3517,7 +3828,7 @@ static float NSEEL_CGEN_CALL _eel_wavDecodeFile(void *opaque, INT_PTR num_param,
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	const char *filename = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
+	const char *filename = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
 	uint32_t channels, fs;
 	uint64_t frameCount;
 	float *signal = drwav_open_file_and_read_pcm_frames_f32(filename, &channels, &fs, &frameCount, 0);
@@ -3577,7 +3888,7 @@ static float NSEEL_CGEN_CALL _eel_wavDecodeMemory(void *opaque, INT_PTR num_para
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	const char *base64String = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
+	const char *base64String = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
 	size_t actualSize;
 	unsigned char *memoryBlk = base64_decode((const unsigned char*)base64String, strlen(base64String), &actualSize);
 	uint32_t channels, fs;
@@ -3846,7 +4157,7 @@ static float NSEEL_CGEN_CALL _eel_writeWavFile(void *opaque, INT_PTR num_param, 
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	const char *filename = (const char*)GetStringForIndex(c->m_string_context, *parms[0], 0);
+	const char *filename = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
 	uint32_t channels = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
 	uint32_t fs = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 	uint64_t frameCount = (uint64_t)(*parms[3] + NSEEL_CLOSEFACTOR);
@@ -3875,7 +4186,7 @@ static float NSEEL_CGEN_CALL _eel_writeWavMemory(void *opaque, INT_PTR num_param
 {
 	compileContext *c = (compileContext*)opaque;
 	float *blocks = c->ram_state;
-	s_str *dest = (s_str*)GetStringForIndex(c->m_string_context, *parms[0], 1);
+	s_str *dest = (s_str*)GetStringForIndex(c->region_context, *parms[0], 1);
 	uint32_t channels = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
 	uint32_t fs = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 	uint64_t frameCount = (uint64_t)(*parms[3] + NSEEL_CLOSEFACTOR);
@@ -3921,7 +4232,7 @@ static float NSEEL_CGEN_CALL _eel_listSystemVariable(void *opaque, INT_PTR num_p
 	{
 		for (int j = 0; j < NSEEL_VARS_PER_BLOCK; j++)
 		{
-			char *valid = GetStringForIndex(c->m_string_context, c->varTable_Values[i][j], 1);
+			char *valid = GetStringForIndex(c->region_context, c->varTable_Values[i][j], 1);
 			if (!valid)
 				strncpy(isString, "Is not string", 16);
 			else
@@ -4093,18 +4404,26 @@ static functionType fnTable1[] = {
   {"strnicmp",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void**)&_eel_strnicmp},NSEEL_PProc_THIS},
   {"printf",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_printf},NSEEL_PProc_THIS},
   {"sprintf",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_sprintf},NSEEL_PProc_THIS},
-  {"resetStringContainers",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_TAKES_VARPARM_EX | BIF_RETURNSONSTACK,{(void**)&_eel_delete_all_strings},NSEEL_PProc_THIS},
+  {"resetSysMemRegion",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_TAKES_VARPARM_EX | BIF_RETURNSONSTACK,{(void**)&_eel_resetSysMemRegion},NSEEL_PProc_THIS},
   {"importFLTFromStr",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&_eel_importFloatArrayFromString},NSEEL_PProc_THIS},
   {"arburgCheckMemoryRequirement",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&arburgCheckMemoryRequirement},NSEEL_PProc_RAM},
-  {"arburgTrainModel",_asm_generic2parm_retd,_asm_generic2parm_retd_end,5 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&arburgTrainModel},NSEEL_PProc_THIS},
-  {"arburgGetPredictionReflectionCoeff",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&arburgGetPredictionReflectionCoeff},NSEEL_PProc_THIS},
+  {"arburgTrainModel",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&arburgTrainModel},NSEEL_PProc_THIS},
   {"arburgPredictBackward",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&arburgPredictBackward},NSEEL_PProc_RAM},
   {"arburgPredictForward",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&arburgPredictForward},NSEEL_PProc_RAM},
+  {"getCosineWindows",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&getCosineWindows},NSEEL_PProc_THIS},
+  {"getAsymmetricCosine",_asm_generic2parm_retd,_asm_generic2parm_retd_end,5 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&getAsymmetricCosine},NSEEL_PProc_THIS},
   {"stftCheckMemoryRequirement",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftCheckMemoryRequirement},NSEEL_PProc_THIS},
   {"stftInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftInit},NSEEL_PProc_THIS},
+  {"iirHilbertProcess",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void **)&iirHilbertProcess},NSEEL_PProc_RAM},
+  {"iirHilbertInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&iirHilbertInit},NSEEL_PProc_THIS},
+  {"movingMinMaxProcess",_asm_generic3parm_retd,_asm_generic3parm_retd_end,3 | BIF_RETURNSONSTACK,{(void **)&movingMinMaxProcess},NSEEL_PProc_RAM},
+  {"movingMinMaxInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&movingMinMaxInit},NSEEL_PProc_RAM},
+  {"movingMedianProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void **)&movingMedianProcess},NSEEL_PProc_RAM},
+  {"movingMedianInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&movingMedianInit},NSEEL_PProc_RAM},
   {"stftGetWindowPower",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftGetWindowPower},NSEEL_PProc_THIS},
   {"stftForward",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftForward},NSEEL_PProc_THIS},
   {"stftBackward",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftBackward},NSEEL_PProc_THIS},
+  {"stftSetAsymWnd",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&stftSetAsymWnd},NSEEL_PProc_THIS},
   {"InitPinkNoise",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&pinkNoiseInit},NSEEL_PProc_THIS},
   {"GeneratePinkNoise",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&pinkNoiseGen},NSEEL_PProc_THIS},
   {"InitPolyphaseFilterbank",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&PolyphaseFilterbankInit},NSEEL_PProc_THIS},
@@ -4181,9 +4500,17 @@ void printFunctions()
 		EEL_STRING_STDOUT_WRITE(badStr, strlen(badStr));
 	}
 }
-
+int XLITTLE_ENDIAN;
 void NSEEL_start()
 {
+	union
+	{
+		unsigned char cc[4];
+		unsigned short s[2];
+		unsigned long n;
+	} u;
+	u.n = 0x12345678;
+	XLITTLE_ENDIAN = (u.s[0] == 0x5678 && u.s[1] == 0x1234 && u.cc[0] == 0x78 && u.cc[1] == 0x56 && u.cc[2] == 0x34 && u.cc[3] == 0x12);
 	// Global memory
 	if (decompressedCoefficients)
 		free(decompressedCoefficients);
@@ -4618,9 +4945,7 @@ eelStringSegmentRec *nseel_createStringSegmentRec(compileContext *ctx, const cha
 opcodeRec *nseel_eelMakeOpcodeFromStringSegments(compileContext *ctx, eelStringSegmentRec *rec)
 {
 	if (ctx && ctx->onString)
-	{
 		return nseel_createCompiledValue(ctx, ctx->onString(ctx->caller_this, rec));
-	}
 	return NULL;
 }
 opcodeRec *nseel_createMoreParametersOpcode(compileContext *ctx, opcodeRec *code1, opcodeRec *code2)
@@ -5779,7 +6104,7 @@ unsigned char *compileCodeBlockWithRet(compileContext *ctx, opcodeRec *rec, int3
 	p += funcsz;
 	memcpy(p, &GLUE_RET, sizeof(GLUE_RET)); p += sizeof(GLUE_RET);
 #ifdef __arm__
-	//__clear_cache(newblock2, p);
+	__clear_cache(newblock2, p);
 #endif
 	ctx->l_stats[2] += funcsz + 2;
 	return newblock2;
@@ -7187,7 +7512,7 @@ NSEEL_CODEHANDLE NSEEL_code_compile_ex(NSEEL_VMCTX _ctx, const char *_expression
 			ctx->l_stats[1] = size;
 			handle->code_size = (int32_t)(writeptr - (unsigned char *)handle->code);
 #ifdef __arm__
-			//__clear_cache(handle->code, writeptr);
+			__clear_cache(handle->code, writeptr);
 #endif
 		}
 		handle->blocks = ctx->blocks_head;
@@ -7271,72 +7596,26 @@ void NSEEL_VM_freevars(NSEEL_VMCTX _ctx)
 	if (_ctx)
 	{
 		compileContext *ctx = (compileContext*)_ctx;
-		memset(ctx->ram_state, 0, sizeof(ctx->ram_state));
 		free(ctx->varTable_Values);
 		free(ctx->varTable_Names);
 		ctx->varTable_Values = 0;
 		ctx->varTable_Names = 0;
 		ctx->varTable_numBlocks = 0;
-		if (ctx->numberOfConvolver)
+		if (ctx->region_context)
 		{
-			for (uint32_t i = 0; i < ctx->numberOfConvolver; i++)
-			{
-				void *ptr = ctx->convolverSink[i];
-				int32_t convType = ctx->convolverType[i];
-				if (convType == 1)
-				{
-					FFTConvolver1x1 *conv = (FFTConvolver1x1*)ptr;
-					FFTConvolver1x1Free(conv);
-					free(conv);
-				}
-				if (convType == 2)
-				{
-					FFTConvolver2x2 *conv = (FFTConvolver2x2*)ptr;
-					FFTConvolver2x2Free(conv);
-					free(conv);
-				}
-				if (convType == 4)
-				{
-					FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2*)ptr;
-					FFTConvolver2x4x2Free(conv);
-					free(conv);
-				}
-			}
-			if (ctx->convolverMap)
-				free(ctx->convolverMap);
-			if (ctx->convolverType)
-				free(ctx->convolverType);
-			if (ctx->convolverSink)
-				free(ctx->convolverSink);
-			ctx->convolverMap = 0;
-			ctx->convolverType = 0;
-			ctx->convolverSink = 0;
-			ctx->numberOfConvolver = 0;
-		}
-		if (ctx->numberOfThreads)
-		{
-			for (uint32_t i = 0; i < ctx->numberOfThreads; i++)
-			{
-				thread_delete(ctx, i);
-				free(ctx->codePtrThreadSink[i]);
-			}
-			ctx->numberOfThreads = 0;
-		}
-		if (ctx->m_string_context)
-		{
-			Freeel_string_context_state(ctx->m_string_context);
-			free(ctx->m_string_context);
-			ctx->m_string_context = 0;
+			FreeRegion_context(ctx->region_context);
+			free(ctx->region_context);
+			ctx->region_context = 0;
 		}
 	}
 }
-void NSEEL_init_string(NSEEL_VMCTX _ctx)
+void NSEEL_init_memRegion(NSEEL_VMCTX _ctx)
 {
 	if (_ctx)
 	{
 		compileContext *ctx = (compileContext*)_ctx;
-		ctx->m_string_context = (eel_string_context_state*)malloc(sizeof(eel_string_context_state));
-		Initeel_string_context_state(ctx->m_string_context);
+		ctx->region_context = (eel_builtin_memRegion*)malloc(sizeof(eel_builtin_memRegion));
+		InitRegion_context(ctx->region_context);
 	}
 }
 NSEEL_VMCTX NSEEL_VM_alloc() // return a handle
@@ -7348,7 +7627,7 @@ NSEEL_VMCTX NSEEL_VM_alloc() // return a handle
 		ctx->caller_this = ctx;
 		ctx->scanner = ctx;
 		ctx->onString = addStringCallback;
-		NSEEL_init_string((NSEEL_VMCTX)ctx);
+		NSEEL_init_memRegion((NSEEL_VMCTX)ctx);
 	}
 	return ctx;
 }
@@ -7651,7 +7930,7 @@ opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen) 
 		else if (!tmplen ? !stricmp(tmp, "$E") : (tmplen == 2 && !strnicmp(tmp, "$E", 2)))
 			return nseel_createCompiledValue(ctx, (float)2.71828182845904523536);
 		else if (!tmplen ? !stricmp(tmp, "$PI") : (tmplen == 3 && !strnicmp(tmp, "$PI", 3)))
-			return nseel_createCompiledValue(ctx, (float)3.141592653589793238463);
+			return nseel_createCompiledValue(ctx, (float)M_PIDouble);
 		else if (!tmplen ? !stricmp(tmp, "$PHI") : (tmplen == 4 && !strnicmp(tmp, "$PHI", 4)))
 			return nseel_createCompiledValue(ctx, (float)1.618033988749894848205);
 		else if (!tmplen ? !stricmp(tmp, "$EPS") : (tmplen == 4 && !strnicmp(tmp, "$EPS", 4)))
