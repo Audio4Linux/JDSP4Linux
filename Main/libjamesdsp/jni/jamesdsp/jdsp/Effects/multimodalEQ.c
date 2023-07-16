@@ -94,11 +94,11 @@ void HSHOResponse(double fs, double fc, unsigned int filterOrder, double gain, d
 			complexMultiplication(cplxRe[j], cplxIm[j], cplx2Re, cplx2Im, &cplxRe[j], &cplxIm[j]);
 		}
 	}
+scalar_gain:
 	free(sRe);
 	free(sIm);
 	free(s2Re);
 	free(s2Im);
-scalar_gain:
 	for (unsigned int j = 0; j < queryPts; j++)
 	{
 		cplxRe[j] *= overallGain;
