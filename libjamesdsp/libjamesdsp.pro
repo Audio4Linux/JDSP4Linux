@@ -10,6 +10,8 @@ QMAKE_CFLAGS += -std=gnu11 -O2
 
 CONFIG += warn_off # Disable warnings for library
 
+DEBUG_ASAN: CONFIG += sanitizer sanitize_address
+
 # Enable liveprog logging redirection
 DEFINES += CUSTOM_CMD
 

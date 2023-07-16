@@ -26,33 +26,6 @@ extern "C" {
 inline JamesDSPLib* cast(void* raw){
     return static_cast<JamesDSPLib*>(raw);
 }
-inline int32_t arySearch(int32_t *array, int32_t N, int32_t x)
-{
-    for (int32_t i = 0; i < N; i++)
-    {
-        if (array[i] == x)
-            return i;
-    }
-    return -1;
-}
-#define FLOIDX 20000
-inline void* GetStringForIndex(eel_string_context_state *st, float val, int32_t write)
-{
-    int32_t castedValue = (int32_t)(val + 0.5f);
-    if (castedValue < FLOIDX)
-        return 0;
-    int32_t idx = arySearch(st->map, st->slot, castedValue);
-    if (idx < 0)
-        return 0;
-    if (!write)
-    {
-        s_str *tmp = &st->m_literal_strings[idx];
-        const char *s = s_str_c_str(tmp);
-        return (void*)s;
-    }
-    else
-        return (void*)&st->m_literal_strings[idx];
-}
 
 DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(std::move(extraHandler))
 {
@@ -746,16 +719,17 @@ std::vector<EelVariable> DspHost::enumEelVariables()
         for (int j = 0; j < NSEEL_VARS_PER_BLOCK; j++)
         {
             EelVariable var;
-            char *valid = (char*)GetStringForIndex(ctx->m_string_context, ctx->varTable_Values[i][j], 0);
-            var.isString = valid;
+            // char *valid = (char*)GetStringForIndex(ctx->region_context, ctx->varTable_Values[i][j], 0);
+            // TODO fix string handling (broke after last libjamesdsp update)
+            var.isString = false; // = valid;
 
             if (ctx->varTable_Names[i][j])
             {
                 var.name = ctx->varTable_Names[i][j];
-                if(var.isString)
+                /*if(var.isString)
                     var.value = valid;
-                else
-                    var.value = ctx->varTable_Values[i][j];
+                else*/
+                var.value = ctx->varTable_Values[i][j];
 
                 vars.push_back(var);
             }
@@ -777,7 +751,8 @@ bool DspHost::manipulateEelVariable(const char* name, float value)
                 continue;
             }
 
-            char *validString = (char*)GetStringForIndex(ctx->m_string_context, ctx->varTable_Values[i][j], 0);
+            // TODO fix string handling & detection
+            char *validString = nullptr;//(char*)GetStringForIndex(ctx->region_context, ctx->varTable_Values[i][j], 1);
             if(validString)
             {
                 Log::error(QString("variable '%1' is a string; currently only numerical variables can be manipulated").arg(name));
