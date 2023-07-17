@@ -729,17 +729,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation type="unfinished"/>
+      <translation>Р&amp;егулярний вираз</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
-      <translation type="unfinished"/>
+      <translation>&amp;Ціле слово </translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Враховувати регістр</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
@@ -749,22 +749,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Заміна</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
       <source>Replace &amp;All</source>
-      <translation type="unfinished"/>
+      <translation>Замінити &amp;все</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
       <source>no match found</source>
-      <translation type="unfinished"/>
+      <translation>збігів не знайдено</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="170"/>
       <source>Replaced %1 occurrence(s)</source>
-      <translation type="unfinished"/>
+      <translation>Замінено %1 збіг(и)</translation>
     </message>
   </context>
   <context>
@@ -772,7 +772,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
       <source>Welcome!</source>
-      <translation type="unfinished"/>
+      <translation>Вітаємо!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
@@ -834,7 +834,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>FlatTabWidget</translation>
     </message>
   </context>
   <context>
@@ -842,32 +842,32 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Увімкнути графічний еквалайзер</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
       <source>Freq.</source>
-      <translation type="unfinished"/>
+      <translation>Част.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
       <source>Gain</source>
-      <translation type="unfinished"/>
+      <translation>Підсилення</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>База даних AutoEQ...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
       <source>15-band</source>
-      <translation type="unfinished"/>
+      <translation>15-діапазонний</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
       <source>31-band</source>
-      <translation type="unfinished"/>
+      <translation>31-діапазонний</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
@@ -887,41 +887,41 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
       <source>Invert response</source>
-      <translation type="unfinished"/>
+      <translation>Інвертувати фазу</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>Нормалізувати амплітудну-частотну характеристику</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
       <source>Reset response</source>
-      <translation type="unfinished"/>
+      <translation>Скинути амплітудну-частотну характеристику</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
       <source>Import EqualizerAPO settings</source>
-      <translation type="unfinished"/>
+      <translation>Імпорт параметрів EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
       <source>Import frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Імпорт амплітудно-частотної характеристики</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
       <source>CSV frequency response (*.csv)</source>
-      <translation type="unfinished"/>
+      <translation>CSV амплітудної-частотної характеристики (*.csv)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
       <source>All files (*.*)</source>
-      <translation type="unfinished"/>
+      <translation>Усі файли (*.*)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
@@ -931,12 +931,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
       <source>EqualizerAPO GraphicEQ (*.txt)</source>
-      <translation type="unfinished"/>
+      <translation>EqualizerAPO GraphicEQ (*.txt)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
       <source>Export frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Експорт амплітудно-частотної характеристики</translation>
     </message>
   </context>
   <context>
@@ -963,23 +963,23 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
-      <translation type="unfinished"/>
+      <translation>Не завантажено жодного скрипту</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
       <source>Enable</source>
-      <translation type="unfinished"/>
+      <translation>Увімкнути</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="120"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Скинути</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Створити новий скрипт</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
@@ -1002,7 +1002,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
       <source>Edit script</source>
-      <translation type="unfinished"/>
+      <translation>Редагувати скрипт</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
@@ -1015,7 +1015,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="26"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP для Linux</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
@@ -1025,12 +1025,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Динамічне підсилення басів</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>Максимальне підсилення</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
@@ -1055,12 +1055,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>Лімітер/Мастер</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="214"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>Поріг</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
@@ -1070,7 +1070,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Рівень вихідного підсилення</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
@@ -1085,7 +1085,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>Постійна часу</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
@@ -1121,22 +1121,22 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="473"/>
       <location filename="../../src/MainWindow.ui" line="529"/>
       <source>Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>Кроссфід</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="494"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>Режим</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="511"/>
       <source>Custom BS2B parameters</source>
-      <translation type="unfinished"/>
+      <translation>Користувацькі BS2B параметри</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="552"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>Частотний зріз</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="607"/>
@@ -1151,7 +1151,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="631"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>Рівень ширини</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="676"/>
@@ -1161,7 +1161,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="702"/>
       <source>Enable reverberation</source>
-      <translation type="unfinished"/>
+      <translation>Увімкнути реверберацію</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="722"/>
@@ -1257,7 +1257,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="995"/>
       <source>Bass boost</source>
-      <translation type="unfinished"/>
+      <translation>Підсилення басів</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1143"/>
@@ -1267,7 +1267,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1279"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>Мінімальна фаза FIR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1284"/>
@@ -1297,7 +1297,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1235"/>
       <source>Enable EQ</source>
-      <translation type="unfinished"/>
+      <translation>Увімкнути еквалайзер</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1255"/>
@@ -1332,17 +1332,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1356"/>
       <source>Reset EQ</source>
-      <translation type="unfinished"/>
+      <translation>Скинути EQ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1384"/>
       <source>Fixed bands</source>
-      <translation type="unfinished"/>
+      <translation>Фіксовані діапазони</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1400"/>
       <source>Flexible bands</source>
-      <translation type="unfinished"/>
+      <translation>Гнучкі діапазони</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1432"/>
@@ -1353,7 +1353,7 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="1457"/>
       <location filename="../../src/MainWindow.ui" line="1779"/>
       <source>Filesystem</source>
-      <translation type="unfinished"/>
+      <translation>Файлова система</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1479"/>
@@ -1393,12 +1393,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1582"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Редагувати</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1628"/>
       <source>Channels:</source>
-      <translation type="unfinished"/>
+      <translation>Канали:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1648"/>
@@ -1972,128 +1972,129 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>Закрити групу</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="248"/>
       <source>Close Tab</source>
-      <translation type="unfinished"/>
+      <translation>Закрити вкладку</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="20"/>
       <source>Something went wrong</source>
-      <translation type="unfinished"/>
+      <translation>Щось пішло не так</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="21"/>
       <source>Failed to open URL with default browser.
  Please copy this URL manually: </source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося відкрити URL у браузері за увмовчанням
+ Будь ласка, скопіюйте URL вручну: </translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="29"/>
       <source>Flat</source>
-      <translation type="unfinished"/>
+      <translation>Плоский</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="82"/>
       <source>Pop</source>
-      <translation type="unfinished"/>
+      <translation>Поп</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="83"/>
       <source>Rock</source>
-      <translation type="unfinished"/>
+      <translation>Рок</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="84"/>
       <source>Jazz</source>
-      <translation type="unfinished"/>
+      <translation>Джаз</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="85"/>
       <source>Classic</source>
-      <translation type="unfinished"/>
+      <translation>Класичний</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="86"/>
       <source>Bass</source>
-      <translation type="unfinished"/>
+      <translation>Баси</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="87"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Очистити</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="88"/>
       <source>Hip-Hop</source>
-      <translation type="unfinished"/>
+      <translation>Хіп-Хоп</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="89"/>
       <source>Dubstep</source>
-      <translation type="unfinished"/>
+      <translation>Дабстеп</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="90"/>
       <source>Movie</source>
-      <translation type="unfinished"/>
+      <translation>Фільм</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="91"/>
       <source>Metal</source>
-      <translation type="unfinished"/>
+      <translation>Метал</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="92"/>
       <source>Vocal Booster</source>
-      <translation type="unfinished"/>
+      <translation>Підсилення вокалу</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="93"/>
       <source>Hardstyle</source>
-      <translation type="unfinished"/>
+      <translation>Хардстайл</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="94"/>
       <source>Acoustic</source>
-      <translation type="unfinished"/>
+      <translation>Акустика</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="95"/>
       <source>R&amp;B</source>
-      <translation type="unfinished"/>
+      <translation>R&amp;B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="96"/>
       <source>Electronic</source>
-      <translation type="unfinished"/>
+      <translation>Електронна</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="97"/>
       <source>Deep Bass</source>
-      <translation type="unfinished"/>
+      <translation>Глибокий бас</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="98"/>
       <source>Beats</source>
-      <translation type="unfinished"/>
+      <translation>Біти</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="105"/>
       <source>BS2B Custom</source>
-      <translation type="unfinished"/>
+      <translation>Користувацький BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="106"/>
       <source>BS2B Weak</source>
-      <translation type="unfinished"/>
+      <translation>Слабкий BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="107"/>
       <source>BS2B Strong</source>
-      <translation type="unfinished"/>
+      <translation>Сильний BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
@@ -2118,7 +2119,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Default</source>
-      <translation type="unfinished"/>
+      <translation>Типово</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
