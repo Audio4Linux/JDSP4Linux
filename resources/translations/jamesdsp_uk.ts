@@ -991,13 +991,15 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <source>Cannot restore defaults.
 No EEL file is currently loaded.</source>
-      <translation type="unfinished"/>
+      <translation>Неможливо відновити типові значення.
+Зараз не завантажений файл EEL.</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Selected EEL file does not exist anymore.
 Please select another one</source>
-      <translation type="unfinished"/>
+      <translation>Обраний файл EEL більше не існує.
+Будь ласка, виберіть інший</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
@@ -1080,7 +1082,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>Компандер динамічного діапазону</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
@@ -1312,12 +1314,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1324"/>
       <source>Interpolator</source>
-      <translation type="unfinished"/>
+      <translation>Інтерполятор</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1327"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим інтерполяції&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1331"/>
@@ -1388,7 +1390,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1563"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Розширене редагування форми хвиль</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1582"/>
@@ -1428,12 +1430,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1866"/>
       <source>Create your custom DDC files using DDCToolbox</source>
-      <translation type="unfinished"/>
+      <translation>Створити свої власні файли DDC за допомогою DDCToolbox</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1876"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1932"/>
@@ -1458,12 +1460,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2071"/>
       <source>Custom Presets</source>
-      <translation type="unfinished"/>
+      <translation>Користувацькі пресети</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2074"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Користувацькі пресети&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Створення та керування користувацькими пресетами&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2100"/>
@@ -1473,7 +1475,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Налаштування&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Налаштуштування цього застосунку&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2126"/>
@@ -1638,7 +1640,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1175"/>
       <source>Advanced waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Розширене редагування форми хвиль</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1176"/>
@@ -1662,7 +1664,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Створити новий скрипт</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="63"/>
@@ -1677,7 +1679,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
       <source>Workspace directory</source>
-      <translation type="unfinished"/>
+      <translation>Директорія робочого простору</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
@@ -1709,7 +1711,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <source>Workspace directory does not exist</source>
-      <translation type="unfinished"/>
+      <translation>Директорія робочого простору не існує</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
@@ -1719,7 +1721,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>File name is empty or contains illegal characters</source>
-      <translation type="unfinished"/>
+      <translation>Ім'я файлу пусте або містить неприпустимі символи</translation>
     </message>
   </context>
   <context>
@@ -1737,7 +1739,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="14"/>
       <source>Palette editor</source>
-      <translation type="unfinished"/>
+      <translation>Редактор палітри</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="26"/>
@@ -1898,12 +1900,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="14"/>
       <source>Preset auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>Правила автоперемикання пресету</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="27"/>
       <source>Auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>Правила автоперемикання</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="62"/>
@@ -1913,7 +1915,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="75"/>
       <source>  Delete selection  </source>
-      <translation type="unfinished"/>
+      <translation>  Видалити виділення  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="34"/>
@@ -1924,7 +1926,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="62"/>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
       <source>Cannot add new rule</source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося додати нове правило</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="63"/>
@@ -1949,7 +1951,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
       <source>Assigned preset</source>
-      <translation type="unfinished"/>
+      <translation>Застосований пресет</translation>
     </message>
   </context>
   <context>
@@ -1957,17 +1959,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="159"/>
       <source>List All Tabs</source>
-      <translation type="unfinished"/>
+      <translation>Список усіх вкладок</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>Відчепити групу</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
       <source>Close Active Tab</source>
-      <translation type="unfinished"/>
+      <translation>Закрити активну вкладку</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
@@ -2154,32 +2156,32 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 1</source>
-      <translation type="unfinished"/>
+      <translation>Мала кімната 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 2</source>
-      <translation type="unfinished"/>
+      <translation>Мала кімната 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Medium room 1</source>
-      <translation type="unfinished"/>
+      <translation>Середня кімната 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium room 2</source>
-      <translation type="unfinished"/>
+      <translation>Середня кімната 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 1</source>
-      <translation type="unfinished"/>
+      <translation>Велика кімната 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 2</source>
-      <translation type="unfinished"/>
+      <translation>Велика кімната 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2204,27 +2206,27 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation type="unfinished"/>
+      <translation>Довга ревербрація 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation type="unfinished"/>
+      <translation>Довга ревербрація 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
       <source>error</source>
-      <translation type="unfinished"/>
+      <translation>помилка</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="44"/>
       <source>creating</source>
-      <translation type="unfinished"/>
+      <translation>створення</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="47"/>
       <source>suspended</source>
-      <translation type="unfinished"/>
+      <translation>призупинено</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="50"/>
@@ -2251,7 +2253,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>Дозвіл до автозапуску було відмовлено</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
@@ -2261,7 +2263,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Невідома помилка</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
@@ -2309,7 +2311,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="112"/>
       <source>Context menu</source>
-      <translation type="unfinished"/>
+      <translation>Контекстне меню</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="159"/>
@@ -2359,7 +2361,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="388"/>
       <source>Built-in assets</source>
-      <translation type="unfinished"/>
+      <translation>Вбудовані ресурси</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="399"/>
@@ -2374,22 +2376,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="422"/>
       <source>  Extract now  </source>
-      <translation type="unfinished"/>
+      <translation>  Видобути зараз  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="454"/>
       <source>Select sink/device to be processed</source>
-      <translation type="unfinished"/>
+      <translation>Виберіть джерело/пристрій для обробки</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="460"/>
       <source>Use default output device (recommended)</source>
-      <translation type="unfinished"/>
+      <translation>Використовувати стандартний пристрій виводу (рекомендовано)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="467"/>
       <source>Manually select device</source>
-      <translation type="unfinished"/>
+      <translation>Виберіть пристрій вручну</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="479"/>
@@ -2434,7 +2436,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="630"/>
       <source>  Manage local database  </source>
-      <translation type="unfinished"/>
+      <translation>  Керування локальною базою даних  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
@@ -2454,12 +2456,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="682"/>
       <source>Auto-start</source>
-      <translation type="unfinished"/>
+      <translation>Автозапуск</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="688"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Запускати згорнутим під час завантаження</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
@@ -2469,12 +2471,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="760"/>
       <source>Visit Github repo</source>
-      <translation type="unfinished"/>
+      <translation>Відвідати GitHub репозиторій</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="786"/>
       <source>Run setup wizard</source>
-      <translation type="unfinished"/>
+      <translation>Запустити майстер налаштування</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="809"/>
@@ -2484,22 +2486,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="201"/>
       <source>Unknown (%1)</source>
-      <translation type="unfinished"/>
+      <translation>Невідомо (%1)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
       <source>installed</source>
-      <translation type="unfinished"/>
+      <translation>встановлено</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
       <source>not installed</source>
-      <translation type="unfinished"/>
+      <translation>не встановлено</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
       <source>Override liveprog scripts?</source>
-      <translation type="unfinished"/>
+      <translation>Перевизначити скрипти liveprog?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
@@ -2510,7 +2512,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
       <source>Extract assets</source>
-      <translation type="unfinished"/>
+      <translation>Розпакувати ресурси</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
@@ -2526,7 +2528,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>Ви впевнені?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
@@ -2536,12 +2538,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
       <source>Warning</source>
-      <translation type="unfinished"/>
+      <translation>Увага</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
       <source>Do you really want to restore the default menu layout?</source>
-      <translation type="unfinished"/>
+      <translation>Ви дійсно хочете відновити макет меню за замовчуванням?</translation>
     </message>
   </context>
   <context>
@@ -2562,12 +2564,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="65"/>
       <source>Application version</source>
-      <translation type="unfinished"/>
+      <translation>Версія застосунку</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
       <source>JamesDSP core version</source>
-      <translation type="unfinished"/>
+      <translation>Версія ядра JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
@@ -2577,12 +2579,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
       <source>Audio format</source>
-      <translation type="unfinished"/>
+      <translation>Формат аудіо</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>Частота дискретизації</translation>
     </message>
   </context>
   <context>
@@ -2603,17 +2605,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
       <source>&amp;Bypass</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Обхід</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="22"/>
       <source>&amp;Presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Пресети</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="25"/>
       <source>&amp;Convolver bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>Закладки &amp;конвольвера</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="42"/>
@@ -2645,7 +2647,7 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/TrayIcon.cpp" line="199"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="269"/>
       <source>&amp;Show/hide window</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Показати/сховати вікно</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="203"/>
@@ -2686,7 +2688,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
@@ -2701,7 +2703,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
       <source>Click a variable to manipulate its value.</source>
-      <translation type="unfinished"/>
+      <translation>Натисніть на змінну, щоб маніпулювати її значенням.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
@@ -2712,17 +2714,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <source>This variable is a string. Currently only numerical value types can be modified.</source>
-      <translation type="unfinished"/>
+      <translation>Ця змінна є рядком. Наразі можна змінити лише числові типи значень.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="74"/>
       <source>Manipulate variable</source>
-      <translation type="unfinished"/>
+      <translation>Маніпулювання змінною</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="75"/>
       <source>Enter a new value for variable &apos;%1&apos;:</source>
-      <translation type="unfinished"/>
+      <translation>Введіть нове значення змінної &apos;%1&apos;:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
@@ -2774,7 +2776,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
       <source>Detach</source>
-      <translation type="unfinished"/>
+      <translation>Відчепити</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
@@ -2802,7 +2804,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
       <source>Moves the selected toolbar item up</source>
-      <translation type="unfinished"/>
+      <translation>Переміщує обрану панель інструментів вгору</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="79"/>
@@ -2832,7 +2834,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="171"/>
       <source>Adds the selected menu action to the toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Додає вибране меню з діями до панелі інструментів</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="174"/>
@@ -2847,7 +2849,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="212"/>
       <source>Removes the selected item from the active toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Видаляє обраний елемент з активної панелі інструментів</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="215"/>
@@ -2863,7 +2865,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="279"/>
       <source>Context menu contents</source>
-      <translation type="unfinished"/>
+      <translation>Вміст контекстного меню</translation>
     </message>
   </context>
 </TS>
