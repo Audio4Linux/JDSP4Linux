@@ -1097,22 +1097,22 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>Przekształcenia czasowo-częstotliwościowe</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="398"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>Jednolity (krótkotrwały Fourier)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="403"/>
       <source>Multiresolution (Continuous wavelet)</source>
-      <translation type="unfinished"/>
+      <translation>Wielorozdzielczy (falka ciągła)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="408"/>
       <source>Multiresolution (Time domain)</source>
-      <translation type="unfinished"/>
+      <translation>Wielorozdzielczy (dziedzina czasu)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="470"/>
@@ -1264,37 +1264,37 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1143"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Korektor wielomodalny&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Włącza/wyłącza korektor wielomodalny.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Typ filtra:&lt;/span&gt; Korektor wielomodalny obsługuje zarówno FIR (faza minimalna), jak i kilka trybów filtrowania IIR.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1279"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>Faza minimalna FIR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1284"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 4 rzędu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 6 rzędu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1294"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 8 rzędu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1299"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 10 rzędu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1304"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 12 rzędu</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1235"/>
@@ -1615,27 +1615,27 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>Bardzo niski</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>Niski</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>Średni</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>Wysoki</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1055"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>Ekstremalny</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1175"/>
