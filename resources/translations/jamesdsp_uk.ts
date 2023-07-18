@@ -1009,7 +1009,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
       <source>No customizable parameters</source>
-      <translation type="unfinished"/>
+      <translation>Немає змінних параметрів</translation>
     </message>
   </context>
   <context>
@@ -1047,7 +1047,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
       <source>Preamp (Harmonics)</source>
-      <translation type="unfinished"/>
+      <translation>Підсилювач (Гармоніки)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
@@ -1067,7 +1067,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>Затухання</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
@@ -1092,12 +1092,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>Деталізація</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>Часово-частотне перетворення</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="398"/>
@@ -1148,7 +1148,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="610"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>Широкість звукової сцени</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="631"/>
@@ -1234,17 +1234,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="960"/>
       <source>Width L/R mix</source>
-      <translation type="unfinished"/>
+      <translation>Ширина Л/П поєднання</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="967"/>
       <source>LFO wander amount</source>
-      <translation type="unfinished"/>
+      <translation>Кількість блукань ГНЧ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="974"/>
       <source>LFO spin amount</source>
-      <translation type="unfinished"/>
+      <translation>Кількість обертань ГНЧ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="981"/>
@@ -1450,7 +1450,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2011"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;DSP з програмуванням у реальному часі&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Це віртуально машина, яка компілює файл коду .eel як вхід, котрий потім виконує як інструкції; говорячи простою мовою, це дозволяє користувачеві створювати свої власні звукові ефекти. &lt;/p&gt;&lt;p&gt;Кількість підтримуваних операцій незліченна; переглянути офіційну документацію: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Натисни &apos;Редагувати скрипт&apos;, для запуску вбудованого середовища сценаріїв для файлів коду EEL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2033"/>
@@ -1674,7 +1674,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
       <source>Define and generate a basic script template</source>
-      <translation type="unfinished"/>
+      <translation>Визначення та створення основного шаблону скриптів</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
@@ -1716,7 +1716,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <source>A file with the same name already exists at this loction</source>
-      <translation type="unfinished"/>
+      <translation>Файл з такою самою назвою вже існує у цій локації</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
@@ -1932,13 +1932,15 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="63"/>
       <source>All connected audio devices have already a rule defined.
 You can only create one rule per device.</source>
-      <translation type="unfinished"/>
+      <translation>Усі під'єднані аудіопристрої вже мають визначене правило.
+Ви можете створити лише одне правило на один пристрій.</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
       <source>You have no presets saved.
 Please create one first before adding a new rule.</source>
-      <translation type="unfinished"/>
+      <translation>Ще не має збережених пресетів.
+Будь ласка, створіть хоча б один пресет перед тим як додавати нове правило.</translation>
     </message>
   </context>
   <context>
@@ -2186,22 +2188,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 1</source>
-      <translation type="unfinished"/>
+      <translation>Середній ER 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 2</source>
-      <translation type="unfinished"/>
+      <translation>Середній ER 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation type="unfinished"/>
+      <translation>Висока плита</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation type="unfinished"/>
+      <translation>Низька плита</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
@@ -2248,7 +2250,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/main.cpp" line="181"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP - це передовий двигун обробки звуку, доступний для систем Linux та Android.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
@@ -2258,7 +2260,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
       <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Будь ласка, запустіть &apos;flatpak permission-reset %1&apos; і знову увімкніть автозапуск.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
@@ -2268,7 +2270,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>Переконайтеся, що реалізація XDG фонового порталу доступна й активна, щоб використовувати автозапуск. %1</translation>
     </message>
   </context>
   <context>
@@ -2306,7 +2308,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Іконка в системному лотку</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="112"/>
@@ -2341,7 +2343,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="311"/>
       <source>Impluse responses</source>
-      <translation type="unfinished"/>
+      <translation>Відгуки імпульсу</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="328"/>
@@ -2406,12 +2408,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="513"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation type="unfinished"/>
+      <translation>У розділі &apos;Програми&apos;, доступне в меню з трьома крапками в головному вікні, ви можете заблокувати обробку застосунків, що обробляються з допомоги JamesDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="529"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
-      <translation type="unfinished"/>
+      <translation>Режим списку дозволів (замість цього потрібно вмикати застосунки)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="560"/>
@@ -2441,17 +2443,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
       <source>Run in background (tray icon)</source>
-      <translation type="unfinished"/>
+      <translation>Запустити у фоновому режимі (іконка в системному лотку)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>No, shutdown audio effects when closing app</source>
-      <translation type="unfinished"/>
+      <translation>Ні, вимикати звукові ефекти під час закриття програми</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="675"/>
       <source>Yes, minimize to tray icon when closing app</source>
-      <translation type="unfinished"/>
+      <translation>Так, згорнути до системного лотка при закритті застосунку</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="682"/>
@@ -2466,7 +2468,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
       <source>Systray not supported on this system</source>
-      <translation type="unfinished"/>
+      <translation>Системний лоток не підтримується цією системою</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="760"/>
@@ -2507,7 +2509,8 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
-      <translation type="unfinished"/>
+      <translation>Ви хочете перезаписати чинні за замовчуванням скрипти liveprog?
+Якщо вони були змінені, вони будуть скинуті.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
@@ -2517,13 +2520,14 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
       <source>%1 files have been restored</source>
-      <translation type="unfinished"/>
+      <translation>%1 файлів було відновлено</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation type="unfinished"/>
+      <translation>Ви збираєтеся увімкнути режим зі списком дозволів. JamesDSP не буде обробляти всі застосунки за замовчуванням, поки цей режим активний. Необхідно примусово дозволити кожному застосунку отримувати обробку в меню &apos;Застосунки&apos;.
+</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
@@ -2533,7 +2537,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
-      <translation type="unfinished"/>
+      <translation>Ця дія призведе до скидання поточного списку блокувань або дозволів. Ви хочете продовжити?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
@@ -2551,7 +2555,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/utils/SingleInstanceMonitor.cpp" line="56"/>
       <source>Another instance of JamesDSP is already active and has been put in the foreground.</source>
-      <translation type="unfinished"/>
+      <translation>Інший екземпляр JamesDSP вже активний і розміщений на передньому плані.</translation>
     </message>
   </context>
   <context>
@@ -2574,7 +2578,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
       <source>Processing state</source>
-      <translation type="unfinished"/>
+      <translation>Стан обробки</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
@@ -2729,7 +2733,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Failed to manipulate variable &apos;%1&apos;. Either it does not exist anymore, or it cannot be changed.</source>
-      <translation type="unfinished"/>
+      <translation>Не вдалося змінити значення &apos;%1&apos;. Або воно не існує, або його не можна його змінити.</translation>
     </message>
   </context>
   <context>
