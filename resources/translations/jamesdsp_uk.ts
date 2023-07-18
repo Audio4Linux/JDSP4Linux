@@ -1022,7 +1022,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Динамічне підсилення басу&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Частотно-определяемое усиление басов. Підсилення низьких частот із визначенням частоти. Автоматично встановлює власні параметри, такі як посилення, пропускна здатність і частота зрізу, аналізуючи вхідний аудіопотік&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Максимальне підсилення:&lt;/span&gt; регулює величину ефекту динамічного підсилення басу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
@@ -1052,7 +1052,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Лімітер&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Цей вихідний обмежувач намагається уникнути обрізання вихідного сигналу (спричиненого DSP, який намагається зробити частину або весь звук гучніше, ніж раніше, якщо вхідний сигнал вже близький до максимального). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Поріг лімітера:&lt;/span&gt; Це має бути виставлено на -0,1, якщо з якоїсь причини ваше аудіо не обрізається перед цифровим обрізанням, у такому випадку ви можете встановити нижчі значення.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Затухання лмітера:&lt;/span&gt; Лімітер ефективний лише доти, доки встановлено час затухання. Короткий час випуску призведе до звукових спотворень обмеженого звуку, особливо низьких частот; Велике затухання зазвичай є кращим, але він дещо зменшує гучність, якого можна досягти. Якщо &amp;quot;стрибки гучності&amp;quot; (приглушення обмеженого звуку та відновлення з часом) стає небажаним, можна зробити затухання довшим АБО коротшим, що зробить ефект менш помітним. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Підсилення:&lt;/span&gt; Підсилення діє як цифровий регулятор гучності для всіх ефектів після їх застосування, але до того, як звук досягне лімітера.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
@@ -1077,7 +1077,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Компандер динамічного діапазону&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Вмикає/вимикає компандер динамічного діапазону.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
@@ -1102,7 +1102,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="398"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>Рівномірне (короткочасне перетворення Фур'є)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="403"/>
@@ -1158,7 +1158,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="676"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ревербрація&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Складна ревербераційна мережа IIR (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="702"/>
@@ -1184,37 +1184,37 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="789"/>
       <source>Early reflection factor</source>
-      <translation type="unfinished"/>
+      <translation>Фактор раннього відбиття</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="812"/>
       <source>Early reflection amount</source>
-      <translation type="unfinished"/>
+      <translation>Кількість раннього відбиття</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="829"/>
       <source>Early reflection width</source>
-      <translation type="unfinished"/>
+      <translation>Ширина раннього відбиття</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="852"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>Обрізання низьких частот (Вхід)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="872"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>Обрізання низьких частот (Баси)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="892"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>Обрізання низьких частот (Згасання)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="912"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>Обрізання низьких частот (Вихід)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="939"/>
@@ -1274,27 +1274,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1284"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 4-го порядку</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 6-го порядку</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1294"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 8-го порядку</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1299"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 10-го порядку</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1304"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 12-го порядку</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1235"/>
@@ -1380,12 +1380,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1550"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>Зменшити</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1555"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>Мінімальне фазове перетворення і зменшення</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1563"/>
@@ -1480,12 +1480,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2126"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Інше&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Різні дії, які рідко використовуються&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2184"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Обхід&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ця опція визначає чи увімкнені чи вимкнені звукові ефекти.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2187"/>
@@ -1520,7 +1520,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="291"/>
       <source>Relink audio pipeline</source>
-      <translation type="unfinished"/>
+      <translation>Перепідключити аудіо потоки</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="293"/>
@@ -1545,7 +1545,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="299"/>
       <source>What&apos;s this... (Select UI element)</source>
-      <translation type="unfinished"/>
+      <translation>Що це... (Оберіть елемент інтерфейсу користувача)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="403"/>
@@ -1656,7 +1656,18 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>Розширене редагування форми сигналу (за замовчуванням: -80;-100;0;0;0;0)
+
+Встановіть поріг автоматичного IR обрізання та додайте затримку до порізаного/мінімального фазового перетворення IR.
+Цей параметр діє, лише якщо ввімкнено IR оптимізацію.
+
+1-е значення: Початкове порогового автоматичного обрізання (дБ)
+2-е значення: Кінець порогового автоматичного обрізання (дБ)
+3-є значення: затримка каналу 1 (семпли)
+4-е значення: затримка каналу 2 (семпли)
+5-е значення: затримка каналу 3 (семпли)
+6-е значення: затримка каналу 4 (семпли)
+</translation>
     </message>
   </context>
   <context>
@@ -2368,12 +2379,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="399"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ця опція перевірятиме під час кожного запуску, чи відсутній один зі стандартних скриптів EEL. Якщо це так, відсутні файл(и) буде автоматично відновлено з ресурсів. (Це не перезапише їх, якщо вони вже існують!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="402"/>
       <source>Extract bundled assets on startup</source>
-      <translation type="unfinished"/>
+      <translation>Розпакування комплекту ресурсів під час запуску</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="422"/>
@@ -2634,7 +2645,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="140"/>
       <source>No impulse responses found</source>
-      <translation type="unfinished"/>
+      <translation>Не знайдено імпульсних відповідей</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="191"/>
@@ -2772,7 +2783,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockManager.cpp" line="489"/>
       <source>Show View</source>
-      <translation type="unfinished"/>
+      <translation>Показати вигляд</translation>
     </message>
   </context>
   <context>
