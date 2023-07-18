@@ -1037,7 +1037,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Аналогове моделювання&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Надсемплінг аналогового моделювання - це генератор рівних гармонік без згладжування.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
@@ -1107,17 +1107,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="403"/>
       <source>Multiresolution (Continuous wavelet)</source>
-      <translation type="unfinished"/>
+      <translation>Мультироздільність (безперервний вейвлет)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="408"/>
       <source>Multiresolution (Time domain)</source>
-      <translation type="unfinished"/>
+      <translation>Мультироздільність (в області часу)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="470"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Перехресна подача&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Включає традиційні BS2B (Бауер від стереофонічного до бінаурального DSP) режим і більш просунутий на основі згортки HRTF підхід.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="473"/>
@@ -1143,7 +1143,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="607"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ширина звукової сцени&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Алгоритм, який виявляє стереофазове співвідношення в кількох спектральних областях і покращує стереозвук, не впливаючи на цілісність вокалу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="610"/>
@@ -1179,7 +1179,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="769"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>Коефіцієнт надсемплінгу</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="789"/>
@@ -1264,7 +1264,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1143"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Мультирежимний еквалайзер&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Увімкнути/вимкнути мультирежимний еквалайзер.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Тип фільтра:&lt;/span&gt; Мультирежимний еквалайзер підтримує як FIR (мінімальна фаза), так і декілька IIR режимів фільтрації.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1279"/>
@@ -1324,7 +1324,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1331"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>Кусково-кубічний інтерполяційний поліном Ерміта</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1336"/>
@@ -1349,7 +1349,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1432"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Конвольвер&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Розділений конвольвер (згортка з автоматичним сегментуванням). Виберіть файл імпульсної характеристики, який потрібно згорнути. Він бере характеристики сигналу імпульсної характеристики та застосовує їх до вхідного звуку в режимі реального часу.&lt;/p&gt;&lt;p&gt;Підтримує моно, стерео, повне/справжнє стерео (ЛЛ, ЛП, ПЛ, ПП) імпульсні характеристики.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Оптимізація імпульсної характеристики:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Цей параметр намагається якомога більше зменшити тривалість імпульсної характеристики; суть полягає в тому, щоб максимально зменшити затримку, можливо, зменшивши споживання енергії.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1457"/>
@@ -1415,7 +1415,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1754"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Його основна робота полягає у виконанні параметричного вирівнювання аудіо, однак вона вимагає від користувача надати .vdc файл який DDCToolbox генерує.&lt;/p&gt;&lt;p&gt;ViPER-DDC у jDSP — це узагальнена реалізація фільтрів секцій другого порядку, яка дещо відрізняється від реалізації в Viper4Android. V4A підтримує лише параметричне пікінгування; причина в тому, що V4A використовує властивість коефіцієнта частки пікового фільтра. У контрасті, jDSP не має такого припущення.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1801"/>
@@ -1455,7 +1455,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2033"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Еквалайзер довільної відповіді&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Також відомий як GraphicEQ з EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2071"/>
@@ -2114,7 +2114,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation type="unfinished"/>
+      <translation>Поза головою</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
@@ -2349,7 +2349,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="265"/>
       <source>Always display handles</source>
-      <translation type="unfinished"/>
+      <translation>Завжди показувати елементи керування</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="311"/>
