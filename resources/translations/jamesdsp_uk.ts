@@ -926,7 +926,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
       <source>Import EqualizerAPO graphic EQ preset</source>
-      <translation type="unfinished"/>
+      <translation>Імпорт пресету графічного еквалайзера EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
@@ -1824,7 +1824,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
       <source>Adds current config as a preset</source>
-      <translation type="unfinished"/>
+      <translation>Додає поточні налаштування як пресет</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
