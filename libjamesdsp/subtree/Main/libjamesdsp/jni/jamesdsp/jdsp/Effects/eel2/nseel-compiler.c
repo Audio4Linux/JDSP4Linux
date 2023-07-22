@@ -29,6 +29,7 @@
 #include <assert.h>
 #include "eel_matrix.h"
 #include "numericSys/FFTConvolver.h"
+#include "numericSys/HPFloat/xpre.h"
 static void lstrcpyn_safe(char *o, const char *in, int32_t count)
 {
 	if (count > 0)
@@ -926,7 +927,7 @@ typedef struct
 	double *path, *z;
 	double imOld;
 } IIRHilbert;
-static inline void ProcessIIRHilbert(IIRHilbert *hil, double Xi, double *re, double *im)
+void ProcessIIRHilbert(IIRHilbert *hil, double Xi, double *re, double *im)
 {
 	double imTmp;
 	imTmp = *re = Xi;
@@ -950,6 +951,26 @@ static float NSEEL_CGEN_CALL iirHilbertProcess(float *blocks, float *offptr, flo
 	out[1] = im;
 	return 2;
 }
+void InitIIRHilbert2(IIRHilbert *hil, unsigned int numStages, double transitionHz, double fs)
+{
+	unsigned int i;
+	double transition = transitionHz / fs;
+	hil->stages = numStages;
+	unsigned int numCoefs = numStages << 1;
+	double *coefs = (double *)malloc(numCoefs * sizeof(double));
+	hil->path = (double *)malloc(numCoefs * sizeof(double));
+	hil->z = (double *)malloc(2 * hil->stages * 2 * sizeof(double));
+	memset(hil->z, 0, 2 * hil->stages * 2 * sizeof(double));
+	compute_coefs_spec_order_tbw(coefs, numCoefs, transition);
+	// Phase reference path coefficients
+	for (i = 1; i < numCoefs; i += 2)
+		hil->path[i >> 1] = coefs[i];
+	// +90 deg path coefficients
+	for (i = 0; i < numCoefs; i += 2)
+		hil->path[hil->stages + (i >> 1)] = coefs[i];
+	free(coefs);
+	hil->imOld = 0.0;
+}
 static float NSEEL_CGEN_CALL iirHilbertInit(void *opaque, INT_PTR num_param, float **parms)
 {
 	compileContext *c = (compileContext *)opaque;
@@ -960,10 +981,10 @@ static float NSEEL_CGEN_CALL iirHilbertInit(void *opaque, INT_PTR num_param, flo
 	unsigned int numStages = (unsigned int)(*parms[1] + NSEEL_CLOSEFACTOR);
 	float transition = *parms[2];
 	unsigned int numCoefs = numStages << 1;
-	size_t memSize = sizeof(IIRHilbert) + (numCoefs + (numStages << 2));
+	size_t memSize = sizeof(IIRHilbert) + (numCoefs + (numStages << 2)) * sizeof(double);
 	hil->stages = numStages;
 	double *coefs = (double *)malloc(numCoefs * sizeof(double));
-	hil->path = hil + 1;
+	hil->path = (double*)(hil + 1);
 	hil->z = hil->path + numCoefs;
 	memset(hil->z, 0, (hil->stages << 2) * sizeof(double));
 	compute_coefs_spec_order_tbw(coefs, numCoefs, transition);
@@ -1071,7 +1092,7 @@ static float NSEEL_CGEN_CALL movingMinMaxInit(float *blocks, float *offptr, floa
 	stk->s1.capacity = windowSize;
 	stk->s2.top = 0;
 	stk->s2.capacity = windowSize;
-	stk->s1.items = stk + 1;
+	stk->s1.items = (node*)(stk + 1);
 	stk->s2.items = (node*)(((char*)stk->s1.items) + sizeof(node) * windowSize);
 	stk->windowSize = windowSize;
 	stk->cnt = 0;
@@ -1745,18 +1766,6 @@ static inline void eelThread_wait(abstractThreads *info)
 			break;
 	}
 }
-static inline void InitRegion_context(eel_builtin_memRegion *st)
-{
-	st->inuse = 0;
-	st->slot = 2;
-	st->type = (char*)malloc(st->slot * sizeof(char));
-	st->memRegion = (s_str*)malloc(st->slot * sizeof(s_str));
-	for (int32_t i = 0; i < st->slot; i++)
-	{
-		st->type[i] = 0;
-		st->memRegion[i] = 0;
-	}
-}
 void* GetStringForIndex(eel_builtin_memRegion *st, float val, int32_t write)
 {
 	int32_t idx = (int32_t)(val + 0.5f);
@@ -1769,7 +1778,7 @@ void* GetStringForIndex(eel_builtin_memRegion *st, float val, int32_t write)
 	else
 		return (void*)&st->memRegion[idx];
 }
-int32_t getEmptyRegion(eel_builtin_memRegion *st)
+static inline int32_t getEmptyRegion(eel_builtin_memRegion *st)
 {
 	int32_t x;
 	for (x = 0; x < st->slot; x++)
@@ -1817,7 +1826,7 @@ void DeleteSlot(eel_builtin_memRegion *st, float val)
 	}
 	else if (st->type[idx] == 4)
 	{
-		abstractThreads *ptr = (abstractThreads*)st->memRegion[idx];
+		abstractThreads *ptr = (abstractThreads *)st->memRegion[idx];
 		// ensure the worker is waiting
 		if (ptr->state == EEL_WORKING)
 			eelThread_wait(ptr);
@@ -1836,6 +1845,8 @@ void DeleteSlot(eel_builtin_memRegion *st, float val)
 		NSEEL_code_free(ptr->codePtr);
 		free(ptr);
 	}
+	else
+		free(st->memRegion[idx]);
 	st->memRegion[idx] = 0;
 decrement:
 	st->inuse--;
@@ -1873,6 +1884,27 @@ static float addStringCallback(void *opaque, eelStringSegmentRec *list)
 	ns = (char*)realloc(ns, sz);
 	int32_t id = AddData(c->region_context, (void*)ns, 0);
 	return (float)id;
+}
+static const xpr *xConstant[19] = { &xZero, &xOne, &xTwo, &xTen, &xPinf, &xMinf, &xNaN, &xPi, &xPi2, &xPi4, &xEe, &xSqrt2, &xLn2, &xLn10, &xLog2_e, &xLog2_10, &xLog10_e, &HPA_MIN, &HPA_MAX };
+static const char xVarName[19][10] = { "$hZero", "$hOne", "$hTwo", "$hTen", "$hPinf", "$hMinf", "$hNaN", "$hPi", "$hPi2", "$hPi4", "$hEe", "$hSqrt2", "$hLn2", "$hLn10", "$hLog2_e", "$hLog2_10", "$hLog10_e", "$HPA_MIN", "$HPA_MAX" };
+static inline void InitRegion_context(eel_builtin_memRegion *st)
+{
+	st->inuse = 0;
+	st->slot = 30;
+	st->type = (char *)malloc(st->slot * sizeof(char));
+	st->memRegion = (s_str *)malloc(st->slot * sizeof(s_str));
+	for (int32_t i = 0; i < st->slot; i++)
+	{
+		st->type[i] = 0;
+		st->memRegion[i] = 0;
+	}
+	for (int32_t i = 0; i < 19; i++)
+	{
+		xpr br = *xConstant[i];
+		void *ptr = malloc(sizeof(xpr));
+		memcpy(ptr, (void *)&br, sizeof(xpr));
+		int32_t id = AddData(st, ptr, 5);
+	}
 }
 static int32_t eel_string_match(compileContext *c, const char *fmt, const char *msg, int32_t match_fmt_pos, int32_t ignorecase, const char *fmt_endptr, const char *msg_endptr, int32_t num_fmt_parms, float **fmt_parms)
 {
@@ -2168,7 +2200,7 @@ static int32_t eel_validate_format_specifier(const char *fmt_in, char *typeOut, 
 	{
 		const char c = *fmt++;
 		if (fmtOut_sz < 2) return 0;
-		if (c == 'f' || c == 'e' || c == 'E' || c == 'g' || c == 'G' || c == 'd' || c == 'u' || c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'i')
+		if (c == 'f' || c == 'F' || c == 'e' || c == 'E' || c == 'g' || c == 'G' || c == 'd' || c == 'u' || c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'i')
 		{
 			*typeOut = c;
 			fmtOut[0] = c;
@@ -2232,7 +2264,7 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 			float v = varptr ? (float)*varptr : 0.0f;
 			if (ct == 'x' || ct == 'X' || ct == 'd' || ct == 'u' || ct == 'i')
 			{
-				stbsp_snprintf(op, 64, fs, (int32_t)(v));
+				stbsp_snprintf(op, 128, fs, (int32_t)(v));
 			}
 			else if (ct == 's' || ct == 'S')
 			{
@@ -2240,6 +2272,16 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 				const char *str = (const char*)GetStringForIndex(c->region_context, v, 0);
 				const size_t maxl = (size_t)(buf + buf_sz - 2u - op);
 				stbsp_snprintf(op, maxl, fs, str ? str : "");
+			}
+			else if (ct == 'F')
+			{
+				compileContext *c = (compileContext*)opaque;
+				int32_t idx = (int32_t)(v + NSEEL_CLOSEFACTOR);
+				xpr *br = (xpr *)c->region_context->memRegion[idx];
+				char *str = xpr_asprint(*br, 1, 0, (XDIM * 48) / 10 - 2);
+				int maxl = strlen(str);
+				stbsp_snprintf(op, min(maxl + 1, 128), "%s", str ? str : "");
+				free(str);
 			}
 			else if (ct == 'c')
 			{
@@ -2262,7 +2304,7 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 				*op = 0;
 			}
 			else
-				stbsp_snprintf(op, 64, fs, v);
+				stbsp_snprintf(op, 128, fs, v);
 			while (*op) op++;
 			fmt += l;
 		}
@@ -3414,10 +3456,10 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 	{
 		int32_t offs1 = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 		float *impulseresponse = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
-		FFTConvolver1x1 *conv = (FFTConvolver1x1 *)malloc(sizeof(FFTConvolver1x1));
+		FFTConvolver1x1 *conv = (FFTConvolver1x1*)malloc(sizeof(FFTConvolver1x1));
 		FFTConvolver1x1Init(conv);
 		FFTConvolver1x1LoadImpulseResponse(conv, latency, impulseresponse, irLen);
-		ptr = (void *)conv;
+		ptr = (void*)conv;
 	}
 	else if (convType == 2)
 	{
@@ -3425,10 +3467,10 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 		uint32_t offs2 = (uint32_t)(*parms[3] + NSEEL_CLOSEFACTOR);
 		float *leftImp = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
 		float *rightImp = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-		FFTConvolver2x2 *conv = (FFTConvolver2x2 *)malloc(sizeof(FFTConvolver2x2));
+		FFTConvolver2x2 *conv = (FFTConvolver2x2*)malloc(sizeof(FFTConvolver2x2));
 		FFTConvolver2x2Init(conv);
 		FFTConvolver2x2LoadImpulseResponse(conv, latency, leftImp, rightImp, irLen);
-		ptr = (void *)conv;
+		ptr = (void*)conv;
 	}
 	else
 	{
@@ -3440,19 +3482,13 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 		float *LR = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
 		float *RL = __NSEEL_RAMAlloc(blocks, (uint64_t)offs3);
 		float *RR = __NSEEL_RAMAlloc(blocks, (uint64_t)offs4);
-		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2 *)malloc(sizeof(FFTConvolver2x4x2));
+		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2*)malloc(sizeof(FFTConvolver2x4x2));
 		FFTConvolver2x4x2Init(conv);
 		FFTConvolver2x4x2LoadImpulseResponse(conv, latency, LL, LR, RL, RR, irLen);
-		ptr = (void *)conv;
+		ptr = (void*)conv;
 	}
 	int32_t id = AddData(c->region_context, ptr, convType);
 	return (float)id;
-}
-static float NSEEL_CGEN_CALL _eel_deletefftconv1d(void *opaque, float *v)
-{
-	compileContext *c = (compileContext*)opaque;
-	DeleteSlot(c->region_context, (int32_t)(*v + NSEEL_CLOSEFACTOR));
-	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_processfftconv1d(void *opaque, INT_PTR num_param, float **parms)
 {
@@ -3551,10 +3587,10 @@ static float NSEEL_CGEN_CALL _eel_initthread(void *opaque, float *stringID)
 	int32_t id = AddData(c->region_context, (void *)pth, 4);
 	return (float)id;
 }
-static float NSEEL_CGEN_CALL _eel_deletethread(void *opaque, float *v)
+static float NSEEL_CGEN_CALL _eel_deleteSysVariable(void *opaque, float *v)
 {
 	compileContext *c = (compileContext*)opaque;
-	DeleteSlot(c->region_context, *v);
+	DeleteSlot(c->region_context, (int32_t)(*v + NSEEL_CLOSEFACTOR));
 	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_createThread(void *opaque, float *v)
@@ -3585,7 +3621,208 @@ static float NSEEL_CGEN_CALL _eel_unlockThread(void *opaque, float *v)
 	pthread_mutex_unlock(&c->globalLocker);
 	return 1;
 }
-
+// HPFloat
+#define HPFREPEATBLKEND \
+void *ptr = malloc(sizeof(xpr)); \
+memcpy(ptr, (void *)&br, sizeof(xpr)); \
+int32_t id = AddData(c->region_context, ptr, 5); \
+return id;
+static float NSEEL_CGEN_CALL _eel_createHPFloatFromString(void *opaque, float *v)
+{
+	compileContext *c = (compileContext *)opaque;
+	const char *decimal = (const char *)GetStringForIndex(c->region_context, *v, 0);
+	xpr br = atox(decimal);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_createHPFloatFromFloat32(void *opaque, float *flt)
+{
+	compileContext *c = (compileContext *)opaque;
+	xpr br = flttox(*flt);
+	void *ptr = malloc(sizeof(xpr));
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	int32_t id = AddData(c->region_context, ptr, 5);
+	return id;
+}
+static float NSEEL_CGEN_CALL _eel_createHPFloatToFloat32(void *opaque, float *v)
+{
+	compileContext *c = (compileContext *)opaque;
+	int32_t idx = (int32_t)(*v + NSEEL_CLOSEFACTOR);
+	xpr *br = (xpr *)c->region_context->memRegion[idx];
+	return xtoflt(*br);
+}
+static float NSEEL_CGEN_CALL _eel_createHPFloatToString(void *opaque, float *v)
+{
+	compileContext *c = (compileContext *)opaque;
+	int32_t idx = (int32_t)(*v + NSEEL_CLOSEFACTOR);
+	xpr *br = (xpr *)c->region_context->memRegion[idx];
+	char *str = xpr_asprint(*br, 1, 0, (XDIM * 48) / 10 - 2);
+	int32_t id = AddData(c->region_context, (void*)str, 0);
+	return id;
+}
+#define HPFREPEATBLKDYADIC \
+compileContext *c = (compileContext *)opaque; \
+xpr *x1 = (xpr *)c->region_context->memRegion[(int32_t)(*parms[0] + NSEEL_CLOSEFACTOR)]; \
+xpr *x2 = (xpr *)c->region_context->memRegion[(int32_t)(*parms[1] + NSEEL_CLOSEFACTOR)];
+#define HPFREPEATBLK1O \
+compileContext *c = (compileContext *)opaque; \
+xpr *x = (xpr *)c->region_context->memRegion[(int32_t)(*parms[0] + NSEEL_CLOSEFACTOR)];
+static float NSEEL_CGEN_CALL _eel_HPFAdd(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xadd(*x1, *x2, 0);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFSub(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xadd(*x1, *x2, 1);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFMul(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xmul(*x1, *x2);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFDiv(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xdiv(*x1, *x2);
+	HPFREPEATBLKEND
+}
+// Math functions
+static float NSEEL_CGEN_CALL _eel_HPFfrexp(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	float *blocks = c->ram_state;
+	int p;
+	xpr br = xfrexp(*x, &p);
+	uint32_t offs2 = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float *out = (float *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	void *ptr = malloc(sizeof(xpr));
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[0] = AddData(c->region_context, ptr, 5);
+	ptr = malloc(sizeof(xpr));
+	br = dbltox((double)p);
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[1] = AddData(c->region_context, ptr, 5);
+	return 0;
+}
+static float NSEEL_CGEN_CALL _eel_HPFqfmod(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext *)opaque;
+	xpr *s = (xpr *)c->region_context->memRegion[(int32_t)(*parms[0] + NSEEL_CLOSEFACTOR)];
+	xpr *t = (xpr *)c->region_context->memRegion[(int32_t)(*parms[1] + NSEEL_CLOSEFACTOR)];
+	xpr *q = (xpr *)c->region_context->memRegion[(int32_t)(*parms[2] + NSEEL_CLOSEFACTOR)];
+	xpr br = xfmod(*s, *t, q);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFfmod(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr q;
+	xpr br = xfmod(*x1, *x2, &q);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFsfmod(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	float *blocks = c->ram_state;
+	int p;
+	xpr br = xsfmod(*x, &p);
+	uint32_t offs2 = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float *out = (float *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	void *ptr = malloc(sizeof(xpr));
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[0] = AddData(c->region_context, ptr, 5);
+	ptr = malloc(sizeof(xpr));
+	br = dbltox((double)p);
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[1] = AddData(c->region_context, ptr, 5);
+	return 0;
+}
+static float NSEEL_CGEN_CALL _eel_HPFMulPowOf2(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	xpr br = xpr2(*x, (int32_t)(*parms[1] + NSEEL_CLOSEFACTOR));
+	HPFREPEATBLKEND
+}
+#define HPFLogicGen1O(fname, expr) \
+static float NSEEL_CGEN_CALL fname(void *opaque, INT_PTR num_param, float **parms) \
+{ \
+	HPFREPEATBLK1O \
+	int lg = expr; \
+	return lg; \
+}
+#define HPFLogicGenDYADIC(fname, expr) \
+static float NSEEL_CGEN_CALL fname(void *opaque, INT_PTR num_param, float **parms) \
+{ \
+	HPFREPEATBLKDYADIC \
+	int lg = expr; \
+	return lg; \
+}
+#define HPFGen(fname, expr) \
+static float NSEEL_CGEN_CALL fname(void *opaque, INT_PTR num_param, float **parms) \
+{ \
+	HPFREPEATBLK1O \
+	xpr br = expr(*x); \
+	HPFREPEATBLKEND \
+}
+HPFGen(_eel_HPFfrac, xfrac)
+HPFGen(_eel_HPFabs, xabs)
+HPFGen(_eel_HPFtrunc, xtrunc)
+HPFGen(_eel_HPFround, xround)
+HPFGen(_eel_HPFceil, xceil)
+HPFGen(_eel_HPFfloor, xfloor)
+HPFGen(_eel_HPFfix, xfix)
+HPFGen(_eel_HPFtan, xtan)
+HPFGen(_eel_HPFsin, xsin)
+HPFGen(_eel_HPFcos, xcos)
+HPFGen(_eel_HPFatan, xatan)
+HPFGen(_eel_HPFasin, xasin)
+HPFGen(_eel_HPFacos, xacos)
+HPFGen(_eel_HPFNegation, xneg)
+static float NSEEL_CGEN_CALL _eel_HPFatan2(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xatan2(*x1, *x2);
+	HPFREPEATBLKEND
+}
+HPFGen(_eel_HPFsqrt, xsqrt)
+HPFGen(_eel_HPFexp, xexp)
+HPFGen(_eel_HPFexp2, xexp2)
+HPFGen(_eel_HPFexp10, xexp10)
+HPFGen(_eel_HPFlog, xlog)
+HPFGen(_eel_HPFlog2, xlog2)
+HPFGen(_eel_HPFlog10, xlog10)
+HPFGen(_eel_HPFtanh, xtanh)
+HPFGen(_eel_HPFsinh, xsinh)
+HPFGen(_eel_HPFcosh, xcosh)
+HPFGen(_eel_HPFatanh, xatanh)
+HPFGen(_eel_HPFasinh, xasinh)
+HPFGen(_eel_HPFacosh, xacosh)
+HPFGen(_eel_HPFclone, )
+static float NSEEL_CGEN_CALL _eel_HPFpow(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xpow(*x1, *x2);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFIntPow(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	xpr br = xpwr(*x, (int32_t)roundf(*parms[1]));
+	HPFREPEATBLKEND
+}
+HPFLogicGen1O(_eel_HPFiszero, xis0(x))
+HPFLogicGen1O(_eel_HPFisneg, x_neg(x))
+HPFLogicGen1O(_eel_HPFbinaryexp, x_exp(x))
+HPFLogicGenDYADIC(_eel_HPFeq, (xprcmp(x1, x2) == 0))
+HPFLogicGenDYADIC(_eel_HPFneq, (xprcmp(x1, x2) != 0))
+HPFLogicGenDYADIC(_eel_HPFle, (xprcmp(x1, x2) <= 0))
+HPFLogicGenDYADIC(_eel_HPFge, (xprcmp(x1, x2) >= 0))
+HPFLogicGenDYADIC(_eel_HPFgt, (xprcmp(x1, x2) > 0))
+HPFLogicGenDYADIC(_eel_HPFlt, (xprcmp(x1, x2) < 0))
 static void channel_split(float *buffer, uint64_t num_frames, float **chan_buffers, uint32_t num_channels)
 {
 	uint64_t i, samples = num_frames * num_channels;
@@ -4342,50 +4579,50 @@ redirect(roundf)
 redirect(floorf)
 redirect(ceilf)
 static functionType fnTable1[] = {
-   { "sin",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinf} },
-   { "cos",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_cosf} },
-   { "tan",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanf}  },
-   { "sqrt",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sqrtf}, },
-   { "asin",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinf}, },
-   { "acos",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acosf}, },
-   { "atan",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanf}, },
-   { "atan2",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_atan2f}, },
-   { "sinh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinhf} },
-   { "cosh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_coshf} },
-   { "tanh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanhf}  },
-   { "asinh",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinhf}, },
-   { "acosh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acoshf}, },
-   { "atanh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanhf}, },
-   { "log",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_logf} },
-   { "log10",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_log10f} },
-   { "hypot",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_hypotf}, },
-   { "pow",    nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_powf}, },
-   { "exp",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_expf}, },
-   { "abs",    nseel_asm_abs,nseel_asm_abs_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(0) | BIF_WONTMAKEDENORMAL },
-   { "sqr",    nseel_asm_sqr,nseel_asm_sqr_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(1) },
-   { "min",    nseel_asm_min,nseel_asm_min_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
-   { "max",    nseel_asm_max,nseel_asm_max_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
-   { "sign",   nseel_asm_sign,nseel_asm_sign_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(2) | BIF_CLEARDENORMAL, },
-   { "rand",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&nseel_int_rand}, },
-   { "round",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_roundf} },
-   { "floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_floorf} },
-   { "ceil",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_ceilf} },
-   { "expint", nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint} },
-   { "expintFast",nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint_interpolation} },
-   { "invsqrt",nseel_asm_1pdd,nseel_asm_1pdd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), {(void**)&invsqrt} },
-   { "invsqrtFast",nseel_asm_invsqrt,nseel_asm_invsqrt_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), },
-   { "circshift",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_circshift},NSEEL_PProc_RAM},
-   { "convolve_c",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&eel_convolve_c},NSEEL_PProc_RAM},
-   { "maxVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_max},NSEEL_PProc_RAM},
-   { "minVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_min},NSEEL_PProc_RAM},
-   { "meanVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_mean},NSEEL_PProc_RAM},
-   { "medianVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_median},NSEEL_PProc_RAM},
-   { "fft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft},NSEEL_PProc_RAM},
-   { "ifft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft},NSEEL_PProc_RAM},
-   { "fft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_real},NSEEL_PProc_RAM},
-   { "ifft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_real},NSEEL_PProc_RAM},
-   { "fft_permute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_permute},NSEEL_PProc_RAM},
-   { "fft_ipermute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_permute},NSEEL_PProc_RAM},
+  {"sin",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinf} },
+  {"cos",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_cosf} },
+  {"tan",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanf}  },
+  {"sqrt",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sqrtf}, },
+  {"asin",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinf}, },
+  {"acos",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acosf}, },
+  {"atan",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanf}, },
+  {"atan2",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_atan2f}, },
+  {"sinh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinhf} },
+  {"cosh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_coshf} },
+  {"tanh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanhf}  },
+  {"asinh",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinhf}, },
+  {"acosh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acoshf}, },
+  {"atanh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanhf}, },
+  {"log",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_logf} },
+  {"log10",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_log10f} },
+  {"hypot",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_hypotf}, },
+  {"pow",    nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_powf}, },
+  {"exp",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_expf}, },
+  {"abs",    nseel_asm_abs,nseel_asm_abs_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(0) | BIF_WONTMAKEDENORMAL },
+  {"sqr",    nseel_asm_sqr,nseel_asm_sqr_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(1) },
+  {"min",    nseel_asm_min,nseel_asm_min_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
+  {"max",    nseel_asm_max,nseel_asm_max_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
+  {"sign",   nseel_asm_sign,nseel_asm_sign_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(2) | BIF_CLEARDENORMAL, },
+  {"rand",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&nseel_int_rand}, },
+  {"round",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_roundf} },
+  {"floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_floorf} },
+  {"ceil",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_ceilf} },
+  {"expint", nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint} },
+  {"expintFast",nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint_interpolation} },
+  {"invsqrt",nseel_asm_1pdd,nseel_asm_1pdd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), {(void**)&invsqrt} },
+  {"invsqrtFast",nseel_asm_invsqrt,nseel_asm_invsqrt_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), },
+  {"circshift",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_circshift},NSEEL_PProc_RAM},
+  {"convolve_c",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&eel_convolve_c},NSEEL_PProc_RAM},
+  {"maxVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_max},NSEEL_PProc_RAM},
+  {"minVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_min},NSEEL_PProc_RAM},
+  {"meanVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_mean},NSEEL_PProc_RAM},
+  {"medianVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_median},NSEEL_PProc_RAM},
+  {"fft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft},NSEEL_PProc_RAM},
+  {"ifft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft},NSEEL_PProc_RAM},
+  {"fft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_real},NSEEL_PProc_RAM},
+  {"ifft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_real},NSEEL_PProc_RAM},
+  {"fft_permute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_permute},NSEEL_PProc_RAM},
+  {"fft_ipermute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_permute},NSEEL_PProc_RAM},
   {"memcpy",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_RAM_MemCpy},NSEEL_PProc_RAM},
   {"memset",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_RAM_MemSet},NSEEL_PProc_RAM},
   {"sleep",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void**)&_eel_sleep}},
@@ -4463,9 +4700,6 @@ static functionType fnTable1[] = {
   {"IIRBandSplitterInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_iirBandSplitterInit},NSEEL_PProc_THIS},
   {"IIRBandSplitterClearState",_asm_generic1parm_retd,_asm_generic1parm_retd_end, 1 | BIF_RETURNSONSTACK,{(void**)&_eel_iirBandSplitterClearState},NSEEL_PProc_RAM},
   {"IIRBandSplitterProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_iirBandSplitterProcess},NSEEL_PProc_THIS},
-  {"Conv1DInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_initfftconv1d},NSEEL_PProc_THIS},
-  {"Conv1DProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_processfftconv1d},NSEEL_PProc_THIS},
-  {"Conv1DFree",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_deletefftconv1d},NSEEL_PProc_THIS},
   {"decodeFLACFromFile",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_flacDecodeFile},NSEEL_PProc_THIS},
   {"decodeFLACFromMemory",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_flacDecodeMemory},NSEEL_PProc_THIS},
   {"decodeWavFromFile",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_wavDecodeFile},NSEEL_PProc_THIS},
@@ -4479,17 +4713,70 @@ static functionType fnTable1[] = {
   {"vectorizeMinus",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_vectorizeMinus},NSEEL_PProc_THIS },
   {"vectorizeMultiply",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_vectorizeMultiply},NSEEL_PProc_THIS },
   {"vectorizeDivide",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_vectorizeDivide},NSEEL_PProc_THIS },
+  { "lerpAt",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_lerp},NSEEL_PProc_THIS },
   {"ls",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_ls},NSEEL_PProc_THIS },
   {"cd",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_cd},NSEEL_PProc_THIS },
   {"eval",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_eval},NSEEL_PProc_THIS },
   {"evalFile",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_evalFile},NSEEL_PProc_THIS },
+  {"Conv1DInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_initfftconv1d},NSEEL_PProc_THIS },
+  {"Conv1DProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_processfftconv1d},NSEEL_PProc_THIS },
   {"ThreadInit",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_initthread},NSEEL_PProc_THIS },
   {"ThreadCreate",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_createThread},NSEEL_PProc_THIS },
   {"ThreadJoin",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_joinThread},NSEEL_PProc_THIS },
-  {"ThreadDelete",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_deletethread},NSEEL_PProc_THIS },
   {"ThreadMutexLock",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_lockThread},NSEEL_PProc_THIS },
   {"ThreadMutexUnlock",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_unlockThread},NSEEL_PProc_THIS },
-  {"lerpAt",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_lerp},NSEEL_PProc_THIS },
+  {"xFloatS",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatFromString},NSEEL_PProc_THIS },
+  {"xFloatF",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatFromFloat32},NSEEL_PProc_THIS },
+  {"xF2f32",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatToFloat32},NSEEL_PProc_THIS },
+  {"xF2str",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatToString},NSEEL_PProc_THIS },
+  {"xAdd",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFAdd},NSEEL_PProc_THIS },
+  {"xSub",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFSub},NSEEL_PProc_THIS },
+  {"xMul",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFMul},NSEEL_PProc_THIS },
+  {"xDiv",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFDiv},NSEEL_PProc_THIS },
+  {"xfrexp",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfrexp},NSEEL_PProc_THIS },
+  {"xqfmod",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFqfmod},NSEEL_PProc_THIS },
+  {"xfmod",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfmod},NSEEL_PProc_THIS },
+  {"xsfmod",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsfmod},NSEEL_PProc_THIS },
+  {"xMulPowOf2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFMulPowOf2},NSEEL_PProc_THIS },
+  {"xfrac",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfrac},NSEEL_PProc_THIS },
+  {"xabs",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFabs},NSEEL_PProc_THIS },
+  {"xtrunc",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFtrunc},NSEEL_PProc_THIS },
+  {"xround",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFround},NSEEL_PProc_THIS },
+  {"xceil",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFceil},NSEEL_PProc_THIS },
+  {"xfloor",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfloor},NSEEL_PProc_THIS },
+  {"xfix",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfix},NSEEL_PProc_THIS },
+  {"xtan",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFtan},NSEEL_PProc_THIS },
+  {"xsin",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsin},NSEEL_PProc_THIS },
+  {"xcos",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFcos},NSEEL_PProc_THIS },
+  {"xatan",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFatan},NSEEL_PProc_THIS },
+  {"xasin",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFasin},NSEEL_PProc_THIS },
+  {"xacos",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFacos},NSEEL_PProc_THIS },
+  {"xNegation",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFNegation},NSEEL_PProc_THIS },
+  {"xatan2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFatan2},NSEEL_PProc_THIS },
+  {"xsqrt",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsqrt},NSEEL_PProc_THIS },
+  {"xexp",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFexp},NSEEL_PProc_THIS },
+  {"xexp2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFexp2},NSEEL_PProc_THIS },
+  {"xexp10",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFexp10},NSEEL_PProc_THIS },
+  {"xlog",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlog},NSEEL_PProc_THIS },
+  {"xlog2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlog2},NSEEL_PProc_THIS },
+  {"xlog10",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlog10},NSEEL_PProc_THIS },
+  {"xtanh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFtanh},NSEEL_PProc_THIS },
+  {"xsinh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsinh},NSEEL_PProc_THIS },
+  {"xcosh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFcosh},NSEEL_PProc_THIS },
+  {"xatanh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFatanh},NSEEL_PProc_THIS },
+  {"xasinh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFasinh},NSEEL_PProc_THIS },
+  {"xacosh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFacosh},NSEEL_PProc_THIS },
+  {"xclone",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFclone},NSEEL_PProc_THIS },
+  {"xpow",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFpow},NSEEL_PProc_THIS },
+  {"xintpow",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFIntPow},NSEEL_PProc_THIS },
+  {"xbinexp",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFbinaryexp},NSEEL_PProc_THIS },
+  {"xequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFeq},NSEEL_PProc_THIS },
+  {"xnotequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFneq},NSEEL_PProc_THIS },
+  {"xlessequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFle},NSEEL_PProc_THIS },
+  {"xgreaterequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFge},NSEEL_PProc_THIS },
+  {"xgreater",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFgt},NSEEL_PProc_THIS },
+  {"xless",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlt},NSEEL_PProc_THIS },
+  {"DeleteSysVariable",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_deleteSysVariable},NSEEL_PProc_THIS },
 };
 void printFunctions()
 {
@@ -7910,6 +8197,9 @@ opcodeRec *nseel_createFunctionByName(compileContext *ctx, const char *name, int
 }
 #include <float.h>
 //------------------------------------------------------------------------------
+#define GENCONSTANTIF_ELSE(idx) \
+else if (!tmplen ? !stricmp(tmp, xVarName[idx]) : (tmplen == strlen(xVarName[idx]) && !strnicmp(tmp, xVarName[idx], strlen(xVarName[idx])))) \
+return nseel_createCompiledValue(ctx, idx);
 opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen) // tmplen 0 = null term
 {
 	// this depends on the string being nul terminated eventually, tmplen is used more as a hint than anything else
@@ -7935,8 +8225,25 @@ opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen) 
 			return nseel_createCompiledValue(ctx, (float)1.618033988749894848205);
 		else if (!tmplen ? !stricmp(tmp, "$EPS") : (tmplen == 4 && !strnicmp(tmp, "$EPS", 4)))
 			return nseel_createCompiledValue(ctx, (float)FLT_EPSILON);
-		else if (!tmplen ? !stricmp(tmp, "$DBL_MAX") : (tmplen == 4 && !strnicmp(tmp, "$DBL_MAX", 4)))
-			return nseel_createCompiledValue(ctx, (float)FLT_MAX);
+		GENCONSTANTIF_ELSE(0)
+		GENCONSTANTIF_ELSE(1)
+		GENCONSTANTIF_ELSE(2)
+		GENCONSTANTIF_ELSE(3)
+		GENCONSTANTIF_ELSE(4)
+		GENCONSTANTIF_ELSE(5)
+		GENCONSTANTIF_ELSE(6)
+		GENCONSTANTIF_ELSE(7)
+		GENCONSTANTIF_ELSE(8)
+		GENCONSTANTIF_ELSE(9)
+		GENCONSTANTIF_ELSE(10)
+		GENCONSTANTIF_ELSE(11)
+		GENCONSTANTIF_ELSE(12)
+		GENCONSTANTIF_ELSE(13)
+		GENCONSTANTIF_ELSE(14)
+		GENCONSTANTIF_ELSE(15)
+		GENCONSTANTIF_ELSE(16)
+		GENCONSTANTIF_ELSE(17)
+		GENCONSTANTIF_ELSE(18)
 		else if (!tmplen ? !stricmp(tmp, "$MEMBLKLIMIT") : (tmplen == 12 && !strnicmp(tmp, "$MEMBLKLIMIT", 12)))
 			return nseel_createCompiledValue(ctx, (float)NSEEL_RAM_ITEMSPERBLOCK);
 		else if ((!tmplen || tmplen == 4) && tmp[1] == '\'' && tmp[2] && tmp[3] == '\'')

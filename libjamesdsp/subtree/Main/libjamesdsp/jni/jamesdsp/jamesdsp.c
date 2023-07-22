@@ -202,7 +202,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				replyData->psize = 4;
 				replyData->vsize = 4;
 				replyData->cmd = 20001;
-				replyData->data = (int32_t)dspmain->jdsp.trueSampleRate;
+				replyData->data = (int32_t)dspmain->jdsp.fs;
 				*replySize = sizeof(reply1x4_1x4_t);
 				return 0;
 			}

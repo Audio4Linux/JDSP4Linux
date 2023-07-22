@@ -196,12 +196,14 @@ int selectConvPartitions(JamesDSPLib *jdsp, unsigned int impulseLengthActual, un
 	*seg2Len = mflen_best;
 	return type_best;
 }
-void JamesDSPGlobalMemoryAllocation()
+void JamesDSPGlobalMemoryAllocation(int do_benchmark)
 {
 	benchmarkCompletionFlag = 0;
 	NSEEL_start();
-	pthread_t benchmarkThread;
-	pthread_create(&benchmarkThread, NULL, convBench, 0);
+    if(do_benchmark) {
+        pthread_t benchmarkThread;
+        pthread_create(&benchmarkThread, NULL, convBench, 0);
+    }
 }
 void JamesDSPGlobalMemoryDeallocation()
 {

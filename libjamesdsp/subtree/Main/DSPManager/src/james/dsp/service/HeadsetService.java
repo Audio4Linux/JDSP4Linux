@@ -954,7 +954,7 @@ public class HeadsetService extends Service
 						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
 						if (DSPManager.devMsgDisplay)
 						{
-							Toast.makeText(HeadsetService.this, getString(R.string.basicinfo, dspBufferLen, dspAllocatedBlockLen, dspModuleSamplingRate), Toast.LENGTH_SHORT).show();
+							Toast.makeText(HeadsetService.this, getString(R.string.basicinfo, dspBufferLen, dspAllocatedBlockLen), Toast.LENGTH_SHORT).show();
 							if (impinfo[0] == 1)
 								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, getString(R.string.mono_conv), impinfo[1], (int)impulseCutted), Toast.LENGTH_SHORT).show();
 							else if (impinfo[0] == 2)
