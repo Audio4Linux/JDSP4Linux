@@ -2305,7 +2305,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Audioverarbeitung</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
@@ -2360,17 +2360,17 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>Convolver-Benchmarking</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="305"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>Benchmarking beim Start aktivieren</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="312"/>
       <source>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</source>
-      <translation type="unfinished"/>
+      <translation>Optimiert die Convolver-Performance, verursacht aber vorübergehend eine erhöhte CPU-Auslastung für etwa eine Minute nach dem Start.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="359"/>
