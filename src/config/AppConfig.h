@@ -67,6 +67,8 @@ public:
         AudioAppBlocklistInvert,
         AudioInactivityTimeout,
 
+        BenchmarkOnBoot,
+
         AeqPlotDarkMode,
 
         ConvolverDefaultPath,

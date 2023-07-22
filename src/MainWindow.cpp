@@ -137,11 +137,6 @@ MainWindow::MainWindow(bool     statupInTray,
         // GraphicEQ
         ui->graphicEq->setEnableSwitchVisible(true);
         ui->graphicEq->setAutoEqAvailable(true);
-
-        // Compander
-        // TODO remove this once the option is actually implemented in libjamesdsp
-        ui->label_5->setVisible(false);
-        ui->comp_tf_transforms->setVisible(false);
     }
 
     // Allocate pointers and init important variables

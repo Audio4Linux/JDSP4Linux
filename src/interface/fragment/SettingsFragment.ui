@@ -90,6 +90,11 @@
          </item>
          <item>
           <property name="text">
+           <string>Audio processing</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>Default paths</string>
           </property>
          </item>
@@ -129,7 +134,7 @@
         <bool>true</bool>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="interface_2">
         <property name="maximumSize">
@@ -273,6 +278,49 @@
          </item>
          <item>
           <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="audioProcessing">
+        <layout class="QVBoxLayout" name="verticalLayout_12">
+         <item>
+          <widget class="QGroupBox" name="groupBox_7">
+           <property name="title">
+            <string>Convolver benchmarking</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <widget class="QCheckBox" name="benchmarkOnBoot">
+              <property name="text">
+               <string>Enable benchmarking on boot</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_5">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>

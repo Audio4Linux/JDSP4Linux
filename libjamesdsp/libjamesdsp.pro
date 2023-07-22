@@ -57,7 +57,21 @@ HEADERS += \
     $$BASEPATH/jdsp_header.h \
     EELStdOutExtension.h \
     PrintfStdOutExtension.h \
-    JdspImpResToolbox.h
+    JdspImpResToolbox.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxpre.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxxsrc/xcomplex.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxxsrc/xreal.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/doc/xcomplex.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/doc/xreal.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/hpaconf.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const07.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const11.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const15.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const19.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const23.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const27.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/mp/const31.h \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xpre.h
 
 SOURCES += \
     $$BASEPATH/Effects/arbEqConv.c \
@@ -107,6 +121,45 @@ SOURCES += \
     EELStdOutExtension.c \
     PrintfStdOutExtension.c \
     JdspImpResToolbox.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/loose_eel.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/atox.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/constant.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxaop.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxbasic.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxconstant.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxconvf.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxexp.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxhypb.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxidiv.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxpow.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxprcmp.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/cxtrig.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/hpaconf.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/prcxpr.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/print.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/prxpr.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/sfmod.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/shift.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xadd.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xchcof.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xdiv.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xevtch.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xexp.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xfmod.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xfrac.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xhypb.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xivhypb.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xivtrg.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xlog.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xmul.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xneg.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xprcmp.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xpwr.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xsigerr.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xsqrt.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xtodbl.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xtoflt.c \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/xtrig.c \
     subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/multimodalEQ.c
 
 unix {
@@ -120,3 +173,6 @@ unix {
 else: error("Static linking only available on Linux systems")
 
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/eel2/numericSys/HPFloat/doc/hpa.txt

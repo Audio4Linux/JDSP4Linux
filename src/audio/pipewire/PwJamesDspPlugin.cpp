@@ -1,6 +1,8 @@
 #include "PwJamesDspPlugin.h"
 #include <QString>
 
+#include "config/AppConfig.h"
+
 extern "C" {
 #ifdef DEBUG_FPE
 #include <fenv.h>
@@ -27,7 +29,7 @@ PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, IAudioServic
 #ifdef DEBUG_FPE
     feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
 #endif
-    JamesDSPGlobalMemoryAllocation();
+    JamesDSPGlobalMemoryAllocation((int)AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot));
     JamesDSPInit(this->dsp, 128, 48000);
 #ifdef DEBUG_FPE
     fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);

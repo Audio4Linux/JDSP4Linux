@@ -556,6 +556,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
                 StereoEnhancementEnable(cast(this->_dsp));
             else
                 StereoEnhancementDisable(cast(this->_dsp));
+            StereoEnhancementSetParam(cast(this->_dsp), _cache->get<float>(DspConfig::stereowide_level) / 100.0f);
             break;
         case DspConfig::stereowide_level:
             StereoEnhancementDisable(cast(this->_dsp));

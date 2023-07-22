@@ -66,6 +66,7 @@ private slots:
     void onTrayEditorCommitted();
     void onTrayEditorReset();
     void onEqualizerHandlesToggled();
+    void onBenchmarkOnBootToggled();
     void onLiveprogAutoExtractToggled();
     void onGithubLinkClicked();
     void onAeqDatabaseManageClicked();
