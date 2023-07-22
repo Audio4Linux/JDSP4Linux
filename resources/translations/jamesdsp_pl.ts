@@ -1493,157 +1493,157 @@ Proszę wybrać inny plik</translation>
       <translation>Pomiń filtry</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="151"/>
+      <location filename="../../src/MainWindow.cpp" line="146"/>
       <source>%1 connected - Preset loaded automatically</source>
       <translation>%1 podłączone - profil użytkownika został załadowany samoczynnie</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="171"/>
+      <location filename="../../src/MainWindow.cpp" line="166"/>
       <source>Cannot execute script</source>
       <translation>Nie można wykonać skryptu</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="172"/>
+      <location filename="../../src/MainWindow.cpp" line="167"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
       <translation>Bieżący plik EEL (w &apos;%1&apos;) nie istnieje już w systemie plików. Proszę ponownie otworzyć plik ręcznie.</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="286"/>
+      <location filename="../../src/MainWindow.cpp" line="281"/>
       <source>Apps</source>
       <translation>Aplikacje</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="287"/>
+      <location filename="../../src/MainWindow.cpp" line="282"/>
       <source>Driver status</source>
       <translation>Stan sterownika</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="291"/>
+      <location filename="../../src/MainWindow.cpp" line="286"/>
       <source>Relink audio pipeline</source>
       <translation>Połącz potok audio ponownie</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="293"/>
+      <location filename="../../src/MainWindow.cpp" line="288"/>
       <source>Reset to defaults</source>
       <translation>Przywróć domyślne</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="294"/>
+      <location filename="../../src/MainWindow.cpp" line="289"/>
       <source>Load from file</source>
       <translation>Załaduj z pliku</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="295"/>
+      <location filename="../../src/MainWindow.cpp" line="290"/>
       <source>Save to file</source>
       <translation>Zapisz do pliku</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="297"/>
+      <location filename="../../src/MainWindow.cpp" line="292"/>
       <source>Open LiveprogIDE</source>
       <translation>Otwórz LiveprogIDE</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="299"/>
+      <location filename="../../src/MainWindow.cpp" line="294"/>
       <source>What&apos;s this... (Select UI element)</source>
       <translation>Co to jest... (Wybierz element UI)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="403"/>
+      <location filename="../../src/MainWindow.cpp" line="398"/>
       <source>Bass/Misc</source>
       <translation>Bas/różne</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="404"/>
+      <location filename="../../src/MainWindow.cpp" line="399"/>
       <source>Sound Positioning</source>
       <translation>Pozycjonowanie dźwięku</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="405"/>
+      <location filename="../../src/MainWindow.cpp" line="400"/>
       <source>Reverb</source>
       <translation>Pogłos</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="406"/>
+      <location filename="../../src/MainWindow.cpp" line="401"/>
       <source>Equalizer</source>
       <translation>Korektor</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="407"/>
+      <location filename="../../src/MainWindow.cpp" line="402"/>
       <source>Convolver</source>
       <translation>Konwolwer</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="408"/>
+      <location filename="../../src/MainWindow.cpp" line="403"/>
       <source>DDC</source>
       <translation>DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="409"/>
+      <location filename="../../src/MainWindow.cpp" line="404"/>
       <source>Liveprog</source>
       <translation>Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="410"/>
+      <location filename="../../src/MainWindow.cpp" line="405"/>
       <source>Graphic EQ</source>
       <translation>Korektor graficzny</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="422"/>
+      <location filename="../../src/MainWindow.cpp" line="417"/>
       <source>Launch application</source>
       <translation>Uruchom aplikację</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="565"/>
+      <location filename="../../src/MainWindow.cpp" line="560"/>
       <source>Reset Configuration</source>
       <translation>Zresetuj konfigurację</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="565"/>
+      <location filename="../../src/MainWindow.cpp" line="560"/>
       <source>Are you sure?</source>
       <translation>Na pewno?</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="589"/>
+      <location filename="../../src/MainWindow.cpp" line="584"/>
       <source>Load custom audio.conf</source>
       <translation>Wczytaj własne audio.conf</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="601"/>
+      <location filename="../../src/MainWindow.cpp" line="596"/>
       <source>Save current audio.conf</source>
       <translation>Zapisz bieżący audio.conf</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1055"/>
+      <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Very low</source>
       <translation>Bardzo niski</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1055"/>
+      <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Low</source>
       <translation>Niski</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1055"/>
+      <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Medium</source>
       <translation>Średni</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1055"/>
+      <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>High</source>
       <translation>Wysoki</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1055"/>
+      <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Extreme</source>
       <translation>Ekstremalny</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1175"/>
+      <location filename="../../src/MainWindow.cpp" line="1170"/>
       <source>Advanced waveform editing</source>
       <translation>Zaawansowana edycja kształtu fali</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1176"/>
+      <location filename="../../src/MainWindow.cpp" line="1171"/>
       <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -2303,260 +2303,280 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
+      <source>Audio processing</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
       <source>Default paths</source>
       <translation>Domyślne ścieżki</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Devices</source>
       <translation>Urządzenia</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Network</source>
       <translation>Sieć</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
       <translation>Ikona w zasobniku systemowym</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="112"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
       <source>Context menu</source>
       <translation>Menu kontekstowe</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="159"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
       <source>Theme</source>
       <translation>Motyw</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="221"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="226"/>
       <source>Edit</source>
       <translation>Edytuj</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="245"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="250"/>
       <source>Color scheme</source>
       <translation>Schemat kolorów</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="259"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
       <source>Equalizer</source>
       <translation>Korektor</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="265"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
       <source>Always display handles</source>
       <translation>Zawsze wyświetlaj uchwyty</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="311"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
+      <source>Convolver benchmarking</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="305"/>
+      <source>Enable benchmarking on boot</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="312"/>
+      <source>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="359"/>
       <source>Impluse responses</source>
       <translation>Odpowiedzi impulsowe</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="328"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="376"/>
       <source>VDCs</source>
       <translation>VDC</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="342"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="390"/>
       <source>Liveprog scripts</source>
       <translation>Skrypty Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="379"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="427"/>
       <source>Save</source>
       <translation>Zapisz</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="388"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="436"/>
       <source>Built-in assets</source>
       <translation>Wbudowane zasoby</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="399"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="447"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ta opcja sprawdzi przy każdym uruchomieniu, czy brakuje jednego z domyślnych skryptów EEL. W takim przypadku brakujące pliki zostaną automatycznie przywrócone z zasobów. (Nie zastąpi ich, jeśli już istnieją!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="402"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="450"/>
       <source>Extract bundled assets on startup</source>
       <translation>Rozpakuj pakiety zasobów podczas uruchamiania</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="422"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="470"/>
       <source>  Extract now  </source>
       <translation>  Rozpakuj teraz  </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="454"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="502"/>
       <source>Select sink/device to be processed</source>
       <translation>Wybierz sink/urządzenie do przetworzenia</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="460"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="508"/>
       <source>Use default output device (recommended)</source>
       <translation>Użyj domyślnego urządzenia wyjściowego (zalecane)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="467"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="515"/>
       <source>Manually select device</source>
       <translation>Wybierz urządzenie ręcznie</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="479"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="527"/>
       <source>Device</source>
       <translation>Urządzenie</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="507"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="555"/>
       <source>Blocklisted apps</source>
       <translation>Zablokowane aplikacje</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="513"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="561"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
       <translation>W sekcji &apos;Aplikacje&apos;, dostępnej w menu z trzema kropkami w oknie głównym, możesz zablokować aplikacje odtwarzające dźwięk przed przetwarzaniem przez JamesDSP.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="529"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="577"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
       <translation>Tryb listy dozwolonych (w zamian aplikacje muszą być konkretnie włączone)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="560"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="608"/>
       <source>Clear list</source>
       <translation>Wyczyść listę</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="589"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="637"/>
       <source>AutoEQ database</source>
       <translation>Baza danych AutoEQ</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="600"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="648"/>
       <source>Status:</source>
       <translation>Stan:</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="610"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="658"/>
       <source>unknown</source>
       <translation>nieznane</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="630"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
       <source>  Manage local database  </source>
       <translation>  Zarządzaj lokalną bazą danych  </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
       <source>Run in background (tray icon)</source>
       <translation>Uruchom w tle (ikona w zasobniku)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="716"/>
       <source>No, shutdown audio effects when closing app</source>
       <translation>Nie, wyłącz efekty dźwiękowe po zamknięciu aplikacji</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="675"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="723"/>
       <source>Yes, minimize to tray icon when closing app</source>
       <translation>Tak, zminimalizuj do ikony w zasobniku po zamknięciu aplikacji</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="682"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="730"/>
       <source>Auto-start</source>
       <translation>Samouruchamianie</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="688"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="736"/>
       <source>Start minimized on boot</source>
       <translation>Uruchom zminimalizowane przy starcie</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="758"/>
       <source>Systray not supported on this system</source>
       <translation>Zasobnik systemowy nie jest obsługiwany w tym systemie</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="760"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="808"/>
       <source>Visit Github repo</source>
       <translation>Odwiedź repozytorium Github</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="786"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="834"/>
       <source>Run setup wizard</source>
       <translation>Uruchom kreatora konfiguracji</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="809"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="857"/>
       <source>Close</source>
       <translation>Zamknij</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="201"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="207"/>
       <source>Unknown (%1)</source>
       <translation>Nieznane (%1)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="267"/>
       <source>installed</source>
       <translation>zainstalowano</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="259"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="267"/>
       <source>not installed</source>
       <translation>nie zainstalowano</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="280"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="288"/>
       <source>Override liveprog scripts?</source>
       <translation>Zastąpić skrypty liveprog?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="289"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
       <translation>Czy chcesz zastąpić istniejące domyślne skrypty liveprog?
 Jeśli zostały zmodyfikowane, zostaną zresetowane.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="292"/>
       <source>Extract assets</source>
       <translation>Rozpakuj zasoby</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="284"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="292"/>
       <source>%1 files have been restored</source>
       <translation>%1 plików zostało przywróconych</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="376"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="384"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
       <translation>Zamierzasz włączyć tryb listy dozwolonych. JamesDSP nie będzie domyślnie przetwarzać wszystkich aplikacji, gdy ten tryb jest aktywny. Musisz konkretnie zezwolić na przetwarzanie każdej aplikacji w menu &apos;Aplikacje&apos;.
 </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="378"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="386"/>
       <source>Are you sure?</source>
       <translation>Na pewno?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="379"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
       <translation>Spowoduje to zresetowanie bieżącej listy zablokowanych lub dozwolonych. Czy chcesz kontynuować?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
       <source>Warning</source>
       <translation>Uwaga</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="407"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
       <source>Do you really want to restore the default menu layout?</source>
       <translation>Czy na pewno chcesz przywrócić domyślny układ menu?</translation>
     </message>
