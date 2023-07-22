@@ -55,7 +55,11 @@ void HSHOResponse(double fs, double fc, unsigned int filterOrder, double gain, d
 	if (G == 1.0)
 		goto scalar_gain;
 	GB = pow(10.0, GB / 20.0);
-	double gR = (G * G - GB * GB) / (GB * GB - 1);
+	double gR;
+	if (fabs(GB * GB - 1) < DBL_EPSILON)
+		gR = 0.0;
+	else
+		gR = (G * G - GB * GB) / (GB * GB - 1);
 	double reci1Ord = 1.0 / filterOrder;
 	double ratOrd = pow(gR, reci1Ord);
 	double sDw = sin(Dw);
@@ -107,13 +111,13 @@ scalar_gain:
 }
 unsigned int HSHOSVF(double fs, double fc, unsigned int filterOrder, double gain, double overallGainDb, float *c1, float *c2, float *d0, float *d1, float *overallGain)
 {
+	*overallGain = (float)pow(10.0, overallGainDb / 20.0);
+	if (fabs(gain) < 8.0 * DBL_EPSILON)
+		return 0;
 	unsigned int L = filterOrder >> 1;
 	double Dw = M_PI * (fc / fs - 0.5);
 	double GB = pow(10.0, ((1.0 / sqrt(2.0)) * gain / 20.0));
 	double G = pow(10.0, gain / 20.0);
-	*overallGain = (float)pow(10.0, overallGainDb / 20.0);
-	if (G == 1.0)
-		return 0;
 	double gR = (G * G - GB * GB) / (GB * GB - 1);
 	double reci1Ord = 1.0 / filterOrder;
 	double ratOrd = pow(gR, reci1Ord);
@@ -214,7 +218,13 @@ void MultimodalEqualizerAxisInterpolation(JamesDSPLib *jdsp, int interpolationMo
 				designFreq = freq[i];
 			double overallGain = i == 0 ? gains[i] : 0.0;
 			//HSHOResponse(jdsp->fs, designFreq, jdsp->mEQ.order, dB, overallGain, nPts, dispFreq, cplxRe, cplxIm);
-			jdsp->mEQ.sec[i] = HSHOSVF(jdsp->fs, designFreq, jdsp->mEQ.order, dB, overallGain, jdsp->mEQ.c1 + i * jdsp->mEQ.nSec, jdsp->mEQ.c2 + i * jdsp->mEQ.nSec, jdsp->mEQ.d0 + i * jdsp->mEQ.nSec, jdsp->mEQ.d1 + i * jdsp->mEQ.nSec, &jdsp->mEQ.overallGain[i]);
+			if (i == 0)
+				jdsp->mEQ.sec[i] = HSHOSVF(jdsp->fs, designFreq, jdsp->mEQ.order, dB, overallGain, jdsp->mEQ.c1 + i * jdsp->mEQ.nSec, jdsp->mEQ.c2 + i * jdsp->mEQ.nSec, jdsp->mEQ.d0 + i * jdsp->mEQ.nSec, jdsp->mEQ.d1 + i * jdsp->mEQ.nSec, &jdsp->mEQ.overallGain);
+			else
+			{
+				float dummy;
+				jdsp->mEQ.sec[i] = HSHOSVF(jdsp->fs, designFreq, jdsp->mEQ.order, dB, overallGain, jdsp->mEQ.c1 + i * jdsp->mEQ.nSec, jdsp->mEQ.c2 + i * jdsp->mEQ.nSec, jdsp->mEQ.d0 + i * jdsp->mEQ.nSec, jdsp->mEQ.d1 + i * jdsp->mEQ.nSec, &dummy);
+			}
 			//printf("nSec: %d\n", jdsp->mEQ.sec[i]);
 		}
 	}
@@ -272,11 +282,9 @@ void MultimodalEqualizerProcess(JamesDSPLib *jdsp, size_t n)
 					jdsp->mEQ.z2_AR[i * jdsp->mEQ.nSec + j] = jdsp->mEQ.z2_AR[i * jdsp->mEQ.nSec + j] + jdsp->mEQ.c2[i * jdsp->mEQ.nSec + j] * jdsp->mEQ.z1_AR[i * jdsp->mEQ.nSec + j];
 					jdsp->mEQ.z1_AR[i * jdsp->mEQ.nSec + j] = jdsp->mEQ.z1_AR[i * jdsp->mEQ.nSec + j] + jdsp->mEQ.c1[i * jdsp->mEQ.nSec + j] * y2;
 				}
-				x1 *= jdsp->mEQ.overallGain[i];
-				x2 *= jdsp->mEQ.overallGain[i];
 			}
-			jdsp->tmpBuffer[0][smp] = x1;
-			jdsp->tmpBuffer[1][smp] = x2;
+			jdsp->tmpBuffer[0][smp] = x1 * jdsp->mEQ.overallGain;
+			jdsp->tmpBuffer[1][smp] = x2 * jdsp->mEQ.overallGain;
 		}
 	}
 }

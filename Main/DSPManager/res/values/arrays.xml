@@ -93,6 +93,16 @@
     <item>18</item>
   </string-array>
 
+  <string-array name="compander_preset_modes" translatable="false">
+    <item>@string/eq_preset_flat</item>
+    <item>@string/eq_preset_custom</item>
+  </string-array>
+
+  <string-array name="compander_preset_values" translatable="false">
+    <item>95.0;200.0;400.0;800.0;1600.0;3400.0;7500.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0</item>
+    <item>custom</item>
+  </string-array>
+
   <string-array name="equalizer_preset_modes" translatable="false">
     <item>@string/eq_preset_flat</item>
     <item>@string/eq_preset_custom</item>
@@ -101,7 +111,6 @@
   <string-array name="equalizer_preset_values" translatable="false">
     <item>25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0</item>
     <item>custom</item>
-    <!-- Custom -->
   </string-array>
 
   <string-array name="equalizer_filtertype">

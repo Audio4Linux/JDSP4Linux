@@ -85,7 +85,7 @@
   <string name="resamplererror">请先启用全域模式或者惯用模式来注册DSP，以便从音讯DSP中获取采样率</string>
   <string name="impfilefault">载入冲激响应失败\n请选择正确冲激响应档案</string>
   <string name="unmatchedsamplerate">冲激响应档案%1$s的采样率%2$d与DSP模组采样率%3$d不吻合\n目前正使用快速重采样器\n预先使用离线重采样器可改善冲激响应质量。</string>
-  <string name="basicinfo">缓冲区大小:%1$s\n动态容器容量:%2$d\n采样率:%3$d</string>
+  <string name="basicinfo">缓冲区大小:%1$s\n动态容器容量:%2$d</string>
   <string name="convolversuccess">成功载入冲激响应:%1$s\n声道:%2$s\n每声道样本总数:%3$d\n截短后的每声道样本总数:%4$d</string>
   <string name="limiter_threshold">压限器阈值[-60 到 -0.1 dB]</string>
   <string name="limiter_release">压限器时间常数[1.5 到 500 ms]</string>

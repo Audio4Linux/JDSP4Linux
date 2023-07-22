@@ -43,8 +43,12 @@ typedef struct
 #define HALFWNDLEN_DRS ((FFTSIZE_DRS >> 1) + 1)
 #define MAX_OUTPUT_BUFFERS_DRS 2
 #define NUMPTS_DRS (7)
+#define DYN_BANDS_GAMMATONE (16)
+#define MAXORDER (12)
+#define MAXSECTIONS (MAXORDER >> 1)
 typedef struct
 {
+	// Frequency domain
 	// Constant
 	unsigned int fftLen, minus_fftLen, ovpLen, halfLen, smpShift, procUpTo;
 	void(*fft)(float*, const float*);
@@ -71,6 +75,7 @@ typedef struct
 	char octaveSmooth[sizeof(unsigned int) + sizeof(float) + sizeof(unsigned int) + ((HALFWNDLEN_DRS + 1) << 1) * sizeof(unsigned int) + (HALFWNDLEN_DRS + 1) * sizeof(float) + ((HALFWNDLEN_DRS + 1) + 3) * 2 * sizeof(float)];
 	float finalGain[HALFWNDLEN_DRS];
 	double freq2[NUMPTS_DRS + 2];
+	float freq3[DYN_BANDS_GAMMATONE + 2];
 	double gains2[NUMPTS_DRS + 2];
 	float DREmultUniform[HALFWNDLEN_DRS];
 	float DREmult[HALFWNDLEN_DRS];
@@ -79,6 +84,34 @@ typedef struct
 	float headRoomdB;
 	float fgt_fac, fgt_facT;
 	float spectralRate;
+	// Time domain
+	float bRe[DYN_BANDS_GAMMATONE];
+	float aRe[DYN_BANDS_GAMMATONE];
+	float aIm[DYN_BANDS_GAMMATONE];
+	float Zre[DYN_BANDS_GAMMATONE * 2];
+	float Zim[DYN_BANDS_GAMMATONE * 2];
+	float gmtFreq[DYN_BANDS_GAMMATONE];
+	float interpolatedGain[DYN_BANDS_GAMMATONE + 2];
+	float diffGain[DYN_BANDS_GAMMATONE];
+	float c1[(DYN_BANDS_GAMMATONE - 1)];
+	float c2[(DYN_BANDS_GAMMATONE - 1)];
+	float d0[(DYN_BANDS_GAMMATONE - 1)];
+	float d1[(DYN_BANDS_GAMMATONE - 1)];
+	float overallGain;
+	float c1step[(DYN_BANDS_GAMMATONE - 1)];
+	float c2step[(DYN_BANDS_GAMMATONE - 1)];
+	float d0step[(DYN_BANDS_GAMMATONE - 1)];
+	float d1step[(DYN_BANDS_GAMMATONE - 1)];
+	float overallGainstep;
+	float z1_AL[(DYN_BANDS_GAMMATONE - 1)];
+	float z2_AL[(DYN_BANDS_GAMMATONE - 1)];
+	float z1_AR[(DYN_BANDS_GAMMATONE - 1)];
+	float z2_AR[(DYN_BANDS_GAMMATONE - 1)];
+	double trigo[(DYN_BANDS_GAMMATONE - 1) * 4];
+	unsigned int updatePerNSmps;
+	float dsSm, alpha;
+	int updateIdx;
+	// Global variable
 	int granularity, tfresolution;
 } FFTCompander;
 typedef struct
@@ -411,8 +444,6 @@ typedef struct
 	FFTConvolver2x2 convState;
 } ArbEqConv;
 #define NUMPTS 15
-#define MAXORDER (12)
-#define MAXSECTIONS (MAXORDER >> 1)
 typedef struct
 {
 	// FIR
@@ -432,9 +463,10 @@ typedef struct
 	float z2_AL[(NUMPTS - 1) * MAXSECTIONS];
 	float z1_AR[(NUMPTS - 1) * MAXSECTIONS];
 	float z2_AR[(NUMPTS - 1) * MAXSECTIONS];
-	float overallGain[NUMPTS - 1];
+	float overallGain;
 	char sec[NUMPTS - 1];
 } MultimodalEQ;
+extern unsigned int HSHOSVF(double fs, double fc, unsigned int filterOrder, double gain, double overallGainDb, float *c1, float *c2, float *d0, float *d1, float *overallGain);
 typedef struct
 {
 	ArbEqConv instance;
@@ -521,7 +553,7 @@ typedef struct dspsys
 	uint64_t rndstate[2];
 } JamesDSPLib;
 // JamesDSP controller
-extern void JamesDSPGlobalMemoryAllocation();
+extern void JamesDSPGlobalMemoryAllocation(int do_benchmark);
 extern void JamesDSPGlobalMemoryDeallocation();
 extern void JamesDSPReallocateBlock(JamesDSPLib *jdsp, size_t blockSizeMax);
 extern void jdsp_lock(JamesDSPLib *jdsp);

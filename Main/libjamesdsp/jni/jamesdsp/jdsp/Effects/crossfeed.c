@@ -10,6 +10,7 @@ void CrossfeedConstructor(JamesDSPLib *jdsp)
 }
 void CrossfeedDestructor(JamesDSPLib *jdsp)
 {
+    jdsp_lock(jdsp);
 	if (jdsp->advXF.conv[0])
 	{
 		FFTConvolver2x4x2Free(jdsp->advXF.conv[0]);
@@ -29,6 +30,7 @@ void CrossfeedDestructor(JamesDSPLib *jdsp)
 		FFTConvolver2x4x2Free(jdsp->advXF.convLong_S_S);
 		free(jdsp->advXF.convLong_S_S);
 	}
+    jdsp_unlock(jdsp);
 }
 void CrossfeedProcessFFTConvolver2x4x2(JamesDSPLib *jdsp, size_t n)
 {
@@ -40,6 +42,7 @@ void CrossfeedProcessTwoStageFFTConvolver2x4x2(JamesDSPLib *jdsp, size_t n)
 }
 void CrossfeedEnable(JamesDSPLib *jdsp, char enable)
 {
+    jdsp_lock(jdsp);
 	if (jdsp->crossfeedForceRefresh || !jdsp->advXF.conv[0] || !jdsp->advXF.conv[1] || !jdsp->advXF.conv[2] || !jdsp->advXF.convLong_S_S || !jdsp->advXF.convLong_T_S)
 	{
 		if (jdsp->advXF.conv[0])
@@ -96,6 +99,7 @@ void CrossfeedEnable(JamesDSPLib *jdsp, char enable)
 	}
 	if (enable)
 		jdsp->crossfeedEnabled = 1;
+    jdsp_unlock(jdsp);
 }
 void CrossfeedDisable(JamesDSPLib *jdsp)
 {

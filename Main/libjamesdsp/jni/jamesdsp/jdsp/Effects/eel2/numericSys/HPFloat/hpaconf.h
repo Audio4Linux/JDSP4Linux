@@ -10,5 +10,5 @@ extern int XLITTLE_ENDIAN;
 // 7 = 34 decimal places
 // Algorithm become slower when XDIM > 19
 // 31 = 150 decimal places
-#define XDIM 7
+#define XDIM 15
 #endif

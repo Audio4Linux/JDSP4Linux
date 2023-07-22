@@ -58,12 +58,12 @@
         android:entryValues="@array/compression_tfresolution_values"
         android:title="@string/dialog_compression_tfresolution" />
     <james.dsp.preference.SummariedListPreference
-        android:entries="@array/equalizer_preset_modes"
+        android:entries="@array/compander_preset_modes"
         android:dialogTitle="@string/pref_equalizer_preset_title"
         android:key="dsp.compression.eq"
         android:defaultValue="95.0;200.0;400.0;800.0;1600.0;3400.0;7500.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0"
         android:title="@string/pref_equalizer_preset_title"
-        android:entryValues="@array/equalizer_preset_values" />
+        android:entryValues="@array/compander_preset_values" />
     <james.dsp.preference.CompanderPreference android:key="dsp.compression.eq.custom" />
   </PreferenceCategory>
 

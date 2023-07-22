@@ -48,8 +48,7 @@ const xreal x_floatMin = HPA_MIN;
 const xreal x_floatMax = HPA_MAX;
 xoutflags xreal::ioflags = { -1, XOUT_FIXED, 0, 0, 6, ' ', -1, -1 };
 
-ostream&
-operator<< (ostream& os, const xreal& x)
+ostream& operator<< (ostream& os, const xreal& x)
 {
   char buffer[BUFF_SIZE];
 
@@ -57,8 +56,7 @@ operator<< (ostream& os, const xreal& x)
   return os << buffer;
 }
 
-istream&
-operator>> (istream& is, xreal& x)
+istream& operator>> (istream& is, xreal& x)
 {
   double f;
   istream& res = is >> f;
@@ -67,74 +65,62 @@ operator>> (istream& is, xreal& x)
   return res;
 }
 
-xreal
-operator+ (const xreal& x1, const xreal& x2)
+xreal operator+ (const xreal& x1, const xreal& x2)
 {
   return xreal(xadd (x1.br, x2.br, 0));
 }
 
-xreal
-operator- (const xreal& x1, const xreal& x2)
+xreal operator- (const xreal& x1, const xreal& x2)
 {
   return xreal(xadd (x1.br, x2.br, 1));
 }
 
-xreal
-operator* (const xreal& x1, const xreal& x2)
+xreal operator* (const xreal& x1, const xreal& x2)
 {
   return xreal(xmul (x1.br, x2.br));
 }
 
-xreal
-operator/ (const xreal& x1, const xreal& x2)
+xreal operator/ (const xreal& x1, const xreal& x2)
 {
   return xreal(xdiv (x1.br, x2.br));
 }
 
-xreal
-operator% (const xreal& x1, int n)
+xreal operator% (const xreal& x, int n)
 {
-  return xpr2 (x1.br, n);
+  return xpr2 (x.br, n);
 }
 
-int
-operator== (const xreal& x1, const xreal& x2)
+int operator== (const xreal& x1, const xreal& x2)
 {
   return (xprcmp (&x1.br, &x2.br) == 0);
 }
 
-int
-operator!= (const xreal& x1, const xreal& x2)
+int operator!= (const xreal& x1, const xreal& x2)
 {
   return (xprcmp (&x1.br, &x2.br) != 0);
 }
 
-int
-operator<= (const xreal& x1, const xreal& x2)
+int operator<= (const xreal& x1, const xreal& x2)
 {
   return (xprcmp (&x1.br, &x2.br) <= 0);
 }
 
-int
-operator>= (const xreal& x1, const xreal& x2)
+int operator>= (const xreal& x1, const xreal& x2)
 {
   return (xprcmp (&x1.br, &x2.br) >= 0);
 }
 
-int
-operator< (const xreal& x1, const xreal& x2)
+int operator< (const xreal& x1, const xreal& x2)
 {
   return (xprcmp (&x1.br, &x2.br) < 0);
 }
 
-int
-operator> (const xreal& x1, const xreal& x2)
+int operator> (const xreal& x1, const xreal& x2)
 {
   return (xprcmp (&x1.br, &x2.br) > 0);
 }
 
-unsigned long
-sget (string s, unsigned long startp, xreal& x)
+unsigned long sget (string s, unsigned long startp, xreal& x)
 {
   const char *startptr;
   char *tail;
@@ -152,8 +138,7 @@ sget (string s, unsigned long startp, xreal& x)
     }
 }
 
-const char*
-bget (const char* buff, xreal& x)
+const char* bget (const char* buff, xreal& x)
 {
   char* tail;
 
@@ -169,217 +154,181 @@ bget (const char* buff, xreal& x)
     }
 }
 
-int
-compare (const xreal& x1, const xreal& x2)
+int compare (const xreal& x1, const xreal& x2)
 {
   return xprcmp (&x1.br, &x2.br);
 }
 
-int
-isNaN (const xreal& x)
+int isNaN (const xreal& x)
 {
   return xisNaN (&x.br);
 }
 
-xreal
-abs (const xreal& s)
+xreal abs (const xreal& s)
 {
   return xabs (s.br);
 }
 
-xreal
-frexp (const xreal& s, int *p)
+xreal frexp (const xreal& s, int *p)
 {
   return xfrexp (s.br, p);
 }
 
-xreal
-qfmod (const xreal& s, const xreal& t, xreal& q)
+xreal qfmod (const xreal& s, const xreal& t, xreal& q)
 {
   return xfmod (s.br, t.br, &q.br);
 }
 
-xreal
-fmod (const xreal& s, const xreal& t)
+xreal fmod (const xreal& s, const xreal& t)
 {
   xpr q;
 
   return xfmod (s.br, t.br, &q);
 }
 
-xreal
-sfmod (const xreal& s, int *p)
+xreal sfmod (const xreal& s, int *p)
 {
   return xsfmod (s.br, p);
 }
 
-xreal
-frac (const xreal& x)
+xreal frac (const xreal& x)
 {
   return xfrac (x.br);
 }
 
-xreal
-trunc (const xreal& x)
+xreal trunc (const xreal& x)
 {
   return xtrunc (x.br);
 }
 
-xreal
-round (const xreal& x)
+xreal round (const xreal& x)
 {
   return xround (x.br);
 }
 
-xreal
-ceil (const xreal& x)
+xreal ceil (const xreal& x)
 {
   return xceil (x.br);
 }
 
-xreal
-floor (const xreal& x)
+xreal floor (const xreal& x)
 {
   return xfloor (x.br);
 }
 
-xreal
-fix (const xreal& x)
+xreal fix (const xreal& x)
 {
   return xfix (x.br);
 }
 
-xreal
-tan (const xreal& x)
+xreal tan (const xreal& x)
 {
   return xtan (x.br);
 }
 
-xreal
-sin (const xreal& x)
+xreal sin (const xreal& x)
 {
   return xsin (x.br);
 }
 
-xreal
-cos (const xreal& x)
+xreal cos (const xreal& x)
 {
   return xcos (x.br);
 }
 
-xreal
-atan (const xreal& a)
+xreal atan (const xreal& a)
 {
   return xatan (a.br);
 }
 
-xreal
-asin (const xreal& a)
+xreal asin (const xreal& a)
 {
   return xasin (a.br);
 }
 
-xreal
-acos (const xreal& a)
+xreal acos (const xreal& a)
 {
   return xacos (a.br);
 }
 
-xreal
-atan2 (const xreal& y, const xreal& x)
+xreal atan2 (const xreal& y, const xreal& x)
 {
   return xatan2 (y.br, x.br);
 }
 
-xreal
-sqrt (const xreal& u)
+xreal sqrt (const xreal& u)
 {
   return xsqrt (u.br);
 }
 
-xreal
-exp (const xreal& u)
+xreal exp (const xreal& u)
 {
   return xexp (u.br);
 }
 
-xreal
-exp2 (const xreal& u)
+xreal exp2 (const xreal& u)
 {
   return xexp2 (u.br);
 }
 
-xreal
-exp10 (const xreal& u)
+xreal exp10 (const xreal& u)
 {
   return xexp10 (u.br);
 }
 
-xreal
-log (const xreal& u)
+xreal log (const xreal& u)
 {
   return xlog (u.br);
 }
 
-xreal
-log2 (const xreal& u)
+xreal log2 (const xreal& u)
 {
   return xlog2 (u.br);
 }
 
-xreal
-log10 (const xreal& u)
+xreal log10 (const xreal& u)
 {
   return xlog10 (u.br);
 }
 
-xreal
-tanh (const xreal& v)
+xreal tanh (const xreal& v)
 {
   return xtanh (v.br);
 }
 
-xreal
-sinh (const xreal& v)
+xreal sinh (const xreal& v)
 {
   return xsinh (v.br);
 }
 
-xreal
-cosh (const xreal& v)
+xreal cosh (const xreal& v)
 {
   return xcosh (v.br);
 }
 
-xreal
-atanh (const xreal& v)
+xreal atanh (const xreal& v)
 {
   return xatanh (v.br);
 }
 
-xreal
-asinh (const xreal& v)
+xreal asinh (const xreal& v)
 {
   return xasinh (v.br);
 }
 
-xreal
-acosh (const xreal& v)
+xreal acosh (const xreal& v)
 {
   return xacosh (v.br);
 }
 
-xreal
-pow (const xreal& x, const xreal& y)
+xreal pow (const xreal& x, const xreal& y)
 {
   return xpow (x.br, y.br);
 }
 
-extern int
-hpa_read_item (istream& is, char* buff, unsigned size);
+extern int hpa_read_item (istream& is, char* buff, unsigned size);
 
-int
-xreal::getfrom (istream& is)
+int xreal::getfrom (istream& is)
 {
   char buffer[BUFF_SIZE];
   int n = hpa_read_item (is, buffer, BUFF_SIZE);
@@ -388,8 +337,7 @@ xreal::getfrom (istream& is)
   return n;
 }
 
-int 
-xreal::print (ostream& os, int sc_not, int sign, int lim) const
+int xreal::print (ostream& os, int sc_not, int sign, int lim) const
 {
   char* s = xpr_asprint (br, sc_not, sign, lim);
 
@@ -409,8 +357,7 @@ extern int xErrNo;
 
 }
 
-int
-xmatherrcode ()
+int xmatherrcode ()
 {
 #ifdef XERR_DFL
   return xErrNo;
@@ -419,8 +366,7 @@ xmatherrcode ()
 #endif
 }
 
-void
-clear_xmatherr ()
+void clear_xmatherr ()
 {
 #ifdef XERR_DFL
   xErrNo = 0;
