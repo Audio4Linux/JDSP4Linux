@@ -2341,22 +2341,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>卷积器压力测试及计算速度优化</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="305"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>开机时启用卷积器计算速度优化</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="312"/>
       <source>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</source>
-      <translation type="unfinished"/>
+      <translation>优化卷积器性能，但在主程序启动后约1分钟内导致CPU使用率临时增加。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="359"/>
       <source>Impluse responses</source>
-      <translation type="unfinished"/>
+      <translation>冲激响应/滤波器</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="376"/>
@@ -2366,12 +2366,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="390"/>
       <source>Liveprog scripts</source>
-      <translation type="unfinished"/>
+      <translation>现场可编程处理器脚本</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="427"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>保存</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="436"/>
@@ -2677,7 +2677,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="221"/>
       <source>&amp;Equalizer presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;均衡器预置</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="234"/>
