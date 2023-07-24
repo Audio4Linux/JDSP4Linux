@@ -331,17 +331,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
       <source>Auto-scroll</source>
-      <translation type="unfinished"/>
+      <translation>自动滚屏</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>复制选中项</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
       <source>Copy all</source>
-      <translation type="unfinished"/>
+      <translation>复制所有内容</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
@@ -354,27 +354,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation type="unfinished"/>
+      <translation>EEL 脚本开发环境</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
       <source>File</source>
-      <translation type="unfinished"/>
+      <translation>文件</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>编辑</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>导航</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>视图</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
@@ -553,7 +553,7 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
       <source>Freeze</source>
-      <translation type="unfinished"/>
+      <translation>冻结运行</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
@@ -568,7 +568,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>代码大纲</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
@@ -677,12 +677,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>重命名</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>移除</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
@@ -700,52 +700,52 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>查找(&amp;F)：</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>替换为(&amp;E)：</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>查找上一个匹配项</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>查找下一个匹配项</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
       <source>&amp;Options</source>
-      <translation type="unfinished"/>
+      <translation>选项(&amp;O)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation type="unfinished"/>
+      <translation>正则表达式(&amp;E)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
-      <translation type="unfinished"/>
+      <translation>全字匹配(&amp;W) </translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
-      <translation type="unfinished"/>
+      <translation>区分大小写(&amp;C)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
       <source>&amp;Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭(&amp;C)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
-      <translation type="unfinished"/>
+      <translation>替换(&amp;R)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
@@ -755,7 +755,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
       <source>no match found</source>
-      <translation type="unfinished"/>
+      <translation>找不到指定的文字</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="170"/>
@@ -774,7 +774,8 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>感谢你安装这个应用程序！
+但是，在你开始体验JamesDSP for Linux之前，我们需要做一些调整，旨在尽可能保证你使用JDSP的最佳体验。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
@@ -806,7 +807,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
       <source>That&apos;s it!</source>
-      <translation type="unfinished"/>
+      <translation>搞定，就这些了！</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
@@ -1118,7 +1119,7 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="473"/>
       <location filename="../../src/MainWindow.ui" line="529"/>
       <source>Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>交叉反馈</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="494"/>
@@ -1294,12 +1295,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1235"/>
       <source>Enable EQ</source>
-      <translation type="unfinished"/>
+      <translation>启用 EQ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1255"/>
       <source>Presets...</source>
-      <translation type="unfinished"/>
+      <translation>预设...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1275"/>
@@ -1309,7 +1310,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1324"/>
       <source>Interpolator</source>
-      <translation type="unfinished"/>
+      <translation>插值器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1327"/>
@@ -1485,7 +1486,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2187"/>
       <source>Bypass</source>
-      <translation type="unfinished"/>
+      <translation>旁通</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="146"/>
@@ -1555,17 +1556,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="400"/>
       <source>Reverb</source>
-      <translation type="unfinished"/>
+      <translation>混响</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="401"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>均衡器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="402"/>
       <source>Convolver</source>
-      <translation type="unfinished"/>
+      <translation>脉冲反馈</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="403"/>
@@ -1595,7 +1596,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="560"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>你确定吗？</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="584"/>
@@ -1659,12 +1660,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>创建新脚本</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="63"/>
       <source>New script</source>
-      <translation type="unfinished"/>
+      <translation>新脚本</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
@@ -1674,17 +1675,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
       <source>Workspace directory</source>
-      <translation type="unfinished"/>
+      <translation>工作区目录</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
+      <translation>文件名</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
       <source>Description</source>
-      <translation type="unfinished"/>
+      <translation>说明</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
@@ -1701,7 +1702,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>错误</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
@@ -1726,7 +1727,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/utils/OverlayMsgProxy.h" line="33"/>
       <location filename="../../src/utils/OverlayMsgProxy.h" line="37"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
   </context>
   <context>
@@ -1743,7 +1744,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="143"/>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="169"/>
       <source>Select...</source>
-      <translation type="unfinished"/>
+      <translation>选择...</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="39"/>
@@ -1753,7 +1754,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="52"/>
       <source>Background Color</source>
-      <translation type="unfinished"/>
+      <translation>背景颜色</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="65"/>
@@ -1824,7 +1825,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>保存</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
@@ -1954,7 +1955,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="159"/>
       <source>List All Tabs</source>
-      <translation type="unfinished"/>
+      <translation>列出所有标签页</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
@@ -1964,17 +1965,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
       <source>Close Active Tab</source>
-      <translation type="unfinished"/>
+      <translation>关闭活动的标签页</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>关闭分组</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="248"/>
       <source>Close Tab</source>
-      <translation type="unfinished"/>
+      <translation>关闭标签页</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="20"/>
@@ -2110,7 +2111,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
       <source>Joe0Bloggs Realistic surround</source>
-      <translation type="unfinished"/>
+      <translation>Joe0Blogs 现实环绕模式</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
@@ -2270,7 +2271,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>设置</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
@@ -2305,12 +2306,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>托盘图标</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
       <source>Context menu</source>
-      <translation type="unfinished"/>
+      <translation>右键菜单</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
@@ -2330,7 +2331,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>均衡器</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
@@ -2385,12 +2386,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="450"/>
       <source>Extract bundled assets on startup</source>
-      <translation type="unfinished"/>
+      <translation>启动时解包自带资源文件</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="470"/>
       <source>  Extract now  </source>
-      <translation type="unfinished"/>
+      <translation>  现在解包  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="502"/>
@@ -2542,7 +2543,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="386"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>你确定吗？</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
@@ -2557,7 +2558,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
       <source>Do you really want to restore the default menu layout?</source>
-      <translation type="unfinished"/>
+      <translation>你真的确定要恢复默认的菜单布局吗？</translation>
     </message>
   </context>
   <context>
@@ -2583,7 +2584,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
       <source>JamesDSP core version</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP 核心版本</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
@@ -2598,7 +2599,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>采样率</translation>
     </message>
   </context>
   <context>
