@@ -284,7 +284,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>延迟: %1毫秒</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
@@ -1335,12 +1335,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1384"/>
       <source>Fixed bands</source>
-      <translation type="unfinished"/>
+      <translation>固定频率</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1400"/>
       <source>Flexible bands</source>
-      <translation type="unfinished"/>
+      <translation>可调频率</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1432"/>
@@ -1361,7 +1361,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1518"/>
       <source>Enable convolver</source>
-      <translation type="unfinished"/>
+      <translation>启用卷积器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1525"/>
@@ -1381,7 +1381,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1555"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>最小相位变换以及长度剪枝</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1563"/>
@@ -1551,7 +1551,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="399"/>
       <source>Sound Positioning</source>
-      <translation type="unfinished"/>
+      <translation>声音方位</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="400"/>
@@ -1576,12 +1576,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="404"/>
       <source>Liveprog</source>
-      <translation type="unfinished"/>
+      <translation>现场可编程处理器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="405"/>
       <source>Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>图形均衡器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="417"/>
@@ -1690,12 +1690,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
       <source>Untitled script</source>
-      <translation type="unfinished"/>
+      <translation>无名脚本</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
       <source>Select directory</source>
-      <translation type="unfinished"/>
+      <translation>选择目录</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
@@ -2243,12 +2243,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/main.cpp" line="181"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP 是 Linux 和 Android 系统可用的高级音频处理引擎。</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>自动启动权限已被拒绝</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
@@ -2286,12 +2286,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>音频处理</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
       <source>Default paths</source>
-      <translation type="unfinished"/>
+      <translation>默认路径</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
