@@ -2251,7 +2251,7 @@ Please create one first before adding a new rule.</source>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
-      <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
+      <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
       <translation type="unfinished"/>
     </message>
     <message>
