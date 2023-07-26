@@ -2272,7 +2272,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Bitte führe &apos;flatpak permission-set background background %1 yes&apos; aus und aktiviere die Autostart-Einstellung erneut.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
