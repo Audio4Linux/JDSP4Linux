@@ -2270,7 +2270,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
     </message>
     <message>
         <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
-        <source>Please run &apos;flatpak permission-reset %1&apos; and reenable auto-start.</source>
+        <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
