@@ -2271,7 +2271,7 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Proszę wykonać polecenie &apos;flatpak permission-set background background %1 yes&apos; i ponownie włączyć opcję samouruchamiania.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
@@ -2304,7 +2304,7 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Przetwarzanie audio</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
@@ -2359,17 +2359,17 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>Benchmarking konwolwera</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="305"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>Włącz benchmarking przy starcie</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="312"/>
       <source>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</source>
-      <translation type="unfinished"/>
+      <translation>Optymalizuje wydajność konwolwera, ale powoduje chwilowe zwiększenie użycia procesora przez około 1 minutę przy starcie.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="359"/>
