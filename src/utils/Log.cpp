@@ -120,6 +120,8 @@ void Log::write(const QString& msg, bool force, bool useStdErr, LoggingMode mode
     if(mode == LM_UNSPECIFIED)
         mode = loggingMode;
 
+    mutex.lock();
+
     QFile file(path());
     if (mode == LM_ALL || mode == LM_FILE)
     {
@@ -136,6 +138,8 @@ void Log::write(const QString& msg, bool force, bool useStdErr, LoggingMode mode
         (useStdErr ? err : out) << msg.toUtf8().constData() << Qt::endl;
         (useStdErr ? err : out).flush();
     }
+
+    mutex.unlock();
 }
 
 QString Log::prepareDebugMessage(const QString& message, util::source_location location)

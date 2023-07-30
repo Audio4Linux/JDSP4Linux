@@ -18,6 +18,7 @@
 #include <string>
 #include <QString>
 #include <QTextStream>
+#include <QMutex>
 
 // TODO Move Utils.h out of AudioDrivers/Base into a common subproject
 #include "Utils.h"
@@ -101,6 +102,7 @@ private:
     LoggingMode loggingMode = LM_ALL;
     bool useSimpleFormat = false;
     Severity minSeverity = Debug;
+    QMutex mutex = QMutex();
 };
 
 #endif // LOG_H
