@@ -8,6 +8,15 @@
 #include "Effects/eel2/ns-eel.h"
 #include "jdsp_header.h"
 #define TAG "EffectDSPMain"
+
+#ifdef __ANDROID_API__
+#if __ANDROID_API__ < __ANDROID_API_J_MR2__
+double log2(double x) {
+    return (log(x)*1.4426950408889634);
+}
+#endif
+#endif
+
 // Range: 0x800000, 0x7fffff
 int32_t i32_from_p24_big_endian(const uint8_t *packed24)
 {
@@ -107,6 +116,7 @@ double getProcTime(int flen, int num, double dur)
 	free(y);
 	return t_diff / (double)counter;
 }
+char benchmarkEnable = 0;
 char benchmarkCompletionFlag = 0;
 double convbench_c0[MAX_BENCHMARK] = { 2.4999999e-05f,4.9999999e-05f,9.9999997e-05f,0.0002f,0.0005f,0.001f,0.0021f,0.0057f,0.0126f,0.0293f };
 double convbench_c1[MAX_BENCHMARK] = { 3.1249999e-06f,6.2499998e-06f,1.2500000e-05f,2.4999999e-05f,4.9999999e-05f,9.9999997e-05f,0.0002f,0.0004f,0.0009f,0.0019f };
@@ -200,6 +210,7 @@ void JamesDSPGlobalMemoryAllocation(int do_benchmark)
 {
 	benchmarkCompletionFlag = 0;
 	NSEEL_start();
+    benchmarkEnable = do_benchmark;
     if(do_benchmark) {
         pthread_t benchmarkThread;
         pthread_create(&benchmarkThread, NULL, convBench, 0);
@@ -247,6 +258,14 @@ void JamesDSPReallocateBlock(JamesDSPLib *jdsp, size_t n)
 }
 void JamesDSPRefreshConvolutions(JamesDSPLib *jdsp, char refreshAll)
 {
+    // Temporary(?) bug fix when benchmarks are off
+   if(!benchmarkEnable) {
+#ifdef DEBUG
+        __android_log_print(ANDROID_LOG_INFO, TAG, "ignoring call to JamesDSPRefreshConvolutions(...) because benchmarks are disabled");
+#endif
+        return;
+    }
+
 #ifdef DEBUG
 	__android_log_print(ANDROID_LOG_INFO, TAG, "Buffer size changed, update convolution object to maximize performance");
 #endif
@@ -876,6 +895,7 @@ void pfloat32Multiplexed(JamesDSPLib *jdsp, float *x, float *y, size_t n)
 	if (jdsp->blockSize != n)
 	{
 		jdsp->blockSize = n;
+
 		JamesDSPRefreshConvolutions(jdsp, 1);
 	}
 	for (size_t i = 0; i < n; i++)
