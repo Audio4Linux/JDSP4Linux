@@ -16,7 +16,7 @@ PipewireAudioService::PipewireAudioService()
 
     mgr = std::make_unique<PwPipelineManager>();
     appMgr = std::make_unique<PwAppManager>(mgr.get());
-    plugin = new PwJamesDspPlugin(mgr.get(), this);
+    plugin = new PwJamesDspPlugin(mgr.get(), AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot), this);
     effects = std::make_unique<FilterContainer>(mgr.get(), plugin, &AppConfig::instance());
 
     mgr.get()->new_default_sink_name.connect([=](const std::string& name) {

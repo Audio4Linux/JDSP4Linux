@@ -1,8 +1,6 @@
 #include "PwJamesDspPlugin.h"
 #include <QString>
 
-#include "config/AppConfig.h"
-
 extern "C" {
 #ifdef DEBUG_FPE
 #include <fenv.h>
@@ -17,7 +15,7 @@ void receivePrintfStdout(const char* msg, void* userdata) {
     }
 }
 
-PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, IAudioService* parent_service)
+PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, bool enableBenchmark, IAudioService* parent_service)
     : PwPluginBase("@PwJamesDspPlugin: ", "JamesDsp", pipe_manager)
 {
     setMessageHandler(std::bind(&IAudioService::handleMessage, parent_service, std::placeholders::_1, std::placeholders::_2));
@@ -29,7 +27,7 @@ PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, IAudioServic
 #ifdef DEBUG_FPE
     feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
 #endif
-    JamesDSPGlobalMemoryAllocation((int)AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot));
+    JamesDSPGlobalMemoryAllocation((int)enableBenchmark);
     JamesDSPInit(this->dsp, 128, 48000);
 #ifdef DEBUG_FPE
     fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
