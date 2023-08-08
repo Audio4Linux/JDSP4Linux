@@ -1100,395 +1100,400 @@ Selecione outro</translation>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="398"/>
+      <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="403"/>
-      <source>Multiresolution (Continuous wavelet)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/MainWindow.ui" line="408"/>
-      <source>Multiresolution (Time domain)</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <location filename="../../src/MainWindow.ui" line="470"/>
+      <location filename="../../src/MainWindow.ui" line="484"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Crossfeed Inclui o modo tradicional BS2B (DSP Bauer estereofónico a binaural) e uma abordagem mais avançada de HRTF baseada na convolução.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="473"/>
-      <location filename="../../src/MainWindow.ui" line="529"/>
+      <location filename="../../src/MainWindow.ui" line="487"/>
+      <location filename="../../src/MainWindow.ui" line="543"/>
       <source>Crossfeed</source>
       <translation>Crossfeed</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="494"/>
+      <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
       <translation>Modo</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="511"/>
+      <location filename="../../src/MainWindow.ui" line="525"/>
       <source>Custom BS2B parameters</source>
       <translation>Parâmetros BS2B customizados</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="552"/>
+      <location filename="../../src/MainWindow.ui" line="566"/>
       <source>Cut frequency</source>
       <translation>Frequência de corte</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="607"/>
+      <location filename="../../src/MainWindow.ui" line="621"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Amplitude do palco sonoro&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Um algoritmo que detecta a relação de fase estéreo em várias regiões espectrais e melhora o som estéreo sem afetar a integridade vocal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="610"/>
+      <location filename="../../src/MainWindow.ui" line="624"/>
       <source>Soundstage wideness</source>
       <translation>Amplitude do palco sonoro</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="631"/>
+      <location filename="../../src/MainWindow.ui" line="645"/>
       <source>Widen level</source>
       <translation>Nível da ampliação</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="676"/>
+      <location filename="../../src/MainWindow.ui" line="690"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberação&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rede IIR complexa (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="702"/>
+      <location filename="../../src/MainWindow.ui" line="716"/>
       <source>Enable reverberation</source>
       <translation>Ativar reverberação</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="722"/>
+      <location filename="../../src/MainWindow.ui" line="736"/>
       <source>Presets</source>
       <translation>Predefinições</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="755"/>
-      <location filename="../../src/MainWindow.ui" line="2129"/>
+      <location filename="../../src/MainWindow.ui" line="769"/>
+      <location filename="../../src/MainWindow.ui" line="2143"/>
       <source>...</source>
       <translation>...</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="769"/>
+      <location filename="../../src/MainWindow.ui" line="783"/>
       <source>Oversampling factor</source>
       <translation>Fator de sobreamostragem</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="789"/>
+      <location filename="../../src/MainWindow.ui" line="803"/>
       <source>Early reflection factor</source>
       <translation>Fator de reflexão precoce</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="812"/>
+      <location filename="../../src/MainWindow.ui" line="826"/>
       <source>Early reflection amount</source>
       <translation>Quantidade de reflexão precoce</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="829"/>
+      <location filename="../../src/MainWindow.ui" line="843"/>
       <source>Early reflection width</source>
       <translation>Amplitude da reflexão precoce</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="852"/>
+      <location filename="../../src/MainWindow.ui" line="866"/>
       <source>Lowpass cutoff (Input)</source>
       <translation>Corte de passa-baixo (entrada)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="872"/>
+      <location filename="../../src/MainWindow.ui" line="886"/>
       <source>Lowpass cutoff (Bass)</source>
       <translation>Corte de passa-baixo (graves)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="892"/>
+      <location filename="../../src/MainWindow.ui" line="906"/>
       <source>Lowpass cutoff (Damp)</source>
       <translation>Corte de passa-baixo (umidade)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="912"/>
+      <location filename="../../src/MainWindow.ui" line="926"/>
       <source>Lowpass cutoff (Output)</source>
       <translation>Corte de passa-baixo (saída)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="939"/>
+      <location filename="../../src/MainWindow.ui" line="953"/>
       <source>Final wet mix</source>
       <translation>Mistura úmida final</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="946"/>
+      <location filename="../../src/MainWindow.ui" line="960"/>
       <source>Final dry mix</source>
       <translation>Mistura seca final</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="953"/>
+      <location filename="../../src/MainWindow.ui" line="967"/>
       <source>Reverb wetness</source>
       <translation>Umidade da reverberação</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="960"/>
+      <location filename="../../src/MainWindow.ui" line="974"/>
       <source>Width L/R mix</source>
       <translation>Mistura de amplitude L/R</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="967"/>
+      <location filename="../../src/MainWindow.ui" line="981"/>
       <source>LFO wander amount</source>
       <translation>Quantidade de LFO vagando</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="974"/>
+      <location filename="../../src/MainWindow.ui" line="988"/>
       <source>LFO spin amount</source>
       <translation>Quantidade de rotação de LFO</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="981"/>
+      <location filename="../../src/MainWindow.ui" line="995"/>
       <source>Time decay</source>
       <translation>Decomposição do tempo</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="988"/>
+      <location filename="../../src/MainWindow.ui" line="1002"/>
       <source>Delay</source>
       <translation>Atraso</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="995"/>
+      <location filename="../../src/MainWindow.ui" line="1009"/>
       <source>Bass boost</source>
       <translation>Reforço de graves</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1143"/>
+      <location filename="../../src/MainWindow.ui" line="1157"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1279"/>
+      <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1284"/>
+      <location filename="../../src/MainWindow.ui" line="1298"/>
       <source>IIR 4 order</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1289"/>
+      <location filename="../../src/MainWindow.ui" line="1303"/>
       <source>IIR 6 order</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1294"/>
+      <location filename="../../src/MainWindow.ui" line="1308"/>
       <source>IIR 8 order</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1299"/>
+      <location filename="../../src/MainWindow.ui" line="1313"/>
       <source>IIR 10 order</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1304"/>
+      <location filename="../../src/MainWindow.ui" line="1318"/>
       <source>IIR 12 order</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1235"/>
+      <location filename="../../src/MainWindow.ui" line="1249"/>
       <source>Enable EQ</source>
       <translation>Ativar EQ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1255"/>
+      <location filename="../../src/MainWindow.ui" line="412"/>
+      <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/MainWindow.ui" line="417"/>
+      <source>Pseudo multiresolution (Undersampling frame)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/MainWindow.ui" line="422"/>
+      <source>Pseudo multiresolution (Time domain, zero latency)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/MainWindow.ui" line="1269"/>
       <source>Presets...</source>
       <translation>Predefinições...</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1275"/>
+      <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>Filter type</source>
       <translation>Tipo de filtro</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1324"/>
+      <location filename="../../src/MainWindow.ui" line="1338"/>
       <source>Interpolator</source>
       <translation>Interpolador</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1327"/>
+      <location filename="../../src/MainWindow.ui" line="1341"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modo de interpolação&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1331"/>
+      <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
       <translation>Polinomial Interpolador de Hermite Cúbico</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1336"/>
+      <location filename="../../src/MainWindow.ui" line="1350"/>
       <source>Modified Hiroshi Akima spline</source>
       <translation>Spline de Hiroshi Akima modificada</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1356"/>
+      <location filename="../../src/MainWindow.ui" line="1370"/>
       <source>Reset EQ</source>
       <translation>Redefinir EQ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1384"/>
+      <location filename="../../src/MainWindow.ui" line="1398"/>
       <source>Fixed bands</source>
       <translation>Bandas fixas</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1400"/>
+      <location filename="../../src/MainWindow.ui" line="1414"/>
       <source>Flexible bands</source>
       <translation>Bandas flexíveis</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1432"/>
+      <location filename="../../src/MainWindow.ui" line="1446"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Convolver particionado (convolução de segmentação automática). Selecione seu arquivo de resposta de impulsos para ser convolvido. Ele toma as características do sinal da resposta de impulso e as aplica ao áudio recebido em tempo real.&lt;/p&gt;&lt;p&gt;Suporta respostas de impulso mono, estéreo e estéreo completo/verdadeiro (LL, LR, RL, RR).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Otimização de resposta de impulso:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Este parâmetro tenta reduzir ao máximo a duração da resposta de impulso; o objetivo é reduzir ao máximo a latência, possivelmente reduzindo o consumo de energia..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1457"/>
-      <location filename="../../src/MainWindow.ui" line="1779"/>
+      <location filename="../../src/MainWindow.ui" line="1471"/>
+      <location filename="../../src/MainWindow.ui" line="1793"/>
       <source>Filesystem</source>
       <translation>Sistema de arquivos</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1479"/>
+      <location filename="../../src/MainWindow.ui" line="1493"/>
       <source>Bookmarks</source>
       <translation>Marcadores</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1518"/>
+      <location filename="../../src/MainWindow.ui" line="1532"/>
       <source>Enable convolver</source>
       <translation>Ativar convolver</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1525"/>
+      <location filename="../../src/MainWindow.ui" line="1539"/>
       <source>IR optimization</source>
       <translation>Otimização de IR</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1545"/>
+      <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
       <translation>Original</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1550"/>
+      <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
       <translation>Reduzir</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1555"/>
+      <location filename="../../src/MainWindow.ui" line="1569"/>
       <source>Minimum phase transform and shrink</source>
       <translation>Mínimo de transformação e encolhimento de fase</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1563"/>
+      <location filename="../../src/MainWindow.ui" line="1577"/>
       <source>Adv. waveform editing</source>
       <translation>Edição avançada de formas de onda</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1582"/>
+      <location filename="../../src/MainWindow.ui" line="1596"/>
       <source>Edit</source>
       <translation>Editar</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1628"/>
+      <location filename="../../src/MainWindow.ui" line="1642"/>
       <source>Channels:</source>
       <translation>Canais:</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1648"/>
+      <location filename="../../src/MainWindow.ui" line="1662"/>
       <source>Samples:</source>
       <translation>Amostras:</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1707"/>
+      <location filename="../../src/MainWindow.ui" line="1721"/>
       <source>No selection</source>
       <translation>Nenhuma seleção</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1754"/>
+      <location filename="../../src/MainWindow.ui" line="1768"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Seu trabalho principal é equalizar o áudio parametricamente, mas requer que o usuário forneça um arquivo .vdc que o DDCToolbox gera.&lt;/p&gt;&lt;p&gt;ViPER-DDC no jDSP é uma implementação generalizada de filtros de seção de segunda ordem, que é um pouco diferente da implementação no Viper4Android. O V4A só suporta o Peaking paramétrico; a razão é que o V4A usa uma propriedade de coeficiente de ação do filtro Peaking. O jDSP já não tem tal suposição.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1801"/>
+      <location filename="../../src/MainWindow.ui" line="1815"/>
       <source>Database</source>
       <translation>Banco de dados</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1842"/>
+      <location filename="../../src/MainWindow.ui" line="1856"/>
       <source>Create</source>
       <translation>Criar</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1866"/>
+      <location filename="../../src/MainWindow.ui" line="1880"/>
       <source>Create your custom DDC files using DDCToolbox</source>
       <translation>Crie seus arquivos DDC customizados usando DDCToolbox</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1876"/>
+      <location filename="../../src/MainWindow.ui" line="1890"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1932"/>
+      <location filename="../../src/MainWindow.ui" line="1946"/>
       <source>View installation instructions</source>
       <translation>Ver instruções da instalação</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1988"/>
+      <location filename="../../src/MainWindow.ui" line="2002"/>
       <source>Enable ViPER-DDC</source>
       <translation>Ativar ViPER-DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2011"/>
+      <location filename="../../src/MainWindow.ui" line="2025"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;DSP programável ao vivo&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Esta é uma máquina virtual que compila um arquivo de código EEL como entrada e executa as instruções; em palavras simples, ela permite que os usuários programem seus próprios efeitos de áudio.&lt;/p&gt;&lt;p&gt;O número de operações suportadas é enorme; considere verificar a documentação oficial: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Clique em &apos;Editar script&apos; para iniciar um ambiente integrado de script para arquivos de código EEL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2033"/>
+      <location filename="../../src/MainWindow.ui" line="2047"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Equalizador de resposta arbitrária&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Também conhecido como GraphicEQ do EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2071"/>
+      <location filename="../../src/MainWindow.ui" line="2085"/>
       <source>Custom Presets</source>
       <translation>Predefinições customizadas</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2074"/>
+      <location filename="../../src/MainWindow.ui" line="2088"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Predefinições customizadas&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Criar e gerenciar predefinições customizadas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2100"/>
+      <location filename="../../src/MainWindow.ui" line="2114"/>
       <source>Settings</source>
       <translation>Configurações</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2106"/>
+      <location filename="../../src/MainWindow.ui" line="2120"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Configurações&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configurar este aplicativo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2126"/>
+      <location filename="../../src/MainWindow.ui" line="2140"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Outras&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Várias ações usadas com menos frequência&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2184"/>
+      <location filename="../../src/MainWindow.ui" line="2198"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passado&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Esta opção define se quer ativar ou desativar efeitos sonoros.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2187"/>
+      <location filename="../../src/MainWindow.ui" line="2201"/>
       <source>Bypass</source>
       <translation>Ignorar</translation>
     </message>
@@ -2259,7 +2264,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
       <translation>não conectado</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="181"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP é um mecanismo avançado de processamento de áudio disponível para sistemas Linux e Android.</translation>
     </message>
@@ -2362,223 +2367,260 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="305"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
+      <source>Benchmark now</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
+      <source>Clear cached data</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="312"/>
-      <source>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</source>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
+      <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="359"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="431"/>
       <source>Impluse responses</source>
       <translation>Respostas implícitas</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="376"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="448"/>
       <source>VDCs</source>
       <translation>VDCs</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="390"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="462"/>
       <source>Liveprog scripts</source>
       <translation>Scripts do Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="427"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="499"/>
       <source>Save</source>
       <translation>Salvar</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="436"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="508"/>
       <source>Built-in assets</source>
       <translation>Recursos integrados</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="447"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="519"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Esta opção verificará a cada inicialização se um dos scripts EEL padrão está faltando. Se este for o caso, o(s) arquivo(s) faltando(s) será(ão) automaticamente restaurado(s) dos recursos (isto não o(s) substituirá se ele(s) já existe(m)!).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="450"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="522"/>
       <source>Extract bundled assets on startup</source>
       <translation>Extrair recursos agregados na inicialização</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="470"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="542"/>
       <source>  Extract now  </source>
       <translation>  Extrair agora  </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="502"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="574"/>
       <source>Select sink/device to be processed</source>
       <translation>Selecione o sink/dispositivo a ser processado</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="508"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="580"/>
       <source>Use default output device (recommended)</source>
       <translation>Usar o dispositivo de saída padrão (recomendado)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="515"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="587"/>
       <source>Manually select device</source>
       <translation>Selecionar dispositivo manualmente</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="527"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="599"/>
       <source>Device</source>
       <translation>Dispositivo</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="555"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="627"/>
       <source>Blocklisted apps</source>
       <translation>Aplicativos bloqueados</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="561"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="633"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
       <translation>Na seção &apos;Aplicativos&apos; seção acessível usando o menu de três pontos na janela principal, você pode bloquear aplicativos que estão tocando som no fundo de serem processados pelo JamesDSP.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="577"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="649"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
       <translation>Modo de lista de permissão (aplicativos têm de ser explicitamente ativados)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="608"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="680"/>
       <source>Clear list</source>
       <translation>Limpar lista</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="637"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="709"/>
       <source>AutoEQ database</source>
       <translation>Banco de dados do AutoEQ</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="648"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="720"/>
       <source>Status:</source>
       <translation>Estado:</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="658"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="730"/>
       <source>unknown</source>
       <translation>desconhecido</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="750"/>
       <source>  Manage local database  </source>
       <translation>  Gerenciar banco de dados local  </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="782"/>
       <source>Run in background (tray icon)</source>
       <translation>Executar em segundo plano (ícone da bandeja)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="716"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="788"/>
       <source>No, shutdown audio effects when closing app</source>
       <translation>Não, desligar efeitos de áudio ao fechar o aplicativo</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="723"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="795"/>
       <source>Yes, minimize to tray icon when closing app</source>
       <translation>Sim, minimizar para ícone da bandeja ao fechar o aplicativo</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="730"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="802"/>
       <source>Auto-start</source>
       <translation>Auto-iniciar</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="736"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="808"/>
       <source>Start minimized on boot</source>
       <translation>Iniciar minimizado na inicialização</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="758"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="830"/>
       <source>Systray not supported on this system</source>
       <translation>Systray não suportado neste sistema</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="808"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="880"/>
       <source>Visit Github repo</source>
       <translation>Visitar repositório do GitHub</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="834"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="906"/>
       <source>Run setup wizard</source>
       <translation>Executar assistente de configuração</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="857"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="929"/>
       <source>Close</source>
       <translation>Fechar</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="207"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="104"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
+      <source>benchmark data loaded</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="215"/>
       <source>Unknown (%1)</source>
       <translation>Desconhecido (%1)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="267"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="275"/>
       <source>installed</source>
       <translation>Instalado</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="267"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="275"/>
       <source>not installed</source>
       <translation>Não instalado</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="288"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="279"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="460"/>
+      <source>no benchmark data stored</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="302"/>
       <source>Override liveprog scripts?</source>
       <translation>Substituir scripts do liveprog?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="289"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="303"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
       <translation>Você quer substituir os scripts padrão do liveprog existentes?
 Se eles foram modificados, eles serão redefinidos.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="292"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="306"/>
       <source>Extract assets</source>
       <translation>Extrair recursos</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="292"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="306"/>
       <source>%1 files have been restored</source>
       <translation>%1 arquivos foram restaurados</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="384"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="398"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
       <translation>Você está prestes a ativar o modo de lista de permissões. O JamesDSP não processará todo aplicativo por padrão enquanto este modo estiver ativo. Você tem de permitir explicitamente que cada aplicativo seja processado no menu de &apos;Aplicativos&apos;.
 </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="386"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
       <source>Are you sure?</source>
       <translation>Você tem certeza?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="401"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
       <translation>Esta ação redefinirá a sua lista de bloqueio atual ou lista de permissões. Você quer continuar?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="429"/>
       <source>Warning</source>
       <translation>Aviso</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="429"/>
       <source>Do you really want to restore the default menu layout?</source>
       <translation>Você realmente quer restaurar a disposição padrão do menu?</translation>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="452"/>
+      <source>waiting for result...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="459"/>
+      <source>Cache cleared</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="459"/>
+      <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
