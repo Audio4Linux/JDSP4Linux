@@ -1,6 +1,8 @@
 #include "config/DspConfig.h"
 #include "Utils.h"
+#include "BenchmarkWorker.h"
 
+#include <QTimer>
 #include <sstream>
 #include <string>
 
@@ -18,6 +20,7 @@ extern "C" {
 
 #include <QElapsedTimer>
 #include <QTextStream>
+#include <QThread>
 #include <QDebug>
 #include <cstring>
 #include <assert.h>
@@ -45,11 +48,82 @@ DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(s
 
     _dsp = dsp;
     _cache = new DspConfig();
+
+    benchmarkThread = new QThread();
+    benchmarkWorker = new BenchmarkWorker();
+
+    QObject::connect(benchmarkThread, &QThread::started, benchmarkWorker, &BenchmarkWorker::process);
+    QObject::connect(benchmarkWorker, &BenchmarkWorker::finished, benchmarkThread, &QThread::quit);
+    QObject::connect(benchmarkWorker, &BenchmarkWorker::finished, benchmarkThread, [this] {
+        dispatch(Message::BenchmarkDone, nullptr);
+    });
+
+    loadBenchmarkData();
+
+    if(AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot))
+        QTimer::singleShot(30000, [this]{ runBenchmarks(); });
 }
 
 DspHost::~DspHost()
 {
     setStdOutHandler(NULL, NULL);
+
+    _cache->deleteLater();
+    benchmarkThread->deleteLater();
+    benchmarkWorker->deleteLater();
+
+    _cache = nullptr;
+    benchmarkWorker = nullptr;
+    benchmarkThread = nullptr;
+}
+
+void DspHost::runBenchmarks()
+{
+    if(benchmarkThread->isRunning()) {
+        Log::warning("Another benchmark is already active");
+        return;
+    }
+
+    benchmarkWorker->moveToThread(benchmarkThread);
+    benchmarkThread->start();
+}
+
+void DspHost::loadBenchmarkData()
+{
+    // Empty cache = no benchmark data stored
+    if(AppConfig::instance().get<QString>(AppConfig::BenchmarkCacheC0).isEmpty() &&
+       AppConfig::instance().get<QString>(AppConfig::BenchmarkCacheC1).isEmpty())
+        return;
+
+    auto loadFromCache = [](int num, double* output){
+        auto values = AppConfig::instance().get<QString>(num == 0 ? AppConfig::BenchmarkCacheC0 : AppConfig::BenchmarkCacheC1).split(';', Qt::SkipEmptyParts);
+        if(values.size() != MAX_BENCHMARK)
+            return false;
+
+        for(int i = 0; i < values.size(); i++) {
+            bool ok = false;
+            output[i] = values[i].toDouble(&ok);
+            if(!ok)
+                return false;
+        }
+        return true;
+    };
+
+    double* c0 = new double[MAX_BENCHMARK];
+    double* c1 = new double[MAX_BENCHMARK];
+
+    bool ok0 = loadFromCache(0, c0);
+    bool ok1 = loadFromCache(1, c1);
+
+    if(!ok0 || !ok1) {
+        Log::error("Failed to parse cached benchmark data");
+        return;
+    }
+
+    JamesDSP_Load_benchmark(c0, c1);
+
+    delete[] c0;
+    delete[] c1;
 }
 
 void DspHost::updateLimiter(DspConfig* config)
@@ -200,7 +274,7 @@ void DspHost::updateCompander(DspConfig *config)
         param[i] = (double)std::stod(v[i]);
     }
 
-    CompressorSetParam(cast(this->_dsp), timeconstant, granularity, tftransforms);
+    CompressorSetParam(cast(this->_dsp), timeconstant, granularity, tftransforms, 0);
     CompressorSetGain(cast(this->_dsp), param, param + 7, 1);
 }
 
@@ -556,6 +630,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
                 StereoEnhancementEnable(cast(this->_dsp));
             else
                 StereoEnhancementDisable(cast(this->_dsp));
+            StereoEnhancementSetParam(cast(this->_dsp), _cache->get<float>(DspConfig::stereowide_level) / 100.0f);
             break;
         case DspConfig::stereowide_level:
             StereoEnhancementDisable(cast(this->_dsp));

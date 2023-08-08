@@ -83,7 +83,7 @@
   <string name="resamplererror">Please first register audio engine by enabling global effect or open a music player if using conventional mode in order to retrive sample rate from audio engine</string>
   <string name="impfilefault">Load impulse failed\nPlease choose right impulse response file!</string>
   <string name="unmatchedsamplerate">Impulse response %1$s sample rate (%2$d) is not matching with driver sample rate(%3$d)\nWill use low quality resampler to resample&#8230;\nUse Offline Resampler for higher qualtiy resampling!</string>
-  <string name="basicinfo">Buffer len: %1$s\nAllocated block size: %2$d\nSample rate: %3$d</string>
+  <string name="basicinfo">Buffer len: %1$s\nAllocated block size: %2$d</string>
   <string name="convolversuccess">Impulse response %1$s loaded\nChannel info:%2$s\nSamples per channel:%3$d\nSamples per channel(Truncated):%4$d</string>
   <string name="limiter_threshold">Limiter threshold [-60 &#8211; -0.1 dB]</string>
   <string name="limiter_release">Limiter release [1.5 &#8211; 500 ms]</string>

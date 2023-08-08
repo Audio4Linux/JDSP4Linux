@@ -2,6 +2,7 @@ INCLUDEPATH += $$PWD
 
 HEADERS += \
     $$PWD/AppNode.h \
+    $$PWD/BenchmarkWorker.h \
     $$PWD/DspHost.h \
     $$PWD/DspStatus.h \
     $$PWD/EelVariable.h \
@@ -13,5 +14,6 @@ HEADERS += \
     $$PWD/Utils.h
 
 SOURCES += \
+    $$PWD/BenchmarkWorker.cpp \
     $$PWD/DspHost.cpp \
     $$PWD/Utils.cpp

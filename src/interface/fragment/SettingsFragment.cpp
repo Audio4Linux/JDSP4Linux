@@ -41,9 +41,10 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
 	ui->setupUi(this);
 
 #ifdef USE_PULSEAUDIO
-    ui->selector->topLevelItem(2)->setHidden(true); // Hide devices
+    ui->selector->topLevelItem(3)->setHidden(true); // Hide devices
     ui->devices->setVisible(false);
     ui->blocklistBox->setVisible(false);
+    ui->benchmarkOnBoot->setEnabled(false);
 #endif
 
     _paletteEditor->setFixedSize(_paletteEditor->geometry().width(), _paletteEditor->geometry().height());
@@ -54,7 +55,7 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     ui->selector->setCurrentItem(ui->selector->topLevelItem(0));
 	ui->stackedWidget->setCurrentIndex(0);
     ui->stackedWidget->repaint();
-    ui->selector->expandItem(ui->selector->topLevelItem(4)); // Expand tray-icon
+    ui->selector->expandItem(ui->selector->topLevelItem(5)); // Expand tray-icon
     connect(ui->selector, &QTreeWidget::currentItemChanged, this, &SettingsFragment::onTreeItemSelected);
 
 	/*
@@ -86,13 +87,21 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
     connect(ui->menu_edit, &QMenuEditor::resetPressed, this, &SettingsFragment::onTrayEditorReset);
     ui->menu_edit->setSourceMenu(trayIcon->buildAvailableActions());
 
-	/*
+    /*
      * Interface signals
-	 */
+     */
     connect(ui->themeSelect, qOverload<int>(&QComboBox::currentIndexChanged), this, &SettingsFragment::onThemeSelected);
     connect(ui->paletteSelect, qOverload<int>(&QComboBox::currentIndexChanged), this, &SettingsFragment::onPaletteSelected);
     connect(ui->paletteConfig, &QPushButton::clicked, _paletteEditor, &PaletteEditor::show);
     connect(ui->eq_alwaysdrawhandles, &QCheckBox::clicked, this, &SettingsFragment::onEqualizerHandlesToggled);
+
+    /*
+     * Audio processing
+     */
+    connect(ui->benchmarkOnBoot, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkOnBootToggled);
+    connect(ui->benchmarkNow, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkRunClicked);
+    connect(ui->benchmarkClear, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkClearClicked);
+    connect(_audioService, &IAudioService::benchmarkDone, this, [this]{ updateBenchmarkStatus(tr("benchmark data loaded")); });
 
 	/*
      * Paths signals
@@ -160,7 +169,12 @@ void SettingsFragment::onAppConfigUpdated(const AppConfig::Key &key, const QVari
             ui->systray_minOnBoot->setChecked(value.toBool());
         default:
             break;
-    }
+        }
+}
+
+void SettingsFragment::updateBenchmarkStatus(const QString &message)
+{
+    ui->benchmarkStatus->setText(QString("Status: %1").arg(message));
 }
 
 void SettingsFragment::refreshDevices()
@@ -252,13 +266,21 @@ void SettingsFragment::refreshAll()
 
     ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
+    ui->benchmarkOnBoot->setChecked(AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot));
+
     ui->blocklistInvert->blockSignals(true);
     ui->blocklistInvert->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert));
     ui->blocklistInvert->blockSignals(false);
 
     ui->aeqStatus->setText(AeqPackageManager().isPackageInstalled() ? tr("installed") : tr("not installed"));
 
-	refreshDevices();
+    if(AppConfig::instance().get<QString>(AppConfig::BenchmarkCacheC0).isEmpty() &&
+       AppConfig::instance().get<QString>(AppConfig::BenchmarkCacheC1).isEmpty())
+        updateBenchmarkStatus(tr("no benchmark data stored"));
+    else
+        updateBenchmarkStatus(tr("benchmark data loaded"));
+
+    refreshDevices();
 
     _lockslot = false;
 }
@@ -313,9 +335,9 @@ void SettingsFragment::onTreeItemSelected(QTreeWidgetItem *cur, QTreeWidgetItem 
     switch (topLevelIndex)
     {
         case -1:
-            if (ui->selector->indexOfTopLevelItem(cur->parent()) == 4 /* Tray-icon */)
+            if (ui->selector->indexOfTopLevelItem(cur->parent()) == 5 /* Tray-icon */)
             {
-                ui->stackedWidget->setCurrentIndex(5); // Context menu
+                ui->stackedWidget->setCurrentIndex(6); // Context menu
             }
             break;
         default:
@@ -417,6 +439,25 @@ void SettingsFragment::onTrayEditorReset()
 void SettingsFragment::onEqualizerHandlesToggled()
 {
     AppConfig::instance().set(AppConfig::EqualizerShowHandles, ui->eq_alwaysdrawhandles->isChecked());
+}
+
+void SettingsFragment::onBenchmarkOnBootToggled()
+{
+    AppConfig::instance().set(AppConfig::BenchmarkOnBoot, ui->benchmarkOnBoot->isChecked());
+}
+
+void SettingsFragment::onBenchmarkRunClicked()
+{
+    _audioService->runBenchmarks();
+    updateBenchmarkStatus(tr("waiting for result..."));
+}
+
+void SettingsFragment::onBenchmarkClearClicked()
+{
+    AppConfig::instance().set(AppConfig::BenchmarkCacheC0, "");
+    AppConfig::instance().set(AppConfig::BenchmarkCacheC1, "");
+    QMessageBox::information(this, tr("Cache cleared"), tr("Benchmark data has been cleared. Restart this app to fully apply the changes."));
+    updateBenchmarkStatus(tr("no benchmark data stored"));
 }
 
 void SettingsFragment::onLiveprogAutoExtractToggled()

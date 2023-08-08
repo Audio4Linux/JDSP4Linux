@@ -761,7 +761,7 @@ public class HeadsetService extends Service
 				}
 				float timeConstant = Float.valueOf(preferences.getString("dsp.compression.timeconstant", "0.22"));
 				float granularity = Float.valueOf(preferences.getString("dsp.compression.granularity", "4"));
-				float tfresolution = Float.valueOf(preferences.getString("dsp.compression.tfresolution", "1"));
+				float tfresolution = Float.valueOf(preferences.getString("dsp.compression.tfresolution", "0"));
 				float compConfig[] = new float[]{ timeConstant, granularity, tfresolution };
 				float sendAry[] = mergeFloatArray(compConfig, compLevels);
 				//Log.i(DSPManager.TAG, "Compander: " + Arrays.toString(compLevels));
@@ -954,7 +954,7 @@ public class HeadsetService extends Service
 						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
 						if (DSPManager.devMsgDisplay)
 						{
-							Toast.makeText(HeadsetService.this, getString(R.string.basicinfo, dspBufferLen, dspAllocatedBlockLen, dspModuleSamplingRate), Toast.LENGTH_SHORT).show();
+							Toast.makeText(HeadsetService.this, getString(R.string.basicinfo, dspBufferLen, dspAllocatedBlockLen), Toast.LENGTH_SHORT).show();
 							if (impinfo[0] == 1)
 								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, getString(R.string.mono_conv), impinfo[1], (int)impulseCutted), Toast.LENGTH_SHORT).show();
 							else if (impinfo[0] == 2)

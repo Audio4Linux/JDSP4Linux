@@ -66,10 +66,15 @@ private slots:
     void onTrayEditorCommitted();
     void onTrayEditorReset();
     void onEqualizerHandlesToggled();
+    void onBenchmarkOnBootToggled();
+    void onBenchmarkRunClicked();
+    void onBenchmarkClearClicked();
     void onLiveprogAutoExtractToggled();
     void onGithubLinkClicked();
     void onAeqDatabaseManageClicked();
     void onAppConfigUpdated(const AppConfig::Key &key, const QVariant &value);
+
+    void updateBenchmarkStatus(const QString& message);
 
 signals:
 	void launchSetupWizard();

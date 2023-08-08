@@ -32,7 +32,7 @@ static void onPortalBackgroundRequest(GObject *source_object, GAsyncResult *res,
 
         if (error != nullptr && error->code == 19) {
             reason = QObject::tr("Auto-start permission has been denied");
-            explanation = QObject::tr("Please run 'flatpak permission-reset %1' and reenable auto-start.").arg(FLATPAK_APP_ID);
+            explanation = QObject::tr("Please run 'flatpak permission-set background background %1 yes' and reenable auto-start.").arg(FLATPAK_APP_ID);
         } else {
             reason = QObject::tr("Unknown error");
             explanation = QObject::tr("Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1").arg((error) != nullptr ? error->message : "");

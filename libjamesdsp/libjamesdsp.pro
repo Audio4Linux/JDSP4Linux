@@ -57,7 +57,22 @@ HEADERS += \
     $$BASEPATH/jdsp_header.h \
     EELStdOutExtension.h \
     PrintfStdOutExtension.h \
-    JdspImpResToolbox.h
+    JdspImpResToolbox.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxpre.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxxsrc/xcomplex.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxxsrc/xreal.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/doc/xcomplex.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/doc/xreal.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/hpaconf.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const07.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const11.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const15.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const19.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const23.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const27.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/mp/const31.h \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xpre.h \
+    $$BASEPATH/Effects/info.h
 
 SOURCES += \
     $$BASEPATH/Effects/arbEqConv.c \
@@ -107,7 +122,47 @@ SOURCES += \
     EELStdOutExtension.c \
     PrintfStdOutExtension.c \
     JdspImpResToolbox.c \
-    subtree/Main/libjamesdsp/jni/jamesdsp/jdsp/Effects/multimodalEQ.c
+    $$BASEPATH/Effects/eel2/loose_eel.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/atox.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/constant.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxaop.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxbasic.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxconstant.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxconvf.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxexp.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxhypb.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxidiv.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxpow.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxprcmp.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxtrig.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/hpaconf.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/prcxpr.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/print.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/prxpr.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/sfmod.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/shift.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xadd.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xchcof.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xdiv.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xevtch.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xexp.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xfmod.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xfrac.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xhypb.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xivhypb.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xivtrg.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xlog.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xmul.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xneg.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xprcmp.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xpwr.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xsigerr.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xsqrt.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xtodbl.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xtoflt.c \
+    $$BASEPATH/Effects/eel2/numericSys/HPFloat/xtrig.c \
+    $$BASEPATH/Effects/eel2/numericSys/libsamplerate/src_linear.c \
+    $$BASEPATH/Effects/multimodalEQ.c
 
 unix {
     isEmpty(LIBDIR) {

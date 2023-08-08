@@ -44,9 +44,6 @@
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\dynamic.c">
       <Filter>jdsp\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\firEqualizer.c">
-      <Filter>jdsp\Effects</Filter>
-    </ClCompile>
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\liveprogWrapper.c">
       <Filter>jdsp\Effects</Filter>
     </ClCompile>
@@ -134,6 +131,129 @@
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.c">
       <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\multimodalEQ.c">
+      <Filter>jdsp\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_linear.c">
+      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseFilterbank.c">
+      <Filter>jdsp\Effects\eel2\numericSys\FilterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\atox.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\constant.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxaop.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxbasic.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxconstant.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxconvf.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxexp.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxhypb.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxidiv.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxpow.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxprcmp.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxtrig.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\hpaconf.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\prcxpr.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\print.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\prxpr.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\sfmod.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\shift.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xadd.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xchcof.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xdiv.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xevtch.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xexp.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xfmod.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xfrac.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xhypb.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xivhypb.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xivtrg.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xlog.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xmul.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xneg.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xprcmp.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xpwr.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xsigerr.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xsqrt.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xtodbl.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xtoflt.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xtrig.c">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="jdsp">
@@ -159,6 +279,9 @@
     </Filter>
     <Filter Include="jdsp\Effects\eel2\numericSys\SolveLinearSystem">
       <UniqueIdentifier>{120faa8f-8a0e-42a8-86c4-bfe62ab09b72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jdsp\Effects\eel2\numericSys\HPFloat">
+      <UniqueIdentifier>{8a0ba327-7ca9-4821-9afb-ef3d7eca4812}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -249,11 +372,20 @@
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.h">
       <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
     </ClInclude>
-    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_config.h">
-      <Filter>jdsp\Effects\eel2\numericSys\libsamplerate</Filter>
-    </ClInclude>
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.h">
       <Filter>jdsp\Effects\eel2\numericSys\SolveLinearSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\info.h">
+      <Filter>jdsp\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxpre.h">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\hpaconf.h">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xpre.h">
+      <Filter>jdsp\Effects\eel2\numericSys\HPFloat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

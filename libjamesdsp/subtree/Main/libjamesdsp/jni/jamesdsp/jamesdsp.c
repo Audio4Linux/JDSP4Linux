@@ -202,7 +202,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				replyData->psize = 4;
 				replyData->vsize = 4;
 				replyData->cmd = 20001;
-				replyData->data = (int32_t)dspmain->jdsp.trueSampleRate;
+				replyData->data = (int32_t)dspmain->jdsp.fs;
 				*replySize = sizeof(reply1x4_1x4_t);
 				return 0;
 			}
@@ -550,7 +550,7 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				for (int i = 0; i < 7; i++)
 					LOGI("%1.7lf %1.7lf; ", param[i], param[i + 7]);
 #endif
-				CompressorSetParam(&dspmain->jdsp, timeconstant, granularity, tfresolution);
+				CompressorSetParam(&dspmain->jdsp, timeconstant, granularity, tfresolution, 0);
 				CompressorSetGain(&dspmain->jdsp, param, param + 7, 1);
 				*replyData = 0;
 				return 0;

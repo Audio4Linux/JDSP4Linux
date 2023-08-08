@@ -112,6 +112,7 @@ gst_jamesdsp_init(Gstjamesdsp *self) {
     self->dsp = malloc(sizeof(JamesDSPLib));
     memset(self->dsp, 0, sizeof(JamesDSPLib));
 
+    // TODO: Add benchmark toggle support to pulse version...
     JamesDSPGlobalMemoryAllocation();
     JamesDSPInit(self->dsp, 128, 48000);
 

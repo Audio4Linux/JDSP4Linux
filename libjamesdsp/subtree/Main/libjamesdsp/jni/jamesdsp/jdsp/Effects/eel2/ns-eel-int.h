@@ -239,6 +239,7 @@ opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen);
 #define __NSEEL_RAMAlloc(pblocks, w) (pblocks + w)
 float * NSEEL_CGEN_CALL __NSEEL_RAM_MemSet(float *blocks,float *dest, float *v, float *lenptr);
 float * NSEEL_CGEN_CALL __NSEEL_RAM_MemCpy(float *blocks,float *dest, float *src, float *lenptr);
+float *dataSectionToRamDisk(void *opaque, size_t len);
 extern float NSEEL_CGEN_CALL nseel_int_rand(float amplitude);
 #ifdef __cplusplus
 }

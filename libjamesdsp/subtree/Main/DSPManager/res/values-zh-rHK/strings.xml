@@ -85,7 +85,7 @@
   <string name="resamplererror">請先啟用全域模式或者慣用模式來註冊DSP，以便從音訊DSP中獲取採樣率</string>
   <string name="impfilefault">載入脈衝響應失敗\n請選擇正確脈衝響應檔案</string>
   <string name="unmatchedsamplerate">脈衝響應檔案%1$s的採樣率%2$d與DSP模組採樣率%3$d不吻合\n目前正使用快速重採樣器\n預先使用離線重採樣器可改善脈衝響應質量。</string>
-  <string name="basicinfo">緩衝區大小:%1$s\n動態容器容量:%2$d\n採樣率:%3$d</string>
+  <string name="basicinfo">緩衝區大小:%1$s\n動態容器容量:%2$d</string>
   <string name="convolversuccess">成功載入脈衝響應:%1$s\n聲道:%2$s\n每聲道樣本總數:%3$d\n截短後的每聲道樣本總數:%4$d</string>
   <string name="limiter_threshold">壓限器閾值[-60 到 -0.1 dB]</string>
   <string name="limiter_release">壓限器時間常數[1.5 到 500 ms]</string>

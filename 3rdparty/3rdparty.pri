@@ -1,4 +1,3 @@
-include($$PWD/asyncplusplus.pri)
 include($$PWD/qtpromise/qtpromise.pri)
 include($$PWD/qcustomplot/qcustomplot.pri)
 include($$PWD/qtcsv/qtcsv.pri)

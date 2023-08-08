@@ -43,6 +43,10 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioAppBlocklistInvert, false);
     DEFINE_KEY(AudioInactivityTimeout, 10);
 
+    DEFINE_KEY(BenchmarkOnBoot, false);
+    DEFINE_KEY(BenchmarkCacheC0, "");
+    DEFINE_KEY(BenchmarkCacheC1, "");
+
     DEFINE_KEY(AeqPlotDarkMode, false);
 
     DEFINE_KEY(ConvolverDefaultPath, ENCLOSE_QUOTES(getPath("irs")));

@@ -29,6 +29,7 @@
 #include <assert.h>
 #include "eel_matrix.h"
 #include "numericSys/FFTConvolver.h"
+#include "numericSys/HPFloat/xpre.h"
 static void lstrcpyn_safe(char *o, const char *in, int32_t count)
 {
 	if (count > 0)
@@ -135,6 +136,11 @@ struct opcodeRec
 	// OPCODETYPE_FUNC* with fntype=FUNCTYPE_EELFUNC
 	const char *relname;
 };
+float *dataSectionToRamDisk(void *opaque, size_t len)
+{
+	compileContext *c = (compileContext*)opaque;
+	return c->ram_state + (NSEEL_RAM_ITEMSPERBLOCK - len);
+}
 static void *newTmpBlock(compileContext *ctx, int32_t size)
 {
 	const int32_t align = 8;
@@ -960,10 +966,10 @@ static float NSEEL_CGEN_CALL iirHilbertInit(void *opaque, INT_PTR num_param, flo
 	unsigned int numStages = (unsigned int)(*parms[1] + NSEEL_CLOSEFACTOR);
 	float transition = *parms[2];
 	unsigned int numCoefs = numStages << 1;
-	size_t memSize = sizeof(IIRHilbert) + (numCoefs + (numStages << 2));
+	size_t memSize = sizeof(IIRHilbert) + (numCoefs + (numStages << 2)) * sizeof(double);
 	hil->stages = numStages;
 	double *coefs = (double *)malloc(numCoefs * sizeof(double));
-	hil->path = hil + 1;
+	hil->path = (double*)(hil + 1);
 	hil->z = hil->path + numCoefs;
 	memset(hil->z, 0, (hil->stages << 2) * sizeof(double));
 	compute_coefs_spec_order_tbw(coefs, numCoefs, transition);
@@ -1071,7 +1077,7 @@ static float NSEEL_CGEN_CALL movingMinMaxInit(float *blocks, float *offptr, floa
 	stk->s1.capacity = windowSize;
 	stk->s2.top = 0;
 	stk->s2.capacity = windowSize;
-	stk->s1.items = stk + 1;
+	stk->s1.items = (node*)(stk + 1);
 	stk->s2.items = (node*)(((char*)stk->s1.items) + sizeof(node) * windowSize);
 	stk->windowSize = windowSize;
 	stk->cnt = 0;
@@ -1745,18 +1751,6 @@ static inline void eelThread_wait(abstractThreads *info)
 			break;
 	}
 }
-static inline void InitRegion_context(eel_builtin_memRegion *st)
-{
-	st->inuse = 0;
-	st->slot = 2;
-	st->type = (char*)malloc(st->slot * sizeof(char));
-	st->memRegion = (s_str*)malloc(st->slot * sizeof(s_str));
-	for (int32_t i = 0; i < st->slot; i++)
-	{
-		st->type[i] = 0;
-		st->memRegion[i] = 0;
-	}
-}
 void* GetStringForIndex(eel_builtin_memRegion *st, float val, int32_t write)
 {
 	int32_t idx = (int32_t)(val + 0.5f);
@@ -1769,7 +1763,7 @@ void* GetStringForIndex(eel_builtin_memRegion *st, float val, int32_t write)
 	else
 		return (void*)&st->memRegion[idx];
 }
-int32_t getEmptyRegion(eel_builtin_memRegion *st)
+static inline int32_t getEmptyRegion(eel_builtin_memRegion *st)
 {
 	int32_t x;
 	for (x = 0; x < st->slot; x++)
@@ -1817,7 +1811,7 @@ void DeleteSlot(eel_builtin_memRegion *st, float val)
 	}
 	else if (st->type[idx] == 4)
 	{
-		abstractThreads *ptr = (abstractThreads*)st->memRegion[idx];
+		abstractThreads *ptr = (abstractThreads *)st->memRegion[idx];
 		// ensure the worker is waiting
 		if (ptr->state == EEL_WORKING)
 			eelThread_wait(ptr);
@@ -1836,6 +1830,8 @@ void DeleteSlot(eel_builtin_memRegion *st, float val)
 		NSEEL_code_free(ptr->codePtr);
 		free(ptr);
 	}
+	else
+		free(st->memRegion[idx]);
 	st->memRegion[idx] = 0;
 decrement:
 	st->inuse--;
@@ -1873,6 +1869,27 @@ static float addStringCallback(void *opaque, eelStringSegmentRec *list)
 	ns = (char*)realloc(ns, sz);
 	int32_t id = AddData(c->region_context, (void*)ns, 0);
 	return (float)id;
+}
+static const xpr *xConstant[19] = { &xZero, &xOne, &xTwo, &xTen, &xPinf, &xMinf, &xNaN, &xPi, &xPi2, &xPi4, &xEe, &xSqrt2, &xLn2, &xLn10, &xLog2_e, &xLog2_10, &xLog10_e, &HPA_MIN, &HPA_MAX };
+static const char xVarName[19][10] = { "$hZero", "$hOne", "$hTwo", "$hTen", "$hPinf", "$hMinf", "$hNaN", "$hPi", "$hPi2", "$hPi4", "$hEe", "$hSqrt2", "$hLn2", "$hLn10", "$hLog2_e", "$hLog2_10", "$hLog10_e", "$HPA_MIN", "$HPA_MAX" };
+static inline void InitRegion_context(eel_builtin_memRegion *st)
+{
+	st->inuse = 0;
+	st->slot = 30;
+	st->type = (char *)malloc(st->slot * sizeof(char));
+	st->memRegion = (s_str *)malloc(st->slot * sizeof(s_str));
+	for (int32_t i = 0; i < st->slot; i++)
+	{
+		st->type[i] = 0;
+		st->memRegion[i] = 0;
+	}
+	for (int32_t i = 0; i < 19; i++)
+	{
+		xpr br = *xConstant[i];
+		void *ptr = malloc(sizeof(xpr));
+		memcpy(ptr, (void *)&br, sizeof(xpr));
+		int32_t id = AddData(st, ptr, 5);
+	}
 }
 static int32_t eel_string_match(compileContext *c, const char *fmt, const char *msg, int32_t match_fmt_pos, int32_t ignorecase, const char *fmt_endptr, const char *msg_endptr, int32_t num_fmt_parms, float **fmt_parms)
 {
@@ -2168,7 +2185,7 @@ static int32_t eel_validate_format_specifier(const char *fmt_in, char *typeOut, 
 	{
 		const char c = *fmt++;
 		if (fmtOut_sz < 2) return 0;
-		if (c == 'f' || c == 'e' || c == 'E' || c == 'g' || c == 'G' || c == 'd' || c == 'u' || c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'i')
+		if (c == 'f' || c == 'F' || c == 'e' || c == 'E' || c == 'g' || c == 'G' || c == 'd' || c == 'u' || c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'i')
 		{
 			*typeOut = c;
 			fmtOut[0] = c;
@@ -2232,7 +2249,7 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 			float v = varptr ? (float)*varptr : 0.0f;
 			if (ct == 'x' || ct == 'X' || ct == 'd' || ct == 'u' || ct == 'i')
 			{
-				stbsp_snprintf(op, 64, fs, (int32_t)(v));
+				stbsp_snprintf(op, 128, fs, (int32_t)(v));
 			}
 			else if (ct == 's' || ct == 'S')
 			{
@@ -2240,6 +2257,16 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 				const char *str = (const char*)GetStringForIndex(c->region_context, v, 0);
 				const size_t maxl = (size_t)(buf + buf_sz - 2u - op);
 				stbsp_snprintf(op, maxl, fs, str ? str : "");
+			}
+			else if (ct == 'F')
+			{
+				compileContext *c = (compileContext*)opaque;
+				int32_t idx = (int32_t)(v + NSEEL_CLOSEFACTOR);
+				xpr *br = (xpr *)c->region_context->memRegion[idx];
+				char *str = xpr_asprint(*br, 1, 0, (XDIM * 48) / 10 - 2);
+				int maxl = strlen(str);
+				stbsp_snprintf(op, min(maxl + 1, 128), "%s", str ? str : "");
+				free(str);
 			}
 			else if (ct == 'c')
 			{
@@ -2262,7 +2289,7 @@ int32_t eel_format_strings(void *opaque, const char *fmt, const char *fmt_end, c
 				*op = 0;
 			}
 			else
-				stbsp_snprintf(op, 64, fs, v);
+				stbsp_snprintf(op, 128, fs, v);
 			while (*op) op++;
 			fmt += l;
 		}
@@ -3414,10 +3441,10 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 	{
 		int32_t offs1 = (uint32_t)(*parms[2] + NSEEL_CLOSEFACTOR);
 		float *impulseresponse = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
-		FFTConvolver1x1 *conv = (FFTConvolver1x1 *)malloc(sizeof(FFTConvolver1x1));
+		FFTConvolver1x1 *conv = (FFTConvolver1x1*)malloc(sizeof(FFTConvolver1x1));
 		FFTConvolver1x1Init(conv);
 		FFTConvolver1x1LoadImpulseResponse(conv, latency, impulseresponse, irLen);
-		ptr = (void *)conv;
+		ptr = (void*)conv;
 	}
 	else if (convType == 2)
 	{
@@ -3425,10 +3452,10 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 		uint32_t offs2 = (uint32_t)(*parms[3] + NSEEL_CLOSEFACTOR);
 		float *leftImp = __NSEEL_RAMAlloc(blocks, (uint64_t)offs1);
 		float *rightImp = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
-		FFTConvolver2x2 *conv = (FFTConvolver2x2 *)malloc(sizeof(FFTConvolver2x2));
+		FFTConvolver2x2 *conv = (FFTConvolver2x2*)malloc(sizeof(FFTConvolver2x2));
 		FFTConvolver2x2Init(conv);
 		FFTConvolver2x2LoadImpulseResponse(conv, latency, leftImp, rightImp, irLen);
-		ptr = (void *)conv;
+		ptr = (void*)conv;
 	}
 	else
 	{
@@ -3440,19 +3467,13 @@ static float NSEEL_CGEN_CALL _eel_initfftconv1d(void *opaque, INT_PTR num_param,
 		float *LR = __NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
 		float *RL = __NSEEL_RAMAlloc(blocks, (uint64_t)offs3);
 		float *RR = __NSEEL_RAMAlloc(blocks, (uint64_t)offs4);
-		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2 *)malloc(sizeof(FFTConvolver2x4x2));
+		FFTConvolver2x4x2 *conv = (FFTConvolver2x4x2*)malloc(sizeof(FFTConvolver2x4x2));
 		FFTConvolver2x4x2Init(conv);
 		FFTConvolver2x4x2LoadImpulseResponse(conv, latency, LL, LR, RL, RR, irLen);
-		ptr = (void *)conv;
+		ptr = (void*)conv;
 	}
 	int32_t id = AddData(c->region_context, ptr, convType);
 	return (float)id;
-}
-static float NSEEL_CGEN_CALL _eel_deletefftconv1d(void *opaque, float *v)
-{
-	compileContext *c = (compileContext*)opaque;
-	DeleteSlot(c->region_context, (int32_t)(*v + NSEEL_CLOSEFACTOR));
-	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_processfftconv1d(void *opaque, INT_PTR num_param, float **parms)
 {
@@ -3551,10 +3572,10 @@ static float NSEEL_CGEN_CALL _eel_initthread(void *opaque, float *stringID)
 	int32_t id = AddData(c->region_context, (void *)pth, 4);
 	return (float)id;
 }
-static float NSEEL_CGEN_CALL _eel_deletethread(void *opaque, float *v)
+static float NSEEL_CGEN_CALL _eel_deleteSysVariable(void *opaque, float *v)
 {
 	compileContext *c = (compileContext*)opaque;
-	DeleteSlot(c->region_context, *v);
+	DeleteSlot(c->region_context, (int32_t)(*v + NSEEL_CLOSEFACTOR));
 	return 1;
 }
 static float NSEEL_CGEN_CALL _eel_createThread(void *opaque, float *v)
@@ -3585,7 +3606,208 @@ static float NSEEL_CGEN_CALL _eel_unlockThread(void *opaque, float *v)
 	pthread_mutex_unlock(&c->globalLocker);
 	return 1;
 }
-
+// HPFloat
+#define HPFREPEATBLKEND \
+void *ptr = malloc(sizeof(xpr)); \
+memcpy(ptr, (void *)&br, sizeof(xpr)); \
+int32_t id = AddData(c->region_context, ptr, 5); \
+return id;
+static float NSEEL_CGEN_CALL _eel_createHPFloatFromString(void *opaque, float *v)
+{
+	compileContext *c = (compileContext *)opaque;
+	const char *decimal = (const char *)GetStringForIndex(c->region_context, *v, 0);
+	xpr br = atox(decimal);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_createHPFloatFromFloat32(void *opaque, float *flt)
+{
+	compileContext *c = (compileContext *)opaque;
+	xpr br = flttox(*flt);
+	void *ptr = malloc(sizeof(xpr));
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	int32_t id = AddData(c->region_context, ptr, 5);
+	return id;
+}
+static float NSEEL_CGEN_CALL _eel_createHPFloatToFloat32(void *opaque, float *v)
+{
+	compileContext *c = (compileContext *)opaque;
+	int32_t idx = (int32_t)(*v + NSEEL_CLOSEFACTOR);
+	xpr *br = (xpr *)c->region_context->memRegion[idx];
+	return xtoflt(*br);
+}
+static float NSEEL_CGEN_CALL _eel_createHPFloatToString(void *opaque, float *v)
+{
+	compileContext *c = (compileContext *)opaque;
+	int32_t idx = (int32_t)(*v + NSEEL_CLOSEFACTOR);
+	xpr *br = (xpr *)c->region_context->memRegion[idx];
+	char *str = xpr_asprint(*br, 1, 0, (XDIM * 48) / 10 - 2);
+	int32_t id = AddData(c->region_context, (void*)str, 0);
+	return id;
+}
+#define HPFREPEATBLKDYADIC \
+compileContext *c = (compileContext *)opaque; \
+xpr *x1 = (xpr *)c->region_context->memRegion[(int32_t)(*parms[0] + NSEEL_CLOSEFACTOR)]; \
+xpr *x2 = (xpr *)c->region_context->memRegion[(int32_t)(*parms[1] + NSEEL_CLOSEFACTOR)];
+#define HPFREPEATBLK1O \
+compileContext *c = (compileContext *)opaque; \
+xpr *x = (xpr *)c->region_context->memRegion[(int32_t)(*parms[0] + NSEEL_CLOSEFACTOR)];
+static float NSEEL_CGEN_CALL _eel_HPFAdd(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xadd(*x1, *x2, 0);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFSub(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xadd(*x1, *x2, 1);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFMul(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xmul(*x1, *x2);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFDiv(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xdiv(*x1, *x2);
+	HPFREPEATBLKEND
+}
+// Math functions
+static float NSEEL_CGEN_CALL _eel_HPFfrexp(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	float *blocks = c->ram_state;
+	int p;
+	xpr br = xfrexp(*x, &p);
+	uint32_t offs2 = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float *out = (float *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	void *ptr = malloc(sizeof(xpr));
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[0] = AddData(c->region_context, ptr, 5);
+	ptr = malloc(sizeof(xpr));
+	br = dbltox((double)p);
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[1] = AddData(c->region_context, ptr, 5);
+	return 0;
+}
+static float NSEEL_CGEN_CALL _eel_HPFqfmod(void *opaque, INT_PTR num_param, float **parms)
+{
+	compileContext *c = (compileContext *)opaque;
+	xpr *s = (xpr *)c->region_context->memRegion[(int32_t)(*parms[0] + NSEEL_CLOSEFACTOR)];
+	xpr *t = (xpr *)c->region_context->memRegion[(int32_t)(*parms[1] + NSEEL_CLOSEFACTOR)];
+	xpr *q = (xpr *)c->region_context->memRegion[(int32_t)(*parms[2] + NSEEL_CLOSEFACTOR)];
+	xpr br = xfmod(*s, *t, q);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFfmod(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr q;
+	xpr br = xfmod(*x1, *x2, &q);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFsfmod(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	float *blocks = c->ram_state;
+	int p;
+	xpr br = xsfmod(*x, &p);
+	uint32_t offs2 = (uint32_t)(*parms[1] + NSEEL_CLOSEFACTOR);
+	float *out = (float *)__NSEEL_RAMAlloc(blocks, (uint64_t)offs2);
+	void *ptr = malloc(sizeof(xpr));
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[0] = AddData(c->region_context, ptr, 5);
+	ptr = malloc(sizeof(xpr));
+	br = dbltox((double)p);
+	memcpy(ptr, (void *)&br, sizeof(xpr));
+	out[1] = AddData(c->region_context, ptr, 5);
+	return 0;
+}
+static float NSEEL_CGEN_CALL _eel_HPFMulPowOf2(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	xpr br = xpr2(*x, (int32_t)(*parms[1] + NSEEL_CLOSEFACTOR));
+	HPFREPEATBLKEND
+}
+#define HPFLogicGen1O(fname, expr) \
+static float NSEEL_CGEN_CALL fname(void *opaque, INT_PTR num_param, float **parms) \
+{ \
+	HPFREPEATBLK1O \
+	int lg = expr; \
+	return lg; \
+}
+#define HPFLogicGenDYADIC(fname, expr) \
+static float NSEEL_CGEN_CALL fname(void *opaque, INT_PTR num_param, float **parms) \
+{ \
+	HPFREPEATBLKDYADIC \
+	int lg = expr; \
+	return lg; \
+}
+#define HPFGen(fname, expr) \
+static float NSEEL_CGEN_CALL fname(void *opaque, INT_PTR num_param, float **parms) \
+{ \
+	HPFREPEATBLK1O \
+	xpr br = expr(*x); \
+	HPFREPEATBLKEND \
+}
+HPFGen(_eel_HPFfrac, xfrac)
+HPFGen(_eel_HPFabs, xabs)
+HPFGen(_eel_HPFtrunc, xtrunc)
+HPFGen(_eel_HPFround, xround)
+HPFGen(_eel_HPFceil, xceil)
+HPFGen(_eel_HPFfloor, xfloor)
+HPFGen(_eel_HPFfix, xfix)
+HPFGen(_eel_HPFtan, xtan)
+HPFGen(_eel_HPFsin, xsin)
+HPFGen(_eel_HPFcos, xcos)
+HPFGen(_eel_HPFatan, xatan)
+HPFGen(_eel_HPFasin, xasin)
+HPFGen(_eel_HPFacos, xacos)
+HPFGen(_eel_HPFNegation, xneg)
+static float NSEEL_CGEN_CALL _eel_HPFatan2(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xatan2(*x1, *x2);
+	HPFREPEATBLKEND
+}
+HPFGen(_eel_HPFsqrt, xsqrt)
+HPFGen(_eel_HPFexp, xexp)
+HPFGen(_eel_HPFexp2, xexp2)
+HPFGen(_eel_HPFexp10, xexp10)
+HPFGen(_eel_HPFlog, xlog)
+HPFGen(_eel_HPFlog2, xlog2)
+HPFGen(_eel_HPFlog10, xlog10)
+HPFGen(_eel_HPFtanh, xtanh)
+HPFGen(_eel_HPFsinh, xsinh)
+HPFGen(_eel_HPFcosh, xcosh)
+HPFGen(_eel_HPFatanh, xatanh)
+HPFGen(_eel_HPFasinh, xasinh)
+HPFGen(_eel_HPFacosh, xacosh)
+HPFGen(_eel_HPFclone, )
+static float NSEEL_CGEN_CALL _eel_HPFpow(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLKDYADIC
+	xpr br = xpow(*x1, *x2);
+	HPFREPEATBLKEND
+}
+static float NSEEL_CGEN_CALL _eel_HPFIntPow(void *opaque, INT_PTR num_param, float **parms)
+{
+	HPFREPEATBLK1O
+	xpr br = xpwr(*x, (int32_t)roundf(*parms[1]));
+	HPFREPEATBLKEND
+}
+HPFLogicGen1O(_eel_HPFiszero, xis0(x))
+HPFLogicGen1O(_eel_HPFisneg, x_neg(x))
+HPFLogicGen1O(_eel_HPFbinaryexp, x_exp(x))
+HPFLogicGenDYADIC(_eel_HPFeq, (xprcmp(x1, x2) == 0))
+HPFLogicGenDYADIC(_eel_HPFneq, (xprcmp(x1, x2) != 0))
+HPFLogicGenDYADIC(_eel_HPFle, (xprcmp(x1, x2) <= 0))
+HPFLogicGenDYADIC(_eel_HPFge, (xprcmp(x1, x2) >= 0))
+HPFLogicGenDYADIC(_eel_HPFgt, (xprcmp(x1, x2) > 0))
+HPFLogicGenDYADIC(_eel_HPFlt, (xprcmp(x1, x2) < 0))
 static void channel_split(float *buffer, uint64_t num_frames, float **chan_buffers, uint32_t num_channels)
 {
 	uint64_t i, samples = num_frames * num_channels;
@@ -3597,83 +3819,6 @@ static void channel_join(float **chan_buffers, uint32_t num_channels, float *buf
 	uint64_t i, samples = num_frames * num_channels;
 	for (i = 0; i < samples; i++)
 		buffer[i] = (float)(chan_buffers[i % num_channels][i / num_channels]);
-}
-static const double compressedCoeffMQ[701] = { 0.919063234986138511, 0.913619994199411201, 0.897406560667438402, 0.870768836078722797, 0.834273523109754001, 0.788693711602254766, 0.734989263333015286, 0.674282539592362951, 0.607830143521649657, 0.536991457245508341, 0.463194839157173466, 0.387902406850539450, 0.312574364478514499, 0.238633838900749129, 0.167433166845669668, 0.100222526262645231, 0.038121730693097225, -0.017904091793426027, -0.067064330735278010, -0.108757765594775291, -0.142582153044975485, -0.168338357500518510, -0.186029009837402531, -0.195851834439330574, -0.198187933840591440, -0.193585458951914369, -0.182739217157973949, -0.166466876941489483, -0.145682513177707279, -0.121368299577954988, -0.094545192393702127, -0.066243461643369750, -0.037473912797399318, -0.009200603832691301, 0.017684198632122932, 0.042382162574711987, 0.064207571946511041, 0.082602100079150684, 0.097145355203635028, 0.107561011406507381, 0.113718474453852247, 0.115630166683615837, 0.113444644504459249, 0.107435882084395071, 0.097989162055837783, 0.085584105452548076, 0.070775446120293309, 0.054172207614333223, 0.036415971885660689, 0.018158938330246815, 0.000042459196338912, -0.017323296238410713, -0.033377949403731559, -0.047627263300716267, -0.059656793081079629, -0.069142490141500798, -0.075858019256578396, -0.079678658979652428, -0.080581767609623323, -0.078643906863599317, -0.074034819562284179, -0.067008552930955145, -0.057892102695980191, -0.047072022601671190, -0.034979497375161483, -0.022074413174279148, -0.008828977400685476, 0.004288560713652965, 0.016829555699174666, 0.028379479813981756, 0.038570858162652835, 0.047094241683417769, 0.053706909605020871, 0.058239076113395197, 0.060597464446319166, 0.060766202425508065, 0.058805083502616720, 0.054845323789501445, 0.049083025498695095, 0.041770628243703020, 0.033206689594802247, 0.023724383421121997, 0.013679137601712221, 0.003435850879130631, -0.006643868309165797, -0.016214010012738603, -0.024955612937682017, -0.032586990530198853, -0.038872417226545809, -0.043629018879643239, -0.046731678346964158, -0.048115839004410917, -0.047778163016171563, -0.045775074997070689, -0.042219292770236193, -0.037274512912134725, -0.031148477572630149, -0.024084698830208532, -0.016353156105483747, -0.008240309809337577, -0.000038789761018515, 0.007962880277736915, 0.015490170167632772, 0.022291712611484882, 0.028147455724642705, 0.032875542265754551, 0.036337708303315903, 0.038443049556812471, 0.039150063091460026, 0.038466933347880143, 0.036450092517807633, 0.033201143952433128, 0.028862291652591764, 0.023610467168487866, 0.017650385903971395, 0.011206796641134264, 0.004516210167813600, -0.002181595351151269, -0.008651993358287469, -0.014673562407359826, -0.020045503214184583, -0.024594176093158650, -0.028178551235573571, -0.030694406321622035, -0.032077152831841031, -0.032303222419993387, -0.031389996039150381, -0.029394309376722470, -0.026409616804964359, -0.022561940854659814, -0.018004773700230153, -0.012913130046223239, -0.007476976122050557, -0.001894276500050309, 0.003636091270827173, 0.008921304789011335, 0.013781207467236415, 0.018054338893886482, 0.021603186795815136, 0.024318493648450956, 0.026122487293166251, 0.026970945047679402, 0.026854043263213976, 0.025795987570079431, 0.023853461640206807, 0.021112972713804853, 0.017687209024348168, 0.013710556397414673, 0.009333947668859192, 0.004719238361448204, 0.000033314715823999, -0.004557854609777880, -0.008895014112733140, -0.012831064739959125, -0.016235971633599879, -0.019000975419769615, -0.021041973670496809, -0.022301970824562707, -0.022752529440111541, -0.022394191906072568, -0.021255878361951062, -0.019393302279828196, -0.016886478718542881, -0.013836430536684995, -0.010361223853106050, -0.006591484944463394, -0.002665565936317155, 0.001275464342459697, 0.005092825309417521, 0.008654850008311749, 0.011841465274590917, 0.014548176385701671, 0.016689426206986688, 0.018201223316688792, 0.019042961289876651, 0.019198381208357294, 0.018675660452129358, 0.017506641810096972, 0.015745246837337051, 0.013465145155917528, 0.010756776112709417, 0.007723840062309154, 0.004479392878420811, 0.001141688626311485, -0.002170078649346380, -0.005339982462341837, -0.008259373919338373, -0.010830557217282604, -0.012970007990380254, -0.014611030342508765, -0.015705770153788771, -0.016226526478563909, -0.016166328657139784, -0.015538773207899238, -0.014377140707818779, -0.012732837794565421, -0.010673232279050818, -0.008278969379415602, -0.005640873626063710, -0.002856553527664500, -0.000026834265658038, 0.002747852704083721, 0.005370995258360709, 0.007753319014958258, 0.009815785813909824, 0.011492173003678219, 0.012731150958433296, 0.013497795530424229, 0.013774493273929109, 0.013561219484126362, 0.012875191572278549, 0.011749922250546383, 0.010233717662138146, 0.008387684262046795, 0.006283324310867826, 0.003999812773708582, 0.001621057822818793, -0.000767347236997687, -0.003081171091507831, -0.005240483245491547, -0.007172383140908554, -0.008813427537033921, -0.010111676574189758, -0.011028293954650051, -0.011538653669060464, -0.011632924035784708, -0.011316118830412747, -0.010607624279109693, -0.009540229002217340, -0.008158700990423423, -0.006517970800651516, -0.004680992876389242, -0.002716366825287035, -0.000695807329823454, 0.001308445056270027, 0.003226179724201707, 0.004991648959431359, 0.006545794666321473, 0.007838194454033614, 0.008828664063258869, 0.009488466505815606, 0.009801093167340614, 0.009762597931815446, 0.009381481548192093, 0.008678139395534967, 0.007683900954968532, 0.006439703144240938, 0.004994451750326167, 0.003403135115410580, 0.001724761684323746, 0.000020197792912962, -0.001650015947868542, -0.003227792151864713, -0.004659494079420105, -0.005897735119564774, -0.006902920847777659, -0.007644484483944344, -0.008101778413755888, -0.008264597354555087, -0.008133322264400958, -0.007718687720230902, -0.007041188742854554, -0.006130155461650219, -0.005022535167821778, -0.003761430832691131, -0.002394452762763960, -0.000971945496911797, 0.000454844825025831, 0.001835596641714852, 0.003122668316617104, 0.004272722114380925, 0.005248162177843576, 0.006018339594106877, 0.006560486855847911, 0.006860354383749922, 0.006912532886871314, 0.006720456790559610, 0.006296095343184246, 0.005659348921651181, 0.004837178114662079, 0.003862502033291890, 0.002772909691220670, 0.001609233980906675, 0.000414041581645497, -0.000769906024675906, -0.001901165407831948, -0.002941044990442539, -0.003854910802244932, -0.004613320774623974, -0.005192951162290093, -0.005577286818932973, -0.005757056020769449, -0.005730399990410974, -0.005502776877353867, -0.005086609356845171, -0.004500693886508907, -0.003769397706347888, -0.002921676615038254, -0.001989952181071211, -0.001008891180284735, -0.000014132577398601, 0.000958991766382216, 0.001876697269289887, 0.002707904681562794, 0.003425276863778077, 0.004006100299408528, 0.004432983601002821, 0.004694352366032693, 0.004784727410211850, 0.004704781367912914, 0.004461176612085595, 0.004066195127045020, 0.003537178100163921, 0.002895799341758980, 0.002167201988627001, 0.001379032128141500, 0.000560405874095270, -0.000259152041390146, -0.001050759947470964, -0.001787184184342184, -0.002443762818329620, -0.002999217281793143, -0.003436325772772713, -0.003742437746853627, -0.003909814939345641, -0.003935790838753386, -0.003822747153675574, -0.003577912336230492, -0.003212993416401785, -0.002743658050835511, -0.002188888608264336, -0.001570234143874397, -0.000910989133812205, -0.000235329764723561, 0.000432560641279413, 0.001069345839998360, 0.001653340745377959, 0.002165238082962834, 0.002588733711954676, 0.002911030869493576, 0.003123208352342977, 0.003220442832479460, 0.003202080909987641, 0.003071561941475896, 0.002836197950977609, 0.002506821849485185, 0.002097319592184942, 0.001624065644771860, 0.001105284094542681, 0.000560359841433201, 0.000009125484808694, -0.000528850236297424, -0.001034947274672293, -0.001492128764321782, -0.001885503916298735, -0.002202801129643487, -0.002434736758218434, -0.002575269035034838, -0.002621730990172647, -0.002574840645573092, -0.002438591168737718, -0.002220027862259672, -0.001928922712789991, -0.001577360593112676, -0.001179253996234489, -0.000749805296090004, -0.000304936916893765, 0.000139289578942291, 0.000567244609490058, 0.000964271897894877, 0.001317181565737385, 0.001614678737960774, 0.001847714105275549, 0.002009746006742852, 0.002096907004167219, 0.002108071492117578, 0.002044824491385029, 0.001911335280223238, 0.001714142804308648, 0.001461862761483392, 0.001164828784166054, 0.000834682161765550, 0.000483925998593740, 0.000125460552453497, -0.000227883269383389, -0.000563795658925073, -0.000870909262856999, -0.001139175997920627, -0.001360187135536317, -0.001527426803455576, -0.001636451679881492, -0.001684992470943874, -0.001672975660262524, -0.001602466894019970, -0.001477540114542411, -0.001304079085075351, -0.001089520173828018, -0.000842547115162114, -0.000572749884052837, -0.000290260767615715, -0.000005381173403155, 0.000271787324682131, 0.000531694720882059, 0.000765665077860444, 0.000966179147256847, 0.001127108176071712, 0.001243891947014572, 0.001313656276814221, 0.001335267482640161, 0.001309323638539731, 0.001238084697878249, 0.001125345675261167, 0.000976258990458714, 0.000797113715033597, 0.000595080778704776, 0.000377934148912837, 0.000153758569481225, -0.000069345376995143, -0.000283548328671139, -0.000481561352316614, -0.000656878246049437, -0.000803983100343503, -0.000918516742461215, -0.000997397336828164, -0.001038892182663637, -0.001042639573678904, -0.001009621396079384, -0.000942088876021349, -0.000843445486235168, -0.000718092430499951, -0.000571243299133416, -0.000408715393446694, -0.000236705827693455, -0.000061560820167541, 0.000110453421068778, 0.000273370118506192, 0.000421724138601977, 0.000550730322629083, 0.000656432310144007, 0.000735817450677950, 0.000786894740519778, 0.000808734131933592, 0.000801466989262860, 0.000766248858509478, 0.000705187025332569, 0.000621236516650982, 0.000518069214751335, 0.000399921568730665, 0.000271426983019702, 0.000137439322056229, 0.000002854088234340, -0.000127566289796932, -0.000249356967950712, -0.000358499459727905, -0.000451549869015331, -0.000525742663600061, -0.000579067066332711, -0.000610314210246149, -0.000619094306052033, -0.000605824164738963, -0.000571686465475047, -0.000518563123569660, -0.000448945962885840, -0.000365828604967228, -0.000272584032349123, -0.000172832651673869, -0.000070305865763902, 0.000031289837955523, 0.000128403456337462, 0.000217760218406138, 0.000296468531144650, 0.000362109765670523, 0.000412808249833617, 0.000447279627497663, 0.000464856578836417, 0.000465491738613502, 0.000449738470059130, 0.000418710921836804, 0.000374025488711351, 0.000317726390511799, 0.000252198560764628, 0.000180071382714710, 0.000104117018254314, 0.000027147141711448, -0.000048088182130861, -0.000118995940709898, -0.000183226726188442, -0.000238749615318076, -0.000283913107803554, -0.000317490431754438, -0.000338708143110164, -0.000347257581417331, -0.000343289373546324, -0.000327391777412823, -0.000300554208881314, -0.000264117778630104, -0.000219715066774411, -0.000169201669906033, -0.000114582260151285, -0.000057933995063949, -0.000001330110803372, 0.000053233576939992, 0.000103906741924272, 0.000149044949497856, 0.000187260510974094, 0.000217462319983746, 0.000238883649294571, 0.000251097355835207, 0.000254018413730855, 0.000247894152903089, 0.000233283008194432, 0.000211022966716673, 0.000182191226994878, 0.000148056842795767, 0.000110028310364557, 0.000069598166140896, 0.000028286691831679, -0.000012413223177511, -0.000051088131137235, -0.000086451240238396, -0.000117383287411682, -0.000142965848616867, -0.000162506184310969, -0.000175553056891817, -0.000181903303379713, -0.000181599287597338, -0.000174917679492114, -0.000162350303974188, -0.000144578058136870, -0.000122439106161612, -0.000096892719738482, -0.000068980234721197, -0.000039784640417051, -0.000010390306964679, 0.000018155708707897, 0.000044879452343343, 0.000068911789142910, 0.000089515073669816, 0.000106104020030281, 0.000118260259226232, 0.000125740319217347, 0.000128477011389261, 0.000126574445796332, 0.000120297118433995, 0.000110053709582710, 0.000096376396848920, 0.000079896615190895, 0.000061318285745045, 0.000041389584008291, 0.000020874325790195, 0.000000524017729422, -0.000018948449136533, -0.000036892585232981, -0.000052740818819573, -0.000066025144314650, -0.000076389469747209, -0.000083597404911355, -0.000087535408131387, -0.000088211381288728, -0.000085748963835814, -0.000080377921496540, -0.000072421149619506, -0.000062278911057702, -0.000050411001395778, -0.000037317578835504, -0.000023519411693731, -0.000009538283954733, 0.000004121739654397, 0.000016991550435446, 0.000028652179052461, 0.000038747470023706, 0.000046993903986995, 0.000053187343852112, 0.000057206603209622, 0.000059013855762422, 0.000058652018744224, 0.000056239347370971, 0.000051961567969763, 0.000046061951828715, 0.000038829788015541, 0.000030587750191730, 0.000021678669346899, 0.000012452221695327, 0.000003252019725938, -0.000005596443768274, -0.000013796601731427, -0.000021090036946349, -0.000027263866219030, -0.000032156106624670, -0.000035658928433894, -0.000037719781474555, -0.000038340460301533, -0.000037574245901964, -0.000035521325378456, -0.000032322744186229, -0.000028153186597604, -0.000023212908194301, -0.000017719158939021, -0.000011897436866734, -0.000005972901266780, -0.000000162251446552, 0.000005333655793588, 0.000010336218246169, 0.000014694346087313, 0.000018288433744639, 0.000021032968627464, 0.000022877753957232, 0.000023807775391314, 0.000023841789731823, 0.000023029757133319, 0.000021449274538926, 0.000019201196577477, 0.000016404650185715, 0.000013191660473528, 0.000009701607868611, 0.000006075730729441, 0.000002451874068818, -0.000001040335292299, -0.000004283732788372, -0.000007177155365100, -0.000009638185206925, -0.000011605042076524, -0.000013037603419542, -0.000013917565218600, -0.000014247788012456, -0.000014050900469913, -0.000013367256554309, -0.000012252360976939, -0.000010773890887184, -0.000009008449384796, -0.000007038188493661, -0.000004947435946560, -0.000002819451929447, -0.000000733429418017, 0.000001238164361723, 0.000003031826677860, 0.000004594780305705, 0.000005886220575305, 0.000006878033995645, 0.000007554995005623, 0.000007914466875845, 0.000007965650064675, 0.000007728435880102, 0.000007231934716903, 0.000006512756173231, 0.000005613122895949, 0.000004578901096601, 0.000003457628489583, 0.000002296615219305, 0.000001141185552533, 0.000000033118183302, -0.000000990668545558, -0.000001899152803076, -0.000002667946210802, -0.000003279724008567, -0.000003724353373815, -0.000003998736284580, -0.000004106393367485, -0.000004056823505075, -0.000003864680371659, -0.000003548811395079, -0.000003131206866384, -0.000002635907089885, -0.000002087913711897, -0.000001512147886406, -0.000000932492985725, -0.000000370953442845, 0.000000153045653294, 0.000000623201057861, 0.000001026706448750, 0.000001354458044511, 0.000001601095747237, 0.000001764891111188, 0.000001847498832724, 0.000001853592772907, 0.000001790410657756, 0.000001667233505382, 0.000001494826511430, 0.000001284867642241, 0.000001049388641653, 0.000000800250692844, 0.000000548673760673, 0.000000304834862491, 0.000000077546377014, -0.000000125978796206, -0.000000300272674786, -0.000000441669721214, -0.000000548281621807, -0.000000619897641839, -0.000000657821438861, -0.000000664657100282, -0.000000644058349094, -0.000000600455333568, -0.000000538773213853, -0.000000464155939282, -0.000000381707256690, -0.000000296259201847, -0.000000212176215381, -0.000000133200709942, -0.000000062343516559, 0.0 };
-void decompressResamplerMQ(const double y[701], float *yi)
-{
-	double breaks[701];
-	double coefs[2800];
-	int k;
-	double s[701];
-	double dx[700];
-	double dvdf[700];
-	double r, dzzdx, dzdxdx;
-	for (k = 0; k < 700; k++)
-	{
-		r = 0.0014285714285714286 * ((double)k + 1.0) - 0.0014285714285714286 * (double)k;
-		dx[k] = r;
-		dvdf[k] = (y[k + 1] - y[k]) / r;
-	}
-	s[0] = ((dx[0] + 0.0057142857142857143) * dx[1] * dvdf[0] + dx[0] * dx[0] * dvdf[1]) / 0.0028571428571428571;
-	s[700] = ((dx[699] + 0.0057142857142857828) * dx[698] * dvdf[699] + dx[699] * dx[699] * dvdf[698]) / 0.0028571428571428914;
-	breaks[0] = dx[1];
-	breaks[700] = dx[698];
-	for (k = 0; k < 699; k++)
-	{
-		r = dx[k + 1];
-		s[k + 1] = 3.0 * (r * dvdf[k] + dx[k] * dvdf[k + 1]);
-		breaks[k + 1] = 2.0 * (r + dx[k]);
-	}
-	r = dx[1] / breaks[0];
-	breaks[1] -= r * 0.0028571428571428571;
-	s[1] -= r * s[0];
-	for (k = 0; k < 698; k++)
-	{
-		r = dx[k + 2] / breaks[k + 1];
-		breaks[k + 2] -= r * dx[k];
-		s[k + 2] -= r * s[k + 1];
-	}
-	r = 0.0028571428571428914 / breaks[699];
-	breaks[700] -= r * dx[698];
-	s[700] -= r * s[699];
-	s[700] /= breaks[700];
-	for (k = 698; k >= 0; k--)
-		s[k + 1] = (s[k + 1] - dx[k] * s[k + 2]) / breaks[k + 1];
-	s[0] = (s[0] - 0.0028571428571428571 * s[1]) / breaks[0];
-	for (k = 0; k < 701; k++)
-		breaks[k] = 0.0014285714285714286 * (double)k;
-	for (k = 0; k < 700; k++)
-	{
-		r = 1.0 / dx[k];
-		dzzdx = (dvdf[k] - s[k]) * r;
-		dzdxdx = (s[k + 1] - dvdf[k]) * r;
-		coefs[k] = (dzdxdx - dzzdx) * r;
-		coefs[k + 700] = 2.0 * dzzdx - dzdxdx;
-		coefs[k + 1400] = s[k];
-		coefs[k + 2100] = y[k];
-	}
-	double d = 1.0 / 22437.0;
-	int low_i, low_ip1, high_i, mid_i;
-	for (k = 0; k < 22438; k++)
-	{
-		low_i = 0;
-		low_ip1 = 2;
-		high_i = 701;
-		r = k * d;
-		while (high_i > low_ip1)
-		{
-			mid_i = ((low_i + high_i) + 1) >> 1;
-			if (r >= breaks[mid_i - 1])
-			{
-				low_i = mid_i - 1;
-				low_ip1 = mid_i + 1;
-			}
-			else
-				high_i = mid_i;
-		}
-		double xloc = r - breaks[low_i];
-		yi[k] = (float)(xloc * (xloc * (xloc * coefs[low_i] + coefs[low_i + 700]) + coefs[low_i + 1400]) + coefs[low_i + 2100]);
-	}
 }
 #include "numericSys/libsamplerate/samplerate.h"
 void JamesDSPOfflineResampling(float const *in, float *out, size_t lenIn, size_t lenOut, int channels, double src_ratio)
@@ -3696,7 +3841,6 @@ void JamesDSPOfflineResampling(float const *in, float *out, size_t lenIn, size_t
 		printf("\n%s\n\n", src_strerror(error));
 	}
 }
-float *decompressedCoefficients = 0;
 #define DR_FLAC_IMPLEMENTATION
 #include "dr_flac.h"
 #define DR_WAV_IMPLEMENTATION
@@ -4342,50 +4486,50 @@ redirect(roundf)
 redirect(floorf)
 redirect(ceilf)
 static functionType fnTable1[] = {
-   { "sin",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinf} },
-   { "cos",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_cosf} },
-   { "tan",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanf}  },
-   { "sqrt",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sqrtf}, },
-   { "asin",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinf}, },
-   { "acos",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acosf}, },
-   { "atan",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanf}, },
-   { "atan2",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_atan2f}, },
-   { "sinh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinhf} },
-   { "cosh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_coshf} },
-   { "tanh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanhf}  },
-   { "asinh",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinhf}, },
-   { "acosh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acoshf}, },
-   { "atanh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanhf}, },
-   { "log",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_logf} },
-   { "log10",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_log10f} },
-   { "hypot",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_hypotf}, },
-   { "pow",    nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_powf}, },
-   { "exp",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_expf}, },
-   { "abs",    nseel_asm_abs,nseel_asm_abs_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(0) | BIF_WONTMAKEDENORMAL },
-   { "sqr",    nseel_asm_sqr,nseel_asm_sqr_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(1) },
-   { "min",    nseel_asm_min,nseel_asm_min_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
-   { "max",    nseel_asm_max,nseel_asm_max_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
-   { "sign",   nseel_asm_sign,nseel_asm_sign_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(2) | BIF_CLEARDENORMAL, },
-   { "rand",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&nseel_int_rand}, },
-   { "round",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_roundf} },
-   { "floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_floorf} },
-   { "ceil",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_ceilf} },
-   { "expint", nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint} },
-   { "expintFast",nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint_interpolation} },
-   { "invsqrt",nseel_asm_1pdd,nseel_asm_1pdd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), {(void**)&invsqrt} },
-   { "invsqrtFast",nseel_asm_invsqrt,nseel_asm_invsqrt_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), },
-   { "circshift",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_circshift},NSEEL_PProc_RAM},
-   { "convolve_c",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&eel_convolve_c},NSEEL_PProc_RAM},
-   { "maxVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_max},NSEEL_PProc_RAM},
-   { "minVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_min},NSEEL_PProc_RAM},
-   { "meanVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_mean},NSEEL_PProc_RAM},
-   { "medianVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_median},NSEEL_PProc_RAM},
-   { "fft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft},NSEEL_PProc_RAM},
-   { "ifft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft},NSEEL_PProc_RAM},
-   { "fft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_real},NSEEL_PProc_RAM},
-   { "ifft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_real},NSEEL_PProc_RAM},
-   { "fft_permute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_permute},NSEEL_PProc_RAM},
-   { "fft_ipermute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_permute},NSEEL_PProc_RAM},
+  {"sin",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinf} },
+  {"cos",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_cosf} },
+  {"tan",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanf}  },
+  {"sqrt",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sqrtf}, },
+  {"asin",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinf}, },
+  {"acos",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acosf}, },
+  {"atan",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanf}, },
+  {"atan2",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_atan2f}, },
+  {"sinh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_WONTMAKEDENORMAL, {(void**)&redirect_sinhf} },
+  {"cosh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_coshf} },
+  {"tanh",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_tanhf}  },
+  {"asinh",   nseel_asm_1pdd,nseel_asm_1pdd_end,  1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_asinhf}, },
+  {"acosh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_acoshf}, },
+  {"atanh",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_atanhf}, },
+  {"log",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_logf} },
+  {"log10",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_log10f} },
+  {"hypot",  nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_hypotf}, },
+  {"pow",    nseel_asm_2pdd,nseel_asm_2pdd_end, 2 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_TWOPARMSONFPSTACK, {(void**)&redirect_powf}, },
+  {"exp",    nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK, {(void**)&redirect_expf}, },
+  {"abs",    nseel_asm_abs,nseel_asm_abs_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(0) | BIF_WONTMAKEDENORMAL },
+  {"sqr",    nseel_asm_sqr,nseel_asm_sqr_end,   1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(1) },
+  {"min",    nseel_asm_min,nseel_asm_min_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
+  {"max",    nseel_asm_max,nseel_asm_max_end,   2 | NSEEL_NPARAMS_FLAG_CONST | BIF_FPSTACKUSE(3) | BIF_WONTMAKEDENORMAL },
+  {"sign",   nseel_asm_sign,nseel_asm_sign_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(2) | BIF_CLEARDENORMAL, },
+  {"rand",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&nseel_int_rand}, },
+  {"round",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_roundf} },
+  {"floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_floorf} },
+  {"ceil",   nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&redirect_ceilf} },
+  {"expint", nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint} },
+  {"expintFast",nseel_asm_1pdd,nseel_asm_1pdd_end, 1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_CLEARDENORMAL, {(void**)&expint_interpolation} },
+  {"invsqrt",nseel_asm_1pdd,nseel_asm_1pdd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), {(void**)&invsqrt} },
+  {"invsqrtFast",nseel_asm_invsqrt,nseel_asm_invsqrt_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK | BIF_FPSTACKUSE(3), },
+  {"circshift",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_circshift},NSEEL_PProc_RAM},
+  {"convolve_c",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&eel_convolve_c},NSEEL_PProc_RAM},
+  {"maxVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_max},NSEEL_PProc_RAM},
+  {"minVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_min},NSEEL_PProc_RAM},
+  {"meanVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_mean},NSEEL_PProc_RAM},
+  {"medianVec",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_RETURNSONSTACK,{(void**)&eel_median},NSEEL_PProc_RAM},
+  {"fft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft},NSEEL_PProc_RAM},
+  {"ifft",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft},NSEEL_PProc_RAM},
+  {"fft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_real},NSEEL_PProc_RAM},
+  {"ifft_real",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_real},NSEEL_PProc_RAM},
+  {"fft_permute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_fft_permute},NSEEL_PProc_RAM},
+  {"fft_ipermute",_asm_generic2parm,_asm_generic2parm_end,2,{(void**)&eel_ifft_permute},NSEEL_PProc_RAM},
   {"memcpy",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_RAM_MemCpy},NSEEL_PProc_RAM},
   {"memset",_asm_generic3parm,_asm_generic3parm_end,3,{(void**)&__NSEEL_RAM_MemSet},NSEEL_PProc_RAM},
   {"sleep",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | NSEEL_NPARAMS_FLAG_CONST | BIF_RETURNSONSTACK | BIF_LASTPARMONSTACK,{(void**)&_eel_sleep}},
@@ -4463,9 +4607,6 @@ static functionType fnTable1[] = {
   {"IIRBandSplitterInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_iirBandSplitterInit},NSEEL_PProc_THIS},
   {"IIRBandSplitterClearState",_asm_generic1parm_retd,_asm_generic1parm_retd_end, 1 | BIF_RETURNSONSTACK,{(void**)&_eel_iirBandSplitterClearState},NSEEL_PProc_RAM},
   {"IIRBandSplitterProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_iirBandSplitterProcess},NSEEL_PProc_THIS},
-  {"Conv1DInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_initfftconv1d},NSEEL_PProc_THIS},
-  {"Conv1DProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_processfftconv1d},NSEEL_PProc_THIS},
-  {"Conv1DFree",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_deletefftconv1d},NSEEL_PProc_THIS},
   {"decodeFLACFromFile",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_flacDecodeFile},NSEEL_PProc_THIS},
   {"decodeFLACFromMemory",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_flacDecodeMemory},NSEEL_PProc_THIS},
   {"decodeWavFromFile",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_wavDecodeFile},NSEEL_PProc_THIS},
@@ -4479,17 +4620,70 @@ static functionType fnTable1[] = {
   {"vectorizeMinus",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_vectorizeMinus},NSEEL_PProc_THIS },
   {"vectorizeMultiply",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_vectorizeMultiply},NSEEL_PProc_THIS },
   {"vectorizeDivide",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_vectorizeDivide},NSEEL_PProc_THIS },
+  { "lerpAt",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_lerp},NSEEL_PProc_THIS },
   {"ls",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_ls},NSEEL_PProc_THIS },
   {"cd",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_cd},NSEEL_PProc_THIS },
   {"eval",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_eval},NSEEL_PProc_THIS },
   {"evalFile",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_evalFile},NSEEL_PProc_THIS },
+  {"Conv1DInit",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_initfftconv1d},NSEEL_PProc_THIS },
+  {"Conv1DProcess",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_processfftconv1d},NSEEL_PProc_THIS },
   {"ThreadInit",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_initthread},NSEEL_PProc_THIS },
   {"ThreadCreate",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_createThread},NSEEL_PProc_THIS },
   {"ThreadJoin",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_joinThread},NSEEL_PProc_THIS },
-  {"ThreadDelete",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_deletethread},NSEEL_PProc_THIS },
   {"ThreadMutexLock",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_lockThread},NSEEL_PProc_THIS },
   {"ThreadMutexUnlock",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void**)&_eel_unlockThread},NSEEL_PProc_THIS },
-  {"lerpAt",_asm_generic2parm_retd,_asm_generic2parm_retd_end,4 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void**)&_eel_lerp},NSEEL_PProc_THIS },
+  {"xFloatS",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatFromString},NSEEL_PProc_THIS },
+  {"xFloatF",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatFromFloat32},NSEEL_PProc_THIS },
+  {"xF2f32",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatToFloat32},NSEEL_PProc_THIS },
+  {"xF2str",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_createHPFloatToString},NSEEL_PProc_THIS },
+  {"xAdd",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFAdd},NSEEL_PProc_THIS },
+  {"xSub",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFSub},NSEEL_PProc_THIS },
+  {"xMul",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFMul},NSEEL_PProc_THIS },
+  {"xDiv",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFDiv},NSEEL_PProc_THIS },
+  {"xfrexp",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfrexp},NSEEL_PProc_THIS },
+  {"xqfmod",_asm_generic2parm_retd,_asm_generic2parm_retd_end,3 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFqfmod},NSEEL_PProc_THIS },
+  {"xfmod",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfmod},NSEEL_PProc_THIS },
+  {"xsfmod",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsfmod},NSEEL_PProc_THIS },
+  {"xMulPowOf2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFMulPowOf2},NSEEL_PProc_THIS },
+  {"xfrac",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfrac},NSEEL_PProc_THIS },
+  {"xabs",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFabs},NSEEL_PProc_THIS },
+  {"xtrunc",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFtrunc},NSEEL_PProc_THIS },
+  {"xround",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFround},NSEEL_PProc_THIS },
+  {"xceil",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFceil},NSEEL_PProc_THIS },
+  {"xfloor",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfloor},NSEEL_PProc_THIS },
+  {"xfix",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFfix},NSEEL_PProc_THIS },
+  {"xtan",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFtan},NSEEL_PProc_THIS },
+  {"xsin",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsin},NSEEL_PProc_THIS },
+  {"xcos",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFcos},NSEEL_PProc_THIS },
+  {"xatan",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFatan},NSEEL_PProc_THIS },
+  {"xasin",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFasin},NSEEL_PProc_THIS },
+  {"xacos",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFacos},NSEEL_PProc_THIS },
+  {"xNegation",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFNegation},NSEEL_PProc_THIS },
+  {"xatan2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,2 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFatan2},NSEEL_PProc_THIS },
+  {"xsqrt",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsqrt},NSEEL_PProc_THIS },
+  {"xexp",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFexp},NSEEL_PProc_THIS },
+  {"xexp2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFexp2},NSEEL_PProc_THIS },
+  {"xexp10",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFexp10},NSEEL_PProc_THIS },
+  {"xlog",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlog},NSEEL_PProc_THIS },
+  {"xlog2",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlog2},NSEEL_PProc_THIS },
+  {"xlog10",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlog10},NSEEL_PProc_THIS },
+  {"xtanh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFtanh},NSEEL_PProc_THIS },
+  {"xsinh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFsinh},NSEEL_PProc_THIS },
+  {"xcosh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFcosh},NSEEL_PProc_THIS },
+  {"xatanh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFatanh},NSEEL_PProc_THIS },
+  {"xasinh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFasinh},NSEEL_PProc_THIS },
+  {"xacosh",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFacosh},NSEEL_PProc_THIS },
+  {"xclone",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFclone},NSEEL_PProc_THIS },
+  {"xpow",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFpow},NSEEL_PProc_THIS },
+  {"xintpow",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFIntPow},NSEEL_PProc_THIS },
+  {"xbinexp",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFbinaryexp},NSEEL_PProc_THIS },
+  {"xequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFeq},NSEEL_PProc_THIS },
+  {"xnotequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFneq},NSEEL_PProc_THIS },
+  {"xlessequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFle},NSEEL_PProc_THIS },
+  {"xgreaterequal",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFge},NSEEL_PProc_THIS },
+  {"xgreater",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFgt},NSEEL_PProc_THIS },
+  {"xless",_asm_generic2parm_retd,_asm_generic2parm_retd_end,1 | BIF_TAKES_VARPARM | BIF_RETURNSONSTACK,{(void **)&_eel_HPFlt},NSEEL_PProc_THIS },
+  {"DeleteSysVariable",_asm_generic1parm_retd,_asm_generic1parm_retd_end,1 | BIF_RETURNSONSTACK,{(void **)&_eel_deleteSysVariable},NSEEL_PProc_THIS },
 };
 void printFunctions()
 {
@@ -4512,18 +4706,13 @@ void NSEEL_start()
 	u.n = 0x12345678;
 	XLITTLE_ENDIAN = (u.s[0] == 0x5678 && u.s[1] == 0x1234 && u.cc[0] == 0x78 && u.cc[1] == 0x56 && u.cc[2] == 0x34 && u.cc[3] == 0x12);
 	// Global memory
-	if (decompressedCoefficients)
-		free(decompressedCoefficients);
-	decompressedCoefficients = (float*)malloc(22438 * sizeof(float));
-	decompressResamplerMQ(compressedCoeffMQ, decompressedCoefficients);
+	precompute_lpfcoeff();
 	initFFTData();
 	srand((uint32_t)time(NULL));
 }
 void NSEEL_quit()
 {
-	if (decompressedCoefficients)
-		free(decompressedCoefficients);
-	decompressedCoefficients = 0;
+	clean_lpfcoeff();
 }
 //---------------------------------------------------------------------------------------------------------------
 static void freeBlocks(llBlock **start)
@@ -7910,6 +8099,9 @@ opcodeRec *nseel_createFunctionByName(compileContext *ctx, const char *name, int
 }
 #include <float.h>
 //------------------------------------------------------------------------------
+#define GENCONSTANTIF_ELSE(idx) \
+else if (!tmplen ? !stricmp(tmp, xVarName[idx]) : (tmplen == strlen(xVarName[idx]) && !strnicmp(tmp, xVarName[idx], strlen(xVarName[idx])))) \
+return nseel_createCompiledValue(ctx, idx);
 opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen) // tmplen 0 = null term
 {
 	// this depends on the string being nul terminated eventually, tmplen is used more as a hint than anything else
@@ -7935,8 +8127,25 @@ opcodeRec *nseel_translate(compileContext *ctx, const char *tmp, size_t tmplen) 
 			return nseel_createCompiledValue(ctx, (float)1.618033988749894848205);
 		else if (!tmplen ? !stricmp(tmp, "$EPS") : (tmplen == 4 && !strnicmp(tmp, "$EPS", 4)))
 			return nseel_createCompiledValue(ctx, (float)FLT_EPSILON);
-		else if (!tmplen ? !stricmp(tmp, "$DBL_MAX") : (tmplen == 4 && !strnicmp(tmp, "$DBL_MAX", 4)))
-			return nseel_createCompiledValue(ctx, (float)FLT_MAX);
+		GENCONSTANTIF_ELSE(0)
+		GENCONSTANTIF_ELSE(1)
+		GENCONSTANTIF_ELSE(2)
+		GENCONSTANTIF_ELSE(3)
+		GENCONSTANTIF_ELSE(4)
+		GENCONSTANTIF_ELSE(5)
+		GENCONSTANTIF_ELSE(6)
+		GENCONSTANTIF_ELSE(7)
+		GENCONSTANTIF_ELSE(8)
+		GENCONSTANTIF_ELSE(9)
+		GENCONSTANTIF_ELSE(10)
+		GENCONSTANTIF_ELSE(11)
+		GENCONSTANTIF_ELSE(12)
+		GENCONSTANTIF_ELSE(13)
+		GENCONSTANTIF_ELSE(14)
+		GENCONSTANTIF_ELSE(15)
+		GENCONSTANTIF_ELSE(16)
+		GENCONSTANTIF_ELSE(17)
+		GENCONSTANTIF_ELSE(18)
 		else if (!tmplen ? !stricmp(tmp, "$MEMBLKLIMIT") : (tmplen == 12 && !strnicmp(tmp, "$MEMBLKLIMIT", 12)))
 			return nseel_createCompiledValue(ctx, (float)NSEEL_RAM_ITEMSPERBLOCK);
 		else if ((!tmplen || tmplen == 4) && tmp[1] == '\'' && tmp[2] && tmp[3] == '\'')

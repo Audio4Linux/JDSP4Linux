@@ -74,7 +74,7 @@
          <item>
           <widget class="QStackedWidget" name="tabhost">
            <property name="currentIndex">
-            <number>3</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabHostPage1">
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -393,6 +393,15 @@
                     </item>
                     <item>
                      <widget class="QComboBox" name="comp_tf_transforms">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="sizeAdjustPolicy">
+                       <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+                      </property>
                       <item>
                        <property name="text">
                         <string>Uniform (Short-time Fourier)</string>
@@ -400,12 +409,17 @@
                       </item>
                       <item>
                        <property name="text">
-                        <string>Multiresolution (Continuous wavelet)</string>
+                        <string>Multiresolution (Continuous wavelet, incomplete dual frame)</string>
                        </property>
                       </item>
                       <item>
                        <property name="text">
-                        <string>Multiresolution (Time domain)</string>
+                        <string>Pseudo multiresolution (Undersampling frame)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Pseudo multiresolution (Time domain, zero latency)</string>
                        </property>
                       </item>
                      </widget>

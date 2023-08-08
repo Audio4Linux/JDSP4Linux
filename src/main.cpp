@@ -148,6 +148,9 @@ int main(int   argc,
     // Prepare crash handler if enabled
     bool lastSessionCrashed = initCrashHandler(exepath);
 
+    qRegisterMetaType<AppConfig::Key>();
+    qRegisterMetaType<DspConfig::Key>();
+
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
