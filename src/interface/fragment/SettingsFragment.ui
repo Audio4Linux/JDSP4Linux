@@ -381,7 +381,7 @@
                <bool>false</bool>
               </property>
               <property name="text">
-               <string>Benchmarking on boot may cause increased CPU usage for about one minute after launch.</string>
+               <string>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
