@@ -63,14 +63,16 @@
     <item>4</item>
   </string-array>
   <string-array name="compression_tfresolution">
-    <item>Uniform(Short time Fourier)</item>
-    <item>Multiresolution(Continuous wavelet)</item>
-    <item>Multiresolution(Time domain)</item>
+    <item>Uniform(Short time Fourier transform)</item>
+    <item>Multiresolution(Continuous wavelet incomplete dual frame)</item>
+    <item>Pseudo multiresolution(Undersampling frame)</item>
+    <item>Pseudo multiresolution(Time domain, zero latency)</item>
   </string-array>
   <string-array name="compression_tfresolution_values" translatable="false">
     <item>0</item>
     <item>1</item>
     <item>2</item>
+    <item>3</item>
   </string-array>
 
   <string-array name="headphone_preset">

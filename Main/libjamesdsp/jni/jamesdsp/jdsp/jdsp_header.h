@@ -26,7 +26,6 @@ extern int upper_bound(double *a, int n, double x);
 extern int lower_bound(double *a, int n, double x);
 extern size_t fast_upper_bound(double *a, size_t n, double x);
 extern size_t fast_lower_bound(double *a, size_t n, double x);
-extern void fhtbitReversalTbl(unsigned *dst, unsigned int n);
 extern void fhtsinHalfTblFloat(float *dst, unsigned int n);
 extern void LLdiscreteHartleyFloat(float *A, const int nPoints, const float *sinTab);
 extern double randXorshift(uint64_t s[2]);
@@ -38,33 +37,42 @@ typedef struct
 	float envOverThreshold;
 } JLimiter;
 #define FFTSIZE_DRS (8192)
-#define ANALYSIS_OVERLAP_DRS 4
-#define OVPSIZE_DRS (FFTSIZE_DRS / ANALYSIS_OVERLAP_DRS)
+#define ANALYSIS_OVERLAP_DRS_MAX (8)
 #define HALFWNDLEN_DRS ((FFTSIZE_DRS >> 1) + 1)
 #define MAX_OUTPUT_BUFFERS_DRS 2
 #define NUMPTS_DRS (7)
 #define DYN_BANDS_GAMMATONE (16)
 #define MAXORDER (12)
 #define MAXSECTIONS (MAXORDER >> 1)
+// number of points of pre and post padding used to set initial conditions
+#define PREPAD (200) // Max pad
+#define POSPAD (200) // Max pad
 typedef struct
 {
+	float real, imag;
+} cplx;
+typedef struct
+{
+	double real, imag;
+} cplxDouble;
+typedef struct str_dynfreqdomain
+{
 	// Frequency domain
-	// Constant
-	unsigned int fftLen, minus_fftLen, ovpLen, halfLen, smpShift, procUpTo;
+	float analysisWnd[FFTSIZE_DRS];
+	unsigned int fftLen, minus_fftLen, ovpLen, ovpCount, halfLen, smpShift, procUpTo;
 	void(*fft)(float*, const float*);
 	unsigned int mBitRev[FFTSIZE_DRS];
 	float 	mSineTab[FFTSIZE_DRS >> 1];
-	float analysisWnd[FFTSIZE_DRS];
 	float synthesisWnd[FFTSIZE_DRS];
 	// Shared variable between all FFT length and modes and channel config
 	int  mOutputReadSampleOffset;
 	int  mOutputBufferCount; // How many buffers are actually in use
 	unsigned int mInputSamplesNeeded;
 	float 	*mOutputBuffer[MAX_OUTPUT_BUFFERS_DRS];
-	float buffer[MAX_OUTPUT_BUFFERS_DRS][OVPSIZE_DRS * 2];
+	float buffer[MAX_OUTPUT_BUFFERS_DRS][FFTSIZE_DRS >> 1];
 	unsigned int mInputPos;
 	float 	mInput[2][FFTSIZE_DRS];
-	float 	mOverlapStage2dash[2][OVPSIZE_DRS];
+	float mOverlapStage2dash[2][ANALYSIS_OVERLAP_DRS_MAX][FFTSIZE_DRS >> 1];
 	float 	mTempLBuffer[FFTSIZE_DRS];
 	float 	mTempRBuffer[FFTSIZE_DRS];
 	float timeDomainOut[2][FFTSIZE_DRS];
@@ -113,6 +121,19 @@ typedef struct
 	int updateIdx;
 	// Global variable
 	int granularity, tfresolution;
+	// CWT
+	unsigned int reqSynthesisWnd;
+	float gauss_c1[PREPAD + HALFWNDLEN_DRS + POSPAD - 1], gauss_c2[PREPAD + HALFWNDLEN_DRS + POSPAD - 1], gauss_b[PREPAD + HALFWNDLEN_DRS + POSPAD - 1];
+	unsigned int prepad, pospad;
+	unsigned int bitrevfftshift[FFTSIZE_DRS];
+	float corrF[HALFWNDLEN_DRS];
+	void (*process)(struct str_dynfreqdomain *);
+	float shiftCentre[HALFWNDLEN_DRS];
+	float scalarGain;
+	float fftBuf[2][FFTSIZE_DRS], getbackCorrectedToSpectrum1[2][FFTSIZE_DRS];
+	float real[2][HALFWNDLEN_DRS], imag[2][HALFWNDLEN_DRS];
+	float specHannReal[2][PREPAD + HALFWNDLEN_DRS + POSPAD - 1], specHannImag[2][PREPAD + HALFWNDLEN_DRS + POSPAD - 1];
+	cplx tmp[2][PREPAD + HALFWNDLEN_DRS + POSPAD - 1];
 } FFTCompander;
 typedef struct
 {
@@ -556,6 +577,9 @@ typedef struct dspsys
 extern void JamesDSPGlobalMemoryAllocation(int do_benchmark);
 extern void JamesDSPGlobalMemoryDeallocation();
 extern void JamesDSPReallocateBlock(JamesDSPLib *jdsp, size_t blockSizeMax);
+extern void JamesDSP_Load_benchmark(double *_c0, double *_c1);
+extern void JamesDSP_Save_benchmark(double *_c0, double *_c1);
+extern void JamesDSP_Start_benchmark();
 extern void jdsp_lock(JamesDSPLib *jdsp);
 extern void jdsp_unlock(JamesDSPLib *jdsp);
 extern void JamesDSPFree(JamesDSPLib *jdsp);
@@ -570,7 +594,7 @@ extern void JLimiterInit(JamesDSPLib *jdsp);
 // Compressor
 extern void CompressorConstructor(JamesDSPLib *jdsp);
 extern void CompressorDestructor(JamesDSPLib *jdsp);
-extern void CompressorSetParam(JamesDSPLib *jdsp, float fgt_facT, int granularity, int tfresolution);
+extern void CompressorSetParam(JamesDSPLib *jdsp, float fgt_facT, int granularity, int tfresolution, char forceRefresh);
 extern void CompressorSetGain(JamesDSPLib *jdsp, double *freq, double *gains, char cpy);
 extern void CompressorEnable(JamesDSPLib *jdsp, char enable);
 extern void CompressorDisable(JamesDSPLib *jdsp);

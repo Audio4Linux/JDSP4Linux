@@ -17,9 +17,10 @@
     <item>極高</item>
   </string-array>
   <string-array name="compression_tfresolution">
-    <item>均勻(短時傅立葉)</item>
-    <item>多解析率(連續小波)</item>
-    <item>多解析率(時域)</item>
+    <item>均勻(降採樣短時傅立葉)</item>
+    <item>多解析率(連續小波不完整對偶幀)</item>
+    <item>偽多解析率(降採樣幀)</item>
+    <item>偽多解析率(時域零延時)</item>
   </string-array>
   <string-array name="bassboost_modes">
     <item>開啟</item>

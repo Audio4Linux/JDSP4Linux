@@ -17,9 +17,10 @@
     <item>极高</item>
   </string-array>
   <string-array name="compression_tfresolution">
-    <item>均匀(短时傅里叶)</item>
-    <item>多解析率(连续小波)</item>
-    <item>多解析率(时域)</item>
+    <item>均匀(降采样短时傅里叶)</item>
+    <item>多解析率(连续小波不完整对偶帧)</item>
+    <item>伪多解析率(降采样帧)</item>
+    <item>伪多解析率(时域零延时)</item>
   </string-array>
   <string-array name="equalizer_filtertype">
     <item>最小相位FIR</item>

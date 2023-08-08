@@ -38,7 +38,47 @@
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\firls.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\generalFdesign.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseASRC.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseFilterbank.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\atox.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\constant.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxaop.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxbasic.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxconstant.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxconvf.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxexp.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxhypb.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxidiv.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxpow.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxprcmp.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxtrig.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\hpaconf.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\prcxpr.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\print.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\prxpr.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\sfmod.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\shift.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xadd.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xchcof.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xdiv.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xevtch.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xexp.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xfmod.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xfrac.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xhypb.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xivhypb.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xivtrg.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xlog.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xmul.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xneg.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xprcmp.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xpwr.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xsigerr.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xsqrt.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xtodbl.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xtoflt.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xtrig.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_linear.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_sinc.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\MersenneTwister.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\quadprog.c" />
@@ -50,8 +90,8 @@
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\solvopt.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\s_str.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\y.tab.c" />
-    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\firEqualizer.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\liveprogWrapper.c" />
+    <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\multimodalEQ.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\reverb.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\stereoEnhancement.c" />
     <ClCompile Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\vacuumTube.c" />
@@ -83,14 +123,17 @@
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\fdesign.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseASRC.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\FilterDesign\polyphaseFilterbank.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\cxpre.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\hpaconf.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\HPFloat\xpre.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\common.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\samplerate.h" />
-    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\libsamplerate\src_config.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\quadprog.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\SolveLinearSystem\qr_fact.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\numericSys\solvopt.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\stb_sprintf.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\eel2\s_str.h" />
+    <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\Effects\info.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\ArbFIRGen.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\digitalFilters.h" />
     <ClInclude Include="..\libjamesdsp\jni\jamesdsp\jdsp\generalDSP\interpolation.h" />
@@ -103,33 +146,33 @@
     <ProjectGuid>{0B79F137-4D4B-448F-95FF-2E6D56BE770B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>JamesDSPLib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>JamesDSPLib</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>

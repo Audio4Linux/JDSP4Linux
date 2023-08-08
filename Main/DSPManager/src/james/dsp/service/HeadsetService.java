@@ -761,7 +761,7 @@ public class HeadsetService extends Service
 				}
 				float timeConstant = Float.valueOf(preferences.getString("dsp.compression.timeconstant", "0.22"));
 				float granularity = Float.valueOf(preferences.getString("dsp.compression.granularity", "4"));
-				float tfresolution = Float.valueOf(preferences.getString("dsp.compression.tfresolution", "1"));
+				float tfresolution = Float.valueOf(preferences.getString("dsp.compression.tfresolution", "0"));
 				float compConfig[] = new float[]{ timeConstant, granularity, tfresolution };
 				float sendAry[] = mergeFloatArray(compConfig, compLevels);
 				//Log.i(DSPManager.TAG, "Compander: " + Arrays.toString(compLevels));
