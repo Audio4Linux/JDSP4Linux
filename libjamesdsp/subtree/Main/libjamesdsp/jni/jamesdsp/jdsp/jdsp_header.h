@@ -574,7 +574,7 @@ typedef struct dspsys
 	uint64_t rndstate[2];
 } JamesDSPLib;
 // JamesDSP controller
-extern void JamesDSPGlobalMemoryAllocation(int do_benchmark);
+extern void JamesDSPGlobalMemoryAllocation();
 extern void JamesDSPGlobalMemoryDeallocation();
 extern void JamesDSPReallocateBlock(JamesDSPLib *jdsp, size_t blockSizeMax);
 extern void JamesDSP_Load_benchmark(double *_c0, double *_c1);
