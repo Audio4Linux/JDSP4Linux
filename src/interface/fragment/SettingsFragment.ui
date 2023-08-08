@@ -307,6 +307,59 @@
              </widget>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="benchmarkNow">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Benchmark now</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="benchmarkClear">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Clear cached data</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="benchmarkStatus">
+              <property name="text">
+               <string notr="true">Status: unknown</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="label_8">
               <property name="text">
                <string>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</string>

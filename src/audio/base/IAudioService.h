@@ -32,6 +32,7 @@ public slots:
 
     void reloadLiveprog();
     void enumerateLiveprogVariables();
+    void runBenchmarks();
 
     void handleMessage(DspHost::Message msg, std::any arg);
 
@@ -43,6 +44,7 @@ signals:
     void convolverInfoChanged(const ConvolverInfoEventArgs& args);
     void logOutputReceived(const QString& output);
     void outputDeviceChanged(const QString& deviceName, const QString& deviceId);
+    void benchmarkDone();
 
 };
 
@@ -55,6 +57,11 @@ inline void IAudioService::enumerateLiveprogVariables()
 {
     auto vars = this->host()->enumEelVariables();
     emit eelVariablesEnumerated(vars);
+}
+
+inline void IAudioService::runBenchmarks()
+{
+    host()->runBenchmarks();
 }
 
 inline void IAudioService::handleMessage(DspHost::Message msg, std::any value)
@@ -79,6 +86,9 @@ inline void IAudioService::handleMessage(DspHost::Message msg, std::any value)
         break;
     case DspHost::PrintfWriteOutputBuffer:
         emit logOutputReceived(std::any_cast<QString>(value));
+        break;
+    case DspHost::BenchmarkDone:
+        emit benchmarkDone();
         break;
     default:
         break;

@@ -99,6 +99,9 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
      * Audio processing
      */
     connect(ui->benchmarkOnBoot, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkOnBootToggled);
+    connect(ui->benchmarkNow, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkRunClicked);
+    connect(ui->benchmarkClear, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkClearClicked);
+    connect(_audioService, &IAudioService::benchmarkDone, this, [this]{ updateBenchmarkStatus(tr("benchmark data loaded")); });
 
 	/*
      * Paths signals
@@ -166,7 +169,12 @@ void SettingsFragment::onAppConfigUpdated(const AppConfig::Key &key, const QVari
             ui->systray_minOnBoot->setChecked(value.toBool());
         default:
             break;
-    }
+        }
+}
+
+void SettingsFragment::updateBenchmarkStatus(const QString &message)
+{
+    ui->benchmarkStatus->setText(QString("Status: %1").arg(message));
 }
 
 void SettingsFragment::refreshDevices()
@@ -266,7 +274,13 @@ void SettingsFragment::refreshAll()
 
     ui->aeqStatus->setText(AeqPackageManager().isPackageInstalled() ? tr("installed") : tr("not installed"));
 
-	refreshDevices();
+    if(AppConfig::instance().get<QString>(AppConfig::BenchmarkCacheC0).isEmpty() &&
+       AppConfig::instance().get<QString>(AppConfig::BenchmarkCacheC1).isEmpty())
+        updateBenchmarkStatus(tr("no benchmark data stored"));
+    else
+        updateBenchmarkStatus(tr("benchmark data loaded"));
+
+    refreshDevices();
 
     _lockslot = false;
 }
@@ -430,6 +444,20 @@ void SettingsFragment::onEqualizerHandlesToggled()
 void SettingsFragment::onBenchmarkOnBootToggled()
 {
     AppConfig::instance().set(AppConfig::BenchmarkOnBoot, ui->benchmarkOnBoot->isChecked());
+}
+
+void SettingsFragment::onBenchmarkRunClicked()
+{
+    _audioService->runBenchmarks();
+    updateBenchmarkStatus(tr("waiting for result..."));
+}
+
+void SettingsFragment::onBenchmarkClearClicked()
+{
+    AppConfig::instance().set(AppConfig::BenchmarkCacheC0, "");
+    AppConfig::instance().set(AppConfig::BenchmarkCacheC1, "");
+    QMessageBox::information(this, tr("Cache cleared"), tr("Benchmark data has been cleared. Restart this app to fully apply the changes."));
+    updateBenchmarkStatus(tr("no benchmark data stored"));
 }
 
 void SettingsFragment::onLiveprogAutoExtractToggled()

@@ -68,6 +68,8 @@ public:
         AudioInactivityTimeout,
 
         BenchmarkOnBoot,
+        BenchmarkCacheC0,
+        BenchmarkCacheC1,
 
         AeqPlotDarkMode,
 
@@ -179,5 +181,7 @@ private:
     QMap<Key, QVariant> definitions;
 	ConfigContainer *_appconf;
 };
+
+Q_DECLARE_METATYPE(AppConfig::Key)
 
 #endif // APPCONFIGWRAPPER_H

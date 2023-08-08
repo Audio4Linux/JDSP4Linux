@@ -315,4 +315,6 @@ private:
     QFileSystemWatcher *_watcher;
 };
 
+Q_DECLARE_METATYPE(DspConfig::Key)
+
 #endif // DSPCONFIGWRAPPER_H

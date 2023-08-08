@@ -9,7 +9,9 @@
 #include "EelVariable.h"
 #include "Utils.h"
 
+class BenchmarkWorker;
 class DspConfig;
+class QThread;
 class QVariant;
 
 class DspHost
@@ -21,7 +23,8 @@ public:
         EelCompilerResult,
         EelWriteOutputBuffer,
         ConvolverInfoChanged,
-        PrintfWriteOutputBuffer
+        PrintfWriteOutputBuffer,
+        BenchmarkDone
     };
 
     typedef std::function<void(Message,std::any)> MessageHandlerFunc;
@@ -35,6 +38,9 @@ public:
     std::vector<EelVariable> enumEelVariables();
     bool manipulateEelVariable(const char *name, float value);
     void freezeLiveprogExecution(bool freeze);
+    void runBenchmarks();
+    void loadBenchmarkData();
+
     void dispatch(Message msg, std::any value);
 
 private:
@@ -45,6 +51,9 @@ private:
        due to #defines and other global definitons that may conflict */
     void* _dsp; // JamesDSPLib*
     DspConfig* _cache;
+
+    QThread* benchmarkThread;
+    BenchmarkWorker* benchmarkWorker;
 
     void updateLimiter(DspConfig *config);
     void updateFirEqualizer(DspConfig *config);
