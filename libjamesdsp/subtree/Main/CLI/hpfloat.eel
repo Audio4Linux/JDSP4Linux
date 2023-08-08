@@ -1,0 +1,94 @@
+desc: Hadamard Variable Delay Array
+
+@init
+// Constants
+printf("hZero: %F\n", $hZero);
+printf("hOne: %F\n", $hOne);
+printf("hTwo: %F\n", $hTwo);
+printf("hTen: %F\n", $hTen);
+printf("hPinf: %F\n", $hPinf);
+printf("hMinf: %F\n", $hMinf);
+printf("hNaN: %F\n", $hNaN);
+printf("hPi: %F\n", $hPi);
+printf("hPi2: %F\n", $hPi2);
+printf("hPi4: %F\n", $hPi4);
+printf("hEe: %F\n", $hEe);
+printf("hSqrt2: %F\n", $hSqrt2);
+printf("hLn2: %F\n", $hLn2);
+printf("hLn10: %F\n", $hLn10);
+printf("hLog2_e: %F\n", $hLog2_e);
+printf("hLog2_10: %F\n", $hLog2_10);
+printf("hLog2_e: %F\n", $hLog2_e);
+printf("HPA_MIN: %F\n", $HPA_MIN);
+printf("HPA_MAX: %F\n", $HPA_MAX);
+// Arithmetic
+num256b_1 = xFloatS("0.4121114214214945995439191");
+num256b_2 = xFloatF(-4.1456);
+str1 = xF2str(num256b_2);
+flt1 = xF2f32(num256b_1);
+printf("Load from string 1: %F\nLoad from string 2: %s\nConvert back to float32: %f\n", num256b_1, str1, flt1);
+
+var1 = xAdd(num256b_1, num256b_2);
+var2 = xSub(num256b_1, num256b_2);
+var3 = xMul(num256b_1, num256b_2);
+var4 = xDiv(num256b_1, num256b_2);
+var5 = xclone(num256b_1);
+printf("Add(var1): %F\nSub(var2): %F\nMul(var3): %F\nDiv(var4): %F\nCloned variable: %F\n", var1, var2, var3, var4, var5);
+
+var6 = xsin(var1);
+var7 = xcos(var2);
+var8 = xtan(var3);
+var9 = xasin(var1);
+var10 = xacos(xfrac(var2));
+var11 = xatan(var3);
+var12 = xsinh(var1);
+var13 = xcosh(var2);
+var14 = xtanh(var3);
+var15 = xasinh(var1);
+var16 = xacosh(var2);
+var17 = xatanh(xfrac(var3));
+var18 = xatan2(xFloatS("-0.8"), xFloatS("2.7"));
+printf("sin(var1): %F\n", var6);
+printf("cos(var2): %F\n", var7);
+printf("tan(var3): %F\n", var8);
+printf("asin(var1): %F\n", var9);
+printf("acos(xfrac(var2)): %F\n", var10);
+printf("atan(var3): %F\n", var11);
+printf("sinh(var1): %F\n", var12);
+printf("cosh(var2): %F\n", var13);
+printf("tanh(var3): %F\n", var14);
+printf("asinh(var1): %F\n", var15);
+printf("acosh(var2): %F\n", var16);
+printf("atanh(frac(var3)): %F\n", var17);
+printf("xatan2(-0.8, 2.7): %F\n", var18);
+var19 = xround(xFloatS("-10.8"));
+var20 = xceil(xFloatS("-10.8"));
+var21 = xfloor(xFloatS("-10.8"));
+var22 = xtrunc(xFloatS("-10.8"));
+var23 = xfix(xFloatS("-10.8"));
+var24 = xfrac(xFloatS("80.84125"));
+printf("round(-10.8): %F\nceil(-10.8): %F\nfloor(-10.8): %F\ntrunc(-10.8): %F\nfix(-10.8): %F\nfrac(-10.8): %F\n", var19, var20, var21, var22, var23, var24);
+var25 = xNegation(var17);
+printf("-var17 = %F\n", var25);
+var26 = xsqrt(xabs(var22));
+var27 = xexp(var22);
+printf("sqrt(abs(var22)) = %F\n", var26);
+
+logic1 = xequal(var5, num256b_1);
+logic2 = xequal(var5, var20);
+printf("Is var5 == num256b_1 -> %d\n", logic1);
+printf("Is var5 == var20 -> %d\n", logic2);
+printf("Is var6 <= var7 -> %d\n", xlessequal(var6, var7));
+printf("Is var6 < var7 -> %d\n", xless(var6, var7));
+printf("Is var18 >= var17 -> %d\n", xgreaterequal(var18, var17));
+printf("Is var17 > var18 -> %d\n", xgreater(var17, var18));
+
+printf("exp(0.421) = %F\n", xexp(xFloatS("2.214")));
+printf("exp2(0.421) = %F\n", xexp2(xFloatS("2.214")));
+printf("exp10(0.421) = %F\n", xexp10(xFloatS("2.214")));
+printf("log(0.221) = %F\n", xlog(xFloatS("2.214")));
+printf("log2(0.221) = %F\n", xlog2(xFloatS("2.214")));
+printf("log10(0.221) = %F\n", xlog10(xFloatS("2.214")));
+printf("pow(12.54, 16.45) = %F\n", xpow(xFloatS("12.54"), xFloatS("16.45")));
+printf("intpow(12.54, 280) = %F\n", xintpow(xFloatS("12.54"), 290));
+@sample
