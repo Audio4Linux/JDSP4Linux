@@ -1100,395 +1100,400 @@ Please select another one</source>
       <translation>Часово-частотне перетворення</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="398"/>
+      <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
       <translation>Рівномірне (короткочасне перетворення Фур'є)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="403"/>
-      <source>Multiresolution (Continuous wavelet)</source>
-      <translation>Мультироздільність (безперервний вейвлет)</translation>
-    </message>
-    <message>
-      <location filename="../../src/MainWindow.ui" line="408"/>
-      <source>Multiresolution (Time domain)</source>
-      <translation>Мультироздільність (в області часу)</translation>
-    </message>
-    <message>
-      <location filename="../../src/MainWindow.ui" line="470"/>
+      <location filename="../../src/MainWindow.ui" line="484"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Перехресна подача&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Включає традиційні BS2B (Бауер від стереофонічного до бінаурального DSP) режим і більш просунутий на основі згортки HRTF підхід.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="473"/>
-      <location filename="../../src/MainWindow.ui" line="529"/>
+      <location filename="../../src/MainWindow.ui" line="487"/>
+      <location filename="../../src/MainWindow.ui" line="543"/>
       <source>Crossfeed</source>
       <translation>Кроссфід</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="494"/>
+      <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
       <translation>Режим</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="511"/>
+      <location filename="../../src/MainWindow.ui" line="525"/>
       <source>Custom BS2B parameters</source>
       <translation>Користувацькі BS2B параметри</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="552"/>
+      <location filename="../../src/MainWindow.ui" line="566"/>
       <source>Cut frequency</source>
       <translation>Частотний зріз</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="607"/>
+      <location filename="../../src/MainWindow.ui" line="621"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ширина звукової сцени&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Алгоритм, який виявляє стереофазове співвідношення в кількох спектральних областях і покращує стереозвук, не впливаючи на цілісність вокалу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="610"/>
+      <location filename="../../src/MainWindow.ui" line="624"/>
       <source>Soundstage wideness</source>
       <translation>Широкість звукової сцени</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="631"/>
+      <location filename="../../src/MainWindow.ui" line="645"/>
       <source>Widen level</source>
       <translation>Рівень ширини</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="676"/>
+      <location filename="../../src/MainWindow.ui" line="690"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ревербрація&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Складна ревербераційна мережа IIR (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="702"/>
+      <location filename="../../src/MainWindow.ui" line="716"/>
       <source>Enable reverberation</source>
       <translation>Увімкнути реверберацію</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="722"/>
+      <location filename="../../src/MainWindow.ui" line="736"/>
       <source>Presets</source>
       <translation>Пресети</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="755"/>
-      <location filename="../../src/MainWindow.ui" line="2129"/>
+      <location filename="../../src/MainWindow.ui" line="769"/>
+      <location filename="../../src/MainWindow.ui" line="2143"/>
       <source>...</source>
       <translation>...</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="769"/>
+      <location filename="../../src/MainWindow.ui" line="783"/>
       <source>Oversampling factor</source>
       <translation>Коефіцієнт надсемплінгу</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="789"/>
+      <location filename="../../src/MainWindow.ui" line="803"/>
       <source>Early reflection factor</source>
       <translation>Фактор раннього відбиття</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="812"/>
+      <location filename="../../src/MainWindow.ui" line="826"/>
       <source>Early reflection amount</source>
       <translation>Кількість раннього відбиття</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="829"/>
+      <location filename="../../src/MainWindow.ui" line="843"/>
       <source>Early reflection width</source>
       <translation>Ширина раннього відбиття</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="852"/>
+      <location filename="../../src/MainWindow.ui" line="866"/>
       <source>Lowpass cutoff (Input)</source>
       <translation>Обрізання низьких частот (Вхід)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="872"/>
+      <location filename="../../src/MainWindow.ui" line="886"/>
       <source>Lowpass cutoff (Bass)</source>
       <translation>Обрізання низьких частот (Баси)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="892"/>
+      <location filename="../../src/MainWindow.ui" line="906"/>
       <source>Lowpass cutoff (Damp)</source>
       <translation>Обрізання низьких частот (Згасання)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="912"/>
+      <location filename="../../src/MainWindow.ui" line="926"/>
       <source>Lowpass cutoff (Output)</source>
       <translation>Обрізання низьких частот (Вихід)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="939"/>
+      <location filename="../../src/MainWindow.ui" line="953"/>
       <source>Final wet mix</source>
       <translation>Остаточне мокре поєднання</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="946"/>
+      <location filename="../../src/MainWindow.ui" line="960"/>
       <source>Final dry mix</source>
       <translation>Остаточне сухе поєднання</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="953"/>
+      <location filename="../../src/MainWindow.ui" line="967"/>
       <source>Reverb wetness</source>
       <translation>Вологості реверберації</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="960"/>
+      <location filename="../../src/MainWindow.ui" line="974"/>
       <source>Width L/R mix</source>
       <translation>Ширина Л/П поєднання</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="967"/>
+      <location filename="../../src/MainWindow.ui" line="981"/>
       <source>LFO wander amount</source>
       <translation>Кількість блукань ГНЧ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="974"/>
+      <location filename="../../src/MainWindow.ui" line="988"/>
       <source>LFO spin amount</source>
       <translation>Кількість обертань ГНЧ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="981"/>
+      <location filename="../../src/MainWindow.ui" line="995"/>
       <source>Time decay</source>
       <translation>Час затухання</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="988"/>
+      <location filename="../../src/MainWindow.ui" line="1002"/>
       <source>Delay</source>
       <translation>Затримка</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="995"/>
+      <location filename="../../src/MainWindow.ui" line="1009"/>
       <source>Bass boost</source>
       <translation>Підсилення басів</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1143"/>
+      <location filename="../../src/MainWindow.ui" line="1157"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Мультирежимний еквалайзер&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Увімкнути/вимкнути мультирежимний еквалайзер.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Тип фільтра:&lt;/span&gt; Мультирежимний еквалайзер підтримує як FIR (мінімальна фаза), так і декілька IIR режимів фільтрації.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1279"/>
+      <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
       <translation>Мінімальна фаза FIR</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1284"/>
+      <location filename="../../src/MainWindow.ui" line="1298"/>
       <source>IIR 4 order</source>
       <translation>IIR 4-го порядку</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1289"/>
+      <location filename="../../src/MainWindow.ui" line="1303"/>
       <source>IIR 6 order</source>
       <translation>IIR 6-го порядку</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1294"/>
+      <location filename="../../src/MainWindow.ui" line="1308"/>
       <source>IIR 8 order</source>
       <translation>IIR 8-го порядку</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1299"/>
+      <location filename="../../src/MainWindow.ui" line="1313"/>
       <source>IIR 10 order</source>
       <translation>IIR 10-го порядку</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1304"/>
+      <location filename="../../src/MainWindow.ui" line="1318"/>
       <source>IIR 12 order</source>
       <translation>IIR 12-го порядку</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1235"/>
+      <location filename="../../src/MainWindow.ui" line="1249"/>
       <source>Enable EQ</source>
       <translation>Увімкнути еквалайзер</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1255"/>
+      <location filename="../../src/MainWindow.ui" line="412"/>
+      <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/MainWindow.ui" line="417"/>
+      <source>Pseudo multiresolution (Undersampling frame)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/MainWindow.ui" line="422"/>
+      <source>Pseudo multiresolution (Time domain, zero latency)</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/MainWindow.ui" line="1269"/>
       <source>Presets...</source>
       <translation>Пресети...</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1275"/>
+      <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>Filter type</source>
       <translation>Тип фільтра</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1324"/>
+      <location filename="../../src/MainWindow.ui" line="1338"/>
       <source>Interpolator</source>
       <translation>Інтерполятор</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1327"/>
+      <location filename="../../src/MainWindow.ui" line="1341"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим інтерполяції&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1331"/>
+      <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
       <translation>Кусково-кубічний інтерполяційний поліном Ерміта</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1336"/>
+      <location filename="../../src/MainWindow.ui" line="1350"/>
       <source>Modified Hiroshi Akima spline</source>
       <translation>Модифікований сплайн Хіросі Акіма</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1356"/>
+      <location filename="../../src/MainWindow.ui" line="1370"/>
       <source>Reset EQ</source>
       <translation>Скинути EQ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1384"/>
+      <location filename="../../src/MainWindow.ui" line="1398"/>
       <source>Fixed bands</source>
       <translation>Фіксовані діапазони</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1400"/>
+      <location filename="../../src/MainWindow.ui" line="1414"/>
       <source>Flexible bands</source>
       <translation>Гнучкі діапазони</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1432"/>
+      <location filename="../../src/MainWindow.ui" line="1446"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Конвольвер&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Розділений конвольвер (згортка з автоматичним сегментуванням). Виберіть файл імпульсної характеристики, який потрібно згорнути. Він бере характеристики сигналу імпульсної характеристики та застосовує їх до вхідного звуку в режимі реального часу.&lt;/p&gt;&lt;p&gt;Підтримує моно, стерео, повне/справжнє стерео (ЛЛ, ЛП, ПЛ, ПП) імпульсні характеристики.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Оптимізація імпульсної характеристики:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Цей параметр намагається якомога більше зменшити тривалість імпульсної характеристики; суть полягає в тому, щоб максимально зменшити затримку, можливо, зменшивши споживання енергії.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1457"/>
-      <location filename="../../src/MainWindow.ui" line="1779"/>
+      <location filename="../../src/MainWindow.ui" line="1471"/>
+      <location filename="../../src/MainWindow.ui" line="1793"/>
       <source>Filesystem</source>
       <translation>Файлова система</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1479"/>
+      <location filename="../../src/MainWindow.ui" line="1493"/>
       <source>Bookmarks</source>
       <translation>Закладки</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1518"/>
+      <location filename="../../src/MainWindow.ui" line="1532"/>
       <source>Enable convolver</source>
       <translation>Увімкнути конвольвер</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1525"/>
+      <location filename="../../src/MainWindow.ui" line="1539"/>
       <source>IR optimization</source>
       <translation>Оптимізація IR</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1545"/>
+      <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
       <translation>Оригінал</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1550"/>
+      <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
       <translation>Зменшити</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1555"/>
+      <location filename="../../src/MainWindow.ui" line="1569"/>
       <source>Minimum phase transform and shrink</source>
       <translation>Мінімальне фазове перетворення і зменшення</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1563"/>
+      <location filename="../../src/MainWindow.ui" line="1577"/>
       <source>Adv. waveform editing</source>
       <translation>Розширене редагування форми хвиль</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1582"/>
+      <location filename="../../src/MainWindow.ui" line="1596"/>
       <source>Edit</source>
       <translation>Редагувати</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1628"/>
+      <location filename="../../src/MainWindow.ui" line="1642"/>
       <source>Channels:</source>
       <translation>Канали:</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1648"/>
+      <location filename="../../src/MainWindow.ui" line="1662"/>
       <source>Samples:</source>
       <translation>Семпли:</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1707"/>
+      <location filename="../../src/MainWindow.ui" line="1721"/>
       <source>No selection</source>
       <translation>Нічого не вибрано</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1754"/>
+      <location filename="../../src/MainWindow.ui" line="1768"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Його основна робота полягає у виконанні параметричного вирівнювання аудіо, однак вона вимагає від користувача надати .vdc файл який DDCToolbox генерує.&lt;/p&gt;&lt;p&gt;ViPER-DDC у jDSP — це узагальнена реалізація фільтрів секцій другого порядку, яка дещо відрізняється від реалізації в Viper4Android. V4A підтримує лише параметричне пікінгування; причина в тому, що V4A використовує властивість коефіцієнта частки пікового фільтра. У контрасті, jDSP не має такого припущення.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1801"/>
+      <location filename="../../src/MainWindow.ui" line="1815"/>
       <source>Database</source>
       <translation>База даних</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1842"/>
+      <location filename="../../src/MainWindow.ui" line="1856"/>
       <source>Create</source>
       <translation>Створити</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1866"/>
+      <location filename="../../src/MainWindow.ui" line="1880"/>
       <source>Create your custom DDC files using DDCToolbox</source>
       <translation>Створити свої власні файли DDC за допомогою DDCToolbox</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1876"/>
+      <location filename="../../src/MainWindow.ui" line="1890"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1932"/>
+      <location filename="../../src/MainWindow.ui" line="1946"/>
       <source>View installation instructions</source>
       <translation>Переглянути інструкції зі встановлення</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="1988"/>
+      <location filename="../../src/MainWindow.ui" line="2002"/>
       <source>Enable ViPER-DDC</source>
       <translation>Увімкнути ViPER-DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2011"/>
+      <location filename="../../src/MainWindow.ui" line="2025"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;DSP з програмуванням у реальному часі&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Це віртуально машина, яка компілює файл коду .eel як вхід, котрий потім виконує як інструкції; говорячи простою мовою, це дозволяє користувачеві створювати свої власні звукові ефекти. &lt;/p&gt;&lt;p&gt;Кількість підтримуваних операцій незліченна; переглянути офіційну документацію: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Натисни &apos;Редагувати скрипт&apos;, для запуску вбудованого середовища сценаріїв для файлів коду EEL.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2033"/>
+      <location filename="../../src/MainWindow.ui" line="2047"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Еквалайзер довільної відповіді&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Також відомий як GraphicEQ з EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2071"/>
+      <location filename="../../src/MainWindow.ui" line="2085"/>
       <source>Custom Presets</source>
       <translation>Користувацькі пресети</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2074"/>
+      <location filename="../../src/MainWindow.ui" line="2088"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Користувацькі пресети&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Створення та керування користувацькими пресетами&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2100"/>
+      <location filename="../../src/MainWindow.ui" line="2114"/>
       <source>Settings</source>
       <translation>Налаштування</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2106"/>
+      <location filename="../../src/MainWindow.ui" line="2120"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Налаштування&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Налаштуштування цього застосунку&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2126"/>
+      <location filename="../../src/MainWindow.ui" line="2140"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Інше&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Різні дії, які рідко використовуються&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2184"/>
+      <location filename="../../src/MainWindow.ui" line="2198"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Обхід&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ця опція визначає чи увімкнені чи вимкнені звукові ефекти.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.ui" line="2187"/>
+      <location filename="../../src/MainWindow.ui" line="2201"/>
       <source>Bypass</source>
       <translation>Обхід</translation>
     </message>
@@ -2259,7 +2264,7 @@ Please create one first before adding a new rule.</source>
       <translation>не під'єднано</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="181"/>
+      <location filename="../../src/main.cpp" line="184"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP - це передовий двигун обробки звуку, доступний для систем Linux та Android.</translation>
     </message>
@@ -2362,223 +2367,260 @@ Please create one first before adding a new rule.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="305"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
+      <source>Benchmark now</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
+      <source>Clear cached data</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="312"/>
-      <source>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</source>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
+      <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="359"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="431"/>
       <source>Impluse responses</source>
       <translation>Відгуки імпульсу</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="376"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="448"/>
       <source>VDCs</source>
       <translation>VDC</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="390"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="462"/>
       <source>Liveprog scripts</source>
       <translation>Liveprog скрипти</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="427"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="499"/>
       <source>Save</source>
       <translation>Зберегти</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="436"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="508"/>
       <source>Built-in assets</source>
       <translation>Вбудовані ресурси</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="447"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="519"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ця опція перевірятиме під час кожного запуску, чи відсутній один зі стандартних скриптів EEL. Якщо це так, відсутні файл(и) буде автоматично відновлено з ресурсів. (Це не перезапише їх, якщо вони вже існують!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="450"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="522"/>
       <source>Extract bundled assets on startup</source>
       <translation>Розпакування комплекту ресурсів під час запуску</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="470"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="542"/>
       <source>  Extract now  </source>
       <translation>  Видобути зараз  </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="502"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="574"/>
       <source>Select sink/device to be processed</source>
       <translation>Виберіть джерело/пристрій для обробки</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="508"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="580"/>
       <source>Use default output device (recommended)</source>
       <translation>Використовувати стандартний пристрій виводу (рекомендовано)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="515"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="587"/>
       <source>Manually select device</source>
       <translation>Виберіть пристрій вручну</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="527"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="599"/>
       <source>Device</source>
       <translation>Пристрій</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="555"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="627"/>
       <source>Blocklisted apps</source>
       <translation>Заблоковані додатки</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="561"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="633"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
       <translation>У розділі &apos;Програми&apos;, доступне в меню з трьома крапками в головному вікні, ви можете заблокувати обробку застосунків, що обробляються з допомоги JamesDSP.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="577"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="649"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
       <translation>Режим списку дозволів (замість цього потрібно вмикати застосунки)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="608"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="680"/>
       <source>Clear list</source>
       <translation>Очистити список</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="637"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="709"/>
       <source>AutoEQ database</source>
       <translation>База даних AutoEQ</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="648"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="720"/>
       <source>Status:</source>
       <translation>Стан:</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="658"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="730"/>
       <source>unknown</source>
       <translation>невідомо</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="678"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="750"/>
       <source>  Manage local database  </source>
       <translation>  Керування локальною базою даних  </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="710"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="782"/>
       <source>Run in background (tray icon)</source>
       <translation>Запустити у фоновому режимі (іконка в системному лотку)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="716"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="788"/>
       <source>No, shutdown audio effects when closing app</source>
       <translation>Ні, вимикати звукові ефекти під час закриття програми</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="723"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="795"/>
       <source>Yes, minimize to tray icon when closing app</source>
       <translation>Так, згорнути до системного лотка при закритті застосунку</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="730"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="802"/>
       <source>Auto-start</source>
       <translation>Автозапуск</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="736"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="808"/>
       <source>Start minimized on boot</source>
       <translation>Запускати згорнутим під час завантаження</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="758"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="830"/>
       <source>Systray not supported on this system</source>
       <translation>Системний лоток не підтримується цією системою</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="808"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="880"/>
       <source>Visit Github repo</source>
       <translation>Відвідати GitHub репозиторій</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="834"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="906"/>
       <source>Run setup wizard</source>
       <translation>Запустити майстер налаштування</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="857"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.ui" line="929"/>
       <source>Close</source>
       <translation>Закрити</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="207"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="104"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
+      <source>benchmark data loaded</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="215"/>
       <source>Unknown (%1)</source>
       <translation>Невідомо (%1)</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="267"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="275"/>
       <source>installed</source>
       <translation>встановлено</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="267"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="275"/>
       <source>not installed</source>
       <translation>не встановлено</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="288"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="279"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="460"/>
+      <source>no benchmark data stored</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="302"/>
       <source>Override liveprog scripts?</source>
       <translation>Перевизначити скрипти liveprog?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="289"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="303"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
       <translation>Ви хочете перезаписати чинні за замовчуванням скрипти liveprog?
 Якщо вони були змінені, вони будуть скинуті.</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="292"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="306"/>
       <source>Extract assets</source>
       <translation>Розпакувати ресурси</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="292"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="306"/>
       <source>%1 files have been restored</source>
       <translation>%1 файлів було відновлено</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="384"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="398"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
       <translation>Ви збираєтеся увімкнути режим зі списком дозволів. JamesDSP не буде обробляти всі застосунки за замовчуванням, поки цей режим активний. Необхідно примусово дозволити кожному застосунку отримувати обробку в меню &apos;Застосунки&apos;.
 </translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="386"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
       <source>Are you sure?</source>
       <translation>Ви впевнені?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="387"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="401"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
       <translation>Ця дія призведе до скидання поточного списку блокувань або дозволів. Ви хочете продовжити?</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="429"/>
       <source>Warning</source>
       <translation>Увага</translation>
     </message>
     <message>
-      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="415"/>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="429"/>
       <source>Do you really want to restore the default menu layout?</source>
       <translation>Ви дійсно хочете відновити макет меню за замовчуванням?</translation>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="452"/>
+      <source>waiting for result...</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="459"/>
+      <source>Cache cleared</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="459"/>
+      <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
