@@ -222,13 +222,13 @@ float* loadAudioFile(const char *filename, double targetFs, unsigned int *channe
     const char *ext = get_filename_ext(filename);
     float *pSampleData = 0;
     if (!strncmp(ext, "wav", 5) || !strncmp(ext, "irs", 5))
-        pSampleData = drwav_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameCount, SRC_SINC_BEST_QUALITY);
+        pSampleData = drwav_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameCount, 0);
     if (!strncmp(ext, "flac", 5))
-        pSampleData = drflac_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameCount, SRC_SINC_BEST_QUALITY);
+        pSampleData = drflac_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameCount, 0);
     /*if (!strncmp(ext, "mp3", 5))
     {
         drmp3_config mp3Conf;
-        pSampleData = drmp3_open_file_and_read_pcm_frames_f32(filename, &mp3Conf, totalPCMFrameCount, SRC_SINC_BEST_QUALITY);
+        pSampleData = drmp3_open_file_and_read_pcm_frames_f32(filename, &mp3Conf, totalPCMFrameCount, 0);
         *channels = mp3Conf.channels;
         fs = mp3Conf.sampleRate;
     }*/
@@ -270,7 +270,7 @@ float* ReadImpulseResponseToFloat
     if (strlen(mIRFileName) <= 0) return 0;
     unsigned int channels;
     drwav_uint64 frameCount;
-    float *pFrameBuffer = loadAudioFile(mIRFileName, targetSampleRate, &channels, &frameCount, 1);
+    float *pFrameBuffer = loadAudioFile(mIRFileName, targetSampleRate, &channels, &frameCount, SRC_SINC_BEST_QUALITY);
     if (channels == 0 || channels == 3 || channels > 4)
     {
         free(pFrameBuffer);
@@ -395,7 +395,7 @@ float* ReadImpulseResponseToFloat
     snprintf(filenameIR, needed, "%s%s", jnipath, mIRFileName);
     unsigned int channels;
     drwav_uint64 frameCount;
-    float *pFrameBuffer = loadAudioFile(filenameIR, targetSampleRate, &channels, &frameCount, 0);
+    float *pFrameBuffer = loadAudioFile(filenameIR, targetSampleRate, &channels, &frameCount, SRC_SINC_BEST_QUALITY);
     free(filenameIR);
     if (!pFrameBuffer)
     {
