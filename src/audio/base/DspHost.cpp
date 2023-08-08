@@ -200,7 +200,7 @@ void DspHost::updateCompander(DspConfig *config)
         param[i] = (double)std::stod(v[i]);
     }
 
-    CompressorSetParam(cast(this->_dsp), timeconstant, granularity, tftransforms);
+    CompressorSetParam(cast(this->_dsp), timeconstant, granularity, tftransforms, 0);
     CompressorSetGain(cast(this->_dsp), param, param + 7, 1);
 }
 

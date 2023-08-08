@@ -27,8 +27,10 @@ PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, bool enableB
 #ifdef DEBUG_FPE
     feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
 #endif
-    JamesDSPGlobalMemoryAllocation((int)enableBenchmark);
+    JamesDSPGlobalMemoryAllocation();
     JamesDSPInit(this->dsp, 128, 48000);
+    if(enableBenchmark)
+        JamesDSP_Start_benchmark();
 #ifdef DEBUG_FPE
     fedisableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
 #endif
