@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = jamesdsp
 TEMPLATE = app
 
+UI_DEBUG: DEFINES += UI_DEBUG
+DEBUG_FPE: DEFINES += DEBUG_FPE
+DEBUG_ASAN: CONFIG += sanitizer sanitize_address
 USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
 USE_PORTALS: DEFINES += USE_PORTALS
 NO_CRASH_HANDLER: DEFINES += NO_CRASH_HANDLER
@@ -22,11 +25,11 @@ USE_PULSEAUDIO {
     DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pulse\\\"
 }
 else {
-    DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pipewire\\\"
+    DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux\\\"
 }
 
 DEFINES += APP_VERSION=$$system(git describe --tags --long --always)
-DEFINES += JDSP_VERSION=3.12
+DEFINES += JDSP_VERSION=4.01
 
 include(../3rdparty/3rdparty.pri)
 
@@ -70,6 +73,7 @@ SOURCES += \
     interface/CTableView.cpp \
     interface/FadingLabel.cpp \
     interface/FileSelectionWidget.cpp \
+    interface/LiquidMultiEqualizerWidget.cpp \
     interface/LiveprogSelectionWidget.cpp \
     interface/TrayIcon.cpp \
     interface/dialog/PaletteEditor.cpp \
@@ -139,6 +143,7 @@ HEADERS += \
     interface/CTableView.h \
     interface/FadingLabel.h \
     interface/FileSelectionWidget.h \
+    interface/LiquidMultiEqualizerWidget.h \
     interface/LiveprogSelectionWidget.h \
     interface/QMessageOverlay.h \
     interface/TrayIcon.h \
@@ -196,6 +201,7 @@ RESOURCES += \
 
 TRANSLATIONS += ../resources/translations/jamesdsp_de.ts \
                 ../resources/translations/jamesdsp_en.ts \
+                ../resources/translations/jamesdsp_fr.ts \
                 ../resources/translations/jamesdsp_ru.ts \
                 ../resources/translations/jamesdsp_uk.ts \
                 ../resources/translations/jamesdsp_pl.ts \

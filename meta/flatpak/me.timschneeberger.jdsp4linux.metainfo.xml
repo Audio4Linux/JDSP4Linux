@@ -56,7 +56,18 @@
   </provides>
 
   <releases>
-    <release type="stable" version="2.5.1" date="2023-06-17T00:00:00Z">
+    <release type="stable" version="2.6.0" date="2023-07-12T00:00:00Z">
+      <description>
+        <ul>
+          <li>New libjamesdsp updates:</li>
+	  <li>Dynamic range compander added</li>
+	  <li>Multimodal equalizer added (replaces old EQ)</li>
+	  <li>Convolution modules use automatic benchmarking (in the background) to optimize performance</li>
+	  <li>Several performance improvements and bugfixes</li>
+        </ul>
+      </description>
+    </release>
+   <release type="stable" version="2.5.1" date="2023-06-17T00:00:00Z">
       <description>
         <ul>
           <li>Other changes:</li>
@@ -64,7 +75,7 @@
         </ul>
       </description>
     </release>
-    <release type="stable" version="2.5.0" date="2023-06-16T00:00:00Z">
+   <release type="stable" version="2.5.0" date="2023-06-16T00:00:00Z">
       <description>
         <ul>
           <li>Features:</li>

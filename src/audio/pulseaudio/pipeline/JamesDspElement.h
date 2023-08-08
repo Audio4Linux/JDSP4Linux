@@ -9,6 +9,7 @@ class JamesDspElement : public FilterElement, public IDspElement
 {
 public:
     JamesDspElement();
+    ~JamesDspElement();
     DspStatus status() override;
 
 private:

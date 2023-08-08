@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QMetaEnum>
 #include <QFileSystemWatcher>
+#include <QDebug>
 
 using namespace std;
 
@@ -35,10 +36,11 @@ public:
     enum Key {
         bass_enable,
         bass_maxgain,
-        compression_aggressiveness,
-        compression_enable,
-        compression_maxatk,
-        compression_maxrel,
+        compander_enable,
+        compander_response,
+        compander_granularity,
+        compander_timeconstant,
+        compander_time_freq_transforms,
         convolver_enable,
         convolver_file,
         convolver_optimization_mode,
@@ -107,6 +109,13 @@ public:
     DspConfig(bool watcherEnabled = false)
 	{
 		_conf = new ConfigContainer();
+        _defaultConf = new ConfigContainer();
+        QFile file(":/assets/default.conf");
+        if (file.open(QIODevice::ReadOnly))
+        {
+            _defaultConf->setConfigMap(ConfigIO::readString(file.readAll()));
+        }
+        file.close();
 
         if(watcherEnabled)
         {
@@ -144,9 +153,18 @@ public:
     }
 
 	template<class T>
-    T get(const QString &key, bool* exists = nullptr)
+    T get(const QString &key, bool* exists = nullptr, bool useDefaultIfMissing = true)
     {
         auto variant = _conf->getVariant(key, true, exists);
+
+        if(useDefaultIfMissing) {
+            if(exists != nullptr && !*exists) {
+                Log::debug(QString("Key '%1' unset, loading default value").arg(key));
+                variant = _defaultConf->getVariant(key, true, exists);
+            }
+            if(exists != nullptr && !*exists)
+                Log::error(QString("Key '%1' unset and no default value found").arg(key));
+        }
 
         if constexpr (std::is_same_v<T, QVariant>) {
             return (T)(variant);
@@ -172,9 +190,9 @@ public:
 	}
 
     template<class T>
-    T get(const Key &key, bool* exists = nullptr)
+    T get(const Key &key, bool* exists = nullptr, bool useDefaultIfMissing = true)
     {
-        return get<T>(QVariant::fromValue(key).toString(), exists);
+        return get<T>(QVariant::fromValue(key).toString(), exists, useDefaultIfMissing);
     }
 
     Type type(const Key &key)
@@ -292,7 +310,8 @@ private slots:
     }
 
 private:
-	ConfigContainer *_conf;
+    ConfigContainer *_conf;
+    ConfigContainer *_defaultConf;
     QFileSystemWatcher *_watcher;
 };
 

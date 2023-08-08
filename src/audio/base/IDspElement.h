@@ -24,11 +24,23 @@ public:
     void setMessageHandler(DspHost::MessageHandlerFunc&& extraHandler)
     {
         _msgHandler = std::move(extraHandler);
+        _msgHandlerReady = true;
+    }
+
+    void callMessageHandler(DspHost::Message msg, std::any param)
+    {
+        if(_msgHandlerReady)
+            _msgHandler(msg, param);
+        else {
+            // TODO fix this case
+            // printf("IDspElement::callMessageHandler: dropped message of type '%d'\n", msg);
+        }
     }
 
 protected:
     DspHost* _host = nullptr;
     DspHost::MessageHandlerFunc _msgHandler;
+    bool _msgHandlerReady = false;
 
 };
 

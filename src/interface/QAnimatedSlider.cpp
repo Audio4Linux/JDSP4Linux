@@ -67,6 +67,10 @@ int QAnimatedSlider::valueA() const
 
 QString QAnimatedSlider::valueString(int overrideValue) const
 {
+    if(!customValueStrings.empty() && overrideValue >= 0 && overrideValue < customValueStrings.size()) {
+        return customValueStrings.at(overrideValue);
+    }
+
     int value = overrideValue == -1 ? valueA() : overrideValue;
 
     bool handleAsInt = !this->property("handleAsInt").canConvert(QMetaType::Bool) && this->property("handleAsInt").toBool();
@@ -122,4 +126,14 @@ void QAnimatedSlider::onSliderAction(int action)
 void QAnimatedSlider::onTooltipInvalidated()
 {
     this->setToolTip(valueString());
+}
+
+const QStringList &QAnimatedSlider::getCustomValueStrings() const
+{
+    return customValueStrings;
+}
+
+void QAnimatedSlider::setCustomValueStrings(const QStringList &newCustomValueStrings)
+{
+    customValueStrings = newCustomValueStrings;
 }

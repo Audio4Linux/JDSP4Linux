@@ -18,14 +18,14 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
+static QTranslator* qtTranslator = nullptr;
+static QTranslator* translator = nullptr;
+
 #ifndef NO_CRASH_HANDLER
 #include "crash/airbag.h"
 #include "crash/stacktrace.h"
 
 static bool SPIN_ON_CRASH = false;
-
-static QTranslator* qtTranslator = nullptr;
-static QTranslator* translator = nullptr;
 
 void onExceptionRaised(int fd)
 {
@@ -163,7 +163,7 @@ int main(int   argc,
     QCommandLineOption lang(QStringList() << "l" << "lang", "Override language (example: de, es, uk, zh_CN)", "lang");
     QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
     QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
-    QCommandLineOption minVerbosity(QStringList() << "m" << "min-verbosity", "Minimum log verbosity (0 = Debug; ...; 4 = Critical)", "level");
+    QCommandLineOption minVerbosity(QStringList() << "m" << "min-verbosity", "Minimum log verbosity (0 = Debug; ...; 5 = Critical)", "level");
     QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
 
     QCommandLineOption isConnected(QStringList() << "is-connected", "Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)");

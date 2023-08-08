@@ -9,12 +9,18 @@
 #define C_RESET "\u001b[0m"
 #define C_RED "\u001b[31m"
 #define C_YELLOW "\u001b[33m"
+#define C_CYAN "\u001b[36m"
 #define C_WHITE "\u001b[37m"
 #define C_FAINTWHITE "\u001b[2;37m"
 #define C_BACKRED "\u001b[41;37m"
 
 static QTextStream out(stdout);
 static QTextStream err(stderr);
+
+void Log::kernel(const QString &log)
+{
+    Log::instance().write(log.trimmed(), Kernel, util::source_location::current());
+}
 
 void Log::console(const QString &log, bool overrideSilence)
 {
@@ -64,13 +70,18 @@ void Log::write(const QString &log,
     {
     case Debug:
         sev = "DBG";
-        sevSimple = "";
+        sevSimple = "debug: ";
         color = C_FAINTWHITE;
         break;
     case Info:
         sev = "INF";
-        sevSimple = "";
+        sevSimple = "info: ";
         color = C_WHITE;
+        break;
+    case Kernel:
+        sev = "KNL";
+        sevSimple = "kernel: ";
+        color = C_CYAN;
         break;
     case Warning:
         sev = "WRN";
