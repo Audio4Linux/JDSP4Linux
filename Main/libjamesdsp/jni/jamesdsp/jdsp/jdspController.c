@@ -125,6 +125,7 @@ void JamesDSP_Load_benchmark(double *_c0, double *_c1)
 	memcpy(convbench_c0, _c0, sizeof(convbench_c0));
 	memcpy(convbench_c1, _c1, sizeof(convbench_c1));
 	benchmarkCompletionFlag = 1;
+	benchmarkEnable = 1;
 }
 void JamesDSP_Save_benchmark(double *_c0, double *_c1)
 {
