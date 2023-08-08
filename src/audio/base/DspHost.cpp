@@ -58,6 +58,7 @@ DspHost::DspHost(void* dspPtr, MessageHandlerFunc&& extraHandler) : _extraFunc(s
         dispatch(Message::BenchmarkDone, nullptr);
     });
 
+    loadBenchmarkData();
 
     if(AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot))
         QTimer::singleShot(30000, [this]{ runBenchmarks(); });
@@ -101,7 +102,7 @@ void DspHost::loadBenchmarkData()
 
         for(int i = 0; i < values.size(); i++) {
             bool ok = false;
-            output[i] = values[i].toInt(&ok);
+            output[i] = values[i].toDouble(&ok);
             if(!ok)
                 return false;
         }

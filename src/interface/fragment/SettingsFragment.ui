@@ -300,13 +300,6 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_10">
             <item>
-             <widget class="QCheckBox" name="benchmarkOnBoot">
-              <property name="text">
-               <string>Enable benchmarking on boot</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_8">
               <property name="topMargin">
                <number>0</number>
@@ -360,9 +353,35 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_8">
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>2</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="benchmarkOnBoot">
               <property name="text">
-               <string>Optimizes convolver performance but causes temporarily increased CPU usage for about 1 minute after launch.</string>
+               <string>Enable benchmarking on boot</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Benchmarking on boot may cause increased CPU usage for about one minute after launch.</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
