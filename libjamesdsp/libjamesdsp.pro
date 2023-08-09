@@ -122,7 +122,6 @@ SOURCES += \
     EELStdOutExtension.c \
     PrintfStdOutExtension.c \
     JdspImpResToolbox.c \
-    $$BASEPATH/Effects/eel2/loose_eel.c \
     $$BASEPATH/Effects/eel2/numericSys/HPFloat/atox.c \
     $$BASEPATH/Effects/eel2/numericSys/HPFloat/constant.c \
     $$BASEPATH/Effects/eel2/numericSys/HPFloat/cxaop.c \
@@ -161,7 +160,6 @@ SOURCES += \
     $$BASEPATH/Effects/eel2/numericSys/HPFloat/xtodbl.c \
     $$BASEPATH/Effects/eel2/numericSys/HPFloat/xtoflt.c \
     $$BASEPATH/Effects/eel2/numericSys/HPFloat/xtrig.c \
-    $$BASEPATH/Effects/eel2/numericSys/libsamplerate/src_linear.c \
     $$BASEPATH/Effects/multimodalEQ.c
 
 unix {

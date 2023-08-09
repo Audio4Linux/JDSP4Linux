@@ -1,2 +1,4 @@
 *.pro.user
 build/
+.idea/
+*.iml
