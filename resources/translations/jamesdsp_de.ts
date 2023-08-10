@@ -1295,17 +1295,17 @@ Bitte wählen Sie eine andere</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>Multiresolution (kontinuierlicher Wellengang, unvollständiges doppeltes Frame)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo-Multiresolution (Undersampling-Frame)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo-Multiresolution (Zeitdomäne, keine Latenz)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -2370,12 +2370,12 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>Benchmark starten</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Cache löschen</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
@@ -2385,7 +2385,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch.</source>
-      <translation type="unfinished"/>
+      <translation>Benchmarking beim Booten kann zu erhöhter CPU-Auslastung nach dem Start für etwa eine Minute führen.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="431"/>
@@ -2536,7 +2536,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="104"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>Benchmark-Daten geladen</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="215"/>
@@ -2557,7 +2557,7 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="279"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="460"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>Keine Benchmark-Daten gespeichert</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="302"/>
@@ -2611,17 +2611,17 @@ Wenn sie geändert wurden, werden sie zurückgesetzt.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="452"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>Warten auf Ergebnisse...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="459"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>Cache geleert</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="459"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>Benchmark-Daten wurden gelöscht. Starte diese App neu, um die Änderungen vollständig zu übernehmen.</translation>
     </message>
   </context>
   <context>
