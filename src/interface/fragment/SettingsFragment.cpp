@@ -99,8 +99,9 @@ SettingsFragment::SettingsFragment(TrayIcon *trayIcon,
      * Audio processing
      */
     connect(ui->benchmarkOnBoot, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkOnBootToggled);
-    connect(ui->benchmarkNow, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkRunClicked);
-    connect(ui->benchmarkClear, &QCheckBox::clicked, this, &SettingsFragment::onBenchmarkClearClicked);
+    connect(ui->benchmarkNow, &QPushButton::clicked, this, &SettingsFragment::onBenchmarkRunClicked);
+    connect(ui->benchmarkClear, &QPushButton::clicked, this, &SettingsFragment::onBenchmarkClearClicked);
+    connect(ui->sinkAllowVolumeControl, &QCheckBox::clicked, this, &SettingsFragment::onSinkAllowVolumeControlClicked);
     connect(_audioService, &IAudioService::benchmarkDone, this, [this]{ updateBenchmarkStatus(tr("benchmark data loaded")); });
 
 	/*
@@ -267,6 +268,7 @@ void SettingsFragment::refreshAll()
     ui->eq_alwaysdrawhandles->setChecked(AppConfig::instance().get<bool>(AppConfig::EqualizerShowHandles));
 
     ui->benchmarkOnBoot->setChecked(AppConfig::instance().get<bool>(AppConfig::BenchmarkOnBoot));
+    ui->sinkAllowVolumeControl->setChecked(!AppConfig::instance().get<bool>(AppConfig::AudioVirtualSinkForceMaxValue));
 
     ui->blocklistInvert->blockSignals(true);
     ui->blocklistInvert->setChecked(AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert));
@@ -458,6 +460,11 @@ void SettingsFragment::onBenchmarkClearClicked()
     AppConfig::instance().set(AppConfig::BenchmarkCacheC1, "");
     QMessageBox::information(this, tr("Cache cleared"), tr("Benchmark data has been cleared. Restart this app to fully apply the changes."));
     updateBenchmarkStatus(tr("no benchmark data stored"));
+}
+
+void SettingsFragment::onSinkAllowVolumeControlClicked()
+{
+    AppConfig::instance().set(AppConfig::AudioVirtualSinkForceMaxValue, !ui->sinkAllowVolumeControl->isChecked());
 }
 
 void SettingsFragment::onLiveprogAutoExtractToggled()

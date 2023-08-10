@@ -69,6 +69,7 @@ private slots:
     void onBenchmarkOnBootToggled();
     void onBenchmarkRunClicked();
     void onBenchmarkClearClicked();
+    void onSinkAllowVolumeControlClicked();
     void onLiveprogAutoExtractToggled();
     void onGithubLinkClicked();
     void onAeqDatabaseManageClicked();

@@ -14,7 +14,7 @@ PipewireAudioService::PipewireAudioService()
 {
     Glib::init();
 
-    mgr = std::make_unique<PwPipelineManager>();
+    mgr = std::make_unique<PwPipelineManager>(AppConfig::instance().get<bool>(AppConfig::AudioVirtualSinkForceMaxValue));
     appMgr = std::make_unique<PwAppManager>(mgr.get());
     plugin = new PwJamesDspPlugin(mgr.get(), this);
     effects = std::make_unique<FilterContainer>(mgr.get(), plugin, &AppConfig::instance());

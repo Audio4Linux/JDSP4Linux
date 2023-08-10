@@ -50,7 +50,7 @@
 
 class PwPipelineManager {
  public:
-  PwPipelineManager();
+  PwPipelineManager(bool sinkForceMaxVolume);
   PwPipelineManager(const PwPipelineManager&) = delete;
   auto operator=(const PwPipelineManager&) -> PwPipelineManager& = delete;
   PwPipelineManager(const PwPipelineManager&&) = delete;

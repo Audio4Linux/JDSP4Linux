@@ -1432,7 +1432,7 @@ const struct pw_registry_events registry_events = {
 
 }  // namespace
 
-PwPipelineManager::PwPipelineManager() : header_version(pw_get_headers_version()), library_version(pw_get_library_version()) {
+PwPipelineManager::PwPipelineManager(bool sinkForceMaxVolume) : header_version(pw_get_headers_version()), library_version(pw_get_library_version()) {
   pw_init(nullptr, nullptr);
 
   spa_zero(core_listener);
@@ -1494,7 +1494,7 @@ PwPipelineManager::PwPipelineManager() : header_version(pw_get_headers_version()
   pw_properties_set(props_sink, "factory.name", "support.null-audio-sink");
   pw_properties_set(props_sink, PW_KEY_MEDIA_CLASS, tags::pipewire::media_class::sink);
   pw_properties_set(props_sink, "audio.position", "FL,FR");
-  pw_properties_set(props_sink, "monitor.channel-volumes", "false");
+  pw_properties_set(props_sink, "monitor.channel-volumes", !sinkForceMaxVolume ? "true" : "false");
 
   proxy_stream_output_sink = static_cast<pw_proxy*>(
       pw_core_create_object(core, "adapter", PW_TYPE_INTERFACE_Node, PW_VERSION_NODE, &props_sink->dict, 0));

@@ -42,6 +42,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioAppBlocklist, QStringList());
     DEFINE_KEY(AudioAppBlocklistInvert, false);
     DEFINE_KEY(AudioInactivityTimeout, 10);
+    DEFINE_KEY(AudioVirtualSinkForceMaxValue, true);
 
     DEFINE_KEY(BenchmarkOnBoot, false);
     DEFINE_KEY(BenchmarkCacheC0, "");
