@@ -213,6 +213,7 @@ void LiveprogSelectionWidget::loadProperties(const QString& path)
             lbl->setText(prop->getDescription());
 
             cbx->addItems(prop->getOptions());
+            cbx->setCurrentIndex(prop->getValue());
             cbx->setProperty("isCustomEELProperty", true);
 
             cbx->setObjectName(prop->getKey());
