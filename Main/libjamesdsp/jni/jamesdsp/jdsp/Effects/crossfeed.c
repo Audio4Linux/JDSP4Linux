@@ -58,11 +58,13 @@ void CrossfeedEnable(JamesDSPLib *jdsp, char enable)
 		{
 			TwoStageFFTConvolver2x4x2Free(jdsp->advXF.convLong_T_S);
 			free(jdsp->advXF.convLong_T_S);
+			jdsp->advXF.convLong_T_S = NULL;
 		}
 		if (jdsp->advXF.convLong_S_S)
 		{
 			FFTConvolver2x4x2Free(jdsp->advXF.convLong_S_S);
 			free(jdsp->advXF.convLong_S_S);
+			jdsp->advXF.convLong_S_S = NULL;
 		}
 		jdsp->advXF.conv[0] = (FFTConvolver2x4x2 *)malloc(sizeof(FFTConvolver2x4x2));
 		FFTConvolver2x4x2Init(jdsp->advXF.conv[0]);

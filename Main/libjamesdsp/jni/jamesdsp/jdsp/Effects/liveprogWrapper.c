@@ -154,9 +154,17 @@ void LiveProgProcess(JamesDSPLib *jdsp, size_t n)
 		{
 			*eel->input1 = jdsp->tmpBuffer[0][i];
 			*eel->input2 = jdsp->tmpBuffer[1][i];
-			NSEEL_code_execute(eel->codehandleProcess);
-			jdsp->tmpBuffer[0][i] = (float)*eel->input1;
-			jdsp->tmpBuffer[1][i] = (float)*eel->input2;
+				NSEEL_code_execute(eel->codehandleProcess);
+			    // Prevent broken scripts (returning NaN or inf) causing permanent audio loss
+			    if(isinf((float)*eel->input1) || isnan((float)*eel->input1))
+				jdsp->tmpBuffer[0][i] = 0;
+			    else
+				jdsp->tmpBuffer[0][i] = (float)*eel->input1;
+		
+			    if(isinf((float)*eel->input2) || isnan((float)*eel->input2))
+				jdsp->tmpBuffer[1][i] = 0;
+			    else
+				jdsp->tmpBuffer[1][i] = (float)*eel->input2;
 		}
 	}
 }
