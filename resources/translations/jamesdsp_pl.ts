@@ -444,7 +444,7 @@ Czy mimo to chcesz ponownie zainstalować najnowszą aktualizację bazy danych?<
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
       <source>Redo</source>
-      <translation>Ponów</translation>
+      <translation>Przywróć</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
@@ -2635,7 +2635,7 @@ Jeśli zostały zmodyfikowane, zostaną zresetowane.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>Dane benchmarku zostały wyczyszczone. Uruchom ponownie tę aplikację, aby w pełni zastosować zmiany.</translation>
     </message>
   </context>
   <context>
