@@ -1294,17 +1294,17 @@ Proszę wybrać inny plik</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>Wielorozdzielczość (ciągła falka, niekompletna podwójna próbka)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo wielorozdzielczość (podpróbkowanie próbki)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo wielorozdzielczość (dziedzina czasu, bez opóźnień)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -2369,12 +2369,12 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>Zbenchmarkuj teraz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Wyczyść pamięć podręczną</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
@@ -2384,22 +2384,22 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>Benchmarking podczas uruchamiania może powodować zwiększone użycie procesora przez około minutę. Generowanie danych dla twojego systemu może poprawić wydajność modułów konwolwera.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Obejścia</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>Zezwól na zmianę głośności wirtualnego urządzenia sink</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>Aby zastosować zmiany, wymagane jest ponowne uruchomienie. W niektórych przypadkach może to spowodować utratę dźwięku.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
@@ -2550,7 +2550,7 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="283"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>załadowano dane benchmarku</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="216"/>
@@ -2571,7 +2571,7 @@ Utwórz profil, zanim dodasz nową regułę.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>brak zapisanych danych benchmarku</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
@@ -2625,12 +2625,12 @@ Jeśli zostały zmodyfikowane, zostaną zresetowane.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="454"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>czekam na wynik...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>Pamięć podręczna wyczyszczona</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
