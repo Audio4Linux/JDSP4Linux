@@ -278,6 +278,16 @@ void DspHost::updateCompander(DspConfig *config)
     CompressorSetGain(cast(this->_dsp), param, param + 7, 1);
 }
 
+void DspHost::updateStereoWide(DspConfig *config)
+{
+    if(config->get<bool>(DspConfig::stereowide_enable))
+        StereoEnhancementEnable(cast(this->_dsp));
+    else
+        StereoEnhancementDisable(cast(this->_dsp));
+
+    StereoEnhancementSetParam(cast(this->_dsp), config->get<float>(DspConfig::stereowide_level) / 100.0f);
+}
+
 void DspHost::updateReverb(DspConfig* config)
 {
 #define GET_PARAM(key,type,defaults,msg) \
@@ -509,6 +519,7 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     bool refreshGraphicEq = false;
     bool refreshVdc = false;
     bool refreshCompander = false;
+    bool refreshStereoWide = false;
 
 #ifdef DEBUG_FPE
     feenableexcept(FE_ALL_EXCEPT & ~FE_INEXACT & ~FE_INVALID);
@@ -626,19 +637,8 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
             JamesDSPSetPostGain(cast(this->_dsp), current.toFloat());
             break;
         case DspConfig::stereowide_enable:
-            if(current.toBool())
-                StereoEnhancementEnable(cast(this->_dsp));
-            else
-                StereoEnhancementDisable(cast(this->_dsp));
-            StereoEnhancementSetParam(cast(this->_dsp), _cache->get<float>(DspConfig::stereowide_level) / 100.0f);
-            break;
         case DspConfig::stereowide_level:
-            StereoEnhancementDisable(cast(this->_dsp));
-            StereoEnhancementSetParam(cast(this->_dsp), _cache->get<float>(DspConfig::stereowide_level) / 100.0f);
-            if(config->get<bool>(DspConfig::stereowide_enable))
-            {
-                StereoEnhancementEnable(cast(this->_dsp));
-            }
+            refreshStereoWide = true;
             break;
         case DspConfig::tone_enable:
             if(current.toBool())
@@ -698,6 +698,11 @@ bool DspHost::update(DspConfig *config, bool ignoreCache)
     if(refreshCompander)
     {
         updateCompander(config);
+    }
+
+    if(refreshStereoWide)
+    {
+        updateStereoWide(config);
     }
 
 #ifdef DEBUG_FPE

@@ -44,7 +44,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(AudioInactivityTimeout, 10);
     DEFINE_KEY(AudioVirtualSinkForceMaxValue, true);
 
-    DEFINE_KEY(BenchmarkOnBoot, false);
+    DEFINE_KEY(BenchmarkOnBoot, true);
     DEFINE_KEY(BenchmarkCacheC0, "");
     DEFINE_KEY(BenchmarkCacheC1, "");
 

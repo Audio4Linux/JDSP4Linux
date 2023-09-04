@@ -63,6 +63,7 @@ private:
     void updateConvolver(DspConfig *config);
     void updateGraphicEq(DspConfig *config);
     void updateCrossfeed(DspConfig *config);
+    void updateStereoWide(DspConfig *config);
 
 };
 
