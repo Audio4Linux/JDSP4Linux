@@ -207,7 +207,16 @@ TRANSLATIONS += ../resources/translations/jamesdsp_de.ts \
                 ../resources/translations/jamesdsp_pl.ts \
                 ../resources/translations/jamesdsp_es.ts \
                 ../resources/translations/jamesdsp_zh_CN.ts \
-                ../resources/translations/jamesdsp_pt_BR.ts
+                ../resources/translations/jamesdsp_pt_BR.ts \
+                ../resources/translations/jamesdsp_af.ts \
+                ../resources/translations/jamesdsp_pt.ts \
+                ../resources/translations/jamesdsp_ro.ts \
+                ../resources/translations/jamesdsp_sr.ts \
+                ../resources/translations/jamesdsp_sv.ts \
+                ../resources/translations/jamesdsp_th.ts \
+                ../resources/translations/jamesdsp_tr.ts \
+                ../resources/translations/jamesdsp_vi.ts \
+                ../resources/translations/jamesdsp_zh_TW.ts
 
 # Default rules for deployment.
 isEmpty(PREFIX){

@@ -56,7 +56,40 @@
   </provides>
 
   <releases>
-    <release type="stable" version="2.5.0" date="2023-06-16T00:00:00Z">
+    <release type="stable" version="2.6.1" date="2023-08-12T00:00:00Z">
+      <description>
+        <ul>
+          <li>New libjamesdsp updates:</li>
+          <li>  Compander: new time-frequency transform mode and zero latency</li>
+          <li>  EEL engine updated</li>
+          <li>  IIR EQ stability and efficiency improved</li>
+          <li>  Several performance improvements and bugfixes</li>
+          <li>Added settings UI for convolver benchmarking optimizations</li>
+          <li>Fixed distorted audio when enabling the stereo widener without setting the strength</li>
+          <li>Fixed Liveprog list parameters not displaying their current value correctly</li>
+        </ul>
+      </description>
+    </release>
+   <release type="stable" version="2.6.0" date="2023-07-12T00:00:00Z">
+      <description>
+        <ul>
+          <li>New libjamesdsp updates:</li>
+	  <li>Dynamic range compander added</li>
+	  <li>Multimodal equalizer added (replaces old EQ)</li>
+	  <li>Convolution modules use automatic benchmarking (in the background) to optimize performance</li>
+	  <li>Several performance improvements and bugfixes</li>
+        </ul>
+      </description>
+   </release>
+   <release type="stable" version="2.5.1" date="2023-06-17T00:00:00Z">
+      <description>
+        <ul>
+          <li>Other changes:</li>
+          <li>Finalize flatpak support</li>
+        </ul>
+      </description>
+    </release>
+   <release type="stable" version="2.5.0" date="2023-06-16T00:00:00Z">
       <description>
         <ul>
           <li>Features:</li>
@@ -83,6 +116,7 @@
       </description>
     </release>
   </releases>
+
 
   <launchable type="desktop-id">me.timschneeberger.jdsp4linux.pulse.desktop</launchable>
   <screenshots>
