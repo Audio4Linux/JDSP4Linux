@@ -192,7 +192,10 @@ This will override your current GraphicEQ configuration.</source>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 통합 기능을 사용하기 전에 헤드폰 보정 데이터베이스의 축소 버전(~50MB)을 하드 드라이브에 다운로드해야 합니다.
+이 단계에서는 인터넷 연결이 필요합니다.
+
+계속 진행하여 이 기능을 활성화하시겠습니까?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
@@ -226,7 +229,12 @@ Reason: %1</source>
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
 
 Do you want to re-install the latest database update anyway?</source>
-      <translation type="unfinished"/>
+      <translation>현재 로컬 데이터베이스는 최신 상태이며 현재 새로운 업데이트가 제공되지 않습니다.
+
+AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 다운로드할 수 있게 되려면 최대 24시간이 소요될 수 있습니다.
+패키지는 매일 오전 4시(UTC)에 생성됩니다.
+
+그래도 최신 데이터베이스 업데이트를 다시 설치하시겠습니까?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
@@ -246,7 +254,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
-      <translation type="unfinished"/>
+      <translation>데이터베이스에서 해당 파일을 검색할 수 없습니다. 로컬 데이터베이스가 불완전한 것으로 보이므로 데이터베이스를 업데이트해 주세요.</translation>
     </message>
   </context>
   <context>
@@ -767,7 +775,8 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>이 앱을 설치해 주셔서 감사합니다!
+그러나 Linux용 JamesDSP를 사용하기 전에 최상의 경험을 보장하기 위해 몇 가지 조정을 수행해야 합니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
@@ -804,7 +813,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation type="unfinished"/>
+      <translation>이제 준비가 완료되었습니다! 설정 섹션에서 방금 선택한 사항을 변경할 수 있습니다. 더 많은 사용자 지정 옵션을 확인해보세요. 텔레그램 커뮤니티에서 지원과 업데이트를 받아보세요!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
@@ -1093,7 +1102,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;크로스피드&lt;/span&gt;&lt;/p&gt;&lt;p&gt;기존 BS2B (Bauer stereophonic-to-binaural DSP) 모드와 진보된 컨볼루션 기반 HRTF 접근 방식을 포함합니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="487"/>
@@ -1119,7 +1128,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;음장 넓이&lt;/span&gt;&lt;/p&gt;&lt;p&gt;여러 스펙트럼 영역에서 스테레오 위상 관계를 감지하고 보컬 무결성에 영향을 주지 않으면서 스테레오 음장을 향상시키는 알고리즘입니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
@@ -1134,12 +1143,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="690"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;잔향&lt;/span&gt;&lt;/p&gt;&lt;p&gt;복합 잔향 IIR 네트워크 (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="716"/>
       <source>Enable reverberation</source>
-      <translation type="unfinished"/>
+      <translation>잔향 활성화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
@@ -1325,7 +1334,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1370"/>
       <source>Reset EQ</source>
-      <translation type="unfinished"/>
+      <translation>EQ 초기화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1398"/>
@@ -1346,12 +1355,12 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="1471"/>
       <location filename="../../src/MainWindow.ui" line="1793"/>
       <source>Filesystem</source>
-      <translation type="unfinished"/>
+      <translation>파일 시스템</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1493"/>
       <source>Bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>북마크</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1532"/>
@@ -1386,7 +1395,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1596"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>편집</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1642"/>
@@ -1406,12 +1415,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1768"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;주요 작업은 오디오에 파라메트릭 이퀄라이제이션을 수행하는 것입니다. 다만, 사용자가 DDCToolbox가 생성하는 .vdc 파일을 제공해야 합니다.&lt;/p&gt;&lt;p&gt;jDSP의 ViPER-DDC는 2차 섹션 필터의 일반화된 구현으로, Viper4Android의 구현과는 약간 다릅니다. V4A는 피킹 파라메트릭만 지원하는데, 그 이유는 V4A가 피킹 필터의 공유 계수 속성을 사용하기 때문입니다. 반면 jDSP에는 이러한 가정이 없습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1815"/>
       <source>Database</source>
-      <translation type="unfinished"/>
+      <translation>데이터베이스</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1856"/>
@@ -1496,7 +1505,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="167"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation type="unfinished"/>
+      <translation>현재 EEL 파일(at &apos;%1&apos;) 이 파일 시스템에 더 이상 존재하지 않습니다. 파일을 수동으로 다시 열어주세요.</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="281"/>
@@ -1556,27 +1565,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="401"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>이퀄라이저</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="402"/>
       <source>Convolver</source>
-      <translation type="unfinished"/>
+      <translation>컨볼버 (Convolver)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="403"/>
       <source>DDC</source>
-      <translation type="unfinished"/>
+      <translation>DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="404"/>
       <source>Liveprog</source>
-      <translation type="unfinished"/>
+      <translation>Liveprog</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="405"/>
       <source>Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>그래픽 EQ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="417"/>
@@ -1591,7 +1600,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="560"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>확실합니까?</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="584"/>
@@ -1647,7 +1656,17 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>고급 파형 편집(기본값: -80;-100;0;0;0;0)
+
+자동 IR 절단의 임계값을 설정하고 다져진 / 최소 위상 변환된 IR에 지연을 추가합니다.
+이 설정은 IR 최적화가 활성화된 경우에만 적용됩니다.
+
+첫 번째 값: 임계값 자동 자르기 시작 (dB) 
+두 번째 값: 임계값 자동 자르기 종료 (dB)
+세 번째 값: 채널 1의 지연 (samples)
+네 번째 값: 채널 2의 지연 (samples)
+다섯 번째 값: 채널 3의 지연 (samples)
+여섯 번째 값: 채널 4의 지연 (samples)</translation>
     </message>
   </context>
   <context>
@@ -1923,7 +1942,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="63"/>
       <source>All connected audio devices have already a rule defined.
 You can only create one rule per device.</source>
-      <translation type="unfinished"/>
+      <translation>연결된 모든 오디오 기기에는 이미 규칙이 정의되어 있습니다. 기기당 하나의 규칙만 만들 수 있습니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
@@ -2356,7 +2375,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>부팅 시 벤치마킹을 실행하면 실행 후 약 1분 동안 CPU 사용량이 증가할 수 있습니다. 시스템에 대한 벤치마킹 데이터를 생성하면 컨볼버 모듈의 성능을 향상시킬 수 있습니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
@@ -2401,7 +2420,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 옵션은 시작할 때마다 기본 EEL 스크립트 중 하나가 누락되었는지 확인합니다. 이 경우 누락된 파일은 리소스에서 자동으로 복원됩니다. (이미 존재하는 경우 덮어쓰지는 않습니다!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="557"/>
@@ -2441,7 +2460,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation type="unfinished"/>
+      <translation>기본 창의 점 3개 메뉴를 사용하여 액세스할 수 있는 &apos;앱&apos; 섹션에서 사운드를 재생하는 앱이 JamesDSP에 의해 처리되지 않도록 차단할 수 있습니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
@@ -2554,7 +2573,7 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="305"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
-      <translation type="unfinished"/>
+      <translation>기존의 기본 Liveprog 스크립트를 재정의하시겠습니까? 수정한 스크립트가 있으면 재설정됩니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="308"/>
@@ -2570,7 +2589,8 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation type="unfinished"/>
+      <translation>허용 목록 모드를 활성화하려고 합니다. 이 모드가 활성화되어 있는 동안에는 기본적으로 모든 애플리케이션을 처리하지 않습니다. &apos;앱&apos; 메뉴에서 각 앱이 처리되도록 명시적으로 허용해야 합니다.
+</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="402"/>
@@ -2791,7 +2811,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Failed to manipulate variable &apos;%1&apos;. Either it does not exist anymore, or it cannot be changed.</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; 변수 조작 실패. 더 이상 존재하지 않거나 변경할 수 없습니다.</translation>
     </message>
   </context>
   <context>
