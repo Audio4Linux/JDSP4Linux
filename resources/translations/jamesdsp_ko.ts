@@ -660,7 +660,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
       <source>Package manager</source>
-      <translation type="unfinished"/>
+      <translation>패키지 관리자</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
@@ -1005,12 +1005,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
       <source>Edit script</source>
-      <translation type="unfinished"/>
+      <translation>스크립트 편집</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
       <source>No customizable parameters</source>
-      <translation type="unfinished"/>
+      <translation>사용자 정의 가능한 매개변수 없음</translation>
     </message>
   </context>
   <context>
@@ -1023,17 +1023,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;다이나믹 베이스 부스트&lt;/span&gt;&lt;/p&gt;&lt;p&gt;주파수 감지 베이스-부스트. 수신되는 오디오 스트림을 분석하여 게인, 대역폭, 컷오프 주파수 등 자체 파라미터를 자동으로 설정합니다&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;최대 게인:&lt;/span&gt; 다이내믹 베이스 부스트 효과의 양을 조절합니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>다이나믹 베이스 부스트</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>최대 게인</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
@@ -1043,7 +1043,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Analog modelling</source>
-      <translation type="unfinished"/>
+      <translation>아날로그 모델링</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
@@ -1053,7 +1053,8 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;리미터&lt;/span&gt;&lt;/p&gt;&lt;p&gt;이 출력 리미터는 출력의 클리핑(입력이 이미 최대치에 근접한 경우 오디오 신호의 일부 또는 전부를 이전보다 더 크게 만들려고 하는 DSP에 의해 발생함)을 방지합니다. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;리미터 임계값:&lt;/span&gt; 디지털 클리핑 전에 오디오를 클리핑하는 경우가 아니라면 이 값은 -0.1로 설정해야 하며, 이 경우 이보다 낮은 값으로 설정할 수 있습니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;리미터 릴리즈:&lt;/span&gt; 리미터는 릴리즈 시간이 설정된 경우에만 유효합니다. 릴리스 시간이 짧으면 특히 저주파의 경우 제한된 소리가 들리도록 왜곡됩니다. 일반적으로 확장된 릴리스가 선호되지만 달성할 수 있는 음량이 다소 줄어듭니다. 만약 &amp;quot;펌핑&amp;quot; (제한된 사운드가 시간이 지나면서 다시 올라오는 현상)이 거슬리는 경우 릴리즈를 더 길게 또는 더 짧게 만들면 효과가 덜 눈에 띄도록 할 수 있습니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;포스트 게인:&lt;/span&gt; 포스트 게인은 모든 효과가 적용된 후 사운드가 리미터에 도달하기 전에 모든 이펙트에 대한 디지털 볼륨 노브 역할을 합니다.
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
@@ -1063,17 +1064,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="214"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>임계값</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>릴리즈</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>포스트 게인</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
@@ -1083,27 +1084,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>다이나믹 레인지 컴팬더</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>시간 상수</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>입도</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>시간-주파수 변환</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>균등 (단시간 푸리에)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
@@ -1114,12 +1115,12 @@ Please select another one</source>
       <location filename="../../src/MainWindow.ui" line="487"/>
       <location filename="../../src/MainWindow.ui" line="543"/>
       <source>Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>크로스피드</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>모드</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
@@ -1245,12 +1246,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1002"/>
       <source>Delay</source>
-      <translation type="unfinished"/>
+      <translation>지연</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1009"/>
       <source>Bass boost</source>
-      <translation type="unfinished"/>
+      <translation>베이스 부스트</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1157"/>
@@ -1265,27 +1266,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1298"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 4차</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1303"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 6차</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1308"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 8차</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1313"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 10차</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1318"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 12차</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1249"/>
@@ -1310,12 +1311,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
       <source>Presets...</source>
-      <translation type="unfinished"/>
+      <translation>프리셋...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>Filter type</source>
-      <translation type="unfinished"/>
+      <translation>필터 유형</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1338"/>
@@ -1330,12 +1331,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>조각별 3차 에르미트 보간 다항식</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1350"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation type="unfinished"/>
+      <translation>히로시 아키마 변형 스플라인</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1370"/>
@@ -1476,7 +1477,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2114"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>설정</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2120"/>
@@ -1496,7 +1497,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2201"/>
       <source>Bypass</source>
-      <translation type="unfinished"/>
+      <translation>바이패스</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="146"/>
@@ -1516,7 +1517,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="281"/>
       <source>Apps</source>
-      <translation type="unfinished"/>
+      <translation>앱</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="282"/>
@@ -1621,32 +1622,32 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>매우 낮음</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>낮음</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>보통</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>높음</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>매우 높음</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1170"/>
       <source>Advanced waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>고급 파형 편집</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1171"/>
@@ -1722,7 +1723,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>오류</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
@@ -1784,12 +1785,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="104"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>닫기</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="117"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>초기화</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="130"/>
@@ -1845,7 +1846,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>저장</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
@@ -1860,7 +1861,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
       <source>Load</source>
-      <translation type="unfinished"/>
+      <translation>불러오기</translation>
     </message>
   </context>
   <context>
@@ -1888,7 +1889,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>저장</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
@@ -1954,7 +1955,7 @@ You can only create one rule per device.</source>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
       <source>You have no presets saved.
 Please create one first before adding a new rule.</source>
-      <translation type="unfinished"/>
+      <translation>저장된 프리셋이 없습니다. 새 규칙을 추가하기 전에 먼저 프리셋을 만들어 주세요.</translation>
     </message>
   </context>
   <context>
@@ -1962,7 +1963,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="77"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>기기</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
@@ -2011,162 +2012,162 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="29"/>
       <source>Flat</source>
-      <translation type="unfinished"/>
+      <translation>플랫</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="82"/>
       <source>Pop</source>
-      <translation type="unfinished"/>
+      <translation>팝</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="83"/>
       <source>Rock</source>
-      <translation type="unfinished"/>
+      <translation>록</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="84"/>
       <source>Jazz</source>
-      <translation type="unfinished"/>
+      <translation>재즈</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="85"/>
       <source>Classic</source>
-      <translation type="unfinished"/>
+      <translation>클래식</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="86"/>
       <source>Bass</source>
-      <translation type="unfinished"/>
+      <translation>베이스</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="87"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>클리어</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="88"/>
       <source>Hip-Hop</source>
-      <translation type="unfinished"/>
+      <translation>힙합</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="89"/>
       <source>Dubstep</source>
-      <translation type="unfinished"/>
+      <translation>덥스텝</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="90"/>
       <source>Movie</source>
-      <translation type="unfinished"/>
+      <translation>영화</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="91"/>
       <source>Metal</source>
-      <translation type="unfinished"/>
+      <translation>메탈</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="92"/>
       <source>Vocal Booster</source>
-      <translation type="unfinished"/>
+      <translation>보컬 강화</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="93"/>
       <source>Hardstyle</source>
-      <translation type="unfinished"/>
+      <translation>하드스타일</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="94"/>
       <source>Acoustic</source>
-      <translation type="unfinished"/>
+      <translation>어쿠스틱</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="95"/>
       <source>R&amp;B</source>
-      <translation type="unfinished"/>
+      <translation>R&amp;B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="96"/>
       <source>Electronic</source>
-      <translation type="unfinished"/>
+      <translation>일렉트로닉</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="97"/>
       <source>Deep Bass</source>
-      <translation type="unfinished"/>
+      <translation>딥 베이스</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="98"/>
       <source>Beats</source>
-      <translation type="unfinished"/>
+      <translation>비트</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="105"/>
       <source>BS2B Custom</source>
-      <translation type="unfinished"/>
+      <translation>커스텀 BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="106"/>
       <source>BS2B Weak</source>
-      <translation type="unfinished"/>
+      <translation>약한 BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="107"/>
       <source>BS2B Strong</source>
-      <translation type="unfinished"/>
+      <translation>강한 BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation type="unfinished"/>
+      <translation>머리 밖 음상</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
       <source>Surround 1</source>
-      <translation type="unfinished"/>
+      <translation>서라운드 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="110"/>
       <source>Surround 2</source>
-      <translation type="unfinished"/>
+      <translation>서라운드 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
       <source>Joe0Bloggs Realistic surround</source>
-      <translation type="unfinished"/>
+      <translation>Joe0Bloggs 현실적인 서라운드</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Default</source>
-      <translation type="unfinished"/>
+      <translation>기본값</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 1</source>
-      <translation type="unfinished"/>
+      <translation>소형 홀 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 2</source>
-      <translation type="unfinished"/>
+      <translation>소형 홀 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 1</source>
-      <translation type="unfinished"/>
+      <translation>중형 홀 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 2</source>
-      <translation type="unfinished"/>
+      <translation>중형 홀 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 1</source>
-      <translation type="unfinished"/>
+      <translation>대형 홀 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 2</source>
-      <translation type="unfinished"/>
+      <translation>대형 홀 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
@@ -2191,7 +2192,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 1</source>
-      <translation type="unfinished"/>
+      <translation>대형 방 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2211,27 +2212,27 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation type="unfinished"/>
+      <translation>플레이트 하이</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation type="unfinished"/>
+      <translation>플레이트 로우</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation type="unfinished"/>
+      <translation>긴 잔향 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation type="unfinished"/>
+      <translation>긴 잔향 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
       <source>error</source>
-      <translation type="unfinished"/>
+      <translation>오류</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="44"/>
@@ -2263,12 +2264,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/main.cpp" line="184"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP는 Linux 및 Android 시스템에서 사용할 수 있는 진보된 오디오 처리 엔진입니다.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>자동 시작 권한이 거부되었습니다</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
@@ -2291,22 +2292,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>설정</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
       <source>Category</source>
-      <translation type="unfinished"/>
+      <translation>카테고리</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="88"/>
       <source>Interface</source>
-      <translation type="unfinished"/>
+      <translation>인터페이스</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>오디오 처리</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
@@ -2316,17 +2317,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Devices</source>
-      <translation type="unfinished"/>
+      <translation>기기</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Network</source>
-      <translation type="unfinished"/>
+      <translation>네트워크</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>트레이 아이콘</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
@@ -2336,7 +2337,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
       <source>Theme</source>
-      <translation type="unfinished"/>
+      <translation>테마</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="226"/>
@@ -2351,7 +2352,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>이퀄라이저</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
@@ -2361,7 +2362,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>컨볼버 벤치마킹</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
@@ -2396,17 +2397,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>변경 사항을 적용하려면 다시 시작해야 합니다. 경우에 따라 오디오 손실이 발생할 수 있습니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
       <source>Impluse responses</source>
-      <translation type="unfinished"/>
+      <translation>임펄스 응답</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="483"/>
       <source>VDCs</source>
-      <translation type="unfinished"/>
+      <translation>VDCs</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
@@ -2541,7 +2542,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="964"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>닫기</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
