@@ -295,7 +295,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
       <source>Format: %1</source>
-      <translation type="unfinished"/>
+      <translation>포멧: %1</translation>
     </message>
   </context>
   <context>
@@ -303,12 +303,12 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.ui" line="43"/>
       <source>Active apps</source>
-      <translation type="unfinished"/>
+      <translation>활성화된 앱</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.cpp" line="19"/>
       <source>No apps are playing audio</source>
-      <translation type="unfinished"/>
+      <translation>오디오를 재생하는 앱이 없습니다</translation>
     </message>
   </context>
   <context>
@@ -324,7 +324,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
       <source>Annotations</source>
-      <translation type="unfinished"/>
+      <translation>주석</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
@@ -342,7 +342,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>선택 복사</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
@@ -375,12 +375,12 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>내비게이션</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>보기</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
@@ -406,7 +406,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>파일 닫기</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
@@ -426,22 +426,22 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>다른 이름으로 저장...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
       <source>Undo</source>
-      <translation type="unfinished"/>
+      <translation>되돌리기</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
@@ -467,12 +467,12 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Go to line...</source>
-      <translation type="unfinished"/>
+      <translation>라인으로 이동...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
       <source>Go to line</source>
-      <translation type="unfinished"/>
+      <translation>라인으로 이동</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
@@ -513,17 +513,17 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>자동 괄호</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>탭을 공백으로 교체</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>EEL2 설명서</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
@@ -533,7 +533,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>코드 실행</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
@@ -614,7 +614,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>EEL 스크립트 열기</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
@@ -624,12 +624,12 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>다른 이름으로 저장</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>실행할 수 없음</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
@@ -652,7 +652,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
       <source>No project loaded</source>
-      <translation type="unfinished"/>
+      <translation>로드된 프로젝트 없음</translation>
     </message>
   </context>
   <context>
@@ -716,12 +716,12 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>이전</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>다음</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
@@ -774,7 +774,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
       <source>Welcome!</source>
-      <translation type="unfinished"/>
+      <translation>환영합니다!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
@@ -844,17 +844,17 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>그래픽 EQ 활성화</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
       <source>Freq.</source>
-      <translation type="unfinished"/>
+      <translation>주파수</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
       <source>Gain</source>
-      <translation type="unfinished"/>
+      <translation>게인</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
@@ -956,7 +956,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
       <source>Decompressing package...</source>
-      <translation type="unfinished"/>
+      <translation>패키지 압축 풀기...</translation>
     </message>
   </context>
   <context>
@@ -965,7 +965,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
-      <translation type="unfinished"/>
+      <translation>로드된 스크립트 없음</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
@@ -981,7 +981,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>새 스크립트 생성</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
@@ -1018,7 +1018,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="26"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>Linux 용 JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
@@ -1053,7 +1053,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;리미터&lt;/span&gt;&lt;/p&gt;&lt;p&gt;이 출력 리미터는 출력의 클리핑(입력이 이미 최대치에 근접한 경우 오디오 신호의 일부 또는 전부를 이전보다 더 크게 만들려고 하는 DSP에 의해 발생함)을 방지합니다. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;리미터 임계값:&lt;/span&gt; 디지털 클리핑 전에 오디오를 클리핑하는 경우가 아니라면 이 값은 -0.1로 설정해야 하며, 이 경우 이보다 낮은 값으로 설정할 수 있습니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;리미터 릴리즈:&lt;/span&gt; 리미터는 릴리즈 시간이 설정된 경우에만 유효합니다. 릴리스 시간이 짧으면 특히 저주파의 경우 제한된 소리가 들리도록 왜곡됩니다. 일반적으로 확장된 릴리스가 선호되지만 달성할 수 있는 음량이 다소 줄어듭니다. 만약 &amp;quot;펌핑&amp;quot; (제한된 사운드가 시간이 지나면서 다시 올라오는 현상)이 거슬리는 경우 릴리즈를 더 길게 또는 더 짧게 만들면 효과가 덜 눈에 띄도록 할 수 있습니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;포스트 게인:&lt;/span&gt; 포스트 게인은 모든 효과가 적용된 후 사운드가 리미터에 도달하기 전에 모든 이펙트에 대한 디지털 볼륨 노브 역할을 합니다.
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;리미터&lt;/span&gt;&lt;/p&gt;&lt;p&gt;이 출력 리미터는 출력의 클리핑(입력이 이미 최대치에 근접한 경우 오디오 신호의 일부 또는 전부를 이전보다 더 크게 만들려고 하는 DSP에 의해 발생함)을 방지합니다. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;리미터 임계값:&lt;/span&gt; 디지털 클리핑 전에 오디오를 클리핑하는 경우가 아니라면 이 값은 -0.1로 설정해야 하며, 이 경우 이보다 낮은 값으로 설정할 수 있습니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;리미터 릴리즈:&lt;/span&gt; 리미터는 릴리즈 시간이 설정된 경우에만 유효합니다. 릴리스 시간이 짧으면 특히 저주파의 경우 제한된 소리가 들리도록 왜곡됩니다. 일반적으로 확장된 릴리스가 선호되지만 달성할 수 있는 음량이 다소 줄어듭니다. 만약 &amp;quot;펌핑&amp;quot; (제한된 소리가 시간이 지나면서 다시 올라오는 현상)이 거슬리는 경우 릴리즈를 더 길게 또는 더 짧게 만들면 효과가 덜 눈에 띄도록 할 수 있습니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;포스트 게인:&lt;/span&gt; 포스트 게인은 모든 효과가 적용된 후 사운드가 리미터에 도달하기 전에 모든 이펙트에 대한 디지털 볼륨 노브 역할을 합니다.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -1079,7 +1079,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;다이나믹 레인지 컴팬더&lt;/span&gt;&lt;/p&gt;&lt;p&gt;다이나믹 레인지 컴팬더를 활성화/비활성화합니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
@@ -1125,12 +1125,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
       <source>Custom BS2B parameters</source>
-      <translation type="unfinished"/>
+      <translation>커스텀 BS2B 매개변수</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="566"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>차단 주파수</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
@@ -1140,73 +1140,73 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>음장 넓이</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="645"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>확장 단계</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="690"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;잔향&lt;/span&gt;&lt;/p&gt;&lt;p&gt;복합 잔향 IIR 네트워크 (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;리버브&lt;/span&gt;&lt;/p&gt;&lt;p&gt;복합 리버브 IIR 네트워크 (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="716"/>
       <source>Enable reverberation</source>
-      <translation>잔향 활성화</translation>
+      <translation>리버브 활성화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>프리셋</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="769"/>
       <location filename="../../src/MainWindow.ui" line="2143"/>
       <source>...</source>
-      <translation type="unfinished"/>
+      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="783"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>오버샘플링 계수</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="803"/>
       <source>Early reflection factor</source>
-      <translation type="unfinished"/>
+      <translation>초기 반사 계수</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="826"/>
       <source>Early reflection amount</source>
-      <translation type="unfinished"/>
+      <translation>초기 반사량</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="843"/>
       <source>Early reflection width</source>
-      <translation type="unfinished"/>
+      <translation>초기 반사 폭</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="866"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>로우패스 컷오프 (입력)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="886"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>로우패스 컷오프 (저음)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="906"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>로우패스 컷오프 (댐프)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="926"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>로우패스 컷오프 (출력)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="953"/>
@@ -1221,7 +1221,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="967"/>
       <source>Reverb wetness</source>
-      <translation type="unfinished"/>
+      <translation>리버브 습도</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="974"/>
@@ -1261,7 +1261,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>FIR 미니멈 페이즈</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1298"/>
@@ -1291,22 +1291,22 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1249"/>
       <source>Enable EQ</source>
-      <translation type="unfinished"/>
+      <translation>EQ 활성화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>다중 해상도 (연속 웨이블릿, 불완전 이중 프레임)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>의사 다중 해상도 (언더 샘플링 프레임)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>의사 다중 해상도 (시간 영역, 레이턴시 없음)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -1321,12 +1321,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1338"/>
       <source>Interpolator</source>
-      <translation type="unfinished"/>
+      <translation>보간</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1341"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;보간 모드&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
@@ -1346,17 +1346,18 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1398"/>
       <source>Fixed bands</source>
-      <translation type="unfinished"/>
+      <translation>고정 밴드</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1414"/>
       <source>Flexible bands</source>
-      <translation type="unfinished"/>
+      <translation>가변 밴드</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1446"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;컨볼버&lt;/span&gt;&lt;/p&gt;&lt;p&gt;분할 컨볼버 (자동 분할 컨볼루션). 컨볼브할 임펄스 응답 파일을 선택하세요. 임펄스 응답의 신호 특성을 가져와 실시간으로 수신 오디오에 적용합니다.&lt;/p&gt;&lt;p&gt;모노, 스테레오, 풀/트루 스테레오 (LL, LR, RL, RR) 임펄스 응답을 지원합니다.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;임펄스 응답 최적화:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;이 매개변수는 임펄스 응답의 길이를 가능한 한 줄이려고 시도합니다. 핵심은 가능한 한 레이턴시을 줄이고, 가능한 한 전력 소모를 줄이는 것입니다.
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1471"/>
@@ -1372,32 +1373,32 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1532"/>
       <source>Enable convolver</source>
-      <translation type="unfinished"/>
+      <translation>컨볼버 활성화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1539"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>IR 최적화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>원형</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>축소</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1569"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>미니멈 페이즈 변환 및 축소</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1577"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>고급 파형 편집</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1596"/>
@@ -1407,12 +1408,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1642"/>
       <source>Channels:</source>
-      <translation type="unfinished"/>
+      <translation>채널:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1662"/>
       <source>Samples:</source>
-      <translation type="unfinished"/>
+      <translation>샘플:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1721"/>
@@ -1432,47 +1433,47 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1856"/>
       <source>Create</source>
-      <translation type="unfinished"/>
+      <translation>생성</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1880"/>
       <source>Create your custom DDC files using DDCToolbox</source>
-      <translation type="unfinished"/>
+      <translation>DDCToolbox를 사용하여 커스텀 DDC 파일 생성</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1890"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1946"/>
       <source>View installation instructions</source>
-      <translation type="unfinished"/>
+      <translation>설치 지침 보기</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2002"/>
       <source>Enable ViPER-DDC</source>
-      <translation type="unfinished"/>
+      <translation>ViPER-DDC 활성화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2025"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;실시간 프로그래밍 DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;이것은 .eel 코드 파일을 입력으로 컴파일하고 명령어를 실행하는 가상 머신입니다. 간단히 말하자면 사용자가 직접 오디오 효과를 프로그래밍할 수 있습니다.&lt;/p&gt;&lt;p&gt;지원되는 효과의 수는 엄청나게 많으므로 공식 설명서를 확인해 보세요: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;EEL 코드 파일을 위한 기본 제공 스크립팅 환경을 시작하려면 &apos;스크립트 편집&apos; 을 누르세요.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2047"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;임의 응답 이퀄라이저 (GEQ)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;EqualizerAPO의 GraphicEQ로도 알려져 있습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2085"/>
       <source>Custom Presets</source>
-      <translation type="unfinished"/>
+      <translation>커스텀 프리셋</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2088"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;커스텀 프리셋&lt;/span&gt;&lt;/p&gt;&lt;p&gt;커스텀 프리셋을 생성 및 관리합니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2114"/>
@@ -1482,17 +1483,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2120"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;설정&lt;/span&gt;&lt;/p&gt;&lt;p&gt;본 애플리케이션을 구성합니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2140"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;기타&lt;/span&gt;&lt;/p&gt;&lt;p&gt;자주 사용되지 않는 다양한 작업들&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2198"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;패스스루&lt;/span&gt;&lt;/p&gt;&lt;p&gt;이 옵션은 음향 효과의 활성화 또는 비활성화 여부를 정의합니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2201"/>
@@ -1507,7 +1508,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="166"/>
       <source>Cannot execute script</source>
-      <translation type="unfinished"/>
+      <translation>스크립트를 실행할 수 없음</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="167"/>
@@ -1567,7 +1568,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="400"/>
       <source>Reverb</source>
-      <translation type="unfinished"/>
+      <translation>리버브</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="401"/>
@@ -1597,12 +1598,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="417"/>
       <source>Launch application</source>
-      <translation type="unfinished"/>
+      <translation>애플리케이션 실행</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="560"/>
       <source>Reset Configuration</source>
-      <translation type="unfinished"/>
+      <translation>구성 재설정</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="560"/>
@@ -2223,12 +2224,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation>긴 잔향 1</translation>
+      <translation>긴 리버브 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation>긴 잔향 2</translation>
+      <translation>긴 리버브 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
@@ -2468,7 +2469,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation>기본 창의 점 3개 메뉴를 사용하여 액세스할 수 있는 &apos;앱&apos; 섹션에서 사운드를 재생하는 앱이 JamesDSP에 의해 처리되지 않도록 차단할 수 있습니다.</translation>
+      <translation>기본 창의 점 3개 메뉴를 사용하여 액세스할 수 있는 &apos;앱&apos; 섹션에서 소리를 재생하는 앱이 JamesDSP에 의해 처리되지 않도록 차단할 수 있습니다.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
