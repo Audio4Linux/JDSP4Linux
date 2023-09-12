@@ -584,7 +584,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
       <source>Console output</source>
-      <translation type="unfinished"/>
+      <translation>콘솔 출력</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
@@ -609,7 +609,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>파일을 쓸 수 없습니다</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
@@ -665,7 +665,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
       <source>Downloading package...</source>
-      <translation type="unfinished"/>
+      <translation>패키지 다운로드 중...</translation>
     </message>
   </context>
   <context>
@@ -793,7 +793,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
       <source>Run in background?</source>
-      <translation type="unfinished"/>
+      <translation>백그라운드에서 실행하시겠습니까?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
@@ -859,7 +859,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 데이터베이스...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
@@ -1059,7 +1059,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>리미터/마스터</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="214"/>
@@ -1523,7 +1523,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="282"/>
       <source>Driver status</source>
-      <translation type="unfinished"/>
+      <translation>드라이버 상태</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="286"/>
@@ -1533,17 +1533,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="288"/>
       <source>Reset to defaults</source>
-      <translation type="unfinished"/>
+      <translation>기본값으로 초기화</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="289"/>
       <source>Load from file</source>
-      <translation type="unfinished"/>
+      <translation>파일에서 불러오기</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="290"/>
       <source>Save to file</source>
-      <translation type="unfinished"/>
+      <translation>파일로 저장하기</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="292"/>
@@ -1703,12 +1703,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
+      <translation>파일 이름</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
       <source>Description</source>
-      <translation type="unfinished"/>
+      <translation>설명</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
@@ -1750,7 +1750,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/utils/OverlayMsgProxy.h" line="33"/>
       <location filename="../../src/utils/OverlayMsgProxy.h" line="37"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>닫기</translation>
     </message>
   </context>
   <context>
@@ -1833,12 +1833,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>프리셋</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
       <source>Preset name</source>
-      <translation type="unfinished"/>
+      <translation>프리셋 이름</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
@@ -1858,7 +1858,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>제거</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
@@ -1871,7 +1871,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="23"/>
       <source>No presets saved</source>
-      <translation type="unfinished"/>
+      <translation>저장된 프리셋 없음</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
@@ -1886,7 +1886,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
       <source>Overwrite</source>
-      <translation type="unfinished"/>
+      <translation>덮어쓰기</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
@@ -1896,12 +1896,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>이름 바꾸기</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
       <source>Delete</source>
-      <translation type="unfinished"/>
+      <translation>삭제</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
@@ -2184,7 +2184,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Medium room 1</source>
-      <translation type="unfinished"/>
+      <translation>중형 방 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2199,7 +2199,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 2</source>
-      <translation type="unfinished"/>
+      <translation>대형 방 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
