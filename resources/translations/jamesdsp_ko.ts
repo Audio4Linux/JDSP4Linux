@@ -2189,7 +2189,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium room 2</source>
-      <translation type="unfinished"/>
+      <translation>중간 방 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2414,12 +2414,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
       <source>Liveprog scripts</source>
-      <translation type="unfinished"/>
+      <translation>Liveprog 스크립트</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="534"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>저장</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="543"/>
@@ -2459,7 +2459,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="634"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>기기</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
@@ -2484,17 +2484,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="744"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 데이터베이스</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="755"/>
       <source>Status:</source>
-      <translation type="unfinished"/>
+      <translation>상태:</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="765"/>
       <source>unknown</source>
-      <translation type="unfinished"/>
+      <translation>알 수 없음</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="785"/>
@@ -2604,7 +2604,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="402"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>확실합니까?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="403"/>
@@ -2670,12 +2670,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
       <source>Audio format</source>
-      <translation type="unfinished"/>
+      <translation>오디오 형식</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>샘플링 레이트</translation>
     </message>
   </context>
   <context>
@@ -2683,7 +2683,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Processing</source>
-      <translation type="unfinished"/>
+      <translation>처리 중</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
@@ -2748,7 +2748,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="205"/>
       <source>Off</source>
-      <translation type="unfinished"/>
+      <translation>꺼짐</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="221"/>
@@ -2800,7 +2800,7 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>오류</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
@@ -2872,7 +2872,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>닫기</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
