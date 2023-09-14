@@ -139,11 +139,14 @@ using namespace std;
 int main(int   argc,
          char *argv[])
 {
+    // Locale workaround
     setlocale(LC_NUMERIC, "C");
+    QLocale::setDefault(QLocale::c());
+
     // Used for some crash handler magic & auto-start setup
-	findyourself_init(argv[0]);
-	char exepath[PATH_MAX];
-	find_yourself(exepath, sizeof(exepath));
+    findyourself_init(argv[0]);
+    char exepath[PATH_MAX];
+    find_yourself(exepath, sizeof(exepath));
     // Ensure temp directory exists
     mkdir("/tmp/jamesdsp/", S_IRWXU);
     // Prepare crash handler if enabled
@@ -181,7 +184,7 @@ int main(int   argc,
     QCommandLineOption deletePreset(QStringList() << "delete-preset", "Delete preset by name (Remote)", "name");
     QCommandLineOption listPresets(QStringList() << "list-presets", "List presets (Remote)");
 
-	QCommandLineParser parser;
+    QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("JamesDSP is an advanced audio processing engine available for Linux and Android systems."));
     parser.addHelpOption();
     parser.addVersionOption();
@@ -213,13 +216,6 @@ int main(int   argc,
 #ifndef NO_CRASH_HANDLER
     SPIN_ON_CRASH = parser.isSet(spinlck);
 #endif
-
-    // Locale workaround
-    QLocale::setDefault(QLocale::c());
-    if(setlocale(LC_NUMERIC, "en_US.UTF-8") == nullptr)
-    {
-        setlocale(LC_NUMERIC, "C");
-    }
 
     // Prepare logger
     bool minVerbValid = false;
