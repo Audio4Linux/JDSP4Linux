@@ -141,6 +141,7 @@ int main(int   argc,
 {
     // Locale workaround
     setlocale(LC_NUMERIC, "C");
+    auto systemLocale = QLocale::system();
     QLocale::setDefault(QLocale::c());
 
     // Used for some crash handler magic & auto-start setup
@@ -159,7 +160,7 @@ int main(int   argc,
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
     QScopedPointer<QCoreApplication> app(new QCoreApplication(argc, argv));
-    initTranslator(QLocale::system());
+    initTranslator(systemLocale);
 
     QCoreApplication::setApplicationName("jamesdsp");
     QCoreApplication::setApplicationVersion(APP_VERSION_FULL);
@@ -277,7 +278,7 @@ int main(int   argc,
         app.reset();
         app.reset(new QApplication(argc, argv));
         QString langOverride = parser.value(lang);
-        initTranslator(langOverride.isEmpty() ? QLocale::system() : QLocale(langOverride));
+        initTranslator(langOverride.isEmpty() ? systemLocale : QLocale(langOverride));
 
         Log::clear();
 
