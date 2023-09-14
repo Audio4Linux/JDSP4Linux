@@ -139,6 +139,7 @@ using namespace std;
 int main(int   argc,
          char *argv[])
 {
+    setlocale(LC_NUMERIC, "C");
     // Used for some crash handler magic & auto-start setup
 	findyourself_init(argv[0]);
 	char exepath[PATH_MAX];
