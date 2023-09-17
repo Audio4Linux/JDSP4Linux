@@ -175,7 +175,7 @@ If you are still using PulseAudio with your Fedora/openSUSE installation, refer 
 **Debian/Ubuntu-based distros**
 
 ```bash
-sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev 
+sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev qttools5-dev-tools
 ```
 
 **Fedora 34**
