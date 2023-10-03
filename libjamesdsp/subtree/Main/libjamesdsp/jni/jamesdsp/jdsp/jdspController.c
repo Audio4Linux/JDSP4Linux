@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include <float.h>
+#include <locale.h>
 #include "Effects/eel2/dr_flac.h"
 #include "Effects/eel2/ns-eel.h"
 #include "jdsp_header.h"
@@ -1145,6 +1146,7 @@ void JamesDSPInit(JamesDSPLib *jdsp, int n, float sample_rate)
 		__android_log_print(ANDROID_LOG_INFO, TAG, "%1.7lf,%1.7lf", convbench_c0[s], convbench_c1[s]);
 	__android_log_print(ANDROID_LOG_INFO, TAG, "Printing benchmark data end");
 #endif
+	setlocale(LC_NUMERIC, "C");
 }
 void JamesDSPSetPostGain(JamesDSPLib *jdsp, double pGaindB)
 {
