@@ -15,6 +15,9 @@ jobs:
   build-pulse-amd64:
     runs-on: ubuntu-20.04
     container: ubuntu:22.04
+    strategy:
+      matrix:
+        flavor: [full, headless]
 
     steps:
     - name: Setup APT
@@ -38,17 +41,22 @@ jobs:
         DEBIAN_FRONTEND="noninteractive" 
         apt install -y tree make gcc g++ lftp pkg-config libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
      
-    - name: Initialize project (PulseAudio flavor)
+    - name: Initialize project (PulseAudio/full)
+      if: matrix.flavor == 'full'
       run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
-      
+
+    - name: Initialize project (PulseAudio/headless)
+      if: matrix.flavor == 'headless'
+      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO" "CONFIG+=HEADLESS"
+
     - name: Build
       run: |
         make
-    
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: jamesdsp-pulse_portable_linux64
+        name: jamesdsp-pulse-${{ matrix.flavor }}_portable_linux64
         path: src/jamesdsp
         
   build-pipewire-amd64:
@@ -76,9 +84,15 @@ jobs:
         echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
         DEBIAN_FRONTEND="noninteractive" apt install -y libarchive-dev tree make gcc g++ lftp pkg-config qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
       
-    - name: Initialize project (PipeWire flavor)
+    - name: Initialize project (PW/full)
+      if: matrix.flavor == 'full'
       run: qmake JDSP4Linux.pro "CONFIG += CI"
-      
+
+    - name: Initialize project (PW/headless)
+      if: matrix.flavor == 'headless'
+      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG+=HEADLESS"
+
+
     - name: Build
       run: |
         make -j4
@@ -87,7 +101,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: jamesdsp-pipewire_portable_linux64
+        name: jamesdsp-pipewire-${{ matrix.flavor }}_portable_linux64
         path: src/jamesdsp
     
   build-deb-amd64:
@@ -121,7 +135,7 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_portable_linux64
+        name: jamesdsp-${{ matrix.flavor }}-full_portable_linux64
       
     - name: Build DEB package
       run: |
