@@ -62,6 +62,9 @@ jobs:
   build-pipewire-amd64:
     runs-on: ubuntu-20.04
     container: ubuntu:22.04
+    strategy:
+      matrix:
+        flavor: [full, headless]
 
     steps:
     - name: Setup APT
