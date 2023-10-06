@@ -60,7 +60,8 @@ class MainWindow :
 	Q_OBJECT
 
 public:
-    explicit MainWindow(bool     statupInTray,
+    explicit MainWindow(IAudioService* audioService,
+                        bool     statupInTray,
 	                    QWidget *parent = nullptr);
 	~MainWindow();
 

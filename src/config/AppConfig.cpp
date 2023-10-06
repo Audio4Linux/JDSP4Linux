@@ -1,7 +1,9 @@
 #include "AppConfig.h"
 
 #include "ConfigIO.h"
+#ifndef HEADLESS
 #include "utils/AutoStartManager.h"
+#endif
 #include "utils/Common.h"
 
 #include <QStandardPaths>
@@ -31,7 +33,7 @@ AppConfig::AppConfig()
     DEFINE_KEY(ExecutablePath, "");
     DEFINE_KEY(VdcLastDatabaseId, -1);
     DEFINE_KEY(LastWindowGeometry, QByteArray());
-#ifdef USE_PORTALS
+#if defined(USE_PORTALS) || defined(HEADLESS)
     DEFINE_KEY(AutoStartEnabled, false);
 #else
     DEFINE_KEY(AutoStartEnabled, QFile(AutostartManager::getAutostartPath()).exists());

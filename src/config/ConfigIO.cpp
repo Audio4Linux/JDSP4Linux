@@ -1,7 +1,6 @@
 #include "ConfigIO.h"
 
 #include <fstream>
-#include <QMessageBox>
 #include <QRegularExpression>
 #include <string>
 

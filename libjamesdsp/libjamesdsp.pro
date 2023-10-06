@@ -5,6 +5,7 @@ DEFINES += LIBJAMESDSP_PLUGIN
 
 CONFIG += c++17
 
+QT -= gui widgets
 QMAKE_CFLAGS += -std=gnu11 -O2
 #QMAKE_CFLAGS += -std=gnu11 -g3 -Og -gdwarf-2 -finline-functions
 

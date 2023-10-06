@@ -3,11 +3,79 @@
 #include "config/AppConfig.h"
 #include "data/PresetProvider.h"
 #include "utils/Log.h"
-#include "utils/Common.h"
 
 #include <QApplication>
 #include <QMenu>
 #include <QDir>
+
+namespace MenuIO
+{
+static QString buildString(QMenu *menu)
+{
+    QString out;
+
+    for (auto action : menu->actions())
+    {
+        if (action->isSeparator())
+        {
+            out += "separator;";
+        }
+        else if (action->menu())
+        {
+            out += action->menu()->property("tag").toString() + ";";
+        }
+        else
+        {
+            out += action->property("tag").toString() + ";";
+        }
+    }
+
+    return out;
+}
+
+static QMenu* buildMenu(QMenu   *options,
+                        QString  input,
+                        QWidget *owner)
+{
+    QMenu *out = new QMenu(owner);
+
+    for (auto item : input.split(";"))
+    {
+        if (item == "separator")
+        {
+            out->addSeparator();
+        }
+        else if (item.startsWith("menu"))
+        {
+            for (auto action : options->actions())
+            {
+                if (action->menu())
+                {
+                    if (action->menu()->property("tag") == item)
+                    {
+                        out->addMenu(action->menu());
+                        continue;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (auto action : options->actions())
+            {
+                if (action->property("tag") == item)
+                {
+                    out->addAction(action);
+                    continue;
+                }
+            }
+        }
+    }
+
+    return out;
+}
+
+}
 
 TrayIcon::TrayIcon(QObject *parent) : QObject(parent)
 {

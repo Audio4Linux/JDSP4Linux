@@ -1,9 +1,3 @@
-#ifdef USE_PULSEAUDIO
-#include <PulseAudioService.h>
-#else
-#include <PipewireAudioService.h>
-#endif
-
 #include "IAudioService.h"
 
 #include "MainWindow.h"
@@ -58,37 +52,16 @@
 
 using namespace std;
 
-MainWindow::MainWindow(bool     statupInTray,
+MainWindow::MainWindow(IAudioService* audioService,
+                       bool statupInTray,
                        QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    _audioService(audioService)
 {
     ui->setupUi(this);
 
-    // Prepare audio subsystem
-    {
-        Log::information("============ Initializing audio service ============");
-#ifdef USE_PULSEAUDIO
-        Log::information("Compiled with PulseAudio support.");
-        Log::information("This application flavor does not support PipeWire or its PulseAudio compatibility mode.");
-        Log::information("If you want to use this application with PipeWire, you need to recompile this app with proper support enabled.");
-        Log::information("Refer to the README for more detailed information.");
-        Log::information("");
-        _audioService = new PulseAudioService();
-#else
-        Log::information("Compiled with PipeWire support.");
-        Log::information("This application flavor does not support PulseAudio.");
-        Log::information("If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.");
-        Log::information("Refer to the README for more detailed information.");
-        Log::information("");
-        Log::debug("Blocklisted apps: " + AppConfig::instance().get<QString>(AppConfig::AudioAppBlocklist) /* explicitly use as QString here */);
-        Log::debug("Blocklist mode: " + QString((AppConfig::instance().get<bool>(AppConfig::AudioAppBlocklistInvert) ? "allow" : "block")));
-        _audioService = new PipewireAudioService();
-#endif
-        connect(_audioService, &IAudioService::logOutputReceived, this, [](const QString& msg){ Log::kernel(msg); });
-        connect(&DspConfig::instance(), &DspConfig::updated, _audioService, &IAudioService::update);
-        connect(&DspConfig::instance(), &DspConfig::updatedExternally, _audioService, &IAudioService::update);
-    }
+
 
     // Allocate resources
     {
@@ -320,15 +293,6 @@ MainWindow::MainWindow(bool     statupInTray,
         _styleHelper->SetStyle();
         ui->eq_widget->setAccentColor(palette().highlight().color());
         ui->comp_response->setAccentColor(palette().highlight().color());
-    }
-
-    // Extract default EEL files if missing
-    {
-        if (AppConfig::instance().get<bool>(AppConfig::LiveprogAutoExtract))
-        {
-            AssetManager::instance().extractAll();
-
-        }
     }
 
     // Setup file selectors
