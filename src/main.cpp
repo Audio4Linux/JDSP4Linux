@@ -164,7 +164,7 @@ IAudioService* initAudioService() {
     Log::information("If you want to use this application with PipeWire, you need to recompile this app with proper support enabled.");
     Log::information("Refer to the README for more detailed information.");
     Log::information("");
-    _audioService = new PulseAudioService();
+    service = new PulseAudioService();
 #else
     Log::information("Compiled with PipeWire support.");
     Log::information("This application flavor does not support PulseAudio.");
