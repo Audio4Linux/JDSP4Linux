@@ -1077,7 +1077,7 @@ Selecione outro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Compressor de faixa dinâmica&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Habilita/desabilita o compressor de faixa dinâmica.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
@@ -1254,7 +1254,7 @@ Selecione outro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1157"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Equalizador Multimodal&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hables/desabilita o equalizador multimodal.&lt;/p&gt;&lt;p&gt;Tipo de Filtro&lt;span style=&quot; text-decoration: underline;&quot;&gt;:&lt;/span&gt; o equalizador multimodal suporta ambos FIR (fase mínima) e vários modos de filtragem IIR.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1293"/>
@@ -1294,17 +1294,17 @@ Selecione outro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation>Multirresolução</translation>
+      <translation>Multirresolução (Onda contínua, duplo quadro incompleto)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo multirresolução (Quadro de Subamostragem)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo multirresolução (domínio de tempo, latência zero)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -1620,27 +1620,27 @@ Selecione outro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>Muito baixo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>Baixo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>Médio</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>Alto</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1050"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>Extremo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1170"/>
@@ -2271,22 +2271,22 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>A permissão de início automático foi recusada</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Execute &apos;flatpak permission-set background background %1 yes&apos; e reative o início automático.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Erro desconhecido</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>Por favor, certifique-se de que uma implementação do Portal XDG de Fundo está disponível e ativo para usar o início automático. %1</translation>
     </message>
   </context>
   <context>
@@ -2309,7 +2309,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Processamento de áudio</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
@@ -2364,42 +2364,42 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>Avaliação de Convolver</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>Fazer avaliação de desempenho</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Limpar dados em cache</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>Habilitar avaliação de desempenho na inicialização</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>A avaliação de desempenho na inicialização pode causar maior uso da CPU por cerca de um minuto após a inicialização. Gerar dados de avaliação de desempenho para o seu sistema pode melhorar o desempenho dos módulos de convolver.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Soluções alternativas</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>Permitir controle de volume do dispositivo de sink virtual</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>É necessário reiniciar para aplicar as alterações. Pode causar perda de áudio em alguns casos.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
@@ -2550,7 +2550,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="283"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>dados de avaliação carregados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="216"/>
@@ -2571,7 +2571,7 @@ Crie uma primeiro antes de adicionar uma nova regra.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>nenhum dado de avaliação armazenado</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
@@ -2625,17 +2625,17 @@ Se eles foram modificados, eles serão redefinidos.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="454"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>Aguardando o resultado...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>Cache limpo</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>Os dados da avaliação foram limpos. Reinicie este aplicativo para aplicar todas as alterações.</translation>
     </message>
   </context>
   <context>
