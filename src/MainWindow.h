@@ -27,26 +27,16 @@
 #include "data/PresetProvider.h"
 #include "EventArgs.h"
 
+
 class IAudioService;
-class AppConfig;
-class AutostartManager;
-class EELParser;
-class ConfigContainer;
-class StyleHelper;
-class DBusProxy;
-class OverlayMsgProxy;
-class EELEditor;
-class PresetFragment;
-class SettingsFragment;
-class AudioStreamEngine;
-class Spectrograph;
-class QJsonTableModel;
-class TrayIcon;
-class QVBoxLayout;
-class AudioManager;
-class SingleInstanceMonitor;
-class StatusFragment;
 class IpcHandler;
+class AutostartManager;
+class TrayIcon;
+class StyleHelper;
+class StatusFragment;
+class SettingsFragment;
+class PresetFragment;
+class EELEditor;
 
 using namespace std;
 namespace Ui

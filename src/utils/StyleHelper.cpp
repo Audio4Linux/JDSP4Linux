@@ -1,8 +1,6 @@
 #include "StyleHelper.h"
-#include "ui_MainWindow.h"
 
 #include "config/AppConfig.h"
-#include "interface/fragment/SettingsFragment.h"
 #include "MainWindow.h"
 #include <eeleditor.h>
 

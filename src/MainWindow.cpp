@@ -7,12 +7,8 @@
 #include "config/ConfigContainer.h"
 #include "config/ConfigIO.h"
 #include "config/DspConfig.h"
-#include "data/AssetManager.h"
-#include "data/EelParser.h"
 #include "data/model/VdcDatabaseModel.h"
 #include "data/PresetManager.h"
-#include "interface/event/EventFilter.h"
-#include "interface/event/ScrollFilter.h"
 #include "interface/fragment/FirstLaunchWizard.h"
 #include "interface/fragment/PresetFragment.h"
 #include "interface/fragment/SettingsFragment.h"
@@ -21,22 +17,17 @@
 #include "interface/TrayIcon.h"
 #include "utils/AutoStartManager.h"
 #include "utils/Common.h"
-#include "utils/dbus/ClientProxy.h"
 #include "utils/dbus/IpcHandler.h"
 #include "utils/dbus/ServerAdaptor.h"
 #include "utils/DebuggerUtils.h"
+#include "utils/DesktopServices.h"
 #include "utils/Log.h"
-#include "utils/OverlayMsgProxy.h"
-#include "utils/SingleInstanceMonitor.h"
 #include "utils/StyleHelper.h"
 
-//#include <audiostreamengine.h>
 #include <Animation/Animation.h>
 #include <eeleditor.h>
 #include <AeqSelector.h>
 #include <LiquidEqualizerWidget.h>
-#include <utils/DesktopServices.h>
-//#include <spectrograph.h>
 
 #include <QButtonGroup>
 #include <QClipboard>
