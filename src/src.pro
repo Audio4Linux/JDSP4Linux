@@ -97,7 +97,6 @@ CONFIG += c++2a
         MainWindow.h \
         utils/AutoStartManager.h \
         utils/DesktopServices.h \
-        utils/WindowUtils.h \
         utils/OverlayMsgProxy.h \
         utils/StyleHelper.h
 
@@ -158,7 +157,6 @@ HEADERS += \
     data/PresetManager.h \
     data/PresetProvider.h \
     data/PresetRule.h \
-    data/VersionContainer.h \
     data/model/AppItemModel.h \
     data/model/DeviceListModel.h \
     data/model/PresetListModel.h \
@@ -166,7 +164,6 @@ HEADERS += \
     data/model/QJsonTableModel.h \
     data/model/VdcDatabaseModel.h \
     utils/CliRemoteController.h \
-    utils/CrashReportSender.h \
     utils/DebuggerUtils.h \
     utils/Log.h \
     utils/SingleInstanceMonitor.h \
@@ -193,7 +190,6 @@ SOURCES += \
     data/model/VdcDatabaseModel.cpp \
     main.cpp \
     utils/CliRemoteController.cpp \
-    utils/CrashReportSender.cpp \
     utils/Log.cpp \
     utils/SingleInstanceMonitor.cpp \
     utils/dbus/ClientProxy.cpp \
@@ -203,7 +199,6 @@ SOURCES += \
 !NO_CRASH_HANDLER {
     HEADERS += \
         crash/airbag.h \
-        crash/killer.h \
         crash/safecall.h \
         crash/stacktrace.h \
 

@@ -11,7 +11,6 @@
 #include "data/EelParser.h"
 #include "data/model/VdcDatabaseModel.h"
 #include "data/PresetManager.h"
-#include "data/VersionContainer.h"
 #include "interface/event/EventFilter.h"
 #include "interface/event/ScrollFilter.h"
 #include "interface/fragment/FirstLaunchWizard.h"

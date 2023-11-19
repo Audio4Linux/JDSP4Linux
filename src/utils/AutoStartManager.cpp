@@ -7,7 +7,6 @@
 #include "config/AppConfig.h"
 #include "config/ConfigContainer.h"
 #include "config/ConfigIO.h"
-#include "utils/WindowUtils.h"
 
 #include <QDir>
 #include <QFile>
