@@ -310,7 +310,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>Gestionar permisos de inicio automático para JamesDSP</translation>
     </message>
   </context>
   <context>
@@ -318,12 +318,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
       <source>Annotations</source>
-      <translation type="unfinished"/>
+      <translation>Anotaciones</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
       <source>Functions</source>
-      <translation type="unfinished"/>
+      <translation>Funciones</translation>
     </message>
   </context>
   <context>
@@ -331,22 +331,22 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
       <source>Auto-scroll</source>
-      <translation type="unfinished"/>
+      <translation>Desplazamiento automático</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>Copiar selección</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
       <source>Copy all</source>
-      <translation type="unfinished"/>
+      <translation>Copiar todo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Limpiar</translation>
     </message>
   </context>
   <context>
@@ -359,48 +359,48 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
       <source>File</source>
-      <translation type="unfinished"/>
+      <translation>Archivo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Editar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>Navegación</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>Ver</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
       <source>Help</source>
-      <translation type="unfinished"/>
+      <translation>Ayuda</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
       <source>Open</source>
-      <translation type="unfinished"/>
+      <translation>Abrir</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
       <source>Open script</source>
-      <translation type="unfinished"/>
+      <translation>Abrir script</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
       <source>Ctrl+O</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar archivo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
@@ -471,43 +471,43 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
       <source>Ctrl+L</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+L</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
       <source>Jump to function...</source>
-      <translation type="unfinished"/>
+      <translation>Ir a la función...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
       <source>Ctrl+M</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+M</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
       <source>Go to @init</source>
-      <translation type="unfinished"/>
+      <translation>Ir a @init</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
       <source>F2</source>
-      <translation type="unfinished"/>
+      <translation>F2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
       <source>Go to @sample</source>
-      <translation type="unfinished"/>
+      <translation>Ir a @sample</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
       <source>F3</source>
-      <translation type="unfinished"/>
+      <translation>F3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>Paréntesis Automáticos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
@@ -517,22 +517,22 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>Documentación de EEL2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
       <source>F1</source>
-      <translation type="unfinished"/>
+      <translation>F1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>Ejecutar código</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
       <source>F5</source>
-      <translation type="unfinished"/>
+      <translation>F5</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
@@ -542,7 +542,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation type="unfinished"/>
+      <translation>Nuevo asistente de script</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
@@ -563,7 +563,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
       <source>Loaded projects</source>
-      <translation type="unfinished"/>
+      <translation>Proyectos cargados</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
@@ -852,7 +852,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos AutoEQ...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
@@ -882,56 +882,56 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
       <source>Invert response</source>
-      <translation type="unfinished"/>
+      <translation>Invertir respuesta</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>Normalizar respuesta</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
       <source>Reset response</source>
-      <translation type="unfinished"/>
+      <translation>Restablecer respuesta</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
       <source>Import EqualizerAPO settings</source>
-      <translation type="unfinished"/>
+      <translation>Importar ajustes de EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
       <source>Import frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Importar respuesta de frecuencia</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
       <source>CSV frequency response (*.csv)</source>
-      <translation type="unfinished"/>
+      <translation>Respuesta de frecuencia CSV (*.csv)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
       <source>All files (*.*)</source>
-      <translation type="unfinished"/>
+      <translation>Todos los archivos (*.*)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
       <source>Import EqualizerAPO graphic EQ preset</source>
-      <translation type="unfinished"/>
+      <translation>Importar preajuste EQ gráfico EqualizerAPO</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
       <source>EqualizerAPO GraphicEQ (*.txt)</source>
-      <translation type="unfinished"/>
+      <translation>GraphicEQ de EqualizerAPO (*.txt)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
       <source>Export frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Exportar respuesta de frecuencia</translation>
     </message>
   </context>
   <context>
@@ -944,12 +944,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="71"/>
       <source>%1MB of %2MB downloaded</source>
-      <translation type="unfinished"/>
+      <translation>%1MB de %2MB descargados</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/GzipDownloaderDialog.cpp" line="82"/>
       <source>Decompressing package...</source>
-      <translation type="unfinished"/>
+      <translation>Descomprimiendo paquete...</translation>
     </message>
   </context>
   <context>
@@ -958,7 +958,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="90"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="162"/>
       <source>No script has been loaded</source>
-      <translation type="unfinished"/>
+      <translation>No se ha cargado ningún script</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="113"/>
