@@ -1017,7 +1017,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Potenciacion de bajos dinamica&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Potenciacion de bajos con deteccion de frecuencias. Establece automáticamente sus propios parámetros, como ganancia, ancho de banda, y la frequencia cortada analizando el flujo de audio entrante&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ganancia máxima:&lt;/span&gt; ajusta la cantidad de los efectos del potenciador de bajos dinámicos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
