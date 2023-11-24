@@ -45,7 +45,6 @@ HEADERS += \
     $$BASEPATH/Effects/eel2/numericSys/cpoly.h \
     $$BASEPATH/Effects/eel2/numericSys/libsamplerate/common.h \
     $$BASEPATH/Effects/eel2/numericSys/libsamplerate/samplerate.h \
-    $$BASEPATH/Effects/eel2/numericSys/libsamplerate/src_config.h \
     $$BASEPATH/Effects/eel2/numericSys/quadprog.h \
     $$BASEPATH/Effects/eel2/numericSys/solvopt.h \
     $$BASEPATH/Effects/eel2/s_str.h \
@@ -103,6 +102,7 @@ SOURCES += \
     $$BASEPATH/Effects/eel2/numericSys/cpoly.c \
     $$BASEPATH/Effects/eel2/numericSys/libsamplerate/samplerate.c \
     $$BASEPATH/Effects/eel2/numericSys/libsamplerate/src_sinc.c \
+    $$BASEPATH/Effects/eel2/numericSys/libsamplerate/src_linear.c \
     $$BASEPATH/Effects/eel2/numericSys/quadprog.c \
     $$BASEPATH/Effects/eel2/numericSys/solvopt.c \
     $$BASEPATH/Effects/eel2/s_str.c \
