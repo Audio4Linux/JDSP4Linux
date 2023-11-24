@@ -1656,7 +1656,7 @@ void CompressorSetGain(JamesDSPLib *jdsp, double *freq, double *gains, char cpy)
 	cm->gains2[0] = cm->gains2[1];
 	cm->freq2[NUMPTS_DRS + 1] = 24000.0;
 	cm->gains2[NUMPTS_DRS + 1] = cm->gains2[NUMPTS_DRS];
-	makima(&cm->pch, cm->freq2, cm->gains2, NUMPTS_DRS + 2, 1, 1);
+	pchip(&cm->pch, cm->freq2, cm->gains2, NUMPTS_DRS + 2, 1, 1);
 	unsigned int specLen = *((unsigned int *)(cm->octaveSmooth));
 	float reciprocal = *((float *)(cm->octaveSmooth + sizeof(unsigned int)));
 	unsigned int lpLen = *((unsigned int *)(cm->octaveSmooth + sizeof(unsigned int) + sizeof(float)));

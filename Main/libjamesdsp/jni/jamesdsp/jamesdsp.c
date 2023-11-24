@@ -14,6 +14,8 @@
 typedef struct
 {
 	unsigned long long initializeForFirst;
+	int32_t engineImpulseResponseHash;
+	int32_t hashSlot[4];
 	int mEnable;
 	JamesDSPLib jdsp;
     float mSamplingRate;
@@ -214,6 +216,50 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 				replyData->vsize = 4;
 				replyData->cmd = 20002;
 				replyData->data = (int32_t)getpid();
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+			else if (cmd == 30000)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 30000;
+				replyData->data = dspmain->hashSlot[0];
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+			else if (cmd == 30001)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 30001;
+				replyData->data = dspmain->hashSlot[1];
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+			else if (cmd == 30002)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 30002;
+				replyData->data = dspmain->hashSlot[2];
+				*replySize = sizeof(reply1x4_1x4_t);
+				return 0;
+			}
+			else if (cmd == 30003)
+			{
+				reply1x4_1x4_t *replyData = (reply1x4_1x4_t *)pReplyData;
+				replyData->status = 0;
+				replyData->psize = 4;
+				replyData->vsize = 4;
+				replyData->cmd = 30003;
+				replyData->data = dspmain->hashSlot[3];
 				*replySize = sizeof(reply1x4_1x4_t);
 				return 0;
 			}
@@ -436,6 +482,23 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 #endif
 				dspmain->samplesInc = 0;
 				int success = Convolver1DLoadImpulseResponse(&dspmain->jdsp, dspmain->tempImpulseIncoming, dspmain->impChannels, dspmain->impulseLengthActual, 1);
+				union
+				{
+					int32_t raw;
+					float f;
+				} fltInt;
+				int32_t crc = 0xFFFFFFFF;
+				for (unsigned int i = 0; i < dspmain->impulseLengthActual * dspmain->impChannels; i++)
+				{
+					fltInt.f = dspmain->tempImpulseIncoming[i];
+					crc = crc ^ fltInt.raw;
+					for (int j = 7; j >= 0; j--)
+					{
+						int32_t mask = -(crc & 1);
+						crc = (crc >> 1) ^ (0xEDB88320 & mask);
+					}
+				}
+				dspmain->engineImpulseResponseHash = ~crc;
 				free(dspmain->tempImpulseIncoming);
 				dspmain->tempImpulseIncoming = 0;
 #ifdef DEBUG
@@ -497,6 +560,46 @@ int32_t EffectDSPMainCommand(EffectDSPMain *dspmain, uint32_t cmdCode, uint32_t 
 					LOGI("Live prog error message: %s", checkErrorCode(errorCode));
 #endif
 				}
+				*replyData = 0;
+				return 0;
+			}
+		}
+		if (cep->psize == 4 && cep->vsize == 4)
+		{
+			int32_t cmd = ((int32_t *)cep)[3];
+			if (cmd == 25000)
+			{
+				dspmain->hashSlot[0] = ((int32_t*)cep)[4];
+#ifdef DEBUG
+				LOGI("ArbEq hash: %d", dspmain->hashSlot[0]);
+#endif
+				*replyData = 0;
+				return 0;
+			}
+			if (cmd == 25001)
+			{
+				dspmain->hashSlot[0 + 1] = ((int32_t*)cep)[4];
+#ifdef DEBUG
+				LOGI("DDC hash: %d", dspmain->hashSlot[0 + 1]);
+#endif
+				*replyData = 0;
+				return 0;
+			}
+			if (cmd == 25002)
+			{
+				dspmain->hashSlot[0 + 2] = ((int32_t*)cep)[4];
+#ifdef DEBUG
+				LOGI("LiveProg hash: %d", dspmain->hashSlot[0 + 2]);
+#endif
+				*replyData = 0;
+				return 0;
+			}
+			if (cmd == 25003)
+			{
+				dspmain->hashSlot[0 + 3] = ((int32_t*)cep)[4];
+#ifdef DEBUG
+				LOGI("Convolver app hash: %d, engine hash: %d", dspmain->hashSlot[0 + 3], dspmain->engineImpulseResponseHash);
+#endif
 				*replyData = 0;
 				return 0;
 			}
