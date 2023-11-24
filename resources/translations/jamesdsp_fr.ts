@@ -39,7 +39,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Brut (lissé)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>

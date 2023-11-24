@@ -2385,22 +2385,22 @@ Bitte erstelle zuerst eine vor dem Hinzufügen einer neuen Regel.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>Benchmarking beim Booten kann zu erhöhter CPU-Auslastung nach dem Start für etwa eine Minute führen. Die Erstellung von Benchmarking-Daten für dein System kann die Leistung der Convolver-Module verbessern.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Workarounds</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>Lautstärkeregelung des virtuellen Ausgangsgeräts erlauben</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>Neustart erforderlich, um Änderungen zu übernehmen. Kann in einigen Fällen Audioverlust verursachen.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
