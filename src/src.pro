@@ -211,7 +211,22 @@ DISTFILES += utils/dbus/manifest.xml
 RESOURCES += \
     ../resources/resources.qrc
 
-TRANSLATIONS += ../resources/translations/jamesdsp_de.ts \
+TRANSLATIONS += ../resources/translations/jamesdsp_ar.ts \
+                ../resources/translations/jamesdsp_ca.ts \
+                ../resources/translations/jamesdsp_cs.ts \
+                ../resources/translations/jamesdsp_da.ts \
+                ../resources/translations/jamesdsp_el.ts \
+                ../resources/translations/jamesdsp_fi.ts \
+                ../resources/translations/jamesdsp_he.ts \
+                ../resources/translations/jamesdsp_hi.ts \
+                ../resources/translations/jamesdsp_hu.ts \
+                ../resources/translations/jamesdsp_id.ts \
+                ../resources/translations/jamesdsp_it.ts \
+                ../resources/translations/jamesdsp_ja.ts \
+                ../resources/translations/jamesdsp_ko.ts \
+                ../resources/translations/jamesdsp_nl.ts \
+                ../resources/translations/jamesdsp_no.ts \
+                ../resources/translations/jamesdsp_de.ts \
                 ../resources/translations/jamesdsp_en.ts \
                 ../resources/translations/jamesdsp_fr.ts \
                 ../resources/translations/jamesdsp_ru.ts \
