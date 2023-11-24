@@ -1,0 +1,122 @@
+[37m[22:51:00.465] [INF] main::main: Application version: 2.6.1-28-gae0af92 (Pipewire flavor) [0m
+[37m[22:51:00.466] [INF] main::main: Qt library version: 5.15.2[0m
+[37m[22:51:00.466] [INF] main::initAudioService: ============ Initializing audio service ============[0m
+[37m[22:51:00.466] [INF] main::initAudioService: Compiled with PipeWire support.[0m
+[37m[22:51:00.466] [INF] main::initAudioService: This application flavor does not support PulseAudio.[0m
+[37m[22:51:00.466] [INF] main::initAudioService: If you want to use this application with PulseAudio, you need to recompile this app with proper support enabled.[0m
+[37m[22:51:00.466] [INF] main::initAudioService: Refer to the README for more detailed information.[0m
+[37m[22:51:00.466] [INF] main::initAudioService: [0m
+[2;37m[22:51:00.466] [DBG] main::initAudioService: Blocklisted apps: [0m
+[2;37m[22:51:00.466] [DBG] main::initAudioService: Blocklist mode: block[0m
+[2;37m[22:51:00.467] [DBG] PwPipelineManager::PwPipelineManager$ctor: compiled with PipeWire: 0.3.85[0m
+[2;37m[22:51:00.467] [DBG] PwPipelineManager::PwPipelineManager$ctor: linked to PipeWire: 0.3.85[0m
+[2;37m[22:51:00.473] [DBG] PwPipelineManager::on_core_info: core version: 0.3.85[0m
+[2;37m[22:51:00.473] [DBG] PwPipelineManager::on_core_info: core name: pipewire-0[0m
+[2;37m[22:51:00.473] [DBG] PwPipelineManager::on_registry_global: found metadata: settings[0m
+[2;37m[22:51:00.473] [DBG] PwPipelineManager::on_registry_global: found metadata: default[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: found metadata: route-settings[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: found metadata: sm-objects[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Audio/Sink 48 alsa_output.pci-0000_00_1f.3.analog-stereo with serial 48 has been added[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Audio/Source 49 alsa_input.pci-0000_00_1f.3.analog-stereo with serial 49 has been added[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Audio/Sink 59 bluez_output.64_03_7F_2E_2B_3A.1 with serial 59 has been added[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Stream/Output/Audio 86 Firefox with serial 86 has been added[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Firefox port 87 is connected to bluez_output.64_03_7F_2E_2B_3A.1 port 60[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Firefox port 88 is connected to bluez_output.64_03_7F_2E_2B_3A.1 port 62[0m
+[2;37m[22:51:00.474] [DBG] PwPipelineManager::on_registry_global: Audio/Sink 65 jamesdsp_sink with serial 194 has been added[0m
+[2;37m[22:51:00.475] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 0, default.configured.audio.sink, Spa:String:JSON, {"name":"bluez_output.64_03_7F_2E_2B_3A.1"}[0m
+[2;37m[22:51:00.475] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 0, default.configured.audio.source, Spa:String:JSON, {"name":"alsa_input.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.mono-fallback"}[0m
+[2;37m[22:51:00.475] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 0, default.audio.sink, Spa:String:JSON, {"name":"bluez_output.64_03_7F_2E_2B_3A.1"}[0m
+[2;37m[22:51:00.475] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 0, default.audio.source, Spa:String:JSON, {"name":"alsa_input.pci-0000_00_1f.3.analog-stereo"}[0m
+[2;37m[22:51:00.475] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.node, Spa:Id, 73[0m
+[2;37m[22:51:00.476] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.object, Spa:Id, 157[0m
+[2;37m[22:51:00.476] [DBG] PwPipelineManager::PwPipelineManager$ctor: jamesdsp_sink node successfully retrieved with id 65 and serial 194[0m
+[2;37m[22:51:00.586] [DBG] PwBasePlugin::connect_to_pw: @PwJamesDspPlugin: JamesDsp successfully connected to PipeWire graph[0m
+[2;37m[22:51:00.596] [DBG] AssetManager::extractGroup: 5 assets extracted (type 0)[0m
+[2;37m[22:51:00.597] [DBG] AssetManager::extractGroup: 3 assets extracted (type 1)[0m
+[37m[22:51:00.618] [INF] main::main: Using language: en_US[0m
+[2;37m[22:51:00.618] [DBG] main::main: Launched by system session manager: no[0m
+[37m[22:51:00.620] [INF] SingleInstanceMonitor::isServiceReady: Service registration successful[0m
+[37m[22:51:00.836] [INF] MainWindow::MainWindow$ctor: ============ Initializing user interface ============[0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Config update started[0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: bass_enable -> QVariant(bool, true) [0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: bass_maxgain -> QVariant(QString, "11") [0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: compander_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: compander_response -> QVariant(QString, "95.0;200.0;400.0;800.0;1600.0;3400.0;7500.0;0.504827;0.157241;0;0;0;0;0") [0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: compander_granularity -> QVariant(QString, "1") [0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: compander_timeconstant -> QVariant(QString, "0.08000") [0m
+[2;37m[22:51:00.843] [DBG] DspHost::update: Property changed: compander_time_freq_transforms -> QVariant(QString, "1") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: convolver_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: convolver_file -> QVariant(QString, "/home/tim/.config/jamesdsp/irs/CorredHRTF_Surround2.wav") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: convolver_optimization_mode -> QVariant(QString, "0") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: convolver_waveform_edit -> QVariant(QString, "-80;-100;0;0;0;0") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: crossfeed_bs2b_fcut -> QVariant(QString, "700") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: crossfeed_bs2b_feed -> QVariant(QString, "60") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: crossfeed_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: crossfeed_mode -> QVariant(QString, "5") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: ddc_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: ddc_file -> QVariant(QString, "/home/tim/.config/jamesdsp/vdc/FrontRearContrast.vdc") [0m
+[2;37m[22:51:00.844] [DBG] DspHost::update: Property changed: graphiceq_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: graphiceq_param -> QVariant(QString, "GraphicEQ: 20 -4.2; 21 -4.4; 22 -4.5; 23 -4.6; 24 -4.7; 26 -4.9; 27 -4.9; 29 -5; 30 -5.1; 32 -5.1; 34 -5.2; 36 -5.3; 38 -5.4; 40 -5.5; 43 -5.5; 45 -5.6; 48 -5.8; 50 -6; 53 -6.1; 56 -6.2; 59 -6.1; 63 -6.3; 66 -6.4; 70 -6.5; 74 -6.5; 78 -6.5; 83 -6.6; 87 -6.5; 92 -6.5; 97 -6.5; 103 -6.6; 109 -6.5; 115 -6.4; 121 -6.4; 128 -6.4; 136 -6.4; 143 -6.3; 151 -6.2; 160 -6.1; 169 -6.1; 178 -6.1; 188 -6.1; 199 -6; 210 -6; 222 -5.9; 235 -5.8; 248 -5.8; 262 -5.7; 277 -5.6; 292 -5.4; 309 -5.3; 326 -5.2; 345 -5.1; 364 -4.9; 385 -4.9; 406 -4.7; 429 -4.6; 453 -4.5; 479 -4.4; 506 -4.2; 534 -4.1; 565 -3.9; 596 -3.8; 630 -3.6; 665 -3.2; 703 -2.8; 743 -2.6; 784 -2.4; 829 -2.1; 875 -1.9; 924 -1.7; 977 -1.5; 1032 -1.4; 1090 -1.4; 1151 -1.4; 1216 -1.5; 1284 -1.4; 1357 -1.4; 1433 -1.3; 1514 -1.2; 1599 -1.1; 1689 -1.2; 1784 -1.1; 1885 -1.2; 1991 -1.4; 2103 -1.6; 2221 -1.8; 2347 -1.9; 2479 -2; 2618 -1.8; 2766 -1.5; 2921 -1.1; 3086 -0.8; 3260 -0.5; 3443 -0.3; 3637 -0.2; 3842 -0.2; 4058 -0.3; 4287 -0.4; 4528 -0.6; 4783 -0.8; 5052 -0.9; 5337 -1.1; 5637 -1.2; 5955 -1.5; 6290 -1.9; 6644 -2.4; 7018 -2.2; 7414 -1.5; 7831 -1; 8272 -0.8; 8738 -0.8; 9230 -1.1; 9749 -1.8; 10298 -2.5; 10878 -3; 11490 -3.6; 12137 -4.3; 12821 -5.1; 13543 -6; 14305 -6.9; 15110 -7.9; 15961 -9; 16860 -10.2; 17809 -11.5; 18812 -12.8; 19871 -14.2") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_bassboost -> QVariant(QString, "0.05000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_decay -> QVariant(QString, "30.00000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_delay -> QVariant(QString, "0.00000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_finaldry -> QVariant(QString, "-14.00000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_finalwet -> QVariant(QString, "-16.00000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_lfo_spin -> QVariant(QString, "1.00000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_lfo_wander -> QVariant(QString, "0.40000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_lpf_bass -> QVariant(QString, "100") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_lpf_damp -> QVariant(QString, "9000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_lpf_input -> QVariant(QString, "18000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_lpf_output -> QVariant(QString, "18000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_osf -> QVariant(QString, "2") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_reflection_amount -> QVariant(QString, "0.10000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_reflection_factor -> QVariant(QString, "1.00000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_reflection_width -> QVariant(QString, "0.10000") [0m
+[2;37m[22:51:00.845] [DBG] DspHost::update: Property changed: reverb_wet -> QVariant(QString, "-5.00000") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: reverb_width -> QVariant(QString, "1.00000") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: liveprog_enable -> QVariant(bool, true) [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: liveprog_file -> QVariant(QString, "/home/tim/.config/jamesdsp/liveprog/lowpass.eel") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: master_enable -> QVariant(bool, true) [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: master_limrelease -> QVariant(QString, "60") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: master_limthreshold -> QVariant(QString, "0") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: master_postgain -> QVariant(QString, "0") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: stereowide_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: stereowide_level -> QVariant(QString, "60") [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: tone_enable -> QVariant(bool, true) [0m
+[2;37m[22:51:00.846] [DBG] DspHost::update: Property changed: tone_eq -> QVariant(QString, "25.0;40.0;63.0;100.0;160.0;250.0;400.0;630.0;1000.0;1600.0;2500.0;4000.0;6300.0;10000.0;16000.0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0") [0m
+[2;37m[22:51:00.847] [DBG] DspHost::update: Property changed: tone_filtertype -> QVariant(QString, "0") [0m
+[2;37m[22:51:00.848] [DBG] DspHost::update: Property changed: tone_interpolation -> QVariant(QString, "0") [0m
+[2;37m[22:51:00.850] [DBG] DspHost::update: Property changed: tube_enable -> QVariant(bool, false) [0m
+[2;37m[22:51:00.850] [DBG] DspHost::update: Property changed: tube_pregain -> QVariant(QString, "200") [0m
+[37m[22:51:01.525] [INF] MainWindow::MainWindow$ctor: UI initialized[0m
+[2;37m[22:51:01.628] [DBG] FilterContainer::FilterContainer$ctor::<lambda>: Target output device added: bluez_output.64_03_7F_2E_2B_3A.1[0m
+[2;37m[22:51:01.628] [DBG] FilterContainer::disconnect_filters: disconnecting the JamesDsp filter from PipeWire[0m
+[2;37m[22:51:01.631] [DBG] PwBasePlugin::connect_to_pw: @PwJamesDspPlugin: JamesDsp successfully connected to PipeWire graph[0m
+[2;37m[22:51:01.654] [DBG] AppConfig::isAppBlocked: Firefox is not blocked[0m
+[2;37m[22:51:01.654] [DBG] PipewireAudioService::PipewireAudioService$ctor::<lambda>: new default output device: bluez_output.64_03_7F_2E_2B_3A.1[0m
+[2;37m[22:51:01.654] [DBG] FilterContainer::disconnect_filters: disconnecting the JamesDsp filter from PipeWire[0m
+[2;37m[22:51:01.657] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.node, Spa:Id, 65[0m
+[2;37m[22:51:01.658] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.object, Spa:Id, 194[0m
+[2;37m[22:51:01.658] [DBG] PwBasePlugin::connect_to_pw: @PwJamesDspPlugin: JamesDsp successfully connected to PipeWire graph[0m
+[2;37m[22:51:01.659] [DBG] PwPipelineManager::on_registry_global: Firefox port 87 is connected to jamesdsp_sink port 81[0m
+[2;37m[22:51:01.659] [DBG] PwPipelineManager::on_registry_global: Firefox port 88 is connected to jamesdsp_sink port 79[0m
+[2;37m[22:51:01.662] [DBG] PipewireAudioService::PipewireAudioService$ctor::<lambda>: device alsa_card.pci-0000_00_1f.3 has changed its output route to: analog-output-speaker[0m
+[2;37m[22:51:01.662] [DBG] PipewireAudioService::PipewireAudioService$ctor::<lambda>: device bluez_card.64_03_7F_2E_2B_3A has changed its output route to: headset-output[0m
+[36m[22:51:01.669] [KNL] Log::kernel: EffectDSPMain: Buffer size changed, update convolution object to maximize performance[0m
+[36m[22:51:01.683] [KNL] Log::kernel: EffectDSPMain: Benchmark flag == 1, refreshing convolutions[0m
+[36m[22:51:01.684] [KNL] Log::kernel: EffectDSPMain: Buffer size changed, update convolution object to maximize performance[0m
+[2;37m[22:52:58.005] [DBG] PwPipelineManager::on_destroy_node_proxy: Stream/Output/Audio 86 Firefox has been removed[0m
+[2;37m[22:52:59.299] [DBG] PwPipelineManager::on_registry_global: Stream/Output/Audio 86 Firefox with serial 228 has been added[0m
+[2;37m[22:52:59.302] [DBG] AppConfig::isAppBlocked: Firefox is not blocked[0m
+[2;37m[22:52:59.302] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.node, Spa:Id, 65[0m
+[2;37m[22:52:59.304] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.object, Spa:Id, 194[0m
+[2;37m[22:52:59.309] [DBG] PwPipelineManager::on_registry_global: Firefox port 88 is connected to jamesdsp_sink port 81[0m
+[2;37m[22:52:59.309] [DBG] PwPipelineManager::on_registry_global: Firefox port 76 is connected to jamesdsp_sink port 79[0m
+[2;37m[22:58:29.401] [DBG] PwPipelineManager::on_destroy_node_proxy: Stream/Output/Audio 86 Firefox has been removed[0m
+[2;37m[22:58:31.985] [DBG] PwPipelineManager::on_registry_global: Stream/Output/Audio 86 Firefox with serial 233 has been added[0m
+[2;37m[22:58:31.986] [DBG] AppConfig::isAppBlocked: Firefox is not blocked[0m
+[2;37m[22:58:31.988] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.node, Spa:Id, 65[0m
+[2;37m[22:58:31.988] [DBG] PwPipelineManager::on_metadata_property: new metadata property: 86, target.object, Spa:Id, 194[0m
+[2;37m[22:58:31.994] [DBG] PwPipelineManager::on_registry_global: Firefox port 76 is connected to jamesdsp_sink port 81[0m
+[2;37m[22:58:31.994] [DBG] PwPipelineManager::on_registry_global: Firefox port 84 is connected to jamesdsp_sink port 79[0m
