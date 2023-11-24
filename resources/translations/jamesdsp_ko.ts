@@ -314,7 +314,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
   <context>
     <name>AutostartManager</name>
     <message>
-      <location filename="../../src/utils/AutoStartManager.cpp" line="79"/>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="78"/>
       <source>Manage auto-start permission for JamesDSP</source>
       <translation>JamesDSP 자동 시작 권한 관리</translation>
     </message>
@@ -1008,7 +1008,7 @@ Please select another one</source>
       <translation>스크립트 편집</translation>
     </message>
     <message>
-      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="240"/>
+      <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="241"/>
       <source>No customizable parameters</source>
       <translation>사용자 정의 가능한 매개변수 없음</translation>
     </message>
@@ -1501,157 +1501,157 @@ Please select another one</source>
       <translation>바이패스</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="146"/>
+      <location filename="../../src/MainWindow.cpp" line="109"/>
       <source>%1 connected - Preset loaded automatically</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="166"/>
+      <location filename="../../src/MainWindow.cpp" line="129"/>
       <source>Cannot execute script</source>
       <translation>스크립트를 실행할 수 없음</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="167"/>
+      <location filename="../../src/MainWindow.cpp" line="130"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
       <translation>현재 EEL 파일(at &apos;%1&apos;) 이 파일 시스템에 더 이상 존재하지 않습니다. 파일을 수동으로 다시 열어주세요.</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="281"/>
+      <location filename="../../src/MainWindow.cpp" line="244"/>
       <source>Apps</source>
       <translation>앱</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="282"/>
+      <location filename="../../src/MainWindow.cpp" line="245"/>
       <source>Driver status</source>
       <translation>드라이버 상태</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="286"/>
+      <location filename="../../src/MainWindow.cpp" line="249"/>
       <source>Relink audio pipeline</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="288"/>
+      <location filename="../../src/MainWindow.cpp" line="251"/>
       <source>Reset to defaults</source>
       <translation>기본값으로 초기화</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="289"/>
+      <location filename="../../src/MainWindow.cpp" line="252"/>
       <source>Load from file</source>
       <translation>파일에서 불러오기</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="290"/>
+      <location filename="../../src/MainWindow.cpp" line="253"/>
       <source>Save to file</source>
       <translation>파일로 저장하기</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="292"/>
+      <location filename="../../src/MainWindow.cpp" line="255"/>
       <source>Open LiveprogIDE</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="294"/>
+      <location filename="../../src/MainWindow.cpp" line="257"/>
       <source>What&apos;s this... (Select UI element)</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="398"/>
+      <location filename="../../src/MainWindow.cpp" line="352"/>
       <source>Bass/Misc</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="399"/>
+      <location filename="../../src/MainWindow.cpp" line="353"/>
       <source>Sound Positioning</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="400"/>
+      <location filename="../../src/MainWindow.cpp" line="354"/>
       <source>Reverb</source>
       <translation>리버브</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="401"/>
+      <location filename="../../src/MainWindow.cpp" line="355"/>
       <source>Equalizer</source>
       <translation>이퀄라이저</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="402"/>
+      <location filename="../../src/MainWindow.cpp" line="356"/>
       <source>Convolver</source>
       <translation>컨볼버 (Convolver)</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="403"/>
+      <location filename="../../src/MainWindow.cpp" line="357"/>
       <source>DDC</source>
       <translation>DDC</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="404"/>
+      <location filename="../../src/MainWindow.cpp" line="358"/>
       <source>Liveprog</source>
       <translation>Liveprog</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="405"/>
+      <location filename="../../src/MainWindow.cpp" line="359"/>
       <source>Graphic EQ</source>
       <translation>그래픽 EQ</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="417"/>
+      <location filename="../../src/MainWindow.cpp" line="371"/>
       <source>Launch application</source>
       <translation>애플리케이션 실행</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="560"/>
+      <location filename="../../src/MainWindow.cpp" line="514"/>
       <source>Reset Configuration</source>
       <translation>구성 재설정</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="560"/>
+      <location filename="../../src/MainWindow.cpp" line="514"/>
       <source>Are you sure?</source>
       <translation>확실합니까?</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="584"/>
+      <location filename="../../src/MainWindow.cpp" line="538"/>
       <source>Load custom audio.conf</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="596"/>
+      <location filename="../../src/MainWindow.cpp" line="550"/>
       <source>Save current audio.conf</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1050"/>
+      <location filename="../../src/MainWindow.cpp" line="1004"/>
       <source>Very low</source>
       <translation>매우 낮음</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1050"/>
+      <location filename="../../src/MainWindow.cpp" line="1004"/>
       <source>Low</source>
       <translation>낮음</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1050"/>
+      <location filename="../../src/MainWindow.cpp" line="1004"/>
       <source>Medium</source>
       <translation>보통</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1050"/>
+      <location filename="../../src/MainWindow.cpp" line="1004"/>
       <source>High</source>
       <translation>높음</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1050"/>
+      <location filename="../../src/MainWindow.cpp" line="1004"/>
       <source>Extreme</source>
       <translation>매우 높음</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1170"/>
+      <location filename="../../src/MainWindow.cpp" line="1124"/>
       <source>Advanced waveform editing</source>
       <translation>고급 파형 편집</translation>
     </message>
     <message>
-      <location filename="../../src/MainWindow.cpp" line="1171"/>
+      <location filename="../../src/MainWindow.cpp" line="1125"/>
       <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -2264,27 +2264,27 @@ Please create one first before adding a new rule.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="184"/>
+      <location filename="../../src/main.cpp" line="238"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
       <translation>JamesDSP는 Linux 및 Android 시스템에서 사용할 수 있는 진보된 오디오 처리 엔진입니다.</translation>
     </message>
     <message>
-      <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="33"/>
       <source>Auto-start permission has been denied</source>
       <translation>자동 시작 권한이 거부되었습니다</translation>
     </message>
     <message>
-      <location filename="../../src/utils/AutoStartManager.cpp" line="35"/>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
       <source>Unknown error</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/utils/AutoStartManager.cpp" line="38"/>
+      <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
       <translation type="unfinished"/>
     </message>
@@ -2694,69 +2694,69 @@ If they have been modified, they will be reset.</source>
   <context>
     <name>TrayIcon</name>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="16"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="84"/>
       <source>&amp;Bypass</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="22"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="90"/>
       <source>&amp;Presets</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="25"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="93"/>
       <source>&amp;Convolver bookmarks</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="42"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="110"/>
       <source>JamesDSP for Linux</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="96"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="164"/>
       <source>No presets found</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="140"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="208"/>
       <source>No impulse responses found</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="191"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="259"/>
       <source>&amp;Reload JamesDSP</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="195"/>
-      <location filename="../../src/interface/TrayIcon.cpp" line="273"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="263"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="341"/>
       <source>&amp;Quit</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="199"/>
-      <location filename="../../src/interface/TrayIcon.cpp" line="269"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="267"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="337"/>
       <source>&amp;Show/hide window</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="203"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="271"/>
       <source>Re&amp;verberation presets</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="205"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="273"/>
       <source>Off</source>
       <translation>꺼짐</translation>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="221"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="289"/>
       <source>&amp;Equalizer presets</source>
       <translation type="unfinished"/>
     </message>
     <message>
-      <location filename="../../src/interface/TrayIcon.cpp" line="234"/>
+      <location filename="../../src/interface/TrayIcon.cpp" line="302"/>
       <source>&amp;Crossfeed</source>
       <translation type="unfinished"/>
     </message>
