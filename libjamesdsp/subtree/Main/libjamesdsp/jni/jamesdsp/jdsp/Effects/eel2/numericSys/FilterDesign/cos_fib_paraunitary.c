@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include "../../ns-eel.h"
 #include "../SolveLinearSystem/qr_fact.h"
+#include "fdesign.h"
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -696,7 +697,6 @@ double getKaiser(double x, double alpha)
 	}
 	return win;
 }
-extern double sinc(double x);
 void halfSincKaiser(double *win, int L, double fc, double alpha)
 {
 	int i, minus1 = L - 1;

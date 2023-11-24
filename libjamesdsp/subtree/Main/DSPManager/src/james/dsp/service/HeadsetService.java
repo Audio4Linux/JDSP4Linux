@@ -256,7 +256,7 @@ public class HeadsetService extends Service
 				throw new RuntimeException(e);
 			}
 		}
-		private int getParameter(AudioEffect audioEffect, int parameter)
+		private int getParameterInt(AudioEffect audioEffect, int parameter)
 		{
 			try
 			{
@@ -311,20 +311,12 @@ public class HeadsetService extends Service
 	/**
 	* Receive new broadcast intents for adding DSP to session
 	*/
-	private String oldeqText = "";
-	private String oldEELProgramName = "";
-	private String oldVDCName = "";
-	private String oldImpulseName = "";
-	private int[] oldImpSet = new int[6];
-	private int oldConvMode = 0;
 	private float prelimthreshold = 0;
 	private float prelimrelease = 0;
 	private float prepostgain = 0;
 	public static JDSPModule JamesDSPGbEf;
 	private SharedPreferences preferencesMode;
 	public static int dspModuleSamplingRate = 0;
-	public static String ddcString = "";
-	public static String eelProgString = "";
 	
 	final static public float[] mergeFloatArray(final float[] ...arrays)
 	{
@@ -341,6 +333,21 @@ public class HeadsetService extends Service
             System.arraycopy(arrays[i], 0, res, destPos, length);
         }
         return res;
+	}
+	final static public int HashString(final String str)
+	{
+		byte[] btAry = str.getBytes();
+		int crc = 0xFFFFFFFF;
+		for (int i = 0; i < btAry.length; i++)
+		{
+			crc = crc ^ btAry[i];
+			for (int j = 7; j >= 0; j--)
+			{
+				int mask = -(crc & 1);
+				crc = (crc >> 1) ^ (0xEDB88320 & mask);
+			}
+		}
+		return ~crc;
 	}
 	
 	private final BroadcastReceiver mAudioSessionReceiver = new BroadcastReceiver()
@@ -652,7 +659,7 @@ public class HeadsetService extends Service
 		{
 			String pid = "";
 			if (JamesDSPGbEf != null)
-				pid = " PID:" + JamesDSPGbEf.getParameter(JamesDSPGbEf.JamesDSP, 20002);
+				pid = " PID:" + JamesDSPGbEf.getParameterInt(JamesDSPGbEf.JamesDSP, 20002);
 			if (mode == "bluetooth")
 				foregroundPersistent(getString(R.string.bluetooth_title) + pid);
 			else if (mode == "headset")
@@ -690,6 +697,7 @@ public class HeadsetService extends Service
 
 	private void updateDsp(SharedPreferences preferences, JDSPModule session, boolean updateMajor, int sessionId)
 	{
+		Log.e("HeadsetService", "sessionId = " + sessionId);
 		boolean masterSwitch = preferences.getBoolean("dsp.masterswitch.enable", false);
 		session.JamesDSP.setEnabled(masterSwitch); // Master switch
 		if (masterSwitch)
@@ -705,14 +713,14 @@ public class HeadsetService extends Service
 			int analogModelEnabled = preferences.getBoolean("dsp.analogmodelling.enable", false) ? 1 : 0;
 			int viperddcEnabled = preferences.getBoolean("dsp.ddc.enable", false) ? 1 : 0;
 			int liveProgEnabled = preferences.getBoolean("dsp.liveprog.enable", false) ? 1 : 0;
-			int numberOfParameterCommitted = session.getParameter(session.JamesDSP, 19998);
+			int numberOfParameterCommitted = session.getParameterInt(session.JamesDSP, 19998);
 //			Log.i(DSPManager.TAG, "Commited: " + numberOfParameterCommitted);
-			int dspBufferLen = session.getParameter(session.JamesDSP, 19999);
-			int dspAllocatedBlockLen = session.getParameter(session.JamesDSP, 20000);
-			dspModuleSamplingRate = session.getParameter(session.JamesDSP, 20001);
+			int dspBufferLen = session.getParameterInt(session.JamesDSP, 19999);
+			int dspAllocatedBlockLen = session.getParameterInt(session.JamesDSP, 20000);
+			dspModuleSamplingRate = session.getParameterInt(session.JamesDSP, 20001);
 			if (dspModuleSamplingRate == 0)
 			{
-				if (session.getParameter(session.JamesDSP, 20002) == 0)
+				if (session.getParameterInt(session.JamesDSP, 20002) == 0)
 				{
 					Toast.makeText(HeadsetService.this, R.string.dspneedreboot, Toast.LENGTH_LONG).show();
 					Log.e("HeadsetService", "Get PID failed from engine");
@@ -801,15 +809,14 @@ public class HeadsetService extends Service
 				session.setParameterFloatArray(session.JamesDSP, 116, sendAry);
 			}
 			session.setParameterShort(session.JamesDSP, 1202, (short)equalizerEnabled); // Equalizer switch
-			boolean updateNow = true;
 			if (stringEqEnabled == 1 && updateMajor)
 			{
 				String eqText = preferences.getString("dsp.streq.stringp", "GraphicEQ: 0.0 0.0; ");
-				if(oldeqText.equals(eqText) && numberOfParameterCommitted != 0)
-					updateNow = false;
-				if (updateNow)
-				{
-					oldeqText = eqText;
+				int previousHash = session.getParameterInt(session.JamesDSP, 30000);
+		    	int hashID = HashString(eqText);
+		    	Log.e(DSPManager.TAG, "ArbEq hash before: " + previousHash + ", current: " + hashID);
+		    	if (previousHash != hashID)
+		    	{
 					int arraySize2Send = 256;
 					int stringLength = eqText.length();
 					int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
@@ -817,7 +824,8 @@ public class HeadsetService extends Service
 					for (int i = 0; i < numTime2Send; i++)
 						session.setParameterCharArray(session.JamesDSP, 12001, eqText.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
 					session.setParameterShort(session.JamesDSP, 10006, (short)1); // Notify send array completed and generate filter in native side
-				}
+					session.setParameterInt(session.JamesDSP, 25000, hashID); // Commit hashID to engine
+		    	}
 			}
 			session.setParameterShort(session.JamesDSP, 1210, (short)stringEqEnabled); // String equalizer switch
 			if (reverbEnabled == 1 && updateMajor)
@@ -832,79 +840,74 @@ public class HeadsetService extends Service
 			if (analogModelEnabled == 1 && updateMajor)
 				session.setParameterShort(session.JamesDSP, 150, (short) (Float.valueOf(preferences.getString("dsp.analogmodelling.tubedrive", "2"))*1000));
 			session.setParameterShort(session.JamesDSP, 1206, (short)analogModelEnabled); // Analog modelling switch
-			updateNow = true;
 			if (viperddcEnabled == 1 && updateMajor)
 			{
 				String ddcFilePath = preferences.getString("dsp.ddc.files", "");
-				if(oldVDCName.equals(ddcFilePath) && numberOfParameterCommitted != 0)
-					updateNow = false;
-				if (updateNow)
-				{
-					oldVDCName = ddcFilePath;
-					StringBuilder contentBuilder = new StringBuilder();
-				    try (BufferedReader br = new BufferedReader(new FileReader(ddcFilePath)))
-				    {
-				        String sCurrentLine;
-				        while ((sCurrentLine = br.readLine()) != null)
-				            contentBuilder.append(sCurrentLine).append("\n");
-				    }
-				    catch (IOException e)
-				    {
-				        e.printStackTrace();
-				    }
-					int arraySize2Send = 256;
-				    ddcString = contentBuilder.toString();
-				    if(ddcString != null && !ddcString.isEmpty())
-				    {
+				StringBuilder contentBuilder = new StringBuilder();
+			    try (BufferedReader br = new BufferedReader(new FileReader(ddcFilePath)))
+			    {
+			        String sCurrentLine;
+			        while ((sCurrentLine = br.readLine()) != null)
+			            contentBuilder.append(sCurrentLine).append("\n");
+			    }
+			    catch (IOException e)
+			    {
+			        e.printStackTrace();
+			    }
+				int arraySize2Send = 256;
+				String ddcString = contentBuilder.toString();
+			    if(ddcString != null && !ddcString.isEmpty())
+			    {
+					int previousHash = session.getParameterInt(session.JamesDSP, 30001);
+			    	int hashID = HashString(ddcString);
+			    	Log.e(DSPManager.TAG, "DDC hash before: " + previousHash + ", current: " + hashID);
+			    	if (previousHash != hashID)
+			    	{
 						int stringLength = ddcString.length();
 						int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
 						session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
 						for (int i = 0; i < numTime2Send; i++)
 							session.setParameterCharArray(session.JamesDSP, 12001, ddcString.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
 						session.setParameterShort(session.JamesDSP, 10009, (short)1); // Notify send array completed and generate filter in native side
-				    }
-				}
+						session.setParameterInt(session.JamesDSP, 25001, hashID); // Commit hashID to engine
+			    	}
+			    }
 			}
-			else
-				oldVDCName = "";
 			session.setParameterShort(session.JamesDSP, 1212, (short)viperddcEnabled); // VDC switch
-			updateNow = true;
 			if (liveProgEnabled == 1 && updateMajor)
 			{
 				String eelFilePath = preferences.getString("dsp.liveprog.files", "");
-				if(oldEELProgramName.equals(eelFilePath) && numberOfParameterCommitted != 0)
-					updateNow = false;
-				if (updateNow)
-				{
-					oldEELProgramName = eelFilePath;
-					StringBuilder contentBuilder = new StringBuilder();
-				    try (BufferedReader br = new BufferedReader(new FileReader(eelFilePath)))
-				    {
-				        String sCurrentLine;
-				        while ((sCurrentLine = br.readLine()) != null)
-				            contentBuilder.append(sCurrentLine).append("\n");
-				    }
-				    catch (IOException e)
-				    {
-				        e.printStackTrace();
-				    }
-					int arraySize2Send = 256;
-					eelProgString = contentBuilder.toString();
-				    if(eelProgString != null && !eelProgString.isEmpty())
-				    {
+				StringBuilder contentBuilder = new StringBuilder();
+			    try (BufferedReader br = new BufferedReader(new FileReader(eelFilePath)))
+			    {
+			        String sCurrentLine;
+			        while ((sCurrentLine = br.readLine()) != null)
+			            contentBuilder.append(sCurrentLine).append("\n");
+			    }
+			    catch (IOException e)
+			    {
+			        e.printStackTrace();
+			    }
+				int arraySize2Send = 256;
+				String eelProgString = contentBuilder.toString();
+			    if(eelProgString != null && !eelProgString.isEmpty())
+			    {
+					int previousHash = session.getParameterInt(session.JamesDSP, 30002);
+			    	int hashID = HashString(eelProgString);
+			    	Log.e(DSPManager.TAG, "LiveProg hash before: " + previousHash + ", current: " + hashID);
+			    	if (previousHash != hashID)
+			    	{
 						int stringLength = eelProgString.length();
 						int numTime2Send = (int)Math.ceil((double)stringLength / arraySize2Send); // Number of times that have to send
 						session.setParameterIntArray(session.JamesDSP, 8888, new int[]{ numTime2Send, arraySize2Send }); // Send buffer info for module to allocate memory
 						for (int i = 0; i < numTime2Send; i++)
 							session.setParameterCharArray(session.JamesDSP, 12001, eelProgString.substring(arraySize2Send * i, Math.min(arraySize2Send * i + arraySize2Send, stringLength))); // Commit buffer
 						session.setParameterShort(session.JamesDSP, 10010, (short)1); // Notify send array completed and generate filter in native side
-				    }
-				}
+						session.setParameterInt(session.JamesDSP, 25002, hashID); // Commit hashID to engine
+			    	}
+			    }
 			}
-			else
-				oldEELProgramName = "";
 			session.setParameterShort(session.JamesDSP, 1213, (short)liveProgEnabled); // LiveProg switch
-			updateNow = true;
 			if (convolverEnabled == 1 && updateMajor)
 			{
 				String mConvIRFilePath = preferences.getString("dsp.convolver.files", "");
@@ -918,18 +921,15 @@ public class HeadsetService extends Service
 						advSetting[i] = Integer.valueOf(advConv[i]);
 					//Log.e(DSPManager.TAG, "Advance settings: " + Arrays.toString(advSetting));// Debug
 				}
-				if(oldImpulseName.equals(mConvIRFilePath) && numberOfParameterCommitted != 0 && oldConvMode == convMode && Arrays.equals(oldImpSet, advSetting))
-					updateNow = false;
-				if (updateNow)
-				{
-					oldImpulseName = mConvIRFilePath;
-					oldConvMode = convMode;
-					oldImpSet = advSetting.clone();
+				String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
+				int[] impinfo = new int[3];
+				//Log.e(DSPManager.TAG, "Conv mode: " + convMode);// Debug
+				float[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToFloat(mConvIRFilePath, dspModuleSamplingRate, impinfo, convMode, advSetting);
+				int previousHash = session.getParameterInt(session.JamesDSP, 30003);
+		    	Log.e(DSPManager.TAG, "Convolver hash before: " + previousHash + ", current: " + impinfo[2]);
+		    	if (previousHash != impinfo[2])
+		    	{
 					session.setParameterShort(session.JamesDSP, 1205, (short)0);
-					String mConvIRFileName = mConvIRFilePath.replace(DSPManager.impulseResponsePath, "");
-					int[] impinfo = new int[2];
-					//Log.e(DSPManager.TAG, "Conv mode: " + convMode);// Debug
-					float[] impulseResponse = JdspImpResToolbox.ReadImpulseResponseToFloat(mConvIRFilePath, dspModuleSamplingRate, impinfo, convMode, advSetting);
 					//Log.e(DSPManager.TAG, "Channels: " + impinfo[0] + ", frameCount: " + impinfo[1]);// Debug
 					if (impinfo[1] == 0)
 					{
@@ -952,6 +952,7 @@ public class HeadsetService extends Service
 							session.setParameterFloatArray(session.JamesDSP, 12000, sendArray); // Commit buffer
 						}
 						session.setParameterShort(session.JamesDSP, 10004, (short)1); // Notify send array completed and resize array in native side
+						session.setParameterInt(session.JamesDSP, 25003, impinfo[2]); // Commit hashID to engine
 						if (DSPManager.devMsgDisplay)
 						{
 							Toast.makeText(HeadsetService.this, getString(R.string.basicinfo, dspBufferLen, dspAllocatedBlockLen), Toast.LENGTH_SHORT).show();
@@ -963,13 +964,7 @@ public class HeadsetService extends Service
 								Toast.makeText(HeadsetService.this, getString(R.string.convolversuccess, mConvIRFileName, getString(R.string.fullstereo_conv), impinfo[1], (int)impulseCutted / 4), Toast.LENGTH_SHORT).show();
 						}
 					}
-				}
-			}
-			else
-			{
-				oldImpulseName = "";
-				oldConvMode = 0;
-				Arrays.fill(oldImpSet, 0);
+		    	}
 			}
 			session.setParameterShort(session.JamesDSP, 1205, (short)convolverEnabled); // Convolver switch
 		}

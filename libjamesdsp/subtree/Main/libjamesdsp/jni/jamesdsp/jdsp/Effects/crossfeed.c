@@ -10,7 +10,6 @@ void CrossfeedConstructor(JamesDSPLib *jdsp)
 }
 void CrossfeedDestructor(JamesDSPLib *jdsp)
 {
-    jdsp_lock(jdsp);
 	if (jdsp->advXF.conv[0])
 	{
 		FFTConvolver2x4x2Free(jdsp->advXF.conv[0]);
@@ -19,18 +18,20 @@ void CrossfeedDestructor(JamesDSPLib *jdsp)
 		free(jdsp->advXF.conv[0]);
 		free(jdsp->advXF.conv[1]);
 		free(jdsp->advXF.conv[2]);
+		jdsp->advXF.conv[0] = 0;
 	}
 	if (jdsp->advXF.convLong_T_S)
 	{
 		TwoStageFFTConvolver2x4x2Free(jdsp->advXF.convLong_T_S);
 		free(jdsp->advXF.convLong_T_S);
+		jdsp->advXF.convLong_T_S = 0;
 	}
 	if (jdsp->advXF.convLong_S_S)
 	{
 		FFTConvolver2x4x2Free(jdsp->advXF.convLong_S_S);
 		free(jdsp->advXF.convLong_S_S);
+		jdsp->advXF.convLong_S_S = 0;
 	}
-    jdsp_unlock(jdsp);
 }
 void CrossfeedProcessFFTConvolver2x4x2(JamesDSPLib *jdsp, size_t n)
 {
@@ -45,27 +46,7 @@ void CrossfeedEnable(JamesDSPLib *jdsp, char enable)
     jdsp_lock(jdsp);
 	if (jdsp->crossfeedForceRefresh || !jdsp->advXF.conv[0] || !jdsp->advXF.conv[1] || !jdsp->advXF.conv[2] || !jdsp->advXF.convLong_S_S || !jdsp->advXF.convLong_T_S)
 	{
-		if (jdsp->advXF.conv[0])
-		{
-			FFTConvolver2x4x2Free(jdsp->advXF.conv[0]);
-			FFTConvolver2x4x2Free(jdsp->advXF.conv[1]);
-			FFTConvolver2x4x2Free(jdsp->advXF.conv[2]);
-			free(jdsp->advXF.conv[0]);
-			free(jdsp->advXF.conv[1]);
-			free(jdsp->advXF.conv[2]);
-		}
-		if (jdsp->advXF.convLong_T_S)
-		{
-			TwoStageFFTConvolver2x4x2Free(jdsp->advXF.convLong_T_S);
-			free(jdsp->advXF.convLong_T_S);
-			jdsp->advXF.convLong_T_S = NULL;
-		}
-		if (jdsp->advXF.convLong_S_S)
-		{
-			FFTConvolver2x4x2Free(jdsp->advXF.convLong_S_S);
-			free(jdsp->advXF.convLong_S_S);
-			jdsp->advXF.convLong_S_S = NULL;
-		}
+		CrossfeedDestructor(jdsp);
 		jdsp->advXF.conv[0] = (FFTConvolver2x4x2 *)malloc(sizeof(FFTConvolver2x4x2));
 		FFTConvolver2x4x2Init(jdsp->advXF.conv[0]);
 		FFTConvolver2x4x2LoadImpulseResponse(jdsp->advXF.conv[0], (unsigned int)jdsp->blockSize, jdsp->blobsCh1[0], jdsp->blobsCh2[0], jdsp->blobsCh3[0], jdsp->blobsCh4[0], jdsp->blobsResampledLen);

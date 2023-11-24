@@ -29,24 +29,6 @@ double sinc(double x)
 	else
 		return 1.0;
 }
-double bessi0(double x)
-{
-	double xh, sum, pow, ds;
-	int k;
-	xh = 0.5 * x;
-	sum = 1.0;
-	pow = 1.0;
-	k = 0;
-	ds = 1.0;
-	while (ds > sum * DBL_EPSILON)
-	{
-		++k;
-		pow = pow * (xh / k);
-		ds = pow * pow;
-		sum = sum + ds;
-	}
-	return sum;
-}
 double chbevl(double x, double array[], int n)
 {
 	double b0, b1, b2, *p;
@@ -156,7 +138,10 @@ unsigned int getcoeff(double ratio, double atten, unsigned long long N, unsigned
 	y[0] = 1.0;
 	for (m = 1; m < ((N - 1) >> 1) + 1; m++)
 	{
-		double w = i0(bta * sqrt(1.0 - (double)(4 * m * m) * xind)) * bes;
+		double v = 1.0 - (double)(4 * m * m) * xind;
+		if (v < 0.0)
+			v = 0.0;
+		double w = i0(bta * sqrt(v)) * bes;
 		double f = sinc(m / ratio) * w;
 		y[m] = f;
 		sum += f;

@@ -1,3 +1,16 @@
+/*
+** Copyright (c) 2002-2016, Erik de Castro Lopo <erikd@mega-nerd.com>
+** All rights reserved.
+**
+** This code is released under 2-clause BSD license. Please see the
+** file at : https://github.com/libsndfile/libsamplerate/blob/master/COPYING
+*/
+
+/*
+** API documentation is available here:
+**     http://libsndfile.github.io/libsamplerate/api.html
+*/
+
 #ifndef SAMPLERATE_H
 #define SAMPLERATE_H
 
@@ -5,16 +18,20 @@
 extern "C" {
 #endif	/* __cplusplus */
 
+
 /* Opaque data type SRC_STATE. */
 typedef struct SRC_STATE_tag SRC_STATE ;
 
 /* SRC_DATA is used to pass data to src_simple() and src_process(). */
 typedef struct
-{
-	const float	*data_in ;
+{	const float	*data_in ;
 	float	*data_out ;
-	long	input_frames, output_frames, input_frames_used, output_frames_gen;
+
+	long	input_frames, output_frames ;
+	long	input_frames_used, output_frames_gen ;
+
 	int		end_of_input ;
+
 	double	src_ratio ;
 } SRC_DATA ;
 
@@ -26,6 +43,7 @@ typedef struct
 ** point to the start of the user supplied float array. The user supplied
 ** function must return the number of frames that **data points to.
 */
+
 typedef long (*src_callback_t) (void *cb_data, float **data) ;
 
 /*
@@ -33,6 +51,7 @@ typedef long (*src_callback_t) (void *cb_data, float **data) ;
 **	internal state of the converter. Choose a converter from the enums below.
 **	Error returned in *error.
 */
+
 SRC_STATE* src_new (int converter_type, int channels, int *error) ;
 
 /*
@@ -48,18 +67,22 @@ SRC_STATE* src_clone (SRC_STATE* orig, int *error) ;
 **	value, when processing, user supplied function "func" gets called with
 **	cb_data as first parameter.
 */
-SRC_STATE* src_callback_new (src_callback_t func, int converter_type, int channels, int *error, void* cb_data) ;
+
+SRC_STATE* src_callback_new (src_callback_t func, int converter_type, int channels,
+				int *error, void* cb_data) ;
 
 /*
 **	Cleanup all internal allocations.
 **	Always returns NULL.
 */
+
 SRC_STATE* src_delete (SRC_STATE *state) ;
 
 /*
 **	Standard processing function.
 **	Returns non zero on error.
 */
+
 int src_process (SRC_STATE *state, SRC_DATA *data) ;
 
 /*
@@ -74,19 +97,34 @@ long src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *
 **	Simple interface does not require initialisation as it can only operate on
 **	a single buffer worth of audio.
 */
+
 int src_simple (SRC_DATA *data, int converter_type, int channels) ;
+
+/*
+** This library contains a number of different sample rate converters,
+** numbered 0 through N.
+**
+** Return a string giving either a name or a more full description of each
+** sample rate converter or NULL if no sample rate converter exists for
+** the given value. The converters are sequentially numbered from 0 to N.
+*/
+
+const char *src_get_name (int converter_type) ;
+const char *src_get_description (int converter_type) ;
 
 /*
 **	Set a new SRC ratio. This allows step responses
 **	in the conversion ratio.
 **	Returns non zero on error.
 */
+
 int src_set_ratio (SRC_STATE *state, double new_ratio) ;
 
 /*
 **	Get the current channel count.
 **	Returns negative on error, positive channel count otherwise
 */
+
 int src_get_channels (SRC_STATE *state) ;
 
 /*
@@ -95,17 +133,20 @@ int src_get_channels (SRC_STATE *state) ;
 **	Does not free any memory allocations.
 **	Returns non zero on error.
 */
+
 int src_reset (SRC_STATE *state) ;
 
 /*
 ** Return TRUE if ratio is a valid conversion ratio, FALSE
 ** otherwise.
 */
+
 int src_is_valid_ratio (double ratio) ;
 
 /*
 **	Return an error number.
 */
+
 int src_error (SRC_STATE *state) ;
 
 /*
@@ -113,9 +154,36 @@ int src_error (SRC_STATE *state) ;
 */
 const char* src_strerror (int error) ;
 
+/*
+** The following enums can be used to set the interpolator type
+** using the function src_set_converter().
+*/
 
+enum
+{
+	SRC_SINC_BEST_QUALITY		= 0,
+	SRC_SINC_MEDIUM_QUALITY		= 1,
+	SRC_SINC_FASTEST			= 2,
+	SRC_LINEAR					= 3,
+} ;
+
+/*
+** Extra helper functions for converting from short to float and
+** back again.
+*/
+
+void src_short_to_float_array (const short *in, float *out, int len) ;
+void src_float_to_short_array (const float *in, short *out, int len) ;
+
+void src_int_to_float_array (const int *in, float *out, int len) ;
+void src_float_to_int_array (const float *in, int *out, int len) ;
+
+
+void precompute_lpfcoeff();
+void clean_lpfcoeff();
 #ifdef __cplusplus
 }		/* extern "C" */
 #endif	/* __cplusplus */
 
 #endif	/* SAMPLERATE_H */
+
