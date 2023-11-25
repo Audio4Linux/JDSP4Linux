@@ -10,6 +10,8 @@
 CliRemoteController::CliRemoteController(QObject *parent)
     : QObject{parent}
 {
+    DspConfig::instance().load();
+
     service = new me::timschneeberger::jdsp4linux::Service("me.timschneeberger.jdsp4linux", "/jdsp4linux/service",
                                                            QDBusConnection::sessionBus(), this);
 }
@@ -60,6 +62,7 @@ bool CliRemoteController::set(const QString &key, const QVariant &value) const
             return false;
 
         DspConfig::instance().set(resolvedKey, value);
+        DspConfig::instance().save();
         return true;
     }
 
