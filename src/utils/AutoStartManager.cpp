@@ -39,7 +39,7 @@ static void onPortalBackgroundRequest(GObject *source_object, GAsyncResult *res,
 
         Log::error(reason);
         Log::error(explanation);
-        QMessageBox::critical(nullptr, reason, explanation);
+        // QMessageBox::critical(nullptr, reason, explanation);
 
         Log::error("Auto-start disabled");
         AppConfig::instance().set(AppConfig::AutoStartEnabled, false);
