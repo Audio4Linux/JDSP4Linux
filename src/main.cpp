@@ -291,7 +291,7 @@ int main(int   argc,
         bool launchInTray = parser.isSet(tray);
 
         auto* window = new MainWindow(audioService.get(), launchInTray);
-        QObject::connect(instanceMonitor, &SingleInstanceMonitor::raiseWindow, window, &MainWindow::raiseWindow);
+        QObject::connect(instanceMonitor.get(), &SingleInstanceMonitor::raiseWindow, window, &MainWindow::raiseWindow);
 
         window->setGeometry(
             QStyle::alignedRect(
