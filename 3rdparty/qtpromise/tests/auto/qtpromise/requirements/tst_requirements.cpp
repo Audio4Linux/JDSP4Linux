@@ -8,8 +8,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 // https://promisesaplus.com/#requirements
 class tst_requirements : public QObject
 {
@@ -43,7 +41,7 @@ void tst_requirements::statePending()
     // 2.1.1. When pending, a promise:
     // 2.1.1.1. may transition to either the fulfilled state
     {
-        QPromise<int> p{[&](const QPromiseResolve<int>& resolve) {
+        QtPromise::QPromise<int> p{[&](const QtPromise::QPromiseResolve<int>& resolve) {
             QtPromisePrivate::qtpromise_defer([=]() {
                 resolve(42);
             });
@@ -62,7 +60,8 @@ void tst_requirements::statePending()
 
     // 2.1.1.1. ... or the rejected state
     {
-        QPromise<int> p{[&](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
+        QtPromise::QPromise<int> p{[&](const QtPromise::QPromiseResolve<int>&,
+                                       const QtPromise::QPromiseReject<int>& reject) {
             QtPromisePrivate::qtpromise_defer([=]() {
                 reject(QString{"foo"});
             });
@@ -86,7 +85,8 @@ void tst_requirements::stateFulfilled()
     int value = -1;
 
     // 2.1.2. When fulfilled, a promise:
-    QPromise<int> p{[](const QPromiseResolve<int>& resolve, const QPromiseReject<int>& reject) {
+    QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>& resolve,
+                                  const QtPromise::QPromiseReject<int>& reject) {
         QtPromisePrivate::qtpromise_defer([=]() {
             // 2.1.2.2. must have a value, which must not change.
             resolve(42);
@@ -120,7 +120,8 @@ void tst_requirements::stateRejected()
     int value = -1;
 
     // 2.1.3 When rejected, a promise:
-    QPromise<int> p{[](const QPromiseResolve<int>& resolve, const QPromiseReject<int>& reject) {
+    QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>& resolve,
+                                  const QtPromise::QPromiseReject<int>& reject) {
         QtPromisePrivate::qtpromise_defer([=]() {
             // 2.1.3.2. must have a reason, which must not change.
             reject(QString{"foo"});
@@ -154,7 +155,7 @@ void tst_requirements::thenArguments()
     {
         QString error;
         int value = -1;
-        QPromise<int>::resolve(42)
+        QtPromise::QPromise<int>::resolve(42)
             .then(
                 [&](int res) {
                     value = res;
@@ -170,7 +171,7 @@ void tst_requirements::thenArguments()
     {
         QString error;
         int value = -1;
-        QPromise<int>::reject(QString{"foo"})
+        QtPromise::QPromise<int>::reject(QString{"foo"})
             .then(
                 [&](int res) {
                     value = res;
@@ -187,7 +188,7 @@ void tst_requirements::thenArguments()
     // 2.2.1. onFulfilled is an optional arguments:
     {
         QString error;
-        QPromise<int>::reject(QString{"foo"})
+        QtPromise::QPromise<int>::reject(QString{"foo"})
             .then(nullptr,
                   [&](const QString& err) {
                       error = err;
@@ -201,7 +202,7 @@ void tst_requirements::thenArguments()
     // 2.2.1. onRejected is an optional arguments:
     {
         int value = -1;
-        QPromise<int>::resolve(42)
+        QtPromise::QPromise<int>::resolve(42)
             .then([&value](int res) {
                 value = res;
             })
@@ -219,7 +220,7 @@ void tst_requirements::thenOnFulfilled()
 {
     // 2.2.2. If onFulfilled is a function:
     QVector<int> values;
-    QPromise<int> p0{[](const QPromiseResolve<int>& resolve) {
+    QtPromise::QPromise<int> p0{[](const QtPromise::QPromiseResolve<int>& resolve) {
         QtPromisePrivate::qtpromise_defer([=]() {
             // 2.2.2.3. it must not be called more than once
             resolve(42);
@@ -249,13 +250,14 @@ void tst_requirements::thenOnRejected()
 {
     // 2.2.3. If onRejected is a function:
     QStringList errors;
-    QPromise<void> p0{[](const QPromiseResolve<void>&, const QPromiseReject<void>& reject) {
-        QtPromisePrivate::qtpromise_defer([=]() {
-            // 2.2.3.3. it must not be called more than once.
-            reject(QString{"foo"});
-            reject(QString{"bar"});
-        });
-    }};
+    QtPromise::QPromise<void> p0{
+        [](const QtPromise::QPromiseResolve<void>&, const QtPromise::QPromiseReject<void>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                // 2.2.3.3. it must not be called more than once.
+                reject(QString{"foo"});
+                reject(QString{"bar"});
+            });
+        }};
 
     auto p1 = p0.then(nullptr, [&](const QString& err) {
         errors << err;
@@ -282,7 +284,7 @@ void tst_requirements::thenAsynchronous()
     // loop turn in which then is called, and with a fresh stack).
 
     int value = -1;
-    auto p0 = QPromise<int>::resolve(42);
+    auto p0 = QtPromise::QPromise<int>::resolve(42);
     QVERIFY(p0.isFulfilled());
 
     auto p1 = p0.then([&](int res) {
@@ -304,21 +306,21 @@ void tst_requirements::thenMultipleCalls()
     // must execute in the order of their originating calls to then:
     {
         QVector<int> values;
-        QPromise<int> p{[](const QPromiseResolve<int>& resolve) {
+        QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>& resolve) {
             QtPromisePrivate::qtpromise_defer([=]() {
                 resolve(42);
             });
         }};
 
-        QtPromise::all(QVector<QPromise<void>>{p.then([&](int r) {
-                                                   values << r + 1;
-                                               }),
-                                               p.then([&](int r) {
-                                                   values << r + 2;
-                                               }),
-                                               p.then([&](int r) {
-                                                   values << r + 3;
-                                               })})
+        QtPromise::all(QVector<QtPromise::QPromise<void>>{p.then([&](int r) {
+                                                              values << r + 1;
+                                                          }),
+                                                          p.then([&](int r) {
+                                                              values << r + 2;
+                                                          }),
+                                                          p.then([&](int r) {
+                                                              values << r + 3;
+                                                          })})
             .wait();
 
         QCOMPARE(values, (QVector<int>{43, 44, 45}));
@@ -328,27 +330,28 @@ void tst_requirements::thenMultipleCalls()
     // must execute in the order of their originating calls to then:
     {
         QVector<int> values;
-        QPromise<int> p{[](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
+        QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>&,
+                                      const QtPromise::QPromiseReject<int>& reject) {
             QtPromisePrivate::qtpromise_defer([=]() {
                 reject(8);
             });
         }};
 
-        QtPromise::all(QVector<QPromise<int>>{p.then(nullptr,
-                                                     [&](int r) {
-                                                         values << r + 1;
-                                                         return r + 1;
-                                                     }),
-                                              p.then(nullptr,
-                                                     [&](int r) {
-                                                         values << r + 2;
-                                                         return r + 2;
-                                                     }),
-                                              p.then(nullptr,
-                                                     [&](int r) {
-                                                         values << r + 3;
-                                                         return r + 3;
-                                                     })})
+        QtPromise::all(QVector<QtPromise::QPromise<int>>{p.then(nullptr,
+                                                                [&](int r) {
+                                                                    values << r + 1;
+                                                                    return r + 1;
+                                                                }),
+                                                         p.then(nullptr,
+                                                                [&](int r) {
+                                                                    values << r + 2;
+                                                                    return r + 2;
+                                                                }),
+                                                         p.then(nullptr,
+                                                                [&](int r) {
+                                                                    values << r + 3;
+                                                                    return r + 3;
+                                                                })})
             .wait();
 
         QCOMPARE(values, (QVector<int>{9, 10, 11}));
@@ -362,10 +365,13 @@ void tst_requirements::thenHandlers()
         auto handler = []() {
             return 42;
         };
-        auto p1 = QPromise<int>::resolve(42);
-        Q_STATIC_ASSERT((std::is_same<decltype(p1.then(handler, nullptr)), QPromise<int>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p1.then(nullptr, handler)), QPromise<int>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p1.then(handler, handler)), QPromise<int>>::value));
+        auto p1 = QtPromise::QPromise<int>::resolve(42);
+        Q_STATIC_ASSERT(
+            (std::is_same<decltype(p1.then(handler, nullptr)), QtPromise::QPromise<int>>::value));
+        Q_STATIC_ASSERT(
+            (std::is_same<decltype(p1.then(nullptr, handler)), QtPromise::QPromise<int>>::value));
+        Q_STATIC_ASSERT(
+            (std::is_same<decltype(p1.then(handler, handler)), QtPromise::QPromise<int>>::value));
     }
 
     // 2.2.7.1. If either onFulfilled or onRejected returns a value x, run the
@@ -375,7 +381,7 @@ void tst_requirements::thenHandlers()
     // p2 must be rejected with e as the reason.
     {
         QString reason;
-        auto p1 = QPromise<int>::resolve(42);
+        auto p1 = QtPromise::QPromise<int>::resolve(42);
         auto p2 = p1.then([]() {
             throw QString{"foo"};
         });
@@ -389,7 +395,7 @@ void tst_requirements::thenHandlers()
     }
     {
         QString reason;
-        auto p1 = QPromise<int>::reject(QString{"foo"});
+        auto p1 = QtPromise::QPromise<int>::reject(QString{"foo"});
         auto p2 = p1.then(nullptr, []() {
             throw QString{"bar"};
             return 42;
@@ -408,11 +414,11 @@ void tst_requirements::thenHandlers()
     // p2 must be fulfilled with the same value as promise1
     {
         QString value;
-        auto p1 = QPromise<QString>::resolve("42");
+        auto p1 = QtPromise::QPromise<QString>::resolve("42");
         auto p2 = p1.then(nullptr, []() {
             return QString{};
         });
-        Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<QString>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<QString>>::value));
         p2.then([&](const QString& e) {
               value = e;
           }).wait();

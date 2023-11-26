@@ -3,12 +3,11 @@
 
 #include <QtTest>
 
-class TestStringData : public QObject
-{
+class TestStringData : public QObject {
     Q_OBJECT
 
 public:
-    TestStringData();
+    TestStringData() = default;
 
 private Q_SLOTS:
     void testCreation();

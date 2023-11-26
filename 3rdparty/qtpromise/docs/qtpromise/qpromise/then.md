@@ -95,5 +95,5 @@ auto output = input.then([](int res) {
 // output.isRejected() is true
 ```
 
-If an handler returns a promise (or QFuture), the `output` promise is delayed and will be resolved
+If a handler returns a promise (or QFuture), the `output` promise is delayed and will be resolved
 by the returned promise.

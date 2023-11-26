@@ -243,6 +243,13 @@ inline QPromise<QVector<T>> QPromise<T>::all(const Sequence<QPromise<T>, Args...
 }
 
 template<typename T>
+template<typename U>
+inline QPromise<U> QPromise<T>::convert() const
+{
+    return QPromiseBase<T>::then(QtPromisePrivate::PromiseConverter<T, U>::create());
+}
+
+template<typename T>
 inline QPromise<T> QPromise<T>::resolve(const T& value)
 {
     return QPromise<T>{[&](const QPromiseResolve<T>& resolve) {

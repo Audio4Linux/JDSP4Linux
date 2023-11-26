@@ -12,8 +12,6 @@
 
 #include <chrono>
 
-using namespace QtPromise;
-
 class tst_qpromise_timeout : public QObject
 {
     Q_OBJECT
@@ -38,7 +36,7 @@ void tst_qpromise_timeout::fulfilled()
 
     timer.start();
 
-    auto p = QPromise<int>{[](const QPromiseResolve<int>& resolve) {
+    auto p = QtPromise::QPromise<int>{[](const QtPromise::QPromiseResolve<int>& resolve) {
                  QTimer::singleShot(1000, [=]() {
                      resolve(42);
                  });
@@ -59,7 +57,8 @@ void tst_qpromise_timeout::rejected()
 
     timer.start();
 
-    auto p = QPromise<int>{[](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
+    auto p = QtPromise::QPromise<int>{[](const QtPromise::QPromiseResolve<int>&,
+                                         const QtPromise::QPromiseReject<int>& reject) {
                  QTimer::singleShot(1000, [=]() {
                      reject(QString{"foo"});
                  });
@@ -81,7 +80,7 @@ void tst_qpromise_timeout::timeout()
 
     timer.start();
 
-    auto p = QPromise<int>{[](const QPromiseResolve<int>& resolve) {
+    auto p = QtPromise::QPromise<int>{[](const QtPromise::QPromiseResolve<int>& resolve) {
                  QTimer::singleShot(4000, [=]() {
                      resolve(42);
                  });
@@ -90,7 +89,7 @@ void tst_qpromise_timeout::timeout()
                      elapsed = timer.elapsed();
                  });
 
-    p.fail([&](const QPromiseTimeoutException&) {
+    p.fail([&](const QtPromise::QPromiseTimeoutException&) {
          failed = true;
          return -1;
      }).wait();
@@ -113,7 +112,7 @@ void tst_qpromise_timeout::fulfilledStdChrono()
 
     timer.start();
 
-    auto p = QPromise<int>{[](const QPromiseResolve<int>& resolve) {
+    auto p = QtPromise::QPromise<int>{[](const QtPromise::QPromiseResolve<int>& resolve) {
                  QTimer::singleShot(1000, [=]() {
                      resolve(42);
                  });
@@ -134,7 +133,8 @@ void tst_qpromise_timeout::rejectedStdChrono()
 
     timer.start();
 
-    auto p = QPromise<int>{[](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
+    auto p = QtPromise::QPromise<int>{[](const QtPromise::QPromiseResolve<int>&,
+                                         const QtPromise::QPromiseReject<int>& reject) {
                  QTimer::singleShot(1000, [=]() {
                      reject(QString{"foo"});
                  });
@@ -156,7 +156,7 @@ void tst_qpromise_timeout::timeoutStdChrono()
 
     timer.start();
 
-    auto p = QPromise<int>{[](const QPromiseResolve<int>& resolve) {
+    auto p = QtPromise::QPromise<int>{[](const QtPromise::QPromiseResolve<int>& resolve) {
                  QTimer::singleShot(4000, [=]() {
                      resolve(42);
                  });
@@ -165,7 +165,7 @@ void tst_qpromise_timeout::timeoutStdChrono()
                      elapsed = timer.elapsed();
                  });
 
-    p.fail([&](const QPromiseTimeoutException&) {
+    p.fail([&](const QtPromise::QPromiseTimeoutException&) {
          failed = true;
          return -1;
      }).wait();

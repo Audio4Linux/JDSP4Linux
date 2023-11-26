@@ -14,8 +14,6 @@
 
 #include <memory>
 
-using namespace QtPromise;
-
 class tst_helpers_resolve : public QObject
 {
     Q_OBJECT
@@ -45,9 +43,9 @@ void tst_helpers_resolve::value()
     auto p1 = QtPromise::resolve(v0);
     auto p2 = QtPromise::resolve(v1);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<int>>::value));
 
     for (const auto& p : {p0, p1, p2}) {
         QCOMPARE(p.isFulfilled(), true);
@@ -61,7 +59,7 @@ void tst_helpers_resolve::noValue()
 {
     auto p = QtPromise::resolve();
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
 
     QCOMPARE(p.isFulfilled(), true);
     QCOMPARE(waitForValue(p, -1, 42), 42);
@@ -74,7 +72,7 @@ void tst_helpers_resolve::moveRValue()
     {
         auto p = QtPromise::resolve(Data{42}).wait();
 
-        Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<Data>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<Data>>::value));
     }
 
     QCOMPARE(Data::logs().ctor, 1);
@@ -91,7 +89,7 @@ void tst_helpers_resolve::copyLValue()
         Data value{42};
         auto p = QtPromise::resolve(value).wait();
 
-        Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<Data>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<Data>>::value));
     }
 
     QCOMPARE(Data::logs().ctor, 1);
@@ -103,24 +101,26 @@ void tst_helpers_resolve::copyLValue()
 // https://github.com/simonbrunel/qtpromise/issues/6
 void tst_helpers_resolve::qtSharedPtr()
 {
+    using DataSPtr = QSharedPointer<Data>;
+
     Data::logs().reset();
 
     QWeakPointer<Data> wptr;
 
     {
-        auto sptr0 = QSharedPointer<Data>::create(42);
-        const QSharedPointer<Data> sptr1 = sptr0;
+        auto sptr0 = DataSPtr::create(42);
+        const DataSPtr sptr1 = sptr0;
 
-        auto p0 = QtPromise::resolve(QSharedPointer<Data>::create(42));
+        auto p0 = QtPromise::resolve(DataSPtr::create(42));
         auto p1 = QtPromise::resolve(sptr0);
         auto p2 = QtPromise::resolve(sptr1);
 
-        Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<QSharedPointer<Data>>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<QSharedPointer<Data>>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<QSharedPointer<Data>>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<DataSPtr>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<DataSPtr>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<DataSPtr>>::value));
 
-        QCOMPARE(waitForValue(p1, QSharedPointer<Data>{}), sptr0);
-        QCOMPARE(waitForValue(p2, QSharedPointer<Data>{}), sptr1);
+        QCOMPARE(waitForValue(p1, DataSPtr{}), sptr0);
+        QCOMPARE(waitForValue(p2, DataSPtr{}), sptr1);
 
         wptr = sptr0;
 
@@ -139,24 +139,26 @@ void tst_helpers_resolve::qtSharedPtr()
 // https://github.com/simonbrunel/qtpromise/issues/6
 void tst_helpers_resolve::stdSharedPtr()
 {
+    using DataSPtr = std::shared_ptr<Data>;
+
     Data::logs().reset();
 
     std::weak_ptr<Data> wptr;
 
     {
         auto sptr0 = std::make_shared<Data>(42);
-        const std::shared_ptr<Data> sptr1 = sptr0;
+        const DataSPtr sptr1 = sptr0;
 
         auto p0 = QtPromise::resolve(std::make_shared<Data>(42));
         auto p1 = QtPromise::resolve(sptr0);
         auto p2 = QtPromise::resolve(sptr1);
 
-        Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<std::shared_ptr<Data>>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<std::shared_ptr<Data>>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<std::shared_ptr<Data>>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<DataSPtr>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<DataSPtr>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<DataSPtr>>::value));
 
-        QCOMPARE(waitForValue(p1, std::shared_ptr<Data>{}), sptr0);
-        QCOMPARE(waitForValue(p2, std::shared_ptr<Data>{}), sptr1);
+        QCOMPARE(waitForValue(p1, DataSPtr{}), sptr0);
+        QCOMPARE(waitForValue(p2, DataSPtr{}), sptr1);
 
         wptr = sptr0;
 
@@ -174,22 +176,22 @@ void tst_helpers_resolve::stdSharedPtr()
 
 void tst_helpers_resolve::typedPromise()
 {
-    auto resolver = [](const QPromiseResolve<int>& resolve) {
+    auto resolver = [](const QtPromise::QPromiseResolve<int>& resolve) {
         QtPromisePrivate::qtpromise_defer([=]() {
             resolve(42);
         });
     };
 
-    QPromise<int> v0{resolver};
-    const QPromise<int> v1 = v0;
+    QtPromise::QPromise<int> v0{resolver};
+    const QtPromise::QPromise<int> v1 = v0;
 
-    auto p0 = QtPromise::resolve(QPromise<int>{resolver});
+    auto p0 = QtPromise::resolve(QtPromise::QPromise<int>{resolver});
     auto p1 = QtPromise::resolve(v0);
     auto p2 = QtPromise::resolve(v1);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<int>>::value));
 
     for (const auto& promise : {p0, p1, p2}) {
         QCOMPARE(promise.isPending(), true);
@@ -201,22 +203,22 @@ void tst_helpers_resolve::typedPromise()
 
 void tst_helpers_resolve::voidPromise()
 {
-    auto resolver = [](const QPromiseResolve<void>& resolve) {
+    auto resolver = [](const QtPromise::QPromiseResolve<void>& resolve) {
         QtPromisePrivate::qtpromise_defer([=]() {
             resolve();
         });
     };
 
-    QPromise<void> v0{resolver};
-    const QPromise<void> v1 = v0;
+    QtPromise::QPromise<void> v0{resolver};
+    const QtPromise::QPromise<void> v1 = v0;
 
-    auto p0 = QtPromise::resolve(QPromise<void>{resolver});
+    auto p0 = QtPromise::resolve(QtPromise::QPromise<void>{resolver});
     auto p1 = QtPromise::resolve(v0);
     auto p2 = QtPromise::resolve(v1);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<void>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<void>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<void>>::value));
 
     for (const auto& promise : {p0, p1, p2}) {
         QCOMPARE(promise.isPending(), true);
@@ -238,9 +240,9 @@ void tst_helpers_resolve::typedFuture()
     auto p1 = QtPromise::resolve(v0);
     auto p2 = QtPromise::resolve(v1);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<int>>::value));
 
     for (const auto& promise : {p0, p1, p2}) {
         QCOMPARE(promise.isPending(), true);
@@ -260,9 +262,9 @@ void tst_helpers_resolve::voidFuture()
     auto p1 = QtPromise::resolve(v0);
     auto p2 = QtPromise::resolve(v1);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<void>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<void>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p2), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p2), QtPromise::QPromise<void>>::value));
 
     for (const auto& promise : {p0, p1, p2}) {
         QCOMPARE(promise.isPending(), true);

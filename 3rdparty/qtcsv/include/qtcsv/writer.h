@@ -2,15 +2,14 @@
 #define QTCSVWRITER_H
 
 #include "qtcsv/qtcsv_global.h"
+#include "abstractdata.h"
+#include <QIODevice>
+#include <QList>
 #include <QString>
-#include <QStringList>
-#include <QTextCodec>
+#include <QStringConverter>
 
-class QIODevice;
+namespace QtCSV {
 
-namespace QtCSV
-{
-    class AbstractData;
     class ContentIterator;
 
     // Writer is a data-writer class that works with csv-files and IO Devices.
@@ -23,11 +22,9 @@ namespace QtCSV
     // to the end of the file.
     //
     // Also you can specify header and footer for your data.
-    class QTCSVSHARED_EXPORT Writer
-    {
+    class QTCSVSHARED_EXPORT Writer {
     public:
-        enum WriteMode
-        {
+        enum class WriteMode {
             REWRITE = 0,
             APPEND
         };
@@ -38,19 +35,20 @@ namespace QtCSV
             const AbstractData& data,
             const QString& separator = QString(","),
             const QString& textDelimiter = QString("\""),
-            const WriteMode& mode = REWRITE,
-            const QStringList& header = QStringList(),
-            const QStringList& footer = QStringList(),
-            QTextCodec* codec = QTextCodec::codecForName("UTF-8"));
+            WriteMode mode = WriteMode::REWRITE,
+            const QList<QString>& header = {},
+            const QList<QString>& footer = {},
+            QStringConverter::Encoding codec = QStringConverter::Utf8);
 
         // Write data to IO Device
-        static bool write(QIODevice& ioDevice,
+        static bool write(
+            QIODevice& ioDevice,
             const AbstractData& data,
             const QString& separator = QString(","),
             const QString& textDelimiter = QString("\""),
-            const QStringList& header = QStringList(),
-            const QStringList& footer = QStringList(),
-            QTextCodec* codec = QTextCodec::codecForName("UTF-8"));
+            const QList<QString>& header = {},
+            const QList<QString>& footer = {},
+            QStringConverter::Encoding codec = QStringConverter::Utf8);
     };
 }
 

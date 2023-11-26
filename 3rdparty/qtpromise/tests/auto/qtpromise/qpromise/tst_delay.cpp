@@ -12,8 +12,6 @@
 
 #include <chrono>
 
-using namespace QtPromise;
-
 class tst_qpromise_delay : public QObject
 {
     Q_OBJECT
@@ -36,7 +34,7 @@ void tst_qpromise_delay::fulfilled()
 
     timer.start();
 
-    auto p = QPromise<int>::resolve(42).delay(1000).finally([&]() {
+    auto p = QtPromise::QPromise<int>::resolve(42).delay(1000).finally([&]() {
         elapsed = timer.elapsed();
     });
 
@@ -57,7 +55,7 @@ void tst_qpromise_delay::rejected()
 
     timer.start();
 
-    auto p = QPromise<int>::reject(QString{"foo"}).delay(1000).finally([&]() {
+    auto p = QtPromise::QPromise<int>::reject(QString{"foo"}).delay(1000).finally([&]() {
         elapsed = timer.elapsed();
     });
 
@@ -73,7 +71,7 @@ void tst_qpromise_delay::fulfilledStdChrono()
 
     timer.start();
 
-    auto p = QPromise<int>::resolve(42).delay(std::chrono::seconds{1}).finally([&]() {
+    auto p = QtPromise::QPromise<int>::resolve(42).delay(std::chrono::seconds{1}).finally([&]() {
         elapsed = timer.elapsed();
     });
 
@@ -94,9 +92,11 @@ void tst_qpromise_delay::rejectedStdChrono()
 
     timer.start();
 
-    auto p = QPromise<int>::reject(QString{"foo"}).delay(std::chrono::seconds{1}).finally([&]() {
-        elapsed = timer.elapsed();
-    });
+    auto p = QtPromise::QPromise<int>::reject(QString{"foo"})
+                 .delay(std::chrono::seconds{1})
+                 .finally([&]() {
+                     elapsed = timer.elapsed();
+                 });
 
     QCOMPARE(waitForError(p, QString{}), QString{"foo"});
     QCOMPARE(p.isRejected(), true);

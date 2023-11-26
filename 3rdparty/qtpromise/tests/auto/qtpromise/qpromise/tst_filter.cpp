@@ -11,8 +11,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_qpromise_filter : public QObject
 {
     Q_OBJECT
@@ -43,13 +41,13 @@ struct SequenceTester
                          return v > 42 && v < 51;
                      })
                      .filter([](int, int i) {
-                         return QPromise<bool>::resolve(i % 2 == 0);
+                         return QtPromise::QPromise<bool>::resolve(i % 2 == 0);
                      })
                      .filter([](int v, ...) {
                          return v != 45;
                      });
 
-        Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<Sequence>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<Sequence>>::value));
         QCOMPARE(waitForValue(p, Sequence{}), (Sequence{43, 47, 49}));
     }
 };
@@ -58,78 +56,78 @@ struct SequenceTester
 
 void tst_qpromise_filter::emptySequence()
 {
-    auto p = QPromise<QVector<int>>::resolve({}).filter([](int v, ...) {
+    auto p = QtPromise::QPromise<QVector<int>>::resolve({}).filter([](int v, ...) {
         return v % 2 == 0;
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForValue(p, QVector<int>{}), QVector<int>{});
 }
 
 void tst_qpromise_filter::filterValues()
 {
-    auto p = QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
+    auto p = QtPromise::QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
         return v % 2 == 0;
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForValue(p, QVector<int>{}), (QVector<int>{42, 44}));
 }
 
 void tst_qpromise_filter::delayedFulfilled()
 {
-    auto p = QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
-        return QPromise<bool>{[&](const QPromiseResolve<bool>& resolve) {
+    auto p = QtPromise::QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
+        return QtPromise::QPromise<bool>{[&](const QtPromise::QPromiseResolve<bool>& resolve) {
             QtPromisePrivate::qtpromise_defer([=]() {
                 resolve(v % 2 == 0);
             });
         }};
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForValue(p, QVector<int>{}), (QVector<int>{42, 44}));
 }
 
 void tst_qpromise_filter::delayedRejected()
 {
-    auto p = QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
-        return QPromise<bool>{
-            [&](const QPromiseResolve<bool>& resolve, const QPromiseReject<bool>& reject) {
-                QtPromisePrivate::qtpromise_defer([=]() {
-                    if (v == 43) {
-                        reject(QString{"foo"});
-                    }
-                    resolve(true);
-                });
-            }};
+    auto p = QtPromise::QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
+        return QtPromise::QPromise<bool>{[&](const QtPromise::QPromiseResolve<bool>& resolve,
+                                             const QtPromise::QPromiseReject<bool>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                if (v == 43) {
+                    reject(QString{"foo"});
+                }
+                resolve(true);
+            });
+        }};
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForError(p, QString{}), QString{"foo"});
 }
 
 void tst_qpromise_filter::functorThrows()
 {
-    auto p = QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
+    auto p = QtPromise::QPromise<QVector<int>>::resolve({42, 43, 44}).filter([](int v, ...) {
         if (v == 43) {
             throw QString{"foo"};
         }
         return true;
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForError(p, QString{}), QString{"foo"});
 }
 
 void tst_qpromise_filter::functorArguments()
 {
     QMap<int, int> args;
-    auto p = QPromise<QVector<int>>::resolve({42, 43, 44}).filter([&](int v, int i) {
+    auto p = QtPromise::QPromise<QVector<int>>::resolve({42, 43, 44}).filter([&](int v, int i) {
         args[v] = i;
         return i % 2 == 0;
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForValue(p, QVector<int>{}), (QVector<int>{42, 44}));
     QMap<int, int> expected{{42, 0}, {43, 1}, {44, 2}};
     QCOMPARE(args, expected);
@@ -137,11 +135,12 @@ void tst_qpromise_filter::functorArguments()
 
 void tst_qpromise_filter::preserveOrder()
 {
-    auto p = QPromise<QVector<int>>::resolve({250, 50, 100, 400, 300}).filter([](int v, ...) {
-        return QPromise<bool>::resolve(v > 200).delay(v);
-    });
+    auto p =
+        QtPromise::QPromise<QVector<int>>::resolve({250, 50, 100, 400, 300}).filter([](int v, ...) {
+            return QtPromise::QPromise<bool>::resolve(v > 200).delay(v);
+        });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QVector<int>>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QVector<int>>>::value));
     QCOMPARE(waitForValue(p, QVector<int>{}), (QVector<int>{250, 400, 300}));
 }
 

@@ -9,8 +9,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_future : public QObject
 {
     Q_OBJECT
@@ -58,7 +56,7 @@ void tst_future::fulfilled()
         return 42;
     }));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(p.isPending(), true);
 
     p.then([&](int res) {
@@ -74,7 +72,7 @@ void tst_future::fulfilled_void()
     int result = -1;
     auto p = QtPromise::resolve(QtConcurrent::run([]() {}));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(p.isPending(), true);
 
     p.then([&]() {
@@ -93,7 +91,7 @@ void tst_future::rejected()
         return 42;
     }));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(p.isPending(), true);
 
     p.fail([&](const MyException& e) {
@@ -112,7 +110,7 @@ void tst_future::rejected_void()
         throw MyException{"foo"};
     }));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
 
     QCOMPARE(p.isPending(), true);
 
@@ -132,7 +130,7 @@ void tst_future::unhandled()
         return 42;
     }));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p.isPending(), true);
 
@@ -157,7 +155,7 @@ void tst_future::unhandled_void()
         throw QString{"foo"};
     }));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(p.isPending(), true);
 
     p.fail([&](const QString& err) {
@@ -179,7 +177,7 @@ void tst_future::canceled()
 
     QCOMPARE(p.isPending(), true);
 
-    p.fail([&](const QPromiseCanceledException&) {
+    p.fail([&](const QtPromise::QPromiseCanceledException&) {
          error = "canceled";
          return -1;
      }).wait();
@@ -195,7 +193,7 @@ void tst_future::canceled_void()
 
     QCOMPARE(p.isPending(), true);
 
-    p.fail([&](const QPromiseCanceledException&) {
+    p.fail([&](const QtPromise::QPromiseCanceledException&) {
          error = "canceled";
      }).wait();
 
@@ -207,12 +205,12 @@ void tst_future::canceledFromThread()
 {
     QString error;
     auto p = QtPromise::resolve(QtConcurrent::run([]() {
-        throw QPromiseCanceledException{};
+        throw QtPromise::QPromiseCanceledException{};
     }));
 
     QCOMPARE(p.isPending(), true);
 
-    p.fail([&](const QPromiseCanceledException&) {
+    p.fail([&](const QtPromise::QPromiseCanceledException&) {
          error = "bar";
      }).wait();
 
@@ -269,7 +267,7 @@ void tst_future::then_void()
 void tst_future::fail()
 {
     QString result;
-    auto input = QPromise<QString>::reject(MyException{"bar"});
+    auto input = QtPromise::QPromise<QString>::reject(MyException{"bar"});
     auto output = input.fail([](const MyException& e) {
         return QtConcurrent::run(
             [](const QString& error) {
@@ -294,7 +292,7 @@ void tst_future::fail()
 void tst_future::fail_void()
 {
     QString result;
-    auto input = QPromise<void>::reject(MyException{"bar"});
+    auto input = QtPromise::QPromise<void>::reject(MyException{"bar"});
     auto output = input.fail([&](const MyException& e) {
         return QtConcurrent::run(
             [&](const QString& error) {
@@ -325,7 +323,7 @@ void tst_future::finally()
         });
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(output), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(output), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(input.isFulfilled(), true);
     QCOMPARE(output.isPending(), true);
@@ -350,7 +348,7 @@ void tst_future::finallyRejected()
         });
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(output), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(output), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(input.isFulfilled(), true);
     QCOMPARE(output.isPending(), true);

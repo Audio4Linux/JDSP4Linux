@@ -10,8 +10,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_qpromise_fail : public QObject
 {
     Q_OBJECT
@@ -72,7 +70,7 @@ private:
 void tst_qpromise_fail::sameType()
 {
     // http://en.cppreference.com/w/cpp/error/exception
-    auto p = QPromise<int>::reject(std::out_of_range("foo"));
+    auto p = QtPromise::QPromise<int>::reject(std::out_of_range("foo"));
 
     QString error;
     p.fail([&](const std::domain_error& e) {
@@ -95,7 +93,7 @@ void tst_qpromise_fail::sameType()
 void tst_qpromise_fail::baseClass()
 {
     // http://en.cppreference.com/w/cpp/error/exception
-    auto p = QPromise<int>::reject(std::out_of_range("foo"));
+    auto p = QtPromise::QPromise<int>::reject(std::out_of_range("foo"));
 
     QString error;
     p.fail([&](const std::runtime_error& e) {
@@ -117,7 +115,7 @@ void tst_qpromise_fail::baseClass()
 
 void tst_qpromise_fail::catchAll()
 {
-    auto p = QPromise<int>::reject(std::out_of_range("foo"));
+    auto p = QtPromise::QPromise<int>::reject(std::out_of_range("foo"));
 
     QString error;
     p.fail([&](const std::runtime_error& e) {
@@ -140,18 +138,18 @@ void tst_qpromise_fail::catchAll()
 void tst_qpromise_fail::functionPtrHandlers()
 {
     { // Global functions.
-        auto p0 = QPromise<float>::reject(kErr).fail(&fnNoArg);
-        auto p1 = QPromise<float>::reject(kErr).fail(&fnArgByVal);
-        auto p2 = QPromise<float>::reject(kErr).fail(&fnArgByRef);
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(&fnNoArg);
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(&fnArgByVal);
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(&fnArgByRef);
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
         QCOMPARE(waitForValue(p2, kFail), kRes);
     }
     { // Static member functions.
-        auto p0 = QPromise<float>::reject(kErr).fail(&Klass::kFnNoArg);
-        auto p1 = QPromise<float>::reject(kErr).fail(&Klass::kFnArgByVal);
-        auto p2 = QPromise<float>::reject(kErr).fail(&Klass::kFnArgByRef);
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(&Klass::kFnNoArg);
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(&Klass::kFnArgByVal);
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(&Klass::kFnArgByRef);
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
@@ -167,9 +165,9 @@ void tst_qpromise_fail::stdFunctionHandlers()
         std::function<float(QString)> stdFnArgByVal = fnArgByVal;
         std::function<float(const QString&)> stdFnArgByRef = fnArgByRef;
 
-        auto p0 = QPromise<float>::reject(kErr).fail(stdFnNoArg);
-        auto p1 = QPromise<float>::reject(kErr).fail(stdFnArgByVal);
-        auto p2 = QPromise<float>::reject(kErr).fail(stdFnArgByRef);
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(stdFnNoArg);
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(stdFnArgByVal);
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(stdFnArgByRef);
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
@@ -180,19 +178,20 @@ void tst_qpromise_fail::stdFunctionHandlers()
         const std::function<float(QString)> stdFnArgByVal = fnArgByVal;
         const std::function<float(const QString&)> stdFnArgByRef = fnArgByRef;
 
-        auto p0 = QPromise<float>::reject(kErr).fail(stdFnNoArg);
-        auto p1 = QPromise<float>::reject(kErr).fail(stdFnArgByVal);
-        auto p2 = QPromise<float>::reject(kErr).fail(stdFnArgByRef);
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(stdFnNoArg);
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(stdFnArgByVal);
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(stdFnArgByRef);
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
         QCOMPARE(waitForValue(p2, kFail), kRes);
     }
     { // rvalue.
-        auto p0 = QPromise<float>::reject(kErr).fail(std::function<float()>{fnNoArg});
-        auto p1 = QPromise<float>::reject(kErr).fail(std::function<float(QString)>{fnArgByVal});
-        auto p2 =
-            QPromise<float>::reject(kErr).fail(std::function<float(const QString&)>{fnArgByRef});
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(std::function<float()>{fnNoArg});
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(
+            std::function<float(QString)>{fnArgByVal});
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(
+            std::function<float(const QString&)>{fnArgByRef});
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
@@ -213,9 +212,9 @@ void tst_qpromise_fail::stdBindHandlers()
     const std::function<float(const QString&)> bindArgByRef =
         std::bind(&Klass::fnArgByRef, &obj, _1);
 
-    auto p0 = QPromise<float>::reject(kErr).fail(bindNoArg);
-    auto p1 = QPromise<float>::reject(kErr).fail(bindArgByVal);
-    auto p2 = QPromise<float>::reject(kErr).fail(bindArgByRef);
+    auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(bindNoArg);
+    auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(bindArgByVal);
+    auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(bindArgByRef);
 
     QCOMPARE(waitForValue(p0, kFail), val);
     QCOMPARE(waitForValue(p1, kFail), val + kRes);
@@ -235,9 +234,9 @@ void tst_qpromise_fail::lambdaHandlers()
             return v.toFloat();
         };
 
-        auto p0 = QPromise<float>::reject(kErr).fail(lambdaNoArg);
-        auto p1 = QPromise<float>::reject(kErr).fail(lambdaArgByVal);
-        auto p2 = QPromise<float>::reject(kErr).fail(lambdaArgByRef);
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(lambdaNoArg);
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(lambdaArgByVal);
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(lambdaArgByRef);
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
@@ -254,22 +253,22 @@ void tst_qpromise_fail::lambdaHandlers()
             return v.toFloat();
         };
 
-        auto p0 = QPromise<float>::reject(kErr).fail(lambdaNoArg);
-        auto p1 = QPromise<float>::reject(kErr).fail(lambdaArgByVal);
-        auto p2 = QPromise<float>::reject(kErr).fail(lambdaArgByRef);
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail(lambdaNoArg);
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail(lambdaArgByVal);
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail(lambdaArgByRef);
 
         QCOMPARE(waitForValue(p0, kFail), kRes);
         QCOMPARE(waitForValue(p1, kFail), kRes);
         QCOMPARE(waitForValue(p2, kFail), kRes);
     }
     { // rvalue.
-        auto p0 = QPromise<float>::reject(kErr).fail([]() {
+        auto p0 = QtPromise::QPromise<float>::reject(kErr).fail([]() {
             return kRes;
         });
-        auto p1 = QPromise<float>::reject(kErr).fail([](QString v) {
+        auto p1 = QtPromise::QPromise<float>::reject(kErr).fail([](QString v) {
             return v.toFloat();
         });
-        auto p2 = QPromise<float>::reject(kErr).fail([](const QString& v) {
+        auto p2 = QtPromise::QPromise<float>::reject(kErr).fail([](const QString& v) {
             return v.toFloat();
         });
 

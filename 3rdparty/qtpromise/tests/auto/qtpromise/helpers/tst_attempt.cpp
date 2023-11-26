@@ -13,8 +13,6 @@
 
 #include <memory>
 
-using namespace QtPromise;
-
 class tst_helpers_attempt : public QObject
 {
     Q_OBJECT
@@ -35,7 +33,7 @@ void tst_helpers_attempt::voidResult()
 {
     auto p = QtPromise::attempt([]() {});
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(p.isFulfilled(), true);
     QCOMPARE(waitForValue(p, -1, 42), 42);
 }
@@ -46,7 +44,7 @@ void tst_helpers_attempt::typedResult()
         return QString{"foo"};
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
     QCOMPARE(p.isFulfilled(), true);
     QCOMPARE(waitForValue(p, QString{}), QString{"foo"});
 }
@@ -59,7 +57,7 @@ void tst_helpers_attempt::futureResult()
         });
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, QString{}), QString{"foo"});
 }
@@ -70,7 +68,7 @@ void tst_helpers_attempt::promiseResult()
         return QtPromise::resolve(42).delay(200);
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1), 42);
 }
@@ -84,7 +82,7 @@ void tst_helpers_attempt::functorThrows()
         return 42;
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(p.isRejected(), true);
     QCOMPARE(waitForError(p, QString{}), QString{"bar"});
 }
@@ -98,7 +96,7 @@ void tst_helpers_attempt::callWithParams()
         42,
         "foo");
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
     QCOMPARE(p.isFulfilled(), true);
     QCOMPARE(waitForValue(p, QString{}), QString{"42:foo"});
 }

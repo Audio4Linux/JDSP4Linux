@@ -12,8 +12,6 @@
 
 #include <memory>
 
-using namespace QtPromise;
-
 class tst_cpp14_resolver_lambda_auto : public QObject
 {
     Q_OBJECT
@@ -28,19 +26,19 @@ QTEST_MAIN(tst_cpp14_resolver_lambda_auto)
 
 void tst_cpp14_resolver_lambda_auto::resolverTwoAutoArgs()
 {
-    QPromise<int> p0{[](auto resolve, auto reject) {
+    QtPromise::QPromise<int> p0{[](auto resolve, auto reject) {
         Q_UNUSED(reject)
         resolve(42);
     }};
-    QPromise<int> p1{[](auto resolve, const auto& reject) {
+    QtPromise::QPromise<int> p1{[](auto resolve, const auto& reject) {
         Q_UNUSED(reject)
         resolve(42);
     }};
-    QPromise<int> p2{[](const auto& resolve, auto reject) {
+    QtPromise::QPromise<int> p2{[](const auto& resolve, auto reject) {
         Q_UNUSED(reject)
         resolve(42);
     }};
-    QPromise<int> p3{[](const auto& resolve, const auto& reject) {
+    QtPromise::QPromise<int> p3{[](const auto& resolve, const auto& reject) {
         Q_UNUSED(reject)
         resolve(42);
     }};
@@ -54,19 +52,19 @@ void tst_cpp14_resolver_lambda_auto::resolverTwoAutoArgs()
 
 void tst_cpp14_resolver_lambda_auto::resolverTwoAutoArgs_void()
 {
-    QPromise<void> p0{[](auto resolve, auto reject) {
+    QtPromise::QPromise<void> p0{[](auto resolve, auto reject) {
         Q_UNUSED(reject)
         resolve();
     }};
-    QPromise<void> p1{[](auto resolve, const auto& reject) {
+    QtPromise::QPromise<void> p1{[](auto resolve, const auto& reject) {
         Q_UNUSED(reject)
         resolve();
     }};
-    QPromise<void> p2{[](const auto& resolve, auto reject) {
+    QtPromise::QPromise<void> p2{[](const auto& resolve, auto reject) {
         Q_UNUSED(reject)
         resolve();
     }};
-    QPromise<void> p3{[](const auto& resolve, const auto& reject) {
+    QtPromise::QPromise<void> p3{[](const auto& resolve, const auto& reject) {
         Q_UNUSED(reject)
         resolve();
     }};

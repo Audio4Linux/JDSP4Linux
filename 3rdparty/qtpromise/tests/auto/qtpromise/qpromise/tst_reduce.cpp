@@ -11,8 +11,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_qpromise_reduce : public QObject
 {
     Q_OBJECT
@@ -56,8 +54,8 @@ struct SequenceTester
             },
             QtPromise::resolve(2).delay(100));
 
-        Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-        Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+        Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
 
         QCOMPARE(p0.isPending(), true);
         QCOMPARE(p1.isPending(), true);
@@ -84,7 +82,7 @@ void tst_qpromise_reduce::emptySequence()
 
     // NOTE(SB): reduce() on an empty sequence without an initial value is an error!
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(waitForValue(p, -1), 42);
     QCOMPARE(called, false);
@@ -107,8 +105,8 @@ void tst_qpromise_reduce::regularValues()
         },
         2);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p0.isPending(), true);
     QCOMPARE(p1.isPending(), true);
@@ -120,9 +118,9 @@ void tst_qpromise_reduce::regularValues()
 
 void tst_qpromise_reduce::promiseValues()
 {
-    QVector<QPromise<int>> inputs{QtPromise::resolve(4).delay(400),
-                                  QtPromise::resolve(6).delay(300),
-                                  QtPromise::resolve(8).delay(200)};
+    QVector<QtPromise::QPromise<int>> inputs{QtPromise::resolve(4).delay(400),
+                                             QtPromise::resolve(6).delay(300),
+                                             QtPromise::resolve(8).delay(200)};
     QVector<int> v0;
     QVector<int> v1;
 
@@ -137,8 +135,8 @@ void tst_qpromise_reduce::promiseValues()
         },
         2);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p0.isPending(), true);
     QCOMPARE(p1.isPending(), true);
@@ -160,7 +158,7 @@ void tst_qpromise_reduce::convertResultType()
 
     // NOTE(SB): when no initial value is given, the result type is the sequence type.
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
 
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, QString{}), QString{"foo:4:0:6:1:8:2"});
@@ -178,7 +176,7 @@ void tst_qpromise_reduce::delayedInitialValue()
                      },
                      QtPromise::resolve(2).delay(100));
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1), 23);
@@ -202,8 +200,8 @@ void tst_qpromise_reduce::delayedFulfilled()
         },
         2);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p0.isPending(), true);
     QCOMPARE(p1.isPending(), true);
@@ -222,7 +220,7 @@ void tst_qpromise_reduce::delayedRejected()
     auto p0 = QtPromise::resolve(inputs).reduce([&](int acc, int cur, int idx) {
         v0 << acc << cur << idx;
         if (cur == 6) {
-            return QPromise<int>::reject(QString{"foo"});
+            return QtPromise::QPromise<int>::reject(QString{"foo"});
         }
         return QtPromise::resolve(acc + cur + idx);
     });
@@ -230,14 +228,14 @@ void tst_qpromise_reduce::delayedRejected()
         [&](int acc, int cur, int idx) {
             v1 << acc << cur << idx;
             if (cur == 6) {
-                return QPromise<int>::reject(QString{"bar"});
+                return QtPromise::QPromise<int>::reject(QString{"bar"});
             }
             return QtPromise::resolve(acc + cur + idx);
         },
         2);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p0.isPending(), true);
     QCOMPARE(p1.isPending(), true);
@@ -270,8 +268,8 @@ void tst_qpromise_reduce::functorThrows()
         },
         2);
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p0), QPromise<int>>::value));
-    Q_STATIC_ASSERT((std::is_same<decltype(p1), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p0), QtPromise::QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p1), QtPromise::QPromise<int>>::value));
 
     QCOMPARE(p0.isPending(), true);
     QCOMPARE(p1.isPending(), true);
@@ -285,10 +283,10 @@ void tst_qpromise_reduce::sequenceTypes()
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
     // QLinkedList is deprecated since Qt 5.15.
-    SequenceTester<QLinkedList<QPromise<int>>>::exec();
+    SequenceTester<QLinkedList<QtPromise::QPromise<int>>>::exec();
 #endif
-    SequenceTester<QList<QPromise<int>>>::exec();
-    SequenceTester<QVector<QPromise<int>>>::exec();
-    SequenceTester<std::list<QPromise<int>>>::exec();
-    SequenceTester<std::vector<QPromise<int>>>::exec();
+    SequenceTester<QList<QtPromise::QPromise<int>>>::exec();
+    SequenceTester<QVector<QtPromise::QPromise<int>>>::exec();
+    SequenceTester<std::list<QtPromise::QPromise<int>>>::exec();
+    SequenceTester<std::vector<QtPromise::QPromise<int>>>::exec();
 }

@@ -11,8 +11,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_qpromiseconnections : public QObject
 {
     Q_OBJECT
@@ -31,7 +29,7 @@ void tst_qpromiseconnections::connections()
 {
     Object sender;
 
-    QPromiseConnections connections;
+    QtPromise::QPromiseConnections connections;
     QCOMPARE(sender.hasConnections(), false);
     QCOMPARE(connections.count(), 0);
 
@@ -53,7 +51,7 @@ void tst_qpromiseconnections::destruction()
     Object sender;
 
     {
-        QPromiseConnections connections;
+        QtPromise::QPromiseConnections connections;
         QCOMPARE(sender.hasConnections(), false);
         QCOMPARE(connections.count(), 0);
 
@@ -67,7 +65,7 @@ void tst_qpromiseconnections::destruction()
 
 void tst_qpromiseconnections::senderDestroyed()
 {
-    QPromiseConnections connections;
+    QtPromise::QPromiseConnections connections;
     QCOMPARE(connections.count(), 0);
 
     {

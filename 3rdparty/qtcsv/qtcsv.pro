@@ -1,7 +1,7 @@
 QT = core
 TARGET = qtcsv
 TEMPLATE = lib
-VERSION = 1.6.0
+VERSION = 1.7.0
 win32:TARGET_EXT = .dll
 
 # Uncomment this setting if you want to build static library
@@ -29,8 +29,7 @@ DISTFILES += \
     CMakeLists.txt
 
 OTHER_FILES += \
-    appveyor.yml \
-    .travis.yml
+    appveyor.yml
 
 message(=== Configuration of qtcsv ===)
 message(Qt version: $$[QT_VERSION])

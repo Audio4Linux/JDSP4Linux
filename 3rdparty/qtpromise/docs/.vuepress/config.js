@@ -40,6 +40,7 @@ module.exports = {
                         title: 'QPromise',
                         children: [
                             '/qtpromise/qpromise/constructor',
+                            '/qtpromise/qpromise/convert',
                             '/qtpromise/qpromise/delay',
                             '/qtpromise/qpromise/each',
                             '/qtpromise/qpromise/fail',
@@ -77,6 +78,7 @@ module.exports = {
                         children: [
                             '/qtpromise/exceptions/canceled',
                             '/qtpromise/exceptions/context',
+                            '/qtpromise/exceptions/conversion',
                             '/qtpromise/exceptions/timeout',
                             '/qtpromise/exceptions/undefined'
                         ]
