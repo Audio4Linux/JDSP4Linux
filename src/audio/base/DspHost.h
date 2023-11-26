@@ -12,7 +12,7 @@
 class BenchmarkWorker;
 class DspConfig;
 class QThread;
-class QVariant;
+#include <QtCore/qcontainerfwd.h>
 
 class DspHost
 {

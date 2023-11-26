@@ -28,6 +28,9 @@
 
 #include <QtCore/qglobal.h>
 
+
+#define QT_NO_PRINTER
+
 // some Qt version/configuration dependent macros to include or exclude certain code paths:
 #ifdef QCUSTOMPLOT_USE_OPENGL
 #  if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)

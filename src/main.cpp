@@ -281,7 +281,6 @@ int main(int   argc,
         Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no")); /* unreliable */
 
         // Workaround: Block DE's to resurrect multiple instances
-        QGuiApplication::setFallbackSessionManagementEnabled(false);
         QObject::connect(qApp, &QGuiApplication::saveStateRequest, qApp, [](QSessionManager &manager){
                 // Block session restore requests
                 manager.setRestartHint(QSessionManager::RestartNever);

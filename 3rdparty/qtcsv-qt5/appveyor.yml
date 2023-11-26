@@ -1,0 +1,40 @@
+version: "{build}"
+
+init:
+- git config --global core.autocrlf input
+
+environment:
+  matrix:
+  - QT5: C:\Qt\5.6.3\mingw49_32
+    MINGW: C:\Qt\Tools\mingw530_32
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - QT5: C:\Qt\5.9\mingw53_32
+    MINGW: C:\Qt\Tools\mingw530_32
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - QT5: C:\Qt\5.12\mingw73_32
+    MINGW: C:\Qt\Tools\mingw730_32
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+matrix:
+  fast_finish: true
+
+before_build:
+- set PATH=%MINGW%\bin;%QT5%\bin;%PATH%
+
+build_script:
+- mkdir .\build
+- cd .\build
+
+# build library and tests
+- qmake -v
+- qmake ..\qtcsv.pro CONFIG+=release DESTDIR=%cd%
+- mingw32-make
+- dir /s
+- mkdir .\tests
+- copy .\*qtcsv.dll .\tests
+- qmake ..\tests\tests.pro CONFIG+=release DESTDIR=%cd%\tests
+- mingw32-make
+
+# run tests
+- dir /s
+- .\tests\qtcsv_tests.exe
