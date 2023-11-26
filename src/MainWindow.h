@@ -17,6 +17,7 @@
 
 #include <QCloseEvent>
 #include <QFrame>
+#include <QGraphicsColorizeEffect>
 #include <QItemSelection>
 #include <QMainWindow>
 #include <QSystemTrayIcon>
@@ -105,7 +106,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    StyleHelper *_styleHelper;
+    StyleHelper *_styleHelper = nullptr;
+    QGraphicsColorizeEffect  *_redTintEffect = nullptr;
 
     bool _startupInTraySwitch;
     TrayIcon *_trayIcon;

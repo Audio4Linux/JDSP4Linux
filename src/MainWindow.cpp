@@ -238,6 +238,19 @@ MainWindow::MainWindow(IAudioService* audioService,
         ui->toolButton->setIconSize(QSize(16,16));
         ui->disableFX->setIconSize(QSize(16,16));
 
+
+        // Prepare red tint effect for fxDisable toggle button
+        _redTintEffect = new QGraphicsColorizeEffect(this);
+        _redTintEffect->setColor(Qt::red);
+        _redTintEffect->setStrength(0);
+        ui->disableFX->setGraphicsEffect(_redTintEffect);
+
+        auto fxToggleChanged = [this](bool toggled) {
+            _redTintEffect->setStrength(toggled ? 0.6 : 0.0);
+        };
+        fxToggleChanged(ui->disableFX->isChecked());
+        connect(ui->disableFX, &QPushButton::toggled, this, fxToggleChanged);
+
         // Attach menu
         QMenu *menu = new QMenu();
         menu->addAction(tr("Apps"), _appMgrFragment, &FragmentHost<AppManagerFragment*>::slideIn);
@@ -259,7 +272,7 @@ MainWindow::MainWindow(IAudioService* audioService,
         });
         ui->toolButton->setMenu(menu);
 
-        connect(_styleHelper, &StyleHelper::iconColorChanged, this, [this](bool white){
+        connect(_styleHelper, &StyleHelper::iconColorChanged, this, [this](bool white){       
             if (white)
             {
                 ui->set->setIcon(QIcon(":/icons/settings-white.svg"));
