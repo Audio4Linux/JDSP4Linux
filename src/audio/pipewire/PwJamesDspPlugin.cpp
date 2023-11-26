@@ -1,5 +1,6 @@
 #include "PwJamesDspPlugin.h"
 #include <QString>
+#include <clocale>
 
 extern "C" {
 #ifdef DEBUG_FPE
@@ -18,6 +19,8 @@ void receivePrintfStdout(const char* msg, void* userdata) {
 PwJamesDspPlugin::PwJamesDspPlugin(PwPipelineManager* pipe_manager, IAudioService* parent_service)
     : PwPluginBase("@PwJamesDspPlugin: ", "JamesDsp", pipe_manager)
 {
+    setlocale(LC_NUMERIC, "C");
+
     setMessageHandler(std::bind(&IAudioService::handleMessage, parent_service, std::placeholders::_1, std::placeholders::_2));
     setPrintfStdOutHandler(receivePrintfStdout, this);
 

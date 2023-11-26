@@ -188,9 +188,9 @@ int main(int   argc,
          char *argv[])
 {
     // Locale workaround
-    setlocale(LC_NUMERIC, "C");
     auto systemLocale = QLocale::system();
     QLocale::setDefault(QLocale::c());
+    setlocale(LC_NUMERIC, "C");
 
     // Used for some crash handler magic & auto-start setup
     findyourself_init(argv[0]);
