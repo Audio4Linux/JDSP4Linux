@@ -91,7 +91,7 @@ QVariantMap ConfigIO::readString(const QString &string)
 bool ConfigIO::readLine(const QString &line,
                         QPair<QString, QVariant> &out)
 {
-    if (line.trimmed().isEmpty() || line.trimmed()[0] == '#' || line.trimmed()[0] == '[')
+    if (line.trimmed().isEmpty() || line.trimmed()[0] == '#' || line.trimmed()[0] == '[' || !line.contains('='))
 	{
         return false; // Skip commented lines
 	}

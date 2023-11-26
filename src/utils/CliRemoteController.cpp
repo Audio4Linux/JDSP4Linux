@@ -12,8 +12,80 @@ CliRemoteController::CliRemoteController(QObject *parent)
 {
     DspConfig::instance().load();
 
-    service = new me::timschneeberger::jdsp4linux::Service("me.timschneeberger.jdsp4linux", "/jdsp4linux/service",
-                                                           QDBusConnection::sessionBus(), this);
+    const QMetaObject* meta = metaObject();
+    for (int i = meta->propertyOffset(); i < meta->propertyCount(); ++i) {
+        _options.append(meta->property(i).read(this).value<QCommandLineOption*>());
+    }
+}
+
+CliRemoteController::~CliRemoteController()
+{
+    for(auto* opt : _options)
+        delete opt;
+}
+
+void CliRemoteController::attachClient()
+{
+    if(service == nullptr) {
+        service = new me::timschneeberger::jdsp4linux::Service("me.timschneeberger.jdsp4linux", "/jdsp4linux/service",
+                                                               QDBusConnection::sessionBus(), this);
+    }
+}
+
+void CliRemoteController::registerOptions(QCommandLineParser &parser) const
+{
+    for(auto* opt : _options)
+        parser.addOption(*opt);
+}
+
+bool CliRemoteController::isAnyArgumentSet(QCommandLineParser &parser) const
+{
+    for(auto* opt : _options) {
+        if(parser.isSet(*opt))
+            return true;
+    }
+    return false;
+}
+
+bool CliRemoteController::execute(QCommandLineParser &parser)
+{
+    attachClient();
+
+    const QMetaObject* meta = metaObject();
+    for (int i = meta->methodOffset(); i < meta->methodCount(); ++i) {
+        QMetaMethod method = meta->method(i);
+
+        QMetaProperty prop = meta->property(metaObject()->indexOfProperty(QString::fromLocal8Bit(method.name()).prepend('_').toLocal8Bit().constData()));
+        QCommandLineOption* opt = prop.read(this).value<QCommandLineOption*>();
+
+        if(!prop.isValid()) {
+            Log::error(QString("Bug: Method '%1' has no corresponding property assigned").arg(QString::fromLocal8Bit(method.name())));
+            continue;
+        }
+
+        bool result = false;
+        if(parser.isSet(*opt)) {
+            // Argument without parameter
+            if(method.parameterCount() < 1) {
+                method.invoke(this, Q_RETURN_ARG(bool, result));
+                return result;
+            }
+            // Argument with parameter
+            else if(method.parameterCount() == 1 && method.parameterType(0) == QMetaType::QString) {
+                QString inputValue = parser.value(*opt);
+                if(!inputValue.isEmpty()) {
+                    method.invoke(this, Q_RETURN_ARG(bool, result), Q_ARG(QString, inputValue));
+                    return result;
+                }
+            }
+            else {
+                Log::error(QString("Bug: Invokable method '%1' has wrong function signature for property '%2'").arg(QString::fromLocal8Bit(method.name())).arg(prop.name()));
+                continue;
+            }
+        }
+    }
+
+    return true;
 }
 
 template<typename T>
@@ -50,11 +122,22 @@ bool validateKey(const QString& keyString, DspConfig::Key& resolvedKey) {
 
 bool CliRemoteController::isConnected() const
 {
+    Log::console(service->isValid() ? "true" : "false", true);
     return service->isValid();
 }
 
-bool CliRemoteController::set(const QString &key, const QVariant &value) const
+bool CliRemoteController::set(const QString &keyValue) const
 {
+    QPair<QString, QVariant> out;
+    bool validLine = ConfigIO::readLine(keyValue, out);
+    if(!validLine) {
+        Log::error("Syntax error. Please use this format: --set key=value or --set \"key=value with spaces\".");
+        return false;
+    }
+
+    QString key = out.first;
+    QVariant value = out.second;
+
     if(!checkConnectionAndLog()) {
         DspConfig::Key resolvedKey;
         bool valid = validateKey(key, resolvedKey);

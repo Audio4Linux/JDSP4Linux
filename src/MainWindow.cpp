@@ -60,7 +60,6 @@ MainWindow::MainWindow(IAudioService* audioService,
         _styleHelper         = new StyleHelper(this);
         _eelEditor           = new EELEditor(this);
         _trayIcon            = new TrayIcon(this);
-        _ipcHandler          = new IpcHandler(_audioService, this);
         _autostart           = new AutostartManager(this);
 
         _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
@@ -402,7 +401,6 @@ MainWindow::~MainWindow()
 {
     if(_audioService != nullptr)
         delete _audioService;
-    delete _ipcHandler;
     delete ui;
 }
 

@@ -12,15 +12,16 @@
 #include <QSessionManager>
 #else
 #include <QCoreApplication>
-#include "utils/dbus/IpcHandler.h"
 #endif
 
 #include "config/DspConfig.h"
+#include "data/AssetManager.h"
 #include "data/PresetRule.h"
 #include "utils/CliRemoteController.h"
 #include "utils/FindBinary.h"
 #include "utils/SingleInstanceMonitor.h"
 #include "utils/VersionMacros.h"
+#include "utils/dbus/IpcHandler.h"
 
 #include <IAudioService.h>
 
@@ -33,10 +34,10 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#include <data/AssetManager.h>
-
+#ifndef HEADLESS
 static QTranslator* qtTranslator = nullptr;
 static QTranslator* translator = nullptr;
+#endif
 
 #ifndef NO_CRASH_HANDLER
 #include "crash/airbag.h"
@@ -102,55 +103,6 @@ void initTranslator(const QLocale& locale) {
     QApplication::installTranslator(qtTranslator);
     translator->load(locale, "jamesdsp", "_", ":/translations");
     QApplication::installTranslator(translator);
-}
-
-MainWindow* initGui(IAudioService* audioService, bool launchInTray, bool watchConfig) {
-    // Workaround: Block DE's to resurrect multiple instances
-    QGuiApplication::setFallbackSessionManagementEnabled(false);
-    QObject::connect(qApp, &QGuiApplication::saveStateRequest, qApp, [](QSessionManager &manager){
-        // Block session restore requests
-        manager.setRestartHint(QSessionManager::RestartNever);
-        manager.release();
-    }, Qt::DirectConnection);
-
-    // Check if another instance is already running and switch to it if that's the case
-    auto *instanceMonitor = new SingleInstanceMonitor(qApp);
-    if (!instanceMonitor->isServiceReady())
-    {
-        // Only push existing app to foreground if not launched using --tray
-        if(!launchInTray)
-            instanceMonitor->handover();
-        return nullptr;
-    }
-
-    // Prepare DspConfig based on cmdline argument
-    DspConfig::instance(watchConfig);
-
-    auto* window = new MainWindow(audioService, launchInTray);
-    QObject::connect(instanceMonitor, &SingleInstanceMonitor::raiseWindow, window, &MainWindow::raiseWindow);
-
-    window->setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            window->size(),
-            QGuiApplication::primaryScreen()->geometry()
-            )
-        );
-    window->setWindowFlags(Qt::WindowContextHelpButtonHint | Qt::WindowCloseButtonHint);
-    window->hide();
-
-    if (!launchInTray)
-    {
-        /* Session manager: Prevent system from launching this app maximized on session restore (= system startup).
-         * Affects DEs with enabled session restore feature; is independent from the built-in autostart feature */
-        if(!qApp->isSessionRestored())
-        {
-            window->show();
-        }
-    }
-
-    return window;
 }
 #endif
 
@@ -229,21 +181,6 @@ int main(int   argc,
     QCommandLineOption minVerbosity(QStringList() << "m" << "min-verbosity", "Minimum log verbosity (0 = Debug; ...; 5 = Critical)", "level");
     QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
 
-    QCommandLineOption isConnected(QStringList() << "is-connected", "Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)");
-    QCommandLineOption status(QStringList() << "status", "Show status (Remote)");
-    QCommandLineOption listKeys(QStringList() << "list-keys", "List available audio configuration keys (Remote)");
-    QCommandLineOption getAll(QStringList() << "get-all", "Get all audio configuration values (Remote)");
-    QCommandLineOption get(QStringList() << "get", "Get audio configuration value (Remote)", "key");
-    QCommandLineOption set(QStringList() << "set", "Set audio configuration value (format: key=value) (Remote)", "key=value");
-    QCommandLineOption loadPreset(QStringList() << "load-preset", "Load preset by name (Remote)", "name");
-    QCommandLineOption savePreset(QStringList() << "save-preset", "Save current settings as preset (Remote)", "name");
-    QCommandLineOption deletePreset(QStringList() << "delete-preset", "Delete preset by name (Remote)", "name");
-    QCommandLineOption listPresets(QStringList() << "list-presets", "List presets (Remote)");
-
-    QCommandLineOption listDevices(QStringList() << "list-devices", "List audio devices (Remote)");
-    QCommandLineOption listPresetRules(QStringList() << "list-preset-rules", "List preset rules (Remote)");
-    QCommandLineOption addPresetRule(QStringList() << "set-preset-rule", "Add/modify preset rule (Remote)", "deviceId=presetName");
-    QCommandLineOption deletePresetRule(QStringList() << "delete-preset-rule", "Delete preset rule (Remote)", "deviceId=presetName");
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("JamesDSP is an advanced audio processing engine available for Linux and Android systems."));
@@ -260,19 +197,13 @@ int main(int   argc,
     parser.addOptions({silent, nocolor, minVerbosity});
 
     // Remote control
-    auto remoteCmds = {isConnected, listKeys, getAll, get, set, loadPreset, savePreset, deletePreset, listPresets, addPresetRule, deletePresetRule, listPresetRules, listDevices, status};
-    parser.addOptions(remoteCmds);
+    auto ctrl = CliRemoteController();
+    ctrl.registerOptions(parser);
 
     parser.process(*app.get());
 
     // Determine whether CLI mode should be activated
-    bool cliMode = false;
-    for(const auto& arg : remoteCmds) {
-        if(parser.isSet(arg)){
-            cliMode = true;
-            break;
-        }
-    }
+    bool cliMode = ctrl.isAnyArgumentSet(parser);
 
 #ifndef NO_CRASH_HANDLER
     SPIN_ON_CRASH = parser.isSet(spinlck);
@@ -288,60 +219,12 @@ int main(int   argc,
     Log::instance().setUseSimpleFormat(cliMode);
 
     if(cliMode) {
-        // CLI remote control mode
-        auto ctrl = CliRemoteController();
+        // Enable dbus client
+        ctrl.attachClient();
 
         // Parse CLI options
-        bool result = false;
-        if(parser.isSet(isConnected)) {
-            result = ctrl.isConnected();
-            Log::console(result ? "true" : "false", true);
-        }
-        else if(parser.isSet(listKeys))
-            result = ctrl.listKeys();
-        else if(!parser.value(set).isEmpty()) {
-            QPair<QString, QVariant> out;
-            bool valid = ConfigIO::readLine(parser.value(set), out);
-            if(!valid) {
-                Log::error("Syntax error. Please use this format: --set key=value or --set \"key=value with spaces\".");
-                result = false;
-            }
-            else {
-                result = ctrl.set(out.first, out.second);
-            }
-        }
-        else if(parser.isSet(getAll)) {
-            result = ctrl.getAll();
-        }
-        else if(!parser.value(get).isEmpty()) {
-            result = ctrl.get(parser.value(get));
-        }
-        else if(parser.isSet(listPresets))
-            result = ctrl.listPresets();
-        else if(!parser.value(loadPreset).isEmpty()) {
-            result = ctrl.loadPreset(parser.value(loadPreset));
-        }
-        else if(!parser.value(savePreset).isEmpty()) {
-            result = ctrl.savePreset(parser.value(savePreset));
-        }
-        else if(!parser.value(deletePreset).isEmpty()) {
-            result = ctrl.deletePreset(parser.value(deletePreset));
-        }
-        else if(parser.isSet(listPresetRules))
-            result = ctrl.listPresetRules();
-        else if(!parser.value(addPresetRule).isEmpty()) {
-            result = ctrl.addPresetRule(parser.value(addPresetRule));
-        }
-        else if(!parser.value(deletePresetRule).isEmpty()) {
-            result = ctrl.deletePresetRule(parser.value(deletePresetRule));
-        }
-        else if(parser.isSet(listDevices))
-            result = ctrl.listOutputDevices();
-        else if(parser.isSet(status))
-            result = ctrl.showStatus();
-
         // Set exit code accordingly
-        return result ? 0 : 1;
+        return ctrl.execute(parser) ? 0 : 1;
     }
     else {
 #ifndef NO_CRASH_HANDLER
@@ -354,18 +237,29 @@ int main(int   argc,
         AppConfig::instance().set(AppConfig::ExecutablePath, QString::fromLocal8Bit(exepath));
         Log::clear();
 
-#ifdef HEADLESS
-        QScopedPointer instanceMonitor(new SingleInstanceMonitor(qApp));
+#ifndef HEADLESS
+        // Restart qApp in GUI service mode
+        app.reset();
+        app.reset(new QApplication(argc, argv));
+#endif
+
+        // Check if another instance is already running and switch to it if that's the case
+        QScopedPointer instanceMonitor(new SingleInstanceMonitor());
         if(!instanceMonitor->isServiceReady()) {
+#ifdef HEADLESS
             Log::console("Another JamesDSP instance is already active in the background. For information about controlling the active instance, see '--help'.", true);
+#else
+            // Only push existing app to foreground if not launched using --tray
+            if(!parser.isSet(tray))
+                instanceMonitor->handover();
+#endif
             return 1;
         }
-#endif
 
         Log::information("Application version: " + QString(APP_VERSION_FULL));
         Log::information("Qt library version: " + QString(qVersion()));
 
-        IAudioService* audioService = initAudioService();
+        QScopedPointer audioService(initAudioService());
 
         // Extract default EEL files if missing
         {
@@ -375,20 +269,50 @@ int main(int   argc,
             }
         }
 
-#ifdef HEADLESS
-        QScopedPointer ipc(new IpcHandler(audioService));
-        DspConfig::instance().load();
-#else
-        // GUI service mode
-        app.reset();
-        app.reset(new QApplication(argc, argv));
+        DspConfig::instance(parser.isSet(watch)).load();
+        QScopedPointer ipc(new IpcHandler(audioService.get(), qApp));
+
+#ifndef HEADLESS
+        // Setup GUI
         QString langOverride = parser.value(lang);
         initTranslator(langOverride.isEmpty() ? systemLocale : QLocale(langOverride));
 
         Log::information("Using language: " + QString(QLocale::system().name()));
         Log::debug("Launched by system session manager: " + QString(qApp->isSessionRestored() ? "yes" : "no")); /* unreliable */
 
-        initGui(audioService, parser.isSet(tray), parser.isSet(watch));
+        // Workaround: Block DE's to resurrect multiple instances
+        QGuiApplication::setFallbackSessionManagementEnabled(false);
+        QObject::connect(qApp, &QGuiApplication::saveStateRequest, qApp, [](QSessionManager &manager){
+                // Block session restore requests
+                manager.setRestartHint(QSessionManager::RestartNever);
+                manager.release();
+            }, Qt::DirectConnection);
+
+        bool launchInTray = parser.isSet(tray);
+
+        auto* window = new MainWindow(audioService.get(), launchInTray);
+        QObject::connect(instanceMonitor, &SingleInstanceMonitor::raiseWindow, window, &MainWindow::raiseWindow);
+
+        window->setGeometry(
+            QStyle::alignedRect(
+                Qt::LeftToRight,
+                Qt::AlignCenter,
+                window->size(),
+                QGuiApplication::primaryScreen()->geometry()
+                )
+            );
+        window->setWindowFlags(Qt::WindowContextHelpButtonHint | Qt::WindowCloseButtonHint);
+        window->hide();
+
+        if (!launchInTray)
+        {
+            /* Session manager: Prevent system from launching this app maximized on session restore (= system startup).
+         * Affects DEs with enabled session restore feature; is independent from the built-in autostart feature */
+            if(!qApp->isSessionRestored())
+            {
+                window->show();
+            }
+        }
 #endif
         return QCoreApplication::exec();
     }
