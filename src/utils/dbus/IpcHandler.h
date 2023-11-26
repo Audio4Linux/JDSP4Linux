@@ -4,7 +4,10 @@
 #include <QDBusConnection>
 #include <QDBusContext>
 #include <QDBusVariant>
+#include <QList>
 #include <QObject>
+
+#include "data/PresetRule.h"
 
 class ServiceAdaptor;
 class IAudioService;
@@ -48,6 +51,12 @@ public slots:
     void loadPreset(const QString &name) const;
     void savePreset(const QString &name) const;
     void deletePreset(const QString &name) const;
+
+    void setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset) const;
+    void deletePresetRule(const QString &deviceId) const;
+    QList<PresetRule> getPresetRules() const;
+
+     QList<IOutputDevice> getOutputDevices() const;
 
 private:
     QDBusConnection _connection = QDBusConnection::sessionBus();

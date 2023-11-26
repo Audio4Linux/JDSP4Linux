@@ -10,7 +10,7 @@
 
 #include <QDebug>
 
-PipewireAudioService::PipewireAudioService()
+PipewireAudioService::PipewireAudioService() : IAudioService()
 {
     Glib::init();
 

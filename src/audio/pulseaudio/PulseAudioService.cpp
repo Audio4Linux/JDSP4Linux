@@ -13,7 +13,7 @@
 
 #include <gstjamesdsp.h>
 
-PulseAudioService::PulseAudioService()
+PulseAudioService::PulseAudioService() : IAudioService()
 {
     Glib::init();
     gst_init (nullptr, nullptr);

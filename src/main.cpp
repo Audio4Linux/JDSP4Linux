@@ -16,6 +16,7 @@
 #endif
 
 #include "config/DspConfig.h"
+#include "data/PresetRule.h"
 #include "utils/CliRemoteController.h"
 #include "utils/FindBinary.h"
 #include "utils/SingleInstanceMonitor.h"
@@ -203,6 +204,11 @@ int main(int   argc,
     qRegisterMetaType<AppConfig::Key>();
     qRegisterMetaType<DspConfig::Key>();
 
+    qDBusRegisterMetaType<PresetRule>();
+    qDBusRegisterMetaType<QList<PresetRule>>();
+    qDBusRegisterMetaType<IOutputDevice>();
+    qDBusRegisterMetaType<QList<IOutputDevice>>();
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
@@ -234,6 +240,11 @@ int main(int   argc,
     QCommandLineOption deletePreset(QStringList() << "delete-preset", "Delete preset by name (Remote)", "name");
     QCommandLineOption listPresets(QStringList() << "list-presets", "List presets (Remote)");
 
+    QCommandLineOption listDevices(QStringList() << "list-devices", "List audio devices (Remote)");
+    QCommandLineOption listPresetRules(QStringList() << "list-preset-rules", "List preset rules (Remote)");
+    QCommandLineOption addPresetRule(QStringList() << "set-preset-rule", "Add/modify preset rule (Remote)", "deviceId=presetName");
+    QCommandLineOption deletePresetRule(QStringList() << "delete-preset-rule", "Delete preset rule (Remote)", "deviceId=presetName");
+
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("JamesDSP is an advanced audio processing engine available for Linux and Android systems."));
     parser.addHelpOption();
@@ -249,7 +260,7 @@ int main(int   argc,
     parser.addOptions({silent, nocolor, minVerbosity});
 
     // Remote control
-    auto remoteCmds = {isConnected, listKeys, getAll, get, set, loadPreset, savePreset, deletePreset, listPresets, status};
+    auto remoteCmds = {isConnected, listKeys, getAll, get, set, loadPreset, savePreset, deletePreset, listPresets, addPresetRule, deletePresetRule, listPresetRules, listDevices, status};
     parser.addOptions(remoteCmds);
 
     parser.process(*app.get());
@@ -316,6 +327,16 @@ int main(int   argc,
         else if(!parser.value(deletePreset).isEmpty()) {
             result = ctrl.deletePreset(parser.value(deletePreset));
         }
+        else if(parser.isSet(listPresetRules))
+            result = ctrl.listPresetRules();
+        else if(!parser.value(addPresetRule).isEmpty()) {
+            result = ctrl.addPresetRule(parser.value(addPresetRule));
+        }
+        else if(!parser.value(deletePresetRule).isEmpty()) {
+            result = ctrl.deletePresetRule(parser.value(deletePresetRule));
+        }
+        else if(parser.isSet(listDevices))
+            result = ctrl.listOutputDevices();
         else if(parser.isSet(status))
             result = ctrl.showStatus();
 

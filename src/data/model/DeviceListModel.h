@@ -28,6 +28,4 @@ private:
     IAudioService *service;
 };
 
-Q_DECLARE_METATYPE(IOutputDevice)
-
 #endif // DEVICELISTMODEL_H

@@ -161,6 +161,27 @@ void PresetManager::setRules(const QVector<PresetRule> &newRules)
     saveRules();
 }
 
+bool PresetManager::addRule(const PresetRule &rule)
+{
+    // Only one rule per device id
+    removeRule(rule.deviceId);
+
+    _rules.append(rule);
+    saveRules();
+    return true;
+}
+
+void PresetManager::removeRule(const QString deviceId)
+{
+    for(int i = 0; i < _rules.count(); i++) {
+        if(_rules[i].deviceId == deviceId) {
+            _rules.removeAt(i);
+            break;
+        }
+    }
+    saveRules();
+}
+
 QVector<PresetRule> PresetManager::rules() const
 {
     return _rules;

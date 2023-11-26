@@ -6,8 +6,9 @@
 #include "data/model/PresetListModel.h"
 #include "utils/Log.h"
 #include "ServerAdaptor.h"
-#include "ClientProxy.h"
 #include "utils/VersionMacros.h"
+
+#include <QVector>
 
 IpcHandler::IpcHandler(IAudioService* service, QObject* parent) : QObject(parent), _service(service)
 {
@@ -128,6 +129,40 @@ void IpcHandler::deletePreset(const QString &name) const
 {
     if(!PresetManager::instance().remove(name))
         sendErrorReply(QDBusError::InvalidArgs, "Preset does not exist");
+}
+
+void IpcHandler::setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset) const
+{
+#ifdef USE_PULSEAUDIO
+    sendErrorReply(QDBusError::ErrorType::NotSupported, "This feature is only supported in the PipeWire version of JamesDSP");
+    return;
+#endif
+
+    PresetManager::instance().addRule(PresetRule(deviceName, deviceId, preset));
+}
+
+void IpcHandler::deletePresetRule(const QString &deviceId) const
+{
+#ifdef USE_PULSEAUDIO
+    sendErrorReply(QDBusError::ErrorType::NotSupported, "This feature is only supported in the PipeWire version of JamesDSP");
+    return;
+#endif
+    PresetManager::instance().removeRule(deviceId);
+}
+
+QList<PresetRule> IpcHandler::getPresetRules() const
+{
+#ifdef USE_PULSEAUDIO
+    sendErrorReply(QDBusError::ErrorType::NotSupported, "This feature is only supported in the PipeWire version of JamesDSP");
+    return QList<PresetRule>();
+#endif
+    return PresetManager::instance().rules().toList();
+}
+
+QList<IOutputDevice> IpcHandler::getOutputDevices() const
+{
+    auto devices = _service->sinkDevices();
+    return QVector<IOutputDevice>(devices.begin(), devices.end()).toList();
 }
 
 void IpcHandler::setInternal(const QString &key, const QDBusVariant &value) const

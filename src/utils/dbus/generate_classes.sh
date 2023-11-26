@@ -1,2 +1,2 @@
 #!/bin/bash
-qdbusxml2cpp manifest.xml --adaptor ServerAdaptor --proxy ClientProxy
+qdbusxml2cpp manifest.xml -i data/PresetRule.h --adaptor ServerAdaptor --proxy ClientProxy

@@ -109,7 +109,6 @@ MainWindow::MainWindow(IAudioService* audioService,
             ui->info->setAnimatedText(tr("%1 connected - Preset loaded automatically").arg(device), true);
         });
 
-        connect(_audioService, &IAudioService::outputDeviceChanged, &PresetManager::instance(), &PresetManager::onOutputDeviceChanged);
         connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
 
         // Convolver file info

@@ -26,6 +26,8 @@ public:
 
     QVector<PresetRule> rules() const;
     void setRules(const QVector<PresetRule> &newRules);
+    bool addRule(const PresetRule& rule);
+    void removeRule(const QString deviceId);
 
     PresetListModel *presetModel() const;
 

@@ -169,6 +169,83 @@ bool CliRemoteController::deletePreset(const QString &name) const
     return true;
 }
 
+bool CliRemoteController::listPresetRules() const
+{
+#ifdef USE_PULSEAUDIO
+    Log::error("This feature is only supported in the PipeWire version of JamesDSP");
+    return false;
+#endif
+
+    QList<PresetRule> rules;
+    if(checkConnectionAndLog()) {
+        auto reply = service->getPresetRules();
+        rules = handleReply(reply).value_or(rules);
+    }
+
+    rules = rules.empty() ? PresetManager::instance().rules().toList() : rules;
+    for(const PresetRule& rule : rules) {
+        Log::console(rule.deviceId + "=" + rule.preset, true);
+    }
+    return !rules.empty();
+}
+
+bool CliRemoteController::addPresetRule(const QString &keyValue) const
+{
+#ifdef USE_PULSEAUDIO
+    Log::error("This feature is only supported in the PipeWire version of JamesDSP");
+    return false;
+#endif
+
+    QStringList split = keyValue.split("=", Qt::SkipEmptyParts);
+    if(split.count() < 2) {
+        Log::warning("Invalid format. Expected input format: deviceId=presetName");
+        return false;
+    }
+
+    QString id = split.at(0);
+    QString preset = keyValue.mid(keyValue.indexOf('=') + 1);
+
+    if(checkConnectionAndLog()) {
+        auto reply = service->setPresetRule(id, id, preset);
+        return handleVoidReply(reply);
+    }
+
+    PresetManager::instance().addRule(PresetRule(id, id, preset));
+    return true;
+}
+
+bool CliRemoteController::deletePresetRule(const QString &deviceId) const
+{
+#ifdef USE_PULSEAUDIO
+    Log::error("This feature is only supported in the PipeWire version of JamesDSP");
+    return false;
+#endif
+
+    if(checkConnectionAndLog()) {
+        auto reply = service->deletePresetRule(deviceId);
+        return handleVoidReply(reply);
+    }
+
+    PresetManager::instance().removeRule(deviceId);
+    return true;
+}
+
+bool CliRemoteController::listOutputDevices() const
+{
+    if(!requireConnectionAndLog())
+        return false;
+
+    QList<IOutputDevice> devices;
+    auto reply = service->getOutputDevices();
+    devices = handleReply(reply).value_or(devices);
+
+    for(const IOutputDevice& device : devices) {
+        Log::console(QString("Name: %1; Identifier: %2").arg(QString::fromStdString(device.description)).arg(QString::fromStdString(device.name)), true);
+    }
+
+    return true;
+}
+
 bool CliRemoteController::showStatus() const
 {
     if(!requireConnectionAndLog())

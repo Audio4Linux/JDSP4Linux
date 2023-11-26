@@ -20,6 +20,10 @@ public:
     bool loadPreset(const QString& name) const;
     bool savePreset(const QString& name) const;
     bool deletePreset(const QString& name) const;
+    bool listPresetRules() const;
+    bool addPresetRule(const QString& keyValue) const;
+    bool deletePresetRule(const QString& keyValue) const;
+    bool listOutputDevices() const;
     bool showStatus() const;
 
 private:
