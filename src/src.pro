@@ -7,10 +7,13 @@
 QT       += core xml network dbus
 
 !HEADLESS {
-    QT   += gui svg widgets svgwidgets
+    greaterThan(QT_MAJOR_VERSION, 5) {
+        QT += svgwidgets
+    }
+    QT   += gui svg widgets
 }
 else {
-    QT   -= gui svg widgets svgwidgets
+    QT   -= gui svg widgets
 }
 
 TARGET = jamesdsp
@@ -166,6 +169,7 @@ HEADERS += \
     utils/CliRemoteController.h \
     utils/DebuggerUtils.h \
     utils/Log.h \
+    utils/QtCompat.h \
     utils/SingleInstanceMonitor.h \
     utils/VersionMacros.h \
     utils/dbus/ClientProxy.h \

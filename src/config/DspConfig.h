@@ -20,6 +20,7 @@
 #include "ConfigIO.h"
 #include "utils/Common.h"
 #include "utils/Log.h"
+#include "utils/QtCompat.h"
 
 #include <QObject>
 #include <QMetaEnum>
@@ -206,24 +207,24 @@ public:
             return Type::Unknown;
         }
 
-        auto type = variant.type();
-        if(type == QVariant::Type::Int)
+        auto type = QtCompat::variantTypeId(variant);
+        if(type == QMetaType::Int)
         {
             return Type::Int32;
         }
-        if(type == QVariant::Type::Double)
+        if(type == QMetaType::Double)
         {
             return Type::Float;
         }
-        if(type == (int)QMetaType::Float)
+        if(type == QMetaType::Float)
         {
             return Type::Float;
         }
-        if(type == QVariant::Type::String)
+        if(type == QMetaType::QString)
         {
             return Type::String;
         }
-        if(type == QVariant::Type::Bool)
+        if(type == QMetaType::Bool)
         {
             return Type::Boolean;
         }

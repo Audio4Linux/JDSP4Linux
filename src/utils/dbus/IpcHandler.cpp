@@ -177,11 +177,12 @@ void IpcHandler::setInternal(const QString &key, const QDBusVariant &value) cons
     }
 
     QVariant var = value.variant();
+    QMetaType::Type type = QtCompat::variantTypeId(var);
     // Type validation
-    if(var.type() == QVariant::Type::String ||
-            var.type() == QVariant::Type::Bool ||
-            var.type() == QVariant::Type::Double ||
-            var.canConvert(QVariant::Type::Int)) {
+    if(type == QMetaType::QString ||
+       type == QMetaType::Bool ||
+       type== QMetaType::Double ||
+       var.canConvert(QMetaType::Int)) {
         DspConfig::instance().set(resolvedKey, var);
     }
     else
