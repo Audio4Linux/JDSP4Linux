@@ -7,10 +7,10 @@
 QT       += core xml network dbus
 
 !HEADLESS {
-    QT   += gui svg widgets
+    QT   += gui svg widgets svgwidgets
 }
 else {
-    QT   -= gui svg widgets
+    QT   -= gui svg widgets svgwidgets
 }
 
 TARGET = jamesdsp

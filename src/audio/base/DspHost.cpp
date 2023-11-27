@@ -9,6 +9,13 @@
 #include "DspHost.h"
 #include "EventArgs.h"
 
+#include <QElapsedTimer>
+#include <QTextStream>
+#include <QThread>
+#include <QDebug>
+#include <cstring>
+#include <assert.h>
+
 extern "C" {
 #ifdef DEBUG_FPE
 #include <fenv.h>
@@ -17,13 +24,6 @@ extern "C" {
 #include <EELStdOutExtension.h>
 #include <jdsp_header.h>
 }
-
-#include <QElapsedTimer>
-#include <QTextStream>
-#include <QThread>
-#include <QDebug>
-#include <cstring>
-#include <assert.h>
 
 /* C interop */
 inline JamesDSPLib* cast(void* raw){
