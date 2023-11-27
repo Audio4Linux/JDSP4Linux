@@ -3,17 +3,28 @@
 
 #include <QMetaType>
 #include <QVariant>
+#include <QLibraryInfo>
 
-class QtCompat
+namespace QtCompat
 {
-public:
-    static QMetaType::Type variantTypeId(const QVariant& variant) {
+    inline int variantTypeId(const QVariant& variant) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        return (QMetaType::Type)variant.type();
+        return (int)variant.type();
 #else
         return variant.typeId();
 #endif
     };
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    inline QString libraryPath(QLibraryInfo::LibraryLocation p) {
+        return QLibraryInfo::location(p);
+    }
+#else
+    inline QString libraryPath(QLibraryInfo::LibraryPath p) {
+        return QLibraryInfo::path(p);
+    }
+#endif
+
 };
 
 #endif // QTCOMPAT_H

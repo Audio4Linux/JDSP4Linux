@@ -26,7 +26,6 @@
 #include <IAudioService.h>
 
 #include <QCommandLineParser>
-#include <QLibraryInfo>
 #include <QScopeGuard>
 #include <QTextStream>
 #include <QTranslator>
@@ -99,10 +98,11 @@ void initTranslator(const QLocale& locale) {
     translator = new QTranslator(qApp);
 
     // Locale & translation setup
-    qtTranslator->load(locale, "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    bool _ = qtTranslator->load(locale, "qt", "_", QtCompat::libraryPath(QLibraryInfo::TranslationsPath));
     QApplication::installTranslator(qtTranslator);
-    translator->load(locale, "jamesdsp", "_", ":/translations");
+    _ = translator->load(locale, "jamesdsp", "_", ":/translations");
     QApplication::installTranslator(translator);
+    Q_UNUSED(_)
 }
 #endif
 
@@ -161,8 +161,10 @@ int main(int   argc,
     qDBusRegisterMetaType<IOutputDevice>();
     qDBusRegisterMetaType<QList<IOutputDevice>>();
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#endif
 
     QScopedPointer<QCoreApplication> app(new QCoreApplication(argc, argv));
 #ifndef HEADLESS
