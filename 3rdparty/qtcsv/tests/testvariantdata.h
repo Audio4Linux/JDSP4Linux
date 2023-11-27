@@ -4,12 +4,11 @@
 #include <QObject>
 #include <QtTest>
 
-class TestVariantData : public QObject
-{
+class TestVariantData : public QObject {
     Q_OBJECT
 
 public:
-    TestVariantData();
+    TestVariantData() = default;
 
 private Q_SLOTS:
     void testCreation();

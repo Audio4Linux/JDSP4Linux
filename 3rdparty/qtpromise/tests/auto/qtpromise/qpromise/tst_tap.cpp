@@ -10,8 +10,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_qpromise_tap : public QObject
 {
     Q_OBJECT
@@ -33,7 +31,7 @@ QTEST_MAIN(tst_qpromise_tap)
 void tst_qpromise_tap::fulfilledSync()
 {
     int value = -1;
-    auto p = QPromise<int>::resolve(42).tap([&](int res) {
+    auto p = QtPromise::QPromise<int>::resolve(42).tap([&](int res) {
         value = res + 1;
         return 8;
     });
@@ -46,7 +44,7 @@ void tst_qpromise_tap::fulfilledSync()
 void tst_qpromise_tap::fulfilledSync_void()
 {
     int value = -1;
-    auto p = QPromise<void>::resolve().tap([&]() {
+    auto p = QtPromise::QPromise<void>::resolve().tap([&]() {
         value = 43;
         return 8;
     });
@@ -58,7 +56,7 @@ void tst_qpromise_tap::fulfilledSync_void()
 
 void tst_qpromise_tap::fulfilledThrows()
 {
-    auto p = QPromise<int>::resolve(42).tap([&](int) {
+    auto p = QtPromise::QPromise<int>::resolve(42).tap([&](int) {
         throw QString{"foo"};
     });
 
@@ -68,7 +66,7 @@ void tst_qpromise_tap::fulfilledThrows()
 
 void tst_qpromise_tap::fulfilledThrows_void()
 {
-    auto p = QPromise<void>::resolve().tap([&]() {
+    auto p = QtPromise::QPromise<void>::resolve().tap([&]() {
         throw QString{"foo"};
     });
 
@@ -79,8 +77,8 @@ void tst_qpromise_tap::fulfilledThrows_void()
 void tst_qpromise_tap::fulfilledAsyncResolve()
 {
     QVector<int> values;
-    auto p = QPromise<int>::resolve(1).tap([&](int) {
-        QPromise<int> p{[&](const QPromiseResolve<int>& resolve) {
+    auto p = QtPromise::QPromise<int>::resolve(1).tap([&](int) {
+        QtPromise::QPromise<int> p{[&](const QtPromise::QPromiseResolve<int>& resolve) {
             QtPromisePrivate::qtpromise_defer([=, &values]() {
                 values << 3;
                 resolve(4); // ignored!
@@ -102,8 +100,9 @@ void tst_qpromise_tap::fulfilledAsyncResolve()
 void tst_qpromise_tap::fulfilledAsyncReject()
 {
     QVector<int> values;
-    auto p = QPromise<int>::resolve(1).tap([&](int) {
-        QPromise<int> p{[&](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
+    auto p = QtPromise::QPromise<int>::resolve(1).tap([&](int) {
+        QtPromise::QPromise<int> p{[&](const QtPromise::QPromiseResolve<int>&,
+                                       const QtPromise::QPromiseReject<int>& reject) {
             QtPromisePrivate::qtpromise_defer([=, &values]() {
                 values << 3;
                 reject(QString{"foo"});
@@ -126,7 +125,7 @@ void tst_qpromise_tap::fulfilledAsyncReject()
 void tst_qpromise_tap::rejectedSync()
 {
     int value = -1;
-    auto p = QPromise<int>::reject(QString{"foo"}).tap([&](int res) {
+    auto p = QtPromise::QPromise<int>::reject(QString{"foo"}).tap([&](int res) {
         value = res + 1;
     });
 
@@ -138,7 +137,7 @@ void tst_qpromise_tap::rejectedSync()
 void tst_qpromise_tap::rejectedSync_void()
 {
     int value = -1;
-    auto p = QPromise<void>::reject(QString{"foo"}).tap([&]() {
+    auto p = QtPromise::QPromise<void>::reject(QString{"foo"}).tap([&]() {
         value = 43;
     });
 

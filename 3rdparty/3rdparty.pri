@@ -1,6 +1,12 @@
 include($$PWD/asyncplusplus.pri)
 include($$PWD/qtpromise/qtpromise.pri)
-include($$PWD/qtcsv/qtcsv.pri)
+
+greaterThan(QT_MAJOR_VERSION, 5) {
+    include($$PWD/qtcsv/qtcsv.pri)
+}
+lessThan(QT_MAJOR_VERSION, 6) {
+    include($$PWD/qtcsv-qt5/qtcsv-qt5.pri)
+}
 
 !HEADLESS {
     include($$PWD/qcustomplot/qcustomplot.pri)

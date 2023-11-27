@@ -12,8 +12,6 @@
 
 #include <memory>
 
-using namespace QtPromise;
-
 class tst_qpromise_construct : public QObject
 {
     Q_OBJECT
@@ -46,7 +44,7 @@ QTEST_MAIN(tst_qpromise_construct)
 
 void tst_qpromise_construct::resolveSyncOneArg()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>& resolve) {
+    QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>& resolve) {
         resolve(42);
     }};
 
@@ -57,7 +55,7 @@ void tst_qpromise_construct::resolveSyncOneArg()
 
 void tst_qpromise_construct::resolveSyncOneArg_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>& resolve) {
+    QtPromise::QPromise<void> p{[](const QtPromise::QPromiseResolve<void>& resolve) {
         resolve();
     }};
 
@@ -68,9 +66,10 @@ void tst_qpromise_construct::resolveSyncOneArg_void()
 
 void tst_qpromise_construct::resolveSyncTwoArgs()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>& resolve, const QPromiseReject<int>&) {
-        resolve(42);
-    }};
+    QtPromise::QPromise<int> p{
+        [](const QtPromise::QPromiseResolve<int>& resolve, const QtPromise::QPromiseReject<int>&) {
+            resolve(42);
+        }};
 
     QCOMPARE(p.isFulfilled(), true);
     QCOMPARE(waitForError(p, QString{}), QString{});
@@ -79,7 +78,8 @@ void tst_qpromise_construct::resolveSyncTwoArgs()
 
 void tst_qpromise_construct::resolveSyncTwoArgs_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>& resolve, const QPromiseReject<void>&) {
+    QtPromise::QPromise<void> p{[](const QtPromise::QPromiseResolve<void>& resolve,
+                                   const QtPromise::QPromiseReject<void>&) {
         resolve();
     }};
 
@@ -90,7 +90,7 @@ void tst_qpromise_construct::resolveSyncTwoArgs_void()
 
 void tst_qpromise_construct::resolveAsyncOneArg()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>& resolve) {
+    QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>& resolve) {
         QtPromisePrivate::qtpromise_defer([=]() {
             resolve(42);
         });
@@ -104,7 +104,7 @@ void tst_qpromise_construct::resolveAsyncOneArg()
 
 void tst_qpromise_construct::resolveAsyncOneArg_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>& resolve) {
+    QtPromise::QPromise<void> p{[](const QtPromise::QPromiseResolve<void>& resolve) {
         QtPromisePrivate::qtpromise_defer([=]() {
             resolve();
         });
@@ -118,11 +118,12 @@ void tst_qpromise_construct::resolveAsyncOneArg_void()
 
 void tst_qpromise_construct::resolveAsyncTwoArgs()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>& resolve, const QPromiseReject<int>&) {
-        QtPromisePrivate::qtpromise_defer([=]() {
-            resolve(42);
-        });
-    }};
+    QtPromise::QPromise<int> p{
+        [](const QtPromise::QPromiseResolve<int>& resolve, const QtPromise::QPromiseReject<int>&) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                resolve(42);
+            });
+        }};
 
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForError(p, QString{}), QString{});
@@ -132,7 +133,8 @@ void tst_qpromise_construct::resolveAsyncTwoArgs()
 
 void tst_qpromise_construct::resolveAsyncTwoArgs_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>& resolve, const QPromiseReject<void>&) {
+    QtPromise::QPromise<void> p{[](const QtPromise::QPromiseResolve<void>& resolve,
+                                   const QtPromise::QPromiseReject<void>&) {
         QtPromisePrivate::qtpromise_defer([=]() {
             resolve();
         });
@@ -146,9 +148,10 @@ void tst_qpromise_construct::resolveAsyncTwoArgs_void()
 
 void tst_qpromise_construct::rejectSync()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
-        reject(QString{"foo"});
-    }};
+    QtPromise::QPromise<int> p{
+        [](const QtPromise::QPromiseResolve<int>&, const QtPromise::QPromiseReject<int>& reject) {
+            reject(QString{"foo"});
+        }};
 
     QCOMPARE(p.isRejected(), true);
     QCOMPARE(waitForValue(p, -1), -1);
@@ -157,9 +160,10 @@ void tst_qpromise_construct::rejectSync()
 
 void tst_qpromise_construct::rejectSync_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>&, const QPromiseReject<void>& reject) {
-        reject(QString{"foo"});
-    }};
+    QtPromise::QPromise<void> p{
+        [](const QtPromise::QPromiseResolve<void>&, const QtPromise::QPromiseReject<void>& reject) {
+            reject(QString{"foo"});
+        }};
 
     QCOMPARE(p.isRejected(), true);
     QCOMPARE(waitForValue(p, -1, 42), -1);
@@ -168,11 +172,12 @@ void tst_qpromise_construct::rejectSync_void()
 
 void tst_qpromise_construct::rejectAsync()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
-        QtPromisePrivate::qtpromise_defer([=]() {
-            reject(QString{"foo"});
-        });
-    }};
+    QtPromise::QPromise<int> p{
+        [](const QtPromise::QPromiseResolve<int>&, const QtPromise::QPromiseReject<int>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                reject(QString{"foo"});
+            });
+        }};
 
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1), -1);
@@ -182,11 +187,12 @@ void tst_qpromise_construct::rejectAsync()
 
 void tst_qpromise_construct::rejectAsync_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>&, const QPromiseReject<void>& reject) {
-        QtPromisePrivate::qtpromise_defer([=]() {
-            reject(QString{"foo"});
-        });
-    }};
+    QtPromise::QPromise<void> p{
+        [](const QtPromise::QPromiseResolve<void>&, const QtPromise::QPromiseReject<void>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                reject(QString{"foo"});
+            });
+        }};
 
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1, 42), -1);
@@ -196,7 +202,7 @@ void tst_qpromise_construct::rejectAsync_void()
 
 void tst_qpromise_construct::rejectThrowOneArg()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>&) {
+    QtPromise::QPromise<int> p{[](const QtPromise::QPromiseResolve<int>&) {
         throw QString{"foo"};
     }};
 
@@ -207,7 +213,7 @@ void tst_qpromise_construct::rejectThrowOneArg()
 
 void tst_qpromise_construct::rejectThrowOneArg_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>&) {
+    QtPromise::QPromise<void> p{[](const QtPromise::QPromiseResolve<void>&) {
         throw QString{"foo"};
     }};
 
@@ -218,9 +224,10 @@ void tst_qpromise_construct::rejectThrowOneArg_void()
 
 void tst_qpromise_construct::rejectThrowTwoArgs()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>&, const QPromiseReject<int>&) {
-        throw QString{"foo"};
-    }};
+    QtPromise::QPromise<int> p{
+        [](const QtPromise::QPromiseResolve<int>&, const QtPromise::QPromiseReject<int>&) {
+            throw QString{"foo"};
+        }};
 
     QCOMPARE(p.isRejected(), true);
     QCOMPARE(waitForValue(p, -1), -1);
@@ -229,9 +236,10 @@ void tst_qpromise_construct::rejectThrowTwoArgs()
 
 void tst_qpromise_construct::rejectThrowTwoArgs_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>&, const QPromiseReject<void>&) {
-        throw QString{"foo"};
-    }};
+    QtPromise::QPromise<void> p{
+        [](const QtPromise::QPromiseResolve<void>&, const QtPromise::QPromiseReject<void>&) {
+            throw QString{"foo"};
+        }};
 
     QCOMPARE(p.isRejected(), true);
     QCOMPARE(waitForValue(p, -1, 42), -1);
@@ -240,26 +248,28 @@ void tst_qpromise_construct::rejectThrowTwoArgs_void()
 
 void tst_qpromise_construct::rejectUndefined()
 {
-    QPromise<int> p{[](const QPromiseResolve<int>&, const QPromiseReject<int>& reject) {
-        QtPromisePrivate::qtpromise_defer([=]() {
-            reject();
-        });
-    }};
+    QtPromise::QPromise<int> p{
+        [](const QtPromise::QPromiseResolve<int>&, const QtPromise::QPromiseReject<int>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                reject();
+            });
+        }};
 
     QCOMPARE(p.isPending(), true);
-    QCOMPARE(waitForRejected<QPromiseUndefinedException>(p), true);
+    QCOMPARE(waitForRejected<QtPromise::QPromiseUndefinedException>(p), true);
 }
 
 void tst_qpromise_construct::rejectUndefined_void()
 {
-    QPromise<void> p{[](const QPromiseResolve<void>&, const QPromiseReject<void>& reject) {
-        QtPromisePrivate::qtpromise_defer([=]() {
-            reject();
-        });
-    }};
+    QtPromise::QPromise<void> p{
+        [](const QtPromise::QPromiseResolve<void>&, const QtPromise::QPromiseReject<void>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                reject();
+            });
+        }};
 
     QCOMPARE(p.isPending(), true);
-    QCOMPARE(waitForRejected<QPromiseUndefinedException>(p), true);
+    QCOMPARE(waitForRejected<QtPromise::QPromiseUndefinedException>(p), true);
 }
 
 // https://github.com/simonbrunel/qtpromise/issues/6
@@ -270,9 +280,9 @@ void tst_qpromise_construct::connectAndResolve()
     std::weak_ptr<int> wptr;
 
     {
-        auto p =
-            QPromise<std::shared_ptr<int>>{[&](const QPromiseResolve<std::shared_ptr<int>>& resolve,
-                                               const QPromiseReject<std::shared_ptr<int>>& reject) {
+        auto p = QtPromise::QPromise<std::shared_ptr<int>>{
+            [&](const QtPromise::QPromiseResolve<std::shared_ptr<int>>& resolve,
+                const QtPromise::QPromiseReject<std::shared_ptr<int>>& reject) {
                 connect(object.data(),
                         &QObject::objectNameChanged,
                         [=, &wptr](const QString& name) {
@@ -307,8 +317,8 @@ void tst_qpromise_construct::connectAndReject()
     std::weak_ptr<int> wptr;
 
     {
-        auto p = QPromise<int>{[&](const QPromiseResolve<int>& resolve,
-                                   const QPromiseReject<int>& reject) {
+        auto p = QtPromise::QPromise<int>{[&](const QtPromise::QPromiseResolve<int>& resolve,
+                                              const QtPromise::QPromiseReject<int>& reject) {
             connect(object.data(), &QObject::objectNameChanged, [=, &wptr](const QString& name) {
                 auto sptr = std::make_shared<int>(42);
 

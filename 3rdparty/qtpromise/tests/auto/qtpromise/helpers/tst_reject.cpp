@@ -12,8 +12,6 @@
 
 #include <memory>
 
-using namespace QtPromise;
-
 class tst_helpers_reject : public QObject
 {
     Q_OBJECT
@@ -29,7 +27,7 @@ QTEST_MAIN(tst_helpers_reject)
 
 void tst_helpers_reject::rejectWithValue()
 {
-    auto p = QPromise<int>::reject(42);
+    auto p = QtPromise::QPromise<int>::reject(42);
 
     QCOMPARE(p.isRejected(), true);
     QCOMPARE(waitForError(p, -1), 42);
@@ -42,7 +40,7 @@ void tst_helpers_reject::rejectWithQSharedPtr()
 
     {
         auto sptr = QSharedPointer<int>::create(42);
-        auto p = QPromise<int>::reject(sptr);
+        auto p = QtPromise::QPromise<int>::reject(sptr);
 
         QCOMPARE(waitForError(p, QSharedPointer<int>{}), sptr);
 
@@ -62,7 +60,7 @@ void tst_helpers_reject::rejectWithStdSharedPtr()
 
     {
         auto sptr = std::make_shared<int>(42);
-        auto p = QPromise<int>::reject(sptr);
+        auto p = QtPromise::QPromise<int>::reject(sptr);
 
         QCOMPARE(waitForError(p, std::shared_ptr<int>{}), sptr);
 

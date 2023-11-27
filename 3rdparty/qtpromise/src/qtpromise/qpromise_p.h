@@ -17,6 +17,7 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QThread>
+#include <QtCore/QVariant>
 #include <QtCore/QVector>
 
 namespace QtPromise {
@@ -29,6 +30,8 @@ class QPromiseResolve;
 
 template<typename T>
 class QPromiseReject;
+
+class QPromiseConversionException;
 
 } // namespace QtPromise
 
@@ -52,7 +55,7 @@ static void qtpromise_defer(F&& f, const QPointer<QThread>& thread)
     {
         Event(FType&& f) : QEvent{QEvent::None}, m_f{std::move(f)} { }
         Event(const FType& f) : QEvent{QEvent::None}, m_f{f} { }
-        ~Event() { m_f(); }
+        ~Event() override { m_f(); }
         FType m_f;
     };
 
@@ -113,7 +116,7 @@ public:
 
     PromiseError() { }
     PromiseError(const std::exception_ptr& exception) : m_data{exception} { }
-    void rethrow() const { std::rethrow_exception(m_data); }
+    Q_NORETURN void rethrow() const { std::rethrow_exception(m_data); }
     bool isNull() const { return m_data == nullptr; }
 
 private:
@@ -329,8 +332,8 @@ struct PromiseCatcher
         return [=](const PromiseError& error) {
             try {
                 error.rethrow();
-            } catch (const TArg& error) {
-                PromiseDispatch<ResType>::call(resolve, reject, handler, error);
+            } catch (const TArg& argError) {
+                PromiseDispatch<ResType>::call(resolve, reject, handler, argError);
             } catch (...) {
                 reject(std::current_exception());
             }
@@ -497,7 +500,7 @@ public:
     void resolve(V&& value)
     {
         Q_ASSERT(this->isPending());
-        //Q_ASSERT(m_value.isNull());
+        Q_ASSERT(m_value.isNull());
         m_value = PromiseValue<T>{std::forward<V>(value)};
         this->setSettled();
     }
@@ -552,6 +555,70 @@ struct PromiseInspect
         return p.m_d.data();
     }
 };
+
+template<typename T, typename U, bool IsConvertibleViaStaticCast>
+struct PromiseConverterBase;
+
+template<typename T, typename U>
+struct PromiseConverterBase<T, U, true>
+{
+    static std::function<U(const T&)> create()
+    {
+        return [](const T& value) {
+            return static_cast<U>(value);
+        };
+    }
+};
+
+template<typename T, typename U>
+struct PromiseConverterBase<T, U, false>
+{
+    static std::function<U(const T&)> create()
+    {
+        return [](const T& value) {
+            auto tmp = QVariant::fromValue(value);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            // https://doc.qt.io/qt-6/qvariant.html#using-canconvert-and-convert-consecutively
+            if (tmp.canConvert(QMetaType{qMetaTypeId<U>()})
+                && tmp.convert(QMetaType{qMetaTypeId<U>()})) {
+                return qvariant_cast<U>(tmp);
+            }
+#else
+            // https://doc.qt.io/qt-5/qvariant.html#using-canconvert-and-convert-consecutively
+            if (tmp.canConvert(qMetaTypeId<U>()) && tmp.convert(qMetaTypeId<U>())) {
+                return qvariant_cast<U>(tmp);
+            }
+#endif
+            throw QtPromise::QPromiseConversionException{};
+        };
+    }
+};
+
+template<typename T>
+struct PromiseConverterBase<T, QVariant, false>
+{
+    static std::function<QVariant(const T&)> create()
+    {
+        return [](const T& value) {
+            return QVariant::fromValue(value);
+        };
+    }
+};
+
+template<typename T, typename U>
+struct PromiseConverter
+    : PromiseConverterBase<T,
+                           U,
+                           // Fundamental types and converting constructors.
+                           std::is_convertible<T, U>::value ||
+                               // Conversion to void.
+                               std::is_same<U, void>::value ||
+                               // Conversion between enums and arithmetic types.
+                               ((std::is_enum<T>::value && std::is_arithmetic<U>::value)
+                                || (std::is_arithmetic<T>::value && std::is_enum<U>::value)
+                                || (std::is_enum<T>::value && std::is_enum<U>::value))>
+{ };
 
 } // namespace QtPromisePrivate
 

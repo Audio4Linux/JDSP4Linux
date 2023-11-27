@@ -94,7 +94,7 @@ void PresetManager::saveToPath(const QString &filename)
 
 void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId)
 {
-    for(const auto& rule : qAsConst(_rules))
+    for(const auto& rule : std::as_const(_rules))
     {
         if(rule.deviceId == deviceId)
         {

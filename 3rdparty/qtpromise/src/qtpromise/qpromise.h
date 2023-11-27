@@ -8,8 +8,8 @@
 #ifndef QTPROMISE_QPROMISE_H
 #define QTPROMISE_QPROMISE_H
 
-#include "qpromise_p.h"
 #include "qpromiseexceptions.h"
+#include "qpromise_p.h"
 #include "qpromiseglobal.h"
 #include "qpromiseresolver.h"
 
@@ -110,6 +110,9 @@ public:
     template<typename F>
     QPromise(F&& resolver) : QPromiseBase<T>(std::forward<F>(resolver))
     { }
+
+    template<typename U>
+    inline QPromise<U> convert() const;
 
     template<typename Functor>
     inline QPromise<T> each(Functor fn);

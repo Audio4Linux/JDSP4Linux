@@ -4,6 +4,8 @@
 #include <QRegularExpression>
 #include <string>
 
+#include "utils/QtCompat.h"
+
 QString ConfigIO::writeString(const QVariantMap &map)
 {
 	QString ret("");
@@ -31,7 +33,7 @@ void ConfigIO::writeFile(const QString &    path,
 
 		for (const auto &e : map.keys())
 		{
-			if (map.value(e).type() == (QVariant::Type) QMetaType::Float)
+            if (QtCompat::variantTypeId(map.value(e)) == QMetaType::Float)
 			{
 				myfile << e.toStdString() << "=" << QString::number(map.value(e).toDouble(), 'f', 5).toStdString() << std::endl;
 			}

@@ -1,6 +1,7 @@
 qtpromise_add_tests(qpromise
     SOURCES
         tst_construct.cpp
+        tst_convert.cpp
         tst_delay.cpp
         tst_each.cpp
         tst_fail.cpp

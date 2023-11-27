@@ -4,12 +4,11 @@
 #include <QObject>
 #include <QtTest>
 
-class TestReader : public QObject
-{
+class TestReader : public QObject {
     Q_OBJECT
 
 public:
-    TestReader();
+    TestReader() = default;
 
 private Q_SLOTS:
     void testReadToListInvalidArgs();

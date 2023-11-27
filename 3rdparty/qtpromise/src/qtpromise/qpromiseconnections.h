@@ -9,6 +9,7 @@
 #define QTPROMISE_QPROMISECONNECTIONS_H
 
 #include <QtCore/QObject>
+
 #include <memory>
 
 namespace QtPromise {
@@ -18,7 +19,7 @@ class QPromiseConnections
 public:
     QPromiseConnections() : m_d(std::make_shared<Data>()) { }
 
-    int count() const { return m_d->connections.count(); }
+    int count() const { return static_cast<int>(m_d->connections.count()); }
 
     void disconnect() const { m_d->disconnect(); }
 

@@ -123,7 +123,7 @@ bool EELParser::loadDefaults()
         return false;
     }
 
-    for(const auto& prop : qAsConst(properties))
+    for(const auto& prop : std::as_const(properties))
     {
         if(prop->getType() == EELPropertyType::NumberRange)
         {
@@ -147,7 +147,7 @@ bool EELParser::hasDefaultsDefined()
         return false;
     }
 
-    for(const auto& prop : qAsConst(properties))
+    for(const auto& prop : std::as_const(properties))
     {
         if(prop->hasDefault())
         {
@@ -164,7 +164,7 @@ bool EELParser::canLoadDefaults()
         return false;
     }
 
-    for(auto* prop : qAsConst(properties))
+    for(auto* prop : std::as_const(properties))
     {
         if(prop->getType() == EELPropertyType::NumberRange)
         {

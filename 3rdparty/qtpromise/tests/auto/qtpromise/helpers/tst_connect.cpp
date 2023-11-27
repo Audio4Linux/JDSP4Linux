@@ -11,8 +11,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_helpers_connect : public QObject
 {
     Q_OBJECT
@@ -47,7 +45,7 @@ void tst_helpers_connect::resolveOneSenderNoArg()
     });
 
     auto p = QtPromise::connect(&sender, &Object::noArgSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(sender.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1, 42), 42);
@@ -62,7 +60,7 @@ void tst_helpers_connect::resolveOneSenderOneArg()
     });
 
     auto p = QtPromise::connect(&sender, &Object::oneArgSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
     QCOMPARE(sender.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, QString{}), QString{"foo"});
@@ -77,7 +75,7 @@ void tst_helpers_connect::resolveOneSenderManyArgs()
     });
 
     auto p = QtPromise::connect(&sender, &Object::twoArgsSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(sender.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1), 42);
@@ -92,10 +90,10 @@ void tst_helpers_connect::rejectOneSenderNoArg()
     });
 
     auto p = QtPromise::connect(&sender, &Object::oneArgSignal, &Object::noArgSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
     QCOMPARE(sender.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
-    QCOMPARE(waitForRejected<QPromiseUndefinedException>(p), true);
+    QCOMPARE(waitForRejected<QtPromise::QPromiseUndefinedException>(p), true);
     QCOMPARE(sender.hasConnections(), false);
 }
 
@@ -107,7 +105,7 @@ void tst_helpers_connect::rejectOneSenderOneArg()
     });
 
     auto p = QtPromise::connect(&sender, &Object::noArgSignal, &Object::oneArgSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(sender.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForError(p, QString{}), QString{"bar"});
@@ -122,7 +120,7 @@ void tst_helpers_connect::rejectOneSenderManyArgs()
     });
 
     auto p = QtPromise::connect(&sender, &Object::noArgSignal, &Object::twoArgsSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(sender.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForError(p, -1), 42);
@@ -137,9 +135,9 @@ void tst_helpers_connect::rejectOneSenderDestroyed()
     });
 
     auto p = QtPromise::connect(sender, &Object::twoArgsSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(p.isPending(), true);
-    QCOMPARE(waitForRejected<QPromiseContextException>(p), true);
+    QCOMPARE(waitForRejected<QtPromise::QPromiseContextException>(p), true);
 }
 
 void tst_helpers_connect::rejectTwoSendersNoArg()
@@ -150,11 +148,11 @@ void tst_helpers_connect::rejectTwoSendersNoArg()
     });
 
     auto p = QtPromise::connect(&s0, &Object::noArgSignal, &s1, &Object::noArgSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(s0.hasConnections(), true);
     QCOMPARE(s1.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
-    QCOMPARE(waitForRejected<QPromiseUndefinedException>(p), true);
+    QCOMPARE(waitForRejected<QtPromise::QPromiseUndefinedException>(p), true);
     QCOMPARE(s0.hasConnections(), false);
     QCOMPARE(s1.hasConnections(), false);
 }
@@ -167,7 +165,7 @@ void tst_helpers_connect::rejectTwoSendersOneArg()
     });
 
     auto p = QtPromise::connect(&s0, &Object::noArgSignal, &s1, &Object::oneArgSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(s0.hasConnections(), true);
     QCOMPARE(s1.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
@@ -184,7 +182,7 @@ void tst_helpers_connect::rejectTwoSendersManyArgs()
     });
 
     auto p = QtPromise::connect(&s0, &Object::noArgSignal, &s1, &Object::twoArgsSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(s0.hasConnections(), true);
     QCOMPARE(s1.hasConnections(), true);
     QCOMPARE(p.isPending(), true);
@@ -209,7 +207,7 @@ void tst_helpers_connect::rejectTwoSendersDestroyed()
     });
 
     auto p = QtPromise::connect(s0, &Object::noArgSignal, s1, &Object::twoArgsSignal);
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(p.isPending(), true);
     QCOMPARE(waitForValue(p, -1, 42), 42);
 }

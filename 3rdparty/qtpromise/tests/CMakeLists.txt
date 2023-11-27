@@ -1,4 +1,4 @@
-find_package(Qt5 5.6.0 REQUIRED
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED
     COMPONENTS
         Concurrent
         Test

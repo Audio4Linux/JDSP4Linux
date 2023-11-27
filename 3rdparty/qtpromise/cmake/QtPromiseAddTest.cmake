@@ -17,8 +17,8 @@ function(qtpromise_add_test NAME)
     endif()
 
     target_link_libraries(${_TARGET}
-        Qt5::Concurrent
-        Qt5::Test
+        Qt${QT_VERSION_MAJOR}::Concurrent
+        Qt${QT_VERSION_MAJOR}::Test
         qtpromise
         qtpromise.tests.utils
         ${_ARG_LIBRARIES}

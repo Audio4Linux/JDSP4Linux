@@ -12,8 +12,6 @@
 
 #include <functional>
 
-using namespace QtPromise;
-
 class tst_qpromise_then : public QObject
 {
     Q_OBJECT
@@ -76,7 +74,7 @@ void tst_qpromise_then::resolveSync()
 {
     QVariantList values;
 
-    auto input = QPromise<int>::resolve(42);
+    auto input = QtPromise::QPromise<int>::resolve(42);
     auto output = input.then([&](int res) {
         values << res;
         return QString::number(res + 1);
@@ -98,22 +96,23 @@ void tst_qpromise_then::resolveSync()
 
 void tst_qpromise_then::resolveAsync()
 {
-    auto p = QPromise<int>::resolve(42).then([](int res) {
-        return QPromise<QString>{[=](const QPromiseResolve<QString>& resolve) {
-            QtPromisePrivate::qtpromise_defer([=]() {
-                resolve(QString{"foo%1"}.arg(res));
-            });
-        }};
+    auto p = QtPromise::QPromise<int>::resolve(42).then([](int res) {
+        return QtPromise::QPromise<QString>{
+            [=](const QtPromise::QPromiseResolve<QString>& resolve) {
+                QtPromisePrivate::qtpromise_defer([=]() {
+                    resolve(QString{"foo%1"}.arg(res));
+                });
+            }};
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<QString>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<QString>>::value));
     QCOMPARE(waitForValue(p, QString{}), QString{"foo42"});
     QCOMPARE(p.isFulfilled(), true);
 }
 
 void tst_qpromise_then::rejectSync()
 {
-    auto input = QPromise<int>::resolve(42);
+    auto input = QtPromise::QPromise<int>::resolve(42);
     auto output = input.then([](int res) {
         throw QString{"foo%1"}.arg(res);
         return 42;
@@ -136,43 +135,43 @@ void tst_qpromise_then::rejectSync()
 
 void tst_qpromise_then::rejectAsync()
 {
-    auto p = QPromise<int>::resolve(42).then([](int res) {
-        return QPromise<void>{
-            [=](const QPromiseResolve<void>&, const QPromiseReject<void>& reject) {
-                QtPromisePrivate::qtpromise_defer([=]() {
-                    reject(QString{"foo%1"}.arg(res));
-                });
-            }};
+    auto p = QtPromise::QPromise<int>::resolve(42).then([](int res) {
+        return QtPromise::QPromise<void>{[=](const QtPromise::QPromiseResolve<void>&,
+                                             const QtPromise::QPromiseReject<void>& reject) {
+            QtPromisePrivate::qtpromise_defer([=]() {
+                reject(QString{"foo%1"}.arg(res));
+            });
+        }};
     });
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<void>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<void>>::value));
     QCOMPARE(waitForError(p, QString{}), QString{"foo42"});
     QCOMPARE(p.isRejected(), true);
 }
 
 void tst_qpromise_then::skipResult()
 {
-    auto p = QPromise<int>::resolve(42);
+    auto p = QtPromise::QPromise<int>::resolve(42);
 
     int value = -1;
     p.then([&]() {
          value = 43;
      }).wait();
 
-    Q_STATIC_ASSERT((std::is_same<decltype(p), QPromise<int>>::value));
+    Q_STATIC_ASSERT((std::is_same<decltype(p), QtPromise::QPromise<int>>::value));
     QCOMPARE(value, 43);
 }
 
 void tst_qpromise_then::nullHandler()
 {
     { // resolved
-        auto p = QPromise<int>::resolve(42).then(nullptr);
+        auto p = QtPromise::QPromise<int>::resolve(42).then(nullptr);
 
         QCOMPARE(waitForValue(p, -1), 42);
         QCOMPARE(p.isFulfilled(), true);
     }
     { // rejected
-        auto p = QPromise<int>::reject(QString{"foo"}).then(nullptr);
+        auto p = QtPromise::QPromise<int>::reject(QString{"foo"}).then(nullptr);
 
         QCOMPARE(waitForError(p, QString{}), QString{"foo"});
         QCOMPARE(p.isRejected(), true);

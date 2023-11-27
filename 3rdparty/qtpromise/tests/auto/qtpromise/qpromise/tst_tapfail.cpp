@@ -10,8 +10,6 @@
 #include <QtPromise>
 #include <QtTest>
 
-using namespace QtPromise;
-
 class tst_qpromise_tapfail : public QObject
 {
     Q_OBJECT
@@ -33,7 +31,7 @@ QTEST_MAIN(tst_qpromise_tapfail)
 void tst_qpromise_tapfail::fulfilled()
 {
     int value = -1;
-    auto p = QPromise<int>::resolve(42).tapFail([&]() {
+    auto p = QtPromise::QPromise<int>::resolve(42).tapFail([&]() {
         value = 43;
     });
 
@@ -45,7 +43,7 @@ void tst_qpromise_tapfail::fulfilled()
 void tst_qpromise_tapfail::fulfilled_void()
 {
     int value = -1;
-    auto p = QPromise<void>::resolve().tapFail([&]() {
+    auto p = QtPromise::QPromise<void>::resolve().tapFail([&]() {
         value = 43;
     });
 
@@ -58,7 +56,7 @@ void tst_qpromise_tapfail::rejected()
 {
     QStringList errors;
 
-    auto p0 = QPromise<int>::reject(QString{"foo"}).tapFail([&](const QString& err) {
+    auto p0 = QtPromise::QPromise<int>::reject(QString{"foo"}).tapFail([&](const QString& err) {
         errors << "1:" + err;
     });
 
@@ -78,7 +76,7 @@ void tst_qpromise_tapfail::rejected_void()
 {
     QStringList errors;
 
-    auto p0 = QPromise<void>::reject(QString{"foo"}).tapFail([&](const QString& err) {
+    auto p0 = QtPromise::QPromise<void>::reject(QString{"foo"}).tapFail([&](const QString& err) {
         errors << "1:" + err;
     });
 
@@ -95,7 +93,7 @@ void tst_qpromise_tapfail::rejected_void()
 
 void tst_qpromise_tapfail::throws()
 {
-    auto p = QPromise<int>::reject(QString{"foo"}).tapFail([&]() {
+    auto p = QtPromise::QPromise<int>::reject(QString{"foo"}).tapFail([&]() {
         throw QString{"bar"};
     });
 
@@ -105,7 +103,7 @@ void tst_qpromise_tapfail::throws()
 
 void tst_qpromise_tapfail::throws_void()
 {
-    auto p = QPromise<void>::reject(QString{"foo"}).tapFail([&]() {
+    auto p = QtPromise::QPromise<void>::reject(QString{"foo"}).tapFail([&]() {
         throw QString{"bar"};
     });
 
@@ -116,8 +114,8 @@ void tst_qpromise_tapfail::throws_void()
 void tst_qpromise_tapfail::delayedResolved()
 {
     QVector<int> values;
-    auto p = QPromise<int>::reject(QString{"foo"}).tapFail([&]() {
-        QPromise<void> p{[&](const QPromiseResolve<void>& resolve) {
+    auto p = QtPromise::QPromise<int>::reject(QString{"foo"}).tapFail([&]() {
+        QtPromise::QPromise<void> p{[&](const QtPromise::QPromiseResolve<void>& resolve) {
             QtPromisePrivate::qtpromise_defer([=, &values]() {
                 values << 3;
                 resolve(); // ignored!
@@ -135,8 +133,9 @@ void tst_qpromise_tapfail::delayedResolved()
 void tst_qpromise_tapfail::delayedRejected()
 {
     QVector<int> values;
-    auto p = QPromise<int>::reject(QString{"foo"}).tapFail([&]() {
-        QPromise<void> p{[&](const QPromiseResolve<void>&, const QPromiseReject<void>& reject) {
+    auto p = QtPromise::QPromise<int>::reject(QString{"foo"}).tapFail([&]() {
+        QtPromise::QPromise<void> p{[&](const QtPromise::QPromiseResolve<void>&,
+                                        const QtPromise::QPromiseReject<void>& reject) {
             QtPromisePrivate::qtpromise_defer([=, &values]() {
                 values << 3;
                 reject(QString{"bar"});

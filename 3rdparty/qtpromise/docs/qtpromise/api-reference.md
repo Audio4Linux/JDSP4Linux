@@ -3,6 +3,7 @@
 ## Functions
 
 - [`QPromise<T>::QPromise`](qpromise/constructor.md)
+- [`QPromise<T>::convert`](qpromise/convert.md)
 - [`QPromise<T>::delay`](qpromise/delay.md)
 - [`QPromise<T>::each`](qpromise/each.md)
 - [`QPromise<T>::fail`](qpromise/fail.md)
@@ -39,6 +40,7 @@
 
 - [`QPromiseCanceledException`](exceptions/canceled.md)
 - [`QPromiseContextException`](exceptions/context.md)
+- [`QPromiseConversionException`](exceptions/conversion.md)
 - [`QPromiseTimeoutException`](exceptions/timeout.md)
 - [`QPromiseUndefinedException`](exceptions/undefined.md)
 

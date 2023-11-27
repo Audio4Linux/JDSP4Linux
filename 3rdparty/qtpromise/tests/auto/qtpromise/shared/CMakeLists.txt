@@ -7,6 +7,6 @@ add_library(${PROJECT_NAME} STATIC
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-    Qt5::Core
+    Qt${QT_VERSION_MAJOR}::Core
     qtpromise
 )

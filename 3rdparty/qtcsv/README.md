@@ -1,18 +1,17 @@
 # qtcsv
 
-[![Build Status](https://travis-ci.org/iamantony/qtcsv.svg?branch=qt4_qt5)](https://travis-ci.org/iamantony/qtcsv) [![Build status](https://ci.appveyor.com/api/projects/status/7uv7ghs9uexf08bv/branch/qt4_qt5?svg=true)](https://ci.appveyor.com/project/iamantony/qtcsv/branch/qt4_qt5)
+[![Build status](https://ci.appveyor.com/api/projects/status/7uv7ghs9uexf08bv/branch/master?svg=true)](https://ci.appveyor.com/project/iamantony/qtcsv/branch/master)
 
-Small easy-to-use library for reading and writing [csv-files][csvwiki]
-in Qt.
+Small easy-to-use library for reading and writing [csv-files][csvwiki] in Qt.
 
 Qt suppport:
-- Qt6: branch `master`
-- Qt4 and Qt5: branch `qt4_qt5` (you're here)
+- Qt6: branch `master` (you're here)
+- Qt4 and Qt5: branch `qt4_qt5`
 
 Tested on:
-- Ubuntu with gcc, Qt 4.8 - 5.15
-- Windows with MinGW, Qt 5.3 - 5.15
-- OS X with clang, Qt 4.8 - 5.15
+- Ubuntu with gcc, Qt6
+- Windows with MinGW, Qt6
+- OS X with clang, Qt6
 
 ## Table of contents
 * [1. Quick Example](#1-quick-example)
@@ -46,7 +45,7 @@ Tested on:
 
 ```cpp
 #include <QList>
-#include <QStringList>
+#include <QString>
 #include <QDir>
 #include <QDebug>
 
@@ -57,7 +56,7 @@ Tested on:
 int main()
 {
     // prepare data that you want to save to csv-file
-    QStringList strList;
+    QList<QString> strList;
     strList << "one" << "two" << "three";
 
     QtCSV::StringData strData;
@@ -66,12 +65,12 @@ int main()
     strData << strList << "this is the last row";
 
     // write to file
-    QString filePath = QDir::currentPath() + "/test.csv";
+    const auto filePath = QDir::currentPath() + "/test.csv";
     QtCSV::Writer::write(filePath, strData);
 
     // read data from file
-    QList<QStringList> readData = QtCSV::Reader::readToList(filePath);
-    for (int i = 0; i < readData.size(); ++i)
+    const auto readData = QtCSV::Reader::readToList(filePath);
+    for (auto i = 0; i < readData.size(); ++i)
     {
         qDebug() << readData.at(i).join(",");
     }
@@ -87,8 +86,7 @@ Library could be separated into three parts: **_Reader_**,
 
 ### 2.1 Containers
 
-*qtcsv* library can work with standard Qt containers (like QList and
-QStringList) and special data containers.
+*qtcsv* library can work with standard Qt containers (like QList) and special data containers.
 
 #### 2.1.1 AbstractData
 
@@ -96,18 +94,16 @@ QStringList) and special data containers.
 interface for a class of special data containers.
 
 ```cpp
-class AbstractData
-{
+class AbstractData {
 public:
-    explicit AbstractData() {}
-    virtual ~AbstractData() {}
+    virtual ~AbstractData() = default;
 
     virtual void addEmptyRow() = 0;
-    virtual void addRow(const QStringList& values) = 0;
+    virtual void addRow(const QList<QString>& values) = 0;
     virtual void clear() = 0;
     virtual bool isEmpty() const = 0;
-    virtual int rowCount() const = 0;
-    virtual QStringList rowValues(const int& row) const = 0;
+    virtual qsizetype rowCount() const = 0;
+    virtual QList<QString> rowValues(qsizetype row) const = 0;
 };
 ```
 
@@ -136,17 +132,19 @@ Use **[_Reader_][reader]** class to read csv-files / csv-data. Let's see it's fu
 
 #### 2.2.1 Reader functions
 
-1. Read data to **_QList\<QStringList\>_**
+1. Read data to **_QList\<QList\<QString\>\>_**
   ```cpp
-  QList<QStringList> readToList(const QString& filePath,
-                                const QString& separator,
-                                const QString& textDelimiter,
-                                QTextCodec* codec);
+  QList<QList<QString>> readToList(
+      const QString& filePath,
+      const QString& separator = QString(","),
+      const QString& textDelimiter = QString("\""),
+      QStringConverter::Encoding codec = QStringConverter::Utf8);
                                 
-  QList<QStringList> readToList(QIODevice& ioDevice,
-                                const QString& separator,
-                                const QString& textDelimiter,
-                                QTextCodec* codec);
+  QList<QList<QString>> readToList(
+      QIODevice& ioDevice,
+      const QString& separator = QString(","),
+      const QString& textDelimiter = QString("\""),
+      QStringConverter::Encoding codec = QStringConverter::Utf8);
   ```
 
   - *filePath* - string with absolute path to existent csv-file
@@ -156,40 +154,42 @@ Use **[_Reader_][reader]** class to read csv-files / csv-data. Let's see it's fu
   in a row (by default it is comma - ",");
   - *textDelimiter* (optional) - text delimiter symbol that encloses
   each element in a row (by default it is double quoute - ");
-  - *codec* (optional) - pointer to the codec object that will be used
+  - *codec* (optional) - codec type that will be used
   to read data from the file (by default it is UTF-8 codec).
 
-  As a result function will return **_QList\<QStringList\>_** that holds content
+  As a result function will return **_QList\<QList\<QString\>\>_** that holds content
   of the file / IO Device. Size of it will be equal to the number of rows
-  in csv-data source. Each **_QStringList_** will contain elements of the
+  in csv-data source. Each **_QList\<QString\>_** will contain elements of the
   corresponding row. On error these functions will return empty list.
 
 2. Read data to **_AbstractData_**-based container
   ```cpp
-  bool readToData(const QString& filePath,
-                  AbstractData& data,
-                  const QString& separator,
-                  const QString& textDelimiter,
-                  QTextCodec* codec);
+  bool readToData(
+      const QString& filePath,
+      AbstractData& data,
+      const QString& separator = QString(","),
+      const QString& textDelimiter = QString("\""),
+      QStringConverter::Encoding codec = QStringConverter::Utf8);
                   
-  bool readToData(QIODevice& ioDevice,
-                  AbstractData& data,
-                  const QString& separator,
-                  const QString& textDelimiter,
-                  QTextCodec* codec);
+  bool readToData(
+      QIODevice& ioDevice,
+      AbstractData& data,
+      const QString& separator = QString(","),
+      const QString& textDelimiter = QString("\""),
+      QStringConverter::Encoding codec = QStringConverter::Utf8);
   ```
 
-  Second function is a little more advanced and, I hope, a little more useful.
+  These functions are little more advanced and, I hope, a little more useful.
 
   - *filePath* - string with absolute path to existent csv-file;
   - *ioDevice* - IO Device that contains csv-formatted data;
   - *data* - reference to **_AbstractData_**-based class object;
   - *separator* (optional) - delimiter symbol;
   - *textDelimiter* (optional) - text delimiter symbol;
-  - *codec* (optional) - pointer to the codec object.
+  - *codec* (optional) - codec type.
 
-  Function will save content of the file / IO Device in *data* object using virtual
-  function **_AbstractData::addRow(QStringList)_**. Elements of csv-data will be
+  Functions will save content of the file / IO Device in *data* object using virtual
+  function **_AbstractData::addRow(QList\<QString\>)_**. Elements of csv-data will be
   saved as strings in objects of **_StringData_** / **_VariantData_**.
 
   If you would like to convert row elements to the target types on-the-fly during
@@ -197,17 +197,19 @@ Use **[_Reader_][reader]** class to read csv-files / csv-data. Let's see it's fu
 
 3. Read data and process it line-by-line by **_AbstractProcessor_**-based processor
   ```cpp
-  bool readToProcessor(const QString& filePath,
-                       AbstractProcessor& processor,
-                       const QString& separator,
-                       const QString& textDelimiter,
-                       QTextCodec* codec);
+  bool readToProcessor(
+      const QString& filePath,
+      AbstractProcessor& processor,
+      const QString& separator = QString(","),
+      const QString& textDelimiter = QString("\""),
+      QStringConverter::Encoding codec = QStringConverter::Utf8);
                        
-  bool readToProcessor(QIODevice& ioDevice,
-                       AbstractProcessor& processor,
-                       const QString& separator,
-                       const QString& textDelimiter,
-                       QTextCodec* codec);
+  bool readToProcessor(
+      QIODevice& ioDevice,
+      AbstractProcessor& processor,
+      const QString& separator = QString(","),
+      const QString& textDelimiter = QString("\""),
+      QStringConverter::Encoding codec = QStringConverter::Utf8);
   ```
 
   - *filePath* - string with absolute path to existent csv-file;
@@ -215,7 +217,7 @@ Use **[_Reader_][reader]** class to read csv-files / csv-data. Let's see it's fu
   - *processor* - reference to **_AbstractProcessor_**-based class object;
   - *separator* (optional) - delimiter symbol;
   - *textDelimiter* (optional) - text delimiter symbol;
-  - *codec* (optional) - pointer to the codec object.
+  - *codec* (optional) - codec type.
 
   This function will read csv-data from file / IO Device line-by-line and
   pass data to *processor* object.
@@ -228,11 +230,9 @@ Use **[_Reader_][reader]** class to read csv-files / csv-data. Let's see it's fu
 class AbstractProcessor
 {
 public:
-    explicit AbstractProcessor() {}
-    virtual ~AbstractProcessor() {}
-
-    virtual void preProcessRawLine(QString& line) { }
-    virtual bool processRowElements(const QStringList& elements) = 0;
+    virtual ~AbstractProcessor() = default;
+    virtual void preProcessRawLine(QString& /*editable_line*/) {}
+    virtual bool processRowElements(const QList<QString>& elements) = 0;
 };
 ```
 
@@ -242,7 +242,7 @@ new line to processor's method **_preProcessRawLine(QString&)_**. In this method
 you can edit the line - replace values, remove sensitive information and so on.
 
 After that **_Reader_** parses elements of the row and passes them to processor's
-method **_processRowElements(QStringList)_**. At that step you can do whatever
+method **_processRowElements(QList\<QString\>)_**. At that step you can do whatever
 you want with row elements - convert/edit/save/filter the elements. Please check out
 **_ReadToListProcessor_** class (defined in [reader.cpp][reader-cpp]) as an example of
 such processor.
@@ -252,22 +252,24 @@ such processor.
 Use **[_Writer_][writer]** class to write csv-data to files / IO Devices.
 
 ```cpp
-bool write(const QString& filePath,
-           const AbstractData& data,
-           const QString& separator,
-           const QString& textDelimiter,
-           const WriteMode& mode,
-           const QStringList& header,
-           const QStringList& footer,
-           QTextCodec* codec);
+bool write(
+    const QString& filePath,
+    const AbstractData& data,
+    const QString& separator = QString(","),
+    const QString& textDelimiter = QString("\""),
+    WriteMode mode = WriteMode::REWRITE,
+    const QList<QString>& header = {},
+    const QList<QString>& footer = {},
+    QStringConverter::Encoding codec = QStringConverter::Utf8);
                    
-bool write(QIODevice& ioDevice,
-           const AbstractData& data,
-           const QString& separator,
-           const QString& textDelimiter,
-           const QStringList& header,
-           const QStringList& footer,
-           QTextCodec* codec);
+bool write(
+    QIODevice& ioDevice,
+    const AbstractData& data,
+    const QString& separator = QString(","),
+    const QString& textDelimiter = QString("\""),
+    const QList<QString>& header = {},
+    const QList<QString>& footer = {},
+    QStringConverter::Encoding codec = QStringConverter::Utf8);
 ```
 
 - *filePath* - string with absolute path to csv-file (new or existent);
@@ -284,7 +286,7 @@ information will be appended to the end of the file. By default mode is set
 to **_WriteMode::REWRITE_**.
 - *header* (optional) - strings that will be written as the first row;
 - *footer* (optional) - strings that will be written at the last row;
-- *codec* (optional) - pointer to the codec object that will be used
+- *codec* (optional) - codec type that will be used
 in write operations (by default it is UTF-8 codec).
 
 **_Writer_** uses *CRLF* as line ending symbols in accordance with [standard][rfc].
@@ -294,8 +296,7 @@ empty string as text delimiter symbol).
 
 ## 3. Requirements
 
-Qt 4.8 - 5.15, only core/base modules.
-It is quite possible that library would work with older Qt versions.
+Qt6, only core/base modules.
 
 ## 4. Build
 
@@ -341,7 +342,7 @@ make
 
 #### 4.2.1 Prebuild step on Windows
 
-If you going to build *qtcsv* library on Windows with MinGW, first of all [check that your PATH variable][path_var] contains paths to _Qt_ and _MinGW_ toolsets. For example, you have installed Qt 5.3 into _C:\Qt_. Then Qt binaries and libraries will be in folder _C:\Qt\5.3\mingw482_32\bin_ and MinGW binaries will be in _C:\Qt\Tools\mingw482_32\bin_. Add these paths to the PATH variable so that Windows would know where to look for _qmake_ and _make_ binaries.
+If you going to build *qtcsv* library on Windows with MinGW, first of all [check that your PATH variable][path_var] contains paths to _Qt_ and _MinGW_ toolsets.
 
 #### 4.2.2 Using qmake
 
@@ -444,7 +445,7 @@ proper csv-file.
 ## 9. Creators
 
 Author: [Antony Cherepanov][mypage] (antony.cherepanov@gmail.com)  
-Contributors: [Patrizio "pbek" Bekerle][pbek], [Furkan "Furkanzmc" Üzümcü][Furkanzmc], [Martin "schulmar" Schulze][schulmar], [cguentherTUChemnitz][cguentherTUChemnitz], [David Jung][David_Jung], [Nicu Tofan][TNick], [Florian Apolloner][apollo13], [Michael Pollind][pollend], [Kuba Ober][KubaO], [Akram Abdeslem Chaima][gakramx]
+Contributors: [Patrizio "pbek" Bekerle][pbek], [Furkan "Furkanzmc" Üzümcü][Furkanzmc], [Martin "schulmar" Schulze][schulmar], [cguentherTUChemnitz][cguentherTUChemnitz], [David Jung][David_Jung], [Nicu Tofan][TNick], [Florian Apolloner][apollo13], [Michael Pollind][pollend], [Kuba Ober][KubaO], [Akram Abdeslem Chaima][gakramx], [Bogdan Cristea][cristeab], [Markus Krause][markusdd]
 
 [csvwiki]: http://en.wikipedia.org/wiki/Comma-separated_values
 [reader]: https://github.com/iamantony/qtcsv/blob/master/include/qtcsv/reader.h
@@ -454,7 +455,7 @@ Contributors: [Patrizio "pbek" Bekerle][pbek], [Furkan "Furkanzmc" Üzümcü][Fu
 [strdata]: https://github.com/iamantony/qtcsv/blob/master/include/qtcsv/stringdata.h
 [vardata]: https://github.com/iamantony/qtcsv/blob/master/include/qtcsv/variantdata.h
 [qtcsv-pro]: https://github.com/iamantony/qtcsv/blob/master/qtcsv.pro
-[install-files]: http://doc.qt.io/qt-5/qmake-advanced-usage.html#installing-files
+[install-files]: https://doc.qt.io/qt-6/qmake-advanced-usage.html#installing-files
 [qtcsv-example]: https://github.com/iamantony/qtcsv-example
 [rfc]: http://tools.ietf.org/pdf/rfc4180.pdf
 [path_var]: http://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them
@@ -470,3 +471,5 @@ Contributors: [Patrizio "pbek" Bekerle][pbek], [Furkan "Furkanzmc" Üzümcü][Fu
 [pollend]: https://github.com/pollend
 [KubaO]: https://github.com/KubaO
 [gakramx]: https://github.com/gakramx
+[cristeab]: https://github.com/cristeab
+[markusdd]: https://github.com/markusdd
