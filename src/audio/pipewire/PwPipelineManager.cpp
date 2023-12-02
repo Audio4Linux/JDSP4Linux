@@ -900,14 +900,11 @@ void on_device_event_param(void* object,
     }
     else if(id == SPA_PARAM_EnumRoute) {
         if(direction == SPA_DIRECTION_OUTPUT) {
-
           RouteInfo route;
           route.name = name;
           route.description = description;
           route.route_available = available;
           device.output_routes.push_back(route);
-
-          util::debug(name); // TODO remove
         }
     }
 
