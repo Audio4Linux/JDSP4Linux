@@ -170,83 +170,8 @@ If you are still using PulseAudio with your Fedora/openSUSE installation, refer 
 
 ### Build from sources
 
-#### Install dependencies
+Build instructions are available in the [BUILD.md](BUILD.md) file.
 
-**Debian/Ubuntu-based distros**
-
-```bash
-sudo apt install build-essential libarchive-dev qtbase5-private-dev qtbase5-dev libqt5svg5-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev qttools5-dev-tools
-```
-
-**Fedora 34**
-
-```bash
-sudo dnf install libarchive-devel qt5-qtbase-devel qt5-qtbase-private-devel qt5-qtsvg-devel glibmm24-devel glib2-devel pipewire-devel
-```
-
-**Arch Linux**
-
-```bash
-sudo pacman -S gcc make pkgconfig libarchive qt5-base qt5-svg glib2 glibmm pipewire
-```
-
-#### Build application
-
-Clone git repositories and submodules:
-
-```bash
-git clone --recursive https://github.com/Audio4Linux/JDSP4Linux
-```
-
-Prepare build environment
-
-```bash
-cd JDSP4Linux
-mkdir build
-cd build
-# Compile app
-qmake ../JDSP4Linux.pro
-make -j4
-```
-
-Execute compiled binary
-
-```bash
-./src/jamesdsp
-```
-
-#### Optional: Manual installation + menu entry
-
-Copy the binary to /usr/local/bin and set permissions
-
-```bash
-sudo cp src/jamesdsp /usr/local/bin
-sudo chmod 755 /usr/local/bin/jamesdsp
-```
-
-Create a menu entry
-
-```bash
-sudo sh -c 'sudo cat <<EOT >> /usr/share/applications/jamesdsp-test.desktop
-[Desktop Entry]
-Name=JamesDSP
-GenericName=Audio effect processor
-Comment=JamesDSP for Linux
-Keywords=equalizer;audio;effect
-Categories=AudioVideo;Audio;
-Exec=jamesdsp
-Icon=/usr/share/pixmaps/jamesdsp.png
-StartupNotify=false
-Terminal=false
-Type=Application
-EOT'
-```
-
-Download icon
-
-```bash
-sudo wget -O /usr/share/pixmaps/jamesdsp.png https://raw.githubusercontent.com/Audio4Linux/JDSP4Linux/master/resources/icons/icon.png -q --show-progress
-```
 ## Scripting & IPC APIs
 
 Since version 2.5.0, this app supports IPC via D-Bus and is also configurable via a CLI.
