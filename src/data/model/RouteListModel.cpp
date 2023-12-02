@@ -35,7 +35,7 @@ QVariant RouteListModel::data(const QModelIndex &index, int role) const
 
 bool RouteListModel::loadRemaining(PresetRuleTableModel* ruleModel)
 {
-    auto routes = device.output_routes;
+    auto routes = device.output_routes.toVector();
     for(int i = routes.size() - 1; i >= 0; i--)
     {
         if(ruleModel->containsDeviceAndRouteId(QString::fromStdString(device.name), QString::fromStdString(routes.at(i).name)))
