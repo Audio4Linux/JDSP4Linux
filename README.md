@@ -138,7 +138,8 @@ sudo flatpak remote-add --if-not-exists thepbones-repo https://raw.githubusercon
 flatpak install me.timschneeberger.jdsp4linux.pulse
 ```
 
-> **Note**: Flatpaks are sandboxed. This application can only access `~/.var/app/me.timschneeberger.jdsp4linux/` by default.
+> [!IMPORTANT]
+> Flatpaks are sandboxed. This application can only access `~/.var/app/me.timschneeberger.jdsp4linux/` by default.
 
 ### Arch
 [AUR packages](https://aur.archlinux.org/packages/?O=0&K=jamesdsp) are available:
@@ -196,7 +197,8 @@ Currently, these commands for remote-controlling JamesDSP's audio engine are ava
 ```
 The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible setting keys and their syntax.
 
-> **Note**: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
+> [!NOTE]
+> These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
 
 ### D-Bus IPC
 
