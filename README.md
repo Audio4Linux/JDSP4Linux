@@ -84,7 +84,7 @@ ____________
 **Designed for use with PipeWire. PulseAudio is only supported for backward compatibility.**
 
 PipeWire has a much lower latency compared to PulseAudio when injecting audio effects processors into the audio pipeline. 
-I'm currently not planning to add more advanced support for Pulseaudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
+I'm currently not planning to add more advanced support for PulseAudio clients. Features such as selective app exclusion, changing the target audio device, and similar features will only be available to PipeWire clients.
 
 ### Which one am I using?
 
@@ -108,7 +108,7 @@ Server Name: pulseaudio
 
 If you don't know which version fits your Linux setup, go to the [PipeWire vs PulseAudio section](#which-one-am-i-using) above.
 
-It is recommended to switch to PipeWire, if possible. JamesDSP's audio backend for PulseAudio is in maintance-mode; however, it will continue to receive UI-related feature updates.
+It is recommended to switch to PipeWire, if possible. JamesDSP's audio backend for PulseAudio is in maintenance-mode; however, it will continue to receive UI-related feature updates.
 
 The installation instructions for the PulseAudio version have been moved to a separate file: [INSTALL_PULSE.md](INSTALL_PULSE.md).
 
@@ -217,7 +217,7 @@ Execute compiled binary
 
 #### Optional: Manual installation + menu entry
 
-Copy binary to /usr/local/bin and set permissions
+Copy the binary to /usr/local/bin and set permissions
 
 ```bash
 sudo cp src/jamesdsp /usr/local/bin
@@ -271,11 +271,11 @@ Currently, these commands for remote-controlling JamesDSP's audio engine are ava
 ```
 The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible setting keys and their syntax.
 
-> **Note**: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall-back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
+> **Note**: These commands try to connect to an active JamesDSP instance. If no instance is currently online, they will fall back to modifying the audio configuration file directly on disk. The `--is-connected` option can be used to check whether one is currently online.
 
 ### D-Bus IPC
 
-This app also exposes a D-Bus service on the session bus which can be used by other developers or users:
+This app also exposes a D-Bus service on the session bus, which can be used by other developers or users:
 
 Service name: `me.timschneeberger.jdsp4linux`
 * GUI-related interface:
