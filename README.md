@@ -255,15 +255,19 @@ Since version 2.5.0, this app supports IPC via D-Bus and is also configurable vi
 You can list all supported commands using `jamesdsp --help`. 
 Currently, these commands for remote-controlling JamesDSP's audio engine are available:
 ```
-  --is-connected               Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)
-  --list-keys                  List available audio configuration keys (Remote)
-  --get <key>                  Get audio configuration value (Remote)
-  --set <key=value>            Set audio configuration value (format: key=value) (Remote)
-  --load-preset <name>         Load preset by name (Remote)
-  --save-preset <name>         Save current settings as preset (Remote)
-  --delete-preset <name>       Delete preset by name (Remote)
-  --list-presets               List presets (Remote)
-  --status                     Show status (Remote)
+  --is-connected                           Check if JamesDSP service is active. Returns exit code 1 if not. (Remote)
+  --list-keys                              List available audio configuration keys (Remote)
+  --get <key>                              Get audio configuration value (Remote)
+  --set <key=value>                        Set audio configuration value (format: key=value) (Remote)
+  --load-preset <name>                     Load preset by name (Remote)
+  --save-preset <name>                     Save current settings as preset (Remote)
+  --delete-preset <name>                   Delete preset by name (Remote)
+  --list-presets                           List presets (Remote)
+  --status                                 Show status (Remote)
+  --list-devices                           List audio devices (Remote)
+  --list-preset-rules                      List preset rules (Remote)
+  --set-preset-rule <deviceId=presetName>  Add/modify preset rule (Remote)
+  --delete-preset-rule <deviceId>          Delete preset rule (Remote)
 ```
 The options should be fairly self-explanatory. For example, `jamesdsp --set reverb_enable=true` would enable the reverberation setting. Have a look at the audio configuration file at `~/.config/jamesdsp/audio.conf` to learn more about possible setting keys and their syntax.
 
@@ -286,7 +290,11 @@ If you want to test it out, you can use an app like [D-Feet](https://wiki.gnome.
 The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JDSP4Linux/blob/master/src/utils/dbus/manifest.xml.
 
 ## Troubleshooting
-* My volume control not working anymore
+* JamesDSP is randomly killed by the kernel or closes by itself
+  * The processing thread of the app may have exceeded the maximum amount of CPU time allowed for a real-time thread on your system.
+  * To fix: install the `realtime-priorities` package, add your user to the `realtime` group, and re-login. (see [issue #155](https://github.com/Audio4Linux/JDSP4Linux/issues/155#issuecomment-1835866017))
+
+* My volume control is not working anymore
   * Don't set the virtual JamesDSP device as the default audio output device. The virtual device has no audio volume controls and should never be used directly. Please set your actual speakers/headphones as the default output device instead.
 
 * Crackling audio
