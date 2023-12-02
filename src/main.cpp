@@ -158,6 +158,8 @@ int main(int   argc,
 
     qDBusRegisterMetaType<PresetRule>();
     qDBusRegisterMetaType<QList<PresetRule>>();
+    qDBusRegisterMetaType<Route>();
+    qDBusRegisterMetaType<QList<Route>>();
     qDBusRegisterMetaType<IOutputDevice>();
     qDBusRegisterMetaType<QList<IOutputDevice>>();
 

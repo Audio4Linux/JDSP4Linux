@@ -35,7 +35,7 @@ QVariant DeviceListModel::data(const QModelIndex &index, int role) const
 
 bool DeviceListModel::loadRemaining(PresetRuleTableModel* ruleModel)
 {
-    auto devices = service->sinkDevices();
+    auto devices = service->outputDevices();
     for(int i = devices.size() - 1; i >= 0; i--)
     {
         if(ruleModel->containsDeviceId(QString::fromStdString(devices.at(i).name)))

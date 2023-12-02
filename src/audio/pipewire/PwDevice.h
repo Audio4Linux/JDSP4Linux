@@ -8,6 +8,7 @@ class PwDevice : public IOutputDevice
 {
 public:
     PwDevice(NodeInfo info);
+    PwDevice(DeviceInfo info);
 
 };
 

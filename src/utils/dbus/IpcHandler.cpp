@@ -161,7 +161,7 @@ QList<PresetRule> IpcHandler::getPresetRules() const
 
 QList<IOutputDevice> IpcHandler::getOutputDevices() const
 {
-    auto devices = _service->sinkDevices();
+    auto devices = _service->outputDevices();
     return QVector<IOutputDevice>(devices.begin(), devices.end()).toList();
 }
 

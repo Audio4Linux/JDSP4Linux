@@ -123,6 +123,18 @@ bool PresetRuleTableModel::containsDeviceId(const QString &deviceId) const
     return false;
 }
 
+bool PresetRuleTableModel::containsDeviceAndRouteId(const QString &deviceId, const QString& routeId) const
+{
+    for(int i = 0; i < rowCount(); i++)
+    {
+        if(rules[i].deviceId == deviceId && rules[i].route == routeId)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void PresetRuleTableModel::add(PresetRule rule) {
     beginInsertRows({}, rules.count(), rules.count());
     rules.push_back(rule);

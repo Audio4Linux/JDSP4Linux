@@ -21,6 +21,8 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     bool containsDeviceId(const QString& deviceId) const;
+    bool containsDeviceAndRouteId(const QString &deviceId, const QString& routeId) const;
+
     PresetRule at(const QModelIndex &index) const;
     void add(PresetRule rule);
 

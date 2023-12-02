@@ -323,7 +323,14 @@ bool CliRemoteController::listOutputDevices() const
     devices = handleReply(reply).value_or(devices);
 
     for(const IOutputDevice& device : devices) {
-        Log::console(QString("Name: %1; Identifier: %2").arg(QString::fromStdString(device.description)).arg(QString::fromStdString(device.name)), true);
+        Log::console(QString("Name: %1").arg(QString::fromStdString(device.description)), true);
+        Log::console(QString("ID: %1").arg(QString::fromStdString(device.name)), true);
+        Log::console(QString("Current output route ID: %2 (%1)").arg(QString::fromStdString(device.output_route_description)).arg(QString::fromStdString(device.output_route_name)), true);
+        Log::console(QString("Available output route IDs:"), true);
+        for(const Route& route : device.output_routes) {
+            Log::console(QString("\t%2 (%1)").arg(QString::fromStdString(route.description)).arg(QString::fromStdString(route.name)), true);
+        }
+        Log::console("", true);
     }
 
     return true;

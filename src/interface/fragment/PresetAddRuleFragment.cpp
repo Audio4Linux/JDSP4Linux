@@ -32,6 +32,7 @@ PresetAddRuleFragment::~PresetAddRuleFragment()
 PresetRule PresetAddRuleFragment::rule() const
 {
     return PresetRule(ui->comboIf->currentData().value<IOutputDevice>(),
+                      "*", // TODO
                       ui->comboThen->currentData().toString());
 }
 

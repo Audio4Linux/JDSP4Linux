@@ -92,7 +92,7 @@ void PresetManager::saveToPath(const QString &filename)
     Log::debug("Saved to " + filename);
 }
 
-void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId)
+void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId, const QString& outputRouteName)
 {
     for(const auto& rule : std::as_const(_rules))
     {

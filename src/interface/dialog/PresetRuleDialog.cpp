@@ -34,7 +34,7 @@ PresetRuleDialog::PresetRuleDialog(IAudioService* service, QWidget *parent) :
     ui->ruleTable->setEmptyViewTitle(tr("No rules defined"));
 
     ruleModel->load();
-    deviceModel->load(service->sinkDevices());
+    deviceModel->load(service->outputDevices());
     presetModel->rescan();
 
     ui->remove->setEnabled(false);

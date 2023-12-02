@@ -43,7 +43,7 @@ public slots:
     bool load(const QString &filename);
     void save(const QString &name);
 
-    void onOutputDeviceChanged(const QString& deviceName, const QString& deviceId);
+    void onOutputDeviceChanged(const QString& deviceName, const QString& deviceId, const QString& outputRouteName);
 
     void loadRules();
     void saveRules() const;

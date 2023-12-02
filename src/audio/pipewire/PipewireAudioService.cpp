@@ -56,7 +56,7 @@ PipewireAudioService::PipewireAudioService() : IAudioService()
 
         if (target_node.serial != SPA_ID_INVALID)
         {
-            emit outputDeviceChanged(QString::fromStdString(target_node.description), QString::fromStdString(device.name));
+            emit outputDeviceChanged(QString::fromStdString(target_node.description), QString::fromStdString(device.name), QString::fromStdString(device.output_route_name));
         }
         else
         {
@@ -103,7 +103,7 @@ void PipewireAudioService::onAppConfigUpdated(const AppConfig::Key &key, const Q
             {
                 if (device.id == device_id)
                 {
-                    emit outputDeviceChanged(QString::fromStdString(device.description), name);
+                    emit outputDeviceChanged(QString::fromStdString(device.description), name, QString::fromStdString(device.output_route_name));
                     break;
                 }
             }
@@ -164,6 +164,16 @@ std::vector<IOutputDevice> PipewireAudioService::sinkDevices()
 
             devices.push_back(PwDevice(node));
         }
+    }
+    return devices;
+}
+
+std::vector<IOutputDevice> PipewireAudioService::outputDevices()
+{
+    std::vector<IOutputDevice> devices;
+    for(const auto &device : mgr.get()->list_devices)
+    {
+        devices.push_back(PwDevice(device));
     }
     return devices;
 }

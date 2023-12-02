@@ -165,6 +165,7 @@ HEADERS += \
     data/model/PresetListModel.h \
     data/model/PresetRuleTableModel.h \
     data/model/QJsonTableModel.h \
+    data/model/RouteListModel.h \
     data/model/VdcDatabaseModel.h \
     utils/CliRemoteController.h \
     utils/DebuggerUtils.h \
@@ -191,6 +192,7 @@ SOURCES += \
     data/model/PresetListModel.cpp \
     data/model/PresetRuleTableModel.cpp \
     data/model/QJsonTableModel.cpp \
+    data/model/RouteListModel.cpp \
     data/model/VdcDatabaseModel.cpp \
     main.cpp \
     utils/CliRemoteController.cpp \

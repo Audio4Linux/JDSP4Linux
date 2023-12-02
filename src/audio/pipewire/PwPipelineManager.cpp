@@ -815,7 +815,10 @@ void on_device_info(void* object, const struct pw_device_info* info) {
           continue;
         }
 
-        if (const auto id = param.id; id == SPA_PARAM_Route) {
+        if (const auto id = param.id; id == SPA_PARAM_Route || id == SPA_PARAM_EnumRoute) {
+          if(id == SPA_PARAM_EnumRoute)
+              device.output_routes.clear();
+
           pw_device_enum_params((struct pw_device*)dd->proxy, 0, id, 0, -1, nullptr);
         }
       }
@@ -831,20 +834,25 @@ void on_device_event_param(void* object,
                            uint32_t index,
                            uint32_t next,
                            const struct spa_pod* param) {
-  if (id != SPA_PARAM_Route) {
+  if (id != SPA_PARAM_Route && id != SPA_PARAM_EnumRoute) {
     return;
   }
 
   auto* const dd = static_cast<proxy_data*>(object);
 
   const char* name = nullptr;
+  const char* description = nullptr;
 
   enum spa_direction direction {};
   enum spa_param_availability available {};
 
-  if (spa_pod_parse_object(param, SPA_TYPE_OBJECT_ParamRoute, nullptr, SPA_PARAM_ROUTE_direction,
-                           SPA_POD_Id(&direction), SPA_PARAM_ROUTE_name, SPA_POD_String(&name),
-                           SPA_PARAM_ROUTE_available, SPA_POD_Id(&available)) < 0) {
+  int res = spa_pod_parse_object(param, SPA_TYPE_OBJECT_ParamRoute, nullptr,
+                                 SPA_PARAM_ROUTE_direction, SPA_POD_Id(&direction),
+                                 SPA_PARAM_ROUTE_name, SPA_POD_String(&name),
+                                 SPA_PARAM_ROUTE_description, SPA_POD_String(&description),
+                                 SPA_PARAM_ROUTE_available, SPA_POD_Id(&available));
+
+  if (res < 0) {
     return;
   }
 
@@ -859,32 +867,48 @@ void on_device_event_param(void* object,
 
     auto* const pm = dd->pm;
 
-    if (direction == SPA_DIRECTION_INPUT) {
-      if (name != device.input_route_name || available != device.input_route_available) {
-        device.input_route_name = name;
-        device.input_route_available = available;
+    if(id == SPA_PARAM_Route) {
+        if (direction == SPA_DIRECTION_INPUT) {
+          if (name != device.input_route_name || description != device.input_route_desc || available != device.input_route_available) {
+            device.input_route_name = name;
+            device.input_route_desc = description;
+            device.input_route_available = available;
 
-        util::idle_add([pm, device] {
-          if (PwPipelineManager::exiting) {
-            return;
+            util::idle_add([pm, device] {
+              if (PwPipelineManager::exiting) {
+                return;
+              }
+
+              pm->device_input_route_changed.emit(device);
+            });
           }
+        } else if (direction == SPA_DIRECTION_OUTPUT) {
+          if (name != device.output_route_name || description != device.output_route_desc || available != device.output_route_available) {
+            device.output_route_name = name;
+            device.output_route_desc = description;
+            device.output_route_available = available;
 
-          pm->device_input_route_changed.emit(device);
-        });
-      }
-    } else if (direction == SPA_DIRECTION_OUTPUT) {
-      if (name != device.output_route_name || available != device.output_route_available) {
-        device.output_route_name = name;
-        device.output_route_available = available;
+            util::idle_add([pm, device] {
+              if (PwPipelineManager::exiting) {
+                return;
+              }
 
-        util::idle_add([pm, device] {
-          if (PwPipelineManager::exiting) {
-            return;
+              pm->device_output_route_changed.emit(device);
+            });
           }
+        }
+    }
+    else if(id == SPA_PARAM_EnumRoute) {
+        if(direction == SPA_DIRECTION_OUTPUT) {
 
-          pm->device_output_route_changed.emit(device);
-        });
-      }
+          RouteInfo route;
+          route.name = name;
+          route.description = description;
+          route.route_available = available;
+          device.output_routes.push_back(route);
+
+          util::debug(name); // TODO remove
+        }
     }
 
     break;

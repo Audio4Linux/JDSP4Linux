@@ -27,6 +27,7 @@ public slots:
     DspHost* host() override;
     IAppManager* appManager() override;
     std::vector<IOutputDevice> sinkDevices() override;
+    std::vector<IOutputDevice> outputDevices() override;
     DspStatus status() override;
 
 private:

@@ -64,7 +64,7 @@ PulseAudioService::PulseAudioService() : IAudioService()
 
                         if (dev_name != last_sink_dev_name) {
                             last_sink_dev_name = dev_name;
-                            emit outputDeviceChanged(QString::fromStdString(current_info->description), QString::fromStdString(current_info->name));
+                            emit outputDeviceChanged(QString::fromStdString(current_info->description), QString::fromStdString(current_info->name), QString::fromStdString(current_info->active_port));
                         }
                     }
                 }
@@ -138,6 +138,11 @@ std::vector<IOutputDevice> PulseAudioService::sinkDevices()
         devices.push_back(PulseDevice(sink));
     }
     return devices;
+}
+
+std::vector<IOutputDevice> PulseAudioService::outputDevices()
+{
+    return std::vector<IOutputDevice>();
 }
 
 DspStatus PulseAudioService::status()

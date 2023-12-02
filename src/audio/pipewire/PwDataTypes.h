@@ -4,6 +4,7 @@
 #include <pipewire/pipewire.h>
 #include <memory>
 #include <string>
+#include <vector>
 
 struct NodeInfo {
   pw_proxy* proxy = nullptr;
@@ -125,6 +126,14 @@ struct ClientInfo {
   std::string api;
 };
 
+struct RouteInfo {
+  std::string name;
+
+  std::string description;
+
+  spa_param_availability route_available;
+};
+
 struct DeviceInfo {
   uint32_t id;
 
@@ -144,6 +153,10 @@ struct DeviceInfo {
 
   std::string output_route_name;
 
+  std::string input_route_desc;
+
+  std::string output_route_desc;
+
   std::string bus_id;
 
   std::string bus_path;
@@ -151,5 +164,7 @@ struct DeviceInfo {
   spa_param_availability input_route_available;
 
   spa_param_availability output_route_available;
+
+  std::vector<RouteInfo> output_routes;
 };
 #endif // PWDATATYPES_H
