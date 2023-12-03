@@ -19,7 +19,7 @@ PresetAddRuleFragment::PresetAddRuleFragment(DeviceListModel *deviceModel, Prese
     ui->comboRoute->setModel(routeModel);
     ui->comboThen->setModel(presetModel);
 
-    connect(ui->comboIf, &QComboBox::currentIndexChanged, this, &PresetAddRuleFragment::onDeviceChanged);
+    connect(ui->comboIf, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PresetAddRuleFragment::onDeviceChanged);
 
     connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &PresetAddRuleFragment::closePressed);
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &PresetAddRuleFragment::closePressed);
