@@ -247,8 +247,8 @@ void DspHost::updateVdc(DspConfig *config)
 
 void DspHost::updateCompander(DspConfig *config)
 {
-    int granularity = config->get<int>(DspConfig::compander_granularity);
-    float timeconstant = config->get<float>(DspConfig::compander_timeconstant);
+    int granularity = max(config->get<int>(DspConfig::compander_granularity), 2);
+    float timeconstant = max(config->get<float>(DspConfig::compander_timeconstant), 0.22);
     int tftransforms = config->get<int>(DspConfig::compander_time_freq_transforms);
 
     std::string str = chopDoubleQuotes(config->get<QString>(DspConfig::compander_response)).toStdString();
