@@ -43,11 +43,11 @@ jobs:
      
     - name: Initialize project (PulseAudio/full)
       if: matrix.flavor == 'full'
-      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
+      run: qmake6 JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO"
 
     - name: Initialize project (PulseAudio/headless)
       if: matrix.flavor == 'headless'
-      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO" "CONFIG+=HEADLESS"
+      run: qmake6 JDSP4Linux.pro "CONFIG += CI" "CONFIG += USE_PULSEAUDIO" "CONFIG+=HEADLESS"
 
     - name: Build
       run: |
@@ -89,11 +89,11 @@ jobs:
       
     - name: Initialize project (PW/full)
       if: matrix.flavor == 'full'
-      run: qmake JDSP4Linux.pro "CONFIG += CI"
+      run: qmake6 JDSP4Linux.pro "CONFIG += CI"
 
     - name: Initialize project (PW/headless)
       if: matrix.flavor == 'headless'
-      run: qmake JDSP4Linux.pro "CONFIG += CI" "CONFIG+=HEADLESS"
+      run: qmake6 JDSP4Linux.pro "CONFIG += CI" "CONFIG+=HEADLESS"
 
 
     - name: Build
