@@ -82,5 +82,20 @@
         <file>translations/jamesdsp_tr.qm</file>
         <file>translations/jamesdsp_vi.qm</file>
         <file>translations/jamesdsp_zh_TW.qm</file>
+        <file>translations/jamesdsp_ar.qm</file>
+        <file>translations/jamesdsp_ca.qm</file>
+        <file>translations/jamesdsp_cs.qm</file>
+        <file>translations/jamesdsp_da.qm</file>
+        <file>translations/jamesdsp_el.qm</file>
+        <file>translations/jamesdsp_fi.qm</file>
+        <file>translations/jamesdsp_he.qm</file>
+        <file>translations/jamesdsp_hi.qm</file>
+        <file>translations/jamesdsp_hu.qm</file>
+        <file>translations/jamesdsp_id.qm</file>
+        <file>translations/jamesdsp_it.qm</file>
+        <file>translations/jamesdsp_ja.qm</file>
+        <file>translations/jamesdsp_ko.qm</file>
+        <file>translations/jamesdsp_nl.qm</file>
+        <file>translations/jamesdsp_no.qm</file>
     </qresource>
 </RCC>
