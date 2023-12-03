@@ -120,6 +120,28 @@ bool validateKey(const QString& keyString, DspConfig::Key& resolvedKey) {
     return true;
 }
 
+bool parseDeviceAndRoute(const QString& deviceRouteIn, QString& deviceIdOut, QString& routeIdOut)
+{
+    QStringList parts = deviceRouteIn.split(':', Qt::SkipEmptyParts);
+    if(parts.size() == 2) {
+        // Input has both device and route id
+        deviceIdOut = parts.at(0);
+        routeIdOut = parts.at(1);
+        return true;
+    }
+    else if(parts.size() == 1) {
+        // Input has no route id
+        deviceIdOut = deviceRouteIn;
+        routeIdOut = QString::fromStdString(RouteListModel::makeDefaultRoute().name);
+        return true;
+    }
+
+    Log::error("Invalid device/route format. Expected: deviceId[:routeId]");
+    Log::error("\t* To specify a device with any route: alsa_card.pci-XXXX");
+    Log::error("\t* To specify a device with a specific route: alsa_card.pci-XXXX:analog-output-speaker");
+    return false;
+}
+
 bool CliRemoteController::isConnected() const
 {
     Log::console(service->isValid() ? "true" : "false", true);
@@ -267,7 +289,7 @@ bool CliRemoteController::listPresetRules() const
 
     rules = rules.empty() ? PresetManager::instance().rules().toList() : rules;
     for(const PresetRule& rule : rules) {
-        Log::console(rule.deviceId + "=" + rule.preset, true);
+        Log::console(rule.deviceId + ":" + rule.routeId + "=" + rule.preset, true);
     }
     return !rules.empty();
 }
@@ -281,35 +303,46 @@ bool CliRemoteController::addPresetRule(const QString &keyValue) const
 
     QStringList split = keyValue.split("=", Qt::SkipEmptyParts);
     if(split.count() < 2) {
-        Log::warning("Invalid format. Expected input format: deviceId=presetName");
+        Log::error("Invalid format. Expected input format: deviceId=presetName or deviceId:routeId=presetName");
         return false;
     }
 
-    QString id = split.at(0);
+    QString deviceIdWithRoute = split.at(0);
     QString preset = keyValue.mid(keyValue.indexOf('=') + 1);
 
+    QString deviceId;
+    QString routeId;
+
+    if(!parseDeviceAndRoute(deviceIdWithRoute, deviceId, routeId))
+        return false;
+
     if(checkConnectionAndLog()) {
-        auto reply = service->setPresetRule(id, id, preset);
+        auto reply = service->setPresetRule(deviceId, deviceId, routeId, routeId, preset);
         return handleVoidReply(reply);
     }
 
-    PresetManager::instance().addRule(PresetRule(id, id, preset));
+    PresetManager::instance().addRule(PresetRule(deviceId, routeId, preset));
     return true;
 }
 
-bool CliRemoteController::deletePresetRule(const QString &deviceId) const
+bool CliRemoteController::deletePresetRule(const QString &deviceIdWithRoute) const
 {
 #ifdef USE_PULSEAUDIO
     Log::error("This feature is only supported in the PipeWire version of JamesDSP");
     return false;
 #endif
+    QString deviceId;
+    QString routeId;
+
+    if(!parseDeviceAndRoute(deviceIdWithRoute, deviceId, routeId))
+        return false;
 
     if(checkConnectionAndLog()) {
-        auto reply = service->deletePresetRule(deviceId);
+        auto reply = service->deletePresetRule(deviceId, routeId);
         return handleVoidReply(reply);
     }
 
-    PresetManager::instance().removeRule(deviceId);
+    PresetManager::instance().removeRule(deviceId, routeId);
     return true;
 }
 

@@ -26,6 +26,9 @@ public:
     explicit PresetRuleDialog(IAudioService* service, QWidget *parent = nullptr);
     ~PresetRuleDialog();
 
+protected:
+    void showEvent(QShowEvent* event);
+
 private slots:
     void onAddClicked();
     void onAddConfirmed();

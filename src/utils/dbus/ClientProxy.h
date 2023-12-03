@@ -99,10 +99,10 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QStringLiteral("deletePreset"), argumentList);
     }
 
-    inline QDBusPendingReply<> deletePresetRule(const QString &deviceId)
+    inline QDBusPendingReply<> deletePresetRule(const QString &deviceId, const QString &routeId)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(deviceId);
+        argumentList << QVariant::fromValue(deviceId) << QVariant::fromValue(routeId);
         return asyncCallWithArgumentList(QStringLiteral("deletePresetRule"), argumentList);
     }
 
@@ -171,10 +171,10 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QStringLiteral("setAndCommit"), argumentList);
     }
 
-    inline QDBusPendingReply<> setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset)
+    inline QDBusPendingReply<> setPresetRule(const QString &deviceName, const QString &deviceId, const QString &routeName, const QString &routeId, const QString &preset)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(deviceName) << QVariant::fromValue(deviceId) << QVariant::fromValue(preset);
+        argumentList << QVariant::fromValue(deviceName) << QVariant::fromValue(deviceId) << QVariant::fromValue(routeName) << QVariant::fromValue(routeId) << QVariant::fromValue(preset);
         return asyncCallWithArgumentList(QStringLiteral("setPresetRule"), argumentList);
     }
 

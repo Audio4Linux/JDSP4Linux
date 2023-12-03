@@ -92,15 +92,31 @@ void PresetManager::saveToPath(const QString &filename)
     Log::debug("Saved to " + filename);
 }
 
-void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId, const QString& outputRouteName)
+void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QString &deviceId, const QString& outputRouteId)
 {
+    QString defaultRouteId = QString::fromStdString(RouteListModel::makeDefaultRoute().name);
+    auto executeRule = [this, deviceName, outputRouteId, defaultRouteId](const PresetRule& rule){
+        loadFromPath(AppConfig::instance().getPath("presets/" + rule.preset + ".conf"));
+        emit presetAutoloaded(deviceName, rule.routeName, rule.routeId == defaultRouteId);
+    };
+
+    // Look for rule with route
     for(const auto& rule : std::as_const(_rules))
     {
-        if(rule.deviceId == deviceId)
+        if(rule.deviceId == deviceId && rule.routeId == outputRouteId)
         {
-            loadFromPath(AppConfig::instance().getPath("presets/" + rule.preset + ".conf"));
-            emit presetAutoloaded(deviceName);
-            break;
+            executeRule(rule);
+            return;
+        }
+    }
+
+    // Fall back to rule with wildcard route
+    for(const auto& rule : std::as_const(_rules))
+    {
+        if(rule.deviceId == deviceId && rule.routeId == defaultRouteId)
+        {
+            executeRule(rule);
+            return;
         }
     }
 }
@@ -163,18 +179,18 @@ void PresetManager::setRules(const QVector<PresetRule> &newRules)
 
 bool PresetManager::addRule(const PresetRule &rule)
 {
-    // Only one rule per device id
-    removeRule(rule.deviceId);
+    // Only one rule per device & route id
+    removeRule(rule.deviceId, rule.routeId);
 
     _rules.append(rule);
     saveRules();
     return true;
 }
 
-void PresetManager::removeRule(const QString deviceId)
+void PresetManager::removeRule(const QString &deviceId, const QString &routeId)
 {
     for(int i = 0; i < _rules.count(); i++) {
-        if(_rules[i].deviceId == deviceId) {
+        if(_rules[i].deviceId == deviceId && _rules[i].routeId == routeId) {
             _rules.removeAt(i);
             break;
         }

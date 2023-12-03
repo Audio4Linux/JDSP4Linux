@@ -13,18 +13,18 @@ class RouteListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit RouteListModel(IOutputDevice device, QObject *parent = nullptr);
+    explicit RouteListModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    bool loadRemaining(PresetRuleTableModel* ruleModel);
+    bool loadRemaining(IOutputDevice device, PresetRuleTableModel* ruleModel);
     void load(const QVector<Route>& routes);
-    void load(const std::vector<Route>& routes);
+
+    static Route makeDefaultRoute();
 
 private:
     QVector<Route> routes;
-    IOutputDevice device;
 };
 
 #endif // ROUTELISTMODEL_H

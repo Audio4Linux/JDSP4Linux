@@ -58,11 +58,11 @@ private:
     OPT(_savePreset, ARGS("save-preset", "Save current settings as preset (Remote)", "name"))
     OPT(_deletePreset, ARGS("delete-preset", "Delete preset by name (Remote)", "name"))
 
-    OPT(_listOutputDevices, ARGS("list-devices", "List audio devices (Remote)"))
+    OPT(_listOutputDevices, ARGS("list-devices", "List audio devices and output routes (Remote)"))
 
     OPT(_listPresetRules, ARGS("list-preset-rules", "List preset rules (Remote)"))
-    OPT(_addPresetRule, ARGS("set-preset-rule", "Add/modify preset rule (Remote)", "deviceId=presetName"))
-    OPT(_deletePresetRule, ARGS("delete-preset-rule", "Delete preset rule (Remote)", "deviceId"))
+    OPT(_addPresetRule, ARGS("set-preset-rule", "Add/modify preset rule (Remote)", "deviceId[:routeId]=presetName"))
+    OPT(_deletePresetRule, ARGS("delete-preset-rule", "Delete preset rule by device id and route id (Remote)", "deviceId[:routeId]"))
 
 #undef ARGS
 #undef OPT

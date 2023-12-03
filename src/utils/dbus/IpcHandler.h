@@ -52,8 +52,8 @@ public slots:
     void savePreset(const QString &name) const;
     void deletePreset(const QString &name) const;
 
-    void setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset) const;
-    void deletePresetRule(const QString &deviceId) const;
+    void setPresetRule(const QString &deviceName, const QString &deviceId, const QString &routeName, const QString &routeId, const QString &preset) const;
+    void deletePresetRule(const QString &deviceId, const QString &routeId) const;
     QList<PresetRule> getPresetRules() const;
 
      QList<IOutputDevice> getOutputDevices() const;

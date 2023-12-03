@@ -6,6 +6,8 @@
 
 class DeviceListModel;
 class PresetListModel;
+class RouteListModel;
+class PresetRuleTableModel;
 
 namespace Ui {
 class PresetAddRuleFragment;
@@ -16,7 +18,7 @@ class PresetAddRuleFragment : public BaseFragment
     Q_OBJECT
 
 public:
-    explicit PresetAddRuleFragment(DeviceListModel* deviceModel, PresetListModel* presetModel, QWidget *parent = nullptr);
+    explicit PresetAddRuleFragment(DeviceListModel* deviceModel, PresetListModel* presetModel, PresetRuleTableModel* tableModel, QWidget *parent = nullptr);
     ~PresetAddRuleFragment();
 
     PresetRule rule() const;
@@ -27,8 +29,14 @@ protected:
 signals:
     void accepted();
 
+private slots:
+    void onDeviceChanged();
+
 private:
     Ui::PresetAddRuleFragment *ui;
+
+    RouteListModel* routeModel;
+    PresetRuleTableModel* tableModel;
 
 };
 

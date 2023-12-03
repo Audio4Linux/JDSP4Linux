@@ -1,5 +1,6 @@
 #include "DeviceListModel.h"
 #include "PresetRuleTableModel.h"
+#include "RouteListModel.h"
 
 DeviceListModel::DeviceListModel(IAudioService *service, QObject *parent)
     : QAbstractListModel(parent), service(service)
@@ -36,10 +37,22 @@ QVariant DeviceListModel::data(const QModelIndex &index, int role) const
 bool DeviceListModel::loadRemaining(PresetRuleTableModel* ruleModel)
 {
     auto devices = service->outputDevices();
+    // Find all devices with at least one unused route
     for(int i = devices.size() - 1; i >= 0; i--)
     {
-        if(ruleModel->containsDeviceId(QString::fromStdString(devices.at(i).name)))
+        // Find all unused routes
+        QList<Route> routes = devices.at(i).output_routes;
+        routes.append(RouteListModel::makeDefaultRoute());
+        for(int j = routes.size() - 1; j >= 0; j--)
         {
+            if(ruleModel->containsDeviceAndRouteId(QString::fromStdString(devices.at(i).name),
+                                                   QString::fromStdString(routes.at(j).name)))
+            {
+                routes.erase(routes.begin() + j);
+            }
+        }
+
+        if(routes.empty()) {
             devices.erase(devices.begin() + i);
         }
     }

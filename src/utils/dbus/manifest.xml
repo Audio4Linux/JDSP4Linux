@@ -60,21 +60,24 @@
             <method name="setPresetRule">
                 <arg name="deviceName" type="s" direction="in"/>
                 <arg name="deviceId" type="s" direction="in"/>
+                <arg name="routeName" type="s" direction="in"/>
+                <arg name="routeId" type="s" direction="in"/>
                 <arg name="preset" type="s" direction="in"/>
             </method>
 
             <method name="deletePresetRule">
                 <arg name="deviceId" type="s" direction="in"/>
+                <arg name="routeId" type="s" direction="in"/>
             </method>
 
             <method name="getPresetRules">
                 <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;PresetRule&gt;"/>
-                <arg name="rules" type="a(sss)" direction="out"/>
+                <arg name="rules" type="a(sssss)" direction="out"/>
             </method>
 
             <method name="getOutputDevices">
                 <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;IOutputDevice&gt;"/>
-                <arg name="devices" type="a(iss)" direction="out"/>
+                <arg name="devices" type="a(issss)" direction="out"/>
             </method>
         </interface>
     </node>

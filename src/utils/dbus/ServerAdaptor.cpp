@@ -103,10 +103,10 @@ void ServiceAdaptor::deletePreset(const QString &name)
     QMetaObject::invokeMethod(parent(), "deletePreset", Q_ARG(QString, name));
 }
 
-void ServiceAdaptor::deletePresetRule(const QString &deviceId)
+void ServiceAdaptor::deletePresetRule(const QString &deviceId, const QString &routeId)
 {
     // handle method call me.timschneeberger.jdsp4linux.Service.deletePresetRule
-    QMetaObject::invokeMethod(parent(), "deletePresetRule", Q_ARG(QString, deviceId));
+    QMetaObject::invokeMethod(parent(), "deletePresetRule", Q_ARG(QString, deviceId), Q_ARG(QString, routeId));
 }
 
 QString ServiceAdaptor::get(const QString &key)
@@ -181,9 +181,9 @@ void ServiceAdaptor::setAndCommit(const QString &key, const QDBusVariant &value)
     QMetaObject::invokeMethod(parent(), "setAndCommit", Q_ARG(QString, key), Q_ARG(QDBusVariant, value));
 }
 
-void ServiceAdaptor::setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset)
+void ServiceAdaptor::setPresetRule(const QString &deviceName, const QString &deviceId, const QString &routeName, const QString &routeId, const QString &preset)
 {
     // handle method call me.timschneeberger.jdsp4linux.Service.setPresetRule
-    QMetaObject::invokeMethod(parent(), "setPresetRule", Q_ARG(QString, deviceName), Q_ARG(QString, deviceId), Q_ARG(QString, preset));
+    QMetaObject::invokeMethod(parent(), "setPresetRule", Q_ARG(QString, deviceName), Q_ARG(QString, deviceId), Q_ARG(QString, routeName), Q_ARG(QString, routeId), Q_ARG(QString, preset));
 }
 

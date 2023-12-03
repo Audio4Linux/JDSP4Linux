@@ -94,18 +94,21 @@ class ServiceAdaptor: public QDBusAbstractAdaptor
 "    <method name=\"setPresetRule\">\n"
 "      <arg direction=\"in\" type=\"s\" name=\"deviceName\"/>\n"
 "      <arg direction=\"in\" type=\"s\" name=\"deviceId\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"routeName\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"routeId\"/>\n"
 "      <arg direction=\"in\" type=\"s\" name=\"preset\"/>\n"
 "    </method>\n"
 "    <method name=\"deletePresetRule\">\n"
 "      <arg direction=\"in\" type=\"s\" name=\"deviceId\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"routeId\"/>\n"
 "    </method>\n"
 "    <method name=\"getPresetRules\">\n"
 "      <annotation value=\"QList&lt;PresetRule&gt;\" name=\"org.qtproject.QtDBus.QtTypeName.Out0\"/>\n"
-"      <arg direction=\"out\" type=\"a(sss)\" name=\"rules\"/>\n"
+"      <arg direction=\"out\" type=\"a(sssss)\" name=\"rules\"/>\n"
 "    </method>\n"
 "    <method name=\"getOutputDevices\">\n"
 "      <annotation value=\"QList&lt;IOutputDevice&gt;\" name=\"org.qtproject.QtDBus.QtTypeName.Out0\"/>\n"
-"      <arg direction=\"out\" type=\"a(iss)\" name=\"devices\"/>\n"
+"      <arg direction=\"out\" type=\"a(issss)\" name=\"devices\"/>\n"
 "    </method>\n"
 "  </interface>\n"
         "")
@@ -135,7 +138,7 @@ public: // PROPERTIES
 public Q_SLOTS: // METHODS
     void commit();
     void deletePreset(const QString &name);
-    void deletePresetRule(const QString &deviceId);
+    void deletePresetRule(const QString &deviceId, const QString &routeId);
     QString get(const QString &key);
     QString getAll();
     QStringList getKeys();
@@ -146,7 +149,7 @@ public Q_SLOTS: // METHODS
     void savePreset(const QString &name);
     void set(const QString &key, const QDBusVariant &value);
     void setAndCommit(const QString &key, const QDBusVariant &value);
-    void setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset);
+    void setPresetRule(const QString &deviceName, const QString &deviceId, const QString &routeName, const QString &routeId, const QString &preset);
 Q_SIGNALS: // SIGNALS
 };
 

@@ -5,6 +5,8 @@
 #include <QDBusArgument>
 #include <QJsonObject>
 
+#include "model/RouteListModel.h"
+
 class PresetRule
 {
 public:
@@ -14,27 +16,33 @@ public:
         deviceName = pkg.value("deviceName").toString();
         deviceId = pkg.value("deviceId").toString();
         preset = pkg.value("preset").toString();
-        if(!pkg.contains("route"))
-            route = "*";
-        else
-            pkg.value("route").toString();
+
+        Route defaultRoute = RouteListModel::makeDefaultRoute();
+        if(!pkg.contains("routeId") || !pkg.contains("routeName")) {
+            routeName = QString::fromStdString(defaultRoute.description);
+            routeId = QString::fromStdString(defaultRoute.name);
+        }
+        else {
+            routeName = pkg.value("routeName").toString();
+            routeId = pkg.value("routeId").toString();
+        }
     }
 
-    PresetRule(QString _deviceId, QString _deviceName, QString _preset)
-    {
-        deviceName = _deviceName;
-        deviceId = _deviceId;
-        preset = _preset;
-    }
-
-
-    PresetRule(IOutputDevice device, QString _targetRoute, QString _preset)
+    PresetRule(IOutputDevice device, Route route, const QString& _preset)
     {
         deviceName = QString::fromStdString(device.description);
         deviceId = QString::fromStdString(device.name);
-        route = _targetRoute;
+        routeName = QString::fromStdString(route.description);
+        routeId = QString::fromStdString(route.name);
         preset = _preset;
     }
+
+
+    PresetRule(const QString& deviceId, const QString& routeId, const QString& preset)
+        : deviceName(deviceId), deviceId(deviceId), preset(preset), routeName(routeId), routeId(routeId) {}
+
+    PresetRule(const QString& deviceName, const QString& deviceId, const QString& routeName, const QString& routeId, const QString& preset)
+        : deviceName(deviceName), deviceId(deviceId), preset(preset), routeName(routeName), routeId(routeId) {}
 
     QJsonObject toJson() const
     {
@@ -42,7 +50,8 @@ public:
         pkg["deviceName"] = deviceName;
         pkg["deviceId"] = deviceId;
         pkg["preset"] = preset;
-        pkg["route"] = route;
+        pkg["routeName"] = routeName;
+        pkg["routeId"] = routeId;
         return pkg;
     }
 
@@ -50,14 +59,16 @@ public:
     {
         return this->deviceName == rhs.deviceName &&
                this->deviceId == rhs.deviceId &&
-               this->route == rhs.route &&
+               this->routeName == rhs.routeName &&
+               this->routeId == rhs.routeId &&
                this->preset == rhs.preset;
     }
 
     QString deviceName;
     QString deviceId;
     QString preset;
-    QString route;
+    QString routeName;
+    QString routeId;
 };
 
 Q_DECLARE_METATYPE(PresetRule)
@@ -66,7 +77,7 @@ Q_DECLARE_METATYPE(QList<PresetRule>)
 inline QDBusArgument &operator<<(QDBusArgument &argument, const PresetRule &rule)
 {
     argument.beginStructure();
-    argument << rule.deviceName << rule.deviceId << rule.preset << rule.route;
+    argument << rule.deviceName << rule.deviceId << rule.preset << rule.routeId;
     argument.endStructure();
     return argument;
 }
@@ -75,7 +86,7 @@ inline QDBusArgument &operator<<(QDBusArgument &argument, const PresetRule &rule
 inline const QDBusArgument &operator>>(const QDBusArgument &argument, PresetRule &rule)
 {
     argument.beginStructure();
-    argument >> rule.deviceName >> rule.deviceId >> rule.preset >> rule.route;
+    argument >> rule.deviceName >> rule.deviceId >> rule.preset >> rule.routeId;
     argument.endStructure();
     return argument;
 }

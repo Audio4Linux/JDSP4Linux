@@ -21,7 +21,7 @@ PresetRuleDialog::PresetRuleDialog(IAudioService* service, QWidget *parent) :
     presetModel(PresetManager::instance().presetModel()),
     ruleModel(new PresetRuleTableModel(this)),
     ruleDelegate(new PresetRuleTableDelegate(this)),
-    addRuleFragment(new FragmentHost<PresetAddRuleFragment*>(new PresetAddRuleFragment(deviceModel, presetModel, this),
+    addRuleFragment(new FragmentHost<PresetAddRuleFragment*>(new PresetAddRuleFragment(deviceModel, presetModel, ruleModel, this),
                                                              WAF::BottomSide, this))
 {
     ui->setupUi(this);
@@ -53,6 +53,15 @@ PresetRuleDialog::PresetRuleDialog(IAudioService* service, QWidget *parent) :
 PresetRuleDialog::~PresetRuleDialog()
 {
     delete ui;
+}
+
+void PresetRuleDialog::showEvent(QShowEvent *event)
+{
+    ruleModel->load();
+    deviceModel->load(service->outputDevices());
+    presetModel->rescan();
+
+    QDialog::showEvent(event);
 }
 
 void PresetRuleDialog::onAddClicked()

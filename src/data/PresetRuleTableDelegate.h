@@ -33,7 +33,7 @@ public:
         QComboBox *cb = new QComboBox(parent);
         switch(index.column())
         {
-        case 1:
+        case 2:
             cb->setModel(_presetModel);
             break;
         }

@@ -17,7 +17,6 @@
 #include "interface/TrayIcon.h"
 #include "utils/AutoStartManager.h"
 #include "utils/Common.h"
-#include "utils/dbus/IpcHandler.h"
 #include "utils/dbus/ServerAdaptor.h"
 #include "utils/DebuggerUtils.h"
 #include "utils/DesktopServices.h"
@@ -104,8 +103,10 @@ MainWindow::MainWindow(IAudioService* audioService,
     // Allocate pointers and init important variables
     {
         connect(&PresetManager::instance(), &PresetManager::wantsToWriteConfig, this, &MainWindow::applyConfig);
-        connect(&PresetManager::instance(), &PresetManager::presetAutoloaded, this, [this](const QString& device){
-            ui->info->setAnimatedText(tr("%1 connected - Preset loaded automatically").arg(device), true);
+        connect(&PresetManager::instance(), &PresetManager::presetAutoloaded, this, [this](const QString& device, const QString& route, bool anyRoute){
+            QString statusWithRoute = tr("%1 (%2) connected").arg(device).arg(route);
+            QString statusWithoutRoute = tr("%1 connected").arg(device);
+            ui->info->setAnimatedText(anyRoute ? statusWithoutRoute : statusWithRoute, true);
         });
 
         connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);

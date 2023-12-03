@@ -131,23 +131,22 @@ void IpcHandler::deletePreset(const QString &name) const
         sendErrorReply(QDBusError::InvalidArgs, "Preset does not exist");
 }
 
-void IpcHandler::setPresetRule(const QString &deviceName, const QString &deviceId, const QString &preset) const
+void IpcHandler::setPresetRule(const QString &deviceName, const QString &deviceId, const QString &routeName, const QString &routeId, const QString &preset) const
 {
 #ifdef USE_PULSEAUDIO
     sendErrorReply(QDBusError::ErrorType::NotSupported, "This feature is only supported in the PipeWire version of JamesDSP");
     return;
 #endif
-
-    PresetManager::instance().addRule(PresetRule(deviceName, deviceId, preset));
+    PresetManager::instance().addRule(PresetRule(deviceName, deviceId, deviceId, routeId, preset));
 }
 
-void IpcHandler::deletePresetRule(const QString &deviceId) const
+void IpcHandler::deletePresetRule(const QString &deviceId, const QString &routeId) const
 {
 #ifdef USE_PULSEAUDIO
     sendErrorReply(QDBusError::ErrorType::NotSupported, "This feature is only supported in the PipeWire version of JamesDSP");
     return;
 #endif
-    PresetManager::instance().removeRule(deviceId);
+    PresetManager::instance().removeRule(deviceId, routeId);
 }
 
 QList<PresetRule> IpcHandler::getPresetRules() const

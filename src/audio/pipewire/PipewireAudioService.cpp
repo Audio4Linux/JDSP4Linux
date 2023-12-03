@@ -19,8 +19,8 @@ PipewireAudioService::PipewireAudioService() : IAudioService()
     plugin = new PwJamesDspPlugin(mgr.get(), this);
     effects = std::make_unique<FilterContainer>(mgr.get(), plugin, &AppConfig::instance());
 
-    mgr.get()->new_default_sink_name.connect([=](const std::string& name) {
-        util::debug("new default output device: " + name);
+    mgr.get()->new_default_sink_name.connect([this](const std::string& name) {
+        util::debug("new default output sink: " + name);
 
         if (AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault)) {
             /*
@@ -31,6 +31,18 @@ PipewireAudioService::PipewireAudioService() : IAudioService()
             AppConfig::instance().set(AppConfig::AudioOutputDevice, "");
             AppConfig::instance().set(AppConfig::AudioOutputDevice, QString::fromStdString(name));
         }
+
+        for (const auto& device : mgr.get()->list_devices)
+        {
+            if (device.media_class == tags::pipewire::media_class::device) {
+                if (name.starts_with(device.name) || util::str_contains(name, device.bus_path) || util::str_contains(name, device.bus_id)) {
+
+                    util::debug("output device has changed to: "s + device.name + " via route "s + device.output_route_name);
+                    emit outputDeviceChanged(QString::fromStdString(device.description), QString::fromStdString(device.name), QString::fromStdString(device.output_route_name));
+                    break;
+                }
+            }
+        }
     });
 
     mgr.get()->device_output_route_changed.connect([this](DeviceInfo device) {
@@ -38,9 +50,7 @@ PipewireAudioService::PipewireAudioService() : IAudioService()
         {
             return;
         }
-
         util::debug("device "s + device.name + " has changed its output route to: "s + device.output_route_name);
-
 
         NodeInfo target_node;
         for (const auto& [serial, node] : mgr.get()->node_map)

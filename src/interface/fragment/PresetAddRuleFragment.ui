@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>577</width>
-    <height>98</height>
+    <height>104</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,6 +50,9 @@
       </widget>
      </item>
      <item>
+      <widget class="QComboBox" name="comboRoute"/>
+     </item>
+     <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>is connected, then load preset</string>
@@ -69,14 +72,21 @@
     </layout>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="topMargin">
+      <number>0</number>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

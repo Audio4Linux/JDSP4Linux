@@ -1,8 +1,8 @@
 #include "RouteListModel.h"
 #include "PresetRuleTableModel.h"
 
-RouteListModel::RouteListModel(IOutputDevice device, QObject *parent)
-    : QAbstractListModel(parent), device(device)
+RouteListModel::RouteListModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
 }
 
@@ -33,9 +33,10 @@ QVariant RouteListModel::data(const QModelIndex &index, int role) const
     }
 }
 
-bool RouteListModel::loadRemaining(PresetRuleTableModel* ruleModel)
+bool RouteListModel::loadRemaining(IOutputDevice device, PresetRuleTableModel* ruleModel)
 {
     auto routes = device.output_routes.toVector();
+    routes.push_front(makeDefaultRoute());
     for(int i = routes.size() - 1; i >= 0; i--)
     {
         if(ruleModel->containsDeviceAndRouteId(QString::fromStdString(device.name), QString::fromStdString(routes.at(i).name)))
@@ -60,12 +61,7 @@ void RouteListModel::load(const QVector<Route> &_routes)
     endResetModel();
 }
 
-void RouteListModel::load(const std::vector<Route> &_routes)
+Route RouteListModel::makeDefaultRoute()
 {
-    QVector<Route> target;
-    for(const auto& device : _routes)
-    {
-        target.append(device);
-    }
-    load(target);
+    return Route("*", tr("<any output route>").toStdString());
 }

@@ -27,12 +27,12 @@ public:
     QVector<PresetRule> rules() const;
     void setRules(const QVector<PresetRule> &newRules);
     bool addRule(const PresetRule& rule);
-    void removeRule(const QString deviceId);
+    void removeRule(const QString &deviceId, const QString &routeId);
 
     PresetListModel *presetModel() const;
 
 signals:
-    void presetAutoloaded(const QString& deviceName);
+    void presetAutoloaded(const QString& deviceName, const QString& routeName, bool anyRoute);
     void wantsToWriteConfig();
 
 public slots:
