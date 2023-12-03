@@ -452,7 +452,7 @@ Do you want to re-install the latest database update anyway?</source>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="459"/>
         <source>Go to line...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -468,7 +468,7 @@ Do you want to re-install the latest database update anyway?</source>
     </message>
     <message>
         <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="470"/>
         <source>Jump to function...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -554,82 +554,82 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="88"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="87"/>
         <source>Loaded projects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="98"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="97"/>
         <source>Code outline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="108"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="107"/>
         <source>Variable view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="122"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="121"/>
         <source>Console output</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="212"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
         <source>&apos;%1&apos; started compiling at %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="295"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
         <source>&lt;br&gt;Compilation stopped at %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="299"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="298"/>
         <source>Script initialization took %1ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="386"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
         <source>Open EEL script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="414"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
         <source>EEL2 Script (*.eel)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="432"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="431"/>
         <source>Save as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
         <source>Cannot execute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="449"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
         <source>No script file opened. Please open one first and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="461"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
         <source>Enter line number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="472"/>
+        <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
         <source>Enter function name:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -746,12 +746,12 @@ Do you want to re-install the latest database update anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="147"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="148"/>
         <source>no match found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="170"/>
+        <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="171"/>
         <source>Replaced %1 occurrence(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1484,157 +1484,162 @@ Please select another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="109"/>
-        <source>%1 connected - Preset loaded automatically</source>
+        <location filename="../../src/MainWindow.cpp" line="107"/>
+        <source>%1 (%2) connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="129"/>
+        <location filename="../../src/MainWindow.cpp" line="108"/>
+        <source>%1 connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/MainWindow.cpp" line="128"/>
         <source>Cannot execute script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="130"/>
+        <location filename="../../src/MainWindow.cpp" line="129"/>
         <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="244"/>
+        <location filename="../../src/MainWindow.cpp" line="256"/>
         <source>Apps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="245"/>
+        <location filename="../../src/MainWindow.cpp" line="257"/>
         <source>Driver status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="249"/>
+        <location filename="../../src/MainWindow.cpp" line="261"/>
         <source>Relink audio pipeline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="251"/>
+        <location filename="../../src/MainWindow.cpp" line="263"/>
         <source>Reset to defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="252"/>
+        <location filename="../../src/MainWindow.cpp" line="264"/>
         <source>Load from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="253"/>
+        <location filename="../../src/MainWindow.cpp" line="265"/>
         <source>Save to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="255"/>
+        <location filename="../../src/MainWindow.cpp" line="267"/>
         <source>Open LiveprogIDE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="257"/>
+        <location filename="../../src/MainWindow.cpp" line="269"/>
         <source>What&apos;s this... (Select UI element)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="352"/>
+        <location filename="../../src/MainWindow.cpp" line="364"/>
         <source>Bass/Misc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="353"/>
+        <location filename="../../src/MainWindow.cpp" line="365"/>
         <source>Sound Positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="354"/>
+        <location filename="../../src/MainWindow.cpp" line="366"/>
         <source>Reverb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="355"/>
+        <location filename="../../src/MainWindow.cpp" line="367"/>
         <source>Equalizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="356"/>
+        <location filename="../../src/MainWindow.cpp" line="368"/>
         <source>Convolver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="357"/>
+        <location filename="../../src/MainWindow.cpp" line="369"/>
         <source>DDC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="358"/>
+        <location filename="../../src/MainWindow.cpp" line="370"/>
         <source>Liveprog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="359"/>
+        <location filename="../../src/MainWindow.cpp" line="371"/>
         <source>Graphic EQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="371"/>
+        <location filename="../../src/MainWindow.cpp" line="383"/>
         <source>Launch application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="514"/>
+        <location filename="../../src/MainWindow.cpp" line="525"/>
         <source>Reset Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="514"/>
+        <location filename="../../src/MainWindow.cpp" line="525"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="538"/>
+        <location filename="../../src/MainWindow.cpp" line="549"/>
         <source>Load custom audio.conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="550"/>
+        <location filename="../../src/MainWindow.cpp" line="561"/>
         <source>Save current audio.conf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1004"/>
+        <location filename="../../src/MainWindow.cpp" line="1015"/>
         <source>Very low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1004"/>
+        <location filename="../../src/MainWindow.cpp" line="1015"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1004"/>
+        <location filename="../../src/MainWindow.cpp" line="1015"/>
         <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1004"/>
+        <location filename="../../src/MainWindow.cpp" line="1015"/>
         <source>High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1004"/>
+        <location filename="../../src/MainWindow.cpp" line="1015"/>
         <source>Extreme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1124"/>
+        <location filename="../../src/MainWindow.cpp" line="1135"/>
         <source>Advanced waveform editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainWindow.cpp" line="1125"/>
+        <location filename="../../src/MainWindow.cpp" line="1136"/>
         <source>Advanced waveform editing (default: -80;-100;0;0;0;0)
 
 Set threshold of auto-IR-cropping and add delay to a chopped/minimum phase transformed IR.
@@ -1795,7 +1800,7 @@ This setting is only in effect if IR optimization is enabled.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="55"/>
+        <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="58"/>
         <source>is connected, then load preset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1914,19 +1919,19 @@ This setting is only in effect if IR optimization is enabled.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="62"/>
-        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
+        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="71"/>
+        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="79"/>
         <source>Cannot add new rule</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="63"/>
+        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="72"/>
         <source>All connected audio devices have already a rule defined.
 You can only create one rule per device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="70"/>
+        <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="79"/>
         <source>You have no presets saved.
 Please create one first before adding a new rule.</source>
         <translation type="unfinished"></translation>
@@ -1935,12 +1940,17 @@ Please create one first before adding a new rule.</source>
 <context>
     <name>PresetRuleTableModel</name>
     <message>
-        <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="77"/>
+        <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
+        <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="79"/>
+        <source>Output route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="80"/>
         <source>Assigned preset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2236,7 +2246,7 @@ Please create one first before adding a new rule.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="238"/>
+        <location filename="../../src/main.cpp" line="190"/>
         <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2258,6 +2268,14 @@ Please create one first before adding a new rule.</source>
     <message>
         <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
         <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RouteListModel</name>
+    <message>
+        <location filename="../../src/data/model/RouteListModel.cpp" line="66"/>
+        <source>&lt;any output route&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
