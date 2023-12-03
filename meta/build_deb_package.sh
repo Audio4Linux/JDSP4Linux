@@ -14,7 +14,7 @@ else
   exit 1
 fi
 
-debname="jamesdsp-"$2"_"$1"_linux64"
+debname="jamesdsp-"$2"_"$1"_ubuntu22-04_amd64"
 echo $debname
 mkdir $debname
 mkdir $debname"/DEBIAN"

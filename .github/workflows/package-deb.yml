@@ -148,8 +148,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
-        path: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
+        path: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
 
   publish-nightly:
     runs-on: ubuntu-latest
@@ -178,7 +178,7 @@ jobs:
     - name: Download package artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
       
     - name: Upload deb package to nightly server
       uses: wlixcc/SFTP-Deploy-Action@v1.0
@@ -187,7 +187,7 @@ jobs:
         server: 'srv1.timschneeberger.me'
         port: 22
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb'
+        local_path: './jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb'
         remote_path: '/srv/http/nightly.timschneeberger.me/jamesdsp-linux/'
         args: '-o ConnectTimeout=5'
 
@@ -227,7 +227,7 @@ jobs:
     - name: Download package artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
 
     - name: Import GPG key
       id: import_gpg
@@ -295,7 +295,7 @@ jobs:
     - name: Download package artifact
       uses: actions/download-artifact@v2
       with:
-        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_linux64.deb
+        name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
       
     - uses: AButler/upload-release-assets@v2.0
       with:
