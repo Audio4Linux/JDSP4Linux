@@ -39,7 +39,7 @@ jobs:
         echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
         echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
         DEBIAN_FRONTEND="noninteractive" 
-        apt install -y tree make gcc g++ lftp pkg-config libarchive-dev qt6-base-private-dev qt6-base-dev libqt6svg6-dev libmesa-dev libqt6svg6-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+        apt install -y tree make gcc g++ lftp pkg-config libarchive-dev qt6-base-private-dev qt6-base-dev libqt6svg6-dev libgl-dev libqt6svg6-dev libglibmm-2.4-dev libglib2.0-dev libpulse-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
      
     - name: Initialize project (PulseAudio/full)
       if: matrix.flavor == 'full'
@@ -85,7 +85,7 @@ jobs:
         export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PATH"
         echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
         echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
-        DEBIAN_FRONTEND="noninteractive" apt install -y libarchive-dev tree make gcc g++ lftp pkg-config qt6-base-private-dev qt6-base-dev libqt6svg6-dev libmesa-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
+        DEBIAN_FRONTEND="noninteractive" apt install -y libarchive-dev tree make gcc g++ lftp pkg-config qt6-base-private-dev qt6-base-dev libqt6svg6-dev libgl-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev
       
     - name: Initialize project (PW/full)
       if: matrix.flavor == 'full'
