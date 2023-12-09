@@ -193,7 +193,7 @@ Dies wird Ihre aktuelle GraphicEQ-Konfiguration überschreiben.</translation>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation>Bevor du die AutoEQ-Integration nutzt, musst du eine komprimierte Version der Kopfhörer-Kompensationsdatenbank (~50MB) auf deine Festplatte herunterladen.
+      <translation>Bevor du die AutoEQ-Integration nutzen kannst, musst du eine komprimierte Version der Kopfhörer-Kompensationsdatenbank (~50MB) auf deine Festplatte herunterladen.
 Eine Internetverbindung ist während dieses Schritts erforderlich.
 
 Möchtest du fortfahren und diese Funktion aktivieren?</translation>
@@ -247,7 +247,7 @@ Möchtest du trotzdem das aktuelle Datenbankupdate neu installieren?</translatio
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>The database has been removed from your hard disk</source>
-      <translation>Die Datenbank wurde von aus dem Speicher gelöscht</translation>
+      <translation>Die Datenbank wurde aus dem Speicher gelöscht</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
