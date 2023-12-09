@@ -121,7 +121,6 @@ QPalette StyleHelper::getDefaultLightPalette() {
     const QColor button = backGround;
     const QColor shadow = dark.darker(135);
     const QColor disabledShadow = shadow.lighter(150);
-    const QColor disabledHighlight(145, 145, 145);
     QColor placeholder = text;
     placeholder.setAlpha(128);
 
@@ -140,11 +139,7 @@ QPalette StyleHelper::getDefaultLightPalette() {
 
     fusionPalette.setBrush(QPalette::Active, QPalette::Highlight, highlight);
     fusionPalette.setBrush(QPalette::Inactive, QPalette::Highlight, highlight);
-    fusionPalette.setBrush(QPalette::Disabled, QPalette::Highlight, disabledHighlight);
-
-    fusionPalette.setBrush(QPalette::Active, QPalette::Accent, highlight);
-    fusionPalette.setBrush(QPalette::Inactive, QPalette::Accent, highlight);
-    fusionPalette.setBrush(QPalette::Disabled, QPalette::Accent, disabledHighlight);
+    fusionPalette.setBrush(QPalette::Disabled, QPalette::Highlight, QColor(145, 145, 145));
 
     fusionPalette.setBrush(QPalette::PlaceholderText, placeholder);
 
