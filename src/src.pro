@@ -276,7 +276,7 @@ unix {
     PKGCONFIG += glibmm-2.4 giomm-2.4
 
     USE_PORTALS {
-        PKGCONFIG += libportal-qt5
+        PKGCONFIG += libportal-qt6
     }
 
     USE_PULSEAUDIO {
