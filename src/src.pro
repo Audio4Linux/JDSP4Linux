@@ -276,7 +276,7 @@ unix {
     PKGCONFIG += libarchive
     PKGCONFIG += glibmm-2.4 giomm-2.4
 
-    USE_PORTALS {
+    FLATPAK {
         PKGCONFIG += libportal-qt6
     }
 
