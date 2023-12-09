@@ -32,6 +32,9 @@
     <p>
       This app provides various sound effects for PipeWire systems. It offers features such as automatic bass boost, dynamic range compression, reverberation, equalizers, surround effects, stereo wideness control, parametric equalization, scripting engine, and more. Users can also create their own audio effects using the EEL2 scripting language supported by the app. The app includes a minimal scripting IDE with syntax highlighting, code completion, and some debugging features.
     </p>
+    <p>
+      The app icon used in the FlatHub store was made by Papirus (https://github.com/PapirusDevelopmentTeam/papirus-icon-theme).
+    </p>
   </description>
   
   <url type="homepage">https://github.com/Audio4Linux/JDSP4Linux</url>

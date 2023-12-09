@@ -32,6 +32,9 @@
     <p>
       A package with PipeWire support is also available.
     </p>
+    <p>
+      The app icon used in the FlatHub store was made by Papirus (https://github.com/PapirusDevelopmentTeam/papirus-icon-theme).
+    </p>
   </description>
   
   <url type="homepage">https://github.com/Audio4Linux/JDSP4Linux</url>
