@@ -1,5 +1,5 @@
 #ifdef USE_PORTALS
-#include <libportal-qt5/portal-qt5.h>
+#include <libportal-qt6/portal-qt6.h>
 #endif
 
 #include "AutoStartManager.h"
