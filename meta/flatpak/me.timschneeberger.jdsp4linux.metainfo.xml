@@ -56,6 +56,23 @@
   </provides>
 
   <releases>
+    <release type="stable" version="2.7.0" date="2023-12-10T00:00:00Z">
+      <description>
+        <ul>
+          <li>New libjamesdsp updates:</li>
+          <li>  EEL engine updated</li>
+          <li>  Several performance improvements and bugfixes</li>
+
+          <li>Per-device presets overhauled</li>
+
+          <li>New CLI operations implemented</li>
+          <li>  Manage and list per-device preset rules</li>
+          <li>  List all available output devices</li>
+
+          <li>Fixed various bugs and crashes</li>
+        </ul>
+      </description>
+    </release>
     <release type="stable" version="2.6.1" date="2023-08-12T00:00:00Z">
       <description>
         <ul>
