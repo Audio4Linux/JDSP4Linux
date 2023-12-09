@@ -34,6 +34,7 @@ public:
 	int  loadColor(int index,
 	               int rgb_index);
 	void setPalette(const ColorStyle &s);
+	QPalette StyleHelper::getDefaultLightPalette();
 
 private:
 	QObject *m_objhost;
