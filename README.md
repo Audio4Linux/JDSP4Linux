@@ -255,7 +255,7 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <br />
         <sub><b>Tim Schneeberger (ThePBone)</b></sub></a>
       <br />
-      <sub><b>7382 words</b></sub>
+      <sub><b>7404 words</b></sub>
     </td>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/Kazevic"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15680393/medium/4393ae8969da30fc9475409e95e74867.png" />
@@ -395,6 +395,13 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>13 words</b></sub>
     </td>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/ldepaulaf"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16134798/medium/15b5baf47f32c5accb64ab632c4f8f98.png" />
+        <br />
+        <sub><b>Lucas De Paula (ldepaulaf)</b></sub></a>
+      <br />
+      <sub><b>11 words</b></sub>
+    </td>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/artemgrebennikov310"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13820153/medium/d1565ef34bd253f67a995f1fd3811887.jpg" />
         <br />
         <sub><b>Mr.Positiv (artemgrebennikov310)</b></sub></a>
@@ -415,6 +422,8 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>2 words</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/berkantdu123"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/14069105/medium/4e62760cfd61cc38a038670d754cee9a.png" />
         <br />
