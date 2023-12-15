@@ -49,6 +49,10 @@ qmake ../JDSP4Linux.pro
 make -j4
 ```
 
+> [!IMPORTANT]  
+>
+> On some distros like Ubuntu, `qmake6` instead of `qmake` should be used.
+
 Execute compiled binary
 
 ```bash
