@@ -7,7 +7,7 @@ This document only contains compile instructions for the PipeWire build. Please 
 **Debian/Ubuntu-based distros**
 
 ```bash
-sudo apt install build-essential libarchive-dev qt6-base-private-dev qt6-base-dev libqt6svg6-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev qttools5-dev-tools
+sudo apt install build-essential libarchive-dev qt6-base-private-dev qt6-base-dev libqt6svg6-dev libglibmm-2.4-dev libglib2.0-dev libpipewire-0.3-dev qttools5-dev-tools libgl-dev
 ```
 
 **Fedora 34**
