@@ -79,7 +79,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="210"/>
       <source>Move to top center</source>
-      <translation type="unfinished"/>
+      <translation>Mozgatás az alkalmazás tetejére</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
@@ -367,216 +367,216 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>Nézet</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
       <source>Help</source>
-      <translation type="unfinished"/>
+      <translation>Súgó</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
       <source>Open</source>
-      <translation type="unfinished"/>
+      <translation>Megnyitás</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
       <source>Open script</source>
-      <translation type="unfinished"/>
+      <translation>Script megnyitása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
       <source>Ctrl+O</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>Fájl bezárása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
       <source>Ctrl+Shift+W</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Mentés</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
       <source>Ctrl+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>Mentés másként</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
       <source>Undo</source>
-      <translation type="unfinished"/>
+      <translation>Visszavonás</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
       <source>Redo</source>
-      <translation type="unfinished"/>
+      <translation>Újra</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
       <source>Ctrl+Shift+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+H</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation type="unfinished"/>
+      <translation>Keresés/Csere</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
       <source>Ctrl+F</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="459"/>
       <source>Go to line...</source>
-      <translation type="unfinished"/>
+      <translation>Ugrás adott sorra...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
       <source>Go to line</source>
-      <translation type="unfinished"/>
+      <translation>Ugrás adott sorra</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
       <source>Ctrl+L</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+L</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="470"/>
       <source>Jump to function...</source>
-      <translation type="unfinished"/>
+      <translation>Ugrás a funkcióhoz...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
       <source>Ctrl+M</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+M</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
       <source>Go to @init</source>
-      <translation type="unfinished"/>
+      <translation>Ugrás: @init</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
       <source>F2</source>
-      <translation type="unfinished"/>
+      <translation>F2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
       <source>Go to @sample</source>
-      <translation type="unfinished"/>
+      <translation>Ugrás ide: @sample</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
       <source>F3</source>
-      <translation type="unfinished"/>
+      <translation>F3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>Automatikus zárójelek</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>Tabulátorok átcserélése space-re</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>EEL2 dokumentáció</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
       <source>F1</source>
-      <translation type="unfinished"/>
+      <translation>F1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>Kód futtatása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
       <source>F5</source>
-      <translation type="unfinished"/>
+      <translation>F5</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
       <source>New</source>
-      <translation type="unfinished"/>
+      <translation>Új</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation type="unfinished"/>
+      <translation>Új script varázsló</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
       <source>Ctrl+N</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
       <source>Freeze</source>
-      <translation type="unfinished"/>
+      <translation>Befagyasztás</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="87"/>
       <source>Loaded projects</source>
-      <translation type="unfinished"/>
+      <translation>Betöltött projektek</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="97"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>Kód kontúr</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="107"/>
       <source>Variable view</source>
-      <translation type="unfinished"/>
+      <translation>Változó nézet</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="121"/>
       <source>Console output</source>
-      <translation type="unfinished"/>
+      <translation>Konzol kimenet</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; elkezdett összeállni itt: %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
@@ -591,17 +591,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Hiba</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>Nem lehet írni a fájba</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>Parancsfájl megnyitása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
@@ -611,12 +611,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="431"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>Mentés másként</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>Nem futtatható</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
@@ -880,41 +880,41 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>Válasz normalizálása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
       <source>Reset response</source>
-      <translation type="unfinished"/>
+      <translation>Válasz újrakezdése</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="299"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="302"/>
       <source>Import EqualizerAPO settings</source>
-      <translation type="unfinished"/>
+      <translation>EqualizerAPO beállítások importálása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="409"/>
       <source>Import frequency response</source>
-      <translation type="unfinished"/>
+      <translation>Frekvencia beállítások importálása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
       <source>CSV frequency response (*.csv)</source>
-      <translation type="unfinished"/>
+      <translation>CSV frekvencia beállítások (*.csv)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
       <source>All files (*.*)</source>
-      <translation type="unfinished"/>
+      <translation>Összes fájl(*.*)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
       <source>Import EqualizerAPO graphic EQ preset</source>
-      <translation type="unfinished"/>
+      <translation>EqualizerAPO grafikus EQ beállítások importálása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
@@ -2238,17 +2238,17 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/audio/base/AppNode.h" line="53"/>
       <location filename="../../src/audio/base/AppNode.h" line="76"/>
       <source>running</source>
-      <translation type="unfinished"/>
+      <translation>fut</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="80"/>
       <source>not connected</source>
-      <translation type="unfinished"/>
+      <translation>nincs csatlakoztatva</translation>
     </message>
     <message>
       <location filename="../../src/main.cpp" line="190"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>A JamesDSP egy fejlett hang feldolgozó motor ami elérhető Linux illetve Android operációs rendszereken. </translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="33"/>
@@ -2263,7 +2263,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Ismeretlen hiba</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
@@ -2284,67 +2284,67 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>Beállítások</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
       <source>Category</source>
-      <translation type="unfinished"/>
+      <translation>Kategória</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="88"/>
       <source>Interface</source>
-      <translation type="unfinished"/>
+      <translation>Kezelőfelület</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Audio feldolgozás</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
       <source>Default paths</source>
-      <translation type="unfinished"/>
+      <translation>Alap mappa</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Devices</source>
-      <translation type="unfinished"/>
+      <translation>Eszközök</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Network</source>
-      <translation type="unfinished"/>
+      <translation>Hálózat</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Tálca ikon</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
       <source>Context menu</source>
-      <translation type="unfinished"/>
+      <translation>Helyi menü</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
       <source>Theme</source>
-      <translation type="unfinished"/>
+      <translation>Téma</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="226"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Szerkeztés</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="250"/>
       <source>Color scheme</source>
-      <translation type="unfinished"/>
+      <translation>Színséma</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>Hangszínszabályzó</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
@@ -2364,7 +2364,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Gyorsítótár ürítése</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
@@ -2379,7 +2379,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Lehetséges megoldások</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
@@ -2394,7 +2394,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
       <source>Impluse responses</source>
-      <translation type="unfinished"/>
+      <translation>Impulzus jelleggörbe</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="483"/>
@@ -2404,12 +2404,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
       <source>Liveprog scripts</source>
-      <translation type="unfinished"/>
+      <translation>Élőprog szkript</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="534"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Mentés</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="543"/>
@@ -2449,12 +2449,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="634"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>Eszköz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
       <source>Blocklisted apps</source>
-      <translation type="unfinished"/>
+      <translation>Feketelistázott alkalmazások</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
@@ -2469,27 +2469,27 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="715"/>
       <source>Clear list</source>
-      <translation type="unfinished"/>
+      <translation>Lista törlése</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="744"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ adatbázis</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="755"/>
       <source>Status:</source>
-      <translation type="unfinished"/>
+      <translation>Státusz:</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="765"/>
       <source>unknown</source>
-      <translation type="unfinished"/>
+      <translation>ismeretlen</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="785"/>
       <source>  Manage local database  </source>
-      <translation type="unfinished"/>
+      <translation>  Lokális adatbázis kezelése</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="817"/>
@@ -2649,22 +2649,22 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
       <source>JamesDSP core version</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP verziója</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
       <source>Processing state</source>
-      <translation type="unfinished"/>
+      <translation>Feldolgozási státusz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
       <source>Audio format</source>
-      <translation type="unfinished"/>
+      <translation>Hangformátum</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>Mintavételezés</translation>
     </message>
   </context>
   <context>
@@ -2672,7 +2672,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Processing</source>
-      <translation type="unfinished"/>
+      <translation>Folyamatban</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
@@ -2685,12 +2685,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="84"/>
       <source>&amp;Bypass</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Kitérés</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="90"/>
       <source>&amp;Presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Alapbeállítások</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="93"/>
@@ -2700,12 +2700,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="110"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP Linux-ra</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="164"/>
       <source>No presets found</source>
-      <translation type="unfinished"/>
+      <translation>Nincsennek mentett beállítások</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="208"/>
@@ -2721,7 +2721,7 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/TrayIcon.cpp" line="263"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="341"/>
       <source>&amp;Quit</source>
-      <translation type="unfinished"/>
+      <translation>Kilép</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="267"/>
