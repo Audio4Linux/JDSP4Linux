@@ -164,7 +164,7 @@ Package maintained by [@theAeon](https://github.com/theAeon) on [Fedora COPR](ht
 Built for Fedora 34/35/Rawhide and OpenSUSE Tumbleweed.
 
 ```
-yum copr enable arrobbins/JDSP4Linux && yum update && yum install jamesdsp
+yum copr enable arrobbins/JDSP4Linux && yum update && yum install JamesDSP
 ```
 
 If you are still using PulseAudio with your Fedora/openSUSE installation, refer to the '[Build from sources](#build-from-sources)' section below instead.
