@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QNetworkAccessManager>
 
-#define REPO_ROOT QString("https://raw.githubusercontent.com/ThePBone/AutoEqPackages/main/")
+#define REPO_ROOT QString("https://raw.githubusercontent.com/ThePBone/AutoEqPackages/main")
 
 AeqPackageManager::AeqPackageManager(QObject *parent) : QObject(parent), nam(new QNetworkAccessManager(this))
 {
