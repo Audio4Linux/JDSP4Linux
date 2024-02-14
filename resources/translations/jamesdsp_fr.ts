@@ -800,17 +800,17 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
       <source>Yes, minimize to tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Oui, minimiser l'icône dans la barre d'état</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1817"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>Démarrer minimisé au démarrage</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
       <source>That&apos;s it!</source>
-      <translation type="unfinished"/>
+      <translation>C&apos;est tout !</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
@@ -846,7 +846,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
       <source>Freq.</source>
-      <translation type="unfinished"/>
+      <translation>Fréq.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
@@ -876,12 +876,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
       <source>Import</source>
-      <translation type="unfinished"/>
+      <translation>Importer</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="263"/>
       <source>Export</source>
-      <translation type="unfinished"/>
+      <translation>Exporter</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
@@ -920,7 +920,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="485"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="507"/>
       <source>All files (*.*)</source>
-      <translation type="unfinished"/>
+      <translation>Tous les fichiers (*.*)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="481"/>
@@ -1069,7 +1069,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Gain post-traitement</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
@@ -1079,17 +1079,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>Compresseur de plage dynamique</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>Constante de temps</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>Granularité</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
@@ -1099,7 +1099,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>Uniforme (Transformée de Fourier à court terme)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
@@ -1115,7 +1115,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>Mode</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
@@ -1492,7 +1492,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2201"/>
       <source>Bypass</source>
-      <translation type="unfinished"/>
+      <translation>Contourner</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="107"/>
