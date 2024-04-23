@@ -1366,6 +1366,16 @@ static float NSEEL_CGEN_CALL arburgPredictBackward(float *blocks, float *start)
 	double output = predictArburg(backwardState, predictionCoefficients, *flag);
 	return (float)output;
 }
+static float NSEEL_CGEN_CALL arburgPredictForward(float *blocks, float *start)
+{
+	int32_t offs = (int32_t)(*start + NSEEL_CLOSEFACTOR);
+	char *burg = (char*)__NSEEL_RAMAlloc(blocks, (uint64_t)offs);
+	unsigned int *flag = (unsigned int*)(burg + 1);
+	double *predictionCoefficients = (double*)(flag + 1);
+	double *forwardState = ((double*)(flag + 1)) + (*flag + 1) * 5 + (*flag + 2) * 2;
+	double output = predictArburg(forwardState, predictionCoefficients, *flag);
+	return (float)output;
+}
 void reverse(float *arr, int32_t start, int32_t end)
 {
         while (start < end)
@@ -1383,16 +1393,6 @@ void shift(float *arr, int32_t k, int32_t n)
         reverse(arr, 0, n - 1);
         reverse(arr, 0, n - k - 1);
         reverse(arr, n - k, n - 1);
-}
-static float NSEEL_CGEN_CALL arburgPredictForward(float *blocks, float *start)
-{
-	int32_t offs = (int32_t)(*start + NSEEL_CLOSEFACTOR);
-	char *burg = (char*)__NSEEL_RAMAlloc(blocks, (uint64_t)offs);
-	unsigned int *flag = (unsigned int*)(burg + 1);
-	double *predictionCoefficients = (double*)(flag + 1);
-	double *forwardState = ((double*)(flag + 1)) + (*flag + 1) * 5 + (*flag + 2) * 2;
-	double output = predictArburg(forwardState, predictionCoefficients, *flag);
-	return (float)output;
 }
 float * NSEEL_CGEN_CALL __NSEEL_circshift(float *blocks, float *offptr, float *shiftptr, float *lenptr)
 {
