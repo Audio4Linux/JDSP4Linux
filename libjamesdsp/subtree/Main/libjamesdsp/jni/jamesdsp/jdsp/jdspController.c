@@ -3,11 +3,14 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <sys/time.h>
 #include <float.h>
+#include <unistd.h>
 #include "Effects/eel2/dr_flac.h"
 #include "Effects/eel2/ns-eel.h"
 #include "jdsp_header.h"
 #define TAG "EffectDSPMain"
+#include "PrintfStdOutExtension.h"
 
 #ifdef __ANDROID_API__
 #if __ANDROID_API__ < __ANDROID_API_J_MR2__

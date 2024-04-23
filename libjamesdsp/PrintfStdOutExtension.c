@@ -1,5 +1,7 @@
 #include "PrintfStdOutExtension.h"
 #include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static stdOutHandler _printfStdOutHandlerPtr = 0;
 static void* _printfStdOutHandlerUserPtr = 0;
@@ -23,7 +25,7 @@ int redirected_printf(const char * format, ...) {
     return result;
 }
 
-void __android_log_print(int severity, const char* tag, const char* msg) {
+void __android_log_print(int severity, const char* tag, const char* msg, ...) {
     char *s;
     if (asprintf(&s, "%s: %s", tag, msg) > 0 && s != 0)
     {

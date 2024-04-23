@@ -252,10 +252,26 @@ static void decompressResamplerMQ(const double y[701], float *yi)
         yi[k] = xloc * (xloc * (xloc * coefs[low_i] + coefs[low_i + 700]) + coefs[low_i + 1400]) + coefs[low_i + 2100];
     }
 }
-
+void jds_reverse(float *arr, int32_t start, int32_t end)                                                                    {
+        while (start < end)
+        {
+                float tmp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = tmp;
+                start++;
+                end--;
+        }
+}
+void jds_shift(float *arr, int32_t k, int32_t n)
+{
+        k = k % n;
+        jds_reverse(arr, 0, n - 1);
+        jds_reverse(arr, 0, n - k - 1);
+        jds_reverse(arr, n - k, n - 1);
+}
 void circshift(float *x, int n, int k)
 {
-    k < 0 ? shift(x, -k, n) : shift(x, n - k, n);
+    k < 0 ? jds_shift(x, -k, n) : jds_shift(x, n - k, n);
 }
 #define NUMPTS 15
 #define NUMPTS_DRS (7)
@@ -303,10 +319,11 @@ float* loadAudioFile(const char *filename, double targetFs, unsigned int *channe
     unsigned int fs = 1;
     const char *ext = get_filename_ext(filename);
     float *pSampleData = 0;
+    drflac_uintptr *totalPCMFrameFlac = (drflac_uintptr *) totalPCMFrameCount;
     if (!strncmp(ext, "wav", 5) || !strncmp(ext, "irs", 5))
         pSampleData = drwav_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameCount, 0);
     if (!strncmp(ext, "flac", 5))
-        pSampleData = drflac_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameCount, 0);
+        pSampleData = drflac_open_file_and_read_pcm_frames_f32(filename, channels, &fs, totalPCMFrameFlac, 0);
     /*if (!strncmp(ext, "mp3", 5))
     {
         drmp3_config mp3Conf;

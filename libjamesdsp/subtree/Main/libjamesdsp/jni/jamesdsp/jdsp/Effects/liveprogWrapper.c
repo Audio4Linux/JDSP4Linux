@@ -1,5 +1,6 @@
 void NSEEL_HOSTSTUB_EnterMutex() { }
 void NSEEL_HOSTSTUB_LeaveMutex() { }
+#include <math.h>
 #include "../jdsp_header.h"
 void LiveProgConstructor(JamesDSPLib *jdsp)
 {
