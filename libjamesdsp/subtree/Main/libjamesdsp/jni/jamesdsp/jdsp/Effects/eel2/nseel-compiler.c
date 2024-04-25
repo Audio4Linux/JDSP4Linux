@@ -1378,21 +1378,21 @@ static float NSEEL_CGEN_CALL arburgPredictForward(float *blocks, float *start)
 }
 void reverse(float *arr, int32_t start, int32_t end)
 {
-	while (start < end)
-	{
-		float tmp = arr[start];
-		arr[start] = arr[end];
-		arr[end] = tmp;
-		start++;
-		end--;
-	}
+        while (start < end)
+        {
+                float tmp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = tmp;
+                start++;
+                end--;
+        }
 }
 void shift(float *arr, int32_t k, int32_t n)
 {
-	k = k % n;
-	reverse(arr, 0, n - 1);
-	reverse(arr, 0, n - k - 1);
-	reverse(arr, n - k, n - 1);
+        k = k % n;
+        reverse(arr, 0, n - 1);
+        reverse(arr, 0, n - k - 1);
+        reverse(arr, n - k, n - 1);
 }
 float * NSEEL_CGEN_CALL __NSEEL_circshift(float *blocks, float *offptr, float *shiftptr, float *lenptr)
 {
@@ -1646,7 +1646,7 @@ static float NSEEL_CGEN_CALL  eel_mean(float *blocks, float *start, float *lengt
  ---------------------------------------------------------------------------*/
 float kth_smallest(float a[], int n, int k)
 {
-	register i, j, l, m;
+	register int i, j, l, m;
 	register float x;
 
 	l = 0; m = n - 1;
@@ -3855,7 +3855,7 @@ static float NSEEL_CGEN_CALL _eel_flacDecodeFile(void *opaque, INT_PTR num_param
 	float *blocks = c->ram_state;
 	const char *filename = (const char*)GetStringForIndex(c->region_context, *parms[0], 0);
 	uint32_t channels, fs;
-	uint64_t frameCount;
+	drflac_uintptr frameCount;
 	float *signal = drflac_open_file_and_read_pcm_frames_f32(filename, &channels, &fs, &frameCount, 0);
 	float targetFs = *parms[2];
 	if (targetFs > FLT_EPSILON)
@@ -3917,7 +3917,7 @@ static float NSEEL_CGEN_CALL _eel_flacDecodeMemory(void *opaque, INT_PTR num_par
 	size_t actualSize;
 	unsigned char *memoryBlk = base64_decode((const unsigned char*)base64String, strlen(base64String), &actualSize);
 	uint32_t channels, fs;
-	uint64_t frameCount;
+	drflac_uintptr frameCount;
 	float *signal = drflac_open_memory_and_read_pcm_frames_f32(memoryBlk, actualSize, &channels, &fs, &frameCount, 0);
 	float targetFs = *parms[2];
 	if (targetFs > FLT_EPSILON)

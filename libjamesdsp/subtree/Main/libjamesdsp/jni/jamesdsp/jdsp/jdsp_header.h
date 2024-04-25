@@ -440,6 +440,7 @@ int BS2BCalculateflevel(unsigned int fcut, unsigned int gain);
 void BS2BInit(t_bs2bdp *bs2bdp, unsigned int samplerate, int flevel);
 /* sample poits to double floats native endians */
 void BS2BProcess(t_bs2bdp *bs2bdp, double *sampleL, double *sampleR);
+typedef struct dspsys dspsys;
 typedef struct
 {
 	int mode; // 0: BS2B Lv 1, 1: BS2B Lv 2, 2: HRTF crossfeed, 2: HRTF surround 1, 2: HRTF surround 2, 2: HRTF surround 3
@@ -449,7 +450,6 @@ typedef struct
 	FFTConvolver2x4x2 *convLong_S_S;
 	void(*process)(struct dspsys *, size_t);
 } Crossfeed;
-typedef struct dspsys dspsys;
 typedef struct
 {
 	FFTConvolver2x2 *conv1d2x2_S_S;
