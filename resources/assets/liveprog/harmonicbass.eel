@@ -1,0 +1,80 @@
+desc: Harmonic Bass Enhancer
+author: @aliasing
+
+bassFreq:150<50,300>Bass Frequency
+bassQ:2.0<0.5,4.0>Bass Q
+bassLevel:0.0<0.0,2.0>Source bass passthrough
+harmonicFreq:400<100,800>Harmonics Frequency
+harmonicQ:1.0<0.25,2.0>Harmonic Q
+harmonicDrive:6.0<0.0,20.0>Harmonics Drive Level
+harmonicBias:0.1<0.0,0.5>Saturation Bias Level (Odd to Even)
+harmonicLevel:0.8<0.0,2.0>Harmonics Level
+
+@init
+bassFreq = 250;
+bassQ = 2.0;
+bassLevel = 0.0;
+harmonicFreq = 500;
+harmonicQ = 1.0;
+harmonicDrive = 10.0;
+harmonicLevel = 1.0;
+harmonicBias = 0.5;
+
+function LP_set(frequency qFactor)(
+    x = (frequency * 2.f * $PI) / srate;
+    sinX = sin(x);
+    y = sinX / (qFactor * 2.f);
+    cosX = cos(x);
+    z = (1.f - cosX) / 2.f;
+    
+    _a0 = y + 1.f;
+    _a1 = cosX * -2.f;
+    _a2 = 1.f - y;
+    _b0 = z;   
+    _b1 = 1.f - cosX;   
+    _b2 = z;   
+    
+    this.y_2 = 0; this.y_1 = 0; this.x_2 = 0; this.x_1 = 0;
+    this.b0 = _b0 / _a0;
+    this.b1 = _b1 / _a0;
+    this.b2 = _b2 / _a0;
+    this.a1 = -_a1 / _a0;
+    this.a2 = -_a2 / _a0;
+);
+
+function LP_process(sample)(
+    out = sample * this.b0 + this.x_1 * this.b1 + this.x_2 * this.b2 + this.y_1 * this.a1 + this.y_2 * this.a2;
+    this.y_2 = this.y_1;
+    this.y_1 = out;
+    this.x_2 = this.x_1;
+    this.x_1 = sample;
+    
+    out;
+);
+
+function Channel_set(bassFreq, harmonicFreq, qFactor) (
+  this.lp_low.LP_set(bassFreq, qFactor);
+  this.lp_high.LP_set(harmonicFreq, qFactor);
+);
+
+function saturate(sample, bias) (
+   satOdd = sample / (abs(sample) + 1.0);
+   satEven = satOdd * satOdd * 2.0;
+   satOdd + bias * (satEven - satOdd);
+);
+
+function Channel_process(sample, harmonicDrive, harmonicBias, harmonicLevel, bassLevel) (
+   bass = this.lp_low.LP_process(sample);
+   topend = sample - bass;
+   bass = saturate(bass * harmonicDrive, harmonicBias);
+   harmonics = this.lp_high.LP_process(bass);
+   topend + harmonics * harmonicLevel + bass * bassLevel;
+);
+
+bass_l.Channel_set(bassFreq, harmonicFreq, bassQ);
+bass_r.Channel_set(bassFreq, harmonicFreq, harmonicQ);
+
+@sample
+spl0 = bass_l.Channel_process(spl0, harmonicDrive, harmonicBias, harmonicLevel, bassLevel);
+spl1 = bass_r.Channel_process(spl1, harmonicDrive, harmonicBias, harmonicLevel, bassLevel);
+
