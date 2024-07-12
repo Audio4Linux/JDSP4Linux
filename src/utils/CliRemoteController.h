@@ -32,6 +32,7 @@ private:
     Q_INVOKABLE bool deletePresetRule(const QString& keyValue) const;
     Q_INVOKABLE bool listOutputDevices() const;
     Q_INVOKABLE bool showStatus() const;
+    Q_INVOKABLE bool relinkAudioPipeline() const;
 
 private:
     me::timschneeberger::jdsp4linux::Service* service = nullptr;
@@ -63,6 +64,8 @@ private:
     OPT(_listPresetRules, ARGS("list-preset-rules", "List preset rules (Remote)"))
     OPT(_addPresetRule, ARGS("set-preset-rule", "Add/modify preset rule (Remote)", "deviceId[:routeId]=presetName"))
     OPT(_deletePresetRule, ARGS("delete-preset-rule", "Delete preset rule by device id and route id (Remote)", "deviceId[:routeId]"))
+
+    OPT(_relinkAudioPipeline, ARGS("relink", "Relink audio pipeline (Remote)"))
 
 #undef ARGS
 #undef OPT

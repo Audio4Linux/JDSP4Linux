@@ -382,6 +382,15 @@ bool CliRemoteController::showStatus() const
     return true;
 }
 
+bool CliRemoteController::relinkAudioPipeline() const
+{
+    if(!requireConnectionAndLog())
+        return false;
+
+    service->relinkAudioPipeline();
+    return true;
+}
+
 // Helper to warn about failed connection
 bool CliRemoteController::checkConnectionAndLog() const
 {

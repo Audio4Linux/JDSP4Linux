@@ -57,14 +57,14 @@ MainWindow::MainWindow(IAudioService* audioService,
         _startupInTraySwitch = statupInTray;
 
         _styleHelper         = new StyleHelper(this);
-        _eelEditor           = new EELEditor(this);
+        // TODO _eelEditor           = new EELEditor(this);
         _trayIcon            = new TrayIcon(this);
         _autostart           = new AutostartManager(this);
 
-        _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
-        _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
-        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
-        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, _autostart, this), WAF::BottomSide, this);
+        // TODO _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
+        // TODO _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
+        // TODO _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
+        // TODO _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, _autostart, this), WAF::BottomSide, this);
     }
 
     // Prepare base UI
@@ -116,27 +116,6 @@ MainWindow::MainWindow(IAudioService* audioService,
         ciArgs.channels = ciArgs.frames = -1;
         onConvolverInfoChanged(ciArgs);
         connect(_audioService, &IAudioService::convolverInfoChanged, this, &MainWindow::onConvolverInfoChanged);
-
-        _eelEditor->attachHost(_audioService);
-        connect(_eelEditor, &EELEditor::executionRequested, [this](QString path){
-            if (QFileInfo::exists(path) && QFileInfo(path).isFile())
-            {
-                ui->liveprog->setCurrentLiveprog(path);
-            }
-            else
-            {
-                QMessageBox::critical(_eelEditor, tr("Cannot execute script"),
-                                      tr("The current EEL file (at '%1') does not exist anymore on the filesystem. Please reopen the file manually.").arg(path));
-                return;
-            }
-
-            applyConfig();
-
-            if(path == ui->liveprog->currentLiveprog())
-            {
-                _audioService->reloadLiveprog();
-            }
-        });
     }
 
     // Prepare tray icon
@@ -220,9 +199,7 @@ MainWindow::MainWindow(IAudioService* audioService,
         connect(&DspConfig::instance(), &DspConfig::configBuffered, this, &MainWindow::loadConfig);
         DspConfig::instance().load();
 
-        connect(_settingsFragment->fragment(), &SettingsFragment::launchSetupWizard,       this, &MainWindow::launchFirstRunSetup);
-        connect(_settingsFragment->fragment(), &SettingsFragment::reopenSettings, _settingsFragment, &FragmentHost<SettingsFragment*>::slideOutIn);
-        connect(_styleHelper, &StyleHelper::iconColorChanged, _settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
+        //connect(_styleHelper, &StyleHelper::iconColorChanged, _settingsFragment->fragment(), &SettingsFragment::updateButtonStyle);
     }
 
     // Init 3-dot menu button
@@ -263,8 +240,6 @@ MainWindow::MainWindow(IAudioService* audioService,
         menu->addAction(tr("Reset to defaults"), this, SLOT(onResetRequested()));
         menu->addAction(tr("Load from file"), this, SLOT(loadExternalFile()));
         menu->addAction(tr("Save to file"), this, SLOT(saveExternalFile()));
-        menu->addSeparator();
-        menu->addAction(tr("Open LiveprogIDE"), _eelEditor, &EELEditor::show);
         menu->addSeparator();
         menu->addAction(tr("What's this... (Select UI element)"), this, []()
         {
@@ -329,8 +304,6 @@ MainWindow::MainWindow(IAudioService* audioService,
         connect(ui->conv_files, &FileSelectionWidget::bookmarkAdded, ui->conv_fav, &FileSelectionWidget::enumerateFiles);
 
         // Liveprog
-        ui->liveprog->coupleIDE(_eelEditor);
-        ui->liveprog->updateList();
         connect(ui->liveprog, &LiveprogSelectionWidget::liveprogReloadRequested, _audioService, &IAudioService::reloadLiveprog);
         connect(ui->liveprog, &LiveprogSelectionWidget::unitLabelUpdateRequested, ui->info, qOverload<const QString&>(&FadingLabel::setAnimatedText));
     }
@@ -1333,8 +1306,6 @@ void MainWindow::connectActions()
 
     connect(ui->eq_r_fixed,         &QRadioButton::clicked, this, &MainWindow::onEqModeUpdated);
     connect(ui->eq_r_flex,          &QRadioButton::clicked, this, &MainWindow::onEqModeUpdated);
-
-    connect(_eelEditor,             &EELEditor::scriptSaved, ui->liveprog, &LiveprogSelectionWidget::updateFromEelEditor);
 }
 
 // Setup wizard

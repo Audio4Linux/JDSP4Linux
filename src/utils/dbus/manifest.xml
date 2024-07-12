@@ -79,6 +79,8 @@
                 <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QList&lt;IOutputDevice&gt;"/>
                 <arg name="devices" type="a(issss)" direction="out"/>
             </method>
+
+            <method name="relinkAudioPipeline" />
         </interface>
     </node>
 </node>

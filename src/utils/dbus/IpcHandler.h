@@ -56,7 +56,9 @@ public slots:
     void deletePresetRule(const QString &deviceId, const QString &routeId) const;
     QList<PresetRule> getPresetRules() const;
 
-     QList<IOutputDevice> getOutputDevices() const;
+    QList<IOutputDevice> getOutputDevices() const;
+
+    void relinkAudioPipeline() const;
 
 private:
     QDBusConnection _connection = QDBusConnection::sessionBus();

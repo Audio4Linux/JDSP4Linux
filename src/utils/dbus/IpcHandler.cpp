@@ -164,6 +164,12 @@ QList<IOutputDevice> IpcHandler::getOutputDevices() const
     return QVector<IOutputDevice>(devices.begin(), devices.end()).toList();
 }
 
+void IpcHandler::relinkAudioPipeline() const
+{
+    _service->reloadService();
+    DspConfig::instance().commit();
+}
+
 void IpcHandler::setInternal(const QString &key, const QDBusVariant &value) const
 {
     QMetaEnum meta = QMetaEnum::fromType<DspConfig::Key>();
