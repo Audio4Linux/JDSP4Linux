@@ -29,7 +29,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>振幅 (dBr)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
@@ -102,7 +102,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ データベース</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
@@ -132,12 +132,12 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
       <source>Display settings</source>
-      <translation type="unfinished"/>
+      <translation>表示設定</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
       <source>Dark mode</source>
-      <translation type="unfinished"/>
+      <translation>ダークモード</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
@@ -184,7 +184,7 @@ This will override your current GraphicEQ configuration.</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ データベース</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -217,7 +217,7 @@ Reason: %1</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
       <source>No new updates available</source>
-      <translation type="unfinished"/>
+      <translation>利用可能な新しいアップデートはありません</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
@@ -254,20 +254,20 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(未設定)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to blocklist</source>
-      <translation type="unfinished"/>
+      <translation>ブロックリストに追加</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
-      <translation type="unfinished"/>
+      <translation>ホワイトリストに追加する</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
@@ -290,7 +290,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.ui" line="43"/>
       <source>Active apps</source>
-      <translation type="unfinished"/>
+      <translation>アクティブなアプリ</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.cpp" line="19"/>
@@ -347,7 +347,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation type="unfinished"/>
+      <translation>EEL Scripting IDE</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
@@ -372,7 +372,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
       <source>Help</source>
-      <translation type="unfinished"/>
+      <translation>ヘルプ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
@@ -382,43 +382,43 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
       <source>Open script</source>
-      <translation type="unfinished"/>
+      <translation>スクリプトを開く</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
       <source>Ctrl+O</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>ファイルを閉じる</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
       <source>Ctrl+Shift+W</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>保存</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
       <source>Ctrl+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>名前を付けて保存...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
@@ -428,7 +428,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
@@ -438,17 +438,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
       <source>Ctrl+Shift+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation type="unfinished"/>
+      <translation>検索/置換</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
       <source>Ctrl+F</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
@@ -470,7 +470,7 @@ Do you want to re-install the latest database update anyway?</source>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="470"/>
       <source>Jump to function...</source>
-      <translation type="unfinished"/>
+      <translation>関数にジャンプ...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
@@ -485,7 +485,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
       <source>F2</source>
-      <translation type="unfinished"/>
+      <translation>F2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
@@ -495,7 +495,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
       <source>F3</source>
-      <translation type="unfinished"/>
+      <translation>F3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
@@ -505,27 +505,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>タブをスペースに置き換える</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>EEL2 ドキュメント</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
       <source>F1</source>
-      <translation type="unfinished"/>
+      <translation>F1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>コードを実行</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
       <source>F5</source>
-      <translation type="unfinished"/>
+      <translation>F5</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
@@ -535,12 +535,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation type="unfinished"/>
+      <translation>新しいスクリプトウィザード</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
       <source>Ctrl+N</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
@@ -551,7 +551,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="87"/>
@@ -596,27 +596,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>ファイルに書き込めません</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>EEL スクリプトを開く</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>EEL2 Script (*.eel)</source>
-      <translation type="unfinished"/>
+      <translation>EEL2 スクリプト (*.eel)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="431"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>名前を付けて保存</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>実行できません</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
@@ -660,17 +660,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>更新</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
+      <translation>ブックマーク</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>リネーム</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
@@ -703,12 +703,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>戻る</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>次へ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
@@ -761,20 +761,21 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="198"/>
       <source>Welcome!</source>
-      <translation type="unfinished"/>
+      <translation>ようこそ!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>アプリをインストールしてくれてありがとうございます!
+ここで、JamesDSP for Linuxを使用し始める前に、JDSPで最高の体験を得るためにいくつかの調整を行う必要があります。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
       <source>Next &gt;</source>
-      <translation type="unfinished"/>
+      <translation>次へ &gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
@@ -809,7 +810,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
       <source>Telegram</source>
-      <translation type="unfinished"/>
+      <translation>Telegram</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
@@ -830,7 +831,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Graphic EQ を有効にする</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
@@ -845,7 +846,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ データベース...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
@@ -865,12 +866,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
       <source>Import</source>
-      <translation type="unfinished"/>
+      <translation>インポート</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="263"/>
       <source>Export</source>
-      <translation type="unfinished"/>
+      <translation>エクスポート</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
@@ -967,13 +968,13 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/LiveprogSelectionWidget.ui" line="127"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="161"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>新しいスクリプトを作成</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="138"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>エラー</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="80"/>
@@ -990,7 +991,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="168"/>
       <source>Edit script</source>
-      <translation type="unfinished"/>
+      <translation>スクリプトを編集</translation>
     </message>
     <message>
       <location filename="../../src/interface/LiveprogSelectionWidget.cpp" line="241"/>
@@ -1003,7 +1004,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="26"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP for Linux</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
@@ -1230,7 +1231,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1002"/>
       <source>Delay</source>
-      <translation type="unfinished"/>
+      <translation>遅延</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1009"/>
@@ -1506,7 +1507,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="256"/>
       <source>Apps</source>
-      <translation type="unfinished"/>
+      <translation>アプリ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="257"/>
@@ -1521,22 +1522,22 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="263"/>
       <source>Reset to defaults</source>
-      <translation type="unfinished"/>
+      <translation>既定値に戻す</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="264"/>
       <source>Load from file</source>
-      <translation type="unfinished"/>
+      <translation>ファイルを読み込む</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="265"/>
       <source>Save to file</source>
-      <translation type="unfinished"/>
+      <translation>ファイルに保存</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="267"/>
       <source>Open LiveprogIDE</source>
-      <translation type="unfinished"/>
+      <translation>LiveprogIDE を開く</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="269"/>
@@ -1680,17 +1681,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
+      <translation>ファイル名</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
       <source>Description</source>
-      <translation type="unfinished"/>
+      <translation>説明</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
       <source>Untitled script</source>
-      <translation type="unfinished"/>
+      <translation>無題のスクリプト</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
@@ -1702,7 +1703,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>エラー</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
@@ -1727,7 +1728,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/utils/OverlayMsgProxy.h" line="33"/>
       <location filename="../../src/utils/OverlayMsgProxy.h" line="37"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>閉じる</translation>
     </message>
   </context>
   <context>
@@ -1744,7 +1745,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="143"/>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="169"/>
       <source>Select...</source>
-      <translation type="unfinished"/>
+      <translation>選択...</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="39"/>
@@ -1764,7 +1765,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="104"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>閉じる</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="117"/>
@@ -1825,7 +1826,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>保存</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
@@ -1835,12 +1836,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>削除</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
       <source>Load</source>
-      <translation type="unfinished"/>
+      <translation>読み込む</translation>
     </message>
   </context>
   <context>
@@ -1878,7 +1879,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
       <source>Delete</source>
-      <translation type="unfinished"/>
+      <translation>削除</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
@@ -2284,7 +2285,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>設定</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
@@ -2309,7 +2310,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Devices</source>
-      <translation type="unfinished"/>
+      <translation>デバイス</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
@@ -2319,7 +2320,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>トレイアイコン</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
@@ -2329,12 +2330,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
       <source>Theme</source>
-      <translation type="unfinished"/>
+      <translation>テーマ</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="226"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>編集</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="250"/>
@@ -2344,7 +2345,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>イコライザ</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
@@ -2409,7 +2410,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="534"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>保存</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="543"/>
@@ -2449,12 +2450,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="634"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>デバイス</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
       <source>Blocklisted apps</source>
-      <translation type="unfinished"/>
+      <translation>ブロックされたアプリ</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
@@ -2479,7 +2480,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="755"/>
       <source>Status:</source>
-      <translation type="unfinished"/>
+      <translation>ステータス:</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="765"/>
@@ -2524,17 +2525,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="915"/>
       <source>Visit Github repo</source>
-      <translation type="unfinished"/>
+      <translation>Githubリポジトリを開く</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="941"/>
       <source>Run setup wizard</source>
-      <translation type="unfinished"/>
+      <translation>セットアップ ウィザードを実行</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="964"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>閉じる</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
@@ -2550,12 +2551,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
       <source>installed</source>
-      <translation type="unfinished"/>
+      <translation>インストール済み</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
       <source>not installed</source>
-      <translation type="unfinished"/>
+      <translation>未インストール</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
