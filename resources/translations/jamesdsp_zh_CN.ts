@@ -826,7 +826,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
   </context>
   <context>
@@ -834,7 +834,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>平滑标签部件</translation>
     </message>
   </context>
   <context>
@@ -857,7 +857,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 数据库...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
@@ -872,7 +872,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
       <source>variable</source>
-      <translation type="unfinished"/>
+      <translation>可变的</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
@@ -887,12 +887,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
       <source>Invert response</source>
-      <translation type="unfinished"/>
+      <translation>反转结果</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>正常化结果</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
@@ -1027,12 +1027,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>动态低音增强</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>最大增益</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
@@ -1042,7 +1042,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Analog modelling</source>
-      <translation type="unfinished"/>
+      <translation>数仿模拟</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
@@ -1057,22 +1057,22 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>压限器/主音量</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="214"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>阈值</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>释放</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>后增益</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
@@ -1082,27 +1082,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>动态范围压扩器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>时间常数</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>粒度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>时频变换</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>均匀（短时傅里叶）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
@@ -1118,7 +1118,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>模式</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
@@ -1128,7 +1128,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="566"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>滤过频率</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
@@ -1138,12 +1138,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>声场宽度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="645"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>宽度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="690"/>
