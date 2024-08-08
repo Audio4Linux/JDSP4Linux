@@ -54,7 +54,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>原始</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
@@ -64,7 +64,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
       <source>Equalized</source>
-      <translation type="unfinished"/>
+      <translation>均衡器</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
@@ -350,7 +350,7 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>清除</translation>
     </message>
   </context>
   <context>
@@ -786,7 +786,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
       <source>Next &gt;</source>
-      <translation type="unfinished"/>
+      <translation>下一 步 &gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
@@ -796,7 +796,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
       <source>No, don&apos;t apply effects in background</source>
-      <translation type="unfinished"/>
+      <translation>不，不要在后台应用效果</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
@@ -821,12 +821,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
       <source>Telegram</source>
-      <translation type="unfinished"/>
+      <translation>Telegram</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2437"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
   </context>
   <context>
@@ -834,7 +834,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>平滑标签部件</translation>
     </message>
   </context>
   <context>
@@ -847,7 +847,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
       <source>Freq.</source>
-      <translation type="unfinished"/>
+      <translation>频率</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="182"/>
@@ -857,7 +857,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="195"/>
       <source>AutoEQ database...</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 数据库...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
@@ -872,7 +872,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
       <source>variable</source>
-      <translation type="unfinished"/>
+      <translation>可变的</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="254"/>
@@ -887,12 +887,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="272"/>
       <source>Invert response</source>
-      <translation type="unfinished"/>
+      <translation>反转结果</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="281"/>
       <source>Normalize response</source>
-      <translation type="unfinished"/>
+      <translation>正常化结果</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="290"/>
@@ -931,7 +931,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="484"/>
       <source>EqualizerAPO GraphicEQ (*.txt)</source>
-      <translation type="unfinished"/>
+      <translation>EqualizerAPO GraphicEQ (*.txt)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="502"/>
@@ -1022,57 +1022,57 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;动态低音增强&lt;/span&gt;&lt;/p&gt;&lt;p&gt;频率检测低音增强。通过分析输入音频流，自动设置增益、带宽和截止频率等参数。&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;最大增益：&lt;/span&gt; 调整动态低音增强效果的量。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
       <source>Dynamic bass boost</source>
-      <translation type="unfinished"/>
+      <translation>动态低音增强</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="121"/>
       <source>Maximum gain</source>
-      <translation type="unfinished"/>
+      <translation>最大增益</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;数仿模拟&lt;/span&gt;&lt;/p&gt;&lt;p&gt;过采样模拟建模是一种无混叠、谐波均匀的生成器。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Analog modelling</source>
-      <translation type="unfinished"/>
+      <translation>数仿模拟</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
       <source>Preamp (Harmonics)</source>
-      <translation type="unfinished"/>
+      <translation>前置放大器（谐波）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;限制器：&lt;/span&gt;&lt;/p&gt;&lt;p&gt;这是一个用于避免音频输出剪辑的功能。当数字信号处理（DSP）试图使音频的某部分或全部比原来更响，而输入已经接近最大值时，就会发生剪辑。 &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;限制器阈值：&lt;/span&gt; 这个参数通常设置为 -0.1，除非出于某种原因，你的音频在达到数字剪辑之前就已经发生了剪辑，在这种情况下，你可以将其设置为更低的值。&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;限制器释放时间：&lt;/span&gt; 限制器的效果取决于释放时间的设置。较短的释放时间会导致受限声音的明显失真，特别是低频部分；通常更长的释放时间是更优的选择，但它会稍微降低可以达到的音量。如果“泵动”（声音受限后随时间逐渐恢复）变得令人反感，调整释放时间更长或更短可以帮助减少这种效果。&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;后增益：&lt;/span&gt; 后增益可作为所有效果应用后的数字音量控制旋钮，但作用时间是在声音到达限制器之前。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
       <source>Limiter/Master</source>
-      <translation type="unfinished"/>
+      <translation>压限器/主音量</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="214"/>
       <source>Threshold</source>
-      <translation type="unfinished"/>
+      <translation>阈值</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>释放</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>后增益</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
@@ -1082,27 +1082,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>动态范围压扩器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>时间常数</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>粒度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>时频变换</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>均匀（短时傅里叶）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
@@ -1118,17 +1118,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>模式</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
       <source>Custom BS2B parameters</source>
-      <translation type="unfinished"/>
+      <translation>BS2B（双频段动态压缩处理）参数</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="566"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>滤过频率</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
@@ -1138,12 +1138,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>声场宽度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="645"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>宽度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="690"/>
@@ -1153,7 +1153,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="716"/>
       <source>Enable reverberation</source>
-      <translation type="unfinished"/>
+      <translation>启用反转</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
@@ -1339,7 +1339,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1370"/>
       <source>Reset EQ</source>
-      <translation type="unfinished"/>
+      <translation>重置音效</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1398"/>
@@ -1380,12 +1380,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>原始</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>收缩</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1569"/>
@@ -1395,7 +1395,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1577"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Adv. 波形编辑</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1596"/>
@@ -1405,17 +1405,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1642"/>
       <source>Channels:</source>
-      <translation type="unfinished"/>
+      <translation>声道：</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1662"/>
       <source>Samples:</source>
-      <translation type="unfinished"/>
+      <translation>样本：</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1721"/>
       <source>No selection</source>
-      <translation type="unfinished"/>
+      <translation>未选择</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1768"/>
@@ -1450,7 +1450,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2002"/>
       <source>Enable ViPER-DDC</source>
-      <translation type="unfinished"/>
+      <translation>启用 ViPER-DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2025"/>
@@ -1520,7 +1520,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="256"/>
       <source>Apps</source>
-      <translation type="unfinished"/>
+      <translation>应用</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="257"/>
@@ -1530,7 +1530,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="261"/>
       <source>Relink audio pipeline</source>
-      <translation type="unfinished"/>
+      <translation>重新链接音频管道</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="263"/>
@@ -1560,7 +1560,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="364"/>
       <source>Bass/Misc</source>
-      <translation type="unfinished"/>
+      <translation>基础/杂项</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="365"/>
@@ -1585,7 +1585,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="369"/>
       <source>DDC</source>
-      <translation type="unfinished"/>
+      <translation>DDC（数字动态压缩）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="370"/>
@@ -1600,12 +1600,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="383"/>
       <source>Launch application</source>
-      <translation type="unfinished"/>
+      <translation>启动应用</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="525"/>
       <source>Reset Configuration</source>
-      <translation type="unfinished"/>
+      <translation>重置配置</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="525"/>
@@ -1615,37 +1615,37 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="549"/>
       <source>Load custom audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>加载自定义 audio.conf</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="561"/>
       <source>Save current audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>保存当前 audio.conf</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>极低</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>低</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>中等</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>高</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>极端</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1135"/>
@@ -1726,12 +1726,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <source>A file with the same name already exists at this loction</source>
-      <translation type="unfinished"/>
+      <translation>当前位置中已存在同名文件</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>File name is empty or contains illegal characters</source>
-      <translation type="unfinished"/>
+      <translation>文件名为空或包含非法字符</translation>
     </message>
   </context>
   <context>
@@ -1749,7 +1749,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="14"/>
       <source>Palette editor</source>
-      <translation type="unfinished"/>
+      <translation>色板编辑器</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="26"/>
@@ -1763,7 +1763,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="39"/>
       <source>Base Color</source>
-      <translation type="unfinished"/>
+      <translation>基础颜色</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="52"/>
@@ -1773,32 +1773,32 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="65"/>
       <source>Foreground Color</source>
-      <translation type="unfinished"/>
+      <translation>前景色</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="104"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="117"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>重置</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="130"/>
       <source>White Icons</source>
-      <translation type="unfinished"/>
+      <translation>白色图标</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="156"/>
       <source>Selection Color</source>
-      <translation type="unfinished"/>
+      <translation>选中颜色</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="182"/>
       <source>Disabled Color</source>
-      <translation type="unfinished"/>
+      <translation>已禁用对象颜色</translation>
     </message>
   </context>
   <context>
@@ -1806,17 +1806,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="26"/>
       <source>Add new rule...</source>
-      <translation type="unfinished"/>
+      <translation>添加新规则...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="38"/>
       <source>If</source>
-      <translation type="unfinished"/>
+      <translation>如果</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="58"/>
       <source>is connected, then load preset</source>
-      <translation type="unfinished"/>
+      <translation>已连接，就加载预设</translation>
     </message>
   </context>
   <context>
@@ -1824,17 +1824,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
       <source>Preset name</source>
-      <translation type="unfinished"/>
+      <translation>预设名称</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
       <source>Adds current config as a preset</source>
-      <translation type="unfinished"/>
+      <translation>添加当前配置为预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
@@ -1844,17 +1844,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
       <source>Rules...</source>
-      <translation type="unfinished"/>
+      <translation>规则...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>移除</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
       <source>Load</source>
-      <translation type="unfinished"/>
+      <translation>加载</translation>
     </message>
   </context>
   <context>
@@ -2045,87 +2045,87 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="88"/>
       <source>Hip-Hop</source>
-      <translation type="unfinished"/>
+      <translation>嘻哈</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="89"/>
       <source>Dubstep</source>
-      <translation type="unfinished"/>
+      <translation>达步舞曲（回响低音）</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="90"/>
       <source>Movie</source>
-      <translation type="unfinished"/>
+      <translation>电影</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="91"/>
       <source>Metal</source>
-      <translation type="unfinished"/>
+      <translation>重金属</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="92"/>
       <source>Vocal Booster</source>
-      <translation type="unfinished"/>
+      <translation>人声增强</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="93"/>
       <source>Hardstyle</source>
-      <translation type="unfinished"/>
+      <translation>硬派音乐</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="94"/>
       <source>Acoustic</source>
-      <translation type="unfinished"/>
+      <translation>原声</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="95"/>
       <source>R&amp;B</source>
-      <translation type="unfinished"/>
+      <translation>节奏蓝调</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="96"/>
       <source>Electronic</source>
-      <translation type="unfinished"/>
+      <translation>电子乐</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="97"/>
       <source>Deep Bass</source>
-      <translation type="unfinished"/>
+      <translation>重低音</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="98"/>
       <source>Beats</source>
-      <translation type="unfinished"/>
+      <translation>节拍</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="105"/>
       <source>BS2B Custom</source>
-      <translation type="unfinished"/>
+      <translation>自定义 BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="106"/>
       <source>BS2B Weak</source>
-      <translation type="unfinished"/>
+      <translation>弱 BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="107"/>
       <source>BS2B Strong</source>
-      <translation type="unfinished"/>
+      <translation>强 BS2B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation type="unfinished"/>
+      <translation>头部环绕</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
       <source>Surround 1</source>
-      <translation type="unfinished"/>
+      <translation>环绕 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="110"/>
       <source>Surround 2</source>
-      <translation type="unfinished"/>
+      <translation>环绕 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
@@ -2135,129 +2135,129 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Default</source>
-      <translation type="unfinished"/>
+      <translation>默认</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 1</source>
-      <translation type="unfinished"/>
+      <translation>小型大厅 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 2</source>
-      <translation type="unfinished"/>
+      <translation>小型大厅 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 1</source>
-      <translation type="unfinished"/>
+      <translation>中型大厅 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 2</source>
-      <translation type="unfinished"/>
+      <translation>中型大厅 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 1</source>
-      <translation type="unfinished"/>
+      <translation>大厅 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 2</source>
-      <translation type="unfinished"/>
+      <translation>大厅 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 1</source>
-      <translation type="unfinished"/>
+      <translation>小房间 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 2</source>
-      <translation type="unfinished"/>
+      <translation>小房间 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Medium room 1</source>
-      <translation type="unfinished"/>
+      <translation>中型房间 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium room 2</source>
-      <translation type="unfinished"/>
+      <translation>中型房间 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 1</source>
-      <translation type="unfinished"/>
+      <translation>大房间 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 2</source>
-      <translation type="unfinished"/>
+      <translation>大房间 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 1</source>
-      <translation type="unfinished"/>
+      <translation>中等 ER 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 2</source>
-      <translation type="unfinished"/>
+      <translation>中等 ER 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation type="unfinished"/>
+      <translation>板式高频</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation type="unfinished"/>
+      <translation>板式低频</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation type="unfinished"/>
+      <translation>长混响 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation type="unfinished"/>
+      <translation>长混响 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
       <source>error</source>
-      <translation type="unfinished"/>
+      <translation>错误</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="44"/>
       <source>creating</source>
-      <translation type="unfinished"/>
+      <translation>创建中</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="47"/>
       <source>suspended</source>
-      <translation type="unfinished"/>
+      <translation>已暂停</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="50"/>
       <location filename="../../src/audio/base/AppNode.h" line="78"/>
       <source>idle</source>
-      <translation type="unfinished"/>
+      <translation>空闲</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="53"/>
       <location filename="../../src/audio/base/AppNode.h" line="76"/>
       <source>running</source>
-      <translation type="unfinished"/>
+      <translation>运行中</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="80"/>
       <source>not connected</source>
-      <translation type="unfinished"/>
+      <translation>未连接</translation>
     </message>
     <message>
       <location filename="../../src/main.cpp" line="190"/>
@@ -2272,17 +2272,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>请运行 &apos;flatpak permission-set background background %1 yes&apos; 然后重新启用自动启动。</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>未知错误</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>请确保你有一个有效的 XDG 后台门户实现并激活它以使用开机自启动。%1</translation>
     </message>
   </context>
   <context>
@@ -2290,7 +2290,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/RouteListModel.cpp" line="66"/>
       <source>&lt;any output route&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;任意输出路由&gt;</translation>
     </message>
   </context>
   <context>
@@ -2303,12 +2303,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
       <source>Category</source>
-      <translation type="unfinished"/>
+      <translation>类别</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="88"/>
       <source>Interface</source>
-      <translation type="unfinished"/>
+      <translation>界面</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
@@ -2323,12 +2323,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Devices</source>
-      <translation type="unfinished"/>
+      <translation>设备</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Network</source>
-      <translation type="unfinished"/>
+      <translation>网络</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
@@ -2653,12 +2653,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="38"/>
       <source>Status</source>
-      <translation type="unfinished"/>
+      <translation>状态</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="65"/>
       <source>Application version</source>
-      <translation type="unfinished"/>
+      <translation>应用版本</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
@@ -2668,12 +2668,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
       <source>Processing state</source>
-      <translation type="unfinished"/>
+      <translation>处理状态</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
       <source>Audio format</source>
-      <translation type="unfinished"/>
+      <translation>音频格式</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
@@ -2686,12 +2686,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Processing</source>
-      <translation type="unfinished"/>
+      <translation>处理中</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Not processing</source>
-      <translation type="unfinished"/>
+      <translation>未处理</translation>
     </message>
   </context>
   <context>
@@ -2699,27 +2699,27 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="84"/>
       <source>&amp;Bypass</source>
-      <translation type="unfinished"/>
+      <translation>旁路</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="90"/>
       <source>&amp;Presets</source>
-      <translation type="unfinished"/>
+      <translation>预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="93"/>
       <source>&amp;Convolver bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>卷积器书签</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="110"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>Linux 版 JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="164"/>
       <source>No presets found</source>
-      <translation type="unfinished"/>
+      <translation>找不到预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="208"/>
