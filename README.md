@@ -276,7 +276,7 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <br />
         <sub><b>Katie Frogs (KatieFrogs)</b></sub></a>
       <br />
-      <sub><b>2944 words</b></sub>
+      <sub><b>2955 words</b></sub>
     </td>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/catvinyl"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15923209/medium/87c1ec8379dee277ba0bd42e1d8206f2.png" />
