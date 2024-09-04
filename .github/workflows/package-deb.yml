@@ -136,7 +136,7 @@ jobs:
       id: version
       
     - name: Download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4.1.7
       with:
         name: jamesdsp-${{ matrix.flavor }}-full_portable_linux64
       
@@ -176,7 +176,7 @@ jobs:
       id: version
                    
     - name: Download package artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4.1.7
       with:
         name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
       
@@ -225,7 +225,7 @@ jobs:
       id: version
         
     - name: Download package artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4.1.7
       with:
         name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
 
@@ -293,7 +293,7 @@ jobs:
       id: version
       
     - name: Download package artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4.1.7
       with:
         name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
       
