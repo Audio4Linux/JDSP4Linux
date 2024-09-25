@@ -57,14 +57,14 @@ MainWindow::MainWindow(IAudioService* audioService,
         _startupInTraySwitch = statupInTray;
 
         _styleHelper         = new StyleHelper(this);
-        // TODO _eelEditor           = new EELEditor(this);
+        _eelEditor           = new EELEditor(this);
         _trayIcon            = new TrayIcon(this);
         _autostart           = new AutostartManager(this);
 
-        // TODO _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
-        // TODO _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
-        // TODO _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
-        // TODO _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, _autostart, this), WAF::BottomSide, this);
+        _appMgrFragment = new FragmentHost<AppManagerFragment*>(new AppManagerFragment(_audioService->appManager(), this), WAF::BottomSide, this);
+        _statusFragment = new FragmentHost<StatusFragment*>(new StatusFragment(this), WAF::BottomSide, this);
+        _presetFragment = new FragmentHost<PresetFragment*>(new PresetFragment(_audioService, this), WAF::LeftSide, this);
+        _settingsFragment = new FragmentHost<SettingsFragment*>(new SettingsFragment(_trayIcon, _audioService, _autostart, this), WAF::BottomSide, this);
     }
 
     // Prepare base UI
