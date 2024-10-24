@@ -168,7 +168,8 @@
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
       <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
-      <translation type="unfinished"/>
+      <translation>Utilice el cuadro de búsqueda en el lado izquierdo para encontrar una medida adecuada para sus auriculares. Pulsa &apos;OK&apos; para cargar los datos de ecualización en el motor de audio.
+Esto sobrescribirá la configuración actual de GraphicEQ.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
@@ -184,7 +185,7 @@ This will override your current GraphicEQ configuration.</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos Auto EQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -210,12 +211,15 @@ Se requiere una conexión a Internet durante este paso.
 
 Status code: %0
 Reason: %1</source>
-      <translation type="unfinished"/>
+      <translation>No se pudo recuperar la información del paquete del repositorio remoto:
+
+Código de estado: %0
+Razón: %1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Return to database</source>
-      <translation type="unfinished"/>
+      <translation>Volver a la base de datos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
@@ -238,7 +242,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>Database cleared</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos borrada</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
@@ -261,7 +265,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(sin definir)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
@@ -284,12 +288,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Latencia: %1ms</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
       <source>Format: %1</source>
-      <translation type="unfinished"/>
+      <translation>Formato: %1</translation>
     </message>
   </context>
   <context>
@@ -583,17 +587,17 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; ha comenzado a compilar en %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;Compilación detenida en %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="298"/>
       <source>Script initialization took %1ms</source>
-      <translation type="unfinished"/>
+      <translation>La inicialización del script tomó %1ms</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
@@ -608,7 +612,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>Abrir script EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
@@ -633,12 +637,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Enter line number:</source>
-      <translation type="unfinished"/>
+      <translation>Introducir número de línea:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
       <source>Enter function name:</source>
-      <translation type="unfinished"/>
+      <translation>Introduzca el nombre de la función:</translation>
     </message>
   </context>
   <context>
@@ -646,7 +650,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
       <source>No project loaded</source>
-      <translation type="unfinished"/>
+      <translation>No hay proyecto cargado</translation>
     </message>
   </context>
   <context>
@@ -687,7 +691,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>No se encontraron archivos compatibles</translation>
     </message>
   </context>
   <context>
@@ -700,12 +704,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Buscar:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>Reemplazar con:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
@@ -735,7 +739,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
-      <translation type="unfinished"/>
+      <translation>Distinguir mayúsculas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
@@ -774,14 +778,15 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>¡Gracias por instalar la aplicación!
+Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&apos;hacer algunos ajustes para asegurar la mejor experiencia posible con JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
       <source>Next &gt;</source>
-      <translation type="unfinished"/>
+      <translation>Siguiente &gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
@@ -1062,12 +1067,12 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>Versión</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Post Ganancia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
@@ -1077,17 +1082,17 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>Compresor de rango dinámico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation/>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>Nivel de detalle</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
@@ -1113,7 +1118,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>Modo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
@@ -1289,7 +1294,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>Multiresolución (marco dual continuo, onda incompleta)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
