@@ -16,7 +16,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation type="unfinished"/>
+      <translation>Opción %1</translation>
     </message>
   </context>
   <context>
@@ -39,12 +39,12 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Raw (suavizado)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Error (suavizado)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
@@ -54,7 +54,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>Raw</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
@@ -168,7 +168,8 @@
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
       <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
-      <translation type="unfinished"/>
+      <translation>Utilice el cuadro de búsqueda en el lado izquierdo para encontrar una medida adecuada para sus auriculares. Pulsa &apos;OK&apos; para cargar los datos de ecualización en el motor de audio.
+Esto sobrescribirá la configuración actual de GraphicEQ.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
@@ -184,7 +185,7 @@ This will override your current GraphicEQ configuration.</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos Auto EQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -210,12 +211,15 @@ Se requiere una conexión a Internet durante este paso.
 
 Status code: %0
 Reason: %1</source>
-      <translation type="unfinished"/>
+      <translation>No se pudo recuperar la información del paquete del repositorio remoto:
+
+Código de estado: %0
+Razón: %1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Return to database</source>
-      <translation type="unfinished"/>
+      <translation>Volver a la base de datos</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
@@ -238,7 +242,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>Database cleared</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos borrada</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
@@ -261,7 +265,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(sin definir)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
@@ -284,12 +288,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Latencia: %1ms</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
       <source>Format: %1</source>
-      <translation type="unfinished"/>
+      <translation>Formato: %1</translation>
     </message>
   </context>
   <context>
@@ -354,7 +358,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation type="unfinished"/>
+      <translation>EEL Scripting IDE</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
@@ -512,7 +516,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation>Reemplazar tabuladores por espacios</translation>
+      <translation>Reemplaza tabulaciones por espacios</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
@@ -542,7 +546,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation>Nuevo asistente de script</translation>
+      <translation>Asistente de script nuevo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
@@ -568,7 +572,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="97"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>Esquema de código</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="107"/>
@@ -583,17 +587,17 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; ha comenzado a compilar en %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;Compilación detenida en %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="298"/>
       <source>Script initialization took %1ms</source>
-      <translation type="unfinished"/>
+      <translation>La inicialización del script tomó %1ms</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
@@ -603,12 +607,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
       <source>Cannot write file</source>
-      <translation>No se puede escribir archivo</translation>
+      <translation>No se puede escribir el archivo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>Abrir script EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
@@ -633,12 +637,12 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Enter line number:</source>
-      <translation type="unfinished"/>
+      <translation>Introducir número de línea:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
       <source>Enter function name:</source>
-      <translation type="unfinished"/>
+      <translation>Introduzca el nombre de la función:</translation>
     </message>
   </context>
   <context>
@@ -646,7 +650,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
       <source>No project loaded</source>
-      <translation type="unfinished"/>
+      <translation>No hay proyecto cargado</translation>
     </message>
   </context>
   <context>
@@ -687,7 +691,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>No se encontraron archivos compatibles</translation>
     </message>
   </context>
   <context>
@@ -695,17 +699,17 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Formulario</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Buscar:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>Reemplazar con:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
@@ -725,32 +729,32 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation type="unfinished"/>
+      <translation>E&amp;presión regular</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
-      <translation type="unfinished"/>
+      <translation>&amp;Palabras completas </translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
-      <translation type="unfinished"/>
+      <translation>Distinguir mayúsculas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
       <source>&amp;Close</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Cerrar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Reemplazar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
       <source>Replace &amp;All</source>
-      <translation type="unfinished"/>
+      <translation>Reemplazar &amp;todo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="148"/>
@@ -760,7 +764,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="171"/>
       <source>Replaced %1 occurrence(s)</source>
-      <translation type="unfinished"/>
+      <translation>Reemplazado %1 ocurrencia(s)</translation>
     </message>
   </context>
   <context>
@@ -774,14 +778,15 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>¡Gracias por instalar la aplicación!
+Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&apos;hacer algunos ajustes para asegurar la mejor experiencia posible con JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1923"/>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2131"/>
       <source>Next &gt;</source>
-      <translation type="unfinished"/>
+      <translation>Siguiente &gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="433"/>
@@ -811,7 +816,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation type="unfinished"/>
+      <translation>¡Eso está bien para continuar! Puedes hacer cualquier otro cambio de tu elección en la sección de ajustes. Consúltala para más ajustes de customizacion. ¡Visita nuestro Telegram comunitario para ayuda y actualizaciones!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
@@ -829,7 +834,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>Widget de FlatTabb</translation>
     </message>
   </context>
   <context>
@@ -837,7 +842,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="90"/>
       <source>Enable Graphic EQ</source>
-      <translation>Activar EQ gráfico</translation>
+      <translation>Activar ecualizador gráfico</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="177"/>
@@ -857,12 +862,12 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
       <source>15-band</source>
-      <translation type="unfinished"/>
+      <translation>15 bandas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
       <source>31-band</source>
-      <translation type="unfinished"/>
+      <translation>31 bandas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="232"/>
@@ -1017,7 +1022,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Potenciacion de bajos dinamica&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Potenciacion de bajos con deteccion de frecuencias. Establece automáticamente sus propios parámetros, como ganancia, ancho de banda, y la frequencia cortada analizando el flujo de audio entrante&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ganancia máxima:&lt;/span&gt; ajusta la cantidad de los efectos del potenciador de bajos dinámicos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Potenciador de bajos dinamico&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Potenciador de bajos con deteccion de frecuencias. Establece automáticamente sus propios parámetros, como ganancia, ancho de banda, y la frequencia cortada analizando el flujo de audio entrante&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ganancia máxima:&lt;/span&gt; ajusta la cantidad de los efectos del potenciador de bajos dinámicos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
@@ -1037,17 +1042,17 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
       <source>Analog modelling</source>
-      <translation>Modelo analógico</translation>
+      <translation>Modelado analógico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
       <source>Preamp (Harmonics)</source>
-      <translation type="unfinished"/>
+      <translation>Preámbulo (armónico)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limiter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This output limiter tries to avoid clipping of output (caused by DSP that tries to make part or all of the audio louder than before, if the input is already near maximum). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter threshold:&lt;/span&gt; This should be set to -0.1 unless, for some reason, your audio is clipping before digital clipping, in which case you can set it to lower values.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter release:&lt;/span&gt; The limiter is only as effective as long as the release time is set. Short release times will lead to audible distortion of the limited sound, especially of low frequencies; an extended release is usually preferred but reduces the volume that can be achieved somewhat. If &amp;quot;pumping&amp;quot; (ducking of limited sound and coming back up over time) becomes objectionable, making the release longer OR shorter can help make the effect less noticeable.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Post gain:&lt;/span&gt; Post gain acts as a digital volume knob for all effects, after they have been applied but before the sound reaches the limiter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Limitador&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Este limitador de salida intenta evitar el recorte de la salida (causado por DSP que intenta hacer parte o todo el audio más alto que antes, si la entrada ya está cerca del máximo). &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Limiter umbral:&lt;/span&gt; Esto debe establecerse en -0. a menos que, por alguna razón, el audio esté recortando antes del recorte digital, en cuyo caso se puede configurar a valores más bajos.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Versión de Limiter:&lt;/span&gt; El limitador solo es efectivo mientras se establezca el tiempo de liberación. Los cortos tiempos de liberación conducirán a una distorsión audible del sonido limitado, especialmente de bajas frecuencias; normalmente se prefiere una versión ampliada pero reduce el volumen que se puede lograr de alguna manera. Si &amp;quot;pumping&amp;quot; (eludir el sonido limitado y volver con el tiempo) se vuelve censurable, haciendo que el lanzamiento sea más largo o más corto puede ayudar a hacer el efecto menos perceptible.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ganancia Posterior:&lt;/span&gt; Ganacia posterior actúa como un nudo de volumen digital para todos los efectos, después de que se hayan aplicado pero antes de que el sonido llegue al limitador.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="197"/>
@@ -1062,37 +1067,37 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="243"/>
       <source>Release</source>
-      <translation type="unfinished"/>
+      <translation>Versión</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="266"/>
       <source>Post gain</source>
-      <translation type="unfinished"/>
+      <translation>Post Ganancia</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="311"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic range compander&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the dynamic range compander.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Compansion de rango dinámico&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Habilita o deshabilita el compansion de rango dinámico.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>Compresor de rango dinámico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>Constante de tiempo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>Nivel de detalle</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>Transformaciones de frecuencia de tiempo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
@@ -1108,128 +1113,128 @@ Por favor, seleccione otro</translation>
       <location filename="../../src/MainWindow.ui" line="487"/>
       <location filename="../../src/MainWindow.ui" line="543"/>
       <source>Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>Alimentación cruzada</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
       <source>Mode</source>
-      <translation type="unfinished"/>
+      <translation>Modo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="525"/>
       <source>Custom BS2B parameters</source>
-      <translation type="unfinished"/>
+      <translation>Parámetros BS2B personalizados</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="566"/>
       <source>Cut frequency</source>
-      <translation type="unfinished"/>
+      <translation>Frecuencia de corte</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Anchura de la escena sonora&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Un algoritmo que detecta una relación de fase estéreo en varias regiones espectrales. y mejora la etapa de sonido estéreo sin afectar a la integridad vocal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
       <source>Soundstage wideness</source>
-      <translation type="unfinished"/>
+      <translation>Amplitud de la escena sonora</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="645"/>
       <source>Widen level</source>
-      <translation type="unfinished"/>
+      <translation>Nivel de ancho</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="690"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Complex reverberation IIR network (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Reverberation&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Red compleja de reverberación IR (Progenitor 2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="716"/>
       <source>Enable reverberation</source>
-      <translation type="unfinished"/>
+      <translation>Activar reverberación</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>Preajuste</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="769"/>
       <location filename="../../src/MainWindow.ui" line="2143"/>
       <source>...</source>
-      <translation type="unfinished"/>
+      <translation>...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="783"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>Factor de sobremuestreo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="803"/>
       <source>Early reflection factor</source>
-      <translation type="unfinished"/>
+      <translation>Factor de reflexión temprano</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="826"/>
       <source>Early reflection amount</source>
-      <translation type="unfinished"/>
+      <translation>Cantidad de factor de reflection temprano</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="843"/>
       <source>Early reflection width</source>
-      <translation type="unfinished"/>
+      <translation>Anchura de reflexión temprana</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="866"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>Corte de paso bajo (entrada)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="886"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>Corte de paso bajo (bajos)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="906"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>Corte de paso bajo (Damp)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="926"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>Corte de paso bajo (Salida)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="953"/>
       <source>Final wet mix</source>
-      <translation type="unfinished"/>
+      <translation>Mezcla mojada final</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="960"/>
       <source>Final dry mix</source>
-      <translation type="unfinished"/>
+      <translation>Mezcla seca final</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="967"/>
       <source>Reverb wetness</source>
-      <translation type="unfinished"/>
+      <translation>Reverberacion humeda</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="974"/>
       <source>Width L/R mix</source>
-      <translation type="unfinished"/>
+      <translation>Anchura de la mezcla L/R</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="981"/>
       <source>LFO wander amount</source>
-      <translation type="unfinished"/>
+      <translation>Cantidad de varas LFO</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="988"/>
       <source>LFO spin amount</source>
-      <translation type="unfinished"/>
+      <translation>Cantidad de giro LFO</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="995"/>
@@ -1249,37 +1254,37 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1157"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Multimodal Equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enables/disables the multimodal equalizer.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Filter type:&lt;/span&gt; The multimodal equalizer supports both FIR (Minimal phase) and several IIR filtering modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Equalizador multimodal&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Habilita / desactiva el ecualizador multimodal.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Tipo de filtro:&lt;/span&gt; El ecualizador multimodal soporta tanto FIR (fase mínima) como varios modos de filtrado IR.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>FIR de fase mínima</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1298"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR de 4 orden</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1303"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR de 6 orden</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1308"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR de 8 orden</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1313"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR de 10 orden</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1318"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR de 12 orden</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1249"/>
@@ -1289,22 +1294,22 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>Multiresolución (marco dual continuo, onda incompleta)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudo multiresolución (marco de submuestreo)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>Pseudoresolución (Tiempo de dominio, latencia cero)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
       <source>Presets...</source>
-      <translation type="unfinished"/>
+      <translation>Preajuste...</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1289"/>
@@ -1314,12 +1319,12 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1338"/>
       <source>Interpolator</source>
-      <translation type="unfinished"/>
+      <translation>Interpolador</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1341"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modo de interpolación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
@@ -1334,17 +1339,17 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1370"/>
       <source>Reset EQ</source>
-      <translation type="unfinished"/>
+      <translation>Reiniciar EQ</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1398"/>
       <source>Fixed bands</source>
-      <translation type="unfinished"/>
+      <translation>Bandas fijas</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1414"/>
       <source>Flexible bands</source>
-      <translation type="unfinished"/>
+      <translation>Bandas flexibles</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1446"/>
@@ -1370,32 +1375,32 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1539"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>Optimización IR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>Original</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>Disminuir</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1569"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>Transformación y reducción mínima de la fase</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1577"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Edición avanzada de onda</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1596"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Editar</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1642"/>
@@ -1405,17 +1410,17 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1662"/>
       <source>Samples:</source>
-      <translation type="unfinished"/>
+      <translation>Muestras:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1721"/>
       <source>No selection</source>
-      <translation type="unfinished"/>
+      <translation>Ninguna selección</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1768"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Su tarea principal es realizar la ecualización paramétrica en audio, sin embargo, requiere que el usuario proporcione un . archivo dc que DDCToolbox genera.&lt;/p&gt;&lt;p&gt;ViPER-DDC en jDSP es una implementación generalizada de filtros de sección de segundo orden, que es ligeramente diferente de la implementación en Viper4Android. V4A soporta sólo Peaking parametrico; la razón es que V4A utiliza una propiedad de coeficiente de acciones de filtro Peaking. En contraste, jDSP no tiene tal suposición.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1815"/>
@@ -1435,7 +1440,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1890"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1946"/>
@@ -1465,7 +1470,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="2088"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Presets personalizados&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Crear y gestionar presets personalizados&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2114"/>
@@ -1475,17 +1480,17 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="2120"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Settings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configure this application&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ajustes&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Configurar esta aplicación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2140"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Other&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Various actions that are used less frequently&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Otras&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Varias acciones que se utilizan con menos frecuencia&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2198"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Passthrough&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This option defines whether to enable or disable sound effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ON/OFF&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Esta opción define si habilitar o desactivar los efectos de sonido.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2201"/>
@@ -1495,12 +1500,12 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="107"/>
       <source>%1 (%2) connected</source>
-      <translation type="unfinished"/>
+      <translation>%1 (%2) conectado</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="108"/>
       <source>%1 connected</source>
-      <translation type="unfinished"/>
+      <translation>%1 conectado</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="128"/>
@@ -1510,12 +1515,12 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="129"/>
       <source>The current EEL file (at &apos;%1&apos;) does not exist anymore on the filesystem. Please reopen the file manually.</source>
-      <translation type="unfinished"/>
+      <translation>El archivo actual de EEL (en &apos;%1&apos;) ya no existe en el sistema de archivos. Por favor, vuelva a abrir el archivo manualmente.</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="256"/>
       <source>Apps</source>
-      <translation type="unfinished"/>
+      <translation>Aplicaciones</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="257"/>
@@ -1530,22 +1535,22 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="263"/>
       <source>Reset to defaults</source>
-      <translation type="unfinished"/>
+      <translation>Restablecer valores predeterminados</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="264"/>
       <source>Load from file</source>
-      <translation type="unfinished"/>
+      <translation>Cargar desde un archivo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="265"/>
       <source>Save to file</source>
-      <translation type="unfinished"/>
+      <translation>Guardar en un archivo</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="267"/>
       <source>Open LiveprogIDE</source>
-      <translation type="unfinished"/>
+      <translation>Abrir LiveprogIDE</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="269"/>
@@ -1555,97 +1560,97 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="364"/>
       <source>Bass/Misc</source>
-      <translation type="unfinished"/>
+      <translation>Bass/Misc</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="365"/>
       <source>Sound Positioning</source>
-      <translation type="unfinished"/>
+      <translation>Posición del sonido</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="366"/>
       <source>Reverb</source>
-      <translation type="unfinished"/>
+      <translation>Reverberación</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="367"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>Equalitzador</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="368"/>
       <source>Convolver</source>
-      <translation type="unfinished"/>
+      <translation>Convolver</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="369"/>
       <source>DDC</source>
-      <translation type="unfinished"/>
+      <translation>DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="370"/>
       <source>Liveprog</source>
-      <translation type="unfinished"/>
+      <translation>Liveprog</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="371"/>
       <source>Graphic EQ</source>
-      <translation type="unfinished"/>
+      <translation>Ecualizador gráfico</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="383"/>
       <source>Launch application</source>
-      <translation type="unfinished"/>
+      <translation>Iniciar aplicación</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="525"/>
       <source>Reset Configuration</source>
-      <translation type="unfinished"/>
+      <translation>Restablecer Configuración</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="525"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>¿Estás seguro?</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="549"/>
       <source>Load custom audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>Cargar audio.conf personalizado</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="561"/>
       <source>Save current audio.conf</source>
-      <translation type="unfinished"/>
+      <translation>Guardar audio actual</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>Muy baja</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>Baja</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>Media</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>Alta</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>Extrema</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1135"/>
       <source>Advanced waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Edición avanzada de onda</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1136"/>
@@ -1669,64 +1674,64 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="14"/>
       <source>Create new script</source>
-      <translation type="unfinished"/>
+      <translation>Crear nuevo script</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="63"/>
       <source>New script</source>
-      <translation type="unfinished"/>
+      <translation>Nuevo script</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
       <source>Define and generate a basic script template</source>
-      <translation type="unfinished"/>
+      <translation>Definir y generar una plantilla de script básica</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
       <source>Workspace directory</source>
-      <translation type="unfinished"/>
+      <translation>Directorio del espacio de trabajo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="159"/>
       <source>File name</source>
-      <translation type="unfinished"/>
+      <translation>Nombre del archivo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="212"/>
       <source>Description</source>
-      <translation type="unfinished"/>
+      <translation>Descripción</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="219"/>
       <source>Untitled script</source>
-      <translation type="unfinished"/>
+      <translation>Script sin nombre</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="23"/>
       <source>Select directory</source>
-      <translation type="unfinished"/>
+      <translation>Seleccionar directorio</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <source>Workspace directory does not exist</source>
-      <translation type="unfinished"/>
+      <translation>El directorio del espacio de trabajo no existe</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
       <source>A file with the same name already exists at this loction</source>
-      <translation type="unfinished"/>
+      <translation>Ya existe un archivo con el mismo nombre en esta ubicación</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="53"/>
       <source>File name is empty or contains illegal characters</source>
-      <translation type="unfinished"/>
+      <translation>El nombre del archivo está vacío o contiene caracteres no válidos</translation>
     </message>
   </context>
   <context>
@@ -1736,7 +1741,7 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/utils/OverlayMsgProxy.h" line="33"/>
       <location filename="../../src/utils/OverlayMsgProxy.h" line="37"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar</translation>
     </message>
   </context>
   <context>
@@ -1744,7 +1749,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="14"/>
       <source>Palette editor</source>
-      <translation type="unfinished"/>
+      <translation>Editor de paleta</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="26"/>
@@ -1753,47 +1758,47 @@ This setting is only in effect if IR optimization is enabled.
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="143"/>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="169"/>
       <source>Select...</source>
-      <translation type="unfinished"/>
+      <translation>Seleccionar...</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="39"/>
       <source>Base Color</source>
-      <translation type="unfinished"/>
+      <translation>Color base</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="52"/>
       <source>Background Color</source>
-      <translation type="unfinished"/>
+      <translation>Color de fondo</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="65"/>
       <source>Foreground Color</source>
-      <translation type="unfinished"/>
+      <translation>Color de primer plano</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="104"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="117"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Restablecer</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="130"/>
       <source>White Icons</source>
-      <translation type="unfinished"/>
+      <translation>Iconos blancos</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="156"/>
       <source>Selection Color</source>
-      <translation type="unfinished"/>
+      <translation>Selección de Color</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PaletteEditor.ui" line="182"/>
       <source>Disabled Color</source>
-      <translation type="unfinished"/>
+      <translation>Color deshabilitado</translation>
     </message>
   </context>
   <context>
@@ -1801,17 +1806,17 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="26"/>
       <source>Add new rule...</source>
-      <translation type="unfinished"/>
+      <translation>Añadir nueva regla...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="38"/>
       <source>If</source>
-      <translation type="unfinished"/>
+      <translation>Si</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="58"/>
       <source>is connected, then load preset</source>
-      <translation type="unfinished"/>
+      <translation>está conectado, luego carga preajuste</translation>
     </message>
   </context>
   <context>
@@ -1819,37 +1824,37 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>Preajuste</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
       <source>Preset name</source>
-      <translation type="unfinished"/>
+      <translation>Nombre del preajuste</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
       <source>Adds current config as a preset</source>
-      <translation type="unfinished"/>
+      <translation>Añade la configuración actual como preajuste</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Guardar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
       <source>Rules...</source>
-      <translation type="unfinished"/>
+      <translation>Reglas...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="113"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Eliminar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="126"/>
       <source>Load</source>
-      <translation type="unfinished"/>
+      <translation>Cargar</translation>
     </message>
   </context>
   <context>
@@ -1857,47 +1862,47 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="23"/>
       <source>No presets saved</source>
-      <translation type="unfinished"/>
+      <translation>No hay preajustes guardados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
       <source>Cannot load preset</source>
-      <translation type="unfinished"/>
+      <translation>No se puede cargar preajuste</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
       <source>Selected file does not exist anymore</source>
-      <translation type="unfinished"/>
+      <translation>El archivo seleccionado ya no existe</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
       <source>Overwrite</source>
-      <translation type="unfinished"/>
+      <translation>Sobreescribir</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Guardar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Renombrar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
       <source>Delete</source>
-      <translation type="unfinished"/>
+      <translation>Eliminar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
       <source>Rename preset</source>
-      <translation type="unfinished"/>
+      <translation>Renombrar preajuste</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="141"/>
       <source>Enter new name</source>
-      <translation type="unfinished"/>
+      <translation>Introduce un nuevo nombre</translation>
     </message>
   </context>
   <context>
@@ -1905,45 +1910,47 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="14"/>
       <source>Preset auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>Reglas de cambio de preajuste automático</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="27"/>
       <source>Auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>Reglas de cambio automático</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="62"/>
       <source>  Add new rule...  </source>
-      <translation type="unfinished"/>
+      <translation>  Añadir nueva regla...  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="75"/>
       <source>  Delete selection  </source>
-      <translation type="unfinished"/>
+      <translation>  Eliminar selección  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="34"/>
       <source>No rules defined</source>
-      <translation type="unfinished"/>
+      <translation>No hay reglas definidas</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="71"/>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="79"/>
       <source>Cannot add new rule</source>
-      <translation type="unfinished"/>
+      <translation>No se puede añadir una nueva regla</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="72"/>
       <source>All connected audio devices have already a rule defined.
 You can only create one rule per device.</source>
-      <translation type="unfinished"/>
+      <translation>Todos los dispositivos de audio conectados ya tienen una regla definida.
+Solo puede crear una regla por dispositivo.</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="79"/>
       <source>You have no presets saved.
 Please create one first before adding a new rule.</source>
-      <translation type="unfinished"/>
+      <translation>No tiene preajustes guardados.
+Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     </message>
   </context>
   <context>
@@ -1951,17 +1958,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>Dispositivo</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="79"/>
       <source>Output route</source>
-      <translation type="unfinished"/>
+      <translation>Ruta de salida</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="80"/>
       <source>Assigned preset</source>
-      <translation type="unfinished"/>
+      <translation>Preajuste asignado</translation>
     </message>
   </context>
   <context>
@@ -1969,163 +1976,164 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="159"/>
       <source>List All Tabs</source>
-      <translation type="unfinished"/>
+      <translation>Listar todas las pestañas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>Separar grupo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
       <source>Close Active Tab</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar pestaña activa</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="186"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar grupo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="248"/>
       <source>Close Tab</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar pestaña</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="20"/>
       <source>Something went wrong</source>
-      <translation type="unfinished"/>
+      <translation>Algo salió mal</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="21"/>
       <source>Failed to open URL with default browser.
  Please copy this URL manually: </source>
-      <translation type="unfinished"/>
+      <translation>No se pudo abrir la URL con el navegador predeterminado.
+ Por favor, copie esta URL manualmente: </translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="29"/>
       <source>Flat</source>
-      <translation type="unfinished"/>
+      <translation>Plano</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="82"/>
       <source>Pop</source>
-      <translation type="unfinished"/>
+      <translation>Pop</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="83"/>
       <source>Rock</source>
-      <translation type="unfinished"/>
+      <translation>Rock</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="84"/>
       <source>Jazz</source>
-      <translation type="unfinished"/>
+      <translation>Jazz</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="85"/>
       <source>Classic</source>
-      <translation type="unfinished"/>
+      <translation>Clásica</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="86"/>
       <source>Bass</source>
-      <translation type="unfinished"/>
+      <translation>Graves</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="87"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Claro</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="88"/>
       <source>Hip-Hop</source>
-      <translation type="unfinished"/>
+      <translation>Hip-Hop</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="89"/>
       <source>Dubstep</source>
-      <translation type="unfinished"/>
+      <translation>Dubstep</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="90"/>
       <source>Movie</source>
-      <translation type="unfinished"/>
+      <translation>Película</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="91"/>
       <source>Metal</source>
-      <translation type="unfinished"/>
+      <translation>Metal</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="92"/>
       <source>Vocal Booster</source>
-      <translation type="unfinished"/>
+      <translation>Refuerzo de voz</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="93"/>
       <source>Hardstyle</source>
-      <translation type="unfinished"/>
+      <translation>Hardstyle</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="94"/>
       <source>Acoustic</source>
-      <translation type="unfinished"/>
+      <translation>Acústico</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="95"/>
       <source>R&amp;B</source>
-      <translation type="unfinished"/>
+      <translation>R&amp;B</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="96"/>
       <source>Electronic</source>
-      <translation type="unfinished"/>
+      <translation>Electrónica</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="97"/>
       <source>Deep Bass</source>
-      <translation type="unfinished"/>
+      <translation>Bajos profundos</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="98"/>
       <source>Beats</source>
-      <translation type="unfinished"/>
+      <translation>Ritmos</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="105"/>
       <source>BS2B Custom</source>
-      <translation type="unfinished"/>
+      <translation>BS2B personalizado</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="106"/>
       <source>BS2B Weak</source>
-      <translation type="unfinished"/>
+      <translation>BS2B Débil</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="107"/>
       <source>BS2B Strong</source>
-      <translation type="unfinished"/>
+      <translation>BS2B Fuerte</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation type="unfinished"/>
+      <translation>Fuera de la cabeza</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
       <source>Surround 1</source>
-      <translation type="unfinished"/>
+      <translation>Sonido envolvente 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="110"/>
       <source>Surround 2</source>
-      <translation type="unfinished"/>
+      <translation>Sonido envolvente 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
       <source>Joe0Bloggs Realistic surround</source>
-      <translation type="unfinished"/>
+      <translation>Joe0Bloggs Sonido envolvente realista</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
@@ -2135,7 +2143,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Salón pequeño 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
@@ -2252,17 +2260,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="80"/>
       <source>not connected</source>
-      <translation type="unfinished"/>
+      <translation>no conectado</translation>
     </message>
     <message>
       <location filename="../../src/main.cpp" line="190"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP es un avanzado motor de procesamiento de audio disponible para sistemas Linux y Android.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="33"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>Se ha denegado el permiso de inicio automático</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
@@ -2272,12 +2280,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Error desconocido</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>Por favor, asegúrese de que XDG Background Portal está disponible y activa para usar el inicio automático. %1</translation>
     </message>
   </context>
   <context>
@@ -2285,7 +2293,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/RouteListModel.cpp" line="66"/>
       <source>&lt;any output route&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;Cualquier ruta de salida&gt;</translation>
     </message>
   </context>
   <context>
@@ -2293,67 +2301,67 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="44"/>
       <source>Settings</source>
-      <translation type="unfinished"/>
+      <translation>Ajustes</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="83"/>
       <source>Category</source>
-      <translation type="unfinished"/>
+      <translation>Categoría</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="88"/>
       <source>Interface</source>
-      <translation type="unfinished"/>
+      <translation>Interfaz</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Procesamiento de audio</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
       <source>Default paths</source>
-      <translation type="unfinished"/>
+      <translation>Rutas predeterminadas</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="103"/>
       <source>Devices</source>
-      <translation type="unfinished"/>
+      <translation>Dispositivos</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="108"/>
       <source>Network</source>
-      <translation type="unfinished"/>
+      <translation>Red</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation type="unfinished"/>
+      <translation>Icono de bandeja de sistema</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
       <source>Context menu</source>
-      <translation type="unfinished"/>
+      <translation>Menú contextual</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
       <source>Theme</source>
-      <translation type="unfinished"/>
+      <translation>Tema</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="226"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Editar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="250"/>
       <source>Color scheme</source>
-      <translation type="unfinished"/>
+      <translation>Esquema de colores</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>Ecualizador</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
@@ -2363,47 +2371,47 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>Prueba de rendimiento del convolver</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>Hacer prueba de rendimiento</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Borrar datos del caché</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>Activar prueba de rendimiento al arrancar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>La prueba de rendimiento al arrancar puede causar un aumento del uso de la CPU durante aproximadamente un minuto después del lanzamiento. Generar datos de benchmarking para su sistema puede mejorar el rendimiento de los módulos de conversión.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Soluciones alternativas</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>Permitir el control de volumen del dispositivo virtual sink</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>Se necesita reiniciar para aplicar los cambios. Puede causar pérdida de audio en algunos casos.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
       <source>Impluse responses</source>
-      <translation type="unfinished"/>
+      <translation>Respuesta de Impulso</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="483"/>
@@ -2413,7 +2421,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
       <source>Liveprog scripts</source>
-      <translation type="unfinished"/>
+      <translation>Script de programación en vivo</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="534"/>
@@ -2428,7 +2436,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will check on every startup if one of the default EEL scripts is missing. If this is the case the missing file(s) will automatically be restored from the resources. (It will not overwrite them if they already exist!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Esta opción comprobará en cada inicio si falta uno de los scripts por defecto de EEL. Si este es el caso los archivo(s) faltantes serán automáticamente restaurados de los recursos. (¡No las sobrescribirá si ya existen!)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="557"/>
@@ -2468,7 +2476,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation type="unfinished"/>
+      <translation>En la sección &apos;Aplicaciones&apos; accesible usando el menú de tres puntos de la ventana principal, puedes bloquear aplicaciones que estén reproduciendo sonido de ser procesadas por JamesDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
@@ -2483,7 +2491,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="744"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>Base de datos AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="755"/>
@@ -2549,7 +2557,7 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="283"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>Datos de prueba de rendimiento cargados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="216"/>
@@ -2559,39 +2567,40 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
       <source>installed</source>
-      <translation type="unfinished"/>
+      <translation>instalado</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
       <source>not installed</source>
-      <translation type="unfinished"/>
+      <translation>No instalado</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>no hay datos de pruebas de rendimiento almacenados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
       <source>Override liveprog scripts?</source>
-      <translation type="unfinished"/>
+      <translation>¿Reemplazar scripts en liveprog?</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="305"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
-      <translation type="unfinished"/>
+      <translation>¿Quieres sobreescribir los scripts de liveprog predeterminados?
+Si han sido modificados, se reiniciarán.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="308"/>
       <source>Extract assets</source>
-      <translation type="unfinished"/>
+      <translation>Extraer recursos</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="308"/>
       <source>%1 files have been restored</source>
-      <translation type="unfinished"/>
+      <translation>%1 archivos han sido restaurados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
@@ -2623,17 +2632,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="454"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>Esperado resultados...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>Caché borrado</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>Los datos de la prueba de rendimiento han sido borrados. Reinicie la aplicación para aplicar los cambios completamente.</translation>
     </message>
   </context>
   <context>
@@ -2659,17 +2668,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="72"/>
       <source>JamesDSP core version</source>
-      <translation type="unfinished"/>
+      <translation>Versión principal de JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="79"/>
       <source>Processing state</source>
-      <translation type="unfinished"/>
+      <translation>Procesando estado</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="86"/>
       <source>Audio format</source>
-      <translation type="unfinished"/>
+      <translation>Formato de audio</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
@@ -2737,12 +2746,12 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/TrayIcon.cpp" line="267"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="337"/>
       <source>&amp;Show/hide window</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Mostrar / ocultar ventana</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="271"/>
       <source>Re&amp;verberation presets</source>
-      <translation type="unfinished"/>
+      <translation>Re&amp;verberación predefinida</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="273"/>
@@ -2752,12 +2761,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="289"/>
       <source>&amp;Equalizer presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Preajustes del ecualizador</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="302"/>
       <source>&amp;Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Alimentación cruzada</translation>
     </message>
   </context>
   <context>
@@ -2770,7 +2779,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="57"/>
       <source>Value</source>
-      <translation type="unfinished"/>
+      <translation>Valor</translation>
     </message>
   </context>
   <context>
@@ -2778,7 +2787,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Forma</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
@@ -2827,7 +2836,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="36"/>
       <source>Company</source>
-      <translation type="unfinished"/>
+      <translation>Empresa</translation>
     </message>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="37"/>
@@ -2840,12 +2849,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="584"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>Separar grupo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="587"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>Cerrar grupo</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="589"/>
@@ -2894,7 +2903,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
       <source>Moves the selected toolbar item up</source>
-      <translation type="unfinished"/>
+      <translation>Mueve arriba el elemento de la barra de herramientas</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="79"/>
@@ -2944,7 +2953,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="215"/>
       <source>&amp;Del</source>
-      <translation type="unfinished"/>
+      <translation>Eliminar</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="245"/>
