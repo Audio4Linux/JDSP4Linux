@@ -28,7 +28,7 @@ jobs:
         apt update
         apt upgrade -y git
     
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         ref: 'master'
         submodules: 'recursive'
@@ -54,7 +54,7 @@ jobs:
         make
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: jamesdsp-pulse-${{ matrix.flavor }}_portable_linux64
         path: src/jamesdsp
@@ -75,7 +75,7 @@ jobs:
         apt update
         apt upgrade -y git
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         ref: 'master'
         submodules: 'recursive'
@@ -102,7 +102,7 @@ jobs:
         strip --strip-unneeded src/jamesdsp
     
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: jamesdsp-pipewire-${{ matrix.flavor }}_portable_linux64
         path: src/jamesdsp
@@ -115,7 +115,7 @@ jobs:
         flavor: [pulse, pipewire]
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
         ref: 'master'
@@ -146,7 +146,7 @@ jobs:
         ./meta/build_deb_package.sh ${{steps.version.outputs.version}} ${{ matrix.flavor }}
     
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
         path: jamesdsp-${{ matrix.flavor }}_${{steps.version.outputs.version}}_ubuntu22-04_amd64.deb
@@ -201,7 +201,7 @@ jobs:
       max-parallel: 1
         
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         repository: 'ThePBone/PPA-Repository'
         token: ${{ secrets.REPO_AUTH_TOKEN }}
