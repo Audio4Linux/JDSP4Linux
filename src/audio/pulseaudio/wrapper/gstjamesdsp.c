@@ -90,7 +90,7 @@ gst_jamesdsp_class_init(GstjamesdspClass *klass) {
                                           "Tim Schneeberger <tim.schneeberger@outlook.de>");
 
     caps = gst_caps_from_string(ALLOWED_CAPS);
-    gst_audio_filter_class_add_pad_templates(GST_JAMESDSP_CLASS (klass), caps);
+    gst_audio_filter_class_add_pad_templates((GstAudioFilterClass*) GST_JAMESDSP_CLASS (klass), caps);
     gst_caps_unref(caps);
 
     audioself_class->setup = GST_DEBUG_FUNCPTR (gst_jamesdsp_setup);
