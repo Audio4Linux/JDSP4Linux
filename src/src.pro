@@ -26,11 +26,6 @@ USE_PULSEAUDIO: DEFINES += USE_PULSEAUDIO
 FLATPAK: DEFINES += USE_PORTALS
 FLATPAK: DEFINES += IS_FLATPAK
 HEADLESS: DEFINES += HEADLESS
-NO_CRASH_HANDLER: DEFINES += NO_CRASH_HANDLER
-
-!unix {
-    DEFINES += NO_CRASH_HANDLER
-}
 
 USE_PULSEAUDIO {
     DEFINES += FLATPAK_APP_ID=\\\"me.timschneeberger.jdsp4linux.pulse\\\"
@@ -202,16 +197,6 @@ SOURCES += \
     utils/dbus/ClientProxy.cpp \
     utils/dbus/IpcHandler.cpp \
     utils/dbus/ServerAdaptor.cpp
-
-!NO_CRASH_HANDLER {
-    HEADERS += \
-        crash/airbag.h \
-        crash/safecall.h \
-        crash/stacktrace.h \
-
-    SOURCES += \
-        crash/airbag.c \
-}
 
 DISTFILES += utils/dbus/manifest.xml
 

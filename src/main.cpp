@@ -38,59 +38,6 @@ static QTranslator* qtTranslator = nullptr;
 static QTranslator* translator = nullptr;
 #endif
 
-#ifndef NO_CRASH_HANDLER
-#include "crash/airbag.h"
-#include "crash/stacktrace.h"
-
-static bool SPIN_ON_CRASH = false;
-
-void onExceptionRaised(int fd)
-{
-    Q_UNUSED(fd)
-	safe_printf(STDERR_FILENO, "Done! Crash report saved to /tmp/jamesdsp/crash.dmp.\n");
-
-    if(SPIN_ON_CRASH)
-    {
-        safe_printf(STDERR_FILENO, "\nSpinning. Please run 'gdb jamesdsp %u' to continue debugging, Ctrl-C to quit, or Ctrl-\\ to dump core\n", getpid());
-        while(true)
-        {
-            sleep(1);
-        }
-    }
-    else
-    {
-        safe_printf(STDERR_FILENO, "\nConsider to launch this application with the parameter '--spinlock-on-crash' to wait for a debugger in case of a crash.\n");
-    }
-}
-
-#endif
-
-bool initCrashHandler(const char* exePath) {
-#ifndef NO_CRASH_HANDLER
-    QFile crashDmp(STACKTRACE_LOG);
-
-    bool lastSessionCrashed = false;
-    if(crashDmp.exists() && crashDmp.open(QFile::ReadOnly | QFile::Text))
-    {
-        QTextStream in(&crashDmp);
-        auto lastDmp = in.readAll();
-        crashDmp.close();
-
-        if(lastDmp.length() > 10)
-        {
-            lastSessionCrashed = true;
-            crashDmp.copy(STACKTRACE_LOG_OLD);
-            Log::backupLastLog();
-        }
-    }
-
-    EXECUTION_FILENAME = exePath;
-    airbag_init_fd(safe_open_wo_fd("/tmp/jamesdsp/crash.dmp"), onExceptionRaised, EXECUTION_FILENAME);
-    return lastSessionCrashed;
-#else
-    return false;
-#endif
-}
 
 #ifndef HEADLESS
 void initTranslator(const QLocale& locale) {
@@ -144,14 +91,12 @@ int main(int   argc,
     QLocale::setDefault(QLocale::c());
     setlocale(LC_NUMERIC, "C");
 
-    // Used for some crash handler magic & auto-start setup
+    // Used for auto-start setup
     findyourself_init(argv[0]);
     char exepath[PATH_MAX];
     find_yourself(exepath, sizeof(exepath));
     // Ensure temp directory exists
     mkdir("/tmp/jamesdsp/", S_IRWXU);
-    // Prepare crash handler if enabled
-    bool lastSessionCrashed = initCrashHandler(exepath);
 
     qRegisterMetaType<AppConfig::Key>();
     qRegisterMetaType<DspConfig::Key>();
@@ -180,7 +125,6 @@ int main(int   argc,
     QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (GUI)");
     QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically (GUI)");
     QCommandLineOption lang(QStringList() << "l" << "lang", "Override language (example: de, es, uk, zh_CN)", "lang");
-    QCommandLineOption spinlck(QStringList() << "d" << "spinlock-on-crash", "Wait for debugger in case of crash");
     QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
     QCommandLineOption minVerbosity(QStringList() << "m" << "min-verbosity", "Minimum log verbosity (0 = Debug; ...; 5 = Critical)", "level");
     QCommandLineOption nocolor(QStringList() << "c" << "no-color", "Disable colored log output");
@@ -194,9 +138,6 @@ int main(int   argc,
     // GUI
     parser.addOptions({tray, watch, lang});
 
-    // Debug
-    parser.addOption(spinlck);
-
     // Logging
     parser.addOptions({silent, nocolor, minVerbosity});
 
@@ -208,10 +149,6 @@ int main(int   argc,
 
     // Determine whether CLI mode should be activated
     bool cliMode = ctrl.isAnyArgumentSet(parser);
-
-#ifndef NO_CRASH_HANDLER
-    SPIN_ON_CRASH = parser.isSet(spinlck);
-#endif
 
     // Prepare logger
     bool minVerbValid = false;
@@ -231,13 +168,6 @@ int main(int   argc,
         return ctrl.execute(parser) ? 0 : 1;
     }
     else {
-#ifndef NO_CRASH_HANDLER
-        if(lastSessionCrashed)
-        {
-            Log::information("Last session crashed unexpectedly. A crash report has been saved here: " + QString(STACKTRACE_LOG_OLD));
-        }
-#endif
-
         AppConfig::instance().set(AppConfig::ExecutablePath, QString::fromLocal8Bit(exepath));
         Log::clear();
 
