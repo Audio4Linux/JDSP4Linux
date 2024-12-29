@@ -474,11 +474,11 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>11 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/artemgrebennikov310"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13820153/medium/d1565ef34bd253f67a995f1fd3811887.jpg" />
+      <a href="https://crowdin.com/profile/realanon"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15941225/medium/8e8b6e1dfcb275816166eb31df5ed3e0.jpeg" />
         <br />
-        <sub><b>Mr.Positiv (artemgrebennikov310)</b></sub></a>
+        <sub><b>Anonymous (realanon)</b></sub></a>
       <br />
-      <sub><b>4 words</b></sub>
+      <sub><b>6 words</b></sub>
     </td>
   </tr>
 </table><a href="https://crowdin.com/project/jdsp4linux" target="_blank">Translate in Crowdin 🚀</a>
