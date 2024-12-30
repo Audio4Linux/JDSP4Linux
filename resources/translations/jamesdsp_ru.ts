@@ -54,7 +54,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>Raw</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
@@ -314,7 +314,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="78"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>Управление правом автозапуска для JamesDSP</translation>
     </message>
   </context>
   <context>
