@@ -4,6 +4,7 @@
 #include <string.h>
 #include <math.h>
 #include <float.h>
+#include <stdint.h>
 
 #include "jdsp_header.h"
 
