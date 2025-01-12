@@ -102,17 +102,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ Veritabanı</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation type="unfinished"/>
+      <translation>Filtre...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation type="unfinished"/>
+      <translation>Yerel veritabanı versiyonu</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
@@ -152,7 +152,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
       <source>Delete database</source>
-      <translation type="unfinished"/>
+      <translation>Veritabanını sil</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
@@ -184,7 +184,7 @@ This will override your current GraphicEQ configuration.</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ veritabanı</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
