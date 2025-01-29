@@ -251,56 +251,56 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
 <table>
   <tr>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/ThePBone"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15683553/medium/d13428d1e0922bc2069500aef57d1459.png" />
+      <a href="https://crowdin.com/profile/ThePBone"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15683553/medium/d13428d1e0922bc2069500aef57d1459.png" />
         <br />
         <sub><b>Tim Schneeberger (ThePBone)</b></sub></a>
       <br />
       <sub><b>7404 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/Kazevic"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15680393/medium/fd2c52453ee1d86f41406cff9346d74d.png" />
+      <a href="https://crowdin.com/profile/Kazevic"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15680393/medium/fd2c52453ee1d86f41406cff9346d74d.png" />
         <br />
         <sub><b>Kauã Azevedo da Silva Vicente (Kazevic)</b></sub></a>
       <br />
       <sub><b>3174 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/Camellan"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13410766/medium/b4019516b3323e817b7e77712961de69_default.png" />
+      <a href="https://crowdin.com/profile/Camellan"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/13410766/medium/b4019516b3323e817b7e77712961de69_default.png" />
         <br />
         <sub><b>Camellan</b></sub></a>
       <br />
       <sub><b>3152 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/KatieFrogs"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/14450708/medium/bb568293d8b26daa3f7f323dbc9d69d0.png" />
+      <a href="https://crowdin.com/profile/KatieFrogs"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14450708/medium/bb568293d8b26daa3f7f323dbc9d69d0.png" />
         <br />
         <sub><b>Katie Frogs (KatieFrogs)</b></sub></a>
       <br />
       <sub><b>2955 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/catvinyl"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15923209/medium/87c1ec8379dee277ba0bd42e1d8206f2.png" />
+      <a href="https://crowdin.com/profile/catvinyl"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15923209/medium/87c1ec8379dee277ba0bd42e1d8206f2.png" />
         <br />
         <sub><b>catvinyl</b></sub></a>
       <br />
       <sub><b>2352 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/Gokwu"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15975377/medium/7be6218dc0f81f4f2dc8418ea983bd9e.png" />
+      <a href="https://crowdin.com/profile/Gokwu"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15975377/medium/7be6218dc0f81f4f2dc8418ea983bd9e.png" />
         <br />
         <sub><b>Choi Jun Hyeong (Gokwu)</b></sub></a>
       <br />
       <sub><b>2321 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/bl4rnk"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16644221/medium/f77268f6e88c039a3f8d15b3eb472565.jpeg" />
+      <a href="https://crowdin.com/profile/bl4rnk"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16644221/medium/f77268f6e88c039a3f8d15b3eb472565.jpeg" />
         <br />
         <sub><b>bl4rnk</b></sub></a>
       <br />
       <sub><b>1713 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/HoleHolo"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/14737398/medium/7d120eb168560837ca53bd0f189be716.png" />
+      <a href="https://crowdin.com/profile/HoleHolo"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14737398/medium/7d120eb168560837ca53bd0f189be716.png" />
         <br />
         <sub><b>HoleHolo</b></sub></a>
       <br />
@@ -309,56 +309,56 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
   </tr>
   <tr>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/mefsaal"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13221907/medium/c0b751a37f076028f7271b00392736aa.jpg" />
+      <a href="https://crowdin.com/profile/mefsaal"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/13221907/medium/c0b751a37f076028f7271b00392736aa.jpg" />
         <br />
         <sub><b>Gabriel Cabrera Davila (mefsaal)</b></sub></a>
       <br />
       <sub><b>652 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/seqfault"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15878639/medium/bf4af8eeefcd4c065fd867a7ad16994b.jpeg" />
+      <a href="https://crowdin.com/profile/seqfault"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15878639/medium/bf4af8eeefcd4c065fd867a7ad16994b.jpeg" />
         <br />
         <sub><b>NullPointerException (seqfault)</b></sub></a>
       <br />
       <sub><b>1151 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/mariachini"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13113640/medium/99ff648dd8f28efebdce9713cee1b9c3.png" />
+      <a href="https://crowdin.com/profile/mariachini"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/13113640/medium/99ff648dd8f28efebdce9713cee1b9c3.png" />
         <br />
         <sub><b>mariachini</b></sub></a>
       <br />
       <sub><b>373 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/tachyglossues"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16138360/medium/4d6a2b47f6bc03515132a7310e27d4d6_default.png" />
+      <a href="https://crowdin.com/profile/tachyglossues"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16138360/medium/4d6a2b47f6bc03515132a7310e27d4d6_default.png" />
         <br />
         <sub><b>tachyglossues</b></sub></a>
       <br />
       <sub><b>358 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/gkpiccoli"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15512952/medium/57e54eba4de46714593f1d0dcbcdfa3a.jpeg" />
+      <a href="https://crowdin.com/profile/gkpiccoli"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15512952/medium/57e54eba4de46714593f1d0dcbcdfa3a.jpeg" />
         <br />
         <sub><b>Gustavo Kureck Piccoli (gkpiccoli)</b></sub></a>
       <br />
       <sub><b>280 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/zhanghua000"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15906451/medium/db06f53e9b83801ec99389ab759b1e48.png" />
+      <a href="https://crowdin.com/profile/zhanghua000"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15906451/medium/db06f53e9b83801ec99389ab759b1e48.png" />
         <br />
         <sub><b>Noob Zhang (zhanghua000)</b></sub></a>
       <br />
       <sub><b>240 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/kzsuser"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16189758/medium/b0b9640e2be596e641f458345859f5dd_default.png" />
+      <a href="https://crowdin.com/profile/kzsuser"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16189758/medium/b0b9640e2be596e641f458345859f5dd_default.png" />
         <br />
         <sub><b>kzsuser</b></sub></a>
       <br />
       <sub><b>221 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/kanium"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16501577/medium/c73db838b312ee88a0f455b96be1301c.jpeg" />
+      <a href="https://crowdin.com/profile/kanium"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16501577/medium/c73db838b312ee88a0f455b96be1301c.jpeg" />
         <br />
         <sub><b>kanium</b></sub></a>
       <br />
@@ -367,14 +367,14 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
   </tr>
   <tr>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/AnClark"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15932859/medium/621b49aa22122e6ca25fc819eac5e96f.jpeg" />
+      <a href="https://crowdin.com/profile/AnClark"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15932859/medium/621b49aa22122e6ca25fc819eac5e96f.jpeg" />
         <br />
         <sub><b>AnClark Liu (AnClark)</b></sub></a>
       <br />
       <sub><b>173 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/deproocho"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/14966313/medium/71b861af9d1e455f743c1002b4d24622.jpeg" />
+      <a href="https://crowdin.com/profile/deproocho"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14966313/medium/71b861af9d1e455f743c1002b4d24622.jpeg" />
         <br />
         <sub><b>Bruh (deproocho)</b></sub></a>
       <br />
@@ -388,28 +388,28 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>126 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/coldified_"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16382586/medium/27690602b0b2014444ad1346007a6734.png" />
+      <a href="https://crowdin.com/profile/coldified_"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16382586/medium/27690602b0b2014444ad1346007a6734.png" />
         <br />
         <sub><b>Inche Hwang (coldified_)</b></sub></a>
       <br />
       <sub><b>117 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/etiennec78"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15912311/medium/49bacd7fcfc807ea0c5f97127af5bb26.jpeg" />
+      <a href="https://crowdin.com/profile/etiennec78"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15912311/medium/49bacd7fcfc807ea0c5f97127af5bb26.jpeg" />
         <br />
         <sub><b>etiennec79 (etiennec78)</b></sub></a>
       <br />
       <sub><b>114 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/james34602"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15764811/medium/9c166ce647706bbfc568c13763b8a50d.jpeg" />
+      <a href="https://crowdin.com/profile/james34602"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15764811/medium/9c166ce647706bbfc568c13763b8a50d.jpeg" />
         <br />
         <sub><b>James Fung (james34602)</b></sub></a>
       <br />
       <sub><b>72 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/theczechczech"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15271802/medium/850b88d0368fad2a99ee217e658235a1.png" />
+      <a href="https://crowdin.com/profile/theczechczech"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15271802/medium/850b88d0368fad2a99ee217e658235a1.png" />
         <br />
         <sub><b>theczechczech</b></sub></a>
       <br />
@@ -425,56 +425,56 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
   </tr>
   <tr>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/jaytau"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15142098/medium/010a2b64c5b06dd38710cf0c99776867.png" />
+      <a href="https://crowdin.com/profile/jaytau"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15142098/medium/010a2b64c5b06dd38710cf0c99776867.png" />
         <br />
         <sub><b>Joel Tony (jaytau)</b></sub></a>
       <br />
       <sub><b>28 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/crisap94"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/14296216/medium/40edd01d8eb60877be593e043d2561e8_default.png" />
+      <a href="https://crowdin.com/profile/crisap94"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14296216/medium/40edd01d8eb60877be593e043d2561e8_default.png" />
         <br />
         <sub><b>crisap94</b></sub></a>
       <br />
       <sub><b>27 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/arifesat"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15670651/medium/46177c3d13c90ed767700bb49413107f.jpeg" />
+      <a href="https://crowdin.com/profile/arifesat"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15670651/medium/46177c3d13c90ed767700bb49413107f.jpeg" />
         <br />
         <sub><b>Arif Esat Yılmaz (arifesat)</b></sub></a>
       <br />
       <sub><b>24 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/kingconcentrer"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16469555/medium/54ededcf7750147a59dd441e50fd4afb.png" />
+      <a href="https://crowdin.com/profile/kingconcentrer"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16469555/medium/54ededcf7750147a59dd441e50fd4afb.png" />
         <br />
         <sub><b>thành thành (kingconcentrer)</b></sub></a>
       <br />
       <sub><b>18 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/andmydignity"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15821563/medium/cce9327c6cd8879f307495fab2077633.png" />
+      <a href="https://crowdin.com/profile/andmydignity"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15821563/medium/cce9327c6cd8879f307495fab2077633.png" />
         <br />
         <sub><b>Semih Aslan (andmydignity)</b></sub></a>
       <br />
       <sub><b>15 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/deathrobert2010"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/13559998/medium/429e149d92ed6c461f601e7d30d280df.jpg" />
+      <a href="https://crowdin.com/profile/deathrobert2010"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/13559998/medium/429e149d92ed6c461f601e7d30d280df.jpg" />
         <br />
         <sub><b>Robert Abreu (deathrobert2010)</b></sub></a>
       <br />
       <sub><b>13 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/ldepaulaf"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/16134798/medium/15b5baf47f32c5accb64ab632c4f8f98.png" />
+      <a href="https://crowdin.com/profile/ldepaulaf"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16134798/medium/15b5baf47f32c5accb64ab632c4f8f98.png" />
         <br />
         <sub><b>Lucas De Paula (ldepaulaf)</b></sub></a>
       <br />
       <sub><b>11 words</b></sub>
     </td>
     <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/salihefee"><img alt="logo" style="width: 64px" src="https://crowdin-static.downloads.crowdin.com/avatar/15989941/medium/c584ec58fc9202ed9960a41bcda8d6f4.jpg" />
+      <a href="https://crowdin.com/profile/salihefee"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15989941/medium/c584ec58fc9202ed9960a41bcda8d6f4.jpg" />
         <br />
         <sub><b>salihefee</b></sub></a>
       <br />
