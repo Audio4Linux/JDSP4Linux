@@ -34,22 +34,22 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation/>
+      <translation>目标</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation/>
+      <translation>原始（平滑）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>错误（已消除）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>均衡器</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
@@ -69,7 +69,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>均衡器(规格化的)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
@@ -327,7 +327,7 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
       <source>Functions</source>
-      <translation type="unfinished"/>
+      <translation>功能</translation>
     </message>
   </context>
   <context>
@@ -511,7 +511,7 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>自动插入</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
@@ -587,12 +587,12 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; 开始编译 %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;编译停止于 %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="298"/>
@@ -816,7 +816,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation type="unfinished"/>
+      <translation>你可以走了！您可以更改刚刚在设置部分所做的任何选择。查看更多定制选项。访问我们的 Telegram 社区获取支持和更新！</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
@@ -1189,42 +1189,42 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="866"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>低通截止（输入）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="886"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>低通截止（低音）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="906"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>低通截止（阻尼）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="926"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>低通截止（输出）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="953"/>
       <source>Final wet mix</source>
-      <translation type="unfinished"/>
+      <translation>最终湿混合</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="960"/>
       <source>Final dry mix</source>
-      <translation type="unfinished"/>
+      <translation>最终干混合</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="967"/>
       <source>Reverb wetness</source>
-      <translation type="unfinished"/>
+      <translation>恢复湿度</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="974"/>
       <source>Width L/R mix</source>
-      <translation type="unfinished"/>
+      <translation>宽场 L/R 混合</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="981"/>
@@ -1239,17 +1239,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="995"/>
       <source>Time decay</source>
-      <translation type="unfinished"/>
+      <translation>时间衰减</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1002"/>
       <source>Delay</source>
-      <translation type="unfinished"/>
+      <translation>延迟</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1009"/>
       <source>Bass boost</source>
-      <translation type="unfinished"/>
+      <translation>低音增强</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1157"/>
@@ -1259,32 +1259,32 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>FIR 最小相位</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1298"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 四阶</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1303"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 六阶</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1308"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 八阶</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1313"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 十阶</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1318"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>IIR 十二阶</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1249"/>
@@ -1294,17 +1294,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>多分辨率（连续小波，不完全的对偶框架）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>伪多分辨率（欠采样框架）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>伪多分辨率（时域，零延时）</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -1314,7 +1314,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1289"/>
       <source>Filter type</source>
-      <translation type="unfinished"/>
+      <translation>滤波器类型</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1338"/>
@@ -1324,17 +1324,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1341"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interpolation mode&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>；&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;插值模式&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;；</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>分段三次埃尔米特插值</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1350"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation type="unfinished"/>
+      <translation>改良 Hiroshi Akima 样条</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1370"/>
@@ -1420,7 +1420,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1768"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Its main job is to perform parametric equalization on audio, however it requires the user to provide a .vdc file that DDCToolbox generates.&lt;/p&gt;&lt;p&gt;ViPER-DDC in jDSP is a generalized implementation of second-order section filters, which is slightly different from the implementation in Viper4Android. V4A supports only Peaking parametric; the reason is that V4A uses a share coefficient property of Peaking filter. In contrast, jDSP does not have such an assumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>；；&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ViPER-DDC&lt;/span&gt;&lt;/p&gt;&lt;p&gt;其主要功能是实现音频参数均衡， 它要求用户提供一个 DDCToolbox 生成的 .vdc 文件。&lt;/p&gt;&lt;p&gt; JDSP 中的 ViPER-DDC 是二阶分段过滤器的通用实现，它与 Viper4Android 中的实现略有不同。V4A 只支持峰值参数；原因是 V4A 采用了峰值滤波器的共享系数特性。相比之下，JDSP没有这样的假设。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;；</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1815"/>
@@ -1440,7 +1440,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1890"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>；；&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/thepbone/DDCToolbox&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/thepbone/DDCToolbox&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&amp;gt；</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1946"/>
@@ -1470,7 +1470,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="2088"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Custom presets&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Create and manage custom presets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>；；&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;自定义预设&lt;/span&gt;&lt;/p&gt;&lt;p&gt;创建和管理自定义预设&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;；</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2114"/>
@@ -1500,12 +1500,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="107"/>
       <source>%1 (%2) connected</source>
-      <translation type="unfinished"/>
+      <translation>已连接 %1 (%2)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="108"/>
       <source>%1 connected</source>
-      <translation type="unfinished"/>
+      <translation>已连接 %1</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="128"/>
@@ -1650,7 +1650,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1135"/>
       <source>Advanced waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>高级波形编辑</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1136"/>
@@ -1684,7 +1684,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="70"/>
       <source>Define and generate a basic script template</source>
-      <translation type="unfinished"/>
+      <translation>定义并生成一个基本脚本模板</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.ui" line="110"/>
@@ -1721,7 +1721,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="40"/>
       <source>Workspace directory does not exist</source>
-      <translation type="unfinished"/>
+      <translation>工作区目录不存在</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/dialog/newfilewizard.cpp" line="46"/>
@@ -1862,47 +1862,47 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="23"/>
       <source>No presets saved</source>
-      <translation type="unfinished"/>
+      <translation>没有保存预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
       <source>Cannot load preset</source>
-      <translation type="unfinished"/>
+      <translation>无法载入预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="101"/>
       <source>Selected file does not exist anymore</source>
-      <translation type="unfinished"/>
+      <translation>选定的文件不再存在</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="111"/>
       <source>Overwrite</source>
-      <translation type="unfinished"/>
+      <translation>覆盖</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="115"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>保存</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="122"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>重命名</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="123"/>
       <source>Delete</source>
-      <translation type="unfinished"/>
+      <translation>删除</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="140"/>
       <source>Rename preset</source>
-      <translation type="unfinished"/>
+      <translation>重命名预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.cpp" line="141"/>
       <source>Enter new name</source>
-      <translation type="unfinished"/>
+      <translation>键入新名称</translation>
     </message>
   </context>
   <context>
@@ -1910,45 +1910,47 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="14"/>
       <source>Preset auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>预设的自动切换规则</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="27"/>
       <source>Auto-switch rules</source>
-      <translation type="unfinished"/>
+      <translation>自动切换规则</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="62"/>
       <source>  Add new rule...  </source>
-      <translation type="unfinished"/>
+      <translation>  添加新规则...  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.ui" line="75"/>
       <source>  Delete selection  </source>
-      <translation type="unfinished"/>
+      <translation>  删除选中项  </translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="34"/>
       <source>No rules defined</source>
-      <translation type="unfinished"/>
+      <translation>没有定义规则</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="71"/>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="79"/>
       <source>Cannot add new rule</source>
-      <translation type="unfinished"/>
+      <translation>无法添加新规则</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="72"/>
       <source>All connected audio devices have already a rule defined.
 You can only create one rule per device.</source>
-      <translation type="unfinished"/>
+      <translation>所有已连接的音频设备已定义规则。
+每个设备只能创建一条规则。</translation>
     </message>
     <message>
       <location filename="../../src/interface/dialog/PresetRuleDialog.cpp" line="79"/>
       <source>You have no presets saved.
 Please create one first before adding a new rule.</source>
-      <translation type="unfinished"/>
+      <translation>没有保存的预设
+添加新规则前请先创建一个</translation>
     </message>
   </context>
   <context>
@@ -1956,17 +1958,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="78"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>设备</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="79"/>
       <source>Output route</source>
-      <translation type="unfinished"/>
+      <translation>输出路线</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="80"/>
       <source>Assigned preset</source>
-      <translation type="unfinished"/>
+      <translation>已分配预设</translation>
     </message>
   </context>
   <context>
@@ -1979,7 +1981,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="169"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>分离组</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="182"/>
@@ -1999,48 +2001,49 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="20"/>
       <source>Something went wrong</source>
-      <translation type="unfinished"/>
+      <translation>出现了一些错误</translation>
     </message>
     <message>
       <location filename="../../src/utils/DesktopServices.cpp" line="21"/>
       <source>Failed to open URL with default browser.
  Please copy this URL manually: </source>
-      <translation type="unfinished"/>
+      <translation>无法以默认浏览器打开 URL
+ 请手动复制此URL： </translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="29"/>
       <source>Flat</source>
-      <translation type="unfinished"/>
+      <translation>均匀</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="82"/>
       <source>Pop</source>
-      <translation type="unfinished"/>
+      <translation>流行</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="83"/>
       <source>Rock</source>
-      <translation type="unfinished"/>
+      <translation>摇滚</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="84"/>
       <source>Jazz</source>
-      <translation type="unfinished"/>
+      <translation>爵士</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="85"/>
       <source>Classic</source>
-      <translation type="unfinished"/>
+      <translation>古典</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="86"/>
       <source>Bass</source>
-      <translation type="unfinished"/>
+      <translation>低音</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="87"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>明亮</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="88"/>
@@ -2343,17 +2346,17 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
       <source>Theme</source>
-      <translation type="unfinished"/>
+      <translation>主题</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="226"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>编辑</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="250"/>
       <source>Color scheme</source>
-      <translation type="unfinished"/>
+      <translation>配色方案</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="264"/>
@@ -2363,7 +2366,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
       <source>Always display handles</source>
-      <translation type="unfinished"/>
+      <translation>总是显示滑块</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
@@ -2373,12 +2376,12 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>进行基准测试</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>清空缓存数据</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
@@ -2388,22 +2391,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>启动时的基准测试可能导致启动后约一分钟内CPU使用率增加。 为您的系统生成基准数据可以提高卷积器模块的性能。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>工作区</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>允许对虚拟混音设备进行音量控制</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>重启以应用更改。在某些情况下可能会导致音频丢失。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
@@ -2413,7 +2416,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="483"/>
       <source>VDCs</source>
-      <translation type="unfinished"/>
+      <translation>VDCs</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
@@ -2428,7 +2431,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="543"/>
       <source>Built-in assets</source>
-      <translation type="unfinished"/>
+      <translation>内置资源</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
@@ -2453,22 +2456,22 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="615"/>
       <source>Use default output device (recommended)</source>
-      <translation type="unfinished"/>
+      <translation>使用默认输出设备 (推荐)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="622"/>
       <source>Manually select device</source>
-      <translation type="unfinished"/>
+      <translation>手动选择设备</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="634"/>
       <source>Device</source>
-      <translation type="unfinished"/>
+      <translation>设备</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="662"/>
       <source>Blocklisted apps</source>
-      <translation type="unfinished"/>
+      <translation>已屏蔽应用</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
@@ -2478,131 +2481,133 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
       <source>Allowlist mode (apps need to be explicitly enabled instead)</source>
-      <translation type="unfinished"/>
+      <translation>允许列表模式（需要明确启用应用程序）</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="715"/>
       <source>Clear list</source>
-      <translation type="unfinished"/>
+      <translation>清空列表</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="744"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 数据库</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="755"/>
       <source>Status:</source>
-      <translation type="unfinished"/>
+      <translation>状态：</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="765"/>
       <source>unknown</source>
-      <translation type="unfinished"/>
+      <translation>未知</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="785"/>
       <source>  Manage local database  </source>
-      <translation type="unfinished"/>
+      <translation>  管理本地数据库  </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="817"/>
       <source>Run in background (tray icon)</source>
-      <translation type="unfinished"/>
+      <translation>在后台运行(托盘图标)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="823"/>
       <source>No, shutdown audio effects when closing app</source>
-      <translation type="unfinished"/>
+      <translation>不，关闭应用时关闭音频特效</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="830"/>
       <source>Yes, minimize to tray icon when closing app</source>
-      <translation type="unfinished"/>
+      <translation>是的，关闭应用时最小化到托盘图标</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="837"/>
       <source>Auto-start</source>
-      <translation type="unfinished"/>
+      <translation>自动启动</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="843"/>
       <source>Start minimized on boot</source>
-      <translation type="unfinished"/>
+      <translation>启动时最小化</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="865"/>
       <source>Systray not supported on this system</source>
-      <translation type="unfinished"/>
+      <translation>此系统不支持 Systray</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="915"/>
       <source>Visit Github repo</source>
-      <translation type="unfinished"/>
+      <translation>访问 Github 仓库</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="941"/>
       <source>Run setup wizard</source>
-      <translation type="unfinished"/>
+      <translation>运行设置向导</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="964"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="283"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>基准数据已加载</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="216"/>
       <source>Unknown (%1)</source>
-      <translation type="unfinished"/>
+      <translation>未知 (%1)</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
       <source>installed</source>
-      <translation type="unfinished"/>
+      <translation>已安装</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="277"/>
       <source>not installed</source>
-      <translation type="unfinished"/>
+      <translation>未安装</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>没有保存基准数据</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
       <source>Override liveprog scripts?</source>
-      <translation type="unfinished"/>
+      <translation>覆盖 liveprog 脚本？</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="305"/>
       <source>Do you want to override existing default liveprog scripts?
 If they have been modified, they will be reset.</source>
-      <translation type="unfinished"/>
+      <translation>你想要覆盖现有的默认 liveprog 脚本吗？
+如果它们被修改，它们将被重置。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="308"/>
       <source>Extract assets</source>
-      <translation type="unfinished"/>
+      <translation>提取素材</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="308"/>
       <source>%1 files have been restored</source>
-      <translation type="unfinished"/>
+      <translation>%1 个文件已恢复</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation type="unfinished"/>
+      <translation>你将要启用允许名单模式。此模式激活时 JamesDSP 默认将不会处理全部应用程序。
+你需要明确允许每个应用程序在“应用程序”菜单中被处理。</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="402"/>
@@ -2612,12 +2617,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="403"/>
       <source>This action will reset your current blocklist or allowlist. Do you want to continue?</source>
-      <translation type="unfinished"/>
+      <translation>此操作将重置您当前的阻止列表或允许列表。您要继续吗？</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="431"/>
       <source>Warning</source>
-      <translation type="unfinished"/>
+      <translation>警告</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="431"/>
@@ -2627,17 +2632,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="454"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>等待结果……</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>缓存已清除</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>基准数据已清除，重启此应用以完全应用更改。</translation>
     </message>
   </context>
   <context>
@@ -2645,7 +2650,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/utils/SingleInstanceMonitor.cpp" line="56"/>
       <source>Another instance of JamesDSP is already active and has been put in the foreground.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP 的另一个实例已经启动，并在前台运行。</translation>
     </message>
   </context>
   <context>
@@ -2724,34 +2729,34 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="208"/>
       <source>No impulse responses found</source>
-      <translation type="unfinished"/>
+      <translation>未找到脉冲反馈</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="259"/>
       <source>&amp;Reload JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>&amp;重新载入JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="263"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="341"/>
       <source>&amp;Quit</source>
-      <translation type="unfinished"/>
+      <translation>&amp;退出</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="267"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="337"/>
       <source>&amp;Show/hide window</source>
-      <translation type="unfinished"/>
+      <translation>&amp;显示/隐藏窗口</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="271"/>
       <source>Re&amp;verberation presets</source>
-      <translation type="unfinished"/>
+      <translation>重写预设</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="273"/>
       <source>Off</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="289"/>
@@ -2761,7 +2766,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="302"/>
       <source>&amp;Crossfeed</source>
-      <translation type="unfinished"/>
+      <translation>&amp;交叉反馈</translation>
     </message>
   </context>
   <context>
@@ -2769,12 +2774,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="56"/>
       <source>Parameter</source>
-      <translation type="unfinished"/>
+      <translation>参数</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/model/VariableItemModel.cpp" line="57"/>
       <source>Value</source>
-      <translation type="unfinished"/>
+      <translation>值</translation>
     </message>
   </context>
   <context>
@@ -2787,28 +2792,28 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="64"/>
       <source>ms</source>
-      <translation type="unfinished"/>
+      <translation>毫秒</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="86"/>
       <source>Refresh every</source>
-      <translation type="unfinished"/>
+      <translation>刷新间隔</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.ui" line="95"/>
       <source>Click a variable to manipulate its value.</source>
-      <translation type="unfinished"/>
+      <translation>点击变量来修改其值。</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="83"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>错误</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="69"/>
       <source>This variable is a string. Currently only numerical value types can be modified.</source>
-      <translation type="unfinished"/>
+      <translation>此变量是一个字符串。目前只能修改变量类型。</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/VariableWatchWidget.cpp" line="74"/>
@@ -2831,12 +2836,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="36"/>
       <source>Company</source>
-      <translation type="unfinished"/>
+      <translation>公司</translation>
     </message>
     <message>
       <location filename="../../src/data/model/VdcDatabaseModel.cpp" line="37"/>
       <source>Model</source>
-      <translation type="unfinished"/>
+      <translation>型号</translation>
     </message>
   </context>
   <context>
@@ -2844,17 +2849,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="584"/>
       <source>Detach Group</source>
-      <translation type="unfinished"/>
+      <translation>分离组</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="587"/>
       <source>Close Group</source>
-      <translation type="unfinished"/>
+      <translation>关闭分组</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockAreaTitleBar.cpp" line="589"/>
       <source>Close Other Groups</source>
-      <translation type="unfinished"/>
+      <translation>关闭其他分组</translation>
     </message>
   </context>
   <context>
@@ -2862,7 +2867,7 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockManager.cpp" line="489"/>
       <source>Show View</source>
-      <translation type="unfinished"/>
+      <translation>显示视图</translation>
     </message>
   </context>
   <context>
@@ -2870,12 +2875,12 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
       <source>Detach</source>
-      <translation type="unfinished"/>
+      <translation>分离</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>关闭</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
@@ -2888,78 +2893,78 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="25"/>
       <source>Available entries</source>
-      <translation type="unfinished"/>
+      <translation>可用条目</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="73"/>
       <source>Move Up</source>
-      <translation type="unfinished"/>
+      <translation>上移</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
       <source>Moves the selected toolbar item up</source>
-      <translation type="unfinished"/>
+      <translation>将选中的工具栏项目向上移动</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="79"/>
       <source>&amp;Up</source>
-      <translation type="unfinished"/>
+      <translation>&amp;上移</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="114"/>
       <source>Move Down</source>
-      <translation type="unfinished"/>
+      <translation>下移</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="117"/>
       <source>moves the selected toolbar item down</source>
-      <translation type="unfinished"/>
+      <translation>将选中的工具栏项目向下移动</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="120"/>
       <source>&amp;Down</source>
-      <translation type="unfinished"/>
+      <translation>&amp;下</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="168"/>
       <source>Insert</source>
-      <translation type="unfinished"/>
+      <translation>插入</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="171"/>
       <source>Adds the selected menu action to the toolbar</source>
-      <translation type="unfinished"/>
+      <translation>将选中的菜单操作添加到工具栏</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="174"/>
       <source>&amp;Add</source>
-      <translation type="unfinished"/>
+      <translation>&amp;添加</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="209"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>移除</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="212"/>
       <source>Removes the selected item from the active toolbar</source>
-      <translation type="unfinished"/>
+      <translation>从活动工具栏中删除所选项目</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="215"/>
       <source>&amp;Del</source>
-      <translation type="unfinished"/>
+      <translation>&amp;移除</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="245"/>
       <location filename="../../src/interface/menueditor.ui" line="248"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>重置</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="279"/>
       <source>Context menu contents</source>
-      <translation type="unfinished"/>
+      <translation>上下文菜单内容</translation>
     </message>
   </context>
 </TS>
