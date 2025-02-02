@@ -44,12 +44,12 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>错误（已消除）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>均衡器</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
@@ -69,7 +69,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>均衡器(规格化的)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
@@ -327,7 +327,7 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
       <source>Functions</source>
-      <translation type="unfinished"/>
+      <translation>功能</translation>
     </message>
   </context>
   <context>
@@ -511,7 +511,7 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>自动插入</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
@@ -587,12 +587,12 @@ AutoEQ 上游存储库可能需要最多 24 小时才能使最新更改可用于
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; 开始编译 %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;编译停止于 %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="298"/>
@@ -1239,17 +1239,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="995"/>
       <source>Time decay</source>
-      <translation type="unfinished"/>
+      <translation>时间衰减</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1002"/>
       <source>Delay</source>
-      <translation type="unfinished"/>
+      <translation>延迟</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1009"/>
       <source>Bass boost</source>
-      <translation type="unfinished"/>
+      <translation>低音增强</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1157"/>
@@ -1259,7 +1259,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>FIR 最小相位</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1298"/>
