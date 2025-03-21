@@ -1152,7 +1152,7 @@ void on_registry_global(void* data,
       return;
     }
 
-    pw_node_add_listener(proxy, &nd->object_listener, &node_events, nd);
+    pw_proxy_add_object_listener(proxy, &nd->object_listener, &node_events, nd);
     pw_proxy_add_listener(proxy, &nd->proxy_listener, &node_proxy_events, nd);
 
     // sometimes PipeWire destroys the pointer before signal_idle is called,
@@ -1222,7 +1222,7 @@ void on_registry_global(void* data,
     pd->id = id;
     pd->serial = serial;
 
-    pw_link_add_listener(proxy, &pd->object_listener, &link_events, pd);
+    pw_proxy_add_object_listener(proxy, &pd->object_listener, &link_events, pd);
     pw_proxy_add_listener(proxy, &pd->proxy_listener, &link_proxy_events, pd);
 
     auto link_info = link_info_from_props(props);
@@ -1297,7 +1297,7 @@ void on_registry_global(void* data,
     pd->id = id;
     pd->serial = serial;
 
-    pw_module_add_listener(proxy, &pd->object_listener, &module_events, pd);
+    pw_proxy_add_object_listener(proxy, &pd->object_listener, &module_events, pd);
     pw_proxy_add_listener(proxy, &pd->proxy_listener, &module_proxy_events, pd);
 
     ModuleInfo m_info{.id = id, .serial = serial};
@@ -1328,7 +1328,7 @@ void on_registry_global(void* data,
     pd->id = id;
     pd->serial = serial;
 
-    pw_client_add_listener(proxy, &pd->object_listener, &client_events, pd);
+    pw_proxy_add_object_listener(proxy, &pd->object_listener, &client_events, pd);
     pw_proxy_add_listener(proxy, &pd->proxy_listener, &client_proxy_events, pd);
 
     ClientInfo c_info{.id = id, .serial = serial};
@@ -1387,7 +1387,7 @@ void on_registry_global(void* data,
         pd->id = id;
         pd->serial = serial;
 
-        pw_device_add_listener(proxy, &pd->object_listener, &device_events, pd);
+        pw_proxy_add_object_listener(proxy, &pd->object_listener, &device_events, pd);
         pw_proxy_add_listener(proxy, &pd->proxy_listener, &device_proxy_events, pd);
 
         DeviceInfo d_info{.id = id, .serial = serial, .media_class = media_class};
