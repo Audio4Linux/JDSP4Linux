@@ -1107,7 +1107,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Crossfeed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Includes the traditional BS2B (Bauer stereophonic-to-binaural DSP) mode and a more advanced convolution-based HRTF approach.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Alimentación cruzada&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Incluye el modo tradicional BS2B (DSP estereofónico a binaural Bauer) y un enfoque HRTF más avanzado basado en convolución.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="487"/>
@@ -1239,7 +1239,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="995"/>
       <source>Time decay</source>
-      <translation type="unfinished"/>
+      <translation>Tiempo de decaimiento</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1002"/>
@@ -1329,7 +1329,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>Polinomio de Interpolación Cúbica de Hermite a Trozos</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1350"/>
@@ -2198,7 +2198,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 2</source>
-      <translation type="unfinished"/>
+      <translation>Habitación grande 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2233,29 +2233,29 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
       <source>error</source>
-      <translation type="unfinished"/>
+      <translation>error</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="44"/>
       <source>creating</source>
-      <translation type="unfinished"/>
+      <translation>creando</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="47"/>
       <source>suspended</source>
-      <translation type="unfinished"/>
+      <translation>suspendido</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="50"/>
       <location filename="../../src/audio/base/AppNode.h" line="78"/>
       <source>idle</source>
-      <translation type="unfinished"/>
+      <translation>inactivo</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="53"/>
       <location filename="../../src/audio/base/AppNode.h" line="76"/>
       <source>running</source>
-      <translation type="unfinished"/>
+      <translation>ejecutándose</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="80"/>
@@ -2275,7 +2275,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Ejecute &apos;flatpak permission-set background background %1 yes&apos; y vuelva a habilitar el inicio automático.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
