@@ -1102,7 +1102,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>Uniforme (Fourier de Tiempo Corto)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
