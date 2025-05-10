@@ -6,17 +6,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation type="unfinished"/>
+      <translation>第二選擇</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation type="unfinished"/>
+      <translation>第三選擇</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation type="unfinished"/>
+      <translation>第%1th選擇</translation>
     </message>
   </context>
   <context>
@@ -24,77 +24,77 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation type="unfinished"/>
+      <translation>頻率（Hz）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>振幅（dBr）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation type="unfinished"/>
+      <translation>目標</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>原始（平滑）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
       <source>Error (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>錯誤（消除）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>等化器</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>原始</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>錯誤</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
       <source>Equalized</source>
-      <translation type="unfinished"/>
+      <translation>等化器</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>等化器（均一化）</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
       <source>Move to top left</source>
-      <translation type="unfinished"/>
+      <translation>移動到左上角</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="210"/>
       <source>Move to top center</source>
-      <translation type="unfinished"/>
+      <translation>移動到頂中心</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
       <source>Move to top right</source>
-      <translation type="unfinished"/>
+      <translation>移動到右上方</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="212"/>
       <source>Move to bottom right</source>
-      <translation type="unfinished"/>
+      <translation>移動到右下角</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="213"/>
       <source>Move to bottom left</source>
-      <translation type="unfinished"/>
+      <translation>移動到左下角</translation>
     </message>
   </context>
   <context>
@@ -102,89 +102,90 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 資料庫</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation type="unfinished"/>
+      <translation>篩選器…</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation type="unfinished"/>
+      <translation>本地資料庫版本</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
       <source>Checked out at commit:</source>
-      <translation type="unfinished"/>
+      <translation>提交時簽出：</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
       <source>Last commit created at:</source>
-      <translation type="unfinished"/>
+      <translation>最後一次提交於：</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation type="unfinished"/>
+      <translation>軟體包生成於：</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
       <source>Display settings</source>
-      <translation type="unfinished"/>
+      <translation>顯示設定</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
       <source>Dark mode</source>
-      <translation type="unfinished"/>
+      <translation>暗色模式</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
       <source>Update database</source>
-      <translation type="unfinished"/>
+      <translation>更新資料庫</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
       <source>Download latest AutoEQ package</source>
-      <translation type="unfinished"/>
+      <translation>下載最新的AutoEQ包</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
       <source>Delete database</source>
-      <translation type="unfinished"/>
+      <translation>刪除資料庫</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
       <source>Cleanup local database and exit</source>
-      <translation type="unfinished"/>
+      <translation>清除本地資料庫並退出</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
       <source>No measurement selected</source>
-      <translation type="unfinished"/>
+      <translation>未選定預設</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
       <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
-      <translation type="unfinished"/>
+      <translation>用左邊的搜尋欄來給耳機找一個合適的預設。按下&apos;OK&apos;來載入數據。
+這將覆寫你現在的GraphicEQ設定。</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Manage database</source>
-      <translation type="unfinished"/>
+      <translation>管理資料庫</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
       <source>No measurements found</source>
-      <translation type="unfinished"/>
+      <translation>未找到任何預設</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ 資料庫</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -192,13 +193,16 @@ This will override your current GraphicEQ configuration.</source>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation type="unfinished"/>
+      <translation>使用AutoEQ之前，你需要下載耳機補償資料庫的精簡版本（約50MB）到硬碟上。
+此步驟需要網路連線。
+
+繼續並啟用嗎？</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
       <source>Failed to retrieve version information</source>
-      <translation type="unfinished"/>
+      <translation>無法取得版本資訊</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
@@ -207,17 +211,20 @@ Do you want to continue and enable this feature?</source>
 
 Status code: %0
 Reason: %1</source>
-      <translation type="unfinished"/>
+      <translation>從遠端庫抓取包資訊失敗：
+
+狀態碼：%0
+原因：%1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Return to database</source>
-      <translation type="unfinished"/>
+      <translation>返回資料庫</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
       <source>No new updates available</source>
-      <translation type="unfinished"/>
+      <translation>沒有可用更新</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
@@ -226,27 +233,31 @@ Reason: %1</source>
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
 
 Do you want to re-install the latest database update anyway?</source>
-      <translation type="unfinished"/>
+      <translation>本地的資料庫已為最新版本；現時暫無可用更新。
+
+可能需要最多24小時來更新在上游的AutoEQ資料庫以供下載。軟體包會在每天UTC早上四點自動生成。
+
+你仍想重新安裝最新的資料庫更新嗎？</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>Database cleared</source>
-      <translation type="unfinished"/>
+      <translation>資料庫已清除</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>The database has been removed from your hard disk</source>
-      <translation type="unfinished"/>
+      <translation>資料庫已從硬碟中移除</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>錯誤</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
-      <translation type="unfinished"/>
+      <translation>資料庫中找不到對應的檔案。請更新本地資料庫，因為它貌似不完整。</translation>
     </message>
   </context>
   <context>
@@ -254,30 +265,30 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>（未設定）</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to blocklist</source>
-      <translation type="unfinished"/>
+      <translation>添加到封鎖清單</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
-      <translation type="unfinished"/>
+      <translation>添加到允許清單</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
       <source>Rate: %1Hz</source>
-      <translation type="unfinished"/>
+      <translation>速率：%1Hz</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>遲延：%1毫秒</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
@@ -551,17 +562,17 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="87"/>
       <source>Loaded projects</source>
-      <translation type="unfinished"/>
+      <translation>已載入的專案</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="97"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>原始碼大綱</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="107"/>
