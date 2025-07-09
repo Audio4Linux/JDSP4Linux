@@ -1572,7 +1572,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="367"/>
       <source>Equalizer</source>
-      <translation type="unfinished"/>
+      <translation>等化器</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="368"/>
@@ -1582,7 +1582,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="369"/>
       <source>DDC</source>
-      <translation type="unfinished"/>
+      <translation>DDC</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="370"/>
@@ -1607,7 +1607,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="525"/>
       <source>Are you sure?</source>
-      <translation type="unfinished"/>
+      <translation>您確定嗎？</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="549"/>
@@ -1808,12 +1808,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="38"/>
       <source>If</source>
-      <translation type="unfinished"/>
+      <translation>若</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetAddRuleFragment.ui" line="58"/>
       <source>is connected, then load preset</source>
-      <translation type="unfinished"/>
+      <translation>已連接即載入設定檔</translation>
     </message>
   </context>
   <context>
@@ -1821,12 +1821,12 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="35"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>設定檔</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="53"/>
       <source>Preset name</source>
-      <translation type="unfinished"/>
+      <translation>設定檔名稱</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="63"/>
@@ -1836,7 +1836,7 @@ This setting is only in effect if IR optimization is enabled.
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="66"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>儲存</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/PresetFragment.ui" line="87"/>
