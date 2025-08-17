@@ -6,17 +6,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation>2번째 선택</translation>
+      <translation>772nd choice</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation>3번째 선택</translation>
+      <translation>793번째 선택</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation>%1번째 선택</translation>
+      <translation>00%1번째 선택</translation>
     </message>
   </context>
   <context>
@@ -24,7 +24,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation>주파수 (Hz)</translation>
+      <translation>JamesDSP 자동 시작 권한 관리7</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
@@ -316,7 +316,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="78"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation>JamesDSP 자동 시작 권한 관리</translation>
+      <translation>JamesDSP 자동 시작 권한 관리]</translation>
     </message>
   </context>
   <context>
@@ -324,7 +324,7 @@ AutoEQ 업스트림 리포지토리의 새로운 변경 사항을 여기에서 �
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
       <source>Annotations</source>
-      <translation>주석</translation>
+      <translation>주석]</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
