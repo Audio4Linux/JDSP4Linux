@@ -102,89 +102,89 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation>Basis data AutoEQ</translation>
+      <translation>Database AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation>Saring...</translation>
+      <translation>Filter...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation>Versi basis data lokal</translation>
+      <translation>Versi database lokal</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
       <source>Checked out at commit:</source>
-      <translation type="unfinished"/>
+      <translation>Dimuat dari revisi:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
       <source>Last commit created at:</source>
-      <translation type="unfinished"/>
+      <translation>Revisi terakhir dibuat pada:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation type="unfinished"/>
+      <translation>Paket dibuat pada:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
       <source>Display settings</source>
-      <translation type="unfinished"/>
+      <translation>Pengaturan tampilan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
       <source>Dark mode</source>
-      <translation type="unfinished"/>
+      <translation>Mode gelap</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
       <source>Update database</source>
-      <translation type="unfinished"/>
+      <translation>Perbarui database</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
       <source>Download latest AutoEQ package</source>
-      <translation type="unfinished"/>
+      <translation>Unduh paket AutoEQ terbaru</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
       <source>Delete database</source>
-      <translation type="unfinished"/>
+      <translation>Hapus database</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
       <source>Cleanup local database and exit</source>
-      <translation type="unfinished"/>
+      <translation>Bersihkan database lokal dan keluar</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
       <source>No measurement selected</source>
-      <translation type="unfinished"/>
+      <translation>Tidak ada pengukuran terpilih</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="288"/>
       <source>Use the search box on the left-hand side to find a suitable measurement for your headphones. Press &apos;OK&apos; to load the equalization data into the audio engine.
 This will override your current GraphicEQ configuration.</source>
-      <translation type="unfinished"/>
+      <translation>Gunakan kotak pencarian di sisi tangan kiri Anda untuk menemukan pengukuran yang cocok untuk headphone Anda. Tekan &apos;OK&apos; untuk memuat data ekualisasi ke mesin audio. Hal ini akan mengubah pengaturan GraphicEQ Anda saat ini.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="354"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Manage database</source>
-      <translation type="unfinished"/>
+      <translation>Kelola database</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="35"/>
       <source>No measurements found</source>
-      <translation type="unfinished"/>
+      <translation>Tidak ada pengukuran ditemukan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="80"/>
       <source>AutoEQ database</source>
-      <translation type="unfinished"/>
+      <translation>Database AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="81"/>
@@ -192,13 +192,15 @@ This will override your current GraphicEQ configuration.</source>
 An internet connection is required during this step.
 
 Do you want to continue and enable this feature?</source>
-      <translation type="unfinished"/>
+      <translation>Sebelum menggunakan integrasi AutoEQ, Anda perlu mengunduh versi database kompensasi headphone yang dikecilkan (~50 MB) ke hard drive Anda. Koneksi internet diperlukan untuk tahap ini.
+
+Apakah Anda ingin melanjutkan dan mengaktifkan fitur ini?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="136"/>
       <source>Failed to retrieve version information</source>
-      <translation type="unfinished"/>
+      <translation>Gagal menerima informasi versi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="105"/>
@@ -207,17 +209,20 @@ Do you want to continue and enable this feature?</source>
 
 Status code: %0
 Reason: %1</source>
-      <translation type="unfinished"/>
+      <translation>Gagal menerima informasi paket dari repositori remote:
+
+Kode status: %0
+Alasan: %1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="117"/>
       <source>Return to database</source>
-      <translation type="unfinished"/>
+      <translation>Kembali ke database</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="139"/>
       <source>No new updates available</source>
-      <translation type="unfinished"/>
+      <translation>Tidak ada pembaruan terbaru</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="140"/>
@@ -226,27 +231,31 @@ Reason: %1</source>
 It may take up to 24 hours for new changes in the AutoEQ upstream repo to become available for download here. Packages are generated at 4am UTC daily.
 
 Do you want to re-install the latest database update anyway?</source>
-      <translation type="unfinished"/>
+      <translation>Database lokal Anda sudah terbaru; tidak ada perubahan baru tersedia saat ini.
+
+Mungkin memerlukan waktu 24 jam agar perubahan terbaru sumber utama repositori AutoEQ dapat tersedia untuk diunduh. Paket baru dibuat setiap 04:00 (UTC) setiap hari.
+
+Apakah Anda tetap ingin memasang database terbaru?</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>Database cleared</source>
-      <translation type="unfinished"/>
+      <translation>Database dibersihkan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="157"/>
       <source>The database has been removed from your hard disk</source>
-      <translation type="unfinished"/>
+      <translation>Database sudah dihapus dari penyimpanan Anda</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Kesalahan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.cpp" line="239"/>
       <source>Unable to retrieve corresponding file from database. Please update the local database as it appears to be incomplete.</source>
-      <translation type="unfinished"/>
+      <translation>Tidak dapat menerima file terkait dari database. Harap perbarui database lokal Anda karena database Anda terlihat tidak lengkap.</translation>
     </message>
   </context>
   <context>
@@ -254,35 +263,35 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(tidak diatur)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to blocklist</source>
-      <translation type="unfinished"/>
+      <translation>Tambahkan ke daftar hitam</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="37"/>
       <location filename="../../src/interface/item/AppItem.cpp" line="56"/>
       <source>Add to allowlist</source>
-      <translation type="unfinished"/>
+      <translation>Tambahkan ke daftar putih</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
       <source>Rate: %1Hz</source>
-      <translation type="unfinished"/>
+      <translation>Kecepatan: %1Hz</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
       <source>Latency: %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Latensi: %1ms</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="82"/>
       <source>Format: %1</source>
-      <translation type="unfinished"/>
+      <translation>Format: %1</translation>
     </message>
   </context>
   <context>
@@ -290,12 +299,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.ui" line="43"/>
       <source>Active apps</source>
-      <translation type="unfinished"/>
+      <translation>Aplikasi aktif</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/AppManagerFragment.cpp" line="19"/>
       <source>No apps are playing audio</source>
-      <translation type="unfinished"/>
+      <translation>Tidak ada aplikasi yang sedang memainkan audio</translation>
     </message>
   </context>
   <context>
@@ -303,7 +312,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="78"/>
       <source>Manage auto-start permission for JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>Kelola izin mulai otomatis JamesDSP</translation>
     </message>
   </context>
   <context>
@@ -311,12 +320,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="9"/>
       <source>Annotations</source>
-      <translation type="unfinished"/>
+      <translation>Anotasi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/codeoutline.cpp" line="13"/>
       <source>Functions</source>
-      <translation type="unfinished"/>
+      <translation>Fungsi</translation>
     </message>
   </context>
   <context>
@@ -324,22 +333,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
       <source>Auto-scroll</source>
-      <translation type="unfinished"/>
+      <translation>Gulir otomatis</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>Salin pilihan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
       <source>Copy all</source>
-      <translation type="unfinished"/>
+      <translation>Salin semua</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Bersihkan</translation>
     </message>
   </context>
   <context>
@@ -347,291 +356,291 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation type="unfinished"/>
+      <translation>IDE Scripting EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
       <source>File</source>
-      <translation type="unfinished"/>
+      <translation>Berkas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="43"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Ubah</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>Navigasi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
       <source>View</source>
-      <translation type="unfinished"/>
+      <translation>Tampilan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="70"/>
       <source>Help</source>
-      <translation type="unfinished"/>
+      <translation>Bantuan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="126"/>
       <source>Open</source>
-      <translation type="unfinished"/>
+      <translation>Buka</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="129"/>
       <source>Open script</source>
-      <translation type="unfinished"/>
+      <translation>Buka skrip</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="132"/>
       <source>Ctrl+O</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+O</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="141"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="144"/>
       <source>Close file</source>
-      <translation type="unfinished"/>
+      <translation>Tutup file</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="147"/>
       <source>Ctrl+Shift+W</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="156"/>
       <source>Save</source>
-      <translation type="unfinished"/>
+      <translation>Simpan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="159"/>
       <source>Ctrl+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="168"/>
       <source>Save as...</source>
-      <translation type="unfinished"/>
+      <translation>Simpan sebagai...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="171"/>
       <source>Ctrl+Shift+S</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="180"/>
       <source>Undo</source>
-      <translation type="unfinished"/>
+      <translation>Urungkan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="183"/>
       <source>Ctrl+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="192"/>
       <source>Redo</source>
-      <translation type="unfinished"/>
+      <translation>Ulangi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="195"/>
       <source>Ctrl+Shift+Z</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation type="unfinished"/>
+      <translation>Temukan/Ganti...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
       <source>Ctrl+F</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+F</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="216"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="459"/>
       <source>Go to line...</source>
-      <translation type="unfinished"/>
+      <translation>Pergi ke baris...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="219"/>
       <source>Go to line</source>
-      <translation type="unfinished"/>
+      <translation>Pergi ke baris</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="222"/>
       <source>Ctrl+L</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+L</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="231"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="470"/>
       <source>Jump to function...</source>
-      <translation type="unfinished"/>
+      <translation>Loncat ke fungsi...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="234"/>
       <source>Ctrl+M</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+M</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="239"/>
       <source>Go to @init</source>
-      <translation type="unfinished"/>
+      <translation>Pergi ke @init</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="242"/>
       <source>F2</source>
-      <translation type="unfinished"/>
+      <translation>F2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="247"/>
       <source>Go to @sample</source>
-      <translation type="unfinished"/>
+      <translation>Pergi ke @sample</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="250"/>
       <source>F3</source>
-      <translation type="unfinished"/>
+      <translation>F3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="258"/>
       <source>Automatic Parentheses</source>
-      <translation type="unfinished"/>
+      <translation>Tanda Kurung Otomatis</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="266"/>
       <source>Replace Tabs with Spaces</source>
-      <translation type="unfinished"/>
+      <translation>Ganti tab dengan spasi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="275"/>
       <source>EEL2 documentation</source>
-      <translation type="unfinished"/>
+      <translation>Dokumentasi EEL2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="278"/>
       <source>F1</source>
-      <translation type="unfinished"/>
+      <translation>F1</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="287"/>
       <source>Run code</source>
-      <translation type="unfinished"/>
+      <translation>Jalankan kode</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="290"/>
       <source>F5</source>
-      <translation type="unfinished"/>
+      <translation>F5</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="299"/>
       <source>New</source>
-      <translation type="unfinished"/>
+      <translation>Baru</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation type="unfinished"/>
+      <translation>Panduan skrip baru</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
       <source>Ctrl+N</source>
-      <translation type="unfinished"/>
+      <translation>Ctrl+N</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="317"/>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="320"/>
       <source>Freeze</source>
-      <translation type="unfinished"/>
+      <translation>Bekukan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation type="unfinished"/>
+      <translation>F6</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="87"/>
       <source>Loaded projects</source>
-      <translation type="unfinished"/>
+      <translation>Proyek dimuat</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="97"/>
       <source>Code outline</source>
-      <translation type="unfinished"/>
+      <translation>Garis luar kode</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="107"/>
       <source>Variable view</source>
-      <translation type="unfinished"/>
+      <translation>Tampilan variabel</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="121"/>
       <source>Console output</source>
-      <translation type="unfinished"/>
+      <translation>Keluaran konsol</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="211"/>
       <source>&apos;%1&apos; started compiling at %2</source>
-      <translation type="unfinished"/>
+      <translation>&apos;%1&apos; mulai dikompilasi pada %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="294"/>
       <source>&lt;br&gt;Compilation stopped at %2</source>
-      <translation type="unfinished"/>
+      <translation>&lt;br&gt;Kompilasi berhenti pada %2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="298"/>
       <source>Script initialization took %1ms</source>
-      <translation type="unfinished"/>
+      <translation>Inisialisasi skrip memerlukan %1ms</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Kesalahan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="385"/>
       <source>Cannot write file</source>
-      <translation type="unfinished"/>
+      <translation>Tidak dapat menulis ke berkas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>Open EEL script</source>
-      <translation type="unfinished"/>
+      <translation>Buka skrip EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="413"/>
       <source>EEL2 Script (*.eel)</source>
-      <translation type="unfinished"/>
+      <translation>Skrip EEL (*.eel)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="431"/>
       <source>Save as</source>
-      <translation type="unfinished"/>
+      <translation>Simpan sebagai</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
       <source>Cannot execute</source>
-      <translation type="unfinished"/>
+      <translation>Tidak dapat menjalankan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="448"/>
       <source>No script file opened. Please open one first and try again.</source>
-      <translation type="unfinished"/>
+      <translation>Tidak ada file skrip terbuka. Buka sebuah file dan coba lagi.</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="460"/>
       <source>Enter line number:</source>
-      <translation type="unfinished"/>
+      <translation>Masukkan nomor baris:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="471"/>
       <source>Enter function name:</source>
-      <translation type="unfinished"/>
+      <translation>Masukan nama fungsi:</translation>
     </message>
   </context>
   <context>
@@ -639,7 +648,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/EmptyView.ui" line="38"/>
       <source>No project loaded</source>
-      <translation type="unfinished"/>
+      <translation>Tidak ada proyek dimuat</translation>
     </message>
   </context>
   <context>
@@ -647,12 +656,12 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="14"/>
       <source>Package manager</source>
-      <translation type="unfinished"/>
+      <translation>Pengelola paket</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/FileDownloaderDialog.ui" line="23"/>
       <source>Downloading package...</source>
-      <translation type="unfinished"/>
+      <translation>Mengunduh paket...</translation>
     </message>
   </context>
   <context>
@@ -660,27 +669,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>Muat ulang</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
+      <translation>Markah</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Ganti nama</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Hapus</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>Tidak dapat menemukan file yang didukung</translation>
     </message>
   </context>
   <context>
@@ -688,37 +697,37 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Formulir</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>Temukan:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>Ganti dengan:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>Sebelumnya</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>Selanjutnya</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
       <source>&amp;Options</source>
-      <translation type="unfinished"/>
+      <translation>Opsi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation type="unfinished"/>
+      <translation>Ekspresi regular</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
