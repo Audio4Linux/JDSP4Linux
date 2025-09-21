@@ -6,17 +6,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="46"/>
       <source>2nd choice</source>
-      <translation type="unfinished"/>
+      <translation>Pilihan ke-2</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="49"/>
       <source>3rd choice</source>
-      <translation type="unfinished"/>
+      <translation>Pilihan ke-3</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation type="unfinished"/>
+      <translation>Pilihan ke-%1</translation>
     </message>
   </context>
   <context>
@@ -24,22 +24,22 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="17"/>
       <source>Frequency (Hz)</source>
-      <translation type="unfinished"/>
+      <translation>Frekuensi (Hz)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation type="unfinished"/>
+      <translation>Amplitudo (dBr)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
       <source>Target</source>
-      <translation type="unfinished"/>
+      <translation>Target</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="85"/>
       <source>Raw (smoothed)</source>
-      <translation type="unfinished"/>
+      <translation>Mentah (dihaluskan)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="86"/>
@@ -49,52 +49,52 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="87"/>
       <source>Equalization</source>
-      <translation type="unfinished"/>
+      <translation>Ekualisasi</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="89"/>
       <source>Raw</source>
-      <translation type="unfinished"/>
+      <translation>Mentah</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="90"/>
       <source>Error</source>
-      <translation type="unfinished"/>
+      <translation>Kesalahan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="93"/>
       <source>Equalized</source>
-      <translation type="unfinished"/>
+      <translation>Diseimbangkan</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>Ekualisasi (dinormalkan)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
       <source>Move to top left</source>
-      <translation type="unfinished"/>
+      <translation>Pindahkan ke kiri atas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="210"/>
       <source>Move to top center</source>
-      <translation type="unfinished"/>
+      <translation>Pindahkan ke tengah atas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
       <source>Move to top right</source>
-      <translation type="unfinished"/>
+      <translation>Pindahkan ke kanan atas</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="212"/>
       <source>Move to bottom right</source>
-      <translation type="unfinished"/>
+      <translation>Pindahkan ke kanan bawah</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="213"/>
       <source>Move to bottom left</source>
-      <translation type="unfinished"/>
+      <translation>Pindahkan ke kiri bawah</translation>
     </message>
   </context>
   <context>
@@ -102,17 +102,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>Basis data AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation type="unfinished"/>
+      <translation>Saring...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation type="unfinished"/>
+      <translation>Versi basis data lokal</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
