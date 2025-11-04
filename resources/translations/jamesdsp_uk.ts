@@ -1022,7 +1022,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Динамічне підсилення басу&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Частотно-определяемое усиление басов. Підсилення низьких частот із визначенням частоти. Автоматично встановлює власні параметри, такі як посилення, пропускна здатність і частота зрізу, аналізуючи вхідний аудіопотік&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Максимальне підсилення:&lt;/span&gt; регулює величину ефекту динамічного підсилення басу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Динамічне підсилення басу&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Частотно-залежне підсилення басу. Підсилення низьких частот із визначенням частоти. Аналізуючи вхідний аудіопотік, автоматично встановлює власні параметри: підсилення, ширину полоси і частоту зрізу&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Максимальне підсилення:&lt;/span&gt; регулює величину ефекту динамічного підсилення басу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
@@ -1037,7 +1037,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Аналогове моделювання&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Надсемплінг аналогового моделювання - це генератор рівних гармонік без згладжування.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Аналогове моделювання&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Завдяки надлишковій дискретизації, аналогове моделювання генерує чисті парні гармоніки без артефактів накладання спектрів.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
@@ -1133,7 +1133,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ширина звукової сцени&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Алгоритм, який виявляє стереофазове співвідношення в кількох спектральних областях і покращує стереозвук, не впливаючи на цілісність вокалу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ширина звукової сцени&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Алгоритм, який виявляє міжканальну фазову різницю в кількох спектральних областях і покращує стереозвук, не впливаючи на цілісність вокалу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
