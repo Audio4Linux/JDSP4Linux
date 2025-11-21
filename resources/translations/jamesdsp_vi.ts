@@ -254,7 +254,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="64"/>
       <source>(unset)</source>
-      <translation type="unfinished"/>
+      <translation>(chưa được lưu)</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.ui" line="84"/>
@@ -272,7 +272,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
       <source>Rate: %1Hz</source>
-      <translation type="unfinished"/>
+      <translation>Tốc độ: %1Hz</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
