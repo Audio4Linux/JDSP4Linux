@@ -351,12 +351,21 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>358 words</b></sub>
     </td>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/token0"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17410814/medium/2b93212ecd91d1ad45cead0226737e90.jpeg" />
+        <br />
+        <sub><b>token0</b></sub></a>
+      <br />
+      <sub><b>300 words</b></sub>
+    </td>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/Regu_Miabyss"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15317124/medium/9099ec758c209481e79cd9b23b7f6210.png" />
         <br />
         <sub><b>Regu_Miabyss</b></sub></a>
       <br />
       <sub><b>283 words</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/gkpiccoli"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15512952/medium/57e54eba4de46714593f1d0dcbcdfa3a.jpeg" />
         <br />
@@ -364,8 +373,6 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>280 words</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/zhanghua000"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15906451/medium/db06f53e9b83801ec99389ab759b1e48.png" />
         <br />
@@ -415,6 +422,8 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>126 words</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/coldified_"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16382586/medium/27690602b0b2014444ad1346007a6734.png" />
         <br />
@@ -422,12 +431,17 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>117 words</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/etiennec78"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15912311/medium/49bacd7fcfc807ea0c5f97127af5bb26.jpeg" />
         <br />
         <sub><b>etiennec79 (etiennec78)</b></sub></a>
+      <br />
+      <sub><b>114 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/SubaruLenz"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16808355/medium/8f4aecf47a100ae6e3c9934e13ec8f65.jpeg" />
+        <br />
+        <sub><b>NguyenTrungKien (SubaruLenz)</b></sub></a>
       <br />
       <sub><b>114 words</b></sub>
     </td>
@@ -446,6 +460,13 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>72 words</b></sub>
     </td>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/loccun"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17363768/medium/189f23739bcbc17bc6d7e2cd6ebb1c5e.png" />
+        <br />
+        <sub><b>Loc Huynh (loccun)</b></sub></a>
+      <br />
+      <sub><b>68 words</b></sub>
+    </td>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/theczechczech"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15271802/medium/850b88d0368fad2a99ee217e658235a1.png" />
         <br />
         <sub><b>theczechczech</b></sub></a>
@@ -458,27 +479,6 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <sub><b>salihefee</b></sub></a>
       <br />
       <sub><b>33 words</b></sub>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/alex-pex"><img alt="logo" style="width: 64px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1" />
-        <br />
-        <sub><b>Alexandre PAIXAO (alex-pex)</b></sub></a>
-      <br />
-      <sub><b>30 words</b></sub>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/jaytau"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15142098/medium/010a2b64c5b06dd38710cf0c99776867.png" />
-        <br />
-        <sub><b>Joel Tony (jaytau)</b></sub></a>
-      <br />
-      <sub><b>28 words</b></sub>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/crisap94"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14296216/medium/40edd01d8eb60877be593e043d2561e8_default.png" />
-        <br />
-        <sub><b>crisap94</b></sub></a>
-      <br />
-      <sub><b>27 words</b></sub>
     </td>
   </tr>
 </table><a href="https://crowdin.com/project/jdsp4linux" target="_blank">Translate in Crowdin 🚀</a>
