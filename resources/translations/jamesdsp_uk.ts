@@ -914,7 +914,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="412"/>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="506"/>
       <source>CSV frequency response (*.csv)</source>
-      <translation>CSV амплітудної-частотної характеристики (*.csv)</translation>
+      <translation>CSV амплітудно-частотної характеристики (*.csv)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.cpp" line="413"/>
@@ -1022,7 +1022,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dynamic bass boost&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Frequency-detecting bass-boost. Automatically sets its own parameters, such as gain, bandwidth, and cut-off frequency by analysing the incoming audio stream&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Max gain:&lt;/span&gt; adjusts the amount of the dynamic bass boost effects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Динамічне підсилення басу&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Частотно-определяемое усиление басов. Підсилення низьких частот із визначенням частоти. Автоматично встановлює власні параметри, такі як посилення, пропускна здатність і частота зрізу, аналізуючи вхідний аудіопотік&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Максимальне підсилення:&lt;/span&gt; регулює величину ефекту динамічного підсилення басу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Динамічне підсилення басу&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Частотно-залежне підсилення басу. Підсилення низьких частот із визначенням частоти. Аналізуючи вхідний аудіопотік, автоматично встановлює власні параметри: підсилення, ширину полоси і частоту зрізу&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Максимальне підсилення:&lt;/span&gt; регулює величину ефекту динамічного підсилення басу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="109"/>
@@ -1037,7 +1037,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Аналогове моделювання&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Надсемплінг аналогового моделювання - це генератор рівних гармонік без згладжування.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Аналогове моделювання&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Завдяки надлишковій дискретизації, аналогове моделювання генерує чисті парні гармоніки без артефактів накладання спектрів.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
@@ -1047,7 +1047,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="171"/>
       <source>Preamp (Harmonics)</source>
-      <translation>Підсилювач (Гармоніки)</translation>
+      <translation>Передпідсилювач (Гармоніки)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="194"/>
@@ -1133,7 +1133,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="621"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Soundstage widthness&lt;/span&gt;&lt;/p&gt;&lt;p&gt;An algorithm that detects stereo phase relation in a several spectral regions, and enhances the stereo soundstage without affecting vocal integrity.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ширина звукової сцени&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Алгоритм, який виявляє стереофазове співвідношення в кількох спектральних областях і покращує стереозвук, не впливаючи на цілісність вокалу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Ширина звукової сцени&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Алгоритм, який виявляє міжканальну фазову різницю в кількох спектральних областях і покращує стереозвук, не впливаючи на цілісність вокалу.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="624"/>
@@ -1294,17 +1294,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>Мультироздільність (безперервний вейвлет, неповний подвійний фрейм)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>Псевдомультироздільність (зниження частоти дискретизації фрейму)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>Псевдомультироздільність (область часу, нульова затримка)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -1500,12 +1500,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="107"/>
       <source>%1 (%2) connected</source>
-      <translation type="unfinished"/>
+      <translation>%1 (%2) підключено</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="108"/>
       <source>%1 connected</source>
-      <translation type="unfinished"/>
+      <translation>%1 підключено</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="128"/>
@@ -1974,7 +1974,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="79"/>
       <source>Output route</source>
-      <translation type="unfinished"/>
+      <translation>Вихідний маршрут</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="80"/>
@@ -2286,7 +2286,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Будь ласка, запустіть &apos;flatpak permission-set background background %1 yes&apos;  і знову увімкніть автозапуск.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
@@ -2304,7 +2304,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/RouteListModel.cpp" line="66"/>
       <source>&lt;any output route&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;будь-який маршрут виводу&gt;</translation>
     </message>
   </context>
   <context>
@@ -2327,7 +2327,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Обробка аудіо</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
@@ -2382,42 +2382,42 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>Бенчмарк конвольверу</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>Запустити бенчмарк</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Очистити кеш даних</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>Запускати бенчмарк при вході</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>Запуск бенчмарку при вході може призвести до зростання завантаження ЦП приблизно на одну хвилину після входу. Створення даних бенчмарку для вашої системи може покращити швидкодію модулів конвольверу. </translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Вирішення проблем</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>Дозволити керування гучністю для віртуальних sink пристроїв</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>Для застосування змін, необхідно перезапустити програму. В деяких випадках може призвести до втрати звуку.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
@@ -2568,7 +2568,7 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="283"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>дані бенчмарку завантажено</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="216"/>
@@ -2589,7 +2589,7 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>немає збережених даних бенчмарку</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
@@ -2643,17 +2643,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="454"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>очікування результату...</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>Кеш очищено</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>Дані бенчмарку були очищені. Перезавантажте додаток, щоб застосувати зміни.</translation>
     </message>
   </context>
   <context>
