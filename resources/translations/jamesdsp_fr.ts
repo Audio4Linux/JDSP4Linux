@@ -778,7 +778,8 @@ Voulez-vous quand même réinstaller la dernière mise à jour de la base de don
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation type="unfinished"/>
+      <translation>Merci d'avoir installé cette application !
+Cependant, avant de pouvoir commencer à utiliser JamesDSP pour Linux, nous devrons procéder à quelques réglages afin de vous garantir la meilleure expérience possible avec JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
@@ -861,7 +862,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="218"/>
       <source>15-band</source>
-      <translation type="unfinished"/>
+      <translation>15 bandes</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/GraphicEQWidget/GraphicEQWidget/GraphicEQFilterGUI.ui" line="225"/>
@@ -1155,7 +1156,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="736"/>
       <source>Presets</source>
-      <translation type="unfinished"/>
+      <translation>Préréglages</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="769"/>
