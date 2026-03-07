@@ -16,7 +16,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation>%1 -ый вариант</translation>
+      <translation>%1-й вариант</translation>
     </message>
   </context>
   <context>
