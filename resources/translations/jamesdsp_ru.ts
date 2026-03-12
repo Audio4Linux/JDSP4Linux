@@ -16,7 +16,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqListDelegates.h" line="52"/>
       <source>%1th choice</source>
-      <translation>%1 -ый вариант</translation>
+      <translation>%1-й вариант</translation>
     </message>
   </context>
   <context>
@@ -834,7 +834,7 @@ However, before you can begin playing around with JamesDSP for Linux, we&apos;ll
     <message>
       <location filename="../../src/subprojects/FlatTabWidget/FlatTabWidget/flattabwidget.ui" line="14"/>
       <source>FlatTabWidget</source>
-      <translation type="unfinished"/>
+      <translation>FlatTabWidget</translation>
     </message>
   </context>
   <context>
@@ -1082,27 +1082,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="314"/>
       <source>Dynamic range compander</source>
-      <translation type="unfinished"/>
+      <translation>Компандер динамического диапазона</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="326"/>
       <source>Time constant</source>
-      <translation type="unfinished"/>
+      <translation>Константа времени</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="364"/>
       <source>Granularity</source>
-      <translation type="unfinished"/>
+      <translation>Гранулярность</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="390"/>
       <source>Time-frequency transforms</source>
-      <translation type="unfinished"/>
+      <translation>Временно-частотные преобразования</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="407"/>
       <source>Uniform (Short-time Fourier)</source>
-      <translation type="unfinished"/>
+      <translation>Равномерное (быстрое преобразование Фурье)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="484"/>
@@ -1169,32 +1169,32 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="783"/>
       <source>Oversampling factor</source>
-      <translation type="unfinished"/>
+      <translation>Коэффициент передискретизации</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="803"/>
       <source>Early reflection factor</source>
-      <translation type="unfinished"/>
+      <translation>Коэффициент раннего отражения</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="826"/>
       <source>Early reflection amount</source>
-      <translation type="unfinished"/>
+      <translation>Количество раннего отражения</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="843"/>
       <source>Early reflection width</source>
-      <translation type="unfinished"/>
+      <translation>Ширина раннего отражения</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="866"/>
       <source>Lowpass cutoff (Input)</source>
-      <translation type="unfinished"/>
+      <translation>Низкочастотный фильтр (вход)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="886"/>
       <source>Lowpass cutoff (Bass)</source>
-      <translation type="unfinished"/>
+      <translation>Низкочастотный фильтр (бас)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="906"/>
@@ -1204,7 +1204,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="926"/>
       <source>Lowpass cutoff (Output)</source>
-      <translation type="unfinished"/>
+      <translation>Низкочастотный фильтр (выход)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="953"/>
@@ -1294,17 +1294,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="412"/>
       <source>Multiresolution (Continuous wavelet, incomplete dual frame)</source>
-      <translation type="unfinished"/>
+      <translation>Мультиразрешение (непрерывный вейвлет, неполный двойной фрейм)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="417"/>
       <source>Pseudo multiresolution (Undersampling frame)</source>
-      <translation type="unfinished"/>
+      <translation>Псевдомультиразрешение (снижение частоты дискретизации фрейма)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="422"/>
       <source>Pseudo multiresolution (Time domain, zero latency)</source>
-      <translation type="unfinished"/>
+      <translation>Псевдомультиразрешение (временная область, нулевая задержка)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1269"/>
@@ -1329,12 +1329,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1345"/>
       <source>Piecewise Cubic Hermite Interpolating Polynomial</source>
-      <translation type="unfinished"/>
+      <translation>Кусочно-кубический интерполяционный полином Эрмита</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1350"/>
       <source>Modified Hiroshi Akima spline</source>
-      <translation type="unfinished"/>
+      <translation>Модифицированный сплайн Хироси Акимы</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1370"/>
@@ -1380,17 +1380,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>Оригинал</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>Сжатие</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1569"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>Минимальное фазовое преобразование и сжатие</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1577"/>
@@ -1500,12 +1500,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="107"/>
       <source>%1 (%2) connected</source>
-      <translation type="unfinished"/>
+      <translation>%1 (%2) подключён</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="108"/>
       <source>%1 connected</source>
-      <translation type="unfinished"/>
+      <translation>%1 подключён</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="128"/>
@@ -1625,27 +1625,27 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Very low</source>
-      <translation type="unfinished"/>
+      <translation>Очень низкий</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Low</source>
-      <translation type="unfinished"/>
+      <translation>Низкий</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Medium</source>
-      <translation type="unfinished"/>
+      <translation>Средний</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>High</source>
-      <translation type="unfinished"/>
+      <translation>Высокий</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1015"/>
       <source>Extreme</source>
-      <translation type="unfinished"/>
+      <translation>Экстремальная</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="1135"/>
@@ -1666,7 +1666,18 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>Расширенное редактирование волноформы (по умолчанию: -80;-100;0;0;0;0)
+
+Установите порог автоматического IR-обрезания и добавьте задержку к обрезанному/минимально-фазовому преобразованному IR.
+Эта настройка действует только в том случае, если включена оптимизация IR.
+
+1-е значение: начальный порог автоматического обрезания (дБ)
+2-е значение: конечный порог автоматического обрезания (дБ)
+3-е значение: задержка канала 1 (выборки)
+4-е значение: задержка канала 2 (выборки)
+5-е значение: задержка канала 3 (выборки)
+6-е значение: задержка канала 4 (выборки)
+</translation>
     </message>
   </context>
   <context>
@@ -1963,7 +1974,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="79"/>
       <source>Output route</source>
-      <translation type="unfinished"/>
+      <translation>Выходной маршрут</translation>
     </message>
     <message>
       <location filename="../../src/data/model/PresetRuleTableModel.cpp" line="80"/>
@@ -2118,7 +2129,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="108"/>
       <source>Out of head</source>
-      <translation type="unfinished"/>
+      <translation>Вне головы</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="109"/>
@@ -2133,7 +2144,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="111"/>
       <source>Joe0Bloggs Realistic surround</source>
-      <translation type="unfinished"/>
+      <translation>Реалистичный объёмный звук Joe0Bloggs</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
@@ -2265,27 +2276,27 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/main.cpp" line="190"/>
       <source>JamesDSP is an advanced audio processing engine available for Linux and Android systems.</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP — это продвинутая система обработки звука, доступная для систем Linux и Android.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="33"/>
       <source>Auto-start permission has been denied</source>
-      <translation type="unfinished"/>
+      <translation>Разрешение на автозапуск было отклонено</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="34"/>
       <source>Please run &apos;flatpak permission-set background background %1 yes&apos; and reenable auto-start.</source>
-      <translation type="unfinished"/>
+      <translation>Запустите команду «flatpak permission-set background background %1 yes» и повторно включите автозапуск.</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="36"/>
       <source>Unknown error</source>
-      <translation type="unfinished"/>
+      <translation>Неизвестная ошибка</translation>
     </message>
     <message>
       <location filename="../../src/utils/AutoStartManager.cpp" line="37"/>
       <source>Please make sure a XDG Background Portal implementation is available and active to use auto-start. %1</source>
-      <translation type="unfinished"/>
+      <translation>Пожалуйста, убедитесь, что реализация XDG Background Portal доступна и активна для использования автозапуска. %1</translation>
     </message>
   </context>
   <context>
@@ -2293,7 +2304,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/data/model/RouteListModel.cpp" line="66"/>
       <source>&lt;any output route&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;любой маршрут выхода&gt;</translation>
     </message>
   </context>
   <context>
@@ -2316,7 +2327,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="93"/>
       <source>Audio processing</source>
-      <translation type="unfinished"/>
+      <translation>Обработка звука</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="98"/>
@@ -2371,42 +2382,42 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation type="unfinished"/>
+      <translation>Бенчмарк конвольвера</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation type="unfinished"/>
+      <translation>Тестировать сейчас</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
       <source>Clear cached data</source>
-      <translation type="unfinished"/>
+      <translation>Очистить кэшированные данные</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
-      <translation type="unfinished"/>
+      <translation>Включить бенчмарк при загрузке</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation type="unfinished"/>
+      <translation>Бенчмарк при загрузке может привести к увеличению загрузки процессора в течение примерно одной минуты после запуска. Создание данных бенчмарка для вашей системы может улучшить производительность модулей конвольвера.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
       <source>Workarounds</source>
-      <translation type="unfinished"/>
+      <translation>Обходные решения</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="409"/>
       <source>Allow volume control of the virtual sink device</source>
-      <translation type="unfinished"/>
+      <translation>Разрешить регулировку громкости виртуального устройства-приёмника</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="419"/>
       <source>Restart required to apply changes. May cause audio loss in some cases.</source>
-      <translation type="unfinished"/>
+      <translation>Для применения изменений требуется перезапуск. В некоторых случаях может привести к потере звука.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="466"/>
@@ -2557,7 +2568,7 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="105"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="283"/>
       <source>benchmark data loaded</source>
-      <translation type="unfinished"/>
+      <translation>загружены данные бенчмарка</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="216"/>
@@ -2578,7 +2589,7 @@ Please create one first before adding a new rule.</source>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation type="unfinished"/>
+      <translation>нет сохранённых данных бенчмарка</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
@@ -2632,17 +2643,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="454"/>
       <source>waiting for result...</source>
-      <translation type="unfinished"/>
+      <translation>ожидание результата…</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Cache cleared</source>
-      <translation type="unfinished"/>
+      <translation>Кэш очищен</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="461"/>
       <source>Benchmark data has been cleared. Restart this app to fully apply the changes.</source>
-      <translation type="unfinished"/>
+      <translation>Данные бенчмарка были удалены. Перезапустите приложение, чтобы изменения вступили в силу.</translation>
     </message>
   </context>
   <context>
