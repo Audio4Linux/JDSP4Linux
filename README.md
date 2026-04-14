@@ -362,7 +362,7 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <br />
         <sub><b>Andrei Stepanov (adem4ik)</b></sub></a>
       <br />
-      <sub><b>295 words</b></sub>
+      <sub><b>297 words</b></sub>
     </td>
   </tr>
   <tr>
