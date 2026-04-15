@@ -1375,7 +1375,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1539"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>Оптимизация IR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1559"/>
