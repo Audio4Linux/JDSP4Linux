@@ -29,7 +29,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="20"/>
       <source>Amplitude (dBr)</source>
-      <translation>Амплитуда (dBr)</translation>
+      <translation>Амплитуда (дБ отн.)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="84"/>
@@ -358,7 +358,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="14"/>
       <source>EEL Scripting IDE</source>
-      <translation>EEL Scripting IDE</translation>
+      <translation>IDE сценариев EEL</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="31"/>
@@ -454,7 +454,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="204"/>
       <source>Find/Replace...</source>
-      <translation>Найти/Заменить...</translation>
+      <translation>Найти/заменить...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="207"/>
@@ -1199,7 +1199,7 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="906"/>
       <source>Lowpass cutoff (Damp)</source>
-      <translation type="unfinished"/>
+      <translation>Низкочастотный фильтр (демпфирование)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="926"/>
@@ -1209,12 +1209,12 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="953"/>
       <source>Final wet mix</source>
-      <translation type="unfinished"/>
+      <translation>Окончательный обработанный микс</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="960"/>
       <source>Final dry mix</source>
-      <translation type="unfinished"/>
+      <translation>Окончательный необработанный микс</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="967"/>
@@ -1224,17 +1224,17 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="974"/>
       <source>Width L/R mix</source>
-      <translation type="unfinished"/>
+      <translation>Ширина микса Л/П</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="981"/>
       <source>LFO wander amount</source>
-      <translation type="unfinished"/>
+      <translation>Степень дрейфа НЧ-генератора</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="988"/>
       <source>LFO spin amount</source>
-      <translation type="unfinished"/>
+      <translation>Степень вращения НЧ-генератора</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="995"/>
@@ -1259,32 +1259,32 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1293"/>
       <source>FIR Minimum phase</source>
-      <translation type="unfinished"/>
+      <translation>Минимальная фаза FIR</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1298"/>
       <source>IIR 4 order</source>
-      <translation type="unfinished"/>
+      <translation>БИХ 4-го порядка</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1303"/>
       <source>IIR 6 order</source>
-      <translation type="unfinished"/>
+      <translation>БИХ 6-го порядка</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1308"/>
       <source>IIR 8 order</source>
-      <translation type="unfinished"/>
+      <translation>БИХ 8-го порядка</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1313"/>
       <source>IIR 10 order</source>
-      <translation type="unfinished"/>
+      <translation>БИХ 10-го порядка</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1318"/>
       <source>IIR 12 order</source>
-      <translation type="unfinished"/>
+      <translation>БИХ 12-го порядка</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1249"/>
