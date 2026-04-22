@@ -300,14 +300,21 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <sub><b>1713 words</b></sub>
     </td>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/adem4ik"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/12721323/medium/76216572f2d8eae3b1dddf44eca8a7e5.png" />
+        <br />
+        <sub><b>Andrei Stepanov (adem4ik)</b></sub></a>
+      <br />
+      <sub><b>1159 words</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/HoleHolo"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14737398/medium/7d120eb168560837ca53bd0f189be716.png" />
         <br />
         <sub><b>HoleHolo</b></sub></a>
       <br />
       <sub><b>814 words</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/tfkzptzt"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16861075/medium/80c6de4c9945226dd698f55e846842e7.jpeg" />
         <br />
@@ -356,13 +363,6 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <sub><b>token0</b></sub></a>
       <br />
       <sub><b>300 words</b></sub>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/adem4ik"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/12721323/medium/76216572f2d8eae3b1dddf44eca8a7e5.png" />
-        <br />
-        <sub><b>Andrei Stepanov (adem4ik)</b></sub></a>
-      <br />
-      <sub><b>297 words</b></sub>
     </td>
   </tr>
   <tr>
