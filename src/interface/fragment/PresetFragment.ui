@@ -70,6 +70,16 @@
     </layout>
    </item>
    <item>
+    <widget class="QCheckBox" name="rememberDevice">
+     <property name="toolTip">
+      <string>Save the current output device with this preset and switch to it when the preset is loaded</string>
+     </property>
+     <property name="text">
+      <string>Remember output device</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="CListView" name="files">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>

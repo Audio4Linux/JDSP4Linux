@@ -5,6 +5,7 @@
 #include "model/PresetListModel.h"
 
 #include <QFile>
+#include <QFileInfo>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -12,6 +13,7 @@
 PresetManager::PresetManager() : _presetModel(new PresetListModel(this))
 {
     loadRules();
+    loadPresetDevices();
 }
 
 bool PresetManager::exists(const QString &name) const
@@ -38,6 +40,11 @@ bool PresetManager::loadFromPath(const QString &filename)
 
     QFile::copy(src, dest);
     DspConfig::instance().load();
+
+    // If this preset remembers an output device, switch to it. The preset name is
+    // the file's base name; presets without an association leave the device untouched.
+    applyPresetDevice(QFileInfo(filename).completeBaseName());
+
     Log::debug("Loaded " + filename);
     return true;
 }
@@ -55,6 +62,14 @@ void PresetManager::rename(const QString &name, const QString &newName)
     {
         QFile::rename(path, QDir(path).filePath(newName + ".conf"));
     }
+
+    // Keep the device association in sync with the preset's new name
+    if (_presetDevices.contains(name))
+    {
+        _presetDevices[newName] = _presetDevices.take(name);
+        savePresetDevices();
+    }
+
     this->_presetModel->rescan();
 }
 
@@ -64,6 +79,7 @@ bool PresetManager::remove(const QString &name)
     if (QFile::exists(path))
     {
         QFile::remove(path);
+        clearPresetDevice(name);
         this->_presetModel->rescan();
         return true;
     }
@@ -96,7 +112,11 @@ void PresetManager::onOutputDeviceChanged(const QString &deviceName, const QStri
 {
     QString defaultRouteId = QString::fromStdString(RouteListModel::makeDefaultRoute().name);
     auto executeRule = [this, deviceName, outputRouteId, defaultRouteId](const PresetRule& rule){
+        // A rule loads a preset *because* the device changed; do not let the loaded
+        // preset re-apply a device, which would feed back into this handler.
+        _suppressDeviceApply = true;
         loadFromPath(AppConfig::instance().getPath("presets/" + rule.preset + ".conf"));
+        _suppressDeviceApply = false;
         emit presetAutoloaded(deviceName, rule.routeName, rule.routeId == defaultRouteId);
     };
 
@@ -201,5 +221,88 @@ void PresetManager::removeRule(const QString &deviceId, const QString &routeId)
 QVector<PresetRule> PresetManager::rules() const
 {
     return _rules;
+}
+
+QString PresetManager::presetDevicesPath() const
+{
+    return AppConfig::instance().getPath("preset_devices.json");
+}
+
+void PresetManager::loadPresetDevices()
+{
+    _presetDevices.clear();
+
+    QFile json(presetDevicesPath());
+    if(!json.exists())
+    {
+        return;
+    }
+
+    json.open(QFile::ReadOnly);
+    QJsonObject root = QJsonDocument::fromJson(json.readAll()).object();
+    json.close();
+
+    for(auto it = root.constBegin(); it != root.constEnd(); ++it)
+    {
+        _presetDevices.insert(it.key(), it.value().toObject());
+    }
+}
+
+void PresetManager::savePresetDevices()
+{
+    QFile json(presetDevicesPath());
+    if(!json.open(QIODevice::WriteOnly)){
+        Log::error("PresetManager::savePresetDevices: Cannot open json file");
+        return;
+    }
+
+    QJsonObject root;
+    for(auto it = _presetDevices.constBegin(); it != _presetDevices.constEnd(); ++it)
+    {
+        root.insert(it.key(), it.value());
+    }
+
+    json.write(QJsonDocument(root).toJson(QJsonDocument::Indented));
+    json.close();
+}
+
+bool PresetManager::hasPresetDevice(const QString &name) const
+{
+    return _presetDevices.contains(name);
+}
+
+void PresetManager::setPresetDevice(const QString &name)
+{
+    QJsonObject entry;
+    entry["deviceId"]   = AppConfig::instance().get<QString>(AppConfig::AudioOutputDevice);
+    entry["useDefault"] = AppConfig::instance().get<bool>(AppConfig::AudioOutputUseDefault);
+    _presetDevices[name] = entry;
+    savePresetDevices();
+}
+
+void PresetManager::clearPresetDevice(const QString &name)
+{
+    if(_presetDevices.remove(name) > 0)
+    {
+        savePresetDevices();
+    }
+}
+
+void PresetManager::applyPresetDevice(const QString &name)
+{
+    if(_suppressDeviceApply || !_presetDevices.contains(name))
+    {
+        return;
+    }
+
+    const QJsonObject entry = _presetDevices.value(name);
+
+    // Mirror SettingsFragment: setting these AppConfig keys triggers a live device
+    // switch via PipewireAudioService::onAppConfigUpdated.
+    AppConfig::instance().set(AppConfig::AudioOutputUseDefault, entry["useDefault"].toBool());
+    if(!entry["useDefault"].toBool())
+    {
+        AppConfig::instance().set(AppConfig::AudioOutputDevice, entry["deviceId"].toString());
+    }
 }
 

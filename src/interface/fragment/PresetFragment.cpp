@@ -27,7 +27,9 @@ PresetFragment::PresetFragment(IAudioService* service, QWidget *parent) :
     ui->load->setEnabled(false);
 
 #ifdef USE_PULSEAUDIO
+    // Device switching is only implemented for the PipeWire backend
     ui->rules->setVisible(false);
+    ui->rememberDevice->setVisible(false);
 #endif
 
     connect(ui->add, &QPushButton::clicked, this, &PresetFragment::onAddClicked);
@@ -58,7 +60,9 @@ void PresetFragment::onSelectionChanged(const QItemSelection &selected, const QI
 		return;
 	}
 
-    ui->presetName->setText(PresetManager::instance().presetModel()->data(selected.indexes().first(), Qt::UserRole).toString());
+    const QString selectedName = PresetManager::instance().presetModel()->data(selected.indexes().first(), Qt::UserRole).toString();
+    ui->presetName->setText(selectedName);
+    ui->rememberDevice->setChecked(PresetManager::instance().hasPresetDevice(selectedName));
 }
 
 void PresetFragment::onAddClicked()
@@ -68,8 +72,19 @@ void PresetFragment::onAddClicked()
         return;
     }
 
-    PresetManager::instance().save(ui->presetName->text());
-	ui->presetName->text() = "";
+    const QString name = ui->presetName->text();
+    PresetManager::instance().save(name);
+
+    if(ui->rememberDevice->isChecked())
+    {
+        PresetManager::instance().setPresetDevice(name);
+    }
+    else
+    {
+        PresetManager::instance().clearPresetDevice(name);
+    }
+
+    ui->presetName->clear();
 }
 
 void PresetFragment::onRemoveClicked()
