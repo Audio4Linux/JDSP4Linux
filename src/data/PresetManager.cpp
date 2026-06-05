@@ -41,9 +41,15 @@ bool PresetManager::loadFromPath(const QString &filename)
     QFile::copy(src, dest);
     DspConfig::instance().load();
 
-    // If this preset remembers an output device, switch to it. The preset name is
-    // the file's base name; presets without an association leave the device untouched.
-    applyPresetDevice(QFileInfo(filename).completeBaseName());
+    // If this preset remembers an output device, switch to it. Associations belong to
+    // managed presets only (those in the presets directory), keyed by file base name.
+    // An external file imported via loadExternalFile() must not switch the device just
+    // because its base name happens to collide with a saved preset.
+    if (QFileInfo(filename).dir().absolutePath() ==
+        QDir(AppConfig::instance().getPath("presets/")).absolutePath())
+    {
+        applyPresetDevice(QFileInfo(filename).completeBaseName());
+    }
 
     Log::debug("Loaded " + filename);
     return true;

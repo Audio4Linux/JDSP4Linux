@@ -151,6 +151,7 @@
  <tabstops>
   <tabstop>presetName</tabstop>
   <tabstop>add</tabstop>
+  <tabstop>rememberDevice</tabstop>
   <tabstop>remove</tabstop>
   <tabstop>load</tabstop>
  </tabstops>
