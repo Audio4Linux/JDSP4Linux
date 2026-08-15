@@ -778,8 +778,9 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation>¡Gracias por instalar la aplicación!
-Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&apos;hacer algunos ajustes para asegurar la mejor experiencia posible con JDSP.</translation>
+      <translation>¡Gracias por instalar esta aplicación!
+
+Sin embargo, antes de que puedas empezar a experimentar con JamesDSP para Linux, necesitaremos hacer algunos ajustes para garantizar la mejor experiencia posible con JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
@@ -816,7 +817,7 @@ Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation>¡Eso está bien para continuar! Puedes hacer cualquier otro cambio de tu elección en la sección de ajustes. Consúltala para más ajustes de customizacion. ¡Visita nuestro Telegram comunitario para ayuda y actualizaciones!</translation>
+      <translation>¡Ya está todo listo! Puedes cambiar cualquiera de las opciones que acabas de seleccionar en la sección de configuración. Explórala para ver más opciones de personalización. ¡Visita nuestra comunidad de Telegram para recibir soporte y actualizaciones!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
@@ -1113,7 +1114,7 @@ Por favor, seleccione otro</translation>
       <location filename="../../src/MainWindow.ui" line="487"/>
       <location filename="../../src/MainWindow.ui" line="543"/>
       <source>Crossfeed</source>
-      <translation>Alimentación cruzada</translation>
+      <translation>Crossfeed</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
@@ -2153,7 +2154,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 1</source>
-      <translation>Salón pequeño 1</translation>
+      <translation>Sala pequeña 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
