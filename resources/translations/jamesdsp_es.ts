@@ -2402,7 +2402,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation>La prueba de rendimiento al arrancar puede causar un aumento del uso de la CPU durante aproximadamente un minuto después del lanzamiento. Generar datos de benchmarking para su sistema puede mejorar el rendimiento de los módulos de conversión.</translation>
+      <translation>El benchmarking al arrancar puede causar un aumento del uso de la CPU durante aproximadamente un minuto después del inicio. Generar datos de benchmarking para tu sistema puede mejorar el rendimiento de los módulos de convolución.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
@@ -2487,7 +2487,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation>En la sección &apos;Aplicaciones&apos; accesible usando el menú de tres puntos de la ventana principal, puedes bloquear aplicaciones que estén reproduciendo sonido de ser procesadas por JamesDSP.</translation>
+      <translation>En la sección 'Aplicaciones', accesible mediante el menú de tres puntos de la ventana principal, puedes bloquear que las aplicaciones que estén reproduciendo audio sean procesadas por JamesDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
