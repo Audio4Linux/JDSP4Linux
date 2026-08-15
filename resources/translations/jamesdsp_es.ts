@@ -796,7 +796,7 @@ Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
       <source>No, don&apos;t apply effects in background</source>
-      <translation type="unfinished"/>
+      <translation>No aplicar efectos en segundo plano</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
