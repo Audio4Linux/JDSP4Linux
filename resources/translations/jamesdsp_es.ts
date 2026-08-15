@@ -2233,12 +2233,12 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation type="unfinished"/>
+      <translation>Reverberación larga 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation type="unfinished"/>
+      <translation>Reverberación larga 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
@@ -2376,7 +2376,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
       <source>Always display handles</source>
-      <translation type="unfinished"/>
+      <translation>Mostrar siempre controles</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
@@ -2426,7 +2426,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="483"/>
       <source>VDCs</source>
-      <translation type="unfinished"/>
+      <translation>VDCs</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
@@ -2441,7 +2441,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="543"/>
       <source>Built-in assets</source>
-      <translation type="unfinished"/>
+      <translation>Recursos integrados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
@@ -2693,7 +2693,7 @@ Si han sido modificados, se reiniciarán.</translation>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>Frecuencia de muestreo</translation>
     </message>
   </context>
   <context>
@@ -2701,12 +2701,12 @@ Si han sido modificados, se reiniciarán.</translation>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Processing</source>
-      <translation type="unfinished"/>
+      <translation>Procesando</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Not processing</source>
-      <translation type="unfinished"/>
+      <translation>Sin procesamiento</translation>
     </message>
   </context>
   <context>
@@ -2714,37 +2714,37 @@ Si han sido modificados, se reiniciarán.</translation>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="84"/>
       <source>&amp;Bypass</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Anular</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="90"/>
       <source>&amp;Presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Preajustes</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="93"/>
       <source>&amp;Convolver bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Marcadores de convolución</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="110"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP para Linux</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="164"/>
       <source>No presets found</source>
-      <translation type="unfinished"/>
+      <translation>No se encontraron preajustes</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="208"/>
       <source>No impulse responses found</source>
-      <translation type="unfinished"/>
+      <translation>No se encontraron respuestas al impulso</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="259"/>
       <source>&amp;Reload JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Recargar JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="263"/>
