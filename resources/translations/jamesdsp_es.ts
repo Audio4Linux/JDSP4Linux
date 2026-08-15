@@ -1037,7 +1037,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">Modelado analógico&lt;/span>&lt;/p>&lt;p>El modelado analógico sobremuestreado es un generador de armónicos pares libre de aliasing.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
@@ -1354,7 +1354,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1446"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">Convolucionador&lt;/span>&lt;/p>&lt;p>Convolucionador por particiones (convolución con segmentación automática). Selecciona tu archivo de respuesta al impulso para convolucionar. Toma las características de señal de la respuesta al impulso y las aplica al audio entrante en tiempo real.&lt;/p>&lt;p>Admite respuestas al impulso mono, estéreo y estéreo completo/verdadero (LL, LR, RL, RR).&lt;/p>&lt;p>&lt;span style=" text-decoration: underline;">Optimización de la respuesta al impulso:&lt;/span>&lt;/p>&lt;p>Este parámetro intenta reducir al máximo la longitud de la respuesta al impulso; su objetivo principal es minimizar la latencia al máximo, lo que posiblemente reduce el consumo de energía.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1471"/>
@@ -1455,12 +1455,12 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="2025"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">DSP programable en vivo&lt;/span>&lt;/p>&lt;p>Esta es una máquina virtual que compila un archivo de código .eel como entrada y ejecuta las instrucciones; en palabras simples, permite a los usuarios programar sus propios efectos de audio.&lt;/p>&lt;p>El número de operaciones compatibles es enorme; considera consultar la documentación oficial: &lt;a href="https://github.com/james34602/EEL_VM">&lt;span style=" text-decoration: underline; color:#007af4;">https://github.com/james34602/EEL_VM&lt;/span>&lt;/a>&lt;/p>&lt;p>Pulse 'Editar script' para abrir un entorno de scripting integrado para archivos de código EEL.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2047"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">Ecualizador de respuesta arbitraria&lt;/span>&lt;/p>&lt;p>También conocido como GraphicEQ de EqualizerAPO.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2085"/>
@@ -1555,7 +1555,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="269"/>
       <source>What&apos;s this... (Select UI element)</source>
-      <translation type="unfinished"/>
+      <translation>¿Qué es esto... (Seleccionar elemento de la interfaz)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="364"/>
@@ -1666,7 +1666,17 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>Edición avanzada de forma de onda (predeterminado: -80;-100;0;0;0;0)
+
+Establece el umbral para el recorte automático de la IR y añade un retardo a una IR recortada o transformada a fase mínima.
+Esta configuración solo tiene efecto si la optimización de la IR está habilitada.
+
+1.er valor: Umbral de inicio del recorte automático (dB)
+2.º valor: Umbral de fin del recorte automático (dB)
+3.er valor: Retardo del canal 1 (muestras)
+4.º valor: Retardo del canal 2 (muestras)
+5.º valor: Retardo del canal 3 (muestras)
+6.º valor: Retardo del canal 4 (muestras)</translation>
     </message>
   </context>
   <context>
@@ -2138,7 +2148,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Default</source>
-      <translation type="unfinished"/>
+      <translation>Predeterminado</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
@@ -2148,52 +2158,52 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Sala pequeña 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Sala mediana 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Sala mediana 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Sala grande 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Sala grande 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 1</source>
-      <translation type="unfinished"/>
+      <translation>Habitación pequeña 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 2</source>
-      <translation type="unfinished"/>
+      <translation>Habitación pequeña 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Medium room 1</source>
-      <translation type="unfinished"/>
+      <translation>Habitación mediana 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium room 2</source>
-      <translation type="unfinished"/>
+      <translation>Habitación mediana 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 1</source>
-      <translation type="unfinished"/>
+      <translation>Habitación grande 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2203,22 +2213,22 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 1</source>
-      <translation type="unfinished"/>
+      <translation>ER medio 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 2</source>
-      <translation type="unfinished"/>
+      <translation>ER medio 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation type="unfinished"/>
+      <translation>Placa alta</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation type="unfinished"/>
+      <translation>Placa baja</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
