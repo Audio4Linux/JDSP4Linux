@@ -112,7 +112,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation>Versión de la base de datos de archivos</translation>
+      <translation>Versión de base de datos local</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
@@ -127,7 +127,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation>Paquete generado en:</translation>
+      <translation>Paquete generado el:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
@@ -546,7 +546,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation>Asistente de script nuevo</translation>
+      <translation>Asistente de nuevo script</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
@@ -729,7 +729,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation>E&amp;presión regular</translation>
+      <translation>&amp;Expresión regular</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
