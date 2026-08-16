@@ -2617,8 +2617,7 @@ Si han sido modificados, se reiniciarán.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation>Está a punto de activar el modo listas permitidas. JamesDSP no procesará todas las aplicaciones por defecto mientras este modo esté activo. Necesitas permitir explícitamente que cada aplicación se procese en el menú &apos;Aplicaciones&apos;.
-</translation>
+      <translation>Está a punto de activar el modo de lista de permitidos. JamesDSP no procesará todas las aplicaciones de forma predeterminada mientras este modo esté activo. Debe permitir explícitamente cada aplicación para que sea procesada en el menú &apos;Aplicaciones&apos;.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="402"/>
