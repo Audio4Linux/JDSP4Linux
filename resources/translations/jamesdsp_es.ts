@@ -2382,12 +2382,12 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation>Prueba de rendimiento del convolver</translation>
+      <translation>Prueba de rendimiento del convolucionador</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation>Hacer prueba de rendimiento</translation>
+      <translation>Ejecutar pruebas de rendimiento</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
@@ -2397,12 +2397,12 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
-      <translation>Activar prueba de rendimiento al arrancar</translation>
+      <translation>Activar pruebas de rendimiento al iniciar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation>El benchmarking al arrancar puede causar un aumento del uso de la CPU durante aproximadamente un minuto después del inicio. Generar datos de benchmarking para tu sistema puede mejorar el rendimiento de los módulos de convolución.</translation>
+      <translation>Activar las pruebas de rendimiento al iniciar puede provocar un mayor uso de la CPU durante aproximadamente un minuto después del arranque. Generar datos de referencia para tu sistema puede mejorar el rendimiento de los módulos del convolucionador.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
@@ -2557,7 +2557,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="941"/>
       <source>Run setup wizard</source>
-      <translation>Ejecutar el Asistente de Configuración</translation>
+      <translation>Ejecutar asistente de configuración</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="964"/>
@@ -2589,7 +2589,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation>no hay datos de pruebas de rendimiento almacenados</translation>
+      <translation>No hay datos de pruebas de rendimiento almacenados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
