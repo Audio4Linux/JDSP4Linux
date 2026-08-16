@@ -2347,7 +2347,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation>Icono de bandeja de sistema</translation>
+      <translation>Icono en la bandeja</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
