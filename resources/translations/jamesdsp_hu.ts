@@ -1352,68 +1352,68 @@ Please select another one</source>
     <message>
       <location filename="../../src/MainWindow.ui" line="1446"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Konvolúzor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partícionált konvolúzor (Automatikusan szegmentáló konvolúzió). Válassza ki a konvolúzióhoz használi kívánt impulzus válasz fájlt. A program veszi az impulzusválasz hullámkarakterisztikáját és valós időben alkalmazza azt a bejövő hangokra.&lt;/p&gt;&lt;p&gt;Támogatja a mono, stereo, teljes/valódi stereo (LL, LR, RL, RR) impulzis válaszokat.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulzus válasz optimalizáció:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ez a paraméter megkísérli a lehető legjobban lerövidíteni az impulzusválasz idejét a késleltetés, és lehetőség szerint az erőforrásigény csökkentése érdekében.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1471"/>
       <location filename="../../src/MainWindow.ui" line="1793"/>
       <source>Filesystem</source>
-      <translation type="unfinished"/>
+      <translation>Fájlrendszer</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1493"/>
       <source>Bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>Könyvjelzők</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1532"/>
       <source>Enable convolver</source>
-      <translation type="unfinished"/>
+      <translation>Konvolúzor engedélyezése</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1539"/>
       <source>IR optimization</source>
-      <translation type="unfinished"/>
+      <translation>IR optimalizálás</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1559"/>
       <source>Original</source>
-      <translation type="unfinished"/>
+      <translation>Eredeti</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1564"/>
       <source>Shrink</source>
-      <translation type="unfinished"/>
+      <translation>Kicsinyítés</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1569"/>
       <source>Minimum phase transform and shrink</source>
-      <translation type="unfinished"/>
+      <translation>Minimális fázistranszformáció és zsugorítás</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1577"/>
       <source>Adv. waveform editing</source>
-      <translation type="unfinished"/>
+      <translation>Haladó hullámforma szerkesztés</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1596"/>
       <source>Edit</source>
-      <translation type="unfinished"/>
+      <translation>Szerkeztés</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1642"/>
       <source>Channels:</source>
-      <translation type="unfinished"/>
+      <translation>Csatornák:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1662"/>
       <source>Samples:</source>
-      <translation type="unfinished"/>
+      <translation>Minták:</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1721"/>
       <source>No selection</source>
-      <translation type="unfinished"/>
+      <translation>Nincs kijelölés</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1768"/>
