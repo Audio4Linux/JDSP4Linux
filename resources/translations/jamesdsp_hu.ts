@@ -69,7 +69,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="162"/>
       <source>Equalization (normalized)</source>
-      <translation type="unfinished"/>
+      <translation>Ekvalizer (Normalizált)</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="209"/>
@@ -84,17 +84,17 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="211"/>
       <source>Move to top right</source>
-      <translation type="unfinished"/>
+      <translation>Mozgatás jobb felülre</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="212"/>
       <source>Move to bottom right</source>
-      <translation type="unfinished"/>
+      <translation>Mozgatás jobb alulra</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqPreviewPlot.cpp" line="213"/>
       <source>Move to bottom left</source>
-      <translation type="unfinished"/>
+      <translation>Mozgatás bal alulra</translation>
     </message>
   </context>
   <context>
@@ -102,62 +102,62 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation type="unfinished"/>
+      <translation>AutoEQ Adatbázis</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
       <source>Filter...</source>
-      <translation type="unfinished"/>
+      <translation>Szűrő...</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation type="unfinished"/>
+      <translation>Helyi adatbázis verziója</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
       <source>Checked out at commit:</source>
-      <translation type="unfinished"/>
+      <translation>Kód bejelentéskor kicsekkolva:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="145"/>
       <source>Last commit created at:</source>
-      <translation type="unfinished"/>
+      <translation>Utolsó kód bejelentés dátuma:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation type="unfinished"/>
+      <translation>Csomag legenerálva:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
       <source>Display settings</source>
-      <translation type="unfinished"/>
+      <translation>Képernyő beállítások</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="184"/>
       <source>Dark mode</source>
-      <translation type="unfinished"/>
+      <translation>Sötét mód</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="207"/>
       <source>Update database</source>
-      <translation type="unfinished"/>
+      <translation>Adatbázis frissítése</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="217"/>
       <source>Download latest AutoEQ package</source>
-      <translation type="unfinished"/>
+      <translation>Legfrissebb AutoEQ csomagok letöltése</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="224"/>
       <source>Delete database</source>
-      <translation type="unfinished"/>
+      <translation>Adatbázis törlése</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="234"/>
       <source>Cleanup local database and exit</source>
-      <translation type="unfinished"/>
+      <translation>Helyi adatbázis tisztítása és kilépés</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="281"/>
@@ -324,22 +324,22 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="26"/>
       <source>Auto-scroll</source>
-      <translation type="unfinished"/>
+      <translation>Auto görgetés</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="31"/>
       <source>Copy selection</source>
-      <translation type="unfinished"/>
+      <translation>Kijelölés másolása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="34"/>
       <source>Copy all</source>
-      <translation type="unfinished"/>
+      <translation>Összes másolása</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/consoleoutput.cpp" line="39"/>
       <source>Clear</source>
-      <translation type="unfinished"/>
+      <translation>Törlés</translation>
     </message>
   </context>
   <context>
@@ -362,7 +362,7 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="54"/>
       <source>Navigation</source>
-      <translation type="unfinished"/>
+      <translation>Navigáció</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="65"/>
@@ -660,27 +660,27 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="59"/>
       <source>Refresh</source>
-      <translation type="unfinished"/>
+      <translation>Frissítés</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="72"/>
       <source>Bookmark</source>
-      <translation type="unfinished"/>
+      <translation>Könyvjelző</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="135"/>
       <source>Rename</source>
-      <translation type="unfinished"/>
+      <translation>Átnevezés</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.ui" line="148"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Eltávolítás</translation>
     </message>
     <message>
       <location filename="../../src/interface/FileSelectionWidget.cpp" line="92"/>
       <source>No supported files found</source>
-      <translation type="unfinished"/>
+      <translation>Nem található támogatott fájl</translation>
     </message>
   </context>
   <context>
@@ -688,67 +688,67 @@ Do you want to re-install the latest database update anyway?</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished"/>
+      <translation>Űrlap</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="41"/>
       <source>&amp;Find:</source>
-      <translation type="unfinished"/>
+      <translation>Keresés:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="51"/>
       <source>R&amp;eplace with:</source>
-      <translation type="unfinished"/>
+      <translation>Cs&amp;ere erre:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="72"/>
       <source>Previous</source>
-      <translation type="unfinished"/>
+      <translation>Előző</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="89"/>
       <source>Next</source>
-      <translation type="unfinished"/>
+      <translation>Következő</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="121"/>
       <source>&amp;Options</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Beállítások</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation type="unfinished"/>
+      <translation>R&amp;eguláris kifejezések</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
       <source>&amp;Whole words </source>
-      <translation type="unfinished"/>
+      <translation>&amp;Egész szavak </translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="171"/>
       <source>&amp;Case sensitive</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Kis-nagybetű érzékeny</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="191"/>
       <source>&amp;Close</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Bezárás</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="201"/>
       <source>&amp;Replace</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Csere</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="211"/>
       <source>Replace &amp;All</source>
-      <translation type="unfinished"/>
+      <translation>Összes &amp;cseréje</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="148"/>
       <source>no match found</source>
-      <translation type="unfinished"/>
+      <translation>nincs egyezés</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.cpp" line="171"/>
@@ -2324,7 +2324,7 @@ Please create one first before adding a new rule.</source>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
       <source>Context menu</source>
-      <translation>Helyi menü</translation>
+      <translation>Kontextus menü</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="164"/>
@@ -2721,7 +2721,7 @@ If they have been modified, they will be reset.</source>
       <location filename="../../src/interface/TrayIcon.cpp" line="263"/>
       <location filename="../../src/interface/TrayIcon.cpp" line="341"/>
       <source>&amp;Quit</source>
-      <translation>Kilép</translation>
+      <translation>&amp;Kilépés</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="267"/>
@@ -2856,17 +2856,17 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="505"/>
       <source>Detach</source>
-      <translation type="unfinished"/>
+      <translation>Leválasztás</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="508"/>
       <source>Close</source>
-      <translation type="unfinished"/>
+      <translation>Bezárás</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/3rdparty/docking-system/src/DockWidgetTab.cpp" line="510"/>
       <source>Close Others</source>
-      <translation type="unfinished"/>
+      <translation>A többi fül bezárása</translation>
     </message>
   </context>
   <context>
@@ -2874,78 +2874,78 @@ If they have been modified, they will be reset.</source>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="25"/>
       <source>Available entries</source>
-      <translation type="unfinished"/>
+      <translation>Elérhető bejegyzések</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="73"/>
       <source>Move Up</source>
-      <translation type="unfinished"/>
+      <translation>Mozgatás Fel</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="76"/>
       <source>Moves the selected toolbar item up</source>
-      <translation type="unfinished"/>
+      <translation>Kijelölt eszköztár elemet felfelé mozgatja</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="79"/>
       <source>&amp;Up</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Fel</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="114"/>
       <source>Move Down</source>
-      <translation type="unfinished"/>
+      <translation>Mozgatás Le</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="117"/>
       <source>moves the selected toolbar item down</source>
-      <translation type="unfinished"/>
+      <translation>kijelölt eszköztár elemet lefelé mozgatja</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="120"/>
       <source>&amp;Down</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Le</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="168"/>
       <source>Insert</source>
-      <translation type="unfinished"/>
+      <translation>Beszúrás</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="171"/>
       <source>Adds the selected menu action to the toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Hozzáadja a kijelölt menü akciót az eszköztárhoz</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="174"/>
       <source>&amp;Add</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Hozzáadás</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="209"/>
       <source>Remove</source>
-      <translation type="unfinished"/>
+      <translation>Eltávolítás</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="212"/>
       <source>Removes the selected item from the active toolbar</source>
-      <translation type="unfinished"/>
+      <translation>Törli a kijelölt elemet az aktív eszköztárból</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="215"/>
       <source>&amp;Del</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Töröl</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="245"/>
       <location filename="../../src/interface/menueditor.ui" line="248"/>
       <source>Reset</source>
-      <translation type="unfinished"/>
+      <translation>Visszaállítás</translation>
     </message>
     <message>
       <location filename="../../src/interface/menueditor.ui" line="279"/>
       <source>Context menu contents</source>
-      <translation type="unfinished"/>
+      <translation>Kontextus menü tartalma</translation>
     </message>
   </context>
 </TS>
