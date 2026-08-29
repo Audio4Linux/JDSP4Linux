@@ -309,6 +309,13 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
   </tr>
   <tr>
     <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/ldavid8000"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/13511452/medium/0ce6a572593d9697722ec0420156c4d1.jpg" />
+        <br />
+        <sub><b>Dávid László (ldavid8000)</b></sub></a>
+      <br />
+      <sub><b>818 words</b></sub>
+    </td>
+    <td align="center" valign="top">
       <a href="https://crowdin.com/profile/HoleHolo"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14737398/medium/7d120eb168560837ca53bd0f189be716.png" />
         <br />
         <sub><b>HoleHolo</b></sub></a>
@@ -328,6 +335,13 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <sub><b>unsigned char (unsignedchar256)</b></sub></a>
       <br />
       <sub><b>730 words</b></sub>
+    </td>
+    <td align="center" valign="top">
+      <a href="https://crowdin.com/profile/Yuletsi"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16507043/medium/f3e11341009b2302a80f9e62be303758.png" />
+        <br />
+        <sub><b>Yuletsi Lara Maceo (Yuletsi)</b></sub></a>
+      <br />
+      <sub><b>663 words</b></sub>
     </td>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/mefsaal"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/13221907/medium/c0b751a37f076028f7271b00392736aa.jpg" />
@@ -350,13 +364,8 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>373 words</b></sub>
     </td>
-    <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/tachyglossues"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16138360/medium/4d6a2b47f6bc03515132a7310e27d4d6_default.png" />
-        <br />
-        <sub><b>tachyglossues</b></sub></a>
-      <br />
-      <sub><b>358 words</b></sub>
-    </td>
+  </tr>
+  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/token0"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17410814/medium/2b93212ecd91d1ad45cead0226737e90.jpeg" />
         <br />
@@ -364,8 +373,6 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>300 words</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/Regu_Miabyss"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15317124/medium/9099ec758c209481e79cd9b23b7f6210.png" />
         <br />
@@ -415,6 +422,8 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>200 words</b></sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/AnClark"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15932859/medium/621b49aa22122e6ca25fc819eac5e96f.jpeg" />
         <br />
@@ -422,8 +431,6 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
       <br />
       <sub><b>173 words</b></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center" valign="top">
       <a href="https://crowdin.com/profile/deproocho"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/14966313/medium/71b861af9d1e455f743c1002b4d24622.jpeg" />
         <br />
@@ -472,13 +479,6 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
         <sub><b>Loc Huynh (loccun)</b></sub></a>
       <br />
       <sub><b>68 words</b></sub>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://crowdin.com/profile/theczechczech"><img alt="logo" style="width: 64px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15271802/medium/850b88d0368fad2a99ee217e658235a1.png" />
-        <br />
-        <sub><b>theczechczech</b></sub></a>
-      <br />
-      <sub><b>42 words</b></sub>
     </td>
   </tr>
 </table><a href="https://crowdin.com/project/jdsp4linux" target="_blank">Translate in Crowdin 🚀</a>
