@@ -102,7 +102,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="14"/>
       <source>AutoEQ Database</source>
-      <translation>Base de Datos AutoEQ</translation>
+      <translation>Base de datos AutoEQ</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="55"/>
@@ -112,7 +112,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="123"/>
       <source>Local database version</source>
-      <translation>Versión de la base de datos de archivos</translation>
+      <translation>Versión de base de datos local</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="131"/>
@@ -127,7 +127,7 @@
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="159"/>
       <source>Package generated at:</source>
-      <translation>Paquete generado en:</translation>
+      <translation>Paquete generado el:</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/AutoEqIntegration/AeqSelector.ui" line="178"/>
@@ -283,7 +283,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="80"/>
       <source>Rate: %1Hz</source>
-      <translation type="unfinished"/>
+      <translation>Frecuencia: %1Hz</translation>
     </message>
     <message>
       <location filename="../../src/interface/item/AppItem.cpp" line="81"/>
@@ -546,7 +546,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="302"/>
       <source>New script wizard</source>
-      <translation>Asistente de script nuevo</translation>
+      <translation>Asistente de nuevo script</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="305"/>
@@ -562,7 +562,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.ui" line="323"/>
       <source>F6</source>
-      <translation>F6</translation>
+      <translation/>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/eeleditor.cpp" line="87"/>
@@ -729,7 +729,7 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="139"/>
       <source>R&amp;egular expression</source>
-      <translation>E&amp;presión regular</translation>
+      <translation>&amp;Expresión regular</translation>
     </message>
     <message>
       <location filename="../../src/subprojects/EELEditor/src/widgets/findreplaceform.ui" line="155"/>
@@ -778,8 +778,9 @@ Puede tardar hasta 24 horas en que los nuevos cambios en el repositorio principa
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="232"/>
       <source>Thank you for installing this app!
 However, before you can begin playing around with JamesDSP for Linux, we&apos;ll need to make some adjustments in order to ensure the best possible experience with JDSP.</source>
-      <translation>¡Gracias por instalar la aplicación!
-Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&apos;hacer algunos ajustes para asegurar la mejor experiencia posible con JDSP.</translation>
+      <translation>¡Gracias por instalar esta aplicación!
+
+Sin embargo, antes de que puedas empezar a experimentar con JamesDSP para Linux, necesitaremos hacer algunos ajustes para garantizar la mejor experiencia posible con JDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="342"/>
@@ -796,7 +797,7 @@ Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="903"/>
       <source>No, don&apos;t apply effects in background</source>
-      <translation type="unfinished"/>
+      <translation>No aplicar efectos en segundo plano</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="1356"/>
@@ -811,12 +812,12 @@ Sin embargo, antes de que puedas empezar a usar JamesDSP para Linux necesitamos&
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2225"/>
       <source>That&apos;s it!</source>
-      <translation type="unfinished"/>
+      <translation>¡Listo!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2253"/>
       <source>You&apos;re good to go! You can change any choice you just made in the settings section. Check it out for further customization options. Visit our Telegram community for support and updates!</source>
-      <translation>¡Eso está bien para continuar! Puedes hacer cualquier otro cambio de tu elección en la sección de ajustes. Consúltala para más ajustes de customizacion. ¡Visita nuestro Telegram comunitario para ayuda y actualizaciones!</translation>
+      <translation>¡Ya está todo listo! Puedes cambiar cualquiera de las opciones que acabas de seleccionar en la sección de configuración. Explórala para ver más opciones de personalización. ¡Visita nuestra comunidad de Telegram para recibir soporte y actualizaciones!</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/FirstLaunchWizard.ui" line="2362"/>
@@ -1037,7 +1038,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="156"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Analog modelling&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oversampled analog modelling is an aliasing-free, even harmonic generator.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">Modelado analógico&lt;/span>&lt;/p>&lt;p>El modelado analógico sobremuestreado es un generador de armónicos pares libre de aliasing.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="159"/>
@@ -1113,7 +1114,7 @@ Por favor, seleccione otro</translation>
       <location filename="../../src/MainWindow.ui" line="487"/>
       <location filename="../../src/MainWindow.ui" line="543"/>
       <source>Crossfeed</source>
-      <translation>Alimentación cruzada</translation>
+      <translation>Crossfeed</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="508"/>
@@ -1354,7 +1355,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="1446"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Convolver&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Partitioned convolver (Auto segmenting convolution). Select your impulse response file to be convolved. It takes the signal characteristics of the impulse response and applies them to the incoming audio in real-time.&lt;/p&gt;&lt;p&gt;Supports mono, stereo, full/true stereo (LL, LR, RL, RR) impulse responses.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Impulse response optimization:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This parameter attempts to reduce the length of the impulse response as much as possible; the whole point is to reduce latency as much as possible, possibly reducing power consumption.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">Convolucionador&lt;/span>&lt;/p>&lt;p>Convolucionador por particiones (convolución con segmentación automática). Selecciona tu archivo de respuesta al impulso para convolucionar. Toma las características de señal de la respuesta al impulso y las aplica al audio entrante en tiempo real.&lt;/p>&lt;p>Admite respuestas al impulso mono, estéreo y estéreo completo/verdadero (LL, LR, RL, RR).&lt;/p>&lt;p>&lt;span style=" text-decoration: underline;">Optimización de la respuesta al impulso:&lt;/span>&lt;/p>&lt;p>Este parámetro intenta reducir al máximo la longitud de la respuesta al impulso; su objetivo principal es minimizar la latencia al máximo, lo que posiblemente reduce el consumo de energía.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="1471"/>
@@ -1455,12 +1456,12 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.ui" line="2025"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Live programmable DSP&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a virtual machine that compiles an .eel code file as input and runs the instructions; in simple words, it allows users to program their own audio effects.&lt;/p&gt;&lt;p&gt;The number of supported operations is enormous; consider checking out the official documentation: &lt;a href=&quot;https://github.com/james34602/EEL_VM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/james34602/EEL_VM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Press &apos;Edit script&apos; to launch a built-in scripting environment for EEL code files.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">DSP programable en vivo&lt;/span>&lt;/p>&lt;p>Esta es una máquina virtual que compila un archivo de código .eel como entrada y ejecuta las instrucciones; en palabras simples, permite a los usuarios programar sus propios efectos de audio.&lt;/p>&lt;p>El número de operaciones compatibles es enorme; considera consultar la documentación oficial: &lt;a href="https://github.com/james34602/EEL_VM">&lt;span style=" text-decoration: underline; color:#007af4;">https://github.com/james34602/EEL_VM&lt;/span>&lt;/a>&lt;/p>&lt;p>Pulse 'Editar script' para abrir un entorno de scripting integrado para archivos de código EEL.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2047"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Arbitrary response equalizer&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Also known as GraphicEQ from EqualizerAPO.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished"/>
+      <translation>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; text-decoration: underline;">Ecualizador de respuesta arbitraria&lt;/span>&lt;/p>&lt;p>También conocido como GraphicEQ de EqualizerAPO.&lt;/p>&lt;/body>&lt;/html></translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.ui" line="2085"/>
@@ -1555,7 +1556,7 @@ Por favor, seleccione otro</translation>
     <message>
       <location filename="../../src/MainWindow.cpp" line="269"/>
       <source>What&apos;s this... (Select UI element)</source>
-      <translation type="unfinished"/>
+      <translation>¿Qué es esto... (Seleccionar elemento de la interfaz)</translation>
     </message>
     <message>
       <location filename="../../src/MainWindow.cpp" line="364"/>
@@ -1666,7 +1667,17 @@ This setting is only in effect if IR optimization is enabled.
 5th value: Channel 3 delay (samples)
 6th value: Channel 4 delay (samples)
 </source>
-      <translation type="unfinished"/>
+      <translation>Edición avanzada de forma de onda (predeterminado: -80;-100;0;0;0;0)
+
+Establece el umbral para el recorte automático de la IR y añade un retardo a una IR recortada o transformada a fase mínima.
+Esta configuración solo tiene efecto si la optimización de la IR está habilitada.
+
+1.er valor: Umbral de inicio del recorte automático (dB)
+2.º valor: Umbral de fin del recorte automático (dB)
+3.er valor: Retardo del canal 1 (muestras)
+4.º valor: Retardo del canal 2 (muestras)
+5.º valor: Retardo del canal 3 (muestras)
+6.º valor: Retardo del canal 4 (muestras)</translation>
     </message>
   </context>
   <context>
@@ -2138,62 +2149,62 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Default</source>
-      <translation type="unfinished"/>
+      <translation>Predeterminado</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 1</source>
-      <translation>Salón pequeño 1</translation>
+      <translation>Sala pequeña 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Small hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Sala pequeña 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Sala mediana 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="204"/>
       <source>Medium hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Sala mediana 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 1</source>
-      <translation type="unfinished"/>
+      <translation>Sala grande 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Large hall 2</source>
-      <translation type="unfinished"/>
+      <translation>Sala grande 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 1</source>
-      <translation type="unfinished"/>
+      <translation>Habitación pequeña 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Small room 2</source>
-      <translation type="unfinished"/>
+      <translation>Habitación pequeña 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="205"/>
       <source>Medium room 1</source>
-      <translation type="unfinished"/>
+      <translation>Habitación mediana 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium room 2</source>
-      <translation type="unfinished"/>
+      <translation>Habitación mediana 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Large room 1</source>
-      <translation type="unfinished"/>
+      <translation>Habitación grande 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
@@ -2203,32 +2214,32 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 1</source>
-      <translation type="unfinished"/>
+      <translation>ER medio 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="206"/>
       <source>Medium ER 2</source>
-      <translation type="unfinished"/>
+      <translation>ER medio 2</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate high</source>
-      <translation type="unfinished"/>
+      <translation>Placa alta</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Plate low</source>
-      <translation type="unfinished"/>
+      <translation>Placa baja</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 1</source>
-      <translation type="unfinished"/>
+      <translation>Reverberación larga 1</translation>
     </message>
     <message>
       <location filename="../../src/data/PresetProvider.cpp" line="207"/>
       <source>Long reverb 2</source>
-      <translation type="unfinished"/>
+      <translation>Reverberación larga 2</translation>
     </message>
     <message>
       <location filename="../../src/audio/base/AppNode.h" line="41"/>
@@ -2336,7 +2347,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="113"/>
       <source>Tray icon</source>
-      <translation>Icono de bandeja de sistema</translation>
+      <translation>Icono en la bandeja</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="117"/>
@@ -2366,17 +2377,17 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="270"/>
       <source>Always display handles</source>
-      <translation type="unfinished"/>
+      <translation>Mostrar siempre controles</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="299"/>
       <source>Convolver benchmarking</source>
-      <translation>Prueba de rendimiento del convolver</translation>
+      <translation>Prueba de rendimiento del convolucionador</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="316"/>
       <source>Benchmark now</source>
-      <translation>Hacer prueba de rendimiento</translation>
+      <translation>Ejecutar pruebas de rendimiento</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="329"/>
@@ -2386,12 +2397,12 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="374"/>
       <source>Enable benchmarking on boot</source>
-      <translation>Activar prueba de rendimiento al arrancar</translation>
+      <translation>Activar pruebas de rendimiento al iniciar</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="384"/>
       <source>Benchmarking on boot may cause increased CPU usage for about one minute after launch. Generating benchmarking data for your system can improve the performance of the convolver modules.</source>
-      <translation>La prueba de rendimiento al arrancar puede causar un aumento del uso de la CPU durante aproximadamente un minuto después del lanzamiento. Generar datos de benchmarking para su sistema puede mejorar el rendimiento de los módulos de conversión.</translation>
+      <translation>Activar las pruebas de rendimiento al iniciar puede provocar un mayor uso de la CPU durante aproximadamente un minuto después del arranque. Generar datos de referencia para tu sistema puede mejorar el rendimiento de los módulos del convolucionador.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="397"/>
@@ -2416,7 +2427,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="483"/>
       <source>VDCs</source>
-      <translation type="unfinished"/>
+      <translation>VDCs</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="497"/>
@@ -2431,7 +2442,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="543"/>
       <source>Built-in assets</source>
-      <translation type="unfinished"/>
+      <translation>Recursos integrados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="554"/>
@@ -2476,7 +2487,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="668"/>
       <source>In the &apos;Apps&apos; section accessible using the three-dot menu on the main window, you can block apps that are playing back sound from being processed by JamesDSP.</source>
-      <translation>En la sección &apos;Aplicaciones&apos; accesible usando el menú de tres puntos de la ventana principal, puedes bloquear aplicaciones que estén reproduciendo sonido de ser procesadas por JamesDSP.</translation>
+      <translation>En la sección 'Aplicaciones', accesible mediante el menú de tres puntos de la ventana principal, puedes bloquear que las aplicaciones que estén reproduciendo audio sean procesadas por JamesDSP.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="684"/>
@@ -2546,7 +2557,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="941"/>
       <source>Run setup wizard</source>
-      <translation>Ejecutar el Asistente de Configuración</translation>
+      <translation>Ejecutar asistente de configuración</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.ui" line="964"/>
@@ -2578,7 +2589,7 @@ Por favor, cree uno primero antes de añadir una nueva regla.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="281"/>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="462"/>
       <source>no benchmark data stored</source>
-      <translation>no hay datos de pruebas de rendimiento almacenados</translation>
+      <translation>No hay datos de pruebas de rendimiento almacenados</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="304"/>
@@ -2606,8 +2617,7 @@ Si han sido modificados, se reiniciarán.</translation>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="400"/>
       <source>You are about to enable allowlist mode. JamesDSP will not process all applications by default while this mode is active. You need to explicitly allow each app to get processed in the &apos;Apps&apos; menu.
 </source>
-      <translation>Está a punto de activar el modo listas permitidas. JamesDSP no procesará todas las aplicaciones por defecto mientras este modo esté activo. Necesitas permitir explícitamente que cada aplicación se procese en el menú &apos;Aplicaciones&apos;.
-</translation>
+      <translation>Está a punto de activar el modo de lista de permitidos. JamesDSP no procesará todas las aplicaciones de forma predeterminada mientras este modo esté activo. Debe permitir explícitamente cada aplicación para que sea procesada en el menú &apos;Aplicaciones&apos;.</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/SettingsFragment.cpp" line="402"/>
@@ -2683,7 +2693,7 @@ Si han sido modificados, se reiniciarán.</translation>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.ui" line="93"/>
       <source>Sampling rate</source>
-      <translation type="unfinished"/>
+      <translation>Frecuencia de muestreo</translation>
     </message>
   </context>
   <context>
@@ -2691,12 +2701,12 @@ Si han sido modificados, se reiniciarán.</translation>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Processing</source>
-      <translation type="unfinished"/>
+      <translation>Procesando</translation>
     </message>
     <message>
       <location filename="../../src/interface/fragment/StatusFragment.cpp" line="18"/>
       <source>Not processing</source>
-      <translation type="unfinished"/>
+      <translation>Sin procesamiento</translation>
     </message>
   </context>
   <context>
@@ -2704,37 +2714,37 @@ Si han sido modificados, se reiniciarán.</translation>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="84"/>
       <source>&amp;Bypass</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Anular</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="90"/>
       <source>&amp;Presets</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Preajustes</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="93"/>
       <source>&amp;Convolver bookmarks</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Marcadores de convolución</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="110"/>
       <source>JamesDSP for Linux</source>
-      <translation type="unfinished"/>
+      <translation>JamesDSP para Linux</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="164"/>
       <source>No presets found</source>
-      <translation type="unfinished"/>
+      <translation>No se encontraron preajustes</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="208"/>
       <source>No impulse responses found</source>
-      <translation type="unfinished"/>
+      <translation>No se encontraron respuestas al impulso</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="259"/>
       <source>&amp;Reload JamesDSP</source>
-      <translation type="unfinished"/>
+      <translation>&amp;Recargar JamesDSP</translation>
     </message>
     <message>
       <location filename="../../src/interface/TrayIcon.cpp" line="263"/>
