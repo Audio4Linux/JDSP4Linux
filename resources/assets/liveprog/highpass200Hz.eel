@@ -1,26 +1,23 @@
 desc: High Pass Filter
 author: djneba, adapted from @thepbone lowpass
 
-freq:80<10,200,1>Cut-off frequency
-qFactor:0.707<0.10,10.00,0.01>Q factor
+slider1:freq=80<10,20000,1>Cut-off frequency (Hz)
+slider2:qFactor=0.707<0.10,10.00,0.01>Q factor
 
 @init
-freq = 100;
-qFactor = 1.00;
-
-function HighPassFilter_Set(frequency qFactor)(
-    x = (frequency * 2.f * $PI) / srate;
+function HighPassFilter_Set(frequency, qFactor) (
+    x = (frequency * 2 * $PI) / srate;
     sinX = sin(x);
-    y = sinX / (qFactor * 2.f);
+    y = sinX / (qFactor * 2);
     cosX = cos(x);
-    z = (1.f + cosX) / 2.f;
+    z = (1 + cosX) / 2;
 
-    _a0 = y + 1.f;
-    _a1 = cosX * -2.f;
-    _a2 = 1.f - y;
-    _b0 = z;   
-    _b1 = -(1.f + cosX);   
-    _b2 = z;   
+    _a0 = y + 1;
+    _a1 = cosX * -2;
+    _a2 = 1 - y;
+    _b0 = z;    
+    _b1 = -(1 + cosX);    
+    _b2 = z;    
     
     this.y_2 = 0; this.y_1 = 0; this.x_2 = 0; this.x_1 = 0;
     this.b0 = _b0 / _a0;
@@ -30,7 +27,7 @@ function HighPassFilter_Set(frequency qFactor)(
     this.a2 = -_a2 / _a0;
 );
 
-function HighPassFilter_ProcessSample(sample)(
+function HighPassFilter_ProcessSample(sample) (
     out = sample * this.b0
         + this.x_1 * this.b1
         + this.x_2 * this.b2
@@ -45,6 +42,7 @@ function HighPassFilter_ProcessSample(sample)(
     out;
 );
 
+@slider
 hipass.HighPassFilter_Set(freq, qFactor);
 
 @sample
