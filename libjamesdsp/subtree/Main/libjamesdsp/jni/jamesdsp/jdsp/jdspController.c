@@ -983,6 +983,8 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 	memcpy(CorredHRTF_Surround1, pFrameImpulse, copySize);
 	float *CorredHRTF_Surround2 = (float *)malloc(copySize);
 	memcpy(CorredHRTF_Surround2, pFrameImpulse + (hrtfLenPerChannel << 2), copySize);
+	float *CorredHRTF_Surround2_Wet64 = (float *)malloc(copySize);
+	memcpy(CorredHRTF_Surround2_Wet64, pFrameImpulse + (hrtfLenPerChannel << 2), copySize);
 	float *CorredHRTFCrossfeed = (float *)malloc(copySize);
 	memcpy(CorredHRTFCrossfeed, pFrameImpulse + ((hrtfLenPerChannel << 2) << 1), copySize);
 	drflac_close(pFlac);
@@ -1001,6 +1003,8 @@ void JamesDSPRefreshBlob(JamesDSPLib *jdsp, double targetFs)
 	memset(tmpBuf, 0, outLen * channelsBlobsShort * sizeof(float));
 	JamesDSPOfflineResampling(CorredHRTF_Surround2, tmpBuf, hrtfLenPerChannel, outLen, channelsBlobsShort, ratio);
 	free(CorredHRTF_Surround2);
+	JamesDSPOfflineResampling(CorredHRTF_Surround2_Wet64, tmpBuf, hrtfLenPerChannel, outLen, channelsBlobsShort, ratio);
+	free(CorredHRTF_Surround2_Wet64);
 	channel_splitFloat(tmpBuf, outLen, ptr3, channelsBlobsShort);
 	free(tmpBuf);
 
