@@ -2,6 +2,10 @@
 #include <QString>
 #include <clocale>
 
+#if defined(__x86_64__) || defined(__i386__)
+#include <xmmintrin.h>
+#endif
+
 extern "C" {
 #ifdef DEBUG_FPE
 #include <fenv.h>
@@ -78,6 +82,20 @@ void PwJamesDspPlugin::process(float* left_in,
                                float* right_out,
                                size_t length)
 {
+#if defined(__x86_64__) || defined(__i386__)
+  // Denormals are computed ~10x slower on x86. The DSP state decays into the
+  // denormal range once the input turns into digital silence (e.g. right after
+  // a stream stops), the filter no longer fits into the graph quantum and
+  // every cycle ends in an xrun, which keeps one CPU core busy forever.
+  // Enable flush-to-zero / denormals-are-zero once per processing thread.
+  static thread_local bool denormals_flushed = false;
+
+  if (!denormals_flushed) {
+    _mm_setcsr(_mm_getcsr() | 0x8040u);  // FTZ | DAZ
+    denormals_flushed = true;
+  }
+#endif
+
   if (bypass)
   {
       memcpy(left_out, left_in, length * sizeof (float));

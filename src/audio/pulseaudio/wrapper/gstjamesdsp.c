@@ -7,6 +7,10 @@
 #include <gst/controller/controller.h>
 #include <math.h>
 
+#if defined(__x86_64__) || defined(__i386__)
+#include <xmmintrin.h>
+#endif
+
 GST_DEBUG_CATEGORY_STATIC (gst_jamesdsp_debug);
 #define GST_CAT_DEFAULT gst_jamesdsp_debug
 /* Filter signals and args */
@@ -240,6 +244,18 @@ gst_jamesdsp_transform_ip(GstBaseTransform *base, GstBuffer *buf) {
     float *pcm_data;
     GstClockTime timestamp, stream_time;
     GstMapInfo map;
+
+#if defined(__x86_64__) || defined(__i386__)
+    /* See PwJamesDspPlugin::process(): denormal DSP state after the input
+     * turns to digital silence is ~10x slower on x86 and makes the pipeline
+     * overrun. Enable flush-to-zero / denormals-are-zero once per thread. */
+    static __thread gboolean denormals_flushed = FALSE;
+
+    if (!denormals_flushed) {
+        _mm_setcsr(_mm_getcsr() | 0x8040u); /* FTZ | DAZ */
+        denormals_flushed = TRUE;
+    }
+#endif
 
     timestamp = GST_BUFFER_TIMESTAMP (buf);
     stream_time =
