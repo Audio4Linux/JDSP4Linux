@@ -58,6 +58,7 @@
         <file>assets/irs/CorredHRTF_Crossfeed.wav</file>
         <file>assets/irs/CorredHRTF_Surround1.wav</file>
         <file>assets/irs/CorredHRTF_Surround2.wav</file>
+        <file>assets/irs/CorredHRTF_Surround2_Wet64.wav</file>
         <file>assets/irs/SwapChannels.wav</file>
         <file>assets/vdc/Butterworth.vdc</file>
         <file>assets/vdc/FrontRearContrast.vdc</file>
