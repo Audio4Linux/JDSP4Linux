@@ -1,0 +1,10 @@
+desc: Live development - unity gain
+
+@init
+// Save this file while --watch-liveprog is active.
+// gain = 1 preserves the level; gain = 0.5 reduces it by about 6 dB.
+gain = 1;
+
+@sample
+spl0 *= gain;
+spl1 *= gain;

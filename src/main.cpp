@@ -19,6 +19,7 @@
 #include "data/PresetRule.h"
 #include "utils/CliRemoteController.h"
 #include "utils/FindBinary.h"
+#include "utils/LiveprogFileWatcher.h"
 #include "utils/SingleInstanceMonitor.h"
 #include "utils/VersionMacros.h"
 #include "utils/dbus/IpcHandler.h"
@@ -124,6 +125,7 @@ int main(int   argc,
     QCommandLineOption help(QStringList() << "h" << "help", "Displays help on command line options");
     QCommandLineOption tray(QStringList() << "t" << "tray", "Start minimized in systray (GUI)");
     QCommandLineOption watch(QStringList() << "w" << "watch", "Watch audio.conf and apply changes made by external apps automatically (GUI)");
+    QCommandLineOption watchLiveprog("watch-liveprog", "Reload the selected enabled LiveProg script when its file changes");
     QCommandLineOption lang(QStringList() << "l" << "lang", "Override language (example: de, es, uk, zh_CN)", "lang");
     QCommandLineOption silent(QStringList() << "s" << "silent", "Suppress log output");
     QCommandLineOption minVerbosity(QStringList() << "m" << "min-verbosity", "Minimum log verbosity (0 = Debug; ...; 5 = Critical)", "level");
@@ -136,7 +138,7 @@ int main(int   argc,
     parser.addVersionOption();
 
     // GUI
-    parser.addOptions({tray, watch, lang});
+    parser.addOptions({tray, watch, watchLiveprog, lang});
 
     // Logging
     parser.addOptions({silent, nocolor, minVerbosity});
@@ -205,6 +207,38 @@ int main(int   argc,
 
         DspConfig::instance(parser.isSet(watch)).load();
         QScopedPointer ipc(new IpcHandler(audioService.get(), qApp));
+
+        QScopedPointer<LiveprogFileWatcher> liveprogWatcher;
+        if (parser.isSet(watchLiveprog))
+        {
+            liveprogWatcher.reset(new LiveprogFileWatcher());
+            QObject::connect(liveprogWatcher.get(), &LiveprogFileWatcher::warning,
+                             audioService.get(), [](const QString& message) { Log::warning(message); });
+            QObject::connect(liveprogWatcher.get(), &LiveprogFileWatcher::reloadRequested,
+                             audioService.get(), [service = audioService.get()] {
+                Log::information("LiveProg file changed; reloading the selected script");
+                service->reloadLiveprog();
+            });
+            QObject::connect(audioService.get(), &IAudioService::eelCompilationFinished,
+                             liveprogWatcher.get(), [](int result, const QString& resultMessage,
+                                                       const QString& error, const QString& path, float ms) {
+                const QString message = QString("LiveProg compile result %1: %2 (%3 ms). %4 %5")
+                        .arg(result).arg(path).arg(ms).arg(resultMessage, error);
+                if (result > 0)
+                    Log::information(message);
+                else
+                    Log::warning(message);
+            });
+            auto selectScript = [watcher = liveprogWatcher.get()](DspConfig* config) {
+                watcher->setPath(config->get<bool>(DspConfig::liveprog_enable)
+                        ? chopDoubleQuotes(config->get<QString>(DspConfig::liveprog_file)) : QString());
+            };
+            QObject::connect(&DspConfig::instance(), &DspConfig::updated,
+                             liveprogWatcher.get(), selectScript);
+            QObject::connect(&DspConfig::instance(), &DspConfig::updatedExternally,
+                             liveprogWatcher.get(), selectScript);
+            selectScript(&DspConfig::instance());
+        }
 
 #ifndef HEADLESS
         // Setup GUI

@@ -166,6 +166,7 @@ HEADERS += \
     utils/CliRemoteController.h \
     utils/DebuggerUtils.h \
     utils/Log.h \
+    utils/LiveprogFileWatcher.h \
     utils/QtCompat.h \
     utils/SingleInstanceMonitor.h \
     utils/VersionMacros.h \
@@ -193,6 +194,7 @@ SOURCES += \
     main.cpp \
     utils/CliRemoteController.cpp \
     utils/Log.cpp \
+    utils/LiveprogFileWatcher.cpp \
     utils/SingleInstanceMonitor.cpp \
     utils/dbus/ClientProxy.cpp \
     utils/dbus/IpcHandler.cpp \
